@@ -1,0 +1,114 @@
+
+<html><head><title>IPD Paths Classification</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823915" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="IPD Paths Classification" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823915" />
+<meta name="NextFile" content="analysisandreporting_ipdchecksupported.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_ipdchecks.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- IPD Paths Classification" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="0" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_ipdchecks.html" title="Inter-Power Domain (IPD) Logic Checks">Inter-Power Domain (IPD) Logic ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_ipdchecksupported.html" title="Supported IPD Logic Checks">Supported IPD Logic Checks</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:ipdpathclassification" title="IPD Paths Classification"></a><h3>
+<a id="pgfId-2422191"></a>IPD Paths Classification<a id="51730"></a></h3>
+
+<p>
+<a id="pgfId-2422192"></a>The design logic classification is based on the IPD analysis performed on the power domain crossing in the timing paths. The scenarios classified as IPD and non-IPD are described below:</p>
+<ul><li>
+<a id="pgfId-2422193"></a>Data path crossing more than one power domain will always be considered as an IPD path (irrespective of the power domains that the clock paths traverse, or the voltages on the power domains that the data path traverses).</li><li>
+<a id="pgfId-2422194"></a>Launch and/or capture clock path (launch/capture clock path here refers to the path from the clock source to start point/endpoint clock pin) crossing more than one power domain will also be classified as IPD path when:<ul><li>
+<a id="pgfId-2422195"></a>There is no common (CPPR) point on the clock path</li><li>
+<a id="pgfId-2422196"></a>CPPR point has different transition</li><li>
+<a id="pgfId-2422197"></a>Power domain transition occurs after the CPPR point of clock path</li></ul></li></ul>
+
+
+
+
+<p>
+<a id="pgfId-2422184"></a></p>
+
+<p class="webflare-indent1"><strong>Figure -85
+<a id="pgfId-2419337"></a>IPD Paths Classification</strong></p>
+<p>
+<a id="pgfId-2419340"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="598" src="images/analysisandreporting-106.gif" /></div>
+
+<p>
+<a id="pgfId-2419424"></a>In some cases, the IPD paths may have undesired, yet avoidable IPD crossings. These undesired crossings through multiple power domains may add to extra voltage combinations for IPD paths signoff and cause issues or delays in low power signoff.</p>
+
+<p class="webflare-indent1"><strong>Figure -86
+<a id="pgfId-2419454"></a>Undesirable IPD Crossings</strong></p>
+<p>
+<a id="pgfId-2419457"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="307" src="images/analysisandreporting-107.gif" /></div>
+
+<p>
+<a id="pgfId-2419570"></a>The number of exhaustive IPD signoff corners are dependent on the number of voltage corners, where power domains operate, and their number. So an increase in the number of power domains may lead to an exponential increase in IPD signoff corners for a constant number of operating voltages.</p>
+
+<p class="webflare-indent1"><strong>Figure -87
+<a id="pgfId-2419591"></a>Increase in Signoff Corners with increase in Power Domains</strong></p>
+<p>
+<a id="pgfId-2419594"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="235" src="images/analysisandreporting-108.gif" /></div>
+
+<p>
+<a id="pgfId-2419619"></a>The minimum power domains required for a path to be an IPD path is two, post common point, and the minimum signoff corners can be four for two operating voltage conditions. Thus, even if only one path in the whole design travels more than one power domain, it can cause an exponential increase in signoff corners, thus affecting the overall turnaround time and computations.</p>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_ipdchecks.html" id="prev" title="Inter-Power Domain (IPD) Logic Checks">Inter-Power Domain (IPD) Logic ...</a></em></b><b><em><a href="analysisandreporting_ipdchecksupported.html" id="nex" title="Supported IPD Logic Checks">Supported IPD Logic Checks</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

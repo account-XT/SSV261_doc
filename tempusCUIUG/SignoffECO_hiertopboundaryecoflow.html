@@ -1,0 +1,304 @@
+
+<html><head><title>Hierarchical Top+Boundary Model ECO Flow</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845239" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Hierarchical Top+Boundary Model ECO Flow" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845239" />
+<meta name="NextFile" content="timingmodeling.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="SignoffECO_cellemanalysisecoflow.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- Hierarchical Top+Boundary Model ECO Flow" />
+<meta name="Keywords" content="boundary model,two sessions,Paradime,hierarchical,Top+BM" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="ECO" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="SignoffECO_cellemanalysisecoflow.html" title="ECO Flow Use Model for Cell EM Analysis">ECO Flow Use Model for Cell EM ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="timingmodeling.html" title="Timing Model Generation">Timing Model Generation</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:hiertopboundaryecoflow" title="Hierarchical Top+Boundary Model ECO Flow"></a><style>/*<![CDATA[*/
+/**/
+/**/
+/**/
+/**/
+h1 { counter-reset: heading 8;}
+/**/
+/**/
+/**/
+/**/
+/*]]>*/</style><h2>
+<a id="pgfId-3169686"></a><a id="87571"></a>Hi<a id="hiertopboundaryecoflow"></a>erarchical Top+Boundary Model ECO Flow</h2>
+
+<p>
+<a id="pgfId-3174037"></a>The Hierarchical Top+Boundary Model ECO flow can be used for performing timing and power closure over interface paths, while loading lower level models/blocks and closing a higher level module/block. This flow analyzes the design hierarchically using boundary constraints at the top level, thus allowing faster and efficient timing analysis. It also reduces memory usage and runtime significantly on larger designs.</p>
+<p>
+<a id="pgfId-3169714"></a>When the High Capacity ECO (HC-ECO) flow with Top+BM is used, the <code>timing_enable_boundary_model_eco</code> command is applied before generating and loading the boundary model. This is done to ensure that boundary model can be used for ECO. For analysis part of boundary model, refer <a href="timingmodeling_boundarymodels.html#65219">Boundary Models</a>.</p>
+<p>
+<a id="pgfId-3169793"></a>Based on the user-defined settings, the Top+BM database is optimized using any of the following methods:</p>
+<ul><li>
+<a id="pgfId-3169795"></a>Reduction based on the timing violations seen during Top+BM STA session (Setup/Hold/DRV).</li><li>
+<a id="pgfId-3169796"></a>Reduction based on the list of partitions to be optimized for inter_partition timing paths.</li><li>
+<a id="pgfId-3169797"></a>Reduction based on the user-defined path groups and a list of DRV violated nets or pins.</li></ul>
+
+
+<p>
+<a id="pgfId-3169823"></a>To use this flow, Tempus ECO follows two approaches as mentioned below:</p>
+<ul><li>
+<a id="pgfId-3172453"></a><a href="SignoffECO_hiertopboundaryecoflow.html#53852">Top+BM HC-ECO Using Two Sessions Flow</a></li><li>
+<a id="pgfId-3172464"></a><a href="SignoffECO_hiertopboundaryecoflow.html#69318">Top+BM HC-ECO Using Paradime Environment</a></li></ul>
+
+
+
+
+<h4>
+<a id="pgfId-3169833"></a><a id="53852"></a>Top+BM HC-ECO Using Two Sessions Flow</h4>
+
+<p>
+<a id="pgfId-3173334"></a>Using this approach, the tool:</p>
+<ul><li>
+<a id="pgfId-3169834"></a>Performs DRV+Setup+Hold timing closure on the violating zone. </li><li>
+<a id="pgfId-3169835"></a>Performs Top+BM timing closure using High Capacity ECO: </li></ul>
+
+<p>
+<a id="pgfId-3170031"></a>The below figure describes the different flow steps required for a higher level module STA with lower levels models loaded for ECO DB generation, ECO physical-aware timing/power closure, ECO implementation at block and top only levels, and final STA with the implemented ECO.</p>
+
+
+
+<p class="webflare-indent1"><strong>Figure -10
+<a id="pgfId-3174447"></a>Top+BM HC-ECO (Using Two Sessions Flow)</strong></p>
+
+<p>
+<a id="pgfId-3169968"></a></p>
+<div class="webflare-div-image">
+<img width="668" height="160" src="images/SignoffECO-13.gif" /></div>
+
+<ul><li style="list-style-type: none;background-image: none;"><ul><li>
+<a id="pgfId-3169836"></a>Step 1: Run Top+BM timing analysis and ECO DB generation for each view.</li><li>
+<a id="pgfId-3169900"></a>Step 2:  Perform physical aware timing closure in MMMC mode on reduced violating zone database.</li><li>
+<a id="pgfId-3169916"></a>Step 3: Implement ECOs independently in top level and block in P&amp;R tool.</li><li>
+<a id="pgfId-3169921"></a>Step 4: Run Top+BM final timing analysis.</li></ul></li></ul>
+
+
+
+
+
+
+
+<h4>
+<a id="pgfId-3170051"></a><a id="69318"></a>Top+BM HC-ECO Using Paradime Environment</h4>
+
+<p>
+<a id="pgfId-3174413"></a>Using this approach, the tool:</p>
+<ul><li>
+<a id="pgfId-3170087"></a>Performs DRV+Setup+Hold timing closure on violating zone.</li><li>
+<a id="pgfId-3170088"></a>Performs Top+BM timing closure using High Capacity ECO inside Paradime.<br /><strong>Figure -11
+<a id="pgfId-3170309"></a>Top+BM HC-ECO (Using Paradime)</strong><br />
+<a id="pgfId-3170325"></a><div class="webflare-div-image">
+<img width="668" height="258" src="images/SignoffECO-14.gif" /></div><ul><li>
+<a id="pgfId-3170089"></a>Step 1: Start Paradime with physical data on saved sessions, and choose the specific part of the design to focus on. This is either top only, or partitions, or path_groups, or endpoints, and so on.</li><li>
+<a id="pgfId-3170261"></a>Step 2: Implement ECOs independently at top level and block level in P&amp;R tool.</li><li>
+<a id="pgfId-3174665"></a>Step 3: Run Top+BM final timing analysis.</li></ul></li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-3193310"></a><strong>In order to use the flow set up, below are the templates for the Two Sessions and Paradime flows:</strong></p>
+<p>
+<a id="pgfId-3170281"></a><strong>Template 1:</strong></p>
+<p>
+<a id="pgfId-3170392"></a>The Two Sessions flow performs hold timing closure on a Top+BM database based on timing violations seen during STA. You can choose to enable either GBA or PBA mode.</p>
+<p>
+<a id="pgfId-3170470"></a><strong>BM Generation Session</strong></p>
+<p>
+<a id="pgfId-3170496"></a>The BM session can be SMSC, MMMC, or DMMMC:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3702782"></a>set_db timing_full_context_flow 1<br />set_db timing_sum_cc_for_all_small_aggressors 1<br />set_db timing_write_aggressors_to_disk 1<br />set_db timing_enable_model_accurate_nef 1<br />set_db timing_enable_filter_fanin_cone 1<br />timing_enable_boundary_model_eco<br />...<br />create_boundary_model -overwrite -no_extended_fanin \ -latch_effort_low -skip_constants -exclude_no_delay_ports \ -dir BM_${BlockName}_${view} -overwrite</pre>
+
+<p>
+<a id="pgfId-3186491"></a><strong>Session 1: </strong></p>
+<p>
+<a id="pgfId-3170536"></a>The Top+BM session can be SMSC, MMMC, or DMMMC.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3702787"></a>timing_enable_boundary_model_eco<br />&lt;load_Top+BM_design&gt;<br />set_db opt_signoff_enable_high_capacity_eco true<br />set_db opt_signoff_write_eco_opt_db HC-ECO-DB<br />set_db power_dynamic_power_view setup_ss_1p170v<br />set_db opt_signoff_write_eco_opt_db HC-ECO-DB<br />write_eco_opt_db</pre>
+
+<p>
+<a id="pgfId-3186488"></a><strong>Session 2:</strong></p>
+<p>
+<a id="pgfId-3170567"></a>The ECO DB directory must be provided in the script before the design is loaded:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3702792"></a>set_multi_cpu_usage -local_cpu 32<br />set_db opt_signoff_read_eco_opt_db HC-ECO-DB<br />read_physical -lef {../libs/lef/FreePDK45_lib_v1.0.lef\  ../libs/MACRO/LEF/pllclk.lef \          ../libs/MACRO/LEF/ram_256X16A.lef \  ../libs/MACRO/LEF/rom_512x16A.lef }<br />read_mmmc viewDefinition.tcl<br />read_netlist &quot;top.v blockA.v blockB.v&quot; -top top<br />init_design<br />set_db add_fillers_&lt;options&gt;<br />read_hierarchical_def top.def blockA.def blockB.def<br />&lt;load SPEFs&gt;<br />set_db opt_signoff_partition_list_file partition.txt<br />set_db opt_signoff_optimize_replicated_modules true<br />opt_signoff -hold</pre>
+
+<p>
+<a id="pgfId-3186485"></a><strong>Template 2: </strong></p>
+<p>
+<a id="pgfId-3170606"></a>The Two Sessions flow performs the inter-partition Hold timing closure on a Top+BM database based on a user-defined partition during STA. The boundary model generation flow will remain the same as specified in Template 1.</p>
+<p>
+<a id="pgfId-3170581"></a><strong>Session 1:</strong></p>
+<p>
+<a id="pgfId-3170671"></a>The Top+BM session can be SMSC, MMMC, or DMMMC:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3702797"></a>timing_enable_boundary_model_eco<br />&lt;load_Top+BM_design&gt;<br />set_db opt_signoff_enable_high_capacity_eco true<br />set_db opt_signoff_inter_partition {blockA blockB}<br />set_db opt_signoff_intra_partition {}<br />set_db opt_signoff_write_eco_opt_db HC-ECO-DB<br />set_db power_dynamic_power_view setup_ss_1p170v<br />set_db opt_signoff_write_eco_opt_db HC-ECO-DB<br />write_eco_opt_db</pre>
+
+<p>
+<a id="pgfId-3186502"></a><strong>Session 2:</strong></p>
+<p>
+<a id="pgfId-3170730"></a>The ECO DB directory must be provided in the script before the design is loaded.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3702802"></a>set_multi_cpu_usage -local_cpu 32<br />set_db opt_signoff_read_eco_opt_db HC-ECO-DB<br />read_physical -lef {../libs/lef/FreePDK45_lib_v1.0.lef\  ../libs/MACRO/LEF/pllclk.lef \  ../libs/MACRO/LEF/ram_256X16A.lef \     ../libs/MACRO/LEF/rom_512x16A.lef }<br />read_mmmc viewDefinition.tcl<br />set_db add_fillers_&lt;options&gt;<br />read_hierarchical_def top.def blockA.def blockB.def<br />&lt;load SPEFs&gt;<br />set_db opt_signoff_inter_partition {blockA blockB}<br />set_db opt_signoff_intra_partition {}<br />set_db opt_signoff_partition_list_file partition.txt<br />set_db opt_signoff_optimize_replicated_modules true<br />opt_signoff -hold</pre>
+
+<p>
+<a id="pgfId-3186505"></a>The same template can be used to perform inter-partition power recovery.</p>
+<p>
+<a id="pgfId-3170740"></a><strong>Template 3: </strong></p>
+<p>
+<a id="pgfId-3170763"></a>The Two Sessions flow performs DRV, Setup, Hold timing closure on a Top+BM database based on the user-defined Setup/Hold path_groups, and a list of DRV pins during STA. The boundary model generation flow will remain same as specified in Template 1.</p>
+<p>
+<a id="pgfId-3170741"></a><strong>Session 1: </strong></p>
+<p>
+<a id="pgfId-3170943"></a>The Top+BM session can be SMSC, MMMC, or DMMMC.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3702807"></a>timing_enable_boundary_model_eco<br />&lt;load_Top+BM_design&gt;<br />&lt;TCL script which creates mySetupPG and myHoldPG path_groups&gt;<br />set_db opt_signoff_enable_high_capacity_eco true<br />set_db opt_signoff_include_setup_path_groups {mySetupPG}<br />set_db opt_signoff_include_hold_path_groups {myHoldPG}<br />set_db opt_signoff_select_drv_pin_file {myDRVPinList.txt}<br />set_db opt_signoff_write_eco_opt_db HC-ECO-DB<br />set_db power_dynamic_power_view setup_ss_1p170v<br />set_db opt_signoff_write_eco_opt_db HC-ECO-DB<br />write_eco_opt_db</pre>
+
+<p>
+<a id="pgfId-3186482"></a><strong>Session 2: </strong></p>
+<p>
+<a id="pgfId-3170946"></a>The ECO DB directory must be provided in the script before the design is loaded.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3702812"></a>set_multi_cpu_usage -local_cpu 32<br />set_db opt_signoff_read_eco_opt_db HC-ECO-DB<br />read_physical -lef {../libs/lef/FreePDK45_lib_v1.0.lef\  ../libs/MACRO/LEF/pllclk.lef \  ../libs/MACRO/LEF/ram_256X16A.lef \     ../libs/MACRO/LEF/rom_512x16A.lef }<br />read_mmmc viewDefinition.tcl<br />set_db add_fillers_&lt;options&gt;<br />read_hierarchical_def top.def blockA.def blockB.def<br />&lt;load SPEFs&gt;<br />set_db opt_signoff_include_setup_path_groups {mySetupPG}<br />set_db opt_signoff_include_hold_path_groups {myHoldPG}<br />set_db opt_signoff_select_drv_pin_file {myDRVPinList.txt}<br />set_db opt_signoff_partition_list_file partition.txt<br />set_db opt_signoff_optimize_replicated_modules true<br />opt_signoff -drv; opt_signoff -setup; opt_signoff -hold</pre>
+
+<p>
+<a id="pgfId-3186479"></a><strong>Template 4: </strong></p>
+<p>
+<a id="pgfId-3171013"></a>The Paradime flow performs hold timing closure on a Top+BM database based on the timing violations from the Top+BM STA clients. You can choose to enable either GBA or PBA mode. The boundary model generation flow will remain the same as specified in Template 1. </p>
+<p>
+<a id="pgfId-3171019"></a>The STA saved session can be SMSC or MMMC.</p>
+<p>
+<a id="pgfId-3170975"></a><strong>Top+BM STA Session:</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3702817"></a>timing_enable_boundary_model_eco<br />&lt;load_Top+BM_design&gt;<br />write_db view1.enc</pre>
+
+<p>
+<a id="pgfId-3186508"></a><strong>Paradime Session:</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3702822"></a>set_distributed_hosts -local -time_out 10000<br />set_multi_cpu_usage -local_cpu 24 -remote_host 4 -cpu_per_remote_host 4<br />set_distributed_mmmc_mode -eco true<br />set_distributed_mmmc_mode -eco_merge_mmmc<br />set_distributed_mmmc_mode -enable_high_capacity_eco<br />set_db eco_setup_view_list {setup_1v setup_2v setup_3v setup_4v}<br />set_db eco_hold_view_list {hold_1v hold_2v hold_3v hold_4v}<br />set_db eco_dynamic_view {setup_3v} ; set_db eco_leakage_view {setup_3v}<br />set_db eco_lef_file_list &quot;tech.lef std.lef ram_256X16A.lef&quot;<br />set_db eco_def_file_list &quot;top.def blockA.def blockB.def&quot;<br />set_distributed_mmmc_mode -set_filler_mode {-corePrefix FILL}<br />set_db opt_signoff_optimize_replicated_modules true<br />distribute_read_db -restore_design all -restore_dir \<br />STA_211/ -out_dir reports_Paradime<br />set_db opt_signoff_partition_list_file partition.txt<br />opt_signoff -hold</pre>
+
+<p>
+<a id="pgfId-3186511"></a><strong>Template 5: </strong></p>
+<p>
+<a id="pgfId-3171170"></a>The Paradime flow performs inter-partition Hold timing closure on a Top+BM database based on the user-defined partitions. The boundary model generation flow will remain the same as specified in Template 1. </p>
+<p>
+<a id="pgfId-3171128"></a>The STA saved session can be SMSC or MMMC. Same template can be used to perform inter-partition Power recovery.</p>
+<p>
+<a id="pgfId-3171130"></a><strong>Top+BM STA Session:</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3702827"></a>timing_enable_boundary_model_eco<br />&lt;load_Top+BM_design&gt;<br />write_db view1.enc</pre>
+
+<p>
+<a id="pgfId-3186514"></a><strong>Paradime Session:</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3702832"></a>set_distributed_hosts -local -time_out 10000<br />set_multi_cpu_usage -local_cpu 24 -remote_host 4 -cpu_per_remote_host 4<br />set_distributed_mmmc_mode -eco true<br />set_distributed_mmmc_mode -eco_merge_mmmc<br />set_distributed_mmmc_mode -enable_high_capacity_eco<br />set_db opt_signoff_inter_partition {blockA blockB}<br />set_db opt_signoff_intra_partition {}<br />set_db eco_setup_view_list {setup_1v setup_2v setup_3v setup_4v}<br />set_db eco_hold_view_list {hold_1v hold_2v hold_3v hold_4v}<br />set_db eco_dynamic_view {setup_3v}<br />set_db eco_leakage_view {setup_3v}<br />set_db eco_lef_file_list &quot;tech.lef std.lef ram_256X16A.lef&quot;<br />set_db eco_def_file_list &quot;top.def blockA.def blockB.def &quot;<br />set_distributed_mmmc_mode -set_filler_mode {-corePrefix FILL}<br />set_db opt_signoff_optimize_replicated_modules true<br />distribute_read_db -restore_design all -restore_dir \<br />STA_211/ -out_dir reports_Paradime<br />set_db opt_signoff_partition_list_file partition.txt<br />opt_signoff -hold</pre>
+
+<p>
+<a id="pgfId-3186517"></a><strong>Template 6: </strong></p>
+<p>
+<a id="pgfId-3171308"></a>The Paradime flow performs DRV, Setup, Hold timing closure on a Top+BM database based on the user-defined Setup/Hold path_groups, and a list of DRV pins. The boundary model generation flow will remain same as specified in Template 1. </p>
+<p>
+<a id="pgfId-3171245"></a>The STA saved session can be SMSC or MMMC.</p>
+<p>
+<a id="pgfId-3171247"></a><strong>Top+BM STA Session:</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3702837"></a>timing_enable_boundary_model_eco<br />&lt;load_Top+BM_design&gt;<br />write_db view1.enc</pre>
+
+<p>
+<a id="pgfId-3186520"></a><strong>Paradime Session:</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3702842"></a>set_distributed_hosts -local -time_out 10000<br />set_multi_cpu_usage -local_cpu 24 -remote_host 4 -cpu_per_remote_host 4<br />set_distributed_mmmc_mode -eco true<br />set_distributed_mmmc_mode -eco_merge_mmmc<br />set_distributed_mmmc_mode -enable_high_capacity_eco<br />set_db opt_signoff_path_group_file_name {TCL script which creates mySetupPG and myHoldPG path_groups}<br />set_db opt_signoff_include_setup_path_groups {mySetupPG}<br />set_db opt_signoff_include_hold_path_groups {myHoldPG}<br />set_db opt_signoff_select_drv_pin_file {myDRVPinList.txt}<br />set_db eco_setup_view_list {setup_1v setup_2v setup_3v setup_4v}<br />set_db eco_hold_view_list {hold_1v hold_2v hold_3v hold_4v}<br />set_db eco_dynamic_view {setup_3v}<br />set_db eco_leakage_view {setup_3v}<br />set_db eco_lef_file_list &quot;~\tech.lef std.lef ram_256X16A.lef&quot;<br />set_db eco_def_file_list &quot;~\top.def blockA.def blockB.def &quot;<br />set_distributed_mmmc_mode -set_filler_mode {-corePrefix FILL}<br />set_db opt_signoff_optimize_replicated_modules true<br />distribute_read_db -restore_design all -restore_dir  \<br />STA_211/ -out_dir reports_Paradime<br />set_db opt_signoff_partition_list_file partition.txt<br />opt_signoff -drv; opt_signoff -setup; opt_signoff -hold</pre>
+
+
+
+<h4><em>
+<a id="pgfId-3174268"></a>Related Topics</em></h4>
+
+<ul><li>
+<a id="pgfId-3174272"></a><a href="SignoffECO_ecoflow.html#59262">Signoff ECO Flow</a></li><li>
+<a id="pgfId-3174276"></a><a href="SignoffECO_highcapacityecoflow.html#89899">High Capacity ECO Flow for Timing and Power Closure</a></li><li>
+<a id="pgfId-3174280"></a><a href="SignoffECO_metalecoflow.html#41930">Metal ECO Flow</a></li></ul>
+
+
+<p>
+<a id="pgfId-3322959"></a></p>
+
+
+
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="SignoffECO_cellemanalysisecoflow.html" id="prev" title="ECO Flow Use Model for Cell EM Analysis">ECO Flow Use Model for Cell EM ...</a></em></b><b><em><a href="timingmodeling.html" id="nex" title="Timing Model Generation">Timing Model Generation</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

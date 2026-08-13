@@ -1,0 +1,266 @@
+
+<html><head><title>Creating an IEEE 1801 File for an MSV Design</title>
+<meta name="page_sequence" content="13001000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="eastham" />
+<meta name="CreateDate" content="2026-03-25" />
+<meta name="CreateTime" content="1774430425" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes how to capture power intent for your design using IEEE 1801, and includes a list of 1801 commands and options supported across Cadence tools." />
+<meta name="DocTitle" content="IEEE 1801 Cross Platform Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Creating an IEEE 1801 File for an MSV Design" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="IEEE1801user" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-03-25" />
+<meta name="ModifiedTime" content="1774430425" />
+<meta name="NextFile" content="Creating_an_IEEE_1801_File_for_a_PSO_Design.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Creating_an_IEEE_1801_File.html" />
+<meta name="c_product" content="Innovus," />
+<meta name="Product" content="Innovus," />
+<meta name="ProductFamily" content="Innovus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="IEEE 1801 Cross Platform Guide -- Creating an IEEE 1801 File for an MSV Design" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="IEEE1801user40" />
+<meta name="confluence-version" content="7.19.19" />
+<meta name="ecms-plugin-version" content="04.21.019" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="IEEE1801userTOC.html">Contents</a></li><li><a class="prev" href="Creating_an_IEEE_1801_File.html" title="Creating_an_IEEE_1801_File">Creating_an_IEEE_1801_File</a></li><li style="float: right;"><a class="viewPrint" href="IEEE1801user.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Creating_an_IEEE_1801_File_for_a_PSO_Design.html" title="Creating_an_IEEE_1801_File_for_a_PSO_Design">Creating_an_IEEE_1801_File_for ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>IEEE 1801 Cross Platform Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Creating an IEEE 1801 File for an MSV Design</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>A Multiple Supply Voltage (<strong>MSV</strong>) design uses multiple supply voltages for the core logic, as shown in Figure 2-1, <a href="#CreatinganIEEE1801FileforanMSVDesign-1035482">An Example of MSV Design</a>. The top design and instance&#xa0;<code>inst_A</code>&#xa0;operate at voltage&#xa0;<code>VDD1</code>, while instance&#xa0;<code>inst_B</code>&#xa0;operates on voltage&#xa0;<code>VDD2</code>, and instance&#xa0;<code>inst_C</code>&#xa0;operates at voltage&#xa0;<code>VDD3</code>.</p>
+
+<p>A portion of the design that operates at the same operating voltage (that is, uses the same main power supply belongs to the&#xa0;<span style=""><strong>power domain</strong></span>&#xa0;that corresponds to that operating voltage.</p>
+
+<p>A steady state of the design is called a&#xa0;<span style=""><strong>power state</strong></span>. Pure MSV designs have only one power state because the operating voltage of the power domains is assumed not to change.</p>
+
+<p>To pass signals between portions of the design that operate at different voltages,&#xa0;<span style=""><strong>level&#xa0;</strong></span><span style=""><strong>shifters&#xa0;</strong></span>are needed. A level shifter is a special cell that has two separate voltage supplies and shifts the input voltage level to the output voltage level. The&#xa0;<span style="">set_level_shifter</span>&#xa0;command defines the level shifter requirement; this includes which supply sets need to be connected to the level shifters input and output supply pin.</p>
+
+<p>The tools reading 1801 semantics can derive the input and output supplies for level shifters automatically. The input supply set will be the supply set of the driving logic, and the output supply set will be the supply of the receiving logic (if all receivers are on the same supply). For more complex situations, you must explicitly specify the input and output supplies using the&#xa0;<span style="">set_level_shifter</span>&#xa0;command.<br /><br /></p>
+<div class="pbi_avoid CadenceImageWrapperMacro"><span class="content-title" id="Figure-b3d4036e39954209a169f463e13de449"><strong>Figure 2.1:</strong> <strong><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforanMSVDesign-1035482"></span>An Example of MSV Design</strong></span><div class="table-wrap"><table class="confluenceTable cadenceTable cadDefaultfont" id="cadDefaultfont" style="width: 665px;"><colgroup><col style="width: 175px;" /><col style="width: 190px;" /><col style="width: 200px;" /><col style="width: 150px;" /></colgroup><tbody><tr><th class="confluenceTh" style="text-align: center;">Operating Voltage (OV)</th><th class="confluenceTh" style="text-align: center;">Instances Operating on OV</th><th class="confluenceTh" style="text-align: center;">Libraries Characterized for OV</th><th class="confluenceTh" style="text-align: center;">Power Domains for OV</th></tr>
+<tr><td class="confluenceTd">VDD1: 0.8</td>
+<td class="confluenceTd">top, inst_A</td>
+<td class="confluenceTd">lib1, lib 2</td>
+<td class="confluenceTd">PD1</td>
+</tr>
+<tr><td class="confluenceTd">VDD2: 1.0</td>
+<td class="confluenceTd">inst_B</td>
+<td class="confluenceTd">lib3</td>
+<td class="confluenceTd">PD2</td>
+</tr>
+<tr><td class="confluenceTd">VDD3: 1.2</td>
+<td class="confluenceTd">inst_C</td>
+<td class="confluenceTd">lib4</td>
+<td class="confluenceTd">PD3</td>
+</tr>
+</tbody></table></div>
+
+<p>
+
+<map id="gliffy-map-726572368-9982" name="gliffy-map-726572368-9982"></map>
+</p>
+<table class="gliffy-macro-table" width="100%">
+    <tbody><tr>
+        <td>
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+ </caption>
+
+                <tbody><tr>
+                    <td>
+                        <img alt="" class="gliffy-macro-image" src="attachments/726572367/726572369.png" style="border: none; width: 635px;" usemap="#gliffy-map-726572368-9982" />
+                    </td>
+
+                </tr>
+
+            </tbody></table>
+ 
+        </td>
+
+    </tr>
+
+</tbody></table></div>
+
+<p>Figure 2-1, <a href="#CreatinganIEEE1801FileforanMSVDesign-1035482">An Example of MSV Design</a>, shows the typical operating voltage for each power domain.</p>
+
+<p></p>
+<h2 id="CreatinganIEEE1801FileforanMSVDesign-1104078Example:ACompleteIEEE1801FileforMSV"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforanMSVDesign-1104078"></span>Example:&#xa0;A&#xa0;Complete IEEE 1801 File for MSV</h2>
+
+<p><code>upf_version 2.0</code></p>
+
+<p><code>#Define supply ports and nets&#xa0;</code><br /><code>create_supply_port VDD&#xa0;</code><br /><code>create_supply_net VDD</code><br /><code>connect_supply_net VDD -ports VDD</code></p>
+
+<p><code>create_supply_port VDD2</code><br /><code>create_supply_net VDD2</code><br /><code>connect_supply_net VDD2 -ports VDD2</code></p>
+
+<p><code>create_supply_port VDD3</code><br /><code>create_supply_net VDD3</code><br /><code>connect_supply_net VDD3 -ports VDD3</code></p>
+
+<p><code>create_supply_port VSS</code><br /><code>create_supply_net VSS</code><br /><code>connect_supply_net VSS -ports VSS&#xa0;</code></p>
+
+<p><code>#Connect supply nets to power domain supply sets</code><br /><code>create_supply_set ss_PD1 -function {power VDD} -function {ground VSS}</code><br /><code>create_supply_set ss_PD2 -function {power VDD2} -function {ground VSS}</code><br /><code>create_supply_set ss_PD3 -function {power VDD3} -function {ground VSS}&#xa0;</code></p>
+
+<p><code># Create Power Domains</code><br /><code>create_power_domain PD1 -include_scope -supply {primary ss_PD1}</code><br /><code>create_power_domain PD2 -elements {inst_A inst_B} -supply {primary ss_PD2}</code><br /><code>create_power_domain PD3 -elements { inst_C} -supply {primary ss_PD3}&#xa0;</code></p>
+
+<p><code># Create level shifter rules for LD1 -&#xa0;</code><br /><code># which is at a lower voltage than the other domains</code><br /><code>set_level_shifter LS_PD1_PD2 -domain PD2 -applies_to inputs \</code><br /><code>&#xa0;&#xa0; -location self \</code><br /><code>&#xa0;&#xa0; -source PD1.primary \</code><br /><code>&#xa0;&#xa0; -input_supply_set PD1.primary -output_supply_set PD2.primary</code></p>
+
+<p><code>set_level_shifter LS_PD1_PD3 -domain PD3 -applies_to inputs \</code><br /><code>&#xa0;&#xa0; -location self \</code><br /><code>&#xa0;&#xa0; -source PD1.primary \</code><br /><code>&#xa0;&#xa0; -input_supply_set PD1.primary -output_supply_set PD3.primary</code></p>
+
+<p><code>set_level_shifter LS_PD2_PD3 -domain PD3 -applies_to inputs \</code><br /><code>&#xa0;&#xa0; -location self \</code><br /><code>&#xa0;&#xa0; -source PD2.primary \</code><br /><code>&#xa0;&#xa0; -input_supply_set PD2.primary -output_supply_set PD3.primary</code></p>
+
+<p><code>#Define power states for each domain</code><br /><code>add_power_state PD1.primary \</code><br /><code>&#xa0;&#xa0; -state ON { -supply_expr {power == `{FULL_ON, 0.8} &amp;&amp; ground == `{FULL_ON, 0.0}} -simstate NORMAL}</code></p>
+
+<p><code>add_power_state PD2.primary \</code><br /><code>&#xa0;&#xa0; -state ON { -supply_expr {power == `{FULL_ON, 1.0} &amp;&amp; ground == `{FULL_ON, 0.0}} -simstate NORMAL}</code></p>
+
+<p><code>add_power_state PD3.primary \</code><br /><code>&#xa0;&#xa0; -state ON { -supply_expr {power == `{FULL_ON, 1.2} &amp;&amp; ground == `{FULL_ON, 0.0}} -simstate NORMAL}</code></p>
+
+<p><code>add_power_state PD1 -state PM1 {-logic_expr { PD1.primary == ON &amp;&amp; PD2.primary == ON &amp;&amp; PD3.primary == ON }}</code></p>
+<h2 id="CreatinganIEEE1801FileforanMSVDesign-1054288StepstoCreatetheIEEE1801FileforMSVDesign"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforanMSVDesign-1054288"></span>Steps to Create the IEEE 1801 File for MSV Design</h2>
+
+<p>This section describes the information to include in an IEEE 1801 file for an MSV design. The example shown in Figure 2-1, <a href="#CreatinganIEEE1801FileforanMSVDesign-1035482">An Example of MSV Design</a>, is used throughout this section.</p>
+
+<p>The following design-related information captures the power intent and constraints:</p>
+<ul><li><a href="#CreatinganIEEE1801FileforanMSVDesign-1035753">Specifying the Power Domains</a></li><li><a href="#CreatinganIEEE1801FileforanMSVDesign-1109874">Specifying the Power and Ground Nets and Ports</a></li><li><a href="#CreatinganIEEE1801FileforanMSVDesign-1109925">Specifying the Supply Set</a></li><li><a href="#CreatinganIEEE1801FileforanMSVDesign-associateSupSet">Associating the Supply Set to the Power Domain</a></li><li><a href="#CreatinganIEEE1801FileforanMSVDesign-1110109">Specifying the Voltage States Allowed for Each Domain</a></li><li><a href="#CreatinganIEEE1801FileforanMSVDesign-1089976">Defining System Level Power States</a></li><li><a href="#CreatinganIEEE1801FileforanMSVDesign-1089227">Specifying the Rules to Create Level Shifter Logic</a></li></ul>
+<p>This last step is needed for the physical implementation:</p>
+<ul><li><a href="#CreatinganIEEE1801FileforanMSVDesign-1093899">Specifying the Global Connections</a></li></ul><h3 id="CreatinganIEEE1801FileforanMSVDesign-1035753SpecifyingthePowerDomains"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforanMSVDesign-1035753"></span>Specifying the Power Domains</h3>
+
+<p>To identify portions of the design that operate on the same voltage, use the&#xa0;<span style="">create_power_domain</span>&#xa0;command to specify a power domain:</p>
+<p style="margin-left: 30.0px;"><code>create_power_domain&#xa0;<em>power_domain</em></code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-elements&#xa0;<em>elements_list</em>]<br />&#xa0; &#xa0;&#xa0;</code></p>
+
+<p>For Figure 2-1, <a href="#CreatinganIEEE1801FileforanMSVDesign-1035482">An Example of MSV Design</a>, specify three domains:</p>
+
+<p><code>create_power_domain PD1 -include_scope -supply {primary ss_PD1}</code><br /><code>create_power_domain PD2 -elements {inst_A inst_B} -supply {primary ss_PD2}</code><br /><code>create_power_domain PD3 -elements { inst_C} -supply {primary ss_PD3}</code></p>
+<div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body">The top module belongs to the top level domain. You can specify the top level domain with either the&#xa0;<code>-include_scope</code>&#xa0;option or&#xa0;<code>-elements {.}</code>.</div>
+</div>
+<h3 id="CreatinganIEEE1801FileforanMSVDesign-1109874SpecifyingthePowerandGroundNetsandPorts"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforanMSVDesign-1109874"></span>Specifying the Power and Ground Nets and Ports</h3>
+
+<p>For IEEE 1801, you can define the supply ports and nets (power and ground) used in a design. The supply ports are external ports that provide a voltage supply to the device. The supply nets are the internal nets that will be used to connect domains and power pins of individual components in the design.&#xa0;Once specified, these power or ground supplies can be associated to power domains, and as connections to special cells. &#xa0;</p>
+
+<p>Define the power and ground supplies using the following syntax:&#xa0;</p>
+<p style="margin-left: 30.0px;"><code>create_supply_port&#xa0;<em>supply_port_name&#xa0;<br /></em>create_supply_net&#xa0;</code><em><code>supply_net_name</code></em></p>
+
+<p>&#xa0;Then, connect the supply port to the supply net as shown:</p>
+<p style="margin-left: 30.0px;"><code>connect_supply_net&#xa0;<em>supply_net_name</em>&#xa0;-port&#xa0;<em>supply_port_name</em></code><em><br /></em></p>
+
+<p>For a complete description of these commands, see the IEEE 1801-2013 specification.</p>
+<h3 id="CreatinganIEEE1801FileforanMSVDesign-1109925SpecifyingtheSupplySet"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforanMSVDesign-1109925"></span>Specifying the Supply Set</h3>
+
+<p>For IEEE 1801, a basic building block of the low power intent is the supply set. Because a supply set is a bundle of supply nets, you can use the supply set to simplify the connection of supply nets to power domains and special cells. That is, rather than specifying each supply net individually, you can use a supply set instead.</p>
+
+<p>To define a supply set for each power domain, use the following syntax:</p>
+<p style="margin-left: 30.0px;"><code>create_supply_set ss_<em>name</em>&#xa0;[-function {<em>supply_function</em>&#xa0;<em>supply_net</em>}]*</code></p>
+
+<p>The supply set defines a set of functions such as primary power and primary ground, and then defines which supply nets provide those functions. For example, the following&#xa0;command specifies that the primary power for&#xa0;<code>ss_PD1</code>&#xa0;is provided by the supply net&#xa0;<code>VDD1</code>, and the ground function is provided by&#xa0;<code>VSS</code>:</p>
+<p style="margin-left: 30.0px;"><code>create_supply_set ss_PD1 -function {power VDD1} -function {ground VSS}</code></p>
+<h3 id="CreatinganIEEE1801FileforanMSVDesign-associateSupSetAssociatingtheSupplySettothePowerDomain"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforanMSVDesign-associateSupSet"></span>Associating the Supply Set to the Power Domain</h3>
+
+<p>To associate supply sets to power domains, use the&#xa0;<code>associate_supply_set</code>&#xa0;command with the following syntax:</p>
+<p style="margin-left: 30.0px;"><code>associate_supply_set ss_<em>name</em>&#xa0;-handle&#xa0;<em>power_domain</em>.<em>handle</em></code></p>
+
+<p>For example:</p>
+<p style="margin-left: 30.0px;"><code>associate_supply_set ss_PD1 -handle PD1.primary</code></p>
+
+<p>The associated supply set defines that all primary power and ground pins for any cell in&#xa0;<code>PD1</code>&#xa0;will be connected to the nets defined in the&#xa0;<code>ss_PD1</code>&#xa0;supply set. In this case, it means that all primary power pins in the&#xa0;<code>PD1</code>&#xa0;domain will be connected to the&#xa0;<code>supply_net VDD1</code>.</p>
+<h3 id="CreatinganIEEE1801FileforanMSVDesign-1110109SpecifyingtheVoltageStatesAllowedforEachDomain"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforanMSVDesign-1110109"></span>Specifying the Voltage States Allowed for Each Domain</h3>
+
+<p>For IEEE 1801, Cadence recommends using an&#xa0;<code><span style="">add_power_state</span></code>&#xa0;command for each power domain. Use this command to define the allowed operating voltage for each specified domain. Although it is not required, it does provide a very clear definition of power intent for more complex designs.</p>
+
+<p>To specify the operating voltages used in the design, use the&#xa0;<span style="">add_power_state</span>&#xa0;command. For example:</p>
+
+<p><code>add_power_state PD1.primary \</code><br /><code>&#xa0; &#xa0; &#xa0;-state ON {-supply_expr {power == \</code><br /><code>&#xa0; &#xa0; &#xa0;`{FULL_ON, 0.8} &amp;&amp; ground == `{FULL_ON, 0.0}} \</code><br /><code>&#xa0; &#xa0; &#xa0;-simstate NORMAL}</code><br /><br /><code>add_power_state PD2.primary \</code><br /><code>&#xa0; &#xa0; &#xa0;-state ON {-supply_expr {power == \</code><br /><code>&#xa0; &#xa0; &#xa0;`{FULL_ON, 1.0} &amp;&amp; ground == `{FULL_ON, 0.0}} \</code><br /><code>&#xa0; &#xa0; &#xa0;-simstate NORMAL}</code><br /><br /><code>add_power_state PD3.primary \</code><br /><code>&#xa0; &#xa0; &#xa0;-state ON {-supply_expr {power == \</code><br /><code>&#xa0; &#xa0; &#xa0;`{FULL_ON, 1.2} &amp;&amp; ground == `{FULL_ON, 0.0}} \</code><br /><code>&#xa0; &#xa0; &#xa0;-simstate NORMAL}</code></p>
+<div class="confluence-information-macro confluence-information-macro-tip"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon"></span><div class="confluence-information-macro-body">If your designs have a <code>pmos</code> or <code>nmos</code> bias, you can also specify these using the <code>-supply_expr</code> option.</div>
+</div>
+<h3 id="CreatinganIEEE1801FileforanMSVDesign-1089976DefiningSystemLevelPowerStates"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforanMSVDesign-1089976"></span>Defining System Level Power States</h3>
+
+<p>The&#xa0;<code>add_power_state</code>&#xa0;command can also define system level power states. A system level power state defines the interactions between domains rather than the allowed states per domain.</p>
+
+<p>In general, power states are used as follows:</p>
+<ul><li>For verification with IEEE 1801.</li><li>For coverage and to create assertions with simulation.</li><li>To verify all level shifting and isolation requirements in the power intent when running low power design checks.</li></ul>
+<p>A pure MSV design is considered to have only one power mode, and each power domain should be associated with a single voltage. A pure MSV design&#xa0;is a design that uses multiple supply voltages but that has no other low power techniques, such as the PSO or DVFS methodologies.</p>
+
+<p>To define the power state, use the&#xa0;<code>add_power_state</code>&#xa0;command:</p>
+
+<p><code>add_power_state PD1 \<br />&#xa0;&#xa0;&#xa0; -state PM1 {-logic_expr \<br />&#xa0;&#xa0;&#xa0; { PD1.primary == ON &amp;&amp; PD2.primary == ON &amp;&amp; PD3.primary == ON }</code></p>
+<div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><span style="">The system level </span><code>add_power_state</code>&#xa0;command should only specify power domain states with the &#xa0;<code>-logic_expr</code><span style="">&#xa0;option</span>, not individual power nets. In an hierarchical IEEE 1801 flow,&#xa0;<code>-logic_expr</code><span style=""> could also refer to other lower level system states. In this way, the top-level </span><span style="">does not need to specify all the lower level domains.</span></div>
+</div>
+<h3 id="CreatinganIEEE1801FileforanMSVDesign-1089227SpecifyingtheRulestoCreateLevelShifterLogic"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforanMSVDesign-1089227"></span>Specifying the Rules to Create Level Shifter Logic</h3>
+
+<p>Depending on your technology, you may need level shifters when passing signals...</p>
+<ul><li>From a power domain with a lower voltage to a power domain with a higher voltage.</li></ul><ul><li>From a power domain with a higher voltage to a power domain with a lower voltage.</li></ul>
+<p>In both cases, t<span style="">o create a level shifter strategy to use between power domains or a set of pins, use&#xa0;</span><span style="">the&#xa0;</span><span style="">set_level_shifter</span>&#xa0;command, the most common options and values are:</p>
+<p style="margin-left: 30.0px;"><code>set_level_shifter&#xa0;<em>strategy_name</em>&#xa0;<br />&#xa0;&#xa0;&#xa0; -domain&#xa0;<em>domain_name \</em></code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;-applies_to &lt;inputs|outputs|both&gt; \</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;-location &lt;parent|self|other&gt; \</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;-input_supply_set&#xa0;<em>supply_set_name</em>&#xa0;\<br />&#xa0;&#xa0;&#xa0; -output_supply_set&#xa0;<em>supply_set_name \</em></code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;-threshold &lt;<em>value</em>|<em>list&gt;</em></code></p>
+
+<p>The level shifter strategy typically applies to the inputs or outputs of a specific domain as specified by the&#xa0;<span style="">-applies_to</span>&#xa0;option. The&#xa0;<code>-location</code>&#xa0;option provides guidance as to where the implementation tools should place the isolation cell: either on the inside of the domain specified (<code>self</code>) or outside of the hierarchy (<code>other</code>).</p>
+
+<p>The threshold defines when to insert level shifting, this option is often used to avoid level shifting when the voltage difference is small.</p>
+
+<p>For Figure 2-1, <a href="#CreatinganIEEE1801FileforanMSVDesign-1035482">An Example of MSV Design</a>, specify the following:</p>
+
+<p><code>set_level_shifter LS_PD2_inputs -domain PD2 \</code><br /><code>&#xa0; &#xa0; -applies_to inputs \</code><br /><code>&#xa0; &#xa0; -location parent \</code><br /><code>&#xa0; &#xa0; -input_supply_set PD1.primary -output_supply_set PD2.primary&#xa0;</code><br /><br /><code>set_level_shifter _outputs LS_PD1_PD3 -domain PD3 \</code><br /><code>&#xa0; &#xa0; -applies_to inputs -pins {B} \</code><br /><code>&#xa0; &#xa0; -location self \</code><br /><code>&#xa0; &#xa0; -input_supply_set PD1.primary -output_supply_set PD3.primary</code><br /><br /><code>set_level_shifter _outputs LS_PD2_PD3 -domain PD3 \</code><br /><code>&#xa0; &#xa0; -applies_to inputs -pins {a} \</code><br /><code>&#xa0; &#xa0; -location self \&#xa0;</code><br /><code>&#xa0; &#xa0; -input_supply_set PD2.primary&#xa0;</code><br /><code>&#xa0; &#xa0; -output_supply_set PD3.primary</code></p>
+<h3 id="CreatinganIEEE1801FileforanMSVDesign-1093899SpecifyingtheGlobalConnections"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforanMSVDesign-1093899"></span>Specifying the Global Connections</h3>
+
+<p>If the design has hard macros with non-default or multiple power and ground connections, then the supply net must be used to specify how to connect global nets, such as power and ground nets. In the example used in this section, there are no special requirements on the design, so this command is not needed. But it is frequently used for memories and other macros in practice.</p>
+<p style="margin-left: 30.0px;"><code><span style="">connect_supply_net&#xa0;<em>net_name</em><em><br /></em>&#xa0;&#xa0;&#xa0;&#xa0;-ports&#xa0;<em>pin_list \</em><em><br /></em>&#xa0;&#xa0;&#xa0;&#xa0;-domain&#xa0;<em>domain</em></span></code></p>
+
+<p><span style=""></span></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Creating_an_IEEE_1801_File.html" id="prev" title="Creating_an_IEEE_1801_File">Creating_an_IEEE_1801_File</a></em></b><b><em><a href="Creating_an_IEEE_1801_File_for_a_PSO_Design.html" id="nex" title="Creating_an_IEEE_1801_File_for_a_PSO_Design">Creating_an_IEEE_1801_File_for ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

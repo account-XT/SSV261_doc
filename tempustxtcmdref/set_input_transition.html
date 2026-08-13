@@ -1,0 +1,145 @@
+
+<html><head><title>set_input_transition</title>
+<meta name="page_sequence" content="20081000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287440" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_input_transition" />
+<meta name="Keywords" content="set input transition,set,input,transition,input transition,transition time,port list" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Constraints," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287440" />
+<meta name="NextFile" content="set_load.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_input_delay.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- set_input_transition" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="set_input_delay.html" title="set_input_delay">set_input_delay</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_load.html" title="set_load">set_load</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_input_transition</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>set_input_transition<span class="confluence-anchor-link" id="set_input_transition-set_input_transition"></span><span id="set_input_transition-set_input_transition"></span>&#xa0;</code><br /><code>[-help]</code><br /><code>[-min]</code><br /><code>[-max]&#xa0;</code><br /><code>[-rise]</code><br /><code>[-fall]&#xa0;</code><br /><code><em>transition_time</em><em style="font-family: monospace;line-height: 1.4285715;"><br /></em><em style="line-height: 1.4285715;">port_list</em></code></p>
+
+<p>Specifies the slew time for a port on the top level module. This command is useful only in specifying a hard ramp signal as if the port were driven by a very powerful driver. The command does not change the arrival time of an input, but changes the slew time used to compute the delay of the cell on the sink of a net. If you do not define transition using the <code>set_input_transition</code> command, the software uses the default input transition value defined using the <code>delaycal_input_transition_delay</code> variable. This is set in the initialization global variable file and has a default value of 0.1ps.</p>
+
+<p>The <code>set_input_transition</code> command specification for clock signals does not impact setup/hold timing calculations.</p>
+
+<p><strong style="letter-spacing: 0.0px;">Note: </strong><span style="letter-spacing: 0.0px;">The </span><code style="letter-spacing: 0.0px;">set_input_transition</code><span style="letter-spacing: 0.0px;"> command does not support internal pins. For specifying transition on internal pins use the </span><code style="letter-spacing: 0.0px;"><a href="set_annotated_transition.html#set_annotated_transition-set_annotated_transition">set_annotated_transition</a></code><span style="letter-spacing: 0.0px;"> command.</span></p>
+
+<p><strong>Note</strong>: The most recent command settings (of <code><a href="set_driving_cell.html">set_driving_cell</a></code>, <code>set_input_transition</code>, or <code><a href="set_drive.html">set_drive</a></code>) that are applied to a port will be considered - the software will&#xa0;override the previous commands.</p>
+
+<p>The <code>set_input_threshold</code> command should be issued after the <code><a href="set_lib_binding_by_voltage.html">set_lib_binding_by_voltage</a></code> command.</p>
+<h4 id="set_input_transition-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-fall/</code><code>-rise</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies that the slew time should be applied to the rising edge or the falling edge of the signal (data or clock). If neither time is specified, the default is to use both.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-min/</code><code>-max</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Indicates whether the slew times are with respect to the early (hold) or the late (setup) time checks of the data signal. If neither option is specified, the default is to use both.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>port_list</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the list of ports for which the slew time is specified.</p>
+
+<p><span style="letter-spacing: 0.0px;">When you use both </span><code style="letter-spacing: 0.0px;">set_input_transition</code><span style="letter-spacing: 0.0px;"> and </span><code style="letter-spacing: 0.0px;">set_annotated_transition</code><span style="letter-spacing: 0.0px;"> commands for specifying transition on input ports, the worst value is used as the transition value.</span></p>
+
+<p><strong>Note: </strong>You cannot use the <code>set_input_transition</code> command to specify transition on output ports.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>transition_time</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the transition time.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_input_transition-Examples">Examples</h4>
+<ul><li>The following command specifies the slew time of <code>0.5</code> on port&#xa0;<code>input3</code>.<br /><code>tempus &gt;&#xa0;set_input_transition 0.5 input3</code></li></ul><ul><li>The following command specifies the input falling slew of 0.6ns on the port input1 for minimum delay type:<br /><code>tempus &gt; set_input_transition -min -fall 0.6 input1</code></li></ul><h4 id="set_input_transition-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="report_ports.html#report_ports-report_ports">report_ports</a></code></li><li><code><a href="set_driving_cell.html#set_driving_cell-set_driving_cell">set_driving_cell</a></code></li><li><code><a href="set_drive.html#set_drive-set_drive">set_drive</a></code></li><li><code><a href="set_clock_transition.html">set_clock_transition</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_input_delay.html" id="prev" title="set_input_delay">set_input_delay</a></em></b><b><em><a href="set_load.html" id="nex" title="set_load">set_load</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

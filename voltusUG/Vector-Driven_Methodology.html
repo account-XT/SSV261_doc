@@ -1,0 +1,105 @@
+
+<html><head><title>Vector-Driven Methodology</title>
+<meta name="page_sequence" content="22003000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468593" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Vector-Driven Methodology" />
+<meta name="Keywords" content="VCD,switching,clock" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468593" />
+<meta name="NextFile" content="Vector_Profiling.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="State-Propagation-Based_Vectorless_Methodology.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- Vector-Driven Methodology" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="State-Propagation-Based_Vectorless_Methodology.html" title="State-Propagation-Based_Vectorless_Methodology">State-Propagation-Based_Vector ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Vector_Profiling.html" title="Vector_Profiling">Vector_Profiling</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Vector-Driven Methodology</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="VectorDrivenMethodology-83161"></span></p>
+
+<p>The VCD file is the output from a gate-level simulation of many vectors and contains all the net switching activity information for the design. The VCD simulation approach to dynamic power-consumption calculation uses the same VCD file as that used for static power-consumption calculation, but unlike the static VCD approach, it uses the information on the switching instances and when they switch. Using output load and slew, it creates current profile for the instance based on power arcs defined in .lib for the cell. The calculated dynamic currents are saved for all power nets associated with the instance. These current waveforms can be viewed using SimVision waveform viewer interface. The accuracy of the current waveform depends on the power tables in the liberty (.lib) file.</p>
+
+<p>Generally the VCD file can be very large in terms of total simulation duration. While static power calculation can process such full VCD file and derive average activity to calculate static power, running dynamic simulation on full VCD is unrealistic due to performance and resource limitation. Hence it is recommended that you identify the power hungry cycles or cycles with high switching activity up-front to perform dynamic power calculation.</p>
+
+<p>It is recommended that VCD window (start and stop time) for dynamic power calculation does not exceed more than five cycles of dominant clock in the design.</p>
+
+<p><strong>Advantages of Vector-Driven Methodology</strong></p>
+
+<p>The vector-driven approach for dynamic power-consumption calculation offers several advantages:</p>
+<ul><li>The data that it yields is exact for the given vectors. For a given vector, you know exactly what is switching and when.</li><li>You can use it to validate the vectorless, timing-windows based simulation.</li><li>It is a well-understood methodology, if power-hungry cycles are known and is therefore easy to develop.</li></ul><h4 id="VectorDrivenMethodology-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Vector_Profiling.html">Vector Profiling</a></li><li><a href="Vectorless_Methodology.html">Vectorless Methodology</a></li><li><a href="Dynamic_Power_Analysis.html">Dynamic Power Analysis</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="State-Propagation-Based_Vectorless_Methodology.html" id="prev" title="State-Propagation-Based_Vectorless_Methodology">State-Propagation-Based_Vector ...</a></em></b><b><em><a href="Vector_Profiling.html" id="nex" title="Vector_Profiling">Vector_Profiling</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

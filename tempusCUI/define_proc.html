@@ -1,0 +1,188 @@
+
+<html><head><title>define_proc</title>
+<meta name="page_sequence" content="20004000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287159" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="define_proc" />
+<meta name="Keywords" content="define_proc_arguments,parse_proc_arguments" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="General Commands," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287159" />
+<meta name="NextFile" content="define_variables.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="decrypt.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- define_proc" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="decrypt.html" title="decrypt">decrypt</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="define_variables.html" title="define_variables">define_variables</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>define_proc</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>define_proc<span class="confluence-anchor-link" id="define_proc-define_proc"></span><span id="define_proc-define_proc"></span> <br /></code>[-help] <br /><em>proc_name</em>&#xa0;<br /><em>arg_list</em>&#xa0;<br /><em>proc_body&#xa0;</em><br />[-description <em>proc_help</em>] <br />[-extended_help <em>description</em>]<br />[-hidden]<br /></code></p>
+
+<p>This command defines a Tcl proc that uses an extended argument syntax to check for legal argument names and legal values. It is a super-set of the functionality supported by define_proc_arguments, and&#xa0;parse_proc_arguments and easier to use.</p>
+
+<p>The arguments are parsed, and if any errors occur, an error message is written, and a TCL_ERROR is returned, so the&#xa0;<em>proc_body</em>&#xa0;is not executed. If the arguments are parsed successfully the Tcl vars are set accordingly, and the&#xa0;<em>proc_body</em>&#xa0;is executed.</p>
+
+<p>It supports simple types like int, string, etc., built-in types like point, rect, and objects like inst, net, pin.</p>
+
+<p>Commands defined with define_proc also have the same support as other Tempus&#xa0;commands, including:</p>
+<ul><li>help support (e.g. &quot;cmd -help&quot; to see the options, and &#xa0;&quot;help c*&quot; would find the command named cmd, etc.)</li><li>tab-completion of partial command or option names (e.g. &quot;cmd&lt;tab&gt;&quot; or &quot;cmd -opt&lt;tab&gt;&quot;)</li><li>partial argument name matching is allowed (e.g. &quot;cmd -opt&quot; will work if -opt only matches one option name prefix like -opt_test)</li><li>redirect output to files or Tcl vars using &gt; or &gt;&gt; (e.g. &quot;cmd &gt; my_file&quot;, or &quot;cmd &gt; &#xa0;&amp;my_tcl_var&quot;)</li></ul><h4 id="define_proc-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code><em>arg_list</em></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Defines the argument list of the Tcl procedure in the following format for each argument:</p>
+<p style="margin-left: 30.0px;"><code>{<em>var default arg_name data_type flags help</em>}</code></p>
+
+<p>For example</p>
+<p style="margin-left: 30.0px;"><code>{report_file report.out {-out_file file_name} string optional {The output file for the report} }</code></p>
+
+<p>In this format:</p>
+<ul><li><em><code>var</code></em> is the local Tcl variable to assign, such as report_file in the example above. The value for the argument is assigned to this variable before the body of <code>define_proc</code> is invoked.</li><li><em><code>default</code> </em>is the default value, <span>such as</span> report.out in the example above. If the argument is not given, then <em>var</em> will be assigned the <em>default</em> value. Note, unlike an argument value passed to the command, the type of the default value is not checked. <br />For example, the following command <span>would set int_var to &quot;no_value&quot; if -my_int is not given. <span>Normally the default value should be a legal int value, but y</span></span><span>ou can use this to check if the argument was given for an optional argument when there is no good default value.&#xa0;<br /></span><br /><code><span>{int_var no_value {-my_int int} int optional {int value help description}}</span></code><br /><span>The default value is ignored if the argument is a required argument (see <em>flags</em> below).</span></li><li><span style="font-family: monospace;"><em>arg_name </em></span>is the argument name with optional value help. Both named {-opt value} and unnamed {value} arguments are supported.</li></ul><p style="margin-left: 30.0px;">If the first word starts with a dash, it is a named argument with optional help string. For example, <code><span>{&#8211;out_file file_name} </span></code><span>will appear in the help output as: </span><span>-out_file &lt;file_name&gt;.</span></p>
+<p style="margin-left: 30.0px;"><span style="line-height: 1.42857;">If no help string is given like this:<br /></span><code style="line-height: 1.42857;">{&#8211;out_file}</code></p>
+<p style="margin-left: 30.0px;"><span style="line-height: 1.42857;">The help output will include the data_type like: -out_file &lt;string&gt;.</span></p>
+<p style="margin-left: 30.0px;"><span style="line-height: 1.42857;">If the first word does not start with a dash, it is an unnamed argument and the first word is used as the help string. For example, </span><code>{out_file}</code> <span style="line-height: 1.42857;">will appear in the help output as: </span><span style="line-height: 1.42857;"><code>&lt;out_file&gt;</code>.</span></p>
+<ul><li><em><code>data_type</code> </em>is the argument data type. Many types are supported including simple types, bool type, enum type, built-in types, and object types.<ul><li>
+<p>These simple types are supported:<strong><span style="line-height: 1.42857;"> int, float, double, string. </span></strong>They all require an argument value that matches the type (e.g. -my_int 23, or -my_string &quot;my test string&quot;). <strong>float</strong> and <strong>double</strong> are both allowed, and mean the same thing. For example</p>
+
+<p><code><span style="line-height: 1.42857;"> {int_var 0 </span><span style="line-height: 1.42857;">{</span><span style="line-height: 1.42857;">-my_int int} <strong>int</strong> optional {int value help description}}</span></code></p>
+
+<p><span style="line-height: 1.42857;">Note that a integer passed to a float or double type will get a .0 added to the end so it can be passed to expr and forced to use floating point arthimetic.</span></p>
+</li></ul></li></ul><ul><li style="list-style-type: none;background-image: none;"><ul><li><span style="line-height: 1.42857;">The <strong>bool</strong> type supports an argument with or without a value. If the <em>arg_name</em> definition has a value help string, then a bool value is required, otherwise a value is not allowed. So, a switch that takes no value would look like:<br /></span><br /><code>   {switch_var false -my_switch <strong style="line-height: 1.42857;">bool</strong> optional &quot;-my_switch help description&quot;}</code><br />and would be used like this with no value<br /><code><span style="line-height: 1.42857;"> -my_switch</span></code><br />The switch_var will be set to true if -my_switch is given, and set to the default value of false if not given.<br /><span style="line-height: 1.42857;">A bool with a value required, would look like this</span><br /><code>   {bool_var false {-my_bool bool} bool optional &quot;bool with value help description&quot;}</code><br /><span style="line-height: 1.42857;">and would be used like this</span><br /><code><span style="line-height: 1.42857;"> -my_bool true</span></code><br /><span style="line-height: 1.42857;">Any Tcl allowed bool value can be used for the input value (e.g. true, false, 1, 0, on, off, etc.) but the bool_var will always have either true, false or the </span><em style="line-height: 1.42857;">default</em><span style="line-height: 1.42857;"> value if the argument is not given.</span></li></ul></li></ul><ul><li style="list-style-type: none;background-image: none;"><ul><li><span style="line-height: 1.42857;">These built-in types are supported: <strong>point, rect.</strong></span><ul><li><strong>point</strong> is exactly two doubles. The input can be either a single list or list of lists style, so both {1.0 2.0} or {{1.0 2.0}} are allowed as input. The point_var will always be assigned as a simple list of two values for either type of input. An integer value gets a .0 added, so it can be used in a Tcl expr and forced to be treated as a double. So an input like {1 2} will be assigned to the point_var as {1.0 2.0}.</li><li><strong>rect </strong>is exactly four doubles. It can be in a single list or list of lists style, so {0 1 2 3}, {{0 1} {2 3}} or {{0 1 2 3}} are allowed. The rect_var will always be assigned as a simple list of four values.</li></ul></li></ul></li></ul><ul><li style="list-style-type: none;background-image: none;"><ul><li><span style="line-height: 1.42857;">An <strong>enum</strong> type must include the list of legal enum values like this {<strong>enum</strong> val1 val2 ...}. It supports an optional list_type of<strong> * </strong>(a list of 0 or more) or <strong>+</strong> (a list of 1 or more) as the last enum value. It allows an optional {<strong>hidden</strong> val1 val2 ...} list for hidden enum values. The enum value inputs are case-insensitive, but the return value assigned to <em>var</em> is always forced to be all lower-case characters.</span><br /><span style="line-height: 1.42857;">For example, </span><br /><code><span style="line-height: 1.42857;"> <span>&#xa0;</span><span> {sort_var name </span><span>{</span><span>-sort} {<strong>enum</strong> name age {<strong>hidden</strong> city state} +} optional {help description}}</span></span></code><br /><span style="line-height: 1.42857;"><span>would allow<code> -sort age</code>, or <code>-sort &quot;name CITY&quot;</code>, but would give errors for <code>-sort &quot;&quot;</code>, or <code>-sort abc</code>. </span></span><br />The help string will show the enum values but not the hidden enum values like this:<br /><pre>     -sort {name age} # help description (enum+, optional)</pre></li><li>An <strong>object</strong> type allows object names and pointers to be passed in as values like this {<strong>object</strong> <em>obj_type1 [obj_type2 ...] </em>[<em>list_type</em>]}. <span> It supports an optional <em>list_type</em> of</span><strong> * </strong><span>(a list of 0 or more) or </span><strong>+</strong><span> (a list of 1 or more) as the last value. If <em>list_type</em> is not given, exactly one value is required for input. For example, </span></li></ul></li></ul><p style="margin-left: 60.0px;"><span>&#xa0;</span><span>&#xa0;</span><code>  {driver_var {} {-drivers} {<strong>object </strong>pin port *} optional {help description}}</code></p>
+<p style="margin-left: 60.0px;">would allow a list of 0 or more pin or port objects for input. The input could be a list of pin or port pointers, or a name-pattern like &quot;i1/p*&quot; that allows * and ? pattern matching. <em> driver_var</em> will be assigned a list of pointers of the correct type (or types). So both of these uses would have the same result:</p>
+<p style="margin-left: 60.0px;"><code>   -drivers [concat [get_db pins i1/p*] [get_db ports i1/p*]]</code></p>
+<p style="margin-left: 60.0px;"><code>   -drivers i1/p*</code></p>
+<p style="margin-left: 60.0px;">In both cases, all the pins and ports that match i1/p* would be returned as a list of objects and assigned to <em>driver_var</em>.</p>
+<p style="margin-left: 60.0px;">If any objects are passed in that are not pin or port objects, an error will occur during parsing.</p>
+<p style="margin-left: 60.0px;">If<span> at least one pointer is required (e.g. list_type<strong> +</strong> or no list_type), and none are matched by the name pattern, an error will occur during parsing.</span></p>
+<p style="margin-left: 60.0px;"><span style="line-height: 1.42857;">Design objects like <strong>hinst, inst, hnet, net, hpin, pin</strong>, <strong>port</strong>, etc and library objects like <strong>base_cell,</strong> <strong>base_pin, lib_cell, lib_pin</strong>, etc, and technology objects like <strong>layer</strong>, <strong>route_rule</strong>, etc. are supported, but only objects that have a .name attribute can use a name-pattern in addition to pointers (e.g. a wire object has no .name so it cannot be looked up with a name-pattern). See the Stylus Common UI Database Reference for a list of all the obj_types.</span></p>
+<ul><li>
+<p><em style="line-height: 1.42857;"><code><em style="font-family: Arial , sans-serif;line-height: 1.42857;"><code>flags</code> </em></code></em>is list of flags that may be an empty list. The supported flags are</p>
+<ul><li><strong>optional</strong> means the argument is optional. If the argument is not given, <em>var</em> will be set to the <em>default</em> value. Arguments are <strong>optional</strong> by default, so this is mostly to make it easy to see it in the definition. It cannot be combined with <strong>required</strong>.</li><li><strong>required</strong> means the argument is required. It is an error to not have the argument.</li><li><strong>multiple</strong> means the argument can appear multiple times and <em>var</em> will be set to a list of all the values.</li><li><strong>hidden</strong> means the argument is not shown in the help output, partial argument name matching will not match it, and &lt;tab&gt; complete will not show it. <strong>hidden</strong> must be optional, so it cannot be combined with <strong>required</strong>, <strong>required_group, </strong>or <strong>exclusive_required_group</strong> flags.</li><li><strong>obsolete</strong> means the argument still works but is considered obsolete. It will give a warning message if it is used that the user should stop using this argument to be compatible with future releases. An <strong>obsolete</strong> argument will automatically be <strong>hidden</strong> and cannot be a required argument. See <strong>alias</strong> if you just want to change the <em>arg_name</em> to a new <em>arg_name</em>.</li><li>{<strong>exclusive_group </strong><em>group_name</em>} means only one of the arguments can be given from the same <em>group_name</em>. For example, only one of -my_int or -my_int2 are allowed:<br /><code>    {int_var 0 {-my_int int} int {{<strong>exclusive_group</strong> group1}} {help for -my_int}}</code><br /><code>    <span>{int_var2 0 {-my_int2 int} int {{</span><strong>exclusive_group</strong><span> group1}} {<span>help for -my_int2</span>}}</span></code></li><li>{<strong>exclusive_required_group </strong><em>group_name</em>} <span>means exactly one of the arguments must be given from the same </span><em>group_name.</em></li><li><span><span>{</span><strong>required_group </strong><em>group_name</em><span>} means one or more of the arguments <span>must be given from the same </span><em>group_name.</em></span></span></li><li>{<strong>requires </strong><em>arg_name1</em> [<em>arg_name2</em> ...]} means this argument requires all the other arguments in the list. For example both -arg1 and -arg2 are required if -my_int is given.<br /><code> <span>&#xa0; </span><span> {int_var 0 </span><span>{</span><span>-my_int int} int {optional {<strong>requires</strong> -arg1 -arg2}} {help for -my_int}}</span></code></li></ul></li></ul><ul><li style="list-style-type: none;background-image: none;"><ul><li>{<strong>alias</strong><em> obsolete_name [</em><strong>warn</strong><em>]</em>} means an alias of <em>obsolete_name</em> to the <em>arg_name</em> will be added. If <strong>warn</strong> is given, a warning message will be given if the <em>obsolete_name</em> is used telling the user to change to <em>arg_name,</em> otherwise <em>obsolete_name</em> will behave just like <em>arg_name</em>. The <em>obsolete_name</em> is not shown in help output. This can be used to migrate users to new argument names, but keep the old name for backward compatibility. For example, to migrate from <code>-old_my_int</code> to <code>-new_my_int</code> you would use this:<br /><code>&#xa0;&#xa0; {int_var 0 {-new_my_int int} int {{<strong>alias </strong>-old_my_int}} {help for -new_my_int}}</code></li></ul></li><li><em><code>help</code> </em>is a help string for the argument, <span>such as </span><em>&#8220;a file name to read&#8221;</em>.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-description <em>proc_help</em></code></td>
+<td class="confluenceTd" colspan="1">Specifies the help description for the defined procedure, shown by &quot;help cmd&quot; or &quot;cmd -help&quot;.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-extended_help <em>description</em></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the extended help description to the procedure. It is printed after <code>-description</code> and <code><em>arg_list</em></code>.</p>
+
+<p>Shown by &quot;help cmd&quot; or &quot;cmd -help&quot;.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">Outputs the command usage and a brief description about the command parameters.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-hidden</code></td>
+<td class="confluenceTd" colspan="1">Makes the procedure hidden and not public. That means &lt;tab&gt; complete will not return this proc name, and &quot;info commands *&quot; will not return this proc name. But if you type the full name like &quot;info commands full_cmd_name&quot; it will return the command, or &quot;full_cmd_name -help&quot; will return help for it.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><em><code>proc_body</code></em></td>
+<td class="confluenceTd" colspan="1"><span>Defines the Tcl procedure body that uses var names from </span><code><em>arg_list</em></code><span>.&#xa0;</span></td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code><em>proc_name</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the name of the Tcl procedure.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="define_proc-Example">Example</h4>
+
+<p>Here is an example of some common usage:</p>
+<pre class="CodeCxSpFirst">define_proc test &#8211;description&#xa0;&#8220;An example of the extended argument syntax&#8221;&#xa0;{</pre><pre class="CodeCxSpMiddle">    {out_file &quot;default.out&quot; out_file string optional &quot;The output file name&quot;}</pre><pre class="CodeCxSpMiddle">    {my_count 0 {-count num_inputs} int required&#xa0;&quot;The number of inputs&quot;}</pre><pre class="CodeCxSpMiddle">    {verbose false -verbose bool optional &quot;Verbose output&quot;}</pre><pre class="CodeCxSpMiddle">    {check_err not_set {-check_err bool} bool optional &quot;Override global check setting&quot;}</pre><pre class="CodeCxSpMiddle">    {effort low -effort&#xa0;{enum low medium high} optional &quot;How much effort to use&quot;}</pre><pre class="CodeCxSpMiddle">    {my_insts {} {-insts}&#xa0;{object inst +} optional &quot;One or more insts&quot;}</pre><pre class="CodeCxSpMiddle">} {</pre><pre class="CodeCxSpMiddle"># Proc body goes here</pre><pre class="CodeCxSpMiddle">    ...</pre><pre class="CodeCxSpLast">}</pre>
+<p>The above procedure generates the following help output:</p>
+
+<p><code>&gt; test -help</code></p>
+
+<p>An example of the extended argument syntax</p>
+
+<p><code>Usage: test [-help] [&lt;out_file&gt;] [-check_err &lt;bool&gt;] -count &lt;num_inputs&gt; [-effort {low medium high}] [-verbose]</code></p>
+
+<p><code>-help &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;# Prints out the command usage</code></p>
+
+<p><code>&lt;out_file&gt; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; # The output file name (string, optional)</code></p>
+
+<p><code>-check_err &lt;bool&gt; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;# Override global check setting (bool, optional)</code></p>
+
+<p><code>-count &lt;num_inputs&gt; &#xa0; &#xa0; &#xa0; &#xa0;# The number of inputs (int, required)</code></p>
+
+<p><code>-effort {low medium high} &#xa0;# How much effort to use (enum, optional)</code></p>
+
+<p><code>-insts &lt;inst&gt;+ &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; # One or more insts (Iinst)+, optional)</code></p>
+
+<p><code>-verbose &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; # Verbose output (bool, optional)</code></p>
+
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="decrypt.html" id="prev" title="decrypt">decrypt</a></em></b><b><em><a href="define_variables.html" id="nex" title="define_variables">define_variables</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

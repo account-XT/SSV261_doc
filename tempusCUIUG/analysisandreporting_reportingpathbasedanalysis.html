@@ -1,0 +1,126 @@
+
+<html><head><title>Reporting in Path-Based Analysis</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845205" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Reporting in Path-Based Analysis" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845205" />
+<meta name="NextFile" content="analysisandreporting_pathbasedreportingmodels.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_gbavspbacomparision.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- Reporting in Path-Based Analysis" />
+<meta name="Keywords" content="reporting path based analysis" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Analysis,REPORTS,Stylus" />
+<meta name="prod_subfeature" content="Timing Analysis, Reports" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_gbavspbacomparision.html" title="GBA vs PBA Comparison">GBA vs PBA Comparison</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_pathbasedreportingmodels.html" title="Path-Based Analysis Reporting Models">Path-Based Analysis Reporting  ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:reportingpathbasedanalysis" title="Reporting in Path-Based Analysis"></a><h3>
+<a id="pgfId-1013945"></a><a id="12676"></a>Reporting in <a id="ReportinginPathBasedAnalysis"></a>Path-Based Analysis</h3>
+<h4>
+<a id="pgfId-1013946"></a>Commands for PBA Reporting</h4>
+
+<p>
+<a id="pgfId-1013947"></a>You can use the following commands to report violations in PBA mode:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1013948"></a><a href="../tempusCUI/report_constraint.html">report_constraint</a> &#8211;retime &lt;<code><em>option</em></code>&gt;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1013949"></a>report_timing &#8211;retime &lt;<code><em>option</em></code>&gt;</pre>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1013950"></a>To generate the analysis summary file, you can use the following options with the <a href="../tempusCUI/report_timing.html">report_timing</a> command - to give high value of nworst and max_path to get good coverage. The report summary will be stored in the pba.summ file.</div>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1013951"></a>report_timing -retime path_slew_propagation -max_paths &lt;&gt; -nworst &lt;&gt; -path_type summary_slack_only -&lt;late/early&gt; -analysis_summary_file pba.summ</pre>
+<h4>
+<a id="pgfId-1013952"></a>Sample Report Showing GBA vs PBA Timing Results</h4>
+
+<p>
+<a id="pgfId-1013953"></a>The following example demonstrates GBA vs PBA timing results. Given below is the GBA report for pin &#8220;A&#8221;:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3006887"></a>Path 1: MET (1.399 ns) Setup Check with Pin f0/CK-&gt;D<br />View: setup_analysis_view<br />Group: master<br />Startpoint: (F) f0/CK<br />Clock: (F) master<br />Endpoint: (F) f0/D<br />Clock: (F) master<br />N-Sigma: 3.000<br /></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3006888"></a>                  Capture                      Launch<br />Clock Edge:+      3.000                        1.000<br />Src Latency:+     0.000  (0.000, 0.000)        0.000  (0.000, 0.000)<br />Net Latency:+     0.067  (0.072, 0.002) (P)    0.098  (0.093, 0.002) (P)<br />Arrival:=         3.067  (3.072, 0.002)        1.098  (1.093, 0.002)<br /></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3006889"></a>Setup:-            0.237  (0.237, 0.000)<br />Cppr Adjust:+      0.028  (0.021, 0.002)<br />Required Time:=    2.852  (2.856, 0.002)<br />Launch Clock:=     1.098  (1.093, 0.002)<br />Data Path:+        0.365  (0.345, 0.006)<br />Slack:=            1.399  (1.418, 0.006)<br /></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3006890"></a>#---------------------------------------------------------------------------<br />#  Load   Trans   Pin   Delay   Arrival Cell                Arc     Required<br />#  (pf)   (ns)          (ns)    (ns)                                Time<br />#                                                                   (ns)<br />#---------------------------------------------------------------------------<br />  0.005   0.010  f0/CK  -       1.098   (arrival)           CK      2.511<br />  0.005   0.065  f0/Q   0.280   1.373   DFFX2               CK-&gt;Q   2.772<br />  0.003   0.009  p1/Y   0.088   1.458   BUFH_X10M_A9TL_C20  A-&gt;Y    2.856<br />  0.003   0.009  f0/D   0.000   1.458   DFFX2               -       2.856<br />#---------------------------------------------------------------------------</pre>
+
+<p>
+<a id="pgfId-1013955"></a>The slew through &#8220;A&#8221; pin is 0.093ns and B pin is 1.068ns (not shown in the above report). During GBA, the software performs slew merging and uses 1.068ns as the slew through &#8220;A&#8221; pin. Hence, a lot of pessimism is added in this analysis, which can be removed if PBA is used.</p>
+<p>
+<a id="pgfId-1013956"></a>To enable PBA mode, you can use the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1013957"></a>report_timing -retime path_slew_propagation</pre>
+
+<p>
+<a id="pgfId-1013958"></a>Given below is the result of PBA analysis of the above path. The highlighted red numbers show how PBA numbers remove pessimism induced due to slew merging in GBA.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1013959"></a>To report re-timed numbers, you can add retime_slew, retime_delay, and retime_incr_delay options to the <code>timing_report_fields</code> attribute or use the <code>r</code>eport_timing -fields parameter.</div>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1013960"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3006910"></a>Path 1: MET (1.400 ns) Setup Check with Pin f0/CK-&gt;D<br />Retime Analysis:  Data Path-Slew SOCV WP EWM<br />View: setup_analysis_view<br />Group: master<br />Startpoint: (F) f0/CK<br />Clock: (F) master<br />Endpoint: (F) f0/D<br />Clock: (F) master<br />N-Sigma: 3.000<br /></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3006911"></a>                   Capture                     Launch<br />Clock Edge:+       3.000                       1.000<br />Src Latency:+      0.000  (0.000, 0.000)       0.000  (0.000, 0.000)<br />Net Latency:+      0.067  (0.072, 0.002) (P)   0.098  (0.093, 0.002) (P)<br />Arrival:=          3.067  (3.072, 0.002)       1.098  (1.093, 0.002)<br /></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3006912"></a>Setup:-            0.237  (0.237, 0.000)<br />Cppr Adjust:+      0.028  (0.021, 0.002)<br />Required Time:=    2.852  (2.856, 0.002)<br />Launch Clock:=     1.098  (1.093, 0.002)<br />Data Path:+        0.363  (0.344, 0.006)<br />Slack:=            1.400  (1.420, 0.006)<br />Slack(original):=  1.399  (1.418, 0.006)<br /></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3006913"></a>#---------------------------------------------------------------------------<br />#  Load   Trans   Pin   Delay   Arrival Cell                Arc     Required<br />#  (pf)   (ns)          (ns)    (ns)                                Time<br />#                                                                   (ns)<br />#---------------------------------------------------------------------------<br />  0.005   0.010   f0/CK  -      1.098  (arrival)            CK      2.513<br />  0.005   0.065   f0/Q   0.280  1.373  DFFX2                CK-&gt;Q   2.773<br />  0.003   0.009   p1/Y   0.088  1.457  BUFH_X10M_A9TL_C20   A-&gt;Y    2.858<br />  0.003   0.009   f0/D   0.000  1.457  DFFX2                -       2.858<br />#-------------------------------------------------------------------------------</pre>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1013961"></a>The <a href="../tempusCUI/timing_Category_Attributes.html">timing_disable_retime_clock_path_slew_propagation</a> attribute controls whether retiming is done for both data as well as clock paths.</div>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_gbavspbacomparision.html" id="prev" title="GBA vs PBA Comparison">GBA vs PBA Comparison</a></em></b><b><em><a href="analysisandreporting_pathbasedreportingmodels.html" id="nex" title="Path-Based Analysis Reporting Models">Path-Based Analysis Reporting  ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

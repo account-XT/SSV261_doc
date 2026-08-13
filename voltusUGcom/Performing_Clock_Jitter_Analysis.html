@@ -1,0 +1,217 @@
+
+<html><head><title>Performing Clock Jitter Analysis</title>
+<meta name="page_sequence" content="32006000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666206" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Performing Clock Jitter Analysis" />
+<meta name="Keywords" content="jitter,clock,directory,power,rail,net,parasitic,CPF" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="IR Drop-Aware Optimization," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666206" />
+<meta name="NextFile" content="IR_Drop_Aware_Critical_Path_Analysis_Using_Spice.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Jitter_Analysis.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Performing Clock Jitter Analysis" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Jitter_Analysis.html" title="Jitter_Analysis">Jitter_Analysis</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="IR_Drop_Aware_Critical_Path_Analysis_Using_Spice.html" title="IR_Drop_Aware_Critical_Path_Analysis_Using_Spice">IR_Drop_Aware_Critical_Path_An ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Performing Clock Jitter Analysis</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>The following procedure describes the various inputs and outputs of the clock jitter analysis flow.</p>
+<h4 id="PerformingClockJitterAnalysis-RequiredInputFiles"><em> Required Input Files</em></h4>
+<ul><li>Design data (LEF, netlist, DEF)</li><li>Technology PGV</li><li>EIV File (generated from IR drop analysis)</li><li>Clocks or Path Collection</li><li>Spice netlist and model file</li><li>LSF job details (queue resources for simulation)</li></ul><h4 id="PerformingClockJitterAnalysis-Procedure"><em> Procedure</em></h4>
+
+<p>To perform jitter analysis, complete the following steps:</p>
+<ol><li>
+<p>Load the design data.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>read_physical -lefs $lefs<br /></code><code>read_mmmc ../design/viewDefinition.tcl<br /></code><code>read_netlist ../design/postRouteOpt.enc.dat/super_filter.v.gz -top super_filter<br /></code><code>init_design<br /></code><code>read_def ../design/super_filter.def.gz<br /></code><code>read_sdc ../design/timing.sdc</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Specify the SPEF file for signal net parasitic information.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>
+read_spef -rc_corner&#xa0;&#xa0;RC_wc_125 -decoupled\ ../design/postRouteOpt_RC_wc_125.spef.gz</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Specify the directory where the power results will be stored.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>
+set_power_output_dir dynVecLessPowerResults</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Define the power analysis mode. <br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>set_db \ <br /></code><code>    power_method                      dynamic_vectorless \<br />    </code><code>power_enable_state_propagation    true \<br />    </code><code>power_write_db false \<br />    </code><code>power_report_instance_switching_info all \<br />    </code><code>power_grid_libraries { \<br />        </code><code>../data/pgv_dir/tech_pgv/techonly.cl \<br />        </code><code>../data/pgv_dir/stdcell_pgv/stdcells.cl \<br />        </code><code>../data/pgv_dir/macro_pgv/macros_pll.cl \<br />    </code><code>} power_corner max</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Specify jitter frame and simulation time.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>set_default_switching_activity -name low -input_activity 0.05 \<br /></code><code>     -sequential_activity 0.1 -clock_gates_output 0.2 \<br /></code><code>set_default_switching_activity -name high -input_activity 0.1 \<br />     </code><code>-sequential_activity 0.2 -clock_gates_output 2.0 \<br /></code><code>set_dynamic_power_simulation -period 15ns -resolution 50ps \&#xa0;&#xa0;    <br />     </code><code>-activity_pattern {0 high 5ns low 10ns high}</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Define the rail analysis mode.<br /><strong>Tcl command</strong>:<br /><br /></p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>
+set_rail_analysis_config \ <br /></code><code>    -method                     dynamic \<br />    </code><code>-accuracy                   hd \<br />    </code><code>-power_grid_libraries { \<br />        </code><code>../data/pgv_dir/tech_pgv/techonly.cl \<br />        </code><code>../data/pgv_dir/stdcell_pgv/stdcells.cl \<br />        </code><code>../data/pgv_dir/macro_pgv/macros_pll.cl \<br />     </code><code>} \<br />    </code><code>-eiv_method { worst best avg } \<br />    </code><code>-work_directory_name VOLTUS_OUTPUT/extraction_output \<br />    </code><code>-report_power_in_parallel true  \<br />    </code><code>-eiv_average_per_window_list all_cell.list</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Optional. If you do not load the CPF file, use the <code>set_pg_nets</code> command to define the power nets in the design, and assign attributes to these nets. Then, use <code>set_rail_analysis_domain</code> to define the power domains.<br /><strong>Tcl command</strong>:<br /><br /></p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>set_pg_nets -net VDD -voltage 0.9 -threshold 0.810 -force <br /></code><code>set_pg_nets -net VSS -voltage 0.0 -threshold 0.010 -force<br /></code><code>set_rail_analysis_domain -domain_name PD -power_nets VDD -ground_nets VSS</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Define the location of the voltage sources for each power/ground net.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>set_power_pads -net VDD -format xy -file ../design/VDD.pp<br /></code><code>set_power_pads -net VSS -format xy -file ../design/VSS.pp</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Run rail analysis.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>report_rail -type domain -output_dir OUTPUT/IRDROP PD</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Perform Tempus delay calculation.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence">
+<p><br /></p>
+
+<p><br /></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>report_timing<br /></code><code>report_timing -nets</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Run jitter analysis.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence">
+<p><br /></p>
+
+<p><br /></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>analyze_jitter -eiv_vdd_vss {VDD VSS} \ <br /></code><code> -eiv_file /IRDROP/PD_25C_dynamic_1/Reports/VDD_VSS.win_avg.rpt \<br /> </code><code>-model_file /../include.ss -subckt_file /../worst.spi \<br /> </code><code>-spectre /../tools.lnx86/bin/spectre \<br /> </code><code>-level true -out_dir jitter_output \<br /> </code><code>-from i_REC_CLK -spectre_cmd_options {+aps +spice +mt=8 \<br /> </code><code>+postlayout +dcopt&#xa0;&#xa0;} -lsf_job_string {/grid/sfi/farm/bin/bsub \<br /> </code><code>-q rnd -P VOLTUS:16.1:PV:regTest -W 140:00 -R \<br /> </code><code>&quot;OSNAME==Linux &amp;&amp; OSBIT==64 &amp;&amp; (OSREL==EE60||OSREL==EE50)&quot; -Is } \<br /> </code><code>-run_simulation \<br /> </code><code>-levels_combine 2 \<br /> </code><code>-max_spectre_lic 100</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li></ol>
+<p>The Voltus console will display jitter analysis statistics, as shown in the following snippet:</p>
+
+<p><br /></p>
+<div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481646/732481647.gif" data-linked-resource-container-id="732481646" data-linked-resource-container-version="1" data-linked-resource-content-type="image/gif" data-linked-resource-default-alias="timing-13.gif" data-linked-resource-id="732481647" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481646/732481647.gif" tabindex="0" width="678" /></span></div>
+<h4 id="PerformingClockJitterAnalysis-Output"><em> Output</em></h4>
+
+<p>The jitter analysis directory will contain the following files:</p>
+<div class="table-wrap"><table class="webflareTable webflareTableIndent wrapped confluenceTable"><tbody><tr><th class="webflareTh confluenceTh" colspan="1" rowspan="1">
+<p>File Name</p>
+</th><th class="webflareTh confluenceTh" colspan="1" rowspan="1">
+<p>Description</p>
+</th></tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>summary.jitter</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>A report that gives a list of all the start and end point pair clock branches and the corresponding cycle-to-cycle jitter value in picosecond. If the -through point is used, it is also given in the report.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>clock_branch1.jitter</code></p>
+
+<p><code>clock_branch2.jitter</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>A detailed report for each start and end point pair branch. For each branch, it includes stage by stage details as follows:</p>
+<ul><li>Cycle-to-Cycle Jitter Value (ps)</li><li>Cell input pin name and output pin name with rise/fall transition</li><li>EIV value used for cycle 1 and cycle 2</li><li>Simulations measured cell delay for cycle 1 and cycle 2</li></ul></td>
+</tr>
+</tbody></table></div>
+<h4 id="PerformingClockJitterAnalysis-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Jitter_Analysis.html">Jitter Analysis</a></li><li><a href="Skew_Analysis.html">Skew Analysis</a></li><li><a href="Voltus_Setup_for_Power_and_IR_Drop.html">Voltus Setup for Power and IR Drop</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Jitter_Analysis.html" id="prev" title="Jitter_Analysis">Jitter_Analysis</a></em></b><b><em><a href="IR_Drop_Aware_Critical_Path_Analysis_Using_Spice.html" id="nex" title="IR_Drop_Aware_Critical_Path_Analysis_Using_Spice">IR_Drop_Aware_Critical_Path_An ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

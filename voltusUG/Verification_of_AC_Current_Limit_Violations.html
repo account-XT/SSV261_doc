@@ -1,0 +1,139 @@
+
+<html><head><title>Verification of AC Current Limit Violations</title>
+<meta name="page_sequence" content="33007000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468639" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Verification of AC Current Limit Violations" />
+<meta name="Keywords" content="verify,current,violations,routing,segment" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Signal ElectroMigration," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468639" />
+<meta name="NextFile" content="ICT_File.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Computation_of_Current_Limits_for_each_Routing_Segment.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- Verification of AC Current Limit Violations" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="Computation_of_Current_Limits_for_each_Routing_Segment.html" title="Computation_of_Current_Limits_for_each_Routing_Segment">Computation_of_Current_Limits_ ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="ICT_File.html" title="ICT_File">ICT_File</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Verification of AC Current Limit Violations</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="fontredcadence">
+<p>You can verify AC current violations on signal nets by using the <code>set_signal_em_analysis_mode</code> command. <code>set_signal_em_analysis_mode</code> checks for the following types of AC current violations on signal nets:</p>
+<ul><li>Root-mean-square (RMS) current limit violations (<code>Irms</code> violations)</li><li>Peak current limit violations (<code>Ipeak</code> violations)</li></ul>
+<p>In addition, <code>set_signal_em_analysis_mode</code> can be used for average current limit (Iavg) analysis.</p>
+
+<p>AC current limit violations are sometimes also referred as wire self-heat violations. Design Rule Check (DRC) manuals have these current limits to avoid over-heating a signal-net wire with too much AC current. To prevent wire self-heating or AC signal electromigration, signal interconnects should be analyzed for their AC current carrying capacity and measured against the AC current limits specified by foundry.</p>
+
+<p>Use the <code>set_signal_em_analysis_mode -method</code> parameter to specify the waveform calculation method to be used (rms, peak, or avg).</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>SignalStorm can still be used for <code>Irms</code> calculations, but it does not support <code>Ipeak</code> or <code>Iavg</code> calculations.</p>
+</div>
+</div>
+
+<p><strong>RMS/Peak/Avg Current Limit Violations</strong></p>
+
+<p>By default, <code>set_signal_em_analysis_mode</code> only checks for <code>Irms</code> violations. The software calculates the <code>Irms</code> at the driver output and compares it to the <code>ACCURRENTDENSITY</code> tables in the LEF file, which contains the <code>I</code>rms limits for each routing layer.</p>
+
+<p>If the computed Irms for a net exceeds the <code>ACCURRENTDENSITY</code> limit defined in LEF for any of the layers/widths used by the net, an error occurs and a violation marker is attached to the net. Each routing segment is checked separately. If more than one driver exists, the check starts at an arbitrary driver. The layers and widths of pins are not checked for AC current limits.</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>You can use <code>set_signal_em_analysis_mode -useQRCTech</code> to force <code>Irms</code> checks to use the EM rules defined in the QRC technology file instead of the technology LEF file. If either <code>Ipeak</code> or <code>Iavg</code> current limit checks are also turned on, then all checks, including <code>Irms</code>, will use the EM rules defined in the QRC technology file.</p>
+</div>
+</div>
+</span></p>
+
+<p><span style="letter-spacing: 0.0px;">The software support checks the RMS table for all layers. To get access to the width-dependent syntax, we must add an arbitrary single frequency value. Therefore, a typical table might look like:</span></p>
+<pre><code>LAYER met1<br /></code><code>    ...<br />    </code><code>#RMS AC current limits for met1, at 100 C, allowing max temp change of 20 C<br />    </code><code>ACCURRENTDENSITY RMS    <br />    </code><code>FREQUENCY 1 ;            #syntax needs one frequency value<br />    </code><code>WIDTH<br />    </code><code>0.15 0.3 0.6 1.2 15 ;    #values in microns from min to max width<br />    </code><code>TABLEENTRIES<br />    </code><code>10.0 9.2 8.8 8.7 8.6 ;   #mA/um for each width</code></pre><pre><code>END met1 ; </code></pre>
+<p>The tables are interpreted as piece-wise-linear tables indexed by width and frequency. In the example above, a wire of width 0.15um can carry <code>10.0 mA/um * .15um = 1.5mA</code> of current.</p>
+
+<p>The <code>Irms</code> limits in the table can also be scaled for other factors like temperature. For example, the <code>Irms</code> limits table should be computed for a specific &quot;maximum allowed temperature change&quot; (<code>maxTchange</code>). The <code>I</code>rms limits are normally proportional to the square-root of the <code>maxTchange</code>. Therefore, if the table used a <code>maxTchange</code> of 20 degrees, and you want a <code>maxTchange</code> of 10 degrees, you would use a scale value of <code>sqrt(10/20) = 0.71</code>.</p>
+
+<p>For <code>Irms</code>, signal EM analysis not only supports the rules defined in the technology LEF file, but also the rules defined in the QRC Technology file. But for <code>Ipeak</code> and <code>Iavg</code>, only the rules defined in the QRC Technology file are supported. If no EM rule is defined in the QRC Technology file, the software will stop checking and give an error message.</p>
+
+<p>These rules defined in the QRC Technology file are represented in the form of an equation, as opposed to PWL, which when processed for each wire segment individually results in a more accurate EM limit calculation.</p>
+
+<p><span class="fontredcadence">
+<p>To perform this analysis, you must load the QRC tech file in Voltus using the <code>-qx_tech_file</code> parameter of <code>create_rc_corner</code> or <code>update_rc_corner</code>. <code>set_signal_em_analysis_mode</code> processes the limits defined as polynomials inside the QRC tech file to determine layer-based AC current density limits. The QRC technology file attached to the current timing view (current RC corner) is used.</p>
+<h3 id="VerificationofACCurrentLimitViolations-ConditionstoCheckACCURRENTDENSITYTables">Conditions to Check ACCURRENTDENSITY Tables</h3>
+
+<p>The software checks the <code>ACCURRENTDENSITY</code> tables for the following conditions:</p>
+<ul><li>If more than one frequency is given, <code>set_signal_em_analysis_mode</code> will warn that it is only using width values from the first frequency in the table.</li><li>There must be at least two width values, otherwise <code>set_signal_em_analysis_mode</code> gives an error message and quits.</li><li>The widths must be increasing in value, and the current limits must be increasing in value, otherwise the software gives an error message and quits.</li><li>If no table exists for a routing layer, a warning message is given, and the limit is assumed to be infinite for that layer.</li></ul>
+<p><br /></p>
+
+<p><code>set_signal_em_analysis_mode</code> also checks the <code>ACCURRENTDENSITY</code> tables for the following conditions and takes the following actions:</p>
+<ul><li>If there is no table for a routing layer, the software gives a warning and assumes an infinite limit for the layer.</li><li>If <code>PEAK</code> and <code>AVERAGE</code> tables are present, the software ignores them.</li></ul></span></p>
+
+<p><em style="font-weight: 600;letter-spacing: -0.003em;">Related Topics</em></p>
+<ul><li><a href="ICT_File.html">ICT File</a></li><li><a href="Prevention_and_Repair_of_AC_Signal_EM_Violations.html">Prevention and Repair of AC Signal EM Violations</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Computation_of_Current_Limits_for_each_Routing_Segment.html" id="prev" title="Computation_of_Current_Limits_for_each_Routing_Segment">Computation_of_Current_Limits_ ...</a></em></b><b><em><a href="ICT_File.html" id="nex" title="ICT_File">ICT_File</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

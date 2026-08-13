@@ -1,0 +1,207 @@
+
+<html><head><title>Combining Vector Profiling and Power Analysis</title>
+<meta name="page_sequence" content="22011000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468596" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Combining Vector Profiling and Power Analysis" />
+<meta name="Keywords" content="dynamic,power,worst,activity,windows,design" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468596" />
+<meta name="NextFile" content="Viewing_Profiling_Database.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Viewing_Dynamic_Current_Waveforms.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- Combining Vector Profiling and Power Analysis" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="Viewing_Dynamic_Current_Waveforms.html" title="Viewing_Dynamic_Current_Waveforms">Viewing_Dynamic_Current_Wavefo ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Viewing_Profiling_Database.html" title="Viewing_Profiling_Database">Viewing_Profiling_Database</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Combining Vector Profiling and Power Analysis</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>The following procedure describes how to combine vector profiling and power analysis for the worst activity windows.</p>
+<h4 id="CombiningVectorProfilingandPowerAnalysis-RequiredInputFiles"><em> Required Input Files</em></h4>
+<ul><li>Design data (LEF, netlist, DEF)</li><li>Common Power Format (CPF) file</li><li>SPEF</li><li>Activity file</li></ul><h4 id="CombiningVectorProfilingandPowerAnalysis-Procedure"><em> Procedure</em></h4>
+
+<p>To perform vector profiling, complete the following steps:</p>
+<ol><li>
+<p>Load the design data through the command line or through the GUI.<br /><strong>GUI</strong>: Select <em>File</em> - Read Design.<br /><strong>Tcl command</strong>:&#xa0;</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd"><pre><code>read_lib -lef $lefs</code></pre><pre><code>read_view_definition ../design/viewDefinition.tcl</code><code>
+read_verilog ../design/postRouteOpt.enc.dat/super_filter.v.gz</code><code>
+set_top_module super_filter -ignore_undefined_cell</code><code>
+read_def ../design/super_filter.def.gz</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Specify the CPF file for power domain information through the command line or through the GUI.<br /><strong>GUI</strong>: Select <em>File</em> - Load/Commit CPF.<br /><strong>Tcl command</strong>:&#xa0;</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd"><pre><code>read_power_domain -cpf ../design/super_filter.cpf</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Specify the SPEF file for signal net parasitic information through the command line or through the GUI.<br /><strong>GUI</strong>: Select <em>File</em> - Read SPEF.<br /><strong>Tcl command</strong>:&#xa0;</p>
+<div class="table-wrap"><table class="webflareTable webflareTableIndent wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code><code>read_spef -rc_corner&#xa0;&#xa0;RC_wc_125 -decoupled\ ../design/postRouteOpt_RC_wc_125.spef.gz</code></code></pre></td>
+</tr>
+</tbody></table></div>
+</li><li>
+<p>Specify the sub-directory that will contain the power results.<br /><strong>Tcl command</strong>:&#xa0;</p>
+<div class="table-wrap"><table class="webflareTable webflareTableIndent wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code><code>set_power_output_dir&#xa0;&#xa0;          dynVectorbasedPowerResults </code></code></pre></td>
+</tr>
+</tbody></table></div>
+</li><li>
+<p>Specify the activity file.<br /><strong>Tcl command</strong>:&#xa0;</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd"><pre><code>set_power_analysis_mode -report_missing_nets true</code></pre><pre><code>read_activity_file -reset</code></pre><pre><code>read_activity_file -format VCD -scope FIR_TB.Unit -start {} -end {} -block {} ../design/ncsim.vcd</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+<pre><br /></pre><ul><li>The <code>-report_missing_nets</code> parameter gives a list of nets in the design that are not annotated by VCD. This is useful when pipe-cleaning the flow. The default value is <code>false</code>.</li><li>Voltus can read activity files in the following formats: VCD, TCF, SAIF, FSDB, PHY, and SHM.</li></ul></li><li>
+<p>Run vector profiling by defining the vector profile power analysis mode to identify where the maximum activity is taking place.<br /><strong>Tcl command</strong>:&#xa0;<br /><br /></p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd"><pre><code><em>Event-based Vector Profiling</em></code></pre><pre><code>set_power_analysis_mode \</code></pre><pre><code>    -reset</code></pre><pre><code>set_power_analysis_mode \</code></pre><pre><code>    -analysis_view              AV_wc_on \</code></pre><pre><code>    -disable_static             false \</code></pre><pre><code>    -write_static_currents      true \</code></pre><pre><code>    -binary_db_name             dynvectorbasedPower.db \</code></pre><pre><code>    -create_binary_db           true \</code></pre><pre><code>    -method                     <strong>vector_profile</strong> \</code></pre><pre><code>    -worst_step_size            2ns \</code></pre><pre><code>    -write_profiling_db         true \</code></pre><pre><code>    -worst_window_count 2</code></pre><pre><code>report_power -nworst 5 -outfile eventbased_profiler.rpt -time_based_report</code></pre>
+<p><br /></p>
+
+<p>The following are options required for the different types of profiling:</p>
+
+<p><strong><code><em>Activity Profiling</em></code></strong></p>
+<pre><code>set_power_analysis_mode -vector_profile_mode {activity}</code><code>
+report_power -outfile activity_profiler.rpt</code></pre>
+<p><strong><code>
+<em>Power Density Profiling</em></code></strong></p>
+<pre><code>set_power_analysis_mode -vector_profile_mode {power_density}</code></pre><pre><code>report_power -outfile tiling -nworst 5 -time_based_report -pg_net {VDD VSS} -power_density_tiles_row_col { 5 5 }</code></pre></td>
+</tr>
+</tbody></table></div>
+
+<p><strong>Note:</strong></p>
+<ul><li>This Tcl command is the same as for the static power analysis or dynamic vectorless flow, except that <code>-method</code> must be <code>vector_profile</code>.</li><li>Use the <code>-worst_window_count</code> parameter to perform dynamic power analysis and vector profiling for multiple windows.</li></ul></span></p>
+</li><li>
+<p>Optional. Define the simulation period and resolution.<br /><strong>Tcl command</strong>:&#xa0;</p>
+<div class="table-wrap"><table class="webflareTable webflareTableIndent wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code><code>set_dynamic_power_simulation -reset</code></code></pre><pre><code><code>set_dynamic_power_simulation -resolution 50ps</code></code></pre></td>
+</tr>
+</tbody></table></div>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>If the resolution is high, the current peaks may be truncated, affecting the accuracy of the analysis. Alternatively, a small resolution may lead to increase in run time.</p>
+</div>
+</div>
+</li><li>
+<p>Run dynamic power analysis.&#xa0;<br /><strong>Tcl command</strong>:&#xa0;</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd"><pre><code>set_power_analysis_mode -reset</code></pre><pre><code>set_power_analysis_mode -method dynamic_vectorbased</code></pre><pre><code>read_activity_file -reset</code></pre><pre><code>read_activity_file -format SHM ADDER.trn -scope adder_tb_e/u1 -start ${worst_power_window_start} -end ${worst_power_window_end}</code></pre><pre><code>report_power</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>The worst start/end activity windows are stored in memory through the Tcl variables <code>$worst_power_window_start</code> and <code>$worst_power_window_end</code> specified using the <code>read_activity_file</code> command.</p>
+</div>
+</div>
+</li></ol>
+<p>The Voltus console will display vector profiling statistics, as shown in the following snippet:</p>
+<pre><code>User did not set the step size. The step size is being configured as 39.9998 ns.</code></pre><pre><code>Finished Reading VCD toggles</code></pre><pre><code>2018-Oct-03 10:01:46 (2018-Oct-03 04:31:46 GMT)</code><code>
+  Filename (activity)                    : ../design/ncsim.vcd</code></pre><pre><code>  Names in file that matched to design   : 3165/4472</code></pre><pre><code>  Annotation coverage for this file      : 3165/3170 = 99.8423%</code></pre><pre><code>With this vcd command,&#xa0;&#xa0;83472 value changes and 3.99998e-06 second simulation time were counted for power consumption calculation.</code></pre><pre><code>Begin Creating Binary Database</code></pre><pre><code>Ended Creating Binary Database: (cpu=0:00:00, real=0:00:00, mem(process/total/peak)=330.03MB/2571.58MB/1042.52MB)</code></pre><pre><code>Finished Power Analysis at 10:01:46 10/03/2018 (cpu=0:00:03, real=0:00:09, peak mem=1042.53MB)</code></pre><pre><code>Current Voltus IC Power Integrity Solution resource usage: (total cpu=0:01:28, real=0:18:05, mem=1042.53MB)</code></pre><h4 id="CombiningVectorProfilingandPowerAnalysis-Output"><em> Output</em></h4>
+
+<p>The power output directory will contain the following information:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><th class="confluenceTh" colspan="1" rowspan="1">
+<p>File Name</p>
+</th><th class="confluenceTh" colspan="1" rowspan="1">
+<p>Description</p>
+</th></tr>
+<tr class=""><td class="confluenceTd" colspan="1" rowspan="1">
+<p>&lt;<span class="webflare-courier-new"><em>binary_database</em></span>&gt;.db</p>
+</td>
+<td class="confluenceTd" colspan="1" rowspan="1">
+<p>The name of the binary database is specified using the <code>set_power_analysis_mode -binary_db_name</code> parameter. The database can be loaded in the Voltus GUI for viewing and analyzing different types of power plots, and GUI interactive debugging. It cross references the instance names and locations with the power results.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd" colspan="1" rowspan="1">
+<p>&lt;<span class="webflare-courier-new"><em>vector_profile_report</em></span>&gt;.rpt</p>
+</td>
+<td class="confluenceTd" colspan="1" rowspan="1">
+<p>The name of the vector profile report is specified using the <code>report_power -outfile</code> parameter.</p>
+<ul><li><strong>Average Vector Profiling</strong>: The report details the average power of all events in the user-specified window. This report includes a summary based on the power components, cell type, power rail, and clock network. The worst window report is captured in a file specified with the <code>-</code>outfile parameter, and the report is suffixed by &#8216;<code>.avgpower</code>&#8217;. When <code>-</code>outfile is not specified, the <code>vectroprofile.report.avgpower</code> report file is created.</li><li><strong>Activity Vector Profiling</strong>: The report generates only the worst activity report, and does not generate the average power report. The name of the file is as specified using the <code>-</code>outfile parameter.</li><li><strong>Power Density Profiling</strong>: The report generates power for each tile of the design, where design can be considered to be physically divided into equal area tiles. By default, a design is divided in 10x10 tiles.</li></ul></td>
+</tr>
+<tr class=""><td class="confluenceTd" colspan="1" rowspan="1">
+<p>&lt;<span class="webflare-courier-new"><em>profiling_database</em></span>&gt;.trn</p>
+</td>
+<td class="confluenceTd" colspan="1" rowspan="1">
+<p>The name of the profiling database is specified using the <code>set_power_analysis_mode -write_profiling_db</code> parameter. The profiling database is a binary database of the profile data and can be viewed with SimVision. It allows you to visualize the activity of the design.</p>
+</td>
+</tr>
+</tbody></table></div>
+</span></p>
+<h4 id="CombiningVectorProfilingandPowerAnalysis-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Setting_up_and_Running_Vectorless_Power_Analysis.html">Setting up and Running Vectorless Power Analysis</a></li><li><a href="Vector_Profiling_Combined_with_Power_Analysis.html">Vector Profiling Combined with Power Analysis</a></li><li><a href="Viewing_Dynamic_Current_Waveforms.html">Viewing Dynamic Current Waveforms</a></li><li><a href="Viewing_Profiling_Database.html">Viewing Profiling Database</a></li><li><a href="Additional_Tcl_Command_Examples_for_Different_Vector-Based_and_Vectorless_flow.html">Additional Tcl Command Examples for Different Vector-Based and Vectorless flow</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Viewing_Dynamic_Current_Waveforms.html" id="prev" title="Viewing_Dynamic_Current_Waveforms">Viewing_Dynamic_Current_Wavefo ...</a></em></b><b><em><a href="Viewing_Profiling_Database.html" id="nex" title="Viewing_Profiling_Database">Viewing_Profiling_Database</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

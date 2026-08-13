@@ -1,0 +1,135 @@
+
+<html><head><title>Dynamic Rail Analysis for On-Chip Voltage Regulators</title>
+<meta name="page_sequence" content="24022000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666174" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Dynamic Rail Analysis for On-Chip Voltage Regulators" />
+<meta name="Keywords" content="dynamic,voltage,frequency,chip,netlist" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666174" />
+<meta name="NextFile" content="Characterized_Current_PGV_for_Dynamic_Power_and_Rail_Analysis.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Plotting_Rail_Current__Voltage__and_Power_Current_Waveforms.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Dynamic Rail Analysis for On-Chip Voltage Regulators" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Plotting_Rail_Current__Voltage__and_Power_Current_Waveforms.html" title="Plotting_Rail_Current__Voltage__and_Power_Current_Waveforms">Plotting_Rail_Current__Voltage ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Characterized_Current_PGV_for_Dynamic_Power_and_Rail_Analysis.html" title="Characterized_Current_PGV_for_Dynamic_Power_and_Rail_Analysis">Characterized_Current_PGV_for_ ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Dynamic Rail Analysis for On-Chip Voltage Regulators</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>System-on-a-chip (SoC) voltage regulators (Vreg) have been widely used in designs to improve device power efficiency as well as device stability. Voltus IC Power Integrity Solution supports analysis of on-chip Vreg in SoC to stabilize voltage supplies and to handle Dynamic Voltage and Frequency Scaling (DVFS). This analysis has been included in the IR Drop analysis flow to understand how Vreg affects the on-chip voltage drop, chip package co-design, and how it interacts with the IC/package/board system. This feature allows you to accurately model Vreg modules for rail analysis.</p>
+
+<p>In the following diagram, the chip configuration has a Vreg that is connected to an input and output domain along with a common ground:</p>
+<div><span class="confluence-embedded-file-wrapper"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481381/732481383.png" data-linked-resource-container-id="732481381" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="vregulator.PNG" data-linked-resource-id="732481383" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481381/732481383.png" tabindex="0" /></span></div>
+
+<p>During Vreg analysis, the tool captures the noise at the output of Vreg caused due to loading current and RC effects, and uses this time varying voltage waveform for rail analysis. When you perform Vreg analysis, a reduced grid is created for both input and output, and reduced ground resulting in a much concise RC netlist to do simulations of vectors with these loadings. The noise at the output of Vreg is captured and used for rail analysis.</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>Designs with on-chip Vreg have a non-linear circuitry of Vreg in the midst of large linear networks of power-grid. Therefore, the tool simulates the Vreg module using Spectre and the linear networks of power-grid using Voltus solver.</p>
+</div>
+</div>
+
+<p>Use the <code>set_voltage_regulator_module</code> command to enable the Voltage Regulator analysis flow. You must specify this command multiple times for multiple Vreg instances. This command is used to specify all required information for defining a Vreg module, such as Vreg module name, SPICE netlist, power pin mapping for input/output/ground domains, component list (DEF instances working as a voltage regulator), and top-level Vreg subcircuit. The Spice netlist of the Vreg cell should encapsulate the testbench required for the Vreg module to work. When Voltus loads this netlist, it traces the connectivity inside the netlist and maps the top-level pin to instance pin, if the VRM is constructed by multiple sub-instances. After identifying all physical pin locations for Vreg input and output, the physical pins for Vreg output is used as voltage source. The location and placement of voltage sources on VRM cells is done by the tool based on the LEF port definitions of the power pin of the VRM cells.</p>
+
+<p>After performing rail analysis, you can view the time varying waveform created at the output domain of the voltage regulator. The current waveforms through voltage sources are saved inside the <code>voltus_rail.tran.ptiavg</code> file to analyze voltage variation. The dynamic IR drop waveforms can be plotted using <em>Power Rail</em> - <em>Report</em> - <em>Dynamic Waveforms</em> form.</p>
+
+<p>The following is a sample waveform that illustrates the voltage variation at the output domain:</p>
+<div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481381/732481382.png" data-linked-resource-container-id="732481381" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="vreg_waveform.PNG" data-linked-resource-id="732481382" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481381/732481382.png" tabindex="0" width="650" /></span></div>
+<div>
+<p><br /></p>
+
+<p><span class="fontredcadence">
+<p>The following is the Tcl script for Vreg analysis:</p>
+
+<p># Load the design# Perform Power Analysis# Rail Analysis</p>
+<pre><code>set_pg_nets -net VDD_out -voltage 1.35 -threshold 1.21 -tolerance 0.3 -force<br />set_pg_nets -net VDD_in -voltage 3.00 -threshold 2.70 -tolerance 0.3 -force<br />set_pg_nets -net VSS -voltage 0.00 -threshold 0.13 -tolerance 0.3 -force<br />set_rail_analysis_domain -domain_name PD -power_nets {VDD_out VDD_in} -ground_nets VSS</code></pre><div aria-label="Info" class="confluence-information-macro  confluence-information-macro-information" role="region"><span class="aui-icon aui-icon-small aui-iconfont-info-filled confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>For running this flow, you must analyze the input domain, output domain, and ground domain in rail analysis.</p>
+</div>
+</div>
+<pre><code>
+set_rail_analysis_config \<br />    -method dynamic \<br />    -accuracy xd\<br />    -power_grid_libraries ../accurate_stdcells.cl<br />
+set_power_data \
+&#xa0;&#xa0;  -format current { \<br />    dynamic_power/dynamic_VDD_out.ptiavg \<br />    dynamic_power/dynamic_VDD_in.ptiavg \<br />    dynamic_power/dynamic_VSS.ptiavg \<br />    }<br />
+set_power_pads -net VDD_in -format xy -file ./VDD_in.pp
+set_power_pads -net VSS -format xy -file ./vs/VSS.pp
+set_voltage_regulator_module \ 
+&#xa0;&#xa0;  -name vrm1 \<br />    -netlist ./TEST.spi \<br />    -input_power_pin_mapping {{ VDD_in VDD_in }} \<br />    -output_power_pin_mapping {{ VDD_out VDD_out }} \<br />    -ground_pin_mapping {{ VSS VSS }} \<br />    -sub_circuit_name VRM_MODEL \<br />    -component_list { reg_1 } <br />
+set_voltage_regulator_module \ 
+&#xa0;&#xa0;  -name vrm2 \<br />    -netlist ./TEST.spi \<br />    -input_power_pin_mapping {{ VDD_in VDD_in }} \<br />    -output_power_pin_mapping {{ VDD_out VDD_out }} \<br />    -ground_pin_mapping {{ VSS VSS }} \<br />    -sub_circuit_name VRM_MODEL \<br />    -component_list { reg_2 }<br />
+report_rail \
+&#xa0;&#xa0;  -type domain \<br />    -output_dir ./dynamic_rail \<br />    PD</code></pre></span></p>
+<h4 id="DynamicRailAnalysisforOnChipVoltageRegulators-RelatedTopics"><em>Related Topics</em></h4>
+</div>
+<ul><li><a href="Dynamic_Rail_Analysis.html">Dynamic Rail Analysis</a></li><li><a href="Setting_Up_and_Running_Dynamic_Rail_Analysis.html">Setting Up and Running Dynamic Rail Analysis</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Plotting_Rail_Current__Voltage__and_Power_Current_Waveforms.html" id="prev" title="Plotting_Rail_Current__Voltage__and_Power_Current_Waveforms">Plotting_Rail_Current__Voltage ...</a></em></b><b><em><a href="Characterized_Current_PGV_for_Dynamic_Power_and_Rail_Analysis.html" id="nex" title="Characterized_Current_PGV_for_Dynamic_Power_and_Rail_Analysis">Characterized_Current_PGV_for_ ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

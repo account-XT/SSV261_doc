@@ -1,0 +1,115 @@
+
+<html><head><title>IR Drop Impact on Timing</title>
+<meta name="page_sequence" content="32000000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666204" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="IR Drop Impact on Timing" />
+<meta name="Keywords" content="IR drop,delay,power,rails,clock,jitter,skew" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="IR Drop-Aware Optimization," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666204" />
+<meta name="NextFile" content="IR_Drop_Effect_on_Delays.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Mixed_Approach_-_a_Combination_of_TSV_and_SiP.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- IR Drop Impact on Timing" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Mixed_Approach_-_a_Combination_of_TSV_and_SiP.html" title="Mixed_Approach_-_a_Combination_of_TSV_and_SiP">Mixed_Approach_-_a_Combination ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="IR_Drop_Effect_on_Delays.html" title="IR_Drop_Effect_on_Delays">IR_Drop_Effect_on_Delays</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <div style="width: 100%; font-size: 32px; text-align: left;               font-weight: bold;">22</div>
+<h1 style="margin: 4px 0 4px;"><span>IR Drop Impact on Timing</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>IR drop on power rails can significantly affect cell and net delays. IR drop transitions dynamically vary with varying switching activities in the design.</p>
+
+<p><br /></p>
+<div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481620/732481621.gif" data-linked-resource-container-id="732481620" data-linked-resource-container-version="1" data-linked-resource-content-type="image/gif" data-linked-resource-default-alias="timingwindow.gif" data-linked-resource-id="732481621" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481620/732481621.gif" tabindex="0" width="343" /></span></div>
+
+<p>The variation can span from within a clock cycle or clock cycle to clock cycle. The delay variations due to IR drop affects both cell and net delays in clock and data paths.</p>
+
+<p><br /></p>
+<div><span class="confluence-embedded-file-wrapper"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481620/732481622.gif" data-linked-resource-container-id="732481620" data-linked-resource-container-version="1" data-linked-resource-content-type="image/gif" data-linked-resource-default-alias="delay.gif" data-linked-resource-id="732481622" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481620/732481622.gif" tabindex="0" /></span></div>
+
+<p>The delay variance in data paths and clock paths account in setup and hold timing checks. Tempus supports skew analysis to check IR drop effects on clock arrival times at different register pins. It also supports jitter analysis to check late and early arrival times at a particular register.</p>
+
+<p><span class="confluence-anchor-link" id="IRDropImpactonTiming-83961"></span><strong>Basic Voltus/Tempus Flow</strong></p>
+
+<p><br /></p>
+<div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481620/732481623.gif" data-linked-resource-container-id="732481620" data-linked-resource-container-version="1" data-linked-resource-content-type="image/gif" data-linked-resource-default-alias="timing-4.gif" data-linked-resource-id="732481623" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481620/732481623.gif" tabindex="0" width="658" /></span></div>
+
+<p>Voltus performs min and max IR drop analysis based on low and high switching activities and derives effective min/max operating voltages for every instance in the design. These instance specific effective operating voltages are written into files which are referred as min or max IR drop files. The min/max IR drop files can be read in Tempus using the <code>update_delay_corner</code> command. These instance based min and max voltages are used during delay computation for respective corners and for performing variance checks using these delays.</p>
+
+<p>Tempus also runs Spice simulations for the given timing path and compares delays against delays computed using the cell-level delay models. It creates a constant voltage source for each instance with voltage specified in the IR drop files. On the other hand, Voltus generates detailed power and ground voltage waveforms for each instance, which can be input into Tempus. Tempus uses these waveforms to create piece-wise linear voltage waveform for each instance.</p>
+<h4 id="IRDropImpactonTiming-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="IR_Drop_Effect_on_Delays.html">IR Drop Effect on Delays</a></li><li><a href="IR_Drop_Aware_Critical_Path_Analysis_Using_Spice.html">IR Drop Aware Critical Path Analysis Using Spice</a></li><li><a href="IR_Drop_Aware_Clock_Jitter_Analysis_Using_Spice.html">IR Drop Aware Clock Jitter Analysis Using Spice</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Mixed_Approach_-_a_Combination_of_TSV_and_SiP.html" id="prev" title="Mixed_Approach_-_a_Combination_of_TSV_and_SiP">Mixed_Approach_-_a_Combination ...</a></em></b><b><em><a href="IR_Drop_Effect_on_Delays.html" id="nex" title="IR_Drop_Effect_on_Delays">IR_Drop_Effect_on_Delays</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

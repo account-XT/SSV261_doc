@@ -1,0 +1,118 @@
+
+<html><head><title>Active Analysis Views Setup</title>
+<meta name="page_sequence" content="13005000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666104" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Active Analysis Views Setup" />
+<meta name="Keywords" content="constraint,DVFS,SDC,timing,mode" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Design Import," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666104" />
+<meta name="NextFile" content="Creation_of_Constraint_Mode_Objects.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Creation_of_Analysis_Views.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Active Analysis Views Setup" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Creation_of_Analysis_Views.html" title="Creation_of_Analysis_Views">Creation_of_Analysis_Views</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Creation_of_Constraint_Mode_Objects.html" title="Creation_of_Constraint_Mode_Objects">Creation_of_Constraint_Mode_Ob ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Active Analysis Views Setup</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="ActiveAnalysisViewsSetup-68570"></span></p>
+
+<p>After creating analysis views, you must set which views the software should use for setup and hold analysis and optimization. These &quot;<code>active</code>&quot; views represent the different design variations that will be analyzed. Active views can be changed throughout the flow to utilize different subsets of views. Voltus applications can handle the views concurrently or sequentially, depending on their individual capabilities. Libraries and data are loaded into the system, as required to support the selected set of active views.</p>
+
+<p>To set active analysis views, use the <code>set_analysis_view</code> command.</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>You must define at least one setup and one hold analysis view.</p>
+</div>
+</div>
+
+<p>For example, the following command sets <code>missionSlow</code> and <code>mission2Slow</code> as the active views for setup analysis, and <code>missionFast</code> and <code>testFast</code> as the active views for hold analysis:</p>
+<pre><code>set_analysis_view </code></pre><pre><code>  -setup {missionSlow mission2Slow} </code></pre><pre><code>  -hold {missionFast testFast}</code></pre><h4 id="ActiveAnalysisViewsSetup-GuidelinesforSettingActiveAnalysisViews">Guidelines for Setting Active Analysis Views</h4>
+
+<p>The order in which you specify views using the <code>set_analysis_view</code> command is important. By default, the first views defined in the <code>-setup</code> and <code>-hold</code> lists are the default views. Certain applications that do not support multi-mode multi-corner can only process the data defined for a single view. These applications use the information defined for the default view.</p>
+
+<p>Concurrent analysis of views for timing optimization costs memory and CPU.</p>
+<h4 id="ActiveAnalysisViewsSetup-ChangingtheDefaultActiveAnalysisView">Changing the Default Active Analysis View</h4>
+
+<p>Some applications can function only on a single analysis view at a time. By default, these single-view applications use the default analysis view. If an application or flow step does not provide a native option for specifying which view to use, you can use the <code>set_default_view</code> command to temporarily change the default view to a different active view that is better suited to that flow step.</p>
+
+<p>For example, if the analysis view <code>missionSlow</code> is currently the default active setup view in the design, the following command temporarily changes the default view to <code>mission2Slow</code>:</p>
+<pre><code>
+set_default_view -setup mission2Slow</code></pre>
+<p>Using the <code>set_default_view</code> command does not affect software performance because it only uses views that are already active in the design. If you use the <code>set_analysis_view</code> command to change the default views, the existing timing, delay calculation, and RC data is reset.</p>
+<h4 id="ActiveAnalysisViewsSetup-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Creation_of_Analysis_Views.html">Creation of Analysis Views</a></li><li><a href="Configuration_of_the_Multi-Mode_Multi-Corner_Analysis_Setup.html">Configuration of the Multi-Mode Multi-Corner Analysis Setup</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Creation_of_Analysis_Views.html" id="prev" title="Creation_of_Analysis_Views">Creation_of_Analysis_Views</a></em></b><b><em><a href="Creation_of_Constraint_Mode_Objects.html" id="nex" title="Creation_of_Constraint_Mode_Objects">Creation_of_Constraint_Mode_Ob ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

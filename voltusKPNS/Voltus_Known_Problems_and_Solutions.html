@@ -1,0 +1,177 @@
+
+<html><head><title>Voltus Known Problems and Solutions</title>
+<meta name="page_sequence" content="11000000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-03-23" />
+<meta name="CreateTime" content="1774270124" />
+<meta name="DataType" content="KP&amp;S" />
+<meta name="Description" content="Describes important Cadence Change Requests (CCRs) for Voltus and tells you how to work around these problems." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution Known Problems and Solutions" />
+<meta name="DocType" content="Known Problems and Solutions" />
+<meta name="FileTitle" content="Voltus Known Problems and Solutions" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusKPNS" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-03-23" />
+<meta name="ModifiedTime" content="1774270124" />
+<meta name="NextFile" content="" />
+<meta name="Group" content="Voltus Known Problems and Solutions" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="voltusKPNSTOC.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution Known Problems and Solutions -- Voltus Known Problems and Solutions" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="epsKPNS261" />
+<meta name="confluence-version" content="7.19.19" />
+<meta name="ecms-plugin-version" content="04.21.019" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusKPNSTOC.html">Contents</a></li><li><a class="prev" href="voltusKPNSTOC.html" title="TOC">TOC</a></li><li style="float: right;"><a class="viewPrint" href="voltusKPNS.pdf">View/Print PDF</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution Known Problems and Solutions<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <div style="width: 100%; font-size: 32px; text-align: left;               font-weight: bold;">1</div>
+<h1 style="margin: 4px 0 4px;"><span>Voltus Known Problems and Solutions</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>This Known Problems and Solutions (KP&amp;S) document describes important Cadence Change Requests (CCRs) for Voltus IC Power Integrity Solution and tells you how to solve or work around these problems.</p>
+
+<p>Fixed CCRs are listed in the README file accompanying this release.</p>
+<h2 id="VoltusKnownProblemsandSolutions-IdentifiedinThisRelease" style="">Identified in This Release</h2>
+<p style=""><strong>CCMPR03149232 - &#xa0;KPNS &#8211; SSV 25.10 base release bin/checkSysConf patchData file update</strong></p>
+<p style=""><strong>Description</strong>:<br />In the SSV 25.10 Base Release, the patchData file for the checkSysConf is incorrect.</p>
+<p style="">The patchData file is used to check whether a platform/OS is supported and what libraries are needed to run the binary.</p>
+<p style="">The KPNS and CCR clarifies that the checkSysConf patch data file name for the tarkit at the<span>&#xa0;</span><a class="external-link" href="https://download.cadence.com/" rel="nofollow" style="">download.cadence.com</a><span>&#xa0;</span>is provided incorrectly as &#8220;SSV241&#8221;.&#xa0;&#xa0;When the user runs the ckSysConf on RH7.4, it will return the OS as valid, which is incorrect as it is not a supported platform.&#xa0;For the SSV25.10 release, the supported platforms are RH8.4+, RH9.X, and SLES 15.&#xa0;</p>
+<p style="">If the installation is updated based on the solution below to &#8220;SSV251&#8221; patchData file, the user will not see RH7.4 as a supported platform.</p>
+<p style=""><strong>Solution</strong>:<br /><u><span style="">Option 1</span></u>:<br />If you do not want to install<span>&#xa0;</span><code>confDataSSV25.10-p001.t.Z</code>, you can continue to run checkSysConf on the supported platforms RH8.4+, RH9.X, and SLES15.</p>
+<p style=""><u>Option 2</u>:<br />If you need an updated patchData file, this can be picked from<span>&#xa0;</span><code>/eng/tarkits/confDataSSV25.10-p001.t.Z</code><span>&#xa0;</span>and uploaded it to the user site using the following commands:<br />&#xa0;<br /><code>cd &lt;INSTALL_DIR&gt;</code><br /><code>rm -rf share/patchData</code><br />(Extract the tarkit).<br /><code>tar zxvf confDataSSV25.10-p001.t.Z</code><br />&#xa0;<br />For any further questions, contact Cadence Support.</p>
+<h2 id="VoltusKnownProblemsandSolutions-IdentifiedinPreviousReleases">Identified in Previous Releases</h2>
+<h3 id="VoltusKnownProblemsandSolutions-CCR2784079:CDApopups&quot;Renderprocessexitedwithcode133&quot;messageandgeneratethecorefileinDPC">CCR 2784079: CDA popups &quot;Render process exited with code 133&quot; message and generate the core file in DPC</h3>
+
+<p><strong>Description</strong>: In Voltus, accessing the Doc Assistant from the tool Help buttons displays the following error message:</p>
+
+<p><code>Render process exited with code:5</code><br /><code>Do you want to reload the page?</code></p>
+
+<p><strong>Solution</strong>: Set the following environment variable before launching Doc Assistant:</p>
+
+<p><code>setenv QTWEBENGINE_CHROMIUM_FLAGS &quot;--single-process&quot;</code></p>
+
+<p>Open a Voltus session and run Doc Assistant from the <em>Help</em> menu, for example, in the Voltus GUI, select <em>Help</em>&#8212;<em>Documentation Library</em>. Doc Assistant appears.</p>
+<h3 id="VoltusKnownProblemsandSolutions-CCR1240119:Distributedprocessingistakingmorehoststhanspecified">CCR 1240119: Distributed processing is taking more hosts than specified</h3>
+
+<p><strong>Description</strong>: When running IR Drop Analysis in the multi-CPU mode using the LSF job submission script, distributed processing uses more number of hosts than specified. For example, when &quot;<code>set_multi_cpu_usage -remoteHost 2 -cpuPerRemoteHost 8</code>&quot; is specified, it takes four hosts instead of two hosts. In the LSF mode, distributed processing submits only one LSF job per slave and is unable to run multiple jobs on the same host machine.</p>
+
+<p><strong>Solution</strong>: Use the RSH mode to run 2 distributed hosts with 4 slave processes.</p>
+<h3 id="VoltusKnownProblemsandSolutions-CCR1109065:LeakagevaluechangingwithchangingorderofLibertyfiles">CCR 1109065: Leakage value changing with changing order of Liberty files</h3>
+
+<p><strong>Description</strong>: If there is a change in the order in which Liberty files are read in, leakage interpolation leads to different values.</p>
+
+<p><strong>Solution</strong>: Specify the Liberty files based on the voltage values, which must be sorted in the ascending order, to have better voltage-based interpolation. This also applies to temperature-based interpolation. This will be fixed in a later release.</p>
+<h3 id="VoltusKnownProblemsandSolutions-CCR1105272:CurrentCharacterizationflownotworkingwith.libcontainingonlyscalarenergy">CCR 1105272: Current Characterization flow not working with .lib containing only scalar energy</h3>
+
+<p><strong>Description</strong>: If internal power tables in a .lib has only scalar energy values, even if .lib has internal-power with the &#8220;when&#8221; condition, the current characterization flow cannot parse the power table correctly.</p>
+
+<p><strong>Solution</strong>: Edit the .lib to specify the <code>internal_power</code> table with the slew and load template. This will be fixed in a later release.</p>
+<h3 id="VoltusKnownProblemsandSolutions-CCR1104014:GeneratingadiemodelwithoutvirtualgroundcanresultinunstableSpicesimulation">CCR 1104014: Generating a die model without virtual ground can result in unstable Spice simulation</h3>
+
+<p><strong>Description</strong>: Creating a die model with <code>create_die_model</code> <code>-model_transform_method {res_shielding}</code> and disabling global node zero (<code>-disable_global_node_zero true</code>), can lead to stability issues when running the die model in Spice simulators.</p>
+
+<p><strong>Solution</strong>: You can create a die model with <code>-disable_global_node_zero</code> set to <code>false</code>. This will be fixed in a later release.</p>
+<h3 id="VoltusKnownProblemsandSolutions-CCR1095292:Ignorefillerscreatinglargeunconnectedsection">CCR 1095292: Ignore fillers creating large unconnected section</h3>
+
+<p><strong>Description</strong>: If fillers are used to preserve connectivity on the M1 layer, ignoring them using <code>set_rail_analysis_mode -ignore_fillers</code> <code>true</code> would result in disconnects in the power-grid.</p>
+
+<p><strong>Solution</strong>: Use follow-pin routing for the M1 (and sometimes&#xa0; M2) layer, therefore, ignoring filler cells from analysis does not result in connectivity problems. This will be fixed in a later release.</p>
+<h3 id="VoltusKnownProblemsandSolutions-CCR1093337:Event-basedPowerProfilercalculatesleakagepowerusingaveragedutycycle">CCR 1093337: Event-based Power Profiler calculates leakage power using average duty cycle&#xa0; &#xa0;</h3>
+
+<p><strong>Description</strong>: When running the event-based vector profiling flow, the leakage power numbers will not be event-based but still will be calculated based on the average duty cycle.</p>
+
+<p><strong>Solution</strong>: This will be fixed in a later release.</p>
+<h3 id="VoltusKnownProblemsandSolutions-CCR1088489:set_switching_activity-clockonlysupportsscalingofasingleclock">CCR 1088489: set_switching_activity -clock only supports scaling of a single clock <strong><br /></strong></h3>
+
+<p><strong>Description</strong>: The <code>-clock</code> parameter of the <code>set_switching_activity</code> command does not support scaling of multiple clocks at the same time.</p>
+
+<p><strong>Solution</strong>: You can specify the command multiple times with different clocks.</p>
+<h3 id="VoltusKnownProblemsandSolutions-CCR1072855:IncorrectCPUtimereportedinlogfile">CCR <span style="">1072855</span>: Incorrect CPU time reported in log file</h3>
+
+<p><strong>Description</strong>: In this release, the CPU time reported in the log file may not include all the child processes.</p>
+
+<p><strong>Solution</strong>: This will be fixed in a later release.</p>
+<h3 id="VoltusKnownProblemsandSolutions-CCR1071791:LibrarygenerationfailsifSpicemodelcontains&#39;LG&#39;or&#39;WG&#39;">CCR 1071791: Library generation fails if Spice model contains &#39;LG&#39; or &#39;WG&#39;</h3>
+
+<p><strong>Description</strong>: During library characterization, if there is a Spice netlist and model containing &#39;LG&#39; and &#39;WG&#39; as the length and width parameter names, Voltus Library Simulator gives an error message and power-grid library building fails. The Library Simulator cannot recognize &#39;LG&#39; and &#39;WG,&#39; and expects only &#39;l&#39; and &#39;w&#39; for parameter names (case-insensitive) to compute current distribution.</p>
+
+<p><strong>Solution</strong>: Replace &#39;LG&#39; and &#39;WG&#39; parameters with &#39;l&#39; and &#39;w&#39;. This will be fixed in a later release.</p>
+<h3 id="VoltusKnownProblemsandSolutions-CCR964264:Diemodelgenerationtakesalongtimewith-model_transform_method">CCR 964264: Die model generation takes a long time with -model_transform_method</h3>
+
+<p><strong>Description</strong>: When the <code><code>create_die_model</code> -model_transform_method {res_shielding}</code> parameter is used for die model generation, the time taken to generate the die model is expected to increase by about 2x in comparison to die model generation without this parameter.</p>
+
+<p><strong>Solution</strong>: This will be fixed in a later release.</p>
+<h3 id="VoltusKnownProblemsandSolutions-CCR859844:Needtosupportnon0capacitancefillercellsforDecapOptimizationflow">CCR 859844: Need to support non 0 capacitance filler cells for Decap Optimization flow</h3>
+
+<p><strong>Description:&#xa0;</strong>If a cell is tagged as a filler cell, and you provide capacitance value for it during library generation, the cell capacitance will be ignored during rail analysis and decap optimization.</p>
+
+<p><strong>Solution:</strong> This will be fixed in a later release.</p>
+<h3 id="VoltusKnownProblemsandSolutions-CCR853412:Nativepower-upflowhasanaccuracyproblemwhenPSWhaslargedevicelengthinside">CCR 853412: Native power-up flow has an accuracy problem when PSW has large device length inside</h3>
+
+<p><strong>Description</strong>: Concurrent power-up analysis using <code>set_rail_analysis_mode -powering_up_rails</code> produces inaccurate results when a design is using custom long-channel power-gate cells. The problem stems from the modeling of such long-channel power-gate cells that require longer simulation times during library characterization to accurately capture slew and delay.</p>
+
+<p><strong>Solution</strong>: This will be fixed in a later release.</p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="voltusKPNSTOC.html" id="prev" title="TOC">TOC</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

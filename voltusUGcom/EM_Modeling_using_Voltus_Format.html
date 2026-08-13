@@ -1,0 +1,258 @@
+
+<html><head><title>EM Modeling using Voltus Format</title>
+<meta name="page_sequence" content="23027000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666158" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="EM Modeling using Voltus Format" />
+<meta name="Keywords" content="EM,modeling,resistance,PWL" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666158" />
+<meta name="NextFile" content="EM_Modeling_using_QRC_Technology_File.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Electromigration_Risk_Modeling.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- EM Modeling using Voltus Format" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Electromigration_Risk_Modeling.html" title="Electromigration_Risk_Modeling">Electromigration_Risk_Modeling</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="EM_Modeling_using_QRC_Technology_File.html" title="EM_Modeling_using_QRC_Technology_File">EM_Modeling_using_QRC_Technolo ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>EM Modeling using Voltus Format</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="fontredcadence">
+<p>The command <code>set_rail_analysis_config -em_models</code> file is used to point to the file that includes the models needed for EM analysis.</p>
+<div aria-label="Info" class="confluence-information-macro  confluence-information-macro-information" role="region"><span class="aui-icon aui-icon-small aui-iconfont-info-filled confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>The <code>-process_techgen_em_rules</code> and <code>-em_models</code> parameters of the <code>set_rail_analysis_config</code> command are mutually exclusive. If none of these parameters are specified, <code>rj</code> analysis will not be performed.</p>
+</div>
+</div>
+
+<p>The use model for temperature effects on resistance is given below:</p>
+<ul><li>Sources of TC1/TC2/TREF will follow the same use model as of EM rules. Voltus will read both TC1/TC2/TREF and EM rules from one of the following three sources: <code>em model file</code>, <code>.cl</code>, or extraction technology file. These sources are mutually exclusive.<ul><li>When <code>set_rail_analysis_config -process_techgen_em_rules</code> is <code>true</code> and <code>-extraction_tech_file</code> is specified, the extraction technology file settings will be used.</li><li>When <code>-em_models</code> is provided, em model file will be used.</li><li>In other cases, <code>.cl</code> file will be used.</li></ul></li><li>If the temperature coefficients are not set in the em model file, they will be reset to default settings (0 for <code>TC1</code> and <code>TC2</code>, 25 for <code>Tref</code>) and a warning message will be displayed.</li><li>In the em model file, <code>Tref</code> needs to be defined on the layer &quot;<code>ALL</code>&quot;.</li></ul></span></p>
+
+<p><br /></p>
+
+<p><strong>Normal Modeling</strong></p>
+<pre><code>model [<span class="webflare-courier-new" style="white-space: pre;"><em>layer</em></span>|all] <span class="webflare-courier-new" style="white-space: pre;"><em>parameter1 </em></span><code>= </code><span class="webflare-courier-new" style="white-space: pre;"><em>value1</em></span>[<span class="webflare-courier-new" style="white-space: pre;"><em>parameter2 </em></span><code>= </code><span class="webflare-courier-new" style="white-space: pre;"><em>value2...parametern </em></span><code>= </code><span class="webflare-courier-new" style="white-space: pre;"><em>valuen</em></span>]</code></pre>
+<p><strong>PWL Modeling</strong></p>
+<pre><code>model [<span class="webflare-courier-new" style="white-space: pre;"><em>layer</em></span>|all] <span class="webflare-courier-new" style="white-space: pre;"><em>parameter </em></span><code>= </code>&quot;<span class="webflare-courier-new" style="white-space: pre;"><em>value_1</em></span> width<span class="webflare-courier-new" style="white-space: pre;"><em>_1</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>value_2</em></span> width_<span class="webflare-courier-new" style="white-space: pre;"><em>area_2</em></span> [<span class="webflare-courier-new" style="white-space: pre;"><em>value_3</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>width_area_3 </em></span>[...<span class="webflare-courier-new" style="white-space: pre;"><em>value_n</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>width_area_n</em></span>]]&quot;<br /></code><code>model <span class="webflare-courier-new" style="white-space: pre;"><em>metal_layer</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>jmax_parameter </em></span><code>= </code>&quot;jmax_<span class="webflare-courier-new" style="white-space: pre;"><em>value_1</em></span> width<span class="webflare-courier-new" style="white-space: pre;"><em>_1</em></span> jmax_<span class="webflare-courier-new" style="white-space: pre;"><em>value_2</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>width_2</em></span> [jmax_<span class="webflare-courier-new" style="white-space: pre;"><em>value_3</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>width_3 </em></span>[...jmax_<span class="webflare-courier-new" style="white-space: pre;"><em>value_n</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>width_n</em></span>]]&quot;&lt;via_range=<span class="webflare-courier-new" style="white-space: pre;"><em>number</em></span>&gt;<br /></code><code>model <span class="webflare-courier-new" style="white-space: pre;"><em>via_layer</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>jmax_parameter </em></span><code>= </code>&quot;jmax_<span class="webflare-courier-new" style="white-space: pre;"><em>value_1</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>area_1</em></span> jmax_<span class="webflare-courier-new" style="white-space: pre;"><em>value_2</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>area_2</em></span> [jmax_<span class="webflare-courier-new" style="white-space: pre;"><em>value_3</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>area_3 </em></span>[...jmax_<span class="webflare-courier-new" style="white-space: pre;"><em>value_n</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>area_n</em></span>]]&quot;&lt;via_range = <span class="webflare-courier-new" style="white-space: pre;"><em>number</em></span>&gt; &lt;current_direction = [up | down | both]&gt;<br /></code><code>model <span class="webflare-courier-new" style="white-space: pre;"><em>layer_name</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>jmax_length_factor</em></span> = &quot;<span class="webflare-courier-new" style="white-space: pre;"><em>factor_1 length _1</em></span> ... <span class="webflare-courier-new" style="white-space: pre;"><em>factor_n</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>length_n</em></span>&quot;<br /></code><code>model <span class="webflare-courier-new" style="white-space: pre;"><em>jmax_lifetime</em></span> [<span class="webflare-courier-new" style="white-space: pre;"><em>jmax_dc_avg </em></span>| <span class="webflare-courier-new" style="white-space: pre;"><em>jmax_dc_peak </em></span>| <span class="webflare-courier-new" style="white-space: pre;"><em>jmax_dc_rms</em></span>] <span class="webflare-courier-new" style="white-space: pre;"><em>layer_name</em></span> &quot;<span class="webflare-courier-new" style="white-space: pre;"><em>scale1</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>Lifetime1</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>scale2</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>Lifetime2</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>...</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>scalen</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>Lifetimen&quot;</em></span></code></pre>
+<p>The <code>model</code> command lists or changes resistor model parameters, which makes it possible for Voltus to perform electromigration verification. The model parameters provide the following information:</p>
+<ul><li>What layers are to be modeled, such as metal layers and via layers</li><li>Layer dimensions</li><li>Current density information</li></ul>
+<p><strong>Parameter</strong></p>
+<div class="table-wrap"><table class="webflareTable wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>layer</em></span></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the name of the layer for which the software is to set parameters. This name should be the same as the layer name defined in the RCgen and XTC command file.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>all</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Indicates all existing layers. These layer names should be the same as the layer names defined in the RCgen and XTC command file.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>parameter1 = value1 area1</em></span></p>
+
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>parameter2 = value2 area2</em></span></p>
+
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>.</em></span></p>
+
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>.</em></span></p>
+
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>parametern = valuen arean</em></span></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1"><div class="content-wrapper">
+<p>Specifies the <code>model</code> parameter and its new value. If you do not include this argument, the software lists the current model settings. This is for normal modeling.</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>There must be spaces before and after the equals sign.</p>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>parameter =</code><span class="webflare-courier-new" style="white-space: pre;"><em> &quot;value_1 width_area_1 value_2 width_area_2 value_2&#xa0;&#xa0; width_area_2 ...[value_n width_area_n]&quot;</em></span></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the points of the piecewise linear interpolation. Value is one of the following parameters:</p>
+<ul><li><span class="webflare-courier-new" style="white-space: pre;"><em>Ea</em></span></li><li><span class="webflare-courier-new" style="white-space: pre;"><em>A</em></span></li><li><span class="webflare-courier-new" style="white-space: pre;"><em>Jmax_dc_avg</em></span></li><li><span class="webflare-courier-new" style="white-space: pre;"><em>Jmax_dc_rms</em></span></li><li><span class="webflare-courier-new" style="white-space: pre;"><em>Jmax_dc_peak</em></span></li></ul>
+<p>If you specify piecewise linear current density limits for a metal layer, <span class="webflare-courier-new" style="white-space: pre;"><em>width_area_n</em></span> must be the width of the wire, in meters. If you specify the piecewise linear current density limits for a via layer, <span class="webflare-courier-new" style="white-space: pre;"><em>width_area_n</em></span> is the area of the via, in meters squared.</p>
+
+<p>You must define at least two points in a PWL model.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>jmax_parameter</em></span></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>jmax_parameter is one of the dc parameters (i.e. <code>jmax_dc_avg</code>, <code>jmax_dc_rms</code>, <code>jmax_dc_peak</code>).</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>via_range=</code><span class="webflare-courier-new" style="white-space: pre;"><em> number</em></span></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>The permitted current on a metal layer can be specified depending on the number of vias. This is done using the <code>via_layer</code> option. If this option is not used, all currents defined will pertain, independent of the number of vias.</p>
+
+<p>&quot;<code>model</code> <span class="webflare-courier-new" style="white-space: pre;"><em>metal_layer via_range</em></span>&quot; specifies the number of parallel vias encountered when going from the referenced layer to the top metal layer. Multiple <code>model via_range</code> commands are used to specify the different currents for the different ranges in number of vias. The order of these multiple commands are not important. Any via ranges not specified will apply the closest one. An example with three model commands is shown below.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>current_direction = </code><span class="webflare-courier-new" style="white-space: pre;"><em>[up | down | both]</em></span></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Provides the ability to specify EM model parameters based on direction. The default is <code>both</code>.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>jmax_length_factor</em></span></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the length dependent adjustment factor as a PWL function.</p>
+
+<p>The length values are specified in meters.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>jmax_lifetime</em></span></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the current density limit for different lifetimes.</p>
+
+<p>Example:</p>
+<pre><code>
+jmax_lifetime jmax_dc_avg metal1 &quot;4.3 5 1 10 0.4 15&quot;</code></pre></td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>jmax_dc_avg jmax_dc_rms jmax_dc_peak</em></span></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies dc <code>jmax_factor</code> for average, peak, or rms currents.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>scale1 scale2 ... scalen</em></span></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the scaling factor used to calculate the current density limit.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>Lifetime1 Lifetime2 ... Lifetimen</em></span></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the lifetime value. (in hours)</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>TC1 = &quot;value_1 width_1 value_2 width_2 ...value_n width_n&quot;</em></span></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the model parameter TC1/TC2, its new value, and the width corresponding to the new value. The width values are specified in meters.</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><strong>Example</strong></p>
+<ul><li>The following is an example of using the <code>via_range</code> option. <br /><pre class="webflare-pre-block webflare-courier-new">model via_layer jmax_dc_avg = &quot;jmax_value_1 area_1 jmax_value_n area_n&quot; via_range=2 ; </pre>Where, <code>via_range=2</code> refers to number of vias from 1 to 2.<pre class="webflare-pre-block webflare-courier-new">model via_layer jmax_dc_avg = &quot;jmax_value_1 area_1 jmax_value_n area_n&quot; via_range=4 ;</pre>Where, <code>via_range=4</code> refers to number of vias from 3 to 4, since 1 to 2 was covered by prior command.<pre class="webflare-pre-block webflare-courier-new">model via_layer jmax_dc_avg = &quot;jmax_value_1 area_1 jmax_value_n area_n&quot; via_range=8 ;</pre>Where, <code>via_range=8</code> refers to number of vias from 5 to 8, since 1 to 4 was covered by the prior two commands. For any cases that have more than 8 vias, this model will also be applied.<br />The <code>via_range</code> rules on metal layers are only applied to resistors that belong to a segment with a via connection to the upper layer. If there is no via connection (i.e top metal layer), then the default rule (without <code>via_range</code>, like command shown below) will be used.<pre class="webflare-pre-block webflare-courier-new">model via_layer jmax_dc_avg = &quot;jmax_value_1 area_1 jmax_value_n area_n&quot;</pre>If wire width and number of vias rules are both specified, the number of vias rule will be applied first.<br />The &quot;<code>info r</code>&quot;, &quot;<code>which r</code>&quot;, and &quot;<code>print rj</code>&quot; commands will list the number of via cuts to be used in EM modeling. All of these commands require a previous EM analysis with <code>via_range</code> models performed, since only then will it run the connectivity retracing to account for via connections.<br />Temperature effects on resistance are available. The model parameters for each layer include fields for TC1, TC2, and TREF. The resistance of a resistor is calculated by using the following formula:<br /><code>Reffective = R*(1 + TC1 * delta_t + TC2 * delta_t2)</code><br />This syntax contains the following parameters:<ul><li><code>delta_t </code>- Specifies the default temperature minus the nominal model temperature (<code>TREF</code>).</li><li><code>TC1</code> - Specifies the linear temperature coefficient. The default is 0.0 in 1/degrees.</li><li><code>TC2</code> - Specifies the quadratic temperature coefficient. The default is 0.0 in 1/degrees2.</li><li><code>TREF</code> - Specifies the nominal model temperature, in degrees Celsius. The default is 25 degrees Celsius.</li><li><code>TC1</code> and <code>TC2</code> come from the foundry. <code>TREF</code> refers to the temperature at which the technology file was generated. The temperature variable sets the operating temperature at which you want to run the analysis. The tool then recalculates the resistance from the extracted <code>TREF</code> at the analysis temperature that you want.</li></ul></li></ul><h3 id="EMModelingusingVoltusFormat-EMModelFileExample">EM Model File Example</h3>
+
+<p>The following is an example of the contents of the EM model file:</p>
+<pre><code>
+###############################################################</code></pre><pre><code>
+# Example foundry specification current density based EM check<br /># Generated for 110C<br /># METAL_1 =&gt; Imax = 0.36*2.0*(w-0.02)<br /># METAL_2 to METAL_6 =&gt; Imax = 0.36*2.6*(w-0.02)<br /># METAL_7 and METAL_8 =&gt; Imax = 0.36*4.48*(w-0.02)<br /># where w is width. <br /># Contact =&gt; 0.294mA/Cont<br /># VIA_1 to VIA_6 =&gt; 0.189mA/via<br /># VIA_7 and VIA_8 =&gt; 1.452mA/via</code></pre><pre><code>
+###############################################################</code></pre><pre><code>
+# Jmax Calculation: e.g. METAL_1<br /># Imax = 0.36*2.6*(w-0.02)<br /># For w= 0.12u, Imax = 0.36*2.0*(mA/u)*(0.1u) = 0.09mA <br /># Jmax = Imax/(Thickness*width) = 0.09 e-3 (Amp)/(0.24e-4*0.12e-4) (cm^2) = 0.3e+5 A/cm^2 </code></pre><pre><code>
+#</code></pre><pre><code>
+# Thickness for the layer can be found in ICT file.<br /># For different widths, you can generate the PWL limits and Voltus will interpolate between these values based on width of the resistor, e.g.<br /># model METAL_1 jmax_dc_avg  =   &quot;0.25e+5 0.1e-6 0.3e+5 0.12e-6 0.38e+5 0.14e-6 1.25e+5 0.16e-6 1.61e+5 0.2e-6 2.51e+5 0.3e-6 5.21e+5 .6e-6 8.81e+5 1e-6 35.8e+5 4e-6&quot;;  #[A/cm^2]  pwl limits according to widths.<br /># where first value is calculated Jmax and second is width. &quot;Jmax width1 Jmax width2 Jmax width3....&quot;</code></pre><pre><code>
+## METAL_8<br />model METAL_8 TREF           =   110 <br />model METAL_8 Tc1            =   0.0000<br />model METAL_8 Tc2            =   0.0000<br />model METAL_8 thickness      =   0.7744e-06; #Meters<br />model METAL_8 jmax_dc_avg&#xa0;&#xa0;=&#xa0;&#xa0; &quot;0.74e+5 0.1e-6 0.93e+5 0.12e-6 1.11e+5 0.14e-6 1.3e+5 0.16e-6 1.67e+5 0.2e-6 2.6e+5 0.3e-6 3.72e+5 .42e-6 5.39e+5 0.6e-6 9.11e+5 1e-6 37e+5 4e-6&quot;;&#xa0;&#xa0;#[A/cm^2]&#xa0;&#xa0;pwl limits according to widths. </code></pre><pre><code>
+## VIA_7<br />model VIA_7 TREF           =   110<br />model VIA_7 Tc1            =   0.0000<br />model VIA_7 Tc2            =   0.0000<br />model VIA_7 vcwidth        =   0.36e-06;  #Meters<br />model VIA_7 jmax_dc_avg_w&#xa0;&#xa0;=&#xa0;&#xa0; 1.452e-03;&#xa0;&#xa0;#[A/Via] </code></pre><pre><code>
+## METAL_7<br />model METAL_7 TREF           =   110 <br />model METAL_7 Tc1            =   0.0000<br />model METAL_7 Tc2            =   0.0000<br />model METAL_7 thickness      =   0.2986e-06; #Meters<br />model METAL_7 jmax_dc_avg&#xa0;&#xa0;=&#xa0;&#xa0; &quot;0.69e+5 0.1e-6 0.87e+5 0.12e-6 1.04e+5 0.14e-6 1.21e+5 0.16e-6 1.56e+5 0.2e-6 2.43e+5 0.3e-6 5.05e+5 .6e-6 8.53e+5 1e-6 34.65e+5 4e-6&quot;;&#xa0;&#xa0;#[A/cm^2]&#xa0;&#xa0;pwl limits according to widths. </code></pre><pre><code>
+## VIA_6<br />model VIA_6 TREF           =   110<br />model VIA_6 Tc1            =   0.0000<br />model VIA_6 Tc2            =   0.0000<br />model VIA_6 vcwidth        =   0.13e-06;  #Meters<br />model VIA_6 jmax_dc_avg_w&#xa0;&#xa0;=&#xa0;&#xa0; 0.189e-03;&#xa0;&#xa0;#[A/Via] </code></pre><pre><code>
+## METAL_6<br />model METAL_6 TREF           =   110 <br />model METAL_6 Tc1            =   0.0000<br />model METAL_6 Tc2            =   0.0000<br />model METAL_6 thickness      =   0.2986e-06; #Meters<br />model METAL_6 jmax_dc_avg&#xa0;&#xa0;=&#xa0;&#xa0; &quot;0.69e+5 0.1e-6 0.87e+5 0.12e-6 1.04e+5 0.14e-6 1.21e+5 0.16e-6 1.56e+5 0.2e-6 2.43e+5 0.3e-6 5.05e+5 .6e-6 8.53e+5 1e-6 34.65e+5 4e-6&quot;;&#xa0;&#xa0;#[A/cm^2]&#xa0;&#xa0;pwl limits according to widths. </code></pre><pre><code>
+## VIA_5<br />model VIA_5 TREF           =   110<br />model VIA_5 Tc1            =   0.0000<br />model VIA_5 Tc2            =   0.0000<br />model VIA_5 vcwidth        =   0.13e-06;  #Meters<br />model VIA_5 jmax_dc_avg_w&#xa0;&#xa0;=&#xa0;&#xa0; 0.189e-03;&#xa0;&#xa0;#[A/Via] </code></pre><pre><code>
+## METAL_5<br />model METAL_5 TREF           =   110 <br />model METAL_5 Tc1            =   0.0000<br />model METAL_5 Tc2            =   0.0000<br />model METAL_5 thickness      =   0.2986e-06; #Meters<br />model METAL_5 jmax_dc_avg&#xa0;&#xa0;=&#xa0;&#xa0; &quot;0.69e+5 0.1e-6 0.87e+5 0.12e-6 1.04e+5 0.14e-6 1.21e+5 0.16e-6 1.56e+5 0.2e-6 2.43e+5 0.3e-6 5.05e+5 .6e-6 8.53e+5 1e-6 34.65e+5 4e-6&quot;;&#xa0;&#xa0;#[A/cm^2]&#xa0;&#xa0;pwl limits according to widths. </code></pre><pre><code>
+## VIA_4<br />model VIA_4 TREF           =   110<br />model VIA_4 Tc1            =   0.0000<br />model VIA_4 Tc2            =   0.0000<br />model VIA_4 vcwidth        =   0.13e-06;  #Meters<br />model VIA_4 jmax_dc_avg_w&#xa0;&#xa0;=&#xa0;&#xa0; 0.189e-03;&#xa0;&#xa0;#[A/Via] </code></pre><pre><code>
+## METAL_4<br />model METAL_4 TREF           =   110 <br />model METAL_4 Tc1            =   0.0000<br />model METAL_4 Tc2            =   0.0000<br />model METAL_4 thickness      =   0.2986e-06; #Meters<br />model METAL_4 jmax_dc_avg&#xa0;&#xa0;=&#xa0;&#xa0; &quot;0.69e+5 0.1e-6 0.87e+5 0.12e-6 1.04e+5 0.14e-6 1.21e+5 0.16e-6 1.56e+5 0.2e-6 2.43e+5 0.3e-6 5.05e+5 .6e-6 8.53e+5 1e-6 34.65e+5 4e-6&quot;;&#xa0;&#xa0;#[A/cm^2]&#xa0;&#xa0;pwl limits according to widths. </code></pre><pre><code>
+## VIA_3<br />model VIA_3 TREF           =   110<br />model VIA_3 Tc1            =   0.0000<br />model VIA_3 Tc2            =   0.0000<br />model VIA_3 vcwidth        =   0.13e-06;  #Meters<br />model VIA_3 jmax_dc_avg_w  =   0.189e-03;  #[A/Via] <br />#model VIA_3 jmax_dc_peak&#xa0;&#xa0;=&#xa0;&#xa0; 0.713e-03;&#xa0;&#xa0;#[A] </code></pre><pre><code>
+## METAL_3</code></pre><pre><code>
+model METAL_3 TREF           =   110 <br />model METAL_3 Tc1            =   0.0000<br />model METAL_3 Tc2            =   0.0000<br />model METAL_3 thickness      =   0.2986e-06; #Meters<br />model METAL_3 jmax_dc_avg&#xa0;&#xa0;=&#xa0;&#xa0; &quot;0.69e+5 0.1e-6 0.87e+5 0.12e-6 1.04e+5 0.14e-6 1.21e+5 0.16e-6 1.56e+5 0.2e-6 2.43e+5 0.3e-6 5.05e+5 .6e-6 8.53e+5 1e-6 34.65e+5 4e-6&quot;;&#xa0;&#xa0;#[A/cm^2]&#xa0;&#xa0;pwl limits according to widths. </code></pre><pre><code>
+## VIA_2<br />model VIA_2 TREF           =   110<br />model VIA_2 Tc1            =   0.0000<br />model VIA_2 Tc2            =   0.0000<br />model VIA_2 vcwidth        =   0.13e-06;  #Meters<br />model VIA_2 jmax_dc_avg_w&#xa0;&#xa0;=&#xa0;&#xa0; 0.189e-03;&#xa0;&#xa0;#[A/Via] </code></pre><pre><code>
+## METAL_2<br />model METAL_2 TREF           =   110 <br />model METAL_2 Tc1            =   0.0000<br />model METAL_2 Tc2            =   0.0000<br />model METAL_2 thickness      =   0.2986e-06; #Meters<br />model METAL_2 jmax_dc_avg  =   &quot;0.69e+5 0.1e-6 0.87e+5 0.12e-6 1.04e+5 0.14e-6 1.21e+5 0.16e-6 1.56e+5 0.2e-6 2.43e+5 0.3e-6 5.05e+5 .6e-6 8.53e+5 1e-6 34.65e+5 4e-6&quot;;  #[A/cm^2]  pwl limits according to widths. <br />#model METAL_2 jmax_dc_peak&#xa0;&#xa0;=&#xa0;&#xa0; 4.950e+05;&#xa0;&#xa0;#[A/cm^2]</code></pre><pre><code>
+## VIA_1<br />model VIA_1 TREF           =   110<br />model VIA_1 Tc1            =   0.0000<br />model VIA_1 Tc2&#xa0;&#xa0;          =   0.0000</code></pre><pre><code>
+# vcwidth is the default via width.<br />model VIA_1 vcwidth        =   0.13e-06;  #Meters<br />model VIA_1 jmax_dc_avg_w&#xa0;&#xa0;=&#xa0;&#xa0; 0.189e-3;&#xa0;&#xa0;#[A/Via] </code></pre><pre><code>
+## METAL_1<br />model METAL_1 TREF           =   110 <br />model METAL_1 Tc1            =   0.0000<br />model METAL_1 Tc2            =   0.0000<br />model METAL_1 thickness      =   0.24e-06; #Meters<br />model METAL_1 jmax_dc_avg&#xa0;&#xa0;=&#xa0;&#xa0; &quot;0.25e+5 0.1e-6 0.3e+5 0.12e-6 0.38e+5 0.14e-6 0.42e+5 0.16e-6 0.54e+5 0.2e-6 0.83e+5 0.3e-6 1.75e+5 0.6e-6 2.96e+5 1e-6 11.96e+5 4e-6&quot;;&#xa0;&#xa0;#[A/cm^2]&#xa0;&#xa0;pwl limits according to widths. </code></pre><pre><code>
+# CONT<br />model CONT TREF    =   110<br />model CONT Tc1            =   0.0000<br />model CONT Tc2            =   0.0000<br />model CONT vcwidth        =   0.12e-06;  #Meters<br />model CONT jmax_dc_avg_w&#xa0;&#xa0;=&#xa0;&#xa0; 0.294e-3;&#xa0;&#xa0;#[A/Cont]</code></pre><h4 id="EMModelingusingVoltusFormat-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Electromigration_Risk_Modeling.html">Electromigration Risk Modeling</a></li><li><a href="EM_Modeling_using_QRC_Technology_File.html">EM Modeling using QRC Technology File</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Electromigration_Risk_Modeling.html" id="prev" title="Electromigration_Risk_Modeling">Electromigration_Risk_Modeling</a></em></b><b><em><a href="EM_Modeling_using_QRC_Technology_File.html" id="nex" title="EM_Modeling_using_QRC_Technology_File">EM_Modeling_using_QRC_Technolo ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

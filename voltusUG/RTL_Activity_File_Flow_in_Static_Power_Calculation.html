@@ -1,0 +1,117 @@
+
+<html><head><title>RTL Activity File Flow in Static Power Calculation</title>
+<meta name="page_sequence" content="38000000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468652" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="RTL Activity File Flow in Static Power Calculation" />
+<meta name="Keywords" content="RTL,netlist,power,instance,Conformal" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468652" />
+<meta name="NextFile" content="File_Formats.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Voltus_Use_Model_for_Leakage_Power_Scaling.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- RTL Activity File Flow in Static Power Calculation" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="Voltus_Use_Model_for_Leakage_Power_Scaling.html" title="Voltus_Use_Model_for_Leakage_Power_Scaling">Voltus_Use_Model_for_Leakage_P ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="File_Formats.html" title="File_Formats">File_Formats</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <div style="width: 100%; font-size: 32px; text-align: left;               font-weight: bold;">28</div>
+<h1 style="margin: 4px 0 4px;"><span>RTL Activity File Flow in Static Power Calculation</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>The toggle data from RTL simulations are applied to gate-level netlists in Voltus for power analysis. You can use the <code><span class="fontredcadence">map_activity_file</span></code> command of Voltus to specify instance name mapping between RTL netlist and GATE level netlist. The mapping file used for instance name mapping is generated by Conformal.</p>
+
+<p>The following diagram illustrates the flow:</p>
+<div><span class="confluence-embedded-file-wrapper"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481855/732481856.gif" data-linked-resource-container-id="732481855" data-linked-resource-container-version="1" data-linked-resource-content-type="image/gif" data-linked-resource-default-alias="mapping_file_flow.GIF" data-linked-resource-id="732481856" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481855/732481856.gif" tabindex="0" /></span></div>
+
+<p>Conformal flattens and models the Golden and Revised designs and automatically maps the key points. In Conformal, the <code>REPORT MAPPED POINTS</code> command is used to display the mapped points that were automatically identified or added with the Conformal software. The mapping file generated using the <code>report mapped points</code> command is used in Voltus to increase the annotation of the RTL activity file. This mapping is required to annotate waveform from the RTL switching activity (that is, VCD), to do power calculation on a post-layout netlist. RTL level VCD or TCF are obtained from simulation on the RTL Verilog netlist. The mapping file has information for each mapped point from the Golden and Revised design, and a summary of all Golden and Revised mapped points. The tool assumes that the Golden (G) refers to the RTL netlist and Revised (R) refers to the GATE level netlist.</p>
+
+<p>By default, Conformal uses the primitive instance name of the D flip-flops (DFF) during reporting. For example:</p>
+<pre><code>
+LEC&gt; report mapped point<br />...</code></pre><pre><code>
+34-th mapped points:<br />  (G) + 16  DFF  /x_reg[1]<br />  (R) + 16  DFF  /CDN_MBIT_a_reg[1]_MB_a_reg[2]_MB_a_reg[3]_MB_a_reg[4]/U$1<br />35-th mapped points:<br />  (G) + 17  DFF  /x_reg[2]<br />  (R) + 17  DFF  /CDN_MBIT_a_reg[1]_MB_a_reg[2]_MB_a_reg[3]_MB_a_reg[4]/U$2<br />...</code></pre>
+<p>Names like <code>U$1</code> are pin names of the DFF cells referred by Conformal when creating mapping. Sometimes, it is useful to know which library pin a particular DFF instance is referencing, especially when dealing with multibit DFFs. You can use the <code>set gate report -USE_LIBRARY_PIN_NAME</code> command option before generating a report. With this option, Conformal uses the library pin name instead of the primitive name in a gate report, if the gate comes from the library.</p>
+<pre><code>
+LEC&gt; set gate report -USE_LIBRARY_PIN_NAME<br />LEC&gt; report mapped point -long<br />...</code></pre><pre><code>
+34-th mapped points:<br />  (G) + 16  DFF  /x_reg[1]<br />  (R) + 16  DFF  /CDN_MBIT_a_reg[1]_MB_a_reg[2]_MB_a_reg[3]_MB_a_reg[4]/Q1<br />35-th mapped points:<br />  (G) + 17  DFF  /x_reg[2]<br />  (R) + 17  DFF  /CDN_MBIT_a_reg[1]_MB_a_reg[2]_MB_a_reg[3]_MB_a_reg[4]/Q2<br />...</code></pre>
+<p>In the TCL mode, the command option will be:<br /><code>
+set_gate_report -USE_LIBRARY_PIN_NAME</code></p>
+
+<p>Note the following when using the <code>-USE_LIBRARY_PIN_NAME</code> option:</p>
+<ul><li>The option only affects the gate netlist and not the RTL because there are no library pins in the RTL to report.</li><li>This option affects all the report commands. For example, <code>report mapped point</code>, <code>report gate</code>, <code>report path</code>, <code>write map point</code>, and so on.</li><li>Use this option before saving a mapping file (<code>report mapped points -long</code>) for use in Voltus because the mapping file will contain the library pin name. However, this mapping file cannot be read back in Conformal.</li><li>This command option is available in Conformal version 15.10-s180 or later.</li></ul>
+<p>Conformal makes use of the <code>SET NAMING RULE</code> command to specify special text handling rules, such as hierarchical separators, tristate naming rules, register naming rules, array delimiters, instance names, or variable names. This command makes the mapping more run time efficient and reliable. However, these name changes can make the mapping file unusable.</p>
+
+<p>To resolve the issues with the mapping file, add the comment syntax to block of the code related to the <code>SET NAMING RULE</code> command in the Conformal script (and force LEC to map renamed signals by function, and not by names). Although this produces a usable mapping file, it leads to higher run time for Conformal.</p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Voltus_Use_Model_for_Leakage_Power_Scaling.html" id="prev" title="Voltus_Use_Model_for_Leakage_Power_Scaling">Voltus_Use_Model_for_Leakage_P ...</a></em></b><b><em><a href="File_Formats.html" id="nex" title="File_Formats">File_Formats</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

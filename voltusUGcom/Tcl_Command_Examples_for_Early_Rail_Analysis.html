@@ -1,0 +1,156 @@
+
+<html><head><title>Tcl Command Examples for Early Rail Analysis</title>
+<meta name="page_sequence" content="21008000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666128" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Tcl Command Examples for Early Rail Analysis" />
+<meta name="Keywords" content="ERA,tcl,region,current,instance,grid" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Early Rail Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666128" />
+<meta name="NextFile" content="Power-Grid_Library_Generation.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Viewing_Early_Rail_Analysis_Results.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Tcl Command Examples for Early Rail Analysis" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Viewing_Early_Rail_Analysis_Results.html" title="Viewing_Early_Rail_Analysis_Results">Viewing_Early_Rail_Analysis_Re ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Power-Grid_Library_Generation.html" title="Power-Grid_Library_Generation">Power-Grid_Library_Generation</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Tcl Command Examples for Early Rail Analysis</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="fontredcadence">
+<p>The following are the examples of Tcl command for Early Rail Analysis:</p>
+<h4 id="TclCommandExamplesforEarlyRailAnalysis-Example1:Region-basedPowerSpecification.1"><span class="confluence-anchor-link conf-macro output-inline"> </span>Example 1: Region-based Power Specification</h4>
+
+<p>An example Tcl command for the Floorplan stage design grid analysis with current regions is as follows:</p>
+<pre><code>read_physical -lefs design/full.lef<br />read_netlist design/test.v.gz -top test<br />init_design<br />read_def design/full.def</code><code>
+<strong>set_rail_analysis_config -method era_static -accuracy xd \<br />-extraction_tech_file design/tech.tch -era_current_region_file design/current_region</strong></code><code>
+set_pg_nets -net VDD -voltage 1.1 -threshold 1.067<br />set_power_pads -net VDD -format xy -file pads/vdd.pp<br />set_power_data -format area -power 1 -bias_voltage 1<br />report_rail -type net -output_dir early_vdd VDD</code></pre><h4 id="TclCommandExamplesforEarlyRailAnalysis-Example2:User-specifiedCurrentRegionsandInstancePowerFileforTotalPower"><span class="confluence-anchor-link conf-macro output-inline"> </span>Example 2: User-specified Current Regions and Instance Power File for Total Power</h4>
+
+<p>An example Tcl command for partially placed design grid analysis with user-defined macro power file is as follows:<code>
+set_pg_nets -net VSS -voltage 0.000 -threshold 0.020<br />set_power_pads -net VSS -format xy -file pads/VSS.pp<br /><strong>set_power_data -format area -bias_voltage 1 -power 1.5\ power/instance_power_file.txt</strong></code><code>
+</code><code>
+<strong>set_rail_analysis_config -method era_static -accuracy xd \<br />-extraction_tech_file design/tech.tch -era_current_region_file design/current_region<br /></strong></code><code>
+report_rail -type net -output_dir user_power_analysis VSS</code></p>
+<h4 id="TclCommandExamplesforEarlyRailAnalysis-Example3:AutogeneratedCurrentRegionsandInstancePowerFilefromTotalPower"><span class="confluence-anchor-link conf-macro output-inline"> </span>Example 3: Autogenerated Current Regions and Instance Power File from Total Power</h4>
+
+<p>An example Tcl command for partially placed design grid analysis with tool-generated power file is as follows:<br /><code>
+<strong>set_power_data -format area -power 1.5 -bias_voltage 1<br /></strong></code><code>
+<strong>set_rail_analysis_config -extraction_tech_file tech.tch -accuracy xd -ignore_shorts true \<br />-method era_static -era_current_distribution all -era_current_distribution_layer Metal1 \<br />-era_current_distribution_unplaced_area diearea <br /></strong></code></p>
+<pre><code>
+##When -era_current_distribution is set to all, the software will generate both the instance power file (for placed instances) and the current region file (for unplaced instances).</code></pre><pre><code>
+set_power_pads -net VDD_AO -format xy -file design/super_filter_VDD_AO.pp<br />set_power_pads -net VDD_SW -format xy -file design/super_filter_VDD_external.pp<br />set_power_pads -net VSS -format xy -file design/super_filter_VSS.pp</code><code>
+set_pg_nets -net VDD_AO -voltage 0.9 -threshold 0.85  -force<br />set_pg_nets -net VSS -voltage 0.0 -threshold 0.05  -force<br />set_rail_analysis_domain -domain_name core -power_nets { VDD_AO VDD_SW } -ground_nets VSS<br />report_rail -type domain -output_dir era_power_analysis core</code></pre><h4 id="TclCommandExamplesforEarlyRailAnalysis-Example4:PowerEngineCalculatedPower"><span class="confluence-anchor-link conf-macro output-inline"> </span>Example 4: Power Engine Calculated Power</h4>
+
+<p>An example Tcl command for fully placed design grid analysis is as follows:</p>
+<pre><code>set_db power_method static power_write_static_currents true<br />set_default_switching_activity -global_activity 0<br />set_dynamic_power_simulation -period 70ns -resolution 50ps<br /><strong>report_power<br />set_power_data -format current -scale 1 &quot;static_power/static_VDD_AO.ptiavg\ static_power/static_VDD_SW.ptiavg static_power/static_VSS.ptiavg</strong>&quot;</code><code>
+<strong>set_rail_analysis_config -power_grid_libraries tech.pgv -accuracy hd \<br />-ignore_shorts true -method era_static </strong></code></pre><pre><code>set_power_pads -net VDD_AO -format xy -file design/super_filter_VDD_AO.pp<br />set_power_pads -net VSS -format xy -file design/VSS.pp</code><code>
+set_pg_nets -net VDD_AO        -voltage 0.9 -threshold 0.85  -force<br />set_pg_nets -net VSS&#xa0;&#xa0;         -voltage 0.0 -threshold 0.05  -force</code><code>
+set_rail_analysis_domain -domain_name core -power_nets { VDD_AO VDD_SW } -ground_nets VSS<br />report_rail -type domain -output_dir power_engine_analysis core</code></pre><h4 id="TclCommandExamplesforEarlyRailAnalysis-AdditionalTclCommandExamplesforEarlyRailAnalysis"><span class="confluence-anchor-link conf-macro output-inline"> </span>Additional Tcl Command Examples for Early Rail Analysis</h4>
+<ul><li>An example Tcl command for Power Gate Design with auto area based power distribution for remaining placed and unplaced instances. Here user specified current regions and macro power is also specified for accounting for some instances of the design as follows:<br /><pre class="webflare-pre-block webflare-courier-new">read_db -physical_data design.dat CHIP
+set_pg_nets -net VDD -voltage 1.1 -threshold 0.9
+set_power_pads -net VDD -format xy -file design/vdd.pad
+set_power_data -bias_voltage 1.2 -power 1.2 -format area\ power/macro_power_file.txt
+<strong>set_rail_analysis_config -method era_static -accuracy xd \
+-extraction_tech_file design/tech.tech -era_power_switch_file design/power_gate_file\ 
+-era_current_region_file design/user_current_regions -era_current_distribution all \
+-era_current_distribution_layer M1
+</strong>report_rail -type net -output_dir mixed_power_analysis VDD</pre></li><li>An example Tcl command for static analysis, where ERA is also doing follow pin routing and virtual via generation is as follows:<br /><pre class="webflare-pre-block webflare-courier-new">read_db -physical_data design.dat CHIP
+<strong>set_rail_analysis_config -method era_static -accuracy xd  -extraction_tech_file tech.tch \
+-era_current_distribution_layer MET1 -era_current_distribution unplaced \
+-era_current_region_file power/cur_region -era_add_virtual_followpin standard \
+-era_skip_virtual_via_by_type none
+</strong>set_pg_nets -net VDD -voltage 1.1 -threshold 1.067
+set_power_data -format area -power 0.744 -bias_voltage 1.2\ power/cell_power.txt
+set_power_pads -net VDD -format xy -file pads/vdd.pp
+report_rail -type net -output_dir ./early_vdd VDD</pre></li><li>An example Tcl command for MSMV dynamic analysis is as follows:<br /><pre class="webflare-pre-block webflare-courier-new">read_netlist design/test.v.gz -top test
+init_design
+read_def design/full.def
+set_pg_nets -net VSS -voltage 0 -threshold 0.18
+set_pg_nets -net VDDm -voltage 0.84 -threshold 0.756
+set_pg_nets -net VDD -voltage 0.84 -threshold 0.756
+set_power_pads -net VDD -format xy -file design/vdd.pp
+set_power_pads -net VDDm -format xy -file design/vddm.pp
+set_power_pads -net VSS -format xy -file design/vss.pp
+set_power_data -format current { instance_current_files/dynamic_VSS.ptiavg\ instance_current_files/dynamic_VDD.ptiavg\ instance_current_files/dynamic_VDDm.ptiavg\ instance_current_files/dynamic_VDDlu.ptiavg\ instance_current_files/dynamic_VDDau.ptiavg}
+<strong>set_rail_analysis_config -method era_dynamic -accuracy xd \
+-power_grid_libraries { stdcells_accurate/accurate_stdcells.cl \ lpcells_accurate/accurate_stdcells.cl  memories_accurate/MEM.cl  } -exclude_nets VDDau
+
+</strong>set_rail_analysis_domain -domain_name PD -power_nets {VDD VDDm} -ground_nets VSS
+report_rail -type domain PD</pre></li></ul></span></p>
+<h4 id="TclCommandExamplesforEarlyRailAnalysis-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Setting_up_and_Running_Early_Rail_Analysis.html">Setting up and Running Early Rail Analysis</a></li><li><a href="Running_ERA_Using_the_GUI.html">Running ERA Using the GUI</a></li><li><a href="Early_Power-Grid_Analysis.html">Early Power-Grid Analysis</a></li></ul>
+<p><br /></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Viewing_Early_Rail_Analysis_Results.html" id="prev" title="Viewing_Early_Rail_Analysis_Results">Viewing_Early_Rail_Analysis_Re ...</a></em></b><b><em><a href="Power-Grid_Library_Generation.html" id="nex" title="Power-Grid_Library_Generation">Power-Grid_Library_Generation</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

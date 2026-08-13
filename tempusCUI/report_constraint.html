@@ -1,0 +1,860 @@
+
+<html><head><title>report_constraint</title>
+<meta name="page_sequence" content="37061000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287389" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="report_constraint" />
+<meta name="Keywords" content="constraint violation,report drv checks,report setup hold checks,report clock and asynchronous checks" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Timing Analysis," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287389" />
+<meta name="NextFile" content="report_cppr.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="report_clocks.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- report_constraint" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="report_clocks.html" title="report_clocks">report_clocks</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="report_cppr.html" title="report_cppr">report_cppr</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>report_constraint</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>report_constraint<span class="confluence-anchor-link" id="report_constraint-report_constraint"></span><span id="report_constraint-report_constraint"></span><br />[-all_violators]<br />[-late]<br />[-early]<br />[-em_type {peak | rms | avg | all}]<br />[-check_type { pulse_width | clock_period | recovery | removal | clock_gating_setup | clock_gating_hold | skew | pulse_clock_max_width | pulse_clock_min_width<span>&#xa0;|&#xa0;electromigration | </span><span>rail_swing</span>}]<br />[-clock]<br />[-connection_class]<br />[-data]<br /><code>[-drv_abs_margin&#xa0;<em>float</em>]</code><br /> [-drv_fields {<em>field_list</em>}]<br />[-drv_output_format {txt|csv}]<br /><code>[-drv_ratio_margin&#xa0;<em>float</em>]</code><br />[-drv_violation_type { max_capacitance | max_transition | max_fanout | min_capacitance | min_transition | min_fanout | pulse_clock_max_transition | pulse_clock_min_transition}]<br />[-max_pins_per_drv &lt;integer&gt;]<br />[-retime {aocv | path_slew_propagation | aocv_path_slew_propagation}]<br />[-retime_mode {path | exhaustive}]<br />[-view 
+        <em>viewName</em>
+      ]<br />[-worst_drv_per_net]<br />[<code><em>pin_port_list</em></code>]<br /><code>[-verbose]</code><br />[{&gt; | &gt;&gt;} filename[.gz]]</code></code></p>
+
+<p>Reports constraint information of current design. The constraints information includes information such as whether or not constraint is violated, by how much amount, and the worst violator object.</p>
+
+<p>The following timing checks are reported when you use the <code>report_constraint</code> command:</p>
+<ul><li>All setup and hold checks</li></ul><ul><li>DRV</li></ul><ul><li>Clock and asynchronous checks including pulse_width, min_period, recovery, removal, clock_gating_setup, clock_gating_hold, skew</li></ul>
+<p>You can specify the design rule constraints on pins, ports, cells, or a design using the commands:&#xa0;<code>set_min_fanout</code>, <code>set_max_fanout</code>, <code>set_min_transition</code>, <code>set_max_transition</code>, <code>set_min_capacitance</code>, and <code>set_max_capacitance</code>.</p>
+
+<p>The <code>report_constraint</code> command checks against the worst design rule constraint between the library constraint limit&#xa0;and the user-specified constraint value, when both are applied on the violating pin or port.</p>
+
+<p>The <code>report_constraint</code> command supports multi-threaded reporting. You can make the following settings to enable multi-threaded reporting:</p>
+
+<p><code>set_multi_cpu_usage -localCpu <em>number_of_CPU<br /></em>set_table_style -no_frame_fix_width [-nosplit]</code></p>
+
+<p>By default, the&#xa0;<code>report_constraint</code>&#xa0;command reports only the mean slews in transition DRV checks. You can enable DRV checking to use mean as well as the n-sigma&#xa0;slew&#xa0;values (in SOCV mode), with the following setting:<br /><code>set&#xa0;<a href="timing_Category_Attributes.html">timing_report_max_transition_check_using_nsigma_slew</a>&#xa0;true</code></p>
+<h4 id="report_constraint-ConfigurableDRVReports">Configurable DRV Reports</h4>
+
+<p>Tempus allows you to perform design rule violation (DRV) checks to ensure that the netlist meets the design rule constraints specified in the design library. To enable configurable DRV reporting, you can use the <code><a href="timing_Category_Attributes.html">timing_report_constraint_format</a></code> attribute. For example,</p>
+
+<p><code>set timing_report_constraint_format {<em>list of DRV fields</em>}</code><br /><code>report_constraint &#8211;drv_violation_type {<em>list of DRV checks</em>} \</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#8211;all_violators | pin_or_port_list</code></p>
+
+<p>You can also use the following command to specify DRV fields:</p>
+
+<p><code>report_constraint -drv_violation_type {<em>list of DRV checks</em>} -drv_fields <em>field_list</em></code></p>
+
+<p>The field list specified with the <code>-drv_fields</code> parameter has higher precedence and will override the field list specified with the <code>timing_report_constraint_format</code> global variable.&#xa0;If DRV fields are not specified with this global variable (or with the <code>report_constraint</code> <code>-drv_fields</code> command), then the default set of DRV fields will be displayed. For a complete list of DRV fields, refer to the <a href="#report_constraint-DRVFields">DRV Fields</a> table.</p>
+
+<p><span style="color:var(--ds-text,#000000);">For more information, refer to the <a class="message-url" href="../tempusCUIUG/analysisandreporting_drvreporting.html">Design Rule Violation (DRV) Reporting</a> section in the <em>Tempus Stylus User Guide</em>.</span></p>
+<h4 id="report_constraint-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="confluenceTable cadenceTable cadDefaultfont" id="cadDefaultfont" style="width: 720px;"><colgroup><col style="width: 300px;" /><col style="width: 340px;" /></colgroup><tbody><tr><td class="confluenceTd" style="width: 205.0px;" valign="top">
+<p><code>{&gt; | &gt;&gt;} </code><code><em>filename</em></code></p>
+</td>
+<td class="confluenceTd" style="width: 1122.0px;" valign="top">
+<p>When specified with <code>&gt;</code>, writes the report to the specified file name. If the file already exists, the software overwrites it.</p>
+
+<p>When specified with <code>&gt;&gt;</code>, writes the report to the specified file name. If the file already exists, the software concatenates the report to the end of the file.</p>
+
+<p>The <code><em>filename</em></code> parameter must be the last argument in the list.</p>
+
+<p><strong>Note: </strong>To write a compressed report, add the <code>.gz</code> extension to the file name.</p>
+
+<p><em>Default:</em> Report is displayed on standard output without being saved.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 205.0px;" valign="top">
+<p><code>-all_violators</code></p>
+</td>
+<td class="confluenceTd" style="width: 1122.0px;" valign="top">
+<p>Reports the worst negative slack per violating pin against all the timing and design rule constraint checks. For timing checks, the violations are reported at timing endpoints. The DRV is checked and reported on leaf pins and ports.</p>
+
+<p>The supported check types are:</p>
+<ul><li>setup</li></ul><ul><li>hold</li></ul><ul><li>clock_gating_setup</li></ul><ul><li>clock_gating_hold</li></ul><ul><li>recovery</li></ul><ul><li>removal</li></ul><ul><li>clock_period</li></ul><ul><li>pulse_width</li></ul><ul><li>max_capacitance</li></ul><ul><li>max_transition</li></ul><ul><li>max_fanout</li></ul><ul><li>min_capacitance</li></ul><ul><li>min_transition</li></ul><ul><li>min_fanout</li></ul><ul><li>skew</li></ul><ul><li>pulse_clock_max_width</li></ul><ul><li>pulse_clock_min_width</li></ul><ul><li>pulse_clock_max_transition</li></ul><ul><li>pulse_clock_min_transition</li></ul>
+<p>You can use the <code>-all_violators</code> parameter for reporting specific check types to generate report for that particular check type only. For example, you can use <code>-all_violators</code> with <code>-late</code> to report setup checks and path delays from set_max_delay.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 205.0px;" valign="top">
+<p><code>-check_type</code></p>
+</td>
+<td class="confluenceTd" style="width: 1122.0px;" valign="top">
+<p>Reports setup or hold checks. The supported check types are:</p>
+<ul><li><code>clock_gating_setup</code>: Reports only the paths that end at the clock_gating_setup timing check.</li></ul><ul><li><code>clock_gating_hold</code>: Reports only the paths that end at the clock_gating_hold timing check.</li><li><code>electromigration</code>:&#xa0;Reports signal EM analysis related violations.&#xa0;When high density current passes through a thin metal wire, the high energy electrons exert forces on atoms causing them to migrate. Electromigration (EM) can drastically reduce the lifetime of a chip by increasing the resistivity of a metal wire or creating a short circuit between adjacent lines. When this option is specified, the software reports standard cell level electromigration violations.</li></ul><ul><li><code>recovery</code>: Reports paths that end at the recovery timing check.</li></ul><ul><li><code>removal</code>: Reports paths that end at the removal timing check.<br />
+<p><strong>Note: </strong>The check types - recovery, removal, clock_gating_setup, and clock_gating_hold are also supported in AOCV mode.</p>
+</li></ul><ul><li><code>pulse_width</code>: Reports only the paths that end at the pulse_width timing check. <br />If you do not specify the <code>-all_violators</code> parameter, then the pulse_width option reports only one entry of the most critical pulse_width check. The DRV checks also report only the most critical entry.<br /><br />To report all the violated pulse_width checks, you need to specify <code>report_constraint -check_type </code><code>pulse_width </code><code>-all_violators</code> command (which is consistent with other check types of the <code>report_constraint</code> command).<br /><br />To report both violating and met entries, you can use the <code>report_min_pulse_width</code> command.</li></ul><ul><li><code>clock_period</code>: Reports only the paths that end at the clock_period timing check.</li></ul><ul><li><code>skew</code>: Reports skew checks. <br />The <code>report_constraint</code> command performs skew checks by default.<br /><span>Skew checks are implemented as setup checks that are reported in the late analysis or simultaneous mode. These checks are not reported in the early mode. Skew checks are performed assuming the signal and reference clocks have the same frequency. If the frequencies of the signal and reference clocks are different, a warning message is displayed.</span></li><li><code>pulse_clock_max_width</code>: Reports the maximum pulse clock width checks set using the set using <code><a href="set_pulse_clock_max_width.html">set_pulse_clock_max_width</a></code> command.</li><li><code>pulse_clock_min_width</code>: Reports the minimum pulse clock width checks.</li><li><code>rail_swing</code><span>: R</span><span>eports details related to the rail swing checks. </span><span>For rail swing check settings, you can use the following <span>attributes</span>:</span><ul><li><code><a href="timing_Category_Attributes.html">timing_rail_swing_checks_low_voltage_threshold</a></code></li><li><code><a href="timing_Category_Attributes.html">timing_rail_swing_checks_high_voltage_threshold</a></code></li></ul></li></ul></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 205.0px;">
+<p><code>-clock</code></p>
+</td>
+<td class="confluenceTd" style="width: 1122.0px;">
+<p>Specifies that the DRV checks will be restricted to the clock network. If any pin is part of both the clock and data network, it will be reported as a clock.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 205.0px;">
+<p><code>-connection_class</code></p>
+</td>
+<td class="confluenceTd" style="width: 1122.0px;">
+<p>Reports violations if the connection class attributes of the driving pin and receiving pin of a net are different.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="text-align: left;width: 205.0px;"><code>-data</code></td>
+<td class="confluenceTd" style="text-align: left;width: 1122.0px;">Specifies that the DRV check will be restricted to the data network. If any pin is part of both the clock and data network, it will be reported as a clock network pin.<br />By default, the DRV checks are applied to both clock and data networks.</td>
+</tr>
+<tr><td class="confluenceTd"><code>-drv_abs_margin <em>float</em></code></td>
+<td class="confluenceTd">
+<p>Specifies the absolute DRV margin value applied to obtain the threshold transition.&#xa0;</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-drv_fields {<em>field_list</em>}</code></td>
+<td class="confluenceTd">
+<p>Allows only the specified fields to be included in the DRV report - in the same order as defined.</p>
+
+<p>For a complete list of DRV fields, refer to the&#xa0;<a href="#report_constraint-DRVFields">DRV Fields</a>&#xa0;table.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-drv_output_format {txt | csv}</code></td>
+<td class="confluenceTd">
+<p>Specifies the DRV output format &#8211; txt or CSV. The default value is &#8220;txt&#8221;.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-drv_ratio_margin <em>float</em></code></td>
+<td class="confluenceTd">
+<p>Specifies the ratio of the DRV margin value applied to obtain the threshold transition.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 205.0px;" valign="top">
+<p><code>-drv_violation_type</code></p>
+</td>
+<td class="confluenceTd" style="width: 1122.0px;" valign="top">
+<p>Reports DRV violations. The supported DRV check types are:</p>
+<ul><li>max_capacitance: Reports pins having the worst <code>max_capacitance</code> constraint. If you specify the <code>-all_violators</code> parameter, you can see all the pins whose actual capacitance is greater than the <code>max_capacitance</code> value specified in library and timing constraints file.</li></ul><ul><li>min_capacitance: Reports pins having the worst <code>min_capacitance</code> constraint. If you specify the <code>-all_violators</code> parameter, you can see all the pins whose actual capacitance is less than the <code>min_capacitance</code> value specified in the library and timing constraints file.</li></ul><ul><li>max_transition: Reports pins having the worst <code>max_transition</code> constraint. If you specify the <code>-all_violators</code> parameter, you can see all the pins whose actual transition is greater than the <code>max_transition </code>value specified in the library and timing constraint file.
+<p><strong>Note: </strong>These checks are not reported in hold analysis mode. <span>The </span><code>set_si_mode -enable_drv_with_delta_slew true</code><span> setting is required for max_transition DRV violations with SI slew.</span></p>
+</li></ul><ul><li>min_transition: Reports pins having the worst <code>min_transition</code> constraint. If you specify the <code>-all_violators</code> parameter, you can see all the pins whose actual transition is less than the <code>min_transition</code> value specified in the library and timing constraints file.</li></ul><ul><li>max_fanout: Reports pins having the worst <code>max_fanout</code> constraint. If you specify the <code>-all_violators</code> parameter, you can see all the pins whose actual fanout is greater than the <code>max_fanout</code> value specified in the library and timing constraints file.</li></ul><ul><li>min_fanout: Reports pins having the worst <code>min_fanout</code> constraint. If you specify the <code>-all_violators</code> parameter, you can see all the pins whose actual fanout is less than the <code>min_fanout</code> value specified in the library and timing constraints file.</li></ul><ul><li>pulse_clock_max_transition: Reports maximum pulse clock transition checks.</li><li>pulse_clock_min_transition: Reports minimum pulse clock transition checks.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 205.0px;" valign="top">
+<p><code>-early</code></p>
+</td>
+<td class="confluenceTd" style="width: 1122.0px;" valign="top">
+<p>Reports all of the hold checks, including regular, clock_gating_hold, and data-to-data hold checks. Also reports path delays from set_min_delay.</p>
+
+<p><strong>Note: </strong>This parameter does not report removal checks.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-em_type {peak | rms | avg | all}</code>&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p>Reports DRV violations as per the specified EM type table lookup.</p>
+
+<p>When this parameter is specified, the software reads the em_max_toggle_rate table in the Liberty library for the specified EM current type (RMS, peak, or average).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 205.0px;" valign="top">
+<p><code>-late</code></p>
+</td>
+<td class="confluenceTd" style="width: 1122.0px;" valign="top">
+<p>Reports all of the setup checks, including regular, clock_gating_setup, and data-to-data setup checks. Also reports path delays from set_max_delay.</p>
+
+<p><strong>Note: </strong>This parameter does not report recovery checks.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 205.0px;">
+<p><code>-max_pins_per_drv</code></p>
+</td>
+<td class="confluenceTd" style="width: 1122.0px;">
+<p>Reports the specified number of top worst violations per DRV category, such as, max_transition, max_capacitance. If this parameter is not specified, then by default 1000 entries per DRV category will be reported.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 205.0px;" valign="top">
+<p><code><em>pin_port_list</em></code></p>
+</td>
+<td class="confluenceTd" style="width: 1122.0px;" valign="top">
+<p>Controls the output of DRV constraints. When specified, all DRV violations are reported for the specified pins or ports only.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1327.0px;"><code>-retime {aocv | path_slew_propagation | aocv_path_slew_propagation}</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 205.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1122.0px;">
+<p>Reanalyzes the specified set of paths using the specified method.</p>
+
+<p><strong>Note</strong>: The parameter supports setup/hold check types only.</p>
+
+<p><code>aocv</code>: Re-evaluates the given set of graph-based analysis (GBA) paths by reverting back graph-based AOCV derate factors and applying path- based AOCV derates instead of less pessimistic derates. In this case the slew (and respective delays) values are worst that are propagated during graph-based analysis.</p>
+
+<p><code>aocv_path_slew_propagation</code>: Re-evaluates the given set of graph-based analysis (GBA) paths by using path-based AOCV derates and delays using actual path- based propagated slew.</p>
+
+<p><code>path_slew_propagation</code>: Re-evaluates the given set of graph-based analysis (GBA) paths by recalculating the delay values based upon actual propagated slew across the path. In this case the AOCV derates are the ones that are reported during graph-based analysis.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 205.0px;"><code>-retime_mode {path | exhaustive}</code></td>
+<td class="confluenceTd" style="width: 1122.0px;">
+<p>Allows the&#xa0;<code>report_constraint</code>&#xa0;command to be run in exhaustive path-based analysis (PBA) mode.</p>
+
+<p>In this mode, the software will exhaustively examine nworst paths of the selected endpoints and then select the true worst path to be reported - based on retimed slacks of all the examined paths.</p>
+
+<p>To enable exhaustive mode, the use model is given below:</p>
+
+<p><code>report_constraint -all_violators -retime path_slew_propagation -retime_mode exhaustive</code></p>
+
+<p>When you use this parameter, reporting can be run time intensive as the software needs to do an exhaustive search for true worst paths. Therefore, it is recommended to use this option in the later phases of sign-off stage when there are very few violations left for analysis.</p>
+
+<p><em>Default</em>:&#xa0;<code>path</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 205.0px;"><code>-verbose</code></td>
+<td class="confluenceTd" style="width: 1122.0px;">
+<p>Generates a report that displays the full data path with the accompanying required time and slack calculation.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 205.0px;" valign="top">
+<p><code>-view </code><code><em>viewName</em></code></p>
+</td>
+<td class="confluenceTd" style="width: 1122.0px;" valign="top">
+<p>Generates a report containing endpoint and other constraint information for the specified analysis view.</p>
+
+<p>You can only specify this parameter when the software is in multi-mode multi-corner analysis mode.</p>
+
+<p><em>Default:</em> Generates a report containing the worst endpoint and constraint information based on all of the analysis views.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 205.0px;">
+<p><code>-worst_drv_per_net</code></p>
+</td>
+<td class="confluenceTd" style="width: 1122.0px;">
+<p>Reports only the worst DRV violation per net.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="report_constraint-DRVFields"><span class="confluence-anchor-link" id="report_constraint-DRVFields"></span></h4>
+<h4 id="report_constraint-DRVFields.1">DRV Fields</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd">
+<p><strong>Field Name</strong></p>
+</td>
+<td class="confluenceTd">
+<p><strong>Report Column</strong></p>
+</td>
+<td class="confluenceTd">
+<p><strong>Description</strong></p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>capacitance_actual</p>
+</td>
+<td class="confluenceTd">
+<p>Actual Capacitance</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the actual minimum or maximum capacitance at a pin or port. This field is used to determine the capacitance slack value.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>capacitance_slack</p>
+</td>
+<td class="confluenceTd">
+<p>Capacitance Slack</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the max_cap/min_cap slack at a pin or port.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>direction</p>
+</td>
+<td class="confluenceTd">
+<p>Direction</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the pin or port direction.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>driver_max_capacitance</p>
+</td>
+<td class="confluenceTd">
+<p>Driver Required Maximum Capacitance</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the max_capacitance limit at the driver pin or port.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>driver_max_fanout</p>
+</td>
+<td class="confluenceTd">
+<p>Driver Required Maximum Fanout</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the worst max_fanout limit on the driver pin or port.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>driver_max_transition</p>
+</td>
+<td class="confluenceTd">
+<p>Driver Required Maximum Transition</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the max_transition limit at the driver pin or port.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>driver_min_capacitance</p>
+</td>
+<td class="confluenceTd">
+<p>Driver Required Minimum Capacitance</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the min_capacitance limit at the driver pin or port.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>driver_min_transition</p>
+</td>
+<td class="confluenceTd">
+<p>Driver Required Minimum Transition</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the min_transition limit at the driver pin or port.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>driver_pin</p>
+</td>
+<td class="confluenceTd">
+<p>Driver</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the leaf driver pin or port name.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>driver_ref_cell</p>
+</td>
+<td class="confluenceTd">
+<p>Driver Libcell</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the leaf driver reference cell or port.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>driver_transition</p>
+</td>
+<td class="confluenceTd">
+<p>Driver Actual Transition</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the actual transition at driver pin or port.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>drv_source</p>
+</td>
+<td class="confluenceTd">
+<p>Source of DRV</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the source of the DRV constraint which is used for the DRV check. Reports &#39;library_constraint&#39; or &#39;user_constraint&#39; depending on which DRV violation check is used.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>edge</p>
+</td>
+<td class="confluenceTd">
+<p>Edge</p>
+</td>
+<td class="confluenceTd">
+<p>The signal transition direction on the net. Returns &quot;rise&quot; or &quot;fall&quot; if the DRV report corresponds to a rising or falling transition on the net.&#xa0;</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>fanout_actual</p>
+</td>
+<td class="confluenceTd">
+<p>Actual Fanout</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the actual minimum or maximum fanout at a pin or port. This field is used to determine the fanout slack value.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>fanout_slack</p>
+</td>
+<td class="confluenceTd">
+<p>Fanout Slack</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the max_fanout/min_fanout slack at a pin or port.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="text-align: left;">
+<p>hnet</p>
+</td>
+<td class="confluenceTd" style="text-align: left;">
+<p>Hierarchical Nets</p>
+</td>
+<td class="confluenceTd" style="text-align: left;">
+<p>Reports the hierarchical nets associated with violating pins.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>lib_constraint</p>
+</td>
+<td class="confluenceTd">
+<p>Library Constraint</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the value of the library constraint on the violating pin. If not defined, reports as &quot;NA&quot;.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>max_capacitance</p>
+</td>
+<td class="confluenceTd">
+<p>Required Capacitance</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the maximum capacitance limit for a pin.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>max_clock_frequency</p>
+</td>
+<td class="confluenceTd">
+<p>Frequency</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the frequency of the clock reported under the max_frequency_clock field.&#xa0;</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>max_fanout</p>
+</td>
+<td class="confluenceTd">
+<p>Required Fanout</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the maximum fanout limit for a pin.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>max_frequency_clock</p>
+</td>
+<td class="confluenceTd">
+<p>Maximum Frequency Clock</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the name of the highest frequency clock constraining the pin. For clock network pins, the fastest clock reaching the pin will be reported. For data network pins, the fastest launch clock reaching the pin will be reported.&#xa0;</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>max_slack</p>
+</td>
+<td class="confluenceTd">
+<p>Worst Setup Slack</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the worst setup slack through at a pin or port.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>max_transition</p>
+</td>
+<td class="confluenceTd">
+<p>Required Transition</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the maximum transition limit for a pin or port.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>min_capacitance</p>
+</td>
+<td class="confluenceTd">
+<p>Required Capacitance</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the minimum capacitance limit for a pin.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>min_fanout</p>
+</td>
+<td class="confluenceTd">
+<p>Required Fanout</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the minimum fanout limit for a pin.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>min_slack</p>
+</td>
+<td class="confluenceTd">
+<p>Worst Hold Slack</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the worst hold slack through at a pin or port.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>min_transition</p>
+</td>
+<td class="confluenceTd">
+<p>Required Transition</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the minimum transition limit for a pin or port.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>net</p>
+</td>
+<td class="confluenceTd">
+<p>Net</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the top flat net connected to violating pin (net name at topmost hierarchy) flat net.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>hnet</p>
+</td>
+<td class="confluenceTd">
+<p>Hierarchical Nets</p>
+</td>
+<td class="confluenceTd">
+<p>Reports hierarchical nets. When the <code>timing_enable_hierarchical_get_nets_support</code> attribute is set to <code>true</code>, the software enables support for displaying hierarchical net names.&#xa0;</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>net_fanout</p>
+</td>
+<td class="confluenceTd">
+<p>Net Fanout</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the number of leaf level load pins of the net connected to a pin or port.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>net_resistance</p>
+</td>
+<td class="confluenceTd">
+<p>NetResistance</p>
+</td>
+<td class="confluenceTd">
+<p>Resistance of the net connected to a pin or port.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>net_type</p>
+</td>
+<td class="confluenceTd">
+<p>Net Type</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies one or more of the following identifiers to indicate a special net:</p>
+<ul><li>ideal: the net is marked ideal using the set_ideal_network command</li><li>clock:&#xa0; the net is part of a clock network</li><li>constant: the net is tied to logic 1/0 respectively</li><li>multidriven: the net has multiple driver</li><li>dont_touch: the net is marked as dont_touch using set_dont_touch command</li><li>&quot; -&quot;: None of the above</li></ul></td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>partition</p>
+</td>
+<td class="confluenceTd">
+<p>Partition</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the name of the SPEF hierarchy the violating pin appears in.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>pin</p>
+</td>
+<td class="confluenceTd">
+<p>Pin</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the pin or port on which DRV check is performed.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>pin_type</p>
+</td>
+<td class="confluenceTd">
+<p>Type</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies whether the pin/port is a data or a clock pin/port. Any clock network pin will be reported as CLOCK. Any pin that belongs to only data network will be reported as DATA. If a pin/port belongs to both data and clock networks, it will be reported as CLOCK.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>receiver_max_transition</p>
+</td>
+<td class="confluenceTd">
+<p>Receiver Required Maximum Transition</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the max_transition limit at a receiver pin or port.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>receiver_pin</p>
+</td>
+<td class="confluenceTd">
+<p>Receiver</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the leaf receiver pin name.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>receiver_ref_cell</p>
+</td>
+<td class="confluenceTd">
+<p>Receiver Libcell</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the leaf reference cell name of a receiver pin.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>receiver_transition</p>
+</td>
+<td class="confluenceTd">
+<p>Receiver Actual Transition</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the actual transition at a receiver pin or port.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>ref_cell</p>
+</td>
+<td class="confluenceTd">
+<p>Violating Libcell</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the reference library cell the violating pin is attached to.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>sequential</p>
+</td>
+<td class="confluenceTd">
+<p>Sequential</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies if the pin belongs to a sequential cell or a combinational cell. For ports, the report will show &quot;false&quot;.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>total_capacitance</p>
+</td>
+<td class="confluenceTd">
+<p>TotalCapacitance</p>
+</td>
+<td class="confluenceTd">
+<p>Total capacitance of the net connected to a pin or port.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>transition_actual</p>
+</td>
+<td class="confluenceTd">
+<p>Actual Transition</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the actual minimum/maximum transition at a pin or port. This can be base transition or base plus crosstalk-induced transition depending on the timing_max_transition_use_si_transition setting to false (default) or true, respectively.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>transition_si</p>
+</td>
+<td class="confluenceTd">
+<p>SI Transition</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies only the delta SI transition time at a pin or port.</p>
+
+<p>The total transition time comprises of the base transition time (transition value without SI crosstalk analysis) as well as delta SI transition time.&#xa0;</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>transition_sigma</p>
+</td>
+<td class="confluenceTd">
+<p>Transition N-Sigma</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the N-Sigma multiplier defined for transition with the <code><a href="../tempusCUI/set_socv_reporting_nsigma_multiplier.html" rel="nofollow">set_socv_reporting_nsigma_multiplier</a> -transition</code> &lt;<em>nsigma</em>&gt; command.</p>
+
+<p>This field will be reported for SOCV STA, under the <code><a href="../tempusCUI/timing_Category_Attributes.html" rel="nofollow">timing_report_max_transition_check_using_nsigma_slew</a></code>&#xa0;to <code>true</code> setting.</p>
+
+<p>This is sensitive to views and -data and -clock specification.</p>
+
+<p><strong>Note</strong>: This field will impact transition_actual and transition_slack computation for max_transition, min_transition, pulse_clock_max_transition, and pulse_clock_min_transition checks.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>transition_slack</p>
+</td>
+<td class="confluenceTd">
+<p>Transition Slack</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the max_transition/min_transition slack at a pin/port pin/port.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>user_constraint</p>
+</td>
+<td class="confluenceTd">
+<p>User Constraint</p>
+</td>
+<td class="confluenceTd">
+<p>Specifies user defined tran/cap/fanout limit value set by constraints as command or through SDC on the violating pin. If not defined, reports as &quot;NA&quot;.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>view</p>
+</td>
+<td class="confluenceTd">
+<p>View</p>
+</td>
+<td class="confluenceTd">
+<p>Name of the pertaining analysis view.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="report_constraint-Examples">Examples</h4>
+<ul><li>The following command reports the worst negative slack per violating pin under pulse width checks:
+<p><code>tempus &gt; report_constraint &#xa0;FE_C9/A -all_violators -check_type pulse_width&#xa0;</code><br /><br /><code># format : frame 0 : split 0</code><br /><code>**WARN: (TCLCMD-1470): &#xa0; &#xa0;Pins/ports are only supported with &#39;-drv_violation_type&#39; option</code></p>
+
+<p><code>Check type : pulse_width</code><br /><code>---------------------------</code><br /><code>--------------------------------------------------------------------------------------&#xa0;&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;SEQUENTIAL CLOCK PULSE WIDTH &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;</code><br /><code>--------------------------------------------------------------------------------------&#xa0;&#xa0;</code><br /><code>Pin&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Required &#xa0; &#xa0; Actual Pulse&#xa0; &#xa0; Slack&#xa0; &#xa0; &#xa0; View Name &#xa0; &#xa0; &#xa0; &#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Pulse Width &#xa0; &#xa0; &#xa0;Width &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;&#xa0;</code><br /><code>--------------------------------------------------------------------------------------&#xa0;</code><br /><code>RM_25_TS_INST/RM_25_INST/CLK (high)&#xa0; 0.061 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;-0.788&#xa0; &#xa0; &#xa0; &#xa0;-0.849&#xa0; &#xa0; &#xa0;func_RCMAX</code><br /><code>DGINST/out_reg[4]/CK (low)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.017 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;1.514&#xa0; &#xa0; &#xa0; &#xa0; -0.503&#xa0; &#xa0; &#xa0;func_RCMAX</code><br /><code>DGINST/out_reg[3]/CK (low)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.017 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;1.514&#xa0; &#xa0; &#xa0; &#xa0; -0.503&#xa0; &#xa0; &#xa0;func_RCMAX</code><br /><code>DGINST/out_reg[2]/CK (low)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.017 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;1.519&#xa0; &#xa0; &#xa0; &#xa0; -0.499&#xa0; &#xa0; &#xa0;func_RCMAX</code><br /><code>DGINST/out_reg[6]/CK (low)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.017 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;1.519&#xa0; &#xa0; &#xa0; &#xa0; -0.499&#xa0; &#xa0; &#xa0;func_RCMAX</code></p>
+</li><li>
+<p>The following command reports violations if the connection class attributes of the driving pin and receiving pin of a net are different:<br /><code>tempus &gt; report_constraint &#xa0;-connection_class -early -verbose &#xa0;-view scan_slow_RCMAX</code><br /><br /><code># format : frame 0 : split 0</code></p>
+
+<p><code>min_delay/hold</code><br /><code>---------------------------</code><br /><code>Path 1: VIOLATED (-1.094 ns) Hold Check with Pin TP_CORE/data_out_reg[3]/CK-&gt;SI</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;View: scan_slow_RCMAX</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Group: m_clk</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Startpoint: (R) scan_in2</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Clock: (R) m_clk</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Endpoint: (R) TP_CORE/data_out_reg[3]/SI</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Clock: (R) m_clk</code></p>
+
+<p><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Capture &#xa0; &#xa0; &#xa0; Launch</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Clock Edge:+ &#xa0; &#xa0;0.000 &#xa0; &#xa0; &#xa0; &#xa0;0.000</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; Src Latency:+ &#xa0; &#xa0;0.000 &#xa0; &#xa0; &#xa0; &#xa0;0.000</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; Net Latency:+ &#xa0; &#xa0;4.571 (P) &#xa0; &#xa0;0.000 (I)</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Arrival:= &#xa0; &#xa0;4.571 &#xa0; &#xa0; &#xa0; &#xa0;0.000</code></p>
+
+<p><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Hold:+ &#xa0; -0.052</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; Uncertainty:+ &#xa0; &#xa0;0.600</code><br /><code>&#xa0; &#xa0; &#xa0; Required Time:= &#xa0; &#xa0;5.118</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0;Launch Clock:= &#xa0; &#xa0;0.000</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; Input Delay:+ &#xa0; &#xa0;4.000</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Data Path:+ &#xa0; &#xa0;0.024</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Slack:= &#xa0; -1.094</code></p>
+
+<p><code>#--------------------------------------------------------------</code><br /><code># Pin&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Cell &#xa0; &#xa0; &#xa0; &#xa0;Delay&#xa0; &#xa0;Arrival&#xa0; &#xa0; Edge &#xa0;</code><br /><code>#&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(ns)&#xa0; &#xa0; (ns) &#xa0; &#xa0;</code><br /><code>#--------------------------------------------------------------</code><br /><code>scan_in2&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(arrival)&#xa0; &#xa0; &#xa0;-&#xa0; &#xa0; &#xa0; 4.000&#xa0; &#xa0; &#xa0; &#xa0;R &#xa0;</code><br /><code>TP_CORE/data_out_reg[3]/SI SDFFR_X1 &#xa0; &#xa0;0.024&#xa0; &#xa0;4.024&#xa0; &#xa0; &#xa0; &#xa0;R &#xa0;</code><br /><code>#--------------------------------------------------------------</code></p>
+
+<p><code>Check type : connection_class</code><br /><code>---------------------------</code><br /><code>&#xa0; &#xa0; **INFO: No connection_class information found for given parameters</code></p>
+</li><li>Consider a design having 3 sequential endpoints:</li></ul><ul><ul><li>setup_pin: Having a setup check with slack equal to -9.000</li></ul></ul><ul><ul><li>recovery_pin: Having a recovery check with slack equal to -8.000</li></ul></ul><ul><ul><li>both_setup_recovery_pin: Having both setup check (slack = -6.000) and recovery check (slack = -7.000)&#xa0;<br />In this case, the&#xa0;<code>report_constraint -late -all_violators</code>&#xa0;command will display the following output:<br /><br /><code>max_delay/setup</code>&#xa0;<br /><code>-------------------------------------------------</code>&#xa0;<br /><code>End Point &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Slack &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Cause</code>&#xa0;<br /><code>--------------------------------------------------</code>&#xa0;<br /><code>setup_pin f &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; -9.000 &#xa0; &#xa0; &#xa0; &#xa0; VIOLATED</code>&#xa0;<br /><code>both_setup_recovery_pin &#xa0; -6.000 &#xa0; &#xa0; &#xa0; &#xa0; VIOLATED</code>&#xa0;<br /><code>--------------------------------------------------</code></li></ul></ul><ul><li>The&#xa0;<code>report_constraint -check_type recovery -all_violators</code>&#xa0;command will display the following output:<br /><code>Check type : recovery</code>&#xa0;<br /><code>----------------------------------------------------</code>&#xa0;<br /><code>End Point &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Slack &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Cause</code>&#xa0;<br /><code>----------------------------------------------------</code>&#xa0;<br /><code>recovery_pin r &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; -8.000 &#xa0; &#xa0; &#xa0; &#xa0; VIOLATED</code>&#xa0;<br /><code>both_setup_recovery_pin &#xa0; &#xa0; &#xa0;-7.000 &#xa0; &#xa0; &#xa0; &#xa0; VIOLATED</code>&#xa0;<br /><code>-----------------------------------------------------</code></li></ul><ul><li>The&#xa0;<code>report_constraint -late -check_type recovery -all_violators</code>&#xa0;command displays the following output:<br /><code>max_delay/setup</code>&#xa0;<br /><code>--------------------------------------------------</code>&#xa0;<br /><code>End Point &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Slack &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Cause</code>&#xa0;<br /><code>---------------------------------------------------</code>&#xa0;<br /><code>setup_pin f &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; -9.000 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;VIOLATED</code>&#xa0;<br /><code>recovery_pin r &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;-8.000 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;VIOLATED</code>&#xa0;<br /><code>both_setup_recovery_pin &#xa0; -7.000 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;VIOLATED</code>&#xa0;<br /><code>----------------------------------------------------</code></li></ul><ul><li>The&#xa0;<code>report_constraint</code>&#xa0;command displays the following output:<br /><code>max_delay/setup</code>&#xa0;<br /><code>-------------------------------------------------</code>&#xa0;<br /><code>End Point &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Slack &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Cause</code>&#xa0;<br /><code>---------------------------------------------------</code>&#xa0;<br /><code>out2 r &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;-4111.834 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; VIOLATED</code>&#xa0;<br /><code>---------------------------------------------------</code>&#xa0;<br /><code>Check type : clock_period</code>&#xa0;<br /><code>---------------------------</code>&#xa0;<br /><code>No paths found</code>&#xa0;<br /><code>Check type : pulse_width</code>&#xa0;<br /><code>-------------------------------------------------------------</code>&#xa0;<br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; SEQUENTIAL CLOCK PULSE WIDTH</code>&#xa0;<br /><code>-------------------------------------------------------------</code>&#xa0;<br /><code>Pin&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Required &#xa0; &#xa0; &#xa0; &#xa0; Actual Pulse &#xa0; &#xa0; &#xa0; &#xa0; Slack</code>&#xa0;<br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Pulse Width &#xa0; &#xa0; &#xa0;Width</code>&#xa0;<br /><code>-------------------------------------------------------------</code>&#xa0;<br /><code>dff2/CK (low)&#xa0;&#xa0;&#xa0;0.260 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;-670.800 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;-671.060</code>&#xa0;<br /><code>-------------------------------------------------------------</code>&#xa0;<br /><code>Check type : max_transition</code>&#xa0;<br /><code>---------------------------</code>&#xa0;<br /><code>Pin : sub1/dff1/D</code>&#xa0;<br /><code>max_transition : 4.500</code>&#xa0;<br /><code>Transition Time: 5114.060</code>&#xa0;<br /><code>-------------------------------------------------</code>&#xa0;<br /><code>slack: -5109.560 (VIOLATED)</code>&#xa0;<br /><code>Check type : max_capacitance</code>&#xa0;<br /><code>---------------------------</code>&#xa0;<br /><code>Pin : buf133/Y</code>&#xa0;<br /><code>max_capacitance: 0.000</code>&#xa0;<br /><code>-Capacitance : 0.423</code>&#xa0;<br /><code>----------------------------</code>&#xa0;<br /><code>slack : -0.423 (VIOLATED)</code>&#xa0;<br /><code>Check type : max_fanout</code>&#xa0;<br /><code>---------------------------</code>&#xa0;<br /><code>Pin : specialClkGate/o</code>&#xa0;<br /><code>max_fanout : 0.557</code>&#xa0;<br /><code>fanout : 1.000</code>&#xa0;<br /><code>---------------------------</code>&#xa0;<br /><code>slack : -0.443 ( VIOLATED )</code></li></ul><ul><li>The&#xa0;<code>report_constraint -all_violators</code>&#xa0;command displays the following output:<br /><code>max_delay/setup<br /></code><br /><code>---------------------------------------------------------</code>&#xa0;<br /><code>End Point &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Slack &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Cause</code>&#xa0;<br /><code>---------------------------------------------------------</code>&#xa0;<br /><code>out2 r &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;-4111.834 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; VIOLATED</code>&#xa0;<br /><code>dff3/D r &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;-4110.260 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; VIOLATED</code>&#xa0;<br /><code>lat2/D r &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;-3774.174&#xa0;&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;&#xa0;VIOLATED</code>&#xa0;<br /><code>dff2/D r &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;-3770.285&#xa0;&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;&#xa0;VIOLATED</code>&#xa0;<br /><code>out r &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; -3161.115&#xa0;&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;&#xa0;VIOLATED</code>&#xa0;<br /><code>and1/B r &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;-2464.880&#xa0;&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;&#xa0;VIOLATED</code>&#xa0;<br /><code>dff1/D r &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;-2098.868 &#xa0;&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;VIOLATED</code>&#xa0;<br /><code>sub2/bufH1/dff1/D r &#xa0; &#xa0; -2098.821 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; VIOLATED</code>&#xa0;<br /><code>sub2/bufH2/dff1/D r &#xa0; &#xa0; -2028.843 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; VIOLATED</code>&#xa0;<br /><code>sub1/dff1/D r &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; -2028.843 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; VIOLATED</code>&#xa0;<br /><code>dff5/D r &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;-1279.155 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; VIOLATED</code>&#xa0;<br /><code>---------------------------------------------------------</code>&#xa0;<br /><code>Check type : clock_period</code>&#xa0;<br /><code>---------------------------</code>&#xa0;<br /><code>No paths found</code>&#xa0;<br /><code>Check type : skew</code>&#xa0;<br /><code>---------------------------</code>&#xa0;<br /><code>No paths found</code>&#xa0;<br /><code>Check type : pulse_width</code>&#xa0;<br /><code>-------------------------------------------------------------</code>&#xa0;<br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;SEQUENTIAL CLOCK PULSE WIDTH&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;</code>&#xa0;<br /><code>--------------------------------------------------------------</code>&#xa0;<br /><code>Pin&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Required&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Actual Pulse &#xa0; &#xa0; Slack</code>&#xa0;<br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Pulse Width&#xa0;&#xa0;&#xa0;Width</code>&#xa0;<br /><code>-------------------------------------------------------------</code>&#xa0;<br /><code>dff2/CK (low)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0.260&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;-670.800 &#xa0; &#xa0; &#xa0; &#xa0;-671.060</code>&#xa0;<br /><code>lat2/GN (low)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0.201&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;-670.800 &#xa0; &#xa0; &#xa0; &#xa0;-671.001</code>&#xa0;<br /><code>sub2/bufH1/dff1/CK (high)&#xa0;&#xa0;&#xa0;0.167&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;-670.800 &#xa0; &#xa0; &#xa0; &#xa0;-670.968</code>&#xa0;<br /><code>dff1/CK (high) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.167&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;-670.800 &#xa0; &#xa0; &#xa0; &#xa0;-670.968</code>&#xa0;<br /><code>sub2/bufH2/dff1/CK (high) &#xa0; 0.167&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;-670.800 &#xa0; &#xa0; &#xa0; &#xa0;-670.968</code>&#xa0;<br /><code>sub1/dff1/CK (high) &#xa0; &#xa0; &#xa0; &#xa0; 0.167&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;-670.800 &#xa0; &#xa0; &#xa0; &#xa0;-670.968</code>&#xa0;<br /><code>dff11/CK (high) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.167&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;-670.800 &#xa0; &#xa0; &#xa0; &#xa0;-670.968</code>&#xa0;<br /><code>-----------------------------------------------------------------</code>&#xa0;<br /><code>Check type : max_transition</code>&#xa0;<br /><code>-----------------------------------------------------------------</code>&#xa0;<br /><code>Pin Name&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Required &#xa0; &#xa0; &#xa0; Actual &#xa0; &#xa0; &#xa0; &#xa0; Slack</code>&#xa0;<br /><code>-----------------------------------------------------------------</code>&#xa0;<br /><code>and_parallel_1/A&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;4.500 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;5114.060 &#xa0; &#xa0; &#xa0;-5109.560</code>&#xa0;<br /><code>buf4/A&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;4.500 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;5114.060 &#xa0; &#xa0; &#xa0;-5109.560</code>&#xa0;<br /><code>sub1/dff1/D&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;4.500 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;5114.060 &#xa0; &#xa0; &#xa0;-5109.560</code>&#xa0;<br /><code>Check type : max_capacitance</code>&#xa0;<br /><code>--------------------------------------------------------------</code>&#xa0;<br /><code>Pin Name&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Required &#xa0; &#xa0; &#xa0; &#xa0;Actual &#xa0; &#xa0; &#xa0;Slack</code>&#xa0;<br /><code>-------------------------------------------------------------</code>&#xa0;<br /><code>buf133/Y&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0.000 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.423 &#xa0; &#xa0; &#xa0; -0.423</code>&#xa0;<br /><code>buf11/Y&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0.000 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.105 &#xa0; &#xa0; &#xa0; -0.105</code>&#xa0;<br /><code>buf5/Y&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0.000 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.105 &#xa0; &#xa0; &#xa0; -0.105</code>&#xa0;<br /><code>dff11/Q&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0.000 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.105 &#xa0; &#xa0; &#xa0; -0.105</code>&#xa0;<br /><code>Check type : max_fanout</code>&#xa0;<br /><code>--------------------------------------------------------------</code>&#xa0;<br /><code>Pin Name&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Required &#xa0; &#xa0; &#xa0; &#xa0;Actual &#xa0; &#xa0; &#xa0;Slack</code>&#xa0;<br /><code>-------------------------------------------------------------</code>&#xa0;<br /><code>specialClkGate/o&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0.557 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 1.000 &#xa0; &#xa0; &#xa0; -0.443</code></li></ul><ul><li>The&#xa0;<code>report_constraint -all_violators -drv_violation_type min_capacitance</code>&#xa0;command reports the following:<br /><code>-----------------------------------------------</code>&#xa0;<br /><code>Pin Name &#xa0; &#xa0;Required &#xa0; &#xa0; Actual &#xa0; &#xa0; &#xa0; Slack</code>&#xa0;<br /><code>-----------------------------------------------</code>&#xa0;<br /><code>DIN &#xa0; &#xa0; &#xa0; &#xa0;0.0400 &#xa0; &#xa0; &#xa0; &#xa0;0.0013 &#xa0; &#xa0; &#xa0; -0.0387</code>&#xa0;<br /><code>F2/Q &#xa0; &#xa0; &#xa0; 0.0400 &#xa0; &#xa0; &#xa0; &#xa0;0.0013 &#xa0; &#xa0; &#xa0; -0.0387</code>&#xa0;<br /><code>CLK1 &#xa0; &#xa0; &#xa0; 0.0400 &#xa0; &#xa0; &#xa0; &#xa0;0.0051 &#xa0; &#xa0; &#xa0; -0.0349</code></li></ul><ul><li>The&#xa0;<code>report_constraint -drv_violation_type min_capacitance</code>&#xa0;command outputs the following:<br /><code>Check type : min_capacitance</code>&#xa0;<br /><code>---------------------------</code>&#xa0;<br /><code>Pin : F2/Q</code>&#xa0;<br /><code>Capacitance: 0.0013</code>&#xa0;<br /><code>- min_capacitance: 0.0400</code>&#xa0;<br /><code>-----------------------------------------------------</code>&#xa0;<br /><code>slack: -0.0387 ( VIOLATED )</code></li></ul><ul><li>The&#xa0;<code>report_constraint -all_violators -drv_violation_type min_transition</code>&#xa0;command outputs the following:<br /><code>-----------------------------------------------</code>&#xa0;<br /><code>Pin Name &#xa0; &#xa0;Required &#xa0; &#xa0; &#xa0;Actual &#xa0; &#xa0; &#xa0;Slack</code>&#xa0;<br /><code>----------------------------------------------</code>&#xa0;<br /><code>I0/A &#xa0; &#xa0; &#xa0; 0.0300 &#xa0; &#xa0; &#xa0; &#xa0;0.0001 &#xa0; &#xa0; &#xa0; -0.0299</code>&#xa0;<br /><code>I1/A &#xa0; &#xa0; &#xa0; 0.0300 &#xa0; &#xa0; &#xa0; &#xa0;0.0001 &#xa0; &#xa0; &#xa0; -0.0299</code>&#xa0;<br /><code>CLK0 &#xa0; &#xa0; &#xa0; 0.0300 &#xa0; &#xa0; &#xa0; &#xa0;0.0001 &#xa0; &#xa0; &#xa0; -0.0299</code>&#xa0;<br /><code>CLK1 &#xa0; &#xa0; &#xa0; 0.0300 &#xa0; &#xa0; &#xa0; &#xa0;0.0001 &#xa0; &#xa0; &#xa0; -0.0299</code>&#xa0;<br /><code>DIN &#xa0; &#xa0; &#xa0; &#xa0;0.0300 &#xa0; &#xa0; &#xa0; &#xa0;0.0001 &#xa0; &#xa0; &#xa0; -0.0299</code>&#xa0;<br /><code>I4/S0 &#xa0; &#xa0; &#xa0;0.0300 &#xa0; &#xa0; &#xa0; &#xa0;0.0001 &#xa0; &#xa0; &#xa0; -0.0299</code>&#xa0;<br /><code>F1/DATA &#xa0; &#xa0;0.0300 &#xa0; &#xa0; &#xa0; &#xa0;0.0001 &#xa0; &#xa0; &#xa0; -0.0299</code>&#xa0;<br /><code>SEL &#xa0; &#xa0; &#xa0; &#xa0;0.0300 &#xa0; &#xa0; &#xa0; &#xa0;0.0001 &#xa0; &#xa0; &#xa0; -0.0299</code></li></ul><ul><li>The&#xa0;<code>report_constraint -drv_violation_type min_transition</code>&#xa0;command outputs the following:<br /><code>Check type : min_transition</code>&#xa0;<br /><code>---------------------------</code>&#xa0;<br /><code>Pin : F1/DATA</code>&#xa0;<br /><code>&#xa0;</code>&#xa0;<br /><code>Transition Time:0.0001</code>&#xa0;<br /><code>- min_transition :0.0300</code>&#xa0;<br /><code>-----------------------------------------------------</code>&#xa0;<br /><code>slack : -0.0299 ( VIOLATED )</code></li></ul><ul><li>The&#xa0;<code>report_constraint -all_violators -drv_violation_type min_fanout</code>&#xa0;command outputs the following:<br /><code>----------------------------------------------------</code>&#xa0;<br /><code>Pin Name &#xa0; &#xa0;Required &#xa0; &#xa0; &#xa0; Actual &#xa0; &#xa0; &#xa0; &#xa0;Slack</code>&#xa0;<br /><code>----------------------------------------------------</code>&#xa0;<br /><code>F5/Q &#xa0; &#xa0; &#xa0; 2.0000 &#xa0; &#xa0; &#xa0; &#xa0; 0.0000 &#xa0; &#xa0; &#xa0; &#xa0; -2.0000</code>&#xa0;<br /><code>CLK0 &#xa0; &#xa0; &#xa0; 2.0000 &#xa0; &#xa0; &#xa0; &#xa0; 1.0000 &#xa0; &#xa0; &#xa0; &#xa0; -1.0000</code>&#xa0;<br /><code>F3/Q &#xa0; &#xa0; &#xa0; 2.0000 &#xa0; &#xa0; &#xa0; &#xa0; 1.0000 &#xa0; &#xa0; &#xa0; &#xa0; -1.0000</code>&#xa0;<br /><code>F2/Q &#xa0; &#xa0; &#xa0; 2.0000 &#xa0; &#xa0; &#xa0; &#xa0; 1.0000 &#xa0; &#xa0; &#xa0; &#xa0; -1.0000</code>&#xa0;<br /><code>F1/Q &#xa0; &#xa0; &#xa0; 2.0000 &#xa0; &#xa0; &#xa0; &#xa0; 1.0000 &#xa0; &#xa0; &#xa0; &#xa0; -1.0000</code>&#xa0;<br /><code>SEL &#xa0; &#xa0; &#xa0; &#xa0;2.0000 &#xa0; &#xa0; &#xa0; &#xa0; 1.0000 &#xa0; &#xa0; &#xa0; &#xa0; -1.0000</code>&#xa0;<br /><code>CLK1 &#xa0; &#xa0; &#xa0; 2.0000 &#xa0; &#xa0; &#xa0; &#xa0; 1.0000 &#xa0; &#xa0; &#xa0; &#xa0; -1.0000&#xa0;</code></li><li>The&#xa0;<code>report_constraint -drv_violation_type min_fanout</code>&#xa0;command outputs the following:<br /><code>Check type : min_fanout</code>&#xa0;<br /><code>---------------------------</code>&#xa0;<br /><code>Pin : F5/Q</code>&#xa0;<br /><code>Fanout: 0.0000</code>&#xa0;<br /><code>- min_fanout: 2.0000</code>&#xa0;<br /><code>-------------------------------</code>&#xa0;<br /><code>slack : -2.0000 ( VIOLATED )</code></li><li>
+<p>The&#xa0;<code>report_constraint -check_type clock_period</code>&#xa0;command reports the following:</p>
+
+<p><code>Check type : clock_period</code><br /><code>---------------------------------------------------------</code><br /><code>End Point&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Slack&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Cause</code><br /><code>---------------------------------------------------------</code><br /><code>ffo_ram/mm0/mm1/CLKB f&#xa0;&#xa0; -0.027&#xa0;&#xa0;&#xa0;&#xa0; VIOLATED</code><br /><code>---------------------------------------------------------</code></p>
+</li><li>The following example illustrates how to restrict the number of DRV violations to display for each of the specified DRV checks:&#xa0;<br />
+<p><code>report_constraint -drv_violation_type {max_transition max_capacitance} -drv_fields {max_transition transition_actual transition_slack max_capacitance capacitance_actual capacitance_slack max_slack net &#xa0;max_frequency_clock max_clock_frequency pin_type ref_cell driver_pin pin} -all_violators -max_pins_per_drv 6</code><br /><code>###############################################################</code><br /><code># format : frame 0 : split 0</code><br /><code># Units: Time (1ns), Capacitance (1pf), Frequency (1MHz).</code><br /><code>Check type : max_transition</code><br /><code>---------------------------</code><br /><code>----------------------------------------------------------------------------------------------------------------------<br /></code><code>Required&#xa0; &#xa0; &#xa0;Actual&#xa0; &#xa0; &#xa0; &#xa0;Transition&#xa0; &#xa0;Worst&#xa0; &#xa0; &#xa0;Net &#xa0; &#xa0;Maximum&#xa0; &#xa0; &#xa0;Frequency&#xa0; &#xa0;Pin &#xa0; &#xa0; Violating&#xa0; &#xa0; Driver &#xa0; &#xa0;Pin<br /></code><code>Transition&#xa0; &#xa0;Transition&#xa0; &#xa0;Slack&#xa0; &#xa0; &#xa0; &#xa0; Setup&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Frequency&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Type &#xa0; &#xa0;Libcell<br /></code><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Slack&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Clock<br /></code><code>----------------------------------------------------------------------------------------------------------------------<br /></code><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.120&#xa0; &#xa0; &#xa0; &#xa0; -0.118&#xa0; &#xa0; &#xa0; &#xa0;NA&#xa0; &#xa0; &#xa0; &#xa0; clk1 &#xa0; CK1&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;100.000&#xa0; &#xa0; &#xa0;CLOCK &#xa0; DFFRX2&#xa0; &#xa0; &#xa0; &#xa0;clk1 &#xa0; &#xa0; &#xa0;ff1/CK<br /></code><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.120&#xa0; &#xa0; &#xa0; &#xa0; -0.118&#xa0; &#xa0; &#xa0; &#xa0;NA&#xa0; &#xa0; &#xa0; &#xa0; clk2 &#xa0; CK2&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;200.000&#xa0; &#xa0; &#xa0;CLOCK &#xa0; DFFRX2&#xa0; &#xa0; &#xa0; &#xa0;clk2 &#xa0; &#xa0; &#xa0;ff2/CK</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.059&#xa0; &#xa0; &#xa0; &#xa0; -0.057&#xa0; &#xa0; &#xa0; &#xa0;0.894&#xa0; &#xa0; &#xa0;n4 &#xa0; &#xa0; CK1&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;100.000&#xa0; &#xa0; &#xa0;DATA &#xa0; &#xa0;BUFX1&#xa0; &#xa0; &#xa0; &#xa0; buf2/Y &#xa0; &#xa0;buf2/Y</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.059&#xa0; &#xa0; &#xa0; &#xa0; -0.057&#xa0; &#xa0; &#xa0; &#xa0;4.362&#xa0; &#xa0; &#xa0;n4 &#xa0; &#xa0; CK1&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;100.000&#xa0; &#xa0; &#xa0;DATA &#xa0; &#xa0;DFFRX2&#xa0; &#xa0; &#xa0; &#xa0;buf2/Y &#xa0; &#xa0;ff2/D</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.059&#xa0; &#xa0; &#xa0; &#xa0; -0.057&#xa0; &#xa0; &#xa0; &#xa0;0.894&#xa0; &#xa0; &#xa0;n4 &#xa0; &#xa0; CK1&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;100.000&#xa0; &#xa0; &#xa0;DATA &#xa0; &#xa0;BUFX1&#xa0; &#xa0; &#xa0; &#xa0; buf2/Y &#xa0; &#xa0;buf3/A</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.045&#xa0; &#xa0; &#xa0; &#xa0; -0.043&#xa0; &#xa0; &#xa0; &#xa0;3.840&#xa0; &#xa0; &#xa0;n1 &#xa0; &#xa0; CK2&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;200.000&#xa0; &#xa0; &#xa0;DATA &#xa0; &#xa0;BUFX1&#xa0; &#xa0; &#xa0; &#xa0; buf0/Y &#xa0; &#xa0;buf1/A</code></p>
+
+<p><code>Check type : max_capacitance</code><br /><code>---------------------------</code><br /><code>----------------------------------------------------------------------------------------------------------------------</code><br /><code>Required&#xa0; &#xa0; &#xa0;Actual&#xa0; &#xa0; &#xa0; &#xa0;Capacitance&#xa0; &#xa0;Worst&#xa0; &#xa0; Net &#xa0; &#xa0;Maximum&#xa0; &#xa0; &#xa0;Frequency&#xa0; &#xa0;Pin &#xa0; &#xa0; Violating&#xa0; &#xa0; Driver &#xa0; &#xa0;Pin</code><br /><code>Capacitance&#xa0; Capacitance&#xa0; Slack&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Setup&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Frequency&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Type &#xa0; &#xa0;Libcell</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Slack&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Clock</code><br /><code>----------------------------------------------------------------------------------------------------------------------</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.004&#xa0; &#xa0; &#xa0; &#xa0; -0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.894&#xa0; &#xa0; n4 &#xa0; &#xa0; CK1&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;100.000&#xa0; &#xa0; &#xa0;DATA &#xa0; &#xa0;BUFX1&#xa0; &#xa0; &#xa0; &#xa0; buf2/Y &#xa0; &#xa0;buf2/Y</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.002&#xa0; &#xa0; &#xa0; &#xa0; -0.000&#xa0; &#xa0; &#xa0; &#xa0; 3.840&#xa0; &#xa0; n1 &#xa0; &#xa0; CK2&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;200.000&#xa0; &#xa0; &#xa0;DATA &#xa0; &#xa0;BUFX1&#xa0; &#xa0; &#xa0; &#xa0; buf0/Y &#xa0; &#xa0;buf0/Y</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.002&#xa0; &#xa0; &#xa0; &#xa0; -0.000&#xa0; &#xa0; &#xa0; &#xa0; 3.840&#xa0; &#xa0; n2 &#xa0; &#xa0; CK2&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;200.000&#xa0; &#xa0; &#xa0;DATA &#xa0; &#xa0;BUFX1&#xa0; &#xa0; &#xa0; &#xa0; buf1/Y &#xa0; &#xa0;buf1/Y</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.002&#xa0; &#xa0; &#xa0; &#xa0; -0.000&#xa0; &#xa0; &#xa0; &#xa0; 0.894&#xa0; &#xa0; n3 &#xa0; &#xa0; CK1&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;100.000&#xa0; &#xa0; &#xa0;DATA &#xa0; &#xa0;DFFRX2&#xa0; &#xa0; &#xa0; &#xa0;ff1/Q &#xa0; &#xa0; ff1/Q</code></p>
+</li><li>The following examples shows the pin-wise DRV report without the worst DRV per net:<code><br />set timing_report_constraint_format &quot;max_transition transition_actual transition_slack max_capacitance capacitance_actual capacitance_slack max_slack net &#xa0;max_frequency_clock max_clock_frequency pin_type ref_cell driver_pin pin&quot;</code><br /><br />
+<p><code>report_constraint -drv_violation_type {max_transition max_capacitance} -all_violators</code><br /><code>###############################################################</code><br /><code># format : frame 0 : split 0</code><br /><code># Units: Time (1ns), Capacitance (1pf), Frequency (1MHz).</code><br /><code>Check type : max_transition</code><br /><code>---------------------------</code><br /><code>-------------------------------------------------------------------------------------------------------------------</code><br /><code>Required&#xa0; &#xa0; &#xa0;Actual&#xa0; &#xa0; &#xa0; Transition&#xa0; &#xa0;Worst &#xa0; &#xa0; &#xa0;Net &#xa0; &#xa0;Maximum&#xa0; &#xa0; Frequency&#xa0; &#xa0;Pin &#xa0; &#xa0; Violating&#xa0; &#xa0;Driver &#xa0; &#xa0;Pin</code><br /><code>Transition&#xa0; &#xa0;Transition&#xa0; Slack&#xa0; &#xa0; &#xa0; &#xa0; Setup &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Frequency&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Type &#xa0; &#xa0;Libcell</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Slack &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Clock</code><br /><code>--------------------------------------------------------------------------------------------------------------------</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.120&#xa0; &#xa0; &#xa0; &#xa0;-0.118&#xa0; &#xa0; &#xa0; &#xa0;NA &#xa0; &#xa0; &#xa0; &#xa0; clk1 &#xa0; CK1&#xa0; &#xa0; &#xa0; &#xa0; 100.000&#xa0; &#xa0; &#xa0;CLOCK &#xa0; DFFRX2&#xa0; &#xa0; &#xa0; clk1 &#xa0; &#xa0; &#xa0;ff1/CK</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.120&#xa0; &#xa0; &#xa0; &#xa0;-0.118&#xa0; &#xa0; &#xa0; &#xa0;NA &#xa0; &#xa0; &#xa0; &#xa0; clk2 &#xa0; CK2&#xa0; &#xa0; &#xa0; &#xa0; 200.000&#xa0; &#xa0; &#xa0;CLOCK &#xa0; DFFRX2&#xa0; &#xa0; &#xa0; clk2 &#xa0; &#xa0; &#xa0;ff2/CK</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.059&#xa0; &#xa0; &#xa0; &#xa0;-0.057&#xa0; &#xa0; &#xa0; &#xa0;0.894 &#xa0; &#xa0; &#xa0;n4 &#xa0; &#xa0; CK1&#xa0; &#xa0; &#xa0; &#xa0; 100.000&#xa0; &#xa0; &#xa0;DATA &#xa0; &#xa0;BUFX1&#xa0; &#xa0; &#xa0; &#xa0;buf2/Y &#xa0; &#xa0;buf2/Y</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.059&#xa0; &#xa0; &#xa0; &#xa0;-0.057&#xa0; &#xa0; &#xa0; &#xa0;4.362 &#xa0; &#xa0; &#xa0;n4 &#xa0; &#xa0; CK1&#xa0; &#xa0; &#xa0; &#xa0; 100.000&#xa0; &#xa0; &#xa0;DATA &#xa0; &#xa0;DFFRX2&#xa0; &#xa0; &#xa0; buf2/Y &#xa0; &#xa0;ff2/D</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.059&#xa0; &#xa0; &#xa0; &#xa0;-0.057&#xa0; &#xa0; &#xa0; &#xa0;0.894 &#xa0; &#xa0; &#xa0;n4 &#xa0; &#xa0; CK1&#xa0; &#xa0; &#xa0; &#xa0; 100.000&#xa0; &#xa0; &#xa0;DATA &#xa0; &#xa0;BUFX1&#xa0; &#xa0; &#xa0; &#xa0;buf2/Y &#xa0; &#xa0;buf3/A</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.045&#xa0; &#xa0; &#xa0; &#xa0;-0.043&#xa0; &#xa0; &#xa0; &#xa0;3.840 &#xa0; &#xa0; &#xa0;n1 &#xa0; &#xa0; CK2&#xa0; &#xa0; &#xa0; &#xa0; 200.000&#xa0; &#xa0; &#xa0;DATA &#xa0; &#xa0;BUFX1&#xa0; &#xa0; &#xa0; &#xa0;buf0/Y &#xa0; &#xa0;buf1/A</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.045&#xa0; &#xa0; &#xa0; &#xa0;-0.043&#xa0; &#xa0; &#xa0; &#xa0;3.840 &#xa0; &#xa0; &#xa0;n1 &#xa0; &#xa0; CK2&#xa0; &#xa0; &#xa0; &#xa0; 200.000&#xa0; &#xa0; &#xa0;DATA &#xa0; &#xa0;BUFX1&#xa0; &#xa0; &#xa0; &#xa0;buf0/Y &#xa0; &#xa0;buf0/Y</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.044&#xa0; &#xa0; &#xa0; &#xa0;-0.042&#xa0; &#xa0; &#xa0; &#xa0;3.840 &#xa0; &#xa0; &#xa0;n2 &#xa0; &#xa0; CK2&#xa0; &#xa0; &#xa0; &#xa0; 200.000&#xa0; &#xa0; &#xa0;DATA &#xa0; &#xa0;BUFX1&#xa0; &#xa0; &#xa0; &#xa0;buf1/Y &#xa0; &#xa0;buf1/Y</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.044&#xa0; &#xa0; &#xa0; &#xa0;-0.042&#xa0; &#xa0; &#xa0; &#xa0;3.840 &#xa0; &#xa0; &#xa0;n2 &#xa0; &#xa0; CK2&#xa0; &#xa0; &#xa0; &#xa0; 200.000&#xa0; &#xa0; &#xa0;DATA &#xa0; &#xa0;DFFRX2&#xa0; &#xa0; &#xa0; buf1/Y &#xa0; &#xa0;ff1/D</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.038&#xa0; &#xa0; &#xa0; &#xa0;-0.036&#xa0; &#xa0; &#xa0; &#xa0;0.894 &#xa0; &#xa0; &#xa0;n3 &#xa0; &#xa0; CK1&#xa0; &#xa0; &#xa0; &#xa0; 100.000&#xa0; &#xa0; &#xa0;DATA &#xa0; &#xa0;BUFX1&#xa0; &#xa0; &#xa0; &#xa0;ff1/Q &#xa0; &#xa0; buf2/A</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.038&#xa0; &#xa0; &#xa0; &#xa0;-0.036&#xa0; &#xa0; &#xa0; &#xa0;0.894 &#xa0; &#xa0; &#xa0;n3 &#xa0; &#xa0; CK1&#xa0; &#xa0; &#xa0; &#xa0; 100.000&#xa0; &#xa0; &#xa0;DATA &#xa0; &#xa0;DFFRX2&#xa0; &#xa0; &#xa0; ff1/Q &#xa0; &#xa0; ff1/Q</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.031&#xa0; &#xa0; &#xa0; &#xa0;-0.029&#xa0; &#xa0; &#xa0; &#xa0;1.208 &#xa0; &#xa0; &#xa0;out2 &#xa0; CK2&#xa0; &#xa0; &#xa0; &#xa0; 200.000&#xa0; &#xa0; &#xa0;DATA &#xa0; &#xa0;DFFRX2&#xa0; &#xa0; &#xa0; ff2/Q &#xa0; &#xa0; ff2/Q</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.030&#xa0; &#xa0; &#xa0; &#xa0;-0.028&#xa0; &#xa0; &#xa0; &#xa0;0.894 &#xa0; &#xa0; &#xa0;out1 &#xa0; CK1&#xa0; &#xa0; &#xa0; &#xa0; 100.000&#xa0; &#xa0; &#xa0;DATA &#xa0; &#xa0;BUFX1&#xa0; &#xa0; &#xa0; &#xa0;buf3/Y &#xa0; &#xa0;buf3/Y</code></p>
+
+<p><code>Check type : max_capacitance</code><br /><code>---------------------------</code><br /><code>-------------------------------------------------------------------------------------------------------</code><br /><code>Required&#xa0; &#xa0; Actual&#xa0; &#xa0; &#xa0; Capacitance&#xa0; Worst&#xa0; &#xa0;Net&#xa0; &#xa0;Maximum&#xa0; &#xa0;Frequency&#xa0; Pin&#xa0; &#xa0; Violating&#xa0; Driver&#xa0; &#xa0;Pin</code><br /><code>Capacitance Capacitance Slack&#xa0; &#xa0; &#xa0; &#xa0; Setup&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Frequency&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Type&#xa0; &#xa0;Libcell</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Slack&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Clock</code><br /><code>--------------------------------------------------------------------------------------------------------</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.004&#xa0; &#xa0; &#xa0; &#xa0;-0.002&#xa0; &#xa0; &#xa0; 0.894&#xa0; &#xa0;n4&#xa0; &#xa0; CK1&#xa0; &#xa0; &#xa0; &#xa0;100.000&#xa0; &#xa0; DATA&#xa0; &#xa0;BUFX1&#xa0; &#xa0; &#xa0;buf2/Y&#xa0; &#xa0;buf2/Y</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.002&#xa0; &#xa0; &#xa0; &#xa0;-0.000&#xa0; &#xa0; &#xa0; 3.840&#xa0; &#xa0;n1&#xa0; &#xa0; CK2&#xa0; &#xa0; &#xa0; &#xa0;200.000&#xa0; &#xa0; DATA&#xa0; &#xa0;BUFX1&#xa0; &#xa0; &#xa0;buf0/Y&#xa0; &#xa0;buf0/Y</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.002&#xa0; &#xa0; &#xa0; &#xa0;-0.000&#xa0; &#xa0; &#xa0; 3.840&#xa0; &#xa0;n2&#xa0; &#xa0; CK2&#xa0; &#xa0; &#xa0; &#xa0;200.000&#xa0; &#xa0; DATA&#xa0; &#xa0;BUFX1&#xa0; &#xa0; &#xa0;buf1/Y&#xa0; &#xa0;buf1/Y</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.002&#xa0; &#xa0; &#xa0; &#xa0;-0.000&#xa0; &#xa0; &#xa0; 0.894&#xa0; &#xa0;n3&#xa0; &#xa0; CK1&#xa0; &#xa0; &#xa0; &#xa0;100.000&#xa0; &#xa0; DATA&#xa0; &#xa0;DFFRX2&#xa0; &#xa0; ff1/Q&#xa0; &#xa0; ff1/Q</code></p>
+</li><li>The following command example shows pins per net with the worst DRV slack:<br /><code>report_constraint -drv_violation_type {max_transition max_capacitance} -all_violators -worst_drv_per_net -max_pins_per_drv 5</code>
+<p><code>###################################################</code><br /><code># format : frame 0 : split 0</code><br /><code># Units: Time (1ns), Capacitance (1pf), Frequency (1MHz).</code><br /><code>Check type : max_transition</code><br /><code>---------------------------</code><br /><code>------------------------------------------------------------------------------------------------------------------</code><br /><code>Required&#xa0; &#xa0; &#xa0;Actual&#xa0; &#xa0; &#xa0; Transition&#xa0; &#xa0;Worst&#xa0; &#xa0; &#xa0;Net &#xa0; &#xa0;Maximum&#xa0; &#xa0; &#xa0;Frequency&#xa0; &#xa0;Pin &#xa0; &#xa0; Violating&#xa0; &#xa0;Driver&#xa0; &#xa0;Pin</code><br /><code>Transition&#xa0; &#xa0;Transition&#xa0; Slack&#xa0; &#xa0; &#xa0; &#xa0; Setup&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Frequency&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Type &#xa0; &#xa0;Libcell</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Slack&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Clock</code><br /><code>------------------------------------------------------------------------------------------------------------------</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.120&#xa0; &#xa0; &#xa0; &#xa0;-0.118&#xa0; &#xa0; &#xa0; &#xa0;NA&#xa0; &#xa0; &#xa0; &#xa0; clk1 &#xa0; CK1&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;100.000&#xa0; &#xa0; &#xa0;CLOCK &#xa0; DFFRX2&#xa0; &#xa0; &#xa0; clk1&#xa0; &#xa0; &#xa0;ff1/CK</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.120&#xa0; &#xa0; &#xa0; &#xa0;-0.118&#xa0; &#xa0; &#xa0; &#xa0;NA&#xa0; &#xa0; &#xa0; &#xa0; clk2 &#xa0; CK2&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;200.000&#xa0; &#xa0; &#xa0;CLOCK &#xa0; DFFRX2&#xa0; &#xa0; &#xa0; clk2&#xa0; &#xa0; &#xa0;ff2/CK</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.059&#xa0; &#xa0; &#xa0; &#xa0;-0.057&#xa0; &#xa0; &#xa0; &#xa0;0.894&#xa0; &#xa0; &#xa0;n4 &#xa0; &#xa0; CK1&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;100.000&#xa0; &#xa0; &#xa0;DATA &#xa0; &#xa0;BUFX1&#xa0; &#xa0; &#xa0; &#xa0;buf2/Y&#xa0; &#xa0;buf2/Y</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.045&#xa0; &#xa0; &#xa0; &#xa0;-0.043&#xa0; &#xa0; &#xa0; &#xa0;3.840&#xa0; &#xa0; &#xa0;n1 &#xa0; &#xa0; CK2&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;200.000&#xa0; &#xa0; &#xa0;DATA &#xa0; &#xa0;BUFX1&#xa0; &#xa0; &#xa0; &#xa0;buf0/Y&#xa0; &#xa0;buf1/A</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.044&#xa0; &#xa0; &#xa0; &#xa0;-0.042&#xa0; &#xa0; &#xa0; &#xa0;3.840&#xa0; &#xa0; &#xa0;n2 &#xa0; &#xa0; CK2&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;200.000&#xa0; &#xa0; &#xa0;DATA &#xa0; &#xa0;BUFX1&#xa0; &#xa0; &#xa0; &#xa0;buf1/Y&#xa0; &#xa0;buf1/Y</code></p>
+
+<p><code>Check type : max_capacitance</code></p>
+
+<p><code>---------------------------</code><br /><code>---------------------------------------------------------------------------------------------------------------</code><br /><code>Required&#xa0; &#xa0; &#xa0;Actual&#xa0; &#xa0; &#xa0; Capacitance&#xa0; &#xa0;Worst&#xa0; &#xa0; Net&#xa0; &#xa0;Maximum&#xa0; &#xa0; Frequency&#xa0; &#xa0;Pin&#xa0; &#xa0; Violating&#xa0; &#xa0;Driver&#xa0; &#xa0;Pin</code><br /><code>Capacitance&#xa0; Capacitance Slack&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Setup&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Frequency&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Type&#xa0; &#xa0;Libcell</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Slack&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Clock</code><br /><code>---------------------------------------------------------------------------------------------------------------</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.004&#xa0; &#xa0; &#xa0; &#xa0;-0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.894&#xa0; &#xa0; n4&#xa0; &#xa0; CK1&#xa0; &#xa0; &#xa0; &#xa0; 100.000&#xa0; &#xa0; &#xa0;DATA&#xa0; &#xa0;BUFX1&#xa0; &#xa0; &#xa0; &#xa0;buf2/Y&#xa0; &#xa0;buf2/Y</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.002&#xa0; &#xa0; &#xa0; &#xa0;-0.000&#xa0; &#xa0; &#xa0; &#xa0; 3.840&#xa0; &#xa0; n1&#xa0; &#xa0; CK2&#xa0; &#xa0; &#xa0; &#xa0; 200.000&#xa0; &#xa0; &#xa0;DATA&#xa0; &#xa0;BUFX1&#xa0; &#xa0; &#xa0; &#xa0;buf0/Y&#xa0; &#xa0;buf0/Y</code><br /><code>0.002&#xa0; &#xa0; &#xa0; &#xa0; 0.002&#xa0; &#xa0; &#xa0; &#xa0;-0.000&#xa0; &#xa0; &#xa0; &#xa0; 3.840&#xa0; &#xa0; n2&#xa0; &#xa0; CK2&#xa0; &#xa0; &#xa0; &#xa0; 200.000&#xa0; &#xa0; &#xa0;DATA&#xa0; &#xa0;BUFX1&#xa0; &#xa0; &#xa0; &#xa0;buf1/Y&#xa0; &#xa0;buf1/Y</code></p>
+</li><li>
+<p><span>The following command reports the hierarchical nets associated with the violating pins:<br /><code>tempus &gt; report_constraint -drv_violation_type max_transition -drv_fields {pin net hnet}</code></span></p>
+
+<p><code><span>Check type : max_transition</span></code></p>
+
+<p><code><span>---------------------------</span></code></p>
+
+<p><code><span>&#xa0;&#xa0; &#xa0; </span><span>+----------------------------------------+</span></code></p>
+
+<p><code><span>&#xa0;&#xa0; &#xa0; </span><span>| Pin</span><span>&#xa0; &#xa0; &#xa0; &#xa0; </span><span>| Net</span><span>&#xa0; &#xa0; &#xa0; &#xa0; </span><span>| Hierarchical | &#xa0;</span></code></p>
+
+<p><code><span>&#xa0;&#xa0; &#xa0; </span><span>|</span><span>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; </span><span>|</span><span>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; </span><span>| Net</span><span>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; </span><span>|</span></code></p>
+
+<p><code><span>&#xa0;&#xa0; &#xa0; </span><span>|------------+------------+--------------|</span></code></p>
+
+<p><code><span>&#xa0;&#xa0; &#xa0; </span><span>| data_bidi2 | data_bidi2 | data_bidi2 </span><span>&#xa0; </span><span>|</span></code></p>
+
+<p><code><span>&#xa0;&#xa0; &#xa0; </span><span>+----------------------------------------+</span></code></p>
+</li></ul>
+<p><span style="font-weight: 600;letter-spacing: -0.003em;">Related Commands</span></p>
+<ul><li><code><a href="set_min_fanout.html">set_min_fanout</a>&#xa0;</code></li><li><code><span><a href="set_min_fanout.html">set_min_fanout</a></span>&#xa0;</code></li><li><code><a href="set_min_transition.html">set_min_transition</a>&#xa0;</code></li><li><code><a href="set_max_transition.html">set_max_transition</a>&#xa0;</code></li><li><code><a href="set_min_capacitance.html">set_min_capacitance</a>&#xa0;</code></li><li><code><a href="set_max_capacitance.html">set_max_capacitance</a></code></li><li><code><a href="report_timing.html">report_timing</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="report_clocks.html" id="prev" title="report_clocks">report_clocks</a></em></b><b><em><a href="report_cppr.html" id="nex" title="report_cppr">report_cppr</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

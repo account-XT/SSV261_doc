@@ -1,0 +1,212 @@
+
+<html><head><title>Hierarchical STA - Cell EM</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823922" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Hierarchical STA - Cell EM" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823922" />
+<meta name="NextFile" content="analysisandreporting_cellemlimitations.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_cellemsaverestore.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Hierarchical STA - Cell EM" />
+<meta name="Keywords" content="Hierarchical STA - Cell EM" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Analysis,REPORTS,Stylus" />
+<meta name="prod_subfeature" content="Timing Analysis, Reports" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_cellemsaverestore.html" title="Save/Restore of Design Database">Save/Restore of Design Databas ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_cellemlimitations.html" title="Current Limitations and Recommendations">Current Limitations and Recomm ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:cellemhsta" title="Hierarchical STA - Cell EM"></a><h3>
+<a id="pgfId-2241144"></a><a id="35620"></a>Hierarchical STA - Cell EM</h3>
+
+<p>
+<a id="pgfId-2241146"></a>Tempus includes the bottom-up (Boundary Models) and top-down (Context Models) hierarchical timing analysis and closure techniques to overcome the challenges faced by designers during timing and glitch analysis, and closure of large hierarchical designs. The context models for lower level modules are generated from top level analysis to perform accurate block level timing and glitch analysis. Tempus supports Context Analysis for a single as well as multiple instances of blocks.</p>
+<p>
+<a id="pgfId-2241152"></a>The Cell EM feature is supported for both context and boundary model-based flows. The context feature preserves the required information for a block to replicate the same EM violation over a block as it does for the top-level. The boundary model directory will be used to preserve information required for EM.</p>
+<p>
+<a id="pgfId-2241211"></a>For MIM cases, Tempus will use the worse of all the instances. To enable this, you can use the setting given below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3055068"></a>set_power_analysis_mode -worst_case_vector_activity true</pre>
+<h4>
+<a id="pgfId-2241257"></a><a id="76545"></a>Cell EM Context-Based Flow</h4>
+
+<p>
+<a id="pgfId-2241253"></a>The timing analysis and closure with timing context is a two-step flow:</p>
+
+<p class="webflare-indent1"><strong>Figure -121
+<a id="pgfId-2241284"></a>Cell EM Context-Based Flow</strong></p>
+<p>
+<a id="pgfId-2241287"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="276" src="images/analysisandreporting-144.gif" /></div>
+
+<p>
+<a id="pgfId-2250915"></a><strong></strong></p>
+<p>
+<a id="pgfId-2250917"></a><strong></strong></p>
+<p>
+<a id="pgfId-2241327"></a><strong>STEP1: Timing Context Generation from Top STA</strong></p>
+<p>
+<a id="pgfId-2241328"></a>The first step is to create the timing context of lower-level sub-modules from the top-level STA environment. This can either be done from the Top Flat or from Top BM analysis. Once the top-level design is fully loaded and ready to perform timing analysis, you can use the <a href="../tempustxtcmdref/write_timing_context.html">write_timing_context</a> <code>-include_TCF</code> command to create timing context constraints of the required sub-module with EM required database.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-2241367"></a>The <code>write_timing_context</code> command triggers an <code>update_timing</code> <code>-full</code> state. The design state after <code>update_timing</code> <code>-full</code> versus <code>write_timing_context</code>, however, remains the same. So, you can replace <code>update_timing</code> <code>-full</code> with the <code>write_timing_context</code> command in the top-level scripts and continue to generate reports after context creation.</div>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241372"></a>read_lib (including Cell em .libs)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241373"></a>read_verilog</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241374"></a>set_top_module top</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241375"></a>read_spef</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241376"></a>read_sdc</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241377"></a>write_timing_context context.db -module block -include_TCF</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241378"></a>propagate_activity -set_net_freq true</pre>
+
+<p>
+<a id="pgfId-2241432"></a><strong>STEP2: Block STA with Timing Context</strong></p>
+<p>
+<a id="pgfId-2241433"></a>In this step, the software reads the block design with the context generated from STEP 1.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241434"></a>read_lib</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241435"></a>read_verilog</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241436"></a>set_top_module block</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241437"></a>read_spef</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241438"></a>read_sdc</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241439"></a>* read_timing_context context.db -tcf_port_type {default:data; data, clock, both}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241441"></a>update_timing</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241442"></a>propagate_activity -set_net_freq true</pre>
+
+<p>
+<a id="pgfId-2241474"></a>where:</p>
+<p>
+<a id="pgfId-2241475"></a><code>-tcf_port_type</code> parameter utilizes activity information from the top over clock port, data port, or both. You can use the following options:</p>
+<ul><li>
+<a id="pgfId-2241477"></a><code>data</code>: Activity from top will be annotated only on data port, clock over block will be utilized internally for calculating activity over clock port.</li><li>
+<a id="pgfId-2241479"></a><code>clock</code>: Activity from top will be annotated only on clock port. </li><li>
+<a id="pgfId-2241361"></a><code>both</code>: Both clock and data port will have annotation.</li></ul>
+
+
+
+<h4>
+<a id="pgfId-2241523"></a><a id="63950"></a>Cell EM Boundary Model Flow</h4>
+
+<p>
+<a id="pgfId-2241516"></a>The timing analysis and closure with boundary model is a two-step flow:</p>
+
+<p class="webflare-indent1"><strong>Figure -122
+<a id="pgfId-2241547"></a>Cell EM Boundary Model-Based Flow</strong></p>
+<p>
+<a id="pgfId-2249011"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="274" src="images/analysisandreporting-145.gif" /></div>
+<p>
+<a id="pgfId-2241550"></a></p>
+
+<p>
+<a id="pgfId-2241586"></a><strong>STEP1: Boundary Model Generation from Block STA</strong></p>
+<p>
+<a id="pgfId-2241587"></a>The first step is to generate a boundary model BM from Block that is required to be plugged in to TOP.</p>
+<p>
+<a id="pgfId-2241588"></a>You must run the <code><a actuate="user" class="URL" href="../tempustxtcmdref/create_boundary_model.html" show="replace" xml:link="simple">create_boundary_model</a></code> <code>-include_TCF</code> command to have a BM model with all the EM information required to be integrated in TOP, as shown below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241590"></a>read_lib (including Cell em .libs)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241591"></a>read_verilog</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241592"></a>set_top_module block</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241593"></a>read_spef</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241594"></a>read_sdc</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241595"></a>create_boundary_model -dir DIR -include_TCF</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241596"></a>propagate_activity -set_net_freq true</pre>
+
+<p>
+<a id="pgfId-2241598"></a><strong>STEP2: TOP STA with Boundary Model</strong></p>
+<p>
+<a id="pgfId-2241599"></a>This step involves integrating the BM generated from Step 1 in TOP Level.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241600"></a>read_lib</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241543"></a>read_verilog</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241643"></a>set_top_module block</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241644"></a>read_spef</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241645"></a>read_sdc</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241646"></a>* read_boundary_model DIR -module</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241647"></a>update_timing</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241648"></a>propagate_activity -set_net_freq true</pre>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-2241639"></a>You must follow all the requirements and limitations of boundary models.</div>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_cellemsaverestore.html" id="prev" title="Save/Restore of Design Database">Save/Restore of Design Databas ...</a></em></b><b><em><a href="analysisandreporting_cellemlimitations.html" id="nex" title="Current Limitations and Recommendations">Current Limitations and Recomm ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

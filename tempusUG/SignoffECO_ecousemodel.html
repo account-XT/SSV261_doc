@@ -1,0 +1,504 @@
+
+<html><head><title>Signoff Optimization Use Models</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823945" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Signoff Optimization Use Models" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823945" />
+<meta name="NextFile" content="SignoffECO_ecotechniques.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="SignoffECO_ecoenvironment.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Signoff Optimization Use Models" />
+<meta name="Keywords" content="Signoff optimization use models" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="ECO,Stylus" />
+<meta name="prod_subfeature" content="ECO" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="SignoffECO_ecoenvironment.html" title="Setting Up Signoff ECO Environment">Setting Up Signoff ECO Environ ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="SignoffECO_ecotechniques.html" title="Basic Signoff ECO Optimization Techniques">Basic Signoff ECO Optimization ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:ecousemodel" title="Signoff Optimization Use Models"></a><style>/*<![CDATA[*/
+/**/
+/**/
+/**/
+/**/
+h1 { counter-reset: heading 8;}
+/**/
+/**/
+/**/
+/**/
+/*]]>*/</style><h2>
+<a id="pgfId-999700"></a><a id="75204"></a>Signoff Optimization Use Models</h2>
+
+<p>
+<a id="pgfId-999709"></a>The following section describes the various signoff optimization use models:</p>
+<ul><li>
+<a id="pgfId-999718"></a>Generating ECO Timing DB and Running ECO Timing Closure in Separate Sessions </li><li>
+<a id="pgfId-999727"></a>Running Signoff Optimization with ECO timing generated in batch mode using DMMMC</li><li>
+<a id="pgfId-999736"></a>Running Signoff Optimization with ECO timing generated using CMMMC </li><li>
+<a id="pgfId-999745"></a>Parallel Distributed Interactive MMMC Analysis and ECO (Paradime) Flow</li><li>
+<a id="pgfId-999754"></a>Running Signoff Optimization from Innovus</li></ul>
+
+
+
+
+
+
+
+<h4>
+<a id="pgfId-999772"></a><a id="86680"></a>Generating ECO Timing DB and Running ECO Timing Closure in Separate Sessions</h4>
+
+<p>
+<a id="pgfId-999781"></a>ECO Timing DB is a lightweight timing graph built using the design input data. Since this timing graph is lightweight compared to the complete timing graph and stores only the data that is required for ECO fixing, it reduces the memory.</p>
+<p>
+<a id="pgfId-999790"></a>Within ECO fixing, Timing analysis is based on the hold and setup light-weight timing graph. Evaluation and commitment time are also reduced when done on light-weight timing graphs. Therefore, it reduces both memory and turnaround time (TAT) significantly.</p>
+<p>
+<a id="pgfId-999799"></a>The <a href="../tempustxtcmdref/write_eco_opt_db.html">write_eco_opt_db</a> command will save the ECO Timing DB after timing analysis, in non-distributed mode or in a DMMMC session. In case several views are active at the same time, the ECO Timing DB for each of them will be saved. The data will be saved in the directory specified by the <a href="../tempustxtcmdref/set_eco_opt_mode.html">set_eco_opt_mode</a> <code>-save_eco_opt_db</code> <code></code> option.</p>
+<p>
+<a id="pgfId-999815"></a><strong>Example</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3686990"></a>tempus&gt; set_eco_opt_mode -save_eco_opt_db mySignOffTGDir</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-999835"></a>tempus&gt; write_eco_opt_db</pre>
+
+<p>
+<a id="pgfId-999845"></a>This will save the ECO Timing DB information in the <code>mySignOffTGDir</code> directory.</p>
+<p>
+<a id="pgfId-999854"></a>The <code>write_eco_opt_db</code> command is also supported in the concurrent MMMC analysis mode. In addition, ECO Timing DB is saved in a directory that contains all active views&#39; timing graphs. So, if the ECO Timing DBs are generated in a separate session, you can assemble them by simply copying them into the same directory and use the following naming convention:</p>
+
+<a id="pgfId-999867"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+&lt;topModuleName&gt;_&lt;viewName&gt;.tgd and &lt;topModuleName&gt;_&lt;viewName&gt;.ckd</code></pre>
+
+<p>
+<a id="pgfId-999880"></a><strong>Example</strong></p>
+<p>
+<a id="pgfId-999890"></a>The figure below shows that in Session 1, the clients performing timing analysis in parallel can be launched on the local machine, but can also be distributed on the LSF farm <code>(</code><a href="../tempustxtcmdref/set_distribute_host.html">set_distribute_host<code> -lsf)</code></a>.</p>
+
+
+
+<p class="webflare-indent1"><strong>Figure -2
+<a id="pgfId-3687001"></a>ECO Timing Closure in Separate Sessions</strong></p>
+
+<p>
+<a id="pgfId-3687005"></a></p>
+<div class="webflare-div-image">
+<img width="671" height="314" src="images/SignoffECO-3.gif" /></div>
+
+<p>
+<a id="pgfId-3622425"></a></p>
+
+
+
+
+<h4>
+<a id="pgfId-999933"></a><a id="45104"></a>Running Signoff Optimization with ECO Timing Generated in Batch Mode Using DMMMC</h4>
+
+<p>
+<a id="pgfId-999942"></a>When <a href="../tempustxtcmdref/eco_opt_design.html">eco_opt_design</a> is called without providing a pointer to the ECO Timing DB database through <a href="../tempustxtcmdref/set_eco_opt_mode.html">set_eco_opt_mode</a> <code>-load_eco_opt_db <span class="webflare-courier-new" style="white-space:pre"><em>name</em></span></code>, it will automatically generate the ECO Timing DB in batch mode.</p>
+<p>
+<a id="pgfId-999960"></a>Example of Hold fixing with embedded Distributed timing analysis:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1021896"></a><a href="../tempustxtcmdref/read_lib.html">read_lib</a> $liberty<br />read_lib -lef $lef<br /><a href="../tempustxtcmdref/read_verilog.html">read_verilog</a> $netlist<br /><a href="../tempustxtcmdref/set_top_module.html">set_top_module</a> my_top<br />source viewDefinition.tcl<br />read_def $def_file<br />source spef.tcl<br /><a href="../tempustxtcmdref /set_distribute_host.html">set_distribute_host</a> -local<br /><a href="../tempustxtcmdref/set_multi_cpu_usage.html">set_multi_cpu_usage</a> -localCpu 8 -remoteHost 2 -cpuPerRemoteHost 4<br />eco_opt_design -hold<br /></pre>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1000013"></a><code>spef.tcl</code> must contain the <code>read_spef</code> or <code>read_parasitics</code> commands so that every active <code>rc_corner</code> is parasitic annotated.</div>
+
+
+
+<h4>
+<a id="pgfId-1000036"></a><a id="19562"></a>Running Signoff Optimization with ECO Timing Generated Using CMMMC</h4>
+
+<p>
+<a id="pgfId-1000045"></a>For small to medium-sized designs where not many views are active (below 8), you can generate ECO Timing DB in CMMMC and perform ECO fixing in one single Tempus session,</p>
+<p>
+<a id="pgfId-1000054"></a>Example of Hold fixing with ECO Timing DB generation and ECO fixing in one single Tempus CMMMC session:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1022542"></a>read_lib $liberty<br />read_lib -lef $lef<br />read_verilog $netlist<br />set_top_module my_top<br />source viewDefinition.tcl<br />read_def $def_file<br />source spef.tcl<br />set_distribute_host -local<br />set_multi_cpu_usage -localCpu 8<br />set_eco_opt_mode -save_eco_opt_db myEcoTimingDB<br />write_eco_opt_db<br />set_eco_opt_mode -load_eco_opt_db myEcoTimingDB<br />eco_opt_design -hold<br /></pre>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1000137"></a><code>spef.tcl</code> must contain the <code>read_spef</code> or <code>read_parasitics</code> commands so that every <code>active rc_corner</code> is parasitic annotated.</div>
+
+
+
+<h4>
+<a id="pgfId-1000159"></a><a id="85926"></a>Parallel Distributed Inter<a id="paradime"></a>active MMMC Analysis and ECO (Paradime) Flow</h4>
+
+<p>
+<a id="pgfId-1000168"></a>The Paradime flow allows you to perform various tasks, such as distributed timing analysis, ECO, and any interactive debugging (such as reporting, what-if analysis) in a single Tempus session, leading to improved usability of the tool. The licensing requirements for this flow require Tempus to be invoked with the <code>-eco</code> license option for performing optimization in addition to the Tempus Distributed Multi-Mode Multi-Corner licensing requirements.</p>
+<p>
+<a id="pgfId-1000183"></a>The following diagram shows the launch of the Paradime flow, where Tempus master is used for ECO runs and clients are used for timing analysis runs.</p>
+
+
+
+<p class="webflare-indent1"><strong>Figure -3
+<a id="pgfId-1000201"></a>The Paradime Flow</strong></p>
+
+<p>
+<a id="pgfId-1000213"></a></p>
+<div class="webflare-div-image">
+<img width="602" height="442" src="images/SignoffECO-4.gif" /></div>
+
+
+
+<h4>
+<a id="pgfId-1000223"></a>Enabling the Paradime Flow</h4>
+
+<p>
+<a id="pgfId-1000232"></a>To enable this flow, you need to make the following settings in the script provided to the Tempus master.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000241"></a><a href="../tempustxtcmdref/set_distribute_mmmc_mode.html">set_distribute_mmmc_mode</a> -eco true</pre>
+
+<p>
+<a id="pgfId-1000251"></a>In this flow, the number of remoteHost should be equal to the number of views.</p>
+
+
+
+<h4>
+<a id="pgfId-1000301"></a>Running the Paradime Flow</h4>
+
+<p>
+<a id="pgfId-1000260"></a>The Tempus master and clients load the design data for running either of the following flows:</p>
+<ul><li>
+<a id="pgfId-1381124"></a>Full analysis</li><li>
+<a id="pgfId-1381120"></a>Restored analysis</li></ul>
+
+
+
+
+<h4><em>
+<a id="pgfId-1000311"></a>Full Analysis Flow</em></h4>
+
+<p>
+<a id="pgfId-1000320"></a>To run the full analysis flow, you need to make the following settings:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000329"></a><a href="../tempustxtcmdref/distribute_read_design.html">distribute_read_design</a> -design_script design_loading.tcl -outdir Output<br /><code></code>distribute_views -script report.tcl -views {view1 view2}</pre>
+
+<p>
+<a id="pgfId-1000349"></a>Tempus master launches multiple DMMMC clients to load the design data as specified in <code>design_loading.tcl</code> and <code>run report.tcl</code> in order to perform full timing analysis runs and generate timing reports. Meanwhile, the Tempus master also loads the MMMC design for all active views of interest.</p>
+<p>
+<a id="pgfId-1000364"></a>Once the design loading and timing analysis is completed the clients, the software is available with an interactive <code>dmmmc&gt;</code> prompt, providing access to live clients. You can do the following:</p>
+<ul><li>
+<a id="pgfId-1000376"></a>Perform merging of reports after a full timing analysis run or run manual commands to find out critical views of interest.</li><li>
+<a id="pgfId-1000385"></a>Perform interactive querying and debugging on one, a few, or all views of clients.</li></ul>
+
+<p>
+<a id="pgfId-1000394"></a>By default, all active views will be specified as setup and hold views for the Tempus ECO run on master. If setup and hold views for Tempus ECO run are different, they can be specified using the variables below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1410819"></a>set <a href="../tempustxtcmdref/eco_setup_view_list.html">eco_setup_view_list</a> &#8220;&lt;list of setup views&gt;&#8221; # To specify setup views for ECO run<br />set <a href="../tempustxtcmdref/eco_hold_view_list.html">eco_hold_view_list</a> &#8220;&lt;list of hold views&gt;&#8221; # To specify hold views for ECO run<br /></pre>
+
+<p>
+<a id="pgfId-1000428"></a><strong>Sample Script</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1023881"></a># To configure multiple CPUs<br /><a href="../tempustxtcmdref/set_distribute_host.html">set_distribute_host</a> &#8211;local set_multi_cpu_usage -localCpu 8 -remoteHost 2 -cpuPerRemoteHost 8<br /><code></code># To enable the flow<br /><a href="../tempustxtcmdref/set_distribute_mmmc_mode.html">set_distribute_mmmc_mode</a> -eco true<br />set_distribute_mmmc_mode -merge_view_definitions<br /><code>set_distributed_mmmc_mode</code> -eco true# To specify different Tempus version for DMMMC client runs<br />set <a href="../tempustxtcmdref/eco_client_tempus_executable.html">eco_client_tempus_executable</a> &quot;/icd/flows/142_tempus/bin/tempus&quot;<br /> # Variables to specify list of setup and hold view for Tempus ECO (in case different than the views restored on clients). By default, all clients&#8217; views will be in setup/hold view list<br />set <a href="../tempustxtcmdref/eco_setup_view_list.html">eco_setup_view_list</a> &quot;view1&quot;<br />set <a href="../tempustxtcmdref/eco_hold_view_list.html">eco_hold_view_list</a> &quot;view2&quot;<br />#Variables to specify which view must be taken for power reporting<br />set eco_dynamic_view &#8220;view2&#8221;<br />set eco_leakage_view &#8220;view2&#8221;<br /># Variables to specify physical data<br />set <a href="../tempustxtcmdref/eco_lef_file_list.html">eco_lef_file_list</a> &#8220;tech.lef design.lef&#8221;<br />set <a href="../tempustxtcmdref/eco_def_file_list.html">eco_def_file_list</a> &quot;design.def<br />set data_dir /a/b/c <br /><a href="../tempustxtcmdref/distribute_read_design.html">distribute_read_design</a> &#8211;design_script design_loading.tcl -outdir eco_restore_output_dmmmc <br /><code></code>distribute_views -script report.tcl -views {view1 view2}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000524"></a>report_timing &gt; before_ECO.rpt<br /><a href="../tempustxtcmdref/eco_opt_design.html">eco_opt_design</a> -hold<br /><code></code>report_timing &gt; after_ECO.rpt</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000538"></a>The design_loading.tcl script is the following:</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000564"></a><a href="../tempustxtcmdref/read_view_definition.html">read_view_definition</a> &lt;view definition file&gt;<br /><code></code><a actuate="user" class="URL" href="../tempustxtcmdref/read_verilog.html" show="replace" xml:link="simple">read_verilog</a> design.v<br /><code></code><a actuate="user" class="URL" href="../tempustxtcmdref/set_top_module.html" show="replace" xml:link="simple">set_top_module<br /></a>The report.tcl script is the following:</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000576"></a>read_spef &lt;all corner spef files&gt;<br />update_timing &#8211;full<br />report* commands (optional)</pre>
+
+
+<h4><em>
+<a id="pgfId-1000592"></a>Restored Analysis Flow</em></h4>
+
+<p>
+<a id="pgfId-1000601"></a>In this flow, sessions saved from individual STA runs are restored. These individual SMSC STA runs have unique view names and are saved in the MMMC configuration using a view definition file with a unique library set, delay-corner, rc-corner, constraint-mode, analysis-view, and so on. This flow uses the saved SMSC sessions as clients. This is done by setting up the compatible DMMMC sessions to restore the flow structure, as shown below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000610"></a>set Views [list func_rmax func_rcmin test_rcmax] <br />distribute_read_design -restore_design $Views -restore_dir &lt;pathname_of_directory_of_saved_session&gt; -outdir Output</pre>
+
+<p>
+<a id="pgfId-1000622"></a>Alternatively, a way to restore saved SMSC sessions is available if sessions are not saved in compatible DMMMC restore flow structure. You can provide a list of sessions&#8217; directories and corresponding view names as input in pairs as mentioned below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000633"></a>set data_dir &lt;unix path&gt;<br />distribute_read_design -restore_design { {view1 $data_dir/view1/session.enc} {view2 $data_dir/view2/session.enc} ...{viewN $data_dir/viewN/session.enc} } &#8211;outdir Output</pre>
+
+<p>
+<a id="pgfId-1000655"></a>The same number of clients is required as the number of sessions to be restored. Each saved session can have data for one MMMC view.</p>
+<p>
+<a id="pgfId-1000664"></a>Data from the same restored sessions is loaded on the master for all views together. List of setup and hold views for Tempus ECO run can be specified using the variables below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000673"></a>set eco_setup_view_list &#8220;&lt;list of setup views&gt;&#8221; # To specify setup views for Tempus ECO run<br />set eco_hold_view_list &#8220;&lt;list of hold views&gt;&#8221; # To specify hold views for Tempus ECO run</pre>
+
+<p>
+<a id="pgfId-1000687"></a>All data for master is picked from the saved sessions, including constraints and parasitic information. Only libraries from the UNIX path specified in the view definition file are picked, because library data is not saved in saved sessions. In the scenario where there is no common view definition file for restore sessions, you can auto-merge (or concatenate) all the view definition files and create a single view definition file (which is the superset of all the individual sessions&#8217; view definition files) to load on the master.</p>
+<p>
+<a id="pgfId-1000698"></a>If there is no common view definition file, you need to do the following settings:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3687198"></a>set_distribute_mmmc_mode &#8211;merge_view_definition</pre>
+
+<p>
+<a id="pgfId-1000719"></a>Sample Script</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1317330"></a># To configure multiple CPUs</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3687203"></a>set_distribute_host &#8211;local/-rsh/-lsf &#8230; set_multi_cpu_usage -localCpu 8 -remoteHost 2 -cpuPerRemoteHost 8</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1317335"></a># To enable the flow</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3687208"></a>set_distribute_mmmc_mode -eco true</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000753"></a># To specify different Tempus version for DMMMC client runs</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3687214"></a>set <a href="../tempustxtcmdref/eco_client_tempus_executable.html">eco_client_tempus_executable</a> &quot;/icd/flows/142_tempus/bin/tempus&quot; &#8211;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1317351"></a># Variables to specify list of setup and hold view for Tempus ECO (in case different than the views restored on clients). By default, all clients&#8217; views will be in setup/hold view list.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3687219"></a>set eco_setup_view_list &quot;view1&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1339042"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1339039"></a>set eco_hold_view_list &quot;view2&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1317366"></a># Variables to specify physical data</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1339005"></a>set eco_lef_file_list &#8220;tech.lef design.lef&#8221;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1339051"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1339048"></a>set eco_def_file_list &#8220;design.def&#8221;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1339054"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1339057"></a>set data_dir /a/b/c</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1317372"></a># Restoring SMSC saved sessions (not saved in DMMMC compatible directory structure)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3687270"></a><a href="../tempustxtcmdref/distribute_read_design.html">distribute_read_design</a> -restore_design { {view1 $data_dir/setup_view1.enc} {view2 $data_dir/hold_view2.enc} } -outdir eco_restore_output_dmmmc</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1317384"></a>        # Interactive DMMMC prompt pre-Tempus ECO </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1339027"></a>dmmmc&gt; <a href="../tempustxtcmdref/report_design.html">report_timing</a> &gt; before_ECO.rpt </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1339063"></a><a href="../tempustxtcmdref/eco_opt_design.html">eco_opt_design</a> -hold<code></code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000833"></a><code></code># Interactive DMMMC prompt post-Tempus ECO </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1339030"></a>dmmmc&gt; report_timing &gt; after_ECO.rpt</pre>
+
+<p>
+<a id="pgfId-1000844"></a><strong>Sample Script with Interactive Commands</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1317429"></a># To configure multiple CPUs<br />set_distribute_host &#8211;local/-rsh/-lsf &#8230; set_multi_cpu_usage -localCpu 8 -remoteHost 2 -cpuPerRemoteHost 8<br /># To enable the flow<br />set_distribute_mmmc_mode -eco true<br /># To specify different Tempus version for DMMMC client runs<br />set eco_client_tempus_executable &quot;/icd/flows/142_tempus/bin/tempus&quot; &#8211;<br /># Variables to specify list of setup and hold view for Tempus ECO (in case different than the views restored on clients). By default, all clients&#8217; views will be in setup/hold view list.<br />set eco_setup_view_list &quot;view1&quot;<br />set eco_hold_view_list &quot;view2&quot;<br /># Variables to specify physical data<br />set eco_lef_file_list &#8220;tech.lef design.lef&#8221;<br />set eco_def_file_list &#8220;design.def&#8221;<br />set data_dir /a/b/c<br /># Restoring SMSC saved sessions (not saved in DMMMC compatible directory structure)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000933"></a>distribute_read_design -restore_design { view1 view2 } &#8211;restore_dir $data_dir -outdir eco_restore_output_dmmmc<br /># Interactive DMMMC prompt pre-Tempus ECO</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1339190"></a>dmmmc&gt; report_timing &gt; before_ECO.rpt</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1317452"></a># Perform some manual ECOs</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3687355"></a><a actuate="user" class="URL" href="../tempustxtcmdref/change_cell.html" show="replace" xml:link="simple">dmmmc&gt; </a><code>change_cell inst1</code> &#8211;upsize<br />dmmmc&gt; <a href="../tempustxtcmdref/add_repeater.html">add_repeater</a> &#8211;term inst2/Y &#8211;cell BUFX6<br />dmmmc&gt; <a href="../tempustxtcmdref/set_eco_opt_mode.html">set_eco_opt_mode</a> &#8211;add_inst false<br />eco_opt_design &#8211;hold<br /># Interactive DMMMC prompt pre-Tempus ECO<br />dmmmc&gt; report_timing &gt; after_hold_ECO.rpt<br />eco_opt_design &#8211;setup</pre>
+
+
+<h4><em>
+<a id="pgfId-1000986"></a>Pre-ECO Interactive Shell</em></h4>
+
+<p>
+<a id="pgfId-1000995"></a>After the design loading and analysis (relevant only in full analysis flow) is done on the clients, the interactive prompt is available to the user. You can do a report merge after a full timing analysis run or run manual commands to find out critical views of interest. Any prerequisite commands/settings for the Tempus ECO run should be applied by this stage.</p>
+<p>
+<a id="pgfId-1001004"></a>Interactive querying and debugging can be done on any number (one, a few, or all) of clients. To select a few views, use:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1001013"></a><code>distribute_command &#8211;views { &lt;list of views to select&gt;} { &lt;list of commands&gt;}</code></pre>
+
+<p>
+<a id="pgfId-1001025"></a>If any command (s) are to run on all views, use:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1001034"></a>distribute_command { &lt;list of commands&gt;}</pre>
+
+<p>
+<a id="pgfId-1001044"></a>Manual ECOs (if any) must be done on Tempus master directly without <code>distribute_command</code>. Netlist updates are done for all clients and master database. Tempus software detects if manual ECOs are performed using <code>distribute_command</code> and errors out.</p>
+
+
+
+<h4><em>
+<a id="pgfId-1001059"></a><a id="47621"></a>Running ECO</em></h4>
+
+<p>
+<a id="pgfId-1001068"></a>When you run an ECO file written by Tempus ECO, it is sent automatically to clients for post- ECO signoff timing report generation. On completion of the Tempus ECO run, the master will return to the interactive prompt with access to Tempus clients for signoff timing report generation and manual what-if analysis. You can also do successive Tempus ECO runs.</p>
+<p>
+<a id="pgfId-1001077"></a>Note that running Tempus ECO as part of the Paradime flow is different from running normal ECO (when invoked from outside this flow), where all the <a href="../tempustxtcmdref/set_eco_opt_mode.html">set_eco_opt_mode</a> parameters are available in this flow except for the parameters below:</p>
+<ul><li>
+<a id="pgfId-1001089"></a><code>&#8211;load_eco_opt_db</code>: ECO cannot accept pre-generated ECO Timing DB from outside.</li><li>
+<a id="pgfId-1015081"></a><code>&#8211;save_eco_opt_db</code>: This parameter is ignored, and ECO Timing DBs are stored in the DMMMC output directory.</li></ul>
+
+<p>
+<a id="pgfId-1001105"></a>Post ECO, you can generate sign-off reports, debugging, perform manual what-if analysis,&#160;&#160;and so on.</p>
+
+
+
+<h4><em>
+<a id="pgfId-1001115"></a>Post-ECO Interactive Shell</em></h4>
+
+<p>
+<a id="pgfId-1001124"></a>The interactive prompt after ECO is available to the user. It can be used for generating sign-off reports, debugging, doing manual what-if analysis, and so on. You can also run another Tempus ECO run at this stage.</p>
+
+
+
+<h4><em>
+<a id="pgfId-1001134"></a>Use Model</em></h4>
+
+<ul><li>
+<a id="pgfId-1001143"></a>Master does not have any timing information available. There is a check-in software to ensure that the timer update is never triggered in master session.</li><li>
+<a id="pgfId-1001152"></a>All timing-related queries are to be done from clients using two ways:<ul><li>
+<a id="pgfId-1001170"></a>Use <code>distribute_command</code> in non-interactive mode. You can also make selected views active in this mode.
+<code>distribute_command &#8211;views {&lt;list of views | all}</code></li><li>
+<a id="pgfId-1048267"></a>Use <a href="../tempustxtcmdref/set_distribute_mmmc_mode.html">set_distribute_mmmc_mode</a> in interactive mode. You can also make selected views active in this mode.
+<code>set_distribute_mmmc_mode [-interactive {true | false} [-views {list_of_views | all}]]</code></li></ul></li><li>
+<a id="pgfId-1001206"></a>If any command needs to apply to both master and clients, it needs to be specified for both master and clients using separate commands. For example, if you need to specify timing derates, it needs to be done for master as well as the clients:<ul><li>
+<a id="pgfId-1001215"></a>For master: Use <code>set_timing_derate&#8230;.</code></li><li>
+<a id="pgfId-1001226"></a>For clients: Use <code>distribute_command {set_timing_derate &#8230;}</code></li></ul></li></ul>
+
+
+
+
+
+
+<p>
+<a id="pgfId-1001245"></a>Any settings/commands that affect timing analysis should be applied to clients using <code>distribute_command {list of commands}</code></p>
+<p>
+<a id="pgfId-3687402"></a>Use the following command to assign a variable value from the master to the clients<br /><code>set_distribute_variables &#8220;list_of_variable_names&#8221; [-view &lt;viewName&gt;]</code></p>
+<p>
+<a id="pgfId-1001275"></a>Different Tempus versions can be specified for client runs. This is useful when timing analysis and ECO need to be run with different Tempus versions.<br /><code>set eco_client_tempus_executable &quot;tempus executable path&quot;</code></p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-3622470"></a>The <code>eco_client_tempus_executable </code>global variable has to be set before <code>distribute_read_design</code>.</div>
+
+
+
+<h4>
+<a id="pgfId-1001294"></a><a id="27357"></a>Running Signoff Timing/Power Optimization from Innovus</h4>
+
+<p>
+<a id="pgfId-1001303"></a>The Signoff Timing Optimization feature allows you to run timing and power optimization within Innovus on Signoff parasitics from Quantus and Signoff timing from Tempus. This feature provides a complete automated solution for using all signoff tools through a single high-level super command.</p>
+<p>
+<a id="pgfId-1001312"></a>In a good timing closure methodology, at the implementation stage, the timing targets that are set by the signoff Static Timing Analysis (STA) tool should be met. To ensure that the design state is close to sign-off quality, the timing reported by the implementation tool must correlate as much as possible with the signoff STA tool. From that stage, signoff timing optimization provides the following features:</p>
+<ul><li>
+<a id="pgfId-1001321"></a>Allows you to run timing and power optimization on signoff timing within Innovus.</li><li>
+<a id="pgfId-1001330"></a>Maximizes the usage of Cadence tools - Innovus will enable you to run extraction (Quantus) and Tempus without extra effort.</li><li>
+<a id="pgfId-1001339"></a>To provide a signoff timing report in Innovus using Tempus, you can use the <code>signoffTimeDesign</code> command of Innovus. This command uses Quantus and Tempus in standalone mode to perform signoff STA using the DMMMC infrastructure and saves an ECO Timing DB per view. This signoff timing can be optimized using <code>signoffOptDesign</code>. Similarly, the <code>signoffOptDesign</code> command can be used to perform power optimization on this signoff timing.</li></ul>
+
+
+<p>
+<a id="pgfId-1010797"></a>The following diagram illustrates the flow and the architecture of each signoff command:</p>
+
+
+
+<p class="webflare-indent1"><strong>Figure -4
+<a id="pgfId-1010816"></a>Signoff Timing Optimization Flow</strong></p>
+
+<p>
+<a id="pgfId-1001387"></a></p>
+<div class="webflare-div-image">
+<img width="669" height="496" src="images/SignoffECO-5.gif" /></div>
+
+<p>
+<a id="pgfId-3622781"></a></p>
+<p>
+<a id="pgfId-1001397"></a>In case the ECO Timing DB is not available when the <code>signoffOptDesign</code> command is run, then the super command will automatically run <code>signoffTimeDesign,</code> as shown in the figure below:</p>
+
+
+
+
+<p class="webflare-indent1"><strong>Figure -5
+<a id="pgfId-1001421"></a>Signoff Timing Optimization Flow </strong></p>
+
+<p>
+<a id="pgfId-1001433"></a></p>
+<div class="webflare-div-image">
+<img width="571" height="753" src="images/SignoffECO-6.gif" /></div>
+
+<p>
+<a id="pgfId-3622811"></a></p>
+<p>
+<a id="pgfId-1001443"></a>Signoff Timing Optimization provides a flexible flow to accommodate any specific methodology:</p>
+<p>
+<a id="pgfId-1001464"></a>If parasitics are to be extracted using TQuantus or IQuantus, you can do this manually. Then <code>signoffTimeDesign </code>can be used with the <code>-reportOnly</code> option to reuse those parasitics and skip the Quantus call.</p>
+<p>
+<a id="pgfId-1001477"></a>If specific steps/options need to be performed before/during Tempus ECO routing, they can be performed manually after running <code>signoffOptDesign</code> with the <code>-noEcoRoute</code> option.</p>
+<p>
+<a id="pgfId-1001498"></a>When specific signoff STA commands/options/global variables should be applied, you can set them in a file and pass it to Tempus via the <code>setSignoffOptMode -preStaTcl</code><html-code>
+ 
+<code>FILE</code> parameter.</html-code></p>
+<p>
+<a id="pgfId-1001518"></a>The syntax below is the basic template flow when user runs parasitic extraction and ecoRoute manually:</p>
+<p>
+<a id="pgfId-3758422"></a>setMultiCpuUsage -localCpu 16 -remoteHost 4 -cpuPerRemoteHost 4<br /><code></code>setExtractRCMode -effortLevel high<br />extractRC<br />signoffTimeDesign -reportOnly -outDir RPT_initial<br />signoffOptDesign -hold -noEcoRoute<br />ecoRoute<br />extractRC<br />signoffTimeDesign -reportOnly -outDir RPT_final<br /></p>
+
+
+
+
+<h4><em>
+<a id="pgfId-2429246"></a>Related Topics</em></h4>
+
+<ul><li>
+<a id="pgfId-2429250"></a><a href="SignoffECO_overview.html#85337">Signoff ECO Overview</a></li><li>
+<a id="pgfId-2461982"></a><a href="SignoffECO_signoffecokeyfeatures.html#93599">Key Features of Signoff ECO</a></li><li>
+<a id="pgfId-2429275"></a><a href="SignoffECO_ecoflow.html#59262">Signoff ECO Flow</a></li><li>
+<a id="pgfId-2429254"></a><a href="SignoffECO_ecoenvironment.html#61809">Setting Up Signoff ECO Environment</a></li><li>
+<a id="pgfId-2557841"></a><a href="SignoffECO_ecotechniques.html#67633">Basic Signoff ECO Optimization Techniques</a></li></ul>
+
+
+
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="SignoffECO_ecoenvironment.html" id="prev" title="Setting Up Signoff ECO Environment">Setting Up Signoff ECO Environ ...</a></em></b><b><em><a href="SignoffECO_ecotechniques.html" id="nex" title="Basic Signoff ECO Optimization Techniques">Basic Signoff ECO Optimization ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

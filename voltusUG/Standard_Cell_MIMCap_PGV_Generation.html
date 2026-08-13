@@ -1,0 +1,154 @@
+
+<html><head><title>Standard Cell MIMCap PGV Generation</title>
+<meta name="page_sequence" content="20035001" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="anshikag" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468571" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Standard Cell MIMCap PGV Generation" />
+<meta name="Keywords" content="Standard,MIMCap,SPICE,netlist,capacitance" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Power-Grid Library Generation," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468571" />
+<meta name="NextFile" content="Macro_Cell_MIMCap_PGV_Generation.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="MIMCap_PGV_Characterization.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- Standard Cell MIMCap PGV Generation" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="MIMCap_PGV_Characterization.html" title="MIMCap_PGV_Characterization">MIMCap_PGV_Characterization</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Macro_Cell_MIMCap_PGV_Generation.html" title="Macro_Cell_MIMCap_PGV_Generation">Macro_Cell_MIMCap_PGV_Generati ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Standard Cell MIMCap PGV Generation</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span style="color:var(--ds-text,#172b4d);">For standard cell Metal-Insulator-Metal Capacitor (MIMCap) generation, the SPICE netlist &quot;netlist.sp&quot; includes a subcircuit that </span>represents the MIMCap capacitance.</p>
+<h4 id="StandardCellMIMCapPGVGeneration-RequiredInputFiles">Required Input Files</h4>
+<ul><li>Technology LEF</li><li>Cell LEF</li><li>Quantus technology file</li><li>LEFDEF layermap - optional. If you do not specify this file, Voltus will automatically generate it.</li><li>SPICE netlists for standard cells</li><li>SPICE model file containing MIMCap model.&#xa0;</li></ul><h4 id="StandardCellMIMCapPGVGeneration-Procedure">Procedure</h4>
+
+<p>To create MIMCap power-grid views for standard cells, complete the following steps:</p>
+<ol><li>
+<p>Read the LEF files for all the cells to be characterized.&#xa0;<br /><strong>TCL command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>read_lib -lef tech.lef mimcap.lef</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Specify the settings for standard cell library characterization through the command line.<br /><strong>TCL command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup class=""><col class="" /></colgroup><tbody class=""><tr class=""><td class="confluenceTd"><code>set_pg_library_mode \</code><br /><code>&#xa0; &#xa0; -power_pins {vdd 1.0} \</code><br /><code>&#xa0; &#xa0; -ground_pins {vss} \</code><br /><code>&#xa0; &#xa0; <strong>-celltype stdcells</strong> \</code><br /><code>&#xa0; &#xa0; -cell_list_file cells \</code><br /><code>&#xa0; &#xa0; <strong>-spice_subckts { netlist.sp } \</strong></code><br /><code>&#xa0; &#xa0; -current_distribution &#xa0; &#xa0; &#xa0; propagation \</code><br /><code>&#xa0; &#xa0;<strong> -spice_models &#xa0;{ \</strong></code><br /><strong><code>&#xa0; &#xa0; &#xa0; &#xa0; models/toplevel.l \</code></strong><br /><code>&#xa0; &#xa0; } \</code><br /><code>&#xa0; &#xa0; -spice_corners &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;&quot;TOP_TT&quot; \</code><br /><code>&#xa0; &#xa0; -extraction_tech_file &#xa0; &#xa0; &#xa0; qrcTechFile</code></td>
+</tr>
+</tbody></table></div>
+</span></p>
+
+<p>The following table lists the file description and file snippets for MIMCap characterization:</p>
+<div class="table-wrap"><table class="relative-table wrapped confluenceTable" style="width: 59.2424%;"><colgroup class=""><col class="" style="width: 43.5373%;" /><col class="" style="width: 56.4627%;" /></colgroup><tbody class=""><tr class=""><td class="confluenceTd"><strong>File Description</strong></td>
+<td class="confluenceTd"><strong>File Snippet</strong></td>
+</tr>
+<tr class=""><td class="highlight-grey confluenceTd" data-highlight-colour="grey"><strong>SPICE netlist</strong> &#39;<code>netlist.sp</code>&#39; - the netlist has a subcircuit that contains a C device with the area parameter.&#xa0;</td>
+<td class="confluenceTd"><code>.subckt mimcap vdd vss</code><br /><span style="color:var(--ds-text-accent-blue,#0055cc);"><code>C1 vdd vss mimcap_sin area_mim=2e-11</code></span><br /><code>.ends</code></td>
+</tr>
+<tr class=""><td class="highlight-grey confluenceTd" data-highlight-colour="grey">
+<p><strong>SPICE model file</strong> &#39;<code>toplevel.l</code>&#39; - the model file has &#8220;<code>mimcap_sin</code>&#8221; defined, and uses a flag &#8220;<code>capflag_mim</code>&#8221; to specify whether this subckt is to be used as MIMCap or not.</p>
+
+<p><br /></p>
+
+<p>Set <code>.param capflag_mim=1</code> to enable MIMCap computation.</p>
+</td>
+<td class="confluenceTd">
+<p><code>.subckt <span style="color:var(--ds-text-accent-blue,#0055cc);">mimcap_sin</span> top bottom area_mim=0 wt=5u lt=5u multi=1 scale=&#39;scale_mim&#39; <span style="color:var(--ds-text-accent-blue,#0055cc);">capflag=&#39;capflag_mim&#39;</span></code></p>
+
+<p>.......<br />.......</p>
+
+<p><code>.LIB setup_mim<br /></code><code>.param scale_mim=1<br /></code><code>.param sigma_factor_mim=1<br /></code><code><span style="color:var(--ds-text-accent-blue,#0055cc);">.param capflag_mim=1</span><br /></code><code>.ENDL setup_mim</code></p>
+</td>
+</tr>
+</tbody></table></div>
+</li><li>
+<p>Generate the output for power-grid library generation through the command line.<br /><strong>TCL command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>generate_pg_library -output stdcell_pgv</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li></ol><h4 id="StandardCellMIMCapPGVGeneration-Output">Output</h4>
+
+<p>The output directory will contain the <code>stdcells.cl</code>, <code>stdcells.report</code>, and <code>stdcells.summary</code> files similar to other standard cells. However, based on the value of <code>capflag_mim</code> parameter, there is a difference in the reported capacitance in <code>stdcells.report</code> :</p>
+<ul><li><code>.param capflag_mim=0</code> - Disables MIMCap computation so low capacitance is reported in the file:&#xa0;<br /><br />
+<p><code>=============================================================================================</code><br /><code>Cell &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;PowerNets &#xa0; &#xa0; &#xa0; Capacitance &#xa0; &#xa0; PowerGrid Views</code><br /><code>---------------------------------------------------------------------------------------------|</code></p>
+
+<p><code>mimcap&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; vdd(1.0000) &#xa0; &#xa0; <strong>9.98341e-18</strong> &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;EARLY(1 taps) EM(1 taps) IR(1 taps)</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; vss(0.0000) &#xa0; &#xa0; <strong>9.98341e-18</strong> &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;EARLY(1 taps) EM(1 taps) IR(1 taps)</code><br /><code>&#xa0;Cell Type = MACRO &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Cell_Status: PASS</code><br /><code>---------------------------------------------------------------------------------------------|&#xa0;</code></p>
+</li><li><code>.param capflag_mim</code>=<code>1</code> - Enables MIMCap computation so accurate capacitance is reported in the file:<br /><br />
+<p><code>==============================================================================================</code><br /><code>Cell &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;PowerNets &#xa0; &#xa0; &#xa0; Capacitance &#xa0; &#xa0; PowerGrid Views</code><br /><code>----------------------------------------------------------------------------------------------|</code></p>
+
+<p><code>mimcap&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; vdd(1.0000) &#xa0; &#xa0; <strong>4.44003e-13</strong>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; EARLY(1 taps) EM(1 taps) IR(1 taps)</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; vss(0.0000) &#xa0; &#xa0; <strong>4.44003e-13</strong>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; EARLY(1 taps) EM(1 taps) IR(1 taps)</code><br /><code>&#xa0;Cell Type = MACRO &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Cell_Status: PASS</code><br /><code>----------------------------------------------------------------------------------------------|&#xa0;</code></p>
+</li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="MIMCap_PGV_Characterization.html" id="prev" title="MIMCap_PGV_Characterization">MIMCap_PGV_Characterization</a></em></b><b><em><a href="Macro_Cell_MIMCap_PGV_Generation.html" id="nex" title="Macro_Cell_MIMCap_PGV_Generation">Macro_Cell_MIMCap_PGV_Generati ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

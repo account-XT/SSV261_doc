@@ -1,0 +1,178 @@
+
+<html><head><title>Additional Tcl Command Examples for Different Vector-Based and Vectorless flow</title>
+<meta name="page_sequence" content="22013000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468596" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Additional Tcl Command Examples for Different Vector-Based and Vectorless flow" />
+<meta name="Keywords" content="vectorless,vector-based,FSDB,VCD,dynamic,activity" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468596" />
+<meta name="NextFile" content="Scan_Mode_Analysis.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Viewing_Profiling_Database.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- Additional Tcl Command Examples for Different Vector-Based and Vectorless flow" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="Viewing_Profiling_Database.html" title="Viewing_Profiling_Database">Viewing_Profiling_Database</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Scan_Mode_Analysis.html" title="Scan_Mode_Analysis">Scan_Mode_Analysis</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Additional Tcl Command Examples for Different Vector-Based and Vectorless flow</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="fontredcadence">
+<p>The following are the additional Tcl command examples:</p>
+<h4 id="AdditionalTclCommandExamplesforDifferentVectorBasedandVectorlessflow-TclCommandsforVector-BasedFlow-MultipleVCD/FSDBFiles">Tcl Commands for Vector-Based Flow - Multiple VCD/FSDB Files</h4>
+
+<p>The Tcl commands for dynamic vector-based power analysis are shown below.</p>
+<pre><code>set_power_analysis_mode -method dynamic_vectorbased -corner max \<br />    -power_grid_library {fast_allcells.cl} -disable_static true </code></pre><pre><code>
+read_activity_file -format vcd -start 10ns -end 20ns -scope top/block design.vcd<br />set_switching_activity -activity 0.1<br />set_power -cell BUFX2MTL -pwl {0 0 1 0 2 1 3 0}<br />set_power_output_dir dynamic_vectorbased_max<br />report_power<br /><br /></code></pre>
+<p>You can specify multiple VCD/FSDB files with different windows for the vector-based dynamic analysis/vector profiling flow and write out a single dynamic current file/profiling report. The Tcl commands for dynamic vectorbased power analysis using multiple VCD files are shown below:</p>
+<pre><code>set_power_analysis_mode \<br />-start_time_alignment true -disable_static false \<br />-power_grid_library &quot; $testcaseRoot/library_pv.cl&quot;\ <br />-method vector_profile -x_transition_factor 1 -z_transition_factor 1 \<br />-vector_profile_mode {activity} -worst_step_size 2ns</code></pre>
+<p>By default, the software aligns all signals at t=0 (or min start time). You can disable the start time alignment by setting <code>set_power_analysis_mode -start_time_alignment</code> to <code>false</code>.</p>
+<pre><code>
+read_twf $testcaseRoot/pt.tw_ckt2 <br />read_activity_file -format VCD -scope top -start 3 -end 10 top.vcd <br />read_activity_file -format VCD -block block1 -start 5 -end 12 block1.vcd <br />read_activity_file -format VCD -block block2 -start 4 -end 15 block2.vcd <br />report_power -outfile activity.rpt</code></pre>
+<p>#Simulation period is max(endtime - starttime), that is, 11ns.</p>
+
+<p>#Start times for all VCDs will be aligned at t=0</p>
+
+<p>You can specify the <code>read_activity_file </code>command multiple times to read multiple VCD files. When you specify the <code>-start_time_shift</code> parameter of this command, the software first aligns all the signals of the specified activity files at time zero, and then shifts the start time of the activity file specified with the <code>-start_time_shift</code> parameter. A sample Tcl command to illustrate this is given below:</p>
+<pre><code>
+set_power_analysis_mode -method dynamic_vectorbased <br />read_activity_file -format VCD -scope top -start 3 -end 10 top.vcd <br />read_activity_file -format VCD -block block1 -start 5 -end 12 block1.vcd -start_time_shift 2ns <br />read_activity_file -format VCD -block block2 -start 4 -end 15 block2.vcd <br />report_power </code></pre>
+<p>#Simulation period is max(endtime - starttime), that is, 11ns.</p>
+
+<p>#Start times for the top + block2 VCD will be aligned at t=0 whereas for block1.vcd it will start at 2ns.</p>
+<h4 id="AdditionalTclCommandExamplesforDifferentVectorBasedandVectorlessflow-TclCommandforProbability-BasedVectorlessFlow">Tcl Command for Probability-Based Vectorless Flow</h4>
+
+<p>The Tcl commands for dynamic probability-based vectorless power analysis are shown below.</p>
+<pre><code>
+set_power_analysis_mode -method dynamic_vectorless -corner max \<br />                        -power_grid_library {fast_allcells.cl}<br />set_default_switching_activity -input_activity 0.2 -seq_activity 0.1 \<br />                               -hier top/block/module1<br />read_activity_file -format vcd -start 10ns -end 20ns -scope top/block design.vcd<br />set_switching_activity -activity 0.1 <br />set_power -cell BUFX2MTL -pwl {0 0 1 0 2 1 3 0}<br />set_dc_sources {VDD VDD1} -power -voltage 1.2<br />set_power_output_dir dynamic_vectorless_max <br />report_power</code></pre>
+<p>You can use the <code>set_dc_sources</code> command to specify the operating voltages of the power/ground nets. This command is used to specify a global voltage or voltages for specific power nets in the design.</p>
+
+<p># To enable multi-threading in dynamic vectorless flow</p>
+<pre><code>set_multi_cpu_usage -localCpu 4<br />set_power_analysis_mode -method dynamic_vectorless -corner max \ <br /> -power_grid_library {fast_allcells.cl} -disable_static true<br /> set_default_switching_activity -input_activity 0.2 -seq_activity 0.1 \<br />                               -hier top/block/module1 <br />read_activity_file -format vcd -start 10ns -end 65ns -scope top test.vcd <br />set_switching_activity -activity 0.1 <br />set_power -cell BUFX2MTL -pwl {0 0 1 0 2 1 3 0} <br />set_power_output_dir dynamic_vectorless_max <br />report_power </code></pre><h4 id="AdditionalTclCommandExamplesforDifferentVectorBasedandVectorlessflow-TclCommandforState-Propagation-BasedVectorlessFlowwithUser-DefinedActivity">Tcl Command for State-Propagation-Based Vectorless Flow with User-Defined Activity</h4>
+
+<p>The Tcl commands for dynamic state-propagation-based vectorless power analysis are shown below.</p>
+<pre><code>
+set_multi_cpu_usage -localCpu 4<br />set_default_switching_activity -input_activity 0.2 -seq_activity 0.1 \<br />                               -clock_gates_output 2.0 <br />set_power_analysis_mode -method dynamic_vectorless -enable_state_propagation true -power_grid_library {fast_allcells.cl}</code></pre><pre><code>
+set_dynamic_power_simulation -period 20ns -resolution 50ps<br />report_power -output dynamic_power</code></pre>
+<p>Voltus generates a time varying switching profile report (<code>voltus_power.togglestats</code>) in the output directory for both the vector-based and state-propagation-based vectorless dynamic power analysis flows. The report includes the number of output toggles with the corresponding simulation time.</p>
+
+<p>The following is a snippet of the report:</p>
+<pre><code>
+Toggle Statistics<br />*___________________________</code></pre><pre><code>
+*Time(s)     Toggle Count   <br />*___________________________</code></pre><pre><code>
+0.0000e+00    3<br />2.0000e-11    0<br />&#8230;</code></pre>
+<p>Following is a sample of a detailed vector profile report:</p>
+<pre><code>
+The 10 intervals have the maximum power (mW):</code></pre><pre><code>               1.000    to                2.000&#xa0;&#xa0;&#xa0;&#xa0;   0.03452</code></pre><pre><code>              47.000    to               48.000&#xa0;&#xa0;&#xa0;&#xa0;    0.0315</code></pre><pre><code>              48.000    to               49.000&#xa0;&#xa0;&#xa0;&#xa0;   0.03035</code></pre><pre><code>              46.000    to               47.000&#xa0;&#xa0;&#xa0;&#xa0;   0.02716</code></pre><pre><code>               5.000    to                6.000&#xa0;&#xa0;&#xa0;&#xa0;   0.02574</code></pre><pre><code>              15.000    to               16.000&#xa0;&#xa0;&#xa0;&#xa0;   0.02398</code></pre><pre><code>              25.000    to               26.000&#xa0;&#xa0;&#xa0;&#xa0;   0.02398</code></pre><pre><code>              35.000    to               36.000&#xa0;&#xa0;&#xa0;&#xa0;   0.02398</code></pre><pre><code>              45.000    to               46.000&#xa0;&#xa0;&#xa0;&#xa0;   0.02398</code></pre><pre><code>              55.000    to               56.000&#xa0;&#xa0;&#xa0;&#xa0;   0.02398</code></pre><pre><code>
+The 10 intervals have the maximum activity:</code></pre><pre><code>              45.000    to               46.000&#xa0;&#xa0;&#xa0;&#xa0;        11</code></pre><pre><code>              35.000    to               36.000&#xa0;&#xa0;&#xa0;&#xa0;         9</code></pre><pre><code>              46.000    to               47.000&#xa0;&#xa0;&#xa0;&#xa0;         9</code></pre><pre><code>               1.000    to                2.000&#xa0;&#xa0;&#xa0;&#xa0;       8.5</code></pre><pre><code>              47.000    to               48.000&#xa0;&#xa0;&#xa0;&#xa0;         7</code></pre><pre><code>               5.000    to                6.000&#xa0;&#xa0;&#xa0;&#xa0;         6</code></pre><pre><code>              15.000    to               16.000&#xa0;&#xa0;&#xa0;&#xa0;         6</code></pre><pre><code>              25.000    to               26.000&#xa0;&#xa0;&#xa0;&#xa0;         6</code></pre><pre><code>              48.000    to               49.000&#xa0;&#xa0;&#xa0;&#xa0;         4</code></pre><pre><code>               2.000    to                3.000&#xa0;&#xa0;&#xa0;&#xa0;       3.5</code></pre><pre><code>
+</code></pre><pre><code>The 10 intervals having maximum dp/dt (mW):</code></pre><pre><code>               1.000    to                2.000&#xa0;&#xa0;&#xa0;&#xa0;   0.03439</code></pre><pre><code>              49.000    to               50.000&#xa0;&#xa0;&#xa0;&#xa0;  -0.03022</code></pre><pre><code>               5.000    to                6.000&#xa0;&#xa0;&#xa0;&#xa0;   0.02561</code></pre><pre><code>               6.000    to                7.000&#xa0;&#xa0;&#xa0;&#xa0;  -0.02561</code></pre><pre><code>              15.000    to               16.000&#xa0;&#xa0;&#xa0;&#xa0;   0.02384</code></pre><pre><code>              25.000    to               26.000&#xa0;&#xa0;&#xa0;&#xa0;   0.02384</code></pre><pre><code>              35.000    to               36.000&#xa0;&#xa0;&#xa0;&#xa0;   0.02384</code></pre><pre><code>             36.000    to               37.000&#xa0;&#xa0;&#xa0;&#xa0;  -0.02384</code></pre><pre><code>              45.000    to               46.000&#xa0;&#xa0;&#xa0;&#xa0;   0.02384</code></pre><pre><code>              55.000    to               56.000&#xa0;&#xa0;&#xa0;&#xa0;   0.02384</code></pre><pre><code>
+The 10 intervals have the maximum da/dt:</code></pre><pre><code>              45.000    to               46.000&#xa0;&#xa0;&#xa0;&#xa0;        11</code></pre><pre><code>              35.000    to               36.000&#xa0;&#xa0;&#xa0;&#xa0;         9</code></pre><pre><code>              36.000    to               37.000&#xa0;&#xa0;&#xa0;&#xa0;        -9</code></pre><pre><code>               1.000    to                2.000&#xa0;&#xa0;&#xa0;&#xa0;       8.5</code></pre><pre><code>               5.000    to                6.000&#xa0;&#xa0;&#xa0;&#xa0;         6</code></pre><pre><code>               6.000    to                7.000&#xa0;&#xa0;&#xa0;&#xa0;        -6</code></pre><pre><code>              15.000    to               16.000&#xa0;&#xa0;&#xa0;&#xa0;         6</code></pre><pre><code>              25.000    to               26.000&#xa0;&#xa0;&#xa0;&#xa0;         6</code></pre><pre><code>               2.000    to                3.000&#xa0;&#xa0;&#xa0;&#xa0;        -5</code></pre><pre><code>              16.000    to               17.000&#xa0;&#xa0;&#xa0;&#xa0;        -4</code></pre><pre><code>
+</code></pre><pre><code>Step(ns)    Instance Power(mW) Internal   Switching    Leakage        Activity<br />                               Power(mW)  Power(mW)    Power(mW</code></pre><pre><code>-------------------------------------------------------------------------</code></pre><pre><code>
+0.000 to 1.000 Top   0.0001358     0       0           0.0001358       0<br />1.000 to 2.000 Top&#xa0;&#xa0; 0.03452&#xa0;&#xa0;    0.02459  0.009792    0.0001358       8.5     </code></pre><pre><code>
+...</code></pre><pre><code>
+</code></pre><h4 id="AdditionalTclCommandExamplesforDifferentVectorBasedandVectorlessflow-TclCommandforState-Propagation-BasedVectorlessFlowwithUser-DefinedPowerTargets">Tcl Command for State-Propagation-Based Vectorless Flow with User-Defined Power Targets</h4>
+
+<p>The Tcl commands for state-propagation-based vectorless power analysis with user-defined power targets are shown below.</p>
+
+<p><strong>Example 1: Enable the power target flow with fixed CGO</strong></p>
+<pre><code>set_power_analysis_mode \</code></pre><pre><code>...</code><code>
+-method dynamic_vectorless \</code></pre><pre><code>-enable_state_propagation true \</code></pre><pre><code>-enable_power_target_flow true \</code></pre><pre><code>-enable_xp true \</code></pre><pre><code>-keep_clock_gate_ratio_in_iterations true</code><code>
+...</code></pre><pre><code>
+##Set power target at the top-level</code></pre><pre><code>set_power 3mW</code></pre><pre><code>...</code></pre><pre><code>
+##User-specified CGO</code></pre><pre><code>set_default_switching_activity \</code></pre><pre><code>-clock_gates_output 0.4</code></pre>
+<p>In this case, the clock gate output is fixed, while the values for input, macro, and sequential activities will be adjusted to meet the power target of 3mW.</p>
+<pre><code>target_0: (cg_ratio 0.2 seq_activity 0 input_activity 0 macro_activity 0)</code></pre><pre><code>target_0: (cg_ratio 0.2 seq_activity 1 input_activity 1 macro_activity 1)</code></pre><pre><code>target_0: (cg_ratio 0.2 seq_activity 0.54 input_activity 0.54 macro_activity 0.54)</code></pre><pre><code>Achieved total power 0.0031013 in 2 iterations</code></pre><pre><code>
+</code></pre>
+<p><strong>Example 2: Enable the power target flow with a single power target of 3mW</strong></p>
+<pre><code>set_power_analysis_mode \</code></pre><pre><code>...</code></pre><pre><code>-method dynamic_vectorless \</code></pre><pre><code>-enable_state_propagation true \</code></pre><pre><code>-enable_power_target_flow true \</code></pre><pre><code>-enable_xp true \</code></pre><pre><code>...</code></pre><pre><code>##Set power target at the top-level</code></pre><pre><code>set_power 3mW</code></pre><pre><code>...</code></pre>
+<p>In this case, the values for input, macro, clock gate output, and sequential activities will be adjusted to meet the power target of 3mW.</p>
+
+<p><code>
+target_0: (cg_ratio 0 seq_activity 0 input_activity 0 macro_activity 0)</code></p>
+<pre><code>target_0: (cg_ratio 0 seq_activity 1 input_activity 1 macro_activity 1)</code></pre><pre><code>target_0: (cg_ratio 0.44 seq_activity 0.44 input_activity 0.44 macro_activity 0.44)</code></pre><pre><code>Achieved total power 0.00310119 in 2 iterations<br /><br /></code></pre>
+<p><strong>Example 3: Enable the power target flow with two power targets</strong></p>
+<pre><code>set_power_analysis_mode \</code></pre><pre><code>...</code></pre><pre><code>-method dynamic_vectorless \</code></pre><pre><code>-enable_state_propagation true \</code></pre><pre><code>-enable_power_target_flow true \</code></pre><pre><code>-enable_xp true \</code></pre><pre><code>...</code></pre><pre><code>
+##Set 2 power targets (top and physical/logical hierarchy)</code><code>
+set_power 3mW</code></pre><pre><code>set_power 1mW -instance ring</code></pre><pre><code>...</code></pre>
+<p>In this case, the values for input, macro, clock gate output, and sequential activities will be adjusted to meet the two power targets.</p>
+<pre><code>target_0: (cg_ratio 0 seq_activity 0 input_activity 0 macro_activity 0)  <br />target_1: (cg_ratio 0 seq_activity 0 input_activity 0 macro_activity 0)</code></pre><pre><code>
+</code></pre><pre><code>target_0: (cg_ratio 1 seq_activity 1 input_activity 1 macro_activity 1)  <br />target_1: (cg_ratio 1 seq_activity 1 input_activity 1 macro_activity 1)</code><code>
+</code></pre><pre><code>
+target_0: (cg_ratio 0.44 seq_activity 0.44 input_activity 0.44 macro_activity 0.44)<br />target_1: (cg_ratio 0.79 seq_activity 0.79 input_activity 0.79 macro_activity 0.79)</code></pre><pre><code>
+</code></pre><pre><code>target_0: (cg_ratio 0.38 seq_activity 0.38 input_activity 0.38 macro_activity 0.38)<br />target_1: (cg_ratio 0.79 seq_activity 0.79 input_activity 0.79 macro_activity 0.79)</code></pre><pre><code>
+</code></pre><pre><code>target_0: (cg_ratio 0.35 seq_activity 0.35 input_activity 0.35 macro_activity 0.35) <br />target_1: (cg_ratio 0.79 seq_activity 0.79 input_activity 0.79 macro_activity 0.79)</code></pre><pre><code>
+</code></pre><pre><code>Achieved total power 0.00306517 in 4 iterations</code></pre></span></p>
+<h4 id="AdditionalTclCommandExamplesforDifferentVectorBasedandVectorlessflow-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Setting_up_and_Running_Vectorless_Power_Analysis.html">Setting up and Running Vectorless Power Analysis</a></li><li><a href="Combining_Vector_Profiling_and_Power_Analysis.html">Combining Vector Profiling and Power Analysis</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Viewing_Profiling_Database.html" id="prev" title="Viewing_Profiling_Database">Viewing_Profiling_Database</a></em></b><b><em><a href="Scan_Mode_Analysis.html" id="nex" title="Scan_Mode_Analysis">Scan_Mode_Analysis</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

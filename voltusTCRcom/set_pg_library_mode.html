@@ -1,0 +1,967 @@
+
+<html><head><title>set_pg_library_mode</title>
+<meta name="page_sequence" content="26006000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666281" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_pg_library_mode" />
+<meta name="Keywords" content="power-grid library,PGV,input,configuration" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Power-Grid Library Generation," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusTCRcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666281" />
+<meta name="NextFile" content="trim_pg_library.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_advanced_pg_library_mode.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Text Reference Manual  -- set_pg_library_mode" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltuscuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusTCRcomTOC.html">Contents</a></li><li><a class="prev" href="set_advanced_pg_library_mode.html" title="set_advanced_pg_library_mode">set_advanced_pg_library_mode</a></li><li style="float: right;"><a class="viewPrint" href="voltusTCRcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="trim_pg_library.html" title="trim_pg_library">trim_pg_library</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Text Reference Manual <br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_pg_library_mode</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span id="set_pg_library_mode-set_pg_library_mode"></span>&#xa0;<span class="confluence-anchor-link" id="set_pg_library_mode-set_pg_library_mode"></span> <code><br />set_pg_library_mode</code><br /><code>[-help]</code><br /><code>[-add_power_pin_location_cells <em>cell1 cell2 ...</em>]</code><br /><code>[-bulk_ground_pins&#xa0;{ <em>ground_pin_list</em> }]</code><br /><code>[-bulk_power_pins&#xa0;{ <em>pin1 voltage1 ... pinN voltageN</em> }]</code><br /><code>[-calculate_metal_layer_density {true | false}]</code><br /><code>[-cell_power_pin_location_details <em>filename</em>]</code><br /><code>-cell_type { techonly | stdcells | macros }</code><br /><code>[-cells_file <em>filename</em> ]</code><br /><code>[-current_distribution {propagation | dynamic_simulation trigger_file | current_region region_file}]</code><br /><code>[-custom_label <em>label</em>]</code><br /><code>[-decap_cells <em>cell_name_list</em>]</code><br /><code>[-decap_cells_file <em>filename</em>]</code><br /><code>[-default_area_capacitance <em>value</em>]</code><br /><code>[-default_power_voltage <em>value</em>]</code><br /><code>[-design_qrc_layer_map&#xa0;<em>file</em>]</code><br /><code>[-enable_device_size_current_distribution&#xa0;{true | false}]</code><br /><code>[-enable_distributed_processing&#xa0; {true|false} ]</code><br /><code>[-enable_multi_voltage_cap_generation {true | false}]</code><br /><code>[-exclude_cells_file <em>filename</em>]</code><br /><code>[-extraction_tech_file <em>file</em>]</code><br /><code>[-filler_cells <em>cell_name_list</em>]</code><br /><code>[-fine_grain_memory_cell&#xa0; {true | false} ]</code><br /><code>[-generate_port_using_stream mbb_layer_name ]</code><br /><code>[-ground_pins&#xa0;{ <em>ground_pin_list</em> }]</code><br /><code>[-ignore_stream_cells {<em>gds_cell_name_list</em>}]</code><br /><code>[-internal_ground_pins <em>ground_pin_list</em>]</code><br /><code>[-internal_power_pins <em>power_pin_list</em>]</code><br /><code>[-layer_tap_node_distance { {<em>LayerName1tap_node_distance</em>} {<em>LayerName2tap_node_distance} ...</em> }]</code><br /><code>[-layers_to_be_ignored_during_tap_creation&#xa0;{<em>layername</em>+}]</code><br /><code>[-layers_to_have_ports_created&#xa0;{<em>layername</em>+}]</code><br /><code>[-lef_layer_map <em>file</em> ]&#xa0;</code><br /><code>[-liberty_files <em>file_list</em>]</code><br /><code>[-macros_config_file <em>filename</em>]</code><br /><code>[-max_metal_density_tile_dimension {<em>maxlengthmaxwidth</em>}]</code><br /><code>[-non_zero_ground_pins { <em>pin1voltage1 ... pinN voltageN</em> }]<br /><span style="color:var(--ds-text,#172b4d);">[-oasis_stream_files<span>&#xa0;</span></span><em>file_list</em><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span>]</span><br /><span style="color:var(--ds-text,#172b4d);">[-oasis_stream_layer_map<span>&#xa0;</span></span><em>file</em><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span>]</span></code><br /><code>[-pin_shape_current_distribution <em>filename</em>]</code><br /><code>[-power_pins&#xa0;{ <em>pin1voltage1 ... pinN voltageN</em> }]</code><br /><code>[-power_switch_fine_grain_simulation {true|false} ]</code><br /><code>[-power_switch_parameters&#xa0; {{ <em>cell supply switchedRon Idsat Ileak <em><span>enablePinName</span></em> Control_Pin_Logic</em>} + } ]</code><br /><code>[-power_switch_parameters_file <em>filename</em> ]</code><br /><code>[-spice_corners <em>corner_list</em>]</code><br /><code>[-spice_models <em>file_list</em>]</code><br /><code>[-spice_netlist_file <em>filename</em>]</code><br /><code>[-spice_subckts <em>file_list</em>]</code><br /><code>[&#8211;spice_subckts_xy_scaling <em>value</em>]</code><br /><code>[-stop_via <em>layername</em> ]<br /><span style="color:var(--ds-text,#172b4d);">[-stop_via_file<span>&#xa0;</span></span><em>filename</em><span style="color:var(--ds-text,#172b4d);">]</span></code><br /><code>[-stream_files file_list ]</code><br /><code>[-stream_layer_map <em>file</em> ]</code><br /><code>[-tap_node_distance_file&#xa0;<em>filename</em>]<br /><span style="color:var(--ds-text,#172b4d);">[-tech_oasis_stream_layer_map&#xa0;</span><em>filename</em><span style="color:var(--ds-text,#172b4d);">]</span></code><br /><code>[-tech_stream_layer_map&#xa0;<em>filename</em>]</code><br /><code>[-temperature <em>temp_value_in_degree_celcius</em> ]<br /><span style="color:var(--ds-text,#172b4d);">[-tsv_subckt_modelfile_list<span>&#xa0;</span></span><em>filename</em><span style="color:var(--ds-text,#172b4d);">]</span><br /></code><code>[-use_lefonly_for_detailedview_generation {true | false} ]</code><br /><code>[-use_power_switch_data_from_lib {true|false}]</code></p>
+
+<p>Specifies what kind of power-grid library will be created. This command is used to define the type of input and configuration for generating power-grid libraries. You must specify this command before running the <code>write_pg_library</code> command.</p>
+<h4 id="set_pg_library_mode-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table class="wrapped relative-table confluenceTable" style="width: 96.1645%;"><colgroup><col style="width: 3.60279%;" /><col style="width: 96.4107%;" /></colgroup><tbody><tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;">
+<p><code>-help</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1313.0px;">Outputs the command usage.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><span><code><code><span><code><span><code>-add_power_pin_location_cells</code></span></code></span></code> <em>cell1</em> <em>cell2</em> ..</code>.</span></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies the name of the low-dropout (LDO) cell for which a voltage source is to be added. You can specify a&#xa0; list of cells. This parameter is applicable to the LDO cells only, and must be used when creating voltage sources for these cells. When this parameter is specified, all the output pins will be made voltage sources using the highest voltage value of the cell.</p>
+
+<p>The&#xa0;<code><span><code><span><code><span><code><span><code>-add_power_pin_location_cells</code></span></code></span></code></span></code></span></code> parameter is used with the <code><code>-cell_<code>power_pin_location_details</code></code></code> parameter.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;">
+<p><code>-bulk_ground_pins&#xa0;{ <span><em><code><span><code><em>ground_pin_list</em> </code></span></code></em></span>}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies the names of nets that connect transistor bulk terminals to the ground net. This information is used to prevent any current from being assigned to these nets. If a net is connected to any transistor terminals other than a bulk terminal, you must specify that net with the <code>-ground_pins </code>parameter.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;">
+<p><code>-bulk_power_pins&#xa0;{ <em>pin1</em> <em>voltage1 </em>...<em>pinN</em> <em>voltageN</em> }</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies the names of nets that connect transistor bulk terminals to the power net. This information is used to prevent any current from being assigned to these nets. If a net is connected to any transistor terminals other than a bulk terminal, you must specify that net with the <code>-power_pins </code>parameter.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><span>-calculate_metal_layer_density {true | false}</span></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Enables metal layer density calculation for macros. The default value is <code>false</code>.</p>
+
+<p>When this parameter is set to <code>true</code>, Library Generation calculates and stores the area density information for each metal layer in macros for accurate thermal analysis. Metal density for macros is calculated by dividing the macro cell into tiles, and computing the area of polygons in each tile. The calculated metal density values are used in the Power Analysis flow to generate the metal power density map. This power map file is later used as input by Celsius Thermal Solver, the thermal analysis tool for packages and boards.</p>
+
+<p>This parameter is applicable only for macro PGV generation (<code><span>-cell_type&#xa0;</span></code><code><span><code><span><code>macros</code></span></code></span></code>).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-cells_file</code> &#xa0;&#xa0; <em><code>filename </code></em></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies a file containing a list of cells that will be processed.</p>
+
+<p>The <code>-cells_file   </code>parameter is required when <code>set_pg_library_mode -cell_type macros </code>is selected. The program spawns the library generation job in serial mode for each macro in the cell list file. A separate library for each macro is generated. This facilitates debugging when library generation of any macro fails. It also helps in improving the overall performance. The following is a sample cell list file:</p>
+
+<p><code>CELL1</code> <br /><code>CELL2</code> <br /><code>CELL3</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><code>-<code>cell_<code>power_pin_location_details</code></code></code>&#xa0;<em>filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies a file that contains all the information required to add a voltage source at the desired location for the power pad and LDO cells. This file includes the pad cell name, pin name, layer name, and domain name.</p>
+
+<p>The format of the file is:<br /><em><code>cell_name</code></em> &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;&#xa0; <em><code>pin_name</code></em>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; <em><code>layer_name</code></em>&#xa0;&#xa0;&#xa0; <em><code>domain_name<br /></code></em><code>PADCELL &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VDD&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Metal3&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VDD</code></p>
+<ul><li>
+<p><em><code>pin_name</code></em> is the power/ground name for pad cells, and is the output pin name for LDO cells. The pin name could be represented by using the wildcard character &quot;*&quot; to indicate that voltage sources are to be added to all pins of a power pad/LDO cell.</p>
+</li><li>
+<p><code><em>domain_name</em></code> is the pin name for pad cells. For LDO cells, it is the power or ground name whose voltage needs to be used.</p>
+</li></ul>
+<p><strong>Example</strong>:</p>
+
+<p><code>set_pg_library_mode \</code><br /><code>&#xa0;&#xa0;&#xa0; -ground_pins&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; {VSS 0 ExtVSS 0} \</code><br /><code>&#xa0;&#xa0;&#xa0; -power_pins&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; {VDD 1.2 ExtVDD 1.2} \</code><br /><code>&#xa0;&#xa0;&#xa0; -cell_type&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; techonly \</code><br /><code>&#xa0;&#xa0;&#xa0; ...</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;<code><code>-add_power_pin_location_cells</code></code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; {PADVDD PADDI PADVSS} \</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;<code>-<code>cell_<code>power_pin_location_details</code></code></code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; /VoltageSource/config.txt \</code></p>
+
+<p>The following is a snippet of the config.txt file:</p>
+
+<p><code>PADDO * VDD</code><br /><code>PADVDD VDD Metal3 VDD</code><br /><code>PADVSS VSS Metal2 VSS</code><br /><code>PADVDD VDD Metal2 VDD</code><br /><code>PADVSS VSS Metal3 VSS</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;">
+<p><code><span>-cell_type {<span> <code>techonly</code> | stdcells | macros</span>}</span> </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies the type of library creation.</p>
+<ul><li><code>techonly - </code>Creates a technology Library that contains the tech file, area capacitance specification, decap/filler/powergate cells, and Tech view for all the cells. A technology library is a requirement for running rail analysis.<code>        </code></li><li><code>stdcells - </code> <span style="line-height: 1.4285;">Generates a power-grid library for all the standard cells using the Spice netlist. The stdcells power-grid library does not contain the tech file. Power-grid is connected at the LEF pin, and all the capacitance are derived from simulation. The power-grid library contains three kind of power-grid views (PGVs), Early/IR/EM, and the views are selected based on the accuracy mode of rail analysis.</span></li></ul><ul><li><code> macros - </code>Generates a power-grid library for memory, I/Os and macros using the Spice and GDS netlist. GDS is mandatory for the cell type macros. The <code>macros</code> power-grid library does not contain the tech file. Power-grid is connected down to contact/specified via, and all the capacitance are derived from simulation. The power-grid library contains three kind of PGVs, Early/IR/EM, and the views are selected based on the accuracy mode of rail analysis.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-current_distribution {propagation | dynamic_simulation <em>trigger_file</em> | current_region <em>region_file</em>} </code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies the method of current distribution inside the cell.</p>
+<ul><li><strong>Propagation</strong> uses Voltus library simulator to determine the propagation activity to distribute the current.</li><li><strong>Dynamic simulation</strong> uses a trigger file to run detailed analysis to determine current distribution. For more information on the format, see <a href="#set_pg_library_mode-trigger">Trigger File Format</a>.</li><li><strong>Current region</strong> specifies the amount of current to distribute within a cell region. For more information on the format, see <a href="#set_pg_library_mode-current_format">Current Region File</a>.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><span><code>-custom_label <em>label</em></code></span></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">Saves the specified label in the PGV for easy identification. This label can be used for revision control, label for Spice netlist/model, and internal keywords. It will be stored as &#8220;Custom Label&#8221; in VERSION.TXT in the .cl</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;">
+<p><code>-decap_cells <em>cell_name_list</em> </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;">
+<p>&#xa0; &#xa0; &#xa0; &#xa0;</p>
+</td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies the names of cells that have explicit decoupling capacitance for use in decap optimization. These cells are nearly equivalent to feedthrough cells, except that there is typically an active device between the power and ground nets to provide extra decoupling capacitance. Power-grid view library generation uses this list of cells to ensure that a capacitance value is associated with each cell. If no capacitance is associated with a cell, a warning message will be issued.</p>
+
+<p>This parameter supports wildcards (*).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-decap_cells_file <em>filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies the name of a file containing a list of cells and the decoupling capacitance value for each. You can also specify the series resistance value along with the decoupling capacitance value to accurately model the cell decoupling capacitance. The cell decap file format allows you to specify capacitance for multiple voltage values to support multi-voltage capacitance simulation for standard cell and macro PGV generation.</p>
+
+<p><strong>File Format</strong>:</p>
+
+<p><code><code>UNIT &lt;X&gt; <br /></code><code>CELL <em>cell_name</em></code><br /><code>PIN <em>pin_name</em> <em>capacitance</em> <em>resistance</em></code></code></p>
+
+<p><code>or<br />UNIT &lt;X&gt; <br /></code><code>CELL <em>cell_name</em></code><br /><span style="color:var(--ds-text,#000000);"><code><strong>VOLTAGE <em>value1</em></strong></code></span><br /><code>PIN <em>pin_name</em> <em>capacitance</em> <em>resistance</em></code><br /><code>...</code><br /><code>....</code></p>
+
+<p><span style="color:var(--ds-text,#000000);"><code><strong>VOLTAGE <em>value2</em></strong></code></span><br /><code>PIN <code><em>pin_name</em> <em>capacitance</em> <em>resistance</em></code></code><br /><code>...</code><br /><code>...</code></p>
+
+<p>Unit is optional, default is <code>1e-15</code>. The <em>value</em> for each cell will be multiplied by the unit, except if engineering notation is provided.</p>
+
+<p><strong>Examples</strong>:</p>
+
+<p><code>UNIT 1<br />CELL cell1</code></p>
+
+<p><code>VOLTAGE 1.0<br />PIN VDD&#xa0; 1e-18<br />PIN VSS&#xa0; 1e-18<br /></code></p>
+
+<p><code>VOLTAGE 0.9<br />PIN VDD&#xa0; 1e-18<br />PIN VSS&#xa0; 1e-18</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-default_area_capacitance <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">&#xa0;Specifies the default amount of area based decoupling capacitance in a cell. The default area-cap is 0.0 (unit is fF per micron-square).&#xa0; You must provide a value for area-based decoupling capacitance.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><span><code><span><code>-default_power_voltage <em>value</em></code></span></code></span></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">Specifies voltage for the power pins which are present in LEF but not specified using the <code>-power_pins</code> parameter.&#xa0; As a result, the <code>-power_pins</code> parameter of the command is optional. The default&#xa0; voltage value specified using <code>-default_power_voltage</code> is added to all power pins of the cell.<br />
+<p>If both the parameters <code>-power_pins</code> and <code>-default_power_voltage</code> are not specified, the default voltage of 1.2 will be used.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><span><code style="text-align: left;">-design_qrc_layer_map&#xa0;<em>file</em></code></span></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies a file that provides the mapping of <span style="color:var(--ds-text,#000000);">the layer names in the LEF design file to the layer names in the Quantus technology file.<br /></span><strong>File Format</strong>:</p>
+
+<p><code>
+<u>lefdef_layername</u>&#xa0;&#xa0;&#xa0; <u>technology_layername</u><br />M1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &#xa0;&#xa0; METAL_1 <br />VIA1 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VIA_1 <br /></code></p>
+
+<p><code>M2 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &#xa0;&#xa0; METAL_2 <br />VIA2 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VIA_2 </code><code><br />...</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><span><code>-enable_device_size_current_distribution&#xa0;{true | false}</code></span></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies to compute the tap current distribution for a macro based on device sizes (Width, Length), without performing any simulation. This parameter is used for macro PGV generation in a scenario when the Spice netlist is available but the Spice models are not available.</p>
+<em><strong>Default</strong></em>: <code>false</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-enable_distributed_processing&#xa0;<code>{true|false}</code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">Specifies to enable parallel processing for the Library Generation flow.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><span><code>-enable_multi_voltage_cap_generation {true | false}</code> </span></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies to compute capacitance values over a range of input voltages, including the nominal voltage. It generates 10 values from 0.1 to 1.3 times the vdd/vss voltage. The default value is <code>false</code>.</p>
+
+<p>When set to <code>true</code>, it generates a PGV that contains the voltage-dependent capacitance table for the specified cell. This parameter allows you to use the accurate cell capacitance at different supply voltages in power-up analysis and in different voltage domains in dynamic analysis.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><code><code>-exclude_cells_file </code><code><code><em>filename</em></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">Specifies a file containing a list of cells (one per line)&#xa0; which should be excluded from power-grid library generation.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;">
+<p><code>-extraction_tech_file <em>file</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies the name of the technology file that will be used for extraction.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;">
+<p><code>-filler_cells <em>cell_name_list</em>       </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>List the names of the filler or feedthrough cells that have no GDS data. These cells can be swapped out for decaps during decap optimization. This parameter supports wildcards (*).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><span>-fine_grain_memory_cell&#xa0;<code><span><code> <span>{true | false}</span></code></span></code></span></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies to tag the cell as the fine-grain cell in the PGV library when characterizing the cell, and ensures that the software automatically uses this information to identify the fine-grain memory cells in the rail analysis flow. The default value is <code>false</code>.</p>
+
+<p>This parameter is used with the&#xa0;<code>-internal_power_pins</code> and <code>-internal_ground_pins</code> parameters to specify the list of switch power/ground pins. It is recommended to use these parameters when characterizing fine-grain cells to avoid any potential cell type identification conflict in the rail analysis flow.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;">
+<p><code>-generate_port_using_stream <em>mbb_layer_name</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Identifies the layer name that library generation uses to compute the placement bounding box for GDSII cells that are placed by the DEF file.&#xa0;</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;">
+<p><code>-ground_pins&#xa0;{  <span><em><code><span><code><em>ground_pin_list </em></code></span></code></em><code><code>}</code></code></span></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies the names of the nets considered ground nets for all cells for which the ground nets are not specified.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><span><code><span><code>-ignore_stream_cells {<em>gds_cell_name_list</em>}</code></span></code></span></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Ignores the specified cells during macro PGV generation. When this parameter is specified, the Library Generation engine does not extract data for these cells. This parameter supports wildcards.</p>
+
+<p><strong>Example</strong>:</p>
+
+<p>The following command does not extract data for the <code>cell3</code> cell:<br /><code>set_pg_library_mode -ignore_stream_cells {cell3}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><span>-internal_power_pins <em>power_pin_list</em> </span></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">Specifies the list of switch power pins.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><span>-internal_ground_pins <em>ground_pin_list</em> </span></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">Specifies the list of switch ground pins.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><span>-layer_tap_node_distance { {<em>LayerName1</em> <em>tap_node_distance</em>} {<em>LayerName2</em> <em>tap_node_distance</em>} ... }</span></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p><strong>Default</strong>: None</p>
+
+<p>Specifies&#xa0;tap node distances for certain layers. Using this parameter, you can customize the tap node distance for each layer during power-grid library generation.</p>
+
+<p>The tap node distance is in micron. If the tap node distance is specified for a single layer, double brackets {{}} are still required.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><span><span style="color:var(--ds-text,#172b4d);">-layers_to_be_ignored_during_tap_creation&#xa0;{</span><em style="text-align: left;">layername</em><span style="color:var(--ds-text,#172b4d);">+}</span></span></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;"><span style="color:var(--ds-text,#172b4d);">Specifies the names of the layers that library generation is to ignore when it creates the current taps. This parameter can be used to suppress the generation of any nodes or taps on layers that should not be extracted. Some technologies include layers that are only used to influence the extraction of other layers.</span></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code style="text-align: left;">-layers_to_have_ports_created&#xa0;{<em>layername</em>+}</code><span style="color:var(--ds-text,#172b4d);">&#xa0;</span></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;"><span style="color:var(--ds-text,#172b4d);">Specifies the names of the layers for which ports are to be created. This parameter can be used to create ports for the poly and diffusion layers in the technology file. By default ports are only created on metal layers.</span></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-lef_layer_map <em>file</em>  </code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies a file that provides the mapping of layers between the LEF and technology file. This parameter is optional. Library Generation automatically generates the layermap file using the technology LEF (containing all layer and via definitions) and QRC Tech (extraction library) files, therefore, a LEF layermap file is not a mandatory input. The automatically generated layermap file is located in the PGV temp directory.</p>
+
+<p>The following is the format and sample content of the auto-generated file (<code>lefdefLayerMap_AutoGenerated.txt</code>):</p>
+
+<p><code>
+<u>Layer Type</u>&#xa0;&#xa0; <u>tech_layername</u>&#xa0;&#xa0; <u>lefdef</u>&#xa0;&#xa0;&#xa0; <u>lefdef_layername</u>
+            <br />via&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VIA_9&#xa0;&#xa0;&#xa0; &#xa0;&#xa0;&#xa0; lefdef&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VIA9<br />metal&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; METAL_1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; <code>lefdef&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </code>METAL1</code></p>
+
+<p>You can specify this parameter if you want to provide your own layermap file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-liberty_files <em>file_list</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies to directly read decoupling capacitance and resistance from the specified Liberty file for standard cell and macro PGV generation.</p>
+
+<p>The following is an example of the Liberty construct required for capacitance/resistance:</p>
+
+<p><code>&#xa0;&#xa0;&#xa0; intrinsic_parasitic () {</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; when : &quot;I&quot;;</code></p>
+
+<p><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; intrinsic_capacitance (VDD) {</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; value : 0.000248992;</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; }</code></p>
+
+<p><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; intrinsic_resistance (VSS) {</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; related_output : ZN;</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; value : 1.89195;</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; }</code></p>
+
+<p><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; intrinsic_capacitance (VSS) {</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; value : 0.000639008;</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; }</code> <br /><code>&#xa0;&#xa0;&#xa0; }</code></p>
+
+<p>If there are multiple <code>when</code> conditions, the average intrinsic resistance/capacitance value is taken.&#xa0;</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><code>-macros_config_file</code> &#xa0; <em><code>filename</code></em><br /></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies to provide configuration details for each macro cell per Library Generation run.<span style="color:var(--ds-text,#000000);"> This is an additional input for <code>macros</code> cell type wherein you can provide macro specific Spice and GDS. The format of the file is:</span></p>
+
+<p><code>CELL &lt;<em>cell1</em>&gt;</code> <br /><code>GDS_FILE &lt;<em>gds_file1</em>&gt;</code> <br /><code>SUBCKT_FILE &lt;<em>subckt_file1</em>&gt;<br /><span style="color:var(--ds-text,#172b4d);">DECAP_FILE &lt;</span><em style="text-align: left;">decap_file1</em><span style="color:var(--ds-text,#172b4d);">&gt;</span><br style="text-align: left;" /><span style="color:var(--ds-text,#172b4d);">TRIGGER_FILE &lt;</span><em style="text-align: left;">trigger_file1</em><span style="color:var(--ds-text,#172b4d);">&gt;</span><br style="text-align: left;" /><span style="color:var(--ds-text,#172b4d);">POWER_GATE_PARAMS&#xa0;supply &lt;</span><em style="text-align: left;">supplyName</em><span style="color:var(--ds-text,#172b4d);">&gt; switched &lt;</span><em style="text-align: left;">switchedName</em><span style="color:var(--ds-text,#172b4d);">&gt;</span><br /></code><code>CELL &lt;<em>cell2</em>&gt;</code> <br /><code>GDS_FILE &lt;<em> <code>gds_file1</code> </em>&gt;</code> <br /><code>SUBCKT_FILE &lt;<em> <code>subckt_file1</code> </em>&gt;</code></p>
+<span style="color:var(--ds-text,#000000);"> <code>CELL</code> is the keyword to specify a new cell that is to be characterized. This is a mandatory keyword. This keyword is followed by optional keywords, like <code>GDS_FILE</code> and <code>SUBCKT_FILE</code>, that are specific to the cell.</span></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><span><code><span><code><span>-max_metal_density_tile_dimension {<em>maxlength</em> <em>maxwidth</em>}</span></code></span></code></span></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies the tile dimensions, wherein&#xa0;<code><em>maxlength</em></code> denotes maximum length and&#xa0;<code><em>maxwidth</em></code> denotes maximum width in μm. The default value for length or width is 50μm. The number of tiles in the X and Y direction is determined using the length and width dimension.</p>
+
+<p><span>This parameter should only be </span>used when the&#xa0;<code>-calculate_metal_layer_density</code> parameter is set to <code>true</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><span>-non_zero_ground_pins { <em>pin1voltage1 ... pinN voltageN</em> }</span></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd"><p style="text-align: left;"><strong>Default</strong>: None</p>
+<p style="text-align: left;">Specifies the name and voltage of the nets considered ground nets for all cells for which the elevated ground nets need to be specified. This parameter allows you to provide a list of non-zero ground be it positive or negative for the ground nets. If the same name has been specified for both the parameters<span>&#xa0;</span><code>-non_zero_ground_pins</code><span>&#xa0;</span>and<span>&#xa0;</span><code>-ground_pins</code>, then<span>&#xa0;</span><code>-non_zero_ground_pins</code><span>&#xa0;</span>will be given priority.</p>
+<p style="text-align: left;">This parameter is applicable only for standard cell and macro PGV generation (<code><span>-cell_type stdcells </span></code>|&#xa0; <code>macros</code>).</p>
+<p style="text-align: left;"><strong>Example</strong>:</p>
+<p style="text-align: left;"><code>set_pg_library_mode -non_zero_ground_pins {VSS -1.05 VSSA 0.08 VSSA1 1.09}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><p style="text-align: left;"><code><span style="color:var(--ds-text,#172b4d);">-oasis_stream_files&#xa0;</span><em style="text-align: left;">file_list</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd"><p style="text-align: left;">Specifies the names of the OASIS files used during power-grid library generation.</p>
+<p style="text-align: left;"><strong>Usage Guidelines</strong>:</p>
+<p style="text-align: left;">This parameter is a mandatory input for macro PGV generation (<code><span>-cell_type macros</span></code>).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><p style="text-align: left;"><code><span style="color:var(--ds-text,#172b4d);">-oasis_stream_layer_map&#xa0;</span><em style="text-align: left;">file</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd"><p style="text-align: left;">Specifies a file that provides the mapping between the library layers (qrcTechFile layers) and the OASIS layers.</p>
+<p style="text-align: left;"><strong>File Format</strong>:</p>
+<p style="text-align: left;"><code style="text-align: left;">layer_type&#xa0; &#xa0; layer_name&#xa0; &#xa0; oasis&#xa0; &#xa0; oasis_layer_no</code><br style="text-align: left;" /><code style="text-align: left;">via&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VIA9&#xa0; &#xa0; &#xa0; &#xa0; oasis&#xa0; &#xa0; &#xa0; &#xa0; 59</code></p>
+<p style="text-align: left;"><strong>Usage Guidelines</strong>:</p>
+<p style="text-align: left;">This parameter is a mandatory input for macro PGV generation (<code><span>-cell_type macros</span></code>).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><span>-pin_shape_current_distribution <em>filename</em></span></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies a current distribution file that allows you to state how current should be distributed across multiple pin shapes of power and ground pins. Multiple pin shapes exist for VDD and VSS pins, and current drawn through each pin shape is non-uniform depending upon the output bit that is switching. This parameter allows you to define current distribution for multi-height multi-bit flip-flop (MBFF) characterization.&#xa0; The parameter allows you to accurately model the current through each pin shape.</p>
+
+<p><strong>File Format<br /></strong><code>CELL &lt;cell name&gt;</code><br /><code>PGPIN VDD:(&lt;<em>LEF_layer_name</em>&gt;,&lt;<em>LEF_coordinates</em>&gt;):(&lt;<em>LEF_layer_name</em>&gt;,&lt;<em>LEF_coordinates</em>&gt;)</code><br /><code>PGPIN VSS:(&lt;<em>LEF_layer_name</em>&gt;,&lt;<em>LEF_coordinates</em>&gt;):(&lt;<em>LEF_layer_name</em>&gt;,&lt;<em>LEF_coordinates</em>&gt;)</code><br /><code>PIN &lt;<em>signal_pin_name</em>&gt; &lt;<em>current_ratio_for_VDD</em>&gt; &lt;<em>current_ratio_for_VSS</em>&gt;</code></p>
+
+<p>Here,</p>
+<ul><li><code>&lt;<em>LEF_layer_name</em>&gt;,&lt;<em>LEF_coordinates</em>&gt;</code> specifies to assign the current ratio to the pin shape occupying the coordinates.</li><li><code><em>LEF_layer_name</em></code> the&#xa0;layer name to which the current taps are to be created</li></ul>
+<p><strong>Example<br /></strong><code>CELL NAND3X8<br /><span>PGPIN VDD:(Metal1,1,1):(Metal1,4,1)<br /></span></code><code>PGPIN VSS:(Metal1,2,2):(Metal2,5,2):(Metal2,8,2)<br /></code><code>PIN Q1 0.00:1.00 0.00:0.00:1.00</code><br /><code>PIN Q2 0.90:0.10 0.95:0.05:0.00</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;">
+<p><code>-power_pins&#xa0;{ <em>pin1</em> <em>voltage1</em>...<em>pinN </em>
+            <em>voltageN </em>} </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies the name and voltage of the nets considered power nets for all cells for which the power nets are not specified. If both the parameters <code>-power_pins</code> and <code>-default_power_voltage</code> are not specified, the default voltage of 1.2 will be used.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><span><code><span><code>-power_switch_fine_grain_simulation {true|false}</code> </span> </code></span></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">Specifies to enable finegrain powergate simulation.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><span><code><span>-power_switch_parameters&#xa0; <code>{{<em>cell</em>&#xa0;&#xa0; <em>supply</em>&#xa0;&#xa0; <em>switched</em>&#xa0;&#xa0; <em>Ron</em> &#xa0;&#xa0; <em>Idsat</em>&#xa0;&#xa0; <em>Ileak</em> &#xa0;<em>enablePinName</em>&#xa0; Control_Pin_Logic} + }</code> </span></code></span></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies the information that technology library generation needs to characterize a powergate cell. It includes the cell name, unswitched power pin, switched power pin, on resistance in ohms, saturation current in milliamps, leakage current in milliamps, and control pin logic.</p>
+
+<p>If ron, idsat, or ileak values are specified, they will be used to override the data extracted by Voltus library simulator.</p>
+
+<p><code><span><code><span><code>Control_Pin_Logic </code></span></code></span></code>can have the following values:</p>
+<ul><li><code>enableHigh</code> -&#xa0;control pin(s) of the control logic will be connected to the power net to turn on the power gate instances.</li><li><code>enableLow</code> - control pin(s) of the control logic will be connected to the ground net to turn on the power gate instances.</li></ul>
+<p>The control pin logic allows you to specify whether the enable pin of the specified power gate is active high or active low, thus ensuring that the appropriate voltages are applied to the enable pins.</p>
+
+<p><span style="color:var(--ds-text,#172b4d);">You can specify multiple values for on-resistance, saturation current, and leakage current for the same cell based on different enable pin names.</span></p>
+
+<p>This parameter also allows you to specify multiple functional modes to enable different combinations of control pins in each mode. For multiple functional modes, the tool calculates RON for each mode separately and generates a single PGV for the specified modes.</p>
+
+<p><strong>Format for Multiple Functional Modes:</strong></p>
+
+<p><code>set_pg_library_mode&#xa0;<code><span><code><span>-power_switch_parameters</span></code></span></code> { {cell_name mode_name1 {supply switch Ron Idsat Ileak Control_Pin_Logic} mode_name2 {supply switch Ron Idsat Ileak Control_Pin_Logic}... mode_nameN {supply switch Ron Idsat Ileak Control_Pin_Logic} }</code></p>
+
+<p><strong>Examples</strong>:</p>
+<ul><li>For control pin logic:<br /><code><code><span><code><span>-power_switch_parameters</span></code></span></code>&#xa0;{&#xa0; {HEADER_SWITCH TVDD VDD <strong>enableHigh</strong>} }</code></li><li>For Single Powergate:<br />&#xa0; <code><code><span><code><span>-power_switch_parameters</span></code></span></code>{{HDRSID0 TVDD VDD}}</code></li></ul><ul><li>For 2 Header Powergate:<br />&#xa0; <code><code><span><code><span>-power_switch_parameters</span></code></span></code>{{HEAD16_A12TH_C35 VDDG VDD} {HEAD8_A12TH_C35 VDDG VDD}}</code></li></ul><ul><li>For Multiple Footer Powergate <br /><code><code><code><span><code><span>-power_switch_parameters</span></code></span></code></code> {{FOOTBUFVHSV16 VSSG VSS} {FOOTBUFVHSV32 VSSG VSS} {FOOTBUFVHSV64 VSSG VSS} {FOOTBUFVHSV8 VSSG VSS}}</code></li><li>For Multiple Functional Modes:<br /><code>-<code><code><span><code><span>power_switch_parameters</span></code></span></code></code> { {HEADER_SWITCH S1 {TVDD VDD 750 .5 4.0e-8V} S3 {TVDD1 VDD 350 .3 5.0e-8V} S2 {TVDD VDD 450 .5 4.0e-8V} } {RING_SWITCH TVDD VDD 750 .5 4.0e-8} }</code></li><li>For Different Enable Pins:<br /><span><code>-power_switch_parameters {{Cell1 VDDG VDD 300 5e-8 1500 Enable1 } {Cell1 VDDG VDD 280 4e-8 200 Enable2 }}</code></span></li></ul><p style="text-align: left;"><strong>Usage Guidelines</strong>:</p>
+<p style="text-align: left;">This parameter is applicable only for the technology PGV generation (<code>-cell_type techonly</code>).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><span><code><span>-<code>power_switch_parameters_file&#xa0; <em>filename</em></code></span></code></span></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies a file that contains details of power switches that have multiple control pins, input pins, and power nets. The control pins, input pins, and power nets can have either sweep voltages or user-defined voltages.</p>
+
+<p>This parameter also allows you to specify multiple functional modes to enable different combinations of control pins in each mode. For multiple functional modes, the tool calculates RON for each mode separately and generates a single PGV for the specified modes.</p>
+
+<p><strong>File Format</strong>:</p>
+
+<p><code>CELL &lt;<em>cell_name</em>&gt;</code><br /><code>PGATE_PAIR&#xa0; &lt;<em>AON_PIN</em>&gt; &lt;<em>SW_PIN</em>&gt; &lt;<em>CTRL_PIN</em>&gt; &lt;Polarity|<em>VoltageValues</em>&gt;</code><br /><code>PGATE_PAIR&#xa0; &lt;<em>AON_PIN</em>&gt; &lt;<em>SW_PIN</em>&gt; &lt;<em>CTRL_PIN</em>&gt; &lt;Polarity|<em>VoltageValues</em>&gt;</code> <br /><code>&#8230;</code><br /><code>PWR_PIN &lt;<em>net_name</em>&gt; {<em>voltage_values</em>}</code><br /><code>PWR_PIN &lt;<em>net_name</em>&gt; {<em>voltage_values</em>}</code> <br /><code>&#8230;</code><br /><code>INPUT_PIN &lt;<em>pin_name</em>&gt; &lt;Polarity|<em>VoltageValues</em>&gt;</code><br /><code>INPUT_PIN &lt;<em>pin_name</em>&gt; &lt;Polarity|<em>VoltageValues</em>&gt;</code><br /><code>&#8230;</code></p>
+
+<p><code>PGATE_OFF_PIN &lt;CTRL_PIN&gt; &lt;Polarity|VoltageValues&gt;</code><br /><code>PGATE_OFF_PIN &lt;CTRL_PIN&gt; &lt;Polarity|VoltageValues&gt;</code><br /><code>PGATE_OFF_PIN &lt;CTRL_PIN&gt; &lt;Polarity|VoltageValues&gt;</code><br /><code>&#8230;</code></p>
+
+<p><code>CHARACTERIZATION_VOLTAGES {&#xa0;<em>val1</em>&#xa0;<em>val2</em>&#xa0;<em>val3</em>&#xa0;.... }</code> <br /><code>END</code></p>
+
+<p><strong>File Format for Multiple Functional Modes</strong>:</p>
+
+<p><code><code>CELL &lt;<em>cell_name</em>&gt;</code></code><br /><code>MODE_NAME mode_name1</code><br /><code>PGATE_PAIR <code>&lt;<em>AON_PIN</em>&gt; &lt;<em>SW_PIN</em>&gt; &lt;<em>CTRL_PIN</em>&gt; &lt;Polarity|<em>VoltageValues</em>&gt;</code></code><br /><code>PWR_PIN <code>&lt;<em>net_name</em>&gt; {<em>voltage_values</em>}</code></code><br /><code>INPUT_PIN <code>&lt;pin_name&gt; &lt;Polarity|<em>VoltageValues</em>&gt;<br />PGATE_OFF_PIN &lt;CTRL_PIN&gt; &lt;Polarity|VoltageValues&gt;</code><br /><code>CHARACTERIZATION_VOLTAGES &lt;<em>VolageValues</em>&gt;</code></code><br /><code>END_MODE</code></p>
+
+<p><code>MODE_NAME mode_name2</code><br /><code>PGATE_PAIR&#xa0; &lt;AON_PIN&gt; &lt;SW_PIN&gt; &lt;CTRL_PIN&gt; &lt;Polarity|VoltageValues&gt;</code><br /><code>PWR_PIN &lt;net_name&gt; {voltage_values}</code><br /><code>INPUT_PIN &lt;pin_name&gt; &lt;Polarity|<em>VoltageValues</em>&gt;<br />PGATE_OFF_PIN &lt;CTRL_PIN&gt; &lt;Polarity|VoltageValues&gt;<br /><code><code>CHARACTERIZATION_VOLTAGES &lt;<em>VolageValues</em>&gt;</code></code></code><br /><code>END_MODE</code><br /><code>...</code></p>
+
+<p><code>END</code></p>
+<ul><li><code>PGATE_PAIR</code> and <code>CHARACTERIZATION_VOLTAGES</code> are mandatory keywords.</li><li><code>PGATE_PAIR</code> is the keyword to specify the always-on power pin, switched power pin, and control pin names, and the voltage values at which these pins are simulated. If you specify voltage values, then the software uses these user-defined values during power gate characterization. Alternatively, if you specify polarity (high/low), then the software uses the sweep voltage values (<code>CHARACTERIZATION_VOLTAGES</code>) during power gate characterization. <span>If you do not specify both polarity or voltage values, then the software by default uses the sweep voltage values (</span><code>CHARACTERIZATION_VOLTAGES</code><span>) during power gate characterization.</span></li><li><code>CHARACTERIZATION_VOLTAGES</code> is the keyword to specify sweep voltage values. The number of voltage values specified with the <code>PGATE_PAIR</code> keyword must match with the number of voltage values specified with the <code>CHARACTERIZATION_VOLTAGES</code> keyword.</li><li><code>PWR_PIN</code> is the keyword to specify additional power pins of the cell other than the always-on and switched power pins.</li><li><code>INPUT_PIN</code> is the keyword to specify <span>additional </span>signal pins of the cell other than the control pins. <span>If you specify voltage values, then the software uses these user-defined values during power gate characterization. Alternatively, if you specify polarity (high/low), then the software uses the sweep voltage values (</span><code>CHARACTERIZATION_VOLTAGES</code><span>) during power gate characterization. <span>If you do not specify both polarity or voltage values, then the software by default uses the sweep voltage values (</span><code>CHARACTERIZATION_VOLTAGES</code><span>) during power gate characterization.</span></span></li><li><span><span><code>PGATE_OFF_PIN</code> is the keyword to specify the control pin names and the voltage values at which the off-resistance is computed. If you specify voltage values, then the software uses these user-defined values during power gate characterization. Alternatively, if you specify polarity (high/low), then the software uses the sweep voltage values (<code>CHARACTERIZATION_VOLTAGES</code>) during power gate characterization. If you do not specify both polarity or voltage values, then the software by default uses the sweep voltage values (<code>CHARACTERIZATION_VOLTAGES</code>) during power gate characterization.</span></span></li></ul>
+<p><strong>Examples</strong>:</p>
+
+<p><u>Example 1: User-specified voltage values for control pins, input pins, and power nets</u> <br /><code>CELL cellA</code> <br /><code>PGATE_PAIR AONVDD SWVDD SLEEPN {0.600 0.660 0.700 0.750 0.800 }</code> <br /><code>PWR_PIN VDD_PS {0.7 0.8 0.9 1.0 1.1 }</code> <br /><code>INPUT_PIN PS_DISABLE {0.600 0.660 0.700 0.750 0.800 }</code> <br /><code>CHARACTERIZATION_VOLTAGES {0.600 0.660 0.700 0.750 0.800 }</code> <br /><code>END</code></p>
+
+<p><u>Example 2: User-specified polarity</u> <br /><code>CELL cellb</code> <br /><code>PGATE_PAIR TVDD VDD SLEEPN</code> <br /><code>PWR_PIN VDD_SIDE</code> <br /><code>INPUT_PIN S1 HIGH</code> <br /><code>CHARACTERIZATION_VOLTAGES {0.600 0.660 0.700 0.750 0.800 }</code> <br /><code>END</code></p>
+
+<p><u>Example 3: powergate_param_file.txt</u></p>
+
+<p><code>CELL HEADER_SWITCH</code><br /><code><code>MODE_NAME</code> S1</code><br /><code>PGATE_PAIR TVDD VDD NSLEEPIN LOW</code><br /><code>CHARACTERIZATION_VOLTAGES {0.9 1.0 1.1}</code><br /><code>END_MODE</code></p>
+
+<p><code><code>MODE_NAME</code> S2</code><br /><code>PGATE_PAIR TVDD VDD NSLEEPIN HIGH</code><br /><code>CHARACTERIZATION_VOLTAGES {0.9}</code><br /><code>END_MODE</code></p>
+
+<p><code><code>MODE_NAME</code> S3</code><br /><code>PGATE_PAIR TVDD1 VDD NSLEEPIN LOW</code><br /><code>CHARACTERIZATION_VOLTAGES {0.9 1.1}</code><br /><code>END_MODE</code></p>
+
+<p><code>END</code></p>
+<p style="text-align: left;"><strong>Usage Guidelines</strong>:</p>
+<p style="text-align: left;">This parameter is <span style="color:var(--ds-text,#172b4d);">applicable only </span>for standard cell and macro PGV generation (<code><span>-cell_type stdcells&#xa0;</span></code>|&#xa0;<span>&#xa0;</span><code>macros</code>).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;">
+<p><code><code>-spice_corners</code> <em>corner_list</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;">
+<p>&#xa0; &#xa0; &#xa0; &#xa0;</p>
+</td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies a list of SPICE corners. This is an optional parameter. If you specify SPICE corner(s), the number of corner items should be equal to the number of SPICE model files specified in -spice_models <em>file_list</em> .</p>
+
+<p>For example, if a SPICE model1 has three corners and model2 has two corners, you should specify:</p>
+
+<p>&#xa0;<code>-spice_models { spice_1.model spice_2.model } </code></p>
+
+<p><code>-spice_corners { {s11 s12 s13} {s21 s22} }</code></p>
+
+<p>Based on the above parameter description, the following information gets updated in the library generation file:</p>
+
+<p><code>spice_model_file spice_1.model {s11 s12 s13}</code></p>
+
+<p><code>spice_mode_file spice_2.model {s21 s22}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;">
+<p><code><code>-spice_models</code> <em>file_list</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies the names of the SPICE model files used by the SPICE netlist file (<code>-spice_subckts</code>).</p>
+
+<p>Some Spice process models use <code>wnom/Wn</code> and <code>lnom/Ln</code> instead of <code>w</code> and <code>l</code> (device model parameters names for length and width) for MOS models. Voltus recognizes and supports these alternate parameter names.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><span><code><code><span><code>-spice_netlist_file </code></span></code><em>filename</em></code></span></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies a file containing all the spice netlists to be used for library generation, the format is one netlist per line. These spice netlist files must contain the subcircuit definitions for the cells being processed by power-grid library generation.</p>
+
+<p>The following example specifies a file called <em>spice_netlist_list_file</em> that contains the list of spice netlist files:<code>
+            <br />set_pg_library_mode -spice_netlist_file <em>spice_netlist_list_file</em>
+          </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;">
+<p><code>-spice_subckts <em>file_list</em> </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;">
+<p>&#xa0; &#xa0; &#xa0; &#xa0;</p>
+</td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies the names of the SPICE netlist files containing the subcircuits corresponding to the cells being processed during power-grid library generation. These subcircuit netlists will be used to calculate pin capacitances using Voltus library simulator.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>&#8211;spice_subckts_xy_scaling <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies the current region scale factor for the Netlist-based flow<strong> &#xa0; </strong>. The current region scale factor is the factor by which the netlist coordinates are scaled before finding the closest node to attach the tap currents.</p>
+
+<p>The netlist-based flow fails when there is a mismatch in the units of the PGDB coordinates (in nm) and the coordinates in the SPICE netlist causing improper current tap creation. To match these coordinates, you need to specify the current region scale factor. The default scale factor is <code>1000</code> considering that the SPICE netlist coordinate unit is <code>um</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-stop_via <em>layername</em> </code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Stops the extraction of the power-grid network inside a cell at the specified via layer.&#xa0;</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code><span style="color:var(--ds-text,#172b4d);">-stop_via_file<span>&#xa0;</span></span><em style="text-align: left;">filename</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1313.0px;"><p style="text-align: left;">Specifies the name of a file containing a list of cells and the corresponding via layers at which extraction of the power-grid network should be stopped. However, this functionality is applicable only for the cells that are mentioned in the cell list file as well.</p>
+<p style="text-align: left;"><strong>File Format</strong>:<br /><code>&lt;cell_name&gt; &lt;stop@_layer_name&gt;</code></p>
+<p style="text-align: left;"><strong>Sample File Format</strong>:</p>
+<p style="text-align: left;"><code><span>Cell1 Via5<br /></span></code><code><span>Cell2 Via9</span></code></p>
+<p style="text-align: left;"><strong>Usage Guidelines</strong>:</p>
+<p style="text-align: left;">This parameter is applicable only for macro PGV generation (<code><span>-cell_type&#xa0;</span></code><code><span>macros</span></code>).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><span><code><span><code>-stream_files</code> </span></code></span><em>file_list</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies the names of the GDSII files used during power-grid library generation.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><span> <code>-stream_layer_map <em>file</em></code></span></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies a file that provides the mapping between the library layers (qrcTechFile layers) and the GDS layers.</p>
+
+<p><strong>Sample File Format</strong>:</p>
+
+<p><code>layer_type&#xa0; &#xa0; layer_name&#xa0;&#xa0;&#xa0; gds&#xa0;&#xa0;&#xa0; gds_layer_no</code> <br /><code>via&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VIA9&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; gds&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 59</code></p>
+<p style="text-align: left;"><strong>Usage Guidelines</strong>:</p>
+<p style="text-align: left;">This parameter is applicable only for macro PGV generation (<code><span>-cell_type&#xa0;</span></code><code><span>macros</span></code>).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><code><code>-tap_node_distance_file</code> <code><code><em>filename</em></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies a file containing the distance between tap nodes for the given list of cells. The specified file includes the cell name and tap node distance in micron.&#xa0; The default unit for tap node distance is <code>micron</code>, and the default tap node distance is <code>50 microns</code>.</p>
+
+<p>This parameter allows you to customize the tap node distance for each cell during power-grid library generation.</p>
+
+<p><strong>File Format</strong>:<code><em><br />cell_name</em> <em>tap_node_distance</em></code></p>
+
+<p><strong>Examples</strong>:</p>
+
+<p><code>OA_cellA 1</code><br /><code>OA_cellC 1</code></p>
+
+<p>This parameter is applicable only for standard cell and technology PGV generation (<code>-cell_type stdcells</code>|<code>techonly</code>).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code><span style="color:var(--ds-text,#172b4d);">-tech_oasis_stream_layer_map&#xa0;</span><em style="text-align: left;">filename</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;"><p style="text-align: left;">Specifies a file that provides the mapping of the layer names in the Quantus technology file to the layer names in the OASIS file.</p>
+<p style="text-align: left;"><strong>File Format</strong>:</p>
+<p style="text-align: left;"><code>technology_layername&#xa0;&#xa0;&#xa0;use&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;oasis_number&#xa0;&#xa0;data_type</code><br /><code>METAL_1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; text&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 131 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0</code><br /><code>VIA_1 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; x&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 51&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0</code></p>
+<p style="text-align: left;"><code>METAL_2 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; text&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 132 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0</code><br /><code>VIA_2 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; x&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 52 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0</code><br /><code>...</code></p>
+<p style="text-align: left;">If&#xa0;<code>-design_qrc_layermap</code>&#xa0;is specified along with&#xa0;<code>-tech_oasis_stream_layer_map</code>, then the format of&#xa0;<code>-tech_oasis_stream_layer_map</code>&#xa0;is treated as:<br /><code>lefdef_layername&#xa0;&#xa0;&#xa0;use&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;oasis_number&#xa0;&#xa0;data_type</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; M1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; text&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 131&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><span>-tech_stream_layer_map&#xa0;<em>filename</em></span></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies a file that provides the mapping of <span style="color:var(--ds-text,#000000);">the layer names in the Quantus technology file to the layer names in the GDS file.</span></p>
+
+<p><strong>File Format</strong>:</p>
+
+<p><code><u>technology_layername</u> &#xa0; <u>use</u>&#xa0;&#xa0;&#xa0;&#xa0; <u><span style="color:var(--ds-text-accent-blue-bolder,#09326c);">gds_number</span></u>&#xa0; <u>data_type</u><br />METAL_1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; text&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 131 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0<br />VIA_1 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; x&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 51&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0<br /></code></p>
+
+<p><code>METAL_2 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; text&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 132 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0<br />VIA_2 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; x&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 52 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0<br />...<br /></code></p>
+
+<p>If&#xa0;<code>-design_qrc_layer_map</code> is specified along with&#xa0;<code>-tech_stream_layer_map</code>, then the format of&#xa0;<code>-tech_stream_layer_map</code> is treated as:<br /><code><u>lefdef_layername</u>&#xa0;&#xa0; <u>use</u>&#xa0;&#xa0;&#xa0;&#xa0; <u><span style="color:var(--ds-text-accent-blue-bolder,#09326c);">gds_number</span></u>&#xa0; <u>data_type</u></code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; M1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; text&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 131&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;">
+<p><code>-temperature <em>temp_value_in_degree_celcius</em>        </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1313.0px;">
+<p>Specifies the temperature in degree celcius used in library characterization for thermal aware EM/IR analysis.</p>
+
+<p><em>Default</em>: 25</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code><span style="color:var(--ds-text,#172b4d);">-tsv_subckt_modelfile_list<span>&#xa0;</span></span><em>filename</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1313.0px;"><p style="text-align: left;">Specifies the name of external Through Silicon Via (TSV) subckt model files to be used for 3D-IC extraction. You can specify a list of files separated by space. Each file contains the subckt model information for TSV. The specified file has the Spice format.</p>
+<p style="text-align: left;">A sample file is shown below:</p>
+
+<p><code>.subckt TSV top bottom&#xa0;</code><br /><code>R1 top n2 0.03075&#xa0;</code><br /><code>R2 n2 bottom 0.03075</code><br /><code>C1 n2 0 28f&#xa0;</code><br /><code>.ends</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-use_lefonly_for_detailedview_generation {true | false}&#xa0;</code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">
+<p><span style="color:var(--ds-text,#172b4d);">Specifies to generate a detailed PGV with the bump LEF without loading a GDS file. You can specify this parameter to perform the RC extraction of a hybrid bump or via cell while skipping the extraction of its top and bottom routing metal layers. When set to<span>&#xa0;</span></span><code style="text-align: left;">true</code><span style="color:var(--ds-text,#172b4d);">, the top and bottom metal layers are preserved as geometries in the library and promoted to the top level, whereas the via layer shapes are dropped and their resistance is used directly from the PGV.</span></p>
+
+<p><span style="color:var(--ds-text,#172b4d);"><em>Default</em>: <code>false</code></span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><code><code>-use_power_switch_data_from_lib</code> <code> <code>{true|false}</code></code></code> </code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 29.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1313.0px;">Specifies to read powergate parameters ron, saturation current, and leakage current from the Liberty files specified using the existing <code>&#8211;liberty_files</code> parameter. This parameter allows you to obtain the powergate parameters from a Liberty file when a Spice netlist is not available, or when the Liberty file contains the powergate parameters.</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_pg_library_mode-Examples">Examples</h4>
+<ul><li>The following command sets the power library mode: <br /><code>set_pg_library_mode </code> <br /><code>-extraction_tech_file RCgen.tch </code> <br /><code>-lef_layer_map lefdef.map </code> <br /><code>-cell_type techonly </code> <br /><code>-power_pins { VDD 1.08 VDDO 1.08 VDDG 1.08 } </code> <br /><code>-ground_pins { VSS GND VSSG }&#xa0; </code> <br /><code>-cells_file   built_cells_list </code> <br /><code>-temperature -40 </code> <br /><code>-spice_models models/v1d1_usage.l </code> <br /><code>-spice_corners { ss_lib } </code> <br /><code>-spice_subckts { typical_max_m40.spice } </code> <br /><code>-power_switch_parameters { { cell1 VDDG VDD } { cell2 VDDG VDD } } </code> <br /><code>-current_distribution propagation</code></li><li>The following command generates a PGV that contains the voltage dependent capacitance table for the specified cells:<br /><code>set_pg_library_mode -cell_type stdcells&#xa0;<code>-cells_file</code> cellfile -extraction_tech_file ./../qrcTechFile -lef_layermap ./../lefdef.layermap -temperature 125 -power_pins { vcc 1.26 vccpg 1.26 vccr 1.26 } -ground_pins { vss }&#xa0;<code>
+        <span> <code>
+             <span>-power_switch_parameters</span> 
+          </code> </span> </code> {{powercell_pg1 vcc vccpg} {powercell_pg1 vcc vccr} {powercell_pg2 vcc vccpg} {powercell_pg2 vcc vccr}} -spice_corners { tt } -spice_models spice_model/libspice -spice_subckts { powercell_pg.net powercell_pg2.net } -enable_multi_voltage_cap_generation true</code> <br />The PGV report includes the following information:<br /><code>INFO: PGV contains voltage dependent cap table for this cell</code></li></ul>
+<p><span class="confluence-anchor-link" id="set_pg_library_mode-trigger"></span></p>
+<h4 id="set_pg_library_mode-TriggerFileFormat">Trigger File Format</h4>
+
+<p>For the current characterization flow, you must specify the <code>-current_distribution { dynamic_simulation <em>trigger_file</em> }</code> parameter. The format of the trigger file is:</p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><th class="confluenceTh">Trigger File Format</th><th class="confluenceTh">Description</th></tr>
+<tr><td class="confluenceTd" colspan="2"><strong>#Method of current characterization</strong></td>
+</tr>
+<tr><td class="highlight-blue confluenceTd" data-highlight-colour="blue">
+<p><code>CURRENT_CHARACTERIZATION_METHOD &lt;method&gt;</code></p>
+
+<p><code>&lt;SIMULATION/DOTLIB/PWL/FSDB/DATASHEET&gt;</code></p>
+</td>
+<td class="confluenceTd"><ul><li>SIMULATION -&gt; Vector-based flow</li><li>DOTLIB -&gt; Liberty based Flow</li><li>PWL&#xa0; - User-defined PWL flow</li><li>FSDB - Spice total current output captured in the FSDB format</li><li>DATASHEET&#xa0;- Datasheet details of any memory</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><strong>#Memory cell name</strong></td>
+</tr>
+<tr><td class="highlight-blue confluenceTd" data-highlight-colour="blue">
+<p><code>CELL &lt;<em>cellname1</em>&gt;</code></p>
+</td>
+<td class="confluenceTd">Name of the memory cell</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><strong>#Mode and conditional details for trigger</strong></td>
+</tr>
+<tr><td class="highlight-#deebff confluenceTd" data-highlight-colour="#deebff" title="Background color : Light blue 35%"><p title=""><code>LEAKAGE_CURRENT&#xa0;&#xa0;{ &lt;PGPin1&gt; &lt;value1&gt; &#8230; &lt;PGPinN&gt; &lt;valueN&gt; }</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the leakage current for both power and ground pins, or just power pins. Dynamic Power Analysis will process <code>LEAKAGE_CURRENT</code> specified in the PGV trigger file, and use it when a macro cell is idle or dynamic switch pattern is not defined (defined as &quot;-&quot; ).</p>
+
+<p>In the following example, the second cycle will use <code>LEAKAGE_CURRENT</code> defined in the PGV trigger file:</p>
+
+<p><code>set_power -base_cells x -dynamic_switch_pattern { READ &#8211; READ }</code></p>
+
+<p>You must specify the leakage current for all power pins. If leakage current is not defined for some pins, then those pins will get 0 leakage current when processed by Power Analysis.</p>
+
+<p><code>LEAKAGE_CURRENT</code> should be specified in the trigger file as a global, and specified outside the mode specification, as shown below:</p>
+<pre><code>CURRENT_CHARACTERIZATION_METHOD PWL<br />CELL cell1</code></pre><pre><code>LEAKAGE_CURRENT { VSS 2p VDD 17n }<br />MODE_NAME  READ static<br />...</code></pre><pre><code>END_MODE<br />END</code></pre></td>
+</tr>
+<tr><td class="highlight-blue confluenceTd" data-highlight-colour="blue">
+<p><code>MODE_NAME &lt;<em>mode1</em>&gt;<br />CONDITIONAL_INPUT &lt;conditional input statement for cellname1&gt;</code></p>
+</td>
+<td class="confluenceTd">
+<p>Mode name and conditional input statement for the cell. Conditional input of current for the given mode.</p>
+</td>
+</tr>
+<tr><td class="highlight-blue confluenceTd" data-highlight-colour="blue">
+<p><code>CONDITIONAL_PIN &lt;pin_name&gt; (rise|fall|both)</code></p>
+</td>
+<td class="confluenceTd">Conditional pin statement for the cell. Signal pin for which the tool should rise or fall.</td>
+</tr>
+<tr><td class="highlight-blue confluenceTd" data-highlight-colour="blue">
+<p><code>CONDITIONAL_STIMULUS_FILE &lt;usim1.txt&gt;</code></p>
+</td>
+<td class="confluenceTd">Simulation vector detail in the given mode.</td>
+</tr>
+<tr><td class="highlight-blue confluenceTd" data-highlight-colour="blue"><code>USER_PWL_FILE &lt;pwl1.txt&gt;</code></td>
+<td class="confluenceTd">User-specified PWL file that contains information about the PWL waveforms (power/ground currents). The current for ground net should be specified as a negative value.</td>
+</tr>
+<tr><td class="highlight-blue confluenceTd" data-highlight-colour="blue">
+<p><code>FSDB_START_TIME &lt;time&gt;<br />FSDB_END_TIME &lt;time&gt;</code></p>
+</td>
+<td class="confluenceTd">FSDB Simulation based mode details</td>
+</tr>
+<tr><td class="highlight-blue confluenceTd" data-highlight-colour="blue"><code>DATASHEET_PARAMETER &lt; {pg_pin1 Capacitance Leakage} {pg_pin2 Capacitance Leakage}&gt;</code></td>
+<td class="confluenceTd">&#xa0;Datasheet-based mode details</td>
+</tr>
+<tr><td class="highlight-blue confluenceTd" data-highlight-colour="blue"><code>END_MODE</code></td>
+<td class="confluenceTd">&#xa0;End mode section</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><strong>#Datasheet clock required parameters</strong></td>
+</tr>
+<tr><td class="highlight-blue confluenceTd" data-highlight-colour="blue">
+<p><code>DATASHEET_INPUT_SLEW &lt;time&gt;<br />DATASHEET_OUTPUT_SLEW &lt;time&gt;<br />DATASHEET_DELAY &lt;time&gt;<br />DATASHEET_PARAMETER &lt; {<code>
+              <code>power_pin cap&#xa0; leakage_pwr</code> </code>} &gt;</code></p>
+</td>
+<td class="confluenceTd"><ul><li><code>DATASHEET_INPUT_SLEW</code> - Clock input slew of the conditional pin</li><li><code>DATASHEET_OUTPUT_SLEW</code> - Rising slew of the output pin Q</li><li><code>DATASHEET_DELAY</code> - Mode delay as the read_access and write_access time</li><li><code>DATASHEET_PARAMETER</code> - Datasheet parameters include power pin voltage, load capacitance, and leakage power. Load capacitance is mode dependent.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><strong>#FSDB required parameters</strong></p>
+</td>
+</tr>
+<tr><td class="highlight-blue confluenceTd" data-highlight-colour="blue">
+<p><code>FSDB_PATH &lt;path&gt;<br />
+          </code> <code>FSDB_NET_NAME &lt;net&gt; [&lt;generic_name&gt;]<br />
+          </code> <code>FSDB_START_TIME &lt;time&gt;<br />
+          </code> <code>FSDB_END_TIME &lt;time&gt;<br />FSDB_HIER_CHAR &lt;hier_char, for hier DB&gt;</code></p>
+</td>
+<td class="confluenceTd"><ul><li>FSDB file path</li><li>Power net name and its FSDB probe name</li><li>FSDB start and end time</li><li>Hierarchical separator for hierarchical database. The default separator is &quot;<strong>.</strong>&quot;</li></ul>
+<p>Single FSDB file having total current for ALL power/ground pins with all mode current in it</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><strong>#&lt;Other mode independent parameters&gt;</strong></td>
+</tr>
+<tr><td class="highlight-blue confluenceTd" data-highlight-colour="blue">
+<p><code>DOTLIB_LIST&#xa0;<code>{a list of memory dotlibs files}<br />
+            </code>MODE_COUNT </code> <code>
+            <br />MODE_CONFIG_FILE &lt;file_path&gt;<br />SIM_START_TIME &lt;time&gt;<br />SIM_STOP_TIME &lt;time&gt;<br />SIM_STEP_SIZE &lt;step_size&gt;<br />STIMULUS_FILE &lt;file_path&gt;<br />INCLUDE_FILE &lt;file_path&gt;</code></p>
+</td>
+<td class="confluenceTd"><ul><li><code>DOTLIB_LIST</code> - Specifies a list of memory dotlibs.</li><li><code>MODE_COUNT </code>-&#xa0;Specifies the maximum number of modes to be generated. Valid values are either a positive number or `all&#39;. `all&#39; means stimulus for all power groups are to be generated. The default value is <code>4</code>. If you set this parameter to <code>all</code>, it may result in high runtime as it may generate too many modes.</li><li><code>MODE_CONFIG_FILE</code> - Specifies the file containing extra information for memory cell. This file contains the following information - signal slew, signal active value and memory write information.</li><li><code>SIM_START_TIME</code> - Specifies the simulation start time. The default unit is in nanoseconds (ns).</li><li><code>SIM_STOP_TIME</code> - Specifies the simulation stop time. The default unit is in nanoseconds (ns).</li><li><code>SIM_STEP_SIZE</code> - Specifies the step size for power-grid analysis. The default value of step size is 20 picoseconds (ps). This parameter supports other units such as, ns and fs. This parameter supports unit-prefixes (pico, femto, nano) combined with units of measure (ps, fs, ns), but does not support units itself (&quot;second&quot;, &quot;Ohm&quot;, &quot;Farad&quot;) without unit-prefix.</li><li><code>STIMULUS_FILE</code> - Specifies the stimulus file containing the trigger information for all input ports.</li><li><code>INCLUDE_FILE</code> - Specifies the name of the simulation include file.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd"><strong>#End cell section</strong></td>
+<td class="confluenceTd"><br /></td>
+</tr>
+<tr><td class="highlight-blue confluenceTd" data-highlight-colour="blue"><code>END</code></td>
+<td class="confluenceTd">End cell section</td>
+</tr>
+</tbody></table></div>
+
+<p><span class="confluence-anchor-link" id="set_pg_library_mode-current_format"></span></p>
+<h4 id="set_pg_library_mode-CurrentRegionFileFormat">Current Region File Format</h4>
+
+<p>The following shows the current_region_file format:</p>
+
+<p>&#xa0;<code>UNIT CURRENT default_unit_in_amps</code> <br /><code>UNIT CAPACITANCE default_unit_in_farads</code> <br /><code>CELL cell_name</code> <br /><code>&lt;PROP [FLAT | HIER]&gt;</code> <br /><code>NET net_name</code> <br /><code>LAYER layer_name</code> <br /><code>[ REGION x1 y1 x2 y2 current_value &lt;cap_value&gt; | REGION current_value &lt;cap_value&gt; ]</code></p>
+
+<p><br /></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><tbody><tr><td class="confluenceTd">
+<p>UNIT</p>
+</td>
+<td class="confluenceTd">
+<p>Defines the default scale to be used with the current and capacitance values read from the current region file. These scales apply to any value that is not followed by an explicit unit specification. Valid current values are: A (Amps), mA (miliAmps), uA (microAmps), and nA (nanoAmps). Valid capacitance values are: F(Farads), mF (miliFarads), uF (microfarads), nF (nanofarads), pF (picoFarads), and fF (femtoFarads).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>CELL <em>cell_name</em></p>
+</td>
+<td class="confluenceTd">
+<p>This command specifies the name of the cell. All the following NET, LAYER, and REGION commands will apply to this CELL until another CELL specification is encountered. Wildcards can be used in the cell_name.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&lt;PROP [FLAT | HIER]&gt;</p>
+</td>
+<td class="confluenceTd">
+<p>If the keyword FLAT is applied, LibGen will not perform hierarchical tracing for the given net in this cell.</p>
+
+<p>If the keyword HIER is presented, LibGen will perform hierarchical tracing for the given net in this cell. This provides the ability for LibGen to automatically specify a current value to all instances of a cell in the design hierarchy. The assumption is that all of these instances of the cell will consume the same power.</p>
+
+<p>The default is HIER.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>NET <em> net_name</em></p>
+</td>
+<td class="confluenceTd">
+<p>This command specifies that all the LAYER and REGION commands following it applies to the net_name. This stays in effect until another NET or CELL specification is encountered.</p>
+
+<p>Wildcards can be used in the net_name.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>LAYER <em>layer_name</em></p>
+</td>
+<td class="confluenceTd">
+<p>This command specifies that all the REGION commands following it apply to the layer_name. This stays in effect until another LAYER, NET, or CELL command is encountered.</p>
+
+<p>The layer_name must be a library layer name. If the layer is not found, LibGen will issue an error message and exit. You must provide a valid layer name for LibGen to run.</p>
+
+<p>If you specified a valid layer, but LibGen does not find any via in the assigned current region, LibGen will issue a warning message, but the process will still continue and exit successfully. In this case, you may get a 0 current value for the specified cell.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>REGION <em>x1 y1 x2 y2 </em> <em>current_value </em> <em>cap_value</em></p>
+</td>
+<td class="confluenceTd">
+<p>This command specifies the current value and optionally the capacitance value to be associated with the rectangular region specified by the bounding box ( <em>x1 y1 x2 y2</em> ).</p>
+
+<p>Current taps will be created at the locations of the vias or contacts specified by the most recent LAYER command. These current taps will be attached to the layer that is below the specified via or contact layer. Coordinate values are assumed to be in GDSII coordinate units and will be interpreted according to the scale and precision settings contained in the GDSII file (or spice netlist with device XY location) that contains the cell. The value of the current drawn by each current tap will be 1/n of the value specified for the current region, where n is the number of taps within the current region.</p>
+
+<p>The second variation of the REGION command without the bounding box is valid only if there is only one current region. In this case LibGen can automatically uses the bounding box of the cell for the region.</p>
+
+<p>You can specify a single region or multiple regions per cell.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_pg_library_mode-ExampleofCurrentRegionFile">Example of Current Region File</h4>
+
+<p><code>UNIT CURRENT uA</code> <br /><code>UNIT CAPACITANCE fF</code> <br /><code>CELL an4_80</code> <br /><code>NET vcc</code> <br /><code>LAYER CONT</code> <br /><code>REGION 0 14000 28900 17000 3.0 5.0</code> <br /><code>NET gnd</code> <br /><code>LAYER CONT</code> <br /><code>REGION 1.5e-2mA</code></p>
+<h4 id="set_pg_library_mode-ExampleofaDynamicPWLRegionFile(MultipleRegions)">Example of a Dynamic PWL Region File (Multiple Regions)</h4>
+
+<p><code>CELL Cell1</code> <br /><code>&#xa0; NET VSS</code> <br /><code>&#xa0;&#xa0;&#xa0; PROP HIER</code> <br /><code>&#xa0;&#xa0;&#xa0; LAYER via1_r</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; REGION 1 10 188 333&#xa0;&#xa0; { 0 -1 1 -9&#xa0; 2 -8&#xa0; 3 -7&#xa0; 4 -6&#xa0; 5 -5&#xa0; 6 -4&#xa0; 7 -3&#xa0; 8 -2&#xa0; 9 -1&#xa0; } 1e-12 &#xa0;<code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; <br />&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; REGION 121 10 185 80 { 0 -1 1 -90 2 -80 3 -70 4 -60 5 -50 6 -40 7 -30 8 -20 9 -10 } 4e-12&#xa0; </code> </code></p>
+
+<p><code>&#xa0; NET VDDPR</code> <br /><code>&#xa0;&#xa0;&#xa0; PROP HIER</code> <br /><code>&#xa0;&#xa0;&#xa0; LAYER via1_r</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; REGION 1 10 188 333 { 0 -1 1 9&#xa0; 2 8&#xa0; 3 7&#xa0; 4 6&#xa0; 5 5&#xa0; 6 4&#xa0; 7 3&#xa0; 8 2&#xa0; 9 1 } 5e-12</code></p>
+
+<p><code>&#xa0; NET VDDP</code> <br /><code>&#xa0;&#xa0;&#xa0; PROP HIER</code> <br /><code>&#xa0;&#xa0;&#xa0; LAYER via1_r</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; REGION 1 10 188 333 { 0 -1 1 9&#xa0; 2 8&#xa0; 3 7&#xa0; 4 6&#xa0; 5 5&#xa0; 6 4&#xa0; 7 3&#xa0; 8 2&#xa0; 9 1 } 5e-12</code></p>
+
+<p><code>&#xa0; NET VDDAR</code> <br /><code>&#xa0;&#xa0;&#xa0; PROP HIER</code> <br /><code>&#xa0;&#xa0;&#xa0; LAYER via1_r</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; REGION 1 10 188 333 { 0 -1 1 9&#xa0; 2 8&#xa0; 3 7&#xa0; 4 6&#xa0; 5 5&#xa0; 6 4&#xa0; 7 3&#xa0; 8 2&#xa0; 9 1 } 5e-12</code></p>
+
+<p><code>&#xa0; ...</code></p>
+<h4 id="set_pg_library_mode-RelatedTopics">Related Topics</h4>
+<ul><li>&quot;<u>Power-Grid Library Generation</u>&quot; in the&#xa0; <em>Voltus User Guide</em></li></ul>
+<p><br /></p>
+
+<p></p>
+
+<p><br /></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_advanced_pg_library_mode.html" id="prev" title="set_advanced_pg_library_mode">set_advanced_pg_library_mode</a></em></b><b><em><a href="trim_pg_library.html" id="nex" title="trim_pg_library">trim_pg_library</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

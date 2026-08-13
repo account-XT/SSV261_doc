@@ -1,0 +1,150 @@
+
+<html><head><title>Performing Wire Variation Analysis</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823930" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Performing Wire Variation Analysis" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823930" />
+<meta name="NextFile" content="analysisandreporting_statisticalwirevariation.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_wirevariationoverview.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Performing Wire Variation Analysis" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="0" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_wirevariationoverview.html" title="Wire Variation Analysis - Overview">Wire Variation Analysis - Over ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_statisticalwirevariation.html" title="Statistical Wire Variation Analysis">Statistical Wire Variation Ana ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:performwirevariation" title="Performing Wire Variation Analysis"></a><h3>
+<a id="pgfId-2393838"></a>Performing Wire Variation Analysis<a id="38659"></a></h3>
+
+<p>
+<a id="pgfId-2393839"></a>The following setting enables wire variation analysis in path-based analysis mode:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393840"></a>set <a href="../tempustxtcmdref/timing_enable_wire_variation.html">timing_enable_wire_variation</a> true</pre>
+
+<p>
+<a id="pgfId-2393841"></a>By default, the clock path PBA is disabled in Tempus. To model wire variation on clock paths, you can enable clock PBA using the following setting:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393842"></a>set <a href="../tempustxtcmdref/timing_disable_retime_clock_path_slew_propagation.html">timing_disable_retime_clock_path_slew_propagation</a> false</pre>
+
+<p>
+<a id="pgfId-2393845"></a>The wire variation analysis can be run to model local as well as global RC variations. Consider the following illustration:</p>
+
+<p class="webflare-indent1"><strong>Figure -128
+<a id="pgfId-2393879"></a>Wire variation analysis illustration</strong></p>
+<p>
+<a id="pgfId-2393882"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="257" src="images/analysisandreporting-195.gif" /></div>
+
+<p>
+<a id="pgfId-2393925"></a>In the above example, there can be two use models:</p>
+<ol><li>
+<a id="pgfId-2394056"></a><strong>Local variation</strong>: Consider the blue curves above, where wire variation analysis can be run at Cmin or Cmax corners, and metal layers&#39; mean-shift and standard deviation can be accordingly defined by assuming the specified range to be +/-n*sigma.For local variation analysis around Cmin corner:<br />
+<a id="pgfId-2394057"></a>M1 mean-shift = (0% + 5%)/2 = 2.5%<br />
+<a id="pgfId-2394058"></a>M1 stddev = (5% - 0%)/6 = 0.83%<br />
+<a id="pgfId-2394059"></a>M2 mean-shift = (0% + 4%)/2 = 2%<br />
+<a id="pgfId-2394060"></a>M2 stddev = (4% - 0%)/6 = 0.67%</li><li>
+<a id="pgfId-2393982"></a><strong>Global variation</strong>: Consider the red curve above, where wire variation analysis can be run at Ctyp, and metal layers&#39; mean-shift and standard deviation can be accordingly defined by assuming the specified range to be +/-n*sigma.<br />
+<a id="pgfId-2394087"></a>For global variation analysis around Ctyp corner:<br />
+<a id="pgfId-2394088"></a>M1 mean-shift = (-11% + 12%)/2 = 0.5%<br />
+<a id="pgfId-2394089"></a>M1 stddev = (12% - (-11%))/6 = 3.83%<br />
+<a id="pgfId-2394090"></a>M2 mean-shift = (-10% + 9%)/2 = -0.5%<br />
+<a id="pgfId-2394091"></a>M2 stddev = (9% - (-10%))/6 = 3.17%</li></ol>
+
+
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-2394116"></a>The following steps outline the internal working of Tempus to compute wire variation-aware timing slacks:</p>
+<ol><li>
+<a id="pgfId-2394117"></a>Compute delay sensitivities (sigma) of each stage with respect to resistance and capacitance of each metal layer.</li><li>
+<a id="pgfId-2394118"></a>Propagate R/C sensitivities per layer separately across launch and capture paths.<ul><li>
+<a id="pgfId-2394119"></a>Resistance/capacitance delay variations within a layer across all stages are assumed to be fully correlated, that is, the delay sigma is linearly added for the same layer of R or C.</li></ul><br /><strong>Figure -129
+<a id="pgfId-2394234"></a></strong><br />
+<a id="pgfId-2394237"></a><div class="webflare-div-image">
+<img width="666" height="270" src="images/analysisandreporting-196.gif" /></div></li><li>
+<a id="pgfId-2394178"></a>The timing slack is computed by combining the delay sensitivities across different components for launch and capture:<ul><li>
+<a id="pgfId-2394179"></a>The R and C of the same layer are combined based on the correlation factor specified by the user, to get the combined delay sensitivities for each layer:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id3055355">
+<a id="pgfId-3055355"></a><a href="../tempustxtcmdref/set_wire_variation_mode.html">set_wire_variation_mode</a> -rc_correlation_factor &lt; -1 | 1 &gt;</pre>
+<a id="pgfId-2394181"></a>With &#39;-1&#39;, R and C of same layer are considered as inversely correlated and with &#39;1&#39;, then R and C of the same layer are considered as fully correlated. </li><li>
+<a id="pgfId-2394182"></a>Combined slack wire sensitivity across layers is then computed based on the correlation mode specified by the user:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id3055360">
+<a id="pgfId-3055360"></a>set_wire_variation_mode -correlation_type &lt;statistical | binomial&gt;</pre></li></ul></li></ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-2394184"></a>The subsequent sections explain the statistical and binomial modes.</p>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_wirevariationoverview.html" id="prev" title="Wire Variation Analysis - Overview">Wire Variation Analysis - Over ...</a></em></b><b><em><a href="analysisandreporting_statisticalwirevariation.html" id="nex" title="Statistical Wire Variation Analysis">Statistical Wire Variation Ana ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

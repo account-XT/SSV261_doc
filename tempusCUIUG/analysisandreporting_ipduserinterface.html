@@ -1,0 +1,176 @@
+
+<html><head><title>Enabling IPD Analysis</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845207" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Enabling IPD Analysis" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845207" />
+<meta name="NextFile" content="analysisandreporting_ipdreporting.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_ipdflowscopebased.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- Enabling IPD Analysis" />
+<meta name="Keywords" content="set_analysis_mode,enable IPD Analysis," />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="IPD,Stylus" />
+<meta name="prod_subfeature" content="IPD" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_ipdflowscopebased.html" title="Scope-Based IPD Analysis Flow">Scope-Based IPD Analysis Flow</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_ipdreporting.html" title="IPD Analysis Reporting">IPD Analysis Reporting</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:ipduserinterface" title="Enabling IPD Analysis"></a><h3>
+<a id="pgfId-1726415"></a><a id="87253"></a>Enabling IPD Analysis</h3>
+
+<p>
+<a id="pgfId-1726709"></a>To enable IPD Analysis, the following setting is required at the top of the Tempus script:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3007110"></a><code>set_db</code> timing_analysis_enable_inter_power_domain true</pre>
+
+<p>
+<a id="pgfId-1726743"></a>The following commands are required during several steps of the flow, as explained below:</p>
+<ul><li>
+<a id="pgfId-1726744"></a><a href="../tempusCUI/set_ipd_rail_voltage.html">set_ipd_rail_voltage</a><br />
+<a id="pgfId-1726745"></a>This command is used to specify the power rail specifications and excludes combinations that do not require analysis. When power intent is specified through CPF/IEEE-1801, the <code>set_ipd_rail_voltage</code> power rail specification refers to the primary power net of the power domain. The following command parameters can be used:<ul><li>
+<a id="pgfId-1726746"></a><code>-sweep</code>: Specifies the list of power rails and their corresponding voltage values.</li><li>
+<a id="pgfId-1726747"></a><code>-exclude_voltage_signatures</code>: Specifies the list of voltage combinations to be excluded from IPD Analysis.</li></ul><br />
+<a id="pgfId-1726748"></a>In <a href="analysisandreporting_ipdflowscopebased.html#70400">Figure 4-82</a>, if Run2 voltage combination is to be excluded from analysis, the following example shows the usage of <code>set_ipd_rail_voltage</code> command:<pre class="webflare-pre-block webflare-courier-new" id="#id1726749">
+<a id="pgfId-1726749"></a>set_ipd_rail_voltage -sweep { PD1 {0.7 0.8} PD2 {0.9 1.0} PD3 {1.1 1,2} PD4 {0.6 0.7} }</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1726750">
+<a id="pgfId-1726750"></a>set_ipd_rail_voltage -exclude_voltage_signatures { {PD1 0.7 PD2 0.9 PD3 1.2 PD4 0.6} }</pre></li><li>
+<a id="pgfId-1726807"></a><a href="../tempusCUI/create_pg_net_group.html">create_pg_net_group</a><br />
+<a id="pgfId-1726808"></a>This command is used to group a set of PG nets. This helps in simplification of the overall UI of the IPD flow by specifying sweeps for a group rather than a PG net. Also, the crossings between the nets of the same PG net group are automatically ignored.<br />
+<a id="pgfId-1726809"></a>In the example shared below, the PG nets pgn1, pgn2, and pgn3 are part of PG net group PG1 and the sweep voltage specified for PG1 is applicable for the PG nets. The crossings between pgn1 and pgn2, pgn2 and pgn3, and pgn1 and pgn3 will automatically be ignored.<pre class="webflare-pre-block webflare-courier-new" id="#id1726810">
+<a id="pgfId-1726810"></a>create_pg_net_group -name PG1 -pg_nets {pgn1 pgn2 pgn3} 
+         \set_ipd_rail_voltage -sweep { PG1 {0.7 0.8} }</pre></li><li>
+<a id="pgfId-1726896"></a><a href="../tempusCUI/create_ipd_configuration.html">create_ipd_configuration</a><br />
+<a id="pgfId-1726897"></a>This command is used for creating the IPD configuration or the analysis views in both the bounded scope generation and the scope analysis session. It auto identifies the corners based on the user-specified sweep voltages and loads up the view definition for CMMMC-based analysis.<ul><li>
+<a id="pgfId-1726898"></a><code>-bounded_corners</code> parameter is used in the scope creation run to create the minimum/maximum bounding voltage corners to be used for analysis.</li></ul><br /><pre class="webflare-pre-block webflare-courier-new" id="#id1726900">
+<a id="pgfId-1726900"></a>set_ipd_rail_voltage -sweep {PD1 {0.7 0.8} PD2 {0.9 1.0} PD3 {1.1 1.2} PD4 {0.6 0.7}}</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1726901">
+<a id="pgfId-1726901"></a>create_ipd_configuration -bounded_corners </pre>
+<a id="pgfId-1726902"></a>Min bounding view: PD1=0.8v PD2=1.0v PD3=1.2v PD4=0.7v<br />
+<a id="pgfId-1726903"></a>Max bounding view: PD1=0.7v PD2=0.9v PD3=1.1v PD4=0.6v<ul><li>
+<a id="pgfId-1726958"></a><code>-load_constraints</code> and <code>-load_derates</code> parameters are optionally used in the scope analysis session to load the constraints and derates stored in the IPD scope:</li></ul><br /><pre class="webflare-pre-block webflare-courier-new" id="#id1726960">
+<a id="pgfId-1726960"></a>set_ipd_rail_voltage -sweep { PD1 {0.7 0.8} PD2 {0.9 1.0} PD3 {1.1 1.2} PD4 {0.6 0.7} }</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1726961">
+<a id="pgfId-1726961"></a>set_ipd_rail_voltage -exclude_voltage_signatures { {PD1 0.7 PD2 1.0 PD3 1.2 PD4 0.7} }</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1726962">
+<a id="pgfId-1726962"></a>create_ipd_configuration -load_derates -load_constraints</pre><ul><li>
+<a id="pgfId-1726963"></a>Exhaustive number of voltage combinations = 2^4 = 16.</li><li>
+<a id="pgfId-1726964"></a>Analyze 15 IPD views after excluding the voltage combination specified by the user.</li></ul></li><li>
+<a id="pgfId-1726999"></a><a href="../tempusCUI/report_ipd_configuration.html">report_ipd_configuration</a><br />
+<a id="pgfId-1727000"></a>This command reports the rail sweep information and software created voltage combinations, that is, the IPD views.<br />
+<a id="pgfId-1727001"></a>It reports and indicates the valid voltage combinations along the with excluded voltage combinations.<ul><li>
+<a id="pgfId-1727002"></a>IPD views are named automatically as <code>ipd_view&lt;count&gt;</code>.</li><li>
+<a id="pgfId-1727003"></a>&#8220;Excluded&#8221; column reports &#8220;yes&#8221; against excluded voltage combinations.</li></ul><br />
+<a id="pgfId-1726704"></a>A sample report output is given below:<pre class="webflare-pre-block webflare-courier-new" id="#id1727084">
+<a id="pgfId-1727084"></a>POWER RAIL/GROUP MAPPING</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1727085">
+<a id="pgfId-1727085"></a>----------------------------
+Mapping     Power rail/group
+----------------------------
+PG1         VDD
+PG2         VDDR
+PG3         VDDF
+VOLTAGE SWEEP
+------------------------
+Power       Sweep
+Rail
+------------------------
+PG1       { 0.9 }
+PG2       { 1.1 1.2 }
+PG3       { 0.8 0.9 }
+VOLTAGE SIGNATURES
+-------------------------------------------
+PG1   PG2   PG3       View      Excluded
+-------------------------------------------
+0.9   1.1    0.8    ipd_view1      no
+0.9   1.2    0.8    ipd_view2      no
+0.9   1.1    0.9    ipd_view3      no
+0.9   1.2    0.9    ipd_view4      yes</pre></li><li>
+<a id="pgfId-1727432"></a><a href="../tempusCUI/write_ipd_scope.html">write_ipd_scope</a><br />
+<a id="pgfId-1727433"></a>This command is used to write out the IPD scope in the scope creation run. The scope is generated in the directory location specified as command argument. The command parameters allow you to control whether the constraints and derates should be written out within the scope or not. For example,<pre class="webflare-pre-block webflare-courier-new" id="#id2562543">
+<a id="pgfId-2562543"></a>write_ipd_scope -include_derates -include_constraints -bounded_corners -overwrite Bounded_corner_scope</pre></li><li>
+<a id="pgfId-1727439"></a><a href="../tempusCUI/read_ipd_scope.html">read_ipd_scope</a><br />
+<a id="pgfId-1727440"></a>This command is used to load scope data in the scope analysis run. For example,<pre class="webflare-pre-block webflare-courier-new" id="#id2562586">
+<a id="pgfId-2562586"></a>read_ipd_scope Bounded_corner_scope</pre></li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_ipdflowscopebased.html" id="prev" title="Scope-Based IPD Analysis Flow">Scope-Based IPD Analysis Flow</a></em></b><b><em><a href="analysisandreporting_ipdreporting.html" id="nex" title="IPD Analysis Reporting">IPD Analysis Reporting</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

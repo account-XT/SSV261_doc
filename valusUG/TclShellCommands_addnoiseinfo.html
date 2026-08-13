@@ -1,0 +1,339 @@
+
+<html><head><title>add_noise_info</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-03-26" />
+<meta name="CreateTime" content="1774516565" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Valus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="add_noise_info" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="valusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-03-26" />
+<meta name="ModifiedTime" content="1774516565" />
+<meta name="NextFile" content="TclShellCommands_addpowerinfo.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="TclShellCommands_addgroup.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Valus User Guide -- add_noise_info" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="0" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="valusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="valusUGTOC.html">Contents</a></li><li><a class="prev" href="TclShellCommands_addgroup.html" title="add_group">add_group</a></li><li style="float: right;"><a class="viewPrint" href="valusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="TclShellCommands_addpowerinfo.html" title="add_power_info">add_power_info</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Valus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:addnoiseinfo" title="add_noise_info"></a><h2>
+<a id="pgfId-933507"></a><a id="47474"></a>add_noise_info</h2>
+<a id="pgfId-933972"></a><a id="add_noise_info"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+add_noise_info 
+[-help] 
+[-from_pin &lt;string&gt;] 
+[-input_ccb &lt;string&gt;]
+[-propagated_noise_height_above_high &lt;float&gt;]
+[-propagated_noise_height_below_low &lt;float&gt;]
+[-propagated_noise_height_high &lt;float&gt;]
+[-propagated_noise_height_low &lt;float&gt;]
+[-propagated_noise_width_above_high &lt;float&gt;]
+[-propagated_noise_width_below_low &lt;float&gt;]
+[-propagated_noise_width_high &lt;float&gt;]
+[-propagated_noise_width_low &lt;float&gt;] 
+[-ref_pin &lt;string&gt;]
+[-timing_sense &lt;string&gt;] 
+[-timing_type &lt;string&gt;]
+-to_pin &lt;string&gt; 
+[-to_ref_pin &lt;string&gt;]
+[-when_condition &lt;string&gt;]</code></pre>
+<p>
+<a id="pgfId-933968"></a>Adds the noise data in ETM/PTM library. </p>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-934560"></a>It is recommended to use the below command for disabling clipping of noise data while using the <code>add_noise_info</code> command:</div>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-933969"></a>set_valus_mode -ccs_noise_data_disable_clip</pre>
+<p>
+<a id="pgfId-933970"></a>This command supports the following CCSN-first_stage attributes/groups:</p>
+
+<ul><li>
+<a id="pgfId-933992"></a>ccsn_first_stage</li><li>
+<a id="pgfId-933993"></a>is_inverting </li><li>
+<a id="pgfId-933994"></a>is_needed </li><li>
+<a id="pgfId-933995"></a>miller_cap_fall </li><li>
+<a id="pgfId-933996"></a>miller_cap_rise</li><li>
+<a id="pgfId-933997"></a>stage_type</li><li>
+<a id="pgfId-933998"></a>dc_current </li><li>
+<a id="pgfId-933999"></a>output_voltage_fall</li><li>
+<a id="pgfId-934000"></a>output_voltage_rise</li><li>
+<a id="pgfId-934001"></a>propagated_noise_low</li><li>
+<a id="pgfId-934002"></a>propagated_noise_high</li><li>
+<a id="pgfId-934003"></a>related_ccb_node</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-934004"></a>The template corresponding to each sub group will also be copied.</p>
+<h4>
+<a id="pgfId-934005"></a>Parameters</h4>
+<p>
+<a id="pgfId-935635"></a></p>
+<table class="webflareTable" id="#id934739">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935320"></a><code>-help</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935322"></a>Prints out the command usage.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935324"></a><code>-from_pin &lt;string&gt;</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935326"></a>Specifies the from pin.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935328"></a><code>-input_ccb &lt;string&gt;</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935330"></a>Specifies if input_ccb is to be added.</p>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-935941"></a>This parameter cannot be used without the <code>-ref_pin</code> and <code>-to_pin</code> parameters.</div>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935332"></a><code>-propagated_noise_height_above_high &lt;float&gt;</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935334"></a></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935336"></a><code>-propagated_noise_height_below_low &lt;float&gt;</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935338"></a></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935340"></a><code>-propagated_noise_height_high &lt;float&gt; </code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935342"></a></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935344"></a><code>-propagated_noise_height_low &lt;float&gt;</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935346"></a></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935348"></a><code>-propagated_noise_width_above_high &lt;float&gt; </code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935350"></a></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935352"></a><code>-propagated_noise_width_below_low &lt;float&gt;</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935354"></a></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935356"></a><code>-propagated_noise_width_high &lt;float&gt;</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935358"></a></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935360"></a><code>-propagated_noise_width_low &lt;float&gt;</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935362"></a></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935364"></a><code>-ref_pin &lt;string&gt;</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935366"></a>Specifies the from pin.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935369"></a><code>-timing_sense &lt;string&gt; </code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935371"></a>Specifies the timing sense of the reference arc.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935374"></a><code>-timing_type &lt;string&gt;</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935376"></a>Specifies the timing type of the reference arc.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935379"></a><code>-to_pin &lt;string&gt;</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935381"></a>Specifies the to pin</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935384"></a><code>-to_ref_pin &lt;string&gt;</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935386"></a>Specifies the sink pin specified in the reference arc (mandatory for arc-based data).</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935389"></a><code>-when_condition &lt;string&gt; </code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-935391"></a>Specifies the when condition of the reference arc</p>
+</td>
+</tr>
+</tbody></table>
+<h4>
+<a id="pgfId-934024"></a>Examples</h4>
+
+<ul><li>
+<a id="pgfId-935786"></a>The following commands add noise information to the ETM library in accordance with the specified reference CCS library and write it to a new library:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id934025">
+<a id="pgfId-934025"></a>set_valus_mode -ccs_noise_data_disable_clip</pre><pre class="webflare-pre-block webflare-courier-new" id="#id934026">
+<a id="pgfId-934026"></a>read_lib abc.lib xyz.lib #abc.lib is ETM lib and xyz is CCS ref lib</pre><pre class="webflare-pre-block webflare-courier-new" id="#id934027">
+<a id="pgfId-934027"></a>update_library abc.lib #specify the ETM library where noise data needs to be added</pre><pre class="webflare-pre-block webflare-courier-new" id="#id934028">
+<a id="pgfId-934028"></a>add_noise_info -from_pin A -to_pin Y -propagated_noise_width_high 1 -propagated_noise_width_low 1</pre><pre class="webflare-pre-block webflare-courier-new" id="#id934029">
+<a id="pgfId-934029"></a>write_lib -lib_name new.lib</pre></li><li>
+<a id="pgfId-934030"></a>The following commands add input_ccb group from reference CCS library xyz cell BUFX2 pin A to pin A of ETM library:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id934033">
+<a id="pgfId-934033"></a>add_noise_info -ref_pin xyz/BUFX2/A -to_pin A -input_ccb CCB_D1</pre><pre class="webflare-pre-block webflare-courier-new" id="#id934034">
+<a id="pgfId-934034"></a>write_lib -lib_name new.lib</pre></li></ul>
+
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-934035"></a>Here, <code>CCB_D1</code> indicates that the CCB group belongs to pin D and 1 indicates that this is the first input_ccb group of pin D. The pin D can be input/inout pin only.</p>
+<h4><em>
+<a id="pgfId-934036"></a>Important Points</em></h4>
+
+<ul><li>
+<a id="pgfId-934037"></a>If propagated_noise_width_low/high is defined, then its corresponding propagated_noise_height_low/high will be mandatory and vice-versa.</li><li>
+<a id="pgfId-934039"></a>The CCSN data (input_ccb and CCSN first stage) can be defined on input/inout pin only.</li><li>
+<a id="pgfId-934040"></a>The propagated noise data can be defined on output/ inout pin only.</li></ul>
+
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="TclShellCommands_addgroup.html" id="prev" title="add_group">add_group</a></em></b><b><em><a href="TclShellCommands_addpowerinfo.html" id="nex" title="add_power_info">add_power_info</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

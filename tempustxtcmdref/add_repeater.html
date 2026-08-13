@@ -1,0 +1,654 @@
+
+<html><head><title>add_repeater</title>
+<meta name="page_sequence" content="26003000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287528" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="add_repeater" />
+<meta name="Keywords" content="add repeater,evaluate timing,insert repeater,manual eco" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="ECO," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287528" />
+<meta name="NextFile" content="attach_module_port.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="add_net.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- add_repeater" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="add_net.html" title="add_net">add_net</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="attach_module_port.html" title="attach_module_port">attach_module_port</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>add_repeater</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>add_repeater<span class="confluence-anchor-link" id="add_repeater-add_repeater"></span><span id="add_repeater-add_repeater"></span></code><br /><code>[-help]</code><br /><code>[-name &lt;string&gt;]</code><br /><code>[-new_net_name &lt;string&gt;]</code><br /><code>[-relativeDistToSink &lt;float&gt;]</code><br /><code>[-spread_count &lt;integer&gt;]</code><br /><code>[-spread_dist &lt;float&gt;]</code><br /><code>[-spread_prefix &lt;string&gt;] </code><br /><code>{-net &lt;string&gt; | -term &lt;string&gt;}&#xa0;</code><br /><code>[-loc {{x1 y1} {x2 y2}...} [-buforient &lt;string&gt;]]&#xa0;</code><br /><code>[-sort_by {slack trans area} [-max_cells &lt;integer&gt;]]</code><br /><code>[-cell &lt;string&gt; [-evaluate_only ]] [-evaluate_only | -evaluate_all ] [{[-evaluate_all ] [-evaluate_only ]} [{[-view &lt;string&gt;] [-early ] [-late ] <span style="color:var(--ds-text,#172b4d);">[-fall ] [-rise ] </span>[-output_as_tcl ] [-sort_by {slack trans area}]}]] [-early | -late ]</code><br /><code>[-first_spread_dist &lt;float&gt;]</code></p>
+
+<p>Ads either a single buffer or two inverters to a net. In the Multi-mode Multi-corner (MMMC) mode, this command adds a repeater and updates timing in all views. Optionally, you can specify the location of the buffer or inverters relative to the sink pin.</p>
+
+<p><strong>Note: </strong>You do not need to provide the physical information (LEF/DEF) to perform ECO using this command.</p>
+<h4 id="add_repeater-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="wrapped relative-table confluenceTable" style="width: 100.0%;"><colgroup><col style="width: 22.5579%;" /><col style="width: 77.4366%;" /></colgroup><tbody><tr><td class="confluenceTd"><code>-help</code></td>
+<td class="confluenceTd">
+<p>Outputs a brief description that includes type and default information for each&#xa0;<code>add_repeater</code>&#xa0;parameter.</p>
+
+<p>For a detailed description of the command and all of its parameters, use the&#xa0;man&#xa0;command: <code>man add_repeater</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span style="color:var(--ds-text,#000000);">-buforient&#xa0;string</span></code></td>
+<td class="confluenceTd">
+<p>Specifies the legalized orientation for the repeater instance.</p>
+
+<p><strong>Note</strong>: You can specify this parameter with the&#xa0;<code>-loc</code>&#xa0;parameter only.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-cell string</code></p>
+</td>
+<td class="confluenceTd">
+<p><span>Specifies the library cell to be used as a re<span style="color:var(--ds-text,#000000);">peater. If the cell is an inverter, two inverters in series will be added.</span></span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><span><code>-early</code></span></td>
+<td class="confluenceTd">
+<p>Specifies that the timing will be evaluated for early analysis. In such a case, only the active hold analysis views will be considered. If this parameter is not specified, timing will be evaluated for late analysis.</p>
+
+<p><strong>Note</strong>: This parameter must be specified with&#xa0;<code>-evaluate_only</code> or <code>-evaluate_all</code>&#xa0;only.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-evaluate_all&#xa0;&#xa0;</code></td>
+<td class="confluenceTd">
+<p><span>Specifies to only evaluate timing for all buffer/inverter/delay cells with matching footprint (or all footprints) without any changes in the netlist.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>-evaluate_only</span></code></td>
+<td class="confluenceTd">
+<p>Specifies to only evaluate timing for the given buffer/inverter/delay cells without any changes in the netlist.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><span><code><span style="color:var(--ds-text,#172b4d);">-fall</span></code></span></td>
+<td class="confluenceTd"><p style="text-align: left;">Specifies that the timing will be evaluated for the fall transition. If this parameter is not specified, timing will be evaluated for both rise and fall transitions, and the worst result is reported.</p>
+<p style="text-align: left;"><strong>Note</strong>: This parameter must be specified with&#xa0;<code>-evaluate_only</code>&#xa0;or&#xa0;<code>-evaluate_all</code>&#xa0;only.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-first_spread_dist <em>float</em></code></td>
+<td class="confluenceTd">
+<p><span style="color:var(--ds-text,#172b4d);">Specifies the distance from the driver after which the first repeater is to be added.</span></p>
+
+<p><span style="color:var(--ds-text,#172b4d);"><span><span class="ui-provider fz b c d e f g h i j k l m n o p q r s t u v w x y z ab ac ae af ag ah ai aj ak"><strong>Note</strong>: This parameter must be specified with <code>-spread_dist</code>.&#xa0;</span></span></span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>-late</span></code></td>
+<td class="confluenceTd">
+<p>Specifies that timing will be evaluated for late analysis. In such a case, only the active setup analysis views will be considered. If this parameter is not specified, timing will still be evaluated for late analysis.</p>
+
+<p><strong>Note</strong>: This parameter must be specified with&#xa0;<code>-evaluate_only<span> or </span></code><code>-evaluate_all</code>&#xa0;only.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-loc {</code><code><em>x y</em></code> |<code><em> x1 y1 x2 y2</em></code><code>}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the x and y coordinates for the location of the buffer or inverter pair. If you do not specify this parameter, the tool determines the location.</p>
+
+<p>If the cell is a buffer and a location is specified, the newly created buffer is placed at that location. If the cell is an inverter and only one location is specified, both inverters will be placed at the same location.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>-max_cells&#xa0;</span><em>integer</em></code></td>
+<td class="confluenceTd">
+<p>Specifies the maximum number of improving and degrading cells (each) to be reported for evaluation.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-name <em>inst_name</em></code></td>
+<td class="confluenceTd">
+<p>Specifies the base names of the new instances to be added.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-net </code><code><em>net_name</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the name of the net on which the buffer will be added. All sinks of the net are buffered when this parameter is specified.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-new_net_name netname</code></td>
+<td class="confluenceTd">
+<p>Specifies the base name(s) for the new net(s) to be added.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>-output_as_tcl</span></code></td>
+<td class="confluenceTd">Displays the output as a TCL list rather than as text.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-relativeDistToSink </code><code><em>value</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the location of the buffer instance based on its (relative) distance from the sink pin. The value is a number between 0 and 1 (both inclusive). A low value (such as 0.1) places the buffer near the sink. A high value (such as 0.9) places the buffer near the driver. You can use the value 0 to do sink term buffering and the value 1 to do driver term buffering. The fraction is based on the length of the wire. Fractional values can only be specified for two-pin nets.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="text-align: left;">
+<p><code>-rise</code></p>
+</td>
+<td class="confluenceTd" style="text-align: left;">
+<p>Specifies that the timing will be evaluated for the rise transition. If this parameter is not specified, timing will be evaluated for both rise and fall transitions, and the worst result is reported.</p>
+
+<p><strong>Note</strong>: This parameter must be specified with&#xa0;<code>-evaluate_only</code>&#xa0;or&#xa0;<code>-evaluate_all</code>&#xa0;only.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-sort_by {slack trans area}</code></td>
+<td class="confluenceTd">
+<p>Specifies the sorting order for evaluation.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-spread_count <em>integer</em></code></td>
+<td class="confluenceTd">
+<p><span style="color:var(--ds-text,#172b4d);">Specifies the number of repeaters to be added for buffering.</span></p>
+<p style="text-align: left;"><em>Minimum</em>: <code>1</code></p>
+<p style="text-align: left;"><em>Maximum</em>: <code>INT_MAX</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-spread_dist <em>float</em></code></td>
+<td class="confluenceTd">
+<p><span style="color:var(--ds-text,#172b4d);">Specifies the distance (starting from the driver) after which repeaters are to be added.</span></p>
+<p style="text-align: left;"><em>Minimum</em>: <code>2.2250738585072e-308</code></p>
+<p style="text-align: left;"><em>Maximum</em>: <code>1073741.823</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-spread_prefix string</code></td>
+<td class="confluenceTd"><span style="color:var(--ds-text,#172b4d);">Specifies the prefix used for new instances and nets added during spread buffering.</span></td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-term </code><code><em>pin_or_ports</em></code></p>
+</td>
+<td class="confluenceTd">
+<p><span style="color:var(--ds-text,#172B4D);">Specifies the list of pins (with one common net) that the new buffer or inverters would drive.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-view&#xa0;string</code></td>
+<td class="confluenceTd">
+<p>Specifies the active analysis views for which timing must be evaluated. If this parameter is not specified, timing will be evaluated for all active analysis views and results reported for the worst view.</p>
+
+<p><strong>Note</strong>: This parameter must be specified with&#xa0;<code>-evaluate_only or -evaluate_all&#xa0;only</code>.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="add_repeater-Examples">Examples</h4>
+<ul><li>The following command inserts a repeater with cell&#xa0;<code>BUFX4</code>&#xa0;on the net connected to terminal&#xa0;<code>DTMF_INST/RESULT_CONV_INST/RE_PHC369_r1336_0_/Y</code>:&#xa0;<br /><code>tempus&gt; add_repeater -term DTMF_INST/RESULT_CONV_INST/RE_PHC369_r1336_0_/Y -cell BUFX4</code></li><li>The following command inserts a repeater with cell&#xa0;<code>BUFX4</code>&#xa0;and attaches it to (driver) terminal&#xa0;<code>DTMF_INST/RESULT_CONV_INST/RE_PHC369_r1336_0_/Y</code>:&#xa0;<br /><code>tempus&gt; add_repeater -term DTMF_INST/RESULT_CONV_INST/RE_PHC369_r1336_0_/Y -cell BUFX4 -relativeDistToSink 1</code></li><li>The following command inserts a repeater with cell&#xa0;<code>BUFX4</code>&#xa0;and attaches it to (sink) terminal&#xa0;<code>DTMF_INST/RESULT_CONV_INST/RE_PHC369_r1336_0_/A</code>:&#xa0;<br /><code>tempus&gt; add_repeater -term DTMF_INST/RESULT_CONV_INST/RE_PHC369_r1336_0_/A -cell BUFX4 -relativeDistToSink 0</code></li><li>The following command inserts a repeater with cell&#xa0;<code>BUFX4</code>&#xa0;on net n123, places it at the given location, and names the new repeater instance&#xa0;<code>ECO_inst</code>:&#xa0;<br /><code>tempus&gt; add_repeater -net n123 -cell BUFX4 -loc {23.45 98.12} -name {ECO_inst}</code></li><li>
+<p>The following command inserts a repeater with cell&#xa0;<code>BUFX4</code>&#xa0;at a relative distance of 0.3 from the sink terminal of the two-pin net <code>n123</code>:&#xa0;<br /><code>tempus&gt; add_repeater -net n123 -cell BUFX4 -relativeDistToSink 0.3</code></p>
+</li><li>
+<p>The following command reports the evaluation results of buffering pin,&#xa0;<code>EXECUTE_INST/ar0_reg_9/SE</code>,&#xa0;by adding each of all the buffer/inverter/delay cells in the library:<br /><code><span style="font-family: SFMono-Medium , &quot;SF Mono&quot; , &quot;Segoe UI Mono&quot; , &quot;Roboto Mono&quot; , &quot;Ubuntu Mono&quot; , Menlo , Courier , monospace;letter-spacing: 0.0px;">tempus&gt;&#xa0;</span>add_repeater -term EXECUTE_INST/ar0_reg_9/SE -evaluate_all</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>Library-cell&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Area &#xa0; &#xa0; Timing-slack &#xa0; Worst-view &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Transition&#xa0; Trans-slack &#xa0; Worst-Trans-Sink</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>Reference &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.0000 &#xa0; &#xa0; -0.1181&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9024&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>INVXL(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 6.6528 &#xa0; &#xa0; -0.2273&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8825&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>INVX8(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 19.9584 &#xa0; &#xa0; -0.2505&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.7712&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>INVX4(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2000&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8560&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>INVX3(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2093&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8692&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>INVX2(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 9.9792 &#xa0; &#xa0; -0.2056&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8842&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>INVX20(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 63.2016 &#xa0; &#xa0; -0.3922&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8415&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>INVX1(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 6.6528 &#xa0; &#xa0; -0.2119&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9038&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>INVX16(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 56.5488 &#xa0; &#xa0; -0.3908&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8518&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>INVX12(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 43.2432 &#xa0; &#xa0; -0.3977&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8632&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>DLY4X1(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 23.2848 &#xa0; &#xa0; -0.8877&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8231&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>DLY3X1(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 23.2848 &#xa0; &#xa0; -0.6581&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8397&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>DLY2X1(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 19.9584 &#xa0; &#xa0; -0.4660&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8523&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>DLY1X1(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 19.9584 &#xa0; &#xa0; -0.3181&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8632&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>CLKINVXL(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 9.9792 &#xa0; &#xa0; -0.2642&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8451&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>CLKINVX8(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 19.9584 &#xa0; &#xa0; -0.2647&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.7866&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKINVX4(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2062&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8653&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKINVX3(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 9.9792 &#xa0; &#xa0; -0.2062&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8772&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKINVX2(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 9.9792 &#xa0; &#xa0; -0.2179&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8893&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKINVX20(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 96.4656 &#xa0; &#xa0; -0.4696&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8205&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKINVX1(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 9.9792 &#xa0; &#xa0; -0.2460&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8718&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>CLKINVX16(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 83.1600 &#xa0; &#xa0; -0.4635&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8403&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKINVX12(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 63.2016 &#xa0; &#xa0; -0.4383&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8601&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKBUFXL(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2006&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9064&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKBUFX8(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 23.2848 &#xa0; &#xa0; -0.2301&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8591&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKBUFX4(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 16.6320 &#xa0; &#xa0; -0.2111&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8965&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKBUFX3(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2111&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9005&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKBUFX2(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2058&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9019&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKBUFX20(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 79.8336 &#xa0; &#xa0; -0.2979&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.7343&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKBUFX1(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2129&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9002&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKBUFX16(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 63.2016 &#xa0; &#xa0; -0.2758&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.7814&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKBUFX12(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 53.2224 &#xa0; &#xa0; -0.2592&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8028&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>BUFXL(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2163&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8830&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>BUFX8(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 29.9376 &#xa0; &#xa0; -0.2183&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8450&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>BUFX4(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 16.6320 &#xa0; &#xa0; -0.1963&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8891&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>BUFX3(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.1988&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8953&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>BUFX2(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2027&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9008&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>BUFX20(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 53.2224 &#xa0; &#xa0; -0.2577&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.7673&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>BUFX1(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2096&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9043&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>BUFX16(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 43.2432 &#xa0; &#xa0; -0.2449&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.7935&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>BUFX12(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 33.2640 &#xa0; &#xa0; -0.2318&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8191&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+</li><li>
+<p>The following command reports evaluation results (sorted in increasing order of area) of buffering pin, <code>EXECUTE_INST/ar0_reg_9/SE</code>&#xa0;by adding each of all the buffer/inverter/delay cells in the library:<br /><code>tempus&gt;&#xa0;add_repeater -term EXECUTE_INST/ar0_reg_9/SE -evaluate_all -sort_by area</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>Library-cell&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Area &#xa0; &#xa0; Timing-slack &#xa0; Worst-view &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Transition&#xa0; Trans-slack &#xa0; Worst-Trans-Sink</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>Reference &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.0000 &#xa0; &#xa0; -0.1181&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9024&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>INVXL(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 6.6528 &#xa0; &#xa0; -0.2273&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8825&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>INVX1(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 6.6528 &#xa0; &#xa0; -0.2119&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9038&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>INVX2(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 9.9792 &#xa0; &#xa0; -0.2056&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8842&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKINVXL(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 9.9792 &#xa0; &#xa0; -0.2642&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8451&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>CLKINVX3(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 9.9792 &#xa0; &#xa0; -0.2062&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8772&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKINVX2(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 9.9792 &#xa0; &#xa0; -0.2179&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8893&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKINVX1(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 9.9792 &#xa0; &#xa0; -0.2460&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8718&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>INVX4(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2000&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8560&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>INVX3(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2093&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8692&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKINVX4(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2062&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8653&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKBUFXL(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2006&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9064&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKBUFX3(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2111&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9005&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKBUFX2(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2058&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9019&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKBUFX1(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2129&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9002&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>BUFXL(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2163&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8830&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>BUFX3(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.1988&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8953&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>BUFX2(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2027&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9008&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>BUFX1(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2096&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9043&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>CLKBUFX4(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 16.6320 &#xa0; &#xa0; -0.2111&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8965&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>BUFX4(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 16.6320 &#xa0; &#xa0; -0.1963&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8891&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>INVX8(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 19.9584 &#xa0; &#xa0; -0.2505&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.7712&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>DLY2X1(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 19.9584 &#xa0; &#xa0; -0.4660&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8523&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>DLY1X1(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 19.9584 &#xa0; &#xa0; -0.3181&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8632&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>CLKINVX8(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 19.9584 &#xa0; &#xa0; -0.2647&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.7866&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>DLY4X1(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 23.2848 &#xa0; &#xa0; -0.8877&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8231&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>DLY3X1(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 23.2848 &#xa0; &#xa0; -0.6581&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8397&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>CLKBUFX8(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 23.2848 &#xa0; &#xa0; -0.2301&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8591&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>BUFX8(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 29.9376 &#xa0; &#xa0; -0.2183&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8450&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>BUFX12(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 33.2640 &#xa0; &#xa0; -0.2318&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8191&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>INVX12(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 43.2432 &#xa0; &#xa0; -0.3977&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8632&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>BUFX16(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 43.2432 &#xa0; &#xa0; -0.2449&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.7935&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKBUFX12(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 53.2224 &#xa0; &#xa0; -0.2592&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8028&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>BUFX20(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 53.2224 &#xa0; &#xa0; -0.2577&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.7673&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>INVX16(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 56.5488 &#xa0; &#xa0; -0.3908&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8518&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>INVX20(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 63.2016 &#xa0; &#xa0; -0.3922&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8415&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKINVX12(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 63.2016 &#xa0; &#xa0; -0.4383&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8601&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKBUFX16(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 63.2016 &#xa0; &#xa0; -0.2758&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.7814&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKBUFX20(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 79.8336 &#xa0; &#xa0; -0.2979&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.7343&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKINVX16(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 83.1600 &#xa0; &#xa0; -0.4635&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8403&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKINVX20(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 96.4656 &#xa0; &#xa0; -0.4696&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8205&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------<br /></code></p>
+</li><li>
+<p>This command reports the evaluation results (sorted in increasing order of slack) of buffering pin, <code>EXECUTE_INST/ar0_reg_9/SE,</code>&#xa0;by adding each of all the buffer/inverter/delay cells in the library:</p>
+
+<p><code><span>tempus&gt;&#xa0;</span>add_repeater -term EXECUTE_INST/ar0_reg_9/SE -evaluate_all -sort_by slack</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>Library-cell&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Area &#xa0; &#xa0; Timing-slack &#xa0; Worst-view &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Transition&#xa0; Trans-slack &#xa0; Worst-Trans-Sink</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>DLY4X1(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 23.2848 &#xa0; &#xa0; -0.8877&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8231&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>DLY3X1(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 23.2848 &#xa0; &#xa0; -0.6581&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8397&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>CLKINVX20(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 96.4656 &#xa0; &#xa0; -0.4696&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8205&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>DLY2X1(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 19.9584 &#xa0; &#xa0; -0.4660&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8523&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>CLKINVX16(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 83.1600 &#xa0; &#xa0; -0.4635&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8403&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKINVX12(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 63.2016 &#xa0; &#xa0; -0.4383&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8601&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>INVX12(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 43.2432 &#xa0; &#xa0; -0.3977&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8632&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>INVX20(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 63.2016 &#xa0; &#xa0; -0.3922&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8415&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>INVX16(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 56.5488 &#xa0; &#xa0; -0.3908&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8518&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>DLY1X1(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 19.9584 &#xa0; &#xa0; -0.3181&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8632&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>CLKBUFX20(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 79.8336 &#xa0; &#xa0; -0.2979&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.7343&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKBUFX16(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 63.2016 &#xa0; &#xa0; -0.2758&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.7814&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKINVX8(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 19.9584 &#xa0; &#xa0; -0.2647&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.7866&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKINVXL(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 9.9792 &#xa0; &#xa0; -0.2642&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8451&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>CLKBUFX12(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 53.2224 &#xa0; &#xa0; -0.2592&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8028&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>BUFX20(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 53.2224 &#xa0; &#xa0; -0.2577&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.7673&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>INVX8(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 19.9584 &#xa0; &#xa0; -0.2505&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.7712&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKINVX1(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 9.9792 &#xa0; &#xa0; -0.2460&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8718&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>BUFX16(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 43.2432 &#xa0; &#xa0; -0.2449&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.7935&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>BUFX12(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 33.2640 &#xa0; &#xa0; -0.2318&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8191&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKBUFX8(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 23.2848 &#xa0; &#xa0; -0.2301&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8591&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>INVXL(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 6.6528 &#xa0; &#xa0; -0.2273&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8825&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>BUFX8(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 29.9376 &#xa0; &#xa0; -0.2183&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8450&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKINVX2(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 9.9792 &#xa0; &#xa0; -0.2179&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8893&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>BUFXL(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2163&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8830&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>CLKBUFX1(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2129&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9002&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>INVX1(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 6.6528 &#xa0; &#xa0; -0.2119&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9038&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>CLKBUFX4(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 16.6320 &#xa0; &#xa0; -0.2111&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8965&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKBUFX3(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2111&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9005&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>BUFX1(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2096&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9043&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>INVX3(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2093&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8692&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKINVX4(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2062&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8653&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKINVX3(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 9.9792 &#xa0; &#xa0; -0.2062&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8772&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKBUFX2(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2058&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9019&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>INVX2(inv_pair) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 9.9792 &#xa0; &#xa0; -0.2056&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8842&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>BUFX2(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2027&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9008&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>CLKBUFXL(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2006&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9064&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>INVX4(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.2000&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8560&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>BUFX3(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; -0.1988&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8953&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>BUFX4(buf) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 16.6320 &#xa0; &#xa0; -0.1963&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8891&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>Reference &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.0000 &#xa0; &#xa0; -0.1181&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9024&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+</li><li>
+<p>This command evaluates buffering of pin, <code>EXECUTE_INST/ar0_reg_9/SE</code>,&#xa0;by adding each of all the buffer/inverter/delay cells in the library, and report (sorted in increasing order of slack) the top 5 best and bottom 5 worst cells, along with the &#39;reference&#39;:</p>
+
+<p><code><span>tempus&gt;&#xa0;</span>add_repeater -term EXECUTE_INST/ar0_reg_9/SE -evaluate_all -sort_by slack -max_cells 5</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>Library-cell&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Area &#xa0; &#xa0; Timing-slack &#xa0; Worst-view &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Transition&#xa0; Trans-slack &#xa0; Worst-Trans-Sink</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>DLY4X1(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 23.2848 &#xa0; &#xa0; -0.8877&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8231&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>DLY3X1(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 23.2848 &#xa0; &#xa0; -0.6581&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8397&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>CLKINVX20(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 96.4656 &#xa0; &#xa0; -0.4696&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8205&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>DLY2X1(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 19.9584 &#xa0; &#xa0; -0.4660&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8523&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar0_reg_9/SE</code></p>
+
+<p><code>CLKINVX16(inv_pair)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 83.1600 &#xa0; &#xa0; -0.4635&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.8403&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>Reference &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.0000 &#xa0; &#xa0; -0.1181&#xa0; &#xa0; &#xa0; io+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0; &#xa0; 2.9024&#xa0; &#xa0; &#xa0; EXECUTE_INST/ar1_reg_9/SE</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+</li><li>
+<p>The following command reports the evaluation results (worst setup timing across all views) of buffering pin, <code>MPY_32_INST/M16X16_INST/i_910/B0</code>, by adding each buffer/inverter/delay cell in the library that matches the footprint of cell,&#xa0;<code>BUFX4</code>:<br /><code>tempus&gt; add_repeater -term MPY_32_INST/M16X16_INST/i_910/B0 -cell BUFX4 -evaluate_all</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>Library-cell&#xa0; &#xa0; &#xa0; &#xa0;Area&#xa0; &#xa0; &#xa0; &#xa0; Timing-slack&#xa0; &#xa0; Worst-view&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Transition&#xa0; &#xa0; &#xa0;Trans-slack&#xa0; &#xa0; &#xa0;Worst-Trans-Sink</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>Reference&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.0000&#xa0; &#xa0; &#xa0; -0.1242&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;core+typ-rcMax&#xa0; &#xa0; &#xa0;rise&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.8485&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MPY_32_INST/M16X16_INST/i_910/B0</code></p>
+
+<p><code>CLKBUFXL(buf)&#xa0; &#xa0; &#xa0; 13.3056&#xa0;&#xa0;&#xa0;&#xa0; -0.1785&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;core+typ-rcMax&#xa0; &#xa0; &#xa0;rise&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.9125&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MPY_32_INST/M16X16_INST/i_910/B0</code></p>
+
+<p><code>CLKBUFX8(buf)&#xa0; &#xa0; &#xa0; 23.2848&#xa0;&#xa0;&#xa0;&#xa0; -0.2197&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;core+typ-rcMax&#xa0; &#xa0; &#xa0;rise&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.9580&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MPY_32_INST/M16X16_INST/i_910/B0</code></p>
+
+<p><code>CLKBUFX4(buf)&#xa0; &#xa0; &#xa0; 16.6320&#xa0;&#xa0;&#xa0;&#xa0; -0.1928&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;core+typ-rcMax&#xa0; &#xa0; &#xa0;rise&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.9497&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MPY_32_INST/M16X16_INST/i_910/B0</code></p>
+
+<p><code>CLKBUFX3(buf)&#xa0; &#xa0; &#xa0; 13.3056&#xa0;&#xa0;&#xa0;&#xa0; -0.1892&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;core+typ-rcMax&#xa0; &#xa0; &#xa0;rise&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.9453&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MPY_32_INST/M16X16_INST/i_910/B0</code></p>
+
+<p><code>CLKBUFX2(buf)&#xa0; &#xa0; &#xa0; 13.3056&#xa0;&#xa0;&#xa0;&#xa0; -0.1854&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;core+typ-rcMax&#xa0; &#xa0; &#xa0;rise&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.9311&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MPY_32_INST/M16X16_INST/i_910/B0</code></p>
+
+<p><code>CLKBUFX20(buf)&#xa0; &#xa0; &#xa0;79.8336&#xa0;&#xa0;&#xa0;&#xa0; -0.4212&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;core+typ-rcMax&#xa0; &#xa0; &#xa0;rise&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.9477&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MPY_32_INST/M16X16_INST/i_910/B0</code></p>
+
+<p><code>CLKBUFX1(buf)&#xa0; &#xa0; &#xa0; 13.3056&#xa0;&#xa0;&#xa0;&#xa0; -0.2002&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;core+typ-rcMax&#xa0; &#xa0; &#xa0;rise&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.9081&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MPY_32_INST/M16X16_INST/i_910/B0</code></p>
+
+<p><code>CLKBUFX16(buf)&#xa0; &#xa0; &#xa0;63.2016&#xa0;&#xa0;&#xa0;&#xa0; -0.3583&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;core+typ-rcMax&#xa0; &#xa0; &#xa0;rise&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.9509&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MPY_32_INST/M16X16_INST/i_910/B0</code></p>
+
+<p><code>CLKBUFX12(buf)&#xa0; &#xa0; &#xa0;53.2224&#xa0;&#xa0;&#xa0;&#xa0; -0.3147&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;core+typ-rcMax&#xa0; &#xa0; &#xa0;rise&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.9542&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MPY_32_INST/M16X16_INST/i_910/B0</code></p>
+
+<p><code>BUFXL(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;13.3056&#xa0;&#xa0;&#xa0;&#xa0; -0.2028&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;core+typ-rcMax&#xa0; &#xa0; &#xa0;rise&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.8799&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MPY_32_INST/M16X16_INST/i_910/B0</code></p>
+
+<p><code>BUFX8(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;29.9376&#xa0;&#xa0;&#xa0;&#xa0; -0.2222&#xa0;&#xa0;&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;&#xa0;core+typ-rcMax&#xa0; &#xa0; &#xa0;rise&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.9595&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MPY_32_INST/M16X16_INST/i_910/B0</code></p>
+
+<p><code>BUFX4(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;16.6320&#xa0;&#xa0;&#xa0;&#xa0; -0.1836&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;core+typ-rcMax&#xa0; &#xa0; &#xa0;rise&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.9545&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MPY_32_INST/M16X16_INST/i_910/B0</code></p>
+
+<p><code>BUFX3(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;13.3056&#xa0;&#xa0;&#xa0;&#xa0; -0.1805&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;core+typ-rcMax&#xa0; &#xa0; &#xa0;rise&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.9502&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MPY_32_INST/M16X16_INST/i_910/B0</code></p>
+
+<p><code>BUFX2(buf)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;13.3056&#xa0;&#xa0;&#xa0;&#xa0; -0.1818&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;core+typ-rcMax&#xa0; &#xa0; &#xa0;rise&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.9358&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MPY_32_INST/M16X16_INST/i_910/B0</code></p>
+
+<p><code>-----------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+</li><li>
+<p>The following command reports the evaluation results (worst setup timing across all views) of buffering pin,<code> MPY_32_INST/M16X16_INST/i_910/B0</code>, by adding cell,&#xa0;<code>BUFX4</code>:<br /><code>tempus&gt; add_repeater -term MPY_32_INST/M16X16_INST/i_669/A -cell BUFX4 -evaluate_only</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>Library-cell&#xa0; &#xa0; &#xa0; &#xa0;Area&#xa0; &#xa0; &#xa0; Timing-slack&#xa0; &#xa0; &#xa0;Worst-view&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Transition&#xa0; &#xa0; Trans-slack&#xa0; &#xa0; Worst-Trans-Sink</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>Reference&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.0000&#xa0; &#xa0; &#xa0;-0.1242&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; core+typ-rcMax&#xa0; &#xa0; &#xa0; rise&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 2.6766&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;MPY_32_INST/M16X16_INST/i_639/A1</code></p>
+
+<p><code>BUFX4(buf)&#xa0; &#xa0; &#xa0; &#xa0; 16.6320&#xa0; &#xa0; -0.1816&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; core+typ-rcMax&#xa0; &#xa0; &#xa0; rise&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 2.6555&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;MPY_32_INST/M16X16_INST/i_639/A1<br /></code></p>
+
+<p><code>&#xa0;</code></p>
+</li><li>
+<p>The following command reports the evaluation results (worst setup timing across all views) of buffering net, <code>MPY_32_INST/M16X16_INST/n_647</code>, by adding cell,&#xa0;<code>CLKBUFX20</code>:<br /><code>tempus&gt; add_repeater -net MPY_32_INST/M16X16_INST/n_647 -cell CLKBUFX20 -evaluate_only</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>Library-cell&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Area&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Timing-slack&#xa0; &#xa0; &#xa0;Worst-view&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Transition&#xa0; &#xa0; Trans-slack&#xa0; &#xa0; Worst-Trans-Sink</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>Reference&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.0000&#xa0; &#xa0; &#xa0; &#xa0;-0.0745&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; core+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0;rise&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 2.8849&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;MPY_32_INST/M16X16_INST/i_388/A</code></p>
+
+<p><code>CLKBUFX20(buf)&#xa0; &#xa0; &#xa0; &#xa0;79.8336&#xa0; &#xa0; &#xa0; -0.2270&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; core+typ-rcMax&#xa0; &#xa0; &#xa0; &#xa0;rise&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 2.9586&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;MPY_32_INST/M16X16_INST/i_388/A</code></p>
+
+<p><br /></p>
+</li><li>
+<p>The following command reports the evaluation results (worst setup timing across all views) of buffering pin, <code>MPY_32_INST/M16X16_INST/i_669/A</code>, by adding cell,&#xa0;<code>BUFX4</code>:<br /><code>tempus&gt; add_repeater -term MPY_32_INST/M16X16_INST/i_669/A -cell BUFX4 -evaluate_only -output_as_tcl</code></p>
+
+<p><code>{MPY_32_INST/M16X16_INST/n_917 {Reference ref 0.0000 -0.1242 core+typ-rcMax rise 2.6766 MPY_32_INST/M16X16_INST/i_639/A1} {BUFX4 buf 16.6320 -0.1816 core+typ-rcMax rise 2.6555 MPY_32_INST/M16X16_INST/i_639/A1}}</code></p>
+
+<p><code>&#xa0;</code></p>
+</li><li>
+<p>The following command reports the evaluation results (hold timing analysis for only <code>core+typ-rcMin</code>&#xa0;view) of buffering pin, <code>MPY_32_INST/M16X16_INST/i_699/A1</code>, by adding cell,&#xa0;<code>BUFX16</code>:<br /><code>tempus&gt; add_repeater -term MPY_32_INST/M16X16_INST/i_699/A1 -cell BUFX16 -evaluate_only -view core+typ-rcMin -early</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>Library-cell&#xa0; &#xa0; &#xa0; Area&#xa0; &#xa0; &#xa0; &#xa0; Timing-slack&#xa0; &#xa0; Worst-view&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Transition&#xa0; &#xa0; &#xa0;Trans-slack&#xa0; &#xa0; &#xa0; Worst-Trans-Sink</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>Reference&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.0000&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 2.1814&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; core+typ-rcMin&#xa0; &#xa0; &#xa0; &#xa0;rise&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.6919&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;MPY_32_INST/M16X16_INST/i_699/A1</code></p>
+
+<p><code>BUFX16(buf)&#xa0; &#xa0; &#xa0; &#xa0;43.2432&#xa0; &#xa0; &#xa0;2.3008&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; core+typ-rcMin&#xa0; &#xa0; &#xa0; &#xa0;fall&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.4436&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;MPY_32_INST/M16X16_INST/i_731/B</code></p>
+</li><li>
+<p>The following commands add one instance of inverter&#xa0;<code>INVX1</code>&#xa0;after every&#xa0;50 um&#xa0;distance, starting from the net&#8217;s driver (polarity of some or all sinks may get reversed when odd number of instances are added):</p>
+<code>set_eco_mode -leq_check false</code><br /><code>add_repeater -net n123 -cell INVX1 -spread_dist 50</code></li><li>
+<p>The following commands add one instance of inverter <code>INVX1</code> after every 50 um distance, starting from the net&#8217;s driver, and if required, one instance of this inverter at a sink to preserve its polarity:<br /><code>set_eco_mode -leq_check true</code><br /><code>add_repeater -net n123 -cell INVX1 -spread_dist 50</code></p>
+</li><li>
+<p>The following command adds 10 instances of buffer <code>BUFX1</code>, equi-distant from each other, such that only the specified sinks are buffered:<br /><code>add_repeater -term {sink1 sink3} -cell BUFX1 -spread_count 10</code></p>
+</li><li>
+<p>The following command adds one instance each of buffers <code>BUFX1</code>, <code>BUFX2</code>, <code>BUFX3</code>, and <code>BUFX4</code>, equi-distant from each other, such that all the sinks of this net are buffered [total 4 instances added]:<br /><code>add_repeater -net n123 -cell {BUFX1 BUFX2 BUFX3 BUFX4} -spread_count 4</code></p>
+</li><li>
+<p>The following commands add two instances each of inverters <code>INVX1</code> and <code>INVX3</code>, and one instance each of buffers <code>BUFX2</code> and <code>BUFX4</code>, each buffer or inverter equi-distant from each other, such that only the specified sinks are buffered [total 6 instances added]:<br /><code>set_eco_mode -leq_check true</code><br /><code>add_repeater -term {sink1 sink3} -cell {INVX1 BUFX2 INVX3 BUFX4} -spread_count 4</code></p>
+</li><li>The following command&#xa0;adds one instance of buffer BUFX1 after every 50 um distance starting from the net&#8217;s driver:<br /><code>add_repeater -net n123 -cell BUFX1 -spread_dist 50 -spread_prefix {ab}</code><br />The added instances are named as&#xa0;<code>ab_inst_0</code>, <code>ab_inst_1</code>, &#8230; &#xa0;and the added nets are named as <code>ab_net_0</code>,<code> ab_net_1</code>, <code>&#8230;</code></li><li>The following command adds four instances of buffer BUFX1, equidistant from each other so that all sinks of the net are buffered:<br /><code>add_repeater -net n123 -cell BUFX1 -spread_count 4 -spread_prefix {mn}</code>
+<p>The added instances are named as&#xa0;<code>mn_inst_0</code>, <code>mn_inst_1</code>, <code>&#8230;</code> &#xa0;and the added nets are named as <code>mn_net_0</code>, <code>mn_net_1</code>, &#8230;</p>
+
+<p><strong>Note</strong>: The suffix number automatically starts after the last buffer or inverter added earlier.</p>
+</li><li>The following command&#xa0;adds the first buffer (<code>BUFFD4BWP)</code>after 20 micron distance from the driver term, and subsequent buffers after 50 micron distance from the previous buffer.<br /><code>add_repeater -net iso -cell BUFFD4BWP&#xa0;-spread_dist 50&#xa0;-first_spread_dist 20</code></li></ul>
+<p><strong>Related Commands</strong></p>
+<ul><li><code><a href="change_cell.html">change_cell</a></code></li><li><code><a href="delete_repeater.html">delete_repeater</a></code></li><li><code><a href="set_eco_mode.html">set_eco_mode</a></code></li></ul>
+<p></p>
+
+<p><br /></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="add_net.html" id="prev" title="add_net">add_net</a></em></b><b><em><a href="attach_module_port.html" id="nex" title="attach_module_port">attach_module_port</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

@@ -1,0 +1,192 @@
+
+<html><head><title>Power Analysis Setup in Multi-CPU Mode</title>
+<meta name="page_sequence" content="15002000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468546" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Power Analysis Setup in Multi-CPU Mode" />
+<meta name="Keywords" content="static,dynamic,multi,CPU,standalone,heterogeneous,analysis" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Distributed Processing," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468546" />
+<meta name="NextFile" content="Library_Generation_Setup_in_Multi-CPU_Mode.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Distributed_Processing_Setup.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- Power Analysis Setup in Multi-CPU Mode" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="Distributed_Processing_Setup.html" title="Distributed_Processing_Setup">Distributed_Processing_Setup</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Library_Generation_Setup_in_Multi-CPU_Mode.html" title="Library_Generation_Setup_in_Multi-CPU_Mode">Library_Generation_Setup_in_Mu ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Power Analysis Setup in Multi-CPU Mode</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="PowerAnalysisSetupinMultiCPUMode-61409"></span></p>
+
+<p>Multi-CPU support is available in the static, dynamic vectorless, and vector-based power analysis. Both static and dynamic power analysis supports multi-CPU in the local and distributed modes.</p>
+
+<p><span class="fontredcadence">
+<p>Distributed processing allows faster run time for hierarchical designs. In the distributed mode, you can use the <code>set_power_analysis_mode -distributed_setup</code> command parameter to customize the setup for running power analysis. The use model of this parameter is:</p>
+
+<p><code>set_power_analysis_mode -distributed_setup file</code></p>
+</span></p>
+
+<p><code> </code></p>
+
+<p>The specified file has 4 columns:</p>
+
+<p><code>INST/CELL &lt;name&gt; hier/block &lt;power.inc&gt;</code></p>
+
+<p>where,</p>
+<ul><li><code>INST/CELL</code>: Keyword indicating cell or instance to be run in the distributed mode. Cell can be useful for repeated DEF blocks.</li><li><code>name</code>: Name of the hierarchical block or instance.</li><li><code>hier/block</code>: Keyword indicating hierarchy or block. hier implies that the full hierarchy will be preserved by including the DEFs from top to the block, and block implies that only the lower level DEF will be included</li><li><code>power.inc</code>: Name of the power include file. This column is optional.</li></ul>
+<p>The unspecified instance/cell will be run with the top level as a single group. Each distributed block/instance should have corresponding TWF and SPEF to improve run time.</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>Each hierarchy or block will be run independently from other hierarchies/blocks, thus the external load or cell seen at the pin of the hierarchy/block will be different from flat analysis. If the partition boundary analysis is important, distributed processing is not recommended.</p>
+</div>
+</div>
+<h2 id="PowerAnalysisSetupinMultiCPUMode-69907StandaloneDistributedPowerAnalysis"><span class="confluence-anchor-link" id="PowerAnalysisSetupinMultiCPUMode-69907"></span>Standalone Distributed Power Analysis</h2>
+
+<p>Voltus supports standalone distributed power analysis in both the vector-based and vectorless dynamic power analysis flows. This feature allows you to perform dynamic power analysis and vector profiling in the multi-CPU mode without running rail analysis. The following parameters can be specified to perform standalone distributed power analysis:</p>
+
+<p><span class="fontredcadence"><ul><li>
+<p>the <code>-distribute</code> parameter of the <code>report_power</code> command to enable standalone distributed power analysis.</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>To run vectoring profiling in the distributed mode, you must specify the <code>-vector_profile_mode event_based</code> parameter of the <code>set_power_analysis_mode</code> command, as shown below:</p>
+</div>
+</div>
+
+<p><code>set_power_analysis_mode -vector_profile_mode event_based</code><br /><code>report_power -distribute</code></p>
+</li><li>the <code>-partition_twf</code> parameter of the <code>set_power_analysis_mode</code> command to read the input TWF data (flat or hierarchical TWF files), and generate block-level TWFs. This parameter must be specified when the block/partition level TWF files are not available.</li></ul>
+<p>The standalone distributed power analysis flow works only on the DEF hierarchy. Before running this flow, you must set the partition (hierarchy or block) using the <code>set_power_analysis_mode -distributed_setup &lt;file&gt; </code>command parameter. Each partition is run like an independent block-level analysis on the specified distributed hosts.</p>
+</span></p>
+
+<p><span class="fontredcadence"><h2 id="PowerAnalysisSetupinMultiCPUMode-Multi-sizeHeterogeneousDistributedProcessing">Multi-size Heterogeneous Distributed Processing</h2>
+
+<p>Voltus supports multi-size heterogeneous distributed processing using the <code>-custom_script_list</code> parameter of the <code>set_distribute_host</code> command. This parameter allows you to specify multiple launch strings to specify machines with different memory size in the order of priority, and a maximum allowed job count for each string.</p>
+
+<p>The use model of this parameter is:<br /><code>set_distribute_host -custom -custom_script_list {{{string1} count1} {{string2} count2} ... {{stringN} countN}}</code></p>
+
+<p>If you request for N number of jobs, the command starts submitting jobs starting from string1, until the corresponding count is reached, at which point it starts submitting the next string in the list. Therefore, the command submits the first &quot;<code>count1</code>&quot; jobs with <code>string1</code>, the next &quot;<code>count2</code>&quot; jobs with <code>string2</code>, and so on. It stops when the total submitted jobs has reached the requested number (N).</p>
+
+<p>When running distributed power analysis with heterogeneous machines, Voltus uses the order of jobs specified in the distributed configuration file (<code>set_power_analysis_mode -distributed_setup file</code>) to allocate machines. You need to specify the correct order for optimal allocation of machine resources.</p>
+</span></p>
+<h2 id="PowerAnalysisSetupinMultiCPUMode-TclScripttoRunPowerAnalysisinMulti-CPUMode">Tcl Script to Run Power Analysis in Multi-CPU Mode</h2>
+
+<p>The following is the Tcl script to run power analysis in multi-cpu mode:</p>
+
+<p><span class="fontredcadence"><h4 id="PowerAnalysisSetupinMultiCPUMode-TclScripttoRunDynamicVectorlessPowerAnalysisintheLocalMode"><strong>Tcl Script to Run Dynamic Vectorless Power Analysis in the Local Mode</strong></h4>
+
+<p><code>set_distribute_host -local<br />set_multi_cpu_usage -localCpu 4<br />read_lib -lef &lt;LEF&gt;<br />read_lib &lt;timing libraries&gt;<br />read_verilog &lt;verilog netlist&gt;<br />read_sdc &lt;timing constraints&gt;<br />read_def -skip_signal &lt;DEFs&gt;</code></p>
+
+<p># Use <code>specify_def</code> for better performance</p>
+
+<p><code>read_spef &lt;RC parasitic files&gt;</code></p>
+
+<p># Option (<code>-disable_static true</code>) is available to turn off static power calculation during dynamic power calculation</p>
+
+<p><code>set_power_analysis_mode -reset<br />set_power_analysis_mode -method dynamic_vectorless -disable_static true<br /></code># Use 2 dominant cycles and ~50ps resolution</p>
+
+<p><code>set_dynamic_power_simulation -period 8ns -resolution 50ps<br />set_default_switching_activity -input_activity 0.2 -seq_activity 0.1 -period 10.0<br />report_power</code></p>
+<h4 id="PowerAnalysisSetupinMultiCPUMode-TclScripttoRunDynamicVectorlessPowerAnalysisintheDistributedMode"><strong>Tcl Script to Run Dynamic Vectorless Power Analysis in the Distributed Mode</strong></h4>
+
+<p><code>set_distribute_host &#8211;rsh &#8211;add &quot;m1 m2&quot;</code></p>
+
+<p>##The following command specifies the number of remote hosts and number of CPUs per remote host<br /><code>set_multi_cpu_usage -remoteHost</code><strong> </strong>8<strong> </strong><code>-</code>cpuPerRemoteHost<strong> </strong>2<code> -localCpu 16</code></p>
+
+<p>##The following command specifies that all the blocks included in the <code>dp_setup.txt</code> file will be run in parallel<br /><code>set_power_analysis_mode &#8211;method dynamic_vectorless -distributed_setup dp_setup.txt</code></p>
+
+<p>The following is the content of the dp_setup.txt file:</p>
+
+<p><code>INST top.block1 block<br />INST top.block4 block<br />CELL block2 block</code></p>
+
+<p>In the above example, 4 power distributed jobs are created for: top.block1, top.block4, hierarchical cell block2, and any other hierarchical instances not specified in <code>dp_setup.txt</code> that are run with the top-level.</p>
+<h4 id="PowerAnalysisSetupinMultiCPUMode-TclScripttoRunStandaloneDistributedPowerAnalysis"><strong>Tcl Script to Run Standalone Distributed Power Analysis</strong></h4>
+
+<p><code>set_distribute_host -lsf -queue lnx64  -timeout 500000 -args {-P resource:test -W 150:00 -o temp} -resource &quot;lnx86_test&quot;<br />set_multi_cpu_usage -remoteHost 4 -cpuPerRemoteHost 8 -localCpu 16<br />...<br />...<br />set_power_analysis_mode \<br />  -method dynamic_vectorless \  <br />  -disable_static false \<br />  -power_grid_library &quot;$DesignDir/../techonly.cl $DesignDir/../stdcells.cl <br />  -distributed_setup power_control.txt  \<br />  -create_binary_db true \<br />  -partition_twf true \<br />set_db \<br />  power_method dynamic_vectorless \  <br />  power_disable_static false \<br />  power_grid_libraries &quot;$DesignDir/../techonly.cl $DesignDir/../stdcells.cl <br />  power_distributed_setup power_control.txt  \<br />  power_write_db true \<br />  power_partition_twf true \<br />
+report_power -distribute -report_prefix report -output static_power</code></p>
+<h4 id="PowerAnalysisSetupinMultiCPUMode-TclScripttoRunMulti-sizeHeterogeneousDistributedProcessing"><strong>Tcl Script to Run Multi-size Heterogeneous Distributed Processing</strong></h4>
+
+<p>##The following command requests for 32 machines wherein two machines require 512GB memory and 30 machines require 256GB memory:<br /><code>set_multi_cpu_usage -remoteHost 32</code></p>
+
+<p><code>set_distribute_host -custom -custom_script_list {{{bsub -R &quot;OSNAME==Linux &amp;&amp; OSREL==EE50 &amp;&amp; mem &gt; 500000&quot;} 2}&#xa0;&#xa0;{{bsub -R &quot;OSNAME==Linux &amp;&amp; OSREL==EE50 &amp;&amp; mem &gt; 256000&quot;}} 30} </code></p>
+
+<p>##The following command specifies that all the blocks included in the <code>dp_setup.txt</code> file will be run in parallel<br /><code>set_power_analysis_mode &#8211;method dynamic_vectorless -distributed_setup dp_setup.txt</code></p>
+
+<p>The following is the content of the <code>dp_setup.txt</code> file:<br /><code>CELL block1 ./power.inc<br />CELL block2 ./power.inc<br />CELL graphics.block ./power.inc<br />CELL block3 ./power.inc<br />CELL block4 ./power.inc<br />CELL block5 ./power.inc<br />...</code></p>
+
+<p>In the above example, block1 will be scheduled on the first 512GB machine, block2 will be scheduled on the second 512GB machine, and the remaining blocks will be scheduled on the 256GB machines.</p>
+</span></p>
+
+<p><em style="font-weight: 600;letter-spacing: -0.003em;">Related Topics</em></p>
+<ul><li><a href="Distributed_Processing.html">Distributed Processing</a></li><li><a href="Distributed_Processing_Setup.html">Distributed Processing Setup</a></li></ul>
+<p><br /></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Distributed_Processing_Setup.html" id="prev" title="Distributed_Processing_Setup">Distributed_Processing_Setup</a></em></b><b><em><a href="Library_Generation_Setup_in_Multi-CPU_Mode.html" id="nex" title="Library_Generation_Setup_in_Multi-CPU_Mode">Library_Generation_Setup_in_Mu ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

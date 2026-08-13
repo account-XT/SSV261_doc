@@ -1,0 +1,126 @@
+
+<html><head><title>Aging-Aware STA Analysis - Overview</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845210" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Aging-Aware STA Analysis - Overview" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845210" />
+<meta name="NextFile" content="analysisandreporting_agingawaresta.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_aginganalysis.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- Aging-Aware STA Analysis - Overview" />
+<meta name="Keywords" content="advanced aging-aware STA,PPA,accuracy,power, performance, and area" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Aging,Stylus" />
+<meta name="prod_subfeature" content="Aging" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_aginganalysis.html" title="Aging-Aware STA Analysis">Aging-Aware STA Analysis</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_agingawaresta.html" title="Tempus Aging-Aware STA">Tempus Aging-Aware STA</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:aginganalysisoverview" title="Aging-Aware STA Analysis - Overview"></a><h3>
+<a id="pgfId-1729356"></a><a id="19127"></a>Aging-Aware STA Analysis - Overview</h3>
+
+<p>
+<a id="pgfId-1729430"></a>The semiconductor device performance degrades over time due to physical factors, such as Bias Temperature Instability (BTI), Hot Carrier Injection (HCI), and so on. The following diagram shows process nodes and the sources of device failures.</p>
+
+<p class="webflare-indent1"><strong>Figure -93
+<a id="pgfId-1729458"></a>Process nodes and sources of device failures - Illustration</strong></p>
+<p>
+<a id="pgfId-1731449"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="300" src="images/analysisandreporting-114.gif" /></div>
+
+<p>
+<a id="pgfId-1731453"></a>Earlier, the following two methodologies were adopted to account for aging effects into STA:</p>
+<ul><li>
+<a id="pgfId-1731454"></a>Flat timing derates to margin for aging impact</li><li>
+<a id="pgfId-1731455"></a>Perform STA with timing libraries characterized for specific age</li></ul>
+
+<p>
+<a id="pgfId-1731456"></a>However, these methodologies had several limitations. The aging effects on device performance were never modeled comprehensively and accurately in STA. The Tempus advanced aging-aware STA addresses the limitations to improve the accuracy and PPA (power, performance, and area) of a design. </p>
+
+<h4>
+<a id="pgfId-1729490"></a><a id="64232"></a>Bias Temperature Instability (BTI) Overview</h4>
+
+<p>
+<a id="pgfId-1729345"></a>Within the Si-SiO2 interface region, the silicon bonds are not satisfied and there exist unsatisfied or dangling bonds, that trap charges. The dangling silicon bonds are passivated by forming Si-H bonds (annealing the interface). When a transistor is biased in inversion, the dissociation of Si-H bonds along the silicon-oxide interface causes the generation of interface traps. The devices will be under higher BTI stress, when they are not switching. The rate of generation of these traps is accelerated at higher temperature and supply voltage. These traps cause increase in threshold voltage (V_TH), decrease in drain current (I_d), and decrease in channel mobility (µ).</p>
+
+<p class="webflare-indent1"><strong>Figure -94
+<a id="pgfId-1729552"></a>BTI - Illustration</strong></p>
+<p>
+<a id="pgfId-1729555"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="253" src="images/analysisandreporting-115.gif" /></div>
+<h4>
+<a id="pgfId-1729584"></a><a id="17200"></a>Hot Carrier Injection (HCI) Overview</h4>
+
+<p>
+<a id="pgfId-1729588"></a>When transistor gate length decreases, the electrical field increases. This results in impact ionization. Some hot electrons (HE) generated by impact ionization are attracted to the gate. The hot electrons injected into the gate cause oxide damage and lead to device degradation. These devices are under higher HCI stress when they are switching.</p>
+
+<p class="webflare-indent1"><strong>Figure -95
+<a id="pgfId-1729651"></a>HCI - Illustration</strong></p>
+<p>
+<a id="pgfId-1735595"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="285" src="images/analysisandreporting-116.gif" /></div>
+
+<p>
+<a id="pgfId-1735600"></a>The main factors that influence device degradation are:</p>
+<ul><li>
+<a id="pgfId-1735601"></a>Stress duration</li><li>
+<a id="pgfId-1735602"></a>Temperature</li><li>
+<a id="pgfId-1735603"></a>Supply voltage</li><li>
+<a id="pgfId-1735604"></a>Logic conditions (duty cycle and switching activity)</li></ul>
+
+
+
+<p>
+<a id="pgfId-1735599"></a>Both BTI and HCI semiconductor devices degrade over a period of time. Typically, PMOS devices degrade more than NMOS devices.</p>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_aginganalysis.html" id="prev" title="Aging-Aware STA Analysis">Aging-Aware STA Analysis</a></em></b><b><em><a href="analysisandreporting_agingawaresta.html" id="nex" title="Tempus Aging-Aware STA">Tempus Aging-Aware STA</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

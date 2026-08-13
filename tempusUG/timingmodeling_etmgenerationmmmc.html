@@ -1,0 +1,100 @@
+
+<html><head><title>ETM Generation for MMMC Designs</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823950" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="ETM Generation for MMMC Designs" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823950" />
+<meta name="NextFile" content="timingmodeling_basicelementsetm.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="timingmodeling_etmgeneration.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- ETM Generation for MMMC Designs" />
+<meta name="Keywords" content="ETM Generation" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Modeling,Stylus" />
+<meta name="prod_subfeature" content="Timing Modeling" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="timingmodeling_etmgeneration.html" title="ETM Generation">ETM Generation</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="timingmodeling_basicelementsetm.html" title="Basic Elements of Timing Model Extraction">Basic Elements of Timing Model ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:etmgenerationmmmc" title="ETM Generation for MMMC Designs"></a><h3>
+<a id="pgfId-1017866"></a><a id="72825"></a>ETM Generation f<a id="ETMGenerationforMMMCDesigns"></a>or MMMC Designs</h3>
+
+<p>
+<a id="pgfId-1017867"></a>In MMMC configuration, for generating ETM, only one view should be active. If you need to generate ETM for a specified view, however, the view is not active in setup as well as hold mode, then the software will show an error. It is a prerequisite that the view should be active for both setup and hold analysis. You can use the <a href="../tempustxtcmdref/set_analysis_view.html">set_analysis_view</a> <code>&#8211;setup {$viewName} &#8211;hold {$viewName}</code>command before running the <a href="../tempustxtcmdref/do_extract_model.html">do_extract_model</a> command to achieve this.</p>
+<p>
+<a id="pgfId-1017868"></a>After model extraction for MMMC designs, the dumped assertion files will be added with <code>${viewName}</code> suffix, and the dumped derate related assertion files will be added with <code>${delayCornerName}</code> prefix. You need to choose the corresponding file while using the extracted models.</p>
+
+<h3>
+<a id="pgfId-1017870"></a><a id="80592"></a>Slew Propagation Modes in Model Extraction</h3>
+
+<p>
+<a id="pgfId-1017871"></a>Model extraction supports worst slew and path-based slew propagation modes. These are described below.</p>
+<ul><li>
+<a id="pgfId-1017872"></a><strong>Worst Slew Propagation
+</strong>In worst slew propagation mode, the worst of all the slews coming at a convergent point is propagated for characterizing the delay of an arc. </li><li>
+<a id="pgfId-1017873"></a><strong>Path-Based Slew Propagation
+</strong>In path-based slew propagation mode, the slew in the actual path is propagated.</li></ul>
+
+<p>
+<a id="pgfId-1017874"></a>The slew propagation mode can be controlled by using the <a href="../tempustxtcmdref/timing_extract_model_slew_propagation_mode.html">timing_extract_model_slew_propagation_mode</a> global variable. The default value of this global variable is <code>worst_slew</code>.</p>
+<p>
+<a id="pgfId-1017875"></a>An example of slew propagation is given below.</p>
+
+<p>
+<a id="pgfId-1017879"></a></p>
+<div class="webflare-div-image">
+<img width="418" height="155" src="images/timingmodeling-5.gif" /></div>
+
+<p>
+<a id="pgfId-1017880"></a>In worst slew propagation mode, for characterizing both A-Z and B-Z delay arcs, the worst slews S1 and S2 will be propagated to calculate the delay of logic downstream to the AND gate.</p>
+<p>
+<a id="pgfId-1017881"></a>In path-based propagation mode, the slew S1 will be propagated to characterize the A-Z arc, whereas S2 will be propagated to characterize the B-Z arc.</p>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="timingmodeling_etmgeneration.html" id="prev" title="ETM Generation">ETM Generation</a></em></b><b><em><a href="timingmodeling_basicelementsetm.html" id="nex" title="Basic Elements of Timing Model Extraction">Basic Elements of Timing Model ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

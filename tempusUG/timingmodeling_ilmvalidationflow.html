@@ -1,0 +1,368 @@
+
+<html><head><title>ILM Validation Flow</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823954" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="ILM Validation Flow" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823954" />
+<meta name="NextFile" content="timingmodeling_creatingxilm.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="timingmodeling_creatingilms.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- ILM Validation Flow" />
+<meta name="Keywords" content="ILM validation flow validate model block level." />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="ILM/XILM,Timing Modeling,Stylus" />
+<meta name="prod_subfeature" content="Timing Modeling,ILM/FLEXILM" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="timingmodeling_creatingilms.html" title="Creating ILMs">Creating ILMs</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="timingmodeling_creatingxilm.html" title="Creating XILM">Creating XILM</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:ilmvalidationflow" title="ILM Validation Flow"></a><h3>
+<a id="pgfId-1019057"></a><a id="67956"></a>ILM Validation Flow</h3>
+
+<p>
+<a id="pgfId-1019058"></a>The ILM validation flow can be used to validate a model at the block level. For example, an ILM netlist and the .sdc file can be read in a separate Tempus session and timing analysis can be run on all paths. Then, the results can be compared against timing for the same path during full-block implementation.</p>
+<p>
+<a id="pgfId-1019059"></a>Use the following steps to run the automated ILM validation flow:</p>
+<ol><li>
+<a id="pgfId-1019060"></a>Load a block level design.</li><li>
+<a id="pgfId-1019061"></a>Load the SPEF file.</li><li>
+<a id="pgfId-1019062"></a>Run the following command:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1019063">
+<a id="pgfId-1019063"></a>write_ilm -dir ilm_dir -validation_dir validation_dir</pre>
+<a id="pgfId-1019064"></a>Two directories are created - one for saving the ILM data and the second for saving the validation information. The validation directory contains following files:</li></ol>
+
+
+
+
+
+<h4>Table -1
+<a id="pgfId-1024430"></a>List of Files in the Validation Directory</h4>
+<table class="webflareTable" id="#id1024390">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1019068">
+<a id="pgfId-1019068"></a>File</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1019070">
+<a id="pgfId-1019070"></a>Description</span>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1019072"></a>init.tcl</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1019074"></a>Used to initialize the ILM data.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1019076"></a>nets.tcl</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1019078"></a>Used to get the list of net names in which only the real ILM nets are included and other nets like attacker nets are excluded.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1019080"></a>full.tcl</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1019082"></a>Used to run timing analysis on the original netlist using the <a href="../tempustxtcmdref/write_model_timing.html">write_model_timing</a> command.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1019084"></a>xilm.tcl</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1019086"></a>Used to run timing analysis on the generated ILM data using the <code>write_model_timing</code> command.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1019088"></a>rpt.tcl</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1019090"></a>Compares the output of original netlist with the output of ILM data using the <a href="../tempustxtcmdref/compare_model_timing.html">compare_model_timing</a> command.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1019092"></a>validation.src</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1019094"></a>Used to run the ILM validation flow by sourcing the Tcl files automatically.</p>
+</td>
+</tr>
+</tbody></table>
+
+<ol><li>
+<a id="pgfId-1019096"></a>Switch to the validation directory.</li><li>
+<a id="pgfId-1019097"></a>Source the validation.src file.
+After running the ILM validation flow, the validation.sum file is generated. This file provides the summary of the validation checks.</li></ol>
+
+
+<h4>
+<a id="pgfId-1019098"></a>Sample ILM Validation Summary Report</h4>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1019099"></a>#---------------------------------------------------------------------<br />#                      Tolerance    FAIL/PASS   Ave          Max <br />#                      (abs,per)                AbsDiff      AbsDiff<br />#---------------------------------------------------------------------<br />
+ILM&#160;&#160; SETUP  Slack    (0.050 , 2%)    0/6       0.000         0.000  # <br />             PinCap   (0.050 , 2%)    0/5       0.000         0.00   # <br />             Tran     (0.050 , 2%)    0/5       0.000         0.000  # <br />             DRV      (     , 2%)     0/5        --           NA     # <br />
+ILM&#160;&#160; HOLD   Slack    (0.050 , 2%)    0/0       NA            NA     # <br />             PinCap   (0.050 , 2%)    0/5       0.000         0.000  # <br />             Tran     (0.050 , 2%)    0/5       0.000         0.000  # <br />             DRV      (     , 2%)     0/5        --           NA     # <br />
+XILM&#160;&#160; SETUP Slack    (0.100 , 3%)    0/6       0.000         0.000  # <br />             PinCap   (0.100 , 3%)    0/5       0.000         0.000  # <br />             Tran     (0.100 , 3%)    0/5       0.000         0.000  # <br />             DRV      (     , 3%)     0/5        --           NA     # <br />
+XILM&#160;&#160; HOLD  Slack    (0.100 , 3%)    0/0       NA            NA     # <br />             PinCap   (0.100 , 3%)    0/5       0.000         0.000  # <br />             Tran     (0.100 , 3%)    0/5       0.000         0.000  # <br />             DRV      (     , 3%)     0/5       --            NA     # <br />#----------------------------------------------------------------------<br /># ILM/XILM Validation PASS</pre>
+
+<b>Note:</b><br />
+<a id="pgfId-1020390"></a>
+<ul><li>
+<a id="pgfId-1019100"></a>When <a href="../tempustxtcmdref/write_ilm.html">write_ilm</a> is specified, all the views are generated for multi-corner, multi-mode (MMMC) analysis.</li><li>
+<a id="pgfId-1020395"></a>The automated ILM validation performs both ILM/XILM validation depending upon the data available.</li></ul>
+
+
+<h3>
+<a id="pgfId-1019103"></a><a id="46067"></a>Interactive Use of ILMs</h3>
+
+<p>
+<a id="pgfId-1019104"></a>The Global Timing Debugger (GTD) also requires the design to be in a flattened state. The GTD displays rows with instances or nets as grayed out, which are internal to ILM.</p>
+
+<h3>
+<a id="pgfId-1019106"></a><a id="54013"></a>Use of SDF, SDC, and XTWF in ILM Flow</h3>
+
+<ul><li>
+<a id="pgfId-1019107"></a><strong>High-Level view of the ILM-based flow
+</strong>The ILM flow falls into two essential flows that are placed in a bottom-up/top-down fashion. The two flows are done separately, and in separate sessions.<ul><li>
+<a id="pgfId-1019108"></a>ILM generation flow, usually done bottom-up.</li><li>
+<a id="pgfId-1019109"></a>ILM analysis flow, usually done top-down. 
+For example, a hierarchical design made up of BlockA and BlockB sub-blocks.</li><li>
+<a id="pgfId-1019110"></a>In the ILM generation flow, each sub-block has to be implemented as an ILM (<code>write_ilm</code>) after timing and SI analysis sign-off.</li><li>
+<a id="pgfId-1019111"></a>In the ILM analysis flow, the whole design is stitched together by reading the ILM models for BlockA and BlockB, top level netlist, top level SPEF, top level TWF and chip level SDC constraints to perform top level timing and SI analysis. This usually takes place in a separate session.</li></ul></li></ul>
+
+
+
+
+
+<h4>
+<a id="pgfId-1019112"></a>Use of XTWF Generated in ILM</h4>
+
+<p>
+<a id="pgfId-1019113"></a>The <code>write_ilm</code> command creates a directory structure containing the ILM data for timing and SI analysis as described below:</p>
+<p>
+<a id="pgfId-1019114"></a>The information is saved in the following directories:</p>
+<ul><li>
+<a id="pgfId-1019115"></a>For Timing: <br /><pre class="webflare-pre-block webflare-courier-new" id="#id1019116">
+<a id="pgfId-1019116"></a>$dir/ilm_data 
+*.v 
+*.sdc 
+*.spef</pre></li><li>
+<a id="pgfId-1019117"></a>For SI: <br /><pre class="webflare-pre-block webflare-courier-new" id="#id1019118">
+<a id="pgfId-1019118"></a>$dir/si_ilm_data 
+*.v 
+*.sdc 
+*.spef 
+*.xtwf</pre></li></ul>
+
+
+
+<p>
+<a id="pgfId-1019119"></a>The XTWF is a timing file that contains timing window (the earliest and the latest possible arrival times that a signal may arrive on a net or a pin) for attacker nets. Tempus does use the XTWF for SI analysis in the ILM flow. The TWF file is usually used in Tempus if you are performing timing analysis in third-party tool and you want to bring the design into Tempus for SI analysis.</p>
+<p>
+<a id="pgfId-1019120"></a>The ILM model is self-contained with all the needed information for both Timing and SI analysis which is suitable for the ILM bottom-up generation/top down analysis flow. See example below:</p>
+
+<h4><em>
+<a id="pgfId-1019121"></a>Example 1: Block based ILM generation for a sub-module called blockA</em></h4>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726393"></a>read_lib &quot;$libDir/worst.lib&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726394"></a>read_lib -cdb &quot;$libDir/worst.cdB&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726395"></a>read_verilog &quot;$designDir/blockA.v&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726396"></a>set_top_module blockA</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726397"></a>read_sdc &quot;$designDir/blockA.sdc&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726398"></a>set_dc_sources -global 1.65</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726399"></a>read_spef &quot;$designDir/blockA.spef&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726400"></a>set_delay_cal_mode -siAware true&#160;&#160;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726401"></a>report_timing</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726402"></a>write_sdf blockA.sdf</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726403"></a>write_ilm -dir blockA</pre>
+
+<p>
+<a id="pgfId-1019133"></a>In a new session (when the hierarchical design is all stitched together), you read the ILMs of the sub-blocks to perform top-level STA and SI analysis sign-off.</p>
+
+<h4><em>
+<a id="pgfId-1019134"></a>Example 2: Top-Level ILM based flow of design made up of two sub-module blockA and blockB</em></h4>
+
+<p>
+<a id="pgfId-1019135"></a>For SI Analysis:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726408"></a>specify_ilm -cell blockA -dir dir1</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726409"></a>specify_ilm -cell blockB -dir dir2</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726410"></a>read_lib, read_lib -cdb &#8230;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726411"></a>read_verilog top.v</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726412"></a>set_top_module TOP</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726413"></a>read_spef top.spef</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726414"></a>read_sdc top.sdc</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726415"></a>read_ilm</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726416"></a>set_delay_cal_mode -siAware true&#160;&#160;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726417"></a>report_timing</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726418"></a>write_sdf</pre>
+<h4><em>
+<a id="pgfId-1019147"></a>For Timing Analysis:</em></h4>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726423"></a>specify_ilm -cell blockA -dir dir1</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726424"></a>specify_ilm -cell blockB -dir dir2</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726425"></a>read_lib</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726426"></a>read_verilog top.v</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726427"></a>set_top_module TOP</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726428"></a>read_spef top.spefread_sdc top.sdc</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726429"></a>read_ilm</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726430"></a>report_timing</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726431"></a>&#8230;</pre>
+<h4>
+<a id="pgfId-1019157"></a>ILM Models and SDC-Generated Constraints</h4>
+
+<p>
+<a id="pgfId-1019158"></a>The SDC files generated within the ILM directories do not reflect a complete normal set of constraints. You will notice that only <a href="../tempustxtcmdref/set_annotated_transition.html">set_annotated_transition</a> and <a href="../tempustxtcmdref/set_case_analysis.html">set_case_analysis</a> constraints are written in the SDC.</p>
+<p>
+<a id="pgfId-1019159"></a>The SDC constraints found in the ILM directories are primarily used to save the input slew information for loop back path between interface logic and non-interface logic. This feature provides higher accuracy for both Timing/SI analysis using the ILM/XILM flow in Innovus/Tempus. Here is a scenario describing how the slews of reduced nets are stored for better accuracy of timing and SI:</p>
+<p>
+<a id="pgfId-1019160"></a>An ILM instance inst1 has following two input pins:</p>
+<ul><li>
+<a id="pgfId-1019161"></a><strong>Input pin1</strong>: connects with ILM path, its input slew will be calculated and propagated from an ILM path.</li><li>
+<a id="pgfId-1019162"></a><strong>Input pin2</strong>: connects with non-ILM path which is not kept in ILM netlist. This often happens in a loop-back path. The path is reduced in which as a result its pin becomes dangling but its input slew information is needed to calculate the delay of the inst1. In this case, Tempus uses the slew kept in ILM/XILM .sdc file instead of the default input slew which improves the ILM analysis accuracy.</li></ul>
+
+<p>
+<a id="pgfId-1019163"></a>To perform timing analysis using ILM data files, you will need to use the chip level SDC constraints and the generated SDC constrains for the ILM block. The idea here is that these constraints are giving high accuracy while not colliding with top-level SDC constraints during ILM top down analysis flow.</p>
+<p>
+<a id="pgfId-1019164"></a><strong>Example</strong>:</p>
+<p>
+<a id="pgfId-1019165"></a>Generating ILM for BlockA:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726448"></a>read_lib tech.lib</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726449"></a>read_verilog blockA.v</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726450"></a>set_top_module blockA</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1019169"></a>read_sdc blockA.sdc</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1019170"></a>read_spef blockA.spef</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1019171"></a>write_ilm -dir blockA</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1019172"></a>report_timing &gt; sta1.rpt</pre>
+
+<p>
+<a id="pgfId-1019173"></a>Now to use the ILM data for timing analysis and suppose the file names in the ILM directory are: ilm.v, ilm.spef, ilm.sdc, ilm.xtwf.</p>
+<p>
+<a id="pgfId-1019174"></a>Simply read the original SDC and the SDC generated for the ILM.</p>
+<p>
+<a id="pgfId-1019175"></a><strong>Example</strong>:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726455"></a>read_lib tech.lib</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726456"></a>read_verilog ilm.v</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1726457"></a>set_top_module blockA</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1019179"></a>read_sdc ilm.sdc</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1019180"></a>read_sdc blockA.sdc *</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1019181"></a>read_spef ilm.spef</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1019182"></a>report_timing &gt; sta2.rpt</pre>
+
+<p>
+<a id="pgfId-1019183"></a>The timing report of the ILM interface paths should be consistent with the timing report of original full netlist (sta1.rpt should match sta2.rpt). This is usually done for validation purposes and not a real usage of the ILM flow.</p>
+<p>
+<a id="pgfId-1019184"></a>If an ILM is read back to represent a sub-module in a hierarchical design, then to perform timing analysis, you will need to load the top level original constraints only. The timing report of all the top nets and interface paths should be consistent with original full flat netlist. This is the real usage of ILM as it reflects accurate timing and SI information derived from top level constraints.</p>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="timingmodeling_creatingilms.html" id="prev" title="Creating ILMs">Creating ILMs</a></em></b><b><em><a href="timingmodeling_creatingxilm.html" id="nex" title="Creating XILM">Creating XILM</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

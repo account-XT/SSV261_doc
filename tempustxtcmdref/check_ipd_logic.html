@@ -1,0 +1,157 @@
+
+<html><head><title>check_ipd_logic</title>
+<meta name="page_sequence" content="19012000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287327" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="check_ipd_logic" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287327" />
+<meta name="NextFile" content="check_ldb_version.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="check_instance_library_in_views.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- check_ipd_logic" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="check_instance_library_in_views.html" title="check_instance_library_in_views">check_instance_library_in_view ...</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="check_ldb_version.html" title="check_ldb_version">check_ldb_version</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>check_ipd_logic</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>check_ipd_logic <span id="check_ipd_logic-check_ipd_logic"></span></code><br /><code> [-help]</code><br /><code> [-outfile &lt;<em>filename</em>&gt;]</code><br /><code> { [-multi_pd_type &lt;<em>enum</em>&gt; [-verbose ]]}</code></p>
+
+<p>Performs IPD logic checks and reports power-domain crossing information based on data and clock path checks.</p>
+<h4 id="check_ipd_logic-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="relative-table wrapped confluenceTable" style="width: 56.2951%;"><colgroup><col style="width: 27.3616%;" /><col style="width: 72.5891%;" /></colgroup><tbody class=""><tr class=""><td class="confluenceTd">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd">
+<p>Prints out the command usage.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p><code>-multi_pd_type &lt;<em>enum</em>&gt;</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the type of IPD logic check that needs to be performed. You can specify the following options:</p>
+<ul><li><code>clock_divergence</code>: Enables similar crossings on the divergent clock check.</li><li><code>clock_crossing</code>: Enables multiple power domain crossings on clock path checks.</li><li><code>data_crossing</code>: Enables multiple power domain crossings on data path checks.</li><li><code>cppr_aware</code>: Enables checks for multiple power domains post the common point.</li><li><code>all</code>: Enables all the crossing checks, except <code>cppr_aware</code>.</li></ul></td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p><code>-outfile &lt;<em>filename</em>&gt;</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the name of the output report file (suffix .rpt) to be generated.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p><code>-verbose</code></p>
+</td>
+<td class="confluenceTd">
+<p>Allows the <code><a href="report_timing.html">report_timing</a></code> command to generate a detailed output for checks with .tcl suffix.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="check_ipd_logic-Examples">Examples</h4>
+<ul><li>The following command reports all the IPD logic checks in the design:<br /><code>tempus&gt; check_ipd_logic -multi_pd_type all -outfile ipd_logic_check_report -verbose</code><br /><br />The output of <code>ipd_logic_check_report.rpt</code> is as shown below:<br />
+<p><code>##################################################</code><br /><code># Multiple Power Domain Crossings On Data Paths &#xa0;#</code><br /><code>##################################################</code><br /><code>1.</code><br /><code>Beginpoint: ff1/D (clk1)</code><br /><code>Endpoint: ff2/Q (clk1)</code><br /><code>PD1-&gt;PD2 lvl_cell1/Y</code><br /><code>PD2-&gt;PD3 lvl_cell2/Y</code><br /><code>2.</code><br /><code>Beginpoint: ff3/D (clk1)</code><br /><code>Endpoint: ff4/Q (clk2)</code><br /><code>PD1-&gt;PD2 lvl_cell3/Y</code><br /><code>PD2-&gt;PD3 lvl_cell2/Y</code></p>
+
+<p><code>##########################</code><br /><code># Clock Divergence Data &#xa0;#</code><br /><code>##########################</code><br /><code>1.</code><br /><code>Beginpoint: ff4/D (clk2)</code><br /><code>Endpoint: ff5/Q (clk2)</code><br /><code>PD1-&gt;PD2 lvl_cell5/Y (L) level_cell6/Y (C)</code></p>
+
+<p><code>##########################################</code><br /><code># Multiple Clock Power Domain Crossings &#xa0;#</code><br /><code>##########################################</code></p>
+
+<p><code>#######################################</code><br /><code>#Early Check Path Count Summary Output#</code><br /><code>#######################################</code></p>
+
+<p><code>Multiple IPD Data Crossing : 2</code><br /><code>------------------------------------</code><br /><code>Count &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Power Domain&#xa0;</code><br /><code>------------------------------------</code><br /><code>2 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; PD1-&gt;PD2-&gt;PD3</code></p>
+
+<p><code>IPD Clock Divergence : 1</code><br /><code>------------------------------------</code><br /><code>Count &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Power Domain&#xa0;</code><br /><code>------------------------------------</code><br /><code>1 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;PD1-&gt;PD2</code></p>
+
+<p><code>Multiple IPD Clock Crossing : 0</code><br /><code>------------------------------------</code><br /><code>Count &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Power Domain&#xa0;</code><br /><code>------------------------------------</code></p>
+<ul><li>The output of ipd_logic_check.tcl is as shown below:&#xa0;</li></ul>
+<p>##################################################<br /><code># Multiple Power Domain Crossings On Data Paths &#xa0;#</code><br /><code>##################################################</code><br /><code>report_timing -through lvl_cell1/Y -through lvl_cell2/Y</code><br /><code>report_timing -through lvl_cell3/Y -through lvl_cell2/Y</code></p>
+
+<p><code>##########################</code><br /><code># Clock Divergence Data &#xa0;#</code><br /><code>##########################</code><br /><code>report_timing -from ff4/D -clock_from clk1 -to ff5/Q -clock_to clk2</code></p>
+
+<p><code>##########################################</code><br /><code># Multiple Clock Power Domain Crossings &#xa0;#</code><br /><code>##########################################</code></p>
+</li><li>The following command generates a report showing cppr_aware checks:<br /><code><code>tempus&gt; check_ipd_logic -multi_pd_type cppr_aware -outfile cppr_aware_report<br /></code></code>
+<p>cppr_aware_report.rpt</p>
+
+<p><code>##################################################</code><br /><code># Multiple Power Domain Crossings Paths &#xa0;#</code><br /><code>##################################################</code><br /><code>1.</code><br /><code>Beginpoint : inst1/Q(clk1)</code><br /><code>Endpoint : inst2/D(clk2)</code><br /><code>PD1 -&gt; PD2 cinst1/Y (L)</code><br /><code>PD2 -&gt; PD3 inst3/Y (D)</code><br /><code>PD3 -&gt; PD4 inst4/Y (D)</code><br /><code>PD1 -&gt; PD4 cins2/Y (C)</code><br /><code>2.</code><br /><code>Beginpoint : inst11/Q(clk21)</code><br /><code>Endpoint : inst12/D(clk12)</code><br /><code>PD1 -&gt; PD2 cinst13/Y (L)</code><br /><code>PD2 -&gt; PD3 cinst123/Y (L)</code><br /><code>PD3 -&gt; PD4 inst314/Y (D)</code><br /><code>PD4 -&gt; PD5 inst414/Y (D)</code><br /><code>PD5 -&gt; PD3 inst42/Y (D)</code><br /><code>PD1 -&gt; PD2 cins246/Y (C)</code><br /><code>PD2 -&gt; PD3 cins26/Y (C)</code><br /><code>#######################################</code><br /><code>#Early Check Path Count Summary Output#</code><br /><code>#######################################</code><br /><code>Multiple Power Domain Paths : 2</code><br /><code>----------------------------------------------------------------------------</code><br /><code>Count &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;|Power Domains &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;&#xa0;</code><br /><code>----------------------------------------------------------------------------</code><br /><code>1 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;|PD1-&gt;PD2(L) PD2-&gt;PD3-&gt;PD4(D) PD1-&gt;PD4(C) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;</code><br /><code>1 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;|PD1-&gt;PD2-&gt;PD3(L) PD3-&gt;PD4-&gt;PD5-&gt;PD3(D) PD1-&gt;PD2-&gt;PD3(C)</code></p>
+</li></ul>
+<p>The types of crossing in the path is indicated by the following abbreviations:</p>
+<ul><li>C : Capture Path</li><li>L : Launch Path</li><li>D: Data Path</li></ul><h4 id="check_ipd_logic-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="set_analysis_mode.html">set_analysis_mode</a> -enable_ipd</code></li></ul><ul><li><code><a href="set_ipd_rail_voltage.html">set_ipd_rail_voltage</a></code></li><li><code><a href="create_pg_net_group.html">create_pg_net_group</a></code></li><li><code><a href="report_pg_net_group.html">report_pg_net_group</a></code></li><li><code><a href="create_ipd_configuration.html">create_ipd_configuration</a></code></li><li><code><a href="report_ipd_configuration.html">report_ipd_configuration</a></code></li><li><code><a href="write_ipd_scope.html">write_ipd_scope</a></code></li><li><code><a href="read_ipd_scope.html">read_ipd_scope</a></code></li><li><code><a href="report_timing.html">report_timing</a></code></li></ul><h4 id="check_ipd_logic-RelatedInformation">Related Information</h4>
+<ul><li>For more information, refer to the&#xa0;<a class="message-url" href="../tempusUG/analysisandreporting_ipdanalysis.html">Inter Power Domain (IPD) Analysis</a>&#xa0;chapter in the <em>Tempus User Guide</em>.&#xa0;</li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="check_instance_library_in_views.html" id="prev" title="check_instance_library_in_views">check_instance_library_in_view ...</a></em></b><b><em><a href="check_ldb_version.html" id="nex" title="check_ldb_version">check_ldb_version</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

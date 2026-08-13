@@ -1,0 +1,107 @@
+
+<html><head><title>Constant Current Source based IR Drop Analysis</title>
+<meta name="page_sequence" content="23036000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666164" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Constant Current Source based IR Drop Analysis" />
+<meta name="Keywords" content="current,IR drop,pads,voltage" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666164" />
+<meta name="NextFile" content="Hotspot_Debugger.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Power_and_Rail_Analysis_HTML_Reports.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Constant Current Source based IR Drop Analysis" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Power_and_Rail_Analysis_HTML_Reports.html" title="Power_and_Rail_Analysis_HTML_Reports">Power_and_Rail_Analysis_HTML_R ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Hotspot_Debugger.html" title="Hotspot_Debugger">Hotspot_Debugger</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Constant Current Source based IR Drop Analysis</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="ConstantCurrentSourcebasedIRDropAnalysis-17621"></span></p>
+
+<p>Voltus allows you to perform constant current source based IR drop analysis, where power pads are connected with current sources instead of voltage sources. Using this flow, you can perform accurate analysis in design scenarios where voltage regulators are used to ensure constant current supply at power pads. In this mode, there could be higher voltages for some instances, and the hotspot would impact a larger portion of the design.</p>
+
+<p>To run this flow, you must specify:</p>
+
+<p><span class="fontredcadence"><ul><li>a power pad file in the <code>xy</code> format (<code>set_power_pads -format xy</code>) to define all the pad locations (voltage/current source locations).</li><li>a power pad file in the <code>xyiv</code> format using the <code>set_power_pads -format</code> parameter. The <code>xyiv</code> format indicates whether the voltage sources specified in the xy power pad location file are current source or reference voltage source. There must be at least one reference voltage source defined in the xyiv file. The format is the same as the xy file, except the additional first and last columns to indicate the current/voltage source and current/voltage value. The name specified in the xyiv file must match the xy file.<br />The format of the xyiv file is:<pre class="webflare-pre-block webflare-courier-new">&lt;Notation - I/V&gt; &lt;Current/Voltage Source Name&gt; &lt;X Y Coordinates in micron&gt; &lt;Layer Name&gt; &lt;Value (I in milliampere and V in volts)&gt;</pre>The following is an example of power pad file:<pre class="webflare-pre-block webflare-courier-new">I ISR1 12.5 0 M3 100
+V VSRC1 16.401 18.432 M1 0.8 </pre>where, I is the current source and V is the reference voltage</li><li>the <code>-enable_ccs_analysis</code> parameter of the <code>set_rail_analysis_</code>config command to enable constant current source analysis. The default value is <code>false</code>.</li></ul>
+<p>The following is a sample Tcl script to run this flow:</p>
+<pre><code>read_physical -lefs $lefs<br /></code><code>read_netlist test.v.gz -top test<br /></code><code>init_design</code></pre><pre><code><br />read_def test.def<br />read_sdc test.sdc<br /><br />set_power_rail VDD -power -voltage 0.825
+set_default_switching_activity -input_activity 0.2
+set_db power_method static&#xa0;&#xa0;power_grid_libraries { pgv/../stdcells.cl } power_write_static_currents true<br /><br /></code><code>report_power -out_file power.rpt<br />set_power_data -format current POWER/static_VDD.ptiavg<br />set_pg_nets -net VDD -voltage 0.825 -threshold 0.80<br />set_rail_analysis_domain -domain_name PD -power_nets { VDD } -ground_nets VSS<br />set_power_pads -net VDD <strong>-format xy</strong> -file pad.vdd<br />set_power_pads -net VDD <strong>-format xyiv</strong> -file pad.vdd.ccs<br />set_rail_analysis_config -method static -accuracy hd -power_grid_libraries { pgv/../techonly.cl pgv/../stdcells.cl } -enable_ccs_analysis true <br />report_rail -type net -output_dir CCS_IRDROP VDD</code></pre></span></p>
+
+<p><em style="font-weight: 600;letter-spacing: -0.003em;">Related Topics</em></p>
+<ul><li><a href="Layer-based_IR_Drop_Report.html">Layer-based IR Drop Report</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Power_and_Rail_Analysis_HTML_Reports.html" id="prev" title="Power_and_Rail_Analysis_HTML_Reports">Power_and_Rail_Analysis_HTML_R ...</a></em></b><b><em><a href="Hotspot_Debugger.html" id="nex" title="Hotspot_Debugger">Hotspot_Debugger</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

@@ -1,0 +1,202 @@
+
+<html><head><title>Running Interactive ECO on Multiple Views in DMMMC Mode</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845232" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Running Interactive ECO on Multiple Views in DMMMC Mode" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845232" />
+<meta name="NextFile" content="dmmmc_dmmmctroubleshoot.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="dmmmc_dmmmcinteractive.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- Running Interactive ECO on Multiple Views in DMMMC Mode" />
+<meta name="Keywords" content="Interactive ECO,DMMMC Mode,Multiple Views" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="MMMC,Stylus" />
+<meta name="prod_subfeature" content="MMMC" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="dmmmc_dmmmcinteractive.html" title="Running Single Interactive User Interface in DMMMC Mode">Running Single Interactive Use ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="dmmmc_dmmmctroubleshoot.html" title="Important Guidelines and Troubleshooting DMMMC">Important Guidelines and Troub ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:dmmmceco" title="Running Interactive ECO on Multiple Views in DMMMC Mode"></a><style>/*<![CDATA[*/
+/**/
+/**/
+/**/
+/**/
+h1 { counter-reset: heading 6;}
+/**/
+/**/
+/**/
+/**/
+/*]]>*/</style><h2>
+<a id="pgfId-1001202"></a><a id="63108"></a>Running Interactive ECO on Multiple Views in DMMMC Mode</h2>
+
+<p>
+<a id="pgfId-1001211"></a>You can perform the following steps interactively by using the interactive DMMMC feature, after basic distributed analysis has been performed:</p>
+<ul><li>
+<a id="pgfId-1001220"></a>Perform What-If ECO and check results from multiple views using <code>-evaluate_all</code> or <code>evaluate_only</code> parameters of ECO commands.</li><li>
+<a id="pgfId-1001233"></a>Perform ECO commit operation in Tempus on multiple views in a parallel environment.</li><li>
+<a id="pgfId-1001242"></a>Run <a href="../tempusCUI/get_property.html">get_property</a> query to know the slack and other property values with ECO commands from multiple views.</li><li>
+<a id="pgfId-1001262"></a>Save the distributed session with ECO.</li></ul>
+
+
+
+<p>
+<a id="pgfId-1001271"></a>The above steps can be executed on the interactive prompt or directly from the master in the distributed environment.</p>
+<p>
+<a id="pgfId-1001280"></a><strong>Example: Interactive ECO Usage in Distributed MMMC Environment on Interactive prompt</strong></p>
+<p>
+<a id="pgfId-1001290"></a>#MultiCore Machine: Local mode (Default)</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1008597"></a>tempus&gt; set_distributed_host -local </pre>
+
+<p>
+<a id="pgfId-1008594"></a>#RSH mode</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1008584"></a>tempus&gt; set_distributed_host -rsh -add {machine1 machine2}\</pre>
+
+<p>
+<a id="pgfId-1008587"></a>OR</p>
+<p>
+<a id="pgfId-1008591"></a>#LSF mode useful for getting a machine from a remote farm environment</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1299285"></a>tempus&gt; set_distributed_host -lsf -queue normal &#8211;lsf Resource &quot;OSNAME==Linux &amp;&amp; OSREL==EE50&quot;<br />tempus&gt; set_multi_cpu_usage -remote_host 2 -cpu_per_remote_host 8</pre>
+
+<p>
+<a id="pgfId-1008572"></a># Create servers with basic MMMC design</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1008539"></a>tempus&gt; distribute_read_design -design_script design_load.tcl -out_dir output<br />tempus&gt; set views [list view01 view02]</pre>
+
+<p>
+<a id="pgfId-1008542"></a># Run analysis script on select views at remote machines</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1008524"></a>tempus&gt; distribute_views -views $views -script analysis.tcl</pre>
+
+<p>
+<a id="pgfId-1008521"></a># Distribute Interactive Mode commands, scripting, and so on</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1008509"></a>tempus&gt; set_distributed_mmmc_mode -interactive true -views all</pre>
+
+<p>
+<a id="pgfId-1008512"></a># Get reports back on master console</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1008492"></a>tempus_dmmmc&gt; report_timing -through [get_cells i2]</pre>
+
+<p>
+<a id="pgfId-1008500"></a># Scripts examples to be run on remote hosts</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1008481"></a>tempus_dmmmc&gt; set clocks [get_clocks *]<br />tempus_dmmmc&gt; set clock_names [get_object_name $clocks]<br />tempus_dmmmc&gt; set totalClocks [sizeof_collection $clocks]</pre>
+
+<p>
+<a id="pgfId-1001333"></a># Perform What-If ECO and check results from multiple views using -evaluate_all / -evaluate_only options of ECO commands</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1008468"></a>tempus_dmmmc&gt; change_cell -inst i2 -upsize -evaluate_all<br />tempus_dmmmc&gt; change_cell -inst i2 -upsize -evaluate_only</pre>
+
+<p>
+<a id="pgfId-1008471"></a># Perform ECO commit operation in Tempus on multiple views in parallel environment</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1008462"></a>tempus_dmmmc&gt; change_cell -inst i2 -upsize </pre>
+
+<p>
+<a id="pgfId-1008449"></a># Perform <code>get_property</code> query to know slack and other property values with ECO commands from multiple views </p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1008437"></a>tempus_dmmmc&gt; report_timing -through [get_cells i2]<br />tempus_dmmmc&gt; set newSlack [get_property [get_pins i2/A] slack_max_rise]<br />tempus_dmmmc&gt; set_distributed_mmmc_mode -interactive false<br />tempus&gt; get_distribute_variables newSlack</pre>
+
+<p>
+<a id="pgfId-1008440"></a># Save distributed session with ECO</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1008419"></a>tempus&gt; distribute_views -write_design all<br />tempus&gt; puts &quot;Waiting remote servers to exit&quot;</pre>
+
+<p>
+<a id="pgfId-1008428"></a># Merge Analysis reports</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1008407"></a>tempus&gt; merge_timing_reports -view_dirs {view01 view02} -base_report setup_sta.rpt -base_dir output &gt; merged_setup.rpt<br />tempus&gt; merge_timing_report -view_dirs {view01 view2} -base_report hold_sta.rpt -base_dir output &gt; merged_hold.rpt</pre>
+
+<p>
+<a id="pgfId-1001367"></a><strong>LOG Snapshot from Interactive ECO</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1008282"></a>tempus_dmmmc 13&gt; change_cell -inst i2 -upsize -evaluate_all <br />Variable ::_dmi_result(view01) on master session updated with value &#39;1&#39;. <br />Variable ::_dmi_result(view02) on master session updated with value &#39;1&#39;.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1001383"></a>### RESULTS FROM VIEW view02 ### <br />---- Cell: slow/INVX16 (view: view02) ---- <br />Through-object Slack: 1.842 <br />Max Tran Slack: 4.3224 <br />---- Cell: slow/INVX12 (view: view02) ---- <br />Through-object Slack: 1.831 <br />Max Tran Slack: 4.3495 <br />---- Cell: slow/INVX8 (view: view02) ---- <br />Through-object Slack: 1.784 <br />Max Tran Slack: 4.0948</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1001411"></a>### RESULTS FROM VIEW view01 ### <br />---- Cell: slow/INVX16 (view: view01) ---- <br />Through-object Slack: 0.542 <br />Max Tran Slack: 4.3224 <br />---- Cell: slow/INVX12 (view: view01) ---- <br />Through-object Slack: 0.530 <br />Max Tran Slack: 4.3495 <br />---- Cell: slow/INVX8 (view: view01) ---- <br />Through-object Slack: 0.484 <br />Max Tran Slack: 4.0948 <br />tempus_dmmmc 14&gt; change_cell -inst i2 -upsize -evaluate_only <br />Variable ::_dmi_result(view01) on master session updated with value &#39;1&#39;. <br />Variable ::_dmi_result(view02) on master session updated with value &#39;1&#39;.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1001445"></a>### RESULTS FROM VIEW view02 ### <br />---- Cell: slow/CLKINVX1 (view: view02) ---- <br />Through-object Slack: 1.671 <br />Max Tran Slack: 4.3935</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1001461"></a>### RESULTS FROM VIEW view01 ### <br />---- Cell: slow/CLKINVX1 (view: view01) ---- <br />Through-object Slack: 0.371 <br />Max Tran Slack: 4.3935 <br />0 <br /></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1001479"></a>tempus_dmmmc 15&gt; change_cell -inst i2 -upsize <br />Variable ::_dmi_result(view01) on master session updated with value &#39;1&#39;. <br />Variable ::_dmi_result(view02) on master session updated with value &#39;1&#39;.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1001493"></a>### RESULTS FROM VIEW view02 ### <br />Resize i2 (INVX1) to CLKINVX1.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1001505"></a>### RESULTS FROM VIEW view01 ### <br />Resize i2 (INVX1) to CLKINVX1. <br />0 <br />tempus_dmmmc 18&gt; set newSlack [get_property [get_pins i2/A] slack_max_rise] <br />Variable ::_dmi_result(view01) on master session updated with value &#39;1.3085&#39;. <br />Variable ::_dmi_result(view02) on master session updated with value &#39;-0.9915&#39;. <br />0 <br />tempus_dmmmc 21&gt; set_distribute_mmmc_mode -interactive false <br />tempus 22&gt; distribute_views -save_design all <br />CPUs with views &#39;view01 view02&#39; have been enabled for interactive distributed <br />mmmc mode. <br />Variable ::_dmi_result(view01) on master session updated with value &#39;1&#39;. <br />Variable ::_dmi_result(view02) on master session updated with value &#39;1&#39;.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1001539"></a>### RESULTS FROM VIEW view02 ### <br />Writing Netlist &quot;output_di_mmmc/view02/mmmc.enc.dat/mmmc.v.gz&quot; ... <br />Saving timing graph ... <br />Saving configuration ... <br />Saving preference file output/view02/mmmc.enc.dat/enc.pref.tcl ... <br />Saving parasitic data in file &#39;output/view02/mmmc.enc.dat/mmmc.rcdb.d&#39; ... <br />Writing RC database file using in-memory parasitic updation done by ECO commands. <br />Creating parasitic data file &#39;output/view02/mmmc.enc.dat/mmmc.rcdb.d/header.da&#39; in memory efficient access mode for storing RC. <br />
+### RESULTS FROM VIEW view01 ### 
+Writing Netlist &quot;output_di_mmmc/view01/mmmc.enc.dat/mmmc.v.gz&quot; ... 
+Saving timing graph ... 
+Saving configuration ... 
+Saving preference file output/view01/mmmc.enc.dat/enc.pref.tcl ... 
+Saving parasitic data in file &#39;output/view01/mmmc.enc.dat/mmmc.rcdb.d&#39; ... 
+Writing RC database file using in-memory parasitic updation done by ECO commands. 
+Creating parasitic data file &#39;output/view01/mmmc.enc.dat/mmmc.rcdb.d/header.da&#39; in memory efficient access mode for storing RC.</pre>
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="dmmmc_dmmmcinteractive.html" id="prev" title="Running Single Interactive User Interface in DMMMC Mode">Running Single Interactive Use ...</a></em></b><b><em><a href="dmmmc_dmmmctroubleshoot.html" id="nex" title="Important Guidelines and Troubleshooting DMMMC">Important Guidelines and Troub ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

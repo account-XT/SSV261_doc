@@ -1,0 +1,184 @@
+
+<html><head><title>write_model_timing</title>
+<meta name="page_sequence" content="24001004" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287507" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="write_model_timing" />
+<meta name="Keywords" content="interface timing,write interface timing characteristics,write timing model,save timing model" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Timing Modeling," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287507" />
+<meta name="NextFile" content="Interface_Logic_Models_-_ILM.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="merge_model_timing.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- write_model_timing" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="merge_model_timing.html" title="merge_model_timing">merge_model_timing</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Interface_Logic_Models_-_ILM.html" title="Interface_Logic_Models_-_ILM">Interface_Logic_Models_-_ILM</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>write_model_timing</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>write_model_timing<span class="confluence-anchor-link" id="write_model_timing-write_model_timing"></span><span id="write_model_timing-write_model_timing"></span>&#xa0;<br /><code>[-help]&#xa0;</code><br /><code>[<em>model_timing_report_file</em>]</code><br /><code>[-inputs <em>string</em>]</code><br /><code>[-nworst <em>integer</em>]</code><br /><code>[-outputs <em>string</em>]</code><br /><code>[-slew_propagation {worst | path_based}]&#xa0;</code><br /><code>[-type {arc | slack}]</code><br /><code>[-verbose]</code><br /><code>[-view <em>string</em>]</code><br /><code>-setup <em>string</em>&#xa0;| -hold <em>string</em></code></code></code></p>
+
+<p>Writes the interface timing characteristics of the design in the specified timing model report file.&#xa0;</p>
+
+<p>The report file contains the following sections:</p>
+<ul><li><code>Worst-Case Arc/Slack</code>: Contains details about the extracted arcs and the slack or delay across them, depending on the argument specified with the <code>-type</code> option.</li></ul><ul><li><code>Transition Time</code>: Contains information about transition time at ports.</li></ul><ul><li><code>Capacitance</code>: Contains the capacitance values for the ports.</li></ul><ul><li><code>Design Rules</code>: Contains the design rules applied to the ports.</li></ul>
+<p>The command reports unconstrained arcs&#39; delays by default.&#xa0;</p>
+<h4 id="write_model_timing-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" valign="top">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Outputs a brief description that includes type and default information for each <code>write_model_timing</code> parameter. For a detailed description of the command and all of its parameters, use the man command: <code>man</code> <code>write_model_timing</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-hold&#xa0;</span><em>string</em></code></td>
+<td class="confluenceTd" colspan="1">Writes the paths corresponding to early analysis.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-inputs {</code><code><em>port_list</em></code><code>}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Restricts the <code>write_model_timing</code> report to the input ports specified with this parameter. As a result, the software considers only the timing paths associated with the specified input ports when generating the report.</p>
+
+<p>If this parameter is not specified, all input ports in the design are included when generating the report.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code><em>model_timing_report_file</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the name of the interface timing model report file that will be generated with the interface timing characteristics of the loaded design.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-nworst </code><code><em>value</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the number of paths to be enumerated for each endpoint.</p>
+
+<p><strong>Note: </strong>The extracted model will contain a greater number of setup/hold paths per endpoint because it will have fewer endpoints compared to the original netlist. Therefore, it is recommended that you use a greater <code>-nworst</code> value such as <code>40,</code> while writing a timing report for the extracted model to derive better correlation.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-outputs {</code><code><em>port_list</em></code><code>}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Restricts the <code>write_model_timing</code> report to the output ports specified with this parameter. As a result, the software considers only the timing paths associated with the specified output ports when generating the report.</p>
+
+<p>If this parameter is not specified, all output ports in the design are included when generating the report.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-setup&#xa0;</span><em>string</em></code></td>
+<td class="confluenceTd" colspan="1">Writes the paths corresponding to late analysis.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-slew_propagation { worst | path_based }</code></p>
+</td>
+<td class="confluenceTd">
+<p>Sets the slew-propagation mode to use when dumping the design&#39;s timing characteristics.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-type { arc | slack }</code></p>
+</td>
+<td class="confluenceTd">
+<p>Determines whether to report arc delay values (<code>arc</code>) or the worst-slack values (<code>slack</code>).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-view</code> <code><em>view_name</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies a view name. The report can be generated for a specific view.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-verbose</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Prints the command progress details.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="write_model_timing-Example">Example</h4>
+<ul><li>The following command extracts the interface timing characteristics of the currently loaded design and writes out the report file named <code>sample.rpt</code> with the arc delay information: <br /><code><code>tempus &gt; write_model_timing -type arc sample.rpt<br /></code></code><p style="margin-left: 30.0px;">Output:</p>
+<p style="margin-left: 30.0px;"><code>######################################################</code><br /><code># write_model_timing report</code><br /><code># Design : netlist = .//case1.v topcell = set_propagated_clock_tc2</code><br /><code># Version : 07.10-dev.indfe_cm&#xa0;</code><br /><code># Analysis Mode : setup</code><br /><code># Date : Wed Mar 14 15:29:57 IST 2007</code><br /><code># Command : write_model_timing -type arc sample.rpt</code><br /><br /><code>#######################################################</code><br /><code># Section 1 : Worst Case Arc</code><br /><code># Analysis Mode : setup</code><br /><code># Description : worst case arcs</code><br /><code>#&#xa0;</code><br /><code># From To Arc Type Transition Arc-Delays</code><br /><code>######################################################</code><br /><code>in CLK3 setup fall/rise 0.134</code><br /><code>in CLK3 setup rise/rise -0.005</code><br /><code>####################################################</code><br /><code># Section 2 : Transition time</code><br /><code># Analysis Mode : setup</code><br /><code># Description : Actual transition times on the ports</code><br /><code>#&#xa0;</code><br /><code># Port RiseTran FallTran</code><br /><code>####################################################</code><br /><code>in 0.000 0.000</code><br /><code>clk 0.000 0.000</code><br /><code>out 0.056 0.051</code><br /><code>####################################################</code><br /><code># Section 3 : Capacitance&#xa0;</code><br /><code># Analysis Mode : setup</code><br /><code># Description : Total Cap on the ports</code><br /><code>#&#xa0;</code><br /><code># Port CTotal(Rise) CTotal(Fall)</code><br /><code>####################################################</code><br /><code>in 0.002 0.002</code><br /><code>clk 0.002 0.002</code><br /><code>out 0.000 0.000</code><br /><code>######################################################</code><br /><code># Section 4 : Design Rules</code><br /><code># Analysis Mode : setup</code><br /><code># Description : Design Rules on the ports</code><br /><code>#&#xa0;</code><br /><code># Port MaxCap MinCap MaxTrans MaxFanout Fanout Limit</code><br /><code>######################################################</code><br /><code>in NA NA NA NA NA</code><br /><code>clk NA NA NA NA NA</code><br /><code>out NA NA NA NA NA</code>&#xa0;</p>
+<ul><li>In MMMC mode, the <code>write_model_timing</code> command displays the following report output:</li></ul><p style="margin-left: 30.0px;"><code>##################################################</code><br /><code># write_model_timing report</code><br /><code># Design : netlist = ./../../../tc/tempus/testcases/tempus_ilm/DATA/mmmc/dtmf_chip/dtmf_chip.Route.opt.ILM.enc.dat/dtmf_chip.v topcell = dtmf_chip</code><code>&#xa0;</code><br /><code># Analysis Mode : setup</code><br /><code># Date : Mon Sep 21 22:07:40 PDT 2009</code><br /><code># Command : write_model_timing -type arc sample.rpt</code><br /><code>####################################################</code><br /><code>####################################################</code><br /><code># Section 1 : Worst Case Arcs</code><br /><code># Analysis Mode : setup</code><br /><code># Description : worst case arcs</code><br /><code>#</code><br /><code># From&#xa0;&#xa0; To&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Arc Type&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Transition &#xa0;&#xa0;Arc-Delays&#xa0;&#xa0;&#xa0;&#xa0;View</code><br /><code>#############################################################################</code><br /><code>vclk2&#xa0;&#xa0;&#xa0; tdigit[0]&#xa0;&#xa0;&#xa0; max_sequential rise/fall&#xa0;&#xa0; 2.676&#xa0;&#xa0; mission+worst-rcMax</code><br /><code>vclk2&#xa0;&#xa0;&#xa0; tdigit[0]&#xa0;&#xa0;&#xa0; max_sequential rise/rise&#xa0;&#xa0; 2.831&#xa0;&#xa0; mission+worst-rcMax</code><br /><code>vclk2&#xa0;&#xa0;&#xa0; tdigit[1]&#xa0;&#xa0;&#xa0; max_sequential rise/fall &#xa0;&#xa0;2.413&#xa0;&#xa0; mission+worst-rcMax</code><br /><code>vclk2&#xa0;&#xa0;&#xa0; tdigit_flag &#xa0;max_sequential rise/rise &#xa0;&#xa0;2.58&#xa0;&#xa0;&#xa0; mission+worst-rcMax</code><br /><code>vclk2&#xa0;&#xa0;&#xa0; tdigit[0]&#xa0;&#xa0;&#xa0; max_sequential rise/fall&#xa0;&#xa0; 2.676&#xa0;&#xa0; test+worst-rcMax</code><br /><code>vclk2&#xa0;&#xa0;&#xa0; tdigit[0]&#xa0;&#xa0;&#xa0; max_sequential rise/rise &#xa0;&#xa0;2.831&#xa0;&#xa0; test+worst-rcMax</code><br /><code>vclk2&#xa0;&#xa0;&#xa0; tdigit[1]&#xa0;&#xa0;&#xa0; max_sequential rise/fall&#xa0;&#xa0; 2.413&#xa0;&#xa0; test+worst-rcMax</code><br /><code>####################################################</code><br /><code># Section 2 : Transition time</code><br /><code># Analysis Mode : setup</code><br /><code># Description : Actual transition times on the ports</code><br /><code># View : default</code><br /><code>#</code><br /><code># Port&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; RiseTran&#xa0;&#xa0; FallTran</code><br /><code>####################################################</code><br /><code>reset&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.120&#xa0;&#xa0;&#xa0;&#xa0; 0.120</code><br /><code>int&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.120&#xa0;&#xa0;&#xa0;&#xa0; 0.120</code><br /><code>port_pad_data_in[15]&#xa0;&#xa0;&#xa0;&#xa0; 0.120&#xa0;&#xa0;&#xa0;&#xa0; 0.120</code><br /><code>port_pad_data_in[0]&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.120&#xa0;&#xa0;&#xa0;&#xa0; 0.120</code><br /><code>scan_en&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.120&#xa0;&#xa0;&#xa0;&#xa0; 0.120</code><br /><code>scan_clk&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.120&#xa0;&#xa0;&#xa0;&#xa0; 0.120</code><br /><code>scan_in_1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.120&#xa0;&#xa0;&#xa0;&#xa0; 0.120</code><br /><code>scan_in_2&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.120&#xa0;&#xa0;&#xa0;&#xa0; 0.120</code><br /><code>test_mode&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.120&#xa0;&#xa0;&#xa0;&#xa0; 0.120</code><br /><code>spi_data&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.120&#xa0;&#xa0;&#xa0;&#xa0; 0.120</code><br /><code>spi_fs&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.120&#xa0;&#xa0;&#xa0;&#xa0; 0.120</code><br /><code>refclk&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.120&#xa0;&#xa0;&#xa0;&#xa0; 0.120</code><br /><code>vcom&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1.025&#xa0;&#xa0;&#xa0;&#xa0; 1.138</code><br /><code>####################################################</code><br /><code># Section 3 : Capacitance&#xa0;</code><br /><code># Analysis Mode : setup</code><br /><code># Description : Total Cap on the ports</code><br /><code># View : default</code><br /><code>#&#xa0;</code><br /><code># Port&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; CTotal(Rise) CTotal(Fall)</code><br /><code>###########################################</code><br /><code>reset&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 3.078&#xa0;&#xa0;&#xa0;&#xa0; 3.078</code><br /><code>port_pad_data_in[0]&#xa0;&#xa0;&#xa0; 3.078&#xa0;&#xa0;&#xa0;&#xa0; 3.078</code><br /><code>scan_en&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 3.078&#xa0;&#xa0;&#xa0;&#xa0; 3.078</code><br /><code>scan_clk&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 3.078&#xa0;&#xa0;&#xa0;&#xa0; 3.078</code><br /><code>scan_in_1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 3.078&#xa0;&#xa0;&#xa0;&#xa0; 3.078</code><br /><code>vcop&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.007&#xa0;&#xa0;&#xa0;&#xa0; 0.007</code><br /><code>#############################################</code><br /><code># Section 4 : Design Rules</code><br /><code># Analysis Mode : setup</code><br /><code># Description : Design Rules on the ports</code><br /><code># View : default</code><br /><code>#&#xa0;</code><br /><code># Port&#xa0;&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;MaxCap&#xa0;&#xa0;MinCap&#xa0;&#xa0;MaxTrans&#xa0;&#xa0;MaxFanout&#xa0;&#xa0;Fanout&#xa0;&#xa0;Limit</code><br /><code>#############################################################</code><br /><code>reset&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; NA&#xa0;&#xa0;&#xa0;&#xa0;NA&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;2.700&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;15.000&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;NA</code><br /><code>int&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; NA&#xa0;&#xa0;&#xa0; NA&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 2.700&#xa0;&#xa0;&#xa0;&#xa0; 15.000&#xa0;&#xa0;&#xa0;&#xa0; NA</code><br /><code>port_pad_data_in[15]&#xa0;&#xa0;&#xa0;NA&#xa0;&#xa0;&#xa0; NA&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 2.700&#xa0;&#xa0;&#xa0;&#xa0; 15.000&#xa0;&#xa0;&#xa0;&#xa0; NA</code><br /><code>port_pad_data_in[14]&#xa0;&#xa0;&#xa0;NA&#xa0;&#xa0;&#xa0;&#xa0;NA&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 2.700&#xa0;&#xa0;&#xa0;&#xa0; 15.000&#xa0;&#xa0;&#xa0;&#xa0; NA</code><br /><code>port_pad_data_in[13]&#xa0;&#xa0;&#xa0;NA&#xa0;&#xa0;&#xa0;&#xa0;NA&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 2.700&#xa0;&#xa0;&#xa0;&#xa0; 15.000&#xa0;&#xa0;&#xa0;&#xa0; NA</code><br /><code>port_pad_data_in[12]&#xa0;&#xa0;&#xa0;NA&#xa0;&#xa0;&#xa0; NA&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 2.700&#xa0;&#xa0;&#xa0;&#xa0; 15.000&#xa0;&#xa0;&#xa0;&#xa0; NA</code></p>
+</li></ul><h4 id="write_model_timing-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="compare_model_timing.html">compare_model_timing</a></code></li><li><code><a href="do_extract_model.html">do_extract_model</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="merge_model_timing.html" id="prev" title="merge_model_timing">merge_model_timing</a></em></b><b><em><a href="Interface_Logic_Models_-_ILM.html" id="nex" title="Interface_Logic_Models_-_ILM">Interface_Logic_Models_-_ILM</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

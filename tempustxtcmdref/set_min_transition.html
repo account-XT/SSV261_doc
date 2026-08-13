@@ -1,0 +1,178 @@
+
+<html><head><title>set_min_transition</title>
+<meta name="page_sequence" content="20094000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287445" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_min_transition" />
+<meta name="Keywords" content="set min transition,min transition,transition,transition limit" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Constraints," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287445" />
+<meta name="NextFile" content="set_mode.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_min_pulse_width.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- set_min_transition" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="set_min_pulse_width.html" title="set_min_pulse_width">set_min_pulse_width</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_mode.html" title="set_mode">set_mode</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_min_transition</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>set_min_transition<span class="confluence-anchor-link" id="set_min_transition-set_min_transition"></span><span id="set_min_transition-set_min_transition"></span>&#xa0;<br />[-help]</code><br /><code><em>transition_limit</em></code><br /><code><em>object_list</em></code><br /><code> [-clock_path]</code><br /><code> [-data_path]</code><br /><code>[-fall] </code><br /><code>[-override]</code><br /><code> [-rise]</code></p>
+
+<p>Sets the minimum slew time limit (transition) on the specified ports of the top timing module and/or clock waveforms.</p>
+
+<p>When set on a port, the slew time at the port must be greater than or equal to the specified limit. When set on a module, the limit applies to all the pins in the module and its ports if the module is the top timing module. The minimum transition limits on pins can come from library objects, which are the default minimum transition of the libraries or minimum transition on library cell pins. In this case, the constraints limit, which is the largest, will apply on pins and ports.</p>
+
+<p>Use the <code>report_ports</code> <code>-type slew_limit</code> command to view the minimum transition limits set on ports of the top timing module.</p>
+
+<p>When limits are set on a clock waveform, you can use <code>-clock_path</code>, <code>-data_path</code>, <code>-rise</code>, and <code>-fall</code> parameters to provide more specifications.</p>
+
+<p>The <code>set_min_transition</code> constraint on clock objects will be honored only by the <code>report_constraint</code> command for DRV violations. The constraint will not be used in optimizations.</p>
+
+<p><strong>Note</strong>: This command syntax is applicable only when the flow-compatible mode is on.</p>
+<h4 id="set_min_transition-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-clock_path</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies all pins that are in the network of the specific clocks in the object list.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-data_path</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies all pins that are in the data paths launched by the specific clocks in the object list.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-fall</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies falling capacitance.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code><em>object_</em></code><code><em>list</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the list of objects - ports, instance pins, library cell pins, modules, and/or clock waveforms.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-override</code></td>
+<td class="confluenceTd" colspan="1">
+<p>Overrides the transition limit from other sources, such as, library or constraints.</p>
+
+<p>This parameter can be used to force a specific constraint value for a specified list of instance pins/port/library cell pins - this overrides the maximum/minimum values set prior to this setting.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-rise</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies rising capacitance for all selected pins.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>transition_limit</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the value of the minimum slew time limit (minimum transition).&#xa0; The minimum slew time limit is in time units from the target technology library.</p>
+
+<p>Transition limit value (float, required)</p>
+
+<p>Min=-1000000</p>
+
+<p>Max=1000000</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_min_transition-Examples">Examples</h4>
+<ul><li>The following example sets a minimum transition limit of 0.9 units on all the ports of the top timing module, and a minimum transition limit of 0.7 units on the top timing module: <br /><code><span>tempus &gt;&#xa0;</span>set_min_transition 0.9 [get_ports *] </code><br /><code><span>tempus &gt;&#xa0;</span>set_min_transition 0.7 [current_design]</code> <br /><br />The minimum limit that applies to ports is 0.9, which is the largest constraints value.</li></ul><ul><li>The following example shows a report of the minimum transition limit set on ports using the <code>report_ports</code> command, as shown in the example below:&#xa0;<br /><code><span>tempus &gt;&#xa0;</span>set_min_transition 0.9 [get_ports *]</code><br /><code>tempus &gt; report_ports -type slew_limit -pin [get_ports *]</code><br /><br />The following report is displayed:<br />
+<p><code> -------------------------------------------</code><br /><code> Pin &#xa0; &#xa0;Dir &#xa0; Assertion &#xa0; &#xa0;Value</code><br /><code> Name</code><br /><code> -------------------------------------------</code><br /><code> CLK2 &#xa0; IN &#xa0; &#xa0;slew_limit &#xa0;( 0.900 : )</code><br /><code> CLK1 &#xa0; IN &#xa0; &#xa0;slew_limit &#xa0;( 0.900 : )</code><br /><code> in2 &#xa0; &#xa0;IN &#xa0; &#xa0;slew_limit &#xa0;( 0.900 : )</code><br /><code> in1 &#xa0; &#xa0;IN &#xa0; &#xa0;slew_limit &#xa0;( 0.900 : )</code><br /><code> out2 &#xa0; OUT &#xa0; slew_limit &#xa0;( 0.900 : )</code><br /><code> out1 &#xa0; OUT &#xa0; slew_limit &#xa0;( 0.900 : )</code><br /><code> -------------------------------------------</code></p>
+
+<p><code>tempus &gt; report_constraint -drv_violation_type min_transition</code></p>
+
+<p><code>Check type : min_transition</code><br /><code>---------------------------</code><br /><code> Pin : CLK4</code></p>
+
+<p><code>Transition Time: 0.003</code><br /><code>- min_transition: 0.900</code><br /><code>-----------------------------------------------------</code><br /><code> slack : -0.897 ( VIOLATED )</code></p>
+</li></ul><h4 id="set_min_transition-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="set_max_capacitance.html#set_max_capacitance-set_max_capacitance">set_max_capacitance</a></code></li><li><code><a href="reset_min_transition.html#reset_min_transition-reset_min_transition">reset_min_transition</a></code></li><li><code><a href="report_ports.html#report_ports-report_ports">report_ports</a></code></li><li><a href="report_constraint.html"><code>report_constraint</code></a></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_min_pulse_width.html" id="prev" title="set_min_pulse_width">set_min_pulse_width</a></em></b><b><em><a href="set_mode.html" id="nex" title="set_mode">set_mode</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

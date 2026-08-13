@@ -1,0 +1,278 @@
+
+<html><head><title>define_metric</title>
+<meta name="page_sequence" content="17010000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666145" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="define_metric" />
+<meta name="Keywords" content="precision,target,threshold,inheritance_tcl,units" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="General," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusTCRcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666145" />
+<meta name="NextFile" content="define_proc.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="decrypt.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Text Reference Manual  -- define_metric" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltuscuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusTCRcomTOC.html">Contents</a></li><li><a class="prev" href="decrypt.html" title="decrypt">decrypt</a></li><li style="float: right;"><a class="viewPrint" href="voltusTCRcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="define_proc.html" title="define_proc">define_proc</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Text Reference Manual <br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>define_metric</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="define_metric-define_metric"></span><span id="define_metric-define_metric"></span><code>define_metric <br /><code>[-help]&#xa0;<br />[-compare&#xa0;<em>compareFunction</em>]&#xa0;<br />[-description&#xa0;<em>metricDescription</em>]&#xa0;<br /><span>[{-id&#xa0;</span><em>databaseID</em><span>}]</span><br />[-inheritance_tcl&#xa0;<em>TclName</em>]&#xa0;<br />-name&#xa0;<em>metric_name</em>&#xa0;<br />[-no_inheritance]</code><br /><code>[-precision&#xa0;<em>number_of_decimal_places</em>]<br />[-target <em>metric_name</em>]&#xa0;&#xa0;<br />[-tcl&#xa0;<em>TCL_command_list</em>&#xa0;<span>[-tools&#xa0;</span><em>listOfTools</em><span>]</span>]&#xa0;<br />[-threshold&#xa0;<em>reporting_unit</em>]&#xa0;<br />[-type&#xa0;<em>metricType</em>]&#xa0;<br />[-units&#xa0;<em>reporting_unit</em>]<br />[-warning <em>threshold</em>]</code><br /></code></p>
+
+<p>Defines new metrics.</p>
+
+<p>You can use this command to create new metrics that you need to track. &#xa0;To create new metrics, you need to provide the TCL code required to generate the metric. The TCL can be a sequence of commands that return a value or a procedure that returns a value.&#xa0;</p>
+
+<p>The following command provides the TCL commands <code>dbFindInstsByCell HDR*</code>&#xa0;to define the&#xa0;design.switch_cells metric.</p>
+
+<p><code>define_metric &#8211;name design.switch_cells &#8211;tcl { return [dbFindInstsByCell HDR*] }</code></p>
+
+<p>Similarly, a proc can be used to define a metric. The following command provides the <code>my_get_switch_cells{}</code> proc to define the <code>design.switch_cells</code> metric.</p>
+
+<p><code>define_metric &#8211;name design.switch_cells &#8211;tcl { return [my_get_switch_cells{}] }</code></p>
+
+<p>The metric is calculated and stored with the other metrics &#xa0;when <code><a href="create_snapshot.html">create_snapshot</a></code>&#xa0;is executed. &#xa0;All <code>define_metric</code> commands are saved and restored in the design database.</p>
+<h4 id="define_metric-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code><span>-compare <em>compareFunction</em></span></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the compare function, <code>[moreBetter|lessBetter|moreBetterBelowTarget|lessBetterAboveTarget]</code>.</p>
+
+<p>The comparison options show the good or bad color when the value is below or above the target value as appropriate.</p>
+
+<p><em>Unit</em>: <code>string</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-description&#xa0;</span><span>&#xa0;</span><em>metricDescription</em></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the description of the metric.</p>
+
+<p><em>Unit</em><span>: </span><code>string</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-id&#xa0;</span><em>databaseID</em></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the database ID.</p>
+
+<p><em>Unit</em><span>: </span><code>string</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-inheritance_tcl <em>TclName</em></span></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies Tcl for combining children values. The metric is not executed in the global namespace. The equivalent proc args is {children}.</p>
+
+<p><em>Unit</em><span>: </span><code>string</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-name&#xa0;<em>metric_name&#xa0;</em></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the name of the metric.</p>
+
+<p><em>Unit</em><span>: </span><code>string</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-no_inheritance</span></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Disables the inheritance of the metric.</p>
+
+<p><em>Unit</em><span>: </span><code>boolean</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">
+<p>Outputs a brief description that includes type and default information for each <code>define_metric</code> parameter.<br />For a detailed description of the command and all of its parameters, use the man command:</p>
+
+<p><code>man define_metric</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-precision&#xa0;<em>number_of_decimal_places</em></code></td>
+<td class="confluenceTd">
+<p>Specifies the number of decimal places.</p>
+
+<p><em>Unit</em><span>: </span><code>integer</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-target&#xa0;</span><em>metric_name</em></code></td>
+<td class="confluenceTd" colspan="1">Specifies the target or the name of metric containing the target value.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-tcl {&#xa0;<em>TCL_command_list</em>&#xa0;}</code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the list of TCL commands or proc to generate (return) the metric which is of the format <code>{&lt;value&gt; &lt;unit&gt;}</code>.</p>
+
+<p><em>Unit</em><span>: </span><code>string</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-threshold&#xa0;<em>reporting_unit</em></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the threshold for comparing numbers in HTML.&#xa0; If the delta between the two numbers being compared is less than the threshold then the metric will be colored &#8220;yellow&#8221;.&#xa0; If it is outside the threshold, then it is colored red or green depending on the compare function i.e. whether more is better or less is better.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-tools&#xa0;</span><em>listOfTools</em></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the list of tools which the tcl code will run.</p>
+
+<p><em>Unit</em><span>: </span><code>string</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-type&#xa0;</span><em>metricType</em></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the type of metric.</p>
+
+<p><em>Unit</em><span>: </span><code>string</code></p>
+
+<p>The various metrics types are:</p>
+<ul><li>imageplot: A metric type that the renders to an image in the HTML report.</li></ul><ul><li><p class="_mce_tagged_br" style="margin-left: 30.0px;">Format:</p>
+</li></ul><p style="margin-left: 30.0px;"><code>&lt;name1&gt; { \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0;fill_color &quot;&lt;color&gt;&quot; \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0; stroke_color &quot;&lt;color&gt;&quot;\</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0; data &lt;list of data sets&gt;</code></p>
+<p style="margin-left: 30.0px;"><code>} \</code></p>
+<p style="margin-left: 30.0px;"><code>&lt;name2&gt; { \</code></p>
+<p style="margin-left: 30.0px;"><code>&lt;sub-name1&gt; { \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0;&#xa0;&#xa0; fill_color &lt;color&gt; \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0;&#xa0;&#xa0; data &lt;list of data sets&gt; \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0; } \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0; &lt;sub-name2&gt; {...} \</code></p>
+<p style="margin-left: 30.0px;"><code>}</code></p>
+<p style="margin-left: 30.0px;">Where a data set can be one or more of the following:</p>
+<p style="margin-left: 30.0px;">The data on each layer is a string of coordinates (separated by sequences of whitespace and comma) with types. These types are:</p>
+<ul><li style="list-style-type: none;background-image: none;"><ul><li style="list-style-type: none;background-image: none;"><ul><li>R - rectangle (x, y, width, height)</li><li>B - bounding box (x_min, y_min, x_max, y_max)</li><li>G - closed polygon (x, y, x, y, ...)</li><li>L - open polyline (x, y, x, y, ...)</li><li>C - circle (x, y, r)</li><li>P - point (x, y)</li></ul></li></ul></li></ul><p style="margin-left: 30.0px;">For rectangles, boxes, circles and points, multiple shapes can be defined without having to repeat the type letter. e.g. R1,2,3,4,5,6,7,8 is two rectangles.</p>
+<p style="margin-left: 30.0px;">A value can be defined for shapes by adding a V suffix to the type; this value can then be used to color the shapes according to the value for heat maps. The value is always the first number after the type. This means that two points with values 20 and 40 may look like: PV20,1,2 40,6,5 or: PV20,1,2PV40,6,5.</p>
+<p style="margin-left: 30.0px;">Example imageplot TCL dict data:</p>
+<p style="margin-left: 30.0px;"><code>macros { \</code></p>
+<p style="margin-left: 30.0px;"><code>fill_color &quot;#FF0000&quot; \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0; stroke_color &quot;#0000FF88&quot; \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0; data &quot;R5,8,1,2 6,9,2,1 G1,2,3,4,5,6,7,8&quot; \</code></p>
+<p style="margin-left: 30.0px;"><code>} \</code></p>
+<p style="margin-left: 30.0px;"><code>drcs { \</code></p>
+<p style="margin-left: 30.0px;"><code>placement { \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0;&#xa0;&#xa0; fill_color &quot;#FF0000&quot; \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0;&#xa0;&#xa0; data &quot;P3,4&quot; \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0; } \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0; routing {...} \</code></p>
+<p style="margin-left: 30.0px;"><code>}</code></p>
+<p style="margin-left: 30.0px;">Layers in the image are named (macros, congestion, normal, other in the above example) and support hierarchy. Layers should not be nested beyond one level deep. The hierarchy is used in the renderer (see below) to toggle the visibility of the layers. It is an error for any layer to be called data (reserved to keep hierarchy clear).</p>
+<p style="margin-left: 30.0px;">Colors can be defined either as hex or RGB values with optional opacity. Hex values are prefixed with #. RGB values are separated with whitespace.</p>
+<ul><li style="list-style-type: none;background-image: none;"><ul class="_mce_tagged_br"><li style="list-style-type: none;background-image: none;"><ul class="_mce_tagged_br"><li style="list-style-type: none;background-image: none;"><ul class="_mce_tagged_br"><li>#FF0000: Red</li><li>#00FF0040: Green (25% opaque)</li><li>0 0 255: Blue</li><li>255 0 255 192: Magenta (75% opaque)</li></ul></li></ul></li></ul></li><li>histogram: The data will be structured as a set of series with shared X-axis labels that are rendered as a stacked histogram.</li></ul><p class="_mce_tagged_br" style="margin-left: 30.0px;">Format (TCL dict):</p>
+<p style="margin-left: 30.0px;"><code>labels &lt;list of labels&gt; \</code></p>
+<p style="margin-left: 30.0px;"><code>axis_x &lt;name&gt; \</code></p>
+<p style="margin-left: 30.0px;"><code>axis_y &lt;name&gt; \</code></p>
+<p style="margin-left: 30.0px;"><code>series { \</code></p>
+<p style="margin-left: 30.0px;"><code>&lt;series1&gt; { \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0;&#xa0; values &lt;list of buckets \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0;&#xa0; color &quot;#FF0000&quot; \</code></p>
+<p style="margin-left: 30.0px;"><code>} \</code></p>
+<p style="margin-left: 30.0px;"><code>&lt;series2&gt; { \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0;&#xa0; values {2 1 0 0} \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0;&#xa0; color &quot;#0000FF&quot; \</code></p>
+<p style="margin-left: 30.0px;"><code>} \</code></p>
+<p style="margin-left: 30.0px;"><code>}</code></p>
+<p style="margin-left: 30.0px;">Example:</p>
+<p style="margin-left: 30.0px;"><code>get_metric timing.setup.histogram</code></p>
+<p style="margin-left: 30.0px;"><code>timing.setup.histogram {labels {-0.320 -0.240 -0.160 -0.080} \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; series { \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;reg2reg {color #FF0000 values {43 3 2 3 0}} \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; reg2cgate {color #0000FF values {22 4 5 0 0}} \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; } \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; axis_x WNS(ns) \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; axis_y {Failing End Points} \</code></p>
+<p style="margin-left: 30.0px;"><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; }</code></p>
+<p style="margin-left: 30.0px;">The labels (a list of strings, shown in the order provided) define the X-axis labels for the histogram, the values in each series define the Y-axis values.</p>
+<p style="margin-left: 30.0px;">Colors can be defined either as hex or RGB values with optional opacity. Hex values are prefixed with #. RGB values are separated with whitespace.</p>
+<p style="margin-left: 30.0px;"><code>#FF0000&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; - Red</code></p>
+<p style="margin-left: 30.0px;"><code>0 0 255&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; - Blue</code></p>
+<ul><li>html: Supports the inclusion of raw HTML in a metric. You can place simple html into tables allowing simple links to reports. For example, the following command defines <code>test_html</code> as an html type of metric:</li></ul><p style="margin-left: 60.0px;"><code>define_metric -name test_html -type html</code></p>
+<p style="margin-left: 30.0px;">You can the html metric, test_html, using the <code>set_metric</code> command:</p>
+<p style="margin-left: 60.0px;"><code>set_metric -name test_html -value {&lt;a href=&quot;url&quot;&gt;test&lt;/a&gt;}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-units&#xa0;</span><em>reporting_unit</em></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the unit for reporting.</p>
+
+<p><em>Unit</em>:&#xa0;<code>string</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-warning&#xa0;</span><em>threshold</em></code></td>
+<td class="confluenceTd" colspan="1">Specifies the warning threshold or name of metric containing the threshold value.</td>
+</tr>
+</tbody></table></div>
+<h4 id="define_metric-Examples">Examples</h4>
+
+<p>The following command defines the <code>design.vtmix</code>&#xa0;metric :<br /><code>define_metric &#8211;name design.vtmix &#8211;visibility default &#8211;tcl {return [TCL commands]}</code></p>
+<h4 id="define_metric-RelatedTopics">Related Topics</h4>
+<ul><li><code>create_snapshot</code>&#xa0;command</li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="decrypt.html" id="prev" title="decrypt">decrypt</a></em></b><b><em><a href="define_proc.html" id="nex" title="define_proc">define_proc</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

@@ -1,0 +1,162 @@
+
+<html><head><title>Working with get_db and set_db</title>
+<meta name="page_sequence" content="13001000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="leenap" />
+<meta name="CreateDate" content="2026-03-26" />
+<meta name="CreateTime" content="1774530241" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Stylus Common UI Migration Guide" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Migration Guide" />
+<meta name="DocType" content="Migration" />
+<meta name="FileTitle" content="Working with get_db and set_db" />
+<meta name="Keywords" content="database information, database query, SDC commands, get_cells, get_pins, get_property, set_property, chaining, filtering, object matching, string pattern matching" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Stylus,Stylus,Stylus," />
+<meta name="prod_subfeature" content="Tcl/DB Commands,Tcl/DB Commands, Tcl/DB Commands," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="2" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusMIGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-03-26" />
+<meta name="ModifiedTime" content="1774530241" />
+<meta name="NextFile" content="Legacy_vs._Stylus_Common_UI_Database_Object_Commands.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Database_Access_and_Handling.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Migration Guide -- Working with get_db and set_db" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="innovusCUIMig261" />
+<meta name="confluence-version" content="7.19.19" />
+<meta name="ecms-plugin-version" content="04.21.019" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusMIGcomTOC.html">Contents</a></li><li><a class="prev" href="Database_Access_and_Handling.html" title="Database_Access_and_Handling">Database_Access_and_Handling</a></li><li style="float: right;"><a class="viewPrint" href="voltusMIGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Legacy_vs._Stylus_Common_UI_Database_Object_Commands.html" title="Legacy_vs._Stylus_Common_UI_Database_Object_Commands">Legacy_vs._Stylus_Common_UI_Da ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Migration Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Working with get_db and set_db</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>The Stylus Common UI uses the new commands&#xa0;<code>get_db</code>/<code>set_db</code>&#xa0;to provide a single and common way to access/query all the database information.</p>
+
+<p>These commands replace the <span><span class="fontredcadence">Tempus</span> (Legacy) </span>commands,&#xa0;<code>dbGet</code><span>,&#xa0;</span><code>dbSet</code>,<code>&#xa0;get_ccopt_property</code>, and&#xa0;<code>set_ccopt_property</code>;&#xa0;and the 100s of DB object commands that have a&#xa0;<code>db</code>&#xa0;prefix such as&#xa0;<code>dbGetInstByName</code>&#xa0;and&#xa0;<code>dbSetInstPlacementStatus</code>. These commands&#xa0;also give access to all the data available from the SDC collection-based commands such as&#xa0;<code>get_cells</code>,<code>&#xa0;get_pins</code>,<code>&#xa0;get_property</code>, and&#xa0;<code>set_property</code>; although these commands are still available for SDC compatibility in the Common UI.</p>
+
+<p>The <code>get_db</code> and <code>set_db</code>&#xa0;commands&#xa0;support various chaining, filtering, and matching options similar to <code>dbGet<span style="font-family: Arial , sans-serif;">&#xa0;and&#xa0;</span></code><code>dbSet</code>&#xa0;(in legacy) but with an easier usage model.&#xa0;These&#xa0;<span>commands can access most object types directly from the root.</span></p>
+
+<p>Note that <code>get_db</code> also allows string pattern matching directly on any object that has a <code>.name</code> attribute. This enables fetching the objects directly by name. For example:</p>
+
+<p><code>get_db insts i1/* #returns all inst objects with .name matching i1/*</code></p>
+
+<p><code>get_db insts -if {.name == i1/*} #returns all inst objects with .name matching i1/*</code></p>
+
+<p><code>get_db insts .name i1/* #returns all inst names (not objects) matching i1/*</code></p>
+
+<p><strong>Note:&#xa0;</strong><code>get_db</code> requires a space before the <code>.<em>attribute</em></code>&#xa0;name.</p>
+
+<p><strong>Help on Database Attributes</strong></p>
+
+<p><span style="">You can also use help to find the attributes and their help description for any given <code>obj_type</code>, as below:</span></p>
+
+<p><code>help -obj pin &#xa0; &#xa0; #note, &quot;help pin:&quot; also works, the : means only -obj help is desired, so then -obj is not needed</code><br /><code>Attributes:</code><br /><code>arrival_max_fall(pin)</code><br /><code>Returns the latest falling arrival time ...</code><br /><code>arrival_max_rise(pin)</code><br /><code>...</code></p>
+
+<p><span style="">Pattern matching also works for help:</span></p>
+
+<p><code>help pin: *slack*</code><br /><code>Attributes:</code><br /><code>slack_max(pin) Returns the worst slack across all concurrent MMMC views ...</code><br /><code>slack_max_edge(pin) Returns the data edge of the path responsible ...</code><br /><code>...</code></p>
+
+<p>To find all the attributes with <code>slack</code> in their name, run:</p>
+
+<p><code>help -attribute * *slack*</code><br /><code>Attributes:</code><br /><code>cts_move_clock_nodes_for_slack(clock_tree)</code><br /><code>When set, CCOpt will consider moving nodes in the clock tree with poor ...</code><br /><code>slack_max(pin) Returns the worst slack across all concurrent MMMC views for Setup-style ...</code><br /><code>...</code></p>
+
+<p>You can also use the &lt;tab&gt; key to see the attribute names of the current object when entering a <code>get_db</code> command:</p>
+
+<p><code>get_db $my_obj .<em>tab</em></code></p>
+
+<p><strong>Browsing the Database</strong></p>
+
+<p>You can use pattern matching for an attribute name to see multiple attribute values for many objects at the same time. This replaces the legacy <code>dbGet .??</code> usage.</p>
+
+<p>So instead of this legacy usage to see all the attributes and values of every pin (<code>instTerm</code>) in <code>$my_pins</code>, run:</p>
+
+<p><code>dbGet $my_pins.??</code></p>
+
+<p>You can use:</p>
+
+<p><code>get_db $my_pins .*</code></p>
+
+<p>Or use this to see just a few attributes of every pin:</p>
+
+<p><code>get_db $my_pins .capacitance_max*</code><br /><code>Object: pin:top/CG/BC1/Y</code><br /><code>capacitance_max_fall: 1.0</code><br /><code>capacitance_max_rise: 1.1</code><br /><code>Object: pin:top/CG/BC2/A</code><br /><code>capacitance_max_fall: 1.1</code><br /><code>capacitance_max_rise: 1.2</code><br /><code>...</code></p>
+
+<p>If some of the values are not computed (like timing-graph data), and you want to force them to be computed anyway, run:</p>
+
+<p><code>get_db $my_pins .slack_max* -computed</code><br /><code>Object: pin:top/CG/BC1/Y</code><br /><code>slack_max: 9227.4</code><br /><code>slack_max_edge: rise</code><br /><code>slack_max_fall: inf</code><br /><code>slack_max_rise: 9227.4</code><br /><code>...</code></p>
+
+<p><strong>Object Chaining</strong></p>
+
+<p>Object chaining enables you to link to the related objects allowed like <code>dbGet</code>.</p>
+
+<p><strong>Note:</strong>&#xa0;<code>dbGet</code> requires no space before the&#xa0;&quot;.&quot; (<code>dbGet $nets.name</code><span>), but <code>get_db</code> requires at least one space before the &quot;.&quot;</span></p>
+
+<p>For example:</p>
+<ul><li>Pins or ports that drive a specific pin:<br /><code>get_db pin:top/rst_reg/D .net.drivers</code></li><li>Pins or ports that are loads of a specific pin:<br /><code>get_db pin:top/rst_reg/D .<span style="line-height: 1.42857;">net.loads</span></code></li></ul>
+<p><strong>Examples</strong></p>
+<ul><li>
+<p>The following command finds all the insts that start with&#xa0;i1/i2/&#xa0;and end with&#xa0;_buf:<br /><code>get_db insts i1/i2/*_buf</code><br /><code>inst:top/i1/i2/test_buf inst:top/i1/i2/i3/test_buf ...</code></p>
+</li><li>The following command counts the number of repeater cells:<br /><code>llength [get_db insts -if { .base_cell.is_buffer || .base_cell.is_inverter }]</code></li><li>
+<p>The following&#xa0;&#xa0;<code>get_db</code>&#xa0;command uses&#xa0;<code>-foreach</code>&#xa0;to count the number of <code>base_cell</code> used in the <code>netlist</code> inside the <code>cell_count</code> Tcl array.<br /><code>get_db insts .base_cell -foreach {incr cell_count($obj(.name))}</code><br /><code>array get cell_count &#xa0; &#xa0; #write out the array with the counts</code><br /><code>BUF1 20 AND2 30 ...</code></p>
+</li><li>The following command defines a user-defined attribute, and then adds it on a net based on its fanout:<br /><code>define_attribute high_fanout \</code><br /><code>-category test \</code><br /><code>-data_type bool \</code><br /><code>-obj_type net</code><br /><code>set_db [get_db nets -if {.num_loads &gt; 20}] .high_fanout true</code><br /><code>get_db net:clk .high_fanout</code><br /><code>true</code></li></ul><ul><li>The following command count all the pins below the hinst, or all pins at one level of the hierarchy<br /><code>llength [get_db hinst:tdsp_core/ALU_32_INST .insts.pins]</code><br /><code>llength [get_db hinst:tdsp_core/ALU_32_INST .local_insts.pins]</code></li><li>
+<p>The following command filters out the buffer cells, and counts them in <code>buf_count</code>:<br /><code>get_db insts -if {.base_cell.is_buffer==true}&#xa0;\</code><br /><code>-foreach {incr buf_count($obj(.base_cell.name))}</code><br /><code>array get buf_count</code><br /><code>BUF1X 20 BUF2X 30 ...</code></p>
+</li><li>The following command returns all the placed sequential cells:<br /><code>get_db insts -if {.base_cell.is_sequential==true &amp;&amp; .place_status==placed)</code></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Database_Access_and_Handling.html" id="prev" title="Database_Access_and_Handling">Database_Access_and_Handling</a></em></b><b><em><a href="Legacy_vs._Stylus_Common_UI_Database_Object_Commands.html" id="nex" title="Legacy_vs._Stylus_Common_UI_Database_Object_Commands">Legacy_vs._Stylus_Common_UI_Da ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

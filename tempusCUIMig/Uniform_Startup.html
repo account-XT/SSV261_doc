@@ -1,0 +1,141 @@
+
+<html><head><title>Uniform Startup</title>
+<meta name="page_sequence" content="19000000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="leenap" />
+<meta name="CreateDate" content="2026-03-26" />
+<meta name="CreateTime" content="1774517258" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Stylus Common UI Migration Guide" />
+<meta name="DocTitle" content="Stylus Common UI Migration Guide" />
+<meta name="DocType" content="Migration" />
+<meta name="FileTitle" content="Uniform Startup" />
+<meta name="Keywords" content="startup sequence,startup sequence in Stylus,startup sequence in CUI" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Stylus,Stylus,Stylus," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUIMig" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-03-26" />
+<meta name="ModifiedTime" content="1774517258" />
+<meta name="NextFile" content="Metrics.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Uniform_Logging.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Stylus Common UI Migration Guide -- Uniform Startup" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="innovusCUIMig261" />
+<meta name="confluence-version" content="7.19.19" />
+<meta name="ecms-plugin-version" content="04.21.019" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUIMigTOC.html">Contents</a></li><li><a class="prev" href="Uniform_Logging.html" title="Uniform_Logging">Uniform_Logging</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIMig.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Metrics.html" title="Metrics">Metrics</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Stylus Common UI Migration Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <div style="width: 100%; font-size: 32px; text-align: left;               font-weight: bold;">9</div>
+<h1 style="margin: 4px 0 4px;"><span>Uniform Startup</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>In Stylus Common UI, the bootstrap files are loaded in a consistent order across all tools - Genus, Innovus, Joules, Modus, Tempus, and Voltus. The startup sequence is listed in the table below:</p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /><col /></colgroup><tbody><tr><th class="numberingColumn confluenceTh" colspan="1">#</th><th class="confluenceTh" colspan="1">Startup File</th><th class="confluenceTh" colspan="1">Example</th></tr>
+<tr><td class="numberingColumn confluenceTd">1</td>
+<td class="confluenceTd">
+<p><code>~/.cadence/&lt;<em>tool&gt;</em>/{gui.pref.tcl, gui.color.tcl, workspaces}</code>&#xa0;in the home directory if the GUI is enabled.</p>
+
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="1"><code><span>~/.cadence/innovus/{gui.pref.tcl, gui.color.tcl, workspaces}</span></code></td>
+</tr>
+<tr><td class="numberingColumn confluenceTd">2</td>
+<td class="confluenceTd">
+<p>&#xa0;<code>.cadence/&lt;<em>tool&gt;</em>/{gui.pref.tcl, gui.color.tcl, workspaces/}</code>&#xa0;in the current directory if the GUI is enabled.</p>
+</td>
+<td class="confluenceTd" colspan="1"><code>.cadence/innovus/{gui.pref.tcl, gui.color.tcl, workspaces/}</code></td>
+</tr>
+<tr><td class="numberingColumn confluenceTd">3</td>
+<td class="confluenceTd">
+<p><code><em>&lt;install_dir&gt;</em>/etc/&lt;<em>tool&gt;</em>/&lt;<em>tool&gt;</em></code><code>.tcl</code>&#xa0;in the installation directory.</p>
+
+<p><strong>Note</strong>: For Tempus and Voltus,&#xa0;<code>etc/&lt;<em>tool&gt;</em></code>&#xa0;is&#xa0;<code>etc/ssv</code>&#xa0;because they share the same installation. However, both these tools use separate Tcl file names -&#xa0;<code>tempus.tcl</code>&#xa0;and&#xa0;<code>voltus.tcl</code>, respectively.</p>
+</td>
+<td class="confluenceTd" colspan="1"><span>&#xa0;</span><code><em>&lt;install_dir&gt;</em>/etc/innovus/</code><code>innovus.tcl</code><span>&#xa0;</span></td>
+</tr>
+<tr><td class="numberingColumn confluenceTd">4</td>
+<td class="confluenceTd">
+<p><code>~/.cadence/&lt;<em>tool&gt;</em>/&lt;<em>tool&gt;</em>.tcl</code>&#xa0;in the home directory.</p>
+</td>
+<td class="confluenceTd" colspan="1"><code>~/.cadence/innovus/innovus.tcl</code><span>&#xa0;</span></td>
+</tr>
+<tr><td class="numberingColumn confluenceTd">5</td>
+<td class="confluenceTd">
+<p><code>./.cadence/&lt;<em>tool&gt;</em>/&lt;<em>tool&gt;</em>.tcl</code>&#xa0;in the current directory.</p>
+</td>
+<td class="confluenceTd" colspan="1"><code>./.cadence/innovus/innovus.tcl</code><span>&#xa0;</span></td>
+</tr>
+<tr><td class="numberingColumn confluenceTd" colspan="1">6</td>
+<td class="confluenceTd" colspan="1">
+<p><code>./<em>&lt;tool&gt;</em>_startup.tcl</code>&#xa0;in the current directory.&#xa0;</p>
+</td>
+<td class="confluenceTd" colspan="1"><code>./innovus_startup.tcl</code><span>&#xa0;</span></td>
+</tr>
+</tbody></table></div>
+
+<p><strong><br />Note:</strong>&#xa0;The&#xa0;<code>-stylus</code>&#xa0;usage sets the&#xa0;<code>source_verbose</code>&#xa0;root attribute to&#xa0;<code>true</code>&#xa0;at startup. The GUI preference init files (1 and 2 above) ignore this setting, but the non-GUI preference initialization files above (3, 4, 5, and 6) will use verbose logging by default. If the shell envar&#xa0;<code>CDS_STYLUS_SOURCE_VERBOSE</code>&#xa0;exists and has a boolean value, then the&#xa0;<code>source_verbose</code>&#xa0;attribute will be set to the envar value at startup. So you can turn off verbose logging at startup by using the following command:</p>
+
+<p><code>setenv CDS_STYLUS_SOURCE_VERBOSE 0</code></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Uniform_Logging.html" id="prev" title="Uniform_Logging">Uniform_Logging</a></em></b><b><em><a href="Metrics.html" id="nex" title="Metrics">Metrics</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

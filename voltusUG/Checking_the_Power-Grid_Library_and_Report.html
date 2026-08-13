@@ -1,0 +1,113 @@
+
+<html><head><title>Checking the Power-Grid Library and Report</title>
+<meta name="page_sequence" content="20027000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468568" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Checking the Power-Grid Library and Report" />
+<meta name="Keywords" content="PGV,dynamic,static,check" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Power-Grid Library Generation," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468568" />
+<meta name="NextFile" content="Cell_Viewer_for_Debugging_Power-Grid_Libraries.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Generating_the_Open_Access_Based_Library.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- Checking the Power-Grid Library and Report" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="Generating_the_Open_Access_Based_Library.html" title="Generating_the_Open_Access_Based_Library">Generating_the_Open_Access_Bas ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Cell_Viewer_for_Debugging_Power-Grid_Libraries.html" title="Cell_Viewer_for_Debugging_Power-Grid_Libraries">Cell_Viewer_for_Debugging_Powe ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Checking the Power-Grid Library and Report</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>You can perform a comprehensive check of power-grid libraries and generate a report. These checks include:</p>
+<ul><li>Verify that all the PGV views exist: Early/IR/EM</li><li>Report the dynamic PWL and static current</li><li>Perform a compatibility check on the version, layermap and resistivity parameters</li><li>Check any missing information, such as temperature, qrcTechFile location, and so on.</li></ul><h3 id="CheckingthePowerGridLibraryandReport-89571ViewingaPower-GridLibraryReportintheGUI"><span class="confluence-anchor-link" id="CheckingthePowerGridLibraryandReport-89571"></span>Viewing a Power-Grid Library Report in the GUI</h3>
+
+<p>The power-grid library report includes the cell name, associated power pins and their voltage, capacitance, generated views and PASS/FAIL cell status. The power gate cells are identified and characterized Ron, Idsat and Ileakage values are printed. The cells without any power-grid views or power nets/pins are tagged with the FAILED status.</p>
+
+<p>The following steps are needed to view a power-grid library cell in the GUI:</p>
+<ol><li>Select <em>Power &amp; Rail</em> - <em>Textual Reports</em> - <em>PowerGrid Library</em>.<br />The following form appears:<br /><div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481054/732481055.png" data-linked-resource-container-id="732481054" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="example_view_library.png" data-linked-resource-id="732481055" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="250" src="attachments/732481054/732481055.png" tabindex="0" /></span></div>
+</li><li>Click the browse button next to the <em>Power Library</em> field, and select a library from the PowerGrid Library browser window.</li><li>Select the <em>View Power Library</em> option</li><li>Select <em>All Cells</em> to view all cells, or select <em>Cell</em> and specify the cells to view in the library report.</li><li>Click <em>Apply</em> or <em>OK</em>.<br />The power-grid view library report appears in the <em>Console</em> tab.</li></ol>
+<p>The following is a snippet of the standard cell power-grid library report:</p>
+<pre><code>
+==============================================================================<br />Library path name: .<br />Library name: stdcells<br />Hierarchical library: NO<br />User login: tom<br />Date: 2013-Sep-24 00:26:43 (2013-Sep-24 07:26:43 GMT)<br />ToolIdentifier: LIBGEN<br />Application version: voltus_libGen Version v13.20-b048_1 (09/18/2008 05:42:15)<br />Number of cells in library: 2<br />==============================================================================<br />Cell      PowerNets    Capacitance   PowerGrid Views<br />-------------------------------------------------------------------------------|</code></pre><pre><code>
+HDRSID0<br />          VSS(0.0000)   2.9e-15    Early(2 taps)  EM(2 devices) IR(2 devices)<br />          VDD(0.8400)   1.8e-15    Early(6 taps)  EM(6 devices) IR(6 devices)<br />          TVDD(0.8400)  2.9e-15    Early(12 taps) EM(12 devices) IR(12 devices)</code></pre><pre><code>
+ Cell Type = STDCELL<br /> Total power-net series-resistance = 0<br /> Total ground-net series-resistance = 0&#xa0;&#xa0;                      Cell_Status: PASS</code></pre><pre><code>
+-------------------------------------------------------------------------------|</code></pre><pre><code>
+RSDFCD1<br />          VSS(0.0000)   5.9e-15     Early(2 taps) EM(2 devices) IR(2 devices)<br />          VDD(0.8400)   4.8e-15     Early(1 taps) EM(1 devices) IR(1 devices)<br />          TVDD(0.8400)  1.1e-15     Early(1 taps) EM(1 devices) IR(1 devices)<br />
+
+Cell Type = STDCELL
+Total power-net series-resistance = 10206
+Total ground-net series-resistance = 8000&#xa0;&#xa0;                    Cell_Status: PASS</code></pre><pre><code>
+-------------------------------------------------------------------------------|</code></pre><h4 id="CheckingthePowerGridLibraryandReport-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Cell_Viewer_for_Debugging_Power-Grid_Libraries.html#CellViewerforDebuggingPowerGridLibraries-92775">Cell Viewer for Debugging Power-Grid Libraries</a></li><li><a href="Macro_Power-Grid_Library_Validation.html">Macro Power-Grid Library Validation</a></li><li><em><a class="message-url" href="../voltustxtcmdref/check_pg_library.html">check_pg_library</a></em></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Generating_the_Open_Access_Based_Library.html" id="prev" title="Generating_the_Open_Access_Based_Library">Generating_the_Open_Access_Bas ...</a></em></b><b><em><a href="Cell_Viewer_for_Debugging_Power-Grid_Libraries.html" id="nex" title="Cell_Viewer_for_Debugging_Power-Grid_Libraries">Cell_Viewer_for_Debugging_Powe ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

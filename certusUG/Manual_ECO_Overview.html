@@ -1,0 +1,128 @@
+
+<html><head><title>Manual ECO Overview</title>
+<meta name="page_sequence" content="15001000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468364" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Certus" />
+<meta name="DocTitle" content="Certus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Manual ECO Overview" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="certusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468364" />
+<meta name="NextFile" content="" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Manual_ECO.html" />
+<meta name="c_product" content="Certus," />
+<meta name="Product" content="Certus," />
+<meta name="ProductFamily" content="Certus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Certus User Guide -- Manual ECO Overview" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="ctsug261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="certusUGTOC.html">Contents</a></li><li><a class="prev" href="Manual_ECO.html" title="Manual_ECO">Manual_ECO</a></li><li style="float: right;"><a class="viewPrint" href="certusUG.pdf">View/Print PDF</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Certus User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Manual ECO Overview</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>Manual ECO in Certus fixes timing, functional, or design rule violations in a design after signoff stages. This is especially useful in critical design phases, enabling precise fixes and reducing turnaround time before final signoff.</p>
+
+<p>There are two modes supported in Manual ECO:</p>
+<ul><li>Non-Interactive mode</li><li>Interactive mode</li></ul><h2 id="ManualECOOverview-Non-InteractiveMode">Non-Interactive Mode</h2>
+
+<p>In this mode, the tool sources the specified Innovus-compliant ECO files. The command specified in these ECO files will first be executed on the respective Certus clients before being processed for execution on the manager. After this, the processed commands will be executed (block by block) on both the manager and the Tempus clients.</p>
+
+<p>Note that if an error occurs at any stage during execution of the ECO files, processing will stop and control will be returned to the Certus manager.</p>
+
+<p>To enable non-interactive mode, use the&#xa0;<code>replay_distributed_eco - block_eco_file_list &lt;file&gt;</code> setting, which specifies the list of Certus client block module names and the corresponding ECO files as input. You can also specify multiple ECO files for the same module.</p>
+<h3 id="ManualECOOverview-templatescriptmanualecoSampleTemplateScript:"><span class="confluence-anchor-link" id="ManualECOOverview-templatescriptmanualeco"></span>Sample Template Script:</h3>
+
+<p><span class="fontgreencadence">
+<p><code>set_multi_cpu_usage -localCpu 12 -remoteHost 2 -cpuPerRemoteHost 8<br /></code><code>## Settings for Certus start up<br /></code><code>set_eco_opt_mode -distributed_opt_block_restore_file /icd/etsproject3/qor/RAK/LUI/blkRestore.txt<br /></code><code>set_distribute_mmmc_mode -enable_high_capacity_eco<br /></code><code>distribute_read_design -restore_design $dbnames -outdir paradime_Output<br /></code><code>set_multi_cpu_usage -localCpu 12 -remoteHost 3 -cpuPerRemoteHost 8<br /></code><code>start_distributed_eco_clients<br /></code><code>#Setting to replay Certus Manual ECO<br /></code><code>replay_distributed_eco -block_eco_file_list &lt;path to block_eco_file&gt; ./block_eco_file</code></p>
+</span></p>
+
+<p>Below is the template for <code>block_eco_file_list</code>:</p>
+
+<p><code>dtmf_recvr_core ECO/drv_dtmf_recvr_core_eco_innovus.tcl<br /></code><code>ptn_wrapper ECO/drv_ptn_wrapper_eco_innovus.tcl<br /></code><code>tdsp_core ECO/drv_tdsp_core_eco_innovus.tcl<br /></code><code>dtmf_recvr_core ECO/setup_dtmf_recvr_core_eco_innovus.tcl<br /></code><code>ptn_wrapper ECO/setup_ptn_wrapper_eco_innovus.tcl<br /></code><code>tdsp_core ECO/setup_tdsp_core_eco_innovus.tcl</code></p>
+<h2 id="ManualECOOverview-InteractiveMode">Interactive Mode</h2>
+
+<p>In this mode, you need to provide the Tempus-compliant ECO commands on the Certus Client Manager (CCM), which then modifies them to obtain the relevant block-level ECOs (based on the instance on which ECO is performed). The processed ECO command is further sent to the Certus client through the TCL command interface.</p>
+
+<p>The Certus client runs this ECO command and generates an enhanced ECO command for CCM (for example, by appending corner spec data), which CCM then processes. Further, CCM executes this ECO command on all the Tempus Clients first, followed by the Certus Client Manager.</p>
+
+<p><strong>Note:</strong></p>
+<ul><li>The interactive manual ECO does not include support for eval.</li><li>You should not specify more than 1k ECOs to be sourced manually.</li></ul><h3 id="ManualECOOverview-SampleTemplateScript:">Sample Template Script:</h3>
+
+<p><span class="fontgreencadence">
+<p><code>set_distribute_mmmc_mode -eco true -merge_view_definitions<br /></code><code>set_multi_cpu_usage -localCpu 12 -remoteHost 2 -cpuPerRemoteHost 8<br /></code><code>## Settings for Certus start up<br /></code><code>set_eco_opt_mode -distributed_opt_block_restore_file /icd/etsproject3/qor/RAK/LUI/blkRestore.txt<br /></code><code>distribute_read_design -restore_design {save_db_dmmmc_setup_func<br /></code><code>save_db_dmmmc_setup_test} -outdir paradime_Output<br /></code><code>set_multi_cpu_usage -localCpu 12 -remoteHost 3 -cpuPerRemoteHost 8<br /></code><code>start_distributed_eco_clients<br /></code><code>##Tempus Compliant Manual ECO commands<br /></code><code>change_cell -inst TEST_CONTROL_INST/g143 -cell NAND2X2<br /></code><code>add_repeater -cell CLKBUFX2 -name FE_ESOC2_n_206 -term { CPF_ISO_HIER_INST_107/g471/A }<br /></code><code>delete_repeater -inst PM_INST/FE_ESOC76_n_41</code></p>
+
+<p>For details related to Manual ECO commands, refer to the <em>Manual ECO Commands</em> chapter of the <em>Tempus Text Command Reference Manual</em>.&#xa0;</p>
+</span></p>
+
+<p><strong>Related Topics</strong></p>
+<ul><li><a href="Certus_Product_Overview.html">Certus Product Overview</a></li><li><a href="Certus_Template_Scripts.html">Certus Template Scripts</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Manual_ECO.html" id="prev" title="Manual_ECO">Manual_ECO</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

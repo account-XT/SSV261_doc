@@ -1,0 +1,361 @@
+
+<html><head><title>Using CheckSysConf</title>
+<meta name="page_sequence" content="13001000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="jnguyen" />
+<meta name="CreateDate" content="2026-01-11" />
+<meta name="CreateTime" content="1768197412" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Cadence Installation Guide" />
+<meta name="DocTitle" content="Cadence Installation Guide" />
+<meta name="DocType" content="Installation" />
+<meta name="FileTitle" content="Using CheckSysConf" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="install" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-01-11" />
+<meta name="ModifiedTime" content="1768197412" />
+<meta name="NextFile" content="Installing_Products_into_a_New_Hierarchy.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Cadence Shared Tools," />
+<meta name="PrevFile" content="Before_You_Begin_the_Installation.html" />
+<meta name="c_product" content="Installation and Licensing," />
+<meta name="Product" content="Installation and Licensing," />
+<meta name="ProductFamily" content="Installation and Licensing," />
+<meta name="ProductVersion" content="5.0" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Cadence Installation Guide -- Using CheckSysConf" />
+<meta name="Version" content="5.0" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="install35" />
+<meta name="confluence-version" content="7.19.19" />
+<meta name="ecms-plugin-version" content="04.21.016" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="installTOC.html">Contents</a></li><li><a class="prev" href="Before_You_Begin_the_Installation.html" title="Before_You_Begin_the_Installation">Before_You_Begin_the_Installat ...</a></li><li style="float: right;"><a class="viewPrint" href="install.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Installing_Products_into_a_New_Hierarchy.html" title="Installing_Products_into_a_New_Hierarchy">Installing_Products_into_a_New ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Cadence Installation Guide<br />Product Version 5.0, January 2024</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Using CheckSysConf</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    <p class="ppara">CheckSysConf is a tool that verifies whether the machine on which you want to run Cadence tools has the required system configuration and OS patches. This tool is available for&#xa0; LINUX (32-bit and 64-bit) platforms.</p>
+<h1 id="UsingCheckSysConf-CheckSysConfComponents">CheckSysConf Components</h1>
+
+<p>This tool consists of three parts:</p>
+<ul><li><strong>A script</strong>: <code>checkSysConf</code> is a script that performs the checks.</li><li><strong>Data files</strong>: A group of data files that define all the parameters and patches required for a particular release of operating system. The script uses these datafiles to determine whether the machine has the required system configuration and system patches.</li><li><strong>Documentation</strong>: The documentation set consists of the user guide, a README file, and the man pages. The README file and man pages are located in <code>
+      <em>your_inst_dir</em>/doc/check_conf</code>.</li></ul><h2 id="UsingCheckSysConf-CheckSysConfInstallationHierarchy">CheckSysConf Installation Hierarchy</h2>
+
+<p><code>CheckSysConf</code> is installed in the following directory structure:</p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><th class="confluenceTh">Location</th><th class="confluenceTh">Description</th></tr>
+<tr><td class="confluenceTd"><code> <em>your_inst_dir</em>/tools.lnx86  </code></td>
+<td class="confluenceTd">Contains the LINUX script</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>
+            <em>your_inst_dir</em>/doc/check_conf</code></td>
+<td class="confluenceTd" colspan="1">Contains the README file and the man pages</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code> <em>your_inst_dir</em>/share/patchData </code></td>
+<td class="confluenceTd" colspan="1">Contains the data files</td>
+</tr>
+</tbody></table></div>
+<h1 id="UsingCheckSysConf-CheckSysConfSyntax">CheckSysConf Syntax</h1>
+<p class="ppara">The syntax for running <code>CheckSysConf</code> is as follows:</p>
+
+<p><code>checkSysConf <em>release [options]</em>
+  </code></p>
+<p class="ppara">where options can be a combination of one or more of the following:</p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><th class="confluenceTh"><strong>Option</strong></th><th class="confluenceTh"><strong>Description</strong></th></tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">release</pre></td>
+<td class="confluenceTd">Checks an OS configuration and patch list file located at <code>
+            <em>your_inst_dir</em>/share/patchData/platform type/OS/release</code> for the required system configuration and patches for the Cadence product specified in <code>release</code>.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">-c</pre></td>
+<td class="confluenceTd">Checks all existing data files for possible platform/OS conflicts. This option identifies if patches required in one release are known-problem patches in another release.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">-h</pre></td>
+<td class="confluenceTd">Prints the help message.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">-r</pre></td>
+<td class="confluenceTd">Returns the releases supported in the data directory. The output of this option represents the only valid <code>release</code> option.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">-v</pre></td>
+<td class="confluenceTd">Returns the release version of this script.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">-i</pre></td>
+<td class="confluenceTd">Suppresses title and other additional information output.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">-l</pre></td>
+<td class="confluenceTd">Prints the patch data file associated with <code>platform/OS/release</code>.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">-q</pre></td>
+<td class="confluenceTd">Executes the script silently and outputs only <code>PASS</code> or <code>FAIL</code>. This switch will have no effect if used in conjunction with the <code>-l</code> or <code>-p</code> option.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">-d</pre></td>
+<td class="confluenceTd">Provides the patch data from the path specified in the <code>directory</code>. The leading portion of the directory can be any valid path, but the last directory in the path must be named <code>patchData</code>.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">-p </pre></td>
+<td class="confluenceTd">Prints the names of Cadence products that require this patch.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">-noDISPLAY</pre></td>
+<td class="confluenceTd">
+<p>Allows skipping of the display test, even if there is a DISPLAY requirement in the data file. This argument should be used when running the tool on a remote host, where it is not possible to ascertain the display configuration (or it may not even have one). Using the <code>-noDISPLAY</code> argument prevents a false fail in these circumstances.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">--oem</td>
+<td class="confluenceTd">
+<p>force checkSysConf to use OEM datafile</p>
+</td>
+</tr>
+</tbody></table></div>
+<p class="ppara"><br /></p>
+<p class="iiiconImport"><strong>Note:</strong> The output is saved in the <code>/tmp/checkSysConf.&lt;hostname&gt;-&lt;date&gt;.log</code> file.</p>
+<h2 class="h1head1" id="UsingCheckSysConf-Examples">Examples</h2>
+<h3 class="h2head2" id="UsingCheckSysConf-Example1">Example 1</h3>
+<pre class="syxsyntax">checkSysConf &lt;release&gt;</pre><p class="ppara">Determines if this workstation has the proper patches for &lt;release&gt; name.&#xa0; Eg IC23.1 is a release name.</p>
+<h3 class="h2head2" id="UsingCheckSysConf-Example2">Example 2</h3>
+<pre class="syxsyntax">checkSysConf &lt;release&gt; -d &lt;patch Directory&gt;</pre><p class="ppara">Determines if this workstation has the proper patches for &lt;release&gt; based on the patch data files found in the data directory <code>/&lt;installation_dir&gt;/share/patchData</code>. The specified directory must end with the patchData directory, such as IC23.1 -d <code>/home/user/IC231/share/patchData</code>.</p>
+<h3 class="h2head2" id="UsingCheckSysConf-Example3">Example 3</h3>
+<pre class="syxsyntax">checkSysConf &lt;release&gt; -p &lt;patch&gt;</pre><p class="ppara">This command will query the data file to determine which Cadence products require a particular patch. This feature allows users or system administrators to ignore a failure if the indicated product is not in use.&#xa0;&#xa0; -</p>
+<h3 class="h2head2" id="UsingCheckSysConf-Example4">Example 4</h3>
+<pre class="syxsyntax">checkSysConf &lt;release&gt; -q</pre><p class="ppara">Runs the script silently from another script, which verifies the PASS or FAIL output.</p>
+<p class="ppara"><br /></p>
+
+<p>FILES</p>
+
+<p>The data for the platform / OS / patch / release data</p>
+
+<p>is contained in a directory. The default location is</p>
+
+<p>within the Cadence hierarchy at &lt;installation_dir&gt;/share/patchData</p>
+<h1 class="ppara" id="UsingCheckSysConf-CheckSysConfDataFiles">CheckSysConf Data Files</h1>
+<p class="ppara">The data files are the actual files against which the configuration and the patch list are checked. By default, the data files except for LINUX are stored in <code>
+    <em>your_inst_dir</em>/share/patchData</code>. There is a separate directory for each platform type and release. The actual patch data is in a Cadence tool release file, such as IC23.1, containing the minimum required system configuration and patch levels for that Cadence tool release. For example, the data file for the IC23.1 release on Linux is located at <code>
+    <em>your_inst_dir</em>/share/patchData/Linux</code>.</p>
+<p class="ppara">The datafiles for LINUX are stored in <code>
+    <em>your_inst_dir</em>/share/patchData/Linux/architecture/vendor/version/data_file</code></p>
+<p class="ppara">For example, the datafiles for the IC23.1 release on LINUX on all architecture variants are stored in the following locations</p>
+<pre><code>your_inst_dir/share/patchData/Linux/x86_64/redhat/7.0WS/IC23.1<br />your_inst_dir/share/patchData/Linux/x86_64/redhat/8.0WS/IC23.1<br />your_inst_dir/share/patchData/Linux/ppc64le/redhat/7.0WS/IC23.1<br />your_inst_dir/share/patchData/Linux/ppc64le/redhat/8.0WS/IC23.1<br />your_inst_dir/share/patchData/Linux/x86_64/suse/12/IC23.1<br />your_inst_dir/share/patchData/Linux/x86_64/suse/15/IC23.1<br /><br /></code></pre><h2 class="h1head1" id="UsingCheckSysConf-DataFileFormat">Data File Format</h2>
+<p class="ppara">The data file format for the <code>checkSysConf</code> script is different for the LINUX, HP-UX and AIX platforms.</p>
+<p class="ppara">The following apply to all platforms:</p>
+<ul><li>Any line that starts with a # is a comment.</li><li>The first line contains the platform name, operating system name, and product release name for which the data file is meant. Note that it is a commented line.</li><li>Each field within a record line must have at least one space separating it from the next field.</li><li>The first field must be one of these keywords: <code>BANNER</code>, <code>MEMORY</code>, <code>SWAP</code>, or <code>DISPLAY</code>. There are other keywords, which are specific to platform, such as <code>HARDWARE</code>, <code>LOCALE</code>, <code>GRAPHIC-PATCH</code>, <code>PATCH</code>, <code>NOT-PATCH</code> (or <code>FILESET</code>, <code>NOT-FILESET</code> for the IBM platform), and <code>PACKAGE</code> for LINUX. The keywords can be divided into two categories:<ul><li class="bsbulletsub">
+<p>General: which apply to all platform types. The following table describes the general keywords:</p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><th class="confluenceTh"><strong>Keyword</strong></th><th class="confluenceTh"><strong>Description</strong></th></tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">BANNER</pre></td>
+<td class="confluenceTd">For comments that are to be printed. The script prints out all information between the quotation marks. You should not use quotation marks as part of the comments.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">MEMORY &amp; SWAP</pre></td>
+<td class="confluenceTd">For representing value records. The second field on the line must be a number. The implied units are megabytes.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">DISPLAY</pre></td>
+<td class="confluenceTd">For checking the display environment of the system. There are four fields for this key: depth (the depth of the visual, such as 8 planes, 24 planes), Class (the class of the visual, such as PseudoColor), Product list ( the list of product(s) that requires this check), <span class="sa"> and for Linux and AIX X-Render requirement (if X-render is required by the product</span> <span class="sc">)</span>.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">EXIT</pre></td>
+<td class="confluenceTd">To be used directly after a BANNER command, so that checksysconf does no further reporting after printing the contents of the banner. This is to prevent important information held in the banner from scrolling off the top of the screen.</td>
+</tr>
+</tbody></table></div>
+</li></ul></li></ul><ul><li style="list-style-type: none;background-image: none;"><ul><li>
+<p>Platform specific. These are described in the following table:</p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col style="width: 125.0px;" /><col style="width: 897.0px;" /></colgroup><tbody><tr><th class="confluenceTh"><strong>Keyword</strong></th><th class="confluenceTh"><strong>Description</strong></th></tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">PATCH</pre></td>
+<td class="confluenceTd">For required patches to be checked for a particular version excluding the patches for the GRAPHIC card. The keyword is used in Solaris and HP-UX data files.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">NOT-PATCH</pre></td>
+<td class="confluenceTd">For patches that need to be removed. The keyword is used in Solaris and HP-UX data files.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">PATCH, APAR</pre></td>
+<td class="confluenceTd">Patch indicators and require additional fields representing the APARA numbers that need to be installed. The keyword is used in AIX data files.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">FILESET</pre></td>
+<td class="confluenceTd">For required OS filesets for the IBM platform.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">NOT-FILESET</pre></td>
+<td class="confluenceTd">For OS filesets that need to be removed.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">APAR</pre></td>
+<td class="confluenceTd">For required OS APARs for IBM platform.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">PACKAGE</pre></td>
+<td class="confluenceTd">For required LINUX packages, excluding patches for GRAPHIC, HARDWARE, and LOCALE.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">NOT-PACKAGE</pre></td>
+<td class="confluenceTd">For packages or package versions that are incompatible with the software. A specific version can be specified.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">GRAPHIC-PATCH</pre></td>
+<td class="confluenceTd">For patches specific to a certain graphic card. When the keyword is GRAPHIC-PATCH, the PRODUCT field must contain a known graphic type. These are in the script (more can be added) and currently are: PGX32, CREATOR, ELITE, SX, PGX, CG, and BW.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">HARDWARE</pre></td>
+<td class="confluenceTd">For patches specific to a certain hardware model.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">LOCALE</pre></td>
+<td class="confluenceTd">For LOCALE patches.</td>
+</tr>
+<tr><td class="confluenceTd"><pre class="cbcellbody">BUNDLE</pre></td>
+<td class="confluenceTd">Present in HP-UX datafiles. It enables product groups to specify a minimum set of software bundles installed on a HP system.</td>
+</tr>
+</tbody></table></div>
+</li></ul></li></ul><p class="nonote"><strong>Note</strong>: The order of the keyword entries in the file is not important. Remember that there can be only one keyword rule per line.</p>
+<h2 class="h1head1" id="UsingCheckSysConf-SampleDataFiles">Sample Data Files</h2>
+<h3 class="h2head2" id="UsingCheckSysConf-RedHat7">Red Hat 7</h3>
+
+<p>For RedHat Linux systems the keywords include a KERNEL entry for determining the specific kernel version in use since this is not always a package but rather a custom-built component.</p>
+<div class="table-wrap"><table bgcolor="#eeeeee" class="wrapped confluenceTable"><tbody><tr><td class="confluenceTd"><pre><br /></pre>
+<p># IC23.1 PM2023 Data File<br /># RHEL7.4 c05.03 X86_64 data-file<br /># Cadence IT standard Version 1.4<br /># Red Hat Enterprise Linux / CentOS Linux 7.4 and all above minor 7.X versions.</p>
+<pre><br /></pre>
+<p>MEMORY 4096<br />SWAP 4096<br />XKEYBOARD True<br />WRITABLE-FILE /dev/shm &quot;edpSharedMemory&quot;</p>
+<pre><br /></pre>
+<p>#KEY &#xa0; &#xa0; &#xa0; &#xa0;MAJOR &#xa0;MINOR<br />OSVERSION &#xa0; 7 &#xa0; &#xa0; &#xa0;4</p>
+<pre><br /></pre>
+<p>#KEY &#xa0; &#xa0; &#xa0; &#xa0;MIN &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;TITLE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; PRODUCT<br />KERNEL &#xa0; &#xa0; &#xa0;3.10.0-693 &#xa0; &#xa0; &#xa0; &#xa0; &quot;Kernel Version&quot; &#xa0; &#xa0;(All_Products)</p>
+<pre><br /></pre>
+<p>#-------------------------------------<br /># 64-bit system libraries requirements<br />#-------------------------------------</p>
+<pre><br /></pre>
+<p>#KEY &#xa0; &#xa0;PACKAGE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MIN &#xa0; &#xa0; &#xa0; &#xa0; TITLE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; REQUIRED BY &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;ARCHITECTURE<br />PACKAGE glibc-2.17 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;196.el7 &#xa0; &#xa0; &quot;glibc&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (All_Products) &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE elfutils-libelf-0.168 &#xa0; 8.el7 &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libelf.so" rel="nofollow">libelf.so</a>.1&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (All_Products) &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE ksh-20120801 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;34.el7 &#xa0; &#xa0; &#xa0;&quot;ksh&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (cdnWrapper) &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE redhat-lsb-4.1 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;27.el7 &#xa0; &#xa0; &#xa0;&quot;lsb_release command&quot; &#xa0; (FlexNet cdnsCompat) x86_64<br />PACKAGE xterm-295 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 3.el7 &#xa0; &#xa0; &#xa0; &quot;xterm command&quot; &#xa0; &#xa0; &#xa0; &#xa0; (iscape) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />&#xa0;&#xa0;<br />#KEY &#xa0; &#xa0;PACKAGE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MIN &#xa0; &#xa0; &#xa0; &#xa0; TITLE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; REQUIRED BY &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;ARCHITECTURE<br />PACKAGE mesa-libGL-17.0.1 &#xa0; &#xa0; &#xa0; 6.20170307 &#xa0;&quot;<a class="external-link" href="https://libGL.so" rel="nofollow">libGL.so</a>.1&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE mesa-libGLU-9.0.0 &#xa0; &#xa0; &#xa0; 4.el7 &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libGLU.so" rel="nofollow">libGLU.so</a>.1&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE motif-2.3.4 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 12.el7_4 &#xa0; &#xa0;&quot;<a class="external-link" href="https://libXm.so" rel="nofollow">libXm.so</a>.4&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE libXp-1.0.2 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 2.1.el7 &#xa0; &#xa0; &quot;<a class="external-link" href="https://libXp.so" rel="nofollow">libXp.so</a>.6&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE libpng12-1.2.50 &#xa0; &#xa0; &#xa0; &#xa0; 10.el7 &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libpng12.so" rel="nofollow">libpng12.so</a>.0 <a class="external-link" href="https://libpng.so" rel="nofollow">libpng.so</a>.3&quot; (VIRTUOSO) &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE libpng-1.5.13 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 7.el7_2 &#xa0; &#xa0; &quot;<a class="external-link" href="https://libpng15.so" rel="nofollow">libpng15.so</a>.15&quot; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE libjpeg-turbo-1.2.90 &#xa0; &#xa0;5.el7 &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libjpeg.so" rel="nofollow">libjpeg.so</a>.62&quot; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE expat-2.1.0 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 10.el7_3 &#xa0; &#xa0;&quot;<a class="external-link" href="https://libexpat.so" rel="nofollow">libexpat.so</a>.1&quot; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE libXtst-1.2.3 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 1.el7 &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libXtst.so" rel="nofollow">libXtst.so</a>.6&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />#PACKAGE readline-6.2 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 10.el7 &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libreadline.so" rel="nofollow">libreadline.so</a>.6 <a class="external-link" href="https://libhistory.so" rel="nofollow">libhistory.so</a>.6&quot; (VIRTUOSO) x86_64<br />#PACKAGE ncurses-libs-5.9 &#xa0; &#xa0; &#xa0; 13.20130511.el7 &quot;<a class="external-link" href="https://libncurses.so" rel="nofollow">libncurses.so</a>.5&quot; &#xa0; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE glibc-devel-2.17 &#xa0; &#xa0; &#xa0; &#xa0;196.el7 &#xa0; &#xa0; &quot;glibc header files&quot; &#xa0; &#xa0;(GCC) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;x86_64</p>
+<pre><br /></pre>
+<p>#-------------------------------------<br /># 64-bit system libraries requirements - specific to Virtuoso<br />#-------------------------------------</p>
+<pre><br /></pre>
+<p>#KEY &#xa0; &#xa0;PACKAGE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MIN &#xa0; &#xa0; &#xa0; &#xa0; TITLE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; REQUIRED BY &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;ARCHITECTURE<br /># The GDB/pstack package is for crash detector utility (RH 7)<br />PACKAGE gdb-7.6.1 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 100 &#xa0; &#xa0; &#xa0; &#xa0; &quot;GNU debugger&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE libXScrnSaver-1.2.2 &#xa0; &#xa0; 6.1.el7 &#xa0; &#xa0; &quot;libXScrnSaver&quot; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE apr-1.4.8 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 3 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;APR library 64 bits&quot; &#xa0; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE apr-util-1.5.2 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;6 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;APR Utility library 64 bits&quot; (VIRTUOSO) &#xa0; &#xa0; x86_64<br />PACKAGE compat-db47-4.7.25 &#xa0; &#xa0; &#xa0;28 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;&quot;libdb-4.7&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE xorg-x11-server-Xvfb-1.19.3 11 &#xa0; &#xa0; &#xa0;&quot;Xvfb&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br /># Check for Mesa drivers DFII 3D Viewer<br />PACKAGE mesa-dri-drivers-17.2.3 8.20171019 &#xa0;&quot;Mesa drivers&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE openssl-devel-1.0.2k &#xa0; &#xa0;8 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;OpenSSL library&quot; &#xa0; &#xa0; &#xa0; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE libXext-1.3.3 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 3 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libXext.so" rel="nofollow">libXext.so</a>.6&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE libxkbcommon-x11-0.7.1 &#xa0;1 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libxkbcommon-x11.so" rel="nofollow">libxkbcommon-x11.so</a>.0&quot; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE xcb-util-image-0.4.0 &#xa0; &#xa0;2 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libxcb-image.so" rel="nofollow">libxcb-image.so</a>.0&quot; &#xa0; &#xa0; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE xcb-util-keysyms-0.4.0 &#xa0;1 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libxcb-keysyms.so" rel="nofollow">libxcb-keysyms.so</a>.1&quot; &#xa0; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE xcb-util-renderutil-0.3.9 3 &#xa0; &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libxcb-render-util.so" rel="nofollow">libxcb-render-util.so</a>.0&quot; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE xcb-util-wm-0.4.1 &#xa0; &#xa0; &#xa0; 5 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libxcb-icccm.so" rel="nofollow">libxcb-icccm.so</a>.4&quot; &#xa0; &#xa0; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64</p>
+<pre><br /></pre>
+<p>#--------------------<br /># Display requirement<br />#--------------------</p>
+<pre><br /></pre>
+<p>#KEY &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;DEPTH &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; CLASS &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;PRODUCTS<br />DISPLAY &#xa0; &#xa0; &#xa0; &#xa0; 8 planes &#xa0; &#xa0; &#xa0; &#xa0;PseudoColor &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(DFII)</p>
+<pre><code> </code></pre></td>
+</tr>
+</tbody></table></div>
+
+<p><br /></p>
+<h3 class="h2head2" id="UsingCheckSysConf-RedHat8">Red Hat 8</h3>
+
+<p>For RedHat Linux systems the keywords include a KERNEL entry for determining the specific kernel version in use since this is not always a package but rather a custom-built component.</p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd">
+<p># IC23.1 PM2023 Data File<br /># RHEL8.1 c01.00 X86_64 data-file<br /># Cadence IT standard Version 1.1<br /># Red Hat Enterprise Linux / CentOS Linux 8.1 and all above minor 7.X versions.</p>
+
+<p>MEMORY 4096<br />SWAP 4096<br />XKEYBOARD True<br />WRITABLE-FILE /dev/shm &quot;edpSharedMemory&quot;</p>
+
+<p>#KEY &#xa0; &#xa0; &#xa0; &#xa0;MAJOR &#xa0;MINOR<br />OSVERSION &#xa0; 8 &#xa0; &#xa0; &#xa0;1</p>
+
+<p>#KEY &#xa0; &#xa0; &#xa0; &#xa0;MIN &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;TITLE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; PRODUCT<br />KERNEL &#xa0; &#xa0; &#xa0;4.18.0-147 &#xa0; &#xa0; &#xa0; &#xa0; &quot;Kernel Version&quot; &#xa0; &#xa0;(All_Products)</p>
+
+<p>#-------------------------------------<br /># 64-bit system libraries requirements<br />#-------------------------------------</p>
+
+<p>#KEY &#xa0; &#xa0;PACKAGE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MIN &#xa0; &#xa0; &#xa0; &#xa0; TITLE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; REQUIRED BY &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;ARCHITECTURE<br />PACKAGE glibc-2.28 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;72.el8_1.1 &#xa0;&quot;glibc&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (All_Products) &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE elfutils-libelf-0.176 &#xa0; 5.el8 &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libelf.so" rel="nofollow">libelf.so</a>.1&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (All_Products) &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE ksh-20120801 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;253.el8_1 &#xa0; &quot;ksh&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (cdnWrapper) &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE redhat-lsb-core-4.1 &#xa0; &#xa0; 47.el8 &#xa0; &#xa0; &#xa0;&quot;lsb_release command&quot; &#xa0; (FlexNet cdnsCompat) x86_64<br />PACKAGE xterm-331 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 1.el8 &#xa0; &#xa0; &#xa0; &quot;xterm command&quot; &#xa0; &#xa0; &#xa0; &#xa0; (iscape) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />&#xa0;&#xa0;<br />#KEY &#xa0; &#xa0;PACKAGE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MIN &#xa0; &#xa0; &#xa0; &#xa0; TITLE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; REQUIRED BY &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;ARCHITECTURE<br />PACKAGE mesa-libGL-19.1.4 &#xa0; &#xa0; &#xa0; 3.el8_1 &#xa0; &#xa0; &quot;<a class="external-link" href="https://libGL.so" rel="nofollow">libGL.so</a>.1&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE libglvnd-glx-1.0.1 &#xa0; &#xa0; &#xa0;0.9.git5baa1e5.el8 &quot;<a class="external-link" href="https://libGL.so" rel="nofollow">libGL.so</a>.1&quot; &#xa0; &#xa0; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE mesa-libGLU-9.0.0 &#xa0; &#xa0; &#xa0; 15.el8 &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libGLU.so" rel="nofollow">libGLU.so</a>.1&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE motif-2.3.4 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 16.el8 &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libXm.so" rel="nofollow">libXm.so</a>.4&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE libXp-1.0.3 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 3.el8 &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libXp.so" rel="nofollow">libXp.so</a>.6&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE libpng12-1.2.57 &#xa0; &#xa0; &#xa0; &#xa0; 5.el8 &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libpng12.so" rel="nofollow">libpng12.so</a>.0&quot; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE libpng-1.6.34 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 5.el8 &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libpng15.so" rel="nofollow">libpng15.so</a>.15&quot; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE libjpeg-turbo-1.5.3 &#xa0; &#xa0; 10.el8 &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libjpeg.so" rel="nofollow">libjpeg.so</a>.62&quot; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE expat-2.2.5 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 3.el8 &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libexpat.so" rel="nofollow">libexpat.so</a>.1&quot; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE libXtst-1.2.3 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 7.el8 &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libXtst.so" rel="nofollow">libXtst.so</a>.6&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />#PACKAGE readline-7.0 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 10.el8 &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libreadline.so" rel="nofollow">libreadline.so</a>.7 <a class="external-link" href="https://libhistory.so" rel="nofollow">libhistory.so</a>.7&quot; (VIRTUOSO) x86_64<br />#PACKAGE ncurses-compat-libs-6.1 7.20180224 &quot;<a class="external-link" href="https://libncurses.so" rel="nofollow">libncurses.so</a>.5&quot; &#xa0; &#xa0; &#xa0; (VIRTUOSO) x86_64<br />PACKAGE glibc-devel-2.28 &#xa0; &#xa0; &#xa0; &#xa0;72.el8_1.1 &#xa0;&quot;glibc header files&quot; &#xa0; &#xa0;(GCC) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;x86_64</p>
+
+<p>#-------------------------------------<br /># 64-bit system libraries requirements - specific to Virtuoso<br />#-------------------------------------</p>
+
+<p>#KEY &#xa0; &#xa0;PACKAGE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MIN &#xa0; &#xa0; &#xa0; &#xa0; TITLE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; REQUIRED BY &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;ARCHITECTURE<br /># The GDB/pstack package is for crash detector utility<br />PACKAGE gdb-8.2 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 6 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;GNU debugger&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE libXScrnSaver-1.2.3 &#xa0; &#xa0; 1 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;libXScrnSaver&quot; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE apr-1.6.3 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 9 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;APR library 64 bits&quot; &#xa0; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE apr-util-1.6.1 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;6 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;APR Utility library 64 bits&quot;(VIRTUOSO) &#xa0; &#xa0; &#xa0;x86_64<br />PACKAGE xorg-x11-server-Xvfb-1.20.3 11 &#xa0; &#xa0; &#xa0;&quot;Xvfb&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br /># Check for Mesa drivers DFII 3D Viewer<br />PACKAGE mesa-dri-drivers-19.1.4 3 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;Mesa drivers&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE openssl-devel-1.1.1c &#xa0; &#xa0;2 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;OpenSSL library&quot; &#xa0; &#xa0; &#xa0; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br /># MISSING compat<br />PACKAGE libXext-1.3.3 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 9 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libXext.so" rel="nofollow">libXext.so</a>.6&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE libxkbcommon-x11-0.8.2 &#xa0;1 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libxkbcommon-x11.so" rel="nofollow">libxkbcommon-x11.so</a>.0&quot; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE xcb-util-image-0.4.0 &#xa0; &#xa0;9 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libxcb-image.so" rel="nofollow">libxcb-image.so</a>.0&quot; &#xa0; &#xa0; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE xcb-util-keysyms-0.4.0 &#xa0;7 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libxcb-keysyms.so" rel="nofollow">libxcb-keysyms.so</a>.1&quot; &#xa0; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE xcb-util-renderutil-0.3.9 10 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libxcb-render-util.so" rel="nofollow">libxcb-render-util.so</a>.0&quot; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; x86_64<br />PACKAGE xcb-util-wm-0.4.1 &#xa0; &#xa0; &#xa0; 12 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libxcb-icccm.so" rel="nofollow">libxcb-icccm.so</a>.4&quot; &#xa0; &#xa0; (VIRTUOSO) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; x86_64</p>
+
+<p>#--------------------<br /># Display requirement<br />#--------------------</p>
+
+<p>#KEY &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;DEPTH &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; CLASS &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;PRODUCTS<br />DISPLAY &#xa0; &#xa0; &#xa0; &#xa0; 8 planes &#xa0; &#xa0; &#xa0; &#xa0;PseudoColor &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(DFII)</p>
+<pre><br /></pre></td>
+</tr>
+</tbody></table></div>
+
+<p><br /></p>
+<h3 class="h2head2" id="UsingCheckSysConf-Suse12">Suse 12</h3>
+
+<p>For Suse Linux systems the keywords include a KERNEL entry for determining the specific kernel version in use since this is not always a package but rather a custom-built component.</p>
+<div class="table-wrap"><table class="confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd">
+<p># IC23.1 PM2023 Data File<br /># SLES12_SP3 c04.00 X86_64 data-file<br /># Cadence IT standard version 1.0 01/22/2019<br /># SUSE Enterprise Linux 12 SP3 and all above Service Pack releases.</p>
+
+<p>MEMORY 4096<br />SWAP 4096<br />XKEYBOARD True<br />WRITABLE-FILE /dev/shm &quot;edpSharedMemory&quot;</p>
+
+<p>#KEY &#xa0; &#xa0; &#xa0; &#xa0;MIN &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;TITLE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; PRODUCT<br />KERNEL &#xa0; &#xa0; &#xa0;4.4.73-5 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;Kernel Version&quot; &#xa0; &#xa0;(All_Products)</p>
+
+<p>#-------------------------------------<br /># 64-bit system libraries requirements<br />#-------------------------------------</p>
+
+<p>#KEY &#xa0; &#xa0;PACKAGE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MIN &#xa0; &#xa0; &#xa0; &#xa0; TITLE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;REQUIRED BY<br />PACKAGE glibc-2.22 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;61.3 &#xa0; &#xa0; &#xa0; &#xa0;&quot;glibc&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(All_Products)<br />PACKAGE libelf1-0.158 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 6.1 &#xa0; &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libelf.so" rel="nofollow">libelf.so</a>.1&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(All_Products)<br />PACKAGE mksh-50f &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;5.1 &#xa0; &#xa0; &#xa0; &#xa0; &quot;ksh&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(cdnWrapper)<br />PACKAGE lsb-release-2.0 &#xa0; &#xa0; &#xa0; &#xa0; 28.1 &#xa0; &#xa0; &#xa0; &#xa0;&quot;lsb_release command&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(FlexNet cdnsCompat)<br />PACKAGE xterm-308 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 3.8 &#xa0; &#xa0; &#xa0; &#xa0; &quot;xterm command&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(iscape)</p>
+
+<p>#KEY &#xa0; &#xa0;PACKAGE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MIN &#xa0; &#xa0; &#xa0; &#xa0; TITLE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;REQUIRED BY<br />PACKAGE libelf0-0.8.13 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;18.64 &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libelf.so" rel="nofollow">libelf.so</a>.0&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(All_Products)<br />PACKAGE Mesa-libGL1-17.0.5 &#xa0; &#xa0; &#xa0;116.6 &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libGL.so" rel="nofollow">libGL.so</a>.1&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO)<br />PACKAGE libGLU1-9.0.0 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 18.1 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libGLU.so" rel="nofollow">libGLU.so</a>.1&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO)<br />PACKAGE libXm4-2.3.4 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;4.15 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libXm.so" rel="nofollow">libXm.so</a>.4&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO)<br />PACKAGE libXp6-1.0.2 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;3.58 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libXp.so" rel="nofollow">libXp.so</a>.6&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO)<br />PACKAGE libpng12-0-1.2.50 &#xa0; &#xa0; &#xa0; 19.1 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libpng12.so" rel="nofollow">libpng12.so</a>.0&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO)<br />PACKAGE libjpeg62-62.1.0 &#xa0; &#xa0; &#xa0; &#xa0;30.1 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libjpeg.so" rel="nofollow">libjpeg.so</a>.62&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO)<br />#PACKAGE libreadline6-6.3 &#xa0; &#xa0; &#xa0; 82.1 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libreadline.so" rel="nofollow">libreadline.so</a>.6 <a class="external-link" href="https://libhistory.so" rel="nofollow">libhistory.so</a>.6&quot; (VIRTUOSO)<br />#PACKAGE libncurses5-5.9 &#xa0; &#xa0; &#xa0; &#xa0;40.124 &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libncurses.so" rel="nofollow">libncurses.so</a>.5&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO)<br />PACKAGE termcap-2.0.8 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 1042.61 &#xa0; &#xa0; &quot;<a class="external-link" href="https://libcurses.so" rel="nofollow">libcurses.so</a>.1&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO)<br />PACKAGE libgdbm4-1.10 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 9.70 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libgdbm.so" rel="nofollow">libgdbm.so</a>.4&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO)<br />PACKAGE zlib-devel-1.2.8 &#xa0; &#xa0; &#xa0; &#xa0;11.1 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libz.so" rel="nofollow">libz.so</a>&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO)<br />PACKAGE libexpat1-2.1.0 &#xa0; &#xa0; &#xa0; &#xa0; 20.2 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libexpat.so" rel="nofollow">libexpat.so</a>.1&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO)<br />PACKAGE libXtst6-1.2.2 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;7.1 &#xa0; &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libXtst.so" rel="nofollow">libXtst.so</a>.6&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO)<br />PACKAGE glibc-devel-2.22 &#xa0; &#xa0; &#xa0; &#xa0;61.3 &#xa0; &#xa0; &#xa0; &#xa0;&quot;glibc header files&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (GCC)</p>
+
+<p>#-------------------------------------<br /># 64-bit system libraries requirements - specific to Virtuoso<br />#-------------------------------------</p>
+
+<p>#KEY &#xa0; &#xa0;PACKAGE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MIN &#xa0; &#xa0; &#xa0; &#xa0; TITLE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;REQUIRED BY<br />PACKAGE libapr-util1-1.5.3 &#xa0; &#xa0; &#xa0;1.77 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libaprutil-1.so" rel="nofollow">libaprutil-1.so</a>.0&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO)<br />PACKAGE gdb-8.0 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 1.9 &#xa0; &#xa0; &#xa0; &#xa0; &quot;gdb&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO)<br />PACKAGE libopenssl1_0_0-1.0.2j &#xa0;59.1 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libcrypto.so" rel="nofollow">libcrypto.so</a>.1.0.0&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO)<br />PACKAGE libdb-4_8-4.8.30 &#xa0; &#xa0; &#xa0; &#xa0;27.206 &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libdb-4.8.so" rel="nofollow">libdb-4.8.so</a>&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO)</p>
+
+<p>PACKAGE libXext6-1.3.2 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;3.61 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libXext.so" rel="nofollow">libXext.so</a>.6&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO)<br />PACKAGE libxkbcommon-x11-0-0.4.1 1.9 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libxkbcommon-x11.so" rel="nofollow">libxkbcommon-x11.so</a>.0&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO)<br />PACKAGE libxcb-image0-0.3.9 &#xa0; &#xa0; 8.60 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libxcb-image.so" rel="nofollow">libxcb-image.so</a>.0&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO)<br />PACKAGE libxcb-keysyms1-0.3.9 &#xa0; 8.54 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libxcb-keysyms.so" rel="nofollow">libxcb-keysyms.so</a>.1&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO)<br />PACKAGE libxcb-render-util0-0.3.8 8.52 &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libxcb-render-util.so" rel="nofollow">libxcb-render-util.so</a>.0&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO)<br />PACKAGE libxcb-icccm4-0.4.0 &#xa0; &#xa0; 1.16 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libxcb-icccm.so" rel="nofollow">libxcb-icccm.so</a>.4&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO)</p>
+
+<p>#--------------------<br /># Display requirement<br />#--------------------</p>
+
+<p>#KEY &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;DEPTH &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; CLASS &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;PRODUCTS<br />DISPLAY &#xa0; &#xa0; &#xa0; &#xa0; 8 planes &#xa0; &#xa0; &#xa0; &#xa0;PseudoColor &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(DFII)</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><br /></p>
+<h3 class="h2head2" id="UsingCheckSysConf-Suse15">Suse 15</h3>
+
+<p>For Suse Linux systems the keywords include a KERNEL entry for determining the specific kernel version in use since this is not always a package but rather a custom-built component.</p>
+<div class="table-wrap"><table class="confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd">
+<p># IC23.1 PM2023 Data File<br /># SLES15_SP5 c03.00 X86_64 data-file<br /># Cadence IT standard Version 1.0<br /># SUSE Enterprise Linux 15 SP2 and all above Service Pack releases.</p>
+
+<p>MEMORY 4096<br />SWAP 4096<br />XKEYBOARD True<br />WRITABLE-FILE /dev/shm &quot;edpSharedMemory&quot;</p>
+
+<p>#KEY &#xa0; &#xa0; &#xa0; &#xa0;MIN &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;TITLE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; PRODUCT<br />KERNEL &#xa0; &#xa0; &#xa0;5.3.18-24.64 &#xa0; &#xa0; &#xa0; &quot;Kernel Version&quot; &#xa0; &#xa0;(All_Products)</p>
+
+<p>#-------------------------------------<br /># 64-bit system libraries requirements<br />#-------------------------------------</p>
+
+<p>#KEY &#xa0; &#xa0;PACKAGE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MIN &#xa0; &#xa0; &#xa0; &#xa0; TITLE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; REQUIRED BY<br />PACKAGE glibc-2.26 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;13.56.1 &#xa0; &#xa0; &quot;glibc&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (All_Products)<br />PACKAGE libelf1-0.168 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 4.5.3 &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libelf.so" rel="nofollow">libelf.so</a>.1&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (All_Products)<br />PACKAGE mksh-56c &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;1.10 &#xa0; &#xa0; &#xa0; &#xa0;&quot;ksh&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (cdnWrapper)<br />PACKAGE lsb-release-3.1 &#xa0; &#xa0; &#xa0; &#xa0; 1.16 &#xa0; &#xa0; &#xa0; &#xa0;&quot;lsb_release command&quot; &#xa0; (FlexNet cdnsCompat)<br />PACKAGE xterm-330 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 9.1 &#xa0; &#xa0; &#xa0; &#xa0; &quot;xterm command&quot; &#xa0; &#xa0; &#xa0; &#xa0; (iscape)</p>
+
+<p>#KEY &#xa0; &#xa0;PACKAGE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MIN &#xa0; &#xa0; &#xa0; &#xa0; TITLE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; REQUIRED BY<br />PACKAGE Mesa-libGL1-19.3.4 &#xa0; &#xa0; &#xa0;45.23 &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libGL.so" rel="nofollow">libGL.so</a>.1&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO)<br />PACKAGE libGLU1-9.0.0 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 8.45 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libGLU.so" rel="nofollow">libGLU.so</a>.1&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO)<br />PACKAGE libXm4-2.3.4 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;1.33 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libXm.so" rel="nofollow">libXm.so</a>.4&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO)<br />PACKAGE libXp6-1.0.3 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;1.24 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libXp.so" rel="nofollow">libXp.so</a>.6&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO)<br />PACKAGE libpng12-0-1.2.57 &#xa0; &#xa0; &#xa0; 2.18 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libpng12.so" rel="nofollow">libpng12.so</a>.0&quot; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO)<br />PACKAGE libjpeg62-62.2.0 &#xa0; &#xa0; &#xa0; &#xa0;5.15.7 &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libjpeg.so" rel="nofollow">libjpeg.so</a>.62&quot; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO)<br />#PACKAGE libreadline7-7.0 &#xa0; &#xa0; &#xa0; 9.14.1 &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libreadline.so" rel="nofollow">libreadline.so</a>.7 <a class="external-link" href="https://libhistory.so" rel="nofollow">libhistory.so</a>.7&quot; (VIRTUOSO)<br />#PACKAGE libncurses5-6.1 &#xa0; &#xa0; &#xa0; &#xa0;5.6.2 &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libncurses.so" rel="nofollow">libncurses.so</a>.5&quot; &#xa0; &#xa0; &#xa0; (VIRTUOSO)<br />PACKAGE termcap-2.0.8 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 1026.33 &#xa0; &#xa0; &quot;<a class="external-link" href="https://libcurses.so" rel="nofollow">libcurses.so</a>.1&quot; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO)<br />PACKAGE libgdbm4-1.12 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 1.418 &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libgdbm.so" rel="nofollow">libgdbm.so</a>.4&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO)<br />PACKAGE zlib-devel-1.2.11 &#xa0; &#xa0; &#xa0; 3.21.1 &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libz.so" rel="nofollow">libz.so</a>&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO)<br />PACKAGE libexpat1-2.2.5 &#xa0; &#xa0; &#xa0; &#xa0; 3.6.1 &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libexpat.so" rel="nofollow">libexpat.so</a>.1&quot; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO)<br />PACKAGE libXtst6-1.2.3 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;1.24 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libXtst.so" rel="nofollow">libXtst.so</a>.6&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO)<br />PACKAGE libapr-util1-1.6.1 &#xa0; &#xa0; &#xa0;10.21 &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libaprutil-1.so" rel="nofollow">libaprutil-1.so</a>.0&quot; &#xa0; &#xa0; (VIRTUOSO)<br />PACKAGE glibc-devel-2.26 &#xa0; &#xa0; &#xa0; &#xa0;13.56.1 &#xa0; &#xa0; &quot;glibc header files&quot; &#xa0; &#xa0;(GCC)</p>
+
+<p>#-------------------------------------<br /># 64-bit system libraries requirements - specific to Virtuoso<br />#-------------------------------------</p>
+
+<p>#KEY &#xa0; &#xa0;PACKAGE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; MIN &#xa0; &#xa0; &#xa0; &#xa0; TITLE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; REQUIRED BY<br />PACKAGE gdb-8.3.1 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;GNU debugger&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO)<br />PACKAGE xorg-x11-server-1.20.3 &#xa0;0 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;Xorg X server&quot; &#xa0; &#xa0; &#xa0; &#xa0; (VIRTUOSO)<br />PACKAGE libopenssl1_0_0-1.0.2p &#xa0;0 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libcrypto.so" rel="nofollow">libcrypto.so</a>.1.0.0 <a class="external-link" href="https://libssl.so" rel="nofollow">libssl.so</a>.1.0.0&quot; (VIRTUOSO)<br /># compat<br />PACKAGE libdb-4_8-4.8.30 &#xa0; &#xa0; &#xa0; &#xa0;0 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &quot;<a class="external-link" href="https://libdb-4.8.so" rel="nofollow">libdb-4.8.so</a>&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO)<br />PACKAGE libXext6-1.3.3 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;1.30 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libXext.so" rel="nofollow">libXext.so</a>.6&quot; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(VIRTUOSO)<br />PACKAGE libxkbcommon-x11-0-0.8.2 3.3.1 &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libxkbcommon-x11.so" rel="nofollow">libxkbcommon-x11.so</a>.0&quot; (VIRTUOSO)<br />PACKAGE libxcb-image0-0.4.0 &#xa0; &#xa0; 1.23 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libxcb-image.so" rel="nofollow">libxcb-image.so</a>.0&quot; &#xa0; &#xa0; (VIRTUOSO)<br />PACKAGE libxcb-keysyms1-0.4.0 &#xa0; 1.23 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libxcb-keysyms.so" rel="nofollow">libxcb-keysyms.so</a>.1&quot; &#xa0; (VIRTUOSO)<br />PACKAGE libxcb-render-util0-0.3.9 1.23 &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libxcb-render-util.so" rel="nofollow">libxcb-render-util.so</a>.0&quot; (VIRTUOSO)<br />PACKAGE libxcb-icccm4-0.4.1 &#xa0; &#xa0; 1.24 &#xa0; &#xa0; &#xa0; &#xa0;&quot;<a class="external-link" href="https://libxcb-icccm.so" rel="nofollow">libxcb-icccm.so</a>.4&quot; &#xa0; &#xa0; (VIRTUOSO)</p>
+
+<p>#--------------------<br /># Display requirement<br />#--------------------</p>
+
+<p>#KEY &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;DEPTH &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; CLASS &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;PRODUCTS<br />DISPLAY &#xa0; &#xa0; &#xa0; &#xa0; 8 planes &#xa0; &#xa0; &#xa0; &#xa0;PseudoColor &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(DFII)</p>
+</td>
+</tr>
+</tbody></table></div>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Before_You_Begin_the_Installation.html" id="prev" title="Before_You_Begin_the_Installation">Before_You_Begin_the_Installat ...</a></em></b><b><em><a href="Installing_Products_into_a_New_Hierarchy.html" id="nex" title="Installing_Products_into_a_New_Hierarchy">Installing_Products_into_a_New ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

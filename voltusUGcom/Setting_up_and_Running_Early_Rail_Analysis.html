@@ -1,0 +1,187 @@
+
+<html><head><title>Setting up and Running Early Rail Analysis</title>
+<meta name="page_sequence" content="21005000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666127" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Setting up and Running Early Rail Analysis" />
+<meta name="Keywords" content="CPF,GUI,rail,analysis,domain" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Early Rail Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666127" />
+<meta name="NextFile" content="Running_ERA_Using_the_GUI.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Prerequisites_for_Running_Early_Rail_Analysis.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Setting up and Running Early Rail Analysis" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Prerequisites_for_Running_Early_Rail_Analysis.html" title="Prerequisites_for_Running_Early_Rail_Analysis">Prerequisites_for_Running_Earl ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Running_ERA_Using_the_GUI.html" title="Running_ERA_Using_the_GUI">Running_ERA_Using_the_GUI</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Setting up and Running Early Rail Analysis</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>The following procedure describes how to set up the early rail analysis mode and then run rail analysis.</p>
+<h4 id="SettingupandRunningEarlyRailAnalysis-RequiredInputFiles"><em> Required Input Files</em></h4>
+<ul><li>Design data (LEF, netlist, DEF)</li><li>Common Power Format (CPF) file</li><li>SPEF File</li><li>Power-grid libraries (.cl)</li><li>Extraction Technology File</li></ul><h4 id="SettingupandRunningEarlyRailAnalysis-Procedure"><em> Procedure</em></h4>
+
+<p>To perform early rail analysis, complete the following steps:</p>
+<ol><li>
+<p>Load the design data through the command line or through the GUI.<br /><strong>GUI</strong>: Select <em>File</em> - <em>Read Design</em>.<br /><strong>Tcl command</strong>:&#xa0;</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd"><pre><code>read_physical -lefs $lefs</code></pre><pre><code>read_mmmc ../design/viewDefinition.tcl</code><code>
+read_netlist ../design/postRouteOpt.enc.dat/super_filter.v.gz -top super_filter</code><code>
+init_design</code></pre><pre><code>read_def ../design/super_filter.def.gz</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Specify the CPF file for power domain information through the command line or through the GUI.<br /><strong>GUI</strong>: Select <em>File</em> - <em>Load/Commit CPF</em>.<br /><strong>Tcl command</strong>:&#xa0;</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd"><pre><code>read_power_intent -cpf ../design/super_filter.cpf</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Specify the SPEF file for signal net parasitic information through the command line or through the GUI.<br /><strong>GUI</strong>: Select <em>File</em> - <em>Read SPEF</em>.<br /><strong>Tcl command</strong>:&#xa0;</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd"><pre><code>read_spef -rc_corner&#xa0;&#xa0;RC_wc_125 -decoupled\ ../design/postRouteOpt_RC_wc_125.spef.gz</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Define the early rail analysis mode through the command line or through the GUI.<br /><strong>GUI</strong>: Select <em>Power &amp; Rail </em>- <em>Set Rail Analysis Mode</em>.&#xa0;<br /><strong>Tcl command</strong>:&#xa0;</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd"><pre><code>set_rail_analysis_config \</code><code>
+    -method                     era_static \</code><code>
+    -accuracy                   xd \</code><code>
+    -analysis_view              AV_wc_on \</code><code>
+    -extraction_tech_file      ../data/qrc/gpdk090_9l.tch \</code><code>
+    -temperature 125 \</code><code>
+    -era_current_region_file   ../tcl/VSS_1.curRegion</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+
+<p><strong><em>Additional Notes<br /></em></strong></p>
+
+<p><span class="fontredcadence"><ul><li>The xd accuracy mode is used for the early implementation stage IR analysis.</li><li>You have the option to use the extraction (Quantus) technology file without power-grid library, or use the power-grid library without the extraction technology file.</li><li>The current region file specifies a list of regions and the amount of current (mA) to be distributed within a power-grid region. This parameter is to be used when a design is either fully unplaced or partially placed. The format of the current region file is as follows:<br /><pre class="webflare-pre-block webflare-courier-new">#Format:</pre><pre class="webflare-pre-block webflare-courier-new">LABEL name NET netName AREA x1 y1 x2 y2 LAYER layername &lt;CURRENT value | PWL (t1 i1 t2 i2 &#8230;)&gt; INTRINSIC_CAP &lt;value&gt; LOADING_CAP &lt;value&gt; [ADD_OVERLAP | SUBTRACT_OVERLAP] </pre><strong>Static Example</strong>:<pre class="webflare-pre-block webflare-courier-new">label test1 net VDD area 100 200 400 500 layer M1 current 10</pre><strong>Dynamic Example</strong>:<pre class="webflare-pre-block webflare-courier-new">label test1 net VDD area 100 200 400 500 layer M1 pwl (0ns 0mA 1ns 0mA 1.9ns 0mA 2ns 10mA) intrinsic_cap 10 loading_cap 60 </pre></li><li>You can specify the following parameters for virtual follow pin insertion:<ul><li><code>-era_add_virtual_followpin</code></li><li><code>-era_add_virtual_followpin_for_io</code></li></ul></li><li>You can specify the following parameters for virtual via insertion:<ul><li><code>-era_skip_virtual_via_by_type</code></li><li><code>-era_add_virtual_via_on_layers</code></li><li><code>-era_skip_virtual_via_on_layers</code></li></ul></li></ul></span></p>
+
+<p><strong><em><br /></em></strong></p>
+</li><li>
+<p>Optional. If you do not load the CPF file, use the <code>set_pg_nets</code> command to define the power nets in the design, and assign attributes to these nets.&#xa0;<br /><strong>Tcl command</strong>:&#xa0;</p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /></colgroup><tbody><tr><td class="confluenceTd"><code>set_pg_nets -net VSS&#xa0;&#xa0;      -voltage 0.0 -threshold 0.05 </code><code>
+<br />set_pg_nets -net VDD&#xa0;&#xa0;      -voltage 1.8 -threshold 1.62 <br /></code><code>
+set_rail_analysis_domain -name PD1 -pwrnets VDD -gndnets VSS</code></td>
+</tr>
+</tbody></table></div>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>The <code>set_rail_analysis_domain</code> command is required for domain-based analysis. It is not required for the net-based analysis.</p>
+</div>
+</div>
+</li><li>
+<p>Define the location of the voltage sources for each power/ground net.<br /><strong>Tcl command</strong>:&#xa0;</p>
+<div class="table-wrap"><table class="webflareTable webflareTableIndent wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code><code>set_power_pads -net VSS -format xy \<br />-file ../design/super_filter_VSS.pp</code></code></pre></td>
+</tr>
+</tbody></table></div>
+</li><li>
+<p>Run early analysis through the command line or through the GUI.<br /><strong>GUI</strong>: Select <em>Power &amp; Rail </em>- <em>Run Rail Analysis</em>.<br /><strong>Tcl command</strong>:&#xa0;</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd"><pre><code>report_rail -output_dir ./era_run -type net VSS</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li></ol>
+<p>The Voltus console will display rail analysis statistics, as shown in the following snippet:<br /><code>
+Rail Analysis completed successfully.<br /></code><code>
+Finished Rail Analysis at 10:22:02 09/27/2018 (cpu=0:00:09, real=0:00:22, peak mem=1075.38MB)<br /></code><code>
+Current Voltus IC Power Integrity Solution resource usage: (total cpu=0:01:32, real=0:18:06, mem=1075.38MB)</code></p>
+<h4 id="SettingupandRunningEarlyRailAnalysis-Output"><em> Output</em></h4>
+
+<p>The early rail output directory will contain the following information:</p>
+<div class="table-wrap"><table class="webflareTable webflareTableIndent wrapped confluenceTable"><tbody><tr><th class="webflareTh confluenceTh" colspan="1" rowspan="1">
+<p>Directory Name</p>
+</th><th class="webflareTh confluenceTh" colspan="1" rowspan="1">
+<p>Description</p>
+</th></tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>&lt;<span class="webflare-courier-new" style="white-space: pre;"><em>domainName</em></span>&gt;_&lt;temperature&gt;_avg_&lt;<span class="webflare-courier-new" style="white-space: pre;"><em>X</em></span>&gt;</p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>For each run, an output directory is generated with the default name &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>domainName</em></span>&gt;_&lt;<span class="webflare-courier-new" style="white-space: pre;"><em>temperature</em></span>&gt;_avg_&lt;<span class="webflare-courier-new" style="white-space: pre;"><em>X</em></span>&gt;. &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>domainName</em></span>&gt; will be replaced with <code>ALL</code> if all domains are to be analyzed (<code>analyze</code>_rail -output <span class="webflare-courier-new" style="white-space: pre;"><em>dir</em></span><code> -type domain ALL</code>), or with <code>&lt;</code><span class="webflare-courier-new" style="white-space: pre;"><em>netName</em></span><code>&gt;</code> if a power net is to be analyzed. The output directory contains state directories for each net, such as VDD and VSS.</p>
+
+<p>Each state directory contains the following:</p>
+<ul><li><code>results</code> &#8211; a file that gives a summary of the rail analysis results for various plots, such as tc (tap current), rc (resistor current), and so on.</li><li><code>Reports</code> &#8211; a folder that contains a list of useful report files that contain all power-grid integrity data.</li><li>Auto-generated GIF files for the rail analysis plots</li></ul></td>
+</tr>
+</tbody></table></div>
+<h4 id="SettingupandRunningEarlyRailAnalysis-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Early_Rail_Analysis_Flow.html">Early Rail Analysis Flow</a></li><li><a href="Running_ERA_Using_the_GUI.html">Running ERA Using the GUI</a></li><li><a href="Tcl_Command_Examples_for_Early_Rail_Analysis.html">Tcl Command Examples for Early Rail Analysis</a></li><li><a href="Prerequisites_for_Running_Early_Rail_Analysis.html">Prerequisites for Running Early Rail Analysis</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Prerequisites_for_Running_Early_Rail_Analysis.html" id="prev" title="Prerequisites_for_Running_Early_Rail_Analysis">Prerequisites_for_Running_Earl ...</a></em></b><b><em><a href="Running_ERA_Using_the_GUI.html" id="nex" title="Running_ERA_Using_the_GUI">Running_ERA_Using_the_GUI</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

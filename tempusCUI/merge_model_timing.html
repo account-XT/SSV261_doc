@@ -1,0 +1,156 @@
+
+<html><head><title>merge_model_timing</title>
+<meta name="page_sequence" content="41001002" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="gsatish" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287499" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="merge_model_timing" />
+<meta name="Keywords" content="merges extracted timing models,analysis views single output" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Timing Modeling," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287499" />
+<meta name="NextFile" content="report_timing_model.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="check_timing_model.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- merge_model_timing" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="check_timing_model.html" title="check_timing_model">check_timing_model</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="report_timing_model.html" title="report_timing_model">report_timing_model</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>merge_model_timing</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>merge_model_timing<span class="confluence-anchor-link" id="merge_model_timing-merge_model_timing"></span><span id="merge_model_timing-merge_model_timing"></span> <br /><code>[-help]</code><br /><code>-input_library_file&#xa0;<em>string</em></code><br /><code>[-keep_separate_arc]</code><br /><code>[-merged_library_file&#xa0;<em>string</em>]</code><br /><code>-mode_group&#xa0;<em>string</em></code><br /><code>-modes&#xa0;<em>string</em></code><br /><code>[-pin_cap_tolerance&#xa0;<em>float</em>]</code><br /><code>[-tolerance&#xa0;<em>float</em>]</code></code></code></p>
+
+<p>Merges extracted timing models (ETM) for various analysis views into a single output.</p>
+
+<p>The&#xa0;<code>merge_model_timing</code>&#xa0;command should be the last command in the run script. Also, this command should be run separately in a Tempus session when a design is not loaded.&#xa0;</p>
+
+<p>When the DRV values are different in the libraries that are merged, then Tempus saves the worst value of the DRV with a warning message.&#xa0;</p>
+
+<p>If the DRV values are not equal, the greater value is stored for the following:</p>
+<ul><li>Minimum transition</li><li>Minimum capacitance</li><li>Minimum fanout</li></ul>
+<p>The smaller value is stored for the following, in case of unequal DRVs:</p>
+<ul><li>Maximum transition</li><li>Maximum&#xa0;capacitance</li><li>Maximum fanout</li><li>Fanout load</li></ul><h4 id="merge_model_timing-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" valign="top">
+<p><code>-keep_separate_arc</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Enables creating separate timing arcs with respective modes.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-input_library_file </code><code><em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies input library files that are to be merged.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>-</em></code><code>modes </code><code><em>string</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the mode names required for merging the libraries. The number of mode names should be equal to the number of input libraries.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-mode_group</code> <code><em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the name of the mode group.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-merged_library_file <em>string</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the merged library output file name. By default, the output file name is <code>merge.lib</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-pin_cap_tolerance</code><span>&#xa0;</span><em>float</em></td>
+<td class="confluenceTd" colspan="1">Specifies the pin capacitance tolerance for making tolerance comparison for library merging.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-tolerance </code><code><em>float</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the tolerance value for making tolerance comparison for library merging.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="merge_model_timing-Examples">Examples</h4>
+<ul><li>The following command merges library files <code>model1.view1.lib</code> and <code>model1.view1.lib.ref</code> into a single output file: <br /><code><span>tempus &gt;&#xa0;</span>&#xa0;merge_model_timing -input_library_file &quot;model1.view1.lib model1.view1.lib.ref&quot; </code><br /><code>-modes &quot;v1 v2&quot; -mode_group v1_v2</code></li></ul><h4 id="merge_model_timing-RelatedTopics">Related Topics</h4>
+<ul><li>See&#xa0;&quot;<a class="message-url" href="../tempusUG/timingmodeling.html">Extracted Timing Models</a>&quot;&#xa0;in the&#xa0;<em>Tempus User Guide</em>.</li></ul><h4 id="merge_model_timing-RelatedCommands">Related Commands</h4>
+<ul class="childpages-macro"><li><code><a href="write_timing_model.html">write_timing_model</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="check_timing_model.html" id="prev" title="check_timing_model">check_timing_model</a></em></b><b><em><a href="report_timing_model.html" id="nex" title="report_timing_model">report_timing_model</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

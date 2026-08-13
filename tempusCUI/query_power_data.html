@@ -1,0 +1,232 @@
+
+<html><head><title>query_power_data</title>
+<meta name="page_sequence" content="31007000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287303" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="query_power_data" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287303" />
+<meta name="NextFile" content="read_activity_file.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="propagate_activity.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- query_power_data" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="propagate_activity.html" title="propagate_activity">propagate_activity</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="read_activity_file.html" title="read_activity_file">read_activity_file</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>query_power_data</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span id="query_power_data-query_power_data+"></span><span class="confluence-anchor-link" id="query_power_data-query_power_data"></span> <code><br /><code>query_power_data<br />[-help] <br />[&lt;<em>pti_files</em> &lt;<em>file1</em>[<em>file2</em>] ...&gt;&gt;]<br />[-average_current]<br />[-clock_average]<br />[-write_pwl]<br />[-frame &lt;<em>string</em>&gt;]<br />[-insts &lt;<code><em>inst_list</em></code>&gt;]<br /><code><code><code><code>[-inst_list_file <em>filename</em>]</code></code></code></code><br />[-list]<br />[-out_dir &lt;<em>string</em>&gt;]<br />[-peak_current]<br />[-peak_time]<br />[-pin]<br />[-time_steps]<br /><span>[-verbose]</span></code><br /><code>[<code>-total_current &lt;<em>input_current_file&gt; </em></code>]<br />[<code>-output_tap_name &lt;<em>tap_name</em>&gt;</code>]</code><br /><br /></code></p>
+
+<p>The <code><code>query_power_data</code></code> command <span style="color:var(--ds-text,#172b4d);"><span style="color:var(--ds-text,#172b4d);">allows you to query the binary current files (.ptiavg/.ptipeak) that Power Calculation/Rail Analysis creates.</span><span style="color:var(--ds-text,#172b4d);">&#xa0;</span></span> It reads the tap current data in the current files and reports various information for debugging.</p>
+
+<p><span style="color:var(--ds-text,#172b4d);"><span style="color:var(--ds-text,#172b4d);">&#xa0;</span></span></p>
+
+<p><span style="color:var(--ds-text,#172b4d);"><span style="color:var(--ds-text,#172b4d);"><br /></span></span></p>
+<h4 id="query_power_data-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table bgcolor="#FFFFFF" cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">Outputs the command usage and a brief description about the command parameters.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" valign="top">
+<p><code>&lt;<em>pti_files</em> &lt;<em>file1</em>[<em>file2</em>] ...&gt;&gt; </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the names of the VDD and VSS instance voltage pti files.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-average_current </code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to write the average current of all instances.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" valign="top">
+<p><code>-clock_average </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies to write the clock based current report.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" valign="top"><code>-write_pwl </code></td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies to write the tap current in the PWL format. You can use this parameter to view the contents of the binary data file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-frame &lt;<em>string</em>&gt; </code></td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em><br /></em></code></p>
+</td>
+<td class="confluenceTd" valign="top">Specifies intervals for the clock_average report.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" valign="top"><code>-insts &lt;<em>inst_list</em>&gt;</code></td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specify the list of instances to be dumped in the ASCII format, one instance per line. If not specified, it prints all instances.</p>
+
+<p>The <code>-insts</code> parameter is specified with the <code>-write_pwl</code>, <code>-peak_current</code>, <code>-peak_time</code>, and<code>-average_current</code> parameters.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code><code>-inst_list_file <em>filename</em></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies a file with the list of instances to be dumped in the ASCII format.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" valign="top">
+<p><code>-list </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies to write the tap names from the input file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-out_dir &lt;<em>string</em>&gt;&#xa0;</code>&#xa0;</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies the name of the output file.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-output_tap_name &lt;<em>tap_name</em>&gt;</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies the name of the output tap in the new current file, which is created using the <code>-total_current</code> parameter.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-peak_current </code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to write the peak current of all instances.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-peak_time</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to write the peak current time of all instances.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-pin </code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to print the pin names with the instance names. <span>The </span><code>-pin</code><span> parameter is specified with the </span><code>-write_pwl</code><span> and <code>-list</code> parameters.</span></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><span>-verbose</span></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1"><span>Specifies to print the report to standard output.</span></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-time_steps<br /></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to summarize the minimum current, maximum current, average current, and total current for each interval in the data file. You can use this data to estimate which interval in a transient response might contain the worst-case data.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code>-total_current &lt;<em>input_current_file&gt; <br /></em></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1"><div class="content-wrapper">
+<p>Specifies to create a new current (.ptiavg) file containing the total current for all taps of a net. This parameter can be used if you have a very large current file generated by the Power Calculation engine and want to see only a total current waveform in the SimVision waveform viewer.</p>
+
+<p><code><code><code><em>input_current_file</em></code></code></code>&#xa0;is the current file that will be read in (output from the Power Calculation engine).</p>
+
+<p>Use the following syntax to create a total current file:<br /><code>query_power_data</code> <code>-total_current</code> <code>&lt;<em>input_current_file</em>&gt;</code>&#xa0; <code>-out_dir</code> <code>&lt;<em>output_total_current_file</em>&gt;</code></p>
+<div aria-label="Info" class="confluence-information-macro  confluence-information-macro-information" role="region"><span class="aui-icon aui-icon-small aui-iconfont-info-filled confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p><code>-out_dir</code> is used to specify a user-defined output current filename, and is not a mandatory parameter. If not specified, the output file will be generated automatically with the name of the input file suffixed with <code>.ptiavg</code>.</p>
+</div>
+</div>
+</div>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="query_power_data-Example">Example</h4>
+<ul><li>The following command creates a total current waveform file <code>VDD</code> from the input file&#xa0;<code><code>dynamic_VDD.ptiavg</code></code>:<br /><code><code><code><code>query_power_data <code>-output_tap_name</code> vdd_tap -total_current dynamic_VDD.ptiavg -out_dir VDD</code></code><br /></code></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="propagate_activity.html" id="prev" title="propagate_activity">propagate_activity</a></em></b><b><em><a href="read_activity_file.html" id="nex" title="read_activity_file">read_activity_file</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

@@ -1,0 +1,211 @@
+
+<html><head><title>Instance Power Debugging</title>
+<meta name="page_sequence" content="23015000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666152" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Instance Power Debugging" />
+<meta name="Keywords" content="instance,power,report,debug" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666152" />
+<meta name="NextFile" content="Tcl_Script_for_Saving_and_Restoring_Power_Database.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Interactive_Queries_of_Power_Data.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Instance Power Debugging" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Interactive_Queries_of_Power_Data.html" title="Interactive_Queries_of_Power_Data">Interactive_Queries_of_Power_D ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Tcl_Script_for_Saving_and_Restoring_Power_Database.html" title="Tcl_Script_for_Saving_and_Restoring_Power_Database">Tcl_Script_for_Saving_and_Rest ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Instance Power Debugging</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="fontredcadence">
+<p><span style="letter-spacing: 0.0px;">The calculated instance power can be debugged using the </span><code style="letter-spacing: 0.0px;">report_inst_power</code><span style="letter-spacing: 0.0px;"> command. This command generates a text based report for the specified instance. The command enables you to determine how the different components of static power are calculated. You can use the report to debug after performing power analysis (</span><code style="letter-spacing: 0.0px;">report_power</code><span style="letter-spacing: 0.0px;">).</span></p>
+
+<p>This command is available through both the static and dynamic power engines. This command is supported in the dynamic power engine by including this command in the power include file through the command <code>set_power_include_file</code>.</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>For dynamic power engine, the <code>report_inst_power</code> command does not generate text reports incrementally. If the dynamic run has been performed and you need the debug information for a static power number, you should re-run power analysis.</p>
+</div>
+</div>
+</span></p>
+
+<p><span style="font-weight: 600;letter-spacing: -0.003em;">Report Format to Debug Instance Power</span></p>
+
+<p>The format of the report is as follows:</p>
+
+<p>#The breakup of the total Internal, Switching, and Leakage power of the instance is as follows:</p>
+<pre><code>Instance: i_24<br />Cell: XNOR2X1<br />Liberty file: typical.lib<br />Internal power: 0.000178732mW<br />Switching power: 7.72426e-05mW<br />Leakage power: 3.162207e-05mW;<br />Total power: 0.000256006mW;</code></pre>
+<p>#The switching power of each net associated with the instance can be calculated as follows:</p>
+<pre><code>Net  Pin  Dir  Voltage  Duty  Density       Cap      RiseSlew  FallSlew   Power<br />n_20  Y  Output  1.2   0.4961 3.90625e+07 0.0027464  0.1378    0.0841 7.72426e-05<br />n_25  B  Input   1.2   0.5313 3.125e+07   0.00595432 0.0916    0.0789      0<br />n_26&#xa0;&#xa0;A&#xa0;&#xa0;Input&#xa0;&#xa0; 1.2&#xa0;&#xa0; 0.4375 2.5e+07&#xa0;&#xa0;   0.00501434 0.236     0.0775      0</code></pre>
+<p>#It includes:</p>
+<div class="table-wrap"><table class="webflareTable wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><strong>Column Name</strong></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><strong>Description</strong></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code>
+Net</code></pre></td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>net name</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code>
+Pin</code></pre></td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>pin name</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code>
+Direction</code></pre></td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>direction of the pin</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code>
+Voltage (V)</code></pre></td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>voltage of the power rail</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code>
+Duty</code></pre></td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>duty cycle of the pin</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code>
+Density</code></pre></td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>transition density</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code>
+Cap (pf)</code></pre></td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>total cap (net cap + pin cap)</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code>
+rise slew (ns)</code></pre></td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>rise slew</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code>
+fall slew (ns)</code></pre></td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>fall slew from the .lib</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code>
+power (mW)</code></pre></td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>power for the output pin (calculated using 1/2CV2*TD)</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p>#The <code>Leakage power</code> for state dependent leakage can be calculated as follows:</p>
+
+<p>For different states, the power value is multiplied with the duty cycle. Finally, all the state dependent power values are added to get the <code>Total Leakage power</code> reported in the first section.</p>
+<pre><code>
+Leakage power</code></pre><pre><code>When                Duty       Power<br />((A) &amp; (B))         0.23      0.23*4.7799e-08<br />((A) &amp; (!(B)))      0.30      0.30*2.88e-08<br />((!(A)) &amp; (B))      0.21      0.21*2.9958e-08<br />((!(A)) &amp; (!(B)))&#xa0;&#xa0; 0.26&#xa0;&#xa0;    0.26*2.1912e-08</code></pre>
+<p>#The internal power for each arc can be calculated as follows:</p>
+<pre><code>
+Internal power</code></pre><pre><code>From   To   when    activity/ns  duty      energy      power(mW)<br />A ^ -&gt; Y ^ : B :    0.0390625    0.5    3.84665e-15   0.00015026 <br />A v -&gt; Y v : B :    0.0390625    0.5    5.60604e-15   0.000218986 <br />A v -&gt; Y ^ : !(B) : 0.0390625    0.5    4.16763e-15   0.000162798 <br />...<br />...</code></pre>
+<p>For example, the first row signifies to calculate power for 1st arc when <code>pin A</code> is rising and <code>Y</code> is rising and <code>B</code> is high. Activity from either the activity file or calculated by power engine is <code>0.0390625/1e-09</code>. Energy number from the .lib is <code>3.84665e-15</code>. Power for the arc is calculated as activity * energy <code>0.0390625/1e-09*3.84665e-15 = 0.00015026mw</code>. Similarly, internal power is calculated for each arc.</p>
+
+<p>The total internal power is calculated as shown below:</p>
+
+<p>step 1) calculate power: A -&gt; Y</p>
+
+<p>step 2) calculate power: B -&gt; Y</p>
+
+<p>then, output power at Y is:</p>
+<pre><code>
+Power(Y) = [ Power(A -&gt; Y) * TD(A) + Power(B -&gt; Y) * TD(B) ] / [TD(A)+TD(B)] (#1)<br />Details: (in mW) Note: TD(A) =2.5*e+07; TD(B) = 3.125*e+07;</code><code>
+1) Power (A -&gt; Y)<br />a) when = B<br />Power (A -&gt; Y) = [ power (A-&gt;Y ^) + power (A -&gt; Y v) ] /2 = [avg (rise + fall)]<br />               ~ [ 15.030*e-05 + 21.9*e-05 ] / 2 = 18.46*e-05</code><code>
+b) when = !B<br />Power (A -&gt; Y) = [ power (A-&gt;Y ^) + power (A -&gt; Y v) ] /2 = [avg (rise + fall)]<br />               ~ [ 16.28*e-05 + 4.01*e-05 ] / 2 = 10.145*e-05</code><code>
+c) final: Power (A -&gt; Y) = Pow (A-&gt;Y) * Duty(B) + Pow (A-&gt;Y) * Duty(!B)<br />                         = [18.46*(0.513) + 10.145*(.487)] * e-05<br />                         = 14.41 * e-05</code><code>
+2) Power (B-&gt;Y)<br />a) when : A<br />Pow(B-&gt;Y) = 20.6 * e-05 = [avg (rise + fall)]</code></pre><pre><code>
+b) when : !A<br />Power(B-&gt;Y) = 20.457 * e-05 =[ avg (rise + fall)]</code></pre><pre><code>
+c) final Pow(B-&gt;Y) = Pow(B-&gt;Y) * duty(A) + Power(B-&gt;Y)*duty(!A)<br />                  =[ 20.6 * .4375 + 20.457 * .5625] * e-05<br />                   = 20.5125 * e -05</code></pre>
+<p>See (#1)</p>
+
+<p><code>
+Power (Y) = [ (14.41 * 2.5 * e+07) + ( 20.5125 * 3.125 * e+07) ] * e-05 / [[(2.5 + 3.125)]*e+07]<br />          = ( 9.0125 + 11.5 ) * e-05 / ( 5.625) <br />          = 17.8 * e-05 mW </code></p>
+<h4 id="InstancePowerDebugging-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Types_of_Static_Average_Power.html">Types of Static Average Power</a></li><li><a href="Calculation_of_Internal__Leakage_and_Switching_Power_with_State_Dependency.html">Calculation of Internal, Leakage and Switching Power with State Dependency</a></li><li><a href="Interactive_Queries_of_Power_Data.html">Interactive Queries of Power Data</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Interactive_Queries_of_Power_Data.html" id="prev" title="Interactive_Queries_of_Power_Data">Interactive_Queries_of_Power_D ...</a></em></b><b><em><a href="Tcl_Script_for_Saving_and_Restoring_Power_Database.html" id="nex" title="Tcl_Script_for_Saving_and_Restoring_Power_Database">Tcl_Script_for_Saving_and_Rest ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

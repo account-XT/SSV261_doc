@@ -1,0 +1,226 @@
+
+<html><head><title>Wire Variation Analysis - Overview</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823930" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Wire Variation Analysis - Overview" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823930" />
+<meta name="NextFile" content="analysisandreporting_performwirevariation.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_wirevariationanalysis.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Wire Variation Analysis - Overview" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="0" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_wirevariationanalysis.html" title="Wire Variation Analysis">Wire Variation Analysis</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_performwirevariation.html" title="Performing Wire Variation Analysis">Performing Wire Variation Anal ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:wirevariationoverview" title="Wire Variation Analysis - Overview"></a><h3>
+<a id="pgfId-2393367"></a>Wire Variation Analysis - Overview<a id="18057"></a></h3>
+
+<p>
+<a id="pgfId-2393501"></a>The RC variation is modeled by performing STA signoff on multiple global parasitic extraction corners. These corners assume all the layers to be fully correlated. But the probability of these layers getting manufactured at the same corner is very less. </p>
+<p>
+<a id="pgfId-2393502"></a>Once fabricated, the different metal layers may exhibit different variations. Such mis-tracking between layers might cause timing skew imbalance, thereby introducing new timing violations not seen earlier during global RC corner-based STA signoff. To report these missed violations, Tempus PBA solution supports wire variation analysis feature that comprehends the impact of layer mis-tracking.</p>
+<p>
+<a id="pgfId-2393503"></a>Consider the following timing path example (see figure below), where the launch path is dominantly routed by METx, while the capture clock path is dominantly routed by METy. In such scenarios, the timing degradation induced by such interconnect skew may not get caught through global RC corner STA signoff.</p>
+
+<p class="webflare-indent1"><strong>Figure -126
+<a id="pgfId-2393522"></a>Wire Variation Analysis </strong></p>
+<p>
+<a id="pgfId-2406080"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="274" src="images/analysisandreporting-193.gif" /></div>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-2393526"></a>Tempus wire variation solution is supported in PBA mode only - GBA, exhaustive-PBA and infinite-PBA are not supported. You can run regular PBA with high nworst and maximum slack to a value greater than 0 to cover all the violations.</div>
+
+<h3>
+<a id="pgfId-2393373"></a>Required Inputs</h3>
+
+<p>
+<a id="pgfId-2393580"></a>Along with the required STA inputs, the following two inputs are required for performing wire variation analysis:</p>
+<ul><li>
+<a id="pgfId-2393581"></a>Extended SPEF containing layer information </li><li>
+<a id="pgfId-2393582"></a>Wire variation side file<br /><strong>Figure -127
+<a id="pgfId-2393557"></a>Inputs</strong><br />
+<a id="pgfId-2393560"></a><div class="webflare-div-image">
+<img width="666" height="278" src="images/analysisandreporting-194.gif" /></div></li></ul>
+
+
+
+
+
+
+<p>
+<a id="pgfId-2393550"></a>Here is an example of an extended SPEF file, which contains the association of each resistor and capacitor to the corresponding metal layers:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393631"></a>(skipped) </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393632"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393633"></a>// *LAYER_MAP </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393634"></a>// *0 PWELL </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393635"></a>// *1 M8 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393636"></a>// *2 VIA7 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393637"></a>// *3 M7 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393638"></a>// *4 VIA6 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393639"></a>// *5 M6 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393640"></a>// *6 VIA5 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393641"></a>// *7 M5 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393642"></a>// *8 VIA4 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393643"></a>// *9 M4 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393644"></a>// *10 VIA3 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393645"></a>// *11 M3 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393646"></a>// *12 VIA2 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393647"></a>// *13 M2 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393648"></a>// *14 VIA1 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393649"></a>// *15 M1 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393650"></a>// *16 CO </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393651"></a>// *17 PO </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393674"></a>(skipped)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393675"></a> </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393676"></a>*D_NET *397718 1.09503 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393677"></a>*CONN </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393678"></a>*P hrdata_mp2[13] O *C 712.92 1077.97 // $llx=712.92 $lly=1077.97 $urx=712.92 $ury=1077.97 <strong>$LAYER=11</strong> </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393679"></a>*I *19765:X O *C 712.875 1068.42 // $llx=712.875 $lly=1068.42 $urx=712.875 $ury=1068.42 <strong>$LAYER=15</strong> </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393680"></a>*N *397718:1 *C 712.962 1068.42 // $llx=712.962 $lly=1068.42 $urx=712.962 $ury=1068.42 <strong>$LAYER=13</strong> </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393681"></a>*N *397718:2 *C 712.985 1068.42 // $llx=712.985 $lly=1068.42 $urx=712.985 $ury=1068.42 <strong>$LAYER=11</strong> </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393682"></a>*CAP </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393683"></a>0 *397718:1 0.0573391 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393684"></a>1 *397718:2 1.03769 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393685"></a>*RES </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393686"></a>0 hrdata_mp2[13] *397718:2 36.8198 // $L=8.595 $W=0.0476 <strong>$LAYER=11</strong> </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393687"></a>1 *397718:1 *397718:2 5.2 // $A=0.00405 $LAYER=12 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393688"></a>2 *19765:X *397718:1 10.4 // $A=0.002025 $LAYER=14 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393689"></a>*END</pre>
+
+<p>
+<a id="pgfId-2393627"></a>An example of wire variation side file is as follows, which specifies the mean-shift and standard deviation of R and C of each metal layer. Each value represents a ratio of the nominal R/C obtained from the SPEF file.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2406167"></a>version :1.0</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2406168"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2406169"></a>layer_name&#160;&#160;                     :   M1</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2406170"></a>resistance_meanshift&#160;&#160;           :   -0.150</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2406171"></a>resistance_stddev&#160;&#160;              :   0.050</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2406172"></a>capacitance_meanshift&#160;&#160;          :   0.105</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2406173"></a>capacitance_stddev&#160;&#160;             :   0.035</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2406174"></a>coupling_capacitance_meanshift&#160;&#160; :&#160;&#160; 0.105</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2406175"></a>coupling_capacitance_stddev&#160;&#160;    :   0.035</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2406176"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2406177"></a>layer_name&#160;&#160;                     :   M2</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2406178"></a>resistance_meanshift&#160;&#160;           :   -0.120</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2406179"></a>resistance_stddev&#160;&#160;              :   0.030</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2406180"></a>capacitance_meanshift&#160;&#160;          :   0.095</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2406181"></a>capacitance_stddev&#160;&#160;             :   0.035</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2406183"></a>(skipped)</pre>
+
+<p>
+<a id="pgfId-2393793"></a>If coupling capacitance mean-shift and stddev factors are not explicitly specified for any metal layer, then capacitance mean-shift and stddev factors from that layer are used for xcap as well.</p>
+<p>
+<a id="pgfId-2393794"></a>The extended SPEF and wire variation side file can be loaded using the <a href="../tempustxtcmdref/read_spef.html">read__spef</a> command, as shown below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393795"></a>read_spef -extended &lt;extended SPEF path&gt; \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2393816"></a> -wire_variation_file &lt;wire variation side file path&gt;</pre>
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_wirevariationanalysis.html" id="prev" title="Wire Variation Analysis">Wire Variation Analysis</a></em></b><b><em><a href="analysisandreporting_performwirevariation.html" id="nex" title="Performing Wire Variation Analysis">Performing Wire Variation Anal ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

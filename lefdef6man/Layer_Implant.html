@@ -1,0 +1,1323 @@
+
+<html><head><title>LEF Syntax - Layer (Implant)</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="leenap" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775544961" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the syntax for Library Exchange Format (LEF) and Design Exchange Format (DEF) files." />
+<meta name="DocTitle" content="LEF/DEF 6.0 Language Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="LEF Syntax - Layer (Implant)" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="lefdef6man" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775544961" />
+<meta name="NextFile" content="Layer_Masterslice.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation,Cadence Shared Tools" />
+<meta name="PrevFile" content="Layer_Cut.html" />
+<meta name="c_product" content="Innovus,Languages" />
+<meta name="Product" content="Innovus,Languages" />
+<meta name="ProductFamily" content="Innovus,Languages" />
+<meta name="ProductVersion" content="6.0" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="LEF/DEF 6.0 Language Reference -- LEF Syntax - Layer (Implant)" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="0" />
+<meta name="Version" content="6.0" />
+<meta name="SpaceKey" content="lefdef6man60" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="lefdef6manTOC.html">Contents</a></li><li><a class="prev" href="Layer_Cut.html" title="LEF Syntax - Layer (Cut)">LEF Syntax - Layer (Cut)</a></li><li style="float: right;"><a class="viewPrint" href="lefdef6man.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Layer_Masterslice.html" title="LEF Syntax - Layer (Masterslice)">LEF Syntax - Layer (Masterslic ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>LEF/DEF 6.0 Language Reference<br />Product Version 6.0, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+
+<h1>3
+<a id="pgfId-954671"></a>                                                                                                                                                                                                                                         </h1>
+
+<h1>
+<a id="pgfId-1087299"></a><hr />
+<a id="37075"></a>LEF Syntax - Layer (Implant)<hr />
+</h1>
+
+<p>
+<a id="pgfId-1087300"></a>This chapter contains information about the following topics:</p>
+
+<ul><li>
+<a id="pgfId-1758499"></a><a href="Layer_Implant.html#25764">Layer (Implant)</a><ul><li>
+<a id="pgfId-7981343"></a><a href="Layer_Implant.html#11789">Defining Implant Layer Properties to Create 32/28 nm and Smaller Nodes Rules</a></li><li>
+<a id="pgfId-7986628"></a><a href="Layer_Implant.html#21400">Area Rule</a></li><li>
+<a id="pgfId-7986632"></a><a href="Layer_Implant.html#14217">Core Edge Length Rule</a></li><li>
+<a id="pgfId-7986636"></a><a href="Layer_Implant.html#38939">Corner Spacing Rule</a></li><li>
+<a id="pgfId-7990862"></a><a href="Layer_Implant.html#20258">Forbidden Width Rule</a></li><li>
+<a id="pgfId-7987968"></a><a href="Layer_Implant.html#88967">Maximum Spacing Rule</a></li><li>
+<a id="pgfId-7986640"></a><a href="Layer_Implant.html#39439">Min Enclosed Area Rule</a></li><li>
+<a id="pgfId-7990515"></a><a href="Layer_Implant.html#16951">Minimum Height Rule</a></li><li>
+<a id="pgfId-7986644"></a><a href="Layer_Implant.html#72889">Min Step Rule</a></li><li>
+<a id="pgfId-7986648"></a><a href="Layer_Implant.html#55223">Spacing Rule</a></li><li>
+<a id="pgfId-7968611"></a><a href="Layer_Implant.html#75251">Width Rule</a></li></ul></li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>
+<a id="pgfId-6031077"></a><a id="25764"></a>L<a id="Layer(Implant)"></a>ayer (Implant)</h2>
+<a id="pgfId-7988414"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+LAYER <em>layerName
+</em>TYPE IMPLANT ;
+[MANUFACTURINGGRID <em>value ;</em>]
+[MASK <em>maskNum </em>;]
+[WIDTH <em>minWidth</em> ;]
+[SPACING <em>minSpacing</em> [LAYER <em>layerName2</em>]   ;] ...
+[PROPERTY <em>propName</em> <em>propVal</em> ;] ...
+[<a href="Layer_Implant.html#PropImplantArea">PROPERTY LEF_CDN_AREA</a> 
+   &quot;AREA <em>minArea
+</em>   ; &quot; ;]
+[<a href="Layer_Implant.html#PropImplantCoreedgelength">PROPERTY LEF_CDN_COREEDGELENGTH
+</a>   &quot;COREEDGELENGTH <em>minLength</em> 
+       [EXCEPTADJACENTLENGTH 
+          {<em>exactEdgeLength</em> <em>adjLength</em> [EXACTADJACENTLENGTH]}...]
+       [WITHINLAYER {<em>layerName</em>}...
+       |EXCEPTLAYER {<em>exceptLayerName</em>}...]
+   ; &quot; ;]
+[<a href="Layer_Implant.html#PropImplantCornerSpacing">PROPERTY LEF_CDN_CORNERSPACING</a> 
+   &quot;CORNERSPACING <em>spacing</em> [ALIGNEDONLY]
+       [CHECKIMPLANTGROUPONLY]
+   ; &quot; ;]
+[<a href="Layer_Implant.html#PropImplantForbiddenWidth">PROPERTY LEF_CDN_FORBIDDENWIDTH
+</a>   &quot;FORBIDDENWIDTH <em>width</em> 
+   ; &quot; ;]
+[<a href="Layer_Implant.html#PropImplantMaxSpacing">PROPERTY LEF_CDN_MAXSPACING
+</a>   &quot;MAXSPACING <em>maxSpacing</em> WIDTH <em>width</em> LENGTH <em>length</em> 
+   ; &quot; ;]
+[<a href="Layer_Implant.html#PropImplantMinEncAreaRule">PROPERTY LEF_CDN_MINENCLOSEDAREA
+</a>   &quot;MINENCLOSEDAREA <em>area</em> 
+   ; &quot; ;]
+[<a href="Layer_Implant.html#PropImplantMinHeight">PROPERTY LEF_CDN_MINHEIGHT
+</a>   &quot;MINHEIGHT <em>minHeight</em> WIDTH <em>maxWidth</em> OVERLAP <em>maxOverlap
+</em>   ; &quot; ;]
+[<a href="Layer_Implant.html#PropImplantMinStep">PROPERTY LEF_CDN_MINSTEP
+</a>   &quot;MINSTEP <em>minStepLength</em> MINADJACENTLENGTH <em>minAdjLength
+</em>   ; &quot; ;]
+[<a href="Layer_Implant.html#PropImplantSpacing">PROPERTY LEF_CDN_SPACING
+</a>   &quot;SPACING <em>minSpacing</em> [LAYER <em>layerName2</em>] 
+       [HORIZONTAL|VERTICAL PRL <em>prl</em> ][EXCEPTABUTTED]
+            [EXCEPTCORNERTOUCH] [LENGTH <em>length</em>]
+            [INTERSECTLAYERS <em>layerNameList</em>...]
+   ; &quot; ;]
+[<a href="Layer_Implant.html#PropImplantWidth">PROPERTY LEF_CDN_WIDTH
+</a>   &quot;WIDTH <em>minWidth</em> [LAYER {<em>layerName2</em> | ANY} [NODIFFMERGE]]
+       [CELLHEIGHT <em>height</em> LAYER <em>layerName3</em>]
+       [WITHINLAYER <em>layerName
+</em>       |EXCEPTLAYER <em>exceptLayerName</em>]
+       [ZEROPRL [MAXWIDTH <em>maxWidth</em>]
+            [NOTALIGNEDROWWIDTH <em>width</em> LENGTH <em>length</em>]] 
+       [EXCEPTCORNERTOUCH][LENGTH <em>length</em>]
+       [CHECKIMPLANTGROUP <em>groupName</em>]
+   ; &quot; ;]</code></pre>
+<a id="pgfId-983415"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+END <em>layerName</em> </code></pre>
+
+<p>
+<a id="pgfId-983416"></a>Defines implant layers in the design. Each layer is defined by assigning it a name and simple spacing and width rules. These spacing and width rules only affect the legal cell placements. These rules interact with the library methodology, detailed placement, and filler cell support. You must define implant layers separately, with their own layer statements. </p>
+
+
+<p>
+<a id="pgfId-1137168"></a></p>
+<table class="webflareTable" id="#id1137163">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-6335392"></a><code>LAYER </code><span class="webflare-courier-new" style="white-space:pre"><em>layerName</em></span> </p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-6335394"></a>Specifies the name for the layer. This name is used in later references to the layer. </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-6338137"></a><code>LAYER </code><span class="webflare-courier-new" style="white-space:pre"><em>layerName2</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-6338139"></a>Specifies the name of another implant layer that requires extra spacing that is greater than or equal to <span class="webflare-courier-new" style="white-space:pre"><em>minSpacing</em></span> from this implant layer. </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7981089"></a><code>MANUFACTURINGGRID </code><span class="webflare-courier-new" style="white-space:pre"><em>value</em></span><code> </code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7981091"></a>Defines the manufacturing grid for this layer. The vertices of every shape on this layer must be on the manufacturing-grid or a DRC violation will occur. If not given, the library <code>MANUFACTURINGGRID</code> value is used. <span class="webflare-courier-new" style="white-space:pre"><em>value</em></span> is a positive float number in units of microns.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-6335400"></a><code>MASK</code> <span class="webflare-courier-new" style="white-space:pre"><em>maskNum</em></span> </p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-6335402"></a>Specifies how many masks for double- or triple-patterning will be used for this layer. The <span class="webflare-courier-new" style="white-space:pre"><em>maskNum</em></span> variable must be an integer greater than or equal to 2. Most applications only support values of 2 or 3.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1137179"></a><code>PROPERTY </code><span class="webflare-courier-new" style="white-space:pre"><em>propName</em></span> <span class="webflare-courier-new" style="white-space:pre"><em>propVal</em></span></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1137183"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1137185"></a>Specifies a numerical or string value for a layer property defined in the <code>PROPERTYDEFINITIONS</code> statement. The <span class="webflare-courier-new" style="white-space:pre"><em>propName</em></span> you specify must match the <span class="webflare-courier-new" style="white-space:pre"><em>propName</em></span> listed in the <code>PROPERTYDEFINITIONS</code> statement. </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-6338145"></a><code>SPACING </code><span class="webflare-courier-new" style="white-space:pre"><em>minSpacing</em></span></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-6338149"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-6338151"></a>Specifies the minimum spacing for the layer. This value affects the legal cell placement. <br /><em>Type:</em> Float, specified in microns </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-6338141"></a><code>TYPE IMPLANT</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-6338143"></a>Identifies the layer as an implant layer.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-6338133"></a><code>WIDTH </code><span class="webflare-courier-new" style="white-space:pre"><em>minWidth</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-6338135"></a>Specifies the minimum width for this layer. This value affects the legal cell placement. <br /><em>Type:</em> Float, specified in microns </p>
+</td>
+</tr>
+</tbody></table>
+
+
+<p><strong>Example 3-1
+<a id="pgfId-983457"></a><a id="66024"></a>Implant Layer </strong></p>
+
+<p>
+<a id="pgfId-983458"></a>Typically, you define high-drive cells on one implant layer and low-drive cells on another implant layer. The following example defines high-drive cells on <em>implant1</em> and low-drive cells on <em>implant2</em>. Both implant layers cover the entire cell. The placer and filler cell creation attempt to legalize the cell overlaps in abutting rows to ensure that the minimum width and spacing values are met.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-983459"></a>LAYER implant1&#160;&#160;       #high-drive implant layer</pre>
+
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-992214"></a>TYPE IMPLANT ; </pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-992219"></a>WIDTH 0.50 ;&#160;&#160;     #implant rectangles must be &gt;=0.50 microns wide</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-992220"></a>SPACING 0.50 ;&#160;&#160;   #implant rectangles must be &gt;=0.50 microns apart </pre>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-992215"></a>END implant1</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-6315846"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-6315847"></a>LAYER implant2&#160;&#160;       #low-drive implant layer</pre>
+
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-6315848"></a>   TYPE IMPLANT ; </pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-992224"></a>   WIDTH 0.50 ;    #implant rectangles must be &gt;=0.50 microns wide</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-992223"></a>   SPACING 0.50 ;  #implant rectangles must be &gt;=0.50 microns apart</pre>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-992222"></a>END implant2</pre>
+
+<p>
+<a id="pgfId-983486"></a>Assume that the high-drive cells and low-drive cells are completely covered by their respective implant layers. Because there is no spacing between <em>implant1</em> and <em>implant2</em> specified, you might see a placement like that illustrated in <a href="Layer_Implant.html#93366">Figure&#160;3-1</a>.</p>
+
+
+
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 3-1
+<a id="pgfId-987341"></a></strong></pi-para-indent>
+
+<p>
+<a id="pgfId-983493"></a><a id="93366"></a></p>
+<div class="webflare-div-image">
+<img width="668" height="362" src="images/Layer_Implant-2.gif" /></div>
+
+<p>
+<a id="pgfId-983629"></a>Note that you can correct A, C, D, and E by putting in filler cells with the appropriate implant type. However, B cannot be corrected by a filler cell&#8212;either the placer must avoid it, or you must allow the filler cell or post-process command to move cells or modify the implant layer to correct the error.</p>
+<h3>
+<a id="pgfId-7981208"></a><a id="DefineMastersliceLayerProps"></a><a id="11789"></a>Defining Implant Layer Properties to Create 32/28 nm and Smaller Nodes Rules</h3>
+<p>
+<a id="pgfId-7981209"></a>You can include implant layer properties in your LEF file to create DRC rules that currently are not supported by existing LEF syntax. The properties are specified inside the <code>LAYER</code> <code>IMPLANT</code> statements, where they can be seen with other rules.</p>
+<p>
+<a id="pgfId-7981210"></a>Before you can reference them, properties must be defined at the beginning of the LEF file in the <code>PROPERTYDEFINITIONS</code> statement, immediately before the first <code>LAYER</code> statement.</p>
+
+<ul><li>
+<a id="pgfId-7981211"></a>Properties belong to the <code>LAYER</code> object and have a type of <code>STRING</code>.</li><li>
+<a id="pgfId-7981212"></a>The property names used for these rules all start with <code>LEF_CDN_</code>. </li></ul>
+
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-7981213"></a>In LEF 5.8, the prefix for these properties was LEF58_. However, as these rules are probably never going into native LEF syntax and are interpreted only by Cadence tools (other tools have their own DRC rules syntax independent from LEF), the prefix was changed to be independent of the version and CDN was added to indicate that they are normally used only by Cadence tools. To make the transition easier, any tool that reads and interprets these properties should allow either LEF58_ or LEF_CDN_ as the prefix when reading the properties. Tools that write out LEF should use LEF_CDN_ for LEF 6.0, and LEF58_ for LEF 5.8.</div>
+<p>
+<a id="pgfId-7981214"></a>All properties use the following syntax within the LEF <code>PROPERTYDEFINITIONS</code> statement:</p>
+
+<a id="pgfId-7981215"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+PROPERTYDEFINITIONS 
+LAYER propName STRING [&quot;<em>stringValue</em>&quot;] ; </code></pre>
+<a id="pgfId-7981216"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+END PROPERTYDEFINITIONS </code></pre>
+
+<p>
+<a id="pgfId-7981217"></a>The property definitions for the implant layer properties are as follows:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-7981218"></a>PROPERTYDEFINITIONS</pre>
+
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-7986674"></a>LAYER LEF_CDN_AREA STRING ;</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-7986675"></a>LAYER LEF_CDN_COREEDGELENGTH STRING ;</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-7986676"></a>LAYER LEF_CDN_CORNERSPACING STRING ;</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-7988007"></a>LAYER LEF_CDN_MAXSPACING STRING ;</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-7986677"></a>LAYER LEF_CDN_MINENCLOSEDAREA STRING ;</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-7986678"></a>LAYER LEF_CDN_MINSTEP STRING ;</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-7986679"></a>LAYER LEF_CDN_SPACING STRING ;</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-7981230"></a>LAYER LEF_CDN_WIDTH STRING ;</pre>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-7981232"></a>END PROPERTYDEFINITIONS</pre>
+
+
+
+<h4>
+<a id="pgfId-7986685"></a>Area Rule<a id="21400"></a></h4>
+
+<p>
+<a id="pgfId-7986686"></a>An area rule can be used to specify the minimum area on the implant layer.</p>
+<p>
+<a id="pgfId-7986687"></a>You can use the following property definition:</p>
+
+<a id="pgfId-7986689"></a><a id="PropImplantArea"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+PROPERTY LEF_CDN_AREA 
+&quot;AREA <em>minArea
+</em>; &quot; ;</code></pre>
+
+<p>
+<a id="pgfId-7986690"></a>Where:</p>
+
+
+<p>
+<a id="pgfId-7986696"></a></p>
+<table class="webflareTable" id="#id7986691">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986693"></a><span class="webflare-courier-new" style="white-space:pre"><em>AREA minArea</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986695"></a>Specifies the minimum area on the implant layer.<br /><em>Type</em>: Float, specified in microns.</p>
+</td>
+</tr>
+</tbody></table>
+
+
+
+<h4>
+<a id="pgfId-7986698"></a>Core Edge Length Rule<a id="14217"></a></h4>
+
+<p>
+<a id="pgfId-7986699"></a>A core edge length rule can be used to indicate that the edge length of an implant shape of a <code>CORE</code> (standard) cell must be greater than or equal to the specified minimum length.</p>
+<p>
+<a id="pgfId-7986700"></a>You can create a core edge length rule by using the following property definition:</p>
+
+<a id="pgfId-7986702"></a><a id="PropImplantCoreedgelength"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+PROPERTY LEF_CDN_COREEDGELENGTH
+ &quot;COREEDGELENGTH <em>minLength</em> 
+     [EXCEPTADJACENTLENGTH 
+        {<em>exactEdgeLength</em> <em>adjLength</em> [EXACTADJACENTLENGTH]}...]
+       [WITHINLAYER {<em>layerName</em>}...
+       |EXCEPTLAYER {<em>exceptLayerName</em>}...]
+  ; &quot; ;</code></pre>
+
+<p>
+<a id="pgfId-7986703"></a>Where:</p>
+
+
+<p>
+<a id="pgfId-7986721"></a></p>
+<table class="webflareTable" id="#id7986704">
+<tbody><tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7986706"></a><code>COREEDGELENGTH </code><span class="webflare-courier-new" style="white-space:pre"><em>minLength</em></span><code> </code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986710"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986712"></a>Specifies that the edge length of the implant shape of a <code>CORE</code> (standard) cell, in the direction of the cell row, must be greater than or equal to the minLength. <br /><em>Type</em>:&#160;&#160;Float, specified in microns</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7986714"></a><code>EXCEPTADJACENTLENGTH <br />{</code><span class="webflare-courier-new" style="white-space:pre"><em>exactEdgeLength</em></span><code> </code><span class="webflare-courier-new" style="white-space:pre"><em>adjLength</em></span><code> [EXACTADJACENTLENGTH]}...]</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986718"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986720"></a>Specifies that the edge length is exempted if it&#8217;s length is exactly equal to <span class="webflare-courier-new" style="white-space:pre"><em>exactEdgeLength</em></span>, with an adjacent length less than or equal to <span class="webflare-courier-new" style="white-space:pre"><em>adjLength</em></span>, or exactly equal to <span class="webflare-courier-new" style="white-space:pre"><em>adjLength</em></span> if <code>EXACTADJACENTLENGTH</code> is defined. <br /><em>Type</em>: Float, specified in microns</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7988945"></a><code>EXCEPTLAYER {</code><span class="webflare-courier-new" style="white-space:pre"><em>exceptLayerName</em></span><code>}...</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7988940"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7988942"></a>Specifies that the implant shapes overlapping with the shapes in <span class="webflare-courier-new" style="white-space:pre"><em>exceptLayerName</em></span>, which should be a masterslice layer with <code>ABUTFILLER</code> type property, should not be merged with other implant shapes that are not overlapping with the shapes in <span class="webflare-courier-new" style="white-space:pre"><em>exceptLayerName</em></span>, on which the core edge length rule is checked. Typically, only standard cells contain OBS shapes in <span class="webflare-courier-new" style="white-space:pre"><em>exceptLayerName</em></span>.</p>
+<p>
+<a id="pgfId-7988943"></a><em>Type</em>: String</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7988936"></a><code>WITHINLAYER {</code><span class="webflare-courier-new" style="white-space:pre"><em>layerName</em></span><code>}...</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7988931"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7988933"></a>Specifies that the implant shapes overlapping with the shapes in <span class="webflare-courier-new" style="white-space:pre"><em>layerName</em></span>, which should be a masterslice layer with the <code>ABUTFILLER</code> type property, should be checked against <span class="webflare-courier-new" style="white-space:pre"><em>minLength</em></span> by themselves. In other words, those implant shapes should not be merged with other implant shapes that are not overlapping with the shapes in <span class="webflare-courier-new" style="white-space:pre"><em>layerName</em></span>. If multiple <span class="webflare-courier-new" style="white-space:pre"><em>layerName</em></span> layers are defined, only the implant shapes overlapping with the shapes on all those layers are checked individually. The original implant shapes overlapping with the shapes in <span class="webflare-courier-new" style="white-space:pre"><em>layerName</em></span> should be kept without being cut off by shapes in <span class="webflare-courier-new" style="white-space:pre"><em>layerName</em></span>. Typically, only standard cells contain OBS shapes in <span class="webflare-courier-new" style="white-space:pre"><em>layerName</em></span>. </p>
+<p>
+<a id="pgfId-7988934"></a><em>Type</em>: String</p>
+</td>
+</tr>
+</tbody></table>
+
+
+
+<h4><em>
+<a id="pgfId-7989000"></a>Core Edge Length Rule Examples</em></h4>
+
+
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 3-2
+<a id="pgfId-7986722"></a>Example of Core Edge Length Rule</strong></pi-para-indent>
+
+<p>
+<a id="pgfId-7986764"></a></p>
+<div class="webflare-div-image">
+<img width="668" height="385" src="images/Layer_Implant-3.gif" /></div>
+
+
+
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 3-3
+<a id="pgfId-7989318"></a>Example of the Core Edge Length Rule with EXCEPTLAYER</strong></pi-para-indent>
+
+<p>
+<a id="pgfId-7989347"></a></p>
+<div class="webflare-div-image">
+<img width="668" height="328" src="images/Layer_Implant-4.gif" /></div>
+
+
+
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 3-4
+<a id="pgfId-7989116"></a>Example of the Core Edge Length Rule with WITHINLAYER</strong></pi-para-indent>
+
+<p>
+<a id="pgfId-7989144"></a></p>
+<div class="webflare-div-image">
+<img width="668" height="333" src="images/Layer_Implant-5.gif" /></div>
+
+
+
+<h4>
+<a id="pgfId-7986766"></a>Corner Spacing Rule<a id="38939"></a></h4>
+
+<p>
+<a id="pgfId-7986767"></a>A corner spacing rule can be used to specify the spacing between two corner touch points.</p>
+<p>
+<a id="pgfId-7986768"></a>You can create a corner spacing rule by using the following property definition:</p>
+
+<a id="pgfId-7986770"></a><a id="PropImplantCornerSpacing"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+PROPERTY LEF_CDN_CORNERSPACING 
+   &quot;CORNERSPACING <em>spacing</em> [ALIGNEDONLY]
+       [CHECKIMPLANTGROUPONLY]
+   ; &quot; ;</code></pre>
+
+<p>
+<a id="pgfId-7986771"></a>Where:</p>
+
+
+<p>
+<a id="pgfId-7986794"></a></p>
+<table class="webflareTable" id="#id7986772">
+<tbody><tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7986774"></a><code>CORNERSPACING </code><span class="webflare-courier-new" style="white-space:pre"><em>spacing</em></span></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986778"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986780"></a>Specifies the spacing between two corner touch points, where each of the touch points is formed by two implant shapes.</p>
+<p>
+<a id="pgfId-7986781"></a><em>Type</em>: Float, specified in microns.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986783"></a><code>ALIGNEDONLY</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986785"></a>Specifies the rule applies only when the two corner touch points are vertically aligned.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7986787"></a><code>CHECKIMPLANTGROUPONLY</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986791"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986793"></a>Specifies that this corner spacing rule does not apply to shapes of this implant layer, but applies only to the merged shapes of any implant group with <code>BASEDLAYER</code> pointing to this implant layer.</p>
+</td>
+</tr>
+</tbody></table>
+
+
+
+<h4><em>
+<a id="pgfId-7986795"></a>Corner Spacing Rule Examples</em></h4>
+
+
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 3-5
+<a id="pgfId-7986796"></a>Illustration of Corner Spacing Rule</strong></pi-para-indent>
+
+<p>
+<a id="pgfId-7986815"></a></p>
+<div class="webflare-div-image">
+<img width="668" height="423" src="images/Layer_Implant-6.gif" /></div>
+<ul><li>
+<a id="pgfId-7986816"></a>The following example illustrates a corner spacing rule with <code>CHECKIMPLANTGROUPONLY</code>:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id7986817">
+<a id="pgfId-7986817"></a>PROPERTYDEFINITIONS</pre><pre class="webflare-pre-block webflare-courier-new" id="#id7986818">
+<a id="pgfId-7986818"></a>LIBRARY LEF_CDN_IMPLANTGROUP STRING &quot;</pre><pre class="webflare-pre-block webflare-courier-new" id="#id7986819">
+<a id="pgfId-7986819"></a>      IMPLANTGROUP IPG1 LAYER IP1 IP2 BASEDLAYER IP1 ;&quot;;</pre><pre class="webflare-pre-block webflare-courier-new" id="#id7986820">
+<a id="pgfId-7986820"></a>END PROPERTYDEFINITIONS</pre><pre class="webflare-pre-block webflare-courier-new" id="#id7986821">
+<a id="pgfId-7986821"></a></pre>
+<a id="pgfId-7986822"></a>On layer <code>IP1</code>:<pre class="webflare-pre-block webflare-courier-new" id="#id7986823">
+<a id="pgfId-7986823"></a>PROPERTY LEF_CDN_CORNERSPACING &quot;</pre><pre class="webflare-pre-block webflare-courier-new" id="#id7986824">
+<a id="pgfId-7986824"></a>      CORNERSPACING 0.15 ALIGNEDONLY </pre><pre class="webflare-pre-block webflare-courier-new" id="#id7986825">
+<a id="pgfId-7986825"></a>          CHECKIMPLANTGROUPONLY ; &quot; ;</pre><br /><strong class="webflare-fig-line-height">Figure 3-6
+<a id="pgfId-7986826"></a>Example of the Corner Spacing Rule with CHECKIMPLANTGROUPONLY</strong>
+<a id="pgfId-7990706"></a><div class="webflare-div-image">
+<img width="668" height="475" src="images/Layer_Implant-7.gif" /></div></li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h4>
+<a id="pgfId-7990710"></a>Forbidden Width Rule<a id="20258"></a></h4>
+
+<p>
+<a id="pgfId-7990711"></a>You can create a forbidden width rule by using the following property definition:</p>
+
+<a id="pgfId-7990769"></a><a id="PropImplantForbiddenWidth"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+PROPERTY LEF_CDN_FORBIDDENWIDTH
+   &quot;FORBIDDENWIDTH <em>width</em> 
+   ; &quot; ;</code></pre>
+
+<p>
+<a id="pgfId-7990714"></a>Where:</p>
+<p>
+<a id="pgfId-7986839"></a></p>
+<table class="webflareTable" id="#id7990715">
+<tbody><tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7990717"></a><code>FORBIDDENWIDTH </code><span class="webflare-courier-new" style="white-space:pre"><em>width</em></span><code> </code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7990721"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7990821"></a>Specifies that if the implant layer shape abuts two different implant layer shapes and all three shapes have a width exactly equal to <span class="webflare-courier-new" style="white-space:pre"><em>width</em></span>, it is a violation if both neighboring shapes are also each abutted to a different implant layer shape on their opposite sides. All same-layer implant shapes must be merged before considering this rule.</p>
+<p>
+<a id="pgfId-7990723"></a><em>Type</em>: Float, specified in microns</p>
+</td>
+</tr>
+</tbody></table>
+
+<h4>
+<a id="pgfId-7987472"></a>Maximum Spacing Rule<a id="88967"></a></h4>
+
+<p>
+<a id="pgfId-7987474"></a>You can create a maximum spacing rule by using the following property definition:</p>
+
+<a id="pgfId-7987476"></a><a id="PropImplantMaxSpacing"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+PROPERTY LEF_CDN_MAXSPACING
+ &quot;MAXSPACING <em>maxSpacing</em> WIDTH <em>width</em> LENGTH <em>length</em> 
+  ; &quot; ;</code></pre>
+
+<p>
+<a id="pgfId-7987477"></a>Where:</p>
+
+
+
+<p>
+<a id="pgfId-7987487"></a></p>
+<table class="webflareTable" id="#id7987478">
+<tbody><tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7987480"></a><code>MAXSPACING </code><span class="webflare-courier-new" style="white-space:pre"><em>maxSpacing</em></span><code> WIDTH </code><span class="webflare-courier-new" style="white-space:pre"><em>width</em></span><code> LENGTH </code><span class="webflare-courier-new" style="white-space:pre"><em>length</em></span><code> </code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7987484"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7987486"></a>Specifies that an implant shape with width less than or equal to <span class="webflare-courier-new" style="white-space:pre"><em>width</em></span> vertically and length less than <span class="webflare-courier-new" style="white-space:pre"><em>length</em></span> horizontally in horizontal cell rows must be fully covered horizontally by other implant shapes that are vertically on two opposite sides less than or equal to <span class="webflare-courier-new" style="white-space:pre"><em>maxSpacing</em></span>. Abutting implant shapes should be merged if on the same row but not merged if on adjacent rows. <br /><em>Type</em>: Float, specified in microns square</p>
+</td>
+</tr>
+</tbody></table>
+
+
+
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 3-7
+<a id="pgfId-7987488"></a>Illustration of the Max Spacing Rule</strong></pi-para-indent>
+
+<p>
+<a id="pgfId-7987516"></a></p>
+<div class="webflare-div-image">
+<img width="668" height="423" src="images/Layer_Implant-8.gif" /></div>
+<h4>
+<a id="pgfId-7986841"></a>Min Enclosed Area Rule<a id="39439"></a></h4>
+
+<p>
+<a id="pgfId-7986842"></a>A min enclosed area rule can be used to specify the minimum area that is enclosed by shapes on the current implant layer.</p>
+<p>
+<a id="pgfId-7986843"></a>You can create a min enclosed area rule by using the following property definition:</p>
+
+<a id="pgfId-7986845"></a><a id="PropImplantMinEncAreaRule"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+PROPERTY LEF_CDN_MINENCLOSEDAREA
+ &quot;MINENCLOSEDAREA <em>area</em> 
+  ; &quot; ;</code></pre>
+
+<p>
+<a id="pgfId-7986846"></a>Where:</p>
+
+
+
+<p>
+<a id="pgfId-7986856"></a></p>
+<table class="webflareTable" id="#id7986847">
+<tbody><tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7986849"></a><code>MINENCLOSEDAREA </code><span class="webflare-courier-new" style="white-space:pre"><em>area</em></span><code> </code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986853"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986855"></a>Specifies the minimum area that is enclosed by shapes on the current implant layer. <br /><em>Type</em>: Float, specified in microns square</p>
+</td>
+</tr>
+</tbody></table>
+
+
+
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 3-8
+<a id="pgfId-7986857"></a>Example of the Min Enclosed Area Rule</strong></pi-para-indent>
+
+<p>
+<a id="pgfId-7986885"></a></p>
+<div class="webflare-div-image">
+<img width="668" height="344" src="images/Layer_Implant-9.gif" /></div>
+<h4>
+<a id="pgfId-7989985"></a>Minimum Height Rule<a id="16951"></a></h4>
+
+<p>
+<a id="pgfId-7989986"></a>You can create a minimum height rule by using the following property definition: </p>
+
+<a id="pgfId-7990044"></a><a id="PropImplantMinHeight"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+PROPERTY LEF_CDN_MINHEIGHT
+   &quot;MINHEIGHT <em>minHeight</em> WIDTH <em>maxWidth</em> OVERLAP <em>maxOverlap
+</em>   ; &quot; ;]</code></pre>
+
+<p>
+<a id="pgfId-7989989"></a>Where:</p>
+
+
+
+<p>
+<a id="pgfId-7990000"></a></p>
+<table class="webflareTable" id="#id7990277">
+<tbody><tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7989992"></a>MINHEIGHT <span class="webflare-courier-new" style="white-space:pre"><em>minHeight</em></span> WIDTH <span class="webflare-courier-new" style="white-space:pre"><em>maxWidth</em></span> OVERLAP <span class="webflare-courier-new" style="white-space:pre"><em>maxOverlap</em></span></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7989996"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7990188"></a>Specifies a minimum height rule for three implant layer shapes arranged in a staircase or notch pattern across three consecutive vertical cell rows. If the middle shape has a width less than or equal to <span class="webflare-courier-new" style="white-space:pre"><em>maxWidth</em></span>, and its horizontal overlap with both the top and bottom shapes does not exceed <span class="webflare-courier-new" style="white-space:pre"><em>maxOverlap</em></span>, then at least one of the three shapes must have a vertical height greater than or equal to <span class="webflare-courier-new" style="white-space:pre"><em>minHeight</em></span>. If all three shapes have height less than <span class="webflare-courier-new" style="white-space:pre"><em>minHeight</em></span>, it is a violation. </p>
+<p>
+<a id="pgfId-7989999"></a><em>Type</em>: Float, specified in microns.</p>
+</td>
+</tr>
+</tbody></table>
+
+
+
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 3-9
+<a id="pgfId-7990228"></a>Illustration of the Minimum Height Rule</strong></pi-para-indent>
+
+<p>
+<a id="pgfId-7990259"></a></p>
+<div class="webflare-div-image">
+<img width="668" height="439" src="images/Layer_Implant-10.gif" /></div>
+<h4>
+<a id="pgfId-7986887"></a>Min Step Rule<a id="72889"></a></h4>
+
+<p>
+<a id="pgfId-7986888"></a>You can create a min step rule by using the following property definition:</p>
+
+<a id="pgfId-7986890"></a><a id="PropImplantMinStep"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+PROPERTY LEF_CDN_MINSTEP
+   &quot;MINSTEP <em>minStepLength</em> MINADJACENTLENGTH <em>minAdjLength
+</em>   ; &quot; ;</code></pre>
+
+<p>
+<a id="pgfId-7986891"></a>Where:</p>
+
+
+
+<p>
+<a id="pgfId-7986902"></a></p>
+<table class="webflareTable" id="#id7986892">
+<tbody><tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7986894"></a><code>MINSTEP </code><span class="webflare-courier-new" style="white-space:pre"><em>minStepLength</em></span><code> MINADJACENTLENGTH </code><span class="webflare-courier-new" style="white-space:pre"><em>minAdjLength</em></span></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986898"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986900"></a>Specifies a min step length rule vertically on a pattern with three implant layer shapes forming a staircase on three consecutive vertical cell rows. The middle vertical cell length of the staircase must be greater than <span class="webflare-courier-new" style="white-space:pre"><em>minStepLength</em></span> if the lengths of both the adjacent horizontal edges are less than or equal to <span class="webflare-courier-new" style="white-space:pre"><em>minAdjLength</em></span>. The staircase pattern means that consecutive edges must form a concave corner and a convex corner.</p>
+<p>
+<a id="pgfId-7986901"></a>Type: Float, specified in microns</p>
+</td>
+</tr>
+</tbody></table>
+
+
+
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 3-10
+<a id="pgfId-7986903"></a>Illustration of the Min Step Rule</strong></pi-para-indent>
+
+<p>
+<a id="pgfId-7986934"></a></p>
+<div class="webflare-div-image">
+<img width="668" height="391" src="images/Layer_Implant-11.gif" /></div>
+
+
+
+<h4>
+<a id="pgfId-7986936"></a>Spacing Rule<a id="55223"></a></h4>
+
+<p>
+<a id="pgfId-7986937"></a>A spacing rule can be used to specify the spacing requirements for the current implant layer. You can create a spacing rule by using the following property definition:</p>
+
+<a id="pgfId-7986939"></a><a id="PropImplantSpacing"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+PROPERTY LEF_CDN_SPACING
+   &quot;SPACING <em>minSpacing</em> [LAYER <em>layerName2</em>] 
+       [HORIZONTAL|VERTICAL PRL <em>prl</em> ][EXCEPTABUTTED]
+            [EXCEPTCORNERTOUCH] [LENGTH <em>length</em>]
+            [INTERSECTLAYERS <em>layerNameList</em>...]
+       ; &quot; ;</code></pre>
+
+<p>
+<a id="pgfId-7986940"></a>Where:</p>
+
+
+<p>
+<a id="pgfId-7986994"></a></p>
+<table class="webflareTable" id="#id7986941">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986943"></a><code>EXCEPTABUTTED</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986945"></a>Specifies that the implant spacing rule is exempted if the two implant shapes are abutted. <code>PRL</code> in the orthogonal direction of the spacing (that is, vertical <code>PRL</code> in <code>HORIZONTAL</code> or horizontal <code>PRL</code> in <code>VERTICAL</code>) must be greater than <code>0</code> to trigger the exemption. In other words, the corner or point touch in the <code>VERTICAL</code> case for horizontal cell rows is not exempted.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7986947"></a><code>EXCEPTCORNERTOUCH</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986951"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986953"></a>Specifies that the implant spacing rule is exempted if the two implant shapes are corner or point touch in the <code>VERTICAL</code> case for horizontal cell rows.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7986955"></a><code>HORIZONTAL|VERTICAL PRL </code><span class="webflare-courier-new" style="white-space:pre"><em>prl</em></span></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986959"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986961"></a>Specifies that the implant spacing rule applies only in the given direction. By default, the spacing is applied horizontally for implant shapes on the same row. In the <code>VERTICAL</code> case, the rule applies only if the horizontal projected <code>PRL</code> is greater than <span class="webflare-courier-new" style="white-space:pre"><em>prl</em></span>. If <span class="webflare-courier-new" style="white-space:pre"><em>prl</em></span> is negative, the rule is checked for two implant shapes within abs(<span class="webflare-courier-new" style="white-space:pre"><em>prl</em></span>). </p>
+<p>
+<a id="pgfId-7986962"></a><em>Type</em>: Float, specified in microns</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7986964"></a><code>INTERSECTLAYERS </code><span class="webflare-courier-new" style="white-space:pre"><em>layerNameList</em></span><code>...</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986968"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986970"></a>Specifies that the spacing rule applies only if the spacing gap is covered by shapes in any implant layers in <span class="webflare-courier-new" style="white-space:pre"><em>layerNameList</em></span>. For <code>VERTICAL</code>, this construct should be applied only when a negative value is given in <code>PRL</code>. It is a violation only if the spacing gap is covered by shapes in any implant layers in <span class="webflare-courier-new" style="white-space:pre"><em>layerNameList</em></span> on both sides on two adjacent rows.</p>
+<p>
+<a id="pgfId-7986971"></a><em>Type</em>: String</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7986973"></a><code>LAYER </code><span class="webflare-courier-new" style="white-space:pre"><em>layerName2</em></span></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986977"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986979"></a>Specifies the name of another implant layer that requires extra spacing that is greater than or equal to <span class="webflare-courier-new" style="white-space:pre"><em>minSpacing</em></span> from this implant layer.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986981"></a><code>LENGTH </code><span class="webflare-courier-new" style="white-space:pre"><em>length</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986983"></a>Specifies that the spacing rule applies only to implant shapes with length less than <span class="webflare-courier-new" style="white-space:pre"><em>length</em></span>, which is the vertical height for horizontal cell rows. Implant shapes are not merged across different cell rows for length or height determination. In addition, an implant shape with length less than <span class="webflare-courier-new" style="white-space:pre"><em>length</em></span> does not need to honor any other implant spacing rule without <code>LENGTH</code>. </p>
+<p>
+<a id="pgfId-7986984"></a><em>Type</em>: Float, specified in microns</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7986986"></a><code>SPACING </code><span class="webflare-courier-new" style="white-space:pre"><em>minSpacing</em></span></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986990"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7986992"></a>Specifies the minimum spacing for the layer. This value affects the legal cell placement. </p>
+<p>
+<a id="pgfId-7986993"></a><em>Type</em>: Float, specified in microns</p>
+</td>
+</tr>
+</tbody></table>
+
+
+
+<h4><em>
+<a id="pgfId-7986995"></a>Spacing Rule Examples</em></h4>
+
+
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 3-11
+<a id="pgfId-7986996"></a>Illustration of the Spacing Rule</strong></pi-para-indent>
+
+<p>
+<a id="pgfId-7971060"></a></p>
+<div class="webflare-div-image">
+<img width="668" height="416" src="images/Layer_Implant-12.gif" /></div>
+
+
+
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 3-12
+<a id="pgfId-7987034"></a>Illustration of the Spacing Rule</strong></pi-para-indent>
+
+<p>
+<a id="pgfId-7987066"></a></p>
+<div class="webflare-div-image">
+<img width="668" height="333" src="images/Layer_Implant-13.gif" /></div>
+
+
+
+<h4>
+<a id="pgfId-7875044"></a><a id="35723"></a><a id="75251"></a>Width Rule</h4>
+
+<p>
+<a id="pgfId-7875045"></a>A width rule can be used to specify the width requirements for the current implant layer. You can create a spacing rule by using the following property definition:</p>
+
+<a id="pgfId-7875047"></a><a id="PropImplantWidth"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+[PROPERTY LEF_CDN_WIDTH
+   &quot;WIDTH <em>minWidth</em> [LAYER {<em>layerName2</em> | ANY} [NODIFFMERGE]]
+       [CELLHEIGHT <em>height</em> LAYER <em>layerName3</em>]
+       [WITHINLAYER <em>layerName
+</em>       |EXCEPTLAYER <em>exceptLayerName</em>]
+       [ZEROPRL [MAXWIDTH <em>maxWidth</em>]
+            [NOTALIGNEDROWWIDTH <em>width</em> LENGTH <em>length</em>]] 
+       [EXCEPTCORNERTOUCH][LENGTH <em>length</em>]
+       [CHECKIMPLANTGROUP <em>groupName</em>]
+       ]; &quot; ;</code></pre>
+
+<p>
+<a id="pgfId-7875048"></a>Where:</p>
+
+
+<p>
+<a id="pgfId-7875071"></a></p>
+<table class="webflareTable" id="#id7875049">
+<tbody><tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7988560"></a><code>CELLHEIGHT </code><span class="webflare-courier-new" style="white-space:pre"><em>height</em></span><code> LAYER </code><span class="webflare-courier-new" style="white-space:pre"><em>layerName3</em></span></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7988564"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7988571"></a>Specifies that the implant shapes in standard cells with height exactly equal to <span class="webflare-courier-new" style="white-space:pre"><em>height</em></span> should not be merged with the same implant shapes in horizontally abutted cells with shapes on <span class="webflare-courier-new" style="white-space:pre"><em>layerName3</em></span>. <span class="webflare-courier-new" style="white-space:pre"><em>layerName3</em></span> is typically a masterslice layer. When <span class="webflare-courier-new" style="white-space:pre"><em>height</em></span> is specified as 0, it means that cells with any height should not be merged with the same implant shapes in horizontally abutted cells with shapes on <span class="webflare-courier-new" style="white-space:pre"><em>layerName3</em></span>.</p>
+<p>
+<a id="pgfId-7988566"></a><em>Type</em>: String</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7905553"></a><code>CHECKIMPLANTGROUP </code><span class="webflare-courier-new" style="white-space:pre"><em>groupName</em></span></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7905557"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7905582"></a>Specifies that it is a violation only if the given implant group, <span class="webflare-courier-new" style="white-space:pre"><em>groupName</em></span>, to which the implant layer belongs also violates the width requirement at the same location. <br /><em>Type</em>: String</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7875051"></a><code>EXCEPTCORNERTOUCH</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7875055"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7875057"></a>Specifies that the width requirement does not apply if corners touch.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7988675"></a><code>EXCEPTLAYER </code><span class="webflare-courier-new" style="white-space:pre"><em>exceptLayerName</em></span></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7988679"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7988686"></a>Specifies that the implant shapes overlapping with the shapes in <span class="webflare-courier-new" style="white-space:pre"><em>exceptLayerName</em></span>, which should be a masterslice layer with the <code>ABUTFILLER</code> type property, in the same cell should not be merged with other implant shapes that are not overlapping with the shapes in <span class="webflare-courier-new" style="white-space:pre"><em>exceptLayerName</em></span>, on which the width rule is checked. Typically, only standard cells contain OBS shapes in <span class="webflare-courier-new" style="white-space:pre"><em>exceptLayerName</em></span>.</p>
+<p>
+<a id="pgfId-7988681"></a><em>Type</em>: String</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7905602"></a><code>LAYER {</code><span class="webflare-courier-new" style="white-space:pre"><em>layerName2</em></span><code> | ANY</code>}</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7905606"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7981810"></a>Specifies the name of another implant layer that requires the width check after its shapes merge with the shapes on the current implant layer. If <code>ANY</code> is specified, the width check is performed one by one between the current implant layer and any other implant layers.<br /><em>Type</em>: String</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7905644"></a><code>LENGTH </code><span class="webflare-courier-new" style="white-space:pre"><em>length</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7905668"></a>Specifies that the width rule applies only to implant shapes with length less than <span class="webflare-courier-new" style="white-space:pre"><em>length</em></span>, which is the vertical height for horizontal cell rows. Implant shapes should be merged across different cell rows for length or height determination. In addition, an implant shape with length less than <span class="webflare-courier-new" style="white-space:pre"><em>length</em></span> does not need to honor any other implant width rule without <code>LENGTH</code>. <br /><em>Type</em>: Float, specified in microns</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7981822"></a><code>MAXWIDTH </code><span class="webflare-courier-new" style="white-space:pre"><em>maxWidth</em></span></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7989850"></a><code>NODIFFMERGE</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7989852"></a>Specifies that shapes belonging to different implant layers defined in <code>LAYER</code> must not be merged and only the shapes from the same implant layer should be merged prior to applying the width rule check.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7989888"></a><code>NOTALIGNEDROWWIDTH </code><span class="webflare-courier-new" style="white-space:pre"><em>width</em></span><code> LENGTH </code><span class="webflare-courier-new" style="white-space:pre"><em>length</em></span></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7989854"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7989915"></a>Specifies that the rule for width in the direction perpendicular to the row is checked only if one of the implant shapes with a width less than or equal to <span class="webflare-courier-new" style="white-space:pre"><em>width</em></span> is located within a cell whose length is less than <span class="webflare-courier-new" style="white-space:pre"><em>length</em></span>, which is the vertical height for horizontal cell rows. This rule is checked only on the edges that are not aligned with the row boundary.<br /><em>Type</em>: Float, specified in microns</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7981826"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7981828"></a>Specifies that the adjacent row width checking applies only if the width of any shapes on a row is less than or equal to <span class="webflare-courier-new" style="white-space:pre"><em>maxWidth</em></span>.<br /><em>Type</em>: Float, specified in microns</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7875059"></a><code>WIDTH </code><span class="webflare-courier-new" style="white-space:pre"><em>minWidth</em></span></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7875063"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7875065"></a>Specifies the minimum width for this layer. This value affects the legal cell placement. <br /><em>Type</em>: Float, specified in microns</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-7988778"></a><code>WITHINLAYER </code><span class="webflare-courier-new" style="white-space:pre"><em>layerName</em></span></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7988782"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7988789"></a>Specifies that the implant shapes overlapping with the shapes in <span class="webflare-courier-new" style="white-space:pre"><em>layerName</em></span>, which should be a masterslice layer, should be checked against <span class="webflare-courier-new" style="white-space:pre"><em>minWidth</em></span> by themselves. In other words, those implant shapes should not be merged with other implant shapes that are not overlapping with the shapes in <span class="webflare-courier-new" style="white-space:pre"><em>layerName</em></span>. Typically, only standard cells contain OBS shapes in <span class="webflare-courier-new" style="white-space:pre"><em>layerName</em></span>.</p>
+<p>
+<a id="pgfId-7988784"></a><em>Type</em>: String</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7875068"></a><code>ZEROPRL</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-7875070"></a>Specifies that the width requirement applies only for two implant shapes on adjacent rows with zero <code>PRL</code> in the direction perpendicular to the row direction.</p>
+</td>
+</tr>
+</tbody></table>
+
+
+
+<h4><em>
+<a id="pgfId-7987083"></a>Width Rule Examples</em></h4>
+
+
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 3-13
+<a id="pgfId-7987085"></a>Example of the Width Rule with EXCEPTCORNERTOUCH</strong></pi-para-indent>
+
+<p>
+<a id="pgfId-7987107"></a></p>
+<div class="webflare-div-image">
+<img width="668" height="369" src="images/Layer_Implant-14.gif" /></div>
+
+
+
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 3-14
+<a id="pgfId-7988958"></a>Example of the Width Rule with EXCEPTLAYER</strong></pi-para-indent>
+
+<p>
+<a id="pgfId-7988986"></a></p>
+<div class="webflare-div-image">
+<img width="668" height="315" src="images/Layer_Implant-15.gif" /></div>
+<ul><li>
+<a id="pgfId-7987108"></a>The following example illustrates a Width rule with <code>CHECKIMPLANTGROUP</code>:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id7987109">
+<a id="pgfId-7987109"></a>PROPERTYDEFINITIONS</pre><pre class="webflare-pre-block webflare-courier-new" id="#id7987110">
+<a id="pgfId-7987110"></a>LIBRARY LEF_CDN_IMPLANTGROUP STRING &quot;</pre><pre class="webflare-pre-block webflare-courier-new" id="#id7987111">
+<a id="pgfId-7987111"></a>      IMPLANTGROUP IPG1 LAYER IP1 IP2 IP3 BASEDLAYER IP1 ;</pre><pre class="webflare-pre-block webflare-courier-new" id="#id7987112">
+<a id="pgfId-7987112"></a>      IMPLANTGROUP IPG2 LAYER IP1 IP4 BASEDLAYER IP1 ; &quot; ;</pre><pre class="webflare-pre-block webflare-courier-new" id="#id7987113">
+<a id="pgfId-7987113"></a>END PROPERTYDEFINITIONS</pre><pre class="webflare-pre-block webflare-courier-new" id="#id7987114">
+<a id="pgfId-7987114"></a></pre>
+<a id="pgfId-7987115"></a>On layer <code>IP1</code>:<pre class="webflare-pre-block webflare-courier-new" id="#id7987116">
+<a id="pgfId-7987116"></a>PROPERTY LEF_CDN_WIDTH  &quot;</pre><pre class="webflare-pre-block webflare-courier-new" id="#id7987117">
+<a id="pgfId-7987117"></a>      WIDTH 0.15 LAYER IP2 ZEROPRL </pre><pre class="webflare-pre-block webflare-courier-new" id="#id7987118">
+<a id="pgfId-7987118"></a>          CHECKIMPLANTGROUP IPG1 ; &quot; ;</pre><br /><strong class="webflare-fig-line-height">Figure 3-15
+<a id="pgfId-7987119"></a>Example of the Width Rule with CHECKIMPLANTGROUP</strong>
+<a id="pgfId-7987133"></a><div class="webflare-div-image">
+<img width="668" height="398" src="images/Layer_Implant-16.gif" /></div></li><li>
+<a id="pgfId-7987134"></a>The following example illustrates a Width rule with <code>MAXWIDTH</code>:<br />
+<a id="pgfId-7987135"></a>On layer <code>IP1</code>:<pre class="webflare-pre-block webflare-courier-new" id="#id7987136">
+<a id="pgfId-7987136"></a>PROPERTY LEF58_WIDTH  &quot;</pre><pre class="webflare-pre-block webflare-courier-new" id="#id7987137">
+<a id="pgfId-7987137"></a>      WIDTH 0.15 ZEROPRL MAXWIDTH 0.4 ;</pre><pre class="webflare-pre-block webflare-courier-new" id="#id7987138">
+<a id="pgfId-7987138"></a>      WIDTH 0.15 LAYER IP2 ZEROPRL MAXWIDTH 0.4 ; &quot; ;</pre><br /><strong class="webflare-fig-line-height">Figure 3-16
+<a id="pgfId-7987139"></a>Example of the Width Rule with MAXWIDTH</strong>
+<a id="pgfId-7987247"></a><div class="webflare-div-image">
+<img width="668" height="741" src="images/Layer_Implant-17.gif" /></div></li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-1135264"></a></p>
+
+
+
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="Layer_Cut.html" id="prev" title="LEF Syntax - Layer (Cut)">LEF Syntax - Layer (Cut)</a></em></b><b><em><a href="Layer_Masterslice.html" id="nex" title="LEF Syntax - Layer (Masterslice)">LEF Syntax - Layer (Masterslic ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

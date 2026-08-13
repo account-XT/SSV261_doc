@@ -1,0 +1,102 @@
+
+<html><head><title>State-Propagation-Based Vectorless Methodology</title>
+<meta name="page_sequence" content="24002002" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666166" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="State-Propagation-Based Vectorless Methodology" />
+<meta name="Keywords" content="vectorless,state-propagation,,fanout,macro" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666166" />
+<meta name="NextFile" content="Vector-Driven_Methodology.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Probability-Based_Vectorless_Methodology.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- State-Propagation-Based Vectorless Methodology" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Probability-Based_Vectorless_Methodology.html" title="Probability-Based_Vectorless_Methodology">Probability-Based_Vectorless_M ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Vector-Driven_Methodology.html" title="Vector-Driven_Methodology">Vector-Driven_Methodology</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>State-Propagation-Based Vectorless Methodology</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="fontredcadence">
+<p>The vectorless, state-propagation-based approach can be done using the following two methods:</p>
+<ul><li><strong>User-defined activity</strong> - the software will schedule the clock sources, primary inputs, sequential outputs, and macro outputs based on the user-defined activity settings, along with the cells in the fanout cone of such instances. This flow requires the following optional inputs: flip-flop activity, clock network activity (clock gating factor), primary input activity, and macro activity. <br />Each clock cycle simulates a different set of cells to switch based on the following configurable parameters:<ul><li>Clock domain frequency: Prioritizes scheduling cells associated with faster clocks</li><li>Fanout: Prioritizes scheduling cells with higher fanout</li><li>User-defined activity: Prioritizes scheduling cells with higher activity</li></ul><br />This flow is enabled by the following command: <code>set_db power_method dynamic_vectorless power_enable_state_propagation true</code><br />The state-propagation-based dynamic analysis generates a switching scenario file (<code>voltus_power.stateprop.switchsrc</code>) that contains the switching information of flip-flops.<pre class="webflare-pre-block webflare-courier-new">The following is a snippet of the report:
+0.0973 DFF11/DFF Q r
+0.0987 DFF31/DFF Q f
+0.1064 DFF11/DFF QN f
+0.1067 DFF31/DFF QN r
+....</pre>This report contains the following columns:<ul><li>First column: time values when the flip-flops toggle</li><li>Second column: flip-flop name</li><li>Third column: output pin of the flip-flop</li><li>Fourth column: present logic of the pin, that is, r indicates &quot;rise&quot; and f indicates &quot;fall&quot;</li></ul><br />For every flip-flop, toggles at both Q and QN outputs are reported in this file.</li><li><strong>User-defined power target</strong> - the software will utilize the user-defined power targets for full-chip power analysis in the XP mode. You can specify the power targets for full-chip, physical block, logical block, and power/ground net. When these targets are specified, Voltus will automatically scale the toggle rates of clock gate ratio, input, macro, and sequential activities to meet the specified power targets. The tool will run multiple iterations of state propagation with a different activity value (pre-defined upper and lower bounds) for each iteration till the power targets are achieved.<br />This flow is enabled by the following command: <code> set_db power_method dynamic_vectorless power_enable_state_propagation true power_enable_power_target_flow true</code><br />In addition, the flow has the following steps:<ul><li>Specify the power target values using the <code>set_power <span class="webflare-courier-new"><em>value</em></span> [&#8211;insts/-base_cells <span class="webflare-courier-new"><em>blockname</em></span>] [&#8211;pg_net <span class="webflare-courier-new"><em>netname</em></span>] </code>command.</li><li>Specify whether to keep the activities fixed or automatically adjust the activity values for each iteration. This can be specified using the following parameters:<ul><li><code>power_keep_clock_gate_ratio_in_iterations true | false</code></li><li><code>power_adjust_input_activity_in_iterations true|false</code></li><li><code>power_adjust_macro_activity_in_iterations true|false</code></li></ul><br />When values are set to fixed for either CGO, input or macro activity, the user-defined values for these parameters (specified with the <code>set_default_switching_activity</code> command) will be honored.</li></ul></li></ul></span></p>
+<h4 id="StatePropagationBasedVectorlessMethodology-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Vectorless_Methodology.html">Vectorless Methodology</a></li><li><a href="Probability-Based_Vectorless_Methodology.html">Probability-Based Vectorless Methodology</a></li><li><a href="Vector-Driven_Methodology.html">Vector-Driven Methodology</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Probability-Based_Vectorless_Methodology.html" id="prev" title="Probability-Based_Vectorless_Methodology">Probability-Based_Vectorless_M ...</a></em></b><b><em><a href="Vector-Driven_Methodology.html" id="nex" title="Vector-Driven_Methodology">Vector-Driven_Methodology</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

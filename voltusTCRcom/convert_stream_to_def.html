@@ -1,0 +1,336 @@
+
+<html><head><title>convert_stream_to_def</title>
+<meta name="page_sequence" content="28004000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666297" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="convert_stream_to_def" />
+<meta name="Keywords" content="GDS2DEF utility,GDSII file,DEF file" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Rail Analysis," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusTCRcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666297" />
+<meta name="NextFile" content="extract_package.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="connect_die_package.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Text Reference Manual  -- convert_stream_to_def" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltuscuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusTCRcomTOC.html">Contents</a></li><li><a class="prev" href="connect_die_package.html" title="connect_die_package">connect_die_package</a></li><li style="float: right;"><a class="viewPrint" href="voltusTCRcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="extract_package.html" title="extract_package">extract_package</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Text Reference Manual <br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>convert_stream_to_def</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span id="convert_stream_to_def-convert_stream_to_def"></span><span class="confluence-anchor-link" id="convert_stream_to_def-convert_stream_to_def"></span> <code><br /><code><code>convert_stream_to_def</code><br /><code>[-help] </code><br /><code>[-black_box_cell_file <code><em>filename</em></code>]<br />[-esd_cell_bbox_file <em>filename</em>]<br />[-esd_marker_layer_file <em>filename</em>]<br />[-extract_signal_net_logic_info_only]<br />[-ignore_stream_inst_name]</code><br /><code>[-inst_name_file <code><em>filename</em></code>]<br />[-inst_name_prefix <em>prefix</em>]</code><br /><code>-net_location_file <code><em>filename</em></code></code><br /><code><code>[-output_components {ALL | NONE | CONN}]</code></code><br /><code>-output_def_file <code><em>filename</em></code><br /><code>[-output_lef_macros <code><em>filename</em></code>]</code></code><br /><code>-power_grid_library <em>libraryname<br /></em></code>[-print_complete_short_path]<br />[-spef_file <em>filename</em>]<br />-stream_file <em>filename</em><br />-stream_layer_map <em>filename</em><br /><code>-top_cell <code><em>cellname</em></code></code><br /><code>[-use_stream_label {ALL | TOP | &lt;<em>tech_layer_name</em>&gt; | &lt;<em>cell_name</em>&gt;:&lt;<em>tech_layer_name</em>&gt; | &lt;<em>cell_name</em>&gt;:ALL}] </code><br /><code>[-verilog_file <code><em>filename</em></code>]</code></code></code><code><code><code><code><br /><code><code><code><code>[<code>-zero_pin_size</code>]</code></code></code></code><br /></code></code></code></code></p>
+
+<p>A GDS2DEF utility that converts a given GDSII file to a DEF file for power/rail signoff analysis. The utility can convert both cell-level GDS and full-chip level GDS to DEF. The generated DEF contains all the geometries for the P/G routing, the specified P/G pin information, component and logical connectivity information.</p>
+<h4 id="convert_stream_to_def-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd"><code>-help</code></td>
+<td class="confluenceTd">Outputs the command usage.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-black_box_cell_file&#xa0;<em>filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">
+<p>Specifies the name of a file containing a list of black box cells that the utility is to ignore. You can specify both exact string matches and wildcard searches in the specified file.</p>
+
+<p>For exact string matches, each cell name must reside on a separate line in the file, as shown below:</p>
+
+<p><code>CellA</code><br /><code>CellB</code></p>
+
+<p>The wildcard search feature allows you to search cell names that contain wildcard characters, such as square brackets and underscore. When you want to perform wildcard search, type the keyword <code>wildcard</code> first, followed by the cell name. For example, if you want to ignore cell names which contains CLK, add one line <code>wildcard .*CLK.*</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>-esd_marker_layer_file <em>filename</em></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies a file that includes a list of ESD cell/instance names and their corresponding GDS marker layers that represent the bounding box of the ESD cells. The format of the file is:<br /><code>&lt;cell_name&gt; &lt;marker_layer&gt; [top_layer] [bottom_layer]</code></p>
+
+<p>Here,</p>
+<ul><li><code>cell_name</code> is the ESD cell/instance name</li><li><code>marker_layer</code>&#xa0;could contain multiple GDS layers, separated by &#8220;;&#8221;</li><li>The optional&#xa0;<code>top_layer</code> and&#xa0;<code>bottom_layer</code> specifies the top and bottom technology layers of the ESD cell pin shape.&#xa0;You can use these optional arguments to specify the top and bottom technology layers of the ESD cell pin shape. This provides you with the flexibility to specify the lowest layers to be used for creating pins in the LEF. In the following example, only the shapes between M3 and M1 layers are ESD cell pin shapes:</li></ul>
+<p><u>Marker file example</u>:</p>
+
+<p><code>ESD_diode 168;255:3 M3 M1</code><br /><code>ESD_clamp 122 M3 M1</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>-esd_cell_bbox_file <em>filename</em></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies a file that includes the bounding box for each ESD cell. The format of the file is:<br /><code>&lt;<code>cell_name</code>&gt; &lt;x1 y1 x2 y2&gt; [top_layer] [bottom_layer]</code></p>
+
+<p>Here,</p>
+<ul><li><code>cell_name</code> is the ESD cell/instance name</li><li><code>x1 y1 x2 y2</code> are the bounding box coordinates</li><li>The optional&#xa0;<code>top_layer</code> and&#xa0;<code>bottom_layer</code> specifies the top and bottom technology layers of the ESD cell pin shape.&#xa0;You can use these optional arguments to specify the top and bottom technology layers of the ESD cell pin shape. This provides you with the flexibility to specify the lowest layers to be used for creating pins in the LEF. In the following example, only the shapes between AP and&#xa0;M11 layers are ESD cell pin shapes:</li></ul>
+<p><u>Bbox file example</u>:</p>
+
+<p><code>ESD_diode_0 1281296 860923 1296972 895445 AP M11</code><br /><code>ESD_diode_1 1281296 898651 1296972 933173 AP M11</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code><code><code><code><code>-extract_signal_net_logic_info_only</code></code></code></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to print only the logical connectivity for the signal nets in the <code>NETS</code> section of the output DEF file. If this parameter is not specified, the software prints both the logical connectivity and routing shapes for the signal nets in the <code>SPECIALNETS</code> section of the DEF file.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-stream_file <code><em>filename</em></code></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd"><span>Mandatory parameter.</span> Specifies the name of the input GDS file. The top cell name in the GDSII file is the design name in the generated DEF.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-stream_layer_map <code><code><em>filename</em></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">
+<p><span>Mandatory parameter.</span> The layer mapping file between GDS and tech layers. All the layers defined in a given mapping file is extracted. The layers not defined in the mapping file are ignored.</p>
+
+<p>The format of the layer mapping file is:</p>
+
+<p><code>&lt;layer_type&gt; &lt;<em>tech layer name</em>&gt; &lt;gds&gt; &lt;<em>gds layer#</em>&gt; [gds layer data type] [PORT] [<code>TEXT_ONLY</code>] <code>&lt;<em>mask keyword</em>&gt;</code> <span style="color:var(--ds-text,#172b4d);"><code>[dummy] <br /></code></span></code></p>
+
+<p><span style="color:var(--ds-text,#172b4d);">The format of the layer mapping file to identify the die area in the output DEF is:</span></p>
+
+<p><span style="color:var(--ds-text,#172b4d);"><code>&lt;layer&gt;&#xa0;<strong><span style="color:var(--ds-text,#172b4d);"><code>&lt;<code>prBoundary</code>&gt;</code></span></strong> &lt;gds&gt; &lt;<em>gds layer#</em>&gt; [gds layer data type]&#xa0; <span><br /></span></code></span></p>
+
+<p><u><strong>Format Description</strong></u>:</p>
+
+<p><code>&lt;layer_type&gt;</code> specifies the type of library layer. The various layer types are: <code>via</code>, <code>metal</code>, and <code>layer</code>.</p>
+
+<p><code>&lt;<em>tech layer name</em>&gt;</code>&#xa0;specifies the name of the library layer to map to the GDSII layer number. The library layers are technology layers which can be dumped using the <code>Techgen &#8211;techinfo</code> command.</p>
+
+<p><code>&lt;gds&gt;</code>&#xa0;specifies the keyword for the GDS layer mapping.</p>
+
+<p><code>&lt;<em>gds layer#</em>&gt;</code>&#xa0;specifies the layer number of the GDSII layer.</p>
+
+<p><code>[gds layer data type]</code>&#xa0;specifies the optional number of the subclass for the GDSII layer. If you do not specify a datatype, the software uses all datatypes for that GDSII layer. If GDS datatype is not defined, the software considers it as a regular layout routing layer where all the shapes will be extracted.</p>
+
+<p>The GDS layer may have additional information/attribute assigned using the following keywords:</p>
+<ul><li><code>PORT</code>: Converts text labels in this layer to ports.</li><li><code>TEXT_ONLY</code>: Includes only the text in the named layer and ignores all geometries.</li></ul>
+<p><code><code>&lt;<em>mask keyword</em>&gt;&#xa0;</code></code>keyword used to define the back-end metal layers with color masks (MASK A and Mask B).&#xa0;</p>
+
+<p><code><span style="color:var(--ds-text,#172b4d);"><code>[dummy]</code></span></code> indicates that the layer is a metal fill layer. The <code>convert_stream_to_def</code> utility identifies these metal fill shapes and writes them to the <code>FILLS</code> section in the output DEF.</p>
+
+<p><code><span style="color:var(--ds-text,#172b4d);"><code>&lt;prBoundary&gt;</code></span></code> specifies that the shapes on the <code>prBoundary</code> (Place-and-Route Boundaries) layer are used to determine the die area in the output DEF. This keyword can be used if you want to have the required die area in the output DEF file. <span>If the&#xa0;<code>prBoundary</code> keyword is not specified, the die area is determined by the routing shapes specified in the GDS file, cell size, and the pin shapes of all the layers.</span></p>
+
+<p><u>Example1:</u></p>
+
+<p><code>metal METAL1 gds 15</code><br /><code>via VIA1 gds 16</code></p>
+
+<p><u>Example2:</u></p>
+
+<p>The following is a sample layermap file with the mask keywords (<code>mask_a</code> and <code>mask_b</code>):</p>
+
+<p><code>metal&#xa0;<code>METAL1</code> gds 31 250</code><br /><code>metal&#xa0;<code>METAL1</code> gds 31 255 <span style="color:var(--ds-text-accent-blue,#0055cc);">mask_a</span></code><br /><code>metal&#xa0;<code>METAL1</code> gds 31 256 <span style="color:var(--ds-text-accent-blue,#0055cc);">mask_b</span></code></p>
+
+<p>Here, the mask and main layers are defined using the same GDS layer number 31, but uses a different GDS data type (250, 255, and 256).</p>
+
+<p><u>Example3:</u></p>
+
+<p>The following is a sample layermap file with the <code>dummy</code> keyword:<code><br />metal&#xa0;
+          <code>METAL5</code> gds 35 367 <span style="color:var(--ds-text-accent-blue,#0055cc);">dummy</span></code><code><span style="color:var(--ds-text-accent-blue,#0055cc);">&#xa0;</span><br /></code></p>
+
+<p>Here, the layer with the GDS layer ID <code>35</code> and data type <code>367</code> contains the metal fill shapes only.</p>
+
+<p><u>Example4:</u></p>
+The following is a sample layermap file with the&#xa0;<code>prBoundary</code> keyword:<span style="color:var(--ds-text,#172b4d);"><code><br />layer&#xa0;&#xa0; <span style="color:var(--ds-text-accent-blue,#0055cc);">prBoundary</span>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; gds&#xa0;&#xa0;&#xa0;&#xa0; 62 21</code></span></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code><code>-ignore_stream_inst_name</code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to ignore the instance names from the specified GDS file, and the software will then automatically assign instance names to all the instances in the output DEF and Verilog files. This parameter can be used if instance names in the GDS file cannot be used, primarily in cases, such as duplicate instance names.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-inst_name_file <code><em>filename</em></code></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">
+<p>Specifies the file name containing instance names for the generated DEF in the following format:</p>
+
+<p><code>&lt;x coord&gt; &lt;y coord&gt; &lt;instance name&gt;</code></p>
+
+<p>The x y coordinates are in the unit of micron. The priority of getting an instance name is:</p>
+<ol><li>instance name file</li><li>GDS label</li><li>internally assigned name</li></ol>
+<p>The <code>&#8211;inst_name_file</code> parameter allows to provide user-specified instance names. The <code>convert_stream_to_def</code> utility reads the GDS label to decide the instance name. If there are no labels, the software internally assigns instance names.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code><code><code><code><code><code>-inst_name_prefix <em>prefix</em></code></code></code></code></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies a prefix for all the instance names in the output DEF and Verilog files.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-net_location_file <em>filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p><span>Mandatory parameter.</span> Specifies the name of the net location file containing a list of pin locations for nets that needed to be considered. All the geometries of the P/G nets as well as the instance pins connected to the specified P/G nets are included in the <code>SPECIALNETS</code> section of DEF. The instances connected to the P/G nets are included in the <code>COMPONENTS</code> section of DEF.</p>
+
+<p>The format of the net location file is:</p>
+
+<p><code>&lt;<em>net name</em>&gt; &lt;<em>x loc of pin</em>&gt; &lt;<em>y loc of pin</em>&gt; &lt;<em>layer</em>&gt; &lt;<code><span style="color:var(--ds-text,#172b4d);">POWER|GROUND|SIGNAL</span></code>&gt; [<em>pin name</em>]</code></p>
+
+<p><u>Example</u>:</p>
+
+<p><code>VDD 60 73 METAL3 POWER</code><br /><code>VSS 75 40 METAL2 GROUND</code></p>
+
+<p>Here,</p>
+<ul><li>The x/y location in the file has the unit of micron.&#xa0;</li><li>The layer name is the tech layer name.</li><li>The type of a given net can only be POWER, GROUND, or SIGNAL. If the net type is marked as <code>SIGNAL</code>, the net will be traced from the GDS file and included in the <code>SPECIALNETS</code> section with &#8220;<code>USE SIGNAL</code>&#8221; in the output DEF file. In addition, the signal pin connectivity is specified for the net.</li><li>The pin name field is optional. If there is no pin name field, the pin name will be same as the net name.</li></ul>
+<p>If you do not provide pin locations, the utility uses the GDS text labels in either the top-level cell or cells throughout the hierarchy to get the location. In such a case, the format of net location file is:</p>
+
+<p><code>&lt;<em>net name</em>&gt; &lt;<code><code><span style="color:var(--ds-text,#172b4d);">POWER|GROUND|SIGNAL</span></code></code>&gt;</code></p>
+
+<p><u>Example</u>:</p>
+
+<p><code>VDD POWER</code><br /><code>VSS GROUND</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code><code>-output_components {ALL | NONE | CONN}</code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies the components to be printed in the DEF file <code>COMPONENTS</code> section during GDS to DEF conversion. The default is <code>ALL</code>.<br /><ul><li><p class="_mce_tagged_br"><code>ALL</code>: Specifies to output all the instances in the DEF Components section.</p>
+</li><li>
+<p><code>NONE</code>: Specifies not to print instances.</p>
+</li><li>
+<p><code>CONN</code>: Specifies to output instances with logical connectivity only.</p>
+</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-output_def_file <em>filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1"><span>Mandatory parameter.</span> Specifies the name of the output DEF file. If the given DEF name is specified with &#8220;<code>.gz</code>&#8221;, the software will gzip the DEF file to reduce the file size.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>-output_lef_macros</code></code> <code><em>filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the name of the file containing a list of macros for which LEF files are to be generated. One LEF file is generated for each macro. The generated LEF pin shapes are all shapes that connect to top-level nets on all metal/via layer shapes. The cell boundary of the LEF macro is derived by the bounding box of all shapes within the GDS cell.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-power_grid_library <em>libraryname</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Mandatory parameter. Specifies the name of the merged power-grid library (.cl). You can specify only a single .cl library.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code><code><code>-print_complete_short_path</code></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to print the complete shorting path when there is a short between two nets. When this parameter is specified, the entire shorting path is assigned to one of the shorted nets and the path is printed in the generated DEF file. The shapes of the shorting path will be assigned to the net that is specified first in the net location file. For example, if a tracing point of VDD is shorted with a tracing point of VSS, the software honors the net that is defined first in the net location file. <br />
+<p>If this parameter is not specified, the software assigns the shapes of the path to either of the shorted nets by default.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code><code><code>-spef_file</code> <code><code><code><code><em>filename</em></code></code></code></code></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the name of the SPEF file that can be used to include the signal nets in the generated DEF file. The input SPEF file is required to have layer annotation in the <code>RES</code> statements to indicate the pin node layers.</p>
+
+<p>For the signal nets, both the <code>*P</code> and <code>*I</code> nodes are used as the starting tracing points, and the SPEF file pins <code>(*P)</code> are honored as the top-level pins and are reported in the <code>PINS</code> section in the output DEF file. For the PG nets, the <code>*P</code> nodes and the user-defined locations in the net location file are used as the starting tracing points. The SPEF file connections (<code>*I</code> statements) are honored when generating the DEF logic connectivity for both the signal and PG nets. That is, the <code>convert_stream_to_def</code> utility relies on the SPEF file for logic connection if a SPEF file is specified. The instance and pin names are from the SPEF <code>*I</code> statements. The output DEF file includes all the signal net pins from <code>*P</code>&#xa0; in the <code>PINS</code> section, the signal routing shapes in the <code>NETS</code> section, and the PG net routing shapes in the <code>SPECIALNETS</code> section.</p>
+
+<p>In addition to the SPEF file, you need to specify the following parameters for including the signal nets in the DEF file:</p>
+<ul><li><code>-stream_file</code></li><li><code>-net_location_file</code></li><li><code>-power_grid_library</code></li><li><code>-stream_layer_map&#xa0; <br /></code></li><li><code>-output_def_file <br /></code></li><li><code>-top_cell</code></li></ul>
+<p><strong>Notes</strong>:</p>
+<ul><li>The <code>-net_location_file</code> parameter is used to identify the power and ground nets, and therefore the remaining nets are considered as signal nets.</li><li>The <code>-power_grid_library</code> specifies the name of the power-grid library that includes the list of standard cells or macros that should be consistent with the SPEF file. That is, the cell of the instances in the SPEF file should be defined in the PGV.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-top_cell <em>cellname</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1"><span>Mandatory parameter.</span> Specifies the top cell name in the GDSII file.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-use_stream_label<code><code><code> {ALL | TOP | &lt;<em>tech_layer_name</em>&gt; | &lt;<em>cell_name</em>&gt;:&lt;<em>tech_layer_name</em>&gt; | &lt;<em>cell_name</em>&gt;:ALL&gt;}</code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the criteria for selecting text labels.</p>
+<ul><li><code>ALL</code>: specifies to honor all the text labels from GDS.</li><li><code>TOP</code>: specifies to honor just the top-level text labels.</li><li><em><code>&lt;<code><code><code><code><em>tech_layer_name</em></code></code></code></code>&gt;</code></em>: specifies to honor all the text labels on the specified layer.</li><li><code>&lt;<em>cellname</em>&gt;:&lt;<code><code><code><code><em>tech_layer_name</em></code></code></code></code>&gt;</code>: specifies to honor all the text labels of the specified GDS cell on the specified layer.</li><li><code>&lt;<em>cellname</em>&gt;:ALL</code>: specifies to honor all the text labels of the specified GDS cell.</li></ul>
+<p>The following example specifies to use the text labels of the cell &quot;hierblock&quot; on layer METAL10:</p>
+
+<p><code>convert_stream_to_def&#xa0;<code>-use_stream_label hierblock:METAL10</code></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-verilog_file <code><code><em>filename</em></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies the name of the output verilog file. This parameter allows you to use the GUI to display the rail analysis results of the GDS-only flow.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code><code><code>-zero_pin_size</code></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to set the pin shape to size zero &quot;(0 0)(0 0)&quot; in the output DEF file. You can use this parameter when the port shape is outside the drawn shape (metal geometry) at places where the port label is defined near the edge of the geometry.</td>
+</tr>
+</tbody></table></div>
+<h4 id="convert_stream_to_def-Examples">Examples</h4>
+<ul><li>The following command converts the specified GDS file <code>new.gds</code> to a DEF file <code>top.def</code>.<br /><code>convert_stream_to_def -net_location_file net.loc -stream_file new.gds -<code>power_grid_library</code> ../pv_library.cl -stream_layer_map lmap -top_cell cella -output_def_file top.def</code></li><li>The following command converts the specified GDS file <code>chip.gds</code> to a DEF file <code>my.def</code>:<br /><code>convert_stream_to_def -stream_file chip.gds.gz -power_grid_library&#xa0; {pgv/techonly/techonly.cl&#xa0;&#xa0; pgv/full.cl} \</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;
+ -net_location_file netlocfile -stream_layer_map&#xa0; layermap -output_def_file 
+my.def -top_cell chip -spef_file chip.spef.gz<br /></code>Here, the SPEF file <code>chip.spef</code> is specified to include the signal nets in the output DEF file.</li><li>The following command specifies a marker layer file&#xa0;<code>esdcells</code> to enable ESD analysis using <code>convert_stream_to_def</code>:<br /><code>convert_stream_to_def
+ -stream_file gw16_500_usr_test.gds&#xa0; -power_grid_library { 
+/../TECH/techonly.cl }&#xa0; -net_location_file my.nlf -stream_layer_map&#xa0; 
+gds_layer.map \</code><br /><code>&#xa0;&#xa0;&#xa0; -output_def_file my.def&#xa0; -top_cell gw16_500_usr -use_stream_label ALL -esd_marker_layer_file esdcells</code>&#xa0; <br /><code><span class="confluence-link"><br />convert_stream_to_def</span></code> utility generates a LEF file for each ESD cell specified in the <code>esdcells</code> file to enable PGV generation. The output DEF includes the user-defined nets and the ESD instances based on the specified marker layer file.<br /><br /></li></ul><h4 id="convert_stream_to_def-RelatedTopics">Related Topics</h4>
+<ul><li>&quot;<u>GDS2DEF Utility</u>&quot; in the&#xa0;<em>Voltus User Guide</em></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="connect_die_package.html" id="prev" title="connect_die_package">connect_die_package</a></em></b><b><em><a href="extract_package.html" id="nex" title="extract_package">extract_package</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

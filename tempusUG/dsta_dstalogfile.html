@@ -1,0 +1,249 @@
+
+<html><head><title>DSTA Log Files</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823941" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="DSTA Log Files" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823941" />
+<meta name="NextFile" content="dsta_dstaflow.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="dsta_lsfmachine.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- DSTA Log Files" />
+<meta name="Keywords" content="DSTA Operational Tips,dsta log file" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="DSTA,Stylus" />
+<meta name="prod_subfeature" content="DSTA" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="dsta_lsfmachine.html" title="Accessing Specific Machines using LSF">Accessing Specific Machines us ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="dsta_dstaflow.html" title="Distributed Static Timing Analysis Flow">Distributed Static Timing Anal ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:dstalogfile" title="DSTA Log Files"></a><style>/*<![CDATA[*/
+/**/
+/**/
+/**/
+/**/
+h1 { counter-reset: heading 7;}
+/**/
+/**/
+/**/
+/**/
+/*]]>*/</style><h2>
+<a id="pgfId-1000322"></a><a id="32514"></a>DSTA Log Files</h2>
+<h4><em>
+<a id="pgfId-1000332"></a>Master Log</em></h4>
+
+<p>
+<a id="pgfId-1000341"></a>Master logs are unique to DSTA. You can name a log file using the following command:</p>
+
+<a id="pgfId-1014425"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+tempus -log</code></pre>
+
+<p>
+<a id="pgfId-1000362"></a>The default log file name is <code>./tempus.log</code>. The file naming increments to <code>tempus.log1</code> in the next run. If you do not want to increment, but want to overwrite the existing log file, use the <code>tempus -overwrite</code> command.</p>
+<p>
+<a id="pgfId-1000377"></a>The master log shows that the master machine starts the clients, and loads the design. The client machines do most of the work with constraints, timing, and reports.</p>
+<p>
+<a id="pgfId-1000386"></a><strong>Sample Master Log File</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000396"></a>--- Running on machine1(x86_64 w/Linux 2.6.18-308.el5) ---</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000406"></a>This version was compiled on Sun Sep 1 14:53:30 PDT 2013.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000416"></a>INFO (DSTA-1025): Sourcing /icd/flow/ETS/ETS132/13.20-b059_1/lnx86/share/tcltools/icd8.5.9/lib/tcl8.5/history.tcl <br />INFO (DSTA-1025): Sourcing ../blank/run_dsta.tcl</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000428"></a>INFO (DSTA-1017): Starting 2 client processes. <br />INFO (DSTA-1013): Reading verilog file: ./zondammav10gs80.final.v <br />INFO (DSTA-1600): Loading library file: ./GS80_W_-40_0.92_0.92_CORE.lib.gz <br />INFO (DSTA-1025): Sourcing ./tim_ets_settings.tcl</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000444"></a>INFO (DSTA-1193): Reading spef file: ./zondammav10gs80.spef.maxc_maxvia_-40.gz</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000454"></a>INFO (DSTA-1421): After generating partitions: Cpu=00:01:43 Real=00:01:40 Peak_mem=4257meg Cur_mem=4257meg</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000464"></a>INFO (DSTA-1020): Running command: update_timing -full <br />INFO (DSTA-1389): Cond arc const client 1 starts at 1378131471. <br />INFO (DSTA-1389): Cond arc const client 0 starts at 1378131522. <br />INFO (DSTA-1389): Cond arc const client 0 all done at 1378131523. <br />INFO (DSTA-1389): Cond arc const client 1 all done at 1378131523.</pre>
+<h4><em>
+<a id="pgfId-1000482"></a>Client Log</em></h4>
+
+<p>
+<a id="pgfId-1000491"></a>The client log files are the same as the Tempus STA log files. Each client runs a copy of Tempus. The client machine has its own directory and log file, as shown below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000500"></a>partOutput_0/tempus.log <br />partOutput_1/tempus.log</pre>
+
+<p>
+<a id="pgfId-1000512"></a>The log files will increment to <code>tempus.log1</code> in the next run.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1000521"></a>It is possible that you have client logs that are numbered in an unordered manner, as shown below:</div>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000531"></a>partOutput_0/tempus.log12 <br />partOutput_1/tempus.log6</pre>
+
+<p>
+<a id="pgfId-1000543"></a>This is caused due to multiple runs with different number of clients. It is recommended that you check the time stamp to ensure that the logs are for the specific master/client set.</p>
+<p>
+<a id="pgfId-1000552"></a><strong>Sample Client Log File</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000562"></a>--- Starting &quot;Tempus Timing Solution v13.20-b059_1&quot; on Mon Sep  2 12:38:07 2013 (mem=70.9M) --- <br /> Server is up on machine1 ( PID=830 ) <br /> Multi-CPU acceleration using 4 CPU(s). <br /> <br /> Scheduling LEF file(s) ./uc_CS402LND.lef to be loaded when the set_top_module command is issued. <br /> Scheduling LEF file(s) ./uc_CS402LZD.lef to be loaded when the set_top_module command is issued. <br /> Scheduling  timing library file(s) ./LIB/scIMux_f_worst.lib to be loaded when the set_top_module command is issued. <br /> Scheduling  timing library file(s) ./LIB/scxOpt_f_worst.lib to be loaded when the set_top_module command is issued. <br /> <br /> Set top cell to scTop. <br /> ** info: there are 406704 modules. <br /> ** info: there are 13891666 stdCell insts. <br /> ** info: there are 53 Pad insts. <br /> ** info: there are 293926 macros. <br /> <br /> &lt;CMD&gt; report_timing <br /> Analyzing view default_emulate_view with delay corner[0] default_emulate_delay_corner, rc corner[0] ... <br /> All-RC-Corners-Per-Net-In-Memory is turned ON... <br /> Analyzing view default_emulate_view with delay corner[0] default_emulate_delay_corner, rc corner[0] ... <br /> Analyzing view default_emulate_view with delay corner[0] default_emulate_delay_corner, rc corner[0] &#8230;</pre>
+<h2>
+<a id="pgfId-1000604"></a><a id="37194"></a>DSTA Operational Tips</h2>
+
+<p>
+<a id="pgfId-1000613"></a>Although the operating environment of DSTA is similar to STA, you need to manage the new operational requirements in the distributed mode to maximize the DSTA performance. This section provides operating tips for the DSTA environment:</p>
+
+<h4>
+<a id="pgfId-1000623"></a><strong>Name the Master and Client Logs</strong></h4>
+
+<p>
+<a id="pgfId-1000632"></a><strong>Master</strong></p>
+<ul><li>
+<a id="pgfId-1000642"></a>To name the master log and overwrite the old log file, use the following command:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1014544">
+<a id="pgfId-1014544"></a>tempus -distributed -overwrite -log tempus.log</pre></li><li>
+<a id="pgfId-1000653"></a>Consider using 4c8t to indicate 4 clients 8 threads, use:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1014561">
+<a id="pgfId-1014561"></a>tempus -distributed -overwrite -log tempus_4c8t.log</pre></li></ul>
+
+
+
+<p>
+<a id="pgfId-1000672"></a><strong>Client </strong></p>
+<p>
+<a id="pgfId-1000682"></a>To avoid randomly numbered log file names, delete, or rename the old directories before the next run, use the following command:</p>
+
+<a id="pgfId-1014578"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+rm -rf partOutput*</code></pre>
+<h4>
+<a id="pgfId-1000693"></a><strong>Save the DSTA Logs</strong></h4>
+
+<p>
+<a id="pgfId-1000702"></a>Saving the master and client log files allows comparison of various client/thread configurations and scripts. To save logs, use the following commands:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000711"></a>mkdir saveLog1 <br />cp &#8211;rfp tempus*.log pathOutput* saveLog1</pre>
+<h4>
+<a id="pgfId-1000725"></a><strong>Master Log Completion</strong></h4>
+
+<p>
+<a id="pgfId-1000734"></a>Add a print message at the end of the script to confirm completion of DSTA.</p>
+
+<a id="pgfId-1000743"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+# Master run.tcl Script 
+. . . 
+. . . 
+puts &#8220;All done&#8221;</code></pre>
+<h4>
+<a id="pgfId-1000759"></a><strong>Use a Single run.tcl for both STA and DSTA</strong></h4>
+
+<p>
+<a id="pgfId-1000768"></a>You can use a single <code>run.tcl</code> file for both STA and DSTA. This can ensure that there are no errors when DSTA is selected over STA. This can be done by wrapping the DSTA commands with a &#39;<code>if</code>&#39; statement, and allowing STA to skip these commands and DSTA to use them.</p>
+<p>
+<a id="pgfId-1000781"></a>For example,</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000790"></a>if {[info command distribute_partition] != &quot;&quot; } { <br />   puts &quot;You are using Tempus DSTA&#8220; <br />   set_multi_cpu_usage -localCpu 4   -cpuPerRemoteHost 4   -remoteHost 2 <br />} else { <br />  puts &quot;You are using Tempus STA&#8220; <br />  set_multi_cpu_usage -localCpu 4 <br />}</pre>
+
+<p>
+<a id="pgfId-1000812"></a>When you start Tempus, it automatically triggers the &#39;<code>if</code>&#39; statement.</p>
+
+<h4>
+<a id="pgfId-1000824"></a><strong>Configure the Script for both Batch and Interactive Modes</strong></h4>
+
+<p>
+<a id="pgfId-1000833"></a>You can run a script in both the batch and interactive modes without changing the Tcl commands, by specifying the following in the <code>run.tcl</code> file:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000844"></a># Master run.tcl Script <br />. . . <br />. . . <br />return     ; # Stops the script if it is in the interactive mode but does not exit <br />exit&#160;&#160;     ; # Exits Tempus if it is in the batch mode</pre>
+<h4>
+<a id="pgfId-1000862"></a><strong>Tracking Master Runtime</strong></h4>
+
+<p>
+<a id="pgfId-1000871"></a>You can use the following command to track the start to finish runtime:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000880"></a># Initalize at the top of the master run.tcl <br />set initTimeTick     [clock seconds] <br />. . . <br />. . . <br />. . .</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000898"></a># Calculate runtime at the bottom of the master run.tcl <br />set lastTimeTick   [clock seconds] <br />set totalTime        [expr $lastTimeTick - $initTimeTick] <br />set totalMin          [format &quot;%4.1f&quot; [expr $totalTime / 60.0]] <br />puts &#8220;The total walltime minutes was: $totalMin minutes&#8221;</pre>
+<h4>
+<a id="pgfId-1000916"></a><strong>Tracking Master Memory</strong></h4>
+
+<p>
+<a id="pgfId-1000925"></a>You can track the master current and peak memory using the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000934"></a><a href="../tempustxtcmdref/report_resource.html">report_resource</a></pre>
+
+<p>
+<a id="pgfId-1000953"></a>This command will print the resource usage for the master. The following is an example output:</p>
+
+<a id="pgfId-1000962"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+Cpu=03:02:02 Real=02:31:31 Peak_mem=70502meg Cur_mem=70494meg</code></pre>
+<h4>
+<a id="pgfId-1000972"></a><strong>Tracking Client Runtime and Memory</strong></h4>
+
+<p>
+<a id="pgfId-1000981"></a>To print the resource usage for each client, you can use the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1000990"></a><a href="../tempustxtcmdref/distribute_print_client_usage.html">distribute_print_client_usage</a></pre>
+
+<p>
+<a id="pgfId-1001009"></a>This command does not interrupt or wait for whatever the client is currently doing.</p>
+<p>
+<a id="pgfId-1001018"></a>A sample output of this command is given below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1001027"></a>INFO (DSTA-1039): Client resource usage:</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1001037"></a> Client 0: Cpu=00:44:25 Real=01:25:57 Peak_mem=11095meg Cur_mem=9816meg <br /> Client 1: Cpu=00:44:29 Real=01:25:58 Peak_mem=11338meg Cur_mem=10072meg <br /> Client 2: Cpu=00:44:25 Real=01:25:57 Peak_mem=11095meg Cur_mem=9816meg <br /> Client 3: Cpu=00:44:29 Real=01:25:58 Peak_mem=11338meg Cur_mem=10072meg</pre>
+<h4>
+<a id="pgfId-1001053"></a><strong>Monitoring tmp Disk Space</strong></h4>
+
+<p>
+<a id="pgfId-1001062"></a>You can measure the /tmp free disk space by inserting the following code at the beginning and at the end of the script:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1001071"></a>set dir /tmp <br />set a [lindex [lindex [split [exec df -k $dir] \n] end] end-2] <br />set a [expr {$a / 2.0**20 }] <br />set localTmpGigs [format &quot;%0.1f&quot; $a ] <br />puts &#8220;The /tmp disk has $localTmpGigs gigs free&#8221;</pre>
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="dsta_lsfmachine.html" id="prev" title="Accessing Specific Machines using LSF">Accessing Specific Machines us ...</a></em></b><b><em><a href="dsta_dstaflow.html" id="nex" title="Distributed Static Timing Analysis Flow">Distributed Static Timing Anal ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

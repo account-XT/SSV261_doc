@@ -1,0 +1,193 @@
+
+<html><head><title>read_twf</title>
+<meta name="page_sequence" content="19018000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666212" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="read_twf" />
+<meta name="Keywords" content="Timing Window File,TWF,Common Timing Engine,VOLTAGE_THRESHOLD" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Design Import," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusTCRcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666212" />
+<meta name="NextFile" content="relink_db_files.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="read_sdc.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Text Reference Manual  -- read_twf" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltuscuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusTCRcomTOC.html">Contents</a></li><li><a class="prev" href="read_sdc.html" title="read_sdc">read_sdc</a></li><li style="float: right;"><a class="viewPrint" href="voltusTCRcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="relink_db_files.html" title="relink_db_files">relink_db_files</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Text Reference Manual <br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>read_twf</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>read_twf<span class="confluence-anchor-link" id="read_twf-read_twf"></span>&#xa0;<span id="read_twf-read_twf"></span><br />[-help]<br />[<em>filenames</em>]<br /><code><code>[-cell <em>master_cell_name</em>]</code></code><br />[-prefix&#xa0;<em>string</em>]<br /><span style="color:var(--ds-text,#172b4d);">[-quiet]</span> <br />[-reset]<br />[-scope&#xa0;<em>string</em>]&#xa0;<br />[-skip_constant]&#xa0;<br />[-skip_timing_window]<br />[-strip_prefix&#xa0;<em>string</em>]<br />[-verbose]<br />[-view&#xa0;<em>string</em>]&#xa0;<br /></code></code></p>
+
+<p>Reads the external Timing Window File (TWF) for noise and power calculation. This file is used to get clocks, constants, external load, slews, timing windows, and slack information. The external TWF specification is optional. In absence of the TWF, this information is automatically derived using Common Timing Engine if timing constraints are read.</p>
+
+<p><strong>Note:&#xa0;</strong>If the&#xa0;<code>VOLTAGE_THRESHOLD</code>&#xa0;construct is missing from the TWF file header, the values 10 and 90 are automatically assigned as the minimum and maximum threshold values, respectively. For example:</p>
+
+<p><code>VOLTAGE_THRESHOLD (10 90)</code></p>
+<h4 id="read_twf-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code><em>filenames</em><br /></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the names of the timing window files.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-cell&#xa0; master_cell_name</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the master cell name for the timing window file. This parameter allows you to support master cell based TWF annotation. That is, you need to specify only the master cell name for the timing window file, instead of specifying all the instances that were instantiated from a master cell.</p>
+
+<p><u><strong>Example</strong></u></p>
+
+<p>Let us consider a design that has a cell named &quot;<code>cpu_core</code>&quot; with two instances &quot;<code>cpu_core_0</code>&quot; and &quot;<code>cpu_core_1</code>&quot;:</p>
+
+<p><u>Use Model for Instance-based TWF annotation<br /></u></p>
+
+<p><code>read_twf -scope cpu_core_0 cpu_core.twf.gz<br />read_twf -scope cpu_core_1 cpu_core.twf.gz</code></p>
+
+<p><u><u>Use Model for Master Cell based TWF annotation</u><br /></u></p>
+
+<p><code>read_twf -cell cpu_core cpu_core.twf.gz</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-prefix </code><code><em>string</em><br /></code></p>
+</td>
+<td class="confluenceTd">
+<p>Adds a prefix to the net or pin name.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span style="color:var(--ds-text,#172b4d);">-quiet</span></code></td>
+<td class="confluenceTd" colspan="1">Skips information and warning messages.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-reset</code></p>
+</td>
+<td class="confluenceTd">
+<p>Clears the previously read TWF files.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-scope </code><code><em>string</em> </code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the scope for the given hierarchical timing window file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-skip_constant</code></p>
+</td>
+<td class="confluenceTd">
+<p>Skips constant processing.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-skip_timing_window<br /></code></p>
+</td>
+<td class="confluenceTd">
+<p>Skips timing windows processing.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-strip_prefix <em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Removes hierarchical path name.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-verbose</code></p>
+</td>
+<td class="confluenceTd">
+<p>Prints the command progress details.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-view <em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the view for the timing window file.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="read_twf-Examples">Examples</h4>
+<ul><li>The following command reads the timing window file&#xa0;TW.in&#xa0;for the view &#39;view01&#39;, while skipping the constant processing from the timing window file:<br /><code>voltus&gt; read_twf&#xa0;TW.in&#xa0;-skipconst -view view01<br /></code></li><li>The following command clears the previously read TWF file:<br /><code>voltus&gt; read_twf -reset</code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="read_sdc.html" id="prev" title="read_sdc">read_sdc</a></em></b><b><em><a href="relink_db_files.html" id="nex" title="relink_db_files">relink_db_files</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

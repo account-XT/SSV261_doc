@@ -1,0 +1,186 @@
+
+<html><head><title>get_obj_in_area</title>
+<meta name="page_sequence" content="14016000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666104" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="get_obj_in_area" />
+<meta name="Keywords" content="get area object list, getting area objects, area object query" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Tcl/DB Commands," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusTCRcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666104" />
+<meta name="NextFile" content="get_rect.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="get_edge.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Text Reference Manual  -- get_obj_in_area" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltuscuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusTCRcomTOC.html">Contents</a></li><li><a class="prev" href="get_edge.html" title="get_edge">get_edge</a></li><li style="float: right;"><a class="viewPrint" href="voltusTCRcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="get_rect.html" title="get_rect">get_rect</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Text Reference Manual <br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>get_obj_in_area</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span id="get_obj_in_area-get_obj_in_area"></span><span class="confluence-anchor-link" id="get_obj_in_area-get_obj_in_area"></span><code>get_obj_in_area </code><br /><code><code>[-help]</code><br /><code>[-areas&#xa0;{{<em>llx1 lly1 urx1 ury1</em>} {<em>llx2 lly2 urx2 ury2</em>}&#xa0;<em>...</em>}<br />[-bbox_overlap]</code><br /><code>[-dbu]<br />[-layers {<em>layer1 layer2 ...</em>}&#xa0;<span style="color:var(--ds-text,#172b4d);">[-strict_via_inst_layer_check]</span>]</code><br /><code>[-obj_type {bump bus_guide inst inst_all_shapes pin port marker net place_blockage patch_wire pg_pin route_blockage routes resize_blockage row special special_via special_wire via wire what_if_wire what_if_via port_shape <span style="color:var(--ds-text,#172b4d);">partition</span>}]</code>&#xa0;<br /><code>[-abut_only] | [-enclosed_only] | [-overlap_only]</code><br /><code>[-polygons {<em>x11 y11 x12 y12 x13 y13</em><em>&#xa0;...</em>}]</code>&#xa0;</code></p>
+
+<p>Returns a list of objects based on an area query without needing to select them.&#xa0;This command supports all types of routing blockages such as partial, fill, and slot.</p>
+<h4 id="get_obj_in_area-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="relative-table wrapped confluenceTable" style="width: 100.0%;"><colgroup><col style="width: 12.5212%;" /><col style="width: 87.4788%;" /></colgroup><tbody><tr><td class="confluenceTd">
+<p><code>-help                </code></p>
+</td>
+<td class="confluenceTd">
+<p>Prints a brief description that includes type and default information for each <code>get_obj_in_area</code> parameter.</p>
+
+<p>For a detailed description of the command and all its parameters, use the man command:<br /><code>man get_obj_in_area</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-abut_only</code></td>
+<td class="confluenceTd" colspan="1">Returns&#xa0;only&#xa0;those objects that abut the search area. No part of the object polygon overlaps the search area, but at least one point or line of intersection occurs between the object polygon and the search area. A single point of abutment (such as a corner or crossing edges) is also considered as abutted. When multiple areas are specified, the object is returned as long as it abuts one of the search areas.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-areas {{<em>llx1 lly1 urx1 ury1</em>} {<em>llx2 lly2 urx2 ury2</em>} ...}</code></td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the search areas, where&#xa0;<code>ll</code>&#xa0;= lower left,&#xa0;<code>ur</code>&#xa0;= upper right. By default, all the objects overlapping or abutting these areas are returned, unless&#xa0;<code>-abut_only</code>,&#xa0;<code>-enclosed_only</code>, or&#xa0;<code>-overlap_only</code>&#xa0;is specified. The polygon shape of the object is used for the overlap check.</p>
+
+<p>The units are in microns (unless&#xa0;<code>-d</code>&#xa0;is specified).</p>
+
+<p>The input can be in either a single&#xa0;<code>rect {llx1 lly1 urx1 ury1}</code>, or a list of&#xa0;<code>rects {{llx1 lly1 urx1 ury1} {llx2 lly2 urx2 ury2}}</code>. A&#xa0;<code>rect</code>&#xa0;using &quot;two points&quot; format like&#xa0;<code>{{{llx1 lly1} {urx1 ury1}} {{llx2 lly2} {urx2 ury2}}}</code>&#xa0;is also allowed. But input format like&#xa0;<code>{llx1 lly1 urx1 ury1 llx2 lly2 urx2 ury2}</code>&#xa0;or&#xa0;<code>{{llx1 lly1} {urx1 ury1} {llx2 lly2} {urx2 ury2}}</code>&#xa0;is illegal and not allowed.</p>
+
+<p>The resulting area to check for overlap can be a rectangle, line, or a point.</p>
+
+<p>When one object intersects multiple search areas, it will only be returned once.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-bbox_overlap</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Uses bounding-box of the object rather than the polygon shape of the object for overlap for overlap, abut, or enclosure check.&#xa0;For example, an <code>inst</code> that is of L-shape, will not be returned if the <code>-areas</code> parameter overlaps only the upper-right of the bounding-box without touching any part of the L-shaped, unless the <code>-bbox_overlap</code> parameter is included.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">
+<p><code>-dbu</code></p>
+</td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the <code>-areas</code> values that are in database units rather than microns.</p>
+
+<p><em>Default</em>: <code>um</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-enclosed_only</code></td>
+<td class="confluenceTd" colspan="1">Returns&#xa0;only&#xa0;those objects, which are completely enclosed inside the search area. The object polygon is fully enclosed by the search area. No part of the object polygon sticks outside the search area, although it may abut the search area edges. When multiple areas are specified, the object will be returned as long as it is enclosed in one of the search areas.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-layers {<em>layer1 layer2 &#8230;</em>}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Returns&#xa0;all the objects with the layer information for the specified layers. This parameter applies only to object types: <code>port_shape</code>, <code>patch_wire</code>, <code>route_blockage</code>, <code>regular</code>, <code>special</code>, <code>special_via</code>, <code>special_wire</code>, <code>via</code>, <code>wire</code>, <code>what_if_wire</code>, and <code>what_if_via</code>. A&#xa0;<code>via</code>, <code>special_via</code>, or <code>what_if_via</code>&#xa0;object will be returned if any of the via&#8217;s bottom layer, cut layer, or top layer matches with one of the specified layers. Other object types ignore this parameter and will always be returned.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-obj_type </code><code><em>objTypeList</em></code></td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a list of object types to search for overlaps in the area. Multiple object types can be searched at the same time. The objects currently supported include: <code>bump bus_guide inst inst_all_shapes pin port port_shape marker net place_blockage patch_wire pg_pin route_blockage routes resize_blockage row special special_via special_wire via wire what_if_wire what_if_via&#xa0;<span style="color:var(--ds-text,#172b4d);">partition</span></code></p>
+
+<p>Here:</p>
+<ul><li><code>routes</code> is the union of <code>wire</code>, <code>patch_wire</code>, and <code>via</code>.</li><li><code>special</code> is the union of <code>special_via</code> and <code>special_wire</code>.</li></ul>
+<p>Objects with multiple shapes or non-rectangular shapes use a polygon to check for overlap, as described below.</p>
+<ul><li><code>bump</code> has no placement overlap area, so it uses the polygon of all the OBS and PIN shapes.</li><li><code>inst</code> uses the polygon of its placement overlap checks (for example the LEF SIZE or OVERLAP shapes), including any placement halo (if there is any) but not any routing halo. OBS shapes or PIN shapes (like standard-cell power-pins) that stick outside the placement overlap area are not included.</li><li><code>inst_all_shapes</code> is the same as <code>inst</code>, except that it includes all OBS shapes and PIN shapes even if they stick outside the placement overlap area.</li><li><code>pin</code> uses the polygon of all the pin-shapes of the <code>pin</code>.</li><li><code>pg_pin</code> uses the polygon of all the pin-shapes of the <code>pg_pin</code>.</li><li><code>port_shape</code>&#xa0;uses the polygon of all the shapes of the top-level&#xa0;<code>port_shape</code>.</li><li><code>net</code> uses the polygon of all the regular routing shapes on the net. Pin-shapes or special-route shapes attached to the net are not included.</li><li><code>port</code> uses the polygon of all the pin-shapes of the top-level port.</li><li><code>port_shape</code> uses the polygon of all the pin-shapes of the top-level port shape.</li><li><code>via</code> uses the polygon of all the shapes of the via.</li><li><code>special_via</code> uses the polygon of all the shapes of the via.</li><li><code>partition</code><span>&#xa0;</span>uses the polygon of all the shapes of the partition.</li></ul>
+<p><em>Default</em>:&#xa0;<code>inst</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-overlap_only</code></td>
+<td class="confluenceTd" colspan="1">Returns&#xa0;only&#xa0;those objects, which are&#xa0;partially overlapped with the search area. Some part of the object polygon overlaps the search area, whereas some of its part is outside the search area. A single point of contact is not considered as an overlap. When multiple areas are specified, the object is returned as long as it overlaps with one of the search areas.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-polygons {<em>x11 y11 x12 y12 x13 y13</em><em> ...</em>}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies a polygon search area. By default, all the objects overlapping or abutting this area are returned on using the <code>-polygons</code> parameter, unless the <code>-abut_only</code>, <code>-enclosed_only</code>, or <code>-overlap_only</code> parameter is specified. The units are in microns (unless <code>-d</code> is specified, which indicates the database units). The format can be in either like <code>{x11 y11 x12 y12 x13 y13 ...}</code> or <code>{{x11 y11} {x12 y12} {x13 y13} ...}</code>. The polygon must be well-formed, not have zero area, and not have crossing edges.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><span style="color:var(--ds-text,#172b4d);">-strict_via_inst_layer_check</span></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1"><span style="color:var(--ds-text,#172b4d);">Returns only those objects on the specified layer, which match with one of the via&#39;s bottom, cut, or top layers. This parameter does not return the objects of the via on the unmatched layers. It works only for<span>&#xa0;</span></span><code style="text-align: left;">special_via</code><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span>and<span>&#xa0;</span></span><code style="text-align: left;">via</code><span style="color:var(--ds-text,#172b4d);">.</span></td>
+</tr>
+</tbody></table></div>
+<h4 id="get_obj_in_area-Examples"><span style="letter-spacing: -0.003em;">Examples</span></h4>
+<ul><li>The following command returns all the instances and routing-blockages on the&#xa0;<code>metal6</code>&#xa0;and&#xa0;<code>metal7</code>&#xa0;layers that are partially overlapped, abutted, or enclosed&#xa0;in the given triangle area:<br /><code>get_obj_in_area&#xa0;-obj_type&#xa0;{inst&#xa0;route_blockage} -polygons {100 100 110 110 100 110} -layers {Metal6 Metal7}&#xa0;</code></li><li>The following command&#xa0;returns&#xa0;all the instances and routing-blockages on the&#xa0;<code>metal6</code>&#xa0;and&#xa0;<code>metal7</code>&#xa0;layers that are partially overlapped, abutted, or enclosed in the given triangle area using the bounding-box of the objects:<br /><code>get_obj_in_area -obj_type {inst route_blockage} -polygons {100 100 110 110 100 110} -layers {Metal6 Metal7} -bbox_overlap</code></li><li>The following command&#xa0;returns&#xa0;all the instances and regular wires on the&#xa0;<code>metal6</code>&#xa0;and&#xa0;<code>metal7</code>layers that are abutted in the give search areas:<br /><code>get_obj_in_area -obj_type {inst wire} -areas {{0 0 100 100} {150 100 200 200}} -layers {Metal6 Metal7} -abut_only&#xa0;&#xa0;</code></li><li>The following command&#xa0;returns&#xa0;all the instances and regular wires on the&#xa0;<code>metal6</code>&#xa0;and&#xa0;<code>metal7</code>layers that are abutted in the given search areas using the bounding-box of the objects:<br /><code>get_obj_in_area -obj_type {inst wire} -areas {{0 0 100 100} {150 100 200 200}} -layers {Metal6 Metal7} -abut_only -bbox_overlap</code></li><li>Following are the figures to illustrate each position relation. The instances presented by the red rectangles&#xa0;<span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image confluence-thumbnail" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732480256/732480263.png" data-linked-resource-container-id="732480256" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image2019-9-12_11-29-1.png" data-linked-resource-id="732480263" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="13" src="attachments/732480256/732480263.png" tabindex="0" /></span></span>&#xa0;are returned with the specified parameter when the search area presented in the blue rectangle&#xa0;<span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image confluence-thumbnail" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732480256/732480257.png" data-linked-resource-container-id="732480256" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image2019-9-12_11-29-21.png" data-linked-resource-id="732480257" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="13" src="attachments/732480256/732480257.png" tabindex="0" /></span></span>&#xa0;are specified.<br /><ul><li><code><strong>-abut_only</strong><br /><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image confluence-thumbnail" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732480256/732480264.png" data-linked-resource-container-id="732480256" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image2019-9-12_11-30-42.png" data-linked-resource-id="732480264" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="100" src="attachments/732480256/732480264.png" tabindex="0" /></span></span></code></li><li><code><strong>-overlap_only</strong><br /><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image confluence-thumbnail" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732480256/732480258.png" data-linked-resource-container-id="732480256" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image2019-9-12_11-31-4.png" data-linked-resource-id="732480258" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="88" src="attachments/732480256/732480258.png" tabindex="0" /></span></span></code></li><li><code><strong>-enclosed_only</strong><br /><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image confluence-thumbnail" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732480256/732480259.png" data-linked-resource-container-id="732480256" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image2019-9-12_11-31-27.png" data-linked-resource-id="732480259" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="73" src="attachments/732480256/732480259.png" tabindex="0" /></span></span></code><strong><br /></strong></li></ul></li></ul>
+<p><strong>Note:</strong></p>
+<ol><li>If none of the above three parameters is specified, all the instances presented by the red rectangles&#xa0;will be returned, by default.</li><li>For querying object with multi-shape (such as&#xa0;<code>port_shape</code>) in multiple search areas, if one of its shapes is enclosed/abutted/overlapped with any one of the specified areas, the object will be returned.</li></ol>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="get_edge.html" id="prev" title="get_edge">get_edge</a></em></b><b><em><a href="get_rect.html" id="nex" title="get_rect">get_rect</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

@@ -1,0 +1,131 @@
+
+<html><head><title>timing_case_analysis_for_sequential_propagation</title>
+<meta name="page_sequence" content="14002014" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287103" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="timing_case_analysis_for_sequential_propagation" />
+<meta name="Keywords" content="sequential elements,calculate constants" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Timing Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287103" />
+<meta name="NextFile" content="timing_case_analysis_propagation.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="timing_case_analysis_for_icg_propagation.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- timing_case_analysis_for_sequential_propagation" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="timing_case_analysis_for_icg_propagation.html" title="timing_case_analysis_for_icg_propagation">timing_case_analysis_for_icg_p ...</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="timing_case_analysis_propagation.html" title="timing_case_analysis_propagation">timing_case_analysis_propagati ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>timing_case_analysis_for_sequential_propagation</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>timing_case_analysis_for_sequential_propagation<span class="confluence-anchor-link" id="timing_case_analysis_for_sequential_propagation-timing_case_analysis_for_sequential_propagation"></span><span id="timing_case_analysis_for_sequential_propagation-timing_case_analysis_for_sequential_propagation"></span> <br />{false | true | case_only | constant_only}</code> <br /></code></p>
+
+<p><em>Default</em>: <code>false</code></p>
+
+<p><em>Data_type</em>: Enum</p>
+
+<p>Controls whether constants, which propagate to the inputs of sequential devices like registers or flip-flops, are propagated to the output pins of those devices. This global variable will also affect the propagation of constants through integrated clock gating (ICG) cells - depending on the setting of the related global variable <code><a href="timing_case_analysis_for_icg_propagation.html#timing_case_analysis_for_icg_propagation-timing_case_analysis_for_icg_propagation">timing_case_analysis_for_icg_propagation</a></code>. &#xa0;Refer to the documentation for this global variable for more information on ICG handling.</p>
+
+<p>The constants can be present in the analysis due to several different reasons - broadly breaking down to netlist constants and case analysis.&#xa0; The netlist constants come from connections to tie-hi or tie-lo cells, a 1&#39;b0/1&#39;b1 assignment in the netlist, or explicit power rail connections. The constants derived from these sources are considered to be immutable. The constants due to case analysis come strictly from the <code><a href="set_case_analysis.html">set_case_analysis</a></code> constraint and are considered to be temporary - configuring the analysis to align to a certain mode.&#xa0; You may choose to handle constants from any source in a similar manner or customize the handling based on the constant type.</p>
+
+<p>If you choose to allow propagation of only a specific type of constant, the output pin&#39;s state function must resolve to a constant by only considering inputs pins with the required constant type. Otherwise, the constant will not be propagated.&#xa0;The propagation of constants to the output of a sequential device may affect how the timing checks on related input pins are analyzed. &#xa0;If all the possible transitions on a given input pin are unable to change the constant state of the output pin, the timing checks on the input pin will be disabled by default.&#xa0;</p>
+
+<p>Changing the state of this global variable will change where constants are present in the analysis, typically resulting in sets of timing arcs and timing checks being enabled or disabled. As a result, a full timing update, including a fresh delay calculation, will be initiated when this setting is toggled.</p>
+
+<p><strong>Note</strong>: &#xa0; The <code><a href="set_analysis_mode.html">set_analysis_mode</a></code> <code>-sequentialConstProp</code> parameter provides overlapping functionality with this global variable. Changing the state of <code>-sequentialConstProp</code> will also change the state of this global variable. You should refrain&#xa0;from using both controls at the same time.</p>
+
+<p>&#xa0;You can use one of the following options:</p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><th class="confluenceTh" scope="col">Option</th><th class="confluenceTh" scope="col">Description</th></tr>
+<tr><td class="confluenceTd"><code>false</code></td>
+<td class="confluenceTd">
+<p>Disables&#xa0;sequential propagation from any constant source (default setting).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>true&#xa0;</code></td>
+<td class="confluenceTd">Allows sequential propagation from any constant source - netlist or constraint-based.</td>
+</tr>
+<tr><td class="confluenceTd"><code>constant_only</code>&#xa0;</td>
+<td class="confluenceTd">Allows sequential propagation only for constants that are due to the propagation of netlist-based constants.</td>
+</tr>
+<tr><td class="confluenceTd"><code>case_only</code></td>
+<td class="confluenceTd">Allows sequential propagation only for constants that are due to the propagation of constraint-based constants from the <code>set_case_analysis</code> command.</td>
+</tr>
+</tbody></table></div>
+
+<p>To set this global variable, use the <code>set</code>&#xa0;command.</p>
+<h4 id="timing_case_analysis_for_sequential_propagation-OtherReferenceInformation">Other Reference Information</h4>
+<ul><li>Click&#xa0;<a class="message-url" href="https://support.cadence.com/apex/Coveo_CommunitySearch#q=timing_case_analysis_for_sequential_propagation&amp;t=AllContent&amp;searchboxDropdown=1&amp;firstQueryCause=searchFromLink&amp;firstQueryMeta={%22JSUIVersion%22:%222.4609.6%3B2.4609.6%22}&amp;hq=((%40cadproductfeature%3D%3D(%22Tempus%22)))">here</a>&#xa0;for more information&#xa0;on this global variable.</li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="timing_case_analysis_for_icg_propagation.html" id="prev" title="timing_case_analysis_for_icg_propagation">timing_case_analysis_for_icg_p ...</a></em></b><b><em><a href="timing_case_analysis_propagation.html" id="nex" title="timing_case_analysis_propagation">timing_case_analysis_propagati ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

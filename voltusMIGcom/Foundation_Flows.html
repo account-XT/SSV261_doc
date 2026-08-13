@@ -1,0 +1,104 @@
+
+<html><head><title>Foundation Flows</title>
+<meta name="page_sequence" content="14000000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="leenap" />
+<meta name="CreateDate" content="2026-03-26" />
+<meta name="CreateTime" content="1774530245" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Stylus Common UI Migration Guide" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Migration Guide" />
+<meta name="DocType" content="Migration" />
+<meta name="FileTitle" content="Foundation Flows" />
+<meta name="Keywords" content="code generation engine, Tcl variable array, vars, flow control, baseline flow single Tcl script, design initialization, design execution" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Stylus,Stylus,Stylus," />
+<meta name="prod_subfeature" content="Flow,Foundation Flows,Flows," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="3" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusMIGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-03-26" />
+<meta name="ModifiedTime" content="1774530245" />
+<meta name="NextFile" content="Flowkit.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Significant_get_db_Objects.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Migration Guide -- Foundation Flows" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="innovusCUIMig261" />
+<meta name="confluence-version" content="7.19.19" />
+<meta name="ecms-plugin-version" content="04.21.019" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusMIGcomTOC.html">Contents</a></li><li><a class="prev" href="Significant_get_db_Objects.html" title="Significant_get_db_Objects">Significant_get_db_Objects</a></li><li style="float: right;"><a class="viewPrint" href="voltusMIGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Flowkit.html" title="Flowkit">Flowkit</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Migration Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <div style="width: 100%; font-size: 32px; text-align: left;               font-weight: bold;">4</div>
+<h1 style="margin: 4px 0 4px;"><span>Foundation Flows</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>The foundation flow is a code generation engine that takes a Tcl variable array (vars) that defines both the library/design data as well as tool options or flow control and generates a set of scripts to execute a baseline flow. Each flow step is a single Tcl script that gets executed via a Makefile.&#xa0;An example of a simple example flow (default baseline flow) and the scripts that execute the flow is shown below:</p>
+
+<p><span class="confluence-embedded-file-wrapper"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/712492757/712492758.png" data-linked-resource-container-id="712492757" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="Default Baseline Flow.png" data-linked-resource-id="712492758" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/712492757/712492758.png" /></span></p>
+
+<p>The flow can be broken down into two areas: design initialization and design execution. Design initialization takes place as part of <code>run_init.tcl</code> and is supported by the <code>FF/init.tcl</code> and <code>FF/view_definition.tcl</code> files, which define the design and library data required to construct the initial database.&#xa0;</p>
+
+<p>In addition, the flow can be customized through the use of tags and plug-ins that allow you to augment or override the flow commands within the sequence of flow steps. It means that tag and plug-in files are included as part of the flow step script.&#xa0;</p>
+
+<p>The &#xa0;Foundation Flow has been replaced with a more integrated approach to flow construction and execution that works across the entire flow seamless in the Stylus Common UI.</p>
+<h4 id="FoundationFlows-RelatedInformation">Related Information</h4>
+<ul><li><a href="Flowkit.html">Flowkit</a></li><li><a href="flowtool.html">flowtool</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Significant_get_db_Objects.html" id="prev" title="Significant_get_db_Objects">Significant_get_db_Objects</a></em></b><b><em><a href="Flowkit.html" id="nex" title="Flowkit">Flowkit</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

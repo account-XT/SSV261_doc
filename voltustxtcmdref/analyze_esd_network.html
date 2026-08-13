@@ -1,0 +1,191 @@
+
+<html><head><title>analyze_esd_network</title>
+<meta name="page_sequence" content="18001000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666308" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the text commands in Voltus IC Power Integrity Solution." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="analyze_esd_network" />
+<meta name="Keywords" content="effective resistance checks,current density,electrostatic discharge,clamp to clamp,bump to clamp,bump to bump,bump to instance,clamp to instance" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Rail Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666308" />
+<meta name="NextFile" content="analyze_esd_voltage.html" />
+<meta name="Group" content="Voltus Text Command Reference" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Rail_Analysis_Commands.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution Text Command Reference -- analyze_esd_network" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="epstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="Rail_Analysis_Commands.html" title="Rail_Analysis_Commands">Rail_Analysis_Commands</a></li><li style="float: right;"><a class="viewPrint" href="voltustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analyze_esd_voltage.html" title="analyze_esd_voltage">analyze_esd_voltage</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>analyze_esd_network</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><span id="analyze_esd_network-analyze_esd_network"></span><span class="confluence-anchor-link" id="analyze_esd_network-analyze_esd_network"></span><br />analyze_esd_network<br />[-help]<br />&lt;<em>run_name</em>&gt;<br />[-clamp_lowest_layer_taps {true | false}]<br />[-clamp_pin_short_file <em>pin_shorting_file</em>]<br />-config_file <em>rule_filename</em><br /><code>[-output <em>directory</em>]</code><br />[-remove_layers_below <em>layer_name</em>]<br />[-ta | -task_assistant]<br />-type {net | domain}<br />[-use_power_pad {true | false}]<br /></code></p>
+
+<p>Performs different types of effective resistance checks, such as bump to clamp, bump to bump, and clamp to clamp, and current density analysis during an ESD zap event. This command checks whether every power or ground bump has an ESD device, and the device is placed in such a way that it does not violate the effective resistance or current density limit.</p>
+
+<p>The objective of ESD Checker is to easily identify the violations caused by high effective resistance or the current density above the specified threshold value.</p>
+
+<p><br /></p>
+<h4 id="analyze_esd_network-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /><col /></colgroup><tbody><tr><td class="confluenceTd">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Outputs the command usage and a brief description about the command parameters.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>&lt;<em>run_name</em>&gt;</code></td>
+<td class="confluenceTd" colspan="2"><span>Mandatory parameter.&#xa0; </span>Specifies the domain or net name. The result directory is prefixed with <code>&lt;<em>run_name</em>&gt;</code>.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code><code>-clamp_lowest_layer_taps {true | false}</code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies to&#xa0;keep only the lowest layer of clamp taps for effective resistance analysis. The default value is <code>false</code>.</p>
+<ul><li>When set to <code>true</code>, the ESD pin nodes on the lowest layer are shorted, and effective resistance checks are performed to the shorted node on the lowest layer.</li><li>When set to <code>false</code>, the ESD pin nodes on all layers are shorted, and effective resistance checks are performed to the shorted pin nodes of clamps on different layers.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code><code>-clamp_pin_short_file <em>pin_shorting_file</em></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies the list of pin layers to be shorted for bump-to-clamp and clamp-to-clamp resistance checks. If multiple layers for the same pin are specified, then these layers are shorted with each other.</p>
+
+<p>The format of the file is:</p>
+
+<p><code>#Cell specification<br />CELL &lt;cell name&gt; &lt;pin&gt; &lt;layer&gt;</code></p>
+
+<p><code>#Instance specification<br />INST &lt;instance name&gt; &lt;pin&gt; &lt;layer&gt;</code></p>
+
+<p>In this file, multiple layers for the same cell or instance can be specified by adding multiple rows for the same cell or instance name corresponding to each layer.</p>
+
+<p>If the <code><code>-clamp_pin_short_file</code></code> parameter is not specified, the software shorts all pin nodes of the lowest ESD cell pin layer, and performs effective resistance checks to the shorted node on the lowest layer.</p>
+
+<p>Note: If the <code>-clamp_pin_short_file</code> parameter is used in conjunction with <code>-clamp_lowest_layer_taps</code>, the <code>-clamp_pin_short_file</code> parameter will override the settings of <code>-clamp_lowest_layer_taps</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code><code><code>-config_file <em>rule_filename</em></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2"><span>Mandatory parameter.&#xa0; </span>Specifies the name of the rule file that includes all the ESD checks to be performed as a set of rules. It also specifies the effective resistance threshold limit. For more information, refer to the <strong>ESD Rule Specification</strong> section in the &quot;<u>ESD Analysis</u>&quot; chapter of <em>Voltus User Guide</em>.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3">
+<p><code><code><code>-output <em>directory</em></code></code></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies the name of the output directory in which the ESD analysis results are saved.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3">
+<p><code><code>-remove_layers_below <em>layer_name</em></code></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies the layer name below which all layers are dropped from analysis. This parameter can be used in scenarios where the ESD cells connect to the PG grid at high layers, and therefore the impact of the lower PG layers is very small on effective resistance calculation and current density checks.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code>-ta | -task_assistant</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2">Opens ESD Analysis Task Assistant,&#xa0;a task-based quick help functionality&#xa0;for the ESD analysis flow.&#xa0;The information in the Task Assistant is organized by topics relevant to the task you are performing. It answers frequently asked questions, such as format of the rule file, use model of the command, or supported ESD checks.&#xa0;</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3">
+<p><code><code>-type {net | domain}</code>&#xa0;</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p><span>Mandatory parameter.&#xa0; </span>Specifies whether to run rail analysis on a domain or a net.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code>-use_power_pad {true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2">Specifies that the x,y locations of the bump cells are to be obtained from the power pad file. This parameter can be used to support designs for which bump cells are not visible.&#xa0; The default value is <code>false</code>.</td>
+</tr>
+</tbody></table></div>
+
+<p><br /></p>
+<h4 id="analyze_esd_network-Examples">Examples</h4>
+<ul><li>The following commands specify to run ESD analysis on the domain <code>top</code>: <br /><code>set_rail_analysis_mode -method static -accuracy hd -power_grid_library ./techonly.cl -ict_em_models ./Data/ESD_em.ict<br />analyze_esd_network top -config_file ./esd_new_rule.txt -type domain -output ESD_analysis -use_power_pad true</code><br /><br /></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Rail_Analysis_Commands.html" id="prev" title="Rail_Analysis_Commands">Rail_Analysis_Commands</a></em></b><b><em><a href="analyze_esd_voltage.html" id="nex" title="analyze_esd_voltage">analyze_esd_voltage</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

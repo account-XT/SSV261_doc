@@ -1,0 +1,156 @@
+
+<html><head><title>audit_timing</title>
+<meta name="page_sequence" content="25001000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="apokhara" />
+<meta name="CreateDate" content="2026-04-12" />
+<meta name="CreateTime" content="1776062409" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="" />
+<meta name="DocTitle" content="Litmus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="audit_timing" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="litmus_comref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-12" />
+<meta name="ModifiedTime" content="1776062409" />
+<meta name="NextFile" content="check_multi_cpu_usage.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Timing_Analysis_Commands.html" />
+<meta name="c_product" content="Litmus," />
+<meta name="Product" content="Litmus," />
+<meta name="ProductFamily" content="Litmus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Litmus Text Command Reference -- audit_timing" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="litmus26comref" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="litmus_comrefTOC.html">Contents</a></li><li><a class="prev" href="Timing_Analysis_Commands.html" title="Timing_Analysis_Commands">Timing_Analysis_Commands</a></li><li style="float: right;"><a class="viewPrint" href="litmus_comref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="check_multi_cpu_usage.html" title="check_multi_cpu_usage">check_multi_cpu_usage</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Litmus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>audit_timing</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>audit_timing<br /></code></p>
+
+<p>Performs a focused set of timing constraint coverage and sanity checks. It is a Litmus pre-STA audit command, that helps identify unconstrained paths, missing clock definitions, and common timing modeling issues before final STA signoff. Following checks are performed by this command:&#xa0;</p>
+
+<p><strong>Constraint Coverage Checks: </strong>These checks identify timing checks (<code>report_analysis_coverage</code> - RAC) that were not exercised due to missing, blocked, or incomplete constraints.</p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><th class="confluenceTh">Rule</th><th class="confluenceTh">Description</th></tr>
+<tr class=""><th class="confluenceTh"><strong>CONST_COV_SH</strong></th><td class="confluenceTd">Setup and/or hold checks not performed on pins</td>
+</tr>
+<tr class=""><th class="confluenceTh"><strong>CONST_COV_RR</strong></th><td class="confluenceTd">Recovery and/or removal checks not performed on pins</td>
+</tr>
+<tr class=""><th class="confluenceTh"><strong>CONST_COV_CG</strong></th><td class="confluenceTd">Clock-gating setup/hold/pulse-width checks not performed</td>
+</tr>
+<tr class=""><th class="confluenceTh"><strong>CONST_COV_DATA</strong></th><td class="confluenceTd">Data setup and/or hold checks not performed</td>
+</tr>
+<tr class=""><th class="confluenceTh"><strong>CONST_COV_CP</strong></th><td class="confluenceTd">Clock period checks not performed</td>
+</tr>
+<tr class=""><th class="confluenceTh"><strong>CONST_COV_CS</strong></th><td class="confluenceTd">Clock separation checks not performed</td>
+</tr>
+<tr class=""><th class="confluenceTh"><strong>CONST_COV_SKEW</strong></th><td class="confluenceTd">Skew checks not performed</td>
+</tr>
+<tr class=""><th class="confluenceTh"><strong>CONST_COV_PW</strong></th><td class="confluenceTd">Pulse-width checks not performed</td>
+</tr>
+</tbody></table></div>
+
+<p><strong>Clock Gating and Clock Quality Checks:</strong></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><th class="confluenceTh">Rule</th><th class="confluenceTh">Description</th></tr>
+<tr class=""><th class="confluenceTh"><strong>CONST_CG_CHK5</strong></th><td class="confluenceTd">Clock-gating enable pin not reached by any constrained data <em>(check_timing: clock_gating_no_data)</em></td>
+</tr>
+<tr class=""><th class="confluenceTh"><strong>CONST_CG_CHK6</strong></th><td class="confluenceTd">Clock clipping due to incorrect gate type or trigger <em>(check_timing: clock_clipping_gate)</em></td>
+</tr>
+<tr class=""><th class="confluenceTh"><strong>CONST_CG_CHK7</strong></th><td class="confluenceTd">Clock clipping due to incompatible clock and data frequencies <em>(check_timing: clock_clipping_freq)</em></td>
+</tr>
+</tbody></table></div>
+
+<p><strong>Data Path and Structural Timing Checks:</strong></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><th class="confluenceTh">Rule</th><th class="confluenceTh">Description</th></tr>
+<tr class=""><th class="confluenceTh"><strong>CONST_DAT_CHK5</strong></th><td class="confluenceTd">Internal endpoints unconstrained by clocks but affected by max-delay exceptions <em>(check_timing: max_delay_constrained_internal_endpoint)</em></td>
+</tr>
+<tr class=""><th class="confluenceTh"><strong>CONST_DGN_TIM2</strong></th><td class="confluenceTd">Latch and its fanout operating on the same clock <em>(check_timing: latch_fanout_clock_connectivity)</em></td>
+</tr>
+</tbody></table></div>
+
+<p><strong>Clock Interaction and Exception Checks:</strong></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><th class="confluenceTh">Rule</th><th class="confluenceTh">Description</th></tr>
+<tr class=""><th class="confluenceTh"><strong>CONST_EXC_CLK2</strong></th><td class="confluenceTd">Interactions between multiple clock domains, including true, false, or partial crossings <em>(check_timing: clock_crossing)</em></td>
+</tr>
+</tbody></table></div>
+
+<p><strong>Missing Generated Clock Checks:</strong></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><th class="confluenceTh">Rule</th><th class="confluenceTh">Description</th></tr>
+<tr><th class="confluenceTh"><strong>CONST_CLK_DEF1</strong></th><td class="confluenceTd">Detects missing generated clocks on clock generator circuits (flop/ICG driving another clock pin through logic without a generated clock)</td>
+</tr>
+<tr class=""><th class="confluenceTh"><strong>CONST_CLK_DEF46</strong></th><td class="confluenceTd">Detects missing <code>create_generated_clock</code> definitions</td>
+</tr>
+</tbody></table></div>
+<ul style="list-style-type: square;"><li>To enable <code>check_timing</code> checks, add following to your Litmus runscript:<ul style="list-style-type: square;"><li><code>set_rule_handling -category constraint_enhanced_signoff -severity warning</code></li></ul></li></ul><ul style="list-style-type: square;"><li>To enable <code>report_analysis_coverage</code> checks, add following to your Litmus runscript:<ul style="list-style-type: square;"><li><code>set_rule_handling -category constraint_coverage_signoff -severity warning</code></li></ul></li></ul>
+<p><code>audit_timing</code> provides a compact, signoff-oriented audit to ensure that:</p>
+<ul><li>All critical timing checks are exercised</li><li>Clock gating and generated clocks are correctly modeled</li><li>Cross-clock interactions and structural issues are visible early.</li></ul><h4 id="audit_timing-Parameters">Parameters</h4>
+
+<p>None</p>
+<h4 id="audit_timing-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="check_timing.html">check_timing</a></code></li><li><code><a href="report_analysis_coverage.html">report_analysis_coverage</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Timing_Analysis_Commands.html" id="prev" title="Timing_Analysis_Commands">Timing_Analysis_Commands</a></em></b><b><em><a href="check_multi_cpu_usage.html" id="nex" title="check_multi_cpu_usage">check_multi_cpu_usage</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

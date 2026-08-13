@@ -1,0 +1,166 @@
+
+<html><head><title>Design Loading and MMMC Configuration Script</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823940" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Design Loading and MMMC Configuration Script" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823940" />
+<meta name="NextFile" content="dmmmc_saverestoredmmmc.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="dmmmc_dmmmcperform.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Design Loading and MMMC Configuration Script" />
+<meta name="Keywords" content="distribute_read_design,Design Load,MMMC Configuration Script" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="MMMC,Stylus" />
+<meta name="prod_subfeature" content="MMMC" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="dmmmc_dmmmcperform.html" title="Performing Distributed Multi-Mode Multi-Corner Analysis">Performing Distributed Multi-M ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="dmmmc_saverestoredmmmc.html" title="Saving and Restoring DMMMC Sessions">Saving and Restoring DMMMC Ses ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:dmmmcdesignload" title="Design Loading and MMMC Configuration Script"></a><style>/*<![CDATA[*/
+/**/
+/**/
+/**/
+/**/
+h1 { counter-reset: heading 6;}
+/**/
+/**/
+/**/
+/**/
+/*]]>*/</style><h2>
+<a id="pgfId-999408"></a><a id="40895"></a>Design Loading and MMMC Configuration Script</h2>
+
+<p>
+<a id="pgfId-999417"></a>This script contains the common information that needs to be shared by all Tempus clients. The script must include the design loading commands, as well as all MMMC configuration commands, for example, <a href="../tempustxtcmdref/create_library_set.html">create_library_set</a>, <a href="../tempustxtcmdref/create_delay_corner.html">create_delay_corner</a>, and <a href="../tempustxtcmdref/create_constraint_mode.html">create_constraint_mode</a>.</p>
+<p>
+<a id="pgfId-999435"></a>The analysis views are specified with the <a href="../tempustxtcmdref/distribute_views.html">distribute_views</a> command, which distributes them internally to the Tempus clients for processing.This command is automatically issued by Tempus master via a distribution method (<code>distribute_views</code>).</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-999449"></a>The script must not include parasitic file loading commands (<code>read_spef</code>) and analysis view setting commands (<code>set_analysis_view</code>). If specified, these commands will be ignored by the distribution mechanism.</div>
+<p>
+<a id="pgfId-999465"></a>This script is loaded using the <code>distribute_read_design</code> command.</p>
+<p>
+<a id="pgfId-999478"></a><strong>Example:&#160;&#160;Sample MMMC Configuration Script</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1269040"></a>####################### Script 2 : &#8220;design_load.tcl&#8221; #########################<br />read_design $rootDir/sample_chip.enc.dat</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1269041"></a>create_library_set -name libs_best -timing [list $rootDir/library/stdcell//fast.lib \<br />$rootDir/ ram_128x16A_fast_syn.lib <br />$rootDir/ram_256x16A_fast_syn.lib \<br />$rootDir/rom_512x16A_fast_syn.lib \<br />$rootDir/ pllclk_fast.lib ] -si [list \<br />$rootDir/ cdb/artisan_ff.cdb]</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1269042"></a>create_library_set -name libs_typ -timing [list $rootDir/library/stdcell//typical.lib \<br />$rootDir/ram_128x16A_typical_syn.lib \<br />$rootDir/ram_256x16A_typical_syn.lib \<br />$rootDir/rom_512x16A_typical_syn.lib \<br />$rootDir/pllclk_slow.lib ] -si [list \<br />$rootDir/cdb/artisan_ss.cdb]</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1269043"></a>create_library_set -name libs_worst -timing [list $rootDir/library/stdcell//slow.lib \<br />$rootDir/ram_128x16A_slow_syn.lib \<br />$rootDir/ram_256x16A_slow_syn.lib \<br />$rootDir/rom_512x16A_slow_syn.lib \<br />$rootDir/pllclk_slow.lib ] -si [list \<br />$rootDir/cdb/artisan_ss.cdb]</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1269044"></a>create_rc_corner -name rcMin <br />create_rc_corner -name rcMax <br />create_rc_corner -name rcTyp</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1269045"></a>create_op_cond -name 1.98V_0C -library $rootDir/fast.lib -P 1 -V 1.98 -T 0<br />create_op_cond -name 1.80V_25C -library $rootDir/typical.lib -P 1 -V 1.80 -T 25<br />create_op_cond -name 1.62V_125C -library $rootDir/slow.lib -P 1 -V 1.62 -T 125<br />create_delay_corner -name typ_rcMax -library_set libs_typ -opcond_library typical \<br />-opcond 1.80V_25C -rc_corner rcMax<br />create_delay_corner -name typ_rcMin -library_set libs_typ -opcond_library typical \<br />-opcond 1.80V_25C -rc_corner rcMin<br />create_delay_corner -name worst_rcTyp -library_set libs_worst -opcond_library slow \<br />-opcond 1.62V_125C -rc_corner rcTyp<br />create_delay_corner -name worst_rcMax -library_set libs_worst -opcond_library slow \<br />-opcond 1.62V_125C -rc_corner rcMax<br />create_delay_corner -name best_rcTyp -library_set libs_best -opcond_library fast \<br />-opcond 1.98V_0C -rc_corner rcTyp</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1269046"></a>create_constraint_mode -name func ${rootDir}//sample_chip.sdc<br />create_constraint_mode -name test ${rootDir}//sample_chip_testmode.sdc</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1269047"></a>create_analysis_view -name func_ss_rcmax -constraint_mode func -delay_corner worst_rcMax<br />create_analysis_view -name test_ss_rcmax -constraint_mode test -delay_corner worst_rcMax<br />create_analysis_view -name func_ss_rctyp -constraint_mode func -delay_corner worst_rcTyp<br />create_analysis_view -name func_best_rctyp -constraint_mode func -delay_corner best_rcTyp</pre>
+<h4><em>
+<a id="pgfId-999636"></a>Handling TCL Vars in DMMMC Setup</em></h4>
+
+<p>
+<a id="pgfId-999645"></a>Note the following points for handling Tcl variables:</p>
+<ul><li>
+<a id="pgfId-999654"></a>Tcl Variables defined in master.tcl are available in Tempus master.</li><li>
+<a id="pgfId-999663"></a>Tcl Variables defined in <code>design_load.tcl</code> or <code>analysis.tcl</code> will be available in Tempus clients.</li><li>
+<a id="pgfId-999672"></a>Tempus software global variables are available in both master and clients. These global variables will have an impact on the analysis only when they are set inside the <code>design_load.tcl</code> or <code>analysis.tcl</code> file.</li><li>
+<a id="pgfId-999681"></a>Variables set by either <code>distribute_command { &#8230;}</code>or in interactive mode (enabled with the <a href="../tempustxtcmdref/set_distribute_mmmc_mode.html">set_distribute_mmmc_mode</a><code> &#8211;interactive true</code> setting) will be available or changed only on Tempus clients.<br /><div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1007202"></a>For more information on interactive mode, refer to sections &#8220;Running Interactive User Interface in DMMMC&#8221; and &#8220;Interactive ECO on Multiple Views in the <em>Tempus User Guide</em>.</div></li><li>
+<a id="pgfId-999710"></a>Use the <a href="../tempustxtcmdref/get_distribute_variables.html">get_distribute_variables</a> command to fetch the value of a Tempus client Tcl variable from the Tempus master session.</li></ul>
+
+
+
+
+
+<p>
+<a id="pgfId-999730"></a><strong>Example: Setting Tcl vars on Tempus clients from master</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-999740"></a># Create scripts to be run on client/slaves <br />distribute_command { <br />set clocks [get_clocks *] <br />set clock_names [get_object_name $clocks] <br />set totalClocks [sizeof_collection $clocks] <br />}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-999759"></a># Fetch client variable as array back to master <br /># Specify name of client variables w/o &#39;$&#39; <br />get_distribute_variables &quot;totalClocks clock_names&quot; <br />foreach viewName [array names totalClocks] { <br />Puts &quot;View &#39;$viewName&#39; has total &#39;$totalClocks($viewName)&#39; clocks named &#39;$clock_names($viewName)&#39;&quot; <br />}<br />distribute_command {report_timing}</pre>
+<h4>
+<a id="pgfId-999778"></a><a id="45566"></a>Parasitic Information, Analysis, and Report Generation Script</h4>
+
+<p>
+<a id="pgfId-999787"></a>This script contains commands for SPEF reading, analysis, reporting, and ECO DB generation (for Tempus ECO flow, if needed).</p>
+<p>
+<a id="pgfId-999796"></a>The commands for reading parasitic information must be specified in the script before the reporting commands. You must specify parasitic files for all the RC corners. For example:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-999805"></a><a href="../tempustxtcmdref/read_spef.html">read_spef</a> -rc_corner corner1 rc1.spef</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1007255"></a>read_spef -rc_corner corner2 rc2.spef</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1007258"></a>read_spef -rc_corner corner3 rc3.spef</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1007263"></a>read_spef -rc_corner corner4 rc4.spef</pre>
+
+<p>
+<a id="pgfId-999821"></a>If the file includes report commands that redirect their output to a specified file (for example, <a href="../tempustxtcmdref/report_timing.html">report_timing</a> &gt;rt.rpt), then the software generates the file in the active view directory (output directory specified with the <a href="../tempustxtcmdref/distribute_read_design.html">distribute_read_design</a> <code></code> command). For report commands with no specified redirection, the software generates the report in the corresponding log file.</p>
+<p>
+<a id="pgfId-999835"></a>This script is loaded using the <a href="../tempustxtcmdref/distribute_views.html">distribute_views</a> command.</p>
+<p>
+<a id="pgfId-999848"></a><strong>Example: Sample Parasitic Information and Report Generation Script</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1269118"></a>####################### Script 3 : &#8220;analysis.tcl&#8221; ##########################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1269119"></a>read_spef -rc_corner rcTyp SPEF/sample_chip_typ.spef.gz<br />read_spef -rc_corner rcMin SPEF/sample_chip_fastspef.gz<br />read_spef -rc_corner rcMax SPEF/sample_chip_slow.spef.gz</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1269120"></a>set_design_mode -process 28<br />set_delay_cal_mode -SIAware true<br />set_si_mode - enable_glitch_report true</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1269121"></a>report_timing -machine_readable -max_path 10 -check_type -setup &gt; setup_report_max.rpt<br />report_timing -nworst 1 -check_type -setup &gt; setup_worst.rpt<br />report_timing -max_path 10 -machine_readable -check_type hold &gt; hold_report_max.rpt<br />report_timing -nworst 1 -check_type hold &gt; hold_worst.rpt</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1269122"></a>write_sdf sample_ets.sdf<br />write_sdc constraint.sdc</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1269123"></a>write_eco_opt_db</pre>
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="dmmmc_dmmmcperform.html" id="prev" title="Performing Distributed Multi-Mode Multi-Corner Analysis">Performing Distributed Multi-M ...</a></em></b><b><em><a href="dmmmc_saverestoredmmmc.html" id="nex" title="Saving and Restoring DMMMC Sessions">Saving and Restoring DMMMC Ses ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

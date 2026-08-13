@@ -1,0 +1,113 @@
+
+<html><head><title>Recommended Guidelines for Certus</title>
+<meta name="page_sequence" content="13005000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468361" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Certus" />
+<meta name="DocTitle" content="Certus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Recommended Guidelines for Certus" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="certusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468361" />
+<meta name="NextFile" content="Flows.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Certus_Template_Scripts.html" />
+<meta name="c_product" content="Certus," />
+<meta name="Product" content="Certus," />
+<meta name="ProductFamily" content="Certus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Certus User Guide -- Recommended Guidelines for Certus" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="ctsug261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="certusUGTOC.html">Contents</a></li><li><a class="prev" href="Certus_Template_Scripts.html" title="Certus_Template_Scripts">Certus_Template_Scripts</a></li><li style="float: right;"><a class="viewPrint" href="certusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Flows.html" title="Flows">Flows</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Certus User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Recommended Guidelines for Certus</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span style="color:var(--ds-text,#000000);">&#xa0;Few important guidelines that you need to follow while using the Certus tool. These are mentioned below:</span></p>
+
+<p><span class="fontgreencadence"><ul><li><span style="color:var(--ds-text,#000000);">Reserve temporary space for Tempus and Certus clients, approximately one-third of the tool&#39;s memory capacity, as mentioned in the examples below:</span><ul><li><span style="color:var(--ds-text,#000000);">If the STA session uses 600GB of memory, reserve 200GB of temporary memory:</span><br /><span style="color:var(--ds-text,#000000);"><code>set_distribute_host -lsf -resource &quot;mem&gt;600000 rusage\[mem=600000\:tmp=200000\] span\[hosts=1\]&quot; -args { -q xxx -W 100:00 -P tempus -n 16} -timeOut 90000</code></span></li><li><span style="color:var(--ds-text,#000000);">If Innovus clients use 80GB memory, reserve 20GB temporary memory:</span><br /><span style="color:var(--ds-text,#000000);"><code>set_distribute_host -lsf -resource &quot;mem&gt;80000 rusage\[mem=80000\:tmp=20000\] span\[hosts=1\]&quot; -args { -q xxx -W 100:00 -P innovus -n 8} -timeOut 90000</code></span></li></ul></li></ul><p style="margin-left: 80.0px;"><span style="color:var(--ds-text,#000000);">If you intend to reuse Tempus client machines for Certus clients, ensure you increase the memory request for the Tempus clients.</span></p>
+<ul><li><span style="color:var(--ds-text,#000000);">Ensure that your <code>$PATH</code> environment variable points to the same Innovus version as the Certus client manager session, such as Innovus 26.1x and Certus 26.1x.</span></li><li><span style="color:var(--ds-text,#000000);">Ensure that the STA saved sessions in the <code>viewDefinition</code> file have the Quantus technology file defined in <code>create_rc_corner</code>.</span></li><li><span style="color:var(--ds-text,#000000);">Ensure that the STA session flat netlist matches the Innovus DB netlist.</span><ul><li><span style="color:var(--ds-text,#000000);">Any mismatch will indicate don&#39;t touch and can impact timing or power closure.</span></li><li><span style="color:var(--ds-text,#000000);">Ensure that the netlist is not flattened in STA sessions and Innovus DB.</span></li></ul></li><li><span style="color:var(--ds-text,#000000);">To perform a full flat power reporting on the power view, use the settings below:</span></li></ul><p style="margin-left: 40.0px;"><span style="color:var(--ds-text,#000000);"><code>distribute_command -views &lt;powerViewName&gt; {report_power}</code></span></p>
+<ul><li><span style="color:var(--ds-text,#000000);">Use the same tool to generate initial SPEF as Certus clients will re-extract parasitic:</span><ul><li><span style="color:var(--ds-text,#000000);">In case you are generating SPEF on an Innovus DB on a design with ILM, ensure that you add <code>unflattenIlm</code> before doing <code>extractRC</code>.</span></li></ul></li><li><span style="color:var(--ds-text,#000000);">Ensure that your Quantus command file does not contain a hard-coded output file name (since the same file name will be executed on each Certus client), and the input file name is accessible from where the Innovus DB is loaded.</span><ul><li><span style="color:var(--ds-text,#000000);">Provide UPF/CPF in STA sessions when the design has multiple supply voltages.</span></li><li><span style="color:var(--ds-text,#000000);">When running power optimization on inter-partitions, the power numbers printed by Certus are for the logic covering the inter-partition zone only and not the full design power.</span></li><li><span style="color:var(--ds-text,#000000);">Ensure that the top-only level is always opened for ECO (which is a part of the block restore file) - in case it is not a case of abutted partitions with no logic at the top.</span></li><li><span style="color:var(--ds-text,#000000);">The <code>start_distributed_eco_clients</code> command does not prevent the rest of the script from being executed.</span><ul><li><span style="color:var(--ds-text,#000000);">This command is to start the Innovus distributed clients, but allows the next command to be processed.</span></li><li><span style="color:var(--ds-text,#000000);">The purpose is to have <code>eco_opt_design</code>&#xa0;start generating ECO DB while all Innovus clients are booted in parallel.</span></li><li><span style="color:var(--ds-text,#000000);">Do not perform any netlist change between <code>start_distributed_eco_clients</code> and <code>eco_opt_design</code><span style="letter-spacing: 0.0px;">.</span></span></li></ul></li></ul></li></ul><ul><li style="list-style-type: none;"><ul><li><span style="color:var(--ds-text,#000000);">In case of an error, you should first check the client manager/client machines, verify the temporary disk space, ensure that there is no CPU overloading situation, and check the current disk space.</span><ul><li><span style="color:var(--ds-text,#000000);">Check the <code>host-monitor.log</code> file to determine the health of the manager machine and each of the Tempus client machines created for your run.</span></li><li><span style="color:var(--ds-text,#000000);">Check the <code>host-monitor-eco-clients.log</code> file to determine the health of the manager machine and each of the Certus client machines created for your run.</span></li></ul></li><li><span style="color:var(--ds-text,#000000);">Ensure to apply the correct views for the Setup analysis and Hold analysis.</span><ul><li><span style="color:var(--ds-text,#000000);">Adding Hold only views to the Setup active view list may lead to unexpected Setup timing.</span></li></ul></li><li><span style="color:var(--ds-text,#000000);">When having Innovus DBs generated by <code>saveTestcase</code>, those cannot be loaded by distributed ECO:</span><ul><li><span style="color:var(--ds-text,#000000);">Recommended solution is to initially use <code>saveDesign -libs</code>, which replaces all functions of <code>saveTestcase</code>, or you need to load each of those Innovus DBs individually, and save them again with <code>saveDesign</code>.</span></li></ul></li><li><span style="color:var(--ds-text,#000000);">You cannot use CUI STA with LUI Innovus DB (and vice-versa):</span><ul><li><span style="color:var(--ds-text,#000000);">You can generate a CUI STA or CUI Innovus DB by loading a LUI DB in CUI and saving it.</span></li></ul></li><li><span style="color:var(--ds-text,#000000);">It is recommended to load each Innovus DB in a standalone Innovus session to check its validity before starting Certus:</span><ul><li><span style="color:var(--ds-text,#000000);">Run <code>checkPlace-noPreplaced</code>: Verify that there are no placement violations.</span></li><li><span style="color:var(--ds-text,#000000);">Run <code>ecoRoute</code>: Verify that the tool can converge quickly and does not end with too many DRCs.</span></li></ul></li><li><span style="color:var(--ds-text,#000000);">In case of any error or SEGV that the client manager is reporting from the clients, you must review the client&#39;s log files:</span><ul><li><span style="color:var(--ds-text,#000000);">Tempus Clients: Checks in the directory pointed by <code>distribute_read_design</code>.</span></li><li><span style="color:var(--ds-text,#000000);">Certus Clients: Checks in the directory pointed by <code>set_eco_opt_mode - distributed_opt_out_dir xxx.</code></span></li></ul></li><li><span style="color:var(--ds-text,#000000);">In case you observe significant timing jumps in <code>time_design_signoff</code> after <code>implement_distibuted_eco</code>, do the following:</span><ul><li><span style="color:var(--ds-text,#000000);">Check the Certus client log files to verify that there is no large instance movement during placement legalization.</span></li><li><span style="color:var(--ds-text,#000000);">Ensure that the same parasitic extraction tools or options that were utilized to create the original parasitic data used for the initial STA are enabled.</span></li><li><span style="color:var(--ds-text,#000000);">Perform a dry run using the below-mentioned flow to verify that timing does not change during the implementation phase without any ECOs being performed:</span><ul><li><span style="color:var(--ds-text,#000000);">Load design</span></li><li><span style="color:var(--ds-text,#000000);"><code>time_design_signoff</code></span></li><li><span style="color:var(--ds-text,#000000);"><code>implement_distributed_eco -force</code></span></li><li><span style="color:var(--ds-text,#000000);"><code>time_design_signoff</code></span></li></ul></li></ul></li></ul></li><li>
+<p><span style="color:var(--ds-text,#000000);">To enable custom resource distribution related to CPU and memory configurations for Certus and Tempus clients, use the below settings when running the <code>set_eco_opt_mode -custom_distribution_file &lt;file&gt;</code> command parameter.&#xa0;</span></p>
+<ul><li><span style="color:var(--ds-text,#000000);">For every client, either for Tempus or Certus, or Tempus and Certus, specify the following:</span><br /><span style="color:var(--ds-text,#000000);"><code>module=&lt;moduleName&gt; view=&lt;viewName&gt; nCpu=&lt;Number of threads allowed&gt; {&lt;farm distribution instruction&gt;}</code></span></li><li data-uuid="52c97a55-2461-490a-baba-5184dcede006"><span data-teams="true">For client machine sharing, specify the View as<span>&#xa0;</span><code>view=&lt;viewName&gt;</code><span>&#xa0;</span>with one (or multiple) Modules,<span>&#xa0;</span><code>module=&lt;moduleName&gt;</code></span></li><li><span style="color:var(--ds-text,#000000);">For two Certus clients sharing the same machine, specify&#xa0;<code>module=&lt;moduleName&gt;</code>&#xa0;twice on the same line (where the&#xa0;<code>nCPU</code> value is then divided by the number of Certus clients and provided to each Certus client).&#xa0;</span></li><li><span style="color:var(--ds-text,#000000);"><strong>Note: </strong></span><ul><li><span style="color:var(--ds-text,#000000);">When the <code style="letter-spacing: 0.0px;">-custom_distribution_file &lt;file&gt;</code><span style="letter-spacing: 0.0px;"> parameter is specified, Certus ignores the <code>-resource</code> and <code>-args</code> parameters of <code>set_distribute_host</code> from the main TCL file and uses only those settings that are defined within <code>&lt;file&gt;</code>. The <code>-timeOut</code> parameter of the <code>set_distribute_host</code> command will be honored to specify the timeout for a submitted job that will never start. After a timeout, a warning message is displayed.</span></span></li><li><span style="color:var(--ds-text,#000000);">The tool generates an error if any required view or module is not listed in it. This means the user should list all views/modules in this file.</span></li><li data-uuid="3e2c2d66-f827-44ee-be6a-f702a12f587f">The tool first displays the specific error (which can vary in each case, depending on what the user provided incorrectly). However, an informational message is displayed as shown below:<br /><code>Usage: The format for each line: module=&lt;blockName&gt; view=&lt;viewName&gt; nCpu=&lt;INT&gt; {bsub ...}. Each line should contain a module, or a view, or both. One or more modules can be specified in a line, but only one view can be specified. The nCpu and {bsub ...} are mandatory and can appear only once in a line. The host launching string should be enclosed within &#39;{&#39; and &#39;}&#39; and should be at the trailing end of a line.</code></li><li><span style="color:var(--ds-text,#000000);">This approach allows users the flexibility to assign different clients to different queues.</span></li><li><span style="color:var(--ds-text,#000000);">The timeout period is specified using the <code>set_distribute_host -timeOut</code> command parameter in the main TCL script.</span></li><li><span style="color:var(--ds-text,#000000);"><span data-teams="true">In case of CMMMC Tempus clients, the client would take the last occurrence of any of the active views being specified.</span></span></li></ul></li></ul></li></ul><p style="margin-left: 120.0px;"><strong>Examples:</strong></p>
+<ul><li style="list-style-type: none;"><ul><li style="list-style-type: none;"><ul><li>The following command refers to a file (<code>distribution.tcl</code>) where each client requests a separate machine:<br /><code>set_eco_opt_mode -custom_distribution_file distribution.tcl</code>
+<p>where (<code>distribution.tcl</code>) file includes:</p>
+
+<p><code><span data-teams="true">module=topChip nCpu=16 {bsub -q batch -W 100:00 -P SSV:26.1:Certus -o /dev/null -n 8 -R &#39;select\[OSREL==EE80\] rusage\[mem=250000,tmp=50000\] span\[hosts=1\]&#39;}&#xa0;<br />module=small_cpu nCpu=8 {bsub -q batch -W 100:00 -P SSV:26.1:Certus -o /dev/null -n 8 -R &#39;select\[OSREL==EE80\] rusage\[mem=150000,tmp=50000\] span\[hosts=1\]&#39;}&#xa0;<br />module=big_GPU nCpu=16 {bsub -q batch -W 100:00 -P SSV:26.1:Certus -o /dev/null -n 16 -R &#39;select\[OSREL==EE80\] rusage\[mem=250000,tmp=50000\] span\[hosts=1\]&#39;}<br />view=setup_view1 nCpu=16 {bsub -q batch -W 100:00 -P SSV:26.1:Certus -o /dev/null -n 16 -R &#39;select\[OSREL==EE80\] rusage\[mem=200000,tmp=100000\] span\[hosts=1\]&#39;}<br />view=setup_view2 nCpu=16&#xa0; {bsub -q batch -W 100:00 -P SSV:26.1:Certus -o /dev/null -n 16 -R &#39;select\[OSREL==EE80\] rusage\[mem=200000,tmp=100000\] span\[hosts=1\]&#39;}&#xa0;<br />view=setup_hold1 nCpu=8&#xa0; {bsub -q batch -W 100:00 -P SSV:26.1:Certus -o /dev/null -n 8 -R &#39;select\[OSREL==EE80\] rusage\[mem=200000,tmp=100000\] span\[hosts=1\]&#39;}&#xa0;<br />view=setup_power&#xa0; nCpu=8&#xa0; {bsub -q batch -W 100:00 -P SSV:26.1:Certus -o /dev/null -n 8 -R &#39;select\[OSREL==EE80\] rusage\[mem=200000,tmp=100000\] span\[hosts=1\]&#39;}</span>&#xa0;</code></p>
+</li><li>
+<p>The following command refers to a file (<code style="letter-spacing: 0.0px;">distribution.tcl</code><span style="letter-spacing: 0.0px;">) that clients use when sharing machines.<br /></span><span style="font-family: SFMono-Medium , &quot;SF Mono&quot; , &quot;Segoe UI Mono&quot; , &quot;Roboto Mono&quot; , &quot;Ubuntu Mono&quot; , Menlo , Courier , monospace;letter-spacing: 0.0px;">set_eco_opt_mode -custom_distribution_file distribution.tcl</span></p>
+
+<p>where (<code>distribution.tcl</code>) file includes:</p>
+
+<p><code><span data-teams="true">module=topChip view=setup_view1&#xa0; nCpu=16&#xa0; {bsub -q large -W 100:00 -P SSV:26.1:Certus -o /dev/null -n 8 -R &#39;select\[OSREL==EE80\] rusage\[mem=450000,tmp=150000\] span\[hosts=1\]&#39;}<br />module=small_cpu view=setup_hold1 nCpu=8&#xa0; {bsub -q large -W 100:00 -P SSV:26.1:Certus -o /dev/null -n 8 -R &#39;select\[OSREL==EE80\] rusage\[mem=350000,tmp=150000\] span\[hosts=1\]&#39;}<br />module=big_GPU view=setup_view2 nCpu=16&#xa0; {bsub -q large -W 100:00 -P SSV:26.1:Certus -o /dev/null -n 16 -R &#39;select\[OSREL==EE80\] rusage\[mem=450000,tmp=150000\] span\[hosts=1\]&#39;}<br />module=mini_CPU1 module=mini_CPU2 view=setup_view3 nCpu=16&#xa0; {bsub -q large -W 100:00 -P SSV:26.1:Certus -o /dev/null -n 16 -R &#39;select\[OSREL==EE80\] rusage\[mem=450000,tmp=150000\] span\[hosts=1\]&#39;}<br />view=setup_power&#xa0; nCpu=8&#xa0; {bsub -q batch -W 100:00 -P SSV:26.1:Certus -o /dev/null -n 8 -R &#39;select\[OSREL==EE80\] rusage\[mem=200000,tmp=100000\] span\[hosts=1\]&#39;}<br />module=mega_GPU nCpu=32&#xa0; {bsub -q large -W 100:00 -P SSV:26.1:Certus -o /dev/null -n 32 -R &#39;select\[OSREL==EE80\] rusage\[mem=350000,tmp=150000\] span\[hosts=1\]&#39;}</span></code></p>
+</li></ul></li></ul></li></ul></span></p>
+
+<p><span style="color:var(--ds-text,#000000);"><strong>Related Topics</strong></span></p>
+<ul class="plugin_pagetree_children_list"><li data-uuid="d95ad182-6ad1-4ee4-b24a-58a28c5f0c29"><a href="Certus_Product_Overview.html" rel="nofollow" style="">Certus Product Overview</a></li><li data-uuid="7b73943a-f7bd-4b8d-b1da-1cef26de6aca"><a href="Certus_Licensing_Requirements.html" rel="nofollow" style="">Certus Licensing Requirements</a></li><li data-uuid="caea7457-01c3-496c-abc3-702701746ec2"><a href="Certus_Inputs_Requirements.html" rel="nofollow" style="">Certus Inputs Requirements</a></li><li data-uuid="3ff5d527-15a7-45bd-afcd-de28e985a314"><a href="Certus_Template_Scripts.html" rel="nofollow" style="">Certus Template Scripts</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Certus_Template_Scripts.html" id="prev" title="Certus_Template_Scripts">Certus_Template_Scripts</a></em></b><b><em><a href="Flows.html" id="nex" title="Flows">Flows</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

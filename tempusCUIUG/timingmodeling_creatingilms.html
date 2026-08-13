@@ -1,0 +1,228 @@
+
+<html><head><title>Creating ILMs</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845244" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Creating ILMs" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845244" />
+<meta name="NextFile" content="timingmodeling_ilmvalidationflow.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="timingmodeling_interfacelogicmodels.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- Creating ILMs" />
+<meta name="Keywords" content="Creating ILMs" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="ILM/XILM,Timing Modeling,Stylus" />
+<meta name="prod_subfeature" content="Timing Modeling,ILM/FLEXILM" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="timingmodeling_interfacelogicmodels.html" title="Interface Logic Models">Interface Logic Models</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="timingmodeling_ilmvalidationflow.html" title="ILM Validation Flow">ILM Validation Flow</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:creatingilms" title="Creating ILMs"></a><h3>
+<a id="pgfId-1018990"></a><a id="98075"></a>Creating ILMs</h3>
+
+<p>
+<a id="pgfId-1018991"></a>In the hierarchical design flow, you load a detailed block-level implementation of a block and its parasitic data, then specify the <a href="../tempusCUI/write_ilm.html">write_ilm</a> command to create an ILM for the block. This command creates the specified directory containing ILM files.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1018992"></a>An ILM created for an incomplete block is not as accurate as an ILM created for a complete block. Always use ILMs for complete blocks to complete the top-level design.</div>
+<p>
+<a id="pgfId-1018993"></a>The software generates ILM data for timing and signal integrity (SI):</p>
+<ul><li>
+<a id="pgfId-1018994"></a>ILM data for timing 
+The model contains the netlist of the circuitry leading from the I/O ports to interface sequential instances (that is, registers or latches), and from interface sequential instances to I/O ports. The clock tree leading to the interface registers is preserved. </li><li>
+<a id="pgfId-1018995"></a>Internal register-to-register paths, if internal logic is not part of the interface path. However, in special cases some internal paths will be kept, as shown in the following example:<br /><strong>Figure -22
+<a id="pgfId-1018996"></a>Internal Paths </strong><br />
+<a id="pgfId-1019000"></a><div class="webflare-div-image">
+<img width="456" height="245" src="images/timingmodeling-27.gif" /></div></li><li>
+<a id="pgfId-1019001"></a>Internal paths
+Internal paths controlled by different clock, or clocks connected to the ILM module through different ports. If the logic between the I/O ports is pure combinational, it is preserved in an ILM.</li><li>
+<a id="pgfId-1019002"></a>ILM data for SI 
+The model includes all of the above, plus attacker drivers or nets which affect I/O paths. It also includes the timing window files in the ILM model directory.</li></ul>
+
+
+
+
+
+
+
+
+
+<h4>
+<a id="pgfId-1019003"></a>Example ILM Creation</h4>
+
+<p>
+<a id="pgfId-1019004"></a>The following command generates the ILM ignoring certain ports and including certain objects in the BlockB directory. It also writes out the ILM SDF file under the BlockB directory.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1019005"></a>write_ilm -writeSDF -ignore_ports $ignorePorts -include_objects $includeObjects -dir BlockB</pre>
+<h4><em>
+<a id="pgfId-1019006"></a>Sample Summary Report</em></h4>
+
+<p>
+<a id="pgfId-1019007"></a>The following is a sample summary report generated after running the write_ilm command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1019008"></a>--------------------------------------------------------------<br />                   createInterfaceLogic Summary<br />--------------------------------------------------------------<br />Model            Reduced Instances           Reduced Registers<br />--------------------------------------------------------------<br />ilm_data</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1019009"></a>+<br />setup               4/16 (25%)                0/3 (0%)<br />hold                4/16 (25%)                0/3 (0%)<br />setupHold           4/16 (25%)                0/3 (0%)<br />--------------------------------------------------------------<br />si_data<br />
+setup&#160;&#160;            3/16 (18%)                 0/3 (0%)<br />hold               3/16 (18%)                 0/3 (0%)<br />setupHold          3/16 (18%)                 0/3 (0%)<br />--------------------------------------------------------------</pre>
+
+<p>
+<a id="pgfId-1019010"></a>In this report, the reduction ratio in the <code>ilm_data</code> model is 25 percent which means that 4 out the total 16 instances for this block have been eliminated.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1019011"></a>You can run the <a href="../tempusCUI/set_db.html">set_db</a> <code>-</code>ilm_keep_high_fanout_ports <code>false</code> command for improving the reduction ratio.</div>
+
+<h4>
+<a id="pgfId-1019012"></a>Preserving Selected Instances in ILMs</h4>
+
+<p>
+<a id="pgfId-1019013"></a>The <code>write_ilm</code> command can preserve specified instances and/or nets. The -include_objects parameter of the <code>write_ilm</code> command accepts a collection of instances and/or nets. All the specified instances and nets are preserved in the generated ILM.</p>
+
+<h4>
+<a id="pgfId-1019014"></a>Creating ILMs for Shared Modules</h4>
+
+<p>
+<a id="pgfId-1019015"></a>You can use the same sub-block module in different ILM blocks, enabling reuse of versatile modules. The <code>write_ilm</code> command considers constant propagate, so that only the enabled parts of a module are considered when creating ILMs for the reused modules. Because the Tempus database cannot handle the same module name in different circuits, the software automatically modifies the module names with the following rule:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1019016"></a>topModuleName+timestamp+$+moduleName</pre>
+
+<p>
+<a id="pgfId-1019017"></a>As an example, one ILM block (ModuleA) uses an ALU module (ALU) as an unsigned ALU, and a second block (ModuleB) uses the ALU as a signed ALU. You can change the input signal to use the ALU differently, setting one ALU as sign enabled and the other to off. When you run the write_ilm command, the software considers only the enabled parts of the ALU when creating ILMs for ModuleA and ModuleB. The software also ensures that the name of the ALU module in ModuleA and the name of the ALU module in ModuleB are different.</p>
+
+<h4>
+<a id="pgfId-1019018"></a>Creating ILMs Without Using Tempus Database</h4>
+
+<p>
+<a id="pgfId-1019019"></a>If you do not have Tempus database for an implemented block but have a Verilog netlist, constraints, and SPEF and TWF for that block, then use the <a href="../tempusCUI/create_ilm_from_files.html">create_ilm_from_files</a> command to store data in the ILM/XILM format.</p>
+<p>
+<a id="pgfId-1041668"></a>The following example shows the <code>create_ilm_from_files</code> command in case of a MMMC design:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1711622"></a>create_ilm_from_files -si -out_dir block_A.ILM -cell block_A -mmmc -verilog_file myfile.v</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1711623"></a>create_ilm_from_files -si -out_dir block_A.ILM -cell block_A -mmmc -incremental\<br />-spef max.spef.gz -rc_corner rcMax</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1711624"></a>create_ilm_from_files -si -out_dir block_A.ILM -cell block_A -mmmc -incremental\<br />-spef typ.spef.gz -rc_corner rcTyp</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1711625"></a>create_ilm_from_files -si -out_dir block_A.ILM -cell block_A -mmmc -incremental\<br />-spef min.spef.gz -rc_corner rcMin</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1711626"></a>create_ilm_from_files -si -out_dir block_A.ILM -cell block_A -mmmc -incremental\<br />-sdc_file funMaxMax.sdc -view_name funct-devSlow-rcMax</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1711627"></a>create_ilm_from_files -si -out_dir block_A.ILM -cell block_A -mmmc -incremental\<br />-sdc_file funMaxTyp.sdc -view_name funct-devSlow-rcTyp</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1711628"></a>create_ilm_from_files -si -out_dir block_A.ILM -cell block_A -mmmc -incremental\<br />-sdc_file tstMaxMax.sdc -view_name test-devSlow-rcMax</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1711629"></a>create_ilm_from_files -si -out_dir block_A.ILM -cell block_A -mmmc -incremental\<br />-sdc_file funMinMin.sdc -view_name funct-devFast-rcMin</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1711630"></a>create_ilm_from_files -si -out_dir block_A.ILM -cell block_A -mmmc -incremental\<br />-sdc_file tstMinMin.sdc -view_name test-devFast-rcMin</pre>
+
+<p>
+<a id="pgfId-1019030"></a>The following example shows the <code>create_ilm_from_files</code> command in case of a non-MMMC design:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1711640"></a>create_ilm_from_files -out_dir test -verilog_file \ ILM/ilm_setup/ilm_data/\<br />BlockA_0/BlockA_0_postRoute.v.gz -cell BlockA_0 -spef_file \ ILM/ilm_setup/ilm_data/BlockA_0\ BlockA_0_postRoute.spef.gz -\ sdc\ILM/ilm_setup/ilm_data/BlockA_0\ BlockA_0_postRoute.core.sdc.gz -si \<br />-overwrite -si_timing_window_file ILM/ilm_setup/si_ilm_data/BlockA_0/BlockA_0_SI.xtwf.gz</pre>
+<h3>
+<a id="pgfId-1019033"></a><a id="67768"></a>Specifying ILM Directories at the Top Level</h3>
+
+<p>
+<a id="pgfId-1019034"></a>You can use the <a href="../tempusCUI/set_ilm.html">set_ilm</a> command to use the ILM data for a block at the top partition level rather than using the default dotlib model. You can run <code>set_ilm</code> multiple times in the same session. Each time you run this command, the software overwrites the previous setting for a block. If master/clones exist in a design, the cell name will have the name of the master partition.</p>
+<p>
+<a id="pgfId-1019035"></a>You can use the <a href="../tempusCUI/reset_ilm.html">reset_ilm</a> command to revert to using the dotlib model for a block.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1019036"></a>You must use the <code>set_ilm</code> (or <code>reset_ilm</code>) command before specifying <a href="../tempusCUI/read_ilm.html">read_ilm</a>. This is because the ILM settings cannot be changed after using <code>read_ilm</code>.</div>
+
+<h4>
+<a id="pgfId-1019037"></a>Example Top-Level Signoff Flow with ILMs</h4>
+
+<ol><li>
+<a id="pgfId-1019038"></a>Before starting the Tempus tool, prepare the top-level Verilog file, if needed.
+
+You need the following in the top-level directory: <ul><li>
+<a id="pgfId-1019039"></a>A Verilog netlist that includes dummy modules for the blocks (ILM or Liberty) in the design</li><li>
+<a id="pgfId-1019040"></a>A view definition file if you have a MMMC design. Create or load a view definition file that contains the following:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1019041">
+<a id="pgfId-1019041"></a>set_analysis_view -setup {mode1_slowCorner} -hold {mode1_f astCorner}</pre></li></ul></li><li>
+<a id="pgfId-1019042"></a>Start a Tempus session from the top-level module directory within the directory where the partitions are saved.</li><li>
+<a id="pgfId-1019043"></a>Load the config file, including the top-level netlist, libraries, top-level constraint file, and ILM directory name.<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1042196">
+<a id="pgfId-1042196"></a>set_ilm -cell block_A -in_dir ../block_A/block_A.ILM
+set_ilm -cell block_B -in_dir ../block_B/block_B.ILM
+read_design filename</pre></li><li>
+<a id="pgfId-1019045"></a>Run <a href="../tempusCUI/read_spef.html">read_spef</a> to load the top-level Standard Parasitic Extraction File (SPEF).</li><li>
+<a id="pgfId-1019046"></a>Run the <code>read_ilm</code> command.</li><li>
+<a id="pgfId-1019047"></a>Run the <a href="../tempusCUI/report_timing.html">report_timing</a> command to perform timing analysis.</li></ol>
+
+
+
+
+
+
+
+
+
+
+
+
+<h3>
+<a id="pgfId-1019049"></a><a id="47269"></a>ILMs Supported in MMMC Analysis</h3>
+
+<p>
+<a id="pgfId-1019050"></a>Cadence strongly recommends that you use ILMs in the MMMC mode. If you have a non-MMMC design, create and load a view definition file that contains the following:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1019051"></a><a href="../tempusCUI/set_analysis_view.html">set_analysis_view</a> -setup {mode1_slowCorner} -hold {mode1_fastCorner}</pre>
+
+<p>
+<a id="pgfId-1019052"></a>The MMMC analysis for designs including ILMs is identical to MMMC analysis for black box designs except for the following considerations:</p>
+<ol><li>
+<a id="pgfId-1019053"></a>Views, modes, and corners at the top and partition levels must have same names.</li><li>
+<a id="pgfId-1019054"></a>When you use <a href="../tempusCUI/create_constraint_mode.html">create_constraint_mode</a> or <code></code><a actuate="user" class="URL" href="../tempusCUI/update_constraint_mode.html" show="replace" xml:link="simple">update_constraint_mode</a> to specify constraints for MMMC, you must specify the ILM constraints using the <code>-ilm_sdc_files</code> parameter (that is, timing in the presence of ILMs get constraints from the <code>-ilm_sdc_files</code> parameter, not the <code>-sdc_files</code> parameter). The SDC files specified with the <code>-ilm_sdc_files</code> parameter should be the constraint file of the full-chip flat netlist, where it allows referencing nets or pins internal to the ILM model.</li></ol>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1019055"></a>In the current ILM flow, the SDC constraints (originally specified against the complete flat netlist for the design) that reference parts of the design that were pruned cause warnings and errors during constraint loading. In this release, you can set the temporary <a href="../tempusCUI/timing_Category_Attributes.html">timing_suppress_ilm_constraint_mismatches</a> attribute to <code>true</code> to suppress all error and warning messages related to the unfound objects. Note that this command might also suppress error messages that might be of use (that is, where the top-level pins or nets or instances cannot be found).</div>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="timingmodeling_interfacelogicmodels.html" id="prev" title="Interface Logic Models">Interface Logic Models</a></em></b><b><em><a href="timingmodeling_ilmvalidationflow.html" id="nex" title="ILM Validation Flow">ILM Validation Flow</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

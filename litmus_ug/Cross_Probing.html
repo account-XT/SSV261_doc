@@ -1,0 +1,165 @@
+
+<html><head><title>Cross‑Probing</title>
+<meta name="page_sequence" content="19002001" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="apokhara" />
+<meta name="CreateDate" content="2026-04-12" />
+<meta name="CreateTime" content="1776062304" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="" />
+<meta name="DocTitle" content="Litmus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Cross‑Probing" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="litmus_ug" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-12" />
+<meta name="ModifiedTime" content="1776062304" />
+<meta name="NextFile" content="Creating_Rule_Filters.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="GUI_Features.html" />
+<meta name="c_product" content="Litmus," />
+<meta name="Product" content="Litmus," />
+<meta name="ProductFamily" content="Litmus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Litmus User Guide -- Cross‑Probing" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="litmus26ug" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="litmus_ugTOC.html">Contents</a></li><li><a class="prev" href="GUI_Features.html" title="GUI_Features">GUI_Features</a></li><li style="float: right;"><a class="viewPrint" href="litmus_ug.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Creating_Rule_Filters.html" title="Creating_Rule_Filters">Creating_Rule_Filters</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Litmus User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Cross‑Probing</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>Cross‑probing enables you to navigate directly from a reported rule occurrence in the <strong>Occurrences Table</strong> to the corresponding design representation. This capability helps correlate rule violations with RTL, schematic, or constraint definitions and supports efficient root‑cause analysis.</p>
+
+<p>Cross‑probing actions are available through the <strong>right‑click context menu</strong> on a selected rule occurrence row. Depending on the type of information associated with the selected occurrence, different cross‑probing options are presented.</p>
+
+<p></p>
+<div class="toc-macro rbtoc1776062262775">
+<ul class="toc-indentation">
+<li><a href="#Cross‑Probing-Cross‑ProbingtoHDL/RTL">Cross‑Probing to HDL / RTL</a></li>
+<li><a href="#Cross‑Probing-Cross‑ProbingtoSchematic">Cross‑Probing to Schematic</a>
+<ul class="toc-indentation">
+<li><a href="#Cross‑Probing-OpenSchematicView(Cone)">Open Schematic View (Cone)</a></li>
+<li><a href="#Cross‑Probing-OpenSchematicView(Module)">Open Schematic View (Module)</a></li>
+</ul>
+</li>
+<li><a href="#Cross‑Probing-Cross‑ProbingtoSDC">Cross‑Probing to SDC</a></li>
+</ul>
+</div>
+<h2 id="Cross‑Probing-Cross‑ProbingtoHDL/RTL">Cross‑Probing to HDL / RTL</h2>
+
+<p>For rule occurrences associated with RTL objects (for example, pins), you can cross‑probe to the HDL/RTL source code using the&#xa0;<em>Open HDL Viewer</em> option from the right‑click context menu.</p>
+
+<p>When <em>Open HDL Viewer</em> is selected, the <em>HDL viewer</em> opens and navigates to the exact source‑code location corresponding to the selected object. The relevant object is highlighted in the HDL/RTL code, enabling you to quickly identify the implementation context related to the reported rule violation.</p>
+
+<p>This form of cross‑probing allows direct correlation between a rule occurrence and the corresponding RTL construct without manual source navigation.</p>
+
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image confluence-content-image-border" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/745809600/745809610.png" data-linked-resource-container-id="745809600" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image-2026-3-25_10-32-52.png" data-linked-resource-id="745809610" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="111" src="attachments/745809600/745809610.png" tabindex="0" width="616" /></span></p>
+
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image confluence-content-image-border" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/745809600/745809609.png" data-linked-resource-container-id="745809600" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image-2026-3-25_10-33-59.png" data-linked-resource-id="745809609" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="400" src="attachments/745809600/745809609.png" tabindex="0" /></span></p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><p class="title conf-macro-render">Note:</p>
+<span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>Cross‑probing to HDL/RTL is not supported for gate‑level netlists.</p>
+</div>
+</div>
+<h2 id="Cross‑Probing-Cross‑ProbingtoSchematic">Cross‑Probing to Schematic</h2>
+
+<p>The Litmus GUI supports schematic cross‑probing through two distinct options available in the right‑click context menu of a rule occurrence:</p>
+<ul><li><em><a href="#Cross‑Probing-OpenSchematicView(Cone)">Open Schematic View (Cone)</a></em></li><li><em><a href="#Cross‑Probing-OpenSchematicView(Module)">Open Schematic View (Module)</a></em></li></ul>
+<p>For both Cone and Module views, standard zoom and navigation controls can be used to inspect the schematic in detail.</p>
+<h3 id="Cross‑Probing-OpenSchematicView(Cone)">Open Schematic View (Cone)</h3>
+
+<p>The <strong>Cone</strong> view focuses on the local logic cone around the selected object. Selecting <em>Open Schematic View (Cone)</em> opens a schematic that shows the immediate connectivity and surrounding logic relevant to the rule occurrence.</p>
+
+<p>The Cone schematic view provides the following display options:</p>
+<ul><li><em>In Main</em> &#8211; Opens the schematic view in the main GUI window</li><li><em>In New</em> &#8211; Opens the schematic view in a new window</li><li><em>Append</em> &#8211; Appends the schematic content to an already open schematic viewer</li></ul>
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image confluence-content-image-border" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/745809600/745809608.png" data-linked-resource-container-id="745809600" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image-2026-3-25_10-35-43.png" data-linked-resource-id="745809608" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="146" src="attachments/745809600/745809608.png" tabindex="0" width="595" /></span></p>
+
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image confluence-content-image-border" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/745809600/745809607.png" data-linked-resource-container-id="745809600" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image-2026-3-25_10-36-42.png" data-linked-resource-id="745809607" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="400" src="attachments/745809600/745809607.png" tabindex="0" /></span></p>
+<h3 id="Cross‑Probing-OpenSchematicView(Module)">Open Schematic View (Module)</h3>
+
+<p>The <strong>Module</strong> view displays the complete module containing the selected object. Selecting <em>Open Schematic View (Module)</em> opens the full module‑level schematic, providing a broader structural context for the rule occurrence within the design hierarchy.</p>
+
+<p>The Module schematic view provides the following display options:</p>
+<ul><li><em>In Main</em> &#8211; Opens the module schematic in the main GUI window</li><li><em>In New</em> &#8211; Opens the module schematic in a new window</li></ul><div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><p class="title conf-macro-render">Note:</p>
+<span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>An <strong>Append</strong> option is not provided for the Module view, as the entire module is already displayed as a single schematic entity.</p>
+</div>
+</div>
+
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image confluence-content-image-border" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/745809600/745809606.png" data-linked-resource-container-id="745809600" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image-2026-3-25_10-37-49.png" data-linked-resource-id="745809606" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="138" src="attachments/745809600/745809606.png" tabindex="0" width="588" /></span></p>
+
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image confluence-content-image-border" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/745809600/745809604.png" data-linked-resource-container-id="745809600" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image-2026-3-25_10-40-2.png" data-linked-resource-id="745809604" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="400" src="attachments/745809600/745809604.png" tabindex="0" /></span></p>
+<h2 id="Cross‑Probing-Cross‑ProbingtoSDC">Cross‑Probing to SDC</h2>
+
+<p>For rule occurrences that include SDC‑related information (for example, an SDC file and line reference), the Litmus GUI supports cross‑probing directly into the corresponding SDC constraint location. This capability helps to&#xa0;quickly inspect the constraint definition associated with a reported rule occurrence.</p>
+
+<p>Cross‑probing to SDC is invoked from the right‑click context menu on a selected rule occurrence row in the Occurrences Table using the <em>Open SDC Viewer</em> option. In the context menu, the SDC entry is shown with the associated&#xa0;<strong>line number and SDC file name</strong> (for example, <code>105 : fifo_demo.sdc.AFIFO</code>).</p>
+
+<p>When <em>Open SDC Viewer</em> is selected, the <em>SDC Viewer</em> opens and loads the referenced SDC file. The viewer automatically navigates to the referenced line number and highlights the corresponding constraint line for easy identification. This allows you&#xa0;to validate the constraint content at the exact source location associated with the selected rule occurrence.</p>
+
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image confluence-content-image-border" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/745809600/745809603.png" data-linked-resource-container-id="745809600" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image-2026-3-25_10-47-4.png" data-linked-resource-id="745809603" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="137" src="attachments/745809600/745809603.png" tabindex="0" width="447" /></span></p>
+
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image confluence-content-image-border" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/745809600/745809601.png" data-linked-resource-container-id="745809600" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image-2026-3-25_10-55-45.png" data-linked-resource-id="745809601" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="400" src="attachments/745809600/745809601.png" tabindex="0" /></span></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="GUI_Features.html" id="prev" title="GUI_Features">GUI_Features</a></em></b><b><em><a href="Creating_Rule_Filters.html" id="nex" title="Creating_Rule_Filters">Creating_Rule_Filters</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

@@ -1,0 +1,179 @@
+
+<html><head><title>define_attribute</title>
+<meta name="page_sequence" content="14008000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287105" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="define_attribute" />
+<meta name="Keywords" content="create new attribute, user-defined attribute, db object, delete_obj, reset attribute value, no default value, numeric types, boolean types, empty string" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Tcl/DB Commands," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287105" />
+<meta name="NextFile" content="delete_cell_obs.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="decompress_special.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- define_attribute" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="decompress_special.html" title="decompress_special">decompress_special</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="delete_cell_obs.html" title="delete_cell_obs">delete_cell_obs</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>define_attribute</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span id="define_attribute-define_attribute"></span><span class="confluence-anchor-link" id="define_attribute-define_attribute"></span><code>define_attribute<br /></code><code>[-help]<br /><em>attribute_name<br /></em>-obj_type&#xa0;<em>object_type<br /></em>[-obsolete]<br />{-alias <em>existing_attribute</em> | {-category&#xa0;<em>category </em></code>[<code>-data_type {bool | int | double | area | coord | string | point | rect | line | delay | resistance | capacitance | voltage | in_dir | out_dir | in_file | out_file &#xa0;| object | object*}&#xa0;[-enum_values <em>values</em>]]<br />[-check_function&#xa0;<em>check_function</em>]<br />[-compute_function&#xa0;<em>compute_function</em>]<br />[-default&#xa0;<em>default</em>]<br />[-help_string <em>description</em>]<br />[-hidden]<br />[-set_function&#xa0;<em>set_function</em>]<br />[-skip_in_db]}}</code></p>
+
+<p>Creates a new, user-defined attribute with the specified characteristics.&#xa0;</p>
+
+<p>The attribute value can be reset only if a default value is specified.&#xa0;For example, the following command defines a new instance attribute of integer type with a default value equal to 1:<br /><code>define_attribute myattr -default 1 -obj_type inst -data_type int -help_string &quot;my attribute&quot; -category mycat</code></p>
+<h4 id="define_attribute-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable" style="width: 1822.0px;"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" style="width: 306.0px;">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd" style="width: 1516.0px;">
+<p>Outputs a brief description that includes type and default information for each <code>define_attribute</code> parameter.</p>
+
+<p>For a detailed description of the command and all of its parameters, use the man command:<br /><code>man define_attribute</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 306.0px;"><code><span>-alias&#xa0;</span><em>existing_attribute</em></code></td>
+<td class="confluenceTd" style="width: 1516.0px;"><span>Makes </span><code><em>attribute_name</em></code><span> a hidden alias for </span><code><em>existing_attribute</em></code><span>, which must have been defined. This parameter is used along with the </span><code>-obj_type</code><span> parameter. It could also be used with the </span><code>-obsolete</code><span> parameter to generate an obsolete warning.</span></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 306.0px;"><em><code>attribute_name</code></em></td>
+<td class="confluenceTd" style="width: 1516.0px;">
+<p>Specifies the name of the attribute to be defined.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 306.0px;"><code>-category&#xa0;<em>category</em></code></td>
+<td class="confluenceTd" style="width: 1516.0px;">
+<p>Specifies the category of the attribute.</p>
+
+<p>Categories group attributes that perform similar functions, whereas object types describe where in the design an attribute is valid. <br />You can specify any category name, both new and existing category names are allowed.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 306.0px;"><code>-check_function&#xa0;<em>check_function</em></code></td>
+<td class="confluenceTd" style="width: 1516.0px;">
+<p>Specifies a previously defined Tcl procedure&#39;s name to ensure that the newly defined attribute is valid. <br />The Tcl procedure should be of the form <code>proc {object value}</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 306.0px;"><code>-compute_function&#xa0;<em>compute_function</em></code></td>
+<td class="confluenceTd" style="width: 1516.0px;">
+<p>Specifies a previously defined Tcl procedure&#39;s name to get the newly defined attribute&#39;s value later (with the <code>get_attribute</code> command).<br />The Tcl procedure must be of the form <code>proc {object}</code>.</p>
+
+<p>When you use this option, the attribute becomes a read-only attribute because its value is always computed.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1822.0px;"><code>-data_type {bool int double area coord string point rect line polygon delay resistance capacitance voltage in_dir out_dir in_file out_file}</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 306.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1516.0px;">Defines the data type of the attribute. Possible data types are basic only, no objects.</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 306.0px;"><code>-default&#xa0;<em>default</em></code></td>
+<td class="confluenceTd" style="width: 1516.0px;">
+<p>Specifies a default value for the attribute. In case this parameter is not specified while creating an attribute, the default value will be:</p>
+<ul><li><code>no_value</code> for simple numeric types such as <code>int</code>, <code>double</code>, <code>delay</code>, <code>capacitance</code>, <code>coord</code>, and <code>boolean</code></li><li>&quot;&quot; (empty string) for all other types, including <span> <code>enum</code>, </span><code>string</code>, <code>in_file</code>, <code>out_file</code>, <code>in_dir</code>, <code>out_dir</code>, <code>point</code>, <code>rect</code>, <code>polygon</code>, <code>line</code>, and <code>obj_type</code></li></ul></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 306.0px;"><code>-enum_values <em>values</em></code></td>
+<td class="confluenceTd" style="width: 1516.0px;">
+<p>Specifies a list of all the possible values of the enumerated type. For example, <code>-enum_values {a b c}</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 306.0px;"><code>-help_string <em>description</em></code></td>
+<td class="confluenceTd" style="width: 1516.0px;">Specifies the help text for the attribute.</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 306.0px;"><code>-hidden</code></td>
+<td class="confluenceTd" style="width: 1516.0px;">
+<p>Specifies whether the defined attribute is a hidden attribute.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 306.0px;"><code>-obj_type&#xa0;<em>object_type</em></code></td>
+<td class="confluenceTd" style="width: 1516.0px;">Specifies the object type of the attribute. All valid object types can be found by typing&#xa0;<code>get_db obj_types .name</code>&#xa0;at the prompt.&#xa0;<br />The attribute is assigned to the specified type.</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 306.0px;"><code>-obsolete</code></td>
+<td class="confluenceTd" style="width: 1516.0px;">Specifies if the defined attribute is obsolete.</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 306.0px;"><code>-set_function&#xa0;<em>set_function</em></code></td>
+<td class="confluenceTd" style="width: 1516.0px;">
+<p>Specifies a previously defined Tcl procedure&#39;s name. This option allows you to override user-defined values provided it conforms to the parameters <br />in the Tcl procedure you created. The Tcl procedure should be of the form <code>proc {object new_value current_value}</code>. <br />Returns new value assigned to the attribute.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 306.0px;"><code>-skip_in_db</code></td>
+<td class="confluenceTd" style="width: 1516.0px;">
+<p>Prevents the <code>write_db</code> command to write out the defined attribute.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="define_attribute-Examples">Examples</h4>
+<ul><li>The following command creates a Tcl procedure,&#xa0;<code>check_fxn</code>, and then creates an attribute named test_check. The&#xa0;<code>-check_function</code>&#xa0;parameter is specified so that the test_check attribute can be tested for validity when it is specified later:<br /><code>proc check_fxn {obj val} {</code><br /><code>+ if {$val &gt;0} { return 0}</code><br /><code>+ return 1</code><br /><code>+ }</code><br /><code>define_attribute test_check1 -obj_type inst -data_type int -category test -help_string &quot;test_check_function&quot; -check_function&#xa0; check_fxn</code><br /><br />Based on the check_function parameter, the checking criteria attribute value can be set only to a negative value. As a result the following command sets the attribute value to -1:<br /><code>set_db insts .test_check1 -1&#xa0;&#xa0;&#xa0;</code>&#xa0;<br />but the following command displays an error and keeps the previous value.<br /><code>set_db insts .test_check1 2&#xa0;</code></li></ul><ul><li>The following command creates a Tcl procedure,&#xa0;<code>set_fxn</code>, and then creates an attribute named <code>test_set</code>. The&#xa0;<code>-set_function</code>&#xa0;parameter is specified so that you can change the value of the <code>test_set</code> attribute (provided it is valid):<br /><code>{proc set_fxn {obj new_val cur_val} {</code><br /><code>+ if {$new_val &gt; $cur_val} {</code><br /><code>+ return $new_val</code><br /><code>+ }</code><br /><code>+ return $cur_val</code><br /><code>+ }</code><br /><code>+ }</code><br /><code>define_attribute test_set -obj_type root -data_type int -category test -help_string &quot;test set function&quot; -set_function set_fxn</code><br /><br />Now, the following command sets the attribute value to 1 because the previous value was undefined<br /><code>set_db test_set 1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;</code><br />The following command changes the Attribute value to 4 as the new value is greater than the current value<br /><code>set_db test_set 4</code><br class="_mce_tagged_br" />But with the following command the value is not changed as the new value is less than the current value (4)<br /><code>set_db test_set 2</code></li><li>The following command uses the compute_function to set attribute values. Note that the attribute becomes read-only if <code>compute_function</code> is applied.<br /><code>proc comp_func {obj} { return 5}</code><br /><code>define_attribute test_compute -obj_type root -data_type int -category test -help_string &quot;test set function&quot; -compute_function comp_func</code><br /><code>get_db test_compute 5</code><br />Now, the following command will issue an error as attribute value cannot be changed.<br /><code>set_db test_compute 3</code></li></ul><h4 id="define_attribute-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="delete_obj.html">delete_obj</a></code></li><li><code><a href="get_db.html">get_db</a></code></li><li><code><a href="reset_db.html">reset_db</a></code></li><li><code><a href="set_db.html">set_db</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="decompress_special.html" id="prev" title="decompress_special">decompress_special</a></em></b><b><em><a href="delete_cell_obs.html" id="nex" title="delete_cell_obs">delete_cell_obs</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

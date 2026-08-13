@@ -1,0 +1,147 @@
+
+<html><head><title>set_dynamic_power_simulation</title>
+<meta name="page_sequence" content="17020000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666295" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the text commands in Voltus IC Power Integrity Solution." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_dynamic_power_simulation" />
+<meta name="Keywords" content="dynamic power,set,simulation period" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666295" />
+<meta name="NextFile" content="set_inst_temperature_file.html" />
+<meta name="Group" content="Voltus Text Command Reference" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_default_switching_activity.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution Text Command Reference -- set_dynamic_power_simulation" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="epstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="set_default_switching_activity.html" title="set_default_switching_activity">set_default_switching_activity</a></li><li style="float: right;"><a class="viewPrint" href="voltustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_inst_temperature_file.html" title="set_inst_temperature_file">set_inst_temperature_file</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_dynamic_power_simulation</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="set_dynamic_power_simulation-set_dynamic_power_simulation"></span> <code><br /><code>set_dynamic_power_simulation<br />[-help]<br />[-activity_pattern {<em>time1</em>&#xa0; <em>activity_name1</em>&#xa0; <em>time2</em>&#xa0; <em>activity_name2</em> ....}]<br />[-period <code><em>value</em></code>]<br />[-reset]<br />[-resolution <code><em>value</em></code>]</code> <br /></code></p>
+
+<p><br /></p>
+
+<p>Specifies the period and resolution for a dynamic power simulation. This command is used to specify the simulation period in the dynamic vectorbased/vectorless and power-up flows.</p>
+
+<p>Generally, the number of simulation steps (simulation period divided by resolution) should be selected such that the number is around 1000. Around 20 clock cycles of the dominant clock specified as period and 20/50ps specified as resolution will capture all switching events in the design. This can be fine-tuned to balance the run time and accuracy. For example, if the dominant clock frequency is 1GHz, and the clock period is 1ns, the recommended simulation period is 20ns and resolution is 20ps, as shown in the following example:</p>
+
+<p><code>set_dynamic_power_simulation -period 20ns -resolution 20ps</code></p>
+
+<p>In this case, the number of simulation steps is 1000.</p>
+<h4 id="set_dynamic_power_simulation-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table bgcolor="#FFFFFF" cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><colgroup><col style="width: 116.0px;" /><col style="width: 531.0px;" /></colgroup><tbody><tr><td class="confluenceTd"><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">-help</span></code></td>
+<td class="confluenceTd"><p style="text-align: left;">Outputs a brief description that includes type and default information for each<span>&#xa0;</span><code>set_dynamic_power_simulation</code><span>&#xa0;</span>parameter.</p>
+<p style="text-align: left;">For a detailed description of the command and all of its parameters, use the<span>&#xa0;</span><code>man</code><span>&#xa0;</span>command:<span>&#xa0;</span><code>man<span>&#xa0;</span></code><code>set_dynamic_power_simulation</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-activity_pattern&#xa0; {<em>time1</em>&#xa0; <em>activity_name1</em>&#xa0; <em>time2</em>&#xa0; <em>activity_name2</em> ....}</code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">
+<p>Divides the total simulation time based on the windows given in the <code>activity_pattern</code> parameter. For a particular window, it uses the defined activity specified with the <code>set_default_switching_activity</code> command.</p>
+
+<p>When the user-defined low cycle and high cycle time is specified for the input/sequential activity, all the clocks will be in the low or high cycle until completely past the cycle transition time.</p>
+
+<p>Following is the use model of this parameter:</p>
+<ul><li><code>set_default_switching_activity <strong>-name low</strong></code>&#xa0;<code><strong>-input_activity 0.05 -seq_activity 0.1</strong> -clock_gates_output 0.2</code></li><li><code>set_default_switching_activity <strong>-name high</strong>&#xa0;<strong>-input_activity 0.1 -seq_activity 0.2</strong> -clock_gates_output 2.0</code></li></ul><ul><li><code>set_dynamic_power_simulation -period 15ns -resolution 50ps <strong>-activity_pattern {0 high 5ns low 10ns high}</strong></code></li></ul>
+<p>Here, high activity is used for 0ns to 5ns, low activity is used for 5ns to 10ns, and high activity is used for 10ns to 15ns.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-period</code> <code><em>value</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the simulation period that dynamic power analysis will use. The supported time units are <code>s</code>, <code>ms</code>, <code>us</code>, <code>ns</code>, and <code>ps</code>. If no explicit time unit is specified, the default <code>ns</code> (nanosecond) will be applied.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-reset</code></td>
+<td class="confluenceTd">
+<p>Resets all specified options back to default values.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-resolution</code> <code><em>value</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the transient time step size or resolution. The supported time units are <code>s</code>, <code>ms</code>, <code>us</code>, <code>ns</code>, and <code>ps</code>. If no explicit time unit is specified, the default <code>ps</code> (picosecond) will be applied.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_dynamic_power_simulation-Examples">Examples</h4>
+<ul><li>The following command sets up the period and resolution for a dynamic simulation: <br /><code>set_dynamic_power_simulation -period 5ns -resolution 100ps</code><br /><br /></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_default_switching_activity.html" id="prev" title="set_default_switching_activity">set_default_switching_activity</a></em></b><b><em><a href="set_inst_temperature_file.html" id="nex" title="set_inst_temperature_file">set_inst_temperature_file</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

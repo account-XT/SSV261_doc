@@ -1,0 +1,157 @@
+
+<html><head><title>Pad Voltage Source File</title>
+<meta name="page_sequence" content="39009000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468656" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Pad Voltage Source File" />
+<meta name="Keywords" content="pad,voltage,LibGen,LEF,voltage" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Power-Grid Library Generation," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468656" />
+<meta name="NextFile" content="Port_File.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="LEF-DEF_Layermap_File.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- Pad Voltage Source File" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="LEF-DEF_Layermap_File.html" title="LEF-DEF_Layermap_File">LEF-DEF_Layermap_File</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Port_File.html" title="Port_File">Port_File</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Pad Voltage Source File</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>A file containing the locations of the voltage sources to be connected to the pad cells.</p>
+
+<p><strong>Sample file name</strong>: <code>voltsrc_533a.txt</code></p>
+
+<p><strong>Command</strong>: <code>set_advanced_pg_library_mode -source_location_file </code><span class="webflare-courier-new" style="white-space: pre;"><em>file</em></span></p>
+
+<p><strong>Format</strong>:</p>
+
+<p><code>&lt;MIN_SPACING spacing_value&gt;<br />&lt;DENSITY density_value&gt;<br />CELL cell_name<br />&lt;[PORT|DETAILED] {&gt;<br />    NET net_name<br />    &lt;[PORT|DETAILED] {&gt;<br />        lef_layer_name &lt;PORT|DETAILED&gt; x y [x y]  <br />        lef_layer_name &lt;PORT|DETAILED&gt; x y [x y]<br />    &lt;}&gt;<br />&lt;}&gt;</code></p>
+
+<p><strong>Format Description</strong>:</p>
+
+<p>This source location file syntax includes the following parameters:</p>
+<ul><li><code>MIN_SPACING</code> <span class="webflare-courier-new" style="white-space: pre;"><em>spacing_value</em></span> <br /><code>DENSITY</code> <span class="webflare-courier-new" style="white-space: pre;"><em>density_value</em></span><br />These values are used when you specify the source location as a rectangle. LibGen attempts to generate a grid of voltage sources with the dimensions <code>density_value x</code> <code>density_value y</code> in the rectangle. However, if this grid would place the voltage sources closer together than the value set by <code>MIN_SPACING</code>, LibGen generates fewer voltage sources to avoid violating the <code>MIN_SPACING</code> setting. <br />Since these variables are global to the source location file, you can specify them anywhere in the file. If you specify them more than once, LibGen uses the last setting. The default value for <code>MIN_SPACING</code> is 1 micron. The default value for <code>DENSITY</code> is 10.</li><li><code>CELL </code><span class="webflare-courier-new" style="white-space: pre;"><em>cell_name</em></span> <br /><code>NET</code> <span class="webflare-courier-new" style="white-space: pre;"><em>net_name</em></span><br />These specifications apply to the voltage source locations that follow until LibGen encounters a new <code>CELL</code> or <code>NET</code> line. You can specify voltage sources as single points or as rectangles. If you specify them as rectangles, LibGen generates a grid of voltage sources inside these rectangles.</li><li><code>PORT|DETAILED</code> <br />The source location file can specify voltage sources to be used with port or detailed views. If you do not use the <code>PORT</code> and <code>DETAILED</code> keywords, LibGen uses the voltage source data for detailed views. LibGen issues a warning instructing you to update the format of your source location file to include the <code>PORT</code> and <code>DETAILED</code> keywords.<br />You can specify the <code>PORT</code> and <code>DETAILED</code> keywords on the cell level, on the net level, or on an individual voltage source location definition. LibGen uses specifications at the cell level unless they are overridden at the net level. It uses specifications at the net level unless they are overridden by the individual voltage source specifications.</li><li><span class="webflare-courier-new" style="white-space: pre;"><em>lef_layer_name</em></span><code> &lt;PORT|DETAILED&gt; </code><span class="webflare-courier-new" style="white-space: pre;"><em>x y</em></span><code> [</code><span class="webflare-courier-new" style="white-space: pre;"><em>x y</em></span><code>] </code><br />Lines beginning with a LEF layer name specify the actual location of the voltage sources. Usually you can specify this location as a single point by providing one set of values for x and y. These x and y coordinates are specified in microns and use the same coordinate system as that used for LEF ports in the LEF file. <br />Alternatively, you can specify the voltage source locations as a rectangle by giving two sets of <span class="webflare-courier-new" style="white-space: pre;"><em>x</em></span> and <span class="webflare-courier-new" style="white-space: pre;"><em>y</em></span> locations. In this case, LibGen attempts to generate a 10-by-10 grid of voltage sources inside this area. From a rectangle specification, it does not create voltage sources closer than 1 micron apart, so if the rectangle is less than about 10 microns on a side, it generates fewer voltage sources.<br />In the source location file, the location of the voltage sources is specified by using a LEF layer name and location in LEF coordinate space. However, because of the way LibGen uses this data internally, no LEF geometries are actually required to exist at the location where the voltage sources are to be placed. LibGen uses this data internally with the layout of the block (that is, the GDS data) during detailed power-grid view generation, so it only requires that there be layout (GDS) geometries at the location of the voltage sources. Similarly, the LEF layer name used in the source location file does not actually have to be included in any of the input LEF files; it must be defined only in the layer map used by LibGen.</li></ul>
+<p><strong>Example</strong>:</p>
+<ul><li>Following is an example of the contents of the voltage source location file: <br /><pre class="webflare-pre-block webflare-courier-new">CELL an2_120
+NET vcc
+  MET1 11.0 16.0 
+    MET1 0.0 15.0 22.1 17.5
+NET gnd
+   MET1 11.0 1.0
+   MET1 0 -0.5 22.1 2.0
+  
+CELL xor
+NET vcc
+   MET1 10.0 5.0
+NET gnd
+  MET1 10.0 1.0</pre></li><li>Following is an example file that uses only cell-level specifications to define voltage sources for the port view of the NAND1 cell: <br /><pre class="webflare-pre-block webflare-courier-new">CELL NAND1
+PORT
+  NET VDD
+    MET1 5 95
+    MET2 5 95
+  NET VSS
+    MET1 5 5
+    MET2 5 5</pre></li><li>Following is an example file that uses net-level specifications to define voltage sources for both the port and detailed views of the NAND1 cell: <br /><pre class="webflare-pre-block webflare-courier-new">CELL NAND1
+  NET VDD
+    PORT
+    MET1 5 95
+    MET1 DETAILED 5 92
+    MET1 DETAILED 5 98
+  NET VSS
+    PORT
+    MET1 5 5
+    MET1 DETAILED 5 2
+    MET1 DETAILED5 8
+</pre>An alternate way to achieve the same results as the last example is by mixing port- and net- level specifications, or port-level and individual source specifications:<pre class="webflare-pre-block webflare-courier-new">CELL NAND1
+  PORT
+    NET VDD
+      MET1 5 95
+      DETAILED
+        MET1 5 92
+        MET1 5 98
+    NET VSS
+      MET1 5 5
+      MET1 5 2
+      MET1 5 8</pre></li><li>Following is an example file using <code>MIN_SPACING</code> and <code>DENSITY</code> to create a 10 x 10 grid of voltage sources on the VSS net in the detailed view of the NAND1 cell: <br /><pre class="webflare-pre-block webflare-courier-new">DENSITY 10
+MIN_SPACING 1
+CELL NAND1
+  DETAILED
+  NET VSS</pre></li><li>Following is an example using <code>DENSITY</code>: <br /><pre class="webflare-pre-block webflare-courier-new">DENSITY 10
+CELL PVDD_33
+NET VDD
+M6 DETAILED 15 83.23
+M6 PORT 15 83.21</pre></li></ul><h4 id="PadVoltageSourceFile-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="LEF-DEF_Layermap_File.html">LEF-DEF Layermap File</a></li><li><a href="Port_File.html">Port File</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="LEF-DEF_Layermap_File.html" id="prev" title="LEF-DEF_Layermap_File">LEF-DEF_Layermap_File</a></em></b><b><em><a href="Port_File.html" id="nex" title="Port_File">Port_File</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

@@ -1,0 +1,356 @@
+
+<html><head><title>update_delay_corner</title>
+<meta name="page_sequence" content="19155000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287385" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="update_delay_corner" />
+<meta name="Keywords" content="delay calculation corner object.,modify parameters object" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Timing Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287385" />
+<meta name="NextFile" content="update_io_latency.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="update_constraint_mode.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- update_delay_corner" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="update_constraint_mode.html" title="update_constraint_mode">update_constraint_mode</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="update_io_latency.html" title="update_io_latency">update_io_latency</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>update_delay_corner</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>update_delay_corner<span class="confluence-anchor-link" id="update_delay_corner-update_delay_corner"></span><span id="update_delay_corner-update_delay_corner"></span> <br /><code>[-help]<br /><code>[-early_estimated_worst_irDrop_factor&#xa0;<em>percent</em>]</code><br />[-early_irdrop_data <em>files_or_directories</em>]</code><br /><code>[-early_irdrop_file <em>list_of_files</em>]</code><br /><code>[-early_library_set <em>libSetName</em>]</code><br /><code>[-early_opcond <em>opcondName</em>]&#xa0;</code><br /><code>[-early_opcond_library <em>libName</em>]</code><br /><code>[-early_rc_corner rcCornerObj]</code><br /><code>[-early_temp_file <em>tempName</em>]<br />[-irdrop_data <em>files_or_directories</em>]</code><br /><code>[-irdrop_file <em>list_of_files</em>]<br /><span>[-late_estimated_worst_irDrop_factor&#xa0;</span><em>percent</em><span>]</span><br />[-late_irdrop_data <em>files_or_directories</em>]</code><br /><code>[-late_irdrop_file <em>list_of_files</em>]</code><br /><code>[-late_library_set <em>libSetName</em>]</code><br /><code>[-late_opcond <em>opcondName</em>]</code><br /><code>[-late_opcond_library <em>libName</em>]</code><br /><code>[-late_rc_corner <em>rcCornerObj</em>]</code><br /><code>[-late_temp_file <em>tempName</em>]</code><br /><code>[-library_set <em>libSetObj</em>]</code><br /><code>[-name <em>delayCornerObj]</em></code><br /><code>[-opcond <em>opcondName</em>]&#xa0;</code><br /><code>[-opcond_library <em>libName</em>]</code><br /><code><span style="color:var(--ds-text,#172B4D);">[-pg_net_voltages<span>&#xa0;</span></span><em>voltage_pairs</em><span style="color:var(--ds-text,#172B4D);">]</span><br />[-power_domain <em>powerDomainName</em>]</code><br /><code>[-rc_corner <em>rcCornerObj</em>]</code><br /><code>[-si_enabled {true | false}]</code><br /><code>[-supply_set <em>supplySetName</em>]</code><br /><code>[-temp_file <em>tempName</em>]</code></code></code></p>
+
+<p>Modifies the parameters of an existing delay calculation corner object. You can use the <code>update_delay_corner</code> command to add or change attribute values for an existing delay calculation corner object, or for an existing power domain definition.</p>
+
+<p>You can update a delay calculation corner object before the multi-mode multi-corner definition file is loaded into the design, or after. However, after the software processes the file, any change to an existing object when the software is in multi-mode multi-corner mode results in the timing, delay calculation, and RC data being reset.</p>
+
+<p>You can also use the <code>update_delay_corner</code> command to add a power domain definition to the specified delay calculation corner. Instances contained within an MSMV power domain often require a different library or operating condition that used for the default power domain. Power domain definitions within a delay calculation corner object can be used to assign specific libraries and PVT settings per power domain.</p>
+<div>
+<p><strong>Note</strong>:&#xa0;</p>
+<ul><li>You must use the same power domain names that you intend to specify in the power domain file to define the physical aspects of the domain.</li><li>Use separate delay calculation corners to define major PVT corner differences. Use the <code>-early_*</code> and <code>-late_*</code> parameters within a single delay calculation corner to control on-chip-variation.</li></ul></div>
+
+<p>The <code>-early_*</code> and <code>-late_*</code> parameters can be specified separately, to update a delay corner object with early or late information. If you only specify one of the <code>-early_*</code> or <code>-late_*</code> parameters, the software uses the original information pointer in place of the missing early/late parameter.</p>
+
+<p>For example, if you initially created a delay corner object using:</p>
+
+<p><code>create_delay_corner </code><br /><code>-library_set libsNominal</code><br /><code>...</code></p>
+
+<p>If you specify <code>update_delay_corner -early_library_set</code> <code>libsEarly</code>, the software actually uses:</p>
+
+<p><code>update_delay_corner </code><br /><code>-early_library_set libsEarly </code><br /><code>-late_library_set libsNominal</code></p>
+
+<p>Use this command after creating at least one delay calculation corner (<code><a href="create_delay_corner.html">create_delay_corner</a></code>).</p>
+<h4 id="update_delay_corner-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-early_estimated_worst_irDrop_factor&#xa0;<em>percent</em></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the early voltage derating factor.&#xa0;</p>
+
+<p>When this parameter is specified, the software performs delay calculations using the voltage = nomVolt * (1 &#8211; value).</p>
+
+<p><em>Default</em>: 0.0</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-early_irdrop_data&#xa0;<em>files_or_directories</em></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the IR drop files or directories to apply when calculating the early arrival times at a single delay corner.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-early_irdrop_file </code><code><em>list_of_files</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the list of IR drop files to apply when calculating early arrival times at a single power domain.</p>
+
+<p>This parameter is used primarily when configuring the multi-mode multi-corner environment for on-chip-variation (OCV) analysis.</p>
+
+<p><strong>Note</strong>: This parameter is obsolete and will be removed in a future release. To ensure compatibility with future releases, you should update your scripts.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-early_library_set </code><code><em>libSetName</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the library set to associate with the power domain for calculating early arrival times for this power domain.</p>
+
+<p>This parameter is used primarily when configuring the multi-mode multi-corner environment for on-chip-variation (OCV) analysis.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-early_opcond </code><code><em>opcondName</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the operating condition to use for calculating early arrival times for this power domain.</p>
+
+<p>This parameter is used primarily when configuring the multi-mode multi-corner environment for on-chip-variation (OCV) analysis.</p>
+
+<p><em>Default:</em> Each library in the early library set uses its own default operating condition.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-early_opcond_library </code><code><em>libName</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the internal library name for the library in which the early operating condition is defined. This is <em>not</em> the library file name.</p>
+
+<p>This parameter is used primarily when configuring the multi-mode multi-corner environment for on-chip-variation (OCV) analysis.</p>
+
+<p><em>Default:</em> The software searches the early library set for the specified operating condition (<code>-early_opcond</code>), starting with the master library.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-early_rc_corner</code> <code><em>rcCornerObj</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the RC corner object to associate with the early corner object.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-early_temp_file</code> <code><em>tempName</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the name of the temperature file for temperature-aware delay calculation for the early corner.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-irdrop_data&#xa0;<em>files_or_directories</em></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the IR drop files or directories to apply to both the early and late delay calculation for the specified delay corner object.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-irdrop_file </code><code><em>list_of_files</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the list of IR drop files to apply to both early and late delay calculation for this power domain object.</p>
+
+<p>This parameter is used primarily to configure single-corner or Best-Case Worst-Case (BC-WC) analysis modes.</p>
+
+<p><strong>Note</strong>: This parameter is obsolete and will be removed in a future release. To ensure compatibility with future releases, you should update your scripts.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-late_estimated_worst_irDrop_factor&#xa0;<em>percent</em></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the late voltage derating factor.&#xa0;</p>
+
+<p>When this parameter is specified, the software performs delay calculations using the voltage = nomVolt * (1 &#8211; value).</p>
+
+<p><em>Default</em>: 0.0</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-late_irdrop_data&#xa0;<em>files_or_directories</em></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the IR drop files or directories to apply when calculating the late arrival times at a single delay corner.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-late_irdrop_file </code><code><em>list_of_files</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the list of IR drop files to apply when calculating late arrival times at a single power domain.</p>
+
+<p>This parameter is used primarily when configuring the multi-mode multi-corner environment for on-chip-variation (OCV) analysis.</p>
+
+<p><strong>Note</strong>: This parameter is obsolete and will be removed in a future release. To ensure compatibility with future releases, you should update your scripts.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-late_library_set </code><code><em>libSetName</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the library set to associate with this delay corner object for calculating late arrival times for this power domain.</p>
+
+<p>This parameter is used primarily when configuring the multi-mode multi-corner environment for on-chip-variation (OCV) analysis.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-late_opcond </code><code><em>opcondName</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the operating condition to use for calculating late arrival times for this power domain.</p>
+
+<p>This parameter is used primarily when configuring the multi-mode multi-corner environment for on-chip-variation (OCV) analysis.</p>
+
+<p><em>Default:</em> Each library in the late library set uses its own default operating condition.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-late_opcond_library </code><code><em>libName</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the internal library name for the library in which the late operating condition is defined. This is <em>not</em> the library file name.</p>
+
+<p>This parameter is used primarily when configuring the multi-mode multi-corner environment for on-chip-variation (OCV) analysis.</p>
+
+<p><em>Default:</em> The software searches the late library set for the specified operating condition (<code>-late_opcond</code>), starting with the master library.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-late_temp_file</code> <code><em>tempName</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the name of the temperature file for temperature aware delay calculation for late corner.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-late_rc_corner</code> <code><em>rcCornerObj</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the RC corner object to associate with the late corner object.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-library_set </code><code><em>libSetName</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the library set to associate with the power domain. All of the cells and macros in the power domain get their timing and power information from these libraries.</p>
+
+<p>This parameter is used primarily to configure single-corner or Best-Case Worst-Case (BC-WC) analysis modes.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-name </code><code><em>dcCornerObj</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the delay calculation corner to which to add the power domain definition, or to which to update the delay corner or power domain attribute values.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-opcond </code><code><em>OpcondName</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the operating condition to use for the power domain.</p>
+
+<p>This parameter is used primarily to configure single-corner or Best-Case Worst-Case (BC-WC) analysis modes.</p>
+
+<p><em>Default:</em> Each library in the library set uses its own default operating condition.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-opcond_library </code><code><em>libName</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the internal library name for the library in which the operating condition is defined. This is <em>not</em> the library file name.</p>
+
+<p>This parameter is used primarily to configure single-corner or Best-Case Worst-Case (BC-WC) analysis modes.</p>
+
+<p><em>Default:</em> The software searches the library set for the specified operating condition (<code>-opcond</code>), starting with the master library.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-pg_net_voltages<span>&#xa0;</span><em>voltage_pairs</em></code></td>
+<td class="confluenceTd" colspan="1">Specifies the power/ground net voltages to be used for both early/late timing analysis.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-power_domain </code><code><em>powerDomainName</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the name of the power domain to add to the delay calculation corner. This name must match the name of a power domain specified in the power domain file.</p>
+
+<p><strong>Note</strong><span>: This parameter is required for all the designs that use power domains and should be specified for each delay corner in the MMMC file.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-rc_corner </code><code><em>rcCornerObj</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the new RC corner object to associate with this delay corner.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-si_enabled {true | false}</code></td>
+<td class="confluenceTd" colspan="1">
+<p>Controls signal integrity (SI) analysis.</p>
+
+<p>When set to <code>true</code>, the analysis of all MMMC views will include SI analysis by default. You can use this parameter to further determine which analysis views receive SI analysis and which do not.</p>
+
+<p>When this parameter is set to <code>false</code> on a delay corner, the software will disable SI analysis for all the views that reference that corner. By default (or when this parameter is set to <code>true</code>), SI analysis is computed for all the views related to that corner - whenever SI is globally enabled. (The global control of signal integrity (SI) analysis is determined by the <code><a href="set_delay_cal_mode.html">set_delay_cal_mode</a></code> <code>-SIAware</code> setting.)</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-supply_set <em>supplySetName</em></code></td>
+<td class="confluenceTd" colspan="1">Specifies the name of the supply set to add to the delay calculation corner.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-temp_file</code> <code><em>tempName</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><span>Specifies the name of the temperature file for temperature-aware delay calculation for a single corner.</span></p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="update_delay_corner-Examples">Examples</h4>
+<ul><li>The following command creates the delay calculation corner <code>dc1</code>: <br /><code><span>tempus&gt;</span><span>&#xa0;</span>create_delay_corner -name dc1 </code><br /><code>-library_set libs-2volt</code><br /><code>-opcond_library delayvolt_2V&#xa0;</code><br /><code>-opcond slow_2V&#xa0;</code><br /><code>-rc_corner rc-cworst<br /><br /></code>The following commands add definitions for the power domains <code style="line-height: 1.4285715;">domain-3V</code> and <code style="line-height: 1.4285715;">domain-5V</code> to the <code style="line-height: 1.4285715;">dc1</code> delay calculation corner:&#xa0;<br /><code><span>tempus&gt;</span><span>&#xa0;</span>update_delay_corner -name dc1&#xa0;</code><br /><code>-power_domain domain-3V</code><br /><code>-library_set libs-3volt&#xa0;</code><br /><code>-opcond_library delayvolt_3V&#xa0;</code><br /><code>-opcond slow_3V</code><br /><code>update_delay_corner -name dc1&#xa0;</code><br /><code>-power_domain domain-5V&#xa0;</code><br /><code>-library_set libs-5volt&#xa0;</code><br /><code>-opcond_library delayvolt_5V&#xa0;</code><br /><code>-opcond slow_5V</code>&#xa0;</li></ul><ul><li>The following command changes the libraries used by the delay calculation corner <code>dc1</code> to those in the library set <code>IsCOM-2v</code>, and changes the RC corner associated with <code>dc1</code> to <code>rc-ctyp</code>: <br /><code><span>tempus&gt;</span><span>&#xa0;</span>update_delay_corner -name dc1</code><br /><code>-library_set IsCOM-2V</code><br /><code>-rc_corner rc-ctyp</code></li></ul><h4 id="update_delay_corner-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="create_delay_corner.html">create_delay_corner</a></code></li><li><code><a href="get_delay_corner.html">get_delay_corner</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="update_constraint_mode.html" id="prev" title="update_constraint_mode">update_constraint_mode</a></em></b><b><em><a href="update_io_latency.html" id="nex" title="update_io_latency">update_io_latency</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

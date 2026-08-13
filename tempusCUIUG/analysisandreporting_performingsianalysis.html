@@ -1,0 +1,889 @@
+
+<html><head><title>Performing Signal Integrity Delay Analysis</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845198" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Performing Signal Integrity Delay Analysis" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845198" />
+<meta name="NextFile" content="analysisandreporting_sidelayreporting.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_sidelayflow.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- Performing Signal Integrity Delay Analysis" />
+<meta name="Keywords" content="performing si analysis" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="SI Analysis,Stylus" />
+<meta name="prod_subfeature" content="SI Analysis" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_sidelayflow.html" title="SignaI Integrity Delay Analysis Flow">SignaI Integrity Delay Analysi ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_sidelayreporting.html" title="SI Delay Reporting">SI Delay Reporting</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:performingsianalysis" title="Performing Signal Integrity Delay Analysis"></a><h3>
+<a id="pgfId-1010148"></a><a id="performingSI"></a><a id="55125"></a>Performing Signal Integrity Delay Analysis</h3>
+
+<p>
+<a id="pgfId-1010149"></a>Tempus performs SI analysis in conjunction with base timing analysis. The SI delay analysis calculates the change in delay due to coupling noise acting both with (min) and against (max) a transitioning signal and outputs a delay uncertainty report in text format. SI delay analysis uses a fast transistor-level transient <strong>Timing Windows (TW) Illustration</strong> simulation engine to ensure the highest accuracy. This is done by accounting for non-linear waveforms created due to the coupling noise and attributing delay changes to the victim.</p>
+<p>
+<a id="pgfId-1010150"></a>Tempus performs the following operations during SI delay analysis:</p>
+
+<p class="webflare-indent1"><strong>Figure -13
+<a id="pgfId-1010151"></a>Tempus SI Delay Analysis Operations </strong></p>
+<p>
+<a id="pgfId-1010155"></a></p>
+<div class="webflare-div-image">
+<img width="269" height="220" src="images/analysisandreporting-14.gif" /></div>
+
+<p>
+<a id="pgfId-1010156"></a>These are explained in the sections below.</p>
+<ul><li>
+<a id="pgfId-1010160"></a><a href="analysisandreporting_performingsianalysis.html#78962">Determining Timing Windows</a></li><li>
+<a id="pgfId-1010164"></a><a href="analysisandreporting_performingsianalysis.html#18820">Selection of Attackers</a></li></ul>
+
+
+<h4>
+<a id="pgfId-1010166"></a><a id="78962"></a>Determining T<a id="DeterminingTimingWindows"></a>iming Windows</h4>
+
+<p>
+<a id="pgfId-1010167"></a>Tempus can generate or read in the timing window information (using the&#160;&#160;<code><a actuate="user" class="URL" href="../tempusCUI/read_twf.html" show="replace" xml:link="simple">read_twf</a></code> command) to determine which signals can (or cannot) switch simultaneously. The slews are used to switch attacking signals. Timing windows represent the range of time during which a net can transition. They are used to decide when it is possible for multiple attackers to combine.</p>
+<p>
+<a id="pgfId-1010168"></a>Attacker timing windows are exhaustively checked for the worst-case allowable combination for the final combined simulation.</p>
+<ul><li>
+<a id="pgfId-1010169"></a>The worst case is determined by each attacker&#39;s glitch noise contribution.</li><li>
+<a id="pgfId-1010170"></a>The victim&#39;s timing windows are also checked for SI delay analysis.</li><li>
+<a id="pgfId-1010171"></a>The attacker slew affects the magnitude of the noise peak/incremental delay.</li></ul>
+
+
+<p>
+<a id="pgfId-1010172"></a>A more accurate slew reduces the noise peak, if the transition time is greater than the default fast slew.</p>
+
+<p class="webflare-indent1"><strong>Figure -14
+<a id="pgfId-1010173"></a>Timing Windows (TW) Illustration</strong></p>
+<p>
+<a id="pgfId-1010177"></a></p>
+<div class="webflare-div-image">
+<img width="444" height="272" src="images/analysisandreporting-15.gif" /></div>
+
+<p>
+<a id="pgfId-1010178"></a>In the above figure, the ranges represent the timing windows for the respective nets. For attacker A1, TW range is 2-3, that is, the time interval in which net A1 can switch. The attackers A1 and A2 can be combined to produce a bigger SI impact since their TWs are overlapping. Similarly, attackers A3 and A4 can be combined since TWs are overlapping.</p>
+<p>
+<a id="pgfId-1010179"></a>Now, depending on which one of the two combinations (A1-A2, or A3-A4) produces worst SI impact, one of the combinations will be selected by the software for SI analysis.</p>
+
+<h4><em>
+<a id="pgfId-1010180"></a>Timing Windows Iterations</em></h4>
+
+<p>
+<a id="pgfId-1010181"></a>The SI effect on delay depends on timing windows and slew, whereas the timing window and slew depends on the SI effect of delay. Therefore, the timing windows impact SI delay and SI delay impacts timing windows.</p>
+<p>
+<a id="pgfId-1010182"></a>Hence, an iterative approach is required to accurately compute the timing windows affected due to SI so that Tempus can accurately calculate the SI delay and glitch.</p>
+<p>
+<a id="pgfId-1010183"></a>There are two primary approaches to timing window iteration. The default approach starts with an infinite timing window and iterates while shrinking the timing window width. The second approach starts with a nominal or noiseless timing window and iterates while growing the timing window width.</p>
+<p>
+<a id="pgfId-1010184"></a>The following figure shows the default approach to start with infinite timing windows and calculates the initial delta delays.</p>
+
+<p class="webflare-indent1"><strong>Figure -15
+<a id="pgfId-1010185"></a>Timing Windows (TW) 1st Iteration</strong></p>
+<p>
+<a id="pgfId-1010189"></a></p>
+<div class="webflare-div-image">
+<img width="450" height="233" src="images/analysisandreporting-16.gif" /></div>
+
+<p>
+<a id="pgfId-1010190"></a>In the second iteration, as shown in figure below, the delta delays are used to calculate new arrival times, and therefore new timing windows. These new timing windows are used to calculate new delta delays. The new delta delays are smaller because the timing windows are more precise (smaller) compared to infinite timing windows.</p>
+
+<p class="webflare-indent1"><strong>Figure -16
+<a id="pgfId-1010191"></a>Timing Windows (TW) 2nd Iteration</strong></p>
+<p>
+<a id="pgfId-1010195"></a></p>
+<div class="webflare-div-image">
+<img width="449" height="236" src="images/analysisandreporting-17.gif" /></div>
+
+<p>
+<a id="pgfId-1010196"></a>By default, Tempus performs two iterations. You can change the number of Iterations by using the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005294"></a><a href="../tempusCUI/set_db.html">set_db</a> <code>si_num_iteration</code> <code><em>Number</em></code></pre>
+
+<p>
+<a id="pgfId-1010198"></a>All the nets are not reselected for analysis in each timing window iteration. Tempus supports the following methods of re-selection.</p>
+<ul><li>
+<a id="pgfId-1010199"></a>Slack based</li><li>
+<a id="pgfId-1010200"></a>Delta delay based</li><li>
+<a id="pgfId-1010201"></a>Xcap ratio based</li></ul>
+
+
+<p>
+<a id="pgfId-1010202"></a>These reselection criteria can be specified by using the command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005300"></a><a href="../tempusCUI/set_db.html">set_db</a> si_reselection {{delta_delay | slack | xcap_ratio} (default is slack)</pre>
+
+<p>
+<a id="pgfId-1010204"></a>The default approach of starting with infinite TW will incur certain pessimism as in the initial iteration, the nets will be having much bigger computed noise as compared to the actual scenario. This pessimism will be reduced in the subsequent iterations as the nets are reselected and their timing windows are shrunk. But reselecting all the nets will have a huge run time impact. Therefore, the above mentioned criteria determines which nets are to be reselected for further iterations. Understanding the trade-off between the runtime and pessimism reduction, you can appropriately decide how the above criteria needs to be deployed in the design.</p>
+<p>
+<a id="pgfId-1010205"></a>Also, it is important to understand that reselecting a particular net does not ensure that all pessimism is removed from SI analysis on that net. For instance, if the timing critical nets are being reselected, the attackers of the critical victim nets may not necessarily be critical, so the timing windows on the attackers may be pessimistic.</p>
+
+<h4><em>
+<a id="pgfId-1010206"></a>Timing Window CPPR</em></h4>
+
+<p>
+<a id="pgfId-1010207"></a>Timing windows of nets are computed irrespective of their relative positioning. There can be some pessimism in analysis when the victim/attacker share common clock path.</p>
+<p>
+<a id="pgfId-1010208"></a>Attacker attacks a victim with its full strength if it switches at the same time as the victim, and the impact of the attacker on the victim declines as the distance between switching times increases. The computation of closest switching time based on these arrival times can be pessimistic if both attacker and victim share the same clock path.</p>
+
+<p class="webflare-indent1"><strong>Figure -17
+<a id="pgfId-1010209"></a>Timing Windows on CPPR Mode</strong></p>
+<p>
+<a id="pgfId-1010213"></a></p>
+<div class="webflare-div-image">
+<img width="657" height="288" src="images/analysisandreporting-18.gif" /></div>
+
+<p>
+<a id="pgfId-1010214"></a>In the example above, for path from Flop1 to Flop2, Attacker&#8217;s TW (4n &#8211; 8n) is overlapping with Victim&#8217;s TW (2n &#8211; 5n). The clock arrival (at point P1), which is causing victim to reach at 5ns is 3ns. As both victim and attacker are sharing the same launch clock path till P1, they both will be launched with the same clock arrival time till the point. So corresponding to the arrival time of 3ns (at P1) the attacker can switch earliest by 6ns (and not 4ns). Therefore, the actual positioning of the attacker and victim will be, as shown in the figure below. The attacker can only attack from a shortest distance of 1ns from the victim switching time.</p>
+
+<p class="webflare-indent1"><strong>Figure -18
+<a id="pgfId-1010215"></a>Timing window of Attacker and Victim not Overlapping</strong></p>
+<p>
+<a id="pgfId-1010219"></a></p>
+<div class="webflare-div-image">
+<img width="466" height="125" src="images/analysisandreporting-19.gif" /></div>
+
+<p>
+<a id="pgfId-1010220"></a>You can remove pessimism by enabling the following attribute:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005312"></a><a href="../tempusCUI/set_db.html">set_db</a> <a href="../tempusCUI/timing_Category_Attributes.html">timing_enable_timing_window_pessimism_removal</a> <code>true</code></pre>
+
+<p>
+<a id="pgfId-1010222"></a>The adjustment in attacker TWs accounts for the difference in min-max delay on the top common clock path due to the following factors:</p>
+<p>
+<a id="pgfId-1010223"></a>Difference in base arrival of the top clock path due to early/late derates.</p>
+<p>
+<a id="pgfId-1010224"></a>Min/Max SI impact on common clock path (adjusted only during hold analysis).</p>
+
+<h4>
+<a id="pgfId-1010226"></a><a id="18820"></a>Selection of Attackers</h4>
+
+<p>
+<a id="pgfId-1010227"></a>After determining the timing windows of attacker/victim nets, Tempus selects the attackers that produces the worst impact on the victim net. Tempus controls the attacker&#39;s selection based on the following factors:</p>
+<ul><li>
+<a id="pgfId-1010231"></a><a href="analysisandreporting_performingsianalysis.html#42720">Strength of Attacker</a></li><li>
+<a id="pgfId-1022142"></a><a href="analysisandreporting_performingsianalysis.html#74505">Attacker Selection Based on Alignment</a></li><li>
+<a id="pgfId-1010235"></a><a href="analysisandreporting_performingsianalysis.html#90945">Attacker Selection Based on Logical Correlation</a></li></ul>
+
+
+
+<h4><em>
+<a id="pgfId-1010237"></a><a id="42720"></a>Strength of Attacker</em></h4>
+
+<p>
+<a id="pgfId-1010238"></a>The strength of an attacker is the amount of glitch it produces at victim&#8217;s receiver input and it depends on the coupling capacitance between attackers and victims. With new processes (smaller geometries), the ratio of Ccpl/Ctot is increasing. Some victims can have 100s or 1000s of attackers and many of these attackers can be small ones. SI analysis run time is a strong function of the number of attackers. Higher numbers of attackers can result in high analysis run time. Tempus provides a better way of handling small attackers by combining these small attackers together. Tempus models many small attackers on a victim net and replaces them with an imaginary net, called a virtual attacker.</p>
+
+<p class="webflare-indent1"><strong>Figure -19
+<a id="pgfId-1010239"></a>Virtual Attackers Modeling</strong></p>
+<p>
+<a id="pgfId-1010243"></a></p>
+<div class="webflare-div-image">
+<img width="637" height="133" src="images/analysisandreporting-20.gif" /></div>
+
+<p>
+<a id="pgfId-1010244"></a>In the figure above, the small attackers, namely A1, A2, a3, and a4, are combined together to form a virtual attacker ~net1.</p>
+<p>
+<a id="pgfId-1010245"></a>Tempus identifies an attacker as an individual attacker if the glitch contribution from this attacker is more than the threshold value specified with the <code><a actuate="user" class="URL" href="../tempusCUI/set_db.html" show="replace" xml:link="simple">set_db</a> <a actuate="user" class="URL" href="../tempusCUI/si_Category_Attributes.html" show="replace" xml:link="simple">si_individual_aggressor_threshold</a></code> <span class="webflare-courier-new" style="white-space:pre"><em>value</em></span> command. If the peak of this glitch on the victim net exceeds the specified threshold value, then the attacker is significant and is individually reported in the constituents section of the SI report. You can use the <code>si_individual_aggressor_clock_threshold</code> attribute to vary small attacker threshold for victim nets lying on a clock path.</p>
+<p>
+<a id="pgfId-1010246"></a>If the glitch contribution of an attacker is less than the threshold value defined with the <code>si_individual_aggressor_threshold</code> <code>set_db</code> attribute, then this attacker becomes eligible for the virtual attacker.</p>
+<p>
+<a id="pgfId-1010247"></a>The two main characteristics of a virtual attacker are: coupling capacitance and the voltage source waveform used as a transition on the virtual attacker. You can use the <code><a actuate="user" class="URL" href="../tempusCUI/si_Category_Attributes.html" show="replace" xml:link="simple">set_db si_accumulated_small_aggressor_mode</a></code> attribute to create and control the characteristics of the virtual attacker. Tempus provides the following two methodologies for creating virtual attackers:</p>
+<ul><li>
+<a id="pgfId-1010248"></a>Current Matching-Based Methodology</li><li>
+<a id="pgfId-1010249"></a>Coupling Capacitance Matching-Based Methodology</li></ul>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1010250"></a>Both the methodologies account for the low probability of all small attackers switching at once in order to reduce the pessimism on noise and SI delay analysis.</div>
+<p>
+<a id="pgfId-1010251"></a><strong>Current Matching-Based Methodology</strong></p>
+<p>
+<a id="pgfId-1010252"></a>To create virtual attackers using this methodology, you can set the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005367"></a><code><a actuate="user" class="URL" href="../tempusCUI/set_db.html" show="replace" xml:link="simple">set_db</a></code> <code><a actuate="user" class="URL" href="../tempusCUI/si_Category_Attributes.html" show="replace" xml:link="simple">si_accumulated_small_aggressor_mode</a></code> current</pre>
+
+<p>
+<a id="pgfId-1010254"></a>Tempus creates virtual attackers to match both the coupling capacitance and the noise current. The PWL waveforms are generated in such a way that current induced by the transition matches the total current induced by all virtual attacker components.</p>
+<p>
+<a id="pgfId-1010255"></a>This methodology differs from the coupling capacitance methodology as follows:</p>
+<ul><li>
+<a id="pgfId-1010256"></a>Keeps several of the top virtual attacker components and calculates a PWL waveform for each analysis type using TW filtering.</li><li>
+<a id="pgfId-1010257"></a>Improves on the statistical method (3-sigma method) by accounting for the probability of switching.</li></ul>
+
+<p>
+<a id="pgfId-1010258"></a><strong>Coupling Capacitance Matching-Based Methodology</strong></p>
+<p>
+<a id="pgfId-1010259"></a>To create virtual attackers using this methodology, you can set the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005374"></a><a href="../tempusCUI/set_db.html">set_db</a> <a href="../tempusCUI/si_Category_Attributes.html">si_accumulated_small_aggressor_mode</a> cap</pre>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1010261"></a>This is the default methodology for all process nodes above 45nm. The 45nm and below default mode is current.</div>
+<p>
+<a id="pgfId-1010262"></a>Tempus creates virtual attackers that model the combined coupling capacitance effects of small attackers on a victim net. Every victim net can potentially have a virtual attacker. Tempus assigns a name to each virtual attacker based on the name of the victim net. For example, if the victim net name is ABC, then the virtual attacker net name will be ~ABC. The pessimism of using the virtual attacker can be reduced by adjusting the value of the <code>si_accumulated_small_aggressor_factor</code> between 0 and 1.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005385"></a><a href="../tempusCUI/set_db.html">set_db</a> <code>si_accumulated_small_aggressor_factor</code> <code><em>value</em></code></pre>
+
+<p>
+<a id="pgfId-1010264"></a>To recognize those attackers that may have a significant impact on a victim net, Tempus performs a quick and conservative estimation that takes into account the resistance and capacitance (RC) characteristics of the attacker and the victim net, as well as the worst-case drive strength and the load of the victim net. If the estimated coupling capacitance effect from an attacker is greater than five percent of VDD, the attacker is explicitly reported as an attacker constituent of that particular victim net. It is typical for a victim net to have as many as three or four attackers of this type. In general, attackers are usually very small and fall under this five percent threshold.</p>
+<p>
+<a id="pgfId-1010265"></a>You can change the virtual attacker glitch threshold using the&#160;&#160;<code>set_db </code><a href="../tempusCUI/si_Category_Attributes.html">si_accumulated_small_aggressor_threshold</a> attribute. The default value of this parameter is 10.01 percent of VDD. For example, to disable virtual attacker you can use a threshold value greater than 1 (default), by using the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005401"></a><code></code>set_db si_accumulated_small_aggressor_threshold 1.01</pre>
+
+<p>
+<a id="pgfId-1010267"></a>The virtual attacker provides time and memory savings, but sacrifices some accuracy, reporting detail, and control on slew and timing window information. Because the virtual attacker is used only for small attackers, these sacrifices should have a minimal impact on results.</p>
+
+<h4>
+<a id="pgfId-1010268"></a><a id="74505"></a>Attacker Selection Based on Alignment</h4>
+
+<p>
+<a id="pgfId-1010269"></a>Tempus supports the following attacker alignment modes that allow you to select attackers based on their alignment with victim nets:</p>
+<ul><li>
+<a id="pgfId-1010270"></a><a href="analysisandreporting_performingsianalysis.html#20661">Path Mode</a></li><li>
+<a id="pgfId-1010271"></a><a href="analysisandreporting_performingsianalysis.html#97505">Path Overlap Mode</a></li><li>
+<a id="pgfId-1010272"></a><a href="analysisandreporting_performingsianalysis.html#32604">Timing-Aware Edge Mode</a></li><li>
+<a id="pgfId-2349391"></a><a href="analysisandreporting_performingsianalysis.html#90557">Input Arrival Mode</a></li></ul>
+
+
+
+<p>
+<a id="pgfId-1010273"></a>The attacker alignment mode can be set by using the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005408"></a><a href="../tempusCUI/set_db.html">set_db</a> <a href="../tempusCUI/si_Category_Attributes.html">si_aggressor_alignment</a> {path | path_overlap | timing_aware_edge | input_arrival}</pre>
+
+<p>
+<a id="pgfId-1010275"></a>The default mode is <code>input_arrival</code>.</p>
+
+<h4><em>
+<a id="pgfId-1010277"></a><a id="20661"></a>Path Mode</em></h4>
+
+<p>
+<a id="pgfId-1010278"></a>In path alignment mode:</p>
+<ul><li>
+<a id="pgfId-1010279"></a>Tempus uses the victim&#8217;s worst arrival edge (as shown in the figure) when determining which attackers can align with it.</li><li>
+<a id="pgfId-1010280"></a>SI impact is computed according to the latest/earliest arrival edge of the victim for maximum/minimum analysis.</li><li>
+<a id="pgfId-1010281"></a>This mode yields a more realistic analysis.</li></ul>
+
+
+<p>
+<a id="pgfId-1010282"></a>The path-based alignment mode annotates each attacker&#8217;s impact on victim transition where attacker timing window edge aligns. The following example shows that in GBA mode Attacker 2 timing window edge is close to the delay measurement point, thus resulting in maximum impact.</p>
+
+<p class="webflare-indent1"><strong>Figure -20
+<a id="pgfId-1010283"></a>Path Alignment Mode</strong></p>
+<p>
+<a id="pgfId-1010287"></a></p>
+<div class="webflare-div-image">
+<img width="667" height="182" src="images/analysisandreporting-21.gif" /></div>
+
+<p>
+<a id="pgfId-1010288"></a>The path-based alignment is more realistic analysis and is less pessimistic than the other two modes. However, GBA is not guaranteed to bound PBA delays. In this example, the victim arrival time gets faster (move left) due to retiming of victim timing in PBA. With retimed arrival time of victim, both the attacker timing window edges now align at the delay measurement point, thus PBA sees a larger cross-talk impact than GBA. </p>
+<p>
+<a id="pgfId-1010289"></a>The flow in path mode is illustrated in the figure below.</p>
+
+<p class="webflare-indent1"><strong>Figure -21
+<a id="pgfId-1010290"></a>Attackers alignment in path mode</strong></p>
+<p>
+<a id="pgfId-1010294"></a></p>
+<div class="webflare-div-image">
+<img width="632" height="221" src="images/analysisandreporting-22.gif" /></div>
+
+<p>
+<a id="pgfId-1010295"></a>In the above figure, for paths that are based on the last arrival edge of victim net, only A1 will be selected for alignment in path mode.</p>
+
+<h4><em>
+<a id="pgfId-1010296"></a><a id="97505"></a>Path Overlap Mode</em></h4>
+
+<p>
+<a id="pgfId-1010297"></a>In path overlap mode, Tempus uses the full timing window of the victim, when determining which attackers can align with it.</p>
+<p>
+<a id="pgfId-1010298"></a>The SI impact is calculated according to the victim edge that is available anywhere within the timing window where the maximum impact occurs.</p>
+<p>
+<a id="pgfId-1010299"></a>The path overlap mode considers all the attackers which overlap anywhere on victim transition and annotate their combined impact at delay measurement point in both GBA and PBA. Due to this methodology, the computed SI impact based on path overlap is pessimistic. However, GBA is guaranteed to bound PBA analysis. </p>
+<p>
+<a id="pgfId-2360107"></a>The following example illustrates path overlap alignment mode:</p>
+
+<p class="webflare-indent1"><strong>Figure -22
+<a id="pgfId-1010300"></a>Path Overlap Alignment Mode</strong></p>
+<p>
+<a id="pgfId-1010304"></a></p>
+<div class="webflare-div-image">
+<img width="670" height="196" src="images/analysisandreporting-23.gif" /></div>
+
+<p>
+<a id="pgfId-1010305"></a>This mode is more conservative in cross-talk delay computation among the other available modes.</p>
+<p>
+<a id="pgfId-1010306"></a>The PBA analysis does not change based on attacker alignment modes, that is, PBA analysis always annotates individual attacker impact on victim transition where ever attacker timing windows overlap in all the three modes.</p>
+<p>
+<a id="pgfId-1010307"></a>The flow in path overlap mode is illustrated in the diagram below.</p>
+
+<p class="webflare-indent1"><strong>Figure -23
+<a id="pgfId-1010308"></a>Attackers alignment in path overlap mode</strong></p>
+<p>
+<a id="pgfId-1010312"></a></p>
+<div class="webflare-div-image">
+<img width="667" height="202" src="images/analysisandreporting-24.gif" /></div>
+
+<p>
+<a id="pgfId-1010313"></a>Even if victim timing window changes, the attackers&#39; selection will remain the same. This mode ensures that GBA bounds PBA delays.</p>
+<p>
+<a id="pgfId-1010314"></a>In the figure above, consider a full timing window of a victim net - both attackers A1 and A2 will be considered for alignment with victim and hence both A1 and A2 are selected in the path overlap mode. This mode is more pessimistic.</p>
+<p>
+<a id="pgfId-1010315"></a>In path-based analysis (PBA) mode, Tempus uses the specific edge for the victim that occurs for a specific path when determining the alignment of the attackers to the victim. It is possible that the worst SI impact on a net occurs at a victim edge that is not the worst arrival edge for the victim, thus the PBA victim edge used inside the timing window for the victim can yield a worst-case SI result for a net. For more information, refer to section on <a href="analysisandreporting_pathbasedanalysis.html#61957">Path-Based Analysis</a>.</p>
+<p>
+<a id="pgfId-1010316"></a>To ensure that GBA results bound PBA, you should use the path overlap alignment mode.</p>
+
+<h4><em>
+<a id="pgfId-1010317"></a><a id="32604"></a>Timing-Aware Edge Mode</em></h4>
+
+<p>
+<a id="pgfId-1010318"></a>The timing-aware edge mode performs realistic analysis similar to path-based analysis. Each attacker&#8217;s impact is annotated on victim transition where attacker timing window edge aligns with the victim. However, to ensure GBA bounds PBA analysis, the timing-aware edge mode handles some nets based on their timing properties in GBA analysis.</p>
+<p>
+<a id="pgfId-1010319"></a>In the following example, if the victim net is a clock, or with exceptions like false paths or MCP, the attacker timing windows are extended by width of the victim timing window.</p>
+
+<p class="webflare-indent1"><strong>Figure -24
+<a id="pgfId-1010320"></a>Timing-Aware Edge Alignment Mode - Illustration 1</strong></p>
+<p>
+<a id="pgfId-1010324"></a></p>
+<div class="webflare-div-image">
+<img width="492" height="193" src="images/analysisandreporting-25.gif" /></div>
+
+<p>
+<a id="pgfId-1010325"></a>If the victim net is not a clock, and has no exceptions like false path or MCP, then all the attacker timing windows are extended by a critical region of the victim timing window, in addition to the maximum CPPR, as shown below.</p>
+
+<p class="webflare-indent1"><strong>Figure -25
+<a id="pgfId-1010326"></a>Timing-Aware Edge Alignment Mode - Illustration 2</strong></p>
+<p>
+<a id="pgfId-1010330"></a></p>
+<div class="webflare-div-image">
+<img width="523" height="238" src="images/analysisandreporting-26.gif" /></div>
+
+<p>
+<a id="pgfId-1010331"></a>During PBA analysis, the attacker timing windows are extended by the actual CPPR of the path, and no additional padding is required. </p>
+<p>
+<a id="pgfId-2350060"></a><strong>Clock and Exception Handling Timing-Aware Edge Mode</strong></p>
+<p>
+<a id="pgfId-1010333"></a>If the victim net is a clock net, and the attacker timing windows are extended by width of the victim timing window to ensure that an attacker overlaps with the victim arrival time. Any optimism on a clock net in GBA can result in large TNS optimism (in GBA) as compared to PBA, because many paths share the same clock path. To eliminate this situation, the clock nets are handled specially in timing-aware edge mode. The exceptions in certain scenarios can cause optimism in GBA in path-based alignment mode.</p>
+<p>
+<a id="pgfId-1010334"></a>Consider the following example:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1010335"></a><a href="../tempusCUI/set_false_path.html">set_false_path</a> <code>&#8211;through A1/A &#8211;through A2/A</code></pre>
+<p class="webflare-indent1"><strong>Figure -26
+<a id="pgfId-1010336"></a>Timing-Aware Edge Mode - Example 1</strong></p>
+<p>
+<a id="pgfId-1010340"></a></p>
+<div class="webflare-div-image">
+<img width="541" height="183" src="images/analysisandreporting-27.gif" /></div>
+
+<p>
+<a id="pgfId-1010341"></a>In this example, a path going through A1/B-&gt;Y in GBA analysis uses late edge, which overlaps with attacker 2 only. However in PBA mode, a path going through A1/B-&gt;Y overlaps with attackers 1 and 2 as well, this results in a larger delay than GBA. If the path ending at F3 is a critical path, then the late arrival time used in GBA analysis at A1/Y is not an optimal edge as it produces optimism in GBA. In fact, late arrival used in GBA is coming from a pin that has a false path. To overcome this caveat, timing-aware edge mode extends the attacker timing windows by width of victim timing windows, such that GBA does not report optimistic delay on critical path.</p>
+
+<p class="webflare-indent1"><strong>Figure -27
+<a id="pgfId-1010342"></a>Timing-Aware Edge Mode </strong></p>
+<p>
+<a id="pgfId-1010346"></a></p>
+<div class="webflare-div-image">
+<img width="347" height="207" src="images/analysisandreporting-28.gif" /></div>
+
+<p>
+<a id="pgfId-1010347"></a>Similarly, consider the following multi-cycle path example:</p>
+
+<p class="webflare-indent1"><strong>Figure -28
+<a id="pgfId-1010348"></a>Timing-Aware Edge Mode - Example 2</strong></p>
+<p>
+<a id="pgfId-1010352"></a></p>
+<div class="webflare-div-image">
+<img width="577" height="225" src="images/analysisandreporting-29.gif" /></div>
+
+<p>
+<a id="pgfId-1010353"></a>If the late arriving edge at A1/Y is based on arrival time from A1/A, then the SI delay computed based on that edge will see only one attacker, thus resulting in a smaller cross-talk delay compared to the cross-talk delay computed based on the arrival time from A1/B. If a path is reported from F2 in GBA and PBA, then PBA reports a larger delay at stage A1 due to this optimism.</p>
+
+<p>
+<a id="pgfId-1010358"></a><content-title />
+</p>
+<div class="webflare-div-image">
+<img width="368" height="205" src="images/analysisandreporting-30.gif" /></div>
+
+<p>
+<a id="pgfId-1010359"></a>To address this optimism in GBA analysis in path-based alignment, the <code>timing_aware_edge </code>mode expands the attacker timing windows for stages with exceptions, such that GBA analysis will be pessimistic than PBA.</p>
+
+<h4><em>
+<a id="pgfId-2349351"></a><a id="90557"></a>Input Arrival Mode</em></h4>
+
+<p>
+<a id="pgfId-2349430"></a>The input arrival attacker alignment mode can be set by using the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005421"></a><a href="../tempusCUI/set_db.html">set_db</a> <a href="../tempusCUI/si_Category_Attributes.html">si_aggressor_alignment</a> input_arrival</pre>
+
+<p>
+<a id="pgfId-2349379"></a>In this mode, the attackers use timing windows formed by 2-sigma arrivals regardless of the analysis sigma multiplier. </p>
+<p>
+<a id="pgfId-2349874"></a><strong>Victim-Attackers Alignment</strong></p>
+<p>
+<a id="pgfId-2349937"></a>The victim driver input arrivals will be used for SI computation, as shown below:</p>
+
+<p class="webflare-indent1"><strong>Figure -29
+<a id="pgfId-2349944"></a>Input Arrival Alignment Mode - Illustration 1</strong></p>
+<p>
+<a id="pgfId-2349472"></a><content-title />
+</p>
+<div class="webflare-div-image">
+<img width="666" height="244" src="images/analysisandreporting-31.gif" /></div>
+
+<p>
+<a id="pgfId-2360159"></a>In this case, the software will internally account for victim driver cell delay while computing SI.</p>
+<p>
+<a id="pgfId-2349644"></a>This behavior allows pessimism reduction in GBA SI analysis with narrower timing windows. Also, this provides a more accurate PBA SI analysis, with no dependency of driver cell GBA delays.</p>
+<p>
+<a id="pgfId-2349756"></a><strong>Victim Timing Window Handling with SOCV</strong></p>
+<p>
+<a id="pgfId-2349782"></a>The mean victim timing window and edge is used for SI computation in GBA and PBA modes, respectively. This behavior will allow GBA pessimism reduction, and a more accurate PBA analysis.</p>
+
+<p class="webflare-indent1"><strong>Figure -30
+<a id="pgfId-2349963"></a>Input Arrival Alignment Mode - Illustration 2</strong></p>
+<p>
+<a id="pgfId-2349737"></a><content-title />
+</p>
+<div class="webflare-div-image">
+<img width="666" height="288" src="images/analysisandreporting-32.gif" /></div>
+<h4><em>
+<a id="pgfId-1010360"></a>Path-Based Analysis with Signal Integrity</em></h4>
+
+<p>
+<a id="pgfId-1010361"></a>Path-based SI analysis reduces the pessimism introduced during graph-based SI analysis by considering path-based slews and arrival for victims. This helps in reducing design closure ECO cycles, and saves area and power of design chips.</p>
+
+<p class="webflare-indent1"><strong>Figure -31
+<a id="pgfId-1010362"></a>Analysis performed using actual path slew and arrival times of victim</strong></p>
+<p>
+<a id="pgfId-1010366"></a></p>
+<div class="webflare-div-image">
+<img width="595" height="235" src="images/analysisandreporting-33.gif" /></div>
+
+<p>
+<a id="pgfId-1010367"></a>Running PBA-SI on a complete set of paths in the design is computation intensive. It is recommended to run PBA-SI on critical paths identified from GBA-SI analysis. So, while using PBA-SI based signoff ensure that GBA-SI results are always pessimistic to PBA-SI.</p>
+<p>
+<a id="pgfId-1010368"></a>This can be ensured by running GBA-SI in path overlap mode, by using the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005428"></a><a href="../tempusCUI/set_db.html">set_db</a> <a href="../tempusCUI/si_Category_Attributes.html">si_aggressor_alignment</a> <code>path_overlap</code></pre>
+<h4><em>
+<a id="pgfId-1010370"></a>Attacker Selection Based on Relationship Between Clocks</em></h4>
+
+<p>
+<a id="pgfId-1010371"></a>The selection of attackers also depends upon the relationships between the clocks. Presence of multiple clock groups - physically exclusive, asynchronous, and synchronous - in the design will influence attacker selection behavior of Tempus differently. Tempus by default considers all the clocks as synchronous clocks if no clock group is mentioned. You can change the behavior by using below command below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005433"></a>set_db si_clock_synchronicity {asynchronous | synchronous} (default is synchronous)</pre>
+
+<p>
+<a id="pgfId-1010373"></a>Synchronous clocks have defined phase relationships amongst each other. Timing windows are considered while evaluating the attacker/victim relationship.</p>
+<p>
+<a id="pgfId-1010374"></a>The default behavior can be overridden by using the following command. This provides an option to specify the timing relationship between specific clock domains.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1010375"></a><a href="../tempusCUI/set_clock_groups.html">set_clock_groups</a>[-group &lt;clock_list&gt;]<br />[-name &lt;name_list&gt;]<br />[-logically_exclusive] | [-physically_exclusive] | [ [-asynchronous]]</pre>
+
+<p>
+<a id="pgfId-1010376"></a>The preferred order of clock relationships is physically exclusive (highest) and then asynchronous.</p>
+<p>
+<a id="pgfId-1010377"></a>The table below explains the relationships and impact of different clock grouping on STA and SI analysis:</p>
+
+<h4>Table -1
+<a id="pgfId-1024874"></a>Relationships and impact of different clock grouping</h4>
+<table class="webflareTable" id="#id1010379">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1010381">
+<a id="pgfId-1010381"></a>Relationship</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1010383">
+<a id="pgfId-1010383"></a>Description</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1010385">
+<a id="pgfId-1010385"></a>Impact on STA or Timing Paths</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1010387">
+<a id="pgfId-1010387"></a>Impact on SI Analysis</span>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1010389"></a>Logically Exclusive</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1010391"></a>Specifies that there is no logical path between the clocks even though they exist.</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1010393"></a>Makes false path between such clocks.</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1010395"></a>No impact on SI Analysis. Crosstalk impact will remain the same.</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1010397"></a>Asynchronous</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1010399"></a>Indicates that there is no phase relationship between these clocks.</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1010401"></a>Makes false path between such clocks.</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1010403"></a>Attackers from asynchronous clock to victim clock are considered to have infinite timing windows.</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1010405"></a>Physically Exclusive</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1010407"></a>Specifies that these clocks will not exist physically at the same time in the chip.</p>
+<p>
+<a id="pgfId-1010408"></a>Such clocks mainly exist in constraints during mode merging.</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1010410"></a>Makes false path between such clocks.</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1010412"></a>Attackers from physically exclusive clock to victim clock are considered non-switching during SI analysis of the victim (that is, they do not attack the victim).</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1010413"></a>When multiple clocks on a victim net exist, then they are not marked physically exclusive.</div>
+
+</td>
+</tr>
+</tbody></table>
+
+<p>
+<a id="pgfId-1010415"></a>Consider a few scenarios for clock grouping, as follows:</p>
+<p>
+<a id="pgfId-1010416"></a><strong>Scenario1</strong>: In the following figure, the attacker is receiving timing window (TW) with respect to the physically exclusive clock.</p>
+
+<p class="webflare-indent1"><strong>Figure -32
+<a id="pgfId-1010417"></a>Attackers receiving TW with respect to Physically exclusive clock</strong></p>
+<p>
+<a id="pgfId-1010421"></a></p>
+<div class="webflare-div-image">
+<img width="613" height="285" src="images/analysisandreporting-34.gif" /></div>
+
+<p>
+<a id="pgfId-1010422"></a>In this case, the attackers will be dropped even if the timing window overlaps with that of the victim.</p>
+<p>
+<a id="pgfId-1010423"></a>No impact of attacker will be considered on the victim.</p>
+<p>
+<a id="pgfId-1010424"></a><strong>Scenario 2:</strong> In the following figure, the attacker has a timing window with respect to Synchronous as well as Physically Exclusive clocks to the victim.</p>
+
+<p class="webflare-indent1"><strong>Figure -33
+<a id="pgfId-1010425"></a>Attackers having TW with respect to Synchronous as well as Physically Exclusive clock</strong></p>
+<p>
+<a id="pgfId-1010429"></a></p>
+<div class="webflare-div-image">
+<img width="670" height="257" src="images/analysisandreporting-35.gif" /></div>
+
+<p>
+<a id="pgfId-1010430"></a>In this case:</p>
+<ul><li>
+<a id="pgfId-1010431"></a>Timing windows with respect to physically exclusive clocks to victim will be dropped (CLK2) and victim-attacker relationship is determined using the attacker timing window with respect to only synchronous clock (CLK3).</li><li>
+<a id="pgfId-1010432"></a>Victim timing window (with respect to CLK1) overlapping is checked with attacker timing window (with respect to CLK3). As they do not overlap, attacker will not impact the victim.</li></ul>
+
+
+<h4><em>
+<a id="pgfId-1010434"></a><a id="90945"></a>Attacker Selection Based on Logical Correlation</em></h4>
+
+<p>
+<a id="pgfId-1010435"></a>During SI analysis Tempus introduces some pessimism when attackers that cannot logically attack together are allowed to attack. Tempus by default assumes that all attackers can switch together in a direction to cause a worst case delay (causing a slowdown) or speed up of transition on the victim. But in some cases, there could be logical relationship between the signals, that is, attackers might not actually switch together in the same direction.</p>
+<p>
+<a id="pgfId-1010436"></a>Tempus performs logical correlation for inverters and buffers, except complex gates that are not included in logical correlation.</p>
+<p>
+<a id="pgfId-1010437"></a>You can use the following command to enable logical correlation:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005446"></a><a href="../tempusCUI/set_db.html">set_db</a> <a href="../tempusCUI/si_Category_Attributes.html">si_delay_enable_logical_correlation</a> true (Default: false)</pre>
+
+<p>
+<a id="pgfId-1010439"></a>The following examples show some of the scenarios that logical correlation can handle.</p>
+<p>
+<a id="pgfId-1010440"></a><strong>Scenario 1</strong><strong>
+:</strong>
+ Relationship between Attackers</p>
+<p>
+<a id="pgfId-1010441"></a>Exclusive sets are subsets of attackers that can switch simultaneously.</p>
+<p>
+<a id="pgfId-1010442"></a>Exclusive sets can be {A1, A3} and {A2, A4}. Here, attackers A1 and A3 will be switching in one direction, whereas A2 and A4 will switch in the opposite direction, as shown in the figure below.</p>
+
+<p class="webflare-indent1"><strong>Figure -34
+<a id="pgfId-1010443"></a>Logical Relationship Between Attackers</strong></p>
+<p>
+<a id="pgfId-1010447"></a></p>
+<div class="webflare-div-image">
+<img width="302" height="105" src="images/analysisandreporting-36.gif" /></div>
+
+<p>
+<a id="pgfId-1010448"></a><strong>Scenario 2: Relationship between Victim and Attackers</strong></p>
+<p>
+<a id="pgfId-1010449"></a>In max analysis mode, attackers A1 and A4 can be excluded. Because, these nets cannot switch in the opposite direction to the victim to increase the delay.</p>
+<p>
+<a id="pgfId-1010450"></a>In min analysis mode, attackers A2 and A3 can be excluded. Because, these nets cannot switch in the same direction as the victim to decrease the delay.</p>
+
+<p class="webflare-indent1"><strong>Figure -35
+<a id="pgfId-1010451"></a>Logical Relationship Between Victim And Attackers</strong></p>
+<p>
+<a id="pgfId-1010455"></a></p>
+<div class="webflare-div-image">
+<img width="387" height="89" src="images/analysisandreporting-37.gif" /></div>
+
+<p>
+<a id="pgfId-1010456"></a><strong>Scenario 3: Remote Attackers</strong></p>
+<p>
+<a id="pgfId-1010457"></a>If the number of inverters on each branch does not differ by a multiple of 2, then either A1 or A2 will be used as an attacker, as shown in the figure below.</p>
+
+<p class="webflare-indent1"><strong>Figure -36
+<a id="pgfId-1010458"></a>Logical Relationship Between Remote Attackers </strong></p>
+<p>
+<a id="pgfId-1010462"></a></p>
+<div class="webflare-div-image">
+<img width="362" height="172" src="images/analysisandreporting-38.gif" /></div>
+<h4>
+<a id="pgfId-1010464"></a><a id="97581"></a>Waveform Computation</h4>
+
+<p>
+<a id="pgfId-1010465"></a>SI impact on delay (or glitch for glitch analysis) depends primarily on the following factors:</p>
+<ul><li>
+<a id="pgfId-1010466"></a>Victim Slew</li><li>
+<a id="pgfId-1010467"></a>Attackers&#8217; Slew</li><li>
+<a id="pgfId-1010468"></a>Victim coupling cap to ground cap ratio</li><li>
+<a id="pgfId-1010469"></a>Relative switching direction for victim/attacker</li><li>
+<a id="pgfId-1010470"></a>Arrival windows of attackers/victim nets</li></ul>
+
+
+
+
+<p>
+<a id="pgfId-1010471"></a>SI impact on delay is performed in four steps. The first three steps will be applicable for SI Glitch analysis as well.</p>
+<ul><li>
+<a id="pgfId-1010472"></a>Determine the slew of possible attackers and victim nets in their respective directions.</li><li>
+<a id="pgfId-1010473"></a>Determine the alignments of overlapping attackers to compute the worst impact.</li><li>
+<a id="pgfId-1010474"></a>Align all attackers at their respective positions.</li><li>
+<a id="pgfId-1010475"></a>Compute the stage delay.</li></ul>
+
+
+
+<p>
+<a id="pgfId-1010476"></a>These are explained below:</p>
+<p>
+<a id="pgfId-1010477"></a><strong>Step 1: Determine Slew of possible Attackers and Victim Nets in respective directions.</strong></p>
+<p>
+<a id="pgfId-1010478"></a>Tempus implicitly considers attacker slew degradation by including the attacker&#39;s distributed parasitic network in the simulation.</p>
+<p>
+<a id="pgfId-1010479"></a>Tempus determines the fastest and slowest slew possible in each direction (rise/fall) at every node in the design. For max delay analysis, the slowest slew for victim and the fastest slew (in opposite direction of victim slew) for attackers will be used, as shown in the figure below.</p>
+
+<p class="webflare-indent1"><strong>Figure -37
+<a id="pgfId-1010480"></a>Determine slew for max delay and min delay</strong></p>
+<p>
+<a id="pgfId-1010484"></a></p>
+<div class="webflare-div-image">
+<img width="626" height="155" src="images/analysisandreporting-39.gif" /></div>
+
+<p>
+<a id="pgfId-1010485"></a>For min delay analysis, the fastest slew for victim and the fastest slew (in the same direction of victim slew) for attackers will be used, as shown in the figure above.</p>
+<p>
+<a id="pgfId-1010486"></a><strong>Step 2: Determine the alignments of overlapping attackers to compute the worst impact</strong></p>
+<p>
+<a id="pgfId-1010487"></a>Tempus aligns fully overlapping attacker&#8217;s switching time in a way that creates worst impact of each attacker on the victim receiver at the same time. Tempus computes the time of flight for each attacker by individually switching each of them. The time of flight is the time between the attacker switching time at the driver output and the corresponding glitch peak time at the victim receiver input.</p>
+<p>
+<a id="pgfId-1010488"></a>Tempus computes the delay from each attacker to the victim for peak alignment, as illustrated in the figure below.</p>
+
+<p class="webflare-indent1"><strong>Figure -38
+<a id="pgfId-1010489"></a>Compute Attacker A1 To Victim Delay (tvA1 &#8211; tA1)</strong></p>
+<p>
+<a id="pgfId-1010493"></a></p>
+<div class="webflare-div-image">
+<img width="394" height="239" src="images/analysisandreporting-40.gif" /></div>
+
+<p>
+<a id="pgfId-1010494"></a>To compute time of flight for attacker A1, a voltage source with a slew rate, that is either calculated internally or annotated from static timing analysis, is applied at attacker A1 driver output while keeping all other attackers and victims silent.</p>
+<p>
+<a id="pgfId-1010495"></a>Tempus calculates the delay from the 50 percent point of the switching attacker A1 at the driving pin (ta1), to the time the glitch effect on the victim receiver is maximum (tva1). For attacker A1, the delay is tva1-ta1.</p>
+
+<p class="webflare-indent1"><strong>Figure -39
+<a id="pgfId-1010496"></a>Compute Attacker A2 To Victim Delay (tvA2 &#8211; tA2) </strong></p>
+<p>
+<a id="pgfId-1010500"></a></p>
+<div class="webflare-div-image">
+<img width="390" height="261" src="images/analysisandreporting-41.gif" /></div>
+
+<p>
+<a id="pgfId-1010501"></a>Similarly, Tempus calculates the delay from the 50% point of the switching attacker A2 at the driving pin (t<sub>a2</sub>), to the time the glitch effect on the victim is maximum (t<sub>va2</sub>). For this case, attacker A1 will be grounded. So, for attacker A2 the delay is t<sub>va2</sub>-t<sub>a2</sub>. These two delays can be different if one attacker is closely coupled to the near end of the victim wire, and the other attacker is closely coupled to the far end of the victim wire, and the victim wire is long.</p>
+<p>
+<a id="pgfId-1010502"></a><strong>Step 3: Aligning all attackers at their respective position</strong></p>
+<p>
+<a id="pgfId-1010503"></a>Tempus aligns the relative switch times of the fully overlapping attackers according to their time of flights, such that their individual peak at victim receiver input occurs at the same time.</p>
+<p>
+<a id="pgfId-1010504"></a>The attacker relative alignment will be (t<sub>va2</sub>-t<sub>a2</sub>) - (tv<sub>a1</sub>-t<sub>a1</sub>) such that the peak due to attackers A1 and A2 at the victim receiver input occurs at the same time, as shown in the figure below.</p>
+
+<p class="webflare-indent1"><strong>Figure -40
+<a id="pgfId-1010505"></a>Aligning Attackers to Have Worst Impact at Victim at Same Time</strong></p>
+<p>
+<a id="pgfId-1010509"></a></p>
+<div class="webflare-div-image">
+<img width="426" height="290" src="images/analysisandreporting-42.gif" /></div>
+
+<p>
+<a id="pgfId-1010510"></a><strong>Step 4: Compute the stage delay</strong></p>
+<p>
+<a id="pgfId-1010511"></a>As a final step to compute the stage delay with SI, a transition is applied at the victim receiver, and the attacker&#8217;s impact is evaluated across the victim slew to compute the worst-case stage delay.</p>
+<p>
+<a id="pgfId-1010512"></a>In the figure below, the delay at the victim&#8217;s receiver output is measured by considering the attackers across the victim slew. This will result in a change in the delay at the victim receiver&#8217;s input. Tempus computes different delays as t<sub>v2a</sub>&#8217;, t<sub>v2b</sub>&#8217;, t<sub>vc2</sub>&#8217;, and so on for different victim alignment, with respect to attackers. The one resulting in the worst delay will be considered for the worst-case stage delay computation as t<sub>v2</sub>&#8217;. Assuming that t<sub>v2</sub> is the base delay for this stage, that is when all the overlapping attackers of this victim are silent. The delta delay will be (t<sub>v2</sub>&#8217; - t<sub>v2</sub>). This difference becomes the SI effect on the delay results (either slow down or speed up).</p>
+
+<p class="webflare-indent1"><strong>Figure -41
+<a id="pgfId-1010513"></a>Compute stage delay with SI (t<sub>v2</sub>&#8217; -t<sub>v1</sub>)</strong></p>
+<p>
+<a id="pgfId-1010517"></a><strong>
+</strong>
+</p>
+<div class="webflare-div-image">
+<img width="667" height="247" src="images/analysisandreporting-43.gif" /></div>
+
+<p>
+<a id="pgfId-1010518"></a>The SI impact on delay depends on the following factors:</p>
+
+<h4><em>
+<a id="pgfId-1010519"></a>Handling of Unconstrained Nets</em></h4>
+
+<p>
+<a id="pgfId-1010520"></a>If an attacker net is unconstrained, then Tempus does not consider timing windows of such nets for attacker selection. That means an unconstrained attacker is always selected in SI analysis, that is, timing window is infinite for these unconstrained nets. This makes SI analysis more pessimistic, but bounding.</p>
+<p>
+<a id="pgfId-1010521"></a>To turn this off and use a constrained timing window, you can set&#160;&#160;<a href="../tempusCUI/set_db.html">set_db</a> <code>si_unconstrained_net_use_infinite_timing_window</code> to <code>false</code>. The default is <code>true</code>.</p>
+
+<h4><em>
+<a id="pgfId-1010522"></a>Constraining SI Analysis</em></h4>
+
+<p>
+<a id="pgfId-1010523"></a>SI analysis adheres to SDC constraints. However, you can additionally specify constraints on SI analysis to control whether a net can be an attacker or not. To do this, you can use the <code></code><a actuate="user" class="URL" href="../tempusCUI/set_quiet_aggressor.html" show="replace" xml:link="simple">set_quiet_aggressor</a> command. For example,</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005463"></a>set_quiet_aggressor -victim vic -aggressor {att1 att2} -transition rise</pre>
+
+<p>
+<a id="pgfId-1093944"></a>This software ignores an attacker for certain edges when in reference to the victim.</p>
+
+<h4>
+<a id="pgfId-1010525"></a>Computing Timing Arc-Aware SI</h4>
+
+<p>
+<a id="pgfId-1010526"></a>The SI impact on delay is computed based on the timing arc through which the path is traversing.</p>
+
+<p class="webflare-indent1"><strong>Figure -42
+<a id="pgfId-1010527"></a>SI Impact on Delay Computed on Timing Arc</strong></p>
+<p>
+<a id="pgfId-1010531"></a></p>
+<div class="webflare-div-image">
+<img width="445" height="219" src="images/analysisandreporting-44.gif" /></div>
+
+<p>
+<a id="pgfId-1010532"></a>By default, Tempus calculates the delay and SI for each arc. If you choose to view the SI delay separately, it will show annotated to each arc. This helps in reducing pessimism on paths that do not come through the worst arc.</p>
+<p>
+<a id="pgfId-1010533"></a>This can be controlled by using the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005470"></a><a href="../tempusCUI/set_db.html">set_db</a> <a href="../tempusCUI/si_Category_Attributes.html">si_delay_delta_annotation_mode</a> {lumpedOnNet | arc} (Default : arc)</pre>
+
+<p>
+<a id="pgfId-1010535"></a>In lumped-on-net mode, Tempus annotates the worst arc delay on the net delay.</p>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_sidelayflow.html" id="prev" title="SignaI Integrity Delay Analysis Flow">SignaI Integrity Delay Analysi ...</a></em></b><b><em><a href="analysisandreporting_sidelayreporting.html" id="nex" title="SI Delay Reporting">SI Delay Reporting</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

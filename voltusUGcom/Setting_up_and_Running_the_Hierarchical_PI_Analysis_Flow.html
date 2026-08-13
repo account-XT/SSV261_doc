@@ -1,0 +1,207 @@
+
+<html><head><title>Setting up and Running the Hierarchical PI Analysis Flow</title>
+<meta name="page_sequence" content="25004000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666177" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Setting up and Running the Hierarchical PI Analysis Flow" />
+<meta name="Keywords" content="xPGV,power,rail,block,power-grid,instance,plots,block,top" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Power-Grid Library Generation," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666177" />
+<meta name="NextFile" content="ESD_Analysis.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="xPGV_Instantiation.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Setting up and Running the Hierarchical PI Analysis Flow" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="xPGV_Instantiation.html" title="xPGV_Instantiation">xPGV_Instantiation</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="ESD_Analysis.html" title="ESD_Analysis">ESD_Analysis</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Setting up and Running the Hierarchical PI Analysis Flow</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="SettingupandRunningtheHierarchicalPIAnalysisFlow-70690"></span></p>
+
+<p>For the hierarchical analysis flow, you need two Tcl scripts (first for xPGV generation and second for xPGV instantiation).</p>
+<h4 id="SettingupandRunningtheHierarchicalPIAnalysisFlow-RequiredInputFiles"><em> Required Input Files</em></h4>
+<ul><li>Design data (LEF, netlist, DEF)</li><li>Quantus technology file</li><li>Power-grid libraries</li></ul><h4 id="SettingupandRunningtheHierarchicalPIAnalysisFlow-Procedure"><em> Procedure</em></h4>
+
+<p>Following are the steps for running this flow:</p>
+<ol><li>
+<p>In the first Tcl script, load the block-level design data. <br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd"><pre><code>read_physical -lefs $lefs</code><code>
+set_power_def_files {/Data//def/top.def /Data//def/hier_block.def}</code><code>
+set_power_spef_files {Data//spefs/top.spef.gz \ /Data//spefs/hier_block.spef.gz}</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Specify the sub-directory that will contain the power results.<br /><strong>Tcl command</strong>:</p>
+<div class="table-wrap"><table class="webflareTable webflareTableIndent wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code><code>set_power_output_dir&#xa0;&#xa0;          dynVecLessPowerResults </code></code></pre></td>
+</tr>
+</tbody></table></div>
+</li><li>
+<p>Specify the power analysis commands.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd"><pre><code>set_db \</code></pre><pre><code>    power_method                     dynamic_vectorless \</code></pre><pre><code>    power_disable_static&#xa0;&#xa0; false \</code><code>
+    power_db_name                   dynvectorlessPower.db \</code><code>
+    power_write_db                  false \</code><code>
+    power_vector_based_multithread  true \</code><code>
+    power_grid_libraries       /hierpgv_dyn_accurate/All_merge.cl\ </code><code>
+    power_enable_state_propagation   true </code></pre><pre><code>set_default_switching_activity -input_activity 0.2 \</code><code>
+  -sequential_activity 0.1 -clock_gates_output 2.0 \</code></pre><pre><code>set_dynamic_power_simulation -period 20 -resolution 20</code></pre></td>
+</tr>
+</tbody></table></div>
+<div aria-label="Info" class="confluence-information-macro  confluence-information-macro-information" role="region"><span class="aui-icon aui-icon-small aui-iconfont-info-filled confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>To perform standalone power flow for XM generation, include the following parameter:</p>
+
+<p><code>set_db power_extractor_include extraction.inc</code></p>
+
+<p>In the extraction.inc file, specify the configuration file:</p>
+
+<p><code>setvar ippgv_config_file xpgv.config</code></p>
+</div>
+</div>
+</span></p>
+</li><li>
+<p>Specify the rail analysis commands.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>set_rail_analysis_config \</code></pre><pre><code>    -accuracy hd \</code></pre><pre><code>    -method dynamic \</code></pre><pre><code>    -temperature 125 \</code></pre><pre><code>    -ignore_shorts true \</code></pre><pre><code>    -limit_number_of_steps false  \</code></pre><pre><code>    -use_em_view_list /Data//RAIL/submegacells.list \</code></pre><pre><code>    -snap_layer_for_current_taps /Data//RAIL/megacell.collapse_tap_current_layer \</code></pre><pre><code>    -power_grid_libraries $pgv_list \</code></pre><pre><code>    -report_power_in_parallel true \</code></pre><pre><code><strong>    -xpgv_config_file xpgv.config</strong></code></pre><pre><code>set_power_pads -format defpin -net VDD1</code><code>
+set_pg_nets -net VDD1 -force -voltage 1.21 -threshold 1.08</code><code>
+set_power_pads -format defpin -net VSS</code><code>
+set_pg_nets -net VSS -force -voltage 0.0 -threshold 0.12</code><code>
+set_rail_analysis_domain -domain_name core -power_nets VDD1 -ground_nets VSS</code><code>
+report_rail -type domain -output_dir dynamic_rail core</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>The following parameter is specific to the xPGV generation flow:</p>
+</div>
+</div>
+<ul><li><code>-xpgv_config_file </code><span class="webflare-courier-new" style="white-space: pre;"><em>file</em></span><code> </code>- specifies block details, such as, block name for which xPGV is generated, via cut layer name that indicates to preserve the layers about the cut layer, and block LEF file names. This parameter is specified during block-level analysis. <br /><strong>Configuration File Format</strong>:<pre class="webflare-pre-block webflare-courier-new">CELL &lt;<code><em>block_name</em></code>&gt;</pre><pre class="webflare-pre-block webflare-courier-new">CUT_LAYER &lt;<code><em>cut_via_layer_name</em></code>&gt;</pre><pre class="webflare-pre-block webflare-courier-new">Lef &lt;<code><em>tech_lef_name</em></code> <code><em>block_lef_name</em></code>&gt;</pre><pre class="webflare-pre-block webflare-courier-new">END.</pre><strong>Example</strong><pre class="webflare-pre-block webflare-courier-new">CELL hier_block</pre><pre class="webflare-pre-block webflare-courier-new">CUT_LAYER V4</pre><pre class="webflare-pre-block webflare-courier-new">Lef {/Data/lefs/tech.lef /Data/lefs/hier_block.lef}</pre><pre class="webflare-pre-block webflare-courier-new">END
+</pre></li></ul></li><li>
+<p>Generate the block-level xPGVs. <br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd"><pre><code>write_xpgv -cell hier_block -output_dir xpgv -state_directory dynamic_rail/core_125C_dynamic_1 </code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+
+<p>The log file will generate the power-grid view generation statistics, as shown in the following log file snippet:</p>
+<pre class="webflare-pre-block webflare-courier-new">** INFO: (VOLTUS_LGEN-3265):</pre><pre class="webflare-pre-block webflare-courier-new">Power Grid View Generation Statistics:</pre><pre class="webflare-pre-block webflare-courier-new">        # Total number of cells: 1 </pre><pre class="webflare-pre-block webflare-courier-new">        # EARLY view created: 1 (100%)</pre><pre class="webflare-pre-block webflare-courier-new">        # IR view created: 1 (100%)</pre><pre class="webflare-pre-block webflare-courier-new">        # EM view created: 1 (100%)</pre><pre class="webflare-pre-block webflare-courier-new">Finished PGV Library Generator at 13:08:20 02/15/2019 (cpu=0:00:01, real=0:01:01, peak mem=511.77MB)</pre></li><li>
+<p>In the second Tcl script, specify the design loading (top-level design data), power analysis, and rail analysis commands. Following is a snippet of the top-level rail analysis commands using the generated xPGV model:<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd"><pre><code>set_rail_analysis_config \</code></pre><pre><code>    -accuracy hd \</code></pre><pre><code>    -method dynamic \</code></pre><pre><code>    -temperature 125 \</code></pre><pre><code>    -ignore_shorts true \</code></pre><pre><code>    -limit_number_of_steps false  \</code></pre><pre><code>    -use_em_view_list /Data//RAIL/submegacells.list \</code></pre><pre><code>    -snap_layer_for_current_taps \     /Data//RAIL/megacell.collapse_tap_current_layer \</code></pre><pre><code>    -power_grid_libraries {/Data/hierpgv_dyn_accurate/All_merge.cl \     ../xpgv/hier_block/hier_block.cl} \</code></pre><pre><code>    -report_power_in_parallel true \</code><code>
+    -flatten_xpgv_block_instances&#xa0;&#xa0;use_def.txtset_power_pads -format defpin -net VDD1</code></pre><pre><code>set_pg_nets -net VDD1 -force -voltage 1.21 -threshold 1.08</code></pre><pre><code>set_power_pads -format defpin -net VSS</code></pre><pre><code>set_pg_nets -net VSS -force -voltage 0.0 -threshold 0.12</code></pre><pre><code>set_rail_analysis_domain -domain_name core -power_nets VDD1 -ground_nets VSS</code></pre><pre><code>report_rail -type domain -output_dir dynamic_rail core</code></pre></td>
+</tr>
+</tbody></table></div>
+
+<p>The following parameters are specific to the xPGV instantiation flow:</p>
+<ul><li><code>-power_grid_libraries </code><span class="webflare-courier-new"><em>libraries</em></span><code> </code>- specifies the generated xPGV library and other PGV libraries being used in the flow.</li><li><code>-flatten_xpgv_block_instances </code><span class="webflare-courier-new"><em>file</em></span><code> </code>- specifies a file that includes a list of block instances that use DEF instead of xPGV for power and rail analysis, that is, specify the instances that are not to be used as xPGV. This parameter allows you exclude DEFs for xPGV blocks. You can specify a few instances of the same block that will use DEF, and the others that will use xPGV at the top-level. If you do not specify this parameter, and if both DEF and xPGV are given for a block, xPGV takes precedence over DEF. <br /><strong>Instance List File Format</strong>:<pre class="webflare-pre-block webflare-courier-new">&lt;<code><em>block_name</em></code>&gt; &lt;<code><em>block_instance_name</em></code>|All|None&gt;</pre><strong>Example</strong><br />For a design with three blocks, if you want to use the DEF and xPGV as following:<br />Block_1 - &gt; A1 (xPGV) &amp; A2 (DEF)<br />Block_2 - &gt; B1 &amp; B2 (xPGV for both instances)<br />Block_3 - &gt; C1 &amp; C2 (DEF for both instances)<br />The specified file will contain the following information:<pre class="webflare-pre-block webflare-courier-new">Block_1 A2</pre><pre class="webflare-pre-block webflare-courier-new">Block_2 None</pre><p class="webflare-pre-block webflare-courier-new">Block_3 All</p>
+</li></ul></span></p>
+<pre class="webflare-pre-block webflare-courier-new"><br /></pre></li></ol><h4 id="SettingupandRunningtheHierarchicalPIAnalysisFlow-Output"><em> Output</em></h4>
+
+<p>The xPGV output directory will contain the following information:</p>
+<div class="table-wrap"><table class="webflareTable webflareTableIndent wrapped confluenceTable"><tbody><tr><th class="webflareTh confluenceTh" colspan="1" rowspan="1">
+<p>File Name</p>
+</th><th class="webflareTh confluenceTh" colspan="1" rowspan="1">
+<p>Description</p>
+</th></tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>&lt;<span class="webflare-courier-new" style="white-space: pre;"><em>cellname</em></span>&gt;.cl</p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>The name of the macro power-grid library is &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>cellname</em></span>&gt;<code>.cl</code>. It contains the physical and electrical representation of the hierarchical block that is required for rail analysis.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>&lt;<span class="webflare-courier-new" style="white-space: pre;"><em>cellname</em></span>&gt;.report</p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>A report for the cell&#39;s power/ground net containing:</p>
+<ul><li>name of power and ground nets, voltage value for power pins</li><li>number of taps for the Early/EM/IR views</li></ul></td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>&lt;<span class="webflare-courier-new" style="white-space: pre;"><em>cellname</em></span>&gt;.summary</p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>A report containing capacitance, the current of analyzed nets, resistors, and the number of current taps and layers for the Early/EM/IR views.</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p>The top-level analysis will generate the following:</p>
+<ul><li>Static power reports and plots</li><li>Dynamic currents and IR-drop plots</li></ul><h4 id="SettingupandRunningtheHierarchicalPIAnalysisFlow-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="xPGV_Generation.html">xPGV Generation</a></li><li><a href="xPGV_Instantiation.html">xPGV Instantiation</a></li><li><a href="Hierarchical_Analysis_Flow_with_Extreme_Modeling.html">Hierarchical Analysis Flow with Extreme Modeling</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="xPGV_Instantiation.html" id="prev" title="xPGV_Instantiation">xPGV_Instantiation</a></em></b><b><em><a href="ESD_Analysis.html" id="nex" title="ESD_Analysis">ESD_Analysis</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

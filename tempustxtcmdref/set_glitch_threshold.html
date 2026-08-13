@@ -1,0 +1,197 @@
+
+<html><head><title>set_glitch_threshold</title>
+<meta name="page_sequence" content="23040000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287501" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_glitch_threshold" />
+<meta name="Keywords" content="failure criteria,glitch analysis,glitch threshold" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="SI Analysis,Signal Integrity," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287501" />
+<meta name="NextFile" content="set_model_priority.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_glitch_derate.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- set_glitch_threshold" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="set_glitch_derate.html" title="set_glitch_derate">set_glitch_derate</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_model_priority.html" title="set_model_priority">set_model_priority</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_glitch_threshold</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>set_glitch_threshold&#xa0;<span id="set_glitch_threshold-set_glitch_threshold"></span></code><br /><code> [-help]&#xa0;</code><br /><code> [-cells&#xa0;<em>string</em>]</code><br /><code> [-failure_point {none | input | internal | last}]</code><br /><code> [-glitch_type {both | vl | vh | vlu | vho | vl_vh | vlu_vho}]<br />[-library_pins &lt;string&gt;]</code><br /><code> [-nets&#xa0;<em>string</em>]</code><br /><code> [-pins <em>string</em>]</code><br /><code> [-pin_type {clock | data | latch | all}]</code><br /><code> [-threshold_type {failure | reporting | <span>propagation</span>}]</code><br /><code> -value <em>float<br /></em>[-views&#xa0;<em>string</em>]</code></p>
+
+<p>Allows for additional control of failure criteria for SI glitch analysis.&#xa0;</p>
+
+<p><strong>Parameters</strong></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd">
+<p><span style="letter-spacing: 0.0px;">Prints out the command usage. For a detailed description of the command and all of its parameters, use the </span><code style="letter-spacing: 0.0px;">man</code><code style="letter-spacing: 0.0px;"> </code><span style="letter-spacing: 0.0px;">command: </span><code style="letter-spacing: 0.0px;">man set_glitch_threshold</code><span style="letter-spacing: 0.0px;">.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-cells <em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a list of library cell names.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-failure_point {none | input | internal | last} &#xa0;</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies where the failure or reporting criteria apply.</p>
+<ul><li><code>none</code>: Criteria does not apply.</li></ul><ul><li><code>input</code>: Threshold applies when the failure point is at the input pin of the receiver cell.</li><li><code>internal</code>: Threshold is applied when the failure point is internal to the cell. This occurs for multi-stage cells. The failure point will be the output of the first stage inside the cell.</li><li><code>last</code>: Threshold is applied when the failure point is the output of the cell. This occurs for single-stage cells, such as inverters.</li></ul>
+<p><em>Default</em>:&#xa0;<code>internal</code> and <code>last&#xa0;</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-glitch_type {both | vl | vh | vlu | vho | vl_vh | vlu_vho}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the glitch type to which the command applies.</p>
+<ul><li><code>both</code>: R<span>efers to the </span><code>vl</code><span> and </span><code>vh</code><span> types of glitches.</span></li><li><span><code>vl_vh</code>: Includes both </span>VL and VH noise.</li><li><span><code>vlu_vho</code>: Includes both </span>VLU and VHO noise.</li></ul>
+<p><em>Default</em>:&#xa0;<code>both</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-library_pins <em>string</em></code></td>
+<td class="confluenceTd" colspan="1">Specifies a list of library pin names.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-nets <em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the list of nets the command applies to.</p>
+
+<p>Default is not net-specific.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-pins <em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the list of pins or primary ports.</p>
+
+<p>Default is not pin-specific.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-pin_type {clock |data | latch |all}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the pin type to which the command applies.</p>
+
+<p><em>Default</em>:&#xa0;all</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-threshold_type {failure | reporting | <span>propagation</span>}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies whether the command options apply to failure, reporting, or propagation criteria.</p>
+
+<p>In case of VL/VH glitch analysis, it is mandatory to specify the&#xa0;<code>‐threshold_type</code> parameter. This is because when the computed glitch (ROP) at any given stage exceeds the failure threshold (with glitch propagation enabled), it is not propagated and is flagged as a failure in the noise report.</p>
+
+<p>With the ‐<code>threshold_type</code>&#xa0;<code>failure</code>&#xa0;setting, the propagation will stop as per the new threshold, and the failure flagging will change accordingly. However, with the&#xa0;<code>‐threshold_type</code>&#xa0;<code>reporting</code>&#xa0;setting, the propagation threshold remains unchanged, but the failure reporting is updated.</p>
+
+<p>When&#xa0;<code>-threshold_type</code>&#xa0;<code>propagation</code> is used, the software allows for failing nets with ROP values less than the propagation threshold to propagate through single-stage cells.</p>
+
+<p>In case of VLU/VHO glitch analysis, it is optional to use the&#xa0;<code>‐threshold_type</code>&#xa0;parameter because the above flow is not applicable.</p>
+
+<p><em>Default</em>:&#xa0;<code>failure</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-value <em>float</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the threshold value as a ratio of the local VDD.</p>
+
+<p><em>Default</em>: 0.1</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-views </span><em>string</em></code></td>
+<td class="confluenceTd" colspan="1"><span>Specifies a list of view names.</span></td>
+</tr>
+</tbody></table></div>
+<h4 id="set_glitch_threshold-examples"><span class="confluence-anchor-link" id="set_glitch_threshold-examples"></span></h4>
+<h4 id="set_glitch_threshold-Examples">Examples</h4>
+
+<p>Here are some examples.</p>
+<ul><li>The following command moves the failure point from ROP to RIP for <code>inst1/a1</code> and uses a RIP failure of <em>0.2*ReceiverVDD</em>:<code><br /><code>set_glitch_threshold -failure_point input -pin inst1/a1 -threshold_type failure -value 0.2</code></code></li><li>The following command sets clock failure criteria to 0.1*VDD, latch failure criteria to 0.2*VDD and all other nets to 0.3*VDD (set before&#xa0;update_glitch):<br /><code>tempus&gt; set_glitch_threshold &#8211;threshold_type failure &#8211;pin_type all &#8211;failure_point last &#8211;value 0.3</code><br /><code> <span>tempus&gt;&#xa0;</span>set_glitch_threshold &#8211;threshold_type failure &#8211;pin_type clock &#8211;failure_point last &#8211;value 0.2</code><br /><code> <span>tempus&gt;&#xa0;</span>set_glitch_threshold &#8211;threshold_type failure &#8211;pin_type latch &#8211;failure_point last &#8211;value 0.1</code></li><li>The following command sets the failure threshold at the output of the 1st channel connect inside all the instances of macro1 to be 0.2 (set before&#xa0;update_glitch):<br /><code><span>tempus&gt;&#xa0;</span>set_glitch_threshold &#8211;threshold_type failure &#8211;cell {macro1} &#8211;failure_point internal &#8211;value 0.2</code></li><li>The following command changes the reporting criteria for latches to be 0.15*VDD (set after <code>update_glitch</code>):<br /><code><span>tempus&gt;&#xa0;</span>set_glitch_threshold &#8211;threshold_type reporting &#8211;pin_type latch &#8211;value 0.15</code><br /><br />If you need to set all the data failure criteria to be 0.3, then you need to make the following settings:<br /><code><span>tempus&gt;&#xa0;</span>set_glitch_threshold -failure_point internal \</code><br /><code>-threshold_type failure -value 0.3 \</code><br /><code>-pin_type data</code><br /><br /><code><span>tempus&gt;&#xa0;</span>set_glitch_threshold -failure_point last \</code><br /><code>-threshold_type failure -value 0.3 \</code><br /><code>-pin_type data&#xa0;</code></li></ul><h4 id="set_glitch_threshold-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="get_glitch_threshold.html">get_glitch_threshold</a></code></li><li><code><a href="report_glitch_thresholds.html">report_glitch_thresholds</a></code></li><li><code><a href="update_glitch.html">update_glitch</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_glitch_derate.html" id="prev" title="set_glitch_derate">set_glitch_derate</a></em></b><b><em><a href="set_model_priority.html" id="nex" title="set_model_priority">set_model_priority</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

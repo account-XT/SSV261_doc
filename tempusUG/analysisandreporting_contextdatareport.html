@@ -1,0 +1,100 @@
+
+<html><head><title>Context Data Reporting</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823929" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Context Data Reporting" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823929" />
+<meta name="NextFile" content="analysisandreporting_simflow.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_pushdownblock.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Context Data Reporting" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Analysis,Stylus" />
+<meta name="prod_subfeature" content="Timing Analysis" />
+<meta name="new_topic" content="Yes" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_pushdownblock.html" title="Pushdown Block SDC Generation">Pushdown Block SDC Generation</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_simflow.html" title="SIM Flow Examples">SIM Flow Examples</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:contextdatareport" title="Context Data Reporting"></a><h3>
+<a id="pgfId-2946094"></a>Context Data Reporting<a id="74060"></a></h3>
+
+<p>
+<a id="pgfId-2946095"></a>You can use the <code>report_timing_context_data</code> command for context data reporting.</p>
+<p>
+<a id="pgfId-2946112"></a>Examples:</p>
+<ul><li>
+<a id="pgfId-2946114"></a><code>report_timing_context_data -type {latency incr_delay uncertainty}</code></li></ul>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946116"></a>-View: func_setup_view1<br />-Instance: core_0<br />-Port: pclk, Direction: IN<br />-Sink pin: p/I<br />----------------------------------------------------------------------------<br />Type&#160;&#160;            Block Clock     Top Clock       Early     Late      Early     Late            </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946123"></a>                                                       Rise      Rise      Fall      Fall  <br />-------------------------------------------------------------------------------<br />latency coreclk coreclk         183.467   197.769   176.540   191.023<br />incr_delay coreclk         coreclk         -0.700    0.700     -0.600    0.700<br />uncertainty       coreclk coreclk         0.025     0.025     -0.025    0.025<br />-------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946132"></a>-View: func_setup_view2</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946133"></a>-Instance: core_0</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946134"></a>-Port: coreclk, Direction: IN</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946135"></a>-Sink pin: c/I</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946136"></a>----------------------------------------------------------------------------<br />Type              Block Clock     Top Clock       Early     Late      Early     Late  <br />Rise      Rise      Fall      Fall            <br />---------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946140"></a>latency           coreclk coreclk         95.703    109.052   88.904    101.234<br />incr_delay        coreclk coreclk         -1.300    1.400     -1.200    1.200<br />uncertainty       coreclk coreclk         0.025     0.025     -0.025    0.025<br />---------------------------------------------------------------------------------</pre>
+
+<ul><li>
+<a id="pgfId-2946145"></a><code>report_timing_context_data -port coreclk -type {uncertainty}</code></li></ul>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946147"></a>-View: func_setup<br />-Instance: core_0<br />-Port: coreclk, Direction: IN<br />-Sink pin: c/I<br />--------------------------------------------------------------------------------<br />Type              Block Clock     Top Clock       Early     Late      Early     Late <br />Rise      Rise      Fall      Fall            <br />--------------------------------------------------------------------------------<br />uncertainty&#160;&#160;     pclk            pclk            0.025     0.025     -0.025    0.025</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946156"></a>---------------------------------------------------------------------------------</pre>
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_pushdownblock.html" id="prev" title="Pushdown Block SDC Generation">Pushdown Block SDC Generation</a></em></b><b><em><a href="analysisandreporting_simflow.html" id="nex" title="SIM Flow Examples">SIM Flow Examples</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

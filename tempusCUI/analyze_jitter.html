@@ -1,0 +1,324 @@
+
+<html><head><title>analyze_jitter</title>
+<meta name="page_sequence" content="34001000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="gsatish" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287322" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="analyze_jitter" />
+<meta name="Keywords" content="analyze,jitter,noise analysis,noise models,completeness check noise models" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Signal Integrity," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287322" />
+<meta name="NextFile" content="check_noise.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Signal_Integrity_Commands_and_Attributes.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- analyze_jitter" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="Signal_Integrity_Commands_and_Attributes.html" title="Signal_Integrity_Commands_and_Attributes">Signal_Integrity_Commands_and_ ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="check_noise.html" title="check_noise">check_noise</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>analyze_jitter</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>analyze_jitter&#xa0;<span id="analyze_jitter-analyze_jitter"></span><br />[-help]<br />[-eiv_cycle_interval &lt;integer&gt;] <br />[-eiv_end_time <em>float</em>]<br />[-eiv_file <em>string</em>]<br />[-eiv_num_cycle &lt;integer&gt;]<br />[-eiv_start_time <em>float</em>]<br />[-eiv_power_ground <em>string</em>]<br />[-eiv_start_cycle &lt;integer&gt;]<br />[-enable_spectre_x {true | false}]<br />[-force_delete_output_dir] <br />[-from <em>string</em>]&#xa0;<br />[-from_fall <em>string</em>]<br />[-from_rise <em>string</em>]<br />[-level&#xa0;{true | false}]<br />[-levels_combine <em>integer</em>]<br />[-lsf_job_string <em>string</em>]<br /> [-mode {period | cycle_to_cycle | time_interval_error}]<br />[-model_file <em>string</em>]<br />[-level {true | false}]<br />[-out_dir <em>string</em>]<br />[-run_simulation]<br />[-skip_stage_fanout <em>string</em>]&#xa0;<br />[-spectre <em>string</em>]<br />[-spectre_cmd_options <em>string</em>]<br />[-subckt_file <em>string</em>]<br />[-through <em>string</em>]<br />[-to <em>string</em>]<br /> [[ &gt; | &gt;&gt; ]]</code></p>
+
+<p>Allows the software to perform Spice jitter analysis on a clock network using user-specified EIV database. The EIV database stores the effective instance voltages (EIV) per cycle for different instances in the design.</p>
+
+<p>The software reads in the EIV files and identifies the worst two consecutive cycles for each instance where the voltage variation is maximum. The voltage levels from these identified cycles are used as the corresponding supplies for different instances in the generated Spice deck - which is simulated using the Spectre simulator to compute the cycle-to-cycle IR induced jitter.</p>
+<h4 id="analyze_jitter-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col style="width: 222.0px;" /><col style="width: 743.0px;" /></colgroup><tbody><tr><td class="confluenceTd">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd">
+<p>Prints out the command usage.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-eiv_cycle_interval &lt;integer&gt;</code></td>
+<td class="confluenceTd" colspan="1">Allows the software to run the <code>analyze_jitter</code> command natively for EIV cycles with the specified cycle interval.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-eiv_end_time&#xa0;<em>float</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the end time for EIV reading. The voltages specified in the EIV database for time-stamps beyond this value are ignored.</p>
+
+<p><em>Default</em>: The last time-stamp from EIV file is considered as the end time.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-eiv_file&#xa0;<em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the effective instance voltage files for accounting IR Drop in jitter computation.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-eiv_num_cycle &lt;integer&gt;</code></td>
+<td class="confluenceTd" colspan="1">Runs the <code>analyze_jitter</code> command natively for the specified number of EIV cycles.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-eiv_power_ground&#xa0;<em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the power and ground net names for each EIV file specified using the&#xa0;<code>-eiv_file</code>&#xa0;parameter.</p>
+
+<p>For example, &quot;vdd1 vss1 vdd2 vss2&quot;, vdd1 and vss1 are for first and vdd2 and vss2 for the second EIV file defined using the&#xa0;<code>-eiv_file</code>&#xa0;parameter.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-eiv_start_cycle &lt;integer&gt;</code></td>
+<td class="confluenceTd" colspan="1">Runs the <code>analyze_jitter</code> command natively from the starting EIV cycle.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-eiv_start_time&#xa0;<em>float</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the start time for EIV reading. The voltages specified in the EIV database for time-stamps before this value are ignored.</p>
+
+<p><em>Default</em>: The first time-stamp from the EIV file is considered as the start time.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-enable_spectre_x</code></td>
+<td class="confluenceTd" colspan="1">Enables spectreX license checkout when launching Spectre.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-force_delete_output_dir</code></td>
+<td class="confluenceTd" colspan="1">Completely removes the directory specified by the user using the <code>-out_dir</code> parameter.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-from&#xa0;<em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Creates a Spice deck of the clock network starting from the specified pin.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-from_fall&#xa0;<em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Creates a Spice deck of the clock network starting from the falling transition of the specified pin.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-from_rise&#xa0;<em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Creates a Spice deck of the clock network starting from the rising transition of the specified pin.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-level {true | false}</code></td>
+<td class="confluenceTd" colspan="1">
+<p>When set to <code>true</code>, the software traverses down all the way till it hits the clock pin of a flipflop, or any stop point specified with the <code>-to</code> parameter, or when it passes depth&#xa0;specified with the <code>-depth</code> parameter.</p>
+
+<p><em>Default</em>: <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-levels_combine integer</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the number of levels, going up from the leaf nodes, at which the sub-trees can be combined.</p>
+
+<p>By default, the whole clock network is simulated as a single Spice netlist for jitter analysis. But for large networks, running single simulation can result in significant increase in the run time.</p>
+
+<p>When you use this parameter, the software breaks down the clock network into multiple sub-trees, and runs Spice simulations in parallel. For the following values, the behavior is as follows:</p>
+<ul><li>0: Divides the network such that the path traversed from a clock source to each leaf node is part of a separate sub-tree.</li><li>1: Each sub-tree contains the path traversed from a clock source to one-level up of a leaf node. And all the leaf nodes in the fanout of the identified level are part of this sub-tree, and so on.</li></ul>
+<p><strong>Note</strong>: The <code>-max_spectre_lic</code> parameter must have a value greater than 1 to achieve this parallelization.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-lsf_job_string&#xa0;<em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the handle to the farm job for launching simulation.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-max_spectre_lic <em>integer</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the number <span>available </span>Spectre licenses that can be utilized for simulation parallelization.</p>
+
+<p><em>Default</em>: 1 license is assumed to be available, thereby disabling parallelization.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-mode {period | cycle_to_cycle | } time_interval_error}</code></td>
+<td class="confluenceTd" colspan="1">
+<p>Runs the <code>analyze_jitter</code> command natively for the specified mode type.</p>
+
+<p><em>Default</em>: <code>period</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-model_file&#xa0;<em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the path of Spice model files that contain the Spice model information.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-level {true | false}</code></p>
+</td>
+<td class="confluenceTd">
+<p>When set to&#xa0;<code>false</code>, the Spice deck is generated only for&#xa0;the traced&#xa0;paths starting from the&#xa0;<code>-from</code>&#xa0;pin and ending at the&#xa0;<code>-to</code>&#xa0;pin. It does not traverse through the fanout branches that do not lead to the&#xa0;<code>-to</code> specified pin.</p>
+
+<p>When set to <code>true</code>, traversal occurs through the whole fanout cone of the <code>-from</code> pin till it hits a clock pin of a flop, or any stop point specified with the <code>-to</code> parameter</p>
+
+<p><em>Default</em>: <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-out_dir&#xa0;<em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the output directory for the created Spice decks and the simulation output files.</p>
+
+<p><em>Default</em>: <code>tempus_pathsim</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-run_simulation</code></p>
+</td>
+<td class="confluenceTd">
+<p>Enables jitter simulation, in addition to generating the Spice deck.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-skip_stage_fanout&#xa0;<em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Accepts two positive integers in the format &quot;N1 N2&quot;, and scans up to N1 stages in the fanin cone of each endpoint. The software skips the segments where a stage is found to have a fanout greater than N2.</p>
+
+<p>For example, a jitter path Clk_root1 -&gt; &#8230; -&gt; B3 -&gt; B2 -&gt; B1 -&gt; Reg2, B2 and B1 are the last 2 levels.</p>
+
+<p>1） Assume B1&#8217;s fanout is 100 and B2&#8217;s fanout is 80, then</p>
+<ul><li>When N1 = 1, N2 = 80, B1 will be skipped.</li><li>When N1 = 2, N2 = 100, B1 will be skipped</li><li>When N1 = 2, N2 = 80, B2 &amp; B1 will be skipped</li></ul>
+<p><strong>Note</strong>: B2 will always cause B1 to be skipped even when B1&#8217;s fanout is less than 80. So the reduction continues to increase when the level changes from 1 to 2.</p>
+
+<p>2） Assume B1&#8217;s fanout is 80, and B2 fanout is 100, then,</p>
+<ul><li>When N1 = 2, N2 = 90, both B2 and B1 will be skipped.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-spectre&#xa0;<em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the location of the Spectre path.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-spectre_cmd_options&#xa0;<em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the command line options for Spectre.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-subckt_file <em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the file(s) containing subckt definitions of all the instances for which the Spice simulation needs to be performed.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-through&#xa0;<em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Creates the Spice deck of a clock network that starts from the <code>-to</code> pin and traverses through the specified pin(s).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-to&#xa0;<em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Creates the Spice deck of a clock network terminating at the specified pin(s).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>&gt;&#xa0;<em>filename</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Redirects the&#xa0;<code>-run_simulation</code>&#xa0;output to a file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>&gt;&gt;&#xa0;<em>filename</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Appends the&#xa0;<code>-run_simulation</code>&#xa0;output to a file.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="analyze_jitter-Examples">Examples</h4>
+<ul><li>The following command generates the Spice deck for jitter analysis of the entire clock network starting from the <code>CLK</code> pin in the <code>JITTER_SPICE</code> directory and runs the simulations:<br /><code>tempus&gt; analyze_jitter -from CLK -level true -out_dir JITTER_SPICE -eiv_file ./eiv.txt -eiv_power_ground {vdd vss} -run_simulation<br /><br /></code>When the Spice simulations are completed, a summary of the jitter analysis will be saved in the output directory that contains the jitter values of all the endpoints, as shown below:<br /><code>-----------------------------------------------------------------------------------------------------</code><br /><code>Start-point-&gt; [through-point-&gt; through-point] -&gt; End-point Rise/Fall Cycle-to-Cycle Jitter Value (ps)</code><br /><code>-----------------------------------------------------------------------------------------------------</code><br /><code>CLK -&gt; DFF_2/DFF/D (F) 10.782</code><br /><code>CLK -&gt; DFF_2/DFF/D (R) 11.072</code><br /><code>CLK -&gt; DFF_2/DFF/CP (R) 9.054</code><br /><code>CLK -&gt; DFF_2/DFF/CP (F) 9.438</code></li><li>The following command runs jitter analysis for the clock network that originates from the <code>CLK</code> node, and traverses through an intermediate node INV/ZN:<br /><code>tempus&gt; analyze_jitter -from CLK -though INV/ZN -level true -out_dir JITTER_SPICE -eiv_file ./eiv.txt -eiv_power_ground {vdd vss} -run_simulation -levels_combine 1 -max_spectre_lic 8</code><br /><br />The specified clock network is not simulated as a single netlist, but is broken down into multiple sub-trees. All the leaf nodes driven by a single driver are part of one sub-tree. The simulations on these smaller netlists are scheduled in such a way that a maximum of 8 simulations are run in parallel at any given time.</li></ul><h4 id="analyze_jitter-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="report_jitter.html">report_jitter</a></code></li></ul>
+<p><code></code></p>
+
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Signal_Integrity_Commands_and_Attributes.html" id="prev" title="Signal_Integrity_Commands_and_Attributes">Signal_Integrity_Commands_and_ ...</a></em></b><b><em><a href="check_noise.html" id="nex" title="check_noise">check_noise</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

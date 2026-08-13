@@ -1,0 +1,1249 @@
+
+<html><head><title>Merge Mode Context Analysis</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845222" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Merge Mode Context Analysis" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845222" />
+<meta name="NextFile" content="analysisandreporting_wirevariationanalysis.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_contextgeneration.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- Merge Mode Context Analysis" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="0" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_contextgeneration.html" title="Context Generation and Analysis in MMMC">Context Generation and Analysi ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_wirevariationanalysis.html" title="Wire Variation Analysis">Wire Variation Analysis</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:mergemodegeneration" title="Merge Mode Context Analysis"></a><h3>
+<a id="pgfId-2945102"></a>Merge Mode Context Analysis<a id="80244"></a></h3>
+
+<p>
+<a id="pgfId-2945103"></a>When top level analysis is performed as SMSC analysis for each constraints mode (e.g., functional and test modes), but block analysis is performed using merged mode constraints, Tempus supports reading individual constraint mode contexts in merged mode context analysis. The merge mode context analysis is only supported with port-based clock mapping mode (when <code></code>timing_context_port_based_clock_mapping is set to <code>true</code>).</p>
+<p>
+<a id="pgfId-2945116"></a>The contexts corresponding to the multiple modes can be specified using the <code><a actuate="user" class="URL" href="../tempusCUI/read_timing_context.html" show="replace" xml:link="simple">read_timing_context</a></code> <code>-merge</code> parameter. The <code>-view_map_file</code> parameter should be used to provide mapping information of corresponding top/block views. You can map more than 2 top views (corresponding to the individual mode analysis) to the same block view (corresponding to merged mode analysis). See example below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945117"></a>read_timing_context -merge {top_testmodeview.context top_funcmodeview.context} -view_map_file view_map.tcl</pre>
+
+<p>
+<a id="pgfId-2945118"></a>The contents of view map file view_map.tcl are shown below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945119"></a>set_timing_context_view_mapping -top_view top_funcmodeview -block_view block_mergedmodeview</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945120"></a>set_timing_context_view_mapping -top_view top_testmodeview -block_view block_mergedmodeview</pre>
+
+<p>
+<a id="pgfId-2945121"></a><code>top_testmodeview.context</code> is context corresponding to top level test mode view, and <code>t</code>op_funcmodeview.context is context corresponding to top level functional mode view.</p>
+<p>
+<a id="pgfId-2945122"></a>Both the functional and test mode clocks are expected to be retained in the merged mode block constraints (even if the clocks are defined on the same port). The physically exclusive clock group specification is needed between functional and test mode clocks in merged mode block constraints to ensure correlation to flat analysis.</p>
+<p>
+<a id="pgfId-2945123"></a>The merged mode context analysis is supported with both SMSC and MMMC block/top level analysis.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-2945124"></a>To ensure correct behavior, the <code>set_timing_context_view_mapping</code> <code><a actuate="user" class="URL" href="../tempusCUI/set_timing_context_view_mapping.html" show="replace" xml:link="simple">set_timing_context_view_mapping</a></code> command must be specified in a view mapping file and subsequently loaded into the Tempus environment using the following command:</div>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945125"></a>read_timing_context - view_map_file &lt;file&gt;</pre>
+
+<p>
+<a id="pgfId-2945126"></a>This command should not be executed as a separate command without enclosing it in the mapping file.</p>
+
+<h4>
+<a id="pgfId-2945127"></a>Clock Mapping Approach</h4>
+
+<p>
+<a id="pgfId-2945128"></a>The block clocks defined on a port will be attempted to map to top clocks (from top level modes on the same port) using port-based clock mapping approach. The clock mapping approach will be the same for both clock and data phases.</p>
+<p>
+<a id="pgfId-2945129"></a>As shown in the example below, the top clock FCLK1 will be mapped to block clock BCLK1 at port P1 and TCLK2 will be mapped to BCLK2 at port P2.</p>
+
+<p>
+<a id="pgfId-2945163"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="120" src="images/analysisandreporting-182.gif" /></div>
+
+<p>
+<a id="pgfId-2959342"></a>If a block clock at a port can be mapped to top clocks from multiple top level modes, this block clock will remain unmapped, as shown in the figure below.</p>
+
+<p>
+<a id="pgfId-2959361"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="122" src="images/analysisandreporting-183.gif" /></div>
+
+<p>
+<a id="pgfId-2945167"></a>In this case, the block clocks BCLK1/BCLK2 and top clocks FCLK1/TCLK1 will remain unmapped at port P1.</p>
+<p>
+<a id="pgfId-2945168"></a>The manual clock mapping can be specified in case the clocks are not auto mapped. The manual mapping allows mapping top clocks from different modes to the block clock. In the above example, the block clocks BCLK1/BCLK2 can be manually mapped to top clocks FCLK1/TCLK1.</p>
+<p>
+<a id="pgfId-2945169"></a>In some of the merged mode constraints, the block clock names can have unique suffix to indicate the top level mode the clock corresponds to. Tempus allows specification of suffix for block clock names using the <code>-block_clock_suffix</code> parameter as shown below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945170"></a>set_timing_context_view_mapping -top_view testview -block_view blockview -block_clock_suffix &quot;_test&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945171"></a>set_timing_context_view_mapping -top_view funcview -block_view blockview -block_clock_suffix &quot;_func&quot; </pre>
+
+<p>
+<a id="pgfId-2945172"></a>The block clocks with clock suffix <code>_t</code>est will only be mapped to top clocks from <code>testview</code> and block clocks with clock suffix <code>_func</code> will only be mapped to top clocks from <code>funcview</code>.</p>
+
+<p>
+<a id="pgfId-2945205"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="118" src="images/analysisandreporting-184.gif" /></div>
+
+<p>
+<a id="pgfId-2945092"></a>In the above case when <code>_func</code> and <code>_test</code> suffix is specified, the <code>BCLK1_func</code> will be mapped to <code>FCLK1</code> and <code>BCLK1_test</code> will be mapped to <code>TCLK1</code>.</p>
+<p>
+<a id="pgfId-2945224"></a>When a suffix is user-specified, and if some block clocks do not have the specified suffix, then those block clocks without the suffix will remain unmapped.</p>
+<p>
+<a id="pgfId-2945226"></a>The case value from the top level contexts will be retained on a port only if the case value matches for all the top level modes. The case value will be dropped in context analysis if there is a mismatch in case value.</p>
+
+<h3>
+<a id="pgfId-2945228"></a>Glitch Analysis with Timing Context<a id="99161"></a></h3>
+
+<p>
+<a id="pgfId-2945229"></a>Tempus Timing Context analysis has the capability to accurately model the top level glitch that propagates to the block. Thus, top level glitch on the receiver pin of block input boundary nets can be replicated in block context analysis for accurate glitch propagation. In case of MIM, the worst glitch across all the instances is preserved in the Context. </p>
+
+<h3>
+<a id="pgfId-2945241"></a><a id="62195"></a>Querying Context Data on Ports</h3>
+
+<p>
+<a id="pgfId-2945242"></a>Tempus supports querying context information on a port using the <code>c</code>ontext_data object. The <code>context_data</code> object can be used to fetch properties like mapped top and block clocks. This is supported only with port-based clock mapping enabled, when <code>timing_context_port_based_clock_mapping </code>is set to <code>true</code>). </p>
+<p>
+<a id="pgfId-2945244"></a>The below steps can be used to query context properties using the <code></code><a actuate="user" class="URL" href="../tempusCUI/get_property.html" show="replace" xml:link="simple">get_property </a>context_data object:</p>
+<p>
+<a id="pgfId-2945264"></a><strong>Step 1</strong>: Create a collection of <code>context_data</code> objects for the specified port. The <code>context_data</code> object can be used for a single port only. An error will be issued if multiple ports are specified.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945266"></a>set CD [get_property [get_ports A] context_data]</pre>
+
+<p>
+<a id="pgfId-2945268"></a>The above command will return a collection of context data objects for the default view, each corresponding to a top level instance and top view. If there are 3 top instances (h1, h2, h3), and 3 top views (tv1, tv2, tv3), then the size of a context_data collection will be shown as 9.</p>
+<p>
+<a id="pgfId-2945270"></a><strong>Step 2</strong>: Query different properties on the above created collection of context_data objects. The following properties are supported with the context_data object:</p>
+
+<p>
+<a id="pgfId-2946541"></a></p>
+<table class="webflareTable" id="#id2946637">
+<tbody><tr>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2946710">
+<a id="pgfId-2946710"></a>Property</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2946712">
+<a id="pgfId-2946712"></a>Command</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2946714">
+<a id="pgfId-2946714"></a>Output</span>
+</th>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946645"></a><code>top_instance</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946647"></a><code>get_property $CD top_instance</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946649"></a>Returns all the top instances.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946651"></a><code>top_view</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946653"></a><code>get_property $CD top_view</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946655"></a>Returns all the top views.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946657"></a><code>mapped_top_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946659"></a><code>get_property $CD mapped_top_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946661"></a>Returns all the mapped top clocks.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946663"></a><code>unmapped_top_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946665"></a><code>get_property $CD unmapped_top_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946667"></a>Returns all the unmapped top clocks.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946669"></a><code>all_top_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946671"></a><code>get_property $CD all_top_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946673"></a>Returns all the top clocks.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946675"></a><code>mapped_block_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946677"></a><code>get_property $CD mapped_block_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946679"></a>Returns all the mapped block clocks.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946681"></a><code>unmapped_block_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946683"></a><code>get_property $CD unmapped_block_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946685"></a>Returns all the unmapped block clocks.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946687"></a><code>all_block_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946689"></a><code>get_property $CD all_block_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946691"></a>Returns all the block clocks.</p>
+</td>
+</tr>
+</tbody></table>
+
+<p>
+<a id="pgfId-2945362"></a>To report properties for a particular view, the <code><a actuate="user" class="URL" href="../tempusCUI/filter_collection.html" show="replace" xml:link="simple">filter_collection </a></code>command can be used.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945364"></a>get_property [filter_collection $CD top_view==&quot;tv1&quot;] mapped_top_clocks</pre>
+
+<p>
+<a id="pgfId-2945366"></a>This command will return the top clocks for all the instances of top view <code>tv1</code>.</p>
+<p>
+<a id="pgfId-2945368"></a>Similarly, to report properties for a particular view and particular instance, you can use the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945370"></a>get_property [filter_collection $CD top_view==&quot;view1&quot; &amp;&amp; top_instance==&quot;h1&quot;] mapped_top_clocks</pre>
+
+<p>
+<a id="pgfId-2945372"></a>This command will return the top clocks for top view tv1 and instance h1.</p>
+<p>
+<a id="pgfId-2945374"></a>If you want to report the top clocks that are mapped to a particular block clock only, then you can use the <code>get_property -clock</code> parameter, as shown below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945376"></a>get_property [filter_collection $CD top_view==&quot;view1&quot; &amp;&amp; top_instance==&quot;h1&quot;] mapped_top_clocks -clock bc1</pre>
+
+<p>
+<a id="pgfId-2945396"></a>This command will return the top clocks for view<code> tv1</code> and instance <code>h1</code>, that are mapped to the block clock <code>bc1</code>. The <code>context_data</code> object can be generated for one block view only, either the one passed using the <code>-view</code> parameter or the default one used by the <code></code><a actuate="user" class="URL" href="../tempusCUI/get_property.html" show="replace" xml:link="simple">get_property</a> command. If the properties of <code>context_data</code> are fetched for a different view, an error will be issued as shown below: </p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945400"></a>set CD [get_property [get_ports A] context_data] -view view1 get_property $CD top_view -view view2</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945402"></a>=&gt; ERROR: Context data is not generated for block view &#39;view2&#39;</pre>
+<h3>
+<a id="pgfId-2945404"></a>Generating Context Clock Mapping Report<a id="84424"></a></h3>
+
+<p>
+<a id="pgfId-2945405"></a>Tempus generates the clock mapping report during the <code></code><a actuate="user" class="URL" href="../tempusCUI/read_timing_context.html" show="replace" xml:link="simple">read_timing_context</a> by default. Tempus supports <code></code><a actuate="user" class="URL" href="../tempusCUI/report_timing_context_clock_mapping.html" show="replace" xml:link="simple">report_timing_context_clock_mapping </a>command to generate a clock mapping report after <code>read_timing_context</code> command is run. The <code>report_timing_context_clock_mapping</code> command supports generating clock mapping report in either text or CSV format. The CSV format helps in easier post-processing of the report.</p>
+<p>
+<a id="pgfId-2945414"></a>You can use the <code>-format csv</code> option to generate the mapping report in CSV format. Below is an example of a CSV report:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945416"></a># View V1<br /># Inst I1<br /># Block Clock, Block Clock Period, Block Clock Waveform, Top Clock, Top Clock Period, Top Clock Waveform, Port, Comment<br /># Block clocks mapped to top clocks on clock pins/ports:<br />BCLK1, 10, {0 5}, TCLK1, 10, {0 5}, CPORT1, auto mapped<br />BCLK2, 10, {0 5}, TCLK2, 20, {0 10}, CPORT2, user mapped<br /># Block Clocks NOT Mapped to top clocks on clock pin/ports:<br />BCLK3, 10, {0 5}, NA, NA, NA, CPORT3, No possible match by parameter<br /># Top clocks NOT mapped to block clocks on clock pins/ports:<br />NA, NA, NA, TCLK3, 10, {0 5}, CPORT4, No possible match by parameter<br /># Virtual block clocks NOT mapped to top clocks:<br />VCLK1, 10, {0 5}, NA, NA, NA, NA, NA<br /># Block clocks mapped to top clocks on data ports:<br />VCLK2, 10, {0 5}, TCLK4, 10, {0 5}, DPORT1, auto mapped<br /># Block clocks NOT mapped to top clocks on data ports:<br />VCLK2, 10, {0 5}, NA, NA, NA, DPORT2, No possible match by parameter<br /># Top clocks NOT mapped to block clocks on data ports:<br />NA, NA, NA, TCLK5, 10, {0 5}, DPORT3, No possible match by parameter</pre>
+<h3>
+<a id="pgfId-2945460"></a>Context Comparison</h3>
+
+<p>
+<a id="pgfId-2945461"></a>Tempus supports comparison of two timing contexts using the <code></code><a actuate="user" class="URL" href="../tempusCUI/compare_timing_context.html" show="replace" xml:link="simple">compare_timing_context </a>command. The contents of context, such as, clocks, clock latency, arrival time, required, slew, load, constant and glitch, can be compared. To perform context comparison, it is required to generate a context using the <code><a actuate="user" class="URL" href="../tempusCUI/write_timing_context.html" show="replace" xml:link="simple">write_timing_context</a></code> <code>-include_text_format</code> command.</p>
+
+<h4>
+<a id="pgfId-2945493"></a>Context Comparison Report</h4>
+
+<p>
+<a id="pgfId-2945494"></a>The context comparison report has the following sections:</p>
+<p>
+<a id="pgfId-2945514"></a><strong>Section 1</strong>: Comparison Summary</p>
+<p>
+<a id="pgfId-2945516"></a>This section gives the summary of total and failed entries/ports in reference and target context comparison. The header contains the view, module, and instance for which the comparison is reported.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945518"></a>------------------------------------------------<br />Top View: view1<br />Module: Top<br />Top Instance: inst1<br />------------------------------------------------<br />--------------------------------------------------------------------------------<br />          Comparison Summary</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945525"></a>--------------------------------------------------------------------------------<br />Section&#160;&#160;    Failed Entries     Total Entries      Failed Ports       Total Ports          </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945528"></a>Clocks&#160;&#160;          0             1                  0                  0 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945529"></a>Constant Value&#160;&#160;  0             3                  0                  3 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945530"></a>Latency&#160;&#160;         48            48                 2                  2 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945531"></a>Arrival Time&#160;&#160;    0             0                  0                  0</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945532"></a>Required&#160;&#160;        0             0                  0                  0</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945533"></a>Input Transition&#160;&#160;0&#160;&#160;           12                 0                  3</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945534"></a>Output Load&#160;&#160;     0             4                  0                  1</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945535"></a>Glitch&#160;&#160;          2             8                  1                  3--------------------------------------------------------------------------------</pre>
+
+<p>
+<a id="pgfId-2945537"></a><strong>Section 2</strong>: Detailed Clock Comparison</p>
+<p>
+<a id="pgfId-2945539"></a>This section provides the details of differences in clock definitions between the reference and target contexts.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945540"></a>---------------------------------------------------------------------------------<br />            Clocks Comparison</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945542"></a>--------------------------------------------------------------------------------<br />Clock    Ref Waveform     Ref Period    Target Waveform   Target Period   Status <br />--------------------------------------------------------------------------------<br />CK1      [0 0.000 0.500]   1.000        [0 0.000 0.500]   1.000           Pass<br />--------------------------------------------------------------------------------</pre>
+
+<p>
+<a id="pgfId-2945547"></a><strong>Section 3</strong>: Detailed Constant Value Comparison</p>
+<p>
+<a id="pgfId-2945548"></a>This section provides the details of differences in constants between the reference and target contexts.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945549"></a>--------------------------------------------------------------------------------<br />Constants Comparison<br />--------------------------------------------------------------------------------<br />Port                Ref Constant       Target Constant      Status<br />--------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945554"></a>prt1                0                  1                    Fail <br />---------------------------------------------------------------------------------</pre>
+
+<p>
+<a id="pgfId-2945556"></a><strong>Section 4</strong>: Detailed Clock Latency Comparison</p>
+<p>
+<a id="pgfId-2945557"></a>This section provides the details of differences in clock latency, pin-based uncertainty and incremental delays between the reference and target contexts</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945558"></a>--------------------------------------------------------------------------------<br />Clock Latency Comparison<br />--------------------------------------------------------------------------------<br />Port  Clock   Type        Data        Ref    Target  Abs Diff   %Diff    Status <br />--------------------------------------------------------------------------------<br />P1    TCK1(P) latency      early_rise  10.12  10.23   0.11      1.08    Fail<br />P1    TCK1(P) incr_delay   early_rise  0.2    0.2     0         0       Pass<br />P1    TCK1(P) uncertainty  early_rise  0.1    0.2     0.1       100     Fail<br />P1    TCK1(P) latency      late_rise   11.1   11.12   0         0       Pass<br />---------------------------------------------------------------------------------</pre>
+
+<p>
+<a id="pgfId-2945600"></a><strong>Section 5</strong>: Detailed Input Arrival Comparison</p>
+<p>
+<a id="pgfId-2945601"></a>This section provides the details of differences in input arrivals between the reference and target contexts </p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945602"></a>--------------------------------------------------------------------------------<br />Input Arrival Comparison<br />-------------------------------------------------------------------------------<br />Port        Clock       Data           Ref      Target   Abs Diff  %Diff  Status<br />--------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945607"></a>test_scanpt   portclk1(P)  early_rise  1206.32   1214.33   8.0017   0.6633  Fail <br />test_scanpt   portclk0(P)  early_rise  1206.32   1214.33   8.0017   0.6633  Fail<br />test_scanpt   portclk1(P)  early_fall  1202.58   1210.53   7.9497   0.6610  Fail<br />test_scanpt   portclk0(P)  early_fall  1202.58   1210.53   7.9497   0.6610  Fail<br />--------------------------------------------------------------------------------</pre>
+
+<p>
+<a id="pgfId-2945611"></a><strong>Section 6</strong>: Detailed Required Time Comparison</p>
+<p>
+<a id="pgfId-2945612"></a>This section provides the details of differences in required time between the reference and target contexts.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945613"></a>--------------------------------------------------------------------------------<br />Required Time Comparison<br />--------------------------------------------------------------------------------<br />Port      Clock      Data         Ref        Target   Abs Diff   %Diff   Status <br />---------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945621"></a>tst_snopt&#160;&#160;ekph1(P)&#160;&#160; early_fall&#160;&#160; 4.2486&#160;&#160;  3.2270   -1.0216   -24.0456   Fail        </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945622"></a>tst_snopt&#160;&#160;ekph1(P)&#160;&#160; early_rise&#160;&#160; -5.9780&#160;&#160;-7.0736&#160;&#160; -1.0956&#160;&#160; 18.3272&#160;&#160;   Fail        </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945623"></a>tst_snopt&#160;&#160;emph1(N)&#160;&#160; early_fall&#160;&#160; -13.8087 -15.9599&#160;&#160;-2.1512&#160;&#160; 15.5786&#160;&#160;  Fail        </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945624"></a>tst_snopt&#160;&#160;emph1(N)&#160;&#160; early_rise&#160;&#160; -23.0335 -25.2794&#160;&#160;-2.2459&#160;&#160; 9.7506&#160;&#160;   Fail    </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945625"></a>---------------------------------------------------------------------------------</pre>
+
+<p>
+<a id="pgfId-2945626"></a><strong>Section 7</strong>: Detailed Input Port Transition Comparison</p>
+<p>
+<a id="pgfId-2945627"></a>This section provides the details of differences in transition times on input ports between the reference and target contexts.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945628"></a>Input Transition Comparison</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945629"></a>--------------------------------------------------------------------------------<br />Port   Data        Ref      Target      Abs Diff   %Diff      Status<br />--------------------------------------------------------------------------------<br />clk2   early_rise  1.510     1.510      0.000      0.000      Pass<br />clk2   early_fall  0.772     0.772      0.000      0.000      Pass<br />---------------------------------------------------------------------------------</pre>
+
+<p>
+<a id="pgfId-2945635"></a><strong>Section 8</strong>: Detailed Output Port Load Comparison</p>
+<p>
+<a id="pgfId-2945636"></a>This section provides the details of differences in output port load between the reference and target contexts.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945637"></a>Output Load Comparison</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945638"></a>--------------------------------------------------------------------------------<br />Port    Data         Ref       Target     Abs Diff   %Diff     Status      <br />-------------------------------------------------------------------------------<br />Out     early_rise   171.374   171.374    0.000       0.000    Pass        <br />Out     early_fall   171.374   171.374    0.000       0.000    Pass        <br />--------------------------------------------------------------------------------</pre>
+
+<p>
+<a id="pgfId-2945644"></a><strong>Section 9</strong>: Detailed Glitch Comparison</p>
+<p>
+<a id="pgfId-2945671"></a>This section provides the details of differences in glitch value on the pins connected to the input ports between the reference and target contexts.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945672"></a>--------------------------------------------------------------------------------<br />Glitch Comparison<br />--------------------------------------------------------------------------------<br />Port        Pin Name    Data   Ref      Target  Abs Diff   %Diff      Status<br />-------------------------------------------------------------------------------<br />clk2        ff3/CK      VH     96.552   96.611  0.059       0.061     Fail <br />clk2        ff3/CK      VL     95.742   95.776  0.034       0.036     Fail <br />---------------------------------------------------------------------------------</pre>
+<h3>
+<a id="pgfId-2945681"></a>Context Generation from Context Analysis</h3>
+
+<p>
+<a id="pgfId-2945682"></a>In a three-level hierarchical design, Tempus supports the following nested context analysis flow to perform sub-block B context analysis: </p>
+<ul><li>
+<a id="pgfId-2945684"></a>Generate context for block A from top-level analysis</li><li>
+<a id="pgfId-2945685"></a>Perform block A context analysis and generate context for sub-block B</li><li>
+<a id="pgfId-2945686"></a>Perform sub-block B context analysis</li></ul>
+
+
+<p>
+<a id="pgfId-2945688"></a>A nested context analysis flow is shown in the figure below:</p>
+
+<p>
+<a id="pgfId-2959272"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="233" src="images/analysisandreporting-185.gif" /></div>
+<p>
+<a id="pgfId-2959254"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="183" src="images/analysisandreporting-186.gif" /></div>
+
+<p>
+<a id="pgfId-2945688"></a>This analysis is supported with more than 3 levels of hierarchy also. The Top and Block A analysis can also be Top+BM analysis.Tempus supports below use-models of nested context flow:</p>
+
+<p>
+<a id="pgfId-2955984"></a></p>
+<table class="webflareTable" id="#id2955931">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2955933">
+<a id="pgfId-2955933"></a>Use Model</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2955935">
+<a id="pgfId-2955935"></a>Top</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2955937">
+<a id="pgfId-2955937"></a>Block</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2955939">
+<a id="pgfId-2955939"></a>Sub-Block</span>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2955941"></a>1</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2955943"></a>SIM Context Generation</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2955945"></a>SIM Context Generation</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2955947"></a>SIM Context Analysis</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2955949"></a>2</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2955951"></a>SIM Context Generation</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2955953"></a>MIM Context Generation</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2955955"></a>MIM Context Analysis</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2955957"></a>3</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2955959"></a>MIM Context Generation</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2955961"></a>SIM Context Generation</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2955963"></a>SIM Context Analysis</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2955965"></a>4</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2955967"></a>MIM Context Generation</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2955969"></a>MIM Context Generation</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2955971"></a>MIM Context Analysis</p>
+</td>
+</tr>
+</tbody></table>
+<p>
+<a id="pgfId-2945771"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="579" src="images/analysisandreporting-187.gif" /></div>
+
+<p>
+<a id="pgfId-2945787"></a>In the above figure, when context data is generated for the sub-block B (from block A context analysis), separate context data is generated for each instance of the sub-block (with respect to Top). In use model 4, separate context data is generated for A1/B1, A1/B2, A1/B3, A1/B4, A2/B1, A2/B2, A2/B3, A2/B4. The MIM clustering check will be done for all these sub-module instances during both sub-module context generation and analysis.</p>
+<p>
+<a id="pgfId-2956061"></a>The user-interface for context generation and reading is the same as regular context analysis. The only difference is that full instance name (with respect to Top level) needs to be specified for the -instance parameter during sub-module context analysis for both <code>write_timing_context</code> and <code>read_timing_context</code> commands.</p>
+<p>
+<a id="pgfId-2945791"></a>Tempus also supports nested context analysis flow in the case where the same sub-block is instantiated in different blocks as shown in the figure below.</p>
+
+<p>
+<a id="pgfId-2945824"></a></p>
+<div class="webflare-div-image">
+<img width="667" height="230" src="images/analysisandreporting-188.gif" /></div>
+
+<p>
+<a id="pgfId-2945828"></a>In this case, the sub-module context for instances A1/C1 and B1/C1 will be generated from block A and block B context analysis respectively. The contexts of instances A1/C1 and B1/C1 can be specified with the <code>read_timing_context -merge</code> command to perform MIM context analysis.</p>
+
+<h3>
+<a id="pgfId-2945829"></a>Context Jitter Handling<a id="38205"></a></h3>
+
+<p>
+<a id="pgfId-2945830"></a>This section talks about the clock source jitter handling in timing context analysis. In regular STA analysis, the generated clocks inherit the jitter values from their master clocks wherever explicit edge relationship is established. When such clocks sharing common master reach a block port, these clocks may be defined as master clocks in block constraints. This can lead to mis-correlation between flat and block STA, as a flat run will use the jitter values for timing paths between these related clocks, while in block run there is no way to specify jitter between two master clocks. </p>
+<p>
+<a id="pgfId-2945831"></a>Consider the following examples:</p>
+
+<p>
+<a id="pgfId-2945867"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="136" src="images/analysisandreporting-189.gif" /></div>
+
+<p>
+<a id="pgfId-2945908"></a>In the first example, the two generated clocks of the same master enter the block. A flat STA run will use the inherited jitter values for paths between genCLK1 and genCLK2 inside the block, while block STA run will define these as two master clocks (bCLK1 and bCLK2), and hence, no jitter can be specified between these clocks in block STA. To address this problem, hierarchical timing context stores each clocks&#8217; edge relationship to the root clock edge and the corresponding jitter value. During block context analysis, full- or half-cycle jitter is applied based on the master edge relationship for launch and capture clocks.</p>
+<p>
+<a id="pgfId-2945910"></a>Jitter stored in context overrides the jitter specified in block constraints for clocks defined on block ports.</p>
+
+<h4>
+<a id="pgfId-2945911"></a>Multiple Top Clocks to Block Clock Mapping</h4>
+
+<p>
+<a id="pgfId-2945912"></a>If all the multiple top mapped clocks have the same clock root approach for jitter application as 1-to-1 mapped clocks, the clock edge mapping will be required between top root clock and block clock.</p>
+<p>
+<a id="pgfId-2945913"></a>If some of these top mapped clocks do not share common clock root, Tempus will worst-case half- or full-cycle jitter value and use it for the block clock. The half- or full-cycle jitter decision will be based on which edges of the block clock and its generated clocks are used in the timing path at the block level. The jitter is not applied when there is no missing edge mapping between top and block clock.</p>
+<p>
+<a id="pgfId-2957596"></a>Consider the examples in the following table for more details, where:</p>
+<ul><li>
+<a id="pgfId-2957597"></a>TC1, TC2 are top level root clocks. </li><li>
+<a id="pgfId-2957598"></a>BCK1, BCK2 are block level root clocks.<br />
+<a id="pgfId-2956599"></a><table class="webflareTable" id="#id2956912">
+<tbody><tr>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2956914">
+<a id="pgfId-2956914"></a>Case</span>
+</th>
+<th class="webflareTh" colspan="2" rowspan="1">
+<span class="tbl-head" id="#id2956916">
+<a id="pgfId-2956916"></a>Interacting Clock Domains</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="2">
+<span class="tbl-head" id="#id2956920">
+<a id="pgfId-2956920"></a>Jitter Application</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="2">
+<span class="tbl-head" id="#id2956922">
+<a id="pgfId-2956922"></a>Edge Mapping</span>
+</th>
+</tr>
+<tr>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2956924">
+<a id="pgfId-2956924"></a></span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2956926">
+<a id="pgfId-2956926"></a>Block Clocks</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2956928">
+<a id="pgfId-2956928"></a>Top Root Clocks</span>
+</th>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956934"></a>1</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956936"></a>BCK1</p>
+<p>
+<a id="pgfId-2956946"></a>BCK1</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956938"></a>{TC1}</p>
+<p>
+<a id="pgfId-2957296"></a>{TC1}</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956940"></a>TC1 jitter applied</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956942"></a>TC1 edge mapping used.</p>
+</td>
+</tr>
+<tr />
+<tr>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956954"></a>2</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956956"></a>BCK1</p>
+<p>
+<a id="pgfId-2956966"></a>BCK2</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2957310"></a>{TC1}</p>
+<p>
+<a id="pgfId-2956968"></a>{TC1}</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956960"></a>TC1 jitter applied</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956962"></a>TC1 edge mapping used</p>
+</td>
+</tr>
+<tr />
+<tr>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956974"></a>3</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956976"></a>BCK1</p>
+<p>
+<a id="pgfId-2956986"></a>BCK2</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956978"></a>{TC1}</p>
+<p>
+<a id="pgfId-2956988"></a>{TC2}</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956980"></a>Jitter not applied</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956982"></a>-</p>
+</td>
+</tr>
+<tr />
+<tr>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956994"></a>4</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956996"></a>BCK1</p>
+<p>
+<a id="pgfId-2957006"></a>BCK1</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956998"></a>{TC1, TC2}</p>
+<p>
+<a id="pgfId-2957008"></a>{TC1, TC2}</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2957000"></a>Worst of (TC1, TC2) jitter applied</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2957002"></a>BCK1 edge mapping used.</p>
+</td>
+</tr>
+<tr />
+<tr>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2957134"></a>5</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2957136"></a>BCK1</p>
+<p>
+<a id="pgfId-2957146"></a>BCK2</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2957138"></a>{TC1, TC2}</p>
+<p>
+<a id="pgfId-2957148"></a>{TC1, TC2}</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2957140"></a>Worst of (TC1, TC2) jitter applied</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2957142"></a>BCK1 edge mapping used.</p>
+</td>
+</tr>
+<tr />
+</tbody></table></li></ul>
+
+
+
+
+
+<p>
+<a id="pgfId-2945955"></a><strong>Case 1</strong>: </p>
+<p>
+<a id="pgfId-2945956"></a><strong><em>Scenario</em></strong>:</p>
+<ul><li>
+<a id="pgfId-2945957"></a>Timing path being analyzed has both launch and capture clocks as a generated clock of BCK1 at block</li><li>
+<a id="pgfId-2945958"></a>Block clock BCK1 is mapped to a generated clock of top clock TC1</li></ul>
+
+<p>
+<a id="pgfId-2945959"></a><strong><em>Context Analysis</em></strong>:</p>
+<ul><li>
+<a id="pgfId-2945960"></a>TC1 jitter will be applied </li><li>
+<a id="pgfId-2945961"></a>Full-cycle/half-cycle jitter will be applied based on TC1 edge mapping</li></ul>
+
+<p>
+<a id="pgfId-2945962"></a><strong>Case 5</strong>:</p>
+<p>
+<a id="pgfId-2945963"></a><em>Scenario</em>:</p>
+<ul><li>
+<a id="pgfId-2945964"></a>Timing path being analyzed has launch and capture clocks as generated clocks of BCK1 and BCK2 respectively at block</li><li>
+<a id="pgfId-2945965"></a>Block clock BCK1 is mapped to generated clocks of both top clocks TC1 and TC2</li><li>
+<a id="pgfId-2945966"></a>Block clock BCK2 is mapped to generated clocks of both top clocks TC1 and TC2</li><li>
+<a id="pgfId-2945967"></a>BCK1 and BCK2 have same clock waveforms.</li></ul>
+
+
+
+<p>
+<a id="pgfId-2945968"></a><strong><em>Context Analysis</em></strong>:</p>
+<ul><li>
+<a id="pgfId-2945969"></a>Worst of TC1 and TC2 jitter values will be applied if BCK1 and BCK2 have same clock waveform.</li><li>
+<a id="pgfId-2945970"></a>Full-cycle/half-cycle jitter will be applied based on BCK1 edge mapping</li></ul>
+
+
+<h3>
+<a id="pgfId-2945972"></a>Pushdown Block SDC Generation<a id="72024"></a></h3>
+
+<p>
+<a id="pgfId-2945973"></a>Tempus supports pushdown block SDC generation from top-level timing analysis. To generate block SDC from top-level timing analysis, you can specify the <code></code><a actuate="user" class="URL" href="../tempusCUI/write_timing_context.html" show="replace" xml:link="simple">write_timing_context</a> <code>-with_constraints</code> parameter.</p>
+<p>
+<a id="pgfId-2945843"></a>Currently, block SDC generation is supported only for a single instance of a block. In case of multiple instantiated (MIM) blocks, the <code>write_timing_context </code>-instances parameter is mandatory to specify the instance for which the block SDC is to be generated. The block SDC generation from DSTA is not supported.</p>
+<p>
+<a id="pgfId-2945997"></a>When the <code>-with_constraints</code> parameter is specified, Tempus generates SDC for the specified modules and instances. The SDC is stored inside the context directory <code>&lt;context dir&gt;/&lt;module&gt;/&lt;module&gt;.&lt;constraint mode&gt;.sdc</code>.</p>
+<p>
+<a id="pgfId-2945999"></a>The block SDC does not contain data present in the regular block context database, such as, input/output delay, clock latency, or interface path exceptions. So this block SDC can be used only along with the context in context analysis and not in standalone block STA.</p>
+<p>
+<a id="pgfId-2946000"></a>The block SDC stored in context is not automatically read during the <code>read_timing_context</code> command run, so the block SDC should be read explicitly. </p>
+
+<h4>
+<a id="pgfId-2946002"></a>Clock Constraints in Pushdown Block SDC</h4>
+
+<p>
+<a id="pgfId-2946003"></a>All the block internal clocks are written in block SDC. Apart from block internal clocks, the below clocks definitions are also written:</p>
+<ul><li>
+<a id="pgfId-2946005"></a>Any top-level generated or regular clock that reaches the block ports is modeled as a source clock (<code><a actuate="user" class="URL" href="../tempusCUI/create_clock.html" show="replace" xml:link="simple">create_clock</a></code>) on the block port (with the same name as top-level clock).</li><li>
+<a id="pgfId-2946006"></a>Any top-level clock that reaches the block only as data is modeled as a virtual clock (with the same name as top-level clock).</li><li>
+<a id="pgfId-2946007"></a>If the same clock enters multiple ports it is defined on all these ports.</li></ul>
+
+
+<p>
+<a id="pgfId-2946009"></a>The block SDC also contains <code>set_clock_group</code>, clock-to-clock exception, uncertainty, or jitter for the above clocks. The clock latency is written only for the block internal clocks.</p>
+
+<h4>
+<a id="pgfId-2946011"></a>Pushdown Block SDC Details</h4>
+
+<p>
+<a id="pgfId-2946012"></a>This section talks about commands that are part of pushdown block SDC during context analysis and those which are not.</p>
+<p>
+<a id="pgfId-2946014"></a>Below are the constraints that are written in pushdown Block SDC:</p>
+<ul><li>
+<a id="pgfId-2946015"></a>Global constraints like <code>set_min_pulse_width 1.0</code></li><li>
+<a id="pgfId-2946016"></a>Constraints that have block pins and block clocks. For example,<ul><li>
+<a id="pgfId-2946017"></a><code>set_false_path -through &lt;block internal pin&gt;</code></li><li>
+<a id="pgfId-2946018"></a><code>set_false_path -through &lt;block internal pin&gt; -through &lt;block internal pin&gt;</code></li><li>
+<a id="pgfId-2946019"></a><code>set_false_path -through &lt;block interface path pin&gt;</code></li><li>
+<a id="pgfId-2946020"></a><code>set_false_path -through &lt;block port&gt;</code></li><li>
+<a id="pgfId-2946021"></a><code>set_multicycle_path -from &lt;block clock&gt;</code></li></ul></li></ul>
+
+
+
+
+
+
+<p>
+<a id="pgfId-2946022"></a>The valid block constraints after filtering top-level objects from the constraints. For example:</p>
+<ul><li>
+<a id="pgfId-2946049"></a><code>set_false_path -through {&lt;toplevel pin&gt; &lt;block internal pin&gt;} -through {&lt;toplevel pin&gt; &lt;block internal pin&gt;}</code> will be written as <code>set_false_path -through &lt;block internal pin&gt; -through &lt;block internal pin&gt;</code> in block SDC.</li></ul>
+<p>
+<a id="pgfId-2946050"></a>The constraints like <code>set_path_adjust_group</code> and <code>set_path_adjust</code> related to block pins are also written in a separate file <code>&lt;context dir&gt;/&lt;module&gt;/&lt;module&gt;.pathadjust.sdc</code>.</p>
+<p>
+<a id="pgfId-2946051"></a>The following path adjust constraints are written in pushdown SDC:</p>
+<ul><li>
+<a id="pgfId-2946052"></a>When clocks are in -from/-to options like <code>s</code>et_path_adjust_group -from [get_clocks TP1]...</li><li>
+<a id="pgfId-2946053"></a>When block internal pins in -from/-to options like <code>s</code>et_path_adjust_group -from [get_pins &lt;block internal pin&gt;] -to [get_pins &lt;block internal pin&gt;]...</li></ul>
+
+<p>
+<a id="pgfId-2946054"></a>The following path adjust constraints are not written in pushdown SDC (but, captured in context):</p>
+<ul><li>
+<a id="pgfId-2946055"></a>Mix of block internal and top level pins in -from/-to options like <code>s</code>et_path_adjust_group -from [get_pins &lt;toplevel pin&gt;] -to [get_pins &lt;block internal pin&gt;]...</li><li>
+<a id="pgfId-2946056"></a>Path group information is written in separate file &lt;context dir&gt;/&lt;module&gt;/&lt;module&gt;.pathgroup.sdc. </li><li>
+<a id="pgfId-2946057"></a>Timing derates &lt;context dir&gt;/&lt;module&gt;/&lt;module&gt;.&lt;delay_corner&gt;.timingderate.sdc</li></ul>
+
+
+<p>
+<a id="pgfId-2946059"></a>The below constraints are not written in pushdown Block SDC since these are captured in the context:</p>
+<ul><li>
+<a id="pgfId-2946060"></a><code>set_input_delay</code>/<code>s</code>et_output_delay on the ports</li><li>
+<a id="pgfId-2946061"></a>Propagated case values on the ports</li><li>
+<a id="pgfId-2946062"></a><code>set_input_transition</code>/<code>s</code>et_driving_cell/<code>s</code>et_load on the ports</li><li>
+<a id="pgfId-2946063"></a>Constraints that have pins both inside and outside block. E.g, <code>set_false_path -through &lt;toplevel pin&gt; -through &lt;block internal pin&gt;</code></li><li>
+<a id="pgfId-2946065"></a>Clock latency for the clocks created on the ports (except for the block internal clocks)</li><li>
+<a id="pgfId-2946066"></a><code>set_dont_touch</code>, <code>set_dont_use</code> commands.</li><li>
+<a id="pgfId-2946067"></a>DRV constraints are not derived on the block ports / module</li></ul>
+
+
+
+
+
+
+<p>
+<a id="pgfId-2946069"></a>Pushdown SDC is also supported in C-MMMC analysis:</p>
+<ul><li>
+<a id="pgfId-2946070"></a>Pushdown SDC is written for all active constraints modes</li><li>
+<a id="pgfId-2946071"></a><code>set_timing_derate</code> is written for all active delay corners</li><li>
+<a id="pgfId-2946072"></a><code>set_path_adjust</code> is written for all active views</li></ul>
+
+
+
+<h3>
+<a id="pgfId-2946094"></a>Context Data Reporting<a id="74060"></a></h3>
+
+<p>
+<a id="pgfId-2946095"></a>You can use the <code>report_timing_context_data</code> command for context data reporting.</p>
+<p>
+<a id="pgfId-2946112"></a>Examples:</p>
+<ul><li>
+<a id="pgfId-2946114"></a><code>report_timing_context_data -type {latency incr_delay uncertainty}</code></li></ul>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946116"></a>-View: func_setup_view1<br />-Instance: core_0<br />-Port: pclk, Direction: IN<br />-Sink pin: p/I<br />----------------------------------------------------------------------------<br />Type&#160;&#160;            Block Clock     Top Clock       Early     Late      Early     Late            </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946123"></a>                                                       Rise      Rise      Fall      Fall  <br />-------------------------------------------------------------------------------<br />latency coreclk coreclk         183.467   197.769   176.540   191.023<br />incr_delay coreclk         coreclk         -0.700    0.700     -0.600    0.700<br />uncertainty       coreclk coreclk         0.025     0.025     -0.025    0.025<br />-------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946132"></a>-View: func_setup_view2</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946133"></a>-Instance: core_0</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946134"></a>-Port: coreclk, Direction: IN</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946135"></a>-Sink pin: c/I</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946136"></a>----------------------------------------------------------------------------<br />Type              Block Clock     Top Clock       Early     Late      Early     Late  <br />Rise      Rise      Fall      Fall            <br />---------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946140"></a>latency           coreclk coreclk         95.703    109.052   88.904    101.234<br />incr_delay        coreclk coreclk         -1.300    1.400     -1.200    1.200<br />uncertainty       coreclk coreclk         0.025     0.025     -0.025    0.025<br />---------------------------------------------------------------------------------</pre>
+
+<ul><li>
+<a id="pgfId-2946145"></a><code>report_timing_context_data -port coreclk -type {uncertainty}</code></li></ul>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946147"></a>-View: func_setup<br />-Instance: core_0<br />-Port: coreclk, Direction: IN<br />-Sink pin: c/I<br />--------------------------------------------------------------------------------<br />Type              Block Clock     Top Clock       Early     Late      Early     Late <br />Rise      Rise      Fall      Fall            <br />--------------------------------------------------------------------------------<br />uncertainty&#160;&#160;     pclk            pclk            0.025     0.025     -0.025    0.025</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946156"></a>---------------------------------------------------------------------------------</pre>
+<h3>
+<a id="pgfId-2946158"></a>SIM Flow Examples<a id="76962"></a></h3>
+
+<p>
+<a id="pgfId-2946159"></a><strong>Example 1</strong>: This example illustrates how to read and write Timing Context for SIM.</p>
+<p>
+<a id="pgfId-2946160"></a>Consider a top level design with six submodules - A, B, C, D, E &amp; F - with multiple hierarchy levels as illustrated in the figure below. </p>
+
+<p>
+<a id="pgfId-2946207"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="175" src="images/analysisandreporting-190.gif" /></div>
+
+<ul><li>
+<a id="pgfId-2946211"></a>Writing Timing Context from Top STA</li></ul>
+<p>
+<a id="pgfId-2946213"></a>Below command will write the context of all the instances - A, B, C, D, E &amp; F in a single step without any significant memory/runtime overhead. </p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946214"></a>write_timing_context context.db -module {A B C D E F}</pre>
+
+<p>
+<a id="pgfId-2946215"></a>The <code>-skip_interface_paths</code> parameter is not mandatory since all the modules have only one instantiation at top level. This should be used only if you want to use Timing Context to perform the timing analysis on reg-reg paths only. </p>
+<p>
+<a id="pgfId-2946217"></a>The command will create 6 subdirectories named A, B, C, D, E &amp; F inside context.db to write the context of corresponding module within each sub directories. </p>
+<p>
+<a id="pgfId-2946219"></a>Since the <code>write_timing_context</code> command triggers a timing update, the command can replace <code>update_timing</code> in the run scripts. </p>
+<p>
+<a id="pgfId-2946221"></a>Sample Top Script:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946223"></a>read_libs &lt;&gt;<br />read_verilog &#39;Top.v A.v B.v C.v D.v E.v F.v&#39;<br />set_top_module Top<br />read_spef &lt;&gt;<br />read_sdc &lt;&gt;<br />write_timing_context context.db -module {A B C D E F}<br />report_timing</pre>
+
+<ul><li>
+<a id="pgfId-2946232"></a>Block STA with Timing Context</li></ul>
+<p>
+<a id="pgfId-2946234"></a>The <code>read_timing_context</code> command must be issued after loading the block constraints. The context data of required module will be automatically fetched from the corresponding sub-directory within context.db when the <code>read_timing_context</code> command is issued. </p>
+<p>
+<a id="pgfId-2946236"></a>Sample Block Script for Block A:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946238"></a>read_libs &lt;&gt;<br />read_verilog &#39;A.v&#39;<br />set_top_module A<br />read_spef &lt;&gt;<br />read_sdc context.db/A/A.sdc<br />read_timing_context context.db <br />report_timing</pre>
+<h3>
+<a id="pgfId-2946248"></a>MIM Flow Examples<a id="86323"></a></h3>
+
+<p>
+<a id="pgfId-2946249"></a>Example 1: The following example illustrates how to read and write Timing Context for reg-reg analysis of MIM modules.</p>
+<p>
+<a id="pgfId-2946251"></a>Consider a top-level design with two modules - </p>
+<ul><li>
+<a id="pgfId-2946252"></a>Module A with 3 instances A1, A2 and A3 - all belong to single cluster</li><li>
+<a id="pgfId-2946253"></a>Module B with 3 instances B1, B2 and B3 - B1/B2 belong to one cluster, B3 belong to another cluster. <br />
+<a id="pgfId-2946293"></a><div class="webflare-div-image">
+<img width="666" height="312" src="images/analysisandreporting-191.gif" /></div></li><li>
+<a id="pgfId-2946297"></a>Writing Timing Context from Top STA</li></ul>
+
+
+
+
+
+
+<p>
+<a id="pgfId-2946299"></a>Below command will write the context data for all the instances - A1, A2, A3, B1, B2, B3 in a single step. </p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2946300"></a>write_timing_context context.db -module {A B}</pre>
+
+<p>
+<a id="pgfId-2946302"></a>You have the flexibility to perform Context timing analysis for single or multiple instances of the modules using same Timing Context. </p>
+<ul><li>
+<a id="pgfId-2946304"></a>Block A STA with Timing Context <br />
+<a id="pgfId-2946305"></a>The following reg-reg timing analysis can be performed for module A using the generated context.db<ul><li>
+<a id="pgfId-2946307"></a>Block Context Analysis for instance A1 only - <br />
+<a id="pgfId-2946308"></a><code>read_timing_context context.db -instances A1</code></li><li>
+<a id="pgfId-2946309"></a>Block Context Analysis for instance A2 only - <br />
+<a id="pgfId-2946310"></a><code>read_timing_context context.db -instances A2</code></li><li>
+<a id="pgfId-2946311"></a>Block Context Analysis for instance A3 only - <br />
+<a id="pgfId-2946312"></a><code>read_timing_context context.db -instances A3</code></li><li>
+<a id="pgfId-2946313"></a>Block MIM Context Analysis for instances A1 &amp; A2 - <br />
+<a id="pgfId-2946314"></a><code>read_timing_context context.db -instances {A1 A2} </code></li><li>
+<a id="pgfId-2946315"></a>Block MIM Context Analysis for instances A2 &amp; A3 - <br />
+<a id="pgfId-2946316"></a><code>read_timing_context context.db -instances {A2 A3}</code></li><li>
+<a id="pgfId-2946317"></a>Block MIM Context Analysis for instances A3 &amp; A1 - <br />
+<a id="pgfId-2946318"></a><code>read_timing_context context.db -instances {A3 A1}</code></li><li>
+<a id="pgfId-2946319"></a>Block MIM Context Analysis for instances A1, A2 &amp; A3 - <br />
+<a id="pgfId-2946320"></a><code>read_timing_context context.db -instances {A1 A2 A3} </code><br />
+<a id="pgfId-2946321"></a>or <br />
+<a id="pgfId-2946322"></a><code>read_timing_context context.db</code></li></ul></li><li>
+<a id="pgfId-2946324"></a>Block B STA with Timing Context<br />
+<a id="pgfId-2946326"></a>The following reg-reg timing analysis can be performed for module B using the generated context.db<ul><li>
+<a id="pgfId-2946328"></a>Block Context Analysis for instance B1 only - <br />
+<a id="pgfId-2946329"></a>read_timing_context context.db -instances B1</li><li>
+<a id="pgfId-2946330"></a>Block Context Analysis for instance B2 only - <br />
+<a id="pgfId-2946331"></a>read_timing_context context.db -instances B2</li><li>
+<a id="pgfId-2946332"></a>Block Context Analysis for instance B3 only - <br />
+<a id="pgfId-2946333"></a>read_timing_context context.db -instances B3</li><li>
+<a id="pgfId-2946334"></a>Block MIM Context Analysis for instances B1 &amp; B2 - <br />
+<a id="pgfId-2946335"></a>read_timing_context context.db -instances {B1 B2} </li></ul></li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-2946337"></a><strong>Example 2</strong>: This example illustrates how to read and write Timing Context for selected instances of design mentioned in example1.</p>
+<ul><li>
+<a id="pgfId-2946339"></a>Writing Timing Context from Top STA<br />
+<a id="pgfId-2946341"></a>Context generated for selected instances if blocks A and B. Examples - <ul><li>
+<a id="pgfId-2946343"></a><code>write_timing_context context1.db -module {A B} -instances {A1 B1}</code></li><li>
+<a id="pgfId-2946344"></a><code>write_timing_context context2.db -module {A B} -instances {A2 B2}</code></li><li>
+<a id="pgfId-2946345"></a><code>write_timing_context context3.db -module {A B} -instances {A3 B3}</code></li></ul></li><li>
+<a id="pgfId-2946346"></a>Block A STA with Timing Context<br />
+<a id="pgfId-2946348"></a>The following timing analysis (reg-reg + IO) can be performed for module A using the above generated context.<ul><li>
+<a id="pgfId-2946350"></a>Block Context Analysis for instance A1 <br />
+<a id="pgfId-2946351"></a>read_timing_context context1.db -instances A1</li><li>
+<a id="pgfId-2946352"></a>Block Context Analysis for instance A2 <br />
+<a id="pgfId-2946353"></a>read_timing_context context2.db -instances A2</li><li>
+<a id="pgfId-2946354"></a>Block Context Analysis for instance A3 <br />
+<a id="pgfId-2946355"></a>read_timing_context context3.db -instances A3</li></ul></li><li>
+<a id="pgfId-2946356"></a>Block B STA with Timing Context<br />
+<a id="pgfId-2946358"></a>The following timing analysis (reg-reg + IO) can be performed for module B using the above generated context.<ul><li>
+<a id="pgfId-2946359"></a>Block Context Analysis for instance B1<br />
+<a id="pgfId-2946360"></a>read_timing_context context1.db -instances B1</li><li>
+<a id="pgfId-2946361"></a>Block Context Analysis for instance B2 <br />
+<a id="pgfId-2946362"></a>read_timing_context context2.db -instances B2</li><li>
+<a id="pgfId-2946363"></a>Block Context Analysis for instance B3<br />
+<a id="pgfId-2946364"></a>read_timing_context context3.db -instances B3</li></ul></li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-2946366"></a><strong>Example 3</strong>: This example illustrates the incorrect use of <code>write_timing_context</code> and <code>read_timing_context</code> commands for the design mentioned in example1. </p>
+<p>
+<a id="pgfId-2946367"></a>The following context reading commands will error out because B3 is in a different cluster that B1 and B2- </p>
+<ul><li style="list-style-type: none;background-image: none;"><ul><li>
+<a id="pgfId-2946368"></a><code>read_timing_context context.db -instances {B2 B3}</code></li><li>
+<a id="pgfId-2946369"></a><code>read_timing_context context.db -instances {B3 B1}</code></li><li>
+<a id="pgfId-2946370"></a><code>read_timing_context context.db -instances {B1 B2 B3}</code></li></ul></li></ul>
+
+
+<p>
+<a id="pgfId-2946371"></a>The following context writing commands will error out because module names of all the instances provided with -instance option are not specified under -module option</p>
+<ul><li style="list-style-type: none;background-image: none;"><ul><li>
+<a id="pgfId-2946372"></a><code>write_timing_context context.db -module {A} -instance {A1 B1} </code></li><li>
+<a id="pgfId-2946373"></a><code>write_timing_context context.db -module {B} -instance {A1 B1}</code></li></ul></li></ul>
+
+
+<h3>
+<a id="pgfId-2946375"></a>Sources of Inaccuracy in Context Analysis<a id="66053"></a></h3>
+<h4>
+<a id="pgfId-2946376"></a>Inaccuracy Due to Boundary Parasitics </h4>
+
+<p>
+<a id="pgfId-2946377"></a>The distributed parasitic of top-level portion of the input/output interface nets are lumped in block context analysis. This may result in inaccuracy during timing as well as glitch analysis with Context. Two types of nets will be impacted because of this:</p>
+<ul><li>
+<a id="pgfId-2946379"></a>Net on the block reg-reg path that has coupling with interface nets</li></ul>
+<p>
+<a id="pgfId-2946381"></a>Example: net1 in below figure has coupling with net3. Since net3 is an interface net, during Top flat STA, its parasitics are distributed across Top and Block. However, in block context analysis, top portion of the net3 will not be present. Because of this, aggressor net3 will have different SI impact on net1 in Top Flat vs Block Context Analysis. </p>
+<ul><li>
+<a id="pgfId-2946383"></a>Net on the block reg-reg path that fanout to the top-level instances as well</li></ul>
+<p>
+<a id="pgfId-2946385"></a>Example: net2 in below figure is part of reg-reg path (FF2-FF3) and it also fanout to the top level instances. In Top Flat STA, net2 will have parasitics distributed across Top and Block. However, in Block Context STA, portion of the top level parasitics are lumped as port load. Because of this, delay of net2 is computed differently in Top flat and Block Context STA.</p>
+
+<p>
+<a id="pgfId-2946446"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="185" src="images/analysisandreporting-192.gif" /></div>
+<h4>
+<a id="pgfId-2946450"></a>Pessimism due to Slew/Load Worst Cases in MIM</h4>
+
+<p>
+<a id="pgfId-2946451"></a>The output load on a block port may vary across all the instances of the block at top level. In MIM Timing Context, worst load across all the instances will be modeled in GBA.</p>
+<p>
+<a id="pgfId-2946452"></a>Similarly, slew of the top level signal arriving at the block input port may vary across all the instances of the block at top level. In MIM Timing Context, worst early/late slew across all the instances will be modeled in GBA. PBA uses instance-specific slew/load, hence addressing the pessimism due to worst-case.</p>
+
+<h4>
+<a id="pgfId-2945736"></a>Pessimism Due to Wider TW in MIM</h4>
+<p>
+<a id="pgfId-2946478"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="163" src="images/analysisandreporting-193.gif" /></div>
+
+<p>
+<a id="pgfId-2946497"></a>In context analysis, early/late latency and arrival is worst-case across the MIM instances. So, timing windows of a block net in the MIM timing/glitch context analysis will be union of the TWs of same net across all the top level instances of the block. </p>
+<p>
+<a id="pgfId-2946499"></a>Hence SI analysis of a path in block MIM Context analysis can be pessimistic than the top level timing analysis of the same path across all the top level instances of block. </p>
+
+<h4>
+<a id="pgfId-2946500"></a>Design Requirements for Accurate Context Analysis</h4>
+
+<p>
+<a id="pgfId-2946501"></a>The top and Block STA environments should meet the following criteria for accurate Block Context Analysis:</p>
+<ul><li>
+<a id="pgfId-2946503"></a>Block constraints should correlate with top constraints</li><li>
+<a id="pgfId-2946504"></a>All the block boundary clocks should be either automatically mapped by the tool or manually mapped by the user in block Timing Context run. For clocks to be mapped automatically, tool expects 1-to-1 mapping between block and top clocks. </li><li>
+<a id="pgfId-2946505"></a>Tempus setup (Netlist, SPEF, Library, power intent, and settings) should be consistent between the two runs. </li><li>
+<a id="pgfId-2946506"></a>Recommendation is hierarchical extraction of such blocks to avoid flat vs block SPEF differences.</li></ul>
+
+
+
+
+<h3>
+<a id="pgfId-2946508"></a>Limitations of Context Analysis Flow <a id="50388"></a></h3>
+
+<ul><li>
+<a id="pgfId-2946509"></a><strong>PBA on IO paths</strong>: The arrival/latency stored in Timing Context correspond to GBA of top level STA. Hence the PBA analysis of block interface paths with context will be partial PBA - GBA till block port and PBA within the block. Because of this, the PBA slack of the block interface paths will always be pessimistic in block Context STA than the corresponding top level slack. </li><li>
+<a id="pgfId-2946510"></a><strong>Interface ECOs</strong>: Since the top-level context is computed w.r.t interface cells, changing the interface cells/nets during context analysis will result in inaccuracies. Hence, it is recommended to mark the interface nets and cells as dont_touch during ECOs with Context Analysis. </li></ul>
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_contextgeneration.html" id="prev" title="Context Generation and Analysis in MMMC">Context Generation and Analysi ...</a></em></b><b><em><a href="analysisandreporting_wirevariationanalysis.html" id="nex" title="Wire Variation Analysis">Wire Variation Analysis</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

@@ -1,0 +1,187 @@
+
+<html><head><title>Uniform Logging</title>
+<meta name="page_sequence" content="18000000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="leenap" />
+<meta name="CreateDate" content="2026-03-26" />
+<meta name="CreateTime" content="1774530250" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Stylus Common UI Migration Guide" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Migration Guide" />
+<meta name="DocType" content="Migration" />
+<meta name="FileTitle" content="Uniform Logging" />
+<meta name="Keywords" content="command logging,command logging in Stylus,command logging in CUI" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Stylus,Stylus,Stylus," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="3" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusMIGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-03-26" />
+<meta name="ModifiedTime" content="1774530250" />
+<meta name="NextFile" content="Uniform_Startup.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Supported_Reporting_Attributes.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Migration Guide -- Uniform Logging" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="innovusCUIMig261" />
+<meta name="confluence-version" content="7.19.19" />
+<meta name="ecms-plugin-version" content="04.21.019" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusMIGcomTOC.html">Contents</a></li><li><a class="prev" href="Supported_Reporting_Attributes.html" title="Supported_Reporting_Attributes">Supported_Reporting_Attributes</a></li><li style="float: right;"><a class="viewPrint" href="voltusMIGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Uniform_Startup.html" title="Uniform_Startup">Uniform_Startup</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Migration Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <div style="width: 100%; font-size: 32px; text-align: left;               font-weight: bold;">8</div>
+<h1 style="margin: 4px 0 4px;"><span>Uniform Logging</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>Command logging plays a vital role in the debug process. The Stylus Common UI provides improved and uniform logging across products by logging all&#xa0;commands in the log file, irrespective of whether they are issued interactively or through startup files and scripts.</p>
+
+<p>In Common UI, logging is verbose by default for all commands, except those originating through user procs. The following table shows how logging works for commands issued using various methods:</p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /><col /></colgroup><tbody><tr><th class="confluenceTh">Command origin</th><th class="confluenceTh">Logging type</th><th class="confluenceTh" colspan="1">Log Output Example</th></tr>
+<tr><td class="confluenceTd">Interactive typing</td>
+<td class="confluenceTd">Always logged directly in log file</td>
+<td class="confluenceTd" colspan="1"><code>@<span class="fontredcadence">innovus</span> 1&gt; report_timing</code></td>
+</tr>
+<tr><td class="confluenceTd">Sourcing files</td>
+<td class="confluenceTd">
+<p>Verbose logging, by default</p>
+
+<p>To turn off verbose logging for all source file requests, <br />set the <code>source_verbose</code> attribute to <code>false</code></p>
+
+<p>To turn off verbose logging for a specific source file request,<br />use <code>source -quiet <em>file.tcl</em></code></p>
+
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="1">
+<p><code>@<span class="fontredcadence">innovus</span> 1&gt; source scripts/setup.tcl</code></p>
+
+<p><code>#@ Begin verbose source /proj/scripts/setup.tcl</code><br /><code>@file 1: set_db design_process_node 16<br />...<br />Applying the recommended capacitance filtering threshold values for 16nm process node: total_c_th=0, relative_c_th=1 and coupling_c_th=0.1.<br /></code></p>
+
+<p><span style="font-family: monospace;">...</span><br /><code>...</code><br /><code>@file 2: set_db opt_fix_hold_verbose true</code><br /><code>@file 3: set_db route_design_skip_analog true</code><br /><code>#@ End verbose source /proj/scripts/setup.tcl<br />1 true</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>Running flow_steps</p>
+</td>
+<td class="confluenceTd">
+<p>Verbose logging, by default</p>
+
+<p>To turn off verbose logging, set the <code>flow_verbose</code> attribute to <code>false</code></p>
+</td>
+<td class="confluenceTd" colspan="1">
+<p><code>@<span class="fontredcadence">innovus</span> 1&gt; create_flow_step &#8211;name timing {</code><br /><code> report_timing</code><br /><code> }</code><br /><code>@<span class="fontredcadence">innovus</span> 2&gt; create_flow &#8211;name rpt {flow_step:timing}</code><br /><code>@<span class="fontredcadence">innovus</span> 3&gt; run_flow &#8211;flow rpt<br />...</code><br /><code>#@ Begin verbose flow_step rpt.timing</code><br /><code>@flow 1: report_timing</code><br /><code>##############################################################</code><br /><code># Generated by: Cadence <span class="fontredcadence">Innovus</span> 20.10-b015_1</code><br /><code># OS: Linux x86_64(Host ID noi-leenap1)</code><br /><code># Generated on: Tue Feb 11 16:48:49 2020</code><br /><code># Design: carve</code><br /><code># Command: report_timing</code><br />###############################################################<br /><code>...</code><br /><code>#@ End verbose flow_step rpt.timing</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">
+<p>Calling procs</p>
+</td>
+<td class="confluenceTd" colspan="1">
+<p>Non-verbose logging, by default</p>
+
+<p>To enable verbose logging, use the <code>set_proc_verbose</code> command</p>
+</td>
+<td class="confluenceTd" colspan="1">
+<p>Default log output example</p>
+
+<p><code>@<span class="fontredcadence">innovus</span> 1&gt; proc hi {} {puts Hello}</code><br /><code>@<span class="fontredcadence">innovus</span> 2&gt; hi</code><br /><code>Hello</code></p>
+
+<p>Output with<code> set_proc_verbose</code></p>
+
+<p><code>@<span class="fontredcadence">innovus</span> 1&gt; define_proc foo {} { place_opt_design; report_timing }</code><br /><code>@<span class="fontredcadence">innovus</span> 2&gt; set_proc_verbose foo</code><br /><code>@<span class="fontredcadence">innovus</span> 3&gt; foo</code><br /><code>#@ Begin verbose proc foo </code><br /><code>@proc 1: place_opt_design</code><br /><code>#% Begin place_opt_design</code><br /><code>...</code><br /><code>...</code><br /><code>#% End place_opt_design</code><br /><code>@proc 2: report_timing</code><br /><code>##############################################################</code><br /><code># Generated by: Cadence <span class="fontredcadence">Innovus</span> 17.10-d119_1</code><br /><code># OS: Linux x86_64(Host ID sj-jasond)</code><br /><code># Generated on: Wed Mar 15 10:37:56 2017</code><br /><code># Design: dtmf_recvr_core</code><br /><code># Command: report_timing</code><br /><code>###############################################################</code><br /><code>#@ End verbose proc foo</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">Issued through GUI</td>
+<td class="confluenceTd" colspan="1">Similar to interactive typing</td>
+<td class="confluenceTd" colspan="1">
+<p>On selecting <em>Timing -&gt; Report Timing</em> from the GUI menu, log file will show:</p>
+
+<p><code>@<span class="fontredcadence">innovus</span> 1&gt; report_timing</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">
+<p>Product startup files</p>
+</td>
+<td class="confluenceTd" colspan="1">
+<p>Verbose logging, by default</p>
+
+<p>To turn off verbose logging, set the shell envar <br /><code>CDS_STYLUS_SOURCE_VERBOSE </code>to <code>0</code>,<code> <br /></code>which will set <code>source_verbose</code> to <code>false</code> at startup</p>
+</td>
+<td class="confluenceTd" colspan="1">
+<p>If you add the following to the <code>./.cadence/<span class="fontredcadence">innovus</span>/<span class="fontredcadence">innovus</span>.tcl</code> startup file:<br /><code>puts &quot;inside [info filename]&quot;</code></p>
+
+<p>the log file, by default, shows:<br /><code>#@ Loading startup files ...</code><br /><code>@<span class="fontredcadence">innovus</span> 1&gt; source .cadence/<span class="fontredcadence">innovus</span>/<span class="fontredcadence">innovus</span>.tcl</code><br /><code>#@ Begin verbose source .cadence/<span class="fontredcadence">innovus</span>/<span class="fontredcadence">innovus</span>.tcl</code><br /><code>@file 1 : puts &#8220;inside [info filename]&#8221;</code><br /><code>inside ./cadence/<span class="fontredcadence">innovus</span>/<span class="fontredcadence">innovus</span>.tcl</code><br /><code>#@ End verbose source .cadence/<span class="fontredcadence">innovus</span>/<span class="fontredcadence">innovus</span>.tcl</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">Product startup options <br />(<code>-files</code>&#xa0;and&#xa0;<code>-execute</code>)</td>
+<td class="confluenceTd" colspan="1">
+<p>Verbose logging, by default</p>
+
+<p>To turn off verbose logging, set the shell envar <br /><code>CDS_STYLUS_SOURCE_VERBOSE </code>to <code>0</code>, <br />which will set<code>&#xa0;<code>source_verbose</code></code> to <code><code>false</code></code> at startup</p>
+</td>
+<td class="confluenceTd" colspan="1">
+<p>If the file <code>run.tcl</code> contains the following:<br /><code>proc test {} {puts &#8220;This is a test&#8221;}</code><br /><code>test</code></p>
+
+<p>and the product is started with:<br /><code><span class="fontredcadence">innovus</span> -stylus -files run.tcl</code></p>
+
+<p>the log file, by default, shows:<br /><code>#@ Loading startup files ...</code><br /><code>@<span class="fontredcadence">innovus</span> 1&gt; source .cadence/<span class="fontredcadence">innovus</span>/<span class="fontredcadence">innovus</span>.tcl</code><br /><code>#@ Begin verbose source .cadence/<span class="fontredcadence">innovus</span>/<span class="fontredcadence">innovus</span>.tcl</code><br /><code>@file 1 : puts &#8220;inside [info filename]&#8221;</code><br /><code>inside ./cadence/<span class="fontredcadence">innovus</span>/<span class="fontredcadence">innovus</span>.tcl</code><br /><code>#@ End verbose source .cadence/<span class="fontredcadence">innovus</span>/<span class="fontredcadence">innovus</span>.tcl</code><br /><code>#@ Processing -files option</code><br /><code>@<span class="fontredcadence">innovus</span> 2&gt; source run.tcl</code><br /><code>#@ Begin verbose source /proj/scripts/run.tcl </code><br /><code>@file 1: proc test {} {puts &#8220;This is a test&#8221;}</code><br /><code>@file 2: test</code><br /><code>This is a test</code><br /><code>#@ End verbose source /proj/scripts/run.tcl</code></p>
+</td>
+</tr>
+</tbody></table></div>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Supported_Reporting_Attributes.html" id="prev" title="Supported_Reporting_Attributes">Supported_Reporting_Attributes</a></em></b><b><em><a href="Uniform_Startup.html" id="nex" title="Uniform_Startup">Uniform_Startup</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

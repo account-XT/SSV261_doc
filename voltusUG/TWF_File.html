@@ -1,0 +1,920 @@
+
+<html><head><title>TWF File</title>
+<meta name="page_sequence" content="39015000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468660" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="TWF File" />
+<meta name="Keywords" content="TWF,timing,signal,transition" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468660" />
+<meta name="NextFile" content="Dynamic_Trigger_File_During_Rail_Analysis.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="TCF_File.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- TWF File" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="TCF_File.html" title="TCF_File">TCF_File</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Dynamic_Trigger_File_During_Rail_Analysis.html" title="Dynamic_Trigger_File_During_Rail_Analysis">Dynamic_Trigger_File_During_Ra ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>TWF File</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>The timing windows file (TWF) contains timing window and slew data from timing analysis of the design that is used to constrain noise analysis for more realistic results based on the timing dependency of switching signals.</p>
+
+<p>TWF is required when you perform a vectorless dynamic power consumption calculation. For each net or pin, TWF contains the ranges of signal arrival times and transition times derived from the static timing analysis output by Tempus. It compresses all vectors into one result. This file is in ASCII format.</p>
+
+<p>Sample file name: <code>dtmf.twf</code></p>
+
+<p>Command:<code> </code>This file can be generated using the Tempus command <code>write_twf</code> and can be read in using the <code>read_twf</code> command.</p>
+
+<p>Format:</p>
+
+<p><code>timing_windows_file</code></p>
+<p style="margin-left: 40.0px;"><code>::= ( TIMING_WINDOWS header body_statement+ )</code></p>
+
+<p><code>header</code></p>
+<p style="margin-left: 40.0px;"><code>::= ( HEADER version header_info+ )</code></p>
+
+<p><code>version</code></p>
+<p style="margin-left: 40.0px;"><code>::= ( VERSION QSTRING )</code></p>
+<pre><code>header_info</code></pre><pre style="margin-left: 30.0px;"><code>::= design_name</code></pre><pre style="margin-left: 30.0px;"><code>||= date</code></pre><pre style="margin-left: 30.0px;"><code>||= program</code></pre><pre style="margin-left: 30.0px;"><code>||= delimiters</code></pre><pre style="margin-left: 30.0px;"><code>||= time_scale</code></pre><pre style="margin-left: 30.0px;"><code>||= cap_scale</code></pre><pre style="margin-left: 30.0px;"><code>||= res_scale</code></pre><pre style="margin-left: 30.0px;"><code>||= voltage_scale</code></pre><pre style="margin-left: 30.0px;"><code>||= voltage_threshold</code></pre><pre style="margin-left: 30.0px;"><code>||= lifetime</code></pre><pre style="margin-left: 30.0px;"><code>||= voltage</code></pre><pre style="margin-left: 30.0px;"><code>||= temperature</code></pre><pre style="margin-left: 30.0px;"><code>||= operating_conditions</code></pre><pre style="margin-left: 30.0px;"><code>||= default_input_slew</code></pre><pre><code>design_name</code></pre><pre style="margin-left: 30.0px;"><code>::= ( DESIGN QSTRING )</code></pre><pre><code>date</code></pre><pre style="margin-left: 30.0px;"><code>::= ( DATE QSTRING )</code></pre><pre><code>program</code></pre><pre style="margin-left: 30.0px;"><code>::= ( PROGRAM program_name program_version program_company )</code></pre><pre><code>program_name</code></pre><pre style="margin-left: 30.0px;"><code>::= QSTRING</code></pre><pre><code>program_version</code></pre><pre style="margin-left: 30.0px;"><code>::= QSTRING</code></pre><pre><code>program_company</code></pre><pre style="margin-left: 30.0px;"><code>::= QSTRING</code></pre><pre><code>delimiters</code></pre><pre style="margin-left: 30.0px;"><code>::= ( DELIMITERS QSTRING )</code></pre><pre><code>time_scale</code></pre><pre style="margin-left: 30.0px;"><code>::= ( TIME_SCALE multiplier )</code></pre><pre><code>cap_scale</code></pre><pre style="margin-left: 30.0px;"><code>::= ( CAPACITANCE_SCALE multiplier )</code></pre><pre><code>res_scale</code></pre><pre style="margin-left: 30.0px;"><code>::= ( RES_SCALE multiplier )</code></pre><pre><code>voltage_scale</code></pre><pre style="margin-left: 30.0px;"><code>::= ( VOLTAGE_SCALE multiplier )</code></pre><pre><code>voltage_threshold</code></pre><pre style="margin-left: 30.0px;"><code>::= ( VOLTAGE_THRESHOLD min_thres max_thres )</code></pre><pre><code>lifetime</code></pre><pre style="margin-left: 30.0px;"><code>::= ( LIFETIME NUMBER )</code></pre><pre><code>process</code></pre><pre style="margin-left: 30.0px;"><code>::= ( PROCESS single_or_triple_number )</code></pre><pre><code>voltage</code></pre><pre style="margin-left: 30.0px;"><code>::= ( VOLTAGE single_or_triple_number )</code></pre><pre><code>temperature</code></pre><pre style="margin-left: 30.0px;"><code>::= ( TEMPERATURE single_or_triple_number )</code></pre><pre><code>operating_conditions</code></pre><pre style="margin-left: 30.0px;"><code>::= ( OPERATING_CONDITIONS single_or_triple_a_string )</code></pre><pre><code>default_input_slew</code></pre><pre style="margin-left: 30.0px;"><code>::= ( DEFAULT_INPUT_SLEW a_min_rise a_min_fall a_max_rise a_max_fall )</code></pre><pre><code>multiplier</code></pre><pre style="margin-left: 30.0px;"><code>::= NUMBER</code></pre><pre><code>body_statement</code></pre><pre style="margin-left: 30.0px;"><code>::= ext_ctlf_files</code></pre><pre style="margin-left: 30.0px;"><code>||= waveform_entry+</code></pre><pre style="margin-left: 30.0px;"><code>||= clock_entry+</code></pre><pre style="margin-left: 30.0px;"><code>||= clock_group_entry+</code></pre><pre style="margin-left: 30.0px;"><code>||= driver_cell_entry+</code></pre><pre style="margin-left: 30.0px;"><code>||= driver_strength_entry+</code></pre><pre style="margin-left: 30.0px;"><code>||= external_load_entry+</code></pre><pre style="margin-left: 30.0px;"><code>||= constant_entry+</code></pre><pre style="margin-left: 30.0px;"><code>||= input_slew_entry+</code></pre><pre style="margin-left: 30.0px;"><code>||= caused_by_net+</code></pre><pre style="margin-left: 30.0px;"><code>||= caused_by_null+</code></pre><pre><code>ext_ctlf_files</code></pre><pre style="margin-left: 30.0px;"><code>::= ( EXTENSION &quot;CTLF_FILES&quot; (file_name+))</code></pre><pre><code>waveform_entry</code></pre><pre style="margin-left: 30.0px;"><code>::= ( WAVEFORM &quot;waveform_name&quot; period<br /></code><code>( POSEDGE edge_position ) ( NEGEDGE edge_position ) )<br /></code><code>edge_position<br /></code><code>::= NUMBER</code></pre><pre><code>clock_entry<br /></code><code>    ::= ( CLOCK &quot;waveform_name&quot; port )</code></pre><pre><code>clock_group_entry</code></pre><pre style="margin-left: 30.0px;"><code>::= ( CLOCK_GROUP &quot;group_name&quot; &quot;waveform_name&quot;+ )</code></pre><pre><code>driver_cell_entry<br /></code><code>    ::= ( DRIVER_CELL<br />    </code><code>( ( CELL_TYPE &quot;cell_name&quot; library<br />    </code><code>( pos_neg_edge src_pin ) sink_pin )<br />    </code><code>( su_hd? pos_neg_edge? ( INPUT_SLEW slew ) )<br />    </code><code>port )</code></pre><pre><code>slew<br /></code><code>    ::= NUMBER</code></pre><pre><code>driver_strength_entry <br /></code><code>    ::= ( DRIVER_STRENGTH driver_strength_val port )</code></pre><pre><code>driver_strength_val<br /></code><code>    ::= opt_qualifier? resistance<br />    </code><code>||= min_rise min_fall max_rise max_fall</code></pre><pre><code>opt_qualifier<br /></code><code>    ::= ( su_hd? pos_neg_edge? )<br /></code><code>su_hd<br />    </code><code>::= SETUP<br />    </code><code>||= HOLD<br /></code><code>pos_neg_edge<br />    </code><code>::= POSEDGE<br />    </code><code>||= NEGEDGE<br /></code><code>external_load_entry<br />    </code><code>::= ( EXTERNAL_LOAD single_or_triple_a_number port )<br /></code><code>constant_entry<br />    </code><code>::= ( constant_kw net_pin &quot;port&quot; const_val )</code></pre><pre style="margin-left: 30.0px;"><code>
+::= ( constant_kw net_pin &quot;port&quot; const_val rise_k fall_k)</code></pre><pre><code>
+input_slew_entry</code></pre><pre style="margin-left: 30.0px;"><code>
+::= ( INPUT_SLEW a_min_rise a_min_fall a_max_rise a_max_fall port)</code></pre><pre><code>
+caused_by_net</code></pre><pre style="margin-left: 30.0px;"><code>
+::= ( CAUSED_BY &quot;port&quot; rise_fall window_statement+)</code></pre><pre><code>
+caused_by_null</code></pre><pre style="margin-left: 30.0px;"><code>
+::= ( CAUSED_BY NULL window_statement+)</code></pre><pre><code>
+window_statement</code></pre><pre style="margin-left: 30.0px;"><code>
+::= ( net_pin &quot;port&quot;</code></pre><pre><code>
+rise_at rise_time rise_k fall_at fall_time fall_k )</code></pre><pre style="margin-left: 30.0px;"><code>
+||=</code></pre><pre style="margin-left: 30.0px;"><code>
+( net_pin &quot;port&quot; rise_at rise_time rise_k fall_at fall_time fall_k</code></pre><pre style="margin-left: 30.0px;"><code>
+clock_or_data)</code></pre><pre style="margin-left: 30.0px;"><code>
+||=</code></pre><pre style="margin-left: 30.0px;"><code>
+( net_pin &quot;port&quot; rise_at rise_time rise_k rise_slack fall_at fall_time</code></pre><pre style="margin-left: 30.0px;"><code>
+fall_k fall_slack)</code></pre><pre style="margin-left: 30.0px;"><code>
+||=</code></pre><pre style="margin-left: 30.0px;"><code>
+( net_pin &quot;port&quot; rise_at rise_time rise_k rise_slack fall_at fall_time</code></pre><pre style="margin-left: 30.0px;"><code>
+fall_k fall_slack clock_or_data)</code></pre><pre><code>
+constant_kw</code></pre><pre style="margin-left: 30.0px;"><code>
+::= CONSTANT</code></pre><pre style="margin-left: 30.0px;"><code>
+||= USER_CONSTANT</code></pre><pre><code>
+net_pin</code></pre><pre style="margin-left: 30.0px;"><code>
+::= NET</code></pre><pre style="margin-left: 30.0px;"><code>
+||= PIN</code></pre><pre><code>
+const_val</code></pre><pre style="margin-left: 30.0px;"><code>
+::= 1</code></pre><pre style="margin-left: 30.0px;"><code>
+||= 0</code></pre><pre><code>
+rise_fall</code></pre><pre style="margin-left: 30.0px;"><code>
+::= RISE</code></pre><pre style="margin-left: 30.0px;"><code>
+||= FALL</code></pre><pre><code>
+file_name</code></pre><pre style="margin-left: 30.0px;"><code>
+::= STRING</code></pre><pre><code>
+single_or_triple_number</code></pre><pre style="margin-left: 30.0px;"><code>
+::= NUMBER</code></pre><pre style="margin-left: 30.0px;"><code>
+||= min typ max</code></pre><pre><code>
+single_or_triple_a_string</code></pre><pre style="margin-left: 30.0px;"><code>
+::= STRING</code></pre><pre style="margin-left: 30.0px;"><code>
+||= min_a_string typ_a_string max_a_string</code></pre><pre><code>
+single_or_triple_a_number</code></pre><pre style="margin-left: 30.0px;"><code>
+::= a_number</code></pre><pre style="margin-left: 30.0px;"><code>
+||= a_min a_typ a_max</code></pre><pre><code>
+a_number</code></pre><pre style="margin-left: 30.0px;"><code>
+::= *</code></pre><pre style="margin-left: 30.0px;"><code>
+||= NUMBER</code></pre><pre><code>
+rise_at</code></pre><pre style="margin-left: 30.0px;"><code>
+::= triplet</code></pre><pre><code>
+rise_time</code></pre><pre style="margin-left: 30.0px;"><code>
+::= triplet</code></pre><pre><code>
+rise_k</code></pre><pre style="margin-left: 30.0px;"><code>
+::= triplet</code></pre><pre><code>
+rise_slack</code></pre><pre style="margin-left: 30.0px;"><code>
+::= triplet</code></pre><pre><code>
+fall_at</code></pre><pre style="margin-left: 30.0px;"><code>
+::= triplet</code></pre><pre><code>
+fall_time</code></pre><pre style="margin-left: 30.0px;"><code>
+::= triplet</code></pre><pre><code>
+fall_k</code></pre><pre style="margin-left: 30.0px;"><code>
+::= triplet</code></pre><pre><code>
+fall_slack</code></pre><pre style="margin-left: 30.0px;"><code>
+::= triplet</code></pre><pre><code>
+clock_or_data</code></pre><pre style="margin-left: 30.0px;"><code>
+::= C</code></pre><pre style="margin-left: 30.0px;"><code>
+||= D</code></pre><pre style="margin-left: 30.0px;"><code>
+||= U</code></pre><pre style="margin-left: 30.0px;"><code>
+||= Z</code></pre><pre><code>
+triplet</code></pre><pre style="margin-left: 30.0px;"><code>
+::= *</code></pre><pre style="margin-left: 30.0px;"><code>
+||= NUMBER</code></pre><pre style="margin-left: 30.0px;"><code>
+||= NUMBER:NUMBER</code></pre><pre style="margin-left: 30.0px;"><code>
+||= NUMBER:NUMBER:NUMBER</code></pre><pre><code>
+a_min</code></pre><pre style="margin-left: 30.0px;"><code>
+::= a_number</code></pre><pre><code>
+a_typ</code></pre><pre style="margin-left: 30.0px;"><code>
+::= a_number</code></pre><pre><code>
+a_max</code></pre><pre style="margin-left: 30.0px;"><code>
+::= a_number</code></pre><pre><code>
+a_min_rise</code></pre><pre style="margin-left: 30.0px;"><code>
+::= a_number</code></pre><pre><code>
+a_min_fall</code></pre><pre style="margin-left: 30.0px;"><code>
+::= a_number</code></pre><pre><code>
+a_max_rise</code></pre><pre style="margin-left: 30.0px;"><code>
+::= a_number</code></pre><pre><code>
+a_max_fall</code></pre><pre style="margin-left: 30.0px;"><code>
+::= a_number</code></pre><pre><code>
+min_thres</code></pre><pre style="margin-left: 30.0px;"><code>
+::= NUMBER</code></pre><pre><code>
+max_thres</code></pre><pre style="margin-left: 30.0px;"><code>
+::= NUMBER</code></pre><pre><code>
+min</code></pre><pre style="margin-left: 30.0px;"><code>
+::= NUMBER</code></pre><pre><code>
+typ</code></pre><pre style="margin-left: 30.0px;"><code>
+::= NUMBER</code></pre><pre><code>
+max</code></pre><pre style="margin-left: 30.0px;"><code>
+::= NUMBER</code></pre><pre><code>
+min_rise</code></pre><pre style="margin-left: 30.0px;"><code>
+::= NUMBER</code></pre><pre><code>
+min_fall</code></pre><pre style="margin-left: 30.0px;"><code>
+::= NUMBER</code></pre><pre><code>
+max_rise</code></pre><pre style="margin-left: 30.0px;"><code>
+::= NUMBER</code></pre><pre><code>
+max_fall</code></pre><pre style="margin-left: 30.0px;"><code>
+::= NUMBER</code></pre><pre><code>
+period</code></pre><pre style="margin-left: 30.0px;"><code>
+::= NUMBER</code></pre><pre><code>
+resistance</code></pre><pre style="margin-left: 30.0px;"><code>
+::= NUMBER</code></pre><pre><code>
+min_a_string</code></pre><pre style="margin-left: 30.0px;"><code>
+::= a_string</code></pre><pre><code>
+typ_a_string</code></pre><pre style="margin-left: 30.0px;"><code>
+::= a_string</code></pre><pre><code>
+max_a_string</code></pre><pre style="margin-left: 30.0px;"><code>
+::= a_string</code></pre><pre><code>
+a_string</code></pre><pre style="margin-left: 30.0px;"><code>
+::= *</code></pre><pre style="margin-left: 30.0px;"><code>
+||= STRING</code></pre><pre><code>
+waveform_name</code></pre><pre style="margin-left: 30.0px;"><code>
+::= STRING</code></pre><pre><code>
+port</code></pre><pre style="margin-left: 30.0px;"><code>
+::= STRING</code></pre><pre><code>
+group_name</code></pre><pre style="margin-left: 30.0px;"><code>
+::= STRING</code></pre><pre><code>
+cell_name</code></pre><pre style="margin-left: 30.0px;"><code>
+::= STRING</code></pre><pre><code>
+library</code></pre><pre style="margin-left: 30.0px;"><code>
+::= STRING</code></pre><pre><code>
+src_pin</code></pre><pre style="margin-left: 30.0px;"><code>
+::= STRING</code></pre><pre><code>
+sink_pin</code></pre><pre style="margin-left: 30.0px;"><code>
+::= NUMBER</code></pre>
+<p>Format Description:</p>
+<h4 id="TWFFile-HeaderSectionofTWFfile"><em> Header Section of TWF file</em></h4>
+
+<p>The header section of a TWF file contains information relevant to the entire file, including the design name, the tool used to generate the TWF, and scaling factors for the values in the file.</p>
+
+<p>The design name, date, and program entries are for documentation purposes and do not affect the meaning of the data in the rest of the file. The version, delimiters, and scaling factors do affect how the data in the file is interpreted.</p>
+
+<p>Syntax</p>
+<pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>header
+</em></span>::= ( <strong>HEADER</strong><span id="TWF File-marker_1028613"></span> <span class="webflare-courier-new" style="white-space: pre;"><em>version header_info</em></span>+ )</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>header_info</em></span> 
+::= <span class="webflare-courier-new" style="white-space: pre;"><em>design_name
+</em></span>||= <span class="webflare-courier-new" style="white-space: pre;"><em>date
+</em></span>||= <span class="webflare-courier-new" style="white-space: pre;"><em>program
+</em></span>||= <span class="webflare-courier-new" style="white-space: pre;"><em>delimiters
+</em></span>||= <span class="webflare-courier-new" style="white-space: pre;"><em>time_scale
+</em></span>||= <span class="webflare-courier-new" style="white-space: pre;"><em>cap_scale
+</em></span>||= <span class="webflare-courier-new" style="white-space: pre;"><em>res_scale
+</em></span>||= <span class="webflare-courier-new" style="white-space: pre;"><em>voltage_scale
+</em></span>||= <span class="webflare-courier-new" style="white-space: pre;"><em>voltage_threshold
+</em></span>||= <span class="webflare-courier-new" style="white-space: pre;"><em>lifetime
+</em></span>||= <span class="webflare-courier-new" style="white-space: pre;"><em>voltage
+</em></span>||= <span class="webflare-courier-new" style="white-space: pre;"><em>temperature
+</em></span>||= <span class="webflare-courier-new" style="white-space: pre;"><em>operating_conditions
+</em></span>||= <span class="webflare-courier-new" style="white-space: pre;"><em>default_input_slew</em></span></code></pre>
+<p><strong>TWF Version</strong></p>
+
+<p>The <code>VERSION</code> construct identifies the version of the TWF specification to which the file conforms.</p>
+<h4 id="TWFFile-Syntax"><em> Syntax</em></h4>
+<pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>version
+</em></span>::= ( <strong>VERSION</strong><span id="TWF File-marker_1028619"></span> QSTRING )</code></pre><h4 id="TWFFile-Example"><em> Example</em></h4>
+<pre><code>
+(VERSION &quot;0.1&quot;)</code></pre>
+<p><strong>Design Name</strong></p>
+
+<p>The <code>DESIGN</code> construct specifies the name of the design to which the TWF file applies.</p>
+<h4 id="TWFFile-Syntax.1"><em> Syntax</em></h4>
+<pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>design_name
+</em></span>::= (<strong> DESIGN </strong><span id="TWF File-marker_1028626"></span>QSTRING )</code></pre><h4 id="TWFFile-Example.1"><em> Example</em></h4>
+<pre><code>
+(DESIGN &quot;D97000000&quot;)</code></pre>
+<p><strong>Date</strong></p>
+
+<p>The <code>DATE</code> construct indicates the date and time when the data was generated.</p>
+<h4 id="TWFFile-Syntax.2"><em> Syntax</em></h4>
+<pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>date</em></span> 
+::= ( <strong>DATE</strong><span id="TWF File-marker_1028633"></span> QSTRING )</code></pre><h4 id="TWFFile-Example.2"><em> Example</em></h4>
+<pre><code>
+(DATE &quot;Tue Jan 22 18:02:05 2002&quot;)</code></pre>
+<p><strong>Program</strong></p>
+
+<p>The <code>PROGRAM</code> construct indicates the name of the program that created or last modified the TWF file, the version number of that program, and the company that produced the program.</p>
+<h4 id="TWFFile-Syntax.3"><em> Syntax</em></h4>
+<pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>program
+</em></span>::= ( <strong>PROGRAM</strong><span id="TWF File-marker_1028640"></span> <span class="webflare-courier-new" style="white-space: pre;"><em>program_name program_version program_company</em></span> )</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>program_name
+</em></span>::= QSTRING</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>program_version
+</em></span>::= QSTRING</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>program_company
+</em></span>::= QSTRING</code></pre><h4 id="TWFFile-Example.3"><em> Example</em></h4>
+<pre><code>
+(PROGRAM &quot;Pearl&quot; &quot;5.1-b047&quot; &quot;Cadence&quot;)</code></pre>
+<p><strong>Delimiters</strong></p>
+
+<p>The <code>DELIMITERS</code> construct specifies the characters that are used as delimiters in design names for hierarchy delimiter character, left index character and right index character.</p>
+<h4 id="TWFFile-Syntax.4"><em> Syntax</em></h4>
+<pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>delimiters
+</em></span>::= ( <strong>DELIMITERS</strong><span id="TWF File-marker_1028650"></span> QSTRING )</code></pre><h4 id="TWFFile-Example.4"><em> Example</em></h4>
+<pre><code>
+(DELIMITERS &quot;/[]&quot;)</code></pre>
+<p><strong>Scaling Factors</strong><span class="confluence-anchor-link" id="TWFFile-80507"></span></p>
+
+<p>Scaling factor constructs specify the multiplier to use to scale the values for the specified physical property.</p>
+<h4 id="TWFFile-Syntax.5"><em> Syntax</em></h4>
+<pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>time_scale
+</em></span>::= ( <strong>TIME_SCALE</strong><span id="TWF File-marker_1028658"></span> <span class="webflare-courier-new" style="white-space: pre;"><em>multiplier </em></span>)</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>cap_scale
+</em></span>::= ( <strong>CAP_SCALE</strong><span id="TWF File-marker_1028660"></span> <span class="webflare-courier-new" style="white-space: pre;"><em>multiplier </em></span>)</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>res_scale
+</em></span>::= ( <strong>RESISTANCE_SCALE</strong><span id="TWF File-marker_1028662"></span> <span class="webflare-courier-new" style="white-space: pre;"><em>multiplier </em></span>)</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>voltage_scale
+</em></span>::= ( <strong>VOLTAGE_SCALE</strong><span id="TWF File-marker_1028664"></span> <span class="webflare-courier-new" style="white-space: pre;"><em>multiplier </em></span>)</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>multiplier
+</em></span>::= NUMBER</code></pre>
+<p>The default time scale is 1 second. If <code>TIME_SCALE</code> is specified, all delay numbers in the TWF are multiplied by the specified value. For example, <code>1.0E-12</code> corresponds to delay values in picoseconds.</p>
+
+<p>The default capacitance scale is 1 Farad. If <code>CAP_SCALE</code> is specified, all capacitance numbers in the TWF are multiplied by the specified value. For example, <code>1.0E-12</code> corresponds to capacitance values in picofarads.</p>
+
+<p>The default resistance scale is 1 ohm. If <code>RES_SCALE</code> is specified, all resistance numbers in the TWF are multiplied by the specified value. For example, <code>1.0E-3</code> corresponds to resistance values in milli-ohms.</p>
+
+<p>The default voltage scale is 1 volt. If <code>VOLTAGE_SCALE</code> is specified, all voltage numbers in the TWF are multiplied by the specified value. For example, <code>1.0E-3</code> corresponds to voltage values in millivolts.</p>
+
+<p><strong>Voltage Threshold</strong></p>
+
+<p>The <code>VOLTAGE_THRESHOLD</code> construct specifies the two measurement points on a waveform that were used in calculating the slews in the TWF file. These measurement points are defined as a percentage of the change in voltage from the start of the transition to the end of the transition.</p>
+<h4 id="TWFFile-Syntax.6"><em> Syntax</em></h4>
+<pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>voltage_threshold</em></span> 
+::= ( <strong>VOLTAGE_THRESHOLD</strong><span id="TWF File-marker_1028674"></span> <span class="webflare-courier-new" style="white-space: pre;"><em>min_thres max_thres </em></span>)</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>min_thres</em></span> 
+::= NUMBER</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>max_thres</em></span> 
+::= NUMBER</code></pre><h4 id="TWFFile-Example.5"><em> Example</em></h4>
+<pre><code>
+(VOLTAGE_THRESHOLD 20 80)</code></pre>
+<p><strong>Lifetime</strong></p>
+
+<p>The <code>LIFETIME</code> construct specifies the required operating lifetime for the design in years. This value is not scaled by the <code>TIME_SCALE</code> statement.</p>
+<h4 id="TWFFile-Syntax.7"><em> Syntax</em></h4>
+<pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>lifetime</em></span> 
+::= ( <strong>LIFETIME</strong><span id="TWF File-marker_1028683"></span> NUMBER )</code></pre><h4 id="TWFFile-Example.6"><em> Example</em></h4>
+<pre><code>
+(LIFETIME 3)</code></pre>
+<p><strong>Operating Conditions</strong></p>
+
+<p>The operating conditions constructs specify environment corners and related process, voltage, and temperature derating points.</p>
+<h4 id="TWFFile-Syntax.8"><em> Syntax</em></h4>
+<pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>operating_conditions</em></span> 
+::= ( <strong>OPERATING_CONDITIONS</strong> <span class="webflare-courier-new" style="white-space: pre;"><em>single_or_triple_a_string </em></span>)</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>process</em></span> 
+::= ( <strong>PROCESS</strong><span id="TWF File-marker_1028691"></span> <span class="webflare-courier-new" style="white-space: pre;"><em>single_or_triple_number </em></span>)</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>voltage</em></span> 
+::= ( <strong>VOLTAGE</strong> <span class="webflare-courier-new" style="white-space: pre;"><em>single_or_triple_number </em></span>)</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>temperature</em></span> 
+::= ( <strong>TEMPERATURE</strong> <span class="webflare-courier-new" style="white-space: pre;"><em>single_or_triple_number </em></span>)</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>single_or_triple_a_string</em></span> 
+::= <span class="webflare-courier-new" style="white-space: pre;"><em>typ_a_string
+</em></span>||= <span class="webflare-courier-new" style="white-space: pre;"><em>min_a_string typ_a_string max_a_string</em></span></code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>min_a_string</em></span> 
+::= <span class="webflare-courier-new" style="white-space: pre;"><em>a_string</em></span></code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>typ_a_string</em></span> 
+::= <span class="webflare-courier-new" style="white-space: pre;"><em>a_string</em></span></code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>max_a_string</em></span> 
+::= <span class="webflare-courier-new" style="white-space: pre;"><em>a_string</em></span></code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>single_or_triple_number</em></span> 
+::= NUMBER
+||= <span class="webflare-courier-new" style="white-space: pre;"><em>min typ max</em></span></code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>min</em></span> 
+::= NUMBER</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>typ</em></span> 
+::= NUMBER</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>max</em></span> 
+::= NUMBER</code></pre>
+<p>One string (representing typical) or three strings (representing minimum, typical, and maximum) or asterisks (representing placeholders) can be specified for <code>OPERATING</code> <code>CONDITIONS</code> <span class="webflare-courier-new" style="white-space: pre;"><em>a_string</em></span> values .</p>
+
+<p>One or three values can be specified for the <span class="webflare-courier-new" style="white-space: pre;"><em>single_or_triple_number</em></span> parameters.</p>
+<ul><li>When one value is specified, it applies to the typical value.</li><li>When three values are specified, the first represents the minimum value, the second represents the typical value, and the third represents the maximum value.</li></ul><h4 id="TWFFile-Example.7"><em> Example</em></h4>
+<pre><code>
+(OPERATING_CONDITIONS MIN_COND TYP_COND MAX_COND)<br />(PROCESS 1 1 1)<br />(VOLTAGE 3.3 3.3 3.3)<br />(TEMPERATURE 25 25 25)</code></pre>
+<p><strong>Default Input Slew</strong></p>
+
+<p>The <code>DEFAULT_INPUT_SLEW</code> construct specifies the default minimum rise, minimum fall, maximum rise, and maximum fall times for input slews for all primary input and bidirectional pins of the design.</p>
+<h4 id="TWFFile-Syntax.9"><em> Syntax</em></h4>
+<pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>default_input_slew</em></span> 
+::= ( <strong>DEFAULT_INPUT_SLEW</strong> <span class="webflare-courier-new" style="white-space: pre;"><em>a_min_rise a_min_fall a_max_rise a_max_fall </em></span>)</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>a_min_rise</em></span> 
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>a_number</em></span> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>a_min_fall</em></span> 
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>a_number</em></span> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>a_max_rise</em></span> 
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>a_number</em></span> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>a_max_fall</em></span> 
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>a_number</em></span> </code></pre>
+<p>The slews are time values in the units defined by the <code>TIME_SCALE</code>. Each slew value may be specified as a numeric value or an asterisk, which serves as a placeholder.</p>
+<h4 id="TWFFile-56453BodySectionofTWFfile"><em> <span class="confluence-anchor-link" id="TWFFile-56453"></span>Body Section of TWF file</em></h4>
+
+<p>Statements in the body section specify timing data and constraints for the design.</p>
+<h4 id="TWFFile-Syntax.10"><em> Syntax</em></h4>
+<pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>body_statement</em></span> 
+::= <span class="webflare-courier-new" style="white-space: pre;"><em>ext_ctlf_files
+</em></span>||= <span class="webflare-courier-new" style="white-space: pre;"><em>waveform_entry</em></span>+
+||= <span class="webflare-courier-new" style="white-space: pre;"><em>clock_entry</em></span>+
+||= <span class="webflare-courier-new" style="white-space: pre;"><em>clock_group_entry</em></span>+
+||= <span class="webflare-courier-new" style="white-space: pre;"><em>driver_cell_entry</em></span>+
+||= <span class="webflare-courier-new" style="white-space: pre;"><em>driver_strength_entry</em></span>+
+||= <span class="webflare-courier-new" style="white-space: pre;"><em>external_load_entry</em></span>+
+||= <span class="webflare-courier-new" style="white-space: pre;"><em>constant_entry</em></span>+
+||= <span class="webflare-courier-new" style="white-space: pre;"><em>input_slew_entry</em></span>+
+||= <span class="webflare-courier-new" style="white-space: pre;"><em>caused_by_net</em></span>+
+||= <span class="webflare-courier-new" style="white-space: pre;"><em>caused_by_null</em></span>+</code></pre>
+<p><strong>CTLF Files</strong></p>
+
+<p>The locations of the Timing Library Format (TLF) or compiled TLF (CTLF) files for the design are specified in an <span class="webflare-courier-new" style="white-space: pre;"><em>ext_ctlf_files</em></span> statement.</p>
+<h4 id="TWFFile-Syntax.11"><em> Syntax</em></h4>
+<pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>ext_ctlf_files</em></span>      
+::=  ( <strong>EXTENSION</strong> &quot;<strong>CTLF_FILES</strong>&quot; ( <span class="webflare-courier-new" style="white-space: pre;"><em>file_name</em></span>+  ) )</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>file_name</em></span>         
+::=  STRING </code></pre><h4 id="TWFFile-Example.8"><em> Example</em></h4>
+<pre><code>
+(EXTENSION &quot;CTLF_FILES&quot;<br />    (<br />     /data/tlf/pad/timing.tlf<br />     /data/tlf/MAX/timing.tlf<br />     )<br />)</code></pre>
+<p><span class="confluence-anchor-link" id="TWFFile-32052"></span><strong>Waveform</strong></p>
+
+<p>The <code>WAVEFORM</code> construct defines an abstract periodic waveform.</p>
+<h4 id="TWFFile-Syntax.12"><em> Syntax</em></h4>
+<pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>waveform_entry</em></span> 
+::= ( <strong>WAVEFORM</strong> &quot;<span class="webflare-courier-new" style="white-space: pre;"><em>waveform_name</em></span>&quot; <span class="webflare-courier-new" style="white-space: pre;"><em>period
+</em></span>      ( <strong>POSEDGE <span class="webflare-courier-new" style="white-space: pre;"><em>edge_position </em></span></strong>) ( <strong>NEGEDGE <span class="webflare-courier-new" style="white-space: pre;"><em>edge_position</em></span></strong> ) )</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>waveform_name</em></span>         
+::=  STRING </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>period</em></span> 
+::= NUMBER </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>edge_position</em></span> 
+::= NUMBER</code></pre>
+<p>The name of the waveform must be unique. The <span class="webflare-courier-new" style="white-space: pre;"><em>period</em></span> describes the interval at which the waveform repeats. The <span class="webflare-courier-new" style="white-space: pre;"><em>edge_position</em></span> gives the time at which the transition takes place relative to the start of each period. <span class="webflare-courier-new" style="white-space: pre;"><em>edge_position</em></span> and <span class="webflare-courier-new" style="white-space: pre;"><em>period</em></span> are represented in units defined by <code>TIME_SCALE</code> in the header section.</p>
+<h4 id="TWFFile-Example.9"><em> Example</em></h4>
+<pre><code>
+(WAVEFORM &quot;100MHz&quot; 2.8e-08 (POSEDGE 0) (NEGEDGE 1.4e-08))</code></pre>
+<p><strong>Clock</strong><span class="confluence-anchor-link" id="TWFFile-80565"></span></p>
+
+<p>Each clock is described by relating a previously defined waveform to a <span class="webflare-courier-new" style="white-space: pre;"><em>port</em></span> (the source of that waveform). These ports are usually the roots of a clock network.</p>
+<h4 id="TWFFile-Syntax.13"><em> Syntax</em></h4>
+<pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>clock_entry</em></span> 
+::=  ( <strong>CLOCK</strong> &quot;<span class="webflare-courier-new" style="white-space: pre;"><em>waveform_name</em></span>&quot; <span class="webflare-courier-new" style="white-space: pre;"><em>port</em></span> )</code></pre><h4 id="TWFFile-Example.10"><em> Example</em></h4>
+<pre><code>
+(CLOCK &quot;100Mhz&quot; clk_buff/N01)</code></pre>
+<p><strong>Clock Groups</strong><span class="confluence-anchor-link" id="TWFFile-41244"></span></p>
+
+<p>Clocks within a group are identified by their waveform names. The definitions of the waveforms must precede the clock group specification.</p>
+<h4 id="TWFFile-Syntax.14"><em> Syntax</em></h4>
+<pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>clock_group_entry</em></span>   
+::=  ( <strong>CLOCK_GROUP</strong> &quot;<span class="webflare-courier-new" style="white-space: pre;"><em>group_name</em></span>&quot; &quot;<span class="webflare-courier-new" style="white-space: pre;"><em>waveform_name</em></span>&quot;+ ) </code></pre><h4 id="TWFFile-Example.11"><em> Example</em></h4>
+<pre><code>
+(CLOCK &quot;IDL_CLK&quot; IDL_CLK)<br />(CLOCK &quot;clk_derived&quot; clk)<br />(CLOCK_GROUP &quot;GROUP1&quot;<br />    &quot;clk_derived&quot;<br />    &quot;IDL_CLK&quot;<br />)</code></pre>
+<p><strong>Driver Cell Section</strong><span class="confluence-anchor-link" id="TWFFile-14451"></span></p>
+
+<p>The <code>DRIVER_CELL</code> section contains information about the cells driving the input ports of the design, specifying the cell type and the slews at the driver output pins.</p>
+<h4 id="TWFFile-Syntax.15"><em> Syntax</em></h4>
+<pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>driver_cell_entry</em></span>  
+::=  ( <strong>DRIVER_CELL</strong> 
+( ( <strong>CELL_TYPE</strong> &quot;<span class="webflare-courier-new" style="white-space: pre;"><em>cell_name</em></span>&quot; <span class="webflare-courier-new" style="white-space: pre;"><em>library</em></span> ) 
+( <span class="webflare-courier-new" style="white-space: pre;"><em>pos_neg_edge</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>src_pin</em></span> ) <span class="webflare-courier-new" style="white-space: pre;"><em>sink_pin</em></span>  ) 
+( <span class="webflare-courier-new" style="white-space: pre;"><em>su_hd?</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>pos_neg_edge?</em></span> ( <strong>INPUT_SLEW</strong> <span class="webflare-courier-new" style="white-space: pre;"><em>number</em></span> ) )
+<span class="webflare-courier-new" style="white-space: pre;"><em>port</em></span>  ) </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>pos_neg_edge</em></span>       
+::=  <strong>POSEDGE</strong> 
+||=  <strong>NEGEDGE</strong> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>su_hd</em></span>          
+::=  <strong>SETUP</strong> 
+||=  <strong>HOLD</strong> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>cell_name</em></span>         
+::=  STRING </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>library</em></span>           
+::=  STRING </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>src_pin</em></span>           
+::=  STRING </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>sink_pin</em></span>          
+::=  STRING </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>port</em></span>              
+::=  STRING </code></pre>
+<p>The <span class="webflare-courier-new" style="white-space: pre;"><em>library</em></span> name indicates the library that contains the driver cell. The <span class="webflare-courier-new" style="white-space: pre;"><em>pos_neg_edge</em></span> item indicates whether the sink pin transitions on the rising (<code>POSEDGE</code>) or falling (<code>NEGEDGE</code>) of the source pin.</p>
+
+<p>The input slew must be specified in the units defined by the <code>TIME_SCALE</code>.</p>
+
+<p><br /></p>
+<div class="table-wrap"><table class="webflareTable wrapped confluenceTable"><tbody><tr><th class="webflareTh confluenceTh" colspan="1" rowspan="1">
+<p>If</p>
+</th><th class="webflareTh confluenceTh" colspan="1" rowspan="1">
+<p>Input slew applies to:</p>
+</th></tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>HOLD</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>min_rise</em></span> and <span class="webflare-courier-new" style="white-space: pre;"><em>min_fall</em></span></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>HOLD NEGEDGE</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>min_fall</em></span></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>HOLD POSEDGE</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>min_rise</em></span></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>NEGEDGE</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>min_fall</em></span> and <span class="webflare-courier-new" style="white-space: pre;"><em>max_fall</em></span></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>POSEDGE</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>min_rise</em></span> and <span class="webflare-courier-new" style="white-space: pre;"><em>max_rise</em></span></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>SETUP</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>max_rise</em></span> and <span class="webflare-courier-new" style="white-space: pre;"><em>max_fall</em></span></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>SETUP NEGEDGE</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>max_fall</em></span></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>SETUP POSEDGE</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>max_rise</em></span></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>none</p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>min_rise</em></span>, <span class="webflare-courier-new" style="white-space: pre;"><em>min_fall</em></span>, <span class="webflare-courier-new" style="white-space: pre;"><em>max_rise</em></span>, and <span class="webflare-courier-new" style="white-space: pre;"><em>max_fall</em></span></p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>port</em></span> specifies the input or bidirectional port being driven.</p>
+<h4 id="TWFFile-Example.12"><em> Example</em></h4>
+<pre><code>
+(DRIVER_CELL ((CELL_TYPE &quot;INBUF&quot; vixen)<br />              (NEGEDGE BONDING) COREPIN)<br />              (NEGEDGE (INPUT_SLEW 0))<br />              cpurdwr)</code></pre>
+<p>This example specifies the <code>INBUF</code> cell from the <code>vixen</code> library. Sink pin <code>COREPIN</code> transitions on the falling edge of source pin <code>BONDING</code>. An input slew of 0 applies to the falling edge of the driver output.</p>
+
+<p><strong>Driver Strength Section</strong></p>
+
+<p>The <code>DRIVER_STRENGTH</code> section specifies the holding resistance of the cells driving the input ports.</p>
+<h4 id="TWFFile-Syntax.16"><em> Syntax</em></h4>
+<pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>driver_strength_entry
+</em></span>::= ( <strong>DRIVER_STRENGTH</strong> <span class="webflare-courier-new" style="white-space: pre;"><em>driver_strength_val</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>port</em></span> ) </code></pre><pre><code>
+driver_strength_val 
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>opt_qualifier?</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>resistance
+</em></span>||=  <span class="webflare-courier-new" style="white-space: pre;"><em>min_rise</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>min_fall</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>max_rise</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>max_fall</em></span> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>opt_qualifier</em></span>      
+::= ( <span class="webflare-courier-new" style="white-space: pre;"><em>su_hd?</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>pos_neg_edge?</em></span> ) </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>su_hd</em></span>          
+::=  <strong>SETUP</strong> 
+||=  <strong>HOLD</strong> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>pos_neg_edge</em></span>    
+::=  <strong>POSEDGE</strong> 
+||=  <strong>NEGEDGE</strong> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>min_rise</em></span>          
+::=  NUMBER</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>min_fall</em></span>           
+::=  NUMBER</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>max_rise</em></span>           
+::=  NUMBER</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>max_fall</em></span>          
+::=  NUMBER</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>port</em></span>              
+::=  STRING </code></pre>
+<p>The driver strength is a resistance value and must be specified in the units defined by the <code>RES_SCALE</code>.</p>
+
+<p><br /></p>
+<div class="table-wrap"><table class="webflareTable wrapped confluenceTable"><tbody><tr><th class="webflareTh confluenceTh" colspan="1" rowspan="1">
+<p>If</p>
+</th><th class="webflareTh confluenceTh" colspan="1" rowspan="1">
+<p>Resistance applies to:</p>
+</th></tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>HOLD</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>min_rise</em></span> and <span class="webflare-courier-new" style="white-space: pre;"><em>min_fall</em></span></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>HOLD NEGEDGE</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>min_fall</em></span></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>HOLD POSEDGE</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>min_rise</em></span></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>NEGEDGE</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>min_fall</em></span> and <span class="webflare-courier-new" style="white-space: pre;"><em>max_fall</em></span></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>POSEDGE</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>min_rise</em></span> and <span class="webflare-courier-new" style="white-space: pre;"><em>max_rise</em></span></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>SETUP</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>max_rise</em></span> and <span class="webflare-courier-new" style="white-space: pre;"><em>max_fall</em></span></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>SETUP NEGEDGE</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>max_fall</em></span></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>SETUP POSEDGE</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>max_rise</em></span></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>none</p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>min_rise</em></span>, <span class="webflare-courier-new" style="white-space: pre;"><em>min_fall</em></span>, <span class="webflare-courier-new" style="white-space: pre;"><em>max_rise</em></span>, and <span class="webflare-courier-new" style="white-space: pre;"><em>max_fall</em></span></p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><strong>External Load Construct</strong><span class="confluence-anchor-link" id="TWFFile-80414"></span></p>
+
+<p>The <code>EXTERNAL_LOAD</code> construct specifies the external capacitance, or load, at the specified <em>port</em> (pin).</p>
+<h4 id="TWFFile-Syntax.17"><em> Syntax</em></h4>
+<pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>external_load_entry</em></span> 
+::=  ( <strong>EXTERNAL_LOAD</strong> <span class="webflare-courier-new" style="white-space: pre;"><em>single_or_triple_a_number</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>port</em></span> ) </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>single_or_triple_a_number</em></span> 
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>a_number
+</em></span>||=  <span class="webflare-courier-new" style="white-space: pre;"><em>a_min a_typ a_max</em></span></code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>a_min</em></span> 
+::= <span class="webflare-courier-new" style="white-space: pre;"><em>a_number</em></span></code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>a_typ</em></span> 
+::= <span class="webflare-courier-new" style="white-space: pre;"><em>a_number</em></span></code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>a_max</em></span> 
+::= <span class="webflare-courier-new" style="white-space: pre;"><em>a_number</em></span></code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>port</em></span>              
+::=  STRING </code></pre>
+<p>The external load is a capacitance value in the units defined by the <code>RESISTANCE_SCALE</code> construct. Each <span class="webflare-courier-new" style="white-space: pre;"><em>a_number</em></span> value may be specified as a number or an asterisk placeholder.</p>
+<h4 id="TWFFile-Example.13"><em> Example</em></h4>
+<pre><code>
+(EXTERNAL_LOAD 8.4e-13 usb_bus_out[0])</code></pre>
+<p><strong>Constant Section</strong><span class="confluence-anchor-link" id="TWFFile-68351"></span></p>
+
+<p>The <code>Constant</code> section specifies all non-switching nets and their values.</p>
+<h4 id="TWFFile-Syntax.18"><em> Syntax</em></h4>
+<pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>constant_entry</em></span>     
+::=  ( <span class="webflare-courier-new" style="white-space: pre;"><em>constant_kw</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>net_pin</em></span> &quot;<span class="webflare-courier-new" style="white-space: pre;"><em>port</em></span>&quot; <span class="webflare-courier-new" style="white-space: pre;"><em>const_val</em></span> ) 
+||=  ( <span class="webflare-courier-new" style="white-space: pre;"><em>constant_kw</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>net_pin</em></span> &quot;<span class="webflare-courier-new" style="white-space: pre;"><em>port</em></span>&quot; <span class="webflare-courier-new" style="white-space: pre;"><em>const_val</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>rise_k fall_k</em></span>) </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>constant_kw</em></span>        
+::=  <strong>CONSTANT</strong> 
+||=  <strong>USER_CONSTANT</strong> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>net_pin</em></span>            
+::=  <strong>NET</strong> 
+||=  <strong>PIN</strong> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>port</em></span>              
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>string</em></span> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>const_val</em></span>           
+::=  <strong>1</strong> 
+||=  <strong>0</strong> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>rise_k</em></span>            
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>triplet</em></span> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>fall_k</em></span>            
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>triplet</em></span> </code></pre>
+<p>Assigns a logical constraint (0 or 1) to the net(s) or pin(s) connected to <span class="webflare-courier-new" style="white-space: pre;"><em>port</em></span>. The <span class="webflare-courier-new" style="white-space: pre;"><em>rise_k</em></span> value represents the rising signal source resistance and the <span class="webflare-courier-new" style="white-space: pre;"><em>fall_k</em></span> represents the falling signal source resistance.</p>
+<h4 id="TWFFile-Example.14"><em> Example</em></h4>
+<pre><code>
+(CONSTANT NET &quot;usb_bus_out[21]&quot; 1)</code></pre>
+<p>This example sets all nets connected to <code>usb_bus_out[21]</code> to a logical value of <code>1</code>.</p>
+
+<p><strong>Input Slew Section</strong><span class="confluence-anchor-link" id="TWFFile-35292"></span></p>
+
+<p>The <code>INPUT_SLEW</code> section specifies slews at the input ports of the design.</p>
+<h4 id="TWFFile-Syntax.19"><em> Syntax</em></h4>
+<pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>input_slew_entry</em></span> 
+::= ( <strong>INPUT_SLEW</strong> <span class="webflare-courier-new" style="white-space: pre;"><em>a_min_rise a_min_fall a_max_rise a_max_fall port</em></span>)</code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>a_min_rise</em></span>          
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>a_number</em></span> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>a_min_fall</em></span>           
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>a_number</em></span> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>a_max_rise</em></span>           
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>a_number</em></span> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>a_max_fall</em></span>          
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>a_number</em></span> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>port</em></span>              
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>string</em></span> </code></pre>
+<p><strong>Caused By Section</strong><span class="confluence-anchor-link" id="TWFFile-23974"></span></p>
+
+<p>Nets and pins that are timing constrained have arrival times (timing windows) caused by clock pins.</p>
+<ul><li>All nets/pins constrained by the same clock pin are grouped under a <code>CAUSED_BY</code> section for that <em>port</em>.</li><li>A time-constrained net/pin can be contained under multiple <code>CAUSED_BY</code> sections.</li></ul>
+<p>Nets and pins that are not timing constrained are grouped under the <code>CAUSED_BY</code> <code>NULL</code> section.</p>
+<h4 id="TWFFile-Syntax.20"><em> Syntax</em></h4>
+<pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>caused_by_net</em></span>       
+::=  ( <strong>CAUSED_BY</strong> &quot;<span class="webflare-courier-new" style="white-space: pre;"><em>port</em></span>&quot; <span class="webflare-courier-new" style="white-space: pre;"><em>rise_fall</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>window_statement</em></span>+ ) </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>caused_by_null</em></span>      
+::=  ( <strong>CAUSED_BY</strong> <strong>NULL</strong> <span class="webflare-courier-new" style="white-space: pre;"><em>window_statement</em></span>+ ) </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>window_statement
+</em></span>::= ( <span class="webflare-courier-new" style="white-space: pre;"><em>net_pin &quot;port&quot; rise_at rise_time rise_k fall_at fall_time fall_k )
+</em></span>||=
+( <span class="webflare-courier-new" style="white-space: pre;"><em>net_pin &quot;port&quot; rise_at rise_time rise_k fall_at fall_time fall_k clock_or_data)
+</em></span>||=
+( <span class="webflare-courier-new" style="white-space: pre;"><em>net_pin &quot;port&quot; rise_at rise_time rise_k rise_slack fall_at fall_time fall_k fall_slack)
+</em></span><code>||=
+</code>( <span class="webflare-courier-new" style="white-space: pre;"><em>net_pin &quot;port&quot; rise_at rise_time rise_k rise_slack fall_at fall_time fall_k fall_slack clock_or_data)</em></span></code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>net_pin</em></span>            
+::=  <strong>NET</strong> 
+||=  <strong>PIN</strong> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>rise_fall</em></span>         
+::=  <strong>RISE</strong> 
+||=  <strong>FALL</strong> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>rise_at</em></span>           
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>triplet</em></span> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>rise_time</em></span>          
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>triplet</em></span> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>rise_k</em></span>            
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>triplet</em></span> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>rise_slack</em></span>            
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>triplet</em></span> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>fall_at</em></span>          
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>triplet</em></span> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>fall_time</em></span>         
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>triplet</em></span> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>fall_k</em></span>            
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>triplet</em></span> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>fall_slack</em></span>            
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>triplet</em></span> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>port</em></span>              
+::=  <span class="webflare-courier-new" style="white-space: pre;"><em>string</em></span> </code></pre><pre><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>clock_or_data</em></span> 
+::= <code>C
+</code>||= D ||= U ||= Z</code></pre>
+<p>The following definitions apply to the <code>CAUSED_BY</code> parameters:</p>
+
+<p><br /></p>
+<div class="table-wrap"><table class="webflareTable wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>rise_at</em></span></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Rising signal arrival time. <br />For <code>CAUSED_BY</code> <code>NULL</code> statements, this value defaults to *.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>rise_time</em></span></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Rising signal transition time.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>rise_k</em></span></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Rising signal source resistance.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>rise_slack</em></span></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Rising slack value.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>fall_at</em></span></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Falling signal arrival time. <br />For <code>CAUSED_BY</code> <code>NULL</code> statements, this value defaults to *.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>fall_time</em></span></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Falling signal transition time.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>fall_k</em></span></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Falling signal source resistance.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>fall_slack</em></span></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Falling slack value.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><span class="webflare-courier-new" style="white-space: pre;"><em>clock_or_data</em></span></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Value that signifies whether the net or pin is part of the clock network.</p>
+
+<p>(<code>C</code> = Clock; <code>D</code> = Data; <code>U</code> = Undefined; <code>Z</code> = Tristate)</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><strong>Example</strong></p>
+<pre><code>
+( CAUSED_BY &quot;ClkA&quot; RISE<br />    (NET &quot;NetA&quot; 2.8 0.05 * 1.4 3.0 0.03 * 1.5)<br />    (NET &quot;NetB&quot; 2.9 0.05 * 1.5 3.0 0.03 * 1.6)<br />)</code></pre><pre><code>
+( CAUSED_BY &quot;ClkB&quot; RISE<br />    (NET &quot;NetB&quot; 2.9 0.05 * 1.5 3.0 0.03 * 1.6)<br />    (NET &quot;NetC&quot; 2.8 0.05 * 1.4 3.0 0.03 * 1.5)<br />)</code></pre>
+<p>In this example, <code>NetA</code> and <code>NetB</code> have their arrival times (timing windows) caused by <code>ClkA</code>, and <code>NetB</code> and <code>NetC</code> are caused by <code>ClkB</code>. <code>NetB</code> is constrained by multiple clocks and occurs in both <code>CAUSED_BY</code> sections.</p>
+
+<p><strong>Example</strong></p>
+<pre><code>
+<span class="confluence-anchor-link" id="TWFFile-24893"></span>(CAUSED_BY NULL (NET &quot;NetD&quot; * 100 100 * 100 200))</code></pre>
+<p>In this example, net <code>NETD</code> is not time constrained.</p>
+
+<p>Example:</p>
+<pre style="margin-left: 30.0px;"><code>
+(TIMING_WINDOWS</code></pre><pre style="margin-left: 30.0px;"><code>
+ (HEADER</code></pre><pre style="margin-left: 30.0px;"><code>
+  (VERSION &quot;0.1&quot;)</code></pre><pre style="margin-left: 30.0px;"><code>
+  (DATE &quot;Mon Nov 17 17:13:22 2003&quot;)</code></pre><pre style="margin-left: 30.0px;"><code>
+  (DESIGN &quot;AIO&quot;)</code></pre><pre style="margin-left: 30.0px;"><code>
+  (DELIMITERS &quot;/[]&quot;)</code></pre><pre style="margin-left: 30.0px;"><code>
+  (VOLTAGE_THRESHOLD 30 70)</code></pre><pre style="margin-left: 30.0px;"><code>
+  (TIME_SCALE 1e-9)</code></pre><pre style="margin-left: 30.0px;"><code>
+  (PROGRAM &quot;pt_to_celtic.tcl&quot; &quot;v3.3 (Aug 14 2003 18:11:07)&quot; &quot;Cadence&quot;)</code></pre><pre style="margin-left: 30.0px;"><code>
+ )</code></pre><pre style="margin-left: 30.0px;"><code>
+ (WAVEFORM &quot;clocki&quot;&#xa0;&#xa0; 11.250 (POSEDGE&#xa0;&#xa0;  0.000) (NEGEDGE    5.625))</code></pre><pre style="margin-left: 30.0px;"><code>
+ (WAVEFORM &quot;clocko&quot;&#xa0;&#xa0; 11.250 (POSEDGE&#xa0;&#xa0;  0.000) (NEGEDGE    5.625))</code></pre><pre style="margin-left: 30.0px;"><code>
+ (WAVEFORM &quot;clocks2&quot;&#xa0;&#xa0; 13.500 (POSEDGE&#xa0;&#xa0;  0.000) (NEGEDGE    6.750))</code></pre><pre style="margin-left: 30.0px;"><code>
+ (WAVEFORM &quot;clocksi&quot;&#xa0;&#xa0; 13.500 (POSEDGE&#xa0;&#xa0;  0.000) (NEGEDGE    6.750))</code></pre><pre style="margin-left: 30.0px;"><code>
+ (WAVEFORM &quot;clockso&quot;&#xa0;&#xa0; 13.500 (POSEDGE&#xa0;&#xa0;  0.000) (NEGEDGE    6.750))</code></pre><pre style="margin-left: 30.0px;"><code>
+ (WAVEFORM &quot;clock&quot;&#xa0;&#xa0;  4.500 (POSEDGE    0.000) (NEGEDGE    2.250))</code></pre><pre style="margin-left: 30.0px;"><code>
+ (CONSTANT NET &quot;Logic0/output&quot; 0)</code></pre><pre style="margin-left: 30.0px;"><code>
+ (CONSTANT NET &quot;Logic1/output&quot; 1)</code></pre><pre style="margin-left: 30.0px;"><code>
+ (CAUSED_BY NULL</code></pre><pre style="margin-left: 30.0px;"><code>
+  (NET &quot;U40/I&quot; * 1.084:1.084 * 0.242:6.029 * 1.078:1.078 * 0.216:6.101)</code></pre><pre style="margin-left: 30.0px;"><code>
+ )</code></pre><pre style="margin-left: 30.0px;"><code>
+. . .</code></pre><pre style="margin-left: 30.0px;"><code>
+(CAUSED_BY &quot;clocko&quot; FALL</code></pre><pre style="margin-left: 30.0px;"><code>
+  (NET &quot;U63/I&quot; 7.213:7.213 0.145:0.145 * * 7.244:7.244 0.126:0.126 * *)</code></pre><pre style="margin-left: 30.0px;"><code>
+ )</code></pre><pre style="margin-left: 30.0px;"><code>
+ (CONSTANT NET &quot;U74/ZN&quot; 0)</code></pre><pre style="margin-left: 30.0px;"><code>
+ (CONSTANT NET &quot;U59ASTttcInst689/Z&quot; 1)</code></pre><pre style="margin-left: 30.0px;"><code>
+ (CONSTANT NET &quot;U75/ZN&quot; 0)</code></pre><pre style="margin-left: 30.0px;"><code>
+ (CONSTANT NET &quot;U86/ZN&quot; 0)</code></pre><pre style="margin-left: 30.0px;"><code>
+ (CAUSED_BY &quot;clocki&quot; FALL</code></pre><pre style="margin-left: 30.0px;"><code>
+  (NET &quot;U61/ZN&quot; 7.226:7.226 0.146:0.146 * * 7.201:7.201 0.136:0.136 * *)</code></pre><pre style="margin-left: 30.0px;"><code>
+ )</code></pre><pre style="margin-left: 30.0px;"><code>
+. . .</code></pre><h4 id="TWFFile-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="TCF_File.html">TCF File</a></li><li><a href="Instance_ASCII_Power_File.html">Instance ASCII Power File</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="TCF_File.html" id="prev" title="TCF_File">TCF_File</a></em></b><b><em><a href="Dynamic_Trigger_File_During_Rail_Analysis.html" id="nex" title="Dynamic_Trigger_File_During_Rail_Analysis">Dynamic_Trigger_File_During_Ra ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

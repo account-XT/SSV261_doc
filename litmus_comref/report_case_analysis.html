@@ -1,0 +1,235 @@
+
+<html><head><title>report_case_analysis</title>
+<meta name="page_sequence" content="25033000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="apokhara" />
+<meta name="CreateDate" content="2026-04-12" />
+<meta name="CreateTime" content="1776062423" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="" />
+<meta name="DocTitle" content="Litmus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="report_case_analysis" />
+<meta name="Keywords" content="command,report,case,analysis,user,table,ports,pins" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="FLOW," />
+<meta name="prod_subfeature" content="GENERAL_PURPOSE," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="litmus_comref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-12" />
+<meta name="ModifiedTime" content="1776062423" />
+<meta name="NextFile" content="report_cell_instance_timing.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="report_annotated_delay.html" />
+<meta name="c_product" content="Litmus," />
+<meta name="Product" content="Litmus," />
+<meta name="ProductFamily" content="Litmus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Litmus Text Command Reference -- report_case_analysis" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="litmus26comref" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="litmus_comrefTOC.html">Contents</a></li><li><a class="prev" href="report_annotated_delay.html" title="report_annotated_delay">report_annotated_delay</a></li><li style="float: right;"><a class="viewPrint" href="litmus_comref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="report_cell_instance_timing.html" title="report_cell_instance_timing">report_cell_instance_timing</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Litmus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>report_case_analysis</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>report_case_analysis<span class="confluence-anchor-link" id="report_case_analysis-report_case_analysis"></span><span id="report_case_analysis-report_case_analysis"></span> <br /></code></code><code>[-help]</code><br /><code> [<em>pins_and_ports_list</em>]</code><br /><code> [-all]<br /> [-dir]</code><br /><code> [-include_ref_name]</code><br /><code> [-nosplit]</code><br /><code> [-tcl_list]</code><br /><code> [-verbose] </code><br /><code>[-view <em>view_name</em>]</code><br /><code>[&gt; &lt;filename[.gz]&gt;]<br /> [&gt;&gt; &lt;filename[.gz]&gt;] </code><br /><code>[-propagated [-include_function]]</code></p>
+
+<p>Generates a User Case Analysis table, which reports ports and pin that have a <code><a href="../tempusCUI/set_case_analysis.html#set_case_analysis-set_case_analysis">set_case_analysis</a></code> constraint. These ports and pins are constant only for timing analysis. You can optionally generate a Logic Constant Value table, which reports ports and pins whose constant status is part of the design. Information from this table includes ports or pins with <code>set_logic</code> constraints (<code>set_logic_zero</code> and <code>set_logic_one</code>), netlist explicit constants, and output pins with constant output functions.</p>
+<h4 id="report_case_analysis-Parameters">Parameters<br /><br /></h4>
+<div class="table-wrap"><table class="confluenceTable cadenceTable cadDefaultfont" id="cadDefaultfont" style="width: 720px;"><colgroup><col style="width: 300px;" /><col style="width: 340px;" /></colgroup><tbody><tr><td class="confluenceTd"><code>-help</code></td>
+<td class="confluenceTd">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>{&gt; | &gt;&gt;} </code><code><em>filename</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>When specified with <code>&gt;</code>, writes the report to the specified file name. If the file already exists, the software overwrites it.</p>
+
+<p>When specified with <code>&gt;&gt;</code>, writes the report to the specified file name. If the file already exists, the software concatenates the report to the end of the file.</p>
+
+<p>The <code><em>filename</em></code> parameter must be the last argument in the list. The <code><em>filename</em></code> and <code>-tcl_list</code> parameters are mutually exclusive; you cannot specify them together.</p>
+
+<p><strong>Note: </strong>To write a compressed report, add the <code>.gz</code> extension to the file name.</p>
+
+<p><em>Default:</em> Report is displayed on standard output without being saved.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-all</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies that the Logic Constant Value table report pins or ports with <code>set_logic</code> constants, constants in the netlist, and output pins with a constant function. These output pins are from library cells or netlist modules.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-include_function</code></p>
+</td>
+<td class="confluenceTd">
+<p>Displays the pin function of a pin.</p>
+
+<p>This must be specified with the <code>-propagated</code> parameter.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-include_ref_name</code></p>
+</td>
+<td class="confluenceTd">
+<p>Displays the reference name of an instance in the report.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-no_split</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies that reports with long names will not be split into multiple lines.</p>
+
+<p><strong>Note: </strong>The <code>-no_split</code> parameter works if <code>set_table_style </code><code>-no_frame_fix_width</code> command is specified.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-dir</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies that the report include the direction of the pin or port, which is reported as input, output, or inout (internal pins may not have constant constraints).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>pins_and_ports_list</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Generates a report only for the pins and ports in the specified list.</p>
+
+<p><em>Default:</em> Generates a report for all pins and ports in the design.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-propagated</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Generates a report that includes all the constant pins, including pins with propagated constants. When specified, the report column header shows the constant values - the column header for constant values is <code>User case analysis value</code>.</p>
+
+<p><em>Default:</em><span> R</span>eport shows pins specified with the<span>&#xa0;</span><code>set_case_analysis</code><span>&#xa0;</span>command.&#xa0;</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-tcl_list</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Produces the report in Tcl list format instead of a tabular format. This is useful for integrating timing with custom Tcl functions, and also for customizing report generation.</p>
+
+<p>The <code>-tcl_list</code> and <code><em>filename</em></code> parameters are mutually exclusive; you cannot specify them together.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-verbose</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Generates a report in which each pin is listed on a separate line with a cause. If the pin is a propagated constant, a table is included that reports a chain of constants from an original cause to the reported pin.</p>
+
+<p><em>Default:</em> All pins are reported in a table.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-view </code><code><em>view_name</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Generates a User Case Analysis table for the specified analysis view only. To specify this parameter, the software must be in multi-mode multi-corner (MMMC) analysis mode.</p>
+
+<p><em>Default:</em> When in MMMC analysis mode, generates a table for all active analysis views</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><span style="font-weight: 600;letter-spacing: -0.003em;">Examples</span></p>
+<ul><li>The following command reports user case analysis values for all the analysis views:<code><br /></code>
+<p><code><span class="fontdefaultcadence">litmus</span> &gt; report_case_analysis &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;&#xa0;</code><br /><code>Pin name&#xa0; &#xa0; &#xa0; User &#xa0; &#xa0; &#xa0; View Name &#xa0; &#xa0; &#xa0; &#xa0;&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; case &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; analysis &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;&#xa0;</code><br /><code>-----------------------------------------</code><br /><code>tst_mode&#xa0; &#xa0; &#xa0; 0 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;scan_fast_RCMIN</code><br /><code>tst_mode&#xa0; &#xa0; &#xa0; 0 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;scan_slow_RCMIN</code><br /><code>tst_mode&#xa0; &#xa0; &#xa0; 0 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;func_slow_RCMAX</code><br /><code>scan_en&#xa0; &#xa0; &#xa0; &#xa0;0 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;scan_fast_RCMIN</code><br /><code>scan_en&#xa0; &#xa0; &#xa0; &#xa0;0 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;scan_slow_RCMIN<br /><br /></code></p>
+</li><li>
+<p>The following command reports all the constant pins, including pins with propagated constants - and long names are not split into multiple lines:<br /><code><span class="fontdefaultcadence">litmus</span> &gt; report_case_analysis -propagated -no_split</code><br /><code>------------------------------------------------</code><br /><code>Pin name&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Constant&#xa0; &#xa0;View Name</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; value</code><br /><code>-----------------------------------------------</code><br /><code>AB_IS/se_0/D&#xa0; &#xa0; &#xa0; &#xa0;0&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;func_slow_RCMAX</code><br /><code>AB_IS/se_0/RN&#xa0; &#xa0; &#xa0; 1&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;func_slow_RCMAX</code><br /><code>AB_IS/se_0/SE&#xa0; &#xa0; &#xa0; 0&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;func_slow_RCMAX</code><br /><code>AB_IS/se_0/SI&#xa0; &#xa0; &#xa0; 0&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;func_slow_RCMAX</code><br /><code>AB_IS/se_0/SN&#xa0; &#xa0; &#xa0; 1&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;func_slow_RCMAX</code><br /><code>AB_IS/se_1/D&#xa0; &#xa0; &#xa0; &#xa0;0&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;func_slow_RCMAX</code><br /><code>AB_IS/se_1/RN&#xa0; &#xa0; &#xa0; 1&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;func_slow_RCMAX</code><br /><code>AB_IS/se_1/SE&#xa0; &#xa0; &#xa0; 0&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;func_slow_RCMAX<br /></code></p>
+</li><li>
+<p>The following command reports the Logic Constant Value table report pins or ports with set_logic constants, constants in the netlist, and output pins with a constant function. These output pins are from library cells or netlist modules.<br /><code><span class="fontdefaultcadence">litmus</span> &gt; report_case_analysis -all -no_split</code><br /><code>----------------------------------</code><br /><code>Pin name&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Logic</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;constant</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;value</code><br /><code>----------------------------------</code><br /><code>AB_IS/t0/Z&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0</code><br /><code>AB_IS/t1/Z&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;1</code><br /><code>AB_IS/dma_reg/SE&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0</code><br /><code>AB_IS/pre_reg[1]/SE&#xa0; &#xa0; &#xa0; 0</code><br /><code>AB_IS/ECO1reg[2]/SE&#xa0; &#xa0; &#xa0; 0<br />----------------------------------</code></p>
+</li><li>
+<p>The following command reports the Logic Constant Value table of pins:<br /><code><span class="fontdefaultcadence">litmus</span> &gt; report_case_analysis -all -no_split -verbose</code><br /><code>--------------------------------</code><br /><code>Pin name&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Logic</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;constant</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;value</code><br /><code>-------------------------------</code><br /><code>AB_IS/t0/Z&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0</code><br /><code>AB_IS/t1/Z&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;1</code><br /><code>AB_IS/dma_reg/SE&#xa0; &#xa0; &#xa0; &#xa0;0<br /></code></p>
+
+<p><code>Pin tst_mode 0 view scan_fast_RCMIN is caused by set_case_analysis 0 on pin tst_mode</code></p>
+
+<p><br /></p>
+
+<p><code>Pin tst_mode 0 view scan_slow_RCMIN is caused by set_case_analysis 0 on pin tst_mode</code></p>
+
+<p><br /></p>
+
+<p><code>Pin tst_mode 0 view scan_fast_RCMAX is caused by set_case_analysis 0 on pin tst_mode</code></p>
+</li></ul><ul><li>The following command reports user case analysis values for the specified view:<br /><code><span class="fontdefaultcadence">litmus</span> &gt; report_case_analysis -view scan_fast_RCMIN</code><br /><code>--------------------------------------------</code><br /><code>Pin name&#xa0; &#xa0; &#xa0; &#xa0;User&#xa0; &#xa0; &#xa0; &#xa0; View Name</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;case</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;analysis</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;value</code><br /><code>--------------------------------------------</code><br /><code>tst_mode&#xa0; &#xa0; &#xa0; &#xa0; 0 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;scan_fast_RCMIN</code><br /><code>scan_en&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;scan_fast_RCMIN</code><br /><code>--------------------------------------------</code></li><li>The following command reports pins that include the direction of the pin - as input:&#xa0;<br /><code><span class="fontdefaultcadence">litmus</span>&gt; report_case_analysis -dir<br /></code>
+<p><code>------------------------------------------</code>&#xa0;<br /><code>Pin name &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Dir &#xa0; &#xa0; &#xa0;User case&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Analysis value</code>&#xa0;<br /><code>------------------------------------------</code>&#xa0;<br /><code>gscanmode &#xa0; &#xa0; &#xa0; &#xa0;input &#xa0; &#xa0; 0&#xa0;</code><br /><code>gscanenable &#xa0; &#xa0; &#xa0;input &#xa0; &#xa0; 0&#xa0;</code><br /><code>------------------------------------------</code></p>
+</li></ul><ul><li>The following command reports all the constant pins, including pins with propagated constants:&#xa0;<code><br /><span class="fontdefaultcadence">litmus</span>&gt;&#xa0;report_case_analysis -propagated</code>&#xa0;<br />
+<p><code>----------------------------------------</code>&#xa0;<br /><code>Pin name &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Constant&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;value</code>&#xa0;<br /><code>----------------------------------------</code>&#xa0;<br /><code>clockandlatch/U8/TE &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0&#xa0;</code><br /><code>clockandlatch_dup1/U8/TE &#xa0; &#xa0; &#xa0; 1&#xa0;</code><br /><code>clockandlatch_dup2/U8/TE &#xa0; &#xa0; &#xa0; 1&#xa0;</code><br /><code>clockandlatch_dup3/U8/TE &#xa0; &#xa0; &#xa0; 0</code>&#xa0;<br /><code>----------------------------------------</code></p>
+</li></ul><ul><li>
+<p>The following command reports details of each pin separately. The pin <code>crclocklatch/U8/TE</code> is reported because of a <code>set_case_analysis 0</code> assertion on pin gscan:<br /><code><span class="fontdefaultcadence">litmus</span>&gt; report_case_analysis -propagated -verbose crclocklatch/U8/TE&#xa0;</code></p>
+
+<p><code>---------------------------------</code><br /><code>Pin name&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Constant&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Value</code>&#xa0;<br /><code>---------------------------------</code><br /><code>gscan&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0&#xa0;</code><br /><code>FE_OC36_gscan/I&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0&#xa0;</code><br /><code>FE_OC36_gscan/ZN&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;1&#xa0;</code><br /><code>FE_OC37_gscan/I&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 1&#xa0;</code><br /><code>FE_OC37_gscan/ZN&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0&#xa0;</code><br /><code>FE_OC35_gscan/I&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0&#xa0;</code><br /><code>FE_OC35_gscan/Z&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0&#xa0;</code><br /><code>crclocklatch/U8/TE&#xa0; &#xa0; &#xa0; &#xa0;0&#xa0;</code><br /><code>----------------------------------</code></p>
+</li></ul><h4 id="report_case_analysis-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="../tempusCUI/set_case_analysis.html#set_case_analysis-set_case_analysis">set_case_analysis</a></code></li></ul>
+<p></p>
+
+<p><br /></p>
+
+<p><br /></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="report_annotated_delay.html" id="prev" title="report_annotated_delay">report_annotated_delay</a></em></b><b><em><a href="report_cell_instance_timing.html" id="nex" title="report_cell_instance_timing">report_cell_instance_timing</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

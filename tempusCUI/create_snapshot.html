@@ -1,0 +1,147 @@
+
+<html><head><title>create_snapshot</title>
+<meta name="page_sequence" content="20034006" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287184" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="create_snapshot" />
+<meta name="Keywords" content="categories,flow,design,setup,power,check,clock,hold,route,CPU" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="General Commands," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287184" />
+<meta name="NextFile" content="define_metric.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="create_metric_table_heading.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- create_snapshot" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="create_metric_table_heading.html" title="create_metric_table_heading">create_metric_table_heading</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="define_metric.html" title="define_metric">define_metric</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>create_snapshot</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>create_snapshot<span class="confluence-anchor-link" id="create_snapshot-create_snapshot"></span><span id="create_snapshot-create_snapshot"></span><br />-help<br />[<em>pattern</em>]<br /><span>[-auto {min default}]<br />[-categories [* flow design setup power check clock hold route]]<br />[-exclude_time_metric]<br /><span>-name&#xa0;</span><em>metric_name</em><span>&#xa0;</span></span><br /></code></p>
+
+<p>Creates snapshots of the current metric list at various points in the flow.</p>
+
+<p>All super commands that save metrics call <code>create_snapshot</code> to save all metrics in a consistent manner. When <code>create_snapshot</code> is called, it creates an internal record designated by a label. The label for super commands are the command names.</p>
+
+<p>Metrics that do not require extraction and/or timing/power analysis are calculated when the metric snapshot is saved. Timing/clock/power metrics are reported only if they are up-to-date(i.e. if <code>time_design</code>/<code>report_ccopt*</code>/<code>report_power</code> have been run). Metrics are saved as part of db and can be accessed using <code><a href="get_db.html">get_db</a></code>.</p>
+
+<p><strong>Note</strong>: Metric values should be saved such that the unit is easily known/accessible.</p>
+<h4 id="create_snapshot-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="confluenceTable"><tbody><tr><td class="confluenceTd" colspan="1"><code><span>-auto {min default}</span></code></td>
+<td class="confluenceTd" colspan="1">Specifies the set of auto metrics to run.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-categories [* flow design setup power check clock hold route]</code></td>
+<td class="confluenceTd" colspan="1"><span style="white-space: normal;">Specifies&#xa0;the metric categories to compute.</span></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-exclude_time_metric</code></td>
+<td class="confluenceTd" colspan="1">Excludes CPU and wall time from parent snapshot calculations.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-name&#xa0;<em>metric_name&#xa0;</em></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the name of the metric.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">
+<p>Outputs a brief description that includes type and default information for each <code>set_metric</code> parameter.<br />For a detailed description of the command and all of its parameters, use the man command:</p>
+
+<p><code>man set_metric</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><em style="font-family: monospace;white-space: normal;">pattern</em></td>
+<td class="confluenceTd">Specifies specific metrics to save.</td>
+</tr>
+</tbody></table></div>
+<h4 id="create_snapshot-Example">Example</h4>
+
+<p>The following code shows the manual usage of&#xa0;<code>create_snapshot</code>:</p>
+
+<p><code># --------------------------------------------------------------------</code><br /><code># Manual Usage:</code><br /><code># --------------------------------------------------------------------</code></p>
+
+<p><code>opt_design &#8211;preCTS</code><br /><code>report_power ...</code><br /><code><strong>create_snapshot &#8211;label prects</strong> </code><br /><code>ccopt_design</code><br /><code>report_power</code><br /><strong><code>create_snapshot &#8211;label cts</code></strong><br /><code>add_filler</code><br /><code>route_design</code><br /><code><strong>create_snapshot &#8211;label route</strong> ; # Timing and power are not up-to-date</code><br /><code>opt_design &#8211;postRoute</code><br /><code>report_power</code><br /><code>create_snapshot &#8211;label postroute</code></p>
+
+<p>&#xa0;</p>
+
+<p>The following code shows the automatic/mixed usage of&#xa0;<code>create_snapshot</code>:</p>
+
+<p><code># --------------------------------------------------------------------</code><br /><code># Automatic / Mixed Usage:</code><br /><code># --------------------------------------------------------------------</code></p>
+
+<p><code>setDesignMode &#8211;enableMetrics true</code><br /><code>opt_design &#8211;preCTS ; # Saves snapshot &#8220;opt_design_&lt;count&gt;&#8221;</code><br /><code>report_power</code><br /><strong><code>create_snapshot &#8211;name &#8220;prects&#8221;</code></strong><br /><code>ccopt_design ; # Saves snapshot &#8220;ccopt_design&#8221;</code><br /><code>report_power</code><br /><code><strong>create_snapshot &#8211;name &#8220;postcts&#8221;</strong> ; # Includes up-to-date power metrics</code><br /><code>add_filler</code><br /><code>route_design ; # Saves snapshot &#8220;route_design&#8221;</code><br /><code>opt_design &#8211;postRoute ; # Saves snapshot &#8220;opt_design_&lt;count&gt;&#8221;</code><br /><code>report_power</code><br /><code><strong>create_snapshot &#8211;name &#8220;postroute&#8221;</strong> ; # Includes up-to-date power metrics</code></p>
+
+<p></p>
+
+<p>http://rdwiki.cadence.com/display/ssvpubsmgmt/Parameters+not+Documented+-+16.20</p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="create_metric_table_heading.html" id="prev" title="create_metric_table_heading">create_metric_table_heading</a></em></b><b><em><a href="define_metric.html" id="nex" title="define_metric">define_metric</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

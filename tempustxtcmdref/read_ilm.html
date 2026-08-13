@@ -1,0 +1,130 @@
+
+<html><head><title>read_ilm</title>
+<meta name="page_sequence" content="24002001" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287508" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="read_ilm" />
+<meta name="Keywords" content="ilm,interface logic module,logic models" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="ILM/XILM," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287508" />
+<meta name="NextFile" content="set_ilm_mode.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Interface_Logic_Models_-_ILM.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- read_ilm" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="Interface_Logic_Models_-_ILM.html" title="Interface_Logic_Models_-_ILM">Interface_Logic_Models_-_ILM</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_ilm_mode.html" title="set_ilm_mode">set_ilm_mode</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>read_ilm</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>read_ilm<span class="confluence-anchor-link" id="read_ilm-read_ilm"></span><span id="read_ilm-read_ilm"></span> <br />[-help]<br />[-noSpef]<br />[-noSI]</code> <br /></code></p>
+
+<p>Specifies the Interface Logic Module (ILM) or the eXtended Interface Logic Module (XILM) directory for the specified block.</p>
+
+<p>You can run the <code>read_ilm</code> command only once during a session. If there are multiple ILM blocks, you must specify them in a list. The <code>-cell</code> and <code>-dir</code> parameters accept a list instead of a single value only. The order of the cells and directories must match, for example:</p>
+
+<p><code>ilmview&gt;&#xa0;read_ilm -cell {cell1 cell2} -dir {dir1 dir2}</code></p>
+
+<p>If ILM data is generated using previous releases in which both the module definition in the netlist and the <code>.lib</code> for the ILM module are removed, then you must set the following variable before <code>read_design</code> and <code>set_top_module</code> to load the top-level design in the new design flow.</p>
+
+<p><code>set_var load_netlist_ignore_undefined_cell 1</code></p>
+
+<p>If an ILM model is created using the current release, you need not set the&#xa0;<code>set_var </code><code>load_netlist_ignore_undefined_cell</code> variable.</p>
+
+<p><strong>Note</strong>: The ILM is not supported for Signoff in Tempus.</p>
+<h4 id="read_ilm-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="wrapped relative-table confluenceTable" style="width: 100.0%;"><colgroup><col style="width: 10.6091%;" /><col style="width: 89.3543%;" /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-noSpef</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Loads the ILM or XILM netlist, core <code>.sdc,</code> and/or <code>.xtwf</code> file without loading the ILM or XILM SPEF file, even if the top module SPEF is loaded before running <code>read_ilm</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-noSI</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Does not read the SI ILM data.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="read_ilm-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="specify_ilm.html">specify_ilm</a></code></li><li><code><a href="unspecify_ilm.html">unspecify_ilm</a></code></li><li><code><a href="write_ilm.html">write_ilm</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Interface_Logic_Models_-_ILM.html" id="prev" title="Interface_Logic_Models_-_ILM">Interface_Logic_Models_-_ILM</a></em></b><b><em><a href="set_ilm_mode.html" id="nex" title="set_ilm_mode">set_ilm_mode</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

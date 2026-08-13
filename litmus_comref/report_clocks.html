@@ -1,0 +1,278 @@
+
+<html><head><title>report_clocks</title>
+<meta name="page_sequence" content="25039000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="apokhara" />
+<meta name="CreateDate" content="2026-04-12" />
+<meta name="CreateTime" content="1776062427" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="" />
+<meta name="DocTitle" content="Litmus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="report_clocks" />
+<meta name="Keywords" content="command,report,clock,information,create_clock,create_generated_clock,waveforms,points" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="FLOW," />
+<meta name="prod_subfeature" content="GENERAL_PURPOSE," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="litmus_comref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-12" />
+<meta name="ModifiedTime" content="1776062427" />
+<meta name="NextFile" content="report_constraint.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="report_clock_timing.html" />
+<meta name="c_product" content="Litmus," />
+<meta name="Product" content="Litmus," />
+<meta name="ProductFamily" content="Litmus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Litmus Text Command Reference -- report_clocks" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="litmus26comref" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="litmus_comrefTOC.html">Contents</a></li><li><a class="prev" href="report_clock_timing.html" title="report_clock_timing">report_clock_timing</a></li><li style="float: right;"><a class="viewPrint" href="litmus_comref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="report_constraint.html" title="report_constraint">report_constraint</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Litmus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>report_clocks</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>report_clocks<span class="confluence-anchor-link" id="report_clocks-report_clocks"></span><span id="report_clocks-report_clocks"></span>&#xa0;<br />[-description]&#xa0;<br />[-arrival_points]<br />[-phase_shift_table]&#xa0;<br />[-total_shift_table]&#xa0;<br />[-uncertainty_table]&#xa0;<br />[-adjustment_table]&#xa0;<br />[-delay_adjustment_table]&#xa0;<br />[-source_insertion]&#xa0;<br />[-insertion]<br />[-hierarchy]&#xa0;<br />[-groups]&#xa0;<br />[-clocks <em style="background-color: transparent;font-size: 10.0pt;line-height: 13.0pt;">clk_signame</em> | <em style="background-color: transparent;font-size: 10.0pt;line-height: 13.0pt;">clk_signame_list</em>]<br />[-view <em style="background-color: transparent;font-size: 10.0pt;line-height: 13.0pt;">view_name</em>]&#xa0;<br />[{&gt; | &gt;&gt;} <em style="background-color: transparent;font-size: 10.0pt;line-height: 13.0pt;">filename</em> | -tcl_list]</code></p>
+
+<p>Reports information on clocks created with the <code><a href="../tempusCUI/create_clock.html#create_clock-create_clock">create_clock</a></code> and <code><a href="../tempusCUI/create_generated_clock.html#create_generated_clock-create_generated_clock">create_generated_clock</a></code> command. The report includes information about all clock waveforms, clock arrival points, and clock uncertainties.</p>
+
+<p>Use the <code>-description</code>, <code>-arrival_points</code>, <code>-uncertainty_table</code>, and the <code>*_table</code> parameters to specify different parts of the report. If one of these options is supplied, only the section that the option corresponds to is reported. If other options are supplied, those sections are also reported.</p>
+
+<p>Based on the current setup or hold analysis mode, the following parameters report only one of the late or early tables:</p>
+<ul><li><code>-phase_shift_table</code></li></ul><ul><li><code>-total_shift_table</code></li></ul><ul><li><code>-uncertainty_table</code></li></ul><ul><li><code>-adjustment_table</code></li></ul><ul><li><code>-delay_adjustment_table</code></li></ul>
+<p>However, in simultaneous (setup and hold) mode both the tables are reported.</p>
+<div>
+<p><br /></p>
+<div aria-label="Tip" class="confluence-information-macro  confluence-information-macro-tip" role="region"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>The <code>report_clocks</code> command only reports constraints with respect to clock waveforms. Use the <code>report_ports </code><code>-type</code> command for constraints applied to clock pins.</p>
+</div>
+</div>
+
+<p><br /></p>
+</div>
+<h4 id="report_clocks-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="confluenceTable cadenceTable cadDefaultfont" id="cadDefaultfont" style="width: 720px;"><colgroup><col style="width: 300px;" /><col style="width: 340px;" /></colgroup><tbody><tr><td class="confluenceTd" valign="top">
+<p><code>{&gt; | &gt;&gt;} </code><code><em>filename</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>When specified with <code>&gt;</code>, writes the report to the specified file name. If the file already exists, the software overwrites it.</p>
+
+<p>When specified with <code>&gt;&gt;</code>, writes the report to the specified file name. If the file already exists, the software concatenates the report to the end of the file.</p>
+
+<p>The <code><em>filename</em></code> parameter must be the last argument in the list. The <code><em>filename</em></code> and <code>-tcl_list</code> parameters are mutually exclusive; you cannot specify them together.</p>
+
+<p><strong>Note: </strong>To write a compressed report, add the <code>.gz</code> extension to the file name.</p>
+
+<p><em>Default:</em> Report is displayed on standard output without being saved.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-adjustment_table</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Reports two tables that detail the hold and setup cycle adjustments between clock waveforms as set by the <code>set_multicycle_path</code> command.</p>
+
+<p><strong>Note: </strong>If specific ideal (or generated) clocks are requested with the <code>-clocks </code><code><em>clock_name_list</em></code> option, then only the relationships between those clock signals are reported.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-arrival_points</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Reports only the clock arrival points. A clock arrival point is the pin where the <a href="../tempusCUI/create_clock.html#create_clock-create_clock">create_clock</a> or <a href="../tempusCUI/create_generated_clock.html#create_generated_clock-create_generated_clock">create_generated_clock</a> command has been asserted.</p>
+
+<p><strong>Note: </strong>This parameter is obsolete and will be removed in a future release.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-clocks </code><code><em>clk_signame</em></code> | <code><em>clk_signame_list</em></code></p>
+</td>
+<td class="confluenceTd"><div class="content-wrapper">
+<p>Requests information on a specific ideal (or generated) clock. If a list is given, only information about those clocks is reported. You can use wildcards in the names. <br /><em>Default</em>: All clocks, except generated clocks, are reported. Use the <code>-generated</code> option to report generated clocks.</p>
+<div><strong>Note</strong>: This parameter is obsolete and will be removed in a future release. Cadence recommends that you specify clock names without the <code>-clocks </code>parameter.</div>
+</div>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-delay_adjustment_table</code></p>
+</td>
+<td class="confluenceTd">
+<p>Reports two tables that detail the early and late path delay adjustments between clock waveforms as set by the <code>set_max_delay</code> and <code>set_min_delay</code> commands.</p>
+
+<p><strong>Note: </strong>If specific ideal (or generated) clocks are requested with the <code>-clocks </code><code><em>clock_name_list</em></code> option, then only the relationships between those clock signals are reported.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-description</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Reports only the description of the specified clock waveform(s).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-generated</code></p>
+</td>
+<td class="confluenceTd" valign="top"><div class="content-wrapper">
+<p>Includes information on generated clocks in the report, such as source and master clock of the generated clock, and other information specified in the <code>create_generated_clock</code> constraints. The report uses the internal clock names created by the system, if you did not specify new clock names while creating these clocks.</p>
+
+<p><strong>Note</strong>: This parameter is obsolete and will be removed in a future release. The software now reports generated clocks by default.</p>
+</div>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-groups</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Reports the existing clock groups.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-hierarchy</code></td>
+<td class="confluenceTd">Reports the inter-clock relationship in tree style format.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-insertion</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Reports the network insertion delays specified on clock waveforms. The values in the table are in <code>min:typ:max</code> format.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-phase_shift_table</code></p>
+</td>
+<td class="confluenceTd">
+<p>Reports the table that details the phase shift between clock waveforms. Based upon the current analysis mode, the table shows the phase shifts either in late or early mode. In case of simultaneous setup hold mode, both the tables are reported for phase shift in late and early mode.</p>
+
+<p><strong>Note: </strong>If specific ideal (or generated) clocks are requested with the <code>-clocks </code><code><em>clock_name_list</em></code> option, then only the relationships between those clock signals are reported.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-source_insertion</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Reports the source insertion delays specified on clock waveforms.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-tcl_list</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Produces the report in Tcl list format instead of a tabular format. This is useful for integrating timing with custom Tcl functions, and also for customizing report generation.</p>
+
+<p>The <code>-tcl_list</code> and <code><em>filename</em></code> parameters are mutually exclusive; you cannot specify them together.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-total_shift_table</code></p>
+</td>
+<td class="confluenceTd">
+<p>Based on the current analysis mode, reports (late or early mode) details and the relationship between clock waveforms. In case of simultaneous setup hold mode all the details are reported.</p>
+
+<p><strong>Note: </strong>If specific ideal (or generated) clocks are requested with the <code>-clocks </code><code><em>clock_name_list</em></code> option, then only the relationships between those clock signals are reported.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-uncertainty_table</code></p>
+</td>
+<td class="confluenceTd">
+<p>Based on the current analysis mode, reports one of the tables (late mode or early mode) that detail the uncertainty between clock waveforms as specified using the <code><a href="../tempusCUI/set_clock_uncertainty.html#set_clock_uncertainty-set_clock_uncertainty">set_clock_uncertainty</a></code> command. In case of simultaneous setup hold mode both the tables are reported. The tables report only those clock waveforms for which uncertainty has been defined using the <code>set_clock_uncertainty</code> command.</p>
+
+<p><strong>Note: </strong>If specific ideal (or generated) clocks are requested with the <code>-clocks </code><code><em>clock_name_list</em></code> option, then only the relationships between those clock signals are reported.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-view </code><code><em>view_name</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Generates a clock report for the specified analysis view only. You can specify this parameter only when the software is in multi-mode multi-corner timing analysis mode.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="report_clocks-Examples">Examples</h4>
+<ul><li>The following command reports the clock arrival points, and details of the clock waveform(s):<br /><code><span class="fontdefaultcadence">litmus</span> &gt; report_clocks -arrival_points -description</code><br /><code>----------------------------------------------------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Clock Descriptions</code><br /><code>----------------------------------------------------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Attributes</code><br /><code>----------------------------------------------------------------------------------------------</code><br /><code>Clock Name&#xa0; Source&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;View &#xa0; &#xa0; &#xa0; &#xa0; Period &#xa0; &#xa0;Lead &#xa0; &#xa0;Trail &#xa0; Generated &#xa0; Propagated</code><br /><code>----------------------------------------------------------------------------------------------</code><br /><code>m_clk &#xa0; &#xa0; &#xa0; TST_INST/p21/Z &#xa0; scan_slow_RCMAX &#xa0; 40.000 &#xa0; 0.000 &#xa0; 20.000&#xa0; &#xa0; &#xa0; n &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; y</code><br /><code>m_clk &#xa0; &#xa0; &#xa0; TST_INST/p21/Z &#xa0; scan_fast_RCMAX &#xa0; 40.000 &#xa0; 0.000 &#xa0; 20.000&#xa0; &#xa0; &#xa0; n &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; y</code><br /><code>m_clk &#xa0; &#xa0; &#xa0; TST_INST/p21/Z &#xa0; func_fast_RCMAX &#xa0; &#xa0;4.000 &#xa0; 0.000 &#xa0; &#xa0;2.000&#xa0; &#xa0; &#xa0; n &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; y</code><br /><code>m_clk &#xa0; &#xa0; &#xa0; TST_INST/p21/Z &#xa0; func_slow_RCMAX &#xa0; &#xa0;4.000 &#xa0; 0.000 &#xa0; &#xa0;2.000&#xa0; &#xa0; &#xa0; n &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; y</code><br /><code>m_clk &#xa0; &#xa0; &#xa0; TST_INST/p21/Z &#xa0; scan_slow_RCMIN &#xa0; 40.000 &#xa0; 0.000 &#xa0; 20.000&#xa0; &#xa0; &#xa0; n &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; y</code><br /><code>m_clk &#xa0; &#xa0; &#xa0; TST_INST/p21/Z &#xa0; func_fast_RCMIN &#xa0; &#xa0;4.000 &#xa0; 0.000 &#xa0; &#xa0;2.000&#xa0; &#xa0; &#xa0; n &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; y</code><br /><code>m_clk &#xa0; &#xa0; &#xa0; TST_INST/p21/Z &#xa0; scan_fast_RCMIN &#xa0; 40.000 &#xa0; 0.000 &#xa0; 20.000&#xa0; &#xa0; &#xa0; n &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; y</code><br /><code>m_clk &#xa0; &#xa0; &#xa0; TST_INST/p21/Z &#xa0; func_slow_RCMIN &#xa0; &#xa0;4.000 &#xa0; 0.000 &#xa0; &#xa0;2.000&#xa0; &#xa0; &#xa0; n &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; y</code></li></ul>
+<p><code>&#xa0; &#xa0; -----------------------------------------------------------------------------------------------</code></p>
+<ul><li>The following command reports the clock arrival points, along with the hold and setup cycle adjustments between clock waveforms:<br /><code><span class="fontdefaultcadence">litmus</span> &gt; report_clocks -arrival_points &#xa0;-description -clocks m_clk -adjustment_table</code><br /><code>------------------------------------------------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Clock Descriptions</code><br /><code>------------------------------------------------------------------------------------------</code><br /><code>&#xa0;&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Attributes</code><br /><code>------------------------------------------------------------------------------------------</code><br /><code>Clock&#xa0; &#xa0;Source&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; View&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Period&#xa0; &#xa0;Lead &#xa0; &#xa0;Trail &#xa0; Generated &#xa0; Propagated</code><br /><code>Name</code><br /><code>------------------------------------------------------------------------------------------</code><br /><code>m_clk &#xa0; TST_INST/p21/Z &#xa0; scan_slow_RCMAX &#xa0; 40.000 &#xa0; 0.000 &#xa0; 20.000&#xa0; &#xa0; &#xa0; n &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; y</code><br /><code>m_clk &#xa0; TST_INST/p21/Z &#xa0; func_fast_RCMIN &#xa0; &#xa0;4.000 &#xa0; 0.000 &#xa0; &#xa0;2.000&#xa0; &#xa0; &#xa0; n &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; y</code><br /><code>m_clk &#xa0; TST_INST/p21/Z &#xa0; scan_slow_RCMIN &#xa0; 40.000 &#xa0; 0.000 &#xa0; 20.000&#xa0; &#xa0; &#xa0; n &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; y</code><br /><code>m_clk &#xa0; TST_INST/p21/Z &#xa0; func_slow_RCMIN &#xa0; &#xa0;4.000 &#xa0; 0.000 &#xa0; &#xa0;2.000&#xa0; &#xa0; &#xa0; n &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; y</code><br /><code>m_clk &#xa0; TST_INST/p21/Z &#xa0; scan_fast_RCMIN &#xa0; 40.000 &#xa0; 0.000 &#xa0; 20.000&#xa0; &#xa0; &#xa0; n &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; y</code><br /><code>m_clk &#xa0; TST_INST/p21/Z &#xa0; func_fast_RCMAX &#xa0; &#xa0;4.000 &#xa0; 0.000 &#xa0; &#xa0;2.000&#xa0; &#xa0; &#xa0; n &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; y</code><br /><code>m_clk &#xa0; TST_INST/p21/Z &#xa0; scan_fast_RCMAX &#xa0; 40.000 &#xa0; 0.000 &#xa0; 20.000&#xa0; &#xa0; &#xa0; n &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; y</code><br /><code>m_clk &#xa0; TST_INST/p21/Z &#xa0; func_slow_RCMAX &#xa0; &#xa0;4.000 &#xa0; 0.000 &#xa0; &#xa0;2.000&#xa0; &#xa0; &#xa0; n &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; y</code><br /><code>&#xa0; &#xa0; &#xa0; ------------------------------------------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; -----------------------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Clock To Clock Cycle Adjustment (Late)</code><br /><code>&#xa0; &#xa0; &#xa0; -----------------------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; From &#xa0; &#xa0;To &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;View &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;L-&gt;L &#xa0; &#xa0;L-&gt;T &#xa0; &#xa0;T-&gt;L &#xa0; &#xa0;T-&gt;T</code><br /><code>&#xa0; &#xa0; &#xa0; -----------------------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0;m_clk &#xa0; m_clk &#xa0; scan_slow_RCMAX &#xa0; 0.000 &#xa0; 0.000 &#xa0; 0.000 &#xa0; 0.000</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0;m_clk &#xa0; m_clk &#xa0; func_fast_RCMIN &#xa0; 0.000 &#xa0; 0.000 &#xa0; 0.000 &#xa0; 0.000</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0;m_clk &#xa0; m_clk &#xa0; scan_slow_RCMIN &#xa0; 0.000 &#xa0; 0.000 &#xa0; 0.000 &#xa0; 0.000</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0;m_clk &#xa0; m_clk &#xa0; func_slow_RCMIN &#xa0; 0.000 &#xa0; 0.000 &#xa0; 0.000 &#xa0; 0.000</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0;m_clk &#xa0; m_clk &#xa0; scan_fast_RCMIN &#xa0; 0.000 &#xa0; 0.000 &#xa0; 0.000 &#xa0; 0.000</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0;m_clk &#xa0; m_clk &#xa0; func_fast_RCMAX &#xa0; 0.000 &#xa0; 0.000 &#xa0; 0.000 &#xa0; 0.000</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0;m_clk &#xa0; m_clk &#xa0; scan_fast_RCMAX &#xa0; 0.000 &#xa0; 0.000 &#xa0; 0.000 &#xa0; 0.000</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0;m_clk &#xa0; m_clk &#xa0; func_slow_RCMAX &#xa0; 0.000 &#xa0; 0.000 &#xa0; 0.000 &#xa0; 0.000</code><br /><code>&#xa0; &#xa0; &#xa0; -----------------------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; -----------------------------------------------------------------</code></li><li>The following command reports details of generated clocks, and includes information about all the clock waveforms and clock arrival points:<br /><code><span class="fontdefaultcadence">litmus</span> &gt; report_clocks</code><br /><code>---------------------------------------------------------</code><br /><code>Clock Descriptions</code><br /><code>---------------------------------------------------------</code><br /><code>Attributes</code><br /><code>-------------------------------------------------------------</code><br /><code>Clock Name &#xa0;Source &#xa0;Period &#xa0;Lead &#xa0; Trail &#xa0;Generated Propagated</code><br /><code>--------------------------------------------------------------</code><br /><code>CLK1 &#xa0; &#xa0; &#xa0; &#xa0;CLK1 &#xa0; &#xa0;20.000 &#xa0;0.000 &#xa0;10.000 &#xa0;n &#xa0; &#xa0; &#xa0; &#xa0;y</code><br /><code>CLK2 &#xa0; &#xa0; &#xa0; &#xa0;CLK1 &#xa0; &#xa0;10.000 &#xa0;0.000 &#xa0; 5.000 &#xa0;n &#xa0; &#xa0; &#xa0; &#xa0;y</code><br /><code>-------------------------------------------------------------</code><br /><code>Generated-Clock Descriptions</code><br /><code>----------------------------------------------------------------------------------------------</code><br /><code>Name &#xa0; &#xa0; &#xa0; &#xa0;Generated &#xa0; Master &#xa0; &#xa0; &#xa0;Master-clock Invert Freq. &#xa0; &#xa0; &#xa0;Duty-Cycle Edges Edge-Shift</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Source(pin) Source(pin) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Multiplier</code><br /><code>----------------------------------------------------------------------------------------------</code><br /><code>GCLK &#xa0; &#xa0; &#xa0; &#xa0;u8/Q &#xa0; &#xa0; &#xa0; &#xa0;CK1 &#xa0; &#xa0; &#xa0; &#xa0; CLK1 &#xa0; &#xa0; &#xa0; &#xa0; n &#xa0; &#xa0; &#xa0;1/2 &#xa0; &#xa0; &#xa0; &#xa0; - &#xa0; &#xa0; &#xa0; &#xa0; - &#xa0; &#xa0; &#xa0;-</code><br /><code>---------------------------------------------------------------------------------------------&#xa0;<br /></code></li><li>The following command reports uncertainty information as per the defined assertions:<br /><code><span class="fontdefaultcadence">litmus</span> &gt;&#xa0;set_clock_uncertainty 5 CLK_W_1</code><br /><code><span class="fontdefaultcadence">litmus</span> &gt;&#xa0;set_clock_uncertainty 4 -from CLK_W_1 -to CLK_W_4_gen1</code><br /><code><span class="fontdefaultcadence">litmus</span> &gt;&#xa0;set_clock_uncertainty 6 -from CLK_W_2 -to CLK_W_4_gen2</code><br /><code><span class="fontdefaultcadence">litmus</span> &gt;&#xa0;report_clocks -uncertainty_table</code><br /><br /><code>--------------------------------------------------------</code><br /><code>Clock To Clock Uncertainty (Late)</code><br /><code>--------------------------------------------------------</code><br /><code>From &#xa0; &#xa0;To &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; L-&gt;L &#xa0; &#xa0;L-&gt;T &#xa0; &#xa0;T-&gt;L &#xa0; &#xa0; T-&gt;T</code><br /><code>--------------------------------------------------------</code><br /><code>* &#xa0; &#xa0; &#xa0; CLK_W_1 &#xa0; &#xa0; &#xa0;5.000 &#xa0;5.000 &#xa0; 5.000 &#xa0; &#xa0; 5.000</code><br /><code>CLK_W_1 CLK_W_4_gen1 4.000 &#xa0;4.000 &#xa0; 4.000 &#xa0; &#xa0; 4.000</code><br /><code>CLK_W_2 CLK_W_4_gen2 6.000 &#xa0;6.000 &#xa0; 6.000 &#xa0; &#xa0; 6.000</code><br /><code>--------------------------------------------------------</code><br /><code>Clock To Clock Uncertainty (Early)</code><br /><code>------------------------------------------------------------</code><br /><code>From &#xa0; &#xa0; To &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;L-&gt;L &#xa0; L-&gt;T &#xa0; T-&gt;L &#xa0; T-&gt;T</code><br /><code>------------------------------------------------------------</code><br /><code>* &#xa0; &#xa0; &#xa0; &#xa0;CLK_W_1 &#xa0; &#xa0; &#xa0;-5.000 -5.000 -5.000 -5.000</code><br /><code>CLK_W_1 &#xa0;CLK_W_4_gen1 -4.000 -4.000 -4.000 -4.000</code><br /><code>CLK_W_2 &#xa0;CLK_W_4_gen2 -6.000 -6.000 -6.000 -6.000</code><br /><code>------------------------------------------------------------<br /></code></li><li>The following command reports the phase shift between clock waveforms for the defined clock:&#xa0;<br /><code><span><span class="fontdefaultcadence">litmus</span> &gt; create_clock -name &quot;CLK_W_1&quot; -add -period 60 -waveform {0 30}<br /></span><span><span class="fontdefaultcadence">litmus</span> &gt;&#xa0;report_clocks CLK_W_1 -phase_shift_table</span></code>
+<p><code>------------------------------------------------------</code><br /><code>Clock To Clock Phase Shift (Late)</code><br /><code>------------------------------------------------------</code><br /><code>From &#xa0; &#xa0;To &#xa0; &#xa0; &#xa0;L-&gt;L &#xa0; &#xa0;L-&gt;T &#xa0;T-&gt;L &#xa0; T-&gt;T</code><br /><code>------------------------------------------------------</code><br /><code>CLK_W_1 CLK_W_1 60.000 &#xa0;0.000 60.000 60.000</code><br /><code>------------------------------------------------------</code><br /><code>-----------------------------------------------------</code><br /><code>Clock To Clock Phase Shift (Early)</code><br /><code>-----------------------------------------------------</code><br /><code>From &#xa0; &#xa0;To &#xa0; &#xa0; &#xa0;L-&gt;L &#xa0; L-&gt;T &#xa0; T-&gt;L &#xa0;T-&gt;T</code><br /><code>-----------------------------------------------------</code><br /><code>CLK_W_1 CLK_W_1 0.000 -60.000 0.000 0.000</code><br /><code>-----------------------------------------------------<br /></code></p>
+</li><li>
+<p>You can use the following command to define uncertainty for a clock:<br />Based on the current analysis mode, reports (late or early mode) details and the relationship between clock waveforms.<br /><code><span class="fontdefaultcadence">litmus</span> &gt;&#xa0;set_clock_uncertainty 2 CLK_W_1</code><br /><br />The following command reports (late or early mode) details and displays the changed shift values:&#xa0;<br /><code><span class="fontdefaultcadence">litmus</span> &gt;&#xa0;report_clocks -total_shift_table CLK_W_1</code></p>
+
+<p><code>-------------------------------------------------------</code><br /><code>Total Clock To Clock Phase Shift Required (Late)</code><br /><code>-------------------------------------------------------</code><br /><code>From &#xa0; &#xa0;To &#xa0; &#xa0; &#xa0;L-&gt;L &#xa0; &#xa0;L-&gt;T &#xa0;T-&gt;L &#xa0; T-&gt;T</code><br /><code>-------------------------------------------------------</code><br /><code>CLK_W_1 CLK_W_1 58.000 -2.000 58.000 58.000</code><br /><code>-------------------------------------------------------</code><br /><code>-----------------------------------------------------</code><br /><code>Total Clock To Clock Phase Shift Required (Early)</code><br /><code>-----------------------------------------------------</code><br /><code>From &#xa0; &#xa0;To &#xa0; &#xa0; &#xa0;L-&gt;L &#xa0; L-&gt;T &#xa0; T-&gt;L &#xa0;T-&gt;T</code><br /><code>-----------------------------------------------------</code><br /><code>CLK_W_1 CLK_W_1 2.000 -58.000 2.000 2.000</code><br /><code>-----------------------------------------------------</code><br />You can see that the uncertainty is subtracted from the phase shift.<br />Consider the following example path:&#xa0;<br /><br /><code>Path 1: MET Setup Check with Pin u2/CK</code><br /><code>Endpoint: u2/D (v) checked with leading edge of &#39;CLK_W_1&#39;</code><br /><code>Beginpoint: CLK2 (v) triggered by trailing edge of &#39;CLK_W_2&#39;</code><br /><code>Path Groups: {CLK_W_1}</code><br /><code>Other End Arrival Time 0.000</code><br /><code>- Setup 0.188</code><br /><code>+ Phase Shift 15.000</code><br /><code>- Uncertainty 2.000</code><br /><code>= Required Time 12.812</code><br /><code>- Arrival Time 12.463</code><br /><code>= Slack Time 0.349</code><br /><code>Clock Fall Edge 12.500</code><br /><code>= Beginpoint Arrival Time 12.500</code><br /><code>-------------------------------------</code><br /><code>Load &#xa0;Slew &#xa0; &#xa0;Delay &#xa0; Arrival &#xa0; Cell &#xa0;Arc &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Pin</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Time</code><br /><code>--------------------------------------------------------</code><br /><code>0.034 &#xa0;0.003 &#xa0;12.500 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;CLK2 v &#xa0; &#xa0; &#xa0; CLK2</code><br /><code>0.003 &#xa0;0.003 &#xa0;-0.037 &#xa0;12.463 &#xa0; BUF &#xa0; &#xa0;A v -&gt; Y v &#xa0; u10999/Y</code><br /><code>0.003 &#xa0;0.003 &#xa0;0.000 &#xa0; 12.463 &#xa0; DFF &#xa0; &#xa0;D v &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;u2/D</code><br /><code>--------------------------------------------------------</code></p>
+
+<p>Here the begin point CLK_W_2 to end point CLK_W_1 shows a phase shift value of 15.00. This means that if a path starts from the falling edge of CLK_W_2 , and ends at the rising edge of CLK_W_1, the phase shift is 15.00. In other words, when the timing (setup time) is reported, the required time at the end point begins with 15.00 (in addition to adjustments like setup time, time borrowing, uncertainty, etc). However, the arrival time of this path starts at 12.500.<br />&#xa0;</p>
+</li><li>
+<p>When the software is in multi-mode multi-corner timing analysis mode, the software reports the clock information for each active analysis view:&#xa0;<br /><code><span class="fontdefaultcadence">litmus</span> &gt;&#xa0;report_clocks -total_shift_table -description</code></p>
+
+<p><code>-------------------------------------------------------------</code><br /><code>Clock Descriptions</code><br /><code>-------------------------------------------------------------</code><br /><code>Attributes</code><br /><code>-----------------------------------------------------------------------</code><br /><code>Clock Name Source &#xa0;View &#xa0; &#xa0; &#xa0; Period &#xa0;Lead &#xa0; Trail Generated Propagated</code><br /><code>-----------------------------------------------------------------------</code><br /><code>EJ_TCK &#xa0; &#xa0; EJ_TCK &#xa0;hold_view2 17.400 &#xa0;0.000 &#xa0;8.700 &#xa0;n &#xa0; &#xa0; &#xa0; &#xa0; n</code><br /><code>EJ_TCK &#xa0; &#xa0; EJ_TCK &#xa0;hold_view1 17.400 &#xa0;0.000 &#xa0;8.700 &#xa0;n &#xa0; &#xa0; &#xa0; &#xa0; n<br />EJ_TCK &#xa0; &#xa0; EJ_TCK &#xa0;setup_view117.400 &#xa0;0.000 &#xa0;8.700 &#xa0;n &#xa0; &#xa0; &#xa0; &#xa0; n</code><br /><code>-----------------------------------------------------------------------</code><br /><code>-------------------------------------------------------------</code><br /><code>Total Clock To Clock Phase Shift Required (Late)</code><br /><code>-------------------------------------------------------------</code><br /><code>From &#xa0; &#xa0; &#xa0;To &#xa0; &#xa0; &#xa0; &#xa0;View &#xa0; &#xa0; &#xa0; &#xa0;L-&gt;L &#xa0; L-&gt;T &#xa0; T-&gt;L &#xa0; &#xa0;T-&gt;T</code><br /><code>-------------------------------------------------------------</code><br /><code>EJ_TCK &#xa0; &#xa0;EJ_TCK &#xa0; &#xa0;hold_view2 &#xa0;17.400 &#xa0;0.000 17.400 &#xa0;17.400</code><br /><code>EJ_TCK &#xa0; &#xa0;EJ_TCK &#xa0; &#xa0;hold_view1 &#xa0;17.400 &#xa0;0.000 17.400 &#xa0;17.400<br />EJ_TCK &#xa0; &#xa0;EJ_TCK&#xa0; &#xa0; setup_view2 17.400 &#xa0;0.000 17.400 &#xa0;17.400</code><br /><code>-----------------------------------------------------------------------</code></p>
+</li><li>
+<p>The following command reports the late or early mode details and displays the changed shift values for the specified view:<br /><code><span class="fontdefaultcadence">litmus</span> &gt;&#xa0;report_clocks -total_shift_table -description -view setup_view1 &gt; clk_sv1</code></p>
+
+<p><code>-----------------------------------------------------------</code><br /><code>Clock Descriptions</code><br /><code>-----------------------------------------------------------</code><br /><code>Attributes</code><br /><code>-----------------------------------------------------------</code><br /><code>Clock Name &#xa0; &#xa0; &#xa0;Source &#xa0;View &#xa0; &#xa0; &#xa0; &#xa0; Period &#xa0;Lead &#xa0;Trail &#xa0;Generated Propagated</code><br /><code>------------------------------------------------------------------------------</code><br /><code>EJ_TCK &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;EJ_TCK &#xa0;setup_view1 &#xa0;17.400 &#xa0;0.000 8.700 &#xa0;n &#xa0; &#xa0; &#xa0; &#xa0; n</code><br /><code>virt_in_EJ_TCK &#xa0;- &#xa0; &#xa0; &#xa0; setup_view1 &#xa0;17.400 &#xa0;0.000 8.700 &#xa0;n &#xa0; &#xa0; &#xa0; &#xa0; n</code><br /><code>------------------------------------------------------------------------------</code><br /><code>------------------------------------------------------------------</code><br /><code>Total Clock To Clock Phase Shift Required (Late)</code><br /><code>------------------------------------------------------------------</code><br /><code>From &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;To &#xa0; &#xa0; &#xa0;View &#xa0; &#xa0; &#xa0; &#xa0;L-&gt;L &#xa0; &#xa0; L-&gt;T &#xa0; T-&gt;L &#xa0; &#xa0; T-&gt;T</code><br /><code>------------------------------------------------------------------</code><br /><code>EJ_TCK &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; EJ_TCK setup_view1 17.400 &#xa0; 0.000 &#xa0;17.400 &#xa0;17.400</code><br /><code>virt_in_EJ_TCK &#xa0; EJ_TCK setup_view1 17.400 &#xa0; 0.000 &#xa0;17.400 &#xa0;17.400</code><br /><code>-------------------------------------------------------------------</code></p>
+</li><li>
+<p>The&#xa0;<code>report_clocks</code>&#xa0;command output displays a column showing active or inactive clocks in the design:</p>
+
+<p><code>------------------------------------------------------------</code><br /><code>Clock Descriptions</code><br /><code>------------------------------------------------------------</code><br /><code>Attributes</code><br /><code>------------------------------------------------------------</code><br /><code>Clock Name &#xa0; Source &#xa0; Period &#xa0; &#xa0;Lead &#xa0; &#xa0;Trail &#xa0; Generated &#xa0; Propagated &#xa0; Active</code><br /><code>-------------------------------------------------------------------------------</code><br /><code>CLK_W_1 &#xa0; &#xa0; &#xa0;CLK1 &#xa0; &#xa0; 20.000 &#xa0; &#xa0;0.000 &#xa0; 10.000 &#xa0; n &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;y &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;y</code><br /><code>CLK_W_2 &#xa0; &#xa0; &#xa0;CLK2 &#xa0; &#xa0; 25.000 &#xa0; &#xa0;0.000 &#xa0; 12.500 &#xa0; n &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;y &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;y</code><br /><code>CLK_W_4_gen2 u8/Q &#xa0; &#xa0; 20.000 &#xa0; &#xa0;0.000 &#xa0; 10.000 &#xa0; y &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;y &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;y</code><br /><code>-------------------------------------------------------------------------------</code></p>
+</li></ul><h4 id="report_clocks-RelatedInformation"><span class="fontdefaultcadence">Related Commands</span></h4>
+<ul><li><code><a href="../tempusCUI/create_clock.html#create_clock-create_clock">create_clock</a></code></li><li><code><a href="../tempusCUI/create_generated_clock.html#create_generated_clock-create_generated_clock">create_generated_clock</a></code></li><li><code><a href="../tempusCUI/set_clock_uncertainty.html#set_clock_uncertainty-set_clock_uncertainty">set_clock_uncertainty</a></code></li></ul>
+<p></p>
+
+<p><br /></p>
+
+<p><br /></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="report_clock_timing.html" id="prev" title="report_clock_timing">report_clock_timing</a></em></b><b><em><a href="report_constraint.html" id="nex" title="report_constraint">report_constraint</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

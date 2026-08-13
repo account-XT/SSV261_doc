@@ -1,0 +1,117 @@
+
+<html><head><title>User-defined Mode Based Current Waveform Generation with Automatic PWL Scaling</title>
+<meta name="page_sequence" content="22016000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468597" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="User-defined Mode Based Current Waveform Generation with Automatic PWL Scaling" />
+<meta name="Keywords" content="PGV,PWL,power,rail,macro,trigger,vectorless" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468597" />
+<meta name="NextFile" content="Dynamic_Rail_Analysis.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Scan_Control_File_Format.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- User-defined Mode Based Current Waveform Generation with Automatic PWL Scaling" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="Scan_Control_File_Format.html" title="Scan_Control_File_Format">Scan_Control_File_Format</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Dynamic_Rail_Analysis.html" title="Dynamic_Rail_Analysis">Dynamic_Rail_Analysis</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>User-defined Mode Based Current Waveform Generation with Automatic PWL Scaling</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>Given one master cell PWL waveform, Voltus can automatically generate scaled PWL waveforms of the other companion cells defined in a trigger file proportional to the master cell internal power. It keeps the waveform shape and scales the waveform magnitude based on the mode and net-dependent relative ratio of the NLPM internal power energy table value to the master cell model. This feature decouples the mode-based current waveform from PGV, and allows power analysis to directly take the PWL format from the user-defined trigger file. You do not need a dynamic PGV for Voltus power and rail analysis.</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>The companion cells must have the same configuration as the master cell, and they can only be in different sizes.</p>
+</div>
+</div>
+
+<p><br /></p>
+
+<p>Use the <code>-custom_macro_pwl</code> parameter of the <code>set_power</code> command to specify a custom trigger file that allows you to apply instance or cell PWL waveforms.</p>
+<ul><li>In the vector-based analysis, the user-defined PWL model overrides the .lib model. When instance input pins&#39; state matches with the <code>CONDITONAL_INPUT</code> and <code>CONDITIONAL_PIN</code> description, the PWL waveform is applied.</li><li>In the vectorless mode, the <code>-custom_macro_pwl</code> parameter must be used with <code>set_power &#8211;dynamic_switch_pattern</code> in the vectorless flow.</li></ul>
+<p>The use model of the <code>-custom_macro_pwl</code> parameter is:</p>
+<pre><code>set_power -custom_macro_pwl { ./cell.trigger } -dynamic_switch_pattern -cell SRAM_A1 { MODE_0 MODE_0 MODE_0}</code></pre>
+<p><br /></p>
+
+<p><strong>Example of a Custom Macro Power Trigger File (cell.trigger)</strong></p>
+<pre><code>MASTER_CELL        SRAM_A1<br />COMPANION_CELLS    { SRAM_A2, SRAM_A3, SRAM_A4, SRAM_A5 }<br />      MODE_NAME WRITE<br />               CONDITIONAL_INPUT = ( !SD &amp; !SLP &amp; !CEB &amp; !WEB )<br />               CONDITIONAL_PIN = CLK { RISE }<br />               USER_PWL_FILE write_rise.txt    <br />      END_MODE</code></pre><pre><code>
+      MODE_NAME READ<br />               CONDITIONAL_INPUT = ( !SD &amp; !SLP &amp; !CEB &amp; WEB )        <br />               CONDITIONAL_PIN = CLK { RISE }<br />               USER_PWL_FILE read_rise.txt<br />      END_MODE<br />      ...<br />END</code></pre>
+<p>The following information is displayed in the log file:</p>
+<pre><code>---------------------------------------------------------------</code></pre><pre><code>INFO : Macro cell &lt;Name of the cell&gt; used user-defined current waveform.</code></pre><pre><code>---------------------------------------------------------------</code></pre>
+<p>Voltus power saves the waveform scaling factor of each companion cell in an individual text file in the output directory. The file name is <code>scale_factor_report_&lt;master_cell_name&gt;.txt</code>.</p>
+
+<p>The following is an example of the text file:<br /><code>
+# CellName    NET     MODE      Scale-Factor<br />  SRAM_A2     VDD     WRITE      1.0<br />  SRAM_A2     VDDM    WRITE      1.0<br />  SRAM_A2     VSS     WRITE      1.0</code></p>
+<h4 id="UserdefinedModeBasedCurrentWaveformGenerationwithAutomaticPWLScaling-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Scan_Mode_Analysis.html">Scan Mode Analysis</a></li><li><a href="Dynamic_Power_Analysis.html">Dynamic Power Analysis</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Scan_Control_File_Format.html" id="prev" title="Scan_Control_File_Format">Scan_Control_File_Format</a></em></b><b><em><a href="Dynamic_Rail_Analysis.html" id="nex" title="Dynamic_Rail_Analysis">Dynamic_Rail_Analysis</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

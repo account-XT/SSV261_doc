@@ -1,0 +1,133 @@
+
+<html><head><title>Concepts in IR Drop and Ground Bounce</title>
+<meta name="page_sequence" content="21021001" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468583" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Concepts in IR Drop and Ground Bounce" />
+<meta name="Keywords" content="power-grid,resistor,current,static,electromigration,switching,IR drop,ground bounce" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468583" />
+<meta name="NextFile" content="Symptoms_of_IR_Drop_and_Ground_Bounce.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="IR_Drop_and_Ground_Bounce.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- Concepts in IR Drop and Ground Bounce" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="IR_Drop_and_Ground_Bounce.html" title="IR_Drop_and_Ground_Bounce">IR_Drop_and_Ground_Bounce</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Symptoms_of_IR_Drop_and_Ground_Bounce.html" title="Symptoms_of_IR_Drop_and_Ground_Bounce">Symptoms_of_IR_Drop_and_Ground ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Concepts in IR Drop and Ground Bounce</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>The following figure illustrates a power-grid network that helps to explain the concept of IR drop and ground bounce. It shows a chip power supply connected to the chip pads. The power-grid network is illustrated by the R11-R14 resistors for VDD and R21-R24 resistors for VSS. These resistors represent the resistance of the interconnect from the pads to the cells or transistors. G1-G4 are cells connected to VDD and VSS.</p>
+
+<p><br /><br /><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481260/732481261.gif" data-linked-resource-container-id="732481260" data-linked-resource-container-version="1" data-linked-resource-content-type="image/gif" data-linked-resource-default-alias="static-46.gif" data-linked-resource-id="732481261" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481260/732481261.gif" tabindex="0" width="678" /></span></p>
+
+<p>When you perform transistor- or gate-level simulation, the voltages (V1- V4) are typically assumed to be equal. It is further assumed that all power-grid resistances are zero ohms and that all chip components receive ideal power supply voltages.</p>
+
+<p>In reality, the power-grid resistances of a chip cannot be ignored. For example, cell G4 never has an ideal VDD voltage at its VDD pin when it is active; it has a lower voltage because the current flowing from the VDD pad to G4 must flow through resistances R11-R14. Ohm&#39;s law states that a current, I, flowing through an effective resistance, R, introduces a voltage drop, as given by the equation V = IR.</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>The term &quot;IR drop&quot; is derived from &quot;IR.&quot;</p>
+</div>
+</div>
+
+<p>Similarly, cell G4 never has an ideal VSS at its ground pin, because the current flowing from G4 back to the VSS pad must also travel through the ground network resistances R21-R24. In this case, cell G4 has an increased voltage at its ground pin.</p>
+
+<p>The power-grid network diagram also illustrates the complexity of power grids and IR drop. Assume that gate G4 consumes I4 mA and that no other cell is drawing current. This current flows from the power supply through the resistors of the power grid to G4. The IR drop at cell G4 is given by the following equation:</p>
+
+<p>IRG4 = I4 (R11+R12+R13+R14)</p>
+
+<p>In addition, cell G2 experiences an IR drop of I4(R11+R12) because of the current drawn by cell G4.</p>
+
+<p>Clearly, the current associated with each cell or transistor in a design can influence the IR drop or ground bounce for all other devices in the design.</p>
+
+<p><strong>Average and Peak Current</strong></p>
+
+<p>If the cells on a single metal VDD line switch together, the instantaneous IR drop can be large. Given simultaneous currents I1-I4 for the G1-G4 cells (as shown in Example Power-Grid Network), the IR drop at G4 would be given by the following equation:</p>
+
+<p>IIRG4 = I1(R11) + I2(R11+R12) + I3(R11+R12+R13) + I4(R11+R12+R13+R14)</p>
+
+<p>If this peak current occurred over one fourth of the clock cycle, the average IR drop at cell G4 over the entire clock cycle would be one quarter of that value.</p>
+
+<p>The peak IR drop at any location in a chip can therefore be much larger than the IR drop averaged over a clock cycle. As the size of a block increases, the ratio of the peak IR drop to the average decreases towards 1.0, because the probability of many devices switching at once decreases significantly.</p>
+
+<p><strong>Simultaneous Switching</strong></p>
+
+<p>Large amounts of IR drop or ground bounce can be caused by simultaneous switching of cells and transistors. If all cells and transistors of a design switched at once, the local or global IR drop or ground bounce on a chip would be extremely large. Luckily, the logic itself typically prevents this from happening.</p>
+
+<p>Potential causes of simultaneous switching are the following:</p>
+<ul><li>Synchronized clock networks</li><li>Bus drivers</li><li>Memory word line drivers</li><li>Signal I/O circuitry</li></ul>
+<p>Any groups of large drivers designed to switch together</p>
+<h4 id="ConceptsinIRDropandGroundBounce-RelatedTopics:"><em> Related Topics:</em></h4>
+<ul><li><a href="IR_Drop_and_Ground_Bounce.html">IR Drop and Ground Bounce</a></li><li><a href="Symptoms_of_IR_Drop_and_Ground_Bounce.html">Symptoms of IR Drop and Ground Bounce</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="IR_Drop_and_Ground_Bounce.html" id="prev" title="IR_Drop_and_Ground_Bounce">IR_Drop_and_Ground_Bounce</a></em></b><b><em><a href="Symptoms_of_IR_Drop_and_Ground_Bounce.html" id="nex" title="Symptoms_of_IR_Drop_and_Ground_Bounce">Symptoms_of_IR_Drop_and_Ground ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

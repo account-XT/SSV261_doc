@@ -1,0 +1,103 @@
+
+<html><head><title>Base Delay Reporting</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823901" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Base Delay Reporting" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823901" />
+<meta name="NextFile" content="analysisandreporting_signalandglitchanalysis.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_performingbasedelayanalysis.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Base Delay Reporting" />
+<meta name="Keywords" content="base delay reporting" />
+<meta name="topic_type" content="process" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Delay Calculation,Stylus" />
+<meta name="prod_subfeature" content="Delay Calculation" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_performingbasedelayanalysis.html" title="Performing Base Delay Analysis">Performing Base Delay Analysis</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_signalandglitchanalysis.html" title="Signal Integrity Delay and Glitch Analysis">Signal Integrity Delay and Gli ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:basedelayreporting" title="Base Delay Reporting"></a><h3>
+<a id="pgfId-1009610"></a><a id="68649"></a>Base Del<a id="BaseDelayReporting"></a>ay Reporting</h3>
+
+<p>
+<a id="pgfId-1009611"></a>The following commands can be used to generate reports on base delay:</p>
+<ul><li>
+<a id="pgfId-1041468"></a><code><a actuate="user" class="URL" href="../tempustxtcmdref/report_timing.html" show="replace" xml:link="simple">report_timing</a></code></li><li>
+<a id="pgfId-1041462"></a><code><a actuate="user" class="URL" href="../tempustxtcmdref/report_delay_calculation.html" show="replace" xml:link="simple">report_delay_calculation</a></code> </li></ul>
+
+
+<h4><em>
+<a id="pgfId-1009614"></a>Using the report_timing Command</em></h4>
+
+<p>
+<a id="pgfId-1009615"></a>You can use the <code>report_timing</code> command to report the base delays on a timing path. It is recommended to use the <code>report_timing</code> <code>&#8211;net</code> parameter to produce a comprehensive report.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052377"></a>tempus &gt; set_global report_timing_format {hpin cell slew delay arrival} <br />tempus &gt; report_timing &#8211;net<br />Path 1: VIOLATED Setup Check with Pin seg3/u9/CK <br />Endpoint: seg3/u9/D (v) checked with leading edge of &#39;CLK_W_3&#39;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052378"></a>Beginpoint: seg3/u3/Q (v) triggered by leading edge of &#39;CLK_W_3&#39; <br />Path Groups: {CLK_W_3} <br />Other End Arrival Time 1.104 <br />- Setup 0.152 <br />+ Phase Shift    2.000 <br />- Uncertainty    0.050 <br />= Required Time  2.902<br />- Arrival Time   3.151 <br />= Slack Time&#160;&#160;  -0.249</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052380"></a>Clock Rise Edge 0.000 <br />+ Clock Network Latency (Prop) 1.135 <br />= Beginpoint Arrival Time 1.135 <br />------------------------------------------------- <br />Pin             Cell    Slew     Delay    Arrival <br />                                          Time <br />------------------------------------------------- <br />seg3/u3/CK      -        0.091    -       1.135 <br />seg3/u3/Q -&gt;    DFF      0.318    0.303   1.438 <br />seg3/u4/A       BUF      0.318    0.008   1.446 <br />seg3/u4/Y       BUF      0.003    0.158   1.604 <br />seg3/u5/A       INV      0.005    0.003   1.607 <br />seg3/u5/Y       INV      0.499    0.140   1.748 <br />seg3/u6/A       INV      0.549    0.152   1.900 <br />seg3/u6/Y       INV      0.793    0.528   2.427 <br />seg3/u7/A       BUF      0.794    0.003   2.430 <br />seg3/u7/Y       BUF      0.596    0.404   2.835 <br />seg3/u7_a/A     BUF      0.596    0.060   2.895 <br />seg3/u7_a/Y     BUF      0.003    0.250   3.145 <br />seg3/u8/A       BUF      0.003    0.001   3.146 <br />seg3/u8/Y       BUF      0.042   -0.023   3.123 <br />seg3/u9/D       DFF      0.072    0.029   3.151 <br />------------------------------------------------ </pre>
+<h4><em>
+<a id="pgfId-1009620"></a>Using the report_delay_calculation Command</em></h4>
+
+<p>
+<a id="pgfId-1009621"></a>You can use the <code><a actuate="user" class="URL" href="../tempustxtcmdref/report_delay_calculation.html" show="replace" xml:link="simple">report_delay_calculation</a></code>command to report the delay calculation information for a cell or net timing arc.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052391"></a>tempus &gt; report_delay_calculation -from seg3/u5/Y -to seg3/u6/A</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052396"></a>
+From pin&#160;&#160;  : seg3/u5/Y <br />Cell        : INV <br />Library     : cell_w <br />To pin&#160;&#160;    : seg3/u6/A</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052397"></a>Cell : INV <br />Library : cell_w <br />Delay type: net</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1550368"></a>-------------------------------------------------- <br />RC Summary for net seg3/n5 <br />-------------------------------------------------- <br />Number of capacitance   : 17 <br />Net capacitance         : 0.293534 pF <br />Total rise capacitance  : 0.320849 pF <br />Total fall capacitance  : 0.320780 pF <br />Number of resistance    : 17 <br />Total resistance        : 567.671387 Ohm <br />---------------------------------------------------- <br />                          Rise           Fall <br />---------------------------------------------------- <br />Net delay                 : 0.151900 ns  0.119000 ns <br />From pin transition time  : 0.499000 ns  0.211500 ns <br />To pin transition time    : 0.549100 ns  0.248000 ns <br />----------------------------------------------------<a id="51365"></a></pre>
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_performingbasedelayanalysis.html" id="prev" title="Performing Base Delay Analysis">Performing Base Delay Analysis</a></em></b><b><em><a href="analysisandreporting_signalandglitchanalysis.html" id="nex" title="Signal Integrity Delay and Glitch Analysis">Signal Integrity Delay and Gli ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

@@ -1,0 +1,486 @@
+
+<html><head><title>Port-Based Clock Mapping Approach</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845219" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Port-Based Clock Mapping Approach" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845219" />
+<meta name="NextFile" content="analysisandreporting_manualclockmapping.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_onetoonemappingapproache.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- Port-Based Clock Mapping Approach" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="0" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_onetoonemappingapproache.html" title="1-1 Clock Mapping Approach">1-1 Clock Mapping Approach</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_manualclockmapping.html" title="Manual Clock Mapping Specification">Manual Clock Mapping Specifica ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:portmappingapproache" title="Port-Based Clock Mapping Approach"></a><h3>
+<a id="pgfId-2251256"></a><a id="38648"></a>Port-Based Clock Mapping Approach</h3>
+
+<p>
+<a id="pgfId-2251257"></a>The 1-to-1 clock mapping helps to achieve tight correlation between context analysis and flat analysis. But there can be cases where multiple block-level clocks need to be mapped to single top level clock or vice-versa. Tempus supports port-based clock mapping approach to handle such cases. </p>
+<p>
+<a id="pgfId-2251258"></a>The port-based clock mapping approach is enabled by setting the <code>timing_context_port_based_clock_mapping</code> attribute to <code>true</code>. In port-based clock mapping, clock mapping is done for each clock and data port independently based on clock property matching. This section covers details of port-based clock mapping approach.</p>
+
+<h4>
+<a id="pgfId-2251259"></a>Multiple Top Clock to Single Block Clock Mapping</h4>
+
+<p>
+<a id="pgfId-2251260"></a>In case of multiple top clocks reaching a block port with one block clock defined in block constraints, Tempus automatically maps one block clock to multiple top clocks on a block port if the clock property matches. In case of clock property mismatch, manual clock mapping needs to be specified by the user.</p>
+<p>
+<a id="pgfId-2251262"></a><strong>Port Based Clock Mapping Example</strong></p>
+
+<p>
+<a id="pgfId-2251265"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="268" src="images/analysisandreporting-158.gif" /></div>
+
+<p>
+<a id="pgfId-2251266"></a>In above example, automatic clock mapping of TCLK1,TCLK2, or TCLK3 to BCLK1 on clock port C1 and to VCLK1 on data port D1 will be done if clock property matches.</p>
+<p>
+<a id="pgfId-2251267"></a>The table shown below gives the resultant mapping when clock property matches:</p>
+
+<p>
+<a id="pgfId-2254920"></a></p>
+<table class="webflareTable" id="#id2254895">
+<tbody><tr>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2254897">
+<a id="pgfId-2254897"></a>Port</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2254899">
+<a id="pgfId-2254899"></a>Block Clock</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2254901">
+<a id="pgfId-2254901"></a>Mapped Top Clock</span>
+</th>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2254903"></a>C1</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2254905"></a>BCLK1(C)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2254907"></a>TCLK1(C) / TCLK2(C) / TCLK3(C)</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2254909"></a>D1</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2254911"></a>VCLK1</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2254913"></a>TCLK1(D) / TCLK2(D) / TCLK3(D)</p>
+</td>
+</tr>
+</tbody></table>
+
+<p>
+<a id="pgfId-2254875"></a>* (C) refers to clock phase and (D) refers to data phase</p>
+<p>
+<a id="pgfId-2251272"></a>In this case, the worst-case latency of TCLK1/TCLK2/TCLK3 will be applied to BCLK1 at port C1 and worst-case arrivals of TCLK1/TCLK2/TCLK3 will be applied to VCLK1 at port D1 in context analysis. In top level analysis, separate paths will be reported with respect to TCLK1 / TCLK2 / TCLK3 clocks, while context analysis will report paths only with respect to BCLK1 / VCLK1. The worst casing of clock latency and arrivals can cause pessimism due to wider timing windows during context analysis. Also, any mismatch in constraints between TCLK1/TCLK2/TCLK3 and BCLK1/VCLK1 can cause mis-correlation.</p>
+<p>
+<a id="pgfId-2251273"></a>Given below are few other examples:</p>
+
+<p>
+<a id="pgfId-2251277"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="179" src="images/analysisandreporting-159.gif" /></div>
+<p>
+<a id="pgfId-2255000"></a></p>
+<table class="webflareTable" id="#id2255052">
+<tbody><tr>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2254983">
+<a id="pgfId-2254983"></a>Block Port</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2254985">
+<a id="pgfId-2254985"></a>Block Clock</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2254987">
+<a id="pgfId-2254987"></a>Mapped Top Clock</span>
+</th>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2254989"></a>P1</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="3">
+<p>
+<a id="pgfId-2255106"></a></p>
+<p>
+<a id="pgfId-2254991"></a>BCLK1</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2254993"></a>TCLK1</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2254995"></a>P2</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2254999"></a>TCLK2</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2255075"></a>P3</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2255079"></a>TCLK3</p>
+</td>
+</tr>
+</tbody></table>
+
+<p>
+<a id="pgfId-2251278"></a>In above example, the port specific clock latency is applied to BCLK1 in context analysis at ports P1, P2, and P3, and there will be no worst casing of clock-latency.</p>
+
+<p>
+<a id="pgfId-2251282"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="165" src="images/analysisandreporting-160.gif" /></div>
+<p>
+<a id="pgfId-2255188"></a></p>
+<table class="webflareTable" id="#id2255192">
+<tbody><tr>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2255194">
+<a id="pgfId-2255194"></a>Block Port</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2255196">
+<a id="pgfId-2255196"></a>Block Clock</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2255198">
+<a id="pgfId-2255198"></a>Mapped Top Clock</span>
+</th>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2255200"></a>P1</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2255202"></a>BCLK1</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2255204"></a>TCLK1 / TCLK2</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2255206"></a>P2</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2255208"></a>BCLK2</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2255210"></a>TCLK1 / TCLK2</p>
+</td>
+</tr>
+</tbody></table>
+
+<p>
+<a id="pgfId-2251283"></a>In the above example, the port specific worst-cased top level clock latency is applied to BCLK1 and BCLK2 in context analysis at ports P1 and P2, respectively.</p>
+
+<h4>
+<a id="pgfId-2251284"></a>Multiple Block Clock to Single Top Clock Mapping</h4>
+
+<p>
+<a id="pgfId-2251285"></a>In case of one top clock reaching multiple block ports, with a different block clock defined on each of these block ports in block constraints, Tempus automatically maps different block clock to the same top clock on different block ports if the clock property matches. The top level data phases will be mapped (independent of clock phase mapping) to the block clock that constrains the data port. In case of clock property mismatch, manual clock mapping needs to be specified by the user.</p>
+<p>
+<a id="pgfId-2251286"></a>Consider the below example:</p>
+
+<p>
+<a id="pgfId-2251290"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="266" src="images/analysisandreporting-161.gif" /></div>
+
+<p>
+<a id="pgfId-2251291"></a>In above example, automatic clock mapping will be done if period/waveform of TCLK1 and BCLK1/BCLK2/BCLK3/VCLK match. The table below gives the resultant mapping: </p>
+
+<p>
+<a id="pgfId-2255320"></a></p>
+<table class="webflareTable" id="#id2255324">
+<tbody><tr>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2255326">
+<a id="pgfId-2255326"></a>Block Port</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2255328">
+<a id="pgfId-2255328"></a>Block Clock</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2255330">
+<a id="pgfId-2255330"></a>Mapped Top Clock</span>
+</th>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2255332"></a>CI</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2255334"></a>BCLK1(C)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="3">
+<p>
+<a id="pgfId-2255441"></a></p>
+<p>
+<a id="pgfId-2255336"></a>TCLK1(C)</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2255338"></a>C2</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2255340"></a>BCLK2(C)</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2255364"></a>C3</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2255366"></a>BCLK3(C)</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2255370"></a>D1</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2255372"></a>VCLK</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2255342"></a>TCLK1(D) </p>
+</td>
+</tr>
+</tbody></table>
+
+<p>
+<a id="pgfId-2251296"></a>* (C) refers to clock phase and (D) refers to data phase</p>
+<p>
+<a id="pgfId-2251297"></a>The port specific top level clock TCLK1 latency will be applied in context analysis for BCLK1/BCLK2/BCLK3 clocks.</p>
+<p>
+<a id="pgfId-2251298"></a>In the above example, any path exception <code>-to TCLK1</code> on input buffer I1 connected to D1 port in top level STA will be applied to BCLK1/BCLK2/BCLK3 clocks (for paths originating from port D1 only) in context analysis.</p>
+<p>
+<a id="pgfId-2251299"></a>If there are multiple block clocks that can be mapped to the same top clock on the same block port, then the software will not perform auto mapping. </p>
+<p>
+<a id="pgfId-2255522"></a>Consider the following examples:</p>
+
+<p>
+<a id="pgfId-2251303"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="477" src="images/analysisandreporting-162.gif" /></div>
+
+<p>
+<a id="pgfId-2251304"></a>In the above examples, all the clocks will remain unmapped and will require manual clock mapping specification.</p>
+<p>
+<a id="pgfId-2255653"></a><strong>Example 1: Clock Phase Mapping</strong></p>
+
+<p>
+<a id="pgfId-2255655"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="171" src="images/analysisandreporting-163.gif" /></div>
+
+<p>
+<a id="pgfId-2255823"></a>Expected clock mapping behavior:</p>
+<ul><li>
+<a id="pgfId-2255824"></a>TCLK1 will be mapped to BCLK1 at port P2</li><li>
+<a id="pgfId-2255825"></a>TCLK1 will be unmapped at port P1 and P3.</li><li>
+<a id="pgfId-2255826"></a>Clock would propagate only through P2. No clock propagation on P1 and P3<br />
+<a id="pgfId-2255657"></a><div class="webflare-div-image">
+<img width="666" height="169" src="images/analysisandreporting-164.gif" /></div></li></ul>
+
+
+
+
+
+
+<p>
+<a id="pgfId-2255853"></a>Expected clock mapping behavior:</p>
+<ul><li>
+<a id="pgfId-2255854"></a>TCLK1 will be mapped to BCLK1 at port P2</li><li>
+<a id="pgfId-2255855"></a>BCLK1 will be unmapped at port P1 and P3.</li><li>
+<a id="pgfId-2255659"></a>Clock would propagate only through P2. No clock propagation on P1 and P3<br />
+<a id="pgfId-2255893"></a><div class="webflare-div-image">
+<img width="666" height="171" src="images/analysisandreporting-165.gif" /></div></li></ul>
+
+
+
+
+
+
+<p>
+<a id="pgfId-2255897"></a>Expected clock mapping behavior:</p>
+<ul><li>
+<a id="pgfId-2255898"></a>TCLK1 will be mapped to BCLK1 only</li><li>
+<a id="pgfId-2255899"></a>User needs to specify manual N-1 clock mapping when property does not match<br />
+<a id="pgfId-2255661"></a><div class="webflare-div-image">
+<img width="666" height="169" src="images/analysisandreporting-166.gif" /></div></li></ul>
+
+
+
+
+
+<p>
+<a id="pgfId-2255933"></a>Expected clock mapping behavior:</p>
+<ul><li>
+<a id="pgfId-2255934"></a>TCLK1 dropped from context analysis.<br />
+<a id="pgfId-2255670"></a><div class="webflare-div-image">
+<img width="666" height="169" src="images/analysisandreporting-167.gif" /></div></li></ul>
+
+
+
+
+<p>
+<a id="pgfId-2255961"></a>Expected clock mapping behavior:</p>
+<ul><li>
+<a id="pgfId-2255962"></a>BCLK2 dropped from context analysis<br />
+<a id="pgfId-2255672"></a><div class="webflare-div-image">
+<img width="666" height="173" src="images/analysisandreporting-168.gif" /></div></li></ul>
+
+
+
+
+<p>
+<a id="pgfId-2255989"></a>Expected clock mapping behavior:</p>
+<ul><li>
+<a id="pgfId-2255990"></a>BCLK1/TCLK1 will not be mapped</li><li>
+<a id="pgfId-2255991"></a>User needs to specify manual 1-to-1 clock mapping </li></ul>
+
+<p>
+<a id="pgfId-2256359"></a><strong>Example 2: Data Phase Mapping</strong></p>
+
+<p>
+<a id="pgfId-2256017"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="176" src="images/analysisandreporting-169.gif" /></div>
+
+<p>
+<a id="pgfId-2256394"></a>Expected clock mapping behavior:</p>
+<ul><li>
+<a id="pgfId-2256395"></a>BCLK1 mapped to TCLK1 only<br />
+<a id="pgfId-2256056"></a><div class="webflare-div-image">
+<img width="666" height="181" src="images/analysisandreporting-170.gif" /></div></li></ul>
+
+
+
+
+<p>
+<a id="pgfId-2256414"></a>Expected clock mapping behavior:</p>
+<ul><li>
+<a id="pgfId-2256415"></a>TCLK1(D) mapped to VCLK1 at ports P1 and P2<br />
+<a id="pgfId-2256087"></a><div class="webflare-div-image">
+<img width="666" height="178" src="images/analysisandreporting-171.gif" /></div></li></ul>
+
+
+
+
+<p>
+<a id="pgfId-2256430"></a>Expected clock mapping behavior:</p>
+<ul><li>
+<a id="pgfId-2256431"></a>TCLK1(D) mapped to VCLK1 only at port P1</li><li>
+<a id="pgfId-2256432"></a>TCLK1(D) unmapped at ports P2 (and no arrival propagation from this port<br />
+<a id="pgfId-2256119"></a><div class="webflare-div-image">
+<img width="666" height="178" src="images/analysisandreporting-172.gif" /></div></li></ul>
+
+
+
+
+
+<p>
+<a id="pgfId-2256454"></a>Expected clock mapping behavior:</p>
+<ul><li>
+<a id="pgfId-2256455"></a>TCLK1(D) mapped to VCLK1 only at port P1</li><li>
+<a id="pgfId-2256456"></a>VCLK1 will be unmapped at port P2 (and no arrival propagation from this port)</li></ul>
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_onetoonemappingapproache.html" id="prev" title="1-1 Clock Mapping Approach">1-1 Clock Mapping Approach</a></em></b><b><em><a href="analysisandreporting_manualclockmapping.html" id="nex" title="Manual Clock Mapping Specification">Manual Clock Mapping Specifica ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

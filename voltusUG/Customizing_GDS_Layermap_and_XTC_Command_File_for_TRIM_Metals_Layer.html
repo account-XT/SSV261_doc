@@ -1,0 +1,112 @@
+
+<html><head><title>Customizing GDS Layermap and XTC Command File for TRIM Metals Layer</title>
+<meta name="page_sequence" content="41000000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468664" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Customizing GDS Layermap and XTC Command File for TRIM Metals Layer" />
+<meta name="Keywords" content="GDS,XTC,TRIM,CUT" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Utilities," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468664" />
+<meta name="NextFile" content="Glossary.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="DEF_File_Generation.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- Customizing GDS Layermap and XTC Command File for TRIM Metals Layer" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="DEF_File_Generation.html" title="DEF_File_Generation">DEF_File_Generation</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Glossary.html" title="Glossary">Glossary</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <div style="width: 100%; font-size: 32px; text-align: left;               font-weight: bold;">31</div>
+<h1 style="margin: 4px 0 4px;"><span>Customizing GDS Layermap and XTC Command File for TRIM Metals Layer</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>The purpose of the CUT/TRIM layer is to cut the metal layers so as to separate the different supplies. The following diagram illustrates how the CUT layers separate the power and ground supplies:</p>
+
+<p><br /></p>
+<div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481897/732481898.gif" data-linked-resource-container-id="732481897" data-linked-resource-container-version="1" data-linked-resource-content-type="image/gif" data-linked-resource-default-alias="mask_layer-2.gif" data-linked-resource-id="732481898" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481897/732481898.gif" tabindex="0" width="678" /></span></div>
+
+<p>To ensure that Voltus is able to identify the CUT layers, you need to manually modify these layers in the GDS layermap file. After modifying the layermap file, you need to customize the XTC command file for supporting these layers during power-grid library generation.</p>
+
+<p>This chapter gives examples for simple (without CUT layers) and advanced (with CUT layers) GDS layermap files, and the corresponding XTC command files. It gives sample XTC command files for stop@via layer 0, 1, and 2.</p>
+<h4 id="CustomizingGDSLayermapandXTCCommandFileforTRIMMetalsLayer-SimpleGDSLayerMapFile"><em> Simple GDS Layer Map File</em></h4>
+<pre><code>metal&#xa0;&#xa0;  M0    gds    180  250<br /></code><code>via&#xa0;&#xa0;    VIA0  gds    159  250<br /></code><code>metal&#xa0;&#xa0;  M1    gds    31   250<br /></code><code>via&#xa0;&#xa0;    VIA1  gds    51   250<br /></code><code>metal&#xa0;&#xa0;  M2    gds    32   250<br /></code><code>via&#xa0;&#xa0;    VIA2  gds    52   250<br /></code><code>metal    M3    gds    33   270&#xa0;&#xa0;&#xa0; </code></pre><h4 id="CustomizingGDSLayermapandXTCCommandFileforTRIMMetalsLayer-SimpleXTCCommandFile"><em> Simple XTC Command File</em></h4>
+<pre><code>CONNECT&#xa0;&#xa0;  M0    VIA0    M1    VIA1    M2    VIA2    M3</code></pre><h4 id="CustomizingGDSLayermapandXTCCommandFileforTRIMMetalsLayer-ActualLayerMapwithMaskLayers(NotSupportedinVoltus)"><em> Actual Layer Map with Mask Layers (Not Supported in Voltus)</em></h4>
+<pre><code>metal&#xa0;&#xa0;  M0      gds     180  250<br /></code><code>metal&#xa0;&#xa0;  M0      gds     180  255<br /></code><code>metal&#xa0;&#xa0;  M0      gds     180  256<br /></code><code>metal&#xa0;&#xa0;  M0      gds     202  180  port  textonly</code></pre><pre><code>
+<strong>metal&#xa0;&#xa0;      M0           gds          180  109   =&gt;Mask Metal Layer<br /></strong></code><code><strong>metal&#xa0;&#xa0;      M0           gds          180  110   =&gt;Mask Metal Layer<br /></strong></code><code><strong>metal&#xa0;&#xa0;      M0           gds          180  112   =&gt;Mask Metal Layer</strong></code></pre><pre><code>
+via&#xa0;&#xa0;    VIA0    gds     159  250<br /></code><code>metal&#xa0;&#xa0;  M1      gds     31   250<br /></code><code>metal&#xa0;&#xa0;  M1      gds     31   255<br /></code><code>metal&#xa0;&#xa0;  M1      gds     31   256<br /></code><code>metal&#xa0;&#xa0;  M1      gds     20   231  port  textonly</code></pre><pre><code><strong>metal&#xa0;&#xa0;      M1           gds          31   109   =&gt;Mask Metal Layer<br /></strong></code><code><strong>metal&#xa0;&#xa0;      M1           gds          31   110   =&gt;Mask Metal Layer</strong></code></pre><pre><code>via&#xa0;&#xa0;    VIA1    gds     51   250<br /></code><code>via&#xa0;&#xa0;    VIA1     gds     51    255<br /></code><code>via&#xa0;&#xa0;    VIA1     gds     51    256<br /></code><code>metal&#xa0;&#xa0;  M2       gds     32    250<br /></code><code>metal&#xa0;&#xa0;  M2       gds     32    255<br /></code><code>metal&#xa0;&#xa0;  M2       gds     32    256<br /></code><code>metal&#xa0;&#xa0;  M2       gds     202   32  port  textonly</code></pre><pre><code><strong>metal&#xa0;&#xa0;      M2             gds          32        110   =&gt;Mask Metal Layer</strong></code></pre><pre><code>via&#xa0;&#xa0;    VIA2     gds     52    250<br /></code><code>via&#xa0;&#xa0;    VIA2     gds     52    255<br /></code><code>via&#xa0;&#xa0;    VIA2     gds     52    256<br /></code><code>metal&#xa0;&#xa0;  M3       gds     33    270<br /></code><code>metal&#xa0;&#xa0;  M3       gds     33    275<br /></code><code>metal&#xa0;&#xa0;  M3       gds     33    276<br /></code><code>metal&#xa0;&#xa0;  M3       gds     20    233  port  textonly<br /></code><code>via&#xa0;&#xa0;    VIA3     gds     53    330<br /></code><code>metal&#xa0;&#xa0;  M4       gds     54    330<br /></code><code>metal&#xa0;&#xa0;  M4       gds     303   34   port  textonly</code></pre><h4 id="CustomizingGDSLayermapandXTCCommandFileforTRIMMetalsLayer-ModifiedLayerMapwithRenamedMetal(M0,M1,M2)andMaskLayers"><em> Modified Layer Map with Renamed Metal (M0, M1, M2) and Mask Layers </em></h4>
+<pre><code>
+metal&#xa0;&#xa0;  M0      gds     180  250<br /></code><code>metal&#xa0;&#xa0;  M0_0    gds     180  255<br /></code><code>metal&#xa0;&#xa0;  M0_1    gds     180  256<br /></code><code>metal&#xa0;&#xa0;  M0      gds     202  180  port  textonly<br /></code><code><strong>metal&#xa0;&#xa0;      CM0_0     gds          180  109   =&gt;Mask Metal Layer<br /></strong></code><code><strong>metal&#xa0;&#xa0;      CM0_1     gds          180  110   =&gt;Mask Metal Layer<br /></strong></code><code><strong>metal&#xa0;&#xa0;      CM0_2      gds          180  112   =&gt;Mask Metal Layer<br /></strong></code><code>via&#xa0;&#xa0;    VIA0    gds     159  250<br /></code><code>metal&#xa0;&#xa0;  M1      gds     31   250<br /></code><code>metal&#xa0;&#xa0;  M1_0    gds     31   255<br /></code><code>metal&#xa0;&#xa0;  M1_1    gds     31   256<br /></code><code>metal&#xa0;&#xa0;  M1      gds     20   231  port  textonly</code></pre><pre><code><strong>metal&#xa0;&#xa0;      CM1_0     gds          31   109   =&gt;Mask Metal Layer<br /></strong></code><code><strong>metal&#xa0;&#xa0;      CM1_1     gds          31   110   =&gt;Mask Metal Layer</strong></code></pre><pre><code>via&#xa0;&#xa0;    VIA1    gds     51   250<br /></code><code>via&#xa0;&#xa0;    VIA1     gds     51    255<br /></code><code>via&#xa0;&#xa0;    VIA1     gds     51    256<br /></code><code>metal&#xa0;&#xa0;  M2       gds     32    250<br /></code><code>metal&#xa0;&#xa0;  M2_0     gds     32    255<br /></code><code>metal&#xa0;&#xa0;  M2_1     gds     32    256<br /></code><code>metal&#xa0;&#xa0;  M2       gds     202   32  port  textonly</code></pre><pre><code><strong>metal&#xa0;&#xa0;      CM2           gds         32        110   =&gt;Mask Metal Layer</strong></code></pre><pre><code>via&#xa0;&#xa0;    VIA2     gds     52    250<br /></code><code>via&#xa0;&#xa0;    VIA2     gds     52    255<br /></code><code>via&#xa0;&#xa0;    VIA2     gds     52    256<br /></code><code>metal&#xa0;&#xa0;  M3       gds     33    270<br /></code><code>metal&#xa0;&#xa0;  M3       gds     33    275<br /></code><code>metal&#xa0;&#xa0;  M3       gds     33    276<br /></code><code>metal&#xa0;&#xa0;  M3       gds     20    233  port  textonly<br /></code><code>via&#xa0;&#xa0;    VIA3     gds     53    330<br /></code><code>metal&#xa0;&#xa0;  M4       gds     54    330<br /></code><code>metal&#xa0;&#xa0;  M4       gds     303   34   port  textonly</code></pre><h4 id="CustomizingGDSLayermapandXTCCommandFileforTRIMMetalsLayer-XTCCommandFilewithSTOP@VIA0"><em> XTC Command File with STOP@VIA0</em></h4>
+<pre><code>COPY&#xa0;&#xa0;  M0_0      M0<br /></code><code>COPY&#xa0;&#xa0;  M0_1      M0<br /></code><code>AND&#xa0;&#xa0;   M0_0      CM0_0      CM0_0_phy<br /></code><code>AND&#xa0;&#xa0;   M0_1      CM0_1      CM0_1_phy<br /></code><code>NOT&#xa0;&#xa0;   M0        CM0_0_phy  M0_0_phy<br /></code><code>NOT&#xa0;&#xa0;   M0_0_phy  CM0_1_phy  M0_1_phy<br /></code><code>DELETE&#xa0;&#xa0;M0<br /></code><code>COPY&#xa0;&#xa0;  M0_1_phy  M0<br /></code><code>COPY&#xa0;&#xa0;  M1_0      M1<br /></code><code>COPY&#xa0;&#xa0;  M1_1      M1<br /></code><code>AND&#xa0;&#xa0;   M1_0      CM1_0      CM1_0_phy<br /></code><code>AND&#xa0;&#xa0;   M1_1      CM1_1      CM1_1_phy<br /></code><code>NOT&#xa0;&#xa0;   M1        CM1_0_phy  M1_0_phy<br /></code><code>NOT&#xa0;&#xa0;   M1_0_phy  CM1_1_phy  M1_OUT</code></pre><pre><code>DELETE&#xa0;&#xa0;M1</code></pre><pre><code>COPY&#xa0;&#xa0;  M1_OUT    M1<br /></code><code>COPY&#xa0;&#xa0;  M2_0      M2<br /></code><code>COPY&#xa0;&#xa0;  M2_1      M2<br /></code><code>AND&#xa0;&#xa0;   M2_1      CM2        CM2_phy<br /></code><code>NOT&#xa0;&#xa0;   M2        CM2_phy    M2_phy<br /></code><code>DELETE&#xa0;&#xa0;M2<br /></code><code>COPY&#xa0;&#xa0;  M2_phy    M2<br /></code><code>CONNECT&#xa0;&#xa0;   M0    VIA0    M1    VIA1    M2    VIA2    M3</code></pre><h4 id="CustomizingGDSLayermapandXTCCommandFileforTRIMMetalsLayer-XTCCommandFilewithSTOP@VIA1"><em> XTC Command File with STOP@VIA1</em></h4>
+<pre><code>COPY&#xa0;&#xa0;  M1_0      M1<br /></code><code>COPY&#xa0;&#xa0; M1_1&#xa0;&#xa0;    M1<br /></code><code>AND&#xa0;&#xa0;  M1_0      CM1_0     CM1_0_phy<br /></code><code>AND&#xa0;&#xa0;  M1_1      CM1_1     CM1_1_phy<br /></code><code>NOT&#xa0;&#xa0;  M1        CM1_0_phy M1_0_phy<br /></code><code>NOT&#xa0;&#xa0;  M1_0_phy  CM1_1_phy M1_OUT<br /></code><code>DELETE M1<br /></code><code>COPY&#xa0;&#xa0; M1_OUT&#xa0;&#xa0;  M1<br /></code><code>COPY&#xa0;&#xa0; M2_0&#xa0;&#xa0;    M2<br /></code><code>COPY&#xa0;&#xa0; M2_1&#xa0;&#xa0;    M2<br /></code><code>AND&#xa0;&#xa0;  M2_1      CM2       CM2_phy<br /></code><code>NOT&#xa0;&#xa0;  M2        CM2_phy   M2_phy<br /></code><code>DELETE M2<br /></code><code>COPY&#xa0;&#xa0; M2_phy&#xa0;&#xa0;  M2<br /></code><code>CONNECT&#xa0;&#xa0;   M1    VIA1    M2    VIA2    M3</code></pre><h4 id="CustomizingGDSLayermapandXTCCommandFileforTRIMMetalsLayer-XTCCommandFilewithSTOP@VIA2"><em> XTC Command File with STOP@VIA2</em></h4>
+<pre><code>COPY&#xa0;&#xa0;  M2_0     M2<br /></code><code>COPY&#xa0;&#xa0;  M2_1     M2<br /></code><code>AND&#xa0;&#xa0;   M2_1     CM2         CM2_phy<br /></code><code>NOT&#xa0;&#xa0;   M2       CM2_phy     M2_phy<br /></code><code>DELETE&#xa0;&#xa0;M2<br /></code><code>COPY&#xa0;&#xa0;  M2_phy   M2<br /></code><code>CONNECT&#xa0;&#xa0;   M2     VIA2     M3</code></pre>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="DEF_File_Generation.html" id="prev" title="DEF_File_Generation">DEF_File_Generation</a></em></b><b><em><a href="Glossary.html" id="nex" title="Glossary">Glossary</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

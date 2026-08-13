@@ -1,0 +1,153 @@
+
+<html><head><title>Rules for EM model in Conductor layer</title>
+<meta name="page_sequence" content="39019000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468661" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Rules for EM model in Conductor layer" />
+<meta name="Keywords" content="conductor,EM,EQU,length,width" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Rail Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468661" />
+<meta name="NextFile" content="Rules_for_EM_model_in_Via_layer.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="EM_Only_ICT_File.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- Rules for EM model in Conductor layer" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="EM_Only_ICT_File.html" title="EM_Only_ICT_File">EM_Only_ICT_File</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Rules_for_EM_model_in_Via_layer.html" title="Rules_for_EM_model_in_Via_layer">Rules_for_EM_model_in_Via_laye ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Rules for EM model in Conductor layer</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="RulesforEMmodelinConductorlayer-10289"></span></p>
+<ul><li><strong>Equations in EM Model</strong></li></ul>
+<p>The conductor layer usually uses equation (EQU) to describe the EM model. EQU is a function of the conductor/metal width, fn(w). The operators used in EQU are: +, -, *, /, ^, sqrt, (). You must specify the EQU statements in the same fn(w) form with different beneficial factors, and the EQU statements must be listed in the ascending order of beneficial factors.</p>
+
+<p><br /></p>
+<div class="table-wrap"><table class="webflareTable wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code>
+em_model {<br />   em_jmax_dc_avg EQU <strong>1</strong> <strong>* </strong>0.123 * (w &#8211; 0.001) jmax_factor 100 2.0 105 1.5 110 1.0 115 0.8 120 0.6 125 0.4 W &lt;= 2<br />   em_jmax_dc_avg EQU <strong>2</strong> * 0.123 * (w &#8211; 0.001) jmax_factor 100 2.0 105 1.5 110 1.0 115 0.8 120 0.6 125 0.4 W &gt; 2 W &lt;= 3<br />   em_jmax_dc_avg EQU <strong>3 * 0.123 * (w &#8211; 0.001)</strong> jmax_factor 100 2.0 105 1.5 110 1.0 115 0.8 120 0.6 125 0.4 W &gt; 3<br />         }</code></pre></td>
+</tr>
+</tbody></table></div>
+
+<p>In the above EQU statements:</p>
+<p style="margin-left: 30.0px;"><code>fn(w) = </code><strong>0.123 * (w &#8211; 0.001)</strong></p>
+<p style="margin-left: 30.0px;">Beneficial factors are <strong>1</strong>, <strong>2</strong>, and <strong>3</strong>, respectively. The beneficial factor must be preceded to fn(w).</p>
+<ul><li><strong>jmax_factor</strong></li></ul>
+<p><code>jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]</code></p>
+
+<p>EQU may have the temperature scaling table, <code>jmax_factor</code>.&#xa0;&#xa0;<code>jmax_factor</code> is the optional scaling factor to use at different temperatures compared to the reference temperature (defined by <code>em_tref</code> in the process definition). The temperature for <code>jmax_factor</code> should be specified in degrees Celsius. Scaling factor is a positive integer: &gt;1 to scale up, &lt;1 to scale down, or 1 for no scale effect. Normally, the lower temperature has a bigger scale factor, while the higher temperature has a smaller scale factor for the current limit.</p>
+
+<p><br /></p>
+<div class="table-wrap"><table class="webflareTable wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code>
+em_model {<br />    em_jmax_dc_avg EQU 1 * 0.123 * (w &#8211; 0.001) jmax_factor 100 2.0 105 1.5 110 1.0 115 0.8 120 0.6 125 0.4<br />}</code></pre></td>
+</tr>
+</tbody></table></div>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>When setting scale factors for multiple temperatures, they should be specified in an ascending sequence to enable interpolation.</p>
+</div>
+</div>
+
+<p>The temperature in <code>jmax_factor</code> for EM calculation is the input by <code>set_rail_analysis_mode</code> <code>-em_temperature &lt;</code><span class="webflare-courier-new" style="white-space: pre;"><em>value</em></span><code>&gt;</code>.</p>
+<ul><li><strong>Length or Width Condition</strong></li></ul>
+<p>EQU may have the width (W) and/or length (L) of conductor/metal as the condition. The L parameter specifies the length-based jmax values in microns. The W parameter specifies the width-based jmax values in microns. L and W are applicable for both metals and vias.</p>
+
+<p><br /></p>
+<div class="table-wrap"><table class="webflareTable wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code>
+em_model {<br />    em_jmax_dc_avg EQU 1 * 0.123 * (w &#8211; 0.001) jmax_factor 100 2.0 105 1.5 110 1.0 115 0.8 120 0.6 125 0.4 <strong>L &gt; 4 W &lt; 1<br /></strong>    em_jmax_dc_avg EQU 2 * 0.123 * (w &#8211; 0.001) jmax_factor 100 2.0 105 1.5 110 1.0 115 0.8 120 0.6 125 0.4 <strong>L &gt;= 2 L &lt;= 4<br /></strong>}</code></pre></td>
+</tr>
+</tbody></table></div>
+
+<p>The qualifiers of&#xa0;&#xa0;W or L must be preceded to inequality symbols.</p>
+
+<p>W &gt;= 2 W &lt;= 4; acceptable<br />2 &lt;= W &lt;= 4; not acceptable</p>
+<ul><li><strong>delta_T Variable</strong></li></ul>
+<p>EQU may have the variable, <code>delta_T</code>, which is the input by <code>set_rail_analysis_mode &#8211;rms_em_delta_T &lt;</code><span class="webflare-courier-new" style="white-space: pre;"><em>value</em></span><code>&gt;</code>. <code>delta_T</code> is the maximum temperature rise permitted in Celsius degree. This value is used for root-mean-square (rms) Electronmigration current limit analysis.</p>
+
+<p><br /></p>
+<div class="table-wrap"><table class="webflareTable wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code>
+em_model {<br />    em_jmax_ac_rms EQU sqrt( 1.23 * delta_T * ( w - 0.001 )^2 )<br />}</code></pre></td>
+</tr>
+</tbody></table></div>
+<ul><li><strong>Implicit /sqrt(r) in em_jmax_ac_peak</strong></li></ul>
+<p>For AC peak current limit, it may have EQU as shown below:</p>
+
+<p><br /></p>
+<div class="table-wrap"><table class="webflareTable wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code>
+em_model {<br />    em_jmax_ac_peak EQU 123.12 * (w &#8211; 0.002)<br />}</code></pre></td>
+</tr>
+</tbody></table></div>
+
+<p>When the AC peak current limit is calculated, the formulation of &quot;<code>123.12*(w-0.002)/sqrt(r)</code>&quot; is used inside the tool. That is /sqrt(r) is always implicit in the EQU of <code>em_jmax_ac_peak</code>. &quot;r&quot; is duty ratio.</p>
+<h4 id="RulesforEMmodelinConductorlayer-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Rules_for_EM_model_in_Via_layer.html">Rules for EM model in Via layer</a></li><li><a href="EM_Only_ICT_File.html">EM Only ICT File</a></li><li><a href="EM_Models_File.html">EM Models File</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="EM_Only_ICT_File.html" id="prev" title="EM_Only_ICT_File">EM_Only_ICT_File</a></em></b><b><em><a href="Rules_for_EM_model_in_Via_layer.html" id="nex" title="Rules_for_EM_model_in_Via_layer">Rules_for_EM_model_in_Via_laye ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

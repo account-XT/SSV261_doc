@@ -1,0 +1,193 @@
+
+<html><head><title>report_cppr</title>
+<meta name="page_sequence" content="37062000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287389" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="report_cppr" />
+<meta name="Keywords" content="generate clock report,cppr value,clock reconvergence pessimism value" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Timing Analysis," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287389" />
+<meta name="NextFile" content="report_critical_insts.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="report_constraint.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- report_cppr" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="report_constraint.html" title="report_constraint">report_constraint</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="report_critical_insts.html" title="report_critical_insts">report_critical_insts</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>report_cppr</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>report_cppr<span class="confluence-anchor-link" id="report_cppr-report_cppr"></span><span id="report_cppr-report_cppr"></span> <br />[-help]<br /><span>[-check_type {setup | hold | clock_gating_setup | clock_gating_hold | clock_gating_pulse_width | data_setup | data_hold | recovery | removal | pulse_width | clock_period | clock_separation | skew | no_change_setup | no_change_hold | time_borrow}]</span><br />-from <code><em>pin_or_port</em></code> <br />-to <code><em>pin_or_port</em></code> <br />[-from_clock <code><em>clkname</em></code>] <br />[-to_clock <code><em>clkname</em></code>]<br />[-early | -late]<br />[-view <code><em>view_name</em></code>] <br />[&gt; <code><em>filename</em></code>]</code> <br /></code></p>
+
+<p>Reports the clock reconvergence pessimism value at the common branching point of the early and late paths in the clock network of the specified data path.</p>
+
+<p>The <code>report_cppr</code> command reports separate values for both opening and closing edges for paths with latches as destinations. If both source and destination flops are triggered by multiple clocks, then one report is generated for each separate clock.</p>
+
+<p>When the software is in multi-mode multi-corner analysis mode, <code>report_cppr</code> reports the results for each active analysis view.</p>
+
+<p>To use the <code>report_cppr</code> command, you must first set the following attributes:</p>
+<ul><li><code>timing_cppr_transition_sense</code></li><li><code>timing_cppr_threshold_ps</code></li></ul>
+<p>For more details, see&#xa0;<a class="external-link" href="../tempusCUI/timing_Category_Attributes.html" rel="nofollow">timing Category Attributes</a>.</p>
+<h4 id="report_cppr-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="confluenceTable cadenceTable cadDefaultfont" id="cadDefaultfont" style="width: 720px;"><colgroup><col style="width: 300px;" /><col style="width: 340px;" /></colgroup><tbody><tr><td class="confluenceTd"><code>-help</code></td>
+<td class="confluenceTd">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd"><code>-check_type {setup | hold | clock_gating_setup | clock_gating_hold | clock_gating_pulse_width | data_setup | data_hold | recovery | removal | pulse_width | clock_period | clock_separation | skew | no_change_setup | no_change_hold | time_borrow}</code></td>
+<td class="confluenceTd">
+<p>Reports the CPPR for the paths that end at the specified timing check.</p>
+
+<p>The following check types are reported when the software is in setup analysis mode:&#xa0;<code>setup</code>,&#xa0;<code>pulse_width</code>,&#xa0;<code>clock_period</code>,&#xa0;<code>clock_gating_setup</code>,&#xa0;<code>clock_gating_pulse_width</code>,&#xa0;<code>data_setup</code>,&#xa0;<code>recovery</code>,&#xa0;<span>skew, </span><code>clock_separation</code>, <span><code>time_borrow</code>, </span>and&#xa0;<code>no_change_setup</code>.</p>
+
+<p>The following check types are reported when the software is in hold analysis mode:&#xa0;<code>hold</code>,&#xa0;<code>clock_gating_hold</code>,&#xa0;<code>data_hold</code>,&#xa0;<code>removal</code>, and&#xa0;<code>no_change_hold</code>.</p>
+
+<p>If the software is in simultaneous setup and hold analysis mode, all of the check types listed above are reported.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>&gt; </code><code><em>filename</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Writes the report to the specified file name. If the file already exists, the software overwrites it.</p>
+
+<p>The <code><em>filename</em></code> parameter must be the last argument in the list.</p>
+
+<p><strong>Note: </strong>To write a compressed report, add the <code>.gz</code> extension to the file name.</p>
+
+<p><em>Default:</em> Report is displayed on standard output without being saved.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-early</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Reports the hold analysis clock re-convergence pessimism value.</p>
+
+<p>You can specify this parameter when the software is in hold analysis mode, or in simultaneous setup and hold analysis mode (<code>set_db</code> <code>timing_enable_simultaneous_setup_hold_mode</code> <code>true</code>). For more details, see&#xa0;<a class="external-link" href="../tempusCUI/timing_Category_Attributes.html" rel="nofollow">timing Category Attributes</a>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-from</code> <code><em>pin_or_port</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Reports the clock re-convergence pessimism value for paths starting from the specified clock pin of the source flop, or from the specified port.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-from_clock</code> <code><em>clkname</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Reports the clock re-convergence pessimism value for paths with the specified triggering clock. Use this parameter when there is more than one clock triggering the source flop.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-late</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Reports the setup analysis clock re-convergence pessimism value.</p>
+
+<p>You can specify this parameter when the software is in setup analysis mode, or in simultaneous setup and hold analysis mode (<code>set_db</code> <code>timing_enable_simultaneous_setup_hold_mode</code> <code>true</code>). For more details, see&#xa0;<a class="external-link" href="../tempusCUI/timing_Category_Attributes.html" rel="nofollow">timing Category Attributes</a>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-to</code> <code><em>pin_or_port</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Reports the clock re-convergence pessimism value for paths ending at the specified clock pin of the destination flop, or at the specified port.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-to_clock</code> <code><em>clkname</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Reports the clock re-convergence pessimism value for paths with the specified capturing clock. Use this parameter when there is more than one clock capturing the destination flop.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-view </code><code><em>view_name</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Reports the clock re-convergence pessimism values for paths in the specified analysis view only. You can specify this parameter only when the software is in multi-mode multi-corner timing analysis mode.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="report_cppr-Examples">Examples</h4>
+<ul><li>The following command reports the clock re-convergence pessimism value for paths starting from the specified clock pin and ending at the specified destination pin:<br /><code>tempus &gt; report_cppr &#xa0; -from clk &#xa0; -to out2</code><br /><code>&#xa0;</code><br /><code>Start Clock Pin: clk (Triggered by rising &#xa0;edge of clock CLK)</code><br /><code>End Clock Pin: out2 (Triggered by rising &#xa0;edge of clock CLK)</code><br /><code>Analysis Type: Setup</code><br /><code>Analysis View: AV_wc_on</code><br /><code>Common Branch Point : CLK</code><br /><code>Launching Edge Type At Common Point : Rising</code><br /><code>Capturing Edge Type At Common Point : Rising</code><br /><code>Pessimism Threshold Value : &#xa0; &#xa0;0.040</code><br /><code>&#xa0; &#xa0; &#xa0; ------------------------------------- &#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0;Arrival &#xa0; &#xa0;Late &#xa0; Early &#xa0; Pessimism &#xa0;&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; Times &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; ------------------------------------- &#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; Rise &#xa0; &#xa0; 0.000 &#xa0; 0.000 &#xa0; &#xa0; 0.000 &#xa0; &#xa0;&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; Fall &#xa0; &#xa0; 0.000 &#xa0; 0.000 &#xa0; &#xa0; 0.000 &#xa0; &#xa0;&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; ------------------------------------- &#xa0;</code><br /><code>Edge Selection Mode : Normal</code><br /><code>Edge Selection : Match, Using Rise</code><br /><code>CPPR Adjustment : &#xa0; 0.000 </code></li><li>The following command reports the hold analysis clock re-convergence pessimism value:<br /><code>tempus &gt; report_cppr &#xa0; -from clk &#xa0; -to out2 &#xa0; -early</code><br /><code>&#xa0;</code><br /><code>Start Clock Pin: clk (Triggered by rising &#xa0;edge of clock CLK)</code><br /><code>End Clock Pin: out2 (Triggered by rising &#xa0;edge of clock CLK)</code><br /><code>Analysis Type: Hold</code><br /><code>Analysis View: AV_wc_on</code><br /><code>Common Branch Point : CLK</code><br /><code>Launching Edge Type At Common Point : Rising</code><br /><code>Capturing Edge Type At Common Point : Rising</code><br /><code>Pessimism Threshold Value : &#xa0; &#xa0;0.040</code><br /><code>&#xa0; &#xa0; &#xa0; ------------------------------------- &#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0;Arrival &#xa0; &#xa0;Late &#xa0; Early &#xa0; Pessimism &#xa0;&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; Times &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; ------------------------------------- &#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; Rise &#xa0; &#xa0; 0.000 &#xa0; 0.000 &#xa0; &#xa0; 0.000 &#xa0; &#xa0;&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; Fall &#xa0; &#xa0; 0.000 &#xa0; 0.000 &#xa0; &#xa0; 0.000 &#xa0; &#xa0;&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; ------------------------------------- &#xa0;</code><br /><code>Edge Selection Mode : Normal</code><br /><code>Edge Selection : Match, Using Rise</code><br /><code>CPPR Adjustment : &#xa0; 0.000&#xa0;</code></li><li>The following command reports the setup analysis clock re-convergence pessimism value:<br /><code>tempus &gt; report_cppr &#xa0; -from clk &#xa0; -to out2 &#xa0; -late&#xa0;</code><br /><code><br />Start Clock Pin: clk (Triggered by rising &#xa0;edge of clock CLK)</code><br /><code>End Clock Pin: out2 (Triggered by rising &#xa0;edge of clock CLK)</code><br /><code>Analysis Type: Setup</code><br /><code>Analysis View: AV_wc_on</code><br /><code>Common Branch Point : CLK</code><br /><code>Launching Edge Type At Common Point : Rising</code><br /><code>Capturing Edge Type At Common Point : Rising</code><br /><code>Pessimism Threshold Value : &#xa0; &#xa0;0.040</code><br /><code>&#xa0; &#xa0; &#xa0; ------------------------------------- &#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0;Arrival &#xa0; &#xa0;Late &#xa0; Early &#xa0; Pessimism &#xa0;&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; Times &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; ------------------------------------- &#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; Rise &#xa0; &#xa0; 0.000 &#xa0; 0.000 &#xa0; &#xa0; 0.000 &#xa0; &#xa0;&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; Fall &#xa0; &#xa0; 0.000 &#xa0; 0.000 &#xa0; &#xa0; 0.000 &#xa0; &#xa0;&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; ------------------------------------- &#xa0;</code><br /><code>Edge Selection Mode : Normal</code><br /><code>Edge Selection : Match, Using Rise</code><br /><code>CPPR Adjustment : &#xa0; 0.000&#xa0;</code></li><li>When the software is in multi-mode multi-corner timing analysis mode, you can specify the&#xa0;<code>-view</code>&#xa0;parameter to report the CPPR values for a specific analysis view:&#xa0;<br /><code>tempus &gt;&#xa0;report_cppr -from CLK3 -to seg3/u14/CK</code><br />
+<p><code>Start Clock Pin: CLK3 (Triggered by rising edge of clock CLK_W_3)</code><br /><code>End Clock Pin: seg3/u14/CK (Triggered by rising edge of clock CLK_W_3)</code><br /><code>Analysis Type: Setup</code><br /><code>Analysis View: setup_view1</code><br /><code>Common Branch Point : seg3/u17_c/Y</code><br /><code>Launching Edge Type At Common Point : Rising</code><br /><code>Capturing Edge Type At Common Point : Rising</code><br /><code>Pessimism Threshold Value : 0.020</code><br /><code>-------------------------------------</code><br /><code>Arrival &#xa0; Late &#xa0; &#xa0;Early &#xa0; Pessimism</code><br /><code>Times</code><br /><code>-------------------------------------</code><br /><code>Rise &#xa0; &#xa0; &#xa0;0.549 &#xa0; 0.366 &#xa0; 0.183</code><br /><code>Fall &#xa0; &#xa0; &#xa0;0.400 &#xa0; 0.267 &#xa0; 0.133</code><br /><code>-------------------------------------</code><br /><code>Edge Selection Mode : Normal</code><br /><code>Edge Selection : Match, Using Rise</code><br /><code>CPPR Adjustment : 0.183</code></p>
+</li></ul><div><ul><li>The following report shows sigma and mean values:&#xa0;<br /><code>tempus &gt; report_cppr -from FF01/CP -to FF02/CP<br /></code><br /><code>Start Clock Pin: FF01/CP (Triggered by rising edge of clock CK)</code><br /><code>End Clock Pin: FF02/CP (Triggered by rising edge of clock CK)</code><br /><code>Analysis Type: Setup</code><br /><code>Analysis View: view1</code><br /><code>Common Branch Point : CK</code><br /><code>Launching Edge Type At Common Point : Rising</code><br /><code>Capturing Edge Type At Common Point : Rising</code><br /><code>Pessimism Threshold Value : 0.020</code><br /><code>+-----------------------------------------------------------------------------+</code><br /><code>| Arrival | Late &#xa0;| Late &#xa0;| Early | Early | Pessimism | Pessimism | Pessimism |</code><br /><code>| Times &#xa0; | Mean &#xa0;| Sigma | Mean &#xa0;| Sigma | Mean &#xa0; &#xa0; &#xa0;| Sigma &#xa0; &#xa0; | &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; |</code><br /><code>|---------+-------+-------+-------+-------+-----------+-----------+-----------|</code><br /><code>| Rise &#xa0; &#xa0;| 0.000 | 0.000 | 0.000 | 0.000 | 0.000 &#xa0; &#xa0; | 0.000 &#xa0; &#xa0; | 0.000 &#xa0; &#xa0; |</code><br /><code>| Fall &#xa0; &#xa0;| 0.000 | 0.000 | 0.000 | 0.000 | 0.000 &#xa0; &#xa0; | 0.000 &#xa0; &#xa0; | 0.000 &#xa0; &#xa0; |</code><br /><code>+-----------------------------------------------------------------------------+</code><br /><code>Edge Selection Mode : Normal</code><br /><code>Edge Selection : Match, Using Rise</code><br /><code>CPPR Adjustment : 0.000 (+3.00S) | 0.000 | 0.00&#xa0;</code></li></ul><h4 id="report_cppr-RelatedCommandsandGlobalVariables">Related Commands and Global Variables</h4>
+<ul><li><code>timing_cppr_transition_sense</code></li><li><code>timing_cppr_threshold_ps</code></li><li><code>timing_enable_simultaneous_setup_hold_mode&#xa0;</code></li></ul></div>
+
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="report_constraint.html" id="prev" title="report_constraint">report_constraint</a></em></b><b><em><a href="report_critical_insts.html" id="nex" title="report_critical_insts">report_critical_insts</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

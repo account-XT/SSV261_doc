@@ -1,0 +1,222 @@
+
+<html><head><title>Clock Mapping Reporting</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845219" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Clock Mapping Reporting" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845219" />
+<meta name="NextFile" content="analysisandreporting_mimcontextanalysis.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_manualclockmapping.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- Clock Mapping Reporting" />
+<meta name="Keywords" content="clock mapping reports" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Timing Analysis,REPORTS,Stylus" />
+<meta name="prod_subfeature" content="Timing Analysis, Reports" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_manualclockmapping.html" title="Manual Clock Mapping Specification">Manual Clock Mapping Specifica ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_mimcontextanalysis.html" title="MIM Context Analysis">MIM Context Analysis</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:clockmappingreports" title="Clock Mapping Reporting"></a><h3>
+<a id="pgfId-2251339"></a><a id="35415"></a>Clock Mapping Reporting</h3>
+
+<p>
+<a id="pgfId-2251340"></a>Tempus creates clock mapping report (<em>timing_context_clock_mapping.rpt</em>) while reading the timing context (<a href="../tempusCUI/read_timing_context.html">read_timing_context</a> command).</p>
+<p>
+<a id="pgfId-2251342"></a>This file honors <code>auto_file_dir</code> and <code></code><code>auto_file_prefix</code> attributes.</p>
+<p>
+<a id="pgfId-2251343"></a>It is important to review the <em>timing_context_clock_mapping.rpt</em> file for details on mapped and unmapped clocks. The clock mapping report can also be generated using the <code></code><a actuate="user" class="URL" href="../tempusCUI/report_timing_context_clock_mapping.html" show="replace" xml:link="simple">report_timing_context_clock_mapping</a> command.</p>
+<p>
+<a id="pgfId-2251344"></a>The clock mapping report has the following six sections:</p>
+<ul><li>
+<a id="pgfId-2258716"></a><a href="analysisandreporting_clockmappingreports.html#85803">Section1: Mapped Block Clocks</a></li><li>
+<a id="pgfId-2258727"></a><a href="analysisandreporting_clockmappingreports.html#16561">Section2: Unmapped Block Clocks</a></li><li>
+<a id="pgfId-2258734"></a><a href="analysisandreporting_clockmappingreports.html#88952">Section3: Unmapped Top Clocks</a></li><li>
+<a id="pgfId-2258741"></a><a href="analysisandreporting_clockmappingreports.html#96479">Section4: Block Level Unmapped Virtual Clocks</a></li><li>
+<a id="pgfId-2258748"></a><a href="analysisandreporting_clockmappingreports.html#43149">Section5: Mapped Block Clocks on Data Ports</a></li><li>
+<a id="pgfId-2258755"></a><a href="analysisandreporting_clockmappingreports.html#59015">Section6: Unmapped Top Clocks on Data Ports</a></li></ul>
+
+
+
+
+
+
+<h4>
+<a id="pgfId-2251349"></a><a id="85803"></a>Section1: Mapped Block Clocks</h4>
+
+<p>
+<a id="pgfId-2251350"></a>This section reports the block-level clocks and the corresponding mapped top level clocks. It also prints the usage, indicating whether clock enters as clock or data or used for exception modeling.</p>
+<p>
+<a id="pgfId-2251351"></a>Below snippet indicates that block-level clock bclk is mapped to top level clock tclk. Usage {C} indicates that bclk enters the block as clock phase at port b_clk.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2257434"></a>Info:     Block clocks mapped to top clocks on clock pins/ports:<br />--------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2257435"></a>Block Clock   Block Clock Waveform    Top Clock   Top Clock Waveform<br />       Top View   WF Match   Usage     Pins/Ports   Type    View<br />--------------------------------------------------------------------------------<br />bclk         200.000{0.000 1000.000}  tclk        200.000{0.000 1000.000}<br />       view1      yes        {C I O}   b_clk        auto    view1  <br />---------------------------------------------------------------------------------</pre>
+
+<p>
+<a id="pgfId-2251356"></a>The following are the various values of usage:</p>
+
+<p>
+<a id="pgfId-2251382"></a></p>
+<table class="webflareTable" id="#id2251357">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2251359">
+<a id="pgfId-2251359"></a>Usage</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2251361">
+<a id="pgfId-2251361"></a>Explanation</span>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2251363"></a>C</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2251365"></a>Top clock enters block clock ports as clock.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2251367"></a>I</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2251369"></a>Top clock enters block data input ports as launching clock.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2251371"></a>O</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2251373"></a>Top clock enters block data output ports as capturing clock.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2251375"></a>R</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2251377"></a>Top clock enters block data output ports as reference clock to outside path checks.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2251379"></a>E</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2251381"></a>Top clock enters block data ports as -from/to clock in path exceptions.</p>
+</td>
+</tr>
+</tbody></table>
+<h4>
+<a id="pgfId-2251383"></a><strong>Section2: Unmapped Block Clocks</strong><a id="16561"></a></h4>
+
+<p>
+<a id="pgfId-2251384"></a>This section reports the block-level clocks that were not mapped with any top level clock. It also shows a diagnostic message for the possible reason of unsuccessful mapping.</p>
+<p>
+<a id="pgfId-2251385"></a>The following example snippet indicates that the block level clock <code>cclk</code> cannot be mapped with any top level clocks, because any top level clock with a property matching with <code>cclk</code> was found at port <code>c_clk</code>:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2257833"></a>Info:     Block clocks NOT mapped to top clocks on clock pins/ports:<br />--------------------------------------------------------------------------------<br />Block Clock  Block Clock Waveform     Mapping Result     <br />         Pins/Ports      View<br />--------------------------------------------------------------------------------<br />cclk         500.000{0.000 2500.000}  No possible match by parameter/name               <br />         c_clk           view1  <br />---------------------------------------------------------------------------------</pre>
+<h4>
+<a id="pgfId-2251390"></a><strong>Section3: Unmapped Top Clocks</strong><a id="88952"></a></h4>
+
+<p>
+<a id="pgfId-2251391"></a>This section reports the top level clocks that were not mapped with any block level clock. It also has the diagnostic message for possible reason of unsuccessful mapping.</p>
+<p>
+<a id="pgfId-2251392"></a>The snippet shown below indicates that the top level clock <code>atclk</code> cannot be mapped with any block level clocks at the port <code>atport</code>.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2257968"></a>Info:        Top clocks NOT mapped to block clocks on clock pins/ports:<br />--------------------------------------------------------------------------------<br />Top Clock    Top Clock Waveform        Usage     Mapping Result<br />      Pins/Ports      View<br />--------------------------------------------------------------------------------<br />atclk        4000.000{0.000 2000.000}  {C}       No possible match by parameter/name   atport         view1  <br />---------------------------------------------------------------------------------</pre>
+<h4>
+<a id="pgfId-2251397"></a><strong>Section4: Block Level Unmapped Virtual Clocks</strong><a id="96479"></a></h4>
+
+<p>
+<a id="pgfId-2251398"></a>This section reports the block level virtual clocks which could not be mapped with any top-level clock.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2258158"></a>Info:        Virtual block clocks NOT mapped to top clocks:<br />--------------------------------------------------------------------------------<br />Block Clock      Block Clock Waveform           View<br />--------------------------------------------------------------------------------<br />v_bclk&#160;&#160;         10000.000{0.000 5000.000}      view1  </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2258161"></a>---------------------------------------------------------------------------------</pre>
+<h4>
+<a id="pgfId-2251403"></a><strong>Section5: Mapped Block Clocks on Data Ports</strong><a id="43149"></a></h4>
+
+<p>
+<a id="pgfId-2251404"></a>This section reports the block-level clocks mapped to top level clocks on data ports.</p>
+<p>
+<a id="pgfId-2251405"></a>The following example indicates that the block-level clock <code>coreclk</code> is mapped to top level clock <code>coreclk</code> on data port <code>coreclk</code>.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2258399"></a>Info:     Block clocks mapped to top clocks on data ports:<br />---------------------------------------------------------------------------------<br />Block Clock   Block Clock Waveform    Top Clock   Top Clock Waveform<br />       Top View   WF Match   Usage     Ports   Type      View<br />---------------------------------------------------------------------------------<br />coreclk       740.000{0.000 370.000}  coreclk     740.000{0.000 370.000}<br />       view1      yes        {C I}    coreclk     auto   view1</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2258402"></a>---------------------------------------------------------------------------------</pre>
+<h4>
+<a id="pgfId-2251410"></a><strong>Section6: Unmapped Top Clocks on Data Ports</strong><a id="59015"></a></h4>
+
+<p>
+<a id="pgfId-2251411"></a>This section reports the top-level clocks that was not mapped to any block level clock. It also has shows a diagnostic message for the possible reason for unsuccessful mapping.</p>
+<p>
+<a id="pgfId-2251412"></a>The example snippet below indicates that the top-level clock <code>t_clk</code> cannot be mapped with any block level clocks at port <code>t_clk</code>. </p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2258463"></a>Info:        Top clocks NOT mapped to block clocks on data ports:<br />---------------------------------------------------------------------------------<br />Top Clock    Top Clock Waveform        Usage         Mapping Result<br />                 Ports      View<br />---------------------------------------------------------------------------------<br />t_clk        4000.000{0.000 2000.000}  {C I O}       No possible match by parameter/name   t_clk      view1  <br />---------------------------------------------------------------------------------</pre>
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_manualclockmapping.html" id="prev" title="Manual Clock Mapping Specification">Manual Clock Mapping Specifica ...</a></em></b><b><em><a href="analysisandreporting_mimcontextanalysis.html" id="nex" title="MIM Context Analysis">MIM Context Analysis</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

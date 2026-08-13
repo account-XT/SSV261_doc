@@ -1,0 +1,189 @@
+
+<html><head><title>save_testcase</title>
+<meta name="page_sequence" content="23002000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666344" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the text commands in Voltus IC Power Integrity Solution." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="save_testcase" />
+<meta name="Keywords" content="saving design, standalone testcase, design files, library files, database file references, loading design" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="General," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666344" />
+<meta name="NextFile" content="set_delay_cal_mode.html" />
+<meta name="Group" content="Voltus Text Command Reference" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="get_metric.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution Text Command Reference -- save_testcase" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="epstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="get_metric.html" title="get_metric">get_metric</a></li><li style="float: right;"><a class="viewPrint" href="voltustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_delay_cal_mode.html" title="set_delay_cal_mode">set_delay_cal_mode</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>save_testcase</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="save_testcase-save_testcase"></span> <code><br /><code>save_testcase<br />[-dir <em>directoryName</em>]<br />[-foundationFlow]<br />[-gzip]<br />[-name <code><em>testcaseName</em></code>]<code><br /></code>[-merge]<br />[-noTimingGraph]<br />[-oaUsedLibraryOnly]<br />[-overwrite]<br />[-rc]</code></code></p>
+
+<p>Saves your design as a standalone testcase that includes both the design and the library files. All database references to files in the generated testcase are self-contained, such that the database can be loaded into Voltus on a different network.</p>
+
+<p>You can use this command after loading a design.</p>
+
+<p><strong>Note: </strong>Exit Voltus after using the command. This is to avoid a possibility where <code>save_design</code> may create a configuration file with a timing constraints file pointing to the testcase directory. Given that the testcase directory is considered temporary, and may be gzipped or even deleted, a pointer to its data is not desirable. Exiting Voltus and re-loading a previously saved database will avoid this possibility.</p>
+<h4 id="save_testcase-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table bgcolor="#FFFFFF" cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="2" valign="top">
+<p><code>-name</code> <code><em>testcaseName</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the testcase to be created. The path to the saved testcase location is:</p>
+
+<p><code><em>directoryName/testcaseName</em></code></p>
+
+<p>If a previously generated testcase exists at the specified location, the older testcase will be renamed before the new testcase is saved.</p>
+
+<p><em>Default</em>: testcase</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" valign="top">
+<p><code>-dir</code> <code><em>directoryName</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the directory in which to save the testcase. Both, absolute and relative directory paths, may be used.</p>
+
+<p><em>Default</em>: Current working directory</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>-foundationFlow</code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to copy foundation flow files.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-rc</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies that RC extraction data should be saved.</p>
+
+<p><em>Default</em>: RC parasitics files are not saved.</p>
+
+<p><strong>Note: </strong>This option works with these limitations:</p>
+<ul><li>The <code>-rc</code> parameter does not have save RC extraction data if the design is not extracted or if you extract the data using the default extraction engine.</li></ul><ul><li>The previously saved RC data can only be restored on systems that share the same platform and architecture. For example, if you saved the RC data on a Linux platform you can not restore it on a IBM AIX platform. Similarly, RC data saved on a 64-bit system cannot be restored on a 32-bit system.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-merge</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies that a single script should be generated containing both shell executable and Voltus TCL commands.</p>
+
+<p><em>Default</em>: Two script files are generated. A shell executable file and a Voltus TCL script.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-oaUsedLibraryOnly</code></td>
+<td class="confluenceTd" colspan="1">
+<p>Saves only the libraries listed in the <code>init_oa_tech_lib</code>, <code>init_oa_ref_lib</code>, and <code>init_oa_search_lib</code> open access designs, which are referenced through the on-demand processing. On specifying this parameter, a new <code>cds.lib</code> file is created with only the specified libraries. When this parameter is not used, all the open access libraries are saved in the original <code>cds.lib</code> file.</p>
+
+<p><strong>Note:</strong> This parameter works only when the <code>init_design_netlisttype</code> is <code>OA</code>, <code>init_oa_ref_lib</code> is not null, and <code>init_lef_file</code> is null.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-noTimingGraph</code></td>
+<td class="confluenceTd" colspan="1">Skips saving of timing graph by default. This saves time by preventing the timing update to occur in case of designs where no graph is generated in the session.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-overwrite</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies that existing files should be overwritten.</p>
+
+<p><em>Default</em>: Existing testcase files are renamed before new testcase is saved.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-gzip</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies that the generated self contained design should be stored in a gzip compressed tar file. The generated test case directory and files are deleted after gzip compression is complete.</p>
+
+<p><em>Default</em>: If you do not specify this parameter, the generated test case is not gzipped.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="save_testcase-Example">Example</h4>
+<ul><li>The following command creates a self contained design in the current working directory under the testcase directory. <br /><code>save_testcase</code></li></ul><ul><li>The following command creates a gzip compressed tar file <code>/tmp/testcase.tar.gz</code> containing a self contained testcase:<br /><code>save_testcase -dir /tmp -gzip</code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="get_metric.html" id="prev" title="get_metric">get_metric</a></em></b><b><em><a href="set_delay_cal_mode.html" id="nex" title="set_delay_cal_mode">set_delay_cal_mode</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

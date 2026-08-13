@@ -1,0 +1,136 @@
+
+<html><head><title>Dynamic Mixed Mode (Vector-based and Vectorless) Analysis</title>
+<meta name="page_sequence" content="24024000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666174" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Dynamic Mixed Mode (Vector-based and Vectorless) Analysis" />
+<meta name="Keywords" content="power,analysis,vectorless,vector-based,propagation" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666174" />
+<meta name="NextFile" content="Noise_Margin_Calculation.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Characterized_Current_PGV_for_Dynamic_Power_and_Rail_Analysis.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Dynamic Mixed Mode (Vector-based and Vectorless) Analysis" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Characterized_Current_PGV_for_Dynamic_Power_and_Rail_Analysis.html" title="Characterized_Current_PGV_for_Dynamic_Power_and_Rail_Analysis">Characterized_Current_PGV_for_ ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Noise_Margin_Calculation.html" title="Noise_Margin_Calculation">Noise_Margin_Calculation</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Dynamic Mixed Mode (Vector-based and Vectorless) Analysis</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="DynamicMixedMode(VectorbasedandVectorless)Analysis-65966"></span></p>
+
+<p>In addition to the regular methods (<code>static</code>, <code>dynamic_vectorless</code>, <code>dynamic_vectorbased</code>) of power analysis, you can use the <code>dynamic_mixed_mode</code> method to combine the vector-based and state-propagation-based vectorless dynamic analysis. This flow can be used in the following cases:</p>
+<div class="table-wrap"><table class="webflareTable wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><strong>Cases</strong></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><strong>When </strong><code>dynamic_mixed_mode</code><strong> is specified</strong></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Case 1: vectors are not available for every block of a full-chip design</p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1"><ul><li>The software uses the state-propagation-based vectorless methodology for blocks with incomplete vectors.</li></ul></td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Case 2: blocks with vectors having unannotated combinational logic</p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1"><ul><li>The software performs state propagation for the missing combinational logic.</li><li>The software uses the vectorless methodology for a logic cone that does not have the primary inputs or flops annotated from the vector, and then performs state propagation.</li></ul></td>
+</tr>
+</tbody></table></div>
+
+<p>The two cases are illustrated in the following diagram:</p>
+<div><span class="confluence-embedded-file-wrapper"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481387/732481388.png" data-linked-resource-container-id="732481387" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="mixed_mode.png" data-linked-resource-id="732481388" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481387/732481388.png" tabindex="0" /></span></div>
+
+<p><br /></p>
+
+<p><span class="fontredcadence">
+<p>To enable the dynamic mixed mode analysis flow, you must specify the following commands:</p>
+<pre><code>set_default_switching_activity &#8211;clock_gates_output 2.0 -input_activity &lt;activity&gt;\&#xa0;&#xa0;                             </code></pre><pre><code> -sequential_activity &lt;activity&gt;</code></pre><pre><code>
+set_db power_method dynamic_mixed_mode</code></pre><pre><code>read_activity_file &#8211;scope &lt;&gt; -block &lt;&gt; -&gt; (for available blocks)</code></pre><pre><code>
+</code></pre>
+<p>In this flow:</p>
+<ul><li>The specified global activity will be used for selection of unannotated flops and primary inputs in each physical tile.</li><li>If there is a mismatch between the TWF and vector files in terms of clock frequency for the unannotated flops/primary inputs, the TWF frequency will take precedence and will be used for scheduling.</li><li>When multiple vectors are provided for different blocks, they are required to be of the same vector type (post-simulation/zero-delay/rtl) and the same format (VCD, FSDB, PHY, SHM). Mixing of the vector types and formats of the different blocks is not supported.</li><li>The simulation period for different windows in the vector-based analysis is derived from the <code>max(endtime &#8211; starttime)</code> specified using the <code>read_activity_file -start </code>and<code> -end </code>command parameters.</li></ul>
+<p>In addition to the dynamic current files (dynamic_&lt;<span class="webflare-courier-new"><em>net_name</em></span>&gt;.ptiavg) and power report, this flow generates the following output files:</p>
+<ul><li>A switching scenario file (<code>voltus_power.stateprop.switchsrc</code>) that contains the switching information of flip-flops.</li><li>A report file (<code>voltus_power.stateprop.stats</code>) that contains the instance toggle coverage, that is, number of primary input, flop, combinational, macro, and idle instances selected at different clock frequencies.</li></ul>
+<p><strong>Tcl command</strong>:</p>
+<div class="table-wrap"><table class="confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>read_lib ../DesignData//LIB/TYP_DRIVE.lib ../DesignData//LIB/TYP_PRIM.lib ../DesignData//LIB/TYP_SPECIAL.lib </code><code>
+read_lib -lef ../DesignData//LEF/lef.r_mod</code></pre><pre><code>read_verilog ../DesignData//VERILOG/my_chip1.v ../DesignData//VERILOG/my_chip2.v</code></pre><pre><code>set_top_module my_chip</code></pre><pre><code>read_libs ../DesignData//LIB/TYP_DRIVE.lib ../DesignData//LIB/TYP_PRIM.lib ../DesignData//LIB/TYP_SPECIAL.lib </code></pre><pre><code>read_physical -lefs ../DesignData//LEF/lef.r_mod</code></pre><pre><code>read_netlist ../DesignData//VERILOG/my_chip1.v ../DesignData//VERILOG/my_chip2.v -top my_chip</code></pre><pre><code>init_design</code></pre><pre><code>set_power_def_files { ../DesignData//DEF/def1.def ../DesignData//DEF/def2.def}</code></pre><pre><code>set_power_spef_files { ../DesignData//SPEF/core.spef ../DesignData//SPEF/signal.spef}</code></pre><pre><code>read_twf ../DesignData//TWF/my_chip.twf</code></pre><pre><code>read_twf ../DesignData//TWF/mixed.twf -scope inst_A1</code></pre><pre><code>read_twf ../DesignData//TWF/mixed.twf -scope inst_B1</code></pre><pre><code>read_twf ../DesignData//TWF/mixed.twf -scope inst_C1</code></pre><pre><code>read_twf ../DesignData//TWF/mixed.twf -scope inst_D1</code></pre><pre><code>read_activity_file -format VCD -scope top/shell/soin -start 600ns -end 700ns ../mixed_vcd/blocka.vcd -block inst_A1</code></pre><pre><code>read_activity_file -format VCD -scope top/shell/soin -start 600ns -end 700ns ../vcd_hier/DesignData/VCD/blockb.vcd -block inst_B1</code></pre><pre><code>read_activity_file -format VCD -scope top/shell/soin -start 600ns -end 700ns ../vcd_hier/DesignData/VCD/blockc.vcd -block inst_C1</code></pre><pre><code>read_activity_file -format VCD -scope top/shell/soin -start 600ns -end 700ns ../mixed_vcd/blockd.vcd -block inst_D1</code></pre><pre><code>set_db power_method dynamic_mixed_mode power_disable_static false -power_grid_libraries ../DesignData//PGV/library.cl</code></pre><pre><code>set_default_switching_activity -input_activity 0.2 \</code></pre><pre><code>                               -sequential_activity 0.1</code></pre><pre><code>report_power </code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+<h4 id="DynamicMixedMode(VectorbasedandVectorless)Analysis-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Noise_Margin_Calculation.html">Noise Margin Calculation</a></li><li><a href="Vectorless_Methodology.html">Vectorless Methodology</a></li><li><a href="Vector-Driven_Methodology.html">Vector-Driven Methodology</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Characterized_Current_PGV_for_Dynamic_Power_and_Rail_Analysis.html" id="prev" title="Characterized_Current_PGV_for_Dynamic_Power_and_Rail_Analysis">Characterized_Current_PGV_for_ ...</a></em></b><b><em><a href="Noise_Margin_Calculation.html" id="nex" title="Noise_Margin_Calculation">Noise_Margin_Calculation</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

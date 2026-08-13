@@ -1,0 +1,127 @@
+
+<html><head><title>Characterized Current PGV for Dynamic Power and Rail Analysis</title>
+<meta name="page_sequence" content="24023000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666174" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Characterized Current PGV for Dynamic Power and Rail Analysis" />
+<meta name="Keywords" content="Power-grid,rail,power,PGV,VCD,instance" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666174" />
+<meta name="NextFile" content="Dynamic_Mixed_Mode__Vector-based_and_Vectorless__Analysis.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Dynamic_Rail_Analysis_for_On-Chip_Voltage_Regulators.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Characterized Current PGV for Dynamic Power and Rail Analysis" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Dynamic_Rail_Analysis_for_On-Chip_Voltage_Regulators.html" title="Dynamic_Rail_Analysis_for_On-Chip_Voltage_Regulators">Dynamic_Rail_Analysis_for_On-C ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Dynamic_Mixed_Mode__Vector-based_and_Vectorless__Analysis.html" title="Dynamic_Mixed_Mode__Vector-based_and_Vectorless__Analysis">Dynamic_Mixed_Mode__Vector-bas ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Characterized Current PGV for Dynamic Power and Rail Analysis</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>Power-grid view library with dynamic data is supported in both the vector-based and vectorless Voltus power calculation. By default, Voltus computes dynamic power from .lib files. When there are pre-defined currents stored in PGV, Voltus dynamic power calculation automatically identifies the dynamic data and trigger information inside the power-grid view library.</p>
+<ul><li>In the vector-based analysis, Voltus looks at the trigger condition in VCD and schedules the current modes with the matching condition.</li><li>In the vectorless mode, you can control the trigger scenario by using the <code>set_power &#8211;dynamic_switching_pattern</code> parameter. This can be performed in both the instance-based and cell-based switching.</li></ul>
+<p><span class="fontredcadence">
+<p><strong>Example of instance-based switching</strong>:</p>
+
+<p><code>
+set_power -insts mem1 -dynamic_switch_pattern { MODE1 0 MODE2 0 }</code></p>
+
+<p>This command specifies to trigger MODE1 @ first clock edge and MODE2 @ 3rd clock edge.</p>
+
+<p><br /></p>
+
+<p><strong>Example of cell-based switching</strong>:</p>
+<pre><code>set_power -dynamic_switch_pattern -base_cells SRAM_A1 { MODE_0 MODE_0 MODE_0}</code></pre>
+<p>This command specifies to trigger MODE_0 @ 1st, 2nd, and 3rd clock edges.</p>
+
+<p><br /></p>
+
+<p>Following is an example of a trigger.txt file generated in the output directory at the end of the run that shows the various modes and trigger times:</p>
+
+<p><code>mem1 1.95e-09 1 MODE1<br />mem1 3.195e-08 1 MODE1<br />mem1 4.195e-08 1 MODE1<br />mem1 2.205e-08 1 MODE2<br />mem1 3.205e-08 1 MODE2</code></p>
+
+<p>Voltus dynamic rail analysis checks availability of the detailed dynamic data in the power-grid views from a given list of cell libraries. Rail analysis triggers the waveform stored inside a power-grid view based on the trigger time from the power analysis run.&#xa0;&#xa0;The following is a snapshot of the log file:</p>
+<pre><code>
+------------------<br />INFO Found a dynamic tap current view for instance &quot;mem1&quot; whose waveform is triggered at time 1.95e-09s<br />-----------------</code></pre>
+<p>If the power-grid view library does not have any associated trigger time, then the dynamic current stored inside this library starts at t = 0. To shift this waveform, you can use the <code>set_rail_analyis_config -dynamic_trigger_file &lt;</code><span class="webflare-courier-new"><em>filename</em></span><code>&gt;</code> parameter. The syntax of dynamic trigger file is as follows:</p>
+
+<p><code>
+INSTANCE &lt;name&gt; &lt;time&gt; &lt;scale_factor&gt; &lt;mode_name&gt;<br />CELL &lt;name&gt; &lt;time&gt; &lt;scale_factor&gt; &lt;mode_name&gt;</code></p>
+
+<p>You can capture the current/voltage waveforms using the <code>set_rail_analyis_config -probe_waveform_list</code> parameter.</p>
+<h4 id="CharacterizedCurrentPGVforDynamicPowerandRailAnalysis-ExampleTclscriptforDynamicSwitchPatternintheVectorlessMode.1">Example Tcl script for Dynamic Switch Pattern in the Vectorless Mode</h4>
+<pre><code>set_db power_grid_libraries {dynamic_allcells.cl} \<br />  power_method dynamic_vectorless ...<br />set_default_switching_activity ...<br />set_dynamic_power_simulation &#8230;<br />set_power -insts u0 <strong>-dynamic_switch_pattern {READ 0 READ}<br /></strong>set_power_include_file &#8230;<br />report_power &#8230;<br />set_rail_analysis_config \<br />  -power_grid_libraries {dynamic_allcells.cl} ...<br />set_power_data ...<br />set_power_pads ...<br />set_pg_nets ...<br />set_rail_analysis_domain ...<br />report_rail &#8230;</code></pre></span></p>
+<pre><br /></pre><h4 id="CharacterizedCurrentPGVforDynamicPowerandRailAnalysis-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Dynamic_Power_Analysis.html">Dynamic Power Analysis</a></li><li><a href="Dynamic_Rail_Analysis.html">Dynamic Rail Analysis</a></li><li><a href="Dynamic_Mixed_Mode__Vector-based_and_Vectorless__Analysis.html">Dynamic Mixed Mode (Vector-based and Vectorless) Analysis</a></li><li><a href="Noise_Margin_Calculation.html">Noise Margin Calculation</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Dynamic_Rail_Analysis_for_On-Chip_Voltage_Regulators.html" id="prev" title="Dynamic_Rail_Analysis_for_On-Chip_Voltage_Regulators">Dynamic_Rail_Analysis_for_On-C ...</a></em></b><b><em><a href="Dynamic_Mixed_Mode__Vector-based_and_Vectorless__Analysis.html" id="nex" title="Dynamic_Mixed_Mode__Vector-based_and_Vectorless__Analysis">Dynamic_Mixed_Mode__Vector-bas ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

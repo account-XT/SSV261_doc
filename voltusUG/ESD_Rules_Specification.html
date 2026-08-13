@@ -1,0 +1,595 @@
+
+<html><head><title>ESD Rules Specification</title>
+<meta name="page_sequence" content="24003000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468604" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="ESD Rules Specification" />
+<meta name="Keywords" content="resistance,rule,esd,EM,bump,clamp" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="ESD Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468604" />
+<meta name="NextFile" content="ESD_Rule_File_Examples.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Prerequisites_for_ESD_Effective_Resistance_Checks.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- ESD Rules Specification" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="Prerequisites_for_ESD_Effective_Resistance_Checks.html" title="Prerequisites_for_ESD_Effective_Resistance_Checks">Prerequisites_for_ESD_Effectiv ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="ESD_Rule_File_Examples.html" title="ESD_Rule_File_Examples">ESD_Rule_File_Examples</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>ESD Rules Specification</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>Voltus allows you to specify all the rules for computing effective resistance in a single rule file. The rule file is specified using the <code>-config_file</code> parameter of the <code><span class="fontredcadence">analyze_esd_network</span></code> command.</p>
+
+<p>The rule syntax is case insensitive. The syntax of the rule file is as follows:</p>
+
+<p><strong>Syntax for Resistance Checks</strong></p>
+<pre><code>rule <span class="webflare-courier-new" style="white-space: pre;"><em>rule_name</em></span></code><code>
+type {clamp2clamp | bump2bump | bump2clamp | connectivity | bump2instance | clamp2instance}</code><code>
+power -nets <span class="webflare-courier-new" style="white-space: pre;"><em>net1</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>net2</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>net3</em></span> ... -short_bumps {true | false}</code><code>
+ground -nets <span class="webflare-courier-new" style="white-space: pre;"><em>net1</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>net2</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>net3</em></span> ... -short_bumps {true | false}</code><code>
+nets &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>list_of_nets</em></span>|all&gt;</code><code>
+nets -from &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>list_of_nets</em></span>|all&gt; -to &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>list_of_nets</em></span>|all&gt;</code><code>
+bumps &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>list_of_bumps</em></span>&gt;</code><code>
+bumps &#8211;from &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>list_of_bumps</em></span>&gt; &#8211;to &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>list_of_bumps</em></span>&gt;</code><code>
+clamp_types -from <span class="webflare-courier-new" style="white-space: pre;"><em>type1</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>type2</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>type3 ... </em></span>-to <span class="webflare-courier-new" style="white-space: pre;"><em>type1</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>type2</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>type3 ...</em></span> </code><code>
+clamp_cells -from <span class="webflare-courier-new" style="white-space: pre;"><em>cell1</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>cell2</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>cell3 </em></span>-to <span class="webflare-courier-new" style="white-space: pre;"><em>cell1</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>cell2</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>cell3</em></span></code><code>
+current <span class="webflare-courier-new" style="white-space: pre;"><em>value</em></span></code><code>
+em_results {true | false}</code><code>
+reff_threshold <span class="webflare-courier-new" style="white-space: pre;"><em>value</em></span></code><code>
+reporting {reverse | both}</code><code>
+check_isolated_bumps {true | false}</code><code>
+check_isolated_clamps {true | false}</code><code>
+lerp_threshold <span class="webflare-courier-new" style="white-space: pre;"><em>value</em></span></code><code>
+skip_domains net1:net2</code><code>
+instance_list_file <span class="webflare-courier-new" style="white-space: pre;"><em>inst_filename</em></span> [-include|exclude]</code><code>
+cell_list_file <span class="webflare-courier-new" style="white-space: pre;"><em>cell_filename</em></span> [-include|exclude]</code><code>
+esd_device_check {true | false}</code><code>
+effective_calculation {true | false}</code><code>
+parallel_clamp_threshold <span class="webflare-courier-new" style="white-space: pre;"><em>value<br /></em></span></code><code>reff_report_threshold <span class="webflare-courier-new" style="white-space: pre;"><em>value</em></span></code><code>
+report_line_threshold <span class="webflare-courier-new" style="white-space: pre;"><em>value</em></span></code><code>
+end rule</code></pre>
+<p><strong>Syntax for EM Checks</strong></p>
+
+<p><code>
+rule <span class="webflare-courier-new" style="white-space: pre;"><em>rule_name<br /></em></span></code><code>
+type em<br /></code><code>setup [-ahdl_include <span class="webflare-courier-new" style="white-space: pre;"><em>Verilog-A_file</em></span>] [-spice_include <span class="webflare-courier-new" style="white-space: pre;"><em>SPICE_file</em></span>] [-iv_lib {true | false}] [-cross_domain {true | false}]<br /></code><code>source -type {power | ground} -nets <span class="webflare-courier-new" style="white-space: pre;"><em>net1</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>net2</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>net3...</em></span> -short_bumps {true | false} -report_threshold <span class="webflare-courier-new" style="white-space: pre;"><em>value<br /></em></span></code><code>sink -type {power | ground} -nets <span class="webflare-courier-new" style="white-space: pre;"><em>net1</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>net2</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>net3...</em></span> -short_bumps {true | false} -report_threshold <span class="webflare-courier-new" style="white-space: pre;"><em>value<br /></em></span></code><code>clamp_cells <span class="webflare-courier-new" style="white-space: pre;"><em>cell1</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>cell2</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>cell3<br /></em></span></code><code>clamp_types <span class="webflare-courier-new" style="white-space: pre;"><em>type1</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>type2</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>type3...<br /></em></span></code><code>
+nets -from &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>list_of_nets</em></span>|all&gt; -to &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>list_of_nets</em></span>|all&gt;<br /></code><code>
+bumps &#8211;from &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>list_of_bumps</em></span>&gt; &#8211;to &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>list_of_bumps</em></span>&gt;<br /></code><code>
+current <span class="webflare-courier-new" style="white-space: pre;"><em>value<br /></em></span></code><code>
+end rule</code></p>
+
+<p><strong>Parameters</strong></p>
+<div class="table-wrap"><table class="webflareTable webflareTableIndent wrapped relative-table confluenceTable" style="width: 100.0%;"><colgroup><col style="width: 10.3479%;" /><col style="width: 89.6598%;" /></colgroup><tbody><tr><th class="webflareTh confluenceTh" colspan="1" rowspan="1">
+<p>Parameter Name</p>
+</th><th class="webflareTh confluenceTh" colspan="1" rowspan="1">
+<p>Description</p>
+</th></tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>arc_reff_threshold <span class="webflare-courier-new" style="white-space: pre;"><em>value</em></span></code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Allows to filter clamps, that is, only clamps with an effective resistance to bump value less than the specified arc threshold value will be considered for the bump-to-bump resistance check.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>bump_region_xy_size x y</code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the length (x) and width (y) of the bump region in μm for radius-based bump-to-bump ESD checks.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>bumps &#8211;from &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>list_of_bumps</em></span>&gt; &#8211;to &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>list_of_bumps</em></span>&gt;</code></p>
+
+<p><code>bumps &lt;<em>list_of_bumps</em>&gt;</code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>-reporting {original | reverse | both}</code></p>
+
+<p><code>-report_threshold <span class="webflare-courier-new" style="white-space: pre;"><em>value</em></span></code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Allows you to specify the bumps for which the rule is run. bumps is mutually exclusive with the <code>power</code>, <code>ground</code>, <code>nets</code> parameters.</p>
+
+<p>The following are the two use models:</p>
+<ul><li>Specify the bump names for the <code>bump2clamp</code> and <code>clamp2clamp</code> rule types:<br /><code>bumps &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>list_of_bumps</em></span>&gt;</code></li><li>Specify the bump names for the <code>em</code> and <code>bump2bump</code> rule types:<br /><code>bumps -from &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>list_of_bumps</em></span>&gt; -to &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>list_of_bumps</em></span>&gt;</code></li></ul></td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>For <code>bumps</code>, you can specify the following parameters:</p>
+<ul><li><code>-from</code> and <code>-to</code> parameters to indicate the list of starting and ending bumps. You must specify the bumps within the same net. This parameter is applicable to the <code>em</code> and <code>bump2bump</code> rule types.</li><li><code>-reporting {original | reverse | both}</code> specifies the reporting format for sorting of the rule. The default value is <code>original</code>.</li><li><code>-report_threshold <span class="webflare-courier-new" style="white-space: pre;"><em>value</em></span></code> specifies to report EM violations above the threshold value. The value is the ratio of current (avg) to the respective EM limit. The default value is <code>0.9</code>. This parameter is applicable to the <code>em</code> and <code>bump2bump</code> rule types.</li></ul></td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>cell_list_file </code><span class="webflare-courier-new" style="white-space: pre;"><em>cell_filename</em></span><code> [-include|exclude]</code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Excludes or includes the list of cells given in the specified file.</p>
+
+<p>If this parameter is not specified, ESD analysis is performed on all cells in the design. The specified cell list text file contains a list of cells. Each cell name must reside on a separate line in the file.</p>
+
+<p>The following is the format of the specified file:</p>
+<pre><code><span class="webflare-courier-new" style="white-space: pre;"><em>cell1</em></span></code><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>cell2</em></span></code></pre></td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>check_isolated_bumps {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies to check isolated bumps. The default value is <code>false</code>. This parameter is applicable only to the <code>connectivity</code> rule type.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>check_isolated_clamps {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies to check isolated clamps. The default value is <code>false</code>. This parameter is applicable only to the <code>connectivity</code> rule type.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>clamp_cells -from <span class="webflare-courier-new" style="white-space: pre;"><em>cell1</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>cell2</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>cell3</em></span> -to <span class="webflare-courier-new" style="white-space: pre;"><em>cell1</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>cell2</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>cell3</em></span></code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the clamp cells for which the rule is run. <code>clamp_cells </code>and <code>clamp_types</code> are mutually exclusive.</p>
+
+<p>For <code>clamp2clamp</code>, you need to specify the <code>-from</code> and <code>-to</code> parameters to specify the starting and ending clamp cells. For the other types of checks, you need to specify individual clamp cells. The <code>-from</code> and <code>-to</code> parameters are not required.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>clamp_types -from <span class="webflare-courier-new" style="white-space: pre;"><em>type1</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>type2</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>type3</em></span> ... -to <span class="webflare-courier-new" style="white-space: pre;"><em>type1</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>type2</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>type3</em></span> ...</code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the type of clamp for which the rule is run. The different clamp types are stored in PGV. <code>clamp_cells </code>and <code>clamp_types</code> are mutually exclusive.</p>
+
+<p>For <code>clamp2clamp</code>, you need to specify the <code>-from</code> and <code>-to</code> parameters to specify the starting and ending clamp types. For the other types of checks, you need to specify individual clamp cell types. The <code>-from</code> and <code>-to</code> parameters are not required.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>current <span class="webflare-courier-new" style="white-space: pre;"><em>value</em></span></code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the zap current value. This parameter is applicable to the <code>em</code> and <code>bump2bump</code> rule types.</p>
+
+<p>For <code>bump2bump</code>, this parameter must be specified when the IV curve PGV models are used to perform non-linear ESD analysis.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>effective_calculation</code> <code>{true | false}</code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Enables shorting of clamps on the specified nets and performs effective resistance check from each bump to the shorted clamps. It also reports the number of shorted ESD clamps that are connected in parallel to each bump.</p>
+
+<p>This parameter is applicable to the <code>bump2clamp</code> type.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>em_results {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>EM analysis is performed when IV curve PGV based ESD analysis is performed. You can use this option to report those EM results if required. It is recommended to set <code>em_results</code> to <code>false</code> for saving disk space. The default value is <code>false</code>.</p>
+
+<p>This parameter is applicable to the <code>bump2bump</code> rule type.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>esd_device_check {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies to do bump2bump analysis till taps. For this analysis, it is recommended to use ESD PGV generated using Voltus-Fi, and tag the ESD devices inside the PGV. The default value is <code>false</code>.</p>
+
+<p>This parameter is applicable to the <code>bump2bump</code> type.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>ground -nets {<span class="webflare-courier-new" style="white-space: pre;"><em>net1</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>net2</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>net3</em></span>... | all} -short_bumps {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the list of ground nets to be analyzed. You can specify <code>all</code> to include all ground nets.</p>
+
+<p>For <code>bump2clamp</code>, you can specify <code>-short_bumps true</code> to do a resistance check from a shorted bump to each clamp. If <code>-short_bumps</code> is set to <code>false</code>, resistance check is done for every bump to every clamp. You can have two rules for <code>bump2clamp</code>, one with <code>-short_bumps</code> set to <code>true</code> and the other with <code>-short_bumps</code> set to <code>false</code>. Both these rules will have a different value for <code>reff_threshold</code>.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>instance_list_file <span class="webflare-courier-new" style="white-space: pre;"><em>inst_filename</em></span> [-include|exclude]</code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Excludes or includes the list of instances given in the specified file.</p>
+
+<p>If this parameter is not specified, ESD analysis is performed on all instances in the design. The specified instance list text file contains a list of instances. Each instance name must reside on a separate line in the file.</p>
+
+<p>The following is the format of the specified file:</p>
+<pre><code><span class="webflare-courier-new" style="white-space: pre;"><em>instance1</em></span></code><code>
+<span class="webflare-courier-new" style="white-space: pre;"><em>instance2</em></span></code></pre></td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>lerp_threshold <span class="webflare-courier-new" style="white-space: pre;"><em>value</em></span></code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the threshold for least effective resistance path between bump2bump, beyond which failure will be reported. If a threshold value is not specified, all rules will be passed.</p>
+
+<p>This parameter is applicable to the <code>bump2bump</code> type.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>nets &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>list_of_nets</em></span>|all&gt;</code></p>
+
+<p><code>nets -from &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>list_of_nets</em></span>|all&gt; -to &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>list_of_nets</em></span>|all&gt;</code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>-reporting {original | reverse | both}</code></p>
+
+<p><code>-short_bumps {true | false}</code></p>
+
+<p><code>-report_threshold <span class="webflare-courier-new" style="white-space: pre;"><em>value</em></span></code></p>
+
+<p><code>-short_net_bumps <span class="webflare-courier-new" style="white-space: pre;"><em>list_of_nets</em></span></code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Allows you to specify the nets for which ESD analysis is to be performed. nets is mutually exclusive with the <code>power</code>, <code>ground</code>, <code>bumps</code> parameters. This parameter gives you the flexibility to specify any nets for the <code>-from</code> and <code>-to</code> options, and does not confine to the power nets for the <code>-from</code> list and the ground nets for the <code>-to</code> list.</p>
+
+<p>The following are the two use models:</p>
+<ul><li>specify the net names for the <code>bump2clamp</code> and <code>clamp2clamp</code> rule types:<br /><code>nets </code>&lt;<span class="webflare-courier-new" style="white-space: pre;"><em>list_of_nets</em></span>|all&gt;</li><li>specify the net names for the <code>em</code> and <code>bump2bump</code> rule types:<br /><code>nets -from &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>list_of_nets</em></span>|all&gt; -to &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>list_of_nets</em></span>|all&gt;</code></li></ul></td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1"><div class="content-wrapper">
+<p>For <code>nets</code>, you can specify the following options:</p>
+<ul><li><code>-from</code> and <code>-to</code> parameters to indicate the list of starting and ending nets. You can either specify the list of nets or <code>all</code> to include all nets.</li><li><code>-short_net_bumps</code> specifies to short bumps of the specified nets only.</li><li>
+<p><code>-short_bumps</code> specifies to short all bumps for each net. The default value is <code>false</code>.</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p><code>-short_bumps</code> and <code>-short_net_bumps</code> are mutually exclusive.</p>
+</div>
+</div>
+</li><li><code>-reporting {original | reverse | both}</code> specifies the reporting format for sorting of the rule. The default value is <code>original</code>.</li><li><code>-report_threshold <span class="webflare-courier-new" style="white-space: pre;"><em>value</em></span></code> specifies to report EM violations above the threshold value. The value is the ratio of current (avg) to the respective EM limit. The default value is <code>0.9</code>. This parameter is applicable to the <code>em</code> and <code>bump2bump</code> rule types.</li></ul></div>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>parallel_clamp_threshold <span class="webflare-courier-new" style="white-space: pre;"><em>value</em></span></code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the minimum number of shorted clamps between bumps. The number of shorted clamps should be greater than or equal to the given threshold value, beyond which failure will be reported. This is an optional parameter that is used with the effective_calculation parameter.</p>
+
+<p>This parameter is applicable to the <code>bump2clamp</code> type.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>parallel_reff_threshold <span class="webflare-courier-new" style="white-space: pre;"><em>value</em></span></code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the resistance threshold to report the equivalent parallel resistance through multiple clamps in the bump-to-bump path. The equivalent parallel resistance is calculated by considering only those clamps with effective resistance less than the specified arc_reff_threshold.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>pass_criteria {all | one}</code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the Pass/Fail criteria for bumps/clamps/nets.</p>
+<ul><li><code>all</code>: criterion for a bump/clamp/net to pass is that all paths from that bump/clamp/net passes.</li><li><code>one</code>: criterion for a bump/clamp/net to pass is if atleast one path from that bump/clamp/net passes.</li></ul>
+<p>The default value is <code>all</code>.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>path_reff_threshold <span class="webflare-courier-new" style="white-space: pre;"><em>value</em></span></code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the resistance threshold for the bump-to-bump path&#39;s effective resistance to pass. A pass status is given when the effective resistance is below the specified threshold value, and a fail status is given when the effective resistance is above the specified threshold value.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>power -nets</code> <code>{<span class="webflare-courier-new" style="white-space: pre;"><em>net1</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>net2</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>net3</em></span>... | all}</code> <code>-short_bumps {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the list of power nets to be analyzed. You can specify <code>all</code> to include all power nets.</p>
+
+<p>For <code>bump2clamp</code>, you can specify <code>-short_bumps true</code> to do a resistance check from a shorted bump to each clamp. If <code>-short_bumps</code> is set to <code>false</code>, resistance check is done for every bump to every clamp. You can have two rules for <code>bump2clamp</code>, one with <code>-short_bumps</code> set to <code>true</code> and the other with <code>-short_bumps</code> set to <code>false</code>. Both these rules will have a different value for <code>reff_threshold</code>.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>reff_report_threshold <span class="webflare-courier-new" style="white-space: pre;"><em>value</em></span></code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the minimum allowed threshold for the resistance check information written to the report file. The default value is <code>0</code>.</p>
+
+<p>This parameter is applicable to all effective resistance check rule types.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>report_only_pg_pairs {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Reports bump-to-bump resistance for the power-to-ground pair. When this parameter is set to <code>false</code>, reports power-to-power and ground-to-ground bump-to-bump resistance with the power-to-ground pair bump-to-bump resistance. The default value is <code>true</code>.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>report_line_threshold <span class="webflare-courier-new" style="white-space: pre;"><em>value</em></span></code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Controls the size of the effective resistance check report by limiting the number of lines written to the report file. This parameter is useful in limiting the report size when you specify a very low resistance check threshold. The default value is <code>500</code>.</p>
+
+<p>This parameter is applicable to all effective resistance check rule types.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>reporting {original | reverse | both}</code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the reporting format that can be used for sorting of the rule. This parameter gives you the flexibility to report the effective resistance in a different sequence. By default, it reports as per the rule type.</p>
+
+<p>The options of this parameter are:</p>
+<ul><li><code>reverse</code> - reports effective resistance from clamp to bump. It checks if any clamp is failing from clamp to bump.</li><li><code>original</code> - reports effective resistance from bump to clamp. It checks if any bump is failing from bump to clamp. This is the default value.</li><li><code>both</code> - reports effective resistance both from bump to clamp and clamp to bump.</li></ul>
+<p>Example for rule type <code>bump2clamp</code>:</p>
+<ul><li>When reporting is set to <code>original</code>, it reports effective resistance from bump to clamp.</li><li>When reporting is set to <code>reverse</code>, it reports effective resistance from clamp to bump.</li><li>When reporting is set to <code>both</code>, it reports effective resistance from bump to clamp and clamp to bump.</li></ul></td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>rule <span class="webflare-courier-new" style="white-space: pre;"><em>rule_name</em></span></code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the name of the rule.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>reff_threshold </code><span class="webflare-courier-new" style="white-space: pre;"><em>value</em></span></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the resistance threshold for the rule to pass (rule pass criteria). A pass status is given when the effective resistance is below the specified threshold value, and a fail status is given when the effective resistance is above the specified threshold value.</p>
+
+<p>This parameter is applicable to <code>clamp2clamp</code>, <code>bump2bump</code>, and <code>bump2clamp</code> types.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>sep_short {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies to short only the pins of the clamp pair for which the effective resistance is being calculated. By default, the tool shorts pins for all clamps. The default value is <code>false</code>.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>setup [-ahdl_include <span class="webflare-courier-new" style="white-space: pre;"><em>Verilog-A_file</em></span>] [-spice_include <span class="webflare-courier-new" style="white-space: pre;"><em>SPICE_file</em></span>] [-iv_lib {true | false}] [-cross_domain {true | false}]</code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>The <code>setup</code> parameter is used to enable zap analysis on power or ground nodes of a cross-domain pair, wherein the driver-receiver pair have different power or ground domains. It generates current density report for each resistor on the grid for cross-domains with multiple nets between the source and sink bumps.</p>
+<ul><li><code>-ahdl_include</code>, <code>-spice_include</code>, and <code>-iv_lib</code> are mutually exclusive. Use one of these parameters to provide the non-linear connections (ESD models) between the power and ground pins, instead of directly providing ESD Ron/Roff resistor values.</li><li><code>-iv_lib</code> means inherit the model created in PGV run.</li><li><code>-cross_domain true</code> indicates that all the domain nets that have ESD connections with the source and sink net will be taken into account during zap analysis. The default value of <code>false</code> indicates that the tool simulates only the network of the source and sink net.</li></ul></td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>skip_reff&#xa0;&#xa0;{true | false}</code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies to calculate only the least effective resistance path (LERP). When set to <code>true</code>, the effective resistance values will not be reported. The default value is <code>false</code>.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>sink -type {power | ground} -nets {<span class="webflare-courier-new" style="white-space: pre;"><em>net1</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>net2</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>net3</em></span>... | all}-short_bumps {true | false} -report_threshold <span class="webflare-courier-new" style="white-space: pre;"><em>value</em></span></code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>source -type {power | ground} -nets {<span class="webflare-courier-new" style="white-space: pre;"><em>net1</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>net2</em></span> <span class="webflare-courier-new" style="white-space: pre;"><em>net3</em></span>... | all} -short_bumps {true | false} -report_threshold <span class="webflare-courier-new" style="white-space: pre;"><em>value</em></span></code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>For <code>em</code> check, source (the point where current is injected), and sink (the point from where the current comes out) details are provided. For both source and sink, you need to specify the type of net (power/ground), the nets to be analyzed, and whether bumps are to be shorted. You can specify EM rules for all nets or specific nets with zaps and sinks on bumps.</p>
+
+<p>If <code>-short_bumps</code> is set to <code>true</code>, current is injected in the shorted node (vdd), and comes out of the shorted node (vss).</p>
+
+<p>In the <code>em</code> rule check, the software runs a static simulation and checks current through each metal line against the ESD EM techfile.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>skip_domains <span class="webflare-courier-new" style="white-space: pre;"><em>net1</em></span>:<span class="webflare-courier-new" style="white-space: pre;"><em>net2</em></span></code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies a pair of nets separated by &quot;:&quot; that are skipped during bump2bump analysis.</p>
+
+<p>This parameter is applicable to the <code>bump2bump</code> type.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="2" rowspan="1">
+<p><code>type {clamp2clamp | bump2bump | bump2clamp | bump2instance | clamp2instance | connectivity | em}</code></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the rule type.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="ESDRulesSpecification-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="ESD_Rule_File_Examples.html">ESD Rule File Examples</a></li><li><a href="Performing_ESD_Analysis.html">Performing ESD Analysis</a></li><li><a href="Prerequisites_for_ESD_Effective_Resistance_Checks.html">Prerequisites for ESD Effective Resistance Checks</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Prerequisites_for_ESD_Effective_Resistance_Checks.html" id="prev" title="Prerequisites_for_ESD_Effective_Resistance_Checks">Prerequisites_for_ESD_Effectiv ...</a></em></b><b><em><a href="ESD_Rule_File_Examples.html" id="nex" title="ESD_Rule_File_Examples">ESD_Rule_File_Examples</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

@@ -1,0 +1,194 @@
+
+<html><head><title>Running ECO Fixing Using Foundation Flow</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-03-19" />
+<meta name="CreateTime" content="1773989656" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Foundation Flows are the Cadence-recommended procedures for performing MMMC Signoff, CPF-based MMMC Signoff, and Single view non-MMMC flow using the Tempus software." />
+<meta name="DocTitle" content="Tempus Foundation Flow User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Running ECO Fixing Using Foundation Flow" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusffug" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-03-19" />
+<meta name="ModifiedTime" content="1773989656" />
+<meta name="NextFile" content="" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design" />
+<meta name="PrevFile" content="Ecofixing.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Foundation Flow User Guide -- Running ECO Fixing Using Foundation Flow" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="0" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusffug2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusffugTOC.html">Contents</a></li><li><a class="prev" href="Ecofixing.html" title="ECO Fixing">ECO Fixing</a></li><li style="float: right;"><a class="viewPrint" href="tempusffug.pdf">View/Print PDF</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Foundation Flow User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:ffecofixing" title="Running ECO Fixing Using Foundation Flow"></a><h2>
+<a id="pgfId-1069825"></a><a id="58990"></a>Running ECO Fixing Using Foundation Flow</h2>
+
+<p>
+<a id="pgfId-1065496"></a>Tempus Foundation Flow supports the Hold ECO fixing. This is an additional step after the MMMC timing analysis, which Tempus offers to back-end designers for quick final timing closure during the Signoff stage. There are two ways to run hold ECO fixing after the timing analysis:</p>
+<ul><li>
+<a id="pgfId-1065497"></a>Do not exit the session and perform ECO fixing, or</li><li>
+<a id="pgfId-1065498"></a>Save an ECO database and exit the current session; ECO fixing is performed in a new session with previously generated DB.</li></ul>
+
+<p>
+<a id="pgfId-1065499"></a>For better flexibility, it is recommended that you use the second option.</p>
+
+<h3>
+<a id="pgfId-1065500"></a><a id="52454"></a>Before You Begin</h3>
+
+<p>
+<a id="pgfId-1065501"></a>No additional input files are required to perform ECO fixing after timing analysis.</p>
+
+<h3>
+<a id="pgfId-1065502"></a><a id="38215"></a>Flow Chart<strong>
+</strong>
+</h3>
+
+<p>
+<a id="pgfId-1065503"></a>The figure below illustrates the ECO fixing flow.</p>
+
+<p class="webflare-indent1"><strong>Figure -1
+<a id="pgfId-1069217"></a>The ECO Fixing Flow</strong></p>
+<p>
+<a id="pgfId-1065507"></a></p>
+<div class="webflare-div-image">
+<img width="656" height="411" src="images/Ecofixing-2.gif" /></div>
+<h3>
+<a id="pgfId-1065508"></a><a id="12267"></a>Sample of Generated Code</h3>
+
+<p>
+<a id="pgfId-1065509"></a>When you switch on the ECO control variable in the <code>setup.tcl</code> file, a <code>run_eco.tcl</code> script will be created under the <code>FF/Tempus</code> directory, for example:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1065510"></a>set vars(eco_fix) &quot;true&quot; ;</pre>
+
+<p>
+<a id="pgfId-1065511"></a>The <code>run_aae.tcl</code> file is divided into two scripts, namely <code>loadDesign.tcl</code> and <code>sta.tcl</code>.</p>
+
+<p class="webflare-indent1"><strong>Figure -2
+<a id="pgfId-1069279"></a>FF Directory Structure</strong></p>
+<p>
+<a id="pgfId-1065519"></a></p>
+<div class="webflare-div-image">
+<img width="668" height="364" src="images/Ecofixing-3.gif" /></div>
+<h3>
+<a id="pgfId-1065521"></a><a id="24953"></a>Sample Code of Generated run_eco.tcl </h3>
+
+<p>
+<a id="pgfId-1065522"></a>To enable eco fixing, set<code> vars(eco_fix</code>) to &quot;<code>true</code>&quot;. By default, <code>vars(eco_buffers)</code> is set to an empty list and ECO target is set to hold in the <code>setup.tcl</code> templates. The tool will pick the best buffers from the entire library sets to perform eco fixing. The generated code is presented below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1065523"></a><html-code>
+s
+ource FF/vars.tcl</html-code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1065524"></a>source FF/procs.tcl</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1065525"></a>source FF/TEMPUS/loadDesign.tcl</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1065526"></a>source FF/TEMPUS/sta.tcl</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1065527"></a>set_eco_opt_mode -load_eco_opt_db ecoTimingDB</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1065528"></a>set_eco_opt_mode -verbose true \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1065529"></a>   -buffer_cell_list { }</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1065530"></a>eco_opt_design -hold</pre>
+
+<p>
+<a id="pgfId-1065531"></a>You can also provide a list of buffers using <code>vars(eco_buffers)</code>, for example:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1065532"></a>set vars(eco_buffers) &quot;BUF_X8 BUF_X1 BUF_X2 BUF_X4 BUF_X16 BUF_X32&quot;</pre>
+
+<p>
+<a id="pgfId-1065533"></a>The generated <code>set_eco_opt_mode</code> command will contain this information, for example:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1065534"></a>set_eco_opt_mode -verbose true \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1065535"></a>   -buffer_cell_list {BUF_X8 BUF_X1 BUF_X2 BUF_X4 BUF_X16 BUF_X32}</pre>
+
+<p>
+<a id="pgfId-1065536"></a>ECO target can be changed to &quot;<code>setup</code>&quot;, &quot;<code>drv&quot;</code>, or &quot;<code>leakage&quot;</code> using <code>vars(eco_targets)</code>. For example:</p>
+<p>
+<a id="pgfId-1065537"></a><code>set vars(eco_targets) &quot;setup&quot;</code></p>
+<p>
+<a id="pgfId-1065538"></a>The generated <code>eco_opt_design</code> command is shown below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1065539"></a>eco_opt_design -setup</pre>
+
+<p>
+<a id="pgfId-1065540"></a>Signoff ECO allows incremental ECO in the same session. When you set &quot;<code>hold drv setup</code>&quot; to <code>vars(eco_targets)</code>, the generated code is shown as follows:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1065541"></a>set_eco_opt_mode -allow_multiple_incremental true</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1065542"></a>eco_opt_design -hold</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1065543"></a>eco_opt_design -drv</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1065544"></a>eco_opt_design -setup</pre>
+<h3>
+<a id="pgfId-1065545"></a><a id="66260"></a>Sample of Predefined Code</h3>
+
+<p>
+<a id="pgfId-1065546"></a>The generated code only has valid Tempus commands based on the input settings of <code>setup.tcl</code>. Whereas, the predefined code contains all set of Tempus commands used in different analysis, but with control embedded. For example, the sample code of generated <code>run_eco.tcl</code> is shown below.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1065547"></a>source $vars(script_root)/ETC/TEMPUS/loadDesign.tcl</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1065548"></a>source $vars(script_root)/ETC/TEMPUS/sta.tcl</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1065549"></a>::FF_TEMPUS::source_plug tempus_pre_eco<br />if {[info exists vars(tempus_replace_eco)]} {<br />::FF_TEMPUS::source_plug tempus_replace_eco<br />} else {<br />set_eco_opt_mode -verbose true -resize_inst true -optimize_sequential_cells true -swap_inst true -buffer_cell_list $vars(eco_buffers)<br />set_eco_opt_mode -load_eco_opt_db ecoTimingDB<br />if { [llength $vars(eco_targets)] &gt; 1 } { set_eco_opt_mode -allow_multiple_incremental true }<br />set i 0<br />foreach target $vars(eco_targets) {<br />eco_opt_design -$target <br />incr i<br />}<br />}<br />::FF_TEMPUS::source_plug tempus_post_eco</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1065550"></a> </pre>
+
+<p>
+<a id="pgfId-1065073"></a></p>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="Ecofixing.html" id="prev" title="ECO Fixing">ECO Fixing</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

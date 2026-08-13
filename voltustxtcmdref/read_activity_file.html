@@ -1,0 +1,429 @@
+
+<html><head><title>read_activity_file</title>
+<meta name="page_sequence" content="17013000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666293" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the text commands in Voltus IC Power Integrity Solution." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="read_activity_file" />
+<meta name="Keywords" content="read,activity,static power,dynamic power" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666293" />
+<meta name="NextFile" content="report_annotated_parasitics.html" />
+<meta name="Group" content="Voltus Text Command Reference" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="query_power_data.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution Text Command Reference -- read_activity_file" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="epstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="query_power_data.html" title="query_power_data">query_power_data</a></li><li style="float: right;"><a class="viewPrint" href="voltustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="report_annotated_parasitics.html" title="report_annotated_parasitics">report_annotated_parasitics</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>read_activity_file</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p> <span class="confluence-anchor-link" id="read_activity_file-read_activity_file"></span> <code>
+    <br />
+     read_activity_file <br /><em>name</em> <br />[<code><code>-help]<br />[-block 
+        <em>block_name</em>
+      ]<br />[-cell&#xa0;<em>cell_name</em>
+      ]<br />[-end&#xa0;<code><code>{</code> <code>
+            <em>time1 time2 ...timen</em>
+          </code>} </code>]<br />[<code><code><code>-format { VCD | TCF | SAIF | FSDB | PHY <code><code><code><code><code><code>| SHM</code></code></code></code></code></code>}</code></code></code>] <br />[-hier_separator <code>
+        <em>separator</em>
+      </code>]<br />[-name_mapping_rule <em>file</em>]<br />[-reset] <br />[-rtl {true|false}]<br />[-scale_duration <em>scalefactor</em> ]<br />[-scope <em>scope_name</em> ]<br />[-set_net_freq {true | false}] <br />[-start&#xa0;<code><code>{</code> <code>
+            <em>time1 time2 ...timen</em>
+          </code>} </code>]<br />[-start_time_shift <code>
+        <em>value</em>
+        </code>]</code> </code><br /><code>[-weight <em>value</em>]</code><br /><code><code>[-zero_delay {true|false}</code>]</code><br /></code></p>
+
+<p><br /></p>
+
+<p>Specifies the name and type of activity file to be used as input. This command must be used when specifying activity files for static or dynamic power calculation.</p>
+<h4 id="read_activity_file-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+
+<p><br /></p>
+<div class="table-wrap"><table class="wrapped confluenceTable" style="width: 1300.0px;"><colgroup><col style="width: 84.0px;" /><col style="width: 1215.0px;" /></colgroup><tbody><tr><td class="confluenceTd">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd">
+<p>Prints out the command usage.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1300.0px;">
+<p><code>-block <em>block_name</em>     </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 65.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1235.0px;">
+<p>Specifies the name of the FSDB/SAIF/TCF/VCD block to map a sub-block activity file with a top level Verilog file. Provides the ability to support multiple activity files based upon block instance names. The block argument is added to the FSDB/SAIF/TCF/VCD name before comparing it to the Verilog file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1300.0px;"><code>-cell&#xa0;<em>cell_name</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 65.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1235.0px;">
+<p>Specifies the master cell name for the activity file. This parameter allows you to support master-cell-based activity specification. That is, you need to specify only the master cell name for the activity file, instead of specifying all the instances that were instantiated from a master cell.</p>
+
+<p><strong>Example</strong></p>
+
+<p>Let us consider a design that has a cell named &quot;super_filter&quot; with four block instances &quot;super_filter1&quot;, &quot;super_filter2&quot;, &quot;super_filter3&quot;,and &quot;super_filter4&quot;:</p>
+
+<p><u>Instance-Based Use Model</u>:<br /><code>read_activity_file -format VCD -block super_filter1 </code><br /><code>read_activity_file -format VCD -block super_filter2 </code><br /><code>read_activity_file -format VCD -block super_filter3 </code><br /><code>read_activity_file -format VCD -block super_filter4</code></p>
+
+<p><u>Master-Cell-Based Use Model</u>:<br /><code>read_activity_file -format VCD -cell super_filter</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1300.0px;">
+<p><code><span><code>-end </code>{</span><em>time1 time2 ...timen</em> }</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 65.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1235.0px;">
+<p>When you use the vector-driven method of performing dynamic instance-based power-consumption calculation, you can specify the part of the activity file from which you want power analysis to use for the power calculation. This option specifies the end time of this range and is used in conjunction with the -start option.</p>
+
+<p>Specifies the end time as time-value pairs to report the average power across non-overlapping multiple windows specified in the activity file for a block, level of hierarchy, or other part of the design that you want to analyze. Units are in seconds (s), milliseconds (ms), microseconds (us), nanoseconds (ns), or picoseconds (ps).</p>
+
+<p><em>Default</em> : The time unit is defined in the first .lib file read during design import.</p>
+
+<p>You can specify the <code>$worst_power_window_end </code>variable with the<code> -end </code>parameter to take the worst case end time from the last vector profiler run. Not required for TCF and SAIF.</p>
+
+<p><strong>Note</strong>: You can read multiple windows in a single VCD file by specifying multiple pairs of the start time and end time for the non-overlapping multiple windows specified in the activity file. The use model for reading multiple windows is:</p>
+
+<p><code>read_activity_file &#8211;format VCD design.vcd &#8211;start {<em>start1</em> <em>start2</em> <em>start3</em>} &#8211;end {<em>end1</em> <em>end2</em> <em>end3</em>}</code></p>
+
+<p>The <em><code>start1/2/3</code></em> and <em><code>end1/2/3</code></em> values should be in the ascending order.</p>
+
+<p>Multiple current waveforms representing multiple VCD windows are merged into a single continuous current waveform. To capture the waveform for signals at the edge of user windows, a buffer time is added between the windows being stitched using the <code>set_power_analysis_mode -settling_buffer</code> parameter. This buffer time ensures that the stitched waveform is contiguous. The generated waveform hence has the duration of user windows and the intervening settling buffers. The default settling buffer period is 400ps.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1300.0px;">
+<p><code>-format { VCD | TCF | <code><code><code>SAIF | FSDB</code></code></code> | PHY | SHM}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 65.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1235.0px;">
+<p>Specifies the net activity of the design using an activity file in the VCD, TCF, FSDB, SAIF, PHY, or SHM format. The arguments specified with the <code>-format</code> parameter are case-insensitive.</p>
+<ul><li>The VCD file format uses the toggle count information as the basis for the power consumption calculation. These files can be in compressed (zipped) format using the .gz extension.</li></ul><ul><li>The TCF file format contains data on the switching activity of the nets in the design. The switching activity includes the toggle count information and the probability of the net or pin being in the logic 1 state. <br />These files can be in compressed (zipped) format using the .gz extension.<br /><br />Supports extended TCF which contains transition density for X and Z as shown in the following extended TCF example:<br /><br />&quot;out&quot; :&quot;0.0 0&quot; &quot;0.005000 2&quot; &quot;0.0 0&quot; <br /><br />The fields are defined as follows:<br /><br />Field 1: net or pin name <br />Field 2: duty and transition density for transition of 0-1<br />Field 3: duty and transition density for transition of X(0-X-1)<br />Field 4: duty and transition density for transition of Z(0-Z-1)</li></ul><ul><li>
+<p>The SAIF file format contains aggregate switching activity information on the nets and/or ports in the design. It does not contain time-based information. This file format is used for quick average power analysis of the design.</p>
+</li></ul><ul><li>The FSDB file format specifies the net activity of the design using an activity file in FSDB format. Voltus supports the FSDB version up to 6.0.<br /><strong>Use Model</strong> <br /><span><code>read_activity_file -format FSDB  <em>fsdbfile</em> <br />
+</code></span><code>report_power 
+</code><br />(or) <br /><code>report_vector_profile</code> <br /><br /><strong>Example</strong> <br /><code>read_activity_file -format FSDB test.fsdb -scope top</code></li><li>The PHY (Palladium database format generated in the Palladium environment) format contains the simulation activity data generated during emulator-based simulation. The PHY format can be used in all vector-based power analysis flows (vector profiler, static power analysis and dynamic vector-based power analysis).<br /><strong>Use Model</strong><br /><span><code>read_activity_file</code></span><code>-format PHY &lt;<em>path to PHY database directory</em>&gt;</code><br /><strong>Example</strong><br /><code>read_activity_file -format PHY ./phy2/trace.phy -scope test</code><br /><strong>Notes</strong>:<ul><li>
+<p>The xeDebug software must be present in the <code>PATH</code> environment. <span>Add xeDebug in the path using the following command</span>:<br /><code>set path = (<code>&lt;install_dir&gt;</code>/bin $path)</code><br />The xeDebug software version should be the same as the one using which the PHY database is generated.</p>
+</li><li>
+<p>The PHY database generated from the following UXE/VXE version is supported:<code><br />UXE18.6.0 onwards<br />VXE18.6.0 onwards</code></p>
+</li><li>When reading a PHY format activity file, you require a DPA (DPA_ToggleCountFormat) license.</li><li>
+<p>For information on error messages displayed while reading the PHY database, refer to the <code>xe.msg</code> file in the PHY database directory.</p>
+</li><li>
+<p>Make sure that the PHY database is not locked before invoking the Voltus software.</p>
+</li><li>
+<p>Make sure that the xeDebug software is not already running on the machine.</p>
+</li><li>
+<p>Ensure that the following directories are present in the top-level PHY database directory:&#xa0; <code>*.phy</code>, <code>PDB</code>, <code>cellList</code>, <code>QTDB</code>, <code>dbFiles</code>, and <code>.design</code>.</p>
+</li><li>
+<p>It is recommended that the write permission is assigned on the entire PHY database. In case the write permission cannot be granted, you must set the <code>SWFV_FREEZE_PHY</code> environment variable to <code>1</code>.</p>
+</li><li>
+<p>If you want to run parallel Voltus executables on the same top-level PHY directory with multiple <code>*.phy</code> databases, it is suggested to create local copies of the multiple top-level directories, with links to the original PHY database. This will allow local copies of the PHY database to acquire separate locks.</p>
+</li></ul></li><li>The Simulation History Manager (SHM) database format is a record of the data signal changes that occur during design simulation. The SHM database consists of a directory, typically with the &quot;<code>.shm</code>&quot; suffix. The directory contains two disk files, namely <code>*.trn</code> and <code>*.dsn</code>. For more information about the SHM format, refer to the <em>SimVision Analysis Environment</em> manual available on the Cadence Online Support (COS) website.<br /><strong>Example</strong><br /><code>read_activity_file -format SHM&#xa0; 
+/../shm/ADDER.trn -scope 
+adder_e/u1 -start 0ns -end 60ns</code></li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1300.0px;">
+<p><code>-hier_separator  <em>separator</em> <br /></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 65.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1235.0px;">
+<p>Specifies the separator character in the hierarchical net names, bus names, and pin names for the block or other part of the design that you want to analyze. It must be the same as the separator character in the design netlist.</p>
+
+<p><em>Default</em> : slash (/)</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1300.0px;"><code>-name_mapping_rule</code> <em> <code>file</code> </em></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 65.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1235.0px;">
+<p>Specifies to enable rule-based mapping to map RTL vectors to gate-level netlist. This parameter helps in resolving name mismatch between RTL and gate level netlists.</p>
+
+<p>The name mapping rule file format is:</p>
+
+<p><code>Name_Mapping_Rule_file</code> <br /><code> # RTL&#xa0;&#xa0;&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;# Gate</code> <br /><code> &lt;rtlstring&gt; &lt;gatestring&gt;</code></p>
+
+<p>where, each line is a rule. The string in the first column(RTL) is what we want to replace with the string in the second column(Gate). The rules in every line are added onto the previous rules.</p>
+
+<p>For example, to replace all the square <code>[]</code> brackets with under score _ for RTL-to-Gate matching, the rule file will be:</p>
+
+<p><code>#RTL&#xa0;&#xa0;&#xa0; #GATE</code></p>
+
+<p><code>[&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; _</code></p>
+
+<p><code>]&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; _</code></p>
+
+<p><strong>Note</strong>:&#xa0;<code>-name_mapping_rule</code> is not supported when the&#xa0;&#xa0;<code>set_power_analysis_mode&#xa0;</code><code>-comprehensive_automapping</code>&#xa0;parameter is set to <code>true</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 65.0px;">
+<p><span><code>-reset
+            </code> </span></p>
+</td>
+<td class="confluenceTd" style="width: 1235.0px;">
+<p>If <code>-reset </code>is specified, all previous activity files specified using the&#xa0;<code>read_activity_file </code>command will be reset and ignored.</p>
+
+<p><em>Default</em> : All the previous activity files specified using the <code>read_activity_file</code> command are loaded and used (They are additive).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1300.0px;"><code><code><code>-rtl {true|false}</code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 65.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1235.0px;">
+<p>Specifies to process the vector as an RTL vector and perform state propagation.&#xa0;The propagation behavior is global and the full design is propagated. RTL vectors are zero-delay vectors so delay annotation is always done for signals from this vector file.</p>
+
+<p><em>Default</em>: <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1300.0px;">
+<p><span><code>-scale_duration  <em>scalefactor</em> <br /></code></span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 65.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1235.0px;">
+<p>Scales the FSDB/SAIF/TCF/VCD duration value by the specified scale factor. For example, an FSDB scale of 2 will double the FSDB duration value.</p>
+
+<p><strong>Note: </strong> The <code>-start</code> and <code>-end </code>parameters of the <code>read_activity_file </code>command are post scaled.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1300.0px;">
+<p><code>-scope  <em>scope_name</em>          </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 65.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1235.0px;"><div class="content-wrapper">
+<p>Specifies the FSDB/SAIF/TCF/VCD scope, that is, the name of the module within the activity file associated with the block or other part of the design that you want to analyze.</p>
+
+<p>The scope argument is removed from the FSDB/SAIF/TCF/VCD name before comparing it to the Verilog file.</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>If the scope value has backslash &#8216;\&#8217; or square brackets &#8216;[]&#8217;, you must specify the scope within curly brackets {{&#8230;..}} to ensure that &#8216;\&#8217; or &#8216;[]&#8217; are correctly processed by the Tcl Interpreter. In the following example, the scope value is specified within curly brackets as it contains &#39;\&#39; and &#39;[]&#39;:</p>
+
+<p><code>read_activity_file &#8211;scope {{reg_based_buffer.reg_inst\/sv_xpol_trans_q_reg[0][14][7][sv_re][4]}}</code></p>
+
+<p>If &#39;\&#39; and &#39;[]&#39; are not there, curly brackets are not required.</p>
+</div>
+</div>
+
+<p><strong>Example</strong></p>
+
+<p>The following command specifies the u1 module within the VCD file as the module associated with the part of the design being analyzed, and specifies the <code>dut_5buf_full_chip</code> block instance as the block to map<code>:</code><code><br />read_activity_file \<br /></code><code>-format&#xa0; VCD \<br /></code><code>-scope&#xa0; adder/u1 \</code><code><br />-start&#xa0; {0ps 2000ps} \</code><code><br />-end&#xa0;&#xa0;&#xa0; {1100ps 3100ps} \</code><code><br />-block&#xa0; ../vcd/dut_5buf_full_chip</code></p>
+</div>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1300.0px;">
+<p><code>-set_net_freq {true | false}  </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 65.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1235.0px;">
+<p>This option should be set when an activity from a TCF or VCD file needs to be used to capture net frequency for signal EM analysis (<code>verify_AC_limit</code>). In addition, you must use the <code>verify_AC_limit</code> <code>-use_db_freq</code> option to read the toggle rates from the activity file.</p>
+
+<p><em>Default</em> : false</p>
+<br /><strong>Example</strong> <br /><br />The following example reads a TCF file which is used to capture net frequency for signal EM analysis: <br /><br /><code>read_activity_file -format TCF -set_net_freq <code>true</code> design.tcf</code> <code><span><code>          <br />verify_AC_limit</code> </span>-use_db_freq -report signal_em.rpt </code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1300.0px;">
+<p><code>-start { <em>time1 time2 ... timen</em> }</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 65.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1235.0px;">
+<p>When you use the vector-driven method of performing dynamic instance-based power-consumption calculation, you can specify the part of the activity file from which you want power analysis to use for the power calculation. This option specifies the start time of this range and is used in conjunction with the -end option.</p>
+
+<p>Specifies the start time as time-value pairs to report the average power across non-overlapping multiple windows specified in the VCD file for a block, level of hierarchy, or other part of the design that you want to analyze. Units are in seconds (s), milliseconds (ms), microseconds (us), nanoseconds (ns), or picoseconds (ps).</p>
+
+<p><em>Default</em> : The time unit is defined in the first .lib file read during design import.</p>
+
+<p>You can specify the <code>$worst_power_window_start </code>variable with the <code>-start </code>parameter to take the worst case start time from the last vector profiler run. Not required for TCF and SAIF.</p>
+
+<p><strong>Note</strong>: You can read multiple windows in a single VCD file by specifying multiple pairs of the start time and end time for the non-overlapping multiple windows specified in the activity file. The use model for reading multiple windows is:</p>
+
+<p><code>read_activity_file &#8211;format VCD design.vcd &#8211;start {<em>start1</em> <em>start2</em> <em>start3</em>} &#8211;end {<em>end1</em> <em>end2</em> <em>end3</em>}</code></p>
+
+<p>The <em><code>start1/2/3</code></em> and <em><code>end1/2/3</code></em> values should be in the ascending order.</p>
+
+<p>Multiple current waveforms representing multiple VCD windows are merged into a single continuous current waveform. To capture the waveform for signals at the edge of user windows, a buffer time is added between the windows being stitched using the <code>set_power_analysis_mode -settling_buffer</code> parameter. This buffer time ensures that the stitched waveform is contiguous. The generated waveform hence has the duration of user windows and the intervening settling buffers. The default settling buffer period is 400ps.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1300.0px;">
+<p><code>-start_time_shift <em>value</em>          </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 65.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1235.0px;">
+<p>Specifies to shift the start time of the specified activity files.</p>
+
+<p>When you specify the <code>-scale_duration </code>parameter with the <code>-start_time_shift </code>parameter, it scales the start time shift along with the start/end time.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 65.0px;">
+<p><em>name</em> &#xa0;</p>
+</td>
+<td class="confluenceTd" style="width: 1235.0px;">
+<p>The name of the activity file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1300.0px;"><code>-weight <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 65.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1235.0px;">Specifies the weight number of the TCF file. <code>1.0</code> is the default value. The value should be a floating number that is smaller than <code>1.0</code>. This parameter allows you to merge multiple TCF files at different function modes for static power estimation of a design.<br />
+<p>In the following example, TCF <em>file1</em>, <em>file2</em>, and <em>file3</em> has the weight numbers 0.3, 0.2, and 0.4, respectively.</p>
+
+<p><code>read_activity_file -format TCF <em>file1</em> &#8211;weight 0.3 <br />read_activity_file <code>-format TCF</code> <em>file2</em> &#8211;weight 0.2 <br />read_activity_file <code>-format TCF</code> <em>file3</em> &#8211;weight 0.4 </code><br />Here,<em> file1</em>, <em>file2</em>, and <em>file3</em> will be merged together to represent the toggle and duty for the nets/pins in the design. The relative weight of 0.3/0.9, 0.2/0.9, and 0.4/0.9 would be used for static power calculation. In this example, 0.9 is the sum of weights.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1300.0px;"><code><code>-zero_delay {true|false}</code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 65.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1235.0px;">
+<p>Specifies to process the vector as a zero-delay vector and perform delay annotation.</p>
+
+<p><em>Default</em> : <code>false</code></p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="read_activity_file-activity_precedenceActivityPrecedence"><span class="confluence-anchor-link" id="read_activity_file-activity_precedence"></span> Activity Precedence</h4>
+
+<p>The following commands can define activity:</p>
+
+<p><span> <code>read_activity_file  <em>file</em> 
+       <em> <br /> </em> 
+      &#xa0;&#xa0;&#xa0;&#xa0;
+      [-format {&#xa0;<code><code><code><code><code><code>VCD | TCF | SAIF | FSDB</code></code></code></code></code></code> ]}</code> <br /><code>
+      &#xa0;&#xa0;&#xa0;&#xa0;
+      [-hier_separator  <em>separator</em> ]</code> <br /><code>
+      &#xa0;&#xa0;&#xa0;&#xa0;
+      [-start  <em>time</em> ]</code> <br /><code>
+      &#xa0;&#xa0;&#xa0;&#xa0;
+      [-end  <em>time</em> ]</code> <br /><code>&#xa0;&#xa0; &#xa0; [-reset]</code> <br /><code>
+      &#xa0;&#xa0;&#xa0;&#xa0;
+      [-scope  <em>scope_name</em> ]</code> <br /><code>
+      &#xa0;&#xa0;&#xa0;&#xa0;
+      [-block <em> block_name</em> ]</code> <br /><code>&#xa0;&#xa0;&#xa0; <br />
+    </code> </span></p>
+
+<p><span> <code>set_default_switching_activity</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-input_activity  <em>factor</em> ]</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-seq_activity  <em>factor</em> ]</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-period  <em>value</em> ]</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-duty  <em>value</em> ]</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-global_activity  <em>factor</em> ]</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-hier <em> hierarchy</em> 
+      _name]</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-clock_gates_output  <em>activity_factor</em> ]</code> </span></p>
+
+<p><code>set_switching_activity</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-reset]</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-clock clock_name]</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-period  <em>value</em> ]</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-unclocked]</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-activity  <em>factor</em>  | -density transition_density ]</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-net  <em>net_name </em> | -port  <em>port_name </em> | -pin  <em>pin_name </em> ]</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-duty  <em>value</em> ]</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-inst]</code></p>
+
+<p>The precedence of activity is as follows:</p>
+<ol><li>User-Defined: Activities applied to specific nets/pins/ports</li><li>Activity File: Activity specification through a VCD/FSDB/SAIF/TCF format</li><li>Clock Gates Output Activity: Activity specification to the output of all clock gates</li><li>SDC/TWF constants:&#xa0;Set constants to a list of pins or ports for use by the timing engine (timing analysis)</li><li>Hierarchical Global Activity: Activity specification for a specific hierarchy</li><li>Global Activity: Activity specification for all instances that are part of the data network.</li><li>Sequential Element Activity: Activity specification applied to the output of all sequential elements.</li><li>Primary Input Activity: Activity specification for all primary inputs</li></ol>
+<p>If you specify multiple activity data for the same items, the power engine will use the one with the higher precedence.</p>
+<h4 id="read_activity_file-Examples">Examples</h4>
+<ul><li>The following command reads the compressed ap_wait_test_pll1_mod .vcd.gz VCD file that contains the toggle count information for the power consumption calculations, specifies the crm_ap module within the VCD file as the module associated with the part of the design being analyzed, specifies the slash character (/) as the hierarchical separator for hierarchical net names, bus names, and pin names for the part of the design being analyzed, and specifies the start (180002ns) and end (189802ns) times from the VCD file for the part of the design being analyzed:</li></ul><p style="margin-left: 30.0px;"><code>
+    read_activity_file -format VCD \<br />-scope testbench/top/ap/mcu_platform/crm_ap \<br />-hier_separator \
+  </code> <br /><code>
+    -start 180002ns \
+  </code> <br /><code>
+    -end 189802ns \
+  </code> <br /><code>
+    ap_wait_test_pll1_mod.vcd.gz
+  </code></p>
+<ul><li>The following command reads the compressed A.vcd.gz VCD file that contains the toggle count information for the power consumption calculations, specifies A1 as the block to map a sub-block VCD file with a block instance at the top-level, and specifies the start (180002ns) and end (189802ns) times from the VCD file for the part of the design being analyzed:</li></ul><p style="margin-left: 30.0px;"><code>
+    read_activity_file -format VCD \<br />-block ap/A1 \<br />-start 180002ns \
+  </code> <br /><code>
+    -end 189802ns \
+  </code> <br /><code>
+    A.vcd.gz
+  </code></p>
+<ul><li>The next example specifies a VCD activity file called dmac_mac.vcd for the scope top/dma_dut.&#xa0;</li></ul><p style="margin-left: 30.0px;"><code>read_activity_file -format VCD -start 10ns -end 20ns \</code> <br /><code>-scope top/dma_dut dmac_mac.vcd</code></p>
+<ul><li>The following command specifies multiple pairs of the start time and end time for the multiple windows in the VCD file<code><code>:</code></code><code><br />read_activity_file \<br /></code><code>-format&#xa0; VCD \<br /></code><code>-scope&#xa0; adder/u1 \</code><code><br />-start&#xa0; {0ps 2000ps} \</code><code><br />-end&#xa0;&#xa0;&#xa0; {1100ps 3100ps} \</code><code><br />-block&#xa0; ../vcd/dut_5buf_full_chip.vcd</code></li><li>The following command specifies to read the RTL-level VCD activity file:<code><br />read_activity_file -format VCD -scope scope_top -start 300ns -end 700ns /DesignData/VCD/rtl.vcd -block inst_C1 -rtl true</code><code><br />set_power_analysis_mode
+ -method vector_profile -vector_profile_mode transient 
+-worst_window_type full -power_grid_library 
+/DesignData/PGV/library_pv.cl</code></li></ul><h4 id="read_activity_file-RelatedTopics">Related Topics</h4>
+<ul><li>&quot;<u>Dynamic Power and IRDrop Analysis</u>&quot; in the&#xa0; <em>Voltus User Guide</em></li></ul>
+<p><br /></p>
+
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="query_power_data.html" id="prev" title="query_power_data">query_power_data</a></em></b><b><em><a href="report_annotated_parasitics.html" id="nex" title="report_annotated_parasitics">report_annotated_parasitics</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

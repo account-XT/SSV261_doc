@@ -1,0 +1,183 @@
+
+<html><head><title>Basic Signoff ECO Optimization Techniques</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845238" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Basic Signoff ECO Optimization Techniques" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845238" />
+<meta name="NextFile" content="SignoffECO_siviolations.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="SignoffECO_ecousemodel.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- Basic Signoff ECO Optimization Techniques" />
+<meta name="Keywords" content="Signoff ECO optimization techniques" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="ECO,Stylus" />
+<meta name="prod_subfeature" content="ECO" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="SignoffECO_ecousemodel.html" title="Signoff Optimization Use Models">Signoff Optimization Use Model ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="SignoffECO_siviolations.html" title="Fixing SI Violations in Tempus Signoff ECO">Fixing SI Violations in Tempus ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:ecotechniques" title="Basic Signoff ECO Optimization Techniques"></a><style>/*<![CDATA[*/
+/**/
+/**/
+/**/
+/**/
+h1 { counter-reset: heading 8;}
+/**/
+/**/
+/**/
+/**/
+/*]]>*/</style><h2>
+<a id="pgfId-1001543"></a><a id="67633"></a>Basic Signoff ECO Optimization Techniques</h2>
+
+<p>
+<a id="pgfId-1001552"></a>Tempus ECO is able to optimize timing/DRV/Leakage/Area/Hold/Power/Setup. The main command to perform those different optimizations is <code>opt_signoff</code> and you can select the targeted optimization using the following options:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1001564"></a><a href="../tempusCUI/opt_signoff.html">opt_signoff</a> [-area] [-drv] [-dynamic] [-hold] [-leakage] [-power] [-setup]</pre>
+
+<p>
+<a id="pgfId-1339211"></a>This command will generate the <code>eco_innovus.tcl</code> file, which should be used in Innovus to perform place and route. It also generates the <code>eco_tempus.tcl</code> file, which can be sourced in Tempus to perform timing analysis after ECOs. Each optimization engine always ensures no new violations. For example, when fixing Setup timing, the tool ensures no new DRV/Hold violations, or when fixing Hold timing, the tool ensures no new DRV/Setup violations. This is the key to ensure good timing convergence in a minimum of ECO loops.</p>
+<p>
+<a id="pgfId-1001581"></a>Notes before running <a href="../tempusCUI/opt_signoff.html">opt_signoff</a>:</p>
+<ul><li>
+<a id="pgfId-1001592"></a>It is mandatory to provide parasitic before running <code>opt_signoff</code>. The syntax below shows how to load the SPEF files for every active RC corner:
+<code>read_spef -rc_corner rc_max max.spef.gz
+read_spef -rc_corner rc_min1 min1.spef.gz
+read_spef -rc_corner rc_min2 min2.spef.gz</code><br />
+<a id="pgfId-1010959"></a>To perform SI analysis/fixing, SPEF must contain the coupling capacitance data.</li><li>
+<a id="pgfId-1001609"></a>All timing derates, AOCV tables, delay calculation settings, CTE attributes must also be provided before running the <code>opt_signoff</code> since those will the timing updates done during ECO fixing.</li><li>
+<a id="pgfId-1001628"></a>It is important to correctly set up the timing environment and multi-CPU settings before running <code>opt_signoff</code> to avail the benefit of DMMMC timing analysis and Multi-threading during timing/leakage/area optimization.</li><li>
+<a id="pgfId-1019361"></a>In case there are filler cells in the design, <code>opt_signoff</code> will automatically delete them at the start. To implement this, it is mandatory to specify the filler cells that need to be removed by using the command, <code>set_db</code> add_fillers_cells {{list-of-cells1} {list-of-cells2} &#8230;}.</li></ul>
+
+
+
+
+
+
+<p>
+<a id="pgfId-1001647"></a>By default, <code>opt_signoff</code> will use buffering/resizing/swapping techniques to improve timing/DRC/Leakage/Area. For Setup timing closure, <code></code>opt_signoff is also able to insert pairs of inverters. Additionally, sequential elements can also be sized by enabling <code>set_db</code> opt_signoff_optimize_sequential_cells true and buffer deletion can be enabled during area recovery by enabling <code>set_db</code> opt_signoff_delete_inst true.</p>
+<p>
+<a id="pgfId-1001671"></a><strong>Examples</strong></p>
+<ul><li>
+<a id="pgfId-1001681"></a>Example 1:</li></ul>
+
+<a id="pgfId-1011047"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+opt_signoff &#8211;hold</code></pre>
+
+<p>
+<a id="pgfId-1011011"></a>This will perform Hold fixing by using Vth swapping, buffering, and resizing techniques on the combinational cells.</p>
+<ul><li>
+<a id="pgfId-1001693"></a>Example 2:</li></ul>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1011061"></a><code>set_db opt_signoff_optimize_sequential_cells true</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1011014"></a><code></code><code>opt_signoff</code> <code>&#8211;leakage</code></pre>
+
+<p>
+<a id="pgfId-1011033"></a>This will perform Leakage recovery by using Vth swapping technique on both the combinational and sequential cells.</p>
+<ul><li>
+<a id="pgfId-1001709"></a>Example 3:</li></ul>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1011077"></a><code></code>set_db opt_signoff_delete_inst true</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1011020"></a><code></code>opt_signoff &#8211;area</pre>
+
+<p>
+<a id="pgfId-1011036"></a>This will perform Area recovery by using downsizing on both the combination and sequential cells in addition to buffer removal.</p>
+<p>
+<a id="pgfId-1001725"></a>At the signoff stage, you can optimize all remaining violations, such as DRV, Setup, and Hold, but also to recover Power or Area when needed. This can be achieved in one single Tempus session using the incremental optimization feature enabled with <code>set_db opt_signoff_allow_multiple_incremental true.</code></p>
+
+
+
+<p class="webflare-indent1"><strong>Figure -6
+<a id="pgfId-1001747"></a>Examples</strong></p>
+
+<p>
+<a id="pgfId-1001759"></a></p>
+<div class="webflare-div-image">
+<img width="670" height="301" src="images/SignoffECO-7.gif" /></div>
+
+<p>
+<a id="pgfId-1001769"></a>Notes about incremental optimization are as follows:</p>
+<p>
+<a id="pgfId-1001784"></a>The recommended flow is the one described in Example 2 above. In case, area optimization is needed, it should be called as the first flow step.</p>
+<p>
+<a id="pgfId-1001793"></a>Note that if more Tempus ECOs are done in a session then more routing changes will be needed when implementing those ECOs and therefore larger is the risk to get timing degradation.</p>
+<p>
+<a id="pgfId-1001802"></a>Each optimization step will output an ECO file so in order to avoid overwriting the previous one, you should apply a unique prefix for each with the <code>set_db allow_multiple_incremental <span class="webflare-courier-new" style="white-space:pre"><em>prefixName</em></span><code> </code></code>option.</p>
+<p>
+<a id="pgfId-1001826"></a><strong>Example</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3701582"></a>set_db opt_signoff_read_eco_opt_db ECOdb<br />set_db opt_signoff_allow_multiple_incremental true<br />set_db opt_signoff_eco_file_prefix DRV_FIX <br />opt_signoff -drv<br />set_db opt_signoff_eco_file_prefix HOLD_FIX<br />opt_signoff -hold</pre>
+
+<p>
+<a id="pgfId-1001864"></a>This will perform DRV fixing followed by Hold fixing, while giving a different prefix for the ECO files.</p>
+
+
+
+
+<h4><em>
+<a id="pgfId-2429291"></a>Related Topics</em></h4>
+
+<ul><li>
+<a id="pgfId-2429295"></a><a href="SignoffECO_overview.html#85337">Signoff ECO Overview</a></li><li>
+<a id="pgfId-2461988"></a><a href="SignoffECO_signoffecokeyfeatures.html#93599">Key Features of Signoff ECO</a></li><li>
+<a id="pgfId-2429327"></a><a href="SignoffECO_ecoflow.html#59262">Signoff ECO Flow</a></li><li>
+<a id="pgfId-2429299"></a><a href="SignoffECO_ecoenvironment.html#61809">Setting Up Signoff ECO Environment</a></li><li>
+<a id="pgfId-2429303"></a><a href="SignoffECO_ecousemodel.html#75204">Signoff Optimization Use Models</a></li></ul>
+
+
+
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="SignoffECO_ecousemodel.html" id="prev" title="Signoff Optimization Use Models">Signoff Optimization Use Model ...</a></em></b><b><em><a href="SignoffECO_siviolations.html" id="nex" title="Fixing SI Violations in Tempus Signoff ECO">Fixing SI Violations in Tempus ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

@@ -1,0 +1,3601 @@
+
+<html><head><title>Tcl Variables</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-03-19" />
+<meta name="CreateTime" content="1773989658" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Foundation Flows are the Cadence-recommended procedures for performing MMMC Signoff, CPF-based MMMC Signoff, and Single view non-MMMC flow using the Tempus software." />
+<meta name="DocTitle" content="Tempus Foundation Flow User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Tcl Variables" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusffug" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-03-19" />
+<meta name="ModifiedTime" content="1773989658" />
+<meta name="NextFile" content="TimingAnalysisFlow.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design" />
+<meta name="PrevFile" content="GettingStarted.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Foundation Flow User Guide -- Tcl Variables" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="0" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusffug2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusffugTOC.html">Contents</a></li><li><a class="prev" href="GettingStarted.html" title="Getting Started with Tempus Foundation Flows">Getting Started with Tempus Fo ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusffug.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="TimingAnalysisFlow.html" title="Timing Analysis Flow">Timing Analysis Flow</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Foundation Flow User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<h1>2
+<a id="pgfId-1065082"></a></h1>
+<h1>
+<a id="pgfId-1065083"></a><hr />
+Tcl Variables<hr />
+</h1>
+
+<p>
+<a id="pgfId-1067231"></a>The Foundation Flow requires a configuration file (<code>setup.tcl</code>) that defines the necessary information to execute the flow including pointers to design data and command option information. Under the <code>TEMPLATES</code> directory, there are three sample setup files for different flows. You can copy these setup files to the running directory, rename these setup files to <code>setup.tcl</code>, and modify these as required.</p>
+<ul><li>
+<a id="pgfId-1067232"></a><a href="#88190"></a><strong>setup_mmmc.tcl File</strong>
+Defines the variables to use in the MMMC analysis. This script is unique for each design and is the only script that you must edit. It is the source of all input flows, and is a superset of the configuration file that includes design data, library information, and flow control.</li><li>
+<a id="pgfId-1067233"></a><a href="#19658"></a><strong>setup_cpf.tcl File</strong>
+This template is for the low power design specially, which uses the cpf file as the power domain definition file.</li><li>
+<a id="pgfId-1067234"></a><a href="#35392"></a><strong>setup_default.tcl File</strong>
+This template is used for the single view non MMMC flow; if you have only one view to analyze and do not want to define view definition.</li></ul>
+
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1067235"></a>Two sample <code>setup.tcl</code> files have been provided that are able to run through. The <code>setup.tcl</code> files - one for single view non MMMC flow is located at <code>EXAMPLES/TEMPUS/dtmf/WORK</code> directory and the other for MMMC flow is available at <code>EXAMPLES/TEMPUS/dtmf_mmmc/WORK</code> directory. The required libraries, netlists, and SPEF data is also included in the <code>EXAMPLES</code> directory.</div>
+
+<h3>
+<a id="pgfId-1067236"></a><a id="88190"></a>setup_mmmc.tcl File</h3>
+
+<p>
+<a id="pgfId-1067237"></a>Defining Variables and Specifying Values for Timing Environment</p>
+<p>
+<a id="pgfId-1067238"></a># Variables defining the scripts directory, output reports, saved session directories and environment settings.</p>
+<table class="webflareTable" id="#id1067239">
+<tbody><tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067241"></a>Variable Name</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067245"></a>Value Type</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067247"></a>Usage Description</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1067249"></a><strong>Variables to Specify file and saved session directory setting</strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067257"></a><code>flow</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067261"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067263"></a><code>supported flow -&gt; single, mmmc and cpf</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067265"></a><code>script_root</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067269"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067271"></a><code>foundation flow scripts dir (default is&quot;../SCRIPTS&quot;)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067273"></a><code>dbs_dir</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067277"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067279"></a><code>Saved session directory (default is dbs)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1067281"></a><strong>Variables for Design Initialization</strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067289"></a><code>si_analysis</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067293"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067295"></a><code>set &quot;true&quot; to include si analysis (default is &quot;true&quot;)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067297"></a><code>aocv_flow </code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067301"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067303"></a><code>set &quot;true&quot; to switch on the aocv analysis</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067305"></a><code>pba_analysis</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067309"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067311"></a><code>set &quot;true&quot; to switch on path based analysis for violated paths</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067313"></a><code>aocv_pba_analysis</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067317"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067319"></a><code>set &quot;true&quot; to switch on aocv path based analysis for violated paths</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067321"></a><code>physical_data</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067325"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067327"></a><code>set &quot;true&quot; to include physical data (default setting is &quot;false&quot; to just load the timing related data)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1067329"></a><strong>Variables to Specify All the Setup and Hold Analysis Views </strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067337"></a><code>setup_analysis_views</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067341"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067343"></a><code>List all analysis views in this design, e.g. &quot;func_slow test_slow&quot;</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067345"></a><code>hold_analysis_views</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067349"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067351"></a><code>List all analysis views in this design, e.g. &quot;func_fast test_fast&quot;</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1067353"></a><strong>Variable to Specify Concurrent and Distributed MMMC</strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067361"></a>combine_views</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067365"></a>string</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067367"></a>User can also give N views here to enable concurrent + distribute MMMC flow<br />N is the maximum of views to on the same remote</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1067369"></a><strong>Variables to Specify the SPEF Files for Each RC Corner </strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067377"></a><code>$rc_corner,spef_file</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067381"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067383"></a><code>Load all the used .spef for the rc_corner, e.g. vars(slow_rc,spef). </code></p>
+<p>
+<a id="pgfId-1067384"></a><code>The default spef file name will be $rc_corner.spef.gz</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1067386"></a><strong>Variables Defining All the Library Sets, RC Corners, Delay Corners, Constraint Modes and Virtual Operating Conditions </strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067394"></a><code>library_sets</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067398"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067400"></a><code>List all the library sets used in this design, e.g. &quot;slow fast&quot;</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067402"></a><code>rc_corners</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067406"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067408"></a><code>List all the rc corners used in this design, e.g. &quot;slow_rc fast_rc&quot;</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067410"></a><code>delay_corners</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067414"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067416"></a><code>List all the delay_corner used in this design, e.g. &quot;slow_dc fast_dc&quot;</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067418"></a><code>constraint_modes</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067422"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067424"></a><code>List all the constraint modes used in this design, e.g. &quot;func test&quot;</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067426"></a><code>vir_op_conds</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067430"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067432"></a><code>List all the virtual condition need to be created in this design, e.g. &quot;BCCOM_slow WCCOM_slow&quot;</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1067434"></a><strong>Variables to Specify the Library Files for Each Library Set </strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067442"></a><code>$library_set,timing</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067446"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067448"></a><code>Load all the used .libs for the library_set, e.g. vars(slow,timing)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067450"></a><code>$library_set,si</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067454"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067456"></a><code>Load all the used .cdbs for the library_set, e.g. vars(slow,si)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067458"></a><code>$library_set,aocv</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067462"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067464"></a><code>Load all the used aocv libs for the library_set, e.g. vars(slow,aocv)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1067466"></a><strong>Variables to Specify the Binding Library File, Process Value, Voltage and Temperature for the Created Virtual Operating Conditions </strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067474"></a><code>$vir_op_cond,lib_file</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067478"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067480"></a><code>give the binding library file name, e.g. vars(BCCOM_slow,lib_file)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067482"></a><code>$vir_op_cond,P</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067486"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067488"></a><code>give the binding process value, e.g. vars(BCCOM_slow,P)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067490"></a><code>$vir_op_cond,V</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067494"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067496"></a><code>give the binding voltage value, e.g vars(BCCOM_slow,V)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067498"></a><code>$vir_op_cond,T</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067502"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067504"></a><code>give the binding temperature value, e.g. vars(BCCOM_slow,T)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1067506"></a><strong>Variables to Specify the Binding rc_corner, Library Set, operating condition and opcond library name &quot;for Each delay_corner&quot;</strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067514"></a><code>$delay_corner,library_set</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067518"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067520"></a><code>give the binding library_set name, e.g. vars(slew_dc,library_set)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067522"></a><code>\$delay_corner,library_set,late</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067526"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067528"></a><code>give the binding library_set name, e.g. vars(slew_dc,library_set,late)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067530"></a><code>\$delay_corner,library_set,early</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067534"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067536"></a><code>give the binding library_set name, e.g. vars(slew_dc,library_set,early)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067538"></a><code>$delay_corner,rc_corner</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067542"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067544"></a><code>give the binding rc_corner name, e.g. vars(slew_dc,rc_corner)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067546"></a><code>$delay_corner,opcond</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067550"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067552"></a><code>give the binding opcond name (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067554"></a><code>$delay_corner,opcond_lib</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067558"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067560"></a><code>give the binding opcond library name (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1067562"></a><strong>Variables to Specify the Binding SDC files for Each constraint_mode </strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067570"></a><code>$constraint_mode,signoff_sdc</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067574"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067576"></a><code>give the binding sdc_file name, e.g vars(func,sdc_file)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1067578"></a><strong>Variables to Specify the Binding Constraint Mode and Delay Corner for Each View</strong> </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067586"></a><code>$analysis_view,constraint_mode</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067590"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067592"></a><code>give the binding constraint mode name, e.g vars(func_slow,constraint_mode)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067594"></a><code>$analysis_view,delay_corner</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067598"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067600"></a><code>give the binding delay corner name, e.g. vars(func_slow,delay_corner)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1067602"></a><strong>Variable to Specify a Predefined View Definition File </strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067610"></a><code>view_tcl</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067614"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067616"></a><code>if a predefined view definition file is provided, the above MMMC settings are not required</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1067618"></a><strong>Variable to Define the Type of Distributed Processing </strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067626"></a><code>distribute</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067630"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067632"></a><code>the value can be &lt;local | custom | lsf | rsh&gt;</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067634"></a><code>remote_hosts</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067638"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067640"></a><code>set to value = Total(setup views + hold views) machines for distribute all<br />analysis views onto different mahcines;<br />it can also be set to any value &lt; Total(setup views + hold views)<br />the runtime is longer (will be ready before 91rtm, SI results in this mode is not accurate now) </code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1067642"></a><strong>Variables for RSH Mode of Distributed Processing</strong> </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067650"></a><code>rsh,host_list</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067654"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067656"></a><code>provide the host name</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067658"></a><code>distribute_timeout</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067662"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067664"></a><code>provide the time limit for a rsh remote host to respond, the tool&#39;s default is 5 sec </code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1067666"></a><strong>Variables for Custom Mode of Distributed Processing </strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067674"></a><code>custom,script</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067678"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067680"></a><code>provide the custom script</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1067682"></a><strong>Variables for LSF Mode of Distributed Processing </strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067690"></a><code>lsf,queue</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067694"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067696"></a><code>provide the lsf queue name</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067698"></a><code>lsf,resource</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067702"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067704"></a><code>provide the lsf resource name</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067706"></a><code>lsf,args</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067710"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067712"></a><code>provide other lsf args</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1067714"></a>Variable for Specifying Distributed Static Timing Analysis (DSTA) Capability&#160;&#160;</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067722"></a><code>dsta</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067726"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067728"></a><code># by default DMMMC flow will be generated <br /># set to true to switch on DSTA flow</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1067730"></a><strong>Variable for Specifying Multi-Threading Settings </strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067738"></a><code>local_cpus</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067742"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067744"></a><code>specify the number of local CPUs used for multithreading runs <br />if DMMMC is enabled, the value means number of CPUs per remote host</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1067746"></a><strong>Variables for Specifying SDF and IR-Drop Files (Optional) </strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067754"></a><code>$analysis_view,sdf_file,full</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067758"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067760"></a><code>provide the full sdf file name (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067762"></a><code>$analysis_view,sdf_file,incr</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067766"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067768"></a><code>provided the sdf file name of incr delay (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067770"></a><code>$delay_corner,ir_drop_early</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067774"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067776"></a><code>provide the ir-drop files name for early path (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067778"></a><code>$delay_corner,ir_drop_late</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067782"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067784"></a><code>provide the ir-drop files name for late path (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1067786"></a><strong>Variables to Specify Timing Derate and Uncertainty Values </strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067794"></a><code>$delay_corner,cell_data_late</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067798"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067800"></a><code>set derate value for cell for data late path (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067802"></a><code>$delay_corner,cell_data_early</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067806"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067808"></a><code>set derate value for cell for data early path (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067810"></a><code>$delay_corner,cell_clock_late</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067814"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067816"></a><code>set derate value for cell for clock late path (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067818"></a><code>$delay_corner,cell_clock_early</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067822"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067824"></a><code>set derate value for cell for clock early path (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067826"></a><code>$delay_corner,net_data_late</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067830"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067832"></a><code>set derate value for net for data late path (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067834"></a><code>$delay_corner,net_data_early</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067838"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067840"></a><code>set derate value for net for data early path (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067842"></a><code>$delay_corner,net_clock_late</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067846"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067848"></a><code>set derate value for net for clock late path (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067850"></a><code>$delay_corner,net_clock_early</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067854"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067856"></a><code>set derate value for net for clock early path (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067858"></a><code>$delay_corner,derate_tcl</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067862"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067864"></a><code>alternatively, users can specify a derating files (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067866"></a><code>$delay_corner,clock_uncertainty,setup</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067870"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067872"></a><code>set clock uncertainty for setup check (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067874"></a><code>$delay_corner,clock_uncertainty,hold</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067878"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067880"></a><code>set clock uncertainty for setup check (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1067882"></a><strong>Variables for MMMC ECO Fix </strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067890"></a><code>eco_buffers</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067894"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067896"></a><code>provide buffers for eco fix if $vars(eco_fix) set to true</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067898"></a><code>eco_targets</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067902"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067904"></a><code>provide eco optimization targets. Choices inlude hold, drv, setup and leakage default is hold; Tempus Signoff Optimization allows multiple incremental ECOs, e.g. &quot;drv hold setup&quot;. Leakage opt needs separate session. </code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1067906"></a><strong>Variables for Plug-In Tcl Scripts </strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067914"></a><code>tempus_pre_design_import</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067918"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067920"></a><code>&lt;path to plug-in tcl file&gt;,executed before design import (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067922"></a><code>tempus_replace_design_import</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067926"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067928"></a><code>&lt;path to plug-in tcl file&gt;,executed to replace default design import (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067930"></a><code>tempus_post_design_import</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067934"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067936"></a><code>&lt;path to plug-in tcl file&gt;,executed after design import (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067938"></a><code>tempus_pre_parasitic_load</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067942"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067944"></a><code>&lt;path to plug-in tcl file&gt;,executed before parasitic load (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067946"></a><code>tempus_replace_parasitic_load</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067950"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067952"></a><code>&lt;path to plug-in tcl file&gt;,executed to replace parasitic load (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067954"></a><code>tempus_post_parasitic_load</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067958"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067960"></a><code>&lt;path to plug-in tcl file&gt;,executed after parasitic load (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067962"></a><code>tempus_pre_sta</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067966"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067968"></a><code>&lt;path to plug-in tcl file&gt;,executed before first report timing (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067970"></a><code>tempus_replace_sta</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067974"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067976"></a><code>&lt;path to plug-in tcl file&gt;,executed to replace first report timing (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067978"></a><code>tempus_post_sta</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067982"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067984"></a><code>&lt;path to plug-in tcl file&gt;,executed after first report timing (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067986"></a><code>tempus_pre_si</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067990"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067992"></a><code>&lt;path to plug-in tcl file&gt;,executed before SI analysis (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1067994"></a><code>tempus_replace_si</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1067998"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068000"></a><code>&lt;path to plug-in tcl file&gt;,executed to replace SI analysis (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1068002"></a><code>tempus_post_si</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068006"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068008"></a><code>&lt;path to plug-in tcl file&gt;,executed after SI analysis (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1068010"></a><code>tempus_pre_rpt_gen</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068014"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068016"></a><code>&lt;path to plug-in tcl file&gt;,executed before reports generation (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1068018"></a><code>tempus_replace_rpt_gen</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068022"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068024"></a><code>&lt;path to plug-in tcl file&gt;,executed to replace reports generation (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1068026"></a><code>tempus_post_rpt_gen</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068030"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068032"></a><code>&lt;path to plug-in tcl file&gt;,executed after reports generation (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1068034"></a><code>tempus_pre_eco</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068038"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068040"></a><code>&lt;path to plug-in tcl file&gt;,executed before start eco opt (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1068042"></a><code>tempus_replace_eco</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068046"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068048"></a><code>&lt;path to plug-in tcl file&gt;,executed to replace eco opt (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1068050"></a><code>tempus_post_eco</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068054"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068056"></a><code>&lt;path to plug-in tcl file&gt;,executed after eco opt (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="4" rowspan="1">
+<p>
+<a id="pgfId-1068058"></a><strong>Variables to Skip Each Default Steps</strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1068066"></a><code>tempus_skip_design_import</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068070"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068072"></a><code>set to &quot;true&quot; to skip design import (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1068074"></a><code>tempus_skip_parasitic_load</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068078"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068080"></a><code>set to &quot;true&quot; to skip parasitic load (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1068082"></a><code>tempus_skip_sta</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068086"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068088"></a><code>set to &quot;true&quot; to skip first report timing (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1068090"></a><code>tempus_skip_si</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068094"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068096"></a><code>set to &quot;true&quot; to skip SI analysis (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1068098"></a><code>tempus_skip_rpt_gen</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068102"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068104"></a><code>set to &quot;true&quot; to skip report generation (optional)</code></p>
+</td>
+</tr>
+</tbody></table>
+
+<h3>
+<a id="pgfId-1068107"></a><a id="19658"></a>setup_cpf.tcl File</h3>
+
+<p>
+<a id="pgfId-1068108"></a>When compared to the general MMMC design, low power design has CPF as the input for the power domain and analysis view definition. Besides the CPF file, you need to bind <code>rc_corner </code>to the corresponding delay corner to complete the view definition:</p>
+<table class="webflareTable" id="#id1068109">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068111"></a><strong>Variable Name</strong></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068113"></a><strong>Value Type</strong></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068115"></a><strong>Usage Description</strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068117"></a><code>cpf_file</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068119"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068121"></a><code>Provides the full cpf file name</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068123"></a><code>rc_corners</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068125"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068127"></a><code>Lists all the rc corners used in this design, for example, &quot;slow_rc fast_rc&quot;. If you want to use the default rc corner, set the variable to &quot;default_rc_corner&quot;</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068129"></a><code>${analysis_view}_dc,rc_corner</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068131"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068133"></a><code>Specifies the binding rc_corner name, for example, vars(func_slow_dc,rc_corner)</code></p>
+</td>
+</tr>
+</tbody></table>
+
+<h3>
+<a id="pgfId-1068136"></a><a id="35392"></a>setup_default.tcl File</h3>
+
+<p>
+<a id="pgfId-1068137"></a>Use the <code>setup_default.tcl</code> template if you have a single view for analysis, and do not want to create view definitions.</p>
+<p>
+<a id="pgfId-1068138"></a><strong>Defining Variables and Specifying Values for Timing Environment</strong></p>
+<p>
+<a id="pgfId-1068139"></a># Variables defining the scripts directory, output reports, saved session directories and environment settings.</p>
+<table class="webflareTable" id="#id1068140">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068142"></a><strong>Variable Name</strong></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068144"></a><strong>Value Type</strong></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068146"></a><strong>Usage Description</strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="3" rowspan="1">
+<p>
+<a id="pgfId-1068148"></a><strong>Design Initialization Variables </strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068154"></a><code>si_analysis</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068156"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068158"></a><code>set &quot;true&quot; to include si analysis (default is &quot;true&quot;)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068160"></a><code>aocv_flow </code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068162"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068164"></a><code>set &quot;true&quot; to switch on the aocv analysis</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068166"></a><code>pba_analysis</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068168"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068170"></a><code>set &quot;true&quot; to switch on path based analysis for violated paths</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068172"></a><code>aocv_pba_analysis</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068174"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068176"></a><code>set &quot;true&quot; to switch on aocv path based analysis for violated paths</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068178"></a><code>physical_data</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068180"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068182"></a><code>set &quot;true&quot; to include physical data (default setting is &quot;false&quot; <br />to just load the timing related data)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="3" rowspan="1">
+<p>
+<a id="pgfId-1068184"></a><strong>Design Import Variables</strong> </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068190"></a><code>load_edi_db</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068192"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068194"></a><code>set &quot;true&quot; for loading design from EDI DB<br />design saved from TEMPUS session can be restored in the same way</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068196"></a><code>edi_db_name</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068198"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068200"></a><code>EDI database or a conf file (required if <br />load_edi_db is true, default is &quot;DBS/signoff.enc&quot; )</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068202"></a><code>edi_oa_name</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068204"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068206"></a><code>EDI OA database (required if load_edi_db is true, and the<br />database is in OA format</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068208"></a><code>spef_file</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068210"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068212"></a><code>SPEF files</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="3" rowspan="1">
+<p>
+<a id="pgfId-1068214"></a><strong>Variables to Load Library and Design Data</strong> </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="3" rowspan="1">
+<p>
+<a id="pgfId-1068220"></a><strong>Load in single library set</strong> </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068226"></a><code>libs,timing</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068228"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068230"></a><code>List of slow (or fast) .libs</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="3" rowspan="1">
+<p>
+<a id="pgfId-1068232"></a><strong>Load in AOCV library</strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068238"></a><code>libs,aocv</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068240"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068242"></a><code>List of aocv libraries</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068244"></a><code>netlist</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068246"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068248"></a><code>Input netlist</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068250"></a><code>lef_files</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068252"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068254"></a><code>Input lef file (optional, required only if need to load physical data)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068256"></a><code>def_files</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068258"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068260"></a><code>Input def file (optional, required only if need to load physical data)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068262"></a><code>oa_Ref</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068264"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068266"></a><code>Input OA_reference_libs (optional, required only if need to load physical OA data)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068268"></a><code>design</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068270"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068272"></a><code>top design name</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068274"></a><code>signoff_sdc</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068276"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068278"></a><code>signoff SDC file</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="3" rowspan="1">
+<p>
+<a id="pgfId-1068280"></a><strong>Variable to Specify Multi-Threading Settings </strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068286"></a><code>local_cpus</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068288"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068290"></a><code>specify the number of local CPUs used for multithreading runs</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="3" rowspan="1">
+<p>
+<a id="pgfId-1068292"></a><strong>Variables to Load Additional Files</strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068298"></a><code>sdf_file,full</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068300"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068302"></a><code>provide the full sdf file name (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068304"></a><code>sdf_file,incr</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068306"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068308"></a><code>provided the sdf file name of incr delay (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068310"></a><code>ir_drop</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068312"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068314"></a><code>provide the ir-drop files name (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="3" rowspan="1">
+<p>
+<a id="pgfId-1068316"></a><strong>Variables for ILM Support </strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068322"></a><code>read_ilm,cell_list</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068324"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068326"></a><code>provide the corresponding ilm cell name list if ILM herachical flow is used (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068328"></a><code>read_ilm,dir_list</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068330"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068332"></a><code>provide the ilm dir list for the above dir (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068334"></a><code>write_ilm_dir</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068336"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068338"></a><code>provide the writen ilm dir name if want to dump ILM data (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="3" rowspan="1">
+<p>
+<a id="pgfId-1068340"></a><strong>Variables for Timing Analysis Settings </strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068346"></a><code>op_cond,name</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068348"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068350"></a><code>provide the condition name will be used for the design,e.g &quot;WCCOM&quot; (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068352"></a><code>op_cond,lib</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068354"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068356"></a><code>provide the library name where the condition is defined (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068358"></a><code>op_cond_max,name</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068360"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068362"></a><code>provide the max condition name will be used for the design,e.g &quot;WCCOM&quot; (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068364"></a><code>op_cond_max,lib</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068366"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068368"></a><code>provide the max library name where the condition is defined (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068370"></a><code>op_cond_min,name</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068372"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068374"></a><code>provide the min condition name will be used for the design,e.g &quot;WCCOM&quot; (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068376"></a><code>op_cond_min,lib</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068378"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068380"></a><code>provide the min library name where the condition is defined (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="3" rowspan="1">
+<p>
+<a id="pgfId-1068382"></a>Variables to Specify STA Settings </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068388"></a><code>analysis_mode</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068390"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068392"></a><code>value can be chosen from single,bcwc and onChipVariation <br />default value for signoff is &quot;onChipVariation&quot;</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068394"></a><code>cppr</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068396"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068398"></a><code>value can be none,setup,hold and both<br />default value for signoff is &quot;both&quot;</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068400"></a><code>clock_uncertainty,setup</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068402"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068404"></a><code>set clock uncertainty for setup check (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068406"></a><code>clock_uncertainty,hold</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068408"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068410"></a><code>set clock uncertainty for hold check (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="3" rowspan="1">
+<p>
+<a id="pgfId-1068412"></a><strong>Variables to Specify Timing Derate Values</strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068418"></a><code>derate,cell_data_late</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068420"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068422"></a><code>set derate value for cell for data late path (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068424"></a><code>derate,cell_data_early</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068426"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068428"></a><code>set derate value for cell for data early path (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068430"></a><code>derate,cell_clock_late</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068432"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068434"></a><code>set derate value for cell for clock late path (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068436"></a><code>derate,cell_clock_early</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068438"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068440"></a><code>set derate value for cell for clock early path (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068442"></a><code>derate,net_data_late</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068444"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068446"></a><code>set derate value for net for data late path (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068448"></a><code>derate,net_data_early</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068450"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068452"></a><code>set derate value for net for data early path (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068454"></a><code>derate,net_clock_late</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068456"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068458"></a><code>set derate value for net for clock late path (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068460"></a><code>derate,net_clock_early</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068462"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068464"></a><code>set derate value for net for clock early path (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068466"></a><code>derate_tcl</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068468"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068470"></a><code>alternatively, you can specify a derating files (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="3" rowspan="1">
+<p>
+<a id="pgfId-1068472"></a><strong>Variables to Specify SI Settings</strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068478"></a><code>si_rpt_prefix</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068480"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068482"></a><code>set the SI report prefix, default is &quot;tempus&quot;</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068484"></a><code>process</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068486"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068488"></a><code>set SI analysis process,e.g. &quot;65nm&quot;</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068490"></a><code>noise,delta_absolute</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068492"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068494"></a><code>set the noise delay threshold,the tool&#39;s default value is 0.0</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068496"></a><code>twf,conv_iter</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068498"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068500"></a><code>set the timing window convergence,the tool&#39;s default setting is 2</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068502"></a><code>twf_file</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068504"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068506"></a><code>set the load in twf file name (optional),otherwise infinite twf is used to start</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="3" rowspan="1">
+<p>
+<a id="pgfId-1068508"></a><strong>Variables to Specify Advanced SI Settings</strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068514"></a><code>noise,delay_peak</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068516"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068518"></a><code>noise peak for noise-on-delay filtering,tool&#39;s default is 20% of the VDD</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068520"></a><code>noise,glitch_peak</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068522"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068524"></a><code>noise peak for glitch filtering,tool&#39;s default is 20% of the VDD</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068526"></a><code>vir_attacker,mode</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068528"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068530"></a><code>specify whether to use the current-matching based method for <br />virtual attackers,default setting is &quot;current&quot;</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068532"></a><code>vir_attacker,factor</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068534"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068536"></a><code>multiplication factor of virtual attacker,tool&#39;s default is 1</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068538"></a><code>vir_attacker,gtol</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068540"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068542"></a><code>virtual attacker grounding threshold, default is 2% of VDD</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068544"></a><code>vir_attacker,switch_prob</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068546"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068548"></a><code>virtual switch probability,only valid with current mode VA;<br />tool&#39;s default is 0.3333</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068550"></a><code>indiv_attacker,gtol</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068552"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068554"></a><code>individual attacker threshold, defautl is 5% of VDD</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068556"></a><code>glitch_check,latch_limit</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068558"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068560"></a><code>latch failure criteria,tool&#39;s default is 25% of VDD</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068562"></a><code>glitch_check,clock_limit</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068564"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068566"></a><code>clock failure criteria,tool&#39;s default is 5% of VDD</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068568"></a><code>glitch_check,data_limit</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068570"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068572"></a><code>data failure criteria,tool&#39;s default is 80% of VDD</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068574"></a><code>glitch_check,dc_tolerance</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068576"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068578"></a><code>DC tolerance failure criteria,tool&#39;s default is 40% of VDD</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="3" rowspan="1">
+<p>
+<a id="pgfId-1068580"></a><strong>Variables for STA Reports</strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068586"></a><code>compress_sta_rpt</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068588"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068590"></a><code>set to &quot;true&quot; to compress sta report files to .gz, default is &quot;false&quot;</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068592"></a><code>sdf_rpt</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068594"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068596"></a><code>set to &quot;true&quot; to dump out the delay sdf file</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="3" rowspan="1">
+<p>
+<a id="pgfId-1068598"></a><strong>Variables for Plug-In Tcl Scripts </strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068604"></a><code>tempus_pre_design_import</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068606"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068608"></a><code>&lt;path to plug-in tcl file&gt;,executed before design import (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068610"></a><code>tempus_replace_design_import</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068612"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068614"></a><code>&lt;path to plug-in tcl file&gt;,executed to replace default design import (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068616"></a><code>tempus_post_design_import</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068618"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068620"></a><code>&lt;path to plug-in tcl file&gt;,executed after design import (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068622"></a><code>tempus_pre_parasitic_load</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068624"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068626"></a><code>&lt;path to plug-in tcl file&gt;,executed before parasitic load (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068628"></a><code>tempus_replace_parasitic_load</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068630"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068632"></a><code>&lt;path to plug-in tcl file&gt;,executed to replace parasitic load (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068634"></a><code>tempus_post_parasitic_load</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068636"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068638"></a><code>&lt;path to plug-in tcl file&gt;,executed after parasitic load (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068640"></a><code>tempus_pre_sta</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068642"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068644"></a><code>&lt;path to plug-in tcl file&gt;,executed before first report timing (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068646"></a><code>tempus_replace_sta</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068648"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068650"></a><code>&lt;path to plug-in tcl file&gt;,executed to replace first report timing (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068652"></a><code>tempus_post_sta</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068654"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068656"></a><code>&lt;path to plug-in tcl file&gt;,executed after first report timing (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068658"></a><code>tempus_pre_si</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068660"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068662"></a><code>&lt;path to plug-in tcl file&gt;,executed before SI analysis (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068664"></a><code>tempus_replace_si</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068666"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068668"></a><code>&lt;path to plug-in tcl file&gt;,executed to replace SI analysis (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068670"></a><code>tempus_post_si</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068672"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068674"></a><code>&lt;path to plug-in tcl file&gt;,executed after SI analysis (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068676"></a><code>tempus_pre_rpt_gen</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068678"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068680"></a><code>&lt;path to plug-in tcl file&gt;,executed before reports generation (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068682"></a><code>tempus_replace_rpt_gen</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068684"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068686"></a><code>&lt;path to plug-in tcl file&gt;,executed to replace reports generation (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068688"></a><code>tempus_post_rpt_gen</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068690"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068692"></a><code>&lt;path to plug-in tcl file&gt;,executed after reports generation (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="3" rowspan="1">
+<p>
+<a id="pgfId-1068694"></a><strong>Variables to Skip Each Default Steps</strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068700"></a><code>tempus_skip_design_import</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068702"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068704"></a><code>set to &quot;true&quot; to skip design import (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068706"></a><code>tempus_skip_parasitic_load</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068708"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068710"></a><code>set to &quot;true&quot; to skip parasitic load (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068712"></a><code>tempus_skip_sta</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068714"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068716"></a><code>set to &quot;true&quot; to skip first report timing (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068718"></a><code>tempus_skip_si</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068720"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068722"></a><code>set to &quot;true&quot; to skip SI analysis (optional)</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068724"></a><code>tempus_skip_rpt_gen</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068726"></a><code>string</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068728"></a><code>set to &quot;true&quot; to skip report generation (optional)</code></p>
+</td>
+</tr>
+</tbody></table>
+<p>
+<a id="pgfId-1068731"></a><strong>Example of setup_default.tcl</strong></p>
+<p>
+<a id="pgfId-1068732"></a>Sample script for the non-MMMC flow located at the <code>EXAMPLES/TEMPUS/dtmf/WORK</code> directory where the following variables are defined:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068733"></a>###############################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081379"></a># report file and saved session dir setting</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081391"></a>###############################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081403"></a>set vars(flow) &quot;default&quot; ; # supported flow -&gt; default, mmmc and cpf</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068734"></a>set vars(script_root) &quot;../../SCRIPTS&quot; ; # foundation flow scripts dir (default is &quot;../SCRIPTS&quot;)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081409"></a>set vars(rpt_dir) &quot;rpt&quot; ; # Report directory (default is rpt)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081414"></a>set vars(dbs_dir) &quot;dbs&quot; ; # Saved session directory (default is dbs)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081419"></a>#set vars(saved_db_name) ; # Saved session name (optional, default is &lt;design_name&gt;.enc)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068735"></a>#######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081424"></a># DESIGN INITIALIZATION #</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081429"></a>#######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081434"></a>set vars(si_analysis) &quot;true&quot; ; # set &quot;true&quot; to include si analysis (default is &quot;true&quot;)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081442"></a>set vars(aocv_flow) &quot;false&quot; ; # set &quot;true&quot; to switch on the aocv analysis</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081447"></a>set vars(pba_analysis) &quot;false&quot; ; # set &quot;true&quot; to switch on path based analysis for violated paths</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081452"></a>set vars(aocv_pba_analysis) &quot;false&quot; ; # set &quot;true&quot; to switch on aocv path based analysis for violated paths</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081457"></a>set vars(physical_data) &quot;false&quot; ; # set &quot;true&quot; to include physical data (default setting is &quot;false&quot; </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081462"></a># to just load the timing related data) </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081472"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081467"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081477"></a># Variables define,if design is imported from Encounter DB </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081482"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068736"></a>set vars(load_edi_db) &quot;false&quot; ; # set &quot;true&quot; for loading design from EDI DB</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081487"></a># design saved from TEMPUS session can be restored in the same way</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081492"></a>set vars(edi_db_name) &quot;DBS/signoff.enc&quot; ; # EDI database or a conf file (required if <br /># load_edi_db is true, default is &quot;DBS/signoff.enc&quot; )</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081497"></a>#set vars(edi_oa_name) { lib design view } ; # EDI OA database (required if load_edi_db is true, and the</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081502"></a># database is in OA format</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081507"></a>set vars(spef_file) &quot;../../DATA/rc_max.spef.gz&quot; ; # SPEF files</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068737"></a>#---------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081512"></a># load basic design data (will automatically be loaded when design is restored from EDI DB)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081572"></a>#---------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081517"></a># Load in single library set</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081522"></a>set vars(libs,timing) &quot;../../GPDK/LIBS/GPDK045/timing/slow.lib&quot; ; # List of slow (or fast) .libs</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081527"></a>#set vars(libs,si) &quot;&quot; ; # List of slow (or fast) .cdbs (required if si_analysis is true)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068738"></a># Load in AOCV library</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081532"></a>#set vars(libs,aocv) ; # List of aocv libraries</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068739"></a>set vars(netlist) &quot;../../DATA/tdsp_core.v.gz&quot; ; # Input netlist</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081537"></a>set vars(lef_files) &quot;../../GPDK/LIBS/GPDK045/gsclib045.lef&quot; ; # Input lef file (optional, required only if need to load physical data)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081542"></a>#set vars(def_files) ; # Input def file (optional, required only if need to load physical data)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081547"></a>#set vars(oa_Ref) ; # Input OA_reference_libs (optional, required only if need to load physical OA data)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068740"></a>set vars(design) &quot;tdsp_core&quot; ; # top design name</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068741"></a>set vars(signoff_sdc) &quot;../../DATA/prects.sdc ../../DATA/postcts.sdc ../../DATA/prop.sdc&quot; ; # signoff SDC file</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068742"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081552"></a># distribute enviorement setting</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081557"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068743"></a>#set vars(distribute) ; # the value can be &lt;local | custom | lsf | rsh&gt;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081562"></a>#set vars(remote_hosts) ; # set to value = Total(setup views + hold views) machines for distribute all</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081567"></a># analysis views onto different mahcines;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081577"></a># it can also be set to any value &lt; Total(setup views + hold views)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081582"></a># the runtime is longer (will be ready before 91rtm, SI results in this mode is not accurate now)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068744"></a>#set the below, if distribute is set to rsh</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081587"></a>#set vars(rsh,host_list) ; # provide the host name</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081592"></a>#set vars(distribute_timeout) ; # provide the time limit for a rsh remote host to respond, the tool&#39;s default is 5 sec</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068745"></a>#set the below, if distribute is set to custom</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081597"></a>#set vars(custom,script) ; # provide the custom script</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068746"></a>#set the below, if distribute is set to lsf</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081602"></a>#set vars(lsf,queue) ; # provide the lsf queue name</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081607"></a>#set vars(lsf,resource) ; # provide the lsf resource name</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081612"></a>#set vars(lsf,args) ; # provide other lsf args</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068747"></a>set vars(dsta) &quot;false&quot; ; # by defautl DMMMC flow will be generated<br /># set to true to switch on DSTA flow</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068748"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081617"></a># Multithreading Settings </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081622"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068749"></a>#set vars(local_cpus) ; # specify the number of local CPUs used for multithreading runs</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068750"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081632"></a># Load the other Files if used</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081627"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081637"></a>#set vars(sdf_file,full) ; # provide the full sdf file name (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081642"></a>#set vars(sdf_file,incr) ; # provided the sdf file name of incr delay (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081647"></a>#set vars(ir_drop) ; # provide the ir-drop files name (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081682"></a>#set vars(read_ilm,cell_list) ; # provide the corresponding ilm cell name list if ILM herachical flow is used (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081652"></a>#set vars(read_ilm,dir_list) ; # provide the ilm dir list for the above dir (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081657"></a>#set vars(write_ilm_dir) ; # provide the writen ilm dir name if want to dump ILM data (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068751"></a>#######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081667"></a># ANALYSIS SETTINGS #</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081662"></a>#######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068752"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081672"></a># Set operating condition. If not specified,each library will use it&#39;s own condition,with no scaling </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081687"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081677"></a># If read single library set</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081692"></a>#set vars(op_cond,name) ; # provide the condition name will be used for the design,e.g &quot;WCCOM&quot; (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081697"></a>#set vars(op_cond,lib) ; # provide the library name where the condition is defined (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068753"></a># If restoring from EDI db, which contains min/max library sets<br />#set vars(op_cond_max,name) ; # provide the max condition name will be used for the design,e.g &quot;WCCOM&quot; (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081702"></a>#set vars(op_cond_max,lib) ; # provide the max library name where the condition is defined (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081759"></a>#set vars(op_cond_min,name) ; # provide the min condition name will be used for the design,e.g &quot;WCCOM&quot; (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081707"></a>#set vars(op_cond_min,lib) ; # provide the min library name where the condition is defined (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068754"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081764"></a># STA settings</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081712"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081769"></a>set vars(analysis_mode) &quot;onChipVariation&quot; ; # value can be chosen from single,bcwc and onChipVariation </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081724"></a># default value for signoff is &quot;onChipVariation&quot; </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081729"></a>set vars(cppr) &quot;both&quot; ; # value can be none,setup,hold and both</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081734"></a># default value for signoff is &quot;both&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068755"></a>#set vars(aocv_analysis_mode) &quot;launch_capture&quot; ; # controls AOCV analysis modes, other two choices are</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081754"></a># &quot;clock_only&quot; &amp; &quot;separate_data_clock&quot; </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081739"></a>#set vars(aocv_derate_mode) &quot;aocv_multiplicative&quot;; # controls the AOCV derating mode, another choice is &quot;aocv_additive&quot; </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081744"></a>#set vars(aocv_derate_refpoint) &quot;1.0&quot; ; # changes to 0 for those AOCV libs reference point is not 1</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068756"></a>set vars(clock_uncertainty,setup) 0.01 ; # set clock uncertainty for setup check (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081749"></a>set vars(clock_uncertainty,hold) 0.01 ; # set clock uncertainty for hold check (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068757"></a>#--------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081774"></a># derate settings (can either be restored from EDI DB, or user setting)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081779"></a>#--------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081784"></a>set vars(derate,cell_data_late) 1.05 ; # set derate value for cell for data late path (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081789"></a>set vars(derate,cell_data_early) 0.95 ; # set derate value for cell for data early path (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081794"></a>set vars(derate,cell_clock_late) 1.05 ; # set derate value for cell for clock late path (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081799"></a>set vars(derate,cell_clock_early) 0.95 ; # set derate value for cell for clock early path (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068758"></a>set vars(derate,net_data_late) 1.05 ; # set derate value for net for data late path (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081804"></a>set vars(derate,net_data_early) 0.95 ; # set derate value for net for data early path (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081809"></a>set vars(derate,net_clock_late) 1.05 ; # set derate value for net for clock late path (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081814"></a>set vars(derate,net_clock_early) 0.95 ; # set derate value for net for clock early path (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068759"></a>#set vars(derate_tcl) ; # alternatively, users can specify a derating files (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081824"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068760"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068761"></a># STA reports</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081819"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068762"></a>set vars(compress_sta_rpt) &quot;false&quot; ; # set to &quot;true&quot; to compress sta report files to .gz, default is &quot;false&quot; </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081829"></a>set vars(sdf_rpt) &quot;true&quot; ; # set to &quot;true&quot; to dump out the delay sdf file</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068763"></a>#---------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081834"></a># SI settings (will automatically be set when design is restored from EDI DB in 91rtm)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081839"></a>#---------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081844"></a>set vars(si_rpt_prefix) &quot;tempus&quot; ; # set the SI report prefix, default is &quot;tempus&quot;<br />set vars(process) &quot;65nm&quot; ; # set SI analysis process,e.g. &quot;65nm&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068764"></a>#set vars(noise,delta_absolute) ; # set the noise delay threshold,the tool&#39;s default value is 0.0</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068765"></a>set vars(twf,conv_iter) 2 ; # set the timing window convergence,the tool&#39;s default setting is 2</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081854"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081849"></a>#set vars(twf_file) ; # set the load in twf file name (optional),otherwise infinite twf is used to start</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068766"></a>#---------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081859"></a># Advanced SI settings (will automatically be set when design is restored from EDI DB in 91rtm)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081864"></a>#---------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081869"></a>#set vars(noise,delay_peak) ; # noise peak for noise-on-delay filtering,tool&#39;s default is 20% of the VDD </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081874"></a>#set vars(noise,glitch_peak) ; # noise peak for glitch filtering,tool&#39;s default is 20% of the VDD</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068767"></a>set vars(vir_attacker,mode) &quot;current&quot; ; # specify whether to use the current-matching based method for </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081879"></a># virtual attackers,default setting is &quot;current&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081884"></a>#set vars(vir_attacker,factor) ; # multiplication factor of virtual attacker,tool&#39;s default is 1</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081889"></a>set vars(vir_attacker,gtol) 0.02 ; # virtual attacker grounding threshold, default is 2% of VDD</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081894"></a>#set vars(vir_attacker,switch_prob) ; # virtual switch probability,only valid with current mode VA;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081899"></a># tool&#39;s default is 0.3333</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081904"></a>#set vars(indiv_attacker,gtol) ; # individual attacker threshold, defautl is 5% of VDD</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068768"></a>#set vars(glitch_check,latch_limit) ; # latch failure criteria,tool&#39;s default is 25% of VDD</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081909"></a>#set vars(glitch_check,clock_limit) ; # clock failure criteria,tool&#39;s default is 5% of VDD</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081914"></a>#set vars(glitch_check,data_limit) ; # data failure criteria,tool&#39;s default is 80% of VDD</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081919"></a>#set vars(glitch_check,dc_tolerance) ; # DC tolerance failure criteria,tool&#39;s default is 40% of VDD</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068769"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081356"></a># Plug-in variables, each sould point to a tcl script file </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081358"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081360"></a>set vars(tempus_pre_design_import) &quot;../PLUG/init.tcl&quot; ; # &lt;path to plug-in tcl file&gt;,executed before design import (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081362"></a>#set vars(tempus_replace_design_import) ; # &lt;path to plug-in tcl file&gt;,executed to replace default design import (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081370"></a>#set vars(tempus_post_design_import) ; # &lt;path to plug-in tcl file&gt;,executed after design import (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081372"></a>#set vars(tempus_pre_parasitic_load) ; # &lt;path to plug-in tcl file&gt;,executed before parasitic load (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081374"></a>#set vars(tempus_replace_parasitic_load) ; # &lt;path to plug-in tcl file&gt;,executed to replace parasitic load (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081924"></a>#set vars(tempus_post_parasitic_load) ; # &lt;path to plug-in tcl file&gt;,executed after parasitic load (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081929"></a>#set vars(tempus_pre_sta) ; # &lt;path to plug-in tcl file&gt;,executed before first report timing (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081934"></a>#set vars(tempus_replace_sta) ; # &lt;path to plug-in tcl file&gt;,executed to replace first report timing (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081939"></a>#set vars(tempus_post_sta) ; # &lt;path to plug-in tcl file&gt;,executed after first report timing (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081944"></a>#set vars(tempus_pre_rpt_gen) ; # &lt;path to plug-in tcl file&gt;,executed before reports generation (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081949"></a>#set vars(tempus_replace_rpt_gen) ; # &lt;path to plug-in tcl file&gt;,executed to replace reports generation (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081954"></a>set vars(tempus_post_rpt_gen) &quot;../PLUG/sta_rpt.tcl&quot; ; # &lt;path to plug-in tcl file&gt;,executed after reports generation (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068770"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081959"></a># variables to skip each default steps</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081964"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081969"></a>#set vars(tempus_skip_design_import) false; # set to &quot;true&quot; to skip design import (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081974"></a>#set vars(tempus_skip_parasitic_load) false; # set to &quot;true&quot; to skip parasitic load (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081979"></a>#set vars(tempus_skip_sta) false; # set to &quot;true&quot; to skip first report timing (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081984"></a>#set vars(tempus_skip_rpt_gen) false; # set to &quot;true&quot; to skip report generation (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068771"></a>Example of setup_mmmc.tcl</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068772"></a>Sample script for the MMMC flow located at the EXAMPLES/TEMPUS/dtmf_mmmc/WORK directory where the following variables are defined:</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068773"></a>###############################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068774"></a># report file and saved session dir setting</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081989"></a>###############################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081994"></a>set vars(flow) &quot;mmmc&quot; ; # supported flow -&gt; default, mmmc and cpf</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068775"></a>set vars(script_root) &quot;../../SCRIPTS&quot; ; # foundation flow scripts dir (default is &quot;../SCRIPTS&quot;)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081999"></a>set vars(dbs_dir) &quot;dbs&quot; ; # Saved session directory (default is dbs)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068776"></a>################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082004"></a># DESIGN INITIALIZATION #</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082009"></a>###############################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1081331"></a>set vars(si_analysis) &quot;true&quot; ; # set &quot;true&quot; to include si analysis (default is &quot;true&quot;)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082014"></a>set vars(eco_fix) &quot;false&quot; ; # set &quot;true&quot; to include MS-ECO fixing after timing analysis is done </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082019"></a># (default is &quot;false&quot;), please note this is only for DMMMC flow</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082024"></a>set vars(aocv_flow) &quot;false&quot; ; # set &quot;true&quot; to switch on the aocv analysis</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082029"></a>set vars(pba_analysis) &quot;false&quot; ; # set &quot;true&quot; to switch on path based analysis for violated paths</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082034"></a>set vars(aocv_pba_analysis) &quot;false&quot; ; # set &quot;true&quot; to switch on aocv path based analysis for violated paths</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068777"></a>set vars(physical_data) &quot;false&quot; ; # set &quot;true&quot; to include physical data (default setting is &quot;false&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082039"></a># to just load the timing related data)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068778"></a>################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082044"></a># Variables define,if design is imported from Encounter DB</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082049"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082054"></a>set vars(load_edi_db) &quot;false&quot; ; # set &quot;true&quot; for loading design from EDI DB</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082059"></a># design saved from TEMPUS session can be restored in the same way</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082064"></a>set vars(edi_db_name) &quot;DBS/signoff.enc.dat&quot; ; # EDI database or a conf file (required if load_edi_db</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082069"></a># is true, default is &quot;DBS/signoff.enc&quot; )</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082074"></a>#set vars(edi_oa_name) { lib design view }; # EDI OA database (required if load_edi_db is true, and the</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082079"></a># database is in OA format</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068779"></a>#---------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082084"></a># load basic design data (will automatically be loaded when design is restored from EDI DB)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082089"></a>#---------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082094"></a>#set vars(libs,timing) ; # Load all the used .libs when importing the design (optional from 11.1). </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082099"></a>#set vars(libs,si) ; # Load all the used .cdbs when importing the design (optional from 11.1).</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068780"></a>set vars(netlist) &quot;../../DATA/tdsp_core.v.gz&quot; ; # Input netlist</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082104"></a>set vars(lef_files) &quot;../../GPDK/LIBS/GPDK045/gsclib045.lef&quot; ; # Input lef file (optional, required only if need to load physical data)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082109"></a>#set vars(def_files) ; # Input def file (optional, required only if need to load physical data)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082114"></a>#set vars(oa_Ref) ; # Input OA_reference_libs (optional, required only if need to load physical OA data)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068781"></a>set vars(design) &quot;tdsp_core&quot; ; # top design name</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068782"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082119"></a># MMMC view definition</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082124"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082129"></a>set vars(setup_analysis_views) &quot;setup_func_slow &quot; ; # List all analysis views in this design, e.g. &quot;func_slow test_slow&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082134"></a># User can use &quot;&quot; here to enable concurrent + distribute MMMC flow, e.g. &quot;&quot;V1 V2&quot; &quot;V3 V4&quot;&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082139"></a>set vars(hold_analysis_views) &quot;hold_func_fast hold_func_typ&quot; ; # List all analysis views in this design, e.g. &quot;func_fast test_fast&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082144"></a># User can use &quot;&quot; here to enable concurrent + distribute MMMC flow, e.g. &quot;&quot;V1 V2&quot; &quot;V3 V4&quot;&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068783"></a>#set vars(combine_views) ; # User can also give N views here to enable concurrent + distribute MMMC flow</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082149"></a># N is the maxinum of views to on the same remote machine</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068784"></a># provide the spef files foreach rc_corner; use the real rc corner name to replace $rc_corner here<br />#set vars($rc_corner,spef_file) &quot;$rc_corner.spef.gz&quot; ; # Load all the used .spef for the rc_corner, e.g. vars(slow_rc,spef). </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082154"></a># The default spef file name will be $rc_corner.spef.gz </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082159"></a>set vars(rc_max,spef_file) &quot;../../DATA/rc_max.spef.gz&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082164"></a>#---------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082169"></a># detailed view information (will automatically be set when design is restored from EDI DB)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082174"></a>#---------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082179"></a>set vars(library_sets) &quot;slow_libs typ_libs fast_libs&quot; ; # List all the library sets used in this design, e.g. &quot;slow fast&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082184"></a>set vars(rc_corners) &quot;rc_max&quot; ; # List all the rc corners used in this design, e.g. &quot;slow_rc fast_rc&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082189"></a>set vars(delay_corners) &quot;slow_max typ_max fast_max&quot; ; # List all the delay_corner used in this design, e.g. &quot;slow_dc fast_dc&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082194"></a>set vars(constraint_modes) &quot;func_mode&quot; ; # List all the constraint modes used in this design, e.g. &quot;func test&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068785"></a># provide the library files foreach library set; use the real library set name to replace $library_set here</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082199"></a>set vars(slow_libs,timing) &quot;../../GPDK/LIBS/GPDK045/timing/slow.lib&quot; ; # Load all the used .libs for the library_set, e.g. vars(slow,timing)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082204"></a>set vars(typ_libs,timing) &quot;../../GPDK/LIBS/GPDK045/timing/typical.lib&quot; ;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082209"></a>set vars(fast_libs,timing) &quot;../../GPDK/LIBS/GPDK045/timing/fast.lib&quot; ;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068786"></a># provide the binding rc_corner and library set name for each delay_corner; use the real delay corner name to i</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082214"></a># replace $delay_corner here</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082219"></a>set vars(slow_max,library_set) slow_libs ; # give the binding library_set name, e.g. vars(slew_dc,library_set)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082224"></a>set vars(typ_max,library_set) typ_libs ;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082229"></a>set vars(fast_max,library_set) fast_libs ;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068787"></a>set vars(slow_max,rc_corner) rc_max ; # give the binding rc_corner name, e.g. vars(slew_dc,rc_corner)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082234"></a>set vars(typ_max,rc_corner) rc_max ;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082239"></a>set vars(fast_max,rc_corner) rc_max ;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068788"></a># provide the binding sdc files for each constraint_mode; use the real constraint mode name to replace $cosntraint_mode here</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082244"></a>set vars(func_mode,signoff_sdc) &quot;../../DATA/prects.sdc ../../DATA/postcts.sdc ../../DATA/prop.sdc&quot;; # give the binding sdc_file name, e.g vars(func,sdc_file)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068789"></a># provide the binding constraint mode and delay corner for each view; use the real view name to replace $analysis_view here</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082249"></a>set vars(setup_func_slow,constraint_mode) func_mode; # give the binding constraint mode name, e.g vars(func_slow,constraint_mode)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082254"></a>set vars(hold_func_fast,constraint_mode) func_mode ;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082259"></a>set vars(hold_func_typ,constraint_mode) func_mode;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068790"></a>set vars(setup_func_slow,delay_corner) slow_max; # give the binding delay corner name, e.g. vars(func_slow,delay_corner)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082269"></a>set vars(hold_func_fast,delay_corner) typ_max;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082264"></a>set vars(hold_func_typ,delay_corner) fast_max;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068791"></a>#set vars(view_tcl) ; # if a predefined view definition file is provided,</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082274"></a># the above MMMC settings are not required</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068792"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082286"></a># distribute enviorement setting </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082291"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082296"></a>#set vars(distribute) rsh ; # the value can be &lt;local | custom | lsf | rsh&gt;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082301"></a>#set vars(remote_hosts) 2 ; # set to value = Total(setup views + hold views) machines for distribute all</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082306"></a># analysis views onto different mahcines;<br /># it can also be set to any value &lt; Total(setup views + hold views)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082311"></a># the runtime is longer (will be ready before 91rtm, SI results in this mode is not accurate now)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068793"></a>#set the below, if distribute is set to rsh</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082316"></a>#set vars(rsh,host_list) &quot;pe-opt8 pe-opt7&quot; ; # provide the host name</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082328"></a>#set vars(distribute_timeout) 15 ; # provide the time limit for a rsh remote host to respond, the tool&#39;s default is 5 sec</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068794"></a>#set the below, if distribute is set to custom</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082333"></a>#set vars(custom,script) ; # provide the custom script</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068795"></a>#set the below, if distribute is set to lsf</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082338"></a>#set vars(lsf,queue) ; # provide the lsf queue name</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082343"></a>#set vars(lsf,resource) ; # provide the lsf resource name</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082348"></a>#set vars(lsf,args) ; # provide other lsf args</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068796"></a>####################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082353"></a># Multithreading Settings</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082358"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082363"></a>#set vars(local_cpus) ; # specify the number of local CPUs used for multithreading runs</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082368"></a>#set vars(remotehost_cpus) ; # if DMMMC is enabled, the value means number of CPUs per remote host</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082373"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082378"></a># Load other Files if used for any analysis view</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082383"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082388"></a>#set vars($analysis_view,sdf_file,full) ; # provide the full sdf file name (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082393"></a>#set vars($analysis_view,sdf_file,incr) ; # provided the sdf file name of incr delay (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068797"></a># in ocv mode both early and late ir_drop need to be specified</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082398"></a>#set vars($delay_corner,ir_drop_early) ; # provide the ir-drop files name for early path (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082403"></a>#set vars($delay_corner,ir_drop_late) ; # provide the ir-drop files name for late path (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068798"></a>#######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082408"></a># ANALYSIS SETTINGS #</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082413"></a>#######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068799"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082418"></a># STA settings</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082423"></a>#####################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082428"></a>set vars(analysis_mode) &quot;onChipVariation&quot; ; # value can be chosen from single,bcwc and onChipVariation </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082433"></a># default value for signoff is &quot;onChipVariation&quot; </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082438"></a>set vars(cppr) &quot;both&quot; ; # value can be none,setup,hold and both</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082443"></a># default value for signoff is &quot;both&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068800"></a>#set vars($delay_corner,clock_uncertainty,setup) ; # set clock uncertainty for setup check (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082448"></a>#set vars($delay_corner,clock_uncertainty,hold) ; # set clock uncertainty for setup check (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068801"></a>#-------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082453"></a># derate settings (can either be restored from EDI DB, or user setting)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082458"></a>#---------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082463"></a>#set vars($delay_corner,cell_data_late) ; # set derate value for cell for data late path (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082468"></a>#set vars($delay_corner,cell_data_early) ; # set derate value for cell for data early path (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082473"></a>#set vars($delay_corner,cell_clock_late) ; # set derate value for cell for clock late path (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082478"></a>#set vars($delay_corner,cell_clock_early) ; # set derate value for cell for clock early path (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068802"></a>#set vars($delay_corner,net_data_late) ; # set derate value for net for data late path (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082483"></a>#set vars($delay_corner,net_data_early) ; # set derate value for net for data early path (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082488"></a>#set vars($delay_corner,net_clock_late) ; # set derate value for net for clock late path (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082493"></a>#set vars($delay_corner,net_clock_early) ; # set derate value for net for clock early path (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068803"></a>#vars($delay_corner,derate_tcl) ; # alternatively, users can specify a derating files (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082498"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082503"></a># STA reports</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082508"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082513"></a>set vars(compress_sta_rpt) &quot;false&quot; ; # set to &quot;true&quot; to compress sta report files to .gz, default is &quot;false&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082518"></a>set vars(sdf_rpt) &quot;true&quot; ; # set to &quot;true&quot; to dump out the delay sdf file</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068804"></a>#---------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082523"></a># SI settings (will automatically be set when design is restored from EDI DB in 91rtm)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082528"></a>#---------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082543"></a>#set vars(si_rpt_prefix) &quot;tempus&quot; ; # set the SI report prefix,default is &quot;tempus&quot;<br />set vars(process) &quot;65nm&quot; ; # set SI analysis process,e.g. &quot;65nm&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068805"></a>#set vars(noise,delta_absolute) ; # set the noise delay threshold,the tool&#39;s default value is 0.0</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068806"></a>#set vars(twf,conv_iter) 2 ; # set the timing window convergence, tool&#39;s default setting is 2</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082548"></a>#set vars($analysis_view,twf_file) ; # set the load in twf file name (optional) for the specified views,</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082553"></a># otherwise infinite twf is used to start</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068807"></a>#---------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082558"></a># Advanced SI settings (will automatically be set when design is restored from EDI DB in 91rtm)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082568"></a>#---------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082563"></a>#set vars(noise,delay_peak) ; # noise peak for noise-on-delay filtering,tool&#39;s default is 20% of the VDD </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082573"></a>#set vars(noise,glitch_peak) ; # noise peak for glitch filtering,tool&#39;s default is 20% of the VDD</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068808"></a>#set vars(vir_attacker,mode) &quot;current&quot; ; # specify whether to use the current-matching based method for </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082578"></a># virtual attackers,default setting is &quot;current&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082583"></a>#set vars(vir_attacker,factor) ; # multiplication factor of virtual attacker,tool&#39;s default is 1</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082588"></a>#set vars(vir_attacker,gtol) &quot;0.02&quot; ; # virtual attacker glitch threshold, default is 2% of VDD</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082593"></a>#set vars(vir_attacker,switch_prob) ; # virtual switch probability,only valid with current mode VA;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082598"></a># tool&#39;s default is 0.3333</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082603"></a>#set vars(indiv_attacker,gtol) ; # individual attacker threshold, defautl is 5% of VDD</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068809"></a>#set vars(glitch_check,latch_limit) ; # latch failure criteria,tool&#39;s default is 25% of VDD</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082608"></a>#set vars(glitch_check,clock_limit) ; # clock failure criteria,tool&#39;s default is 5% of VDD</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082613"></a>#set vars(glitch_check,data_limit) ; # data failure criteria,tool&#39;s default is 80% of VDD</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082618"></a>#set vars(glitch_check,dc_tolerance) ; # DC tolerance failure criteria,tool;s default is 40% of VDD</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068810"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082628"></a># mmmc eco fix options </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082623"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082633"></a>set vars(eco_buffers) &quot;&quot; ; # provide buffers for eco fix if $vars(eco_fix) set to true</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082638"></a># by default, empty cell list is provided to let tool to auto search</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082643"></a>set vars(eco_targets) &quot;hold&quot; ; # provide eco optimization targets. Choices inlude hold, drv, setup and leakage default is hold</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082648"></a># MS-ECO allows multiple incremental ECOs, e.g. &quot;drv hold setup&quot;. Leakage opt needs separate session.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068811"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082653"></a># Plug-in variables, each sould point to a tcl script file</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082658"></a>#####################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082663"></a>set vars(tempus_pre_design_import) &quot;../PLUG/init.tcl&quot; ; # &lt;path to plug-in tcl file&gt;,executed before design import (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082668"></a>#set vars(tempus_replace_design_import) ; # &lt;path to plug-in tcl file&gt;,executed to replace default design import (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082673"></a>#set vars(tempus_post_design_import) ; # &lt;path to plug-in tcl file&gt;,executed after design import (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082678"></a>#set vars(tempus_pre_parasitic_load) ; # &lt;path to plug-in tcl file&gt;,executed before parasitic load (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082683"></a>#set vars(tempus_replace_parasitic_load) ; # &lt;path to plug-in tcl file&gt;,executed to replace parasitic load (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082688"></a>#set vars(tempus_post_parasitic_load) ; # &lt;path to plug-in tcl file&gt;,executed after parasitic load (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082693"></a>#set vars(tempus_pre_sta) ; # &lt;path to plug-in tcl file&gt;,executed before first report timing (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082698"></a>#set vars(tempus_replace_sta) ; # &lt;path to plug-in tcl file&gt;,executed to replace first report timing (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082703"></a>#set vars(tempus_post_sta) ; # &lt;path to plug-in tcl file&gt;,executed after first report timing (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082708"></a>#set vars(tempus_pre_rpt_gen) ; # &lt;path to plug-in tcl file&gt;,executed before reports generation (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082713"></a>#set vars(tempus_replace_rpt_gen) ; # &lt;path to plug-in tcl file&gt;,executed to replace reports generation (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082718"></a>#set vars(tempus_post_rpt_gen) ; # &lt;path to plug-in tcl file&gt;,executed after reports generation (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082723"></a>#set vars(tempus_pre_eco) ; # &lt;path to plug-in tcl file&gt;,executed before start eco opt (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082728"></a>#set vars(tempus_replace_eco) ; # &lt;path to plug-in tcl file&gt;,executed to replace eco opt (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082733"></a>#set vars(tempus_post_eco) ; # &lt;path to plug-in tcl file&gt;,executed after eco opt (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068812"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082738"></a># variables to skip each default steps</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082743"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082748"></a>#set vars(tempus_skip_design_import) false ; # set to &quot;true&quot; to skip design import (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082753"></a>#set vars(tempus_skip_parasitic_load) false; # set to &quot;true&quot; to skip parasitic load (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082758"></a>#set vars(tempus_skip_sta) false; # set to &quot;true&quot; to skip first report timing (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082763"></a>#set vars(tempus_skip_rpt_gen) false; # set to &quot;true&quot; to skip report generation (optional)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068813"></a>Example of setup_cpf.tcl</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068814"></a>Sample script for the CPF flow located at the EXAMPLES/TEMPUS/LowPower/WORK directory where the following variables are defined:</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068815"></a>###############################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082768"></a># report file and saved session dir setting</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082773"></a>###############################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068816"></a>set vars(flow) &quot;cpf&quot; </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082778"></a>set vars(script_root) &quot;../SCRIPTS&quot; </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082783"></a>set vars(dbs_dir) &quot;dbs&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082788"></a>###############################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082793"></a># DESIGN INITIALIZATION #</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082798"></a>###############################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068817"></a>set vars(si_analysis) &quot;false&quot; </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082803"></a>set vars(eco_fix) &quot;false&quot; </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082808"></a>set vars(aocv_flow) &quot;false&quot; </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082813"></a>set vars(pba_analysis) &quot;false&quot; </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082818"></a>set vars(aocv_pba_analysis) &quot;false&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082823"></a>set vars(physical_data) &quot;false&quot; </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082835"></a>#######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082840"></a># Variables define,if design is imported from Encounter DB</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082845"></a>#######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068818"></a>set vars(load_edi_db) &quot;false&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082850"></a>set vars(edi_db_name) &quot;./DBS/final_signoff.enc&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068819"></a>###############################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082855"></a># CPF file load in and MMMC update</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082860"></a>###############################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068820"></a>set vars(setup_analysis_views) &quot;AVdefault_WC AVdvfs2_WC&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082865"></a>set vars(hold_analysis_views) &quot;AVdefault_BC AVdvfs2_BC&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082870"></a>set vars(rc_max,spef_file) &quot;../SPEF/rc_max.spef.gz&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082875"></a>set vars(rc_min,spef_file) &quot;../SPEF/rc_min.spef.gz&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068821"></a>##############################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082880"></a># distribute MMMC enviorement setting (This section is for Celtic-SI flow) </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082885"></a>##############################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068822"></a>set vars(distribute) &quot;lsf&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082890"></a>set vars(remote_hosts) 4</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082895"></a>set vars(lsf,queue) &quot;lnx64&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082900"></a>set vars(lsf,resource) &quot;rusage \[mem=12000:swp=6000\] select \[OSNAME==Linux &amp;&amp; OSREL==EE40 &amp;&amp; SFIARCH==OPT64 &amp;&amp; SPEED&gt;=2590 &amp;&amp; SPEED&lt;=2595 &amp;&amp; mem&gt; 20000\] -P ICD&quot;<br />set vars(lsf,args) &quot;&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082905"></a>################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082910"></a># STA SETTINGS</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082915"></a>################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068824"></a>set vars(analysis_mode) &quot;onChipVariation&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082920"></a>set vars(cppr) &quot;both&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068825"></a>########################################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082925"></a># STA reports</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082930"></a>########################################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068826"></a>set vars(compress_sta_rpt) &quot;false&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082935"></a>set vars(sdf_rpt) &quot;false&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068827"></a>########################################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082947"></a># SI settings (will automatically be set when design is restored from EDI DB in 91rtm)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082952"></a>########################################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068828"></a>set vars(si_rpt_prefix) &quot;tempus&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082957"></a>set vars(process) &quot;65nm&quot; </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082962"></a>set vars(noise,delta_absolute) 1e-12 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082967"></a>set vars(twf,conv_iter) 3</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068829"></a>################################################################################################### </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082977"></a>Advanced SI settings (will automatically be set when design is restored from EDI DB in 91rtm))</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082985"></a>##################################################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068830"></a>set vars(noise,glitch_peak) 0.18</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082990"></a>set vars(vir_attacker,mode) &quot;current&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1082995"></a>set vars(vir_attacker,gtol) &quot;0.02&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1083000"></a>set vars(vir_attacker,switch_prob) 0.2</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1083012"></a>set vars(glitch_check,latch_limit) 0.25</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1083017"></a>set vars(glitch_check,clock_limit) 0.06</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1083022"></a>set vars(glitch_check,data_limit) 0.7</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1083027"></a>set vars(glitch_check,dc_tolerance) 0.35</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068831"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1083032"></a># eco fix options</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1083037"></a>######################################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1068832"></a>set vars(eco_buffers) &quot;&quot; </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1083042"></a>set vars(eco_targets) &quot;hold&quot;</pre>
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="GettingStarted.html" id="prev" title="Getting Started with Tempus Foundation Flows">Getting Started with Tempus Fo ...</a></em></b><b><em><a href="TimingAnalysisFlow.html" id="nex" title="Timing Analysis Flow">Timing Analysis Flow</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

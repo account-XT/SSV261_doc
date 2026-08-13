@@ -1,0 +1,146 @@
+
+<html><head><title>Trigger File Format - Datasheet</title>
+<meta name="page_sequence" content="22012000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666134" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Trigger File Format - Datasheet" />
+<meta name="Keywords" content="trigger,FSDB" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Power-Grid Library Generation," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666134" />
+<meta name="NextFile" content="Trigger_File_Format_-_User-specified_Spice_Deck.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Trigger_File_Format_-_FSDB.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Trigger File Format - Datasheet" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Trigger_File_Format_-_FSDB.html" title="Trigger_File_Format_-_FSDB">Trigger_File_Format_-_FSDB</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Trigger_File_Format_-_User-specified_Spice_Deck.html" title="Trigger_File_Format_-_User-specified_Spice_Deck">Trigger_File_Format_-_User-spe ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Trigger File Format - Datasheet</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="TriggerFileFormatDatasheet-15921"></span></p>
+
+<p>In Datasheet-based current characterization flow, the slews can be specified either mode-wise or globally. Therefore, following are the two formats of trigger file:</p>
+
+<p><strong>Format 1: Global Slews</strong></p>
+
+<p><code>CURRENT_CHARACTERIZATION_METHOD DATASHEET<br />CELL &lt;cellname1&gt;<br />MODE_NAME &lt;name1&gt;<br />CONDITIONAL_INPUT &lt;conditional input statement for cellname1&gt;<br />CONDITIONAL_PIN &lt;pin_name&gt; (rise|fall|both)<br />DATASHEET_DELAY &lt;time&gt;<br />DATASHEET_PARAMETER &lt; {power_pin cap leakage_pwr} &gt;<br />PEAK_CURRENT {power_pin peak_current}<br />END_MODE<br /></code><strong>DATASHEET_INPUT_SLEW &lt;time&gt;<br />DATASHEET_OUTPUT_SLEW &lt;time&gt;<br /></strong><code>END</code></p>
+
+<p><strong>Format 2: Mode-wise Slews</strong></p>
+
+<p><code>CURRENT_CHARACTERIZATION_METHOD DATASHEET<br />CELL &lt;cellname1&gt;<br />MODE_NAME &lt;name1&gt;<br />CONDITIONAL_INPUT &lt;conditional input statement for cellname1&gt;<br />CONDITIONAL_PIN &lt;pin_name&gt; (rise|fall|both)<br />DATASHEET_DELAY &lt;time&gt;<br />DATASHEET_PARAMETER &lt; {power_pin cap leakage_pwr} &gt;<br />PEAK_CURRENT {power_pin peak_current}<br /></code><strong>DATASHEET_INPUT_SLEW &lt;time&gt;<br />DATASHEET_OUTPUT_SLEW &lt;time&gt;<br /></strong><code>END_MODE</code></p>
+
+<p><code>...</code></p>
+<h4 id="TriggerFileFormatDatasheet-Example1:Datasheet">Example 1: Datasheet</h4>
+
+<p><code>CURRENT_CHARACTERIZATION_METHOD DATASHEET<br />CELL mem1<br />MODE_NAME READ<br />CONDITIONAL_INPUT = ( WZ &amp; EZ )<br />CONDITIONAL_PIN  CLK { RISE }<br />DATASHEET_DELAY  7.6913ns<br />DATASHEET_PARAMETER {{ VDDAR 0.1715pf 2.496e-05mW }{ VDDPR 18.8985pf 3.63e-06mW }{ VBBNW 0.1780pf 2.601e-06mW  }}<br />END_MODE</code></p>
+
+<p><code>MODE_NAME WRITE<br />CONDITIONAL_INPUT = ( !WZ &amp; !WTZ &amp; EZ  )<br />CONDITIONAL_PIN  CLK { RISE }<br />DATASHEET_DELAY  8.216ns<br />DATASHEET_PARAMETER {{ VDDAR 0.1715pf  1.355e-06mW }{ VDDPR  0.1715pf 1.81e-05mW } { VBBNW 0.1715pf 2.614e-06mW }}<br />END_MODE</code></p>
+
+<p><code>MODE_NAME STANDBY<br />CONDITIONAL_INPUT = ( !EZ )<br />CONDITIONAL_PIN  CLK { RISE }<br />DATASHEET_DELAY  0.6913ns<br />DATASHEET_PARAMETER {{ VDDAR 0.1715pf 2.902e-05mW }{ VDDPR  0.2024pf 1.81e-05mW } { VBBNW 0.1723pf 6.92e-07mW }}<br />END_MODE</code></p>
+
+<p><code>DATASHEET_INPUT_SLEW 0.6ns<br />DATASHEET_OUTPUT_SLEW 0.3682ns<br />END</code></p>
+<h4 id="TriggerFileFormatDatasheet-Example2:Datasheet">Example 2: Datasheet</h4>
+
+<p><code>CURRENT_CHARACTERIZATION_METHOD DATASHEET<br />CELL mem1<br />MODE_NAME READ<br />CONDITIONAL_INPUT = ( WZ &amp; EZ )<br />CONDITIONAL_PIN CLK { RISE }<br />DATASHEET_DELAY 7.6913ns<br />DATASHEET_PARAMETER {{ VDD 0.1715pf 2.5e-05W }{ VDDPR 18.8985pf 3.63e-06W }{ VBBNW 0.1780pf 2.601e-06W }}<br />PEAK_CURRENT {{ VDD 0.15mA} { VDDPR 0.1mA} { VBBNW 0.25mA}}<br />END_MODE</code></p>
+
+<p><code>DATASHEET_INPUT_SLEW 0.6ns<br />DATASHEET_OUTPUT_SLEW 0.8ns<br />END</code></p>
+<h4 id="TriggerFileFormatDatasheet-Example3:Datasheet">Example 3: Datasheet</h4>
+
+<p><code>CURRENT_CHARACTERIZATION_METHOD DATASHEET<br />CELL COMPILER_MEM<br />MODE_NAME READ<br />CONDITIONAL_INPUT = (ME &amp; !WE &amp;!LS &amp; !DS &amp; !SD)<br />CONDITIONAL_PIN CLK {RISE}<br />DATASHEET_DELAY 1.2ns<br />DATASHEET_START_TIME 100e-12<br />DATASHEET_PARAMETER {{VDD 0.1193e-09 0.0025mW} {VDDM 0.00146e-09 0mW}}<br />DATASHEET_PEAK_CURRENT {{VDD 68mA} {VDDM 0mA}}<br />END_MODE</code></p>
+
+<p><code>MODE_NAME WRITE<br />CONDITIONAL_INPUT = (ME &amp; !WE &amp;!LS &amp; !DS &amp; !SD)<br />CONDITIONAL_PIN CLK {RISE}<br />DATASHEET_DELAY 1.2ns<br />DATASHEET_START_TIME 100e-12<br />DATASHEET_PARAMETER {{VDD 0.1813e-09 0.0025mW} {VDDM 0.00146e-09 0mW}}<br />DATASHEET_PEAK_CURRENT {{VDD 82mA} {VDDM 0mA}}<br />END_MODE</code></p>
+
+<p><code>DATASHEET_INPUT_SLEW 5.508481e-03ns<br />DATASHEET_OUTPUT-SLEW 3.693163e-03ns</code></p>
+
+<p><code>END</code></p>
+<h4 id="TriggerFileFormatDatasheet-Example4:Datasheet">Example 4: Datasheet</h4>
+
+<p><code>CURRENT_CHARACTERIZATION_METHOD DATASHEET<br />CELL ARM_32x64<br />MODE READ<br />CONDITIONAL_INPUT = ( !CEN &amp; !WEN )<br />CONDITIONAL_PIN CLK { RISE }<br />DATASHEET_PARAMETER {{ VDD 3.443482pF 2.5e-02W }}<br />DATASHEET_INPUT_SLEW 5.962569e-03ns<br />DATASHEET_OUTPUT_SLEW 5.968207e-03ns<br />END_MODE</code></p>
+
+<p><code>MODE WRITE<br />CONDITIONAL_INPUT = ( !CEN &amp; !WEN )<br />CONDITIONAL_PIN CLK { RISE }<br />DATASHEET_PARAMETER {{ VDD 3.826608pF 2.5e-07W }}<br />DATASHEET_PEAK_CURRENT { VDD 2.621318e-02 }<br />DATASHEET_INPUT_SLEW 5.162569e-03ns<br />DATASHEET_OUTPUT_SLEW 5.268207e-03ns<br />END_MODE</code></p>
+
+<p><code>MODE RESET<br />CONDITIONAL_INPUT = ( !CEN &amp; !WEN )<br />CONDITIONAL_PIN CLK { RISE }<br />DATASHEET_DELAY 6.0e-02ns<br />DATASHEET_PARAMETER {{ VDD 3.826608pF 2.5e-07W }}<br />DATASHEET_PEAK_CURRENT { VDD 5.925301e-02 }<br />DATASHEET_START_TIME 2.290418e-02ns<br />DATASHEET_INPUT_SLEW 5.662569e-03ns<br />DATASHEET_OUTPUT_SLEW 5.168207e-03ns<br />END_MODE</code></p>
+
+<p><code>DATASHEET_FAST_CLOCK_CYCLE&#xa0;&#xa0; 14.447ns</code></p>
+
+<p><code>END</code></p>
+<h4 id="TriggerFileFormatDatasheet-Example5:Datasheet">Example 5: Datasheet</h4>
+
+<p><code>CURRENT_CHARACTERIZATION_METHOD DATASHEET<br />CELL ARM_32x64<br />SINGLE_TRIANGULAR READ</code></p>
+
+<p><code>MODE READ<br />CONDITIONAL_INPUT = ( !CEN &amp; !WEN )<br />CONDITIONAL_PIN CLK { RISE }<br />DATASHEET DELAY 1.6879ns<br /></code><code>DATASHEET_INPUT_SLEW 5.962569e-03ns<br />DATASHEET_OUTPUT_SLEW 5.968207e-03ns<br />DATASHEET_PARAMETER {{ VDDG2 0.1715pf 1.355e-06mW} {VDDG 0.1715pf 3.62e-06mW} {VDD 0.1715pf 2.614e-06mW}}<br />PEAK_CURRENT {{VDDG2 0.25mA {VDDG 0.2mA} {VDDG 0.15mA}}<br />END_MODE</code></p>
+<h4 id="TriggerFileFormatDatasheet-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Current_Waveform_Characterization_for_Macro_EM_Views.html#CurrentWaveformCharacterizationforMacroEMViews-38159">Current Waveform Characterization for Macro EM Views</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Trigger_File_Format_-_FSDB.html" id="prev" title="Trigger_File_Format_-_FSDB">Trigger_File_Format_-_FSDB</a></em></b><b><em><a href="Trigger_File_Format_-_User-specified_Spice_Deck.html" id="nex" title="Trigger_File_Format_-_User-specified_Spice_Deck">Trigger_File_Format_-_User-spe ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

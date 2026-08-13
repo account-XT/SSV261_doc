@@ -1,0 +1,240 @@
+
+<html><head><title>Overshoot-Undershoot Glitch Analysis - An Overview</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823906" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Overshoot-Undershoot Glitch Analysis - An Overview" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823906" />
+<meta name="NextFile" content="analysisandreporting_runovershootundershoot.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_siglitchreporting.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Overshoot-Undershoot Glitch Analysis - An Overview" />
+<meta name="Keywords" content="overshoot undershoot analysis" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Signal Integrity,SI Analysis,Stylus" />
+<meta name="prod_subfeature" content="SI Analysis, Signal Integrity" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_siglitchreporting.html" title="SI Glitch Reporting">SI Glitch Reporting</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_runovershootundershoot.html" title="Running Overshoot-Undershoot Glitch Analysis - Sample Script">Running Overshoot-Undershoot G ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:overshootundershootanalysis" title="Overshoot-Undershoot Glitch Analysis - An Overview"></a><h3>
+<a id="pgfId-1010973"></a><a id="46041"></a>Overshoot-Undershoot Glitch Analysis - An Overview</h3>
+
+<p>
+<a id="pgfId-1010974"></a>The Tempus software allows you to perform overshoot and undershoot analysis. The life span of transistors can be described by the overshoot and undershoot values. If a transistor is consistently exposed to a certain percentage of overshoot/undershoot, then it may suffer a reduced life span. Tempus analyzes and generates reports for such cases.</p>
+<p>
+<a id="pgfId-1010975"></a>Due to cross-coupled capacitance between interconnects, switching activity of one net (attacker) can induce undesirable noise (glitch) on a static &#8216;victim&#8217; net. This glitch can be classified into four categories based on the victim state and attackers&#39; switching direction, as shown in the table below.</p>
+
+<h4>Table -3
+<a id="pgfId-1025470"></a>Classification of glitch</h4>
+<table class="webflareTable" id="#id1010977">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1010979">
+<a id="pgfId-1010979"></a>Glitch Type</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1010981">
+<a id="pgfId-1010981"></a>Victim State</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1010983">
+<a id="pgfId-1010983"></a>Attacker Switching</span>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1010985"></a>Glitch over ground rail (VL)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1010987"></a>Low</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1010989"></a>Rising</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1010991"></a>Glitch under power rail (VH)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1010993"></a>High</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1010995"></a>Falling</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1010997"></a>Glitch under ground rail (VLU)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1010999"></a>Low</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011001"></a>Falling</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011003"></a>Glitch over power rail (VHO)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011005"></a>High</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011007"></a>Rising</p>
+</td>
+</tr>
+</tbody></table>
+
+<p>
+<a id="pgfId-1011009"></a>The glitch types VL and VH, mentioned in Table 1, can result in functional failures, if the glitch exceeds the logic threshold.</p>
+<p>
+<a id="pgfId-1011010"></a>The glitch types, VLU and VHO, are known as undershoot and overshoot, respectively. While VLU (undershoot) and VHO (overshoot) do not cause any immediate silicon failure, exposure to VLU/VHO glitch over a period of time causes degradation of the gate-oxide, which increases the threshold voltage (Vth), and in turn can cause silicon failure.</p>
+<p>
+<a id="pgfId-1011011"></a>The following figures indicate the type of glitch waveform:</p>
+
+<p class="webflare-indent1"><strong>Figure -51
+<a id="pgfId-1011012"></a>VHO Glitch</strong></p>
+<p>
+<a id="pgfId-1011016"></a></p>
+<div class="webflare-div-image">
+<img width="308" height="126" src="images/analysisandreporting-55.gif" /></div>
+<p class="webflare-indent1"><strong>Figure -52
+<a id="pgfId-1011017"></a>VLU Glitch</strong></p>
+<p>
+<a id="pgfId-1011021"></a></p>
+<div class="webflare-div-image">
+<img width="308" height="127" src="images/analysisandreporting-56.gif" /></div>
+<p class="webflare-indent1"><strong>Figure -53
+<a id="pgfId-1011022"></a>VL, VH, VLU, and VHO glitch waveforms </strong></p>
+<p>
+<a id="pgfId-1011026"></a></p>
+<div class="webflare-div-image">
+<img width="302" height="264" src="images/analysisandreporting-57.gif" /></div>
+
+<p>
+<a id="pgfId-1011027"></a>Tempus performs overshoot-undershoot glitch analysis by analyzing each potential victim net in the design. The analysis of each net is based on calculating the worst-case glitch waveform that can occur at the input pins of each of the victim nets&#39; receivers.</p>
+<p>
+<a id="pgfId-1011028"></a>The VLU/VHO type of noise cannot propagate through a transistor, and therefore, Tempus does not perform the glitch propagation and ROP (Receiver Output Peak) computation in overshoot-undershoot analysis.</p>
+
+<h4>
+<a id="pgfId-1011030"></a><a id="73919"></a>Overshoot-Undershoot Analysis Flow</h4>
+
+<p>
+<a id="pgfId-1011031"></a>To run overshoot-undershoot analysis, perform the following steps:</p>
+<ul><li>
+<a id="pgfId-1011032"></a>Setup the design for SI analysis.</li><li>
+<a id="pgfId-1290377"></a>Enable overshoot-undershoot analysis:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id3053175">
+<a id="pgfId-3053175"></a><a href="../tempustxtcmdref/set_si_mode.html">set_si_mode</a> <code>-enable_overshoot_undershoot_glitch</code></pre></li><li>
+<a id="pgfId-1290383"></a><code></code>Set failure thresholds:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id3053181">
+<a id="pgfId-3053181"></a><a href="../tempustxtcmdref/set_glitch_threshold.html">set_glitch_threshold</a> <code>-type vho/vlu</code></pre></li><li>
+<a id="pgfId-1011037"></a><code></code>Analyze overshoot and undershoot glitches:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1297795">
+<a id="pgfId-1297795"></a><a href="../tempustxtcmdref/update_glitch.html">update_glitch</a></pre></li></ul>
+
+
+
+
+
+
+<p>
+<a id="pgfId-1011039"></a>You can also use the<code> </code><a href="../tempustxtcmdref/update_glitch.html">update_timing</a> and <a href="../tempustxtcmdref/report_timing.html">report_timing</a> commands for overshoot/undershoot glitch analysis and reporting. </p>
+<p>
+<a id="pgfId-1028623"></a>The following figure shows the overshoot-undershoot analysis flow.</p>
+
+<p class="webflare-indent1"><strong>Figure -54
+<a id="pgfId-1011041"></a>Overshoot-Undershoot Analysis Flow</strong></p>
+<p>
+<a id="pgfId-3053207"></a></p>
+<div class="webflare-div-image">
+<img width="325" height="596" src="images/analysisandreporting-58.gif" /></div>
+<h4>
+<a id="pgfId-1011047"></a><a id="37497"></a>Reporting</h4>
+
+<p>
+<a id="pgfId-1011048"></a>The reporting structure of the overshoot-undershoot analysis is similar to that of traditional glitch analysis.</p>
+<p>
+<a id="pgfId-1011049"></a><strong>Example VLU report</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053212"></a>--------------------------------------------------------------------------------<br />Peak(mV) Level TotalCap(fF) TotalArea Width(ps) Vdd(mV) Library VictimNet<br />381.132&#160;&#160;VLU&#160;&#160; 320.31&#160;&#160;     197.13    1034.459  1080    cell_w seg1/u6/A {seg1/n5}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053213"></a>Receiver Input Threshold:<br />Value   (Threshold)   ReceiverNet   Receiver   failure_type<br />381.132 (431.892)&#160;&#160;   seg1/u6/A     (INV)      [bbox]</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053214"></a>Constituents:<br />Source  Peak(mV)  Offset(ps)  Slew(ps)  Xcap(fF)  Vdd(mV)  Edge  Status  Net<br />Cpl:    215.187   190.000     341.167   139.280   1080     F     ACT w3<br />Cpl:    165.907   223.000     385.667   138.807   1080     F     ACT seg3/n5<br />--------------------------------------------------------------------------------</pre>
+
+<p>
+<a id="pgfId-1011053"></a><strong>Example VHO report</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053219"></a>--------------------------------------------------------------------------------<br />Peak(mV) Level TotalCap(fF) TotalArea Width(ps) Vdd(mV) Library  VictimNet<br />300.348&#160;&#160;VHO&#160;&#160;  320.31      140.66    936.680   1080    cell_w seg1/u6/A {seg1/n5}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053220"></a>Receiver Input Threshold:<br />Value    (Threshold)   ReceiverNet   Receiver   failure_type<br />300.348&#160;&#160;(431.028)&#160;&#160;   seg1/u6/A     (INV)      [bbox]</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053221"></a>Constituents:<br />Source  Peak(mV)  Offset(ps)  Slew(ps)  Xcap(fF)  Vdd(mV)  Edge Status  Net<br />Cpl:    196.067   185.000     281.833   139.280   1080     R    ACT w3<br />Cpl:    104.251   197.000     842.500   138.807   1080     R    ACT seg3/n5<br />--------------------------------------------------------------------------------</pre>
+
+<p>
+<a id="pgfId-1011057"></a>The <a href="../tempustxtcmdref/report_noise.html">report_noise</a> command parameters, such as, <code>-failure</code>, <code>-format</code>, <code>-histogram</code>, <code>-nets</code>, <code>-style</code>, <code>-threshold</code>, <code>-txtfile</code>, <code>and</code> <code>-view</code> work with the overshoot-undershoot reporting as well.</p>
+<p>
+<a id="pgfId-1011058"></a>For more information, refer to <em>Tempus Text Command Reference Guide</em>.</p>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_siglitchreporting.html" id="prev" title="SI Glitch Reporting">SI Glitch Reporting</a></em></b><b><em><a href="analysisandreporting_runovershootundershoot.html" id="nex" title="Running Overshoot-Undershoot Glitch Analysis - Sample Script">Running Overshoot-Undershoot G ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

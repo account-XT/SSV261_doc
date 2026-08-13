@@ -1,0 +1,94 @@
+
+<html><head><title>Design Loading and MMMC Configuration Script</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845231" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Design Loading and MMMC Configuration Script" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845231" />
+<meta name="NextFile" content="cmmmc_savemmmcconfiguration.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="cmmmc_cmmmcanalysisviews.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- Design Loading and MMMC Configuration Script" />
+<meta name="Keywords" content="Design Loading and MMMC Configuration Script" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="MMMC,Stylus" />
+<meta name="prod_subfeature" content="MMMC" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="cmmmc_cmmmcanalysisviews.html" title="Analysis Views">Analysis Views</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="cmmmc_savemmmcconfiguration.html" title="Saving Multi-Mode Multi-Corner Configuration">Saving Multi-Mode Multi-Corner ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:designloadmmmc" title="Design Loading and MMMC Configuration Script"></a><style>/*<![CDATA[*/
+/**/
+/**/
+/**/
+/**/
+h1 { counter-reset: heading 5;}
+/**/
+/**/
+/**/
+/**/
+/*]]>*/</style><h2>
+<a id="pgfId-1016169"></a>Design Loading and MMMC Configuration Script</h2>
+
+<p>
+<a id="pgfId-1016171"></a>The script to load a design must contain design loading as well as all MMMC configuration commands, such as, <code>create_library_set</code>, <code>create_delay_corner</code>, and <code>create_constraint_mode</code>.</p>
+<p>
+<a id="pgfId-1016173"></a>A sample common_init.tcl script is shown below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1016175"></a>################ common_init.tcl #############</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1016176"></a>read_mmmc INPUT/viewDefinition.tcl<br />read_physical -lef &quot;<br />    lib/lef/gsclib045.fixed.lef<br />    lib/lef/MEM1_256X32.lef<br />    lib/lef/MEM1_1024X32.lef<br />    lib/lef/MEM1_4096X32.lef<br />    lib/lef/MEM2_128X16.lef<br />    lib/lef/MEM2_128X32.lef<br />    lib/lef/MEM2_136X32.lef<br />    lib/lef/MEM2_512X32.lef<br />    lib/lef/MEM2_1024X32.lef<br />    lib/lef/MEM2_2048X32.lef<br />    lib/lef/MEM2_4096X32.lef<br />    lib/lef/pdkIO.lef<br />    &quot;<br />read_netlist INPUT/asic_entity.v.gz<br />#read_def aa.def<br />#read_power_intent<br />init_design<br />if {[get_db program_short_name] == &quot;tempus&quot;}  {<br />read_db -physical_data tempus_test.db<br />}</pre>
+
+<p>
+<a id="pgfId-1016202"></a>A sample viewDefinition.tcl script is shown below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1016204"></a>################# viewDefinition.tcl ############<br />create_library_set -name fast\<br />    -timing\<br />    [list ${::IMEX::libVar}/mmmc/fast.lib\<br />    ${::IMEX::libVar}/mmmc/pdkIO.lib\<br />    ${::IMEX::libVar}/mmmc/MEM2_4096X32_slow.lib\<br />    ${::IMEX::libVar}/mmmc/MEM2_2048X32_slow.lib\<br />    ${::IMEX::libVar}/mmmc/MEM2_1024X32_slow.lib\<br />    ${::IMEX::libVar}/mmmc/MEM1_4096X32_slow.lib\<br />    ${::IMEX::libVar}/mmmc/MEM1_1024X32_slow.lib\<br />    ${::IMEX::libVar}/mmmc/MEM1_256X32_slow.lib\<br />    ${::IMEX::libVar}/mmmc/MEM2_512X32_slow.lib\<br />    ${::IMEX::libVar}/mmmc/MEM2_136X32_slow.lib\<br />    ${::IMEX::libVar}/mmmc/MEM2_128X32_slow.lib\<br />    ${::IMEX::libVar}/mmmc/MEM2_128X16_slow.lib\<br />    ${::IMEX::libVar}/mmmc/leon.lib]<br />create_library_set -name slow\<br />    -timing\<br />    [list ${::IMEX::libVar}/mmmc/slow.lib\<br />    ${::IMEX::libVar}/mmmc/pdkIO.lib\<br />    ${::IMEX::libVar}/mmmc/MEM2_4096X32_slow.lib\<br />    ${::IMEX::libVar}/mmmc/MEM2_2048X32_slow.lib\<br />    ${::IMEX::libVar}/mmmc/MEM2_1024X32_slow.lib\<br />    ${::IMEX::libVar}/mmmc/MEM1_4096X32_slow.lib\<br />    ${::IMEX::libVar}/mmmc/MEM1_1024X32_slow.lib\<br />    ${::IMEX::libVar}/mmmc/MEM1_256X32_slow.lib\<br />    ${::IMEX::libVar}/mmmc/MEM2_512X32_slow.lib\<br />    ${::IMEX::libVar}/mmmc/MEM2_136X32_slow.lib\<br />    ${::IMEX::libVar}/mmmc/MEM2_128X32_slow.lib\<br />    ${::IMEX::libVar}/mmmc/MEM2_128X16_slow.lib\<br />    ${::IMEX::libVar}/mmmc/leon.lib]<br />create_timing_condition -name default_mapping_tc_2\<br />    -library_sets [list fast]<br />create_timing_condition -name default_mapping_tc_1\<br />    -library_sets [list slow]<br />create_rc_corner -name rc_min\<br />    -cap_table ${::IMEX::libVar}/mmmc/capTable\<br />    -pre_route_res 1.34236\<br />    -post_route_res 0.994125\<br />    -pre_route_cap 1.10066\<br />    -post_route_cap 0.960235\<br />    -post_route_cross_cap 1.22327\<br />    -pre_route_clock_res 0\<br />    -pre_route_clock_cap 1.105\<br />    -post_route_clock_cap 0.969117\<br />    -temperature 0\<br />    -qrc_tech ${::IMEX::libVar}/mmmc/qrcTechFile\<br />create_rc_corner -name rc_max\<br />    -cap_table ${::IMEX::libVar}/mmmc/capTable\<br />    -pre_route_res 1.34236\<br />    -post_route_res 0.994125\<br />    -pre_route_cap 1.10066\<br />    -post_route_cap 0.960234\<br />    -post_route_cross_cap 1.22327\<br />    -pre_route_clock_res 0\<br />    -pre_route_clock_cap 0.967898\<br />    -post_route_clock_cap 0.969117\<br />    -temperature 125\<br />    -qrc_tech ${::IMEX::libVar}/mmmc/qrcTechFile\<br />create_opcond -name PVT1 \<br />    -process 1 \<br />    -voltage 2 \<br />    -temperature 120 \<br />create_delay_corner -name slow_max\<br />    -timing_condition {default_mapping_tc_1}\<br />    -rc_corner rc_max<br />create_delay_corner -name fast_min\<br />    -timing_condition {default_mapping_tc_2}\<br />    -rc_corner rc_min<br />create_constraint_mode -name functional\<br />    -sdc_files\<br />    [list ${::IMEX::libVar}/mmmc/eagle.sdc]<br />create_analysis_view -name func_slow_max -constraint_mode functional -delay_corner slow_max<br />create_analysis_view -name func_fast_min -constraint_mode functional -delay_corner fast_min<br />set_analysis_view -setup [list func_slow_max] -hold [list func_fast_min]</pre>
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="cmmmc_cmmmcanalysisviews.html" id="prev" title="Analysis Views">Analysis Views</a></em></b><b><em><a href="cmmmc_savemmmcconfiguration.html" id="nex" title="Saving Multi-Mode Multi-Corner Configuration">Saving Multi-Mode Multi-Corner ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

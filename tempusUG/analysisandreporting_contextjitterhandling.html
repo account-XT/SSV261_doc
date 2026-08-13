@@ -1,0 +1,303 @@
+
+<html><head><title>Context Jitter Handling</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823929" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Context Jitter Handling" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823929" />
+<meta name="NextFile" content="analysisandreporting_pushdownblock.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_contextgeneration.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Context Jitter Handling" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="0" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_contextgeneration.html" title="Context Generation from Context Analysis">Context Generation from Contex ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_pushdownblock.html" title="Pushdown Block SDC Generation">Pushdown Block SDC Generation</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:contextjitterhandling" title="Context Jitter Handling"></a><h3>
+<a id="pgfId-2945829"></a>Context Jitter Handling<a id="38205"></a></h3>
+
+<p>
+<a id="pgfId-2945830"></a>This section talks about the clock source jitter handling in timing context analysis. In regular STA analysis, the generated clocks inherit the jitter values from their master clocks wherever explicit edge relationship is established. When such clocks sharing common master reach a block port, these clocks may be defined as master clocks in block constraints. This can lead to mis-correlation between flat and block STA, as a flat run will use the jitter values for timing paths between these related clocks, while in block run there is no way to specify jitter between two master clocks. </p>
+<p>
+<a id="pgfId-2945831"></a>Consider the following examples:</p>
+
+<p>
+<a id="pgfId-2945867"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="136" src="images/analysisandreporting-188.gif" /></div>
+
+<p>
+<a id="pgfId-2945908"></a>In the first example, the two generated clocks of the same master enter the block. A flat STA run will use the inherited jitter values for paths between genCLK1 and genCLK2 inside the block, while block STA run will define these as two master clocks (bCLK1 and bCLK2), and hence, no jitter can be specified between these clocks in block STA. To address this problem, hierarchical timing context stores each clocks&#8217; edge relationship to the root clock edge and the corresponding jitter value. During block context analysis, full- or half-cycle jitter is applied based on the master edge relationship for launch and capture clocks.</p>
+<p>
+<a id="pgfId-2945910"></a>Jitter stored in context overrides the jitter specified in block constraints for clocks defined on block ports.</p>
+
+<h4>
+<a id="pgfId-2945911"></a>Multiple Top Clocks to Block Clock Mapping</h4>
+
+<p>
+<a id="pgfId-2945912"></a>If all the multiple top mapped clocks have the same clock root approach for jitter application as 1-to-1 mapped clocks, the clock edge mapping will be required between top root clock and block clock.</p>
+<p>
+<a id="pgfId-2945913"></a>If some of these top mapped clocks do not share common clock root, Tempus will worst-case half- or full-cycle jitter value and use it for the block clock. The half- or full-cycle jitter decision will be based on which edges of the block clock and its generated clocks are used in the timing path at the block level. The jitter is not applied when there is no missing edge mapping between top and block clock.</p>
+<p>
+<a id="pgfId-2957596"></a>Consider the examples in the following table for more details, where:</p>
+<ul><li>
+<a id="pgfId-2957597"></a>TC1, TC2 are top level root clocks. </li><li>
+<a id="pgfId-2957598"></a>BCK1, BCK2 are block level root clocks.<br />
+<a id="pgfId-2956599"></a><table class="webflareTable" id="#id2956912">
+<tbody><tr>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2956914">
+<a id="pgfId-2956914"></a>Case</span>
+</th>
+<th class="webflareTh" colspan="2" rowspan="1">
+<span class="tbl-head" id="#id2956916">
+<a id="pgfId-2956916"></a>Interacting Clock Domains</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="2">
+<span class="tbl-head" id="#id2956920">
+<a id="pgfId-2956920"></a>Jitter Application</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="2">
+<span class="tbl-head" id="#id2956922">
+<a id="pgfId-2956922"></a>Edge Mapping</span>
+</th>
+</tr>
+<tr>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2956924">
+<a id="pgfId-2956924"></a></span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2956926">
+<a id="pgfId-2956926"></a>Block Clocks</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2956928">
+<a id="pgfId-2956928"></a>Top Root Clocks</span>
+</th>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956934"></a>1</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956936"></a>BCK1</p>
+<p>
+<a id="pgfId-2956946"></a>BCK1</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956938"></a>{TC1}</p>
+<p>
+<a id="pgfId-2957296"></a>{TC1}</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956940"></a>TC1 jitter applied</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956942"></a>TC1 edge mapping used.</p>
+</td>
+</tr>
+<tr />
+<tr>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956954"></a>2</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956956"></a>BCK1</p>
+<p>
+<a id="pgfId-2956966"></a>BCK2</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2957310"></a>{TC1}</p>
+<p>
+<a id="pgfId-2956968"></a>{TC1}</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956960"></a>TC1 jitter applied</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956962"></a>TC1 edge mapping used</p>
+</td>
+</tr>
+<tr />
+<tr>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956974"></a>3</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956976"></a>BCK1</p>
+<p>
+<a id="pgfId-2956986"></a>BCK2</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956978"></a>{TC1}</p>
+<p>
+<a id="pgfId-2956988"></a>{TC2}</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956980"></a>Jitter not applied</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956982"></a>-</p>
+</td>
+</tr>
+<tr />
+<tr>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956994"></a>4</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956996"></a>BCK1</p>
+<p>
+<a id="pgfId-2957006"></a>BCK1</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2956998"></a>{TC1, TC2}</p>
+<p>
+<a id="pgfId-2957008"></a>{TC1, TC2}</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2957000"></a>Worst of (TC1, TC2) jitter applied</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2957002"></a>BCK1 edge mapping used.</p>
+</td>
+</tr>
+<tr />
+<tr>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2957134"></a>5</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2957136"></a>BCK1</p>
+<p>
+<a id="pgfId-2957146"></a>BCK2</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2957138"></a>{TC1, TC2}</p>
+<p>
+<a id="pgfId-2957148"></a>{TC1, TC2}</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2957140"></a>Worst of (TC1, TC2) jitter applied</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2957142"></a>BCK1 edge mapping used.</p>
+</td>
+</tr>
+<tr />
+</tbody></table></li></ul>
+
+
+
+
+
+<p>
+<a id="pgfId-2945955"></a><strong>Case 1</strong>: </p>
+<p>
+<a id="pgfId-2945956"></a><strong><em>Scenario</em></strong>:</p>
+<ul><li>
+<a id="pgfId-2945957"></a>Timing path being analyzed has both launch and capture clocks as a generated clock of BCK1 at block</li><li>
+<a id="pgfId-2945958"></a>Block clock BCK1 is mapped to a generated clock of top clock TC1</li></ul>
+
+<p>
+<a id="pgfId-2945959"></a><strong><em>Context Analysis</em></strong>:</p>
+<ul><li>
+<a id="pgfId-2945960"></a>TC1 jitter will be applied </li><li>
+<a id="pgfId-2945961"></a>Full-cycle/half-cycle jitter will be applied based on TC1 edge mapping</li></ul>
+
+<p>
+<a id="pgfId-2945962"></a><strong>Case 5</strong>:</p>
+<p>
+<a id="pgfId-2945963"></a><em>Scenario</em>:</p>
+<ul><li>
+<a id="pgfId-2945964"></a>Timing path being analyzed has launch and capture clocks as generated clocks of BCK1 and BCK2 respectively at block</li><li>
+<a id="pgfId-2945965"></a>Block clock BCK1 is mapped to generated clocks of both top clocks TC1 and TC2</li><li>
+<a id="pgfId-2945966"></a>Block clock BCK2 is mapped to generated clocks of both top clocks TC1 and TC2</li><li>
+<a id="pgfId-2945967"></a>BCK1 and BCK2 have same clock waveforms.</li></ul>
+
+
+
+<p>
+<a id="pgfId-2945968"></a><strong><em>Context Analysis</em></strong>:</p>
+<ul><li>
+<a id="pgfId-2945969"></a>Worst of TC1 and TC2 jitter values will be applied if BCK1 and BCK2 have same clock waveform.</li><li>
+<a id="pgfId-2945970"></a>Full-cycle/half-cycle jitter will be applied based on BCK1 edge mapping</li></ul>
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_contextgeneration.html" id="prev" title="Context Generation from Context Analysis">Context Generation from Contex ...</a></em></b><b><em><a href="analysisandreporting_pushdownblock.html" id="nex" title="Pushdown Block SDC Generation">Pushdown Block SDC Generation</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

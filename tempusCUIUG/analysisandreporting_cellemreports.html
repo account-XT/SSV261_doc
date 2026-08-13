@@ -1,0 +1,652 @@
+
+<html><head><title>Reports</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845215" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Reports" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845215" />
+<meta name="NextFile" content="analysisandreporting_cellemfloweco.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_requiredinputscellem.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- Reports" />
+<meta name="Keywords" content="cell em reports" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="ECO,Timing Analysis,REPORTS,Stylus" />
+<meta name="prod_subfeature" content="Timing Analysis,ECO, Reports" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_requiredinputscellem.html" title="Required Inputs for Cell EM Analysis">Required Inputs for Cell EM An ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_cellemfloweco.html" title="ECO Flow Use Model">ECO Flow Use Model</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:cellemreports" title="Reports"></a><h3>
+<a id="pgfId-2230358"></a><a id="19887"></a>Reports</h3>
+
+<p>
+<a id="pgfId-2230359"></a>This section describes the reporting for Cell EM. To analyze cell EM, you can use the following commands:</p>
+<ul><li>
+<a id="pgfId-2230361"></a><code><a actuate="user" class="URL" href="../tempusCUI/report_constraint.html" show="replace" xml:link="simple">report_constraint</a> -drv_violation_type max_capacitance</code><br />
+<a id="pgfId-2230362"></a>With the below settings, the above command reports the maximum capacitance value, which is the worst of frequency-based maximum capacitance (cell em) and SDC, or dotlib-based maximum value (without cell em).<pre class="webflare-pre-block webflare-courier-new" id="#id3007831">
+<a id="pgfId-3007831"></a>set_db timing_report_drv_per_frequency_per_input_slew true</pre>
+<a id="pgfId-2230530"></a><em>Default</em>: <code>false</code><br />
+<a id="pgfId-2230759"></a>In this case, the software performs worst of all three avg, rms, and peak as default.</li><li>
+<a id="pgfId-2230374"></a><code>report_constraint -check_type electromigration</code><br />
+<a id="pgfId-2230375"></a>With the below settings, the <code>report_constraint</code> saves the frequency-based maximum capacitance value.<pre class="webflare-pre-block webflare-courier-new" id="#id3007836">
+<a id="pgfId-3007836"></a>set_db timing_report_drv_per_frequency_per_input_slew true</pre>
+<a id="pgfId-2230542"></a><em>Default</em>: <code>false</code><br />
+<a id="pgfId-2230792"></a>In this case, the software performs worst of all three avg, rms, and peak as default.<br /><div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-2230830"></a>The <a href="../tempusCUI/report_constraint.html">report_constraint</a> <code>-check_type electromigration</code> option is supported in DSTA.</div></li><li>
+<a id="pgfId-2230437"></a><code>report_freq_violation</code></li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+<h3>
+<a id="pgfId-2230440"></a>Reports Examples</h3>
+
+<p>
+<a id="pgfId-2230441"></a>Some examples of reports are given below:</p>
+<ul><li>
+<a id="pgfId-2247258"></a><a href="analysisandreporting_cellemreports.html#22369">Example 1</a></li><li>
+<a id="pgfId-2247269"></a><a href="analysisandreporting_cellemreports.html#50333">Example 2</a></li><li>
+<a id="pgfId-2247276"></a><a href="analysisandreporting_cellemreports.html#89733">Example 3</a></li><li>
+<a id="pgfId-2247283"></a><a href="analysisandreporting_cellemreports.html#76803">Example 4</a></li><li>
+<a id="pgfId-2247290"></a><a href="analysisandreporting_cellemreports.html#17229">Example 5</a></li><li>
+<a id="pgfId-2247297"></a><a href="analysisandreporting_cellemreports.html#90192">Example 6</a></li></ul>
+
+
+
+
+
+
+<h4>
+<a id="pgfId-2230442"></a><strong>Example 1</strong><a id="22369"></a></h4>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2230443"></a>report_constraint -drv_violation_type max_capacitance -all_violators</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2230955"></a>--------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2230925"></a># format : frame 0: split l</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2230926"></a># Units scale:&#160;&#160;        capacitance: l.000pf</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2230927"></a>#&#160;&#160;                     transition: l.000ns</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2230928"></a>#&#160;&#160;                     toggle rate: toggles/second</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243646"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2230929"></a>Check type : max_capacitance</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2231931"></a>-----------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2231847"></a>---------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2230930"></a>Pin Name        Related Pin  Required   Actual   Slack  Input Slew  Toggle count<br />Clock Name   Type     Supply      Failure Reason<br />--------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2230931"></a>blkl/clk_launch    i         0.000      0.321    -0.321  0.070    20000000000.000<br />clk&#160;&#160;        Clock    1.100000    CellEH</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2230932"></a>blk1/clk_common    i         0.000      0.316    -0.316  0.100    20000000000.000<br />clk&#160;&#160;        Clock    1.100000    CellEH</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2230933"></a>blkl/clk_capture   i         0.000      0.270    -0.270  0.070    20000000000.000<br />  clk        Clock    1.100000    CellEH</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2230915"></a>blkl/flop_launch   setb      0.131      0.274    -0.143  0.100    1500000000.000<br />clk&#160;&#160;        Data     1.100000    CellEH</pre>
+<h4>
+<a id="pgfId-2231969"></a><strong>Example 2</strong><a id="50333"></a></h4>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2231970"></a>report_constraint -check_type electromigration -all_violators -verbose</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241810"></a>--------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2242174"></a># format : frame 0: split 0</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2242175"></a># Units scale:&#160;&#160;        capacitance: l.000pf</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2242176"></a>#&#160;&#160;                     transition: l.000ns</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2242177"></a>#&#160;&#160;                     toggle rate: toggles/second</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2242195"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2242178"></a>Check type : max_transition</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2242179"></a>-----------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2242180"></a>---------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2242181"></a>Pin Name        Related Pin   Required   Actual   Slack  Input Slew  Toggle count <br />Clock Name   Type      Supply     Failure Reason    View<br />--------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241836"></a>u_vcpu/u_ana/U648/B    *      *          0.000    *      *          337837824.000<br />coreclk&#160;&#160;    Data      0.825000   *    </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2242221"></a>u_vcpu/u_ana/U648/ZN   *      *          0.000    *      *          601435648.000<br />coreclk&#160;&#160;    Data      0.825000   *    </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2242250"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241838"></a>CM Cell Statistics:</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241839"></a>Total Cell Output pins :0</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241840"></a>Cell Output pins Analyted :0 0.00 % of total pins</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241841"></a>         Pass :0 0.00 % of pins analyzed</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241842"></a>         Fail :0 0.00 % of pins analyzed</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241843"></a>               lpeak : 0</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241844"></a>               lrms : 0</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241845"></a>               lavg : 0</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241846"></a>               max_tran :0</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241847"></a>               other_cellem :0</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241848"></a>Cell output pins not analyzed:0 0.00 % of total pins</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241849"></a>         Constant :0 0.00 % of total unanalyzed pins</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241850"></a>         No EM Table :0 0.00 % of total unanalyzed pins</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2241851"></a>Cell pins used as clock : 0 0.00 % of total pins</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2242754"></a>Cell pins used as data : 0 0.00 % of total pins</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2242766"></a>Cell out pins stimulated by default activity factor : 0 0.00 % of total pins</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2242907"></a>--------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243013"></a>--------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243015"></a># Units scale: capacitance: l.000pf</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243016"></a># transition: l.000ns</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243017"></a># toggle rate: toggles/second</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243018"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243019"></a>Check type : max_capacitance</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243020"></a>-----------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243021"></a>---------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243022"></a>Pin Name      Related Pin   Required   Actual   Slack  Input Slew  Toggle count <br />Clock Name   Type      Supply     Failure Reason    View<br />--------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243024"></a>u_vcpu/u_ana/U229/ZN   A1   0.012      0.011    0.001   13.200     80531352.000<br />coreclk&#160;&#160;    Data      0.825000   Pass              view1</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243025"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243026"></a>CM Cell Statistics:</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243027"></a>Total Cell Output pins :2104567</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243028"></a>Cell Output pins Analyted :2097179 99.64 % of total pins</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243029"></a>         Pass :2097179 100.00 % of pins analyzed</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243030"></a>         Fail :2 0.00 % of pins analyzed</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243031"></a>               lpeak : 0</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243032"></a>               lrms : 0</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243033"></a>               lavg : 2</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243034"></a>               max_cap :0</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243035"></a>               other_cellem :0</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243036"></a>Cell output pins not analyzed :7478 0.36 % of total pins</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243037"></a>         Constant :0 0.00 % of total unanalyzed pins</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243038"></a>         No EM Table :0 0.00 % of total unanalyzed pins</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243039"></a>Cell pins used as clock : 9066 0.43 % of total pins</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243040"></a>Cell pins used as data : 2095591 99.57 % of total pins</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243041"></a>Cell output pins stimulated by default activity factor : 68295 3.24 % of total pins</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2243042"></a>--------------------------------------------------------------------------------</pre>
+
+<p>
+<a id="pgfId-2232009"></a>The fields related to cell CM in the above reports are described in the below table:</p>
+<table class="webflareTable" id="#id2232365">
+<tbody><tr>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2232275">
+<a id="pgfId-2232275"></a>Field Name</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2232277">
+<a id="pgfId-2232277"></a>Description</span>
+</th>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2232279"></a>Required Cap</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2232281"></a>Calculates the <code>max_cap</code> based on <code>input_slew</code> and Toogle Count from .lib using the electromigration table.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2232283"></a>Actual Cap</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2232285"></a>Specifies the <code>total_capacitance_max</code> on the net of output pin.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2232287"></a>Input Slew</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2232289"></a>Specifies the <code>slew_max</code> on the input pin.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2232291"></a>Toggle Count</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2232293"></a>Specifies the transition density over the output pin.</p>
+</td>
+</tr>
+</tbody></table>
+<b>Note:</b><br />
+<a id="pgfId-2232333"></a>
+<ul><li>
+<a id="pgfId-2232334"></a>The actual capacitance and input slew can be verified using the <a href="../tempusCUI/get_property.html">get_property</a> command for pin objects.</li><li>
+<a id="pgfId-2232335"></a>The <a href="../tempusCUI/get_activity.html">get_activity</a> <code>-pin</code>, <code>-port</code>, and <code>-net</code> parameters can be used to verify the Toggle Count on pins, ports, and nets.</li></ul>
+
+
+<h4>
+<a id="pgfId-2232337"></a><strong>Example 3</strong><a id="89733"></a></h4>
+
+<p>
+<a id="pgfId-2232338"></a>Use the <a href="../tempusCUI/report_freq_violation.html">report_freq_violation</a> command to write out a file with default name, <em>freqViolation.rpt.</em></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2232454"></a>-----------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2232460"></a># Content: Frequency limit violation report</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2232461"></a># Design: top netlist</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2232462"></a># View Name : default emulate view</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2232563"></a>-----------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2232463"></a>#Summary:</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2232464"></a>#Info: Total 6 instance in design.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2232465"></a>#Info: Total 6 instance has electromigration table.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2232466"></a>#Info: Total 7 frequency recorder for 6 instances in this report file.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2232467"></a>#Info: 7 violations in total 7 recorder in this report file.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2232468"></a>#Info: 3 violations in total 3 recorder for clock net (remark C).</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2232469"></a>#Info: Units · &gt;Frequency (MHz), Capacitance (pf ), Transition Time (ns).</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2232619"></a>-------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2232470"></a>MaxFreq&#160;&#160;  Freq    Tran       Cap      Remark    Arc/Pin</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233393"></a>-------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2232471"></a>685.1&#160;&#160;    750     0.2188     0.2213   *         blk_1/data_inv/o ^ i</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2232472"></a>362&#160;&#160;      750     0.1        0.2738   *         blk_1/flop_launch/q ^ set b</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2232473"></a>360.2&#160;&#160;    750     0.1        0.2738   *         blk_1/flop_launch/q ^ reset b</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2232474"></a>436.6&#160;&#160;    750     0.0707     0.2738   *         blk_1/flop_launch/q ^ phi</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2232475"></a>1286&#160;&#160;     le+04   0.0699     0.2699   C         blk_1/clock_capture/o ^ i</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2232476"></a>1149&#160;&#160;     le+04   0.0699     0.3214   C         blk_1/clock_launch/o ^ i</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2232449"></a>1116&#160;&#160;     le+04   0.1        0.3163   C         blk_1//clock_common/o ^ i</pre>
+
+<p>
+<a id="pgfId-2233499"></a>The fields in the above report are described below:</p>
+<ul><li>
+<a id="pgfId-2233500"></a><code>MaxFreq = min {freq(minslew, minload) , freq(maxslew, maxload)}</code><br />
+<a id="pgfId-2233502"></a>MaxFreq will be derived from cell the EM .lib based on the slew and load.</li><li>
+<a id="pgfId-2233503"></a><code>Freq = toggle_count/2</code></li><li>
+<a id="pgfId-2233504"></a><code>Tran = min (slew_mean_min_fall, slew_mean_min_rise)
+Tran = max (slew_mean_max_fall, slew_mean_max_rise) (with -slew max/ -transition max)</code></li><li>
+<a id="pgfId-2233507"></a><code>Cap= max
+(total_capacitance_max_fall,total_capacitance_max_rise)</code></li></ul>
+
+
+
+
+<p>
+<a id="pgfId-2233601"></a>The rest of the fields can be verified using the <a href="../tempusCUI/get_property.html">get_property</a> command on a pin or net within a timed session.</p>
+
+<h4>
+<a id="pgfId-2233649"></a><strong>Example 4</strong><a id="76803"></a></h4>
+
+<p>
+<a id="pgfId-2233651"></a>The following command adds flags for PASS/FAIL/VIOLATE to the report, as shown below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233650"></a>report_freq_violation -report_format 1</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233683"></a>----------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233782"></a># Content : Frequency limit violation report</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233684"></a># Design : top netlist</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233685"></a># View Name: default emulate view</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233788"></a>-----------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233686"></a>#Summary:</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233687"></a>#Info: Total 6 instance in design.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233688"></a>#Info: Total 6 instance has electromigration table.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233689"></a>#Info: Total 7 frequency recorder for 6 instances in this report file.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233690"></a>#Info: 7 violations in total 7 recorder in this report file.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233691"></a>#Info: 3 violations in total 3 recorder for clock net (remark C).</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233692"></a>#Info: Units-&gt;Frequency (MHz), Capacitance (pf), Transition Time (ns).</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233693"></a>#Info: Sta is Status, [F] is Fail, [V] is Violation, [P] is Pass, [?] is unknown.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233852"></a>-----------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233694"></a>Sta&#160;&#160; Rem&#160;&#160;  Freq   minfreq   maxfreq   Arc/ Pin</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233933"></a>-----------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233695"></a>[V]&#160;&#160; *&#160;&#160;   750     685.1     927.2     blk_l/data_inv/o ^ i</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233696"></a>[F]&#160;&#160; *&#160;&#160;   750     362       362       blk_l/flop_launch/q ^ setb</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233697"></a>[F]&#160;&#160; *&#160;&#160;   750     360.2     360.2     blk_l/flop_launch/q ^ resetb</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233698"></a>[F]&#160;&#160; *&#160;&#160;   750     436.6     436.6     blk_l/flop_launch/q ^ phi</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233699"></a>[F]&#160;&#160; C&#160;&#160;   le+04   1286      1287      blk_l/clock_capture/o ^ i</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233700"></a>[F]&#160;&#160; C&#160;&#160;   le+04   1149      1150      blk 1/clock_launch/o ^ i</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2233678"></a>[F]&#160;&#160; C&#160;&#160;   le+04   1116      1116      blk_l/clk_common/o ^ i</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2234007"></a>-----------------------------------------------------------------------</pre>
+<h4>
+<a id="pgfId-2234799"></a><strong>Example 5</strong><a id="17229"></a></h4>
+
+<p>
+<a id="pgfId-2234867"></a>The following command displays a report that includes more details related to slew/load values along with the flags:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235130"></a>report_freq_violation -report_format 2</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235181"></a>--------------------------------------------------------------------------- Content: Frequency limit violation ireport</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235182"></a># Design: top_netlist</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235183"></a># View Name: default_emulate_view</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235174"></a>#</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235427"></a>#Info: Total 6 instance in design.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235428"></a>#Info: Total 6 instance has electromigration table.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235429"></a>#Info: Total 7 frequency recorder for 6 instances in this report file.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235430"></a>#Info: 7 violations in total 7 recorder in this report file.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235431"></a>#Info: 3 violations in total 3 recorder for clock net (remark C).</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235432"></a>#Info: Units-&gt;Frequency (MHz), Capacitance (pf), Transition Time (ns).</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235421"></a>#Info: Sta is Status, [F] is Fail, [V] is Violation, [P] is Pass, [?] is unknown.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235449"></a>--------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235450"></a>Sta    Rem   Freq    minfreq    maxfreq    minSlew      maxslew     minLoad<br />maxLoad&#160;&#160;Arc/Pin</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235451"></a>--------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235517"></a>[V]&#160;&#160;  *     <strong>750</strong>      <strong>685.1 </strong>     927.2     2.188e-01    3.036e-01   2.213e-01<br />2.215e-01&#160;&#160;  blk_l/data_inv/o ^ i</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235518"></a>[F]    *     750      362       362       1.000e-01    1.000e-01   2.738e-01<br />2.738e-01&#160;&#160;  blk_l/flop_launch/q ^ setb</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235519"></a>[F]    *     750      360.2     360.2     1.000e-01    1.000e-01   2.738e-01<br />    2.738e-01    blk_l/flop_launch/q ^ resetb</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235520"></a>[F]&#160;&#160;  *     <strong>750</strong>      <strong>436.6</strong>      <strong>436.6</strong>     7.070e-02    7.090e-02   2.738e-01<br />    2.738e-01    blk_l/flop_launch/q ^ phi</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235521"></a>[F]    C     le+04    1286      1287      6.999e-02    7.020e-02   2.699e-01<br />    2.699e-01    blk_l/clock_capture/o ^ i</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235522"></a>[F]    C     le+04    1149      1150      6.999e-02    7.020e-02   3.214e-01<br />    3.215e-01     blk 1/clock_launch/o ^ i</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235523"></a>[F]    C     le+04    1116      1116      1.000e-01    1.000e-01   3.163e-01<br />    3.163e-01    blk_l/clk_common/o ^ i</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235459"></a>---------------------------------------------------------------------------------</pre>
+
+<p>
+<a id="pgfId-2236488"></a>In row1, Freq 750 is &gt; <code>minFreq</code>; therefore, Tempus shows the [V] flag, which means it is a violation. Since Freq 750 is &gt; <code>minFreq</code>/<code>maxFreq</code>, Tempus shows the [F] flag, which means it is a Fail.</p>
+<p>
+<a id="pgfId-2236676"></a>The fields in the above report are described below:</p>
+<ul><li>
+<a id="pgfId-2236677"></a><code>Freq = toggle_count/2</code></li><li>
+<a id="pgfId-2236678"></a><code>MinFreq = min {freq(minslew, minload), freq(maxslew,maxload)}</code></li><li>
+<a id="pgfId-2236680"></a><code>MaxFreq = max {freq(minslew, minload), freq(maxslew,maxload)}</code></li><li>
+<a id="pgfId-2236682"></a><code>MinSlew = min (slew_mean_min_fall, slew_mean_min_rise) (Default)</code><ul><li>
+<a id="pgfId-2236684"></a><code>min (slew_mean_max_fall, slew_mean_max_rise) (with -slew max/ -transition max)</code></li></ul></li><li>
+<a id="pgfId-2236686"></a><code>MaxSlew = max (slew_mean_min_fall, slew_mean_min_rise) (Default)</code><ul><li>
+<a id="pgfId-2236688"></a><code>max (slew_mean_max_fall, slew_mean_max_rise) (with -slew max/ -transition max)</code></li><li>
+<a id="pgfId-2236757"></a><code>MinLoad = min (total_capacitance_max_fall ,total_capacitance_max_rise)</code></li><li>
+<a id="pgfId-2236759"></a><code>MaxLoad = max (total_capacitance_max_fall ,total_capacitance_max_rise)</code></li></ul></li></ul>
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-2236788"></a>If the slew/load values are beyond the .lib index range, Tempus reports the values in the <code>report_freq_violation</code> output (if the below attributes are set to <code>true</code>):</p>
+<ul><li>
+<a id="pgfId-2236791"></a><code>timing_library_handle_out_of_bound_frequency</code></li><li>
+<a id="pgfId-2236792"></a><code>timing_library_em_cap_lookup_slew_out_of_bounds</code></li><li>
+<a id="pgfId-2236781"></a><code>timing_report_enable_em_index_clipping_report</code></li></ul>
+
+
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236845"></a><code></code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236850"></a>---------------------------------------------------------------------------------# Content: Frequency limit violation report</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236851"></a># Design : top netlist</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236852"></a># View Name: default emulate view</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236987"></a>--------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236853"></a>#Summary :</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236854"></a>#Info: Total 6 instance in design.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236855"></a>#Info: Total 6 instance has electromigration table.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236856"></a>#Info: Total 16 frequency recorder for 6 instances in this report file .</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236857"></a>#Info: 16 violations in total 16 recorder in this report file.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236858"></a>#Info: 3 violations in total 3 recorder for clock net (remark C) .</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236859"></a>#Info: 3 violations in total 16 recorder are for frequency extrapolation.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236860"></a>#Info: Units-&gt;Frequency (MHz), Capacitance (pf ), Transition Time (ns).</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236861"></a>#Info: Sta is Status, [Fl is Fail, [Vl is Violation, [Pl is Pass, [?] is unknown.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236862"></a>#Info: [Vl is &#39;Violation&#39; means actual freq is greater than minFreq limit from library.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236863"></a>#Info: [F] is &#39;Failure&#39; means actual freq is higher than maxFreq limit from library.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236864"></a>#Info: <strong>(Tr OB)</strong>: Indicates slew coming to related pin is higher than table limit.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236865"></a>#Info: (<strong>Ld OB)</strong>: Load at this stage might be lower than expected table range.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2237067"></a>--------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236866"></a>Sta    Rem  Freq      minFreq        maxFreq        minSlew      maxSlew<br />minload&#160;&#160;    maxload          Arc/Pin</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2237150"></a>--------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236867"></a>[Fl&#160;&#160;  *    2.5e+04   2561 <strong>(Ld OB)</strong>   2561 <strong>(Ld OB)</strong>   1.000e-01   1.000e-01<br />0.000e+00&#160;&#160;    0.000e+00      blk_1/flop_capture/q ^ setb</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236868"></a>[Fl&#160;&#160;  *    2.5e+04   6014 <strong>(Ld OB)</strong>   6014 <strong>(Ld OB)</strong>   1.000e-01   1.000e-01<br />0.000e+00&#160;&#160;    0.000e+00      blk_1/flop_capture/q ^ resetb</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236869"></a>[Fl&#160;&#160;  *    2.5e+04   5212 <strong>(Ld OB)</strong>   5241 <strong>(Ld OB)</strong>   5.950e-02   6.000e-02<br />0.000e+00&#160;&#160;    0.000e+00      blk_1/flop_capture/q ^ phi</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236870"></a>[Fl    *    5e+04     6480            6480          1.000e-01   1.000e-01<br />NA&#160;&#160;        NA                blk_1/flop_capture/ ti</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236871"></a>[Fl    *    5e+04     7459            7459          1.000e-01   1.000e-01<br />NA&#160;&#160;        NA                blk_1/flop_capture/te</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236872"></a>[Fl    *    2e+04     1.183e+04       1.222e+04     5.070e-02   5.400e-02<br />NA&#160;&#160;        NA                blk_1/flop_capture/d</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236873"></a>[Fl    *    2e+04     685.1           927.2         2.188e-01   3.036e-01<br />2.213e-01&#160;&#160; 2.2&#160;&#160;             15e-01 blk_1/data_inv/o ^ i</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236874"></a>[Fl    *    2.5e+04   362             362           1.000e-01   1.000e-01<br />2.738e-01&#160;&#160; 2.738e-01&#160;&#160;       blk_1/flop_launch/q ^ setb</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236875"></a>[Fl    *    2.5e+04   360.2           360.2         1.000e-01   1.000e-01<br />2.738e-01&#160;&#160; 2.738e-01&#160;&#160;       blk_1/flop_launch/q ^ resetb</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236876"></a>[Fl    *    2.5e+04   436.6           436.6         7.070e-02   7.090e-02<br />2.738e-01&#160;&#160; 2.738e-01&#160;&#160;       blk_1/flop_launch/q ^ phi</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236877"></a>[Fl    *    5e+04     6480            6480          1.000e-01   1.000e-01<br />NA&#160;&#160;        NA                blk_1/flop_launch/ti</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236878"></a>[Fl    *    5e+04     7459            7459          1.000e-01   1.000e-01<br />NA&#160;&#160;        NA                blk_1/flop_launch/te</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236879"></a>[Fl    *    5e+04     6480            6480          1.000e-01   l.000e-01<br />NA&#160;&#160;        NA                blk_1/flop_launch/ d</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236880"></a>[Fl    C    le+04     1286            1287          6.990e-02   7.020e-02<br />2.699e-01&#160;&#160; 2.699e-01&#160;&#160;       blk_1/clock_capture/o ^ i</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236881"></a>[Fl    C    le+04     1149            1150          6.990e-02   7.020e-02<br />3.214e-01&#160;&#160; 3.215e-01&#160;&#160;       blk_1/clock_launch/o ^ i</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2236843"></a>[Fl    C    le+04     1116            1116          1.000e-01   1.000e-01<br />3.163e-01&#160;&#160; 3.163e-01&#160;&#160;       blk_1/clk_common/o ^ i</pre>
+<h4>
+<a id="pgfId-2234774"></a><strong>Example 6</strong><a id="90192"></a></h4>
+
+<p>
+<a id="pgfId-2234776"></a>The following is a usage example of the <a href="../tempusCUI/set_design_rule_derate.html">set_design_rule_derate</a> command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2234831"></a>set_design_rule_derate [get_lib_pins *] 1.5</pre>
+
+<p>
+<a id="pgfId-2234832"></a>The given factor will be multiplied with the frequency, as shown below:</p>
+<p>
+<a id="pgfId-2234827"></a>Before this setting:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2234874"></a>[F]&#160;&#160; C&#160;&#160; le+04&#160;&#160; <strong>1286</strong>  1287   6.990e-02   7.020e-02   2.699e-01   2.699e-01<br />blk_1/clock_capture/o ^ i</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2234999"></a>[F]   C   le+04   1149  1150   6.990e-02   7.020e-02   3.214e-01   3.215e-01<br />blk_1/clock_launch/o ^ i</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2235011"></a>[F]   C   le+04   1116  1116   1.000e-01   1.000e-01   3.163e-01   3.163e-01<br />blk_1/clk_common/o ^ i</pre>
+
+<p>
+<a id="pgfId-2234880"></a>After this setting:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2240605"></a>--------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2240606"></a>Sta    Rem  Freq      minFreq      maxFreq     minSlew      maxSlew<br />minload&#160;&#160;        maxload          Arc/Pin</pre>
+
+<p>
+<a id="pgfId-2234870"></a>---------------------------------------------------------------------------------</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2240622"></a>[F]&#160;&#160; C&#160;&#160;   le+04     <strong>1929</strong>         1930        6.990e-02    7.020e-02<br />2.699e-01&#160;&#160;      2.699e-01        blk_1/clock_capture/o ^ i</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2240623"></a>[F]   C     le+04     1723         1724        6.990e-02    7.020e-02<br />3.214e-01&#160;&#160;      3.215e-01        blk_1/clock_launch/o ^ i</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2240624"></a>[F]   C     le+04     1116         1116        1.000e-01    1.000e-01<br />3.163e-01&#160;&#160;      3.163e-01        blk_1/clk_common/o ^ i</pre>
+
+<p>
+<a id="pgfId-2250412"></a>As you can observe, <code>minFreq</code> = <strong>1.5 * 1286 = 1929</strong></p>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_requiredinputscellem.html" id="prev" title="Required Inputs for Cell EM Analysis">Required Inputs for Cell EM An ...</a></em></b><b><em><a href="analysisandreporting_cellemfloweco.html" id="nex" title="ECO Flow Use Model">ECO Flow Use Model</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

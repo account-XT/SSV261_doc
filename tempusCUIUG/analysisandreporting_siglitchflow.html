@@ -1,0 +1,128 @@
+
+<html><head><title>SI Glitch Analysis Flow</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845199" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="SI Glitch Analysis Flow" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845199" />
+<meta name="NextFile" content="analysisandreporting_understandsianalysis.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_siglitchanalysis.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- SI Glitch Analysis Flow" />
+<meta name="Keywords" content="si glitch flow" />
+<meta name="topic_type" content="process" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Signal Integrity,SI Analysis,Stylus" />
+<meta name="prod_subfeature" content="SI Analysis, Signal Integrity" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_siglitchanalysis.html" title="SI Glitch Analysis - An Overview">SI Glitch Analysis - An Overvi ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_understandsianalysis.html" title="Understanding SI Glitch Analysis">Understanding SI Glitch Analys ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:siglitchflow" title="SI Glitch Analysis Flow"></a><h3>
+<a id="pgfId-1010700"></a><a id="57619"></a>SI Glitch Analysis Flow</h3>
+
+<p>
+<a id="pgfId-1010701"></a>The following figure shows the glitch noise analysis flow:</p>
+
+<p class="webflare-indent1"><strong>Figure -45
+<a id="pgfId-1010702"></a>SI Glitch Analysis Flow</strong></p>
+<p>
+<a id="pgfId-1010706"></a></p>
+<div class="webflare-div-image">
+<img width="222" height="316" src="images/analysisandreporting-47.gif" /></div>
+<h4>
+<a id="pgfId-1010707"></a>Sample Glitch Analysis Script</h4>
+
+<p>
+<a id="pgfId-1010708"></a>The following sample script shows the steps to perform glitch analysis:</p>
+<ul><li>
+<a id="pgfId-1010709"></a>Load the timing libraries (.lib) and noise data (cdB, ECSM-Noise, or CCS-Noise):<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1297616">
+<a id="pgfId-1297616"></a><a href="../tempusCUI/read_libs.html">read_libs</a> <code>typ.lib -cdb typ.cdB</code></pre></li><li>
+<a id="pgfId-1010711"></a>Schedule reading of a structural, gate-level verilog netlist:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1297619">
+<a id="pgfId-1297619"></a><a href="../tempusCUI/read_netlist.html">read_netlist</a> <code>top.v</code></pre></li><li>
+<a id="pgfId-1010713"></a>Set the top module name, and check for consistency between Verilog netlist and timing libraries:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1297622">
+<a id="pgfId-1297622"></a><a href="../tempusCUI/init_design.html">init_design</a> <code>top</code></pre></li><li>
+<a id="pgfId-1010715"></a>Set the proper technology node:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1297625">
+<a id="pgfId-1297625"></a><a href="../tempusCUI/set_db.html">set_db</a> <code>design_process_node 16</code></pre></li><li>
+<a id="pgfId-1010717"></a>Load the timing constraints:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1297628">
+<a id="pgfId-1297628"></a><a href="../tempusCUI/read_sdc.html">read_sdc</a> <code>constraints.sdc</code></pre></li><li>
+<a id="pgfId-1010719"></a>Load the cell parasitics:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1297631">
+<a id="pgfId-1297631"></a><a href="../tempusCUI/read_spef.html">read_spef</a> <code>top.spef.gz</code></pre></li><li>
+<a id="pgfId-1290049"></a>Enable signal integrity (SI) analysis.<br /><pre class="webflare-pre-block webflare-courier-new" id="#id3005712">
+<a id="pgfId-3005712"></a><a href="../tempusCUI/set_db.html">set_db<code> </code></a><a href="../tempusCUI/delaycal_Category_Attributes.html">delaycal_enable_si</a><a href="../tempusCUI/set_db.html"><code> true</code></a></pre></li><li>
+<a id="pgfId-1290056"></a>Perform glitch analysis and enable the glitch reports to be generated<br /><pre class="webflare-pre-block webflare-courier-new" id="#id3005719">
+<a id="pgfId-3005719"></a><a href="../tempusCUI/set_db.html">set_db<code> </code></a><a href="../tempusCUI/si_Category_Attributes.html">si_glitch_enable_report</a><a href="../tempusCUI/set_db.html"><code> true</code></a></pre></li><li>
+<a id="pgfId-1290063"></a>Enable glitch propagation:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id3005726">
+<a id="pgfId-3005726"></a><a href="../tempusCUI/set_db.html">set_db<code> </code></a><a href="../tempusCUI/si_Category_Attributes.html">si_enable_glitch_propagation</a><a href="../tempusCUI/set_db.html"><code> true</code></a></pre></li><li>
+<a id="pgfId-1010727"></a>Perform glitch analysis:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1297643">
+<a id="pgfId-1297643"></a><a href="../tempusCUI/update_glitch.html">update_glitch</a></pre></li><li>
+<a id="pgfId-1010729"></a>Generate SI glitch report:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1297653">
+<a id="pgfId-1297653"></a><a href="../tempusCUI/report_noise.html">report_noise</a> <code>-txtfile glitch.txt</code></pre></li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_siglitchanalysis.html" id="prev" title="SI Glitch Analysis - An Overview">SI Glitch Analysis - An Overvi ...</a></em></b><b><em><a href="analysisandreporting_understandsianalysis.html" id="nex" title="Understanding SI Glitch Analysis">Understanding SI Glitch Analys ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

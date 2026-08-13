@@ -1,0 +1,176 @@
+
+<html><head><title>set_max_capacitance</title>
+<meta name="page_sequence" content="20085000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287441" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_max_capacitance" />
+<meta name="Keywords" content="max capacitance,capacitance,capacitance limit,object list" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Constraints," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287441" />
+<meta name="NextFile" content="set_max_delay.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_logic_zero.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- set_max_capacitance" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="set_logic_zero.html" title="set_logic_zero">set_logic_zero</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_max_delay.html" title="set_max_delay">set_max_delay</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_max_capacitance</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>set_max_capacitance<span class="confluence-anchor-link" id="set_max_capacitance-set_max_capacitance"></span>
+    <span id="set_max_capacitance-set_max_capacitance"></span>&#xa0;<br />[-help]</code><br /><code><em>capacitance_limit</em></code><br /><code><em>object_list</em></code><br /><code> [-clock_path]</code><br /><code> [-data_path]</code><br /><code>[-fall]</code><br /><code> [-override]</code><br /><code> [-rise]</code></p>
+
+<p>Sets the maximum capacitance limit on the specified instance pin,&#xa0;ports of the top cell, the specified designs, and/or clock waveforms. The pins&#xa0;of cell instances of timing libraries will have their own maximum constraint.&#xa0;The software will pick the more aggressive value of the two.</p>
+
+<p>When set on a port, the total capacitance of the net connected to that port must be less than or equal to the specified limit. Maximum capacitance limits also come from library objects, which is the default maximum capacitance limit of libraries and the maximum capacitance limit on library cell pins. Pins in the design inherit the limits from libraries.</p>
+
+<p><strong>Note: </strong>The limit set on the top cell applies to its ports. Thus, if maximum capacitance limits are set on the top cell and its ports, the most constraining limit will apply to the ports.</p>
+
+<p>When limits are set on a clock waveform, you can use <code>-clock_path</code>, <code>-data_path</code>, <code>-rise</code>, and <code>-fall</code> parameters to provide more specifications.</p>
+
+<p>The <code>set_max_capacitance</code> constraint on clock objects will be honored only by the <code>report_constraint</code> command for DRV violations. The constraint will not be used in optimizations.</p>
+
+<p><span style="font-size: 20.0px;font-weight: bold;margin: 25.0pt 0 0 0;display: block;">Parameters&#xa0;</span></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-clock_path</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Applies the maximum capacitance constraint only to pins in the clock network of the clocks defined in the object list.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-data_path</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Applies the maximum capacitance constraint only to data path pins, where the path is launched by the clocks defined in the object list.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-fall</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Applies the maximum capacitance constraint only to falling capacitance.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-rise</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Applies the max capacitance constraint only to rising capacitance.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>capacitance_limit</em> </code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the value for the minimum capacitance limit. The limit must be greater than or equal to zero. The limit is in capacitance units from the target technology library.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code><em>object_ list</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a list of objects - ports, instance pins, library cell pins, designs, and/or clock waveforms.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-override</code></td>
+<td class="confluenceTd" colspan="1">
+<p>Overrides the capacitance limit from other sources, such as, library or constraints.</p>
+
+<p>This parameter can be used to force a specific constraint value for a specified list of instance pins/port/library cell pins - this overrides the maximum/minimum values set prior to this setting.</p>
+
+<p><br /></p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_max_capacitance-Examples">Examples</h4>
+
+<p>Here are some examples.</p>
+<ul><li>The following example sets a maximum capacitance limit of <code>1.2</code> units on all the ports of the top cell and a maximum capacitance limit of <code>0.5</code> units on the port named <code>d_out</code>: <br /><code>
+      <span>tempus &gt;&#xa0;</span>set_max_capacitance 1.2 [get_ports *] </code> <br /><code>
+      <span>tempus &gt;&#xa0;</span>set_max_capacitance 0.5 d_out</code></li></ul><ul><li>The following example uses the <code><a href="report_ports.html#report_ports-report_ports">report_ports</a></code> command to show the maximum capacitance limit set on ports:<br /><code>
+      <span>tempus &gt;&#xa0;</span>set_max_capacitance 0.9 [get_ports *] </code> <br /><code>
+      <span>tempus &gt;&#xa0;</span>report_ports -type port_cap_limit -pin [get_ports *]<br />
+      <br />
+    </code>The following report is displayed:<br />
+<p><code>----------------------------------------</code> <br /><code> Pin &#xa0; &#xa0;Dir &#xa0;Assertion &#xa0; &#xa0; &#xa0; Value</code> <br /><code> Name</code> <br /><code> ----------------------------------------</code> <br /><code> CLK2 &#xa0; IN &#xa0; port_cap_limit &#xa0;( : 0.900 )</code> <br /><code> CLK1 &#xa0; IN &#xa0; port_cap_limit &#xa0;( : 0.900 )</code> <br /><code> in2 &#xa0; &#xa0;IN &#xa0; port_cap_limit &#xa0;( : 0.900 )</code> <br /><code> in1 &#xa0; &#xa0;IN &#xa0; port_cap_limit &#xa0;( : 0.900 )</code> <br /><code> out2 &#xa0; OUT &#xa0;port_cap_limit &#xa0;( : 0.900 )</code> <br /><code> out1 &#xa0; OUT &#xa0;port_cap_limit &#xa0;( : 0.900 )</code> <br /><code> ----------------------------------------</code></p>
+</li></ul><h4 id="set_max_capacitance-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="get_ports.html">get_ports</a></code></li><li><code><a href="report_ports.html#report_ports-report_ports">report_ports</a></code></li><li><code><a href="reset_max_capacitance.html">reset_max_capacitance</a></code></li><li><code><a href="set_max_transition.html#set_max_transition-set_max_transition">set_max_transition</a></code></li><li><code><a href="set_max_fanout.html#set_max_fanout-set_max_fanout">set_max_fanout</a></code></li><li><a href="report_constraint.html"><code>report_constraint</code></a></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_logic_zero.html" id="prev" title="set_logic_zero">set_logic_zero</a></em></b><b><em><a href="set_max_delay.html" id="nex" title="set_max_delay">set_max_delay</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

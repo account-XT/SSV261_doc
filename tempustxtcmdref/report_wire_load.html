@@ -1,0 +1,184 @@
+
+<html><head><title>report_wire_load</title>
+<meta name="page_sequence" content="19109000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287366" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="report_wire_load" />
+<meta name="Keywords" content="selection type,wire load mode,wire load name" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Analysis,REPORTS," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287366" />
+<meta name="NextFile" content="reset_instance_library.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="report_timing_robustness.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- report_wire_load" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="report_timing_robustness.html" title="report_timing_robustness">report_timing_robustness</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="reset_instance_library.html" title="reset_instance_library">reset_instance_library</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>report_wire_load</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>
+    <code>report_wire_load<span class="confluence-anchor-link" id="report_wire_load-report_wire_load"></span>
+      <span id="report_wire_load-report_wire_load"></span><br />[-help] <br />[-inst <code>
+        <em>name_or_collection_of_hierarchical_instances</em>
+      </code>] <br />[-ports <code>
+        <em>name_or_collection_of_ports</em>
+      </code>] <br />[-late | -early] <br />[&gt; | &gt;&gt; <code>
+        <em>filename</em>
+      </code>]</code> <br />
+  </code></p>
+
+<p>Reports the wireload name, library, wire load mode, and selection type for all hierarchical instances in the design.</p>
+
+<p><strong>Note: </strong>To use the wireload model functionality, you must enable the <code>enable_wire_load_model_support</code> global variable using the following command:</p>
+
+<p><code>set_var enable_wire_load_model_support 1</code></p>
+<h4 id="report_wire_load-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" valign="top">
+<p><code>&gt;|&gt;&gt;</code> <code><em>filename</em>
+          </code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>When specified with <code>&gt;</code>, writes the report to the specified file name. If the file already exists, the software overwrites it.</p>
+
+<p>When specified with <code>&gt;&gt;</code>, writes the report to the specified file name. If the file already exists, the software concatenates the report to the end of the file.</p>
+
+<p>The <code>
+            <em>filename</em>
+          </code> parameter must be the last argument in the list.</p>
+
+<p><strong>Note: </strong>To write a compressed report, add the <code>.gz</code> extension to the file name.</p>
+
+<p><em>Default:</em> Report is displayed on standard output without being saved.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-early</code></p>
+</td>
+<td class="confluenceTd">
+<p>Reports the wireload model information for the best-case condition.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-inst</code> <code>
+            <em>name_or_collection_of_hierarchical_instances</em>
+          </code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the name of an instance or collection for which the <code>report_wire_load</code> command reports the wireload name, library, wire load mode, and selection type. The <code>report_wire_load</code> command also supports wildcard names such as U*.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-late</code></p>
+</td>
+<td class="confluenceTd">
+<p>Reports the wireload model information in the worst-case condition.</p>
+
+<p><em>Data_type</em>: bool, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-ports</code> <code><em>name_or_collection_of_ports</em>
+          </code></p>
+</td>
+<td class="confluenceTd">
+<p>Reports wireload information for the specified ports.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="report_wire_load-Examples">Examples</h4>
+<ul><li>The following example shows the default report when wireload mode is set to top: <br /><code>
+      <span>tempus&gt;</span>
+      <span>&#xa0;</span>report_wire_load</code> <br /><code>----------------------------------------------------</code> <br /><code>Design Name top_chip</code> <br /><code>Wire Load Mode top</code> <br /><br /><code>Instance Module WireLoadModel Library SelectionType<br />---------------------------------------------------<br />- top_chip model4 fast library-default<br />----------------------------------------------------</code></li></ul><ul><li>The following example shows the report when wireload mode is set to enclosed to report lower hierarchy: <br /><code>
+      <span>tempus&gt;</span>
+      <span>&#xa0;</span>set_wire_load_mode enclosed</code> <br /><code>
+      <span>tempus&gt;</span>
+      <span>&#xa0;</span>report_wire_load<br />----------------------------------------------------<br />Design Name top_chip<br />Wire Load Mode enclosed<br />Instance Module WireLoadModel Library SelctionType<br />----------------------------------------------------<br />- top_chip model4 fast library-default<br />U1 randr model4 fast library-default<br />U2 randr model4 fast library-default<br />----------------------------------------------------</code></li></ul><ul><li>The following example shows model assertions using the set_wire_load_model command the corresponding reports using the report_wire_load command: <br /><code>
+      <span>tempus&gt;</span>
+      <span>&#xa0;</span>set_wire_load_model -name model3</code> <br /><code>
+      <span>tempus&gt;</span>
+      <span>&#xa0;</span>report_wire_load</code> <br /><code>----------------------------------------------------<br />Design Name top_chip<br />Wire Load Mode enclosed</code> <br /><code>Instance Module WireLoadModel Library SelctionType<br />----------------------------------------------------<br />- top_chip model3 fast user-asserted<br />U1 randr model3 fast user-asserted<br />U2 randr model3 fast user-asserted<br />-----------------------------------------------------</code><br /><code>
+      <span>tempus&gt;</span>
+      <span>&#xa0;</span>set_wire_load_model -name model2 [get_cells U1]</code> <br /><code>
+      <span>tempus&gt;</span>
+      <span>&#xa0;</span>set_wire_load_model -name model4 [get_cells U2]</code> <br /><code>
+      <span>tempus&gt;</span>
+      <span>&#xa0;</span>report_wire_load</code> <br /><code>------------------------------------------------------<br />Design Name top_chip<br />Wire Load Mode enclosed</code> <br /><code>Instance Module WireLoadModel Library SelctionType<br />------------------------------------------------------<br />- top_chip model3 fast user-asserted<br />U1 randr model2 fast user-asserted<br />U2 randr model4 fast user-asserted<br />------------------------------------------------------</code></li></ul><ul><li>The following example shows the report including port information: <br /><code>
+      <span>tempus&gt;</span>
+      <span>&#xa0;</span>report_wire_load -ports [get_ports XYZ/A]</code> <br /><code>-------------------------------------------------------</code> <br /><code>Design Name &#xa0;&#xa0;randr</code> <br /><code>Wire Load Mode &#xa0;&#xa0;enclosed</code> <br /><code>Port&#xa0;&#xa0;&#xa0;&#xa0; Module WireLoadModel Library &#xa0;&#xa0;&#xa0;SelctionType</code> <br /><code>-------------------------------------------------------</code> <br /><code>P1&#xa0;&#xa0;&#xa0;&#xa0; randr model2&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;slow &#xa0;&#xa0;user-asserted</code> <br /><code>P2&#xa0;&#xa0;&#xa0;&#xa0; randr model4&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;slow &#xa0;&#xa0;user-asserted</code> <br /><code>-------------------------------------------------------</code></li></ul><h4 id="report_wire_load-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="set_wire_load_model.html">set_wire_load_model</a></code></li><li><code><a href="enable_wire_load_model_support.html">enable_wire_load_model_support</a></code></li><li><code><a href="set_analysis_mode.html">set_analysis_mode</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="report_timing_robustness.html" id="prev" title="report_timing_robustness">report_timing_robustness</a></em></b><b><em><a href="reset_instance_library.html" id="nex" title="reset_instance_library">reset_instance_library</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

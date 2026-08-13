@@ -1,0 +1,170 @@
+
+<html><head><title>Clock Path Pessimism Removal</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823908" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Clock Path Pessimism Removal" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823908" />
+<meta name="NextFile" content="analysisandreporting_aocvanalysis.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_timinganalysismodetypes.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Clock Path Pessimism Removal" />
+<meta name="Keywords" content="clock path pessimism removal" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Analysis,Timing Analysis Mode,REPORTS,Stylus" />
+<meta name="prod_subfeature" content="Timing Analysis, Timing Analysis Mode, Reports" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_timinganalysismodetypes.html" title="Specifying Timing Analysis Mode Types">Specifying Timing Analysis Mod ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_aocvanalysis.html" title="Advanced On-Chip Variation (AOCV) Analysis">Advanced On-Chip Variation (AO ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:clockpathpessimismremoval" title="Clock Path Pessimism Removal"></a><h3>
+<a id="pgfId-1012209"></a><a id="36285"></a>Clock Path Pessimism Removal</h3>
+
+<p>
+<a id="pgfId-1012210"></a>Clock Path Pessimism Removal (CPPR) is the process of identifying and removing pessimism introduced in slack reports for clock paths when launch and capture clock paths have a segment in common.</p>
+<p>
+<a id="pgfId-1012211"></a>You can introduce early or late delay variations by using the <a href="../tempustxtcmdref/set_analysis_mode.html">set_analysis_mode</a><code> -analysisType onChipVariation</code> command or by using the <code><a actuate="user" class="URL" href="../tempustxtcmdref/set_timing_derate.html" show="replace" xml:link="simple">set_timing_derate</a></code> command for early and late clock paths. In CPPR calculations, the difference between late and early delays (for the common clock segment between launch and capture clock path) is calculated first and then this number is adjusted in the slack calculations to remove the pessimism, which existed because of considering common clock path to be both late and early at the same time. To remove this pessimism in propagated clock mode, you can use the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053429"></a>set_analysis_mode -cppr true</pre>
+
+<p>
+<a id="pgfId-1012213"></a>Consider the following figure for setup check between flops FF1 and FF2.</p>
+
+<p class="webflare-indent1"><strong>Figure -65
+<a id="pgfId-1012214"></a>Signal Path</strong></p>
+<p>
+<a id="pgfId-1012218"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="321" src="images/analysisandreporting-69.gif" /></div>
+
+<p>
+<a id="pgfId-1012219"></a>The setup check equation for the example in the figure above with pessimism (without CPPR) is as follows:</p>
+<p>
+<a id="pgfId-1012220"></a>t<sub>1max</sub> + t<sub>2max</sub> + t<sub>3max </sub>&lt;= t<sub>4min</sub> + t<sub>cp</sub> - t<sub>su</sub></p>
+<p>
+<a id="pgfId-1012221"></a>where t<sub>cp</sub> is the clock period and t<sub>su</sub> is the setup requirement at D pin of flip-flop FF2.</p>
+<p>
+<a id="pgfId-1012222"></a>The above setup check equation incorrectly implies that the common clock network, B1, can simultaneously use maximum delay for the launch clock late path (clock source to FF1/CLK) and minimum delay for the capture clock early path (clock source to FF2/CLK). Using the CPPR to remove this pessimism, the setup check equation is as follows:</p>
+<p>
+<a id="pgfId-1012223"></a>t<sub>1max</sub> + t<sub>2max</sub> + t<sub>3max</sub> &lt;= t<sub>4min</sub> + t<sub>cp</sub> - t<sub>su</sub> + t<sub>cppr</sub></p>
+<p>
+<a id="pgfId-1012224"></a>where t<sub>cppr</sub> is the difference in the maximum and minimum delay from the clock source to the branching node.</p>
+<p>
+<a id="pgfId-1012225"></a>Similarly, hold check equation using CPPR is as follows:</p>
+<p>
+<a id="pgfId-1012226"></a>t<sub>1min</sub> + t<sub>2min</sub> + t<sub>3min</sub> + t<sub>cppr</sub> &lt;= t<sub>4max</sub> + t<sub>H</sub></p>
+<p>
+<a id="pgfId-1012227"></a>where t<sub>H</sub> is the hold requirement at D pin of flop FF2.</p>
+
+<h4>
+<a id="pgfId-1012229"></a><a id="47106"></a>Clock Re-convergence and CPPR</h4>
+
+<p>
+<a id="pgfId-1012230"></a>If a design contains re-convergent logic on the clock path, then the timing analysis software might assume certain pessimism while calculating slack. The following figure shows a circuit in which timing analysis is performed in single analysis mode.</p>
+
+<p class="webflare-indent1"><strong>Figure -66
+<a id="pgfId-1012231"></a>Illustration of Clock Re-convergence</strong></p>
+<p>
+<a id="pgfId-1012235"></a></p>
+<div class="webflare-div-image">
+<img width="654" height="313" src="images/analysisandreporting-70.gif" /></div>
+
+<p>
+<a id="pgfId-1012236"></a>In this case, if the <code><a actuate="user" class="URL" href="../tempustxtcmdref/set_case_analysis.html" show="replace" xml:link="simple">set_case_analysis</a></code> command has not been set at point S of the multiplexer, the timing analysis software will assume different delay values for early and late paths. For example, if common early clock path from the clock source to the common clock point has a delay of 0.5ns, and the same common late clock path has delay of 1ns, then a pessimism equal to 0.5ns is introduced in the design. The above pessimism is not specific to single analysis mode only; it also applies to best-case/worst-case and on-chip variation methodologies. You can use CPPR to remove pessimism introduced due to re-convergence.</p>
+
+<h4>
+<a id="pgfId-1012238"></a><a id="92153"></a>Supported CPP<a id="TimingAnalysisModes-SupportedCPPRGlobalVariables"></a>R Global Variables</h4>
+
+<p>
+<a id="pgfId-1012239"></a>The Tempus software uses multiple global variables to control CPPR behavior. These can be changed based on the user requirements. When these global variables are changed, there can be changes in common clock path pessimism removal in terms of accuracy, common point selection, SI behavior, and so on.</p>
+<p>
+<a id="pgfId-1012240"></a>Some of these global variables include:</p>
+<ul><li>
+<a id="pgfId-3053461"></a><a href="../tempustxtcmdref/timing_cppr_remove_clock_to_data_crp.html">timing_cppr_remove_clock_to_data_crp</a></li><li>
+<a id="pgfId-3053463"></a><a href="../tempustxtcmdref/timing_cppr_self_loop_mode.html">timing_cppr_self_loop_mode</a></li><li>
+<a id="pgfId-3053465"></a><a href="../tempustxtcmdref/timing_cppr_skip_clock_reconvergence.html">timing_cppr_skip_clock_reconvergence</a></li><li>
+<a id="pgfId-3053467"></a><a href="../tempustxtcmdref/timing_cppr_threshold_ps.html">timing_cppr_threshold_ps</a></li><li>
+<a id="pgfId-3053469"></a><a href="../tempustxtcmdref/timing_cppr_transition_sense.html">timing_cppr_transition_sense</a></li><li>
+<a id="pgfId-3053471"></a><a href="../tempustxtcmdref/timing_enable_pessimistic_cppr_for_reconvergent_clock_paths.html">timing_enable_pessimistic_cppr_for_reconvergent_clock_paths</a></li><li>
+<a id="pgfId-3053473"></a><a href="../tempustxtcmdref/timing_enable_si_cppr.html">timing_enable_si_cppr</a></li><li>
+<a id="pgfId-3053475"></a><a href="../tempustxtcmdref/timing_cppr_opposite_edge_mean_scale_factor.html">timing_cppr_opposite_edge_mean_scale_factor</a></li><li>
+<a id="pgfId-3053477"></a><a href="../tempustxtcmdref/timing_cppr_opposite_edge_sigma_scale_factor.html">timing_cppr_opposite_edge_sigma_scale_factor</a></li></ul>
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-1012250"></a><code></code>Tempus uses a default threshold of 20ps during pessimism removal. This means that 20ps of uncertainty remains in the analysis. To set the threshold value you can use the <code>timing_cppr_threshold_ps</code> global variable. When you set this global variable to a specified value, all the paths may be reported without having pessimism removed by the given value of the global variable. During SI analysis, the CPPR behavior for setup and hold checks can be controlled by setting the <code>timing_enable_si_cppr</code> global variable.</p>
+
+<h3>
+<a id="pgfId-1012252"></a><a id="91734"></a>Timing Analysis Results Before and After CPPR</h3>
+
+<p>
+<a id="pgfId-1012253"></a>The following example shows a full clock path timing report generated before CPPR analysis. The timing slack is 7.388 without any CPPR adjustments:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053502"></a>Path 1: MET Setup Check with Pin ff2/CK <br />Endpoint: ff2/D (v) checked with leading edge of &#39;clk&#39;<br />Beginpoint: ff1/Q (v) triggered by leading edge of &#39;clk&#39;<br />Path Groups: {clk}<br />Other End Arrival Time     0.972<br />- Setup                    0.335<br />+ Phase Shift             10.000<br />= Required Time           10.637<br />- Arrival Time             3.249<br />= Slack Time               7.388<br />Clock Rise Edge                0.000<br />= Beginpoint Arrival Time      0.000<br />Timing Path:<br />-------------------------------------------------------------------<br />Instance    Cell        Arc            Delay      Arrival   Required <br />                                                  Time      Time <br />-------------------------------------------------------------------<br />                        clk ^          0.000      7.388<br />c1          CLKBUFX1    A ^ -&gt; Y ^     0.312      0.312      7.700<br />c2          CLKBUFX1    A ^ -&gt; Y ^     0.343      0.655      8.042<br />c3          CLKBUFX1    A ^ -&gt; Y ^     0.175      0.829      8.217<br />c4          CLKBUFX1    A ^ -&gt; Y ^     0.126      0.956      8.343<br />c5          CLKBUFX1    A ^ -&gt; Y ^     0.152      1.108      8.496<br />mux1        MX2X1       B ^ -&gt; Y ^     0.211      1.319      8.706<br />cp11        CLKBUFX1    A ^ -&gt; Y ^     0.146      1.465      8.852<br />cp12        CLKBUFX1    A ^ -&gt; Y ^     0.131      1.596      8.983<br />cp13        CLKBUFX1    A ^ -&gt; Y ^     0.157      1.752      9.140<br />ff1         DFFHQX1     CK ^ -&gt; Q v    0.422      2.175      9.562<br />u2          BUFX1       A v -&gt; Y v     0.309      2.483      9.871<br />u4          BUFX1       A v -&gt; Y v     0.279      2.762      10.150<br />u5          BUFX1       A v -&gt; Y v     0.258      3.020      10.408<br />u6          BUFX1       A v -&gt; Y v     0.228      3.248      10.636<br />ff2&#160;&#160;       DFFHQX1     D v            0.001      3.249      10.637</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053503"></a>-------------------------------------------------------------------<br />Clock Rise Edge 0.000<br />= Beginpoint Arrival Time 0.000<br />Other End Path:<br />--------------------------------------------------------------------<br />Instance    Cell         Arc          Delay      Arrival     Required <br />                                                 Time        Time <br />--------------------------------------------------------------------<br />                        clk ^                    0.000       -7.388<br />c1          CLKBUFX1    A ^ -&gt; Y ^    0.124      0.124       -7.264<br />c2          CLKBUFX1    A ^ -&gt; Y ^    0.160      0.284       -7.103<br />cp21        CLKBUFX1    A ^ -&gt; Y ^    0.150      0.434       -6.954<br />cp22        CLKBUFX1    A ^ -&gt; Y ^    0.133      0.566       -6.821<br />cp23        CLKBUFX1    A ^ -&gt; Y ^    0.120      0.687       -6.701<br />cp24        CLKBUFX1    A ^ -&gt; Y ^    0.112      0.799       -6.589<br />cp25        CLKBUFX1    A ^ -&gt; Y ^    0.093      0.891       -6.496<br />cp26        CLKBUFX1    A ^ -&gt; Y ^    0.081      0.972       -6.416<br />ff2         DFFHQX1     CK ^          0.000      0.972       -6.416<br />---------------------------------------------------------------------</pre>
+
+<p>
+<a id="pgfId-1012256"></a>When CPPR adjustment is made, the timing slack improvement is seen as pessimism and is displayed as &#8220;CPPR Adjustment&#8221; in the timing report. </p>
+<p>
+<a id="pgfId-1094594"></a>In the example given below, &#8220;c2&#8221; is a common clock point after which the clock diverges:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053508"></a>Path 1: MET Setup Check with Pin ff2/CK <br />Endpoint: ff2/D (v) checked with leading edge of &#39;clk&#39;<br />Beginpoint: ff1/Q (v) triggered by leading edge of &#39;clk&#39;<br />Path Groups: {clk}<br />Other End Arrival Time       0.972<br />- Setup                      0.335<br />+ Phase Shift               10.000<br />+ CPPR Adjustment            0.370<br />= Required Time             11.008<br />- Arrival Time               3.249<br />= Slack Time                 7.758<br />Clock Rise Edge                   0.000<br />= Beginpoint Arrival Time         0.000<br />Timing Path:<br />---------------------------------------------------------------------<br />Instance    Cell         Arc          Delay       Arrival     Required <br />                                                  Time        Time <br />---------------------------------------------------------------------<br />                         clk ^                    0.000       7.758<br />c1          CLKBUFX1     A ^ -&gt; Y ^    0.312      0.312       8.070<br />c2          CLKBUFX1     A ^ -&gt; Y ^    0.343      0.655       8.413<br />c3          CLKBUFX1     A ^ -&gt; Y ^    0.175      0.829       8.588<br />c4          CLKBUFX1     A ^ -&gt; Y ^    0.126      0.956       8.714<br />c5          CLKBUFX1     A ^ -&gt; Y ^    0.152      1.108       8.866<br />mux1        MX2X1        B ^ -&gt; Y ^    0.211      1.319       9.077<br />cp11        CLKBUFX1     A ^ -&gt; Y ^    0.146      1.465       9.223<br />cp12        CLKBUFX1     A ^ -&gt; Y ^    0.131      1.596       9.354<br />cp13        CLKBUFX1     A ^ -&gt; Y ^    0.157      1.752       9.511<br />ff1         DFFHQX1      CK ^ -&gt; Q v   0.422      2.175       9.933<br />u2          BUFX1        A v -&gt; Y v    0.309      2.483       10.242<br />u4          BUFX1        A v -&gt; Y v    0.279      2.762       10.520<br />u5          BUFX1        A v -&gt; Y v    0.258      3.020       10.778<br />u6          BUFX1        A v -&gt; Y v    0.228      3.248       11.007<br />ff2         DFFHQX1      D v           0.001      3.249       11.008<br />--------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053509"></a>Clock Rise Edge 0.000<br />= Beginpoint Arrival Time 0.000<br />Other End Path:<br />----------------------------------------------------------------------<br />Instance    Cell         Arc           Delay      Arrival     Required <br />                                                  Time        Time <br />---------------------------------------------------------------------<br />                         clk ^                    0.000       -7.758<br />c1          CLKBUFX1     A ^ -&gt; Y ^    0.124      0.124       -7.634<br />c2          CLKBUFX1     A ^ -&gt; Y ^    0.160      0.284       -7.474<br />cp21        CLKBUFX1     A ^ -&gt; Y ^    0.150      0.434       -7.325<br />cp22        CLKBUFX1     A ^ -&gt; Y ^    0.133      0.566       -7.192<br />cp23        CLKBUFX1     A ^ -&gt; Y ^    0.120      0.687       -7.072<br />cp24        CLKBUFX1     A ^ -&gt; Y ^    0.112      0.799       -6.960<br />cp25        CLKBUFX1     A ^ -&gt; Y ^    0.093      0.891       -6.867<br />cp26        CLKBUFX1     A ^ -&gt; Y ^    0.081      0.972       -6.786<br />ff2         DFFHQX1      CK ^          0.000      0.972       -6.786<br />--------------------------------------------------------------------</pre>
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_timinganalysismodetypes.html" id="prev" title="Specifying Timing Analysis Mode Types">Specifying Timing Analysis Mod ...</a></em></b><b><em><a href="analysisandreporting_aocvanalysis.html" id="nex" title="Advanced On-Chip Variation (AOCV) Analysis">Advanced On-Chip Variation (AO ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

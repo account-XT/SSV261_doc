@@ -1,0 +1,132 @@
+
+<html><head><title>Stylus Common UI Metrics</title>
+<meta name="page_sequence" content="20001000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="leenap" />
+<meta name="CreateDate" content="2026-03-26" />
+<meta name="CreateTime" content="1774530253" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Stylus Common UI Migration Guide" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Migration Guide" />
+<meta name="DocType" content="Migration" />
+<meta name="FileTitle" content="Stylus Common UI Metrics" />
+<meta name="Keywords" content="metrics,Metric Infrastructure,Unified metrics,get_metric,set_metric,metric values" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Metrics," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusMIGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-03-26" />
+<meta name="ModifiedTime" content="1774530253" />
+<meta name="NextFile" content="Metric_Commands.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Metrics.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Migration Guide -- Stylus Common UI Metrics" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="innovusCUIMig261" />
+<meta name="confluence-version" content="7.19.19" />
+<meta name="ecms-plugin-version" content="04.21.019" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusMIGcomTOC.html">Contents</a></li><li><a class="prev" href="Metrics.html" title="Metrics">Metrics</a></li><li style="float: right;"><a class="viewPrint" href="voltusMIGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Metric_Commands.html" title="Metric_Commands">Metric_Commands</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Migration Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Stylus Common UI Metrics</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>Unified Metrics (UM) is a system integrated with some Cadence tools that automatically delivers data about the design and run to you. UM provides functionality to:</p>
+<ul><li>Stream data from the reports and algorithms.</li><li>Collect and organize the stream data into a structured form.</li><li>Display the data in a Simple Unified Metrics file&#xa0;or the Advanced Unified Metrics server.<em><br /></em></li></ul>
+<p>Currently, the primary digital flow tools, Genus, Innovus, Voltus, and Tempus are UM-enabled as an integral part of the Stylus Common UI feature across these tools.</p>
+
+<p><strong>Stylus Common UI Metric Infrastructure</strong></p>
+<ul><li>In Common UI, metrics are captured and stored in a file format common to various tools, such as Innovus and RC.</li></ul><ul><li>There are common sets of metrics that are captured consistently in different tools as well as tool-specific metrics.</li><li>The metrics file/database can be used to generate reports/graphs in various formats and can be compared against other runs.</li><li>
+<p>Metrics can be queried using the <code><span class="fontredcadence">get_metric</span></code>&#xa0;command and are written to a &lt;design&gt;.metrics file in the Innovus database directory as part of&#xa0;<code><span class="fontredcadence"> write_db</span></code>.</p>
+
+<p>Using the Common UI metric infrastructure, you can define and capture metric snapshots, using the&#xa0;<code><span class="fontredcadence">create_snapshot</span></code><code></code>&#xa0;command, at specific points in the flow such that metric extraction is not required, and/or timing/power analysis will be calculated at the point the snapshot is saved.</p>
+</li><li>Timing/power metrics are reported based on the last calculated value. You need to ensure that the metrics are updated prior to saving the metric snapshot. All commands that save metrics call <code>create_snapshot</code> to save metrics in a consistent manner.</li><li>Because this data will get saved as part of the database (during <code><span>write_db</span></code>), it can be used across multiple runs for building design project summary pages.</li></ul><div class="line number1 index0 alt2"><div class="line number12 index11 alt1">
+<p><br /></p>
+
+<p><strong>Metrics Overview</strong></p>
+
+<p>A metric is the core representative of a piece of data. A metric has a&#xa0;name&#xa0;and a&#xa0;value. The value should have an SI unit specified wherever possible. The TCL command for setting a metric is <code><span class="fontredcadence">set_metric</span></code>.</p>
+<ul><li class="line number1 index0 alt2">The following command would set the value of the worst negative setup slack (all path groups) to 0.100 ns.<br /><code class="java plain">set_metric -name timing.setup.wns -value&#xa0;{</code><code class="java value">0.100</code><code class="java plain">ns}<br />&#xa0;</code></li><li class="line number3 index2 alt2">The following commands would set the value of the total area of the design to 100 um.<br /><code class="java plain">set_metric -name design.area -value {</code><code class="java value">100</code><code class="java plain">um}</code></li></ul><br />You can get a metric using the <code>get_metric</code>&#xa0;command.<ul><li>
+<p>The following command would get the value of the worst negative setup slack (all path groups), which is set to 0.100 ns.</p>
+
+<p><code><span>% get_metric -name timing.setup.wns<br /></span>0.100 ns</code></p>
+</li></ul>
+<p><strong>Metric Names</strong></p>
+
+<p>Metric names are standardized across the tools so that the same name will contain the same data. This means that each tool will populate a metric with a value that represents the same semantic value. This value can be compared across the runs.&#xa0;The names are look hierarchical with the use of the &quot;.&quot;. Use of &quot;.&quot; allows grouping common metrics through their names. For example, consider the following metric names and how they could be represented as a hierarchy.</p>
+
+<p><span class="confluence-embedded-file-wrapper"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/712492776/712492782.png" data-linked-resource-container-id="712492776" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="MetricHierarchy.png" data-linked-resource-id="712492782" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/712492776/712492782.png" /></span></p>
+
+<p><strong>Metric Values</strong></p>
+
+<p>Metric values can be of many types but are most often a number.&#xa0;Wherever possible, the unit should be defined so that the metric display can always show the values in the same units. This will prevent different tools from producing numbers in different units.</p>
+<h4 id="StylusCommonUIMetrics-RelatedInformation" style="text-align: left;">Related Information</h4>
+<ul><li><code><a href="Metric_Commands.html">Metric Commands</a></code></li><li><code><a href="Metric_Object_Definition.html">Metric Object Definition</a></code></li><li><code><a href="Snapshots.html">Snapshots</a></code></li><li><code><a href="Snapshots_Hierarchy_and_Inheritance.html">Snapshots Hierarchy and Inheritance</a></code></li><li><code><a href="Streaming_Metrics.html">Streaming Metrics</a></code></li></ul>
+<p><code></code></p>
+
+<p></p>
+</div>
+</div>
+<div align="center">
+<p><br /></p>
+</div>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Metrics.html" id="prev" title="Metrics">Metrics</a></em></b><b><em><a href="Metric_Commands.html" id="nex" title="Metric_Commands">Metric_Commands</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

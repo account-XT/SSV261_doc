@@ -1,0 +1,151 @@
+
+<html><head><title>Effects of Manufacturing in Power-Grid Extraction</title>
+<meta name="page_sequence" content="23023000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666157" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Effects of Manufacturing in Power-Grid Extraction" />
+<meta name="Keywords" content="power-grid,extraction,resistivity,erosion,resistance,capacitance" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666157" />
+<meta name="NextFile" content="Electromigration__EM_.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Static_IR_Drop.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Effects of Manufacturing in Power-Grid Extraction" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Static_IR_Drop.html" title="Static_IR_Drop">Static_IR_Drop</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Electromigration__EM_.html" title="Electromigration__EM_">Electromigration__EM_</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Effects of Manufacturing in Power-Grid Extraction</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="EffectsofManufacturinginPowerGridExtraction-80574"></span></p>
+
+<p>The extractor embedded in Voltus IC Power Integrity Solution can include the effects of manufacturing on resistance, capacitance, or both in the extraction results. In copper processes and processes at or below 130 nanometers, the manufacturing steps of resist, lithography, etching, and chemical mechanical polishing (CMP) result in differences between the layout drawn by designers and the manufactured design. Earlier processes exhibited minor effective changes in a wire&#39;s characteristics, such as a change of wire width resulting from a trapezoidal wire shape. Copper processes also exhibit a trapezoidal effect, although more pronounced. In addition, copper processes also exhibit more significant variations in wire width and thickness with respect to the drawn layout.</p>
+
+<p>Accurate prediction of circuit behavior in deep submicron silicon requires the modeling of these manufacturing effects. In the past, it was difficult to obtain measurements and specifications of these manufacturing effects, so they were generally represented by process variations. As consistent sources of these variations have been identified, extraction and analysis tools have been developed that include not only accuracy, capacity, and performance, but models for these deep submicron effects. With each new process generation, the number of such models is expected to increase.</p>
+
+<p>The manufacturing effects on a wire that cause variation from the drawn wire are wire-edge enlargement, resistivity as a function of wire width and erosion.</p>
+<ul><li>Wire-edge enlargement refers to the effective change to a wire&#39;s width as a function of its width and spacing to its neighbors, because of its optical proximity to neighboring wires.</li><li>Resistivity as a function of a wire&#39;s width refers to the effective variations in a wire&#39;s resistivity because of dishing, slotting, and cladding thickness.</li><li>Erosion refers to the change in a wire&#39;s thickness as a function of metal density in a portion of a chip. The Fire &amp; Ice ZX extractor computes the manufactured dimensions of a wire (width and thickness) and applies parasitic models to the resulting wire.</li></ul>
+<p>These effects are described in detail:</p>
+
+<p><strong>Wire-Edge Enlargement</strong></p>
+
+<p>Before manufacturing, reticle enhancement technologies (RET), such as optical proximity correction (OPC) and phase shift masks (PSM), are employed to help create the correct dimensions on silicon from the drawn layout. Even with the use of these advanced techniques, the manufacturing process contains optical effects that result in systematic wire width variations that must be accounted for in nanometer designs.</p>
+
+<p>Basically, the coherent light source that is used to expose a mask onto the wafer creates diffraction patterns around the edges of the mask geometries. These patterns cause a variation in the exposure, which eventually results in a variation of the spacing, and therefore the width, of the wires.</p>
+
+<p>Foundries usually focus the lithographic equipment to allow an increase in the width of wires only to avoid a reduction in wire width that may cause fatal open circuits. The size of the width increase is influenced by the width of the wire in question, its proximity to neighboring wires, and the size and spacing of the neighboring wires. The following diagram illustrates the results of this wire-edge enlargement:</p>
+
+<p><br /></p>
+<div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481266/732481268.gif" data-linked-resource-container-id="732481266" data-linked-resource-container-version="1" data-linked-resource-content-type="image/gif" data-linked-resource-default-alias="static-49.gif" data-linked-resource-id="732481268" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481266/732481268.gif" tabindex="0" width="678" /></span></div>
+
+<p>The spacing and width of the neighboring wire may enlarge each wire edge by a different amount.</p>
+
+<p>Resistivity as a Function of Width (R<sub><strong>s</strong></sub> = f(W<sub><strong>s</strong></sub>) )</p>
+
+<p>Variation in resistivity is caused by a number of phenomena. Copper is a softer material than the dielectric in which it is embedded. As a result, the polishing of the wafer during the CMP process has a tendency to remove a little extra copper from the top of the wire. This effect is called dishing because of the shape of the resulting wire top. The effect becomes more pronounced as the wire width increases. This effect is shown in exaggerated form in (A) in the following figure (Dishing with Erosion and Without Erosion):</p>
+
+<p><br /></p>
+<div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481266/732481267.gif" data-linked-resource-container-id="732481266" data-linked-resource-container-version="1" data-linked-resource-content-type="image/gif" data-linked-resource-default-alias="static-50.gif" data-linked-resource-id="732481267" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481266/732481267.gif" tabindex="0" width="678" /></span></div>
+
+<p>To reduce the effect of dishing on wide wires, small holes, or slots, can be inserted at regular intervals in wide wires. These slots insert a form of hard &quot;posts&quot; in the wire so that the CMP process removes less copper.&#xa0;&#xa0;This technique reduces the dishing, as well as the effective resistivity.&#xa0;&#xa0;</p>
+
+<p>Another contributor to resistivity variation is the cladding in copper wires. Cladding is the material grown around the sides and bottom of copper wires to protect them from chemical reactions with the dielectric material. This cladding is illustrated in gray in the above diagram.&#xa0;&#xa0;The thickness of the cladding on the sides and bottoms of wires also varies with the width of a wire. Because cladding has a much higher resistance than copper, it impacts the effective resistivity of copper wires. This effect is more pronounced in the narrowest wires.</p>
+
+<p>The combination of the effects of dishing, slotting, and cladding thickness is modeled by the wire resistivity as a function of the wire width in silicon. The drawn width of a wire is not representative of the silicon width of a wire after wire-edge enlargement effects are considered.</p>
+
+<p><strong>Erosion</strong></p>
+
+<p>Erosion is the wearing away of the top of the metal by the CMP process. Dishing is limited to a single wire, but erosion impacts a large area of the wafer. It is caused by the varying density of metal across the die or wafer.</p>
+
+<p>Variations in metal density cause the CMP process to over-polish areas of high metal density compared to areas of low metal density, because the amount of harder dielectric varies with the metal density. High metal density is associated with low dielectric density, and vice-versa, and this affects the general hardness of an area. The impact of metal density on erosion is illustrated in an exaggerated form in the diagram Dishing with Erosion and Without Erosion in the &quot;Resistivity as a Function of Width&quot; section. (A) shows dishing without erosion, and (B) shows dishing with erosion.</p>
+
+<p>The impact of erosion on a design can be quite significant. Measurements have shown that high metal-density areas can suffer up to a 30 percent reduction in metal thickness.</p>
+
+<p>Dishing with Erosion and Without Erosion also illustrates an important difference between dishing and erosion. Erosion has a greater impact on capacitance values than dishing. The sides of a wire with dishing effects are of the desired thickness. But erosion affects the thickness of the wire edges, causing a decrease in lateral coupling capacitance.</p>
+
+<p>In order to minimize erosion, most manufacturers have established metal density rules that force a more consistent density of metal (and therefore of dielectric) throughout a design. Although these rules help to minimize the impact of erosion, extraction tools must model erosion for nanometer designs.</p>
+
+<p><strong>Metal Fill</strong></p>
+
+<p>As noted previously, the thickness of wires after CMP varies as a function of the density of metal in an area. In the ideal case, all layers of the entire chip would have a uniform density of about 50 percent (effectively, minimum width and spaced wires), but this is not possible in practice. Extreme ranges of density may have highly non-linear wire thickness.&#xa0;&#xa0;Therefore, thickness variation is managed to some extent through design rules that require all areas of a chip to have densities greater than a specified amount, such as 20 percent, and less than another amount, such as 80 percent. It is common for portions of a design on a specific layer to have a very low density of metal in wires. To increase the overall density of metal in these areas, pieces of metal are inserted in the layout that have no logical function in the circuit but serve only to increase the density of metal. These pieces of metal are called metal fill. The use of metal fill can vary in terms of the size, shape, spacing of the pieces, and whether they are connected to electrical nets in the design, such as VDD or VSS.</p>
+
+<p>In the past, metal fill was inserted at the manufacturing stage of a tapeout. However, since inserted metal fill can influence the resistance and capacitance parasitics of wires in the design, it is now necessary to generate metal fill in design tools and to model the impact of metal fill in parasitic extraction tools. In a typical densely routed design, metal fill has little impact on wire capacitance. In the worst case, however, metal fill can vary wire capacitance by more than 100 percent. Floating metal fill, which refers to those pieces not connected to electrical nets of the design, contributes less to overall net capacitance but can increase the magnitude of coupled capacitance to other nets. The implementation style of the metal fill can therefore have an impact on timing and signal integrity, so it must be modeled in extraction.</p>
+
+<p>You can choose two types of metal fill:</p>
+<ul><li>Grounded, which has a fixed electrical charge. Typically, grounded metal has a higher capacitance.</li><li>Floating, which has no fixed electrical charge</li></ul>
+<p>Metal fill is usually specified in the input DEF file. If the metal fill in the DEF file is incomplete or otherwise unsatisfactory, you can import the metal fill from an external GDSII file, frequently obtained from a foundry. When you use this GDSII file, Fire &amp; Ice ZX ignores the metal fill polygons in the input DEF file.</p>
+<h4 id="EffectsofManufacturinginPowerGridExtraction-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Concepts_in_IR_Drop_and_Ground_Bounce.html">Concepts in IR Drop and Ground Bounce</a></li><li><a href="IR_Drop_and_Ground_Bounce.html">IR Drop and Ground Bounce</a></li><li><a href="Electromigration__EM_.html">Electromigration (EM)</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Static_IR_Drop.html" id="prev" title="Static_IR_Drop">Static_IR_Drop</a></em></b><b><em><a href="Electromigration__EM_.html" id="nex" title="Electromigration__EM_">Electromigration__EM_</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

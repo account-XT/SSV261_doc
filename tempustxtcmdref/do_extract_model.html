@@ -1,0 +1,379 @@
+
+<html><head><title>do_extract_model</title>
+<meta name="page_sequence" content="24001002" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287506" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="do_extract_model" />
+<meta name="Keywords" content="build timing model,liberty format model,extract model" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Timing Modeling," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287506" />
+<meta name="NextFile" content="merge_model_timing.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="compare_model_timing.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- do_extract_model" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="compare_model_timing.html" title="compare_model_timing">compare_model_timing</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="merge_model_timing.html" title="merge_model_timing">merge_model_timing</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>do_extract_model</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>do_extract_model<span class="confluence-anchor-link" id="do_extract_model-do_extract_model"></span><span id="do_extract_model-do_extract_model"></span> <br />[-help]<br />[-abs_tol_val <em>float</em>]<br />[-abs_tol_val_optimistic <em>float</em>]<br />[-abs_tol_val_pessimistic <em>float</em>]<br /><span>[-lib_name&#xa0;</span><code><em>lib_name</em></code><span>]&#xa0;</span><br /><span>[-cell_name&#xa0;</span><code><em>cell_name</em></code><span>]&#xa0;</span><br /><span>[-check]</span><br /><span>[-clock_slews {</span><code><em>clk_slew1 clk_slew2 ...</em></code><span>}]</span><br /><span>[-format&#xa0;</span><em>string</em><span>]</span><br /><span>[-include_aocv_weights]<br />[-include_power]</span><br /><span>[-input_slews {</span><code><em>input_slew1 input_slew2 ...</em></code><span>}]&#xa0;</span><br /><span>[-output_loads {</span><code><em>output_load1 output_load2 ...</em></code><span>}]&#xa0;</span><br /><span>[-precision&#xa0;</span><code><em>value</em></code><span>]&#xa0;</span><br /><span>[-gain&#xa0;</span><code><em>integer</em></code><span>]&#xa0;</span><br /><span>[-resolution&#xa0;</span><code><em>value</em></code><span>]&#xa0;</span><br /><span>[-tolerance&#xa0;</span><code><em>value</em></code><span>] &#xa0;</span><br /><span>[-assertions&#xa0;</span><code><em>constraint filename</em></code><span>]&#xa0;</span><br /><span>[-validate&#xa0;</span><em>string</em><span>]</span><br /><span>[-verilog_shell_file&#xa0;</span><code><em>filename</em></code><span>]&#xa0;</span><br /><span>[-verilog_shell_module&#xa0;</span><code><em>top_module_name</em></code><span>]&#xa0;</span><br /><span>[-max_num_slews&#xa0;</span><code><em>value</em></code><span>]&#xa0;</span><br /><span>[-max_num_loads&#xa0;</span><code><em>value</em></code><span>]</span><br /><span>[-per_tol_val&#xa0;</span><em>float</em><span>]<br />[-per_tol_val_optimistic <em>float</em>]&#xa0;<br />[-per_tol_val_pessimistic <em>float</em>]<br /><span>[-pg]&#xa0;</span><br /><span>[-view&#xa0;</span><em>viewname</em><span>]</span><br /><code><em>model_filename</em></code></span></code></code></p>
+
+<p>Builds a Liberty (<code>.lib</code>) format model for the top cell, which is the timing model equivalent of the original design. The model is extracted for the given analysis modes, PVT conditions, and parasitics. If any one of these parameters changes, then you must extract the model again. The model is extracted for a range of input slews and load capacitances. If you do not specify these ranges, the software automatically computes the default values. The extracted model defines all of the top-level ports of the design as pins. Additionally, all other design pins that are targets of&#xa0;<code>create_clock</code> or <code>create_generated_clock</code> are retained as internal pins.</p>
+<div>
+<p><br /></p>
+<div aria-label="Tip" class="confluence-information-macro  confluence-information-macro-tip" role="region"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>For model extraction, your design must be properly constrained. For example, no clock or data conflicts can be present. Use the <code>check_timing</code> command and correct all errors prior to model extraction.</p>
+</div>
+</div>
+
+<p><br /></p>
+</div>
+<h4 id="do_extract_model-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd"><code>-help</code></td>
+<td class="confluenceTd">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd"><code>-abs_tol_val <em>float</em></code></td>
+<td class="confluenceTd">
+<p>Specifies the absolute tolerance value to be used during the validation of the extracted timing model. For more details, refer to the <code style="line-height: 1.4285715;"><a class="external-link" href="../tempustxtcmdref/compare_model_timing.html" rel="nofollow">compare_model_timing</a>&#xa0;-absolute_tolerance</code> command option.</p>
+
+<p>This parameter can be used only when the <code>-validate</code> option is specified.</p>
+
+<p>The integer value specified with this option is read as ns/ps depending upon the time unit.</p>
+
+<p><em>Default</em>: 3ps</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-abs_tol_val_optimistic <em>float</em></code></p>
+
+<p><br /></p>
+
+<p><em>&#xa0;</em></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the absolute tolerance limit for flagging an optimistic failure. An optimistic path violating the absolute as well as percentage tolerance limit will be flagged as FAIL in the&#xa0;<code><a class="external-link" href="../tempustxtcmdref/compare_model_timing.html" rel="nofollow">compare_model_timing</a>&#xa0;</code>command output report.</p>
+
+<p>You can use this parameter when the <code><span>-validate</span></code>&#xa0;is used with model extraction.</p>
+
+<p><em>Default</em>:&#xa0;15ps</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-abs_tol_val_pessimistic <em>float</em></code></p>
+
+<p><em>&#xa0;</em></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the absolute tolerance limit for flagging a pessimistic failure. A pessimistic path violating the absolute as well as percentage tolerance limit will be flagged as FAIL in the <code>compare_model_timing</code>&#xa0;command output report.</p>
+
+<p>You can use this parameter when the <code><span>-validate</span></code>&#xa0;is used with model extraction.</p>
+
+<p><em>Default</em>:&#xa0;15ps</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-assertions </code><code><em>constraint filename</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Dumps the constraints for a model, which is used in the validation flow.</p>
+
+<p><em>Default</em>: <code>model.asrt</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-cell_name </code><code><em>cell_name</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the cell name used in the timing model.</p>
+
+<p><em>Default:</em> The name of the top cell to be extracted.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-check</code></td>
+<td class="confluenceTd">Checks the extracted timing model for any possible liberty-related issue. When specified, the command displays detailed error and warning messages, and their summary.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-clock_slews {</code><code><em>clk_slew1 clk_slew2</em></code><code>...}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a range of slew values used at all clock pins. The list of values must be enclosed by curly braces. If this parameter is not specified, the software automatically computes the appropriate values.</p>
+
+<p>This parameter accepts a maximum of 32 float values.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-format <em>string</em></code></td>
+<td class="confluenceTd">Specifies the format for the extracted model in tlf, dotlib, or syntech.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-gain </code><code><em>integer</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Represents an increase in the number of delay arcs if a pin is removed. This option reduces the extracted model size in scenarios where removing a pin can result in increased model size. The gain at an internal pin can be defined as:</p>
+
+<p><code>(number of incoming delay arcs * number of </code><code>outgoing delay arcs) - (number of incoming </code><code>delay arcs + number of outgoing delay arcs</code></p>
+
+<p>If an internal pin has a gain greater than the specified number, then that pin needs to be preserved in order to reduce the extracted model size.</p>
+
+<p><em>Default</em>: <code>0</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-include_aocv_weights</code></td>
+<td class="confluenceTd">Enables the software to write stage weights on individual arcs. Before using this option, it is mandatory that the AOCV libraries are read in and AOCV analysis is enabled (by using <code>set_analysis_mode -aocv true</code>).</td>
+</tr>
+<tr><td class="confluenceTd"><code>-include_power</code></td>
+<td class="confluenceTd">
+<p>Writes information about the power consumed by a block.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-input_slews {</code><code><em>input_slew1</em></code> <code><em>input_slew2</em></code><code> ...}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a range of slew values used at all input pins. Enclose the list of values with curly braces. If this parameter is not specified, the software automatically computes the appropriate values.</p>
+
+<p>This parameter accepts a maximum of 32 float values.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-lib_name </code><code><em>lib_name</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the library name used in the timing model. Write extracted timing models in the Liberty format by specifying the <code>.lib</code> file suffix.</p>
+
+<p><em>Default:</em> The name of the top cell to be extracted.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-max_num_loads </code><code><em>value</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the maximum number of output load values used for delay arc characterization. A low value of 1 or 2 improves runtime and memory usage but may significantly degrade model accuracy. Use this parameter only if the model size or model extraction time is critical.</p>
+
+<p>This parameter accepts values between 1 and 32.</p>
+
+<p><em>Default:</em>&#xa0;<code>8</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-max_num_slews </code><code><em>value</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the maximum number of input slews or clock slews used for delay and check arc characterization. Specifying a low value of 1 or 2 improves runtime and memory but may significantly degrade model accuracy. Using the <code>-max_num_slews</code> parameter has a larger impact on runtime and memory than the <code>-max_num_loads</code> parameter. Use this parameter only if the model size or the model extraction time is critical.</p>
+
+<p>The <code>max_num_slews</code> and <code>max_num_loads</code> parameters specify only the maximum limits on how many slew and load points are chosen. The software scans the gates connected to the input and output ports to calculate the number of points.</p>
+
+<p>This parameter accepts values between 1 and 32.</p>
+
+<p><em>Default:</em><span>&#xa0;</span><code>8</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>model_filename</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the output file.</p>
+
+<p>Avoid problems with rebind by using the <code>-lib_name</code> and <code>-cell_name</code> parameters instead of using the default names.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-output_loads {</code><code><em>output_load1</em></code><code><em>output_load2</em></code><code> ...} </code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a range of load values used at all output pins. Enclose the list of values in curly braces. If this parameter is not specified, the software automatically computes the appropriate values.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-per_tol_val &lt;<em>float</em>&gt;</code></td>
+<td class="confluenceTd">
+<p>Specifies the percentage tolerance value to be used during the validation of the extracted ETM. This option can be used&#xa0;<span>only when the <code>-validate</code>&#xa0;option is also specified. </span></p>
+
+<p>For more details, refer to <code><a href="compare_model_timing.html">compare_model_timing</a></code><code> -percent_tolerance</code>.</p>
+
+<p>Default: 3%</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-per_tol_val_optimistic <em>float</em></code></p>
+
+<p><em>&#xa0;</em></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the percentage tolerance limit for flagging an optimistic failure. An optimistic path violating percentage, as well as an absolute tolerance limit, will be flagged as FAIL in the&#xa0;<code><a href="compare_model_timing.html">compare_model_timing</a></code>&#xa0;command output report.</p>
+
+<p>&#xa0;You can use this parameter when the <code>-validate</code>&#xa0;is used with model extraction.</p>
+
+<p><em>Default</em>: 3%</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-per_tol_val_pessimistic <em>float</em></code></p>
+
+<p><em>&#xa0;</em></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the percentage tolerance limit for flagging a pessimistic failure. A pessimistic path-violating percentage, as well as an absolute tolerance limit, will be flagged as FAIL in the <code><a href="compare_model_timing.html">compare_model_timing</a></code>&#xa0;command output report.</p>
+
+<p>You can use this parameter when the <code>-validate</code>&#xa0;is used with model extraction.</p>
+
+<p><em>Default</em>: 3%</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-pg</code></td>
+<td class="confluenceTd">
+<p>Allows power or ground-related pin information to be extracted inside the extracted model.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-precision </code><code><em>value</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the floating-point precision used for the timing model.</p>
+
+<p>This parameter accepts values between 1 and 10.&#xa0;</p>
+
+<p>For example, the floating point precision for 3.0089 can be changed as follows:</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">
+<p>Precision&#xa0; &#xa0;&#xa0;&#xa0;Data Value in .lib</p>
+
+<p>4&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;3.0089</p>
+
+<p>3&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;3.009</p>
+
+<p>2&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;3.01</p>
+
+<p>1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;3.0</p>
+
+<p><em>Default:</em> <code>4</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-resolution </code><code><em>value</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the magnitude of delay difference that can be ignored by the extractor.</p>
+
+<p><em>Default:</em> <code>0.001</code></p>
+
+<p><em>Type</em>: Float</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-tolerance </code><code><em>value</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the accuracy level of the extractor in percent. For example, 5.0 represents a plus or a minus 5.0 percent allowable error in the extracted model. The higher the tolerance, the faster the extraction time.</p>
+
+<p><em>Default:</em> <code>1.0</code></p>
+
+<p><em>Type:</em> Float</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-validate <em>string</em></code></td>
+<td class="confluenceTd">
+<p>Enables the validation of the extracted timing model generated for the corresponding view and displays the number of failures corresponding to setup and hold checks.</p>
+
+<p>You are required to specify the name of the validation directory, for example,&#xa0;<code>do_extract_model -validate <em>valDir</em></code>, which contains data for&#xa0;<code><a href="write_model_timing.html">write_model_timing</a></code>, <code><a href="compare_model_timing.html">compare_model_timing</a></code>, and other summary reports.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-view</code>&#xa0;<em>viewname</em></td>
+<td class="confluenceTd">Specifies the current active view.&#xa0;</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-verilog_shell_file</code> <code><em>filename</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Generates a Verilog shell file that instantiates the timing model. This parameter is useful for validating the model. Use the <code>-verilog_shell_module</code> parameter to specify the name of the top module in this Verilog file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-verilog_shell_module</code> <code><em>top_module_name</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the top module name of the Verilog shell file.</p>
+
+<p><em>Default:</em> <code>test_shell</code></p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="do_extract_model-Examples:">Examples:</h4>
+<ul><li>The following command builds a <code>.lib</code> model (<code>block.lib</code>) for the block: <br /><code>tempus &gt; do_extract_model block.lib</code></li></ul><ul><li>The following command creates the timing model for the <code>test_model</code> cell belonging to the <code>test_lib</code> library, and writes the model into the <code>test.lib</code> liberty file: <br /><code><span>tempus &gt;&#xa0;</span>do_extract_model -cell_name test_model -lib_name test_lib test.lib</code></li></ul><h4 id="do_extract_model-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="compare_model_timing.html">compare_model_timing</a></code></li><li><code><span><a href="set_analysis_mode.html">set_analysis_mode&#xa0;</a></span></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="compare_model_timing.html" id="prev" title="compare_model_timing">compare_model_timing</a></em></b><b><em><a href="merge_model_timing.html" id="nex" title="merge_model_timing">merge_model_timing</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

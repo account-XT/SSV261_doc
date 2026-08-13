@@ -1,0 +1,460 @@
+
+<html><head><title>Parametric Timing Robustness Analysis</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823911" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Parametric Timing Robustness Analysis" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823911" />
+<meta name="NextFile" content="analysisandreporting_pathbasedanalysis.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_statisticalViaVariationFile.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Parametric Timing Robustness Analysis" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="0" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_statisticalViaVariationFile.html" title="Specifying Statistical Via Variation File">Specifying Statistical Via Var ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_pathbasedanalysis.html" title="Path-Based Analysis">Path-Based Analysis</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:ptranalysis" title="Parametric Timing Robustness Analysis"></a><style>/*<![CDATA[*/
+/**/
+/**/
+/**/
+/**/
+h1 { counter-reset: heading 4;}
+/**/
+/**/
+/**/
+/**/
+/*]]>*/</style><h2>
+<a id="pgfId-2433794"></a>Parametric Timing Robustness Analysis<a id="90463"></a></h2>
+
+<ul><li>
+<a id="pgfId-2436290"></a><a href="analysisandreporting_ptranalysis.html#72788">Parametric Timing Robustness (PTR) Analysis Overview</a></li><li>
+<a id="pgfId-2436307"></a><a href="analysisandreporting_ptranalysis.html#85413">Library Requirements</a></li><li>
+<a id="pgfId-2436316"></a><a href="analysisandreporting_ptranalysis.html#41888">Early/Late Sigma LVF</a></li><li>
+<a id="pgfId-2436323"></a><a href="analysisandreporting_ptranalysis.html#98148">LVF Moment Models</a></li><li>
+<a id="pgfId-2436330"></a><a href="analysisandreporting_ptranalysis.html#59811">Enabling PTR Analysis</a></li><li>
+<a id="pgfId-2436337"></a><a href="analysisandreporting_ptranalysis.html#84209">PTR Analysis Reports</a></li></ul>
+
+
+
+
+
+
+<h3>
+<a id="pgfId-2433872"></a>Parametric Timing Robustness (PTR) Analysis Overview<a id="72788"></a></h3>
+
+<p>
+<a id="pgfId-2433900"></a>Tempus supports Parametric Timing Robustness (PTR) analysis capabilities that can be leveraged to calculate the probability of the entire chip meeting timing, instead of relying on the probabilities on individual paths meeting timing to compute the robustness of a chip.</p>
+<p>
+<a id="pgfId-2433901"></a>In traditional SOCV timing analysis, the moments of delays and slews calculated at the arc and instance level are propagated through the paths in the design and Arrival Time, Slack distributions are computed at the path endpoints. </p>
+<p>
+<a id="pgfId-2436421"></a>In the following example, the 99.865 quantile values of the endpoint slack distributions show the probability of the paths to the given endpoint meeting timing.</p>
+<p>
+<a id="pgfId-2433896"></a>The figure below is the slack distribution of a given path with 99.865 percentile slack of zero. This means that the area under slack&#8217;s PDF on the right of zero is exactly 0.99865, and on the left of zero it is 0.00135. The area on the left of zero corresponds to samples (chips) where slack of this path is negative (failing path). In other words, out of 1 million samples (chips) there will be about 1,350 of them where this path fails.</p>
+
+<p class="webflare-indent1"><strong>Figure -74
+<a id="pgfId-2433941"></a></strong></p>
+<p>
+<a id="pgfId-2433945"></a></p>
+<div class="webflare-div-image">
+<img width="667" height="253" src="images/analysisandreporting-90.gif" /></div>
+
+<p>
+<a id="pgfId-2433937"></a>Similarly, in a case with 10 similar paths ending at the same end-point and all having 99.865 percentile slack of zero, assuming that the slack of each path is an independent random variable, the probability of each of them to fail is 0.00135, and then the probability of at least one of them to be negative is Pneg =1 &#8211; (1-0.00135)^10 =0.0134, which means that the probability of the end point to have negative slack (fail) is almost 10x of that of each individual path.</p>
+<p>
+<a id="pgfId-2433989"></a>Considering 1M samples (chips), in this situation 13,400 of them will fail due to that end-point.</p>
+
+<p class="webflare-indent1"><strong>Figure -75
+<a id="pgfId-2434014"></a></strong></p>
+<p>
+<a id="pgfId-2434017"></a></p>
+<div class="webflare-div-image">
+<img width="667" height="297" src="images/analysisandreporting-91.gif" /></div>
+
+<p>
+<a id="pgfId-2434035"></a>Similarly, when we consider 1M such endpoints, the probability of all of them to have non-negative slack is 0.99865^10000000, which is nearly zero. This means nearly all samples (chips) will fail.</p>
+<p>
+<a id="pgfId-2434036"></a>However in reality, chips work with reasonably high robustness, even though they are optimized to make end-point&#8217;s quantile slacks close to zero. This is because paths and end-points exhibit a non-zero correlation, and hence the calculation of probability used above is not valid.</p>
+<p>
+<a id="pgfId-2434037"></a>In SOCV slacks are random variables, which are results of statistical addition of delays on the paths leading to end-points. If paths have common parts, the end-points&#8217; slacks are not independent variables, or in other words, have non-zero covariance (correlation). Computing correlation between end-point&#8217;s slacks is very tedious task, leading to at least quadratic complexity over number of paths reported (and we will need to report slightly positive paths since the tails of their distributions will extend into negative slack region). This makes the correlation calculation through pair-wise common-portion calculation computationally unrealistic.</p>
+<p>
+<a id="pgfId-2434010"></a>The Parametric Timing Robustness analysis models the correlation of paths in the computation of chip robustness, is akin to Monte-Carlo simulation. Here samples of delays and slews on each arc and pin are generated and propagated on both data and clocks paths such that correlation is modeled naturally in the computation of Arrival Time and Slacks. Any two paths crossing same arc will include same delay distribution as part of their ATs.</p>
+<p>
+<a id="pgfId-2434065"></a>The PTR computed using this approach gives an accurate measure of the &#8216;actual&#8217; chip robustness.</p>
+
+<h3>
+<a id="pgfId-2434166"></a>Library Requirements<a id="85413"></a></h3>
+
+<p>
+<a id="pgfId-2434171"></a>The PTR analysis requires variation data to be characterized into the timing libraries. The Liberty Validation Format (LVF) has been adopted by the industry as a common vehicle for providing this information. The syntax for modeling the random variation of delays, transitions, and constraints with tables of sigma values is the most commonly available. Cadence Liberate&#174; and Variety&#174; characterization software and Tempus&#174; sign-off timing analysis software are capable of creating and using more advanced models for improved accuracy at advanced nodes.</p>
+<p>
+<a id="pgfId-2434172"></a>It is strongly recommended to use moment-based LVF models in PTR Analysis in Tempus for good accuracy.</p>
+
+<h3>
+<a id="pgfId-2434173"></a>Early/Late Sigma LVF<a id="41888"></a></h3>
+
+<p>
+<a id="pgfId-2434174"></a>The variation data modeled in traditional LVF provides Liberty ocv_sigma_* tables for delays, transitions, and timing checks. These represent the variation offset from the nominal values contained in the related NLDM table data. This data is specified in terms of 1-sigma.</p>
+<p>
+<a id="pgfId-2433877"></a>The LVF allows separate specification of a sigma value for early path analysis vs. late path analysis. The sigma_type syntax identifies which ocv_sigma_* tables are used for what purpose. In cases where the mean of the distribution is not aligned with the nominal value, having separate characterizations can help improve accuracy. The constraint variation tables do not support separate early and late sigma values.</p>
+
+<p>
+<a id="pgfId-2434633"></a></p>
+<table class="webflareTable" id="#id2434274">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2434296">
+<a id="pgfId-2434296"></a>LVF Early/Late Sigma Groups </span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2434298">
+<a id="pgfId-2434298"></a>Purpose</span>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2434276"></a>ocv_sigma_cell_rise</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2434278"></a>Modeling delay variation</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2434280"></a>ocv_sigma_cell_fall</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2434284"></a>ocv_sigma_rise_transition</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2434290"></a>Modeling transition variation</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2434288"></a>ocv_sigma_fall_transition</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2434401"></a>ocv_sigma_rise_constraint</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2434403"></a>Modeling timing check variation</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2434405"></a>ocv_sigma_fall_constraint</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2434407"></a></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2434409"></a>ocv_sigma_retaining_rise</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2434411"></a>Modeling retain arc delay variation</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2434547"></a>ocv_sigma_retaining_fall</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2434551"></a>ocv_sigma_retain_rise_slew</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="2">
+<p>
+<a id="pgfId-2434553"></a>Modeling retain arc transition variation</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2434555"></a>ocv_sigma_retain_fall_slew</p>
+</td>
+</tr>
+</tbody></table>
+<h3>
+<a id="pgfId-2434637"></a>LVF Moment Models<a id="98148"></a></h3>
+
+<p>
+<a id="pgfId-2434638"></a>The advanced nodes (&lt; 16nm) and ultra-low VDD&#39;s can produce distributions that are strongly non-Gaussian, thereby exhibiting both mean-shift and skewness effects. As a result, three additional models were included in the LVF delay, transition, and constraint variation set. These models represent the three top central moments of the distributions. It is strongly recommended to use these moments-based modes for PTR analysis in Tempus.</p>
+<p>
+<a id="pgfId-2434639"></a>The new constructs do not replace the existing ocv_sigma_* constructs already in use. The LVF consuming applications will decide how best to utilize the older and newer constructs together for the best possible results.</p>
+<p>
+<a id="pgfId-2434273"></a>With the exception of the sigma_type attribute, the new constructs use the same syntax as the existing LVF sigma constructs.</p>
+
+<p>
+<a id="pgfId-2435560"></a></p>
+<table class="webflareTable" id="#id2434662">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2434664">
+<a id="pgfId-2434664"></a>LVF Early/Late Sigma Groups </span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2434666">
+<a id="pgfId-2434666"></a>Purpose</span>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2434668"></a>ocv_std_dev_cell_rise</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="6">
+
+<p>
+<a id="pgfId-2434728"></a>Moment modeling of delay variation</p>
+
+<p>
+<a id="pgfId-2434670"></a></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2434672"></a>ocv_std_dev_cell_fall</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2434676"></a>ocv_mean_shift_cell_rise</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2434680"></a>ocv_mean_shift_cell_fall</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2434684"></a>ocv_skewness_cell_rise</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2434688"></a>ocv_skewness_cell_fall</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2434692"></a>ocv_std_dev_rise_transition</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="8">
+
+<p>
+<a id="pgfId-2434735"></a>Moment modeling of transition variation</p>
+
+<p>
+<a id="pgfId-2434861"></a></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2434696"></a>ocv_std_dev_fall_transition</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2434700"></a>ocv_std_dev_fall_transition</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2434849"></a>ocv_std_dev_fall_transition</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2435026"></a>ocv_std_dev_fall_transition</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2435030"></a>ocv_mean_shift_fall_transition</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2435034"></a>ocv_skewness_rise_transition</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2435082"></a>ocv_skewness_fall_transition</p>
+</td>
+</tr>
+</tbody></table>
+<h3>
+<a id="pgfId-2435571"></a>Enabling PTR Analysis <a id="59811"></a></h3>
+
+<p>
+<a id="pgfId-2435572"></a>The PTR analysis flow can be enabled using the following setting:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053955"></a><a href="../tempustxtcmdref/set_analysis_mode.html">set_analysis_mode</a> -timing_robustness true</pre>
+<h4>
+<a id="pgfId-2435632"></a><code></code>License Requirements for PTR Analysis</h4>
+
+<p>
+<a id="pgfId-2435633"></a>PTR analysis requires the <code>tpsng</code> license.</p>
+
+<h4>
+<a id="pgfId-2435634"></a>PTR Analysis on Clock Paths in PBA Mode</h4>
+
+<p>
+<a id="pgfId-2435635"></a>PTR analysis is performed on clock paths in PBA mode for better accuracy. The setting to enable this is</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053961"></a>set <a href="../tempustxtcmdref/timing_disable_retime_clock_path_slew_propagation.html">timing_disable_retime_clock_path_slew_propagation</a> false</pre>
+<h4>
+<a id="pgfId-2435637"></a>Delay Calculation Controls - Use of Moments LVF</h4>
+
+<p>
+<a id="pgfId-2435639"></a>LVF libraries with moments data are strongly recommended for PTR analysis. The setting to read in moments LVF data is</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053967"></a><a href="../tempustxtcmdref/set_delay_cal_mode.html">set_delay_cal_mode</a> -socv_lvf_mode moments</pre>
+<h4>
+<a id="pgfId-2435641"></a><code></code>Accuracy Modes</h4>
+
+<p>
+<a id="pgfId-2435642"></a>PTR analysis is performed in the highest accuracy mode of statistical analysis. The setting to enable this is:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053972"></a>set_delay_cal_mode -socv_accuracy_mode ultra</pre>
+<h3>
+<a id="pgfId-2435700"></a><a id="84209"></a>PTR Analysis Reports</h3>
+
+<p>
+<a id="pgfId-2435701"></a>The PTR score of a design, which is a statistical measure of the timing slack for the whole design can be reported using the <code>report_timing_robustness</code> command. This command reports the percentage of parts (to be manufactured) which meet timing at all end points.</p>
+<p>
+<a id="pgfId-2435702"></a>The <a href="../tempustxtcmdref/report_timing_robustness.html">report_timing_robustness</a> analysis command reports the PTR score of a given design based on the following steps:</p>
+<ul><li>
+<a id="pgfId-2435703"></a>Enumerates all the instances in the design.</li><li>
+<a id="pgfId-2435704"></a>Identifies paths that are critical for PTR of the design.</li><li>
+<a id="pgfId-2435705"></a>Computes the PTR based on Monte Carlo analysis.</li></ul>
+
+
+<p>
+<a id="pgfId-2435717"></a>The following example shows the final PTR value:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2435718"></a>report_timing_robustness -check_type setup -path_group R2R -target_PTR 0.8 -run_time_limit 15</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2435719"></a>collecting paths and reporting PTR ......</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2435720"></a>Final PTR 0.89735</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2435906"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2435824"></a>set P1 [report_timing_robustness -check_type setup -path_group R2R -target_PTR 0.95 -run_time_limit 15]</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2435825"></a>collecting paths and reporting PTR ......</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2435826"></a>Final PTR 0.91295</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2435827"></a>report_property $P1</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2435834"></a>----------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2435835"></a>property | value</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2435836"></a>----------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2435837"></a>slack_mean | 0.961705</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2435838"></a>slack_ptr | 0.912950</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2435839"></a>slack_quantile | -2.085161</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2435840"></a>slack_skewness | -0.668439</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2435818"></a>slack_stddev | 0.682927</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2435915"></a>----------------------------</pre>
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_statisticalViaVariationFile.html" id="prev" title="Specifying Statistical Via Variation File">Specifying Statistical Via Var ...</a></em></b><b><em><a href="analysisandreporting_pathbasedanalysis.html" id="nex" title="Path-Based Analysis">Path-Based Analysis</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

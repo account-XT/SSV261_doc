@@ -1,0 +1,230 @@
+
+<html><head><title>SI Delay Reporting</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845198" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="SI Delay Reporting" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845198" />
+<meta name="NextFile" content="analysisandreporting_siglitchanalysis.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_performingsianalysis.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- SI Delay Reporting" />
+<meta name="Keywords" content="si delay reporting" />
+<meta name="topic_type" content="process" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Delay Calculation,Signal Integrity,SI Analysis,Stylus" />
+<meta name="prod_subfeature" content="SI Analysis,Delay Calculation, Signal Integrity" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_performingsianalysis.html" title="Performing Signal Integrity Delay Analysis">Performing Signal Integrity De ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_siglitchanalysis.html" title="SI Glitch Analysis - An Overview">SI Glitch Analysis - An Overvi ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:sidelayreporting" title="SI Delay Reporting"></a><h3>
+<a id="pgfId-1010537"></a><a id="13814"></a>SI Delay<a id="SIDelayReporting"></a> Reporting</h3>
+
+<p>
+<a id="pgfId-1010538"></a>There are several commands for generating reports on SI effects on delay:</p>
+<ul><li>
+<a id="pgfId-1045234"></a><a href="../tempusCUI/report_timing.html">report_timing</a></li><li>
+<a id="pgfId-1045251"></a><a href="../tempusCUI/report_delay_calculation.html">report__delay_calculation</a></li><li>
+<a id="pgfId-1045408"></a><a href="../tempusCUI/report_noise.html">report_noise</a></li><li>
+<a id="pgfId-1045445"></a><a href="../tempusCUI/get_property.html">get_property</a></li></ul>
+
+
+
+<p>
+<a id="pgfId-1010543"></a>These are explained below.</p>
+
+<h4>
+<a id="pgfId-1010544"></a>Using report_timing without Separating Delta Delay on Data</h4>
+
+<p>
+<a id="pgfId-1010545"></a>The <a href="../tempusCUI/report_timing.html">report_timing</a> command, by default, does not separate the delta delay on data (delta delay is always separated for clock). You can set the incr_delay option of the <a href="../tempusCUI/timing_Category_Attributes.html">timing_report_fields</a> attribute to display the delta delays of nets. It is recommended to use the <code>report_timing</code> <code>-split_delay</code> parameter for generating comprehensive reports. For example,</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005521"></a>tempus &gt; set_db timing_report_fields {hpin cell transition incr_delay delay arrival}<br />tempus &gt; report_timing -split_delay</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005526"></a>#--------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005527"></a>Path 1: VIOLATED (-1.537 ns) Late Output Delay Assertion<br />View: slow_corner_setup<br />Group:          CCLK<br />Startpoint:    (F) rd_i[152]<br />Clock:         (R) CCLK<br />Endpoint:      (F) rd_o[152]<br />Clock:&#160;&#160;       (R) CCLK</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005528"></a>Capture Launch<br />Clock Edge:    +1.666 0.000<br />Src Latency:   +0.000       0.000<br />Net Latency:   +0.000 (I)   0.000 (I)<br />Arrival:=       1.666       0.000<br />Output Delay:  -1.200<br />Uncertainty:   -0.100<br />Cppr Adjust:   +0.000<br />Required Time:  0.366<br />Launch Clock:   0.000<br />Input Delay:   +1.200<br />Data Path:     +0.703<br />Slack:         -1.537<br />#-----------------------------------------------------------------------<br />#  Pin                    Cell           Trans   Incr    Delay   Arrival<br />#                                         (ns)   Delay   (ns)    (ns)<br />#-----------------------------------------------------------------------<br />rd_i[152]                 (arrival)       0.004   -       -       1.200<br />rd_i_152_ATibuf_i164/A    BUFH_X16M_A12   0.004   0.000   0.001   1.201<br />rd_i_152_ATibuf_i164/Y    BUFH_X16M_A12   0.017   0.000   0.026   1.227<br />rd_i_152_ATrbuf_i225/A    BUFH_X13M_A12   0.031   0.000   0.014   1.241<br />rd_i_152_ATrbuf_i225/Y    BUFH_X13M_A12   0.023   0.000   0.040   1.281<br />rd_i_152_ATrbuf_i10126/A  BUFH_X16M_A12   0.038   0.000   0.016   1.296<br />rd_i_152_ATrbuf_i10126/Y  BUFH_X16M_A12   0.014   0.000   0.042   1.338<br />rd_i_152_ATrbuf_i263/A    BUFH_X16M_A12   0.054   0.000   0.027   1.365<br />rd_i_152_ATrbuf_i263/Y    BUFH_X16M_A12   0.017   0.000   0.051   1.416<br />rd_i_152_ATrbuf_i10136/A  BUFH_X16M_A12   0.042   0.000   0.020   1.436<br />rd_i_152_ATrbuf_i10136/Y  BUFH_X16M_A12   0.017   0.000   0.043   1.479<br />rd_i_152_ATrbuf_i185/A    BUFH_X16M_A12   0.028   0.000   0.012   1.491<br />rd_i_152_ATrbuf_i185/Y    BUFH_X16M_A12   0.016   0.000   0.037   1.528<br />rd_i_152_ATrbuf_i238/A    BUFH_X16M_A12   0.039   0.000   0.020   1.547<br />rd_i_152_ATrbuf_i238/Y    BUFH_X16M_A12   0.016   0.000   0.042   1.589<br />rd_i_152_ATrbuf_i265/A    BUFH_X11M_A12   0.037   0.000   0.017   1.606<br />rd_i_152_ATrbuf_i265/Y    BUFH_X11M_A12   0.018   0.000   0.043   1.648<br />rd_i_152_ATrbuf_i10136/A  BUFH_X16M_A12   0.031   0.000   0.013   1.661<br />rd_i_152_ATrbuf_i10136/Y  BUFH_X16M_A12   0.014   0.000   0.037   1.698<br />rd_i_152_ATrbuf_i202/A    BUFH_X13M_A12   0.042   0.000   0.020   1.718<br />rd_i_152_ATrbuf_i202/Y    BUFH_X13M_A12   0.017   0.000   0.043   1.761<br />rd_i_152_ATrbuf_i10136/A  BUFH_X16M_A12   0.028   0.000   0.012   1.773<br />rd_i_152_ATrbuf_i10136/Y  BUFH_X16M_A12   0.017   0.000   0.035   1.808<br />U2349/A                   OR2_X11M_A12    0.029   0.000   0.013   1.821<br />U2349/Y                   OR2_X11M_A12    0.019   0.000   0.050   1.871<br />rd_o_152_ATobuf_i155/A    BUFH_X6M_A12    0.020   0.000   0.003   1.874<br />rd_o_152_ATobuf_i155/Y    BUFH_X6M_A12    0.009   0.000   0.029   1.903<br />rd_o[152]                 ud_lpu_2x       0.009   0.000   0.000   1.903<br />#-----------------------------------------------------------------------</pre>
+<h4>
+<a id="pgfId-1010558"></a>Using report_timing with Separating Delta Delay on Data</h4>
+
+<p>
+<a id="pgfId-1010559"></a>You can use the following commands to report delta delay on data separately under the <code>Incr Delay</code> column in the timing report:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1010560"></a>tempus &gt; <a href="../tempusCUI/set_db.html">set_db</a> si_delay_separate_on_data true<br />tempus &gt; <a href="../tempusCUI/report_timing.html">report_timing</a> &#8211;split_delay</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1296051"></a>-----------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005550"></a>Path 1: VIOLATED (-1.537 ns) Late Output Delay Assertion<br />View: slow_corner_setup<br />Group: CCLK<br />Startpoint: (F) rd_i[152]<br />Clock: (R) CCLK<br />Endpoint: (F) rd_o[152]<br />Clock: (R) CCLK<br />                Capture     Launch<br />Clock Edge:+    1.666       0.000<br />Src Latency:   +0.000       0.000<br />Net Latency:   +0.000 (I)   0.000 (I)<br />Arrival:=       1.666       0.000<br />Output Delay:  -1.200<br />Uncertainty:   -0.100<br />Cppr Adjust:   +0.000<br />Required Time: =0.366<br />Launch Clock:  =0.000<br />Input Delay:   +1.200<br />Data Path:     +0.703<br />Slack:=&#160;&#160;      -1.537</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005551"></a>#-----------------------------------------------------------------------<br /># Pin                     Cell            Trans  Incr    Delay   Arrival<br />#                                         (ns)   Delay   (ns)    (ns)<br />#-----------------------------------------------------------------------<br />rd_i[152]                  (arrival)      0.004      -       -    1.200<br />rd_i_152_ATibuf_i164/A    BUFH_X16M_A12  0.004   0.000   0.001    1.201<br />rd_i_152_ATibuf_i164/Y    BUFH_X16M_A12  0.017   0.002   0.026    1.227<br />rd_i_152_ATrbuf_i225/A    BUFH_X13M_A12  0.031   0.002   0.014    1.241<br />rd_i_152_ATrbuf_i225/Y    BUFH_X13M_A12  0.023   0.002   0.040    1.281<br />rd_i_152_ATrbuf_i10126/A  BUFH_X16M_A12  0.038   0.001   0.016    1.296<br />rd_i_152_ATrbuf_i10126/Y  BUFH_X16M_A12  0.014   0.002   0.042    1.338<br />rd_i_152_ATrbuf_i263/A    BUFH_X16M_A12  0.054   0.007   0.027    1.365<br />rd_i_152_ATrbuf_i263/Y    BUFH_X16M_A12  0.017   0.002   0.051    1.416<br />rd_i_152_ATrbuf_i10136/A  BUFH_X16M_A12  0.042   0.003   0.020    1.436<br />rd_i_152_ATrbuf_i10136/Y  BUFH_X16M_A12  0.017   0.000   0.043    1.479<br />rd_i_152_ATrbuf_i185/A    BUFH_X16M_A12  0.028   0.000   0.012    1.491<br />rd_i_152_ATrbuf_i185/Y    BUFH_X16M_A12  0.016   0.002   0.037    1.528<br />rd_i_152_ATrbuf_i238/A    BUFH_X16M_A12  0.039   0.003   0.020    1.547<br />rd_i_152_ATrbuf_i238/Y    BUFH_X16M_A12  0.016   0.001   0.042    1.589<br />rd_i_152_ATrbuf_i265/A    BUFH_X11M_A12  0.037   0.001   0.017    1.606<br />rd_i_152_ATrbuf_i265/Y    BUFH_X11M_A12  0.018   0.001   0.043    1.648<br />rd_i_152_ATrbuf_i10136/A  BUFH_X16M_A12  0.031   0.001   0.013    1.661<br />rd_i_152_ATrbuf_i10136/Y  BUFH_X16M_A12  0.014   0.001   0.037    1.698<br />rd_i_152_ATrbuf_i202/A    BUFH_X13M_A12  0.042   0.002   0.020    1.718<br />rd_i_152_ATrbuf_i202/Y    BUFH_X13M_A12  0.017   0.001   0.043    1.761<br />rd_i_152_ATrbuf_i10136/A  BUFH_X16M_A12  0.028   0.001   0.012    1.773<br />rd_i_152_ATrbuf_i10136/Y  BUFH_X16M_A12  0.017   0.000   0.035    1.808<br />U2349/A                    OR2_X11M_A12  0.029   0.000   0.013    1.821<br />U2349/Y                    OR2_X11M_A12  0.019   0.001   0.050    1.871<br />rd_o_152_ATobuf_i155/A    BUFH_X6M_A12   0.020   0.000   0.003    1.874<br />rd_o_152_ATobuf_i155/Y    BUFH_X6M_A12   0.009   0.000   0.029    1.903<br />rd_o[152]                  ud_lpu_2x     0.009   0.000   0.000    1.903<br />#----------------------------------------------------------------------</pre>
+<h4>
+<a id="pgfId-1010572"></a>Using report_timing with lumpedOnNet Option</h4>
+
+<p>
+<a id="pgfId-1010573"></a>By default, Tempus calculates the delay, including SI for each arc, and if you choose to view the SI delay separately, it will show as annotated to each arc. Alternatively, you can choose to annotate the SI delay solely to the net. You can use the following command to lump the delta delay all onto the net:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005558"></a>tempus &gt; <a href="../tempusCUI/set_db.html">set_db</a> <a href="../tempusCUI/si_Category_Attributes.html">si_delay_delta_annotation_mode</a> <code>lumpedOnNet</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1320400"></a>tempus &gt; <a href="../tempusCUI/report_timing.html">report_timing</a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005569"></a>#---------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005570"></a>Path 1: VIOLATED (-1.537 ns) Late Output Delay Assertion<br />View: slow_corner_setup<br />Group: CCLK<br />Startpoint: (F) rd_i[152]<br />Clock: (R) CCLK<br />Endpoint: (F) rd_o[152]<br />Clock: (R) CCLK</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005571"></a>                 Capture      Launch<br />Clock Edge:+     1.666        0.000<br />Src Latency:+    0.000        0.000<br />Net Latency:+    0.000 (I)    0.000 (I)<br />Arrival:=&#160;&#160;      1.666        0.000</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1088055"></a>Output Delay:-   1.200<br />Uncertainty:-    0.100<br />Cppr Adjust:+    0.000<br />Required Time:=  0.366<br />Launch Clock:=   0.000<br />Input Delay:+    1.200<br />Data Path:+      0.703<br />Slack:=         -1.537<br />#--------------------------------------------------------------------------------<br /># Pin                        Cell                Trans   Incr    Delay   Arrival<br />#                                                (ns)    Delay   (ns)    (ns)<br />#--------------------------------------------------------------------------------<br />rd_i[152]                   (arrival)            0.004   0.000   0.001    1.201<br />rd_i_152_ATibuf_i16431/Y    BUFH_X16M_A12TS_C35  0.004   0.004   0.039    1.240<br />rd_i_152_ATrbuf_i22570/Y    BUFH_X13M_A12TS_C35  0.031   0.002   0.056    1.296<br />rd_i_152_ATrbuf_i1012662/Y  BUFH_X16M_A12TS_C35  0.038   0.008   0.069    1.365<br />rd_i_152_ATrbuf_i26345/Y    BUFH_X16M_A12TS_C35  0.054   0.004   0.071    1.436<br />rd_i_152_ATrbuf_i1013653/Y  BUFH_X16M_A12TS_C35  0.042   0.000   0.055    1.491<br />rd_i_152_ATrbuf_i18556/Y    BUFH_X16M_A12TS_C35  0.028   0.004   0.056    1.547<br />rd_i_152_ATrbuf_i23875/Y    BUFH_X16M_A12TS_C35  0.039   0.002   0.059    1.605<br />rd_i_152_ATrbuf_i26553/Y    BUFH_X11M_A12TS_C35  0.037   0.002   0.055    1.661<br />rd_i_152_ATrbuf_i1013655/Y  BUFH_X16M_A12TS_C35  0.031   0.002   0.057    1.717<br />rd_i_152_ATrbuf_i20278/Y    BUFH_X13M_A12TS_C35  0.042   0.002   0.055    1.772<br />rd_i_152_ATrbuf_i1013651/Y  BUFH_X16M_A12TS_C35  0.028   0.000   0.048    1.820<br />U2349/Y                     OR2_X11M_A12TS_C35   0.029   0.001   0.053    1.873<br />rd_o_152_ATobuf_i15597/Y    BUFH_X6M_A12TS_C35   0.020   0.000   0.030    1.903<br />rd_o[152]                   ud_lpu_2x            0.009   0.000   0.000    1.903<br />#--------------------------------------------------------------------------------</pre>
+<h4>
+<a id="pgfId-1010586"></a>Using report_delay_calculation -si Command</h4>
+
+<p>
+<a id="pgfId-1010587"></a>You can use the <a href="../tempusCUI/report_delay_calculation.html">report__delay_calculation</a> command to report the delay calculation information for a cell or net timing arc. When <code>-si</code> parameter is specified, the software will report the SI components, including incremental delay. For example,</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005583"></a>tempus &gt; report_delay_calculation -from wdata_rw_o_150__ATrbuf_i1013579/Y -to wdata_rw_o_150__ATrbuf_i25739/A -si</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1010617"></a>-------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005588"></a>From pin   : rw_150_rbuf_i1013579/Y<br />Cell       : BUFH_X16M_A12TS_C35<br />Library    : ff3sigma_0p935v_125c<br />To pin     : rw_150_rbuf_i25739/A<br />Cell       : BUFH_X13M_A12TS_C35<br />Library    : ff3sigma_0p935v_125c<br />Base or SI : SI delay<br />Delay type : net<br /></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005589"></a>-------------------------------------------------------------<br />RC Summary for net rw_150_rbuf_1413352<br />-------------------------------------------------------------<br />Number of capacitance : 4<br />Net capacitance       : 0.032299 pF<br />Total rise capacitance: 0.040678 pF<br />Total fall capacitance: 0.040768 pF<br />Number of resistance  : 3<br />Total resistance      : 2394.699463 Ohm<br />-------------------------------------------------------------<br />SI information for rise<br />--------------------------------------------------------------------------------<br />Victim timing window  :  1.3741 ns 1.5132 ns  CCLK<br />--------------------------------------------------------------------------------<br />Attacker              Status Direction Slew      Coupling cap Fanout Voltage Bump <br />Timing window       Clock<br />--------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005590"></a>sbsel_r0_5_rbuf_14106  SY     Fall     0.010500ns  0.009328pF   1  0.935v    0.114257v  1.3739ns 1.4720ns  CCLK<br />addr_r0_11_rbuf_14131  SY     Fall     0.009375ns  0.008941pF   1  0.935v    0.136697v  1.3728ns 1.4745ns  CCLK<br />addr_r1_13_mdrc_193    SY     Fall     0.011750ns  0.000998pF   1  0.935v    0.022721v  1.3648ns 1.4503ns  CCLK<br />--------------------------------------------------------------------------------<br />SI information for fall<br />--------------------------------------------------------------------------------<br />Victim timing window  :  1.3777 ns 1.5183 ns  CCLK<br />--------------------------------------------------------------------------------<br />Attacker               Status Direction  Slew       Coupling cap  Fanout  Voltage  Bump     Timing window       Clock<br />--------------------------------------------------------------------------------<br />sbsel_r0_5_rbuf_14106 SY      Rise       0.010625 ns 0.009328 pF     1    0.935 v    0.114725 v  1.3698 ns 1.4689 ns  CCLK<br />addr_r0_11_rbuf_14131 SY      Rise       0.009375 ns 0.008941 pF     1    0.935 v    0.136790 v  1.3691 ns 1.4698 ns  CCLK<br />addr_r1_13_mdrc_193   SY      Rise       0.011625 ns 0.000998 pF     1    0.935 v    0.022907 v  1.3618 ns 1.4473 ns  CCLK<br />--------------------------------------------------------------------------------<br />Model types<br />--------------------------------------------------------------------------------<br />Net                      Term                    Cell                  Model<br />--------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005591"></a>rw_150_rbuf_14133        rw_150_rbuf_i1013579/Y  BUFH_X16M_A12TS_C35   NLDM<br />rw_150_rbuf_14133        rw_150_rbuf_i25739/A    BUFH_X13M_A12TS_C35   CCS<br />sbsel_r0_5_rbuf_14106    Y                       BUFH_X9M_A12TS_C35    CCS<br />addr_r0_11_rbuf_14131    Y                       BUFH_X11M_A12TS_C35   CCS<br />addr_r1_13_mdrc_193      Y                       BUFH_X11M_A12TS_C35   CCS<br />--------------------------------------------------------------------------------<br />                          Rise        Fall<br />-------------------------------------------------------------<br />Incr Net Delay          : 0.042800 ns 0.040500 ns<br />Net delay               : 0.088500 ns 0.085400 ns<br />From pin transition time: 0.006100 ns 0.006000 ns<br />To pin transition time  : 0.122700 ns 0.123700 ns<br />-------------------------------------------------------------<br />Abbreviative attacker status and filtered reason:<br />-------------------------------------------------------------<br />SY :  Synchronous<br />INF:  Attacker with infinite timing window<br />PE :  Filtered due to physical exclusion<br />UF :  Filtered by user<br />CN :  Filtered because it is a constant net<br />SB :  Filtered due to small bump<br />TA :  Filtered because of timing window does not overlap<br />LC :  Filtered due to logical correlation<br />ACT:  Attacker is Active.<br />-------------------------------------------------------------</pre>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1032125"></a>To access attacker information, you need to make the <a href="../tempusCUI/set_db.html">set_db</a> <a href="../tempusCUI/si_Category_Attributes.html">si_delay_enable_report</a> to <code>true</code> setting.</div>
+
+<h4>
+<a id="pgfId-1032108"></a>Using report_noise -delay {max | min} Command</h4>
+
+<p>
+<a id="pgfId-1010627"></a>You can use the <a href="../tempusCUI/report_noise.html">report_noise</a> <code>&#8211;delay</code> <code>max</code> <code>&#8211;nets</code> <span class="webflare-courier-new" style="white-space:pre"><em>netName</em></span> command to report incremental delay on nets. For example,</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1053059"></a>tempus &gt; report_noise -delay max -nets rdata_r_2x_combined[211]<br />--------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005614"></a>Report Options:<br />--------------------------------------------------------------------------------<br />-type delay<br />-net r_2x_combined[211]<br />-threshold 10 (ps)<br />-delay max<br />[-style default]<br />[-sortBy IncrDelay]<br />--------------------------------------------------------------------------------<br />--------------------------------------------------------------------------------<br />Type  IncrDelay(ps) Delay(NomMax/Max)  Vdd(mV) VictimNet<br />R&#160;&#160;   0.200         2.600/2.800        740     U2307/B {r_2x_combined[211]}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005615"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005616"></a>Type&#160;&#160;IncrDelay(ps)&#160;&#160;Delay(NomMax/Max)&#160;&#160;Vdd(mV)&#160;&#160;VictimInst</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005617"></a>R&#160;&#160;   21.600         184.900/206.500    740      r_2x_combined_reg_211_/Q {SDFFRPQ_X1M_A12TS_C35:CK}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005618"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005619"></a>Constituents:</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005620"></a>      Offset(ps)  Slew(ps)   Xcap(fF)  Edge  Status  Vdd(mV)   Net<br />Cpl:  -           26.125     0.609     F     INF     740  r_o_327__ATobuf_15422<br />Cpl:  -           26.250     0.452     F     INF     740  r_o_323__ATobuf_15426<br />Cpl:  -           26.750     0.360     F     INF     740  r_o_343__ATobuf_15406<br />Cpl:  -           75.125     0.491     F     INF     740  r_2x_combined[298]<br />Cpl:  -           77.875     0.473     F     INF     740  r_2x_combined[235]<br />--------------------------------------------------------------------------------<br />Type  IncrDelay(ps)  Delay(NomMax/Max)  Vdd(mV)  VictimNet<br />R&#160;&#160;      0.000          0.400/0.400      740     r_2x_combined_reg_206_/SI {r_2x_combined[211]}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005621"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005622"></a>Type  IncrDelay(ps)  Delay(NomMax/Max)   Vdd(mV)  VictimInst<br />R&#160;&#160;     21.600        184.900/206.500     740   r_2x_combined_reg_211_/Q {SDFFRPQ_X1M_A12TS_C35:CK}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005623"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005624"></a>Constituents:</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005625"></a>      Offset(ps)   Slew(ps)    Xcap(fF)  Edge  Status Vdd(mV)   Net</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005626"></a>Cpl:          -    26.125      0.609     F     INF    740  r_o_327__ATobuf_15422<br />Cpl:          -    26.250      0.452     F     INF    740  r_o_323__ATobuf_15426<br />Cpl:          -    26.750      0.360     F     INF    740  r_o_343__ATobuf_15406<br />Cpl:          -    75.125      0.491     F     INF    740  r_2x_combined[298]<br />Cpl:          -    77.875      0.473     F     INF    740  r_2x_combined[235]<br />--------------------------------------------------------------------------------<br />Type  IncrDelay(ps)  Delay(NomMax/Max)  Vdd(mV)  VictimNet<br />F        0.300          2.500/2.800      740     U2307/B {r_2x_combined[211]}<br /></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005627"></a>Type  IncrDelay(ps)  Delay(NomMax/Max)   Vdd(mV)  VictimInst<br />F&#160;&#160;     16.500        178.900/195.400     740   r_2x_combined_reg_211_/Q {SDFFRPQ_X1M_A12TS_C35:CK}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005628"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005629"></a>Constituents:</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005630"></a>      Offset(ps)   Slew(ps)    Xcap(fF) Edge Status   Vdd(mV)    Net<br />Cpl:          -    26.375      0.609    R    INF      740  r_o_327__ATobuf_15422<br />Cpl:          -    26.625      0.452    R    INF      740  r_o_323__ATobuf_15426<br />Cpl:          -    27.125      0.360    R    INF      740  r_o_343__ATobuf_15406<br />Cpl:          -    95.500      0.491    R    INF      740  r_2x_combined[298]<br />Cpl:          -    100.375     0.473    R    INF      740  r_2x_combined[235]<br />--------------------------------------------------------------------------------<br />Type   IncrDelay(ps)  Delay(NomMax/Max)  Vdd(mV)   VictimNet<br />F&#160;&#160;   0.000           0.400/0.400        740       r_2x_combined_reg_206_/SI {r_2x_combined[211]}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005631"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005632"></a>Type   IncrDelay(ps)  Delay(NomMax/Max)  Vdd(mV)   VictimInst<br />F&#160;&#160;    16.500         178.900/195.400    740       r_2x_combined_reg_211_/Q {SDFFRPQ_X1M_A12TS_C35:CK}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005633"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005634"></a>Constituents:</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3005635"></a>      Offset(ps)   Slew(ps     Xcap(fF) Edge Status   Vdd(mV)    Net<br />Cpl:          -    26.375      0.609    R    INF      740  r_o_327__ATobuf_15422<br />Cpl:          -    26.625      0.452    R    INF      740  r_o_323__ATobuf_15426<br />Cpl:          -    27.125      0.360    R    INF      740  r_o_343__ATobuf_15406<br />Cpl:          -    95.500      0.491    R    INF      740  r_2x_combined[298]<br />Cpl:          -    100.375     0.473    R    INF      740  r_2x_combined[235]<br />********************************************************************************</pre>
+<h4>
+<a id="pgfId-1010651"></a>Using Signal Integrity Attr<a id="SIAttributes"></a>ibutes with get_property Command</h4>
+
+<p>
+<a id="pgfId-1010652"></a>Signal Integrity information can be reported using SI attributes for both graph-based as well as path-based analysis. These attributes can be queried using the <a href="../tempusCUI/get_property.html">get_property</a> command.</p>
+<p>
+<a id="pgfId-1010653"></a>You need to enable SI attributes by setting the <a href="../tempusCUI/timing_Category_Attributes.html">timing_report_enable_si_debug</a> attribute to <code>true</code>.</p>
+<p>
+<a id="pgfId-1026462"></a>The use model for using SI attributes for reporting is given below:</p>
+<p>
+<a id="pgfId-1010654"></a>For path-based analysis, the SI attributes can be reported as follows:</p>
+<p>
+<a id="pgfId-1026491"></a>The <a href="../tempusCUI/report_timing.html">report_timing</a> <code>&#8211;retime</code> <span class="webflare-courier-new" style="white-space:pre"><em>option</em></span> <code>-collection</code> command creates a property called <code>timing_points</code> for each corresponding stage of the path. The <code>timing_points</code> property is a pointer that contains information for each stage. Each timing point has a property called <code>si_object</code>, which contains the victim information.</p>
+<p>
+<a id="pgfId-1028425"></a>The following example shows a query on signal integrity attributes for timing points:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1010655"></a>set path [report_timing -through $pin -retime path_slew_propagation -collection ]<br />set tps [ get_property $path timing_points ]<br />foreach_in_collection point $tps {<br />     set x [ get_property $point si_object ]<br />     set vic_name [ get_property $x hierarchical_name ]<br />     puts &quot;victim: $vic_name&quot;<br />     set num_agg [ get_property $x num_attackers ]<br />     puts &quot;Number of attackers: $num_agg&quot;<br />     set aggs [ get_property $x attackers ]<br />     puts &quot;attackers info:&quot;<br />     foreach_in_collection current_agg $aggs {<br />          set active [ get_property $current_agg is_active ]<br />          set state [ get_property $current_agg state ]<br />          set agg_name [get_property $current_agg hierarchical_name]<br />          puts &quot;$agg_name $active $state&quot;<br />     }<br />}</pre>
+
+<p>
+<a id="pgfId-1010656"></a>The above use model is valid for graph-based analysis also. Additionally, for GBA the SI attributes can be reported on the receiver input pin directly instead of timing points. Each pin has a property <code>si_victim</code>, which contains the victim SI information. The following example shows the usage of <code>si_victim</code>, where the number of active attackers are being printed for both rise and fall transitions in maximum delay analysis:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1010657"></a>set vicArray [get_property [get_pins $pin] si_victim &#8211;view $view] <br />foreach_in_collection vic $vicArray {<br />     set view_type [get_property $vic view_type]<br />     set tran [get_property $vic transition]<br />     if {$view_type == &quot;Late&quot;} {<br />         if {$tran == &quot;Rise&quot;} {<br />            set num_att [get_property $vic num_active_attackers]<br />            puts &quot;number of active attackers for rise transition: $num_att&quot;<br />         }<br />         if {$tran == &quot;Fall&quot;} {<br />            set num_att [get_property $vic num_active_attackers]<br />            puts &quot;number of active attackers for fall transition: $num_att&quot;<br />         }<br />    }<br />}</pre>
+
+<p>
+<a id="pgfId-1010658"></a>For more information on signal integrity (SI) attributes/properties, refer to <a href="../tempusCUI/get_property.html">get_property</a> command in the <em>Tempus Text Command Reference Guide</em>.</p>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_performingsianalysis.html" id="prev" title="Performing Signal Integrity Delay Analysis">Performing Signal Integrity De ...</a></em></b><b><em><a href="analysisandreporting_siglitchanalysis.html" id="nex" title="SI Glitch Analysis - An Overview">SI Glitch Analysis - An Overvi ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

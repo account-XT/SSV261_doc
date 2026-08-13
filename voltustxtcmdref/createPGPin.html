@@ -1,0 +1,159 @@
+
+<html><head><title>createPGPin</title>
+<meta name="page_sequence" content="15004000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666261" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the text commands in Voltus IC Power Integrity Solution." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="createPGPin" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="GUI," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666261" />
+<meta name="NextFile" content="deselectAll.html" />
+<meta name="Group" content="Voltus Text Command Reference" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="createMarker.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution Text Command Reference -- createPGPin" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="epstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="createMarker.html" title="createMarker">createMarker</a></li><li style="float: right;"><a class="viewPrint" href="voltustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="deselectAll.html" title="deselectAll">deselectAll</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>createPGPin</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span id="createPGPin-createPGPin"></span><span class="confluence-anchor-link" id="createPGPin-createPGPin"></span><code>createPGPin </code><br /><code>[-help] </code><br /><code> {-onDie {-selected | -net <em>netName</em>}<br /> </code><code><span>[-dir {undefined | input | output}]</span></code><br /><code>[-length <em>float</em>]} | </code><br /><code> {<em>pgPinName</em> [-net <em>netName</em>] </code><br /><code>[-geom <em>layerName llx lly urx ury</em>]}&#xa0;<br />[-width <em>float</em>]</code></p>
+
+<p>Creates a power/ground pin as per the specified coordinates of the physical shape.&#xa0;</p>
+
+<p>If the <code>-geom</code> parameter is not specified, only the logical pin is created. <br />If the <code>-geom</code> parameter is specified, the physical pin is also created.</p>
+
+<p>If a logical power/ground pin exists before this command is run, the net name will be ignored if it is specified.<br />If a logical power/ground pin does not exist before this command is run:</p>
+<ul><li>If a net has been specified with the -net parameter, the power/ground pin will be created and attached to the net specified.</li><li>If a net name has not been specified, the net name is assumed to be the same as the pin name. In this case, the power/ground pin will be created and attached to that nets.</li></ul><h4 id="createPGPin-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><tbody><tr><td class="confluenceTd" colspan="2"><code><span>-dir {undefined | input | output}</span></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">
+<p>Specifies the direction of the power/ground pin. You can specify one of the following:</p>
+<ul><li><code>undefined</code>: Specifies that the direction of the pin is not defined.</li><li><code>input</code>: Specifies that the direction of the pin is input.</li><li><code>output</code>: Specifies that the direction of the pin is output.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-geom <em>layerName&#xa0;llx&#xa0;lly&#xa0;urx&#xa0;ury</em></code></td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the geometry of the physical pin.</p>
+<ul><li><em><code>layerName</code></em>: Specifies the layer on which the power/ground pin will be created. <br />The <em><code>layerId</code> </em>can range from 1 to n, where, the maximum value for n is the top most routing layer.<br /><strong>Note:</strong> Layers can also be specified using layer names (for example, Metal1, Metal2, Metal3) or the LEF layer names.</li></ul><ul><li><em><code>llx</code></em>: Specifies the lower-left x coordinate, in microns, of the power/ground pin.</li><li><em><code>lly</code></em>: Specifies the lower-left y coordinate, in microns, of the power/ground pin.</li><li><em><code>urx</code></em>: Specifies the upper-right x coordinate, in microns, of the power/ground pin.</li><li><em><code>ury</code></em>: Specifies the upper-right y coordinate, in microns, of the power/ground pin.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Outputs a brief description that includes the type and default information for each <em><code>createPGPin</code> </em>parameter.</p>
+
+<p>For a detailed description of the command and all of its parameters, use the man command: <br /><code>man createPGPin</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-length <em>float</em></code></td>
+<td class="confluenceTd">
+<p>Specifies the length of the power/ground pin.<br /><em>Default</em>: Same as the width</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-net <em>netName</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">Specifies the name of the net to which the power/ground pin will be attached.</td>
+</tr>
+<tr><td class="confluenceTd"><code>-onDie</code></td>
+<td class="confluenceTd">Creates &#xa0;power/ground pin on the die.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>pgPinName</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the power/ground pin.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-selected</code></td>
+<td class="confluenceTd">Creates &#xa0;power/ground pin on the die, for all selected stripes.</td>
+</tr>
+<tr><td class="confluenceTd"><code>-width <em>float</em></code></td>
+<td class="confluenceTd">
+<p>Specifies the width of the power/ground pin.<br /><em>Default</em>: width of the stripe.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="createPGPin-Examples">Examples</h4>
+<ul><li>This example is for the case where a logical pin name has not been defined prior to running the command and a net name has been specified. <br />The following command creates a power/ground pin named pgpin_A on layer Metal2 and attaches the pin to the net net_A. The pin coordinates are 7 (llx), 3 (lly), 17 (urx), and 23 (ury). <br /><code>createPGPin -geom Metal2 7 3 17 23 -net net_A pgpin_A</code></li></ul><ul><li>This example is for the case where a logical pin name has not been defined prior to running the command and a net name has not been specified. <br />The following command creates a power/ground pin named pgpin_B on layer Metal3 and attaches the pin to the net pgpin_B. The pin coordinates are 7 (llx), 3 (lly), 17 (urx), and 23 (ury). As the net name was not specified, the net name is assumed to be the same as the pin name. <br /><code>createPGPin -geom Metal3 7 3 17 23 pgpin_B</code></li></ul><ul><li>This example is for the case where a logical pin name has already been defined prior to running the command. <br />The following command creates a power/ground pin named pgpin_C on layer Metal5. The pin coordinates are 7 (llx), 3 (lly), 17 (urx), and 23 (ury). In this case, the logical pin name was already defined prior to running the command, and so a net name is not required. Even if a net name were specified, it would have been ignored. <br /><code>createPGPin -geom Metal5 7 3 17 23 pgpin_C</code></li></ul><ul><li>This example is for the case where the net name is not specified and the -geom parameter has not been specified. <br />The following command creates a logical pin names pgpin_D. The net name is assumed to be the same as the pin name and no physical pin is created. <br /><code>createPGPin pgpin_D</code><br /><br /></li><li>This example is for the case where the pin is created on the die attached to net vdd with a width of 2 and a length of 3.<br /><code>createPGPin -onDie -net vdd -width 2 -length 3</code><br />&#xa0;&#xa0;</li></ul><h4 id="createPGPin-RelatedTopics">Related Topics</h4>
+<ul><li><span class="confluence-link">&quot;Power Menu</span>&quot; chapter of the<em> Innovus Menu Reference</em></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="createMarker.html" id="prev" title="createMarker">createMarker</a></em></b><b><em><a href="deselectAll.html" id="nex" title="deselectAll">deselectAll</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

@@ -1,0 +1,218 @@
+
+<html><head><title>monitor_hosts</title>
+<meta name="page_sequence" content="15002004" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287274" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="monitor_hosts" />
+<meta name="Keywords" content="monitor hosts,distributed processing,mmmc,host,monitor" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="General Commands," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287274" />
+<meta name="NextFile" content="report_disk.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="get_version.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- monitor_hosts" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="get_version.html" title="get_version">get_version</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="report_disk.html" title="report_disk">report_disk</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>monitor_hosts</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>monitor_hosts<span class="confluence-anchor-link" id="monitor_hosts-monitor_hosts"></span><span id="monitor_hosts-monitor_hosts"></span></code><br /><code> [-help]</code><br /><code> [-log&#xa0;<em>string</em>]</code><br /><code> [-overwrite]</code><br /><code> [-period&#xa0;<em>integer</em>]</code></p>
+
+<p>Monitors hosts and periodically prints the memory or CPU usage, and temporary disk speed of the hosts.&#xa0;This command automatically determines the hosts to be monitored. By default, after every 60 seconds hosts are monitored and the disk information is written to a log file.&#xa0;</p>
+
+<p>This&#xa0;command is helpful to analyze and debug the performance of a session and helps check the machine load, the available memory, and track possible reasons for a slow down or unexpected exit during a session.&#xa0;</p>
+
+<p>The&#xa0;<code>monitor_hosts&#xa0;</code>command is supported in STA, DSTA, and DMMMC flows.&#xa0;</p>
+
+<p>The&#xa0;<code>monitor_hosts</code> command output is described below:</p>
+<div class="table-wrap"><table class="relative-table wrapped confluenceTable" style="width: 59.2233%;"><colgroup><col style="width: 14.9121%;" /> <col style="width: 32.544%;" /><col style="width: 26.9168%;" /><col style="width: 25.4162%;" /></colgroup><tbody><tr><th class="confluenceTh">
+<p>Status Keys/Tags</p>
+</th><th class="confluenceTh">
+<p>Memory (%age of Available Memory on the corresponding host)</p>
+</th><th class="confluenceTh">
+<p>CPU Usage</p>
+</th><th class="confluenceTh">
+<p>Disk Speed (Mb/sec)</p>
+</th></tr>
+<tr><td class="confluenceTd">
+<p>E &#8211; Excellent</p>
+</td>
+<td class="confluenceTd">
+<p>Memory used less than 75%</p>
+</td>
+<td class="confluenceTd">
+<p>CPU Usage less than 85%</p>
+</td>
+<td class="confluenceTd">
+<p>Disk speed more than 250</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>G &#8211; Good</p>
+</td>
+<td class="confluenceTd">
+<p>Memory used between 75% and 85%</p>
+</td>
+<td class="confluenceTd">
+<p>CPU Usage between 85% to 95%</p>
+</td>
+<td class="confluenceTd">
+<p>Disk speed between 125 and 250</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>B &#8211; Bad (*)</p>
+</td>
+<td class="confluenceTd">
+<p>Memory used between 85% and 99%</p>
+</td>
+<td class="confluenceTd">
+<p>CPU Usage between 95% to 105%</p>
+</td>
+<td class="confluenceTd">
+<p>Disk speed between 50 and 125</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>T &#8211; Terrible (**)</p>
+</td>
+<td class="confluenceTd">
+<p>Memory used above 99%</p>
+</td>
+<td class="confluenceTd">
+<p>CPU Usage more than 105%</p>
+</td>
+<td class="confluenceTd">
+<p>Disk speed less than 50</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p>The <code>monitor_hosts</code> command output will show host/machine specific information and not process specific information. So if multiple processes are running on the same machine, then the command output will show the combined impact of all the processes, on the machine&#8217;s memory, machine&#8217;s CPU usage etc.</p>
+
+<p>The &#8220;T&#8221; or &#8220;B&#8221; state denotes that a session may be thrashing or may not give the best results with respect to the performance.&#xa0;For better performance, you must re-run this command with better machines.</p>
+
+<p><strong style="letter-spacing: 0.0px;">Parameters</strong></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd">
+<p>Prints out the command usage. For a detailed description of the command and all of its parameters, use the <code>man</code> command: <code>man monitor_hosts</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-log&#xa0;<em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the log file name.</p>
+
+<p><em>Default</em>: host-monitor.log</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-overwrite</code></p>
+</td>
+<td class="confluenceTd">
+<p>Overwrites the log file, if it already exists.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-period <em>integer</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the sampling period after which hosts will be monitored.</p>
+
+<p><em>Default</em>: 60</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><strong>Examples</strong></p>
+<ul><li>A sample monitor log file is shown below:<br />
+<p><code>Status keys: E excellent, G good, B bad, T terrible.</code><br /><code>Memory values:</code><br /><code>total = Real memory of host</code><br /><code>progs = Real memory used by processes, including swappable cache</code><br /><code>used = Real memory used by processes, excluding swappable cache</code><br /><code>Started at: 17/04/25 04:24:22</code><br /><code>lgi15(0) TMPDIR is : /tmp/tempus_temp_20836_lgi15_ark_lEAcvw</code></p>
+
+<p><code>============= ======== ======================== ========================</code><br /><code>Host &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;CPU &#xa0; &#xa0; &#xa0;Memory (GB) &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;TMPDIR (GB) &#xa0; &#xa0; &#xa0;(Mb/s)</code><br /><code>name(id) &#xa0; &#xa0; &#xa0;util % &#xa0; total progs used %used &#xa0; total &#xa0; avail &#xa0; &#xa0;rate</code><br /><code>============= ======== ===== ===== ===== ====== ========================</code><br /><code>04:24:52</code><br /><code>lgi15(0) &#xa0; &#xa0; &#xa0; &#xa0;6 E &#xa0; &#xa0; 32 &#xa0; 24 &#xa0; &#xa0;15 &#xa0; 46 E &#xa0; &#xa0;100.74 &#xa0;94.67 E &#xa0;262 E</code></p>
+</li></ul><div><span style="font-family: SFMono-Medium , &quot;SF Mono&quot; , &quot;Segoe UI Mono&quot; , &quot;Roboto Mono&quot; , &quot;Ubuntu Mono&quot; , Menlo , Courier , monospace;"><br /></span></div>
+<div><ul><li><span><span>The following example output&#xa0;shows that host &#8220;sjfqos011&#8221; has very high CPU utilization (123%) because of multiple clients (client 1 and client 3) running on same host. Also, %used more than 99T&#xa0;shows that the memory is ~100% consumed on the &#8220;sjfqos011&#8221; and &#8220;sjfqos010&#8221; host machines.<br /></span></span>
+<p><code>Status keys: E excellent, G good, B bad, T terrible.</code><br /><code>Memory values:</code><br /><code>total = Real memory of host</code><br /><code>progs = Real memory used by processes, including swappable cache</code><br /><code>used = Real memory used by processes, excluding swappable cache</code><br /><code>Started at: 20/07/08 07:10:10</code><br /><code>sjfqos009(0) TMPDIR is : /tmp/ssv_tmpdir_25921_eYAlmJ</code><br /><code>sjfqos011(1) TMPDIR is : /tmp/ssv_tmpdir_26114_ZuTGDp</code><br /><code>sjfqos010(2) TMPDIR is : /tmp/ssv_tmpdir_26124_pjq6Cp</code><br /><code>sjfqos011(3) TMPDIR is : /tmp/ssv_tmpdir_26160_vxwbEp</code><br /><code>sjfqos012(4) TMPDIR is : /tmp/ssv_tmpdir_26173_FC8xvo</code></p>
+
+<p><code>======================================================</code><br /><code>Host CPU Memory (GB) TMPDIR (GB) (Mb/s)</code><br /><code>name(id) util % total progs used %used total avail rate</code><br /><code>============= ======= === ===== ===== ====== ======= =</code><br /><code>07:10:10</code><br /><code><span style="color:var(--ds-text,#172b4d);">sjfqos009(0)</span> 12 E 378 262 128 34 E 274.50 254.26 E N/A</code><br /><code>sjfqos011(1) 16 E 378 262 138 36 E 274.50 254.25 E N/A</code><br /><code>sjfqos010(2) 19 E 378 262 125 33 E 274.50 254.25 E N/A</code><br /><code>sjfqos011(3) 16 E 378 262 138 36 E 274.50 254.25 E N/A</code><br /><code>sjfqos012(4) 62 E 378 262 118 31 E 274.50 254.25 E N/A</code><br /><code>07:11:10</code><br /><code>sjfqos009(0) 12 E&#xa0; 378 262 133 36 E 274.50 254.26 E 127</code><br /><code>sjfqos011(1) <strong><span style="color:var(--ds-background-accent-red-bolder,#c9372c);">123 T</span></strong> 378 262 168 44 E 274.50 245 E&#xa0; &#xa0; 145</code><br /><code>sjfqos010(2) 91 G&#xa0; 378 262 138 36 E 274.50 254.25 E 103</code><br /><code>sjfqos011(3) 123 T 378 262 143 38 E 274.50 245 E&#xa0; &#xa0; &#xa0;14</code><br /><code>sjfqos012(4) 82 E&#xa0; 378 262 131 35 E 274.50 254.25 E 135</code><br /><code>07:12:10</code><br /><code>sjfqos009(0) 12 E 378 262 138 36 E&#xa0; 274.50 254.26 E&#xa0; 125</code><br /><code>sjfqos011(1) 99 B 378 378 378 <span style="color:var(--ds-background-accent-red-bolder,#c9372c);"><strong>100 T</strong></span> 274.50 254.25 E&#xa0; 145</code><br /><code>sjfqos010(2) 97 B 378 262 373 <strong><span style="color:var(--ds-background-accent-red-bolder,#c9372c);">99 T</span></strong>&#xa0; 274.50 254.25 E&#xa0; 103</code><br /><code>sjfqos011(3) 99 B 378 378 378 <span style="color:var(--ds-background-accent-red-bolder,#c9372c);"><strong>100 T</strong></span> 274.50 254.25 E&#xa0; 12</code><br /><code>sjfqos012(4) 86 G 378 262 138 36 E&#xa0; 274.50 254.25 E&#xa0; 133</code></p>
+</li></ul></div>
+<h4 id="monitor_hosts-RelatedCommands">Related Commands</h4>
+<ul class="childpages-macro"><li><code><a class="external-link" href="../tempustxtcmdref/set_multi_cpu_usage.html" rel="nofollow">set_multi_cpu_usage</a></code></li><li><code><a class="external-link" href="../tempustxtcmdref/set_distribute_mmmc_mode.html" rel="nofollow">set_distribute_mmmc_mode</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="get_version.html" id="prev" title="get_version">get_version</a></em></b><b><em><a href="report_disk.html" id="nex" title="report_disk">report_disk</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

@@ -1,0 +1,441 @@
+
+<html><head><title>change_cell</title>
+<meta name="page_sequence" content="26007000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287530" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="change_cell" />
+<meta name="Keywords" content="cell change,cell mapping,evaluate timing for instance,manual eco,cell resize,cell upsize,cell downsize" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="ECO," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287530" />
+<meta name="NextFile" content="change_inst_name.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="attach_term.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- change_cell" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="attach_term.html" title="attach_term">attach_term</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="change_inst_name.html" title="change_inst_name">change_inst_name</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>change_cell</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>change_cell&#xa0;<span id="change_cell-change_cell"></span>&#xa0;<span class="confluence-anchor-link" id="change_cell-change_cell"></span>&#xa0;<br /><span>[-help]</span><br /><span>[-pinmap &lt;string&gt;]</span><br /><span>{-cell &lt;string&gt; | -upsize | -downsize | -evaluate_all }</span><br /><span>[-evaluate_only | -evaluate_all ]</span><br /><span>[-early | -late ]</span><br /><span>[-loc {x y} [-orient &lt;string&gt;]]</span><br /><span>[-sort_by {slack delay trans area} [-max_cells &lt;integer&gt;]]</span><br /><span>{-inst &lt;string&gt; | -from &lt;string&gt; | -from_rise &lt;string&gt; | -from_fall &lt;string&gt;}</span><br /><span>{-inst &lt;string&gt; | -to &lt;string&gt; | -to_rise &lt;string&gt; | -to_fall &lt;string&gt;} [{[-from &lt;string&gt;] [-from_rise &lt;string&gt;] [-from_fall &lt;string&gt;] [-to &lt;string&gt;] [-to_rise &lt;string&gt;] [-to_fall &lt;string&gt;]} [{[-timing_type {combinational combinational_fall combinational_rise falling_edge hold_falling hold_rising recovery_falling recovery_rising removal_falling removal_rising rising_edge setup_falling setup_rising}] [-view &lt;string&gt;] [-early ] [-late ] [-output_as_tcl ] [-sort_by {slack delay trans area}]}]] [{[-evaluate_all ] [-evaluate_only ]} [{[-from &lt;string&gt;] [-from_rise &lt;string&gt;] [-from_fall &lt;string&gt;] [-to &lt;string&gt;] [-to_rise &lt;string&gt;] [-to_fall &lt;string&gt;] [-timing_type {combinational combinational_fall combinational_rise falling_edge hold_falling hold_rising recovery_falling recovery_rising removal_falling removal_rising rising_edge setup_falling setup_rising}] [-view &lt;string&gt;] [-early ] [-late ] [-output_as_tcl ]} [-sort_by {slack delay trans area}]]]</span>&#xa0;</code></p>
+
+<p>Changes the cell of an instance. In multi-mode multi-corner (MMMC) mode, this command changes the cell and updates timing in all views. This command upsizes or downsizes the specified instance based on the available footprint. Cell mapping is also possible as long as the output pins are functionally equivalent. This command also checks for and observes power domains.</p>
+
+<p>This command has the following features:</p>
+<ul><li>Changes the cell</li><li>Performs incremental timing updates of the paths passing through the cell</li></ul><ul><li>Supports spef, LEF, and DEF-based flows</li></ul>
+<p><strong>Note:&#xa0;</strong></p>
+
+<p>You do not need to provide physical information (LEF/DEF) to perform ECO with this command.</p>
+<h4 id="change_cell-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="wrapped relative-table confluenceTable" style="width: 100.0%;"><colgroup><col style="width: 19.4608%;" /><col style="width: 80.4896%;" /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">
+<p>Outputs a brief description that includes type and default information for each <code>change_cell</code> parameter.</p>
+
+<p>For a detailed description of the command and all of its parameters, use the <code>man</code> command:</p>
+
+<p><code>man change_cell</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-cell <em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the name of the new cell of the given instance. The function of the original cell must match the function of the new cell for all the outputs used by the old cell. The number of input pins must be the same for both the original and new cells.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-downsize</code></p>
+</td>
+<td class="confluenceTd">
+<p>Downsizes the specified instance to the next available cell in the same footprint unless the specified cell is already of the lowest driving strength. Downsizing an instance on the noncritical path can reduce the loading of its driver on the critical path.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-early</span></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies that timing will be evaluated for early analysis. In such a case, only the active hold analysis views will be considered. If this parameter is not specified, timing will be evaluated for late analysis.</p>
+
+<p><strong>Note</strong>: This parameter must be specified with&#xa0;<code>-evaluate_only</code>/<code>-evaluate_all</code>&#xa0;only.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-evaluate_all</span></code></td>
+<td class="confluenceTd" colspan="1">Allows evaluating new timing(s) within the instance using all functionally equivalent library cell(s) for the instance.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-evaluate_only</span></code></td>
+<td class="confluenceTd" colspan="1">Allows evaluating new timing within the instance using the specified library cell for the instance.&#xa0;</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-from&#xa0;<em>tring</em></span></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the input pin for the instance to be evaluated for resize. B<span>oth the rise and fall transitions are </span><span>considered in the timing report.</span></p>
+
+<p><strong>Note</strong>: This parameter must be specified with&#xa0;<code>-evaluate_only</code>/<code>-evaluate_all</code>&#xa0;only.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><span><code>-from_fall <em>string</em></code>&#xa0;</span></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the input pin for the instance to be evaluated for resize. Only the fall transition is considered in the timing report.</p>
+
+<p><strong>Note</strong>: This parameter must be specified with&#xa0;<code>-evaluate_only</code>/<code>-evaluate_all</code>&#xa0;only.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-from_rise <em>string</em></span></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the input pin for the instance to be evaluated for resize. Only the rise transition is considered in the timing report.</p>
+
+<p><strong>Note</strong>: This parameter must be specified with&#xa0;<code>-evaluate_only</code>/<code>-evaluate_all</code>&#xa0;only.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-inst <em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the name of the instance to be resized.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-late</span></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies that timing will be evaluated for late analysis. In such a case, only the active setup analysis views will be considered. If this parameter is not specified, timing will still be evaluated for late analysis.</p>
+
+<p><strong>Note</strong>: This parameter must be specified with&#xa0;<code>-evaluate_only</code>/<code>-evaluate_all</code>&#xa0;only.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-loc {x y}</code></td>
+<td class="confluenceTd" colspan="1"><span style="color:var(--ds-text,#000000);">Specifies the legalized location where the instance will be placed.</span></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-max_cells &lt;integer&gt;</code></td>
+<td class="confluenceTd" colspan="1">
+<p><span>Specifies the maximum number of improving and degrading cells (each) to be reported for evaluation.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-orient <em>string</em></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the legalized orientation for the instance.</p>
+
+<p>You can specify this parameter with the&#xa0;<code>-loc</code>&#xa0;parameter only.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-output_as_tcl</span></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Returns the evaluation result as a TCL list. By default, the command returns a text-based format.</p>
+
+<p><span style="color:var(--ds-text,#000000);"><strong>Note</strong>: This parameter must be specified with&#xa0;<code>-evaluate_only</code>/<code>-evaluate_all</code>&#xa0;only.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-pinmap <em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the pin mapping for the new cell based on the old cell. This option is required if the new master cell has different pin names than the original cell. The net connected to <code><em>oldpin1 </em></code>of the original cell should be connected to <code><em>newpin1 </em></code>of the new cell, and so forth.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">
+<p><code>-sort_by {slack delay trans area}</code></p>
+</td>
+<td class="confluenceTd" colspan="1"><span>Specifies the sorting order for </span><span>evaluation output.</span></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-timing_type &lt;timing_type&gt;</span></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the type of the timing arc to be used for timing evaluation between the specified&#xa0;<code>-from/-from_rise/-from_fall </code>and&#xa0;<code>-to/-to_rise/_to_fall pins</code>. The software will check for valid timing_types:</p>
+<ul><li>If only one arc is available, it will proceed.</li><li>If multiple arcs are available, you need to specify which timing_type to be considered via this parameter.</li></ul>
+<p><strong>Note</strong>: This parameter must be specified with&#xa0;<code>-evaluate_only/-evaluate_all</code> only. For valid timing types, refer to the section,&#xa0;<strong>List of Valid Timing-types<span style="color:var(--ds-text,#000000);">.</span></strong></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-to <em>string</em></span></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specify one of the following:</p>
+<ul><li>The output pin of the instance to be evaluated for resize, or</li><li>The input pin for the instance driven by the instance to be evaluated for resize.</li></ul>
+<p><strong>Note</strong>: This parameter must be specified with&#xa0;<code>-evaluate_only</code>/<code>-evaluate_all</code>&#xa0;only.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><span><code>-to_fall </code><em><code>string</code> </em></span></td>
+<td class="confluenceTd" colspan="1"><span>Specifies the name of the target pin of the cell to&#xa0;</span><span>be resized, or the input pin of the next-stage </span><span>cell. Only the fall transition is considered in the </span><span>timing report.</span></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-to_rise <em>string</em></span></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the name of the target pin of the cell to be resized, or the input pin of the next-stage cell. Only the rise transition is considered in the timing report.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-upsize</code></p>
+</td>
+<td class="confluenceTd">
+<p>Upsizes the specified instance with the next available cell in the same footprint unless the specified cell is already of the highest driving strength. Upsizing an instance that drives a large load can improve the driver delay and the transition time at the receivers.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-view <em>string</em></span></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the active analysis views for which timing must be evaluated. If this parameter is not specified, timing will be evaluated for all active analysis views and results reported for the worst view.</p>
+
+<p><strong>Note</strong>: This parameter must be specified with&#xa0;<code>-evaluate_only or -evaluate_all&#xa0;only</code>.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="change_cell-Examples">Examples</h4>
+<ul><li>
+<p>The following command substitutes the cell for instance&#xa0;<code>DTMF_INST/ RESULTS_CONV_INST/FE_PHC268_r1477_1_</code>&#xa0;with cell&#xa0;<code>DLY3X2</code>. Pin A maps to pin I, and pin Y maps to pin O of the new cell.&#xa0;</p>
+<code>tempus&gt; change_cell -inst DTMF_INST/RESULTS_CONV_INST/FE_PHC268_r1477_1_ -cell DLY3X2 -pinmap {A I Y O}&#xa0;</code></li><li>
+<p>The following command substitutes the cell for instance&#xa0;<code>DTMF_INST/ RESULTS_CONV_INST/FE_PHC268_r1477_1_</code>&#xa0;with cell&#xa0;<code>BUFX2</code>.<br /><code>tempus&gt; change_cell -inst DTMF_INST/RESULTS_CONV_INST/FE_PHC268_r1477_1_ -cell BUFX2</code></p>
+</li><li>
+<p>The following command upsizes the cell, for instance <code>DTMF_INST/ RESULTS_CONV_INST/FE_PHC268_r1477_1_</code>&#xa0;and places the instance at the given location.<br /><code>tempus&gt; change_cell -inst DTMF_INST/RESULTS_CONV_INST/FE_PHC268_r1477_1_ -upsize -loc {23.45 98.12}</code></p>
+</li><li>The following command evaluates timing for instance,&#xa0;<code>buf2,</code>&#xa0;using library cell&#xa0;<code>BUFX2</code>&#xa0;(prints delay for A to Y arc, slack at A pin, and slew at Y pin, corresponding to the worst timing path) : <br /><code><br />tempus&gt; change_cell -cell BUFX1 -from buf2/A -to buf2/Y -evaluate_only</code><br /><code>From Pin: buf2/A</code><br /><code>To Pin: buf2/Y</code><br /><code>----------------------------------------------------------------------------------------------------</code><br /><code>Library-cell &#xa0;From &#xa0; To &#xa0; &#xa0;Arc-type &#xa0; &#xa0; &#xa0; Delay &#xa0; Timing-slack &#xa0;Trans-slack &#xa0; Worst-view </code><br /><code>----------------------------------------------------------------------------------------------------</code><br /><code>*BUFX1 &#xa0; &#xa0; &#xa0; &#xa0;rise &#xa0; rise &#xa0;combinational &#xa0;0.1036 &#xa0;-1.9976 &#xa0; &#xa0; &#xa0; 4.4498 &#xa0; &#xa0; &#xa0; &#xa0;view1</code><br /><code>BUFX2 &#xa0; &#xa0; &#xa0; &#xa0; fall&#xa0; &#xa0;fall&#xa0; combinational &#xa0;0.0963 &#xa0;-1.8642 &#xa0; &#xa0; &#xa0; 4.8364 &#xa0; &#xa0; &#xa0; &#xa0;view1</code><br /><code>----------------------------------------------------------------------------------------------------</code><br /><code>(Note: A &#8216;*&#8217; preceding an entry indicates data for the present library cell of the instance.)</code></li></ul><ul><li>The following command&#xa0;evaluates timing for instance,&#xa0;<code>TDSP_CORE_INST/TDSP_CORE_GLUE_INST/p1929A341,</code>&#xa0;using library cell&#xa0;<code>INR2D2</code>&#xa0;for combinational timing arc and prints the delay, estimated slack and slew (for the worst timing path across all views)<br /><code>tempus&gt; change_cell -cell INR2D2 -from TDSP_CORE_INST/TDSP_CORE_GLUE_INST/p1929A341/B1 -to TDSP_CORE_INST/TDSP_CORE_GLUE_INST/p1929A341/ZN -evaluate_only -timing_type combinational</code><br /><br /><code>From Pin: TDSP_CORE_INST/TDSP_CORE_GLUE_INST/p1929A341/B1</code><br /><code>To Pin:&#xa0;&#xa0; TDSP_CORE_INST/TDSP_CORE_GLUE_INST/p1929A341/ZN</code><br /><code>-----------------------------------------------------------------------------------------------&#xa0; &#xa0; &#xa0;</code><br /><code>Library-cell&#xa0;&#xa0;&#xa0; From &#xa0; To &#xa0; &#xa0;Arc-type &#xa0; &#xa0; &#xa0; &#xa0;Delay &#xa0; &#xa0;Timing-slack&#xa0; Trans-slack &#xa0; Worst-view</code><br /><code>-----------------------------------------------------------------------------------------------</code><br /><code>*INR2D1 &#xa0; &#xa0; &#xa0; &#xa0; fall &#xa0; rise&#xa0; combinational &#xa0; 0.1793&#xa0;&#xa0; 1.4719 &#xa0; &#xa0; &#xa0; &#xa0;0.7492 &#xa0; &#xa0; &#xa0; &#xa0;view1</code><br /><code>INR2D2 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;fall &#xa0; rise&#xa0; combinational &#xa0; 0.1206&#xa0;&#xa0; 1.5431 &#xa0; &#xa0; &#xa0; &#xa0;0.8401 &#xa0; &#xa0; &#xa0; &#xa0;view1</code><br /><code>-----------------------------------------------------------------------------------------------</code></li></ul><ul><li>The following command evaluates timing for instance,&#xa0;<code>TDSP_CORE_INST/TDSP_CORE_GLUE_INST/p1929A341</code>,&#xa0;using library cell&#xa0;<code>INR2D2&#xa0;</code>for view1 and prints the delay, estimated slack and slew (for the worst slack timing path corresponding to the specified fall/rise transitions)&#xa0;<code>-from_fall TDSP_CORE_INST/TDSP_CORE_GLUE_INST/p1929A341/B1 -to_rise TDSP_CORE_INST/TDSP_CORE_GLUE_INST/p1929A341/ZN</code><br /><br /><code>tempus&gt; change_cell -cell INR2D2 -from TDSP_CORE_INST/TDSP_CORE_GLUE_INST/p1929A341/B1 -to TDSP_CORE_INST/TDSP_CORE_GLUE_INST/p1929A341/ZN -evaluate_only -view view1</code><br /><br /><code>From Pin: TDSP_CORE_INST/TDSP_CORE_GLUE_INST/p1929A341/B1</code><br /><code>To Pin: TDSP_CORE_INST/TDSP_CORE_GLUE_INST/p1929A341/ZN</code><br /><code>-----------------------------------------------------------------------------------------------</code><br /><code>Library-cell &#xa0; &#xa0;From &#xa0; To &#xa0; &#xa0; Arc-type &#xa0; &#xa0; &#xa0; &#xa0;Delay &#xa0; &#xa0;Timing-slack &#xa0;Trans-slack &#xa0; Worst-view</code><br /><code>-----------------------------------------------------------------------------------------------</code><br /><code>*INR2D1 &#xa0; &#xa0; &#xa0; &#xa0; fall &#xa0; rise &#xa0; combinational &#xa0; 0.1793 &#xa0; 1.4719 &#xa0; &#xa0; &#xa0; &#xa0;0.7492 &#xa0; &#xa0; &#xa0; &#xa0;view1</code><br /><code>INR2D2 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;fall &#xa0; rise &#xa0; combinational &#xa0; 0.1206 &#xa0; 1.5431 &#xa0; &#xa0; &#xa0; &#xa0;0.8401 &#xa0; &#xa0; &#xa0; &#xa0;view1</code><br /><code>-----------------------------------------------------------------------------------------------</code></li></ul><ul><li>The following command evaluates timing for instance,&#xa0;<code>TDSP_CORE_INST/TDSP_CORE_GLUE_INST/p1929A341</code>, using library cell,&#xa0;<code>INR2D2</code>:<br /><br /><code>tempus&gt; change_cell -cell INR2D2 -from</code><br /><code>TDSP_CORE_INST/TDSP_CORE_GLUE_INST/p1929A341/B1 -to </code><br /><code>TDSP_CORE_INST/TDSP_CORE_GLUE_INST/p1929A341/ZN -evaluate_only -output_as_tcl</code><br /><code>############################</code><br /><code>TDSP_CORE_INST/TDSP_CORE_GLUE_INST/p1929A341/B1 </code><br /><code>TDSP_CORE_INST/TDSP_CORE_GLUE_INST/p1929A341/ZN {{*INR2D1 fall rise combinational 0.1793 1.4719 0.7492 view1} {INR2D2 fall rise combinational 0.1206 1.5431 0.8401 view1}}</code><br /><code>###########################</code></li></ul><ul><li>The following command evaluates timing(s) using all functionally equivalent library cell(s) for instance,&#xa0;<code>TDSP_CORE_INST/TDSP_CORE_GLUE_INST/p1929A341,&#xa0;</code>and prints the delay, estimated slack and slew (for worst timing path for each individual cell):<br /><br /><code>tempus&gt; change_cell -from TDSP_CORE_INST/TDSP_CORE_GLUE_INST/p1929A341/B1 -to TDSP_CORE_INST/TDSP_CORE_GLUE_INST/p1929A341/ZN -evaluate_all</code><br /><code>From Pin: TDSP_CORE_INST/TDSP_CORE_GLUE_INST/p1929A341/B1</code><br /><code>To Pin: TDSP_CORE_INST/TDSP_CORE_GLUE_INST/p1929A341/ZN</code><br /><code>-------------------------------------------------------------------------------------------------</code><br /><code>Library-cell &#xa0; From &#xa0; &#xa0;To &#xa0; &#xa0; &#xa0;Arc-type &#xa0; &#xa0; &#xa0; Delay &#xa0; &#xa0; Timing-slack &#xa0; Trans-slack &#xa0; Worst-view</code><br /><code>-------------------------------------------------------------------------------------------------</code><br /><code>*INR2D1 &#xa0; &#xa0; &#xa0; &#xa0;fall &#xa0; &#xa0;rise &#xa0; &#xa0;combinational &#xa0;0.1793 &#xa0; &#xa0;1.4719 &#xa0; &#xa0; &#xa0; &#xa0; 0.7492 &#xa0; &#xa0; &#xa0; &#xa0;view1</code><br /><code>INR2D4 &#xa0; &#xa0; &#xa0; &#xa0; rise &#xa0; &#xa0;fall &#xa0; &#xa0;combinational &#xa0;0.0972 &#xa0; &#xa0;1.5457 &#xa0; &#xa0; &#xa0; &#xa0; 0.8742 &#xa0; &#xa0; &#xa0; &#xa0;view1<br /><code>INR2D2 &#xa0; &#xa0; &#xa0; &#xa0; fall &#xa0; &#xa0;rise &#xa0; &#xa0;combinational &#xa0;0.1206 &#xa0; &#xa0;1.5431 &#xa0; &#xa0; &#xa0; &#xa0; 0.8401 &#xa0; &#xa0; &#xa0; &#xa0;view1</code><br /><code>INR2D4HVT &#xa0; &#xa0; &#xa0;fall &#xa0; &#xa0;rise &#xa0; &#xa0;combinational &#xa0;0.1472 &#xa0; &#xa0;1.4934 &#xa0; &#xa0; &#xa0; &#xa0; 0.8635 &#xa0; &#xa0; &#xa0; &#xa0;view1</code><br /><code>INR2D2HVT &#xa0; &#xa0; &#xa0;rise &#xa0; &#xa0;fall &#xa0; &#xa0;combinational &#xa0;0.1749 &#xa0; &#xa0;1.4763 &#xa0; &#xa0; &#xa0; &#xa0; 0.7981 &#xa0; &#xa0; &#xa0; &#xa0;view1</code><br /><code>INR2D1HVT &#xa0; &#xa0; &#xa0;fall &#xa0; &#xa0;rise &#xa0; &#xa0;combinational &#xa0;0.2645 &#xa0; &#xa0;1.3490 &#xa0; &#xa0; &#xa0; &#xa0; 0.6334 &#xa0; &#xa0; &#xa0; &#xa0;view1</code><br /><code>-------------------------------------------------------------------------------------------------</code></code></li><li>
+<p>The following command reports evaluation results (for A to Y arc) of resizing instance, <code>TDSP_CORE_GLUE_INST/FE_OFC29_mdr_3_</code>, with each of all the equivalent cells in the library:</p>
+
+<p><code>change_cell -from TDSP_CORE_GLUE_INST/FE_OFC29_mdr_3_/A -to TDSP_CORE_GLUE_INST/FE_OFC29_mdr_3_/Y -evaluate_all</code></p>
+
+<p><code>From Pin: TDSP_CORE_GLUE_INST/FE_OFC29_mdr_3_/A</code></p>
+
+<p><code>To Pin: &#xa0; TDSP_CORE_GLUE_INST/FE_OFC29_mdr_3_/Y</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>&#xa0;Library-cell&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; From&#xa0; To &#xa0; Arc-type &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Delay &#xa0; Timing-slack&#xa0; Trans-slack&#xa0; &#xa0; &#xa0; Area &#xa0; &#xa0; &#xa0; Worst-view</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>*BUFX1 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.5189 &#xa0; &#xa0; -0.2121 &#xa0; &#xa0; &#xa0; 1.9871 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFXL&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; fall fall&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.5434 &#xa0; &#xa0; -0.2203 &#xa0; &#xa0; &#xa0; 2.1958 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX8&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1443&#xa0; &#xa0; &#xa0; 0.1037 &#xa0; &#xa0; &#xa0; 2.8471 &#xa0; &#xa0; &#xa0; 23.2848 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX4&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.2021&#xa0; &#xa0; &#xa0; 0.0668 &#xa0; &#xa0; &#xa0; 2.7276 &#xa0; &#xa0; &#xa0; 16.6320 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX3&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.2449&#xa0; &#xa0; &#xa0; 0.0287 &#xa0; &#xa0; &#xa0; 2.6377 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX2&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.3028 &#xa0; &#xa0; -0.0242 &#xa0; &#xa0; &#xa0; 2.4827 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX20 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1262 &#xa0; &#xa0; -0.0181 &#xa0; &#xa0; &#xa0; 2.9200 &#xa0; &#xa0; &#xa0; 79.8336 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX1&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.4874 &#xa0; &#xa0; -0.1931 &#xa0; &#xa0; &#xa0; 2.0677 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX16 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1297&#xa0; &#xa0; &#xa0; 0.0317 &#xa0; &#xa0; &#xa0; 2.9166 &#xa0; &#xa0; &#xa0; 63.2016 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX12 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1259&#xa0; &#xa0; &#xa0; 0.0571 &#xa0; &#xa0; &#xa0; 2.9097 &#xa0; &#xa0; &#xa0; 53.2224 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFXL &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.6868 &#xa0; &#xa0; -0.3586 &#xa0; &#xa0; &#xa0; 1.6156 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFX8 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1216&#xa0; &#xa0; &#xa0; 0.1078 &#xa0; &#xa0; &#xa0; 2.8491 &#xa0; &#xa0; &#xa0; 29.9376 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFX4 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1798&#xa0; &#xa0; &#xa0; 0.0781 &#xa0; &#xa0; &#xa0; 2.7308 &#xa0; &#xa0; &#xa0; 16.6320 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFX3 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.2199&#xa0; &#xa0; &#xa0; 0.0459 &#xa0; &#xa0; &#xa0; 2.6492 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFX2 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.2963 &#xa0; &#xa0; -0.0193 &#xa0; &#xa0; &#xa0; 2.4806 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFX20&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.0954&#xa0; &#xa0; &#xa0; 0.0408 &#xa0; &#xa0; &#xa0; 2.9108 &#xa0; &#xa0; &#xa0; 53.2224 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFX16&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1016&#xa0; &#xa0; &#xa0; 0.0669 &#xa0; &#xa0; &#xa0; 2.9011 &#xa0; &#xa0; &#xa0; 43.2432 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFX12&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1096&#xa0; &#xa0; &#xa0; 0.0896 &#xa0; &#xa0; &#xa0; 2.8839 &#xa0; &#xa0; &#xa0; 33.2640 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+<code><code><br /></code></code></li><li>
+<p>The following command reports (sorted in increasing order of area) evaluation results (for A to Y arc) of resizing instance , <code>TDSP_CORE_GLUE_INST/FE_OFC29_mdr_3_</code>, with each of all the equivalent cells in the library:</p>
+
+<p><code>change_cell -from TDSP_CORE_GLUE_INST/FE_OFC29_mdr_3_/A -to TDSP_CORE_GLUE_INST/FE_OFC29_mdr_3_/Y -evaluate_all -sort_by area&#xa0;</code></p>
+
+<p><code>From Pin: TDSP_CORE_GLUE_INST/FE_OFC29_mdr_3_/A</code></p>
+
+<p><code>To Pin: &#xa0; TDSP_CORE_GLUE_INST/FE_OFC29_mdr_3_/Y</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>&#xa0;Library-cell&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; From&#xa0; To &#xa0; Arc-type &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Delay &#xa0; Timing-slack&#xa0; Trans-slack&#xa0; &#xa0; &#xa0; Area &#xa0; &#xa0; &#xa0; Worst-view</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>*BUFX1 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.5189 &#xa0; &#xa0; -0.2121 &#xa0; &#xa0; &#xa0; 1.9871 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFXL&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; fall fall&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.5434 &#xa0; &#xa0; -0.2203 &#xa0; &#xa0; &#xa0; 2.1958 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX3&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.2449&#xa0; &#xa0; &#xa0; 0.0287 &#xa0; &#xa0; &#xa0; 2.6377 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX2&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.3028 &#xa0; &#xa0; -0.0242 &#xa0; &#xa0; &#xa0; 2.4827 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX1&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.4874 &#xa0; &#xa0; -0.1931 &#xa0; &#xa0; &#xa0; 2.0677 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFXL &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.6868 &#xa0; &#xa0; -0.3586 &#xa0; &#xa0; &#xa0; 1.6156 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFX3 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.2199&#xa0; &#xa0; &#xa0; 0.0459 &#xa0; &#xa0; &#xa0; 2.6492 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFX2 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.2963 &#xa0; &#xa0; -0.0193 &#xa0; &#xa0; &#xa0; 2.4806 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX4&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.2021&#xa0; &#xa0; &#xa0; 0.0668 &#xa0; &#xa0; &#xa0; 2.7276 &#xa0; &#xa0; &#xa0; 16.6320 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFX4 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1798&#xa0; &#xa0; &#xa0; 0.0781 &#xa0; &#xa0; &#xa0; 2.7308 &#xa0; &#xa0; &#xa0; 16.6320 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX8&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1443&#xa0; &#xa0; &#xa0; 0.1037 &#xa0; &#xa0; &#xa0; 2.8471 &#xa0; &#xa0; &#xa0; 23.2848 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFX8 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1216&#xa0; &#xa0; &#xa0; 0.1078 &#xa0; &#xa0; &#xa0; 2.8491 &#xa0; &#xa0; &#xa0; 29.9376 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFX12&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1096&#xa0; &#xa0; &#xa0; 0.0896 &#xa0; &#xa0; &#xa0; 2.8839 &#xa0; &#xa0; &#xa0; 33.2640 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFX16&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1016&#xa0; &#xa0; &#xa0; 0.0669 &#xa0; &#xa0; &#xa0; 2.9011 &#xa0; &#xa0; &#xa0; 43.2432 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX12 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1259&#xa0; &#xa0; &#xa0; 0.0571 &#xa0; &#xa0; &#xa0; 2.9097 &#xa0; &#xa0; &#xa0; 53.2224 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFX20&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.0954&#xa0; &#xa0; &#xa0; 0.0408 &#xa0; &#xa0; &#xa0; 2.9108 &#xa0; &#xa0; &#xa0; 53.2224 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX16 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1297&#xa0; &#xa0; &#xa0; 0.0317 &#xa0; &#xa0; &#xa0; 2.9166 &#xa0; &#xa0; &#xa0; 63.2016 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX20 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1262 &#xa0; &#xa0; -0.0181 &#xa0; &#xa0; &#xa0; 2.9200 &#xa0; &#xa0; &#xa0; 79.8336 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+</li><li>
+<p>The following command reports (sorted in increasing order of slack) evaluation results (for A to Y arc) of resizing instance , <code>TDSP_CORE_GLUE_INST/FE_OFC29_mdr_3_</code>, with each of all the equivalent cells in the library.</p>
+
+<p><code>change_cell -from TDSP_CORE_GLUE_INST/FE_OFC29_mdr_3_/A -to TDSP_CORE_GLUE_INST/FE_OFC29_mdr_3_/Y -evaluate_all -sort_by slack</code></p>
+
+<p><code>From Pin: TDSP_CORE_GLUE_INST/FE_OFC29_mdr_3_/A</code></p>
+
+<p><code>To Pin: &#xa0; TDSP_CORE_GLUE_INST/FE_OFC29_mdr_3_/Y</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>&#xa0;Library-cell&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; From&#xa0; To &#xa0; Arc-type &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Delay &#xa0; Timing-slack&#xa0; Trans-slack&#xa0; &#xa0; &#xa0; Area &#xa0; &#xa0; &#xa0; Worst-view</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>&#xa0;BUFXL &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.6868 &#xa0; &#xa0; -0.3586 &#xa0; &#xa0; &#xa0; 1.6156 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFXL&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; fall fall&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.5434 &#xa0; &#xa0; -0.2203 &#xa0; &#xa0; &#xa0; 2.1958 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>*BUFX1 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.5189 &#xa0; &#xa0; -0.2121 &#xa0; &#xa0; &#xa0; 1.9871 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX1&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.4874 &#xa0; &#xa0; -0.1931 &#xa0; &#xa0; &#xa0; 2.0677 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX2&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.3028 &#xa0; &#xa0; -0.0242 &#xa0; &#xa0; &#xa0; 2.4827 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFX2 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.2963 &#xa0; &#xa0; -0.0193 &#xa0; &#xa0; &#xa0; 2.4806 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX20 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1262 &#xa0; &#xa0; -0.0181 &#xa0; &#xa0; &#xa0; 2.9200 &#xa0; &#xa0; &#xa0; 79.8336 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX3&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.2449&#xa0; &#xa0; &#xa0; 0.0287 &#xa0; &#xa0; &#xa0; 2.6377 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX16 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1297&#xa0; &#xa0; &#xa0; 0.0317 &#xa0; &#xa0; &#xa0; 2.9166 &#xa0; &#xa0; &#xa0; 63.2016 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFX20&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.0954&#xa0; &#xa0; &#xa0; 0.0408 &#xa0; &#xa0; &#xa0; 2.9108 &#xa0; &#xa0; &#xa0; 53.2224 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFX3 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.2199&#xa0; &#xa0; &#xa0; 0.0459 &#xa0; &#xa0; &#xa0; 2.6492 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX12 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1259&#xa0; &#xa0; &#xa0; 0.0571 &#xa0; &#xa0; &#xa0; 2.9097 &#xa0; &#xa0; &#xa0; 53.2224 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX4&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.2021&#xa0; &#xa0; &#xa0; 0.0668 &#xa0; &#xa0; &#xa0; 2.7276 &#xa0; &#xa0; &#xa0; 16.6320 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFX16&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1016&#xa0; &#xa0; &#xa0; 0.0669 &#xa0; &#xa0; &#xa0; 2.9011 &#xa0; &#xa0; &#xa0; 43.2432 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFX4 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1798&#xa0; &#xa0; &#xa0; 0.0781 &#xa0; &#xa0; &#xa0; 2.7308 &#xa0; &#xa0; &#xa0; 16.6320 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFX12&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1096&#xa0; &#xa0; &#xa0; 0.0896 &#xa0; &#xa0; &#xa0; 2.8839 &#xa0; &#xa0; &#xa0; 33.2640 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;CLKBUFX8&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1443&#xa0; &#xa0; &#xa0; 0.1037 &#xa0; &#xa0; &#xa0; 2.8471 &#xa0; &#xa0; &#xa0; 23.2848 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFX8 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1216&#xa0; &#xa0; &#xa0; 0.1078 &#xa0; &#xa0; &#xa0; 2.8491 &#xa0; &#xa0; &#xa0; 29.9376 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+</li><li>
+<p>The following command evaluates the resize of instance, <code>TDSP_CORE_GLUE_INST/FE_OFC29_mdr_3_</code>, with each of all the equivalent cells in the library, and report (sorted in increasing order of slack) the best and worst cell, along with the reference:</p>
+
+<p><code>change_cell -from TDSP_CORE_GLUE_INST/FE_OFC29_mdr_3_/A -to TDSP_CORE_GLUE_INST/FE_OFC29_mdr_3_/Y -evaluate_all -sort_by slack -max_cells 1</code></p>
+
+<p><code>From Pin: TDSP_CORE_GLUE_INST/FE_OFC29_mdr_3_/A</code></p>
+
+<p><code>To Pin: &#xa0; TDSP_CORE_GLUE_INST/FE_OFC29_mdr_3_/Y</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>&#xa0;Library-cell&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; From&#xa0; To &#xa0; Arc-type &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Delay &#xa0; Timing-slack&#xa0; Trans-slack&#xa0; &#xa0; &#xa0; Area &#xa0; &#xa0; &#xa0; Worst-view</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+
+<p><code>&#xa0;BUFXL &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.6868 &#xa0; &#xa0; -0.3586 &#xa0; &#xa0; &#xa0; 1.6156 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>*BUFX1 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.5189 &#xa0; &#xa0; -0.2121 &#xa0; &#xa0; &#xa0; 1.9871 &#xa0; &#xa0; &#xa0; 13.3056 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>&#xa0;BUFX8 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; rise rise&#xa0; combinational&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.1216&#xa0; &#xa0; &#xa0; 0.1078 &#xa0; &#xa0; &#xa0; 2.8491 &#xa0; &#xa0; &#xa0; 29.9376 &#xa0; &#xa0; core+typ-rcMax</code></p>
+
+<p><code>------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+</li></ul><h4 class="_mce_tagged_br" id="change_cell-#timingtypesListofValidTiming-types"><span class="confluence-anchor-link conf-macro output-inline"><span class="confluence-anchor-link" id="change_cell-#timingtypes"></span></span>List of Valid Timing-types</h4>
+<ul><li><code>combinational</code></li><li><code>combinational_fall</code></li><li><code>combinational_rise</code></li><li><code>falling_edge</code></li><li><code>hold_falling</code></li><li><code>hold_rising</code></li><li><code>recovery_falling</code></li><li><code>recovery_rising</code></li><li><code>removal_falling</code></li><li><code>removal_rising</code></li><li><code>rising_edge</code></li><li><code>setup_falling</code></li><li><code>setup_rising</code></li></ul>
+<p><strong>Related Commands</strong></p>
+<ul><li><code>
+      <a href="add_repeater.html">add_repeater</a>
+    </code></li><li><code>
+      <a class="external-link" href="../tempustxtcmdref/delete_repeater.html" rel="nofollow">delete_repeater</a>
+    </code></li><li><code>
+      <a href="set_eco_mode.html">set_eco_mode</a>
+    </code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="attach_term.html" id="prev" title="attach_term">attach_term</a></em></b><b><em><a href="change_inst_name.html" id="nex" title="change_inst_name">change_inst_name</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

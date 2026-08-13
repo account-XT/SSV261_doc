@@ -1,0 +1,830 @@
+
+<html><head><title>report_power</title>
+<meta name="page_sequence" content="24014000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666264" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="report_power" />
+<meta name="Keywords" content="report,power,switching,clock network,instance,net" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Static/Dynamic Power Analysis," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusTCRcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666264" />
+<meta name="NextFile" content="report_thermal.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="report_inst_power.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Text Reference Manual  -- report_power" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltuscuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusTCRcomTOC.html">Contents</a></li><li><a class="prev" href="report_inst_power.html" title="report_inst_power">report_inst_power</a></li><li style="float: right;"><a class="viewPrint" href="voltusTCRcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="report_thermal.html" title="report_thermal">report_thermal</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Text Reference Manual <br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>report_power</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p> <code><br /><code>report_power <br /><span style="color:var(--ds-text,#172b4d);">[-help]<br />[-block<span>&#xa0;</span></span><em>block_name</em><span style="color:var(--ds-text,#172b4d);">]</span><br />[-cap] <br />[-cap_unit <em>unit</em>]<br />[-cell <strong>{</strong><code><em>cell_list</em></code><strong>}</strong>]<br />[-cell_fit_file <em>filename</em>]<br />[-cell_list_file <em>filename</em>]<br />[-cell_type {all | <strong>{</strong>macro io combinational sequential&#xa0;clock_combinational clock_sequential<strong>}</strong>}] <br />[-clock_domain <em>names</em>] <br />[-clock_gating_efficiency]<br />[-clock_network {all | <strong>{</strong><em>clock_list</em><strong>}</strong>}]<br />[-cluster_gating_efficiency]<br />[-combinational_sequential_power_distribution]<br />[-compress <em>compression_ratio</em>]<br />[-distribute]<br />[-exclude_cells {<em>cell_list</em>}]<br />[-exclude_cells_file <em>filename</em> ]<br />[-exclude_instances_file <em>filename</em> ]<br />[-exclude_insts {<em>instance_list</em>}]<br />[-float_precision <em>value</em>]<br />[-format { simple | detailed }]<br />[-group_type <em>user_defined_group_name</em>]<br />[-hierarchical_instances {<em>inst1</em> <em>inst2</em> <em>inst3</em> &#8230;}]<br />[-hierarchy {all | <code><em>hierarchy_level}</em></code>]<br /><span style="color:var(--ds-text,#172b4d);">[-include_group_instance_count]</span><br />[-include_sequential_in_clock]<br />[-inst_list_file &#xa0; <em>filename</em>]<br />[-insts <strong>{</strong><em>instance_list</em><strong>}</strong>]<br />[-leakage]<br />[-net [-nworst&#xa0; <em><code><code>number_of_nets</code></code></em>]] <br />[-no_wrap] <br />[-out_dir <em>directory</em>]<br />[-out_file <code><em>filename</em></code>]<br />[-output_cell_fit_file <em>filename</em>]<br />[-pg_net {all | <code><em>pg_net_name_list</em></code>}] <br />[-pg_pin] <br />[-power_db_directory <em>directory</em>]<br />[-power_density_tiles <em>value</em>]<br />[-power_density_tiles_row_column {<em>value1</em> <em>value2</em>}]<br />[-power_density_tiles_size {<em>value1</em> <em>value2</em>}]<br />[-power_domain {all | <strong>{</strong><code><em>power_domain_list</em></code><strong>}</strong><code><em>}</em></code>]<br />[-power_unit <em>unit</em> ]<br />[-print_memory_power]<br />[-register_gating_efficiency] <br />[-report_prefix <em>prefix</em>]<br />[-stat]<br />[-sort {internal | switching | leakage | total}]<br />[-thermal_conductivity_inputs&#xa0; <em>file_name</em>]<br />[-thermal_leakage_temperature {<em>temp1</em> <em>temp2</em> <em>temp3</em> &#8230;}]<br />[-thermal_leakage_temperature_scale_table_file <em>filename</em>]<br />[-thermal_leakage_temperature_scale_table {$<em>temp1</em> $<em>scalefactor1</em> $<em>temp2</em> $<em>scalefactor2</em> $<em>temp3</em> $<em>scalefactor3</em> .....}]<br />[-thermal_material_file <em>filename</em>]<br />[-thermal_power_map_bottom_layer <em>layer_name</em>]<br />[-thermal_power_map_density_table_tiles {<em>Xint</em> <em>Yint</em>}]<br />[-thermal_power_map_file <em>file_name</em>]<br />[-thermal_power_map_format {simple | stack }]<br />[-thermal_power_map_format_version {new|default}]<br />[-thermal_power_map_header_include_file&#xa0;&#xa0;<em>filename</em>]<br />[-thermal_power_map_power_table_tiles {<em>Xint</em> <em>Yint</em>}]<br />[-thermal_power_map_si_unit {true | false}]<br />[-thermal_power_map_tiles {<em>xint</em> <em>yint</em>}]<br />[-thermal_power_map_top_layer <em>layer_name</em>]<br />[-threshold <code><em>value</em></code>]<br />[-threshold_voltage_group { all | <code><em>group_name</em></code>}]<br />[-time_based_report]<br />[-time_unit <em>unit</em>]<br /></code><code><code><code><code><code>[-toggle_rate]</code></code></code></code></code><br /><code><span style="color:var(--ds-text,#172b4d);">[-use_geometry_cell_size {true | false}]</span><br />[-view <em>view_name</em>]<br /><br /></code></code>Reports global as well as specific instance power, clock network power, clock domain power, and net switching power. It also reports the power for power domains and specific power nets. Units are reported in milliwatts.</p>
+
+<p>This command starts the execution of power analysis (both static and dynamic). The <code>report_power</code> command has a character limit of 1015.</p>
+<div>
+<p><br /></p>
+<div aria-label="Info" class="confluence-information-macro  confluence-information-macro-information" role="region"><span class="aui-icon aui-icon-small aui-iconfont-info-filled confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>The parameters of the <code>report_power</code> command, except <code>-cap</code>, are not supported in the dynamic only mode (specified using the <code>power_disable_static </code>attribute). These parameters are only supported in the static mode. However, <code>-clock_gating_efficiency</code>, <code>-register_gating_efficiency</code>, and <code>-power_domain</code> parameters are not supported even if the static power mode is enabled. You can use the <code><span>set_power_include_file</span></code> command to pass the <code>report_power</code> command options in the dynamic analysis mode.</p>
+</div>
+</div>
+
+<p>The <code>report_power</code> command allows generation of multiple power reports with a single <code>report_power</code> command. This allows you to generate all the static reports during dynamic analysis, and removes the need to run incremental <code>report_power</code> in static power analysis using a Verilog netlist. By default, a detailed power summary report, and a short summary will be printed at the beginning of all reports. To enable this flow, you need to specify the following parameters:</p>
+<ul><li><code><code>-out_dir</code></code></li><li><code>-report_prefix</code></li></ul>
+<p>The following <code>report_power</code> command parameters are supported by the multi-report flow, both in static and dynamic power analysis:</p>
+<ul><li><code>-cell</code></li><li><code>-clock_gating_efficiency</code></li><li><code>-register_gating_efficiency</code></li><li><code>-cluster_gating_efficiency</code></li><li><code>-net</code></li><li><code>-insts</code></li><li><code>-pg_net</code></li><li><code>-clock_network</code></li><li><code>-hierarchy</code></li></ul>The following parameters are not supported in the multi-report flow:<ul><li><code>-cell_type</code></li><li><code>-power_domain</code></li><li><code>-clock_domain</code></li><li><code>-clock_gating_efficiency</code> and <code>-clock_network</code> in the same run</li></ul><div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>In the static power analysis flow, you can run the <code>report_power</code> command after the <code>read_power_db</code> command without loading the design. The following command is an example of the use model:<br /><code><code>read_power_db</code>&#xa0;-in_file power.db</code><br /><code>report_power -out_dir same -report_prefix report -clock_network {all} -insts {*}</code></p>
+
+<p>The following parameters of the <code>report_power</code> command are supported without design loading:</p>
+<ul><li><code>-cell</code></li><li><code>-cell_type</code></li><li><code>-insts</code></li><li><code>-clock_network</code></li><li><code>-clock_domain</code></li><li><code>-pg_net</code></li><li><code>-pg_net -format detailed</code></li><li><code>-hierarchy</code></li><li><code>-hierarchical_instances</code></li></ul></div>
+</div>
+
+<p><br /></p>
+</div>
+<h4 id="report_power-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable" style="width: 1326.0px;"><colgroup><col style="width: 125.0px;" /><col style="width: 1200.0px;" /></colgroup><tbody><tr><td class="confluenceTd" style="text-align: left;">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd" style="text-align: left;">
+<p>Outputs a brief description that includes type and default information for each<span>&#xa0;</span><code>report_power</code>&#xa0;parameter.</p>
+
+<p>For a detailed description of the command and all of its parameters, use the&#xa0;man&#xa0;command:</p>
+
+<p>man<span>&#xa0;</span><code>report_power</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-block <em>block_name</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies to generate the different power analysis reports for a block. This parameter is useful in viewing and debugging power consumption issues for a specific block after the power run is complete.</p>
+
+<p><strong>Example</strong>:</p>
+
+<p>The following command will create the summary and pg_net reports for the design block {A/B}: <br /><code><span style="color:var(--ds-text,#172b4d);">report_power -block {A/B} -out_file blockB.rpt -pg_net -pg_pin {all} -insts {*}</span></code></p>
+
+<p>Following are the sample block-specific reports:</p>
+
+<p><code>blockB.rpt.avppower</code><br /><code>blockB.rpt.pgnetpwr</code><br /><code>blockB.rpt.pgpinpwr</code><br /><code>blockB.rpt.instpwr</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;" valign="top">
+<p><code>-cap</code></p>
+</td>
+<td class="confluenceTd" style="width: 1220.0px;" valign="top">
+<p>Dumps out the list of net, pin, and total capacitances in three different columns.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code><code>-cap_unit <em>unit</em></code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">
+<p>Sets the capacitance unit to be used for power report generation. The default unit is pF (picoFarads).</p>
+
+<p>By default, the capacitance unit in <code>report_power</code> is Farad (F). To get the capacitance in pF, use the command <code>report_power -cap_unit pf</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;" valign="top">
+<p><code>-cell</code> <strong>{</strong><code><em>cell_list</em></code><strong>}</strong></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1220.0px;" valign="top">
+<p>Specifies the cells to include in the power report. Accepts wildcards (*)</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-cell_fit_file <em>filename</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a file that accepts a cell-based FIT input table with two columns: cell name and FIT value.&#xa0; This parameter is used to generate an instance-level FIT report based on the cell-level data.</p>
+
+<p>Instance-based FIT report is supported only in the XP mode.</p>
+
+<p><u><strong>File Format Example for the FIT Input File</strong></u>:</p>
+
+<p><code>##Cell Name&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;FIT&#xa0;<br /></code>-----------------------------------<br /><code>&#xa0; CellA&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;.25</code><br /><code>&#xa0; CellB &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; .5</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-cell_list_file <em>filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Specifies a file containing a list of cells that are to be included in the power reports.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;" valign="top">
+<p><code><code>-cell_type {all | {<code><code>macro io combinational sequential&#xa0;clock_combinational clock_sequential</code></code>}}</code></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1220.0px;" valign="top">
+<p>Specifies the cell type to include in the power report.</p>
+
+<p><em>Default</em>: <code>all</code></p>
+
+<p>When you specify the cell types, <code>-cell_type</code> <code>combinational</code> or <code>sequential</code>, the power report now does not show the clock combinational or clock sequential cells.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;" valign="top">
+<p><code>-clock_domain </code><code><em>names</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1220.0px;" valign="top">
+<p>Generates detailed instance power reports for the specified clock domains. Wildcards are not accepted.</p>
+
+<p>When this parameter is not specified, the <code>report_power</code> command provides a summary of clock power for instances with the clock pins driven by a clock domain. In contrast, <code>report_power -clock_domain</code> reports a clock power summary for instances with any pin driven by a clock domain, provided the instance is part of the clock network.</p>
+
+<p><strong>Usage</strong></p>
+
+<p><code>report_power -clock_domain <em>name</em> -out_file <em>filename</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;" valign="top">
+<p><code>-clock_gating_efficiency</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1220.0px;" valign="top">
+<p>Generates a report that includes the Clock Gating Efficiency (CGE) for all clock gating instances as well as different hierarchies in the design. Average CGE for different hierarchies is also reported.</p>
+
+<p>Clock Gating Efficiency is calculated as:</p>
+
+<p><code>CGE = (toggles at clock gate output/toggles at clock gate input)</code></p>
+
+<p><code>Average CGE = (avg of all CGEs above)</code></p>
+
+<p>When you generate a CGE report using the command <code>report_power &#8211;clock_gating_efficiency &#8211;out_file <em>cge.rpt</em></code>, the following information will be displayed:</p>
+<ul><li><strong>Clock-gating Efficiency Report</strong> - for each clock domain, it includes the toggle rate, number of registers, number of clock gates, average clock toggle at registers, average toggle savings at registers, and&#xa0;average toggle savings histogram.&#xa0;</li><li><strong>Hierarchical View of Average Toggle Savings</strong> - number of clock gates and average toggle savings for each hierarchical module in the design</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;" valign="top">
+<p><code>-clock_network</code> {<code>all</code> | <strong>{</strong><code><em>clock_list</em></code><strong>}</strong>}</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1220.0px;" valign="top">
+<p>Reports the power consumption of the clock network, including the power for generated clocks.</p>
+
+<p>Use <code>clock_list</code> to report the power consumed by specific clocks.</p>
+
+<p><em>Default</em>: <code>all</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code><code>-c</code>luster_gating_efficiency</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Specifies to generate the cluster efficiency report in the RGE report. This report gives the CGE/RGE metrics for the registers at the fanout of each clock gate instance in the design.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-combinational_sequential_power_distribution</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Specifies to generate a report that gives the ratio of combinational versus sequential power for all modules of a given hierarchy. You must specify this parameter with the <code>-insts</code> parameter.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code><code>-compress <em>compression_ratio</em></code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Specifies to compress the power analysis report files in the GNU Zip format. The compressed files will have the suffix <code>.gz</code>.
+<p><code><em>compression_ratio</em></code> is from 0-9. <code>0</code> indicates that the report files are not to be compressed. The compression levels vary from <code>1</code> to <code>9</code>. <code>1</code> provides the fastest compression speed but at a lower ratio, so the file size will be larger. <code>9</code> provides the highest compression ratio but at a lower speed.</p>
+
+<p><em>Default</em>: 0</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><code>-distribute</code></td>
+<td class="confluenceTd" style="width: 1220.0px;">Enables standalone distributed power analysis. This parameter allows you to perform dynamic power analysis in the multi-CPU mode without running rail analysis.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-exclude_cells {<em>cell_list</em>}</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">
+<p>Specifies a list of cells that should be excluded from power analysis.</p>
+
+<p><span class="cf0">This parameter is supported in both Verilog and DEF-based flows with the </span><code><span class="cf0">power_method</span></code><span class="cf0"> attribute set to either <code>static</code> or </span><code><span class="cf0">event_based</span></code><span class="cf0">.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-exclude_cells_file <em>filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">
+<p>Specifies a file containing a list of cells (one per line) which should be excluded from power analysis.</p>
+
+<p><span class="cf0">This parameter is supported only in the DEF-based flow with the </span><code><span class="cf0">power_method</span></code><span class="cf0"> attribute set to either <code>static</code> or </span><code><span class="cf0">event_based</span></code><span class="cf0">.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-exclude_insts {<em>instance_list</em>}</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">
+<p>Specifies a list of instances that should be excluded from power analysis.</p>
+
+<p><span class="cf0">This parameter is supported only with the following power attribute: </span><code><span class="cf0">power_method</span><span class="cf0"> </span><span class="cf0">event_based</span></code><span class="cf0">.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-exclude_instances_file <em>filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">
+<p>Specifies a file containing a list of instances (one per line) which should be excluded from power analysis.</p>
+
+<p><span class="cf0">This parameter is supported only with the following power attribute: </span><code><span class="cf0">power_method</span><span class="cf0"> </span><span class="cf0">event_based</span></code><span class="cf0">.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-float_precision <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Sets the precision value to be used for power report generation. The default value is 4.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-format { simple | detailed }</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Specifies the type of report summary required for static power reporting. The possible arguments of this parameter are:<ul><li><code>simple</code> -&#xa0;reports the amount of power consumed by all power nets in a condensed format, breaking down power based on the switching/internal/leakage components.<code> </code></li><li><code>detailed</code> - reports the amount of power consumed by all power nets in a detailed format. The detailed format includes additional information, such as output pin capacitance (<code>Cpin Sum</code>), output net capacitance (<code>Cnet Sum</code>), Total Load Capacitance (<code>Cpin Sum</code> + <code>Cnet Sum = Total Load_Cap</code>), maximum frequency at the input and output pins (<code>Max_Clk_Freq</code>), maximum activity factor at the input and output pins (<code>Max_Activity</code>), cell name of the instance (<code>Cell Name</code>), clock or data cell (<code>C/D</code>), and library used in power analysis for the specific cell (<code>Lib</code>). The libraries are numbered in the header section.</li></ul>
+<p>The name of the generated report file is <code>report.*.detailed.rpt</code>. Currently, the <code>-format</code> detailed report is only available for the <code>-pg_net</code> report.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;" valign="top">
+<p><code>-include_sequential_in_clock</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1220.0px;" valign="top">
+<p>Includes the leaf flip-flop power in the clock network power report.</p>
+
+<p><em>Default</em>: The leaf flip-flop power will not be included in the clock network power report.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code><code>-hierarchical_instances</code> <code><code>{<em>inst1</em> <em>inst2</em> <em>inst3</em> &#8230;}</code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">
+<p>Specifies to report all the power content for the specified hierarchical instances/ blocks. It reports the <code>Total Power</code> (a breakup of power components) and <code>Group</code> (a breakup of power by cell type) of the specified block at each hierarchy.</p>
+
+<p>To generate a complete hierarchical instance power report, it is recommended to specify <code>-hierarchical_instances</code> with <code>-report_prefix</code>. The report is written in the specified output directory. If you specify <code>-outfile</code> instead of <code>-report_prefix</code>, an instance file is output without hierarchy-level details.</p>
+
+<p><code>-report_prefix</code> generates the following 3 reports:</p>
+<ul><li><code>&lt;<em>prefix</em>&gt;.rpt</code> - reports power details for all instances in the design.</li><li><code>&lt;<em>prefix</em>&gt;.hierpwr.rpt</code> - reports hierarchical power, that is, power summary, internal, switching, leakage, and total power for all hierarchical instances.</li><li><code>&lt;<em>prefix</em>&gt;.hierinstpwr.rpt</code> - reports power details for the requested block instances.</li></ul>
+<p><strong>Note</strong>: <code>-hierarchical_instances</code> must be specified with <code>-hierarchy</code> to include hierarchy-level power report. When <code>-hierarchical_instances</code> is used without <code>-hierarchy</code>, only top-level summary of the power consumption is written.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;" valign="top">
+<p><code>-hierarchy</code> {<code>all</code> | <code><em>hierarchy_level</em></code>}</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1220.0px;" valign="top">
+<p>Specifies the hierarchy level that is included in the power report. You can specify the <code><em>hierarchy_level</em></code> as a number that corresponds to a specific hierarchy level in the design. A <code><em>hierarchy_level</em></code> of 0 specifies the top level.</p>
+
+<p><br /></p>
+
+<p><em>Default</em>: <code>all</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code><span style="color:var(--ds-text,#172b4d);">-include_group_instance_count</span></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1220.0px;">
+<p><span style="color:var(--ds-text,#172b4d);">Specifies to report the instance count for each cell type. When specified, you can view the number of instances for the sequential, macro, IO, combinational, clock sequential, and clock combinational cell types in the power report (power.rpt). The parameter is supported in both the static and dynamic power analysis flows. This parameter allows you to verify if there are any missing instances.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;" valign="top">
+<p><code>-insts {<em>instance_list</em>}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1220.0px;" valign="top">
+<p>Specifies the instances to be included in the power report. The power report provides the amount of power consumed by a specified list of hierarchical or leaf-level instances. <code><em>instance_list</em></code> accepts wildcards (*) for leaf-level instances only. An instance with 0 power will not be listed in the power report.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code><code>-inst_list_file</code>&#xa0; <em><code>filename</code></em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Specifies a file containing a list of instances that are to be included in the power reports.</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;" valign="top">
+<p><code>-leakage</code></p>
+</td>
+<td class="confluenceTd" style="width: 1220.0px;" valign="top">
+<p>Reports only leakage power of the design.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;" valign="top">
+<p><code>-net</code></p>
+</td>
+<td class="confluenceTd" style="width: 1220.0px;" valign="top">
+<p>Reports the net switching power, as well as the load capacitance, toggle rate, and switching values for each net in the design.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;" valign="top">
+<p><code>-no_wrap</code></p>
+</td>
+<td class="confluenceTd" style="width: 1220.0px;" valign="top">
+<p>Displays the <code>report_power -cell_type</code> <code>all</code> output on a single line in the report output file.</p>
+
+<p><strong>Example</strong></p>
+
+<p><code>Instance Toggle&#xa0;&#xa0; Internal Switching Leakage Total Percentage Cell<br />&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Power&#xa0;&#xa0;&#xa0; Power&#xa0;&#xa0;&#xa0;&#xa0; Power&#xa0;&#xa0; Power (%)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Name<br />-----------------------------------------------------------------------<br />dma/ram0 7.102e+08 5.58&#xa0;&#xa0;&#xa0; 0.002307&#xa0; 0.02424 5.607&#xa0; 18.19 &#xa0; /data/cellA</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code><code><code>-nworst</code>&#xa0; <em>number_of_nets</em></code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;" valign="top">
+<p><code><br /></code></p>
+</td>
+<td class="confluenceTd" style="width: 1220.0px;" valign="top">
+<p>Provides n top windows with maximum activity or power in the vector profile report. The default value is <code>10</code>.</p>
+
+<p><strong>Note: </strong>You must use the<code> -nworst</code> parameter in conjunction with the <code>-net</code> parameter.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;" valign="top">
+<p><code>-out_file</code> <code><em>filename</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1220.0px;" valign="top">
+<p>Specifies the name of the report file in which the top-level summary of the power consumption information is written. You can include the directory name.</p>
+
+<p>You can convert a power report file to the gzip file format by specifying <code>-out_file</code> <code><em>filename.gz</em></code>.</p>
+
+<p><strong>Note: </strong>If you do not specify this parameter, the software directs the power report to the command line, as well as the log file, and no power report is written to a separate file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-out_dir <em>directory</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Specifies the name of the power analysis output directory that saves the power reports. The default is the current working directory.&#xa0;</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-output_cell_fit_file <em>filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">
+<p><span style="color:var(--ds-text,#172b4d);">Specifies the name of the output file for the generated FIT report, which includes three columns: instance name, corresponding cell name, and computed FIT value. This parameter is specified with the <code>-cell_fit_file</code> parameter. The output file is generated in the power output directory.</span></p>
+
+<p><u><strong>File Format Example for the FIT Output File</strong></u>:</p>
+
+<p><code>#Instance Name &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Cell Name &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;FIT</code><br /><code>##############################################################</code><br /><code>inst_A/al_inst/g5 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;INV_X1A_A9TL &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.25</code><br /><code>inst_A/al_inst/g8 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;INV_X1B_A9TL &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.25</code><br /><code>....</code><br /><code>Total FIT: 115</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;" valign="top">
+<p><code>-pg_net</code> {<code>all</code> | <code><em>pg_net_name_list</em></code>}</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1220.0px;" valign="top">
+<p>When set to <code>all,</code> reports the amount of power consumed by all power nets.</p>
+
+<p>If you specify a list, reports the power consumed by each instance that is connected to the specified list of power nets.</p>
+
+<p><strong>Note: </strong>When using this parameter, the static power calculation engine always performs propagation and power calculation.</p>
+
+<p><em>Default</em>: <code>all</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-pg_pin</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">
+<p>Reports power consumed by all PG pins in a design.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-power_db_directory <em>directory</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">
+<p>Specifies the location of the power database that the Power Calculation engine uses for generating standalone power reports.</p>
+
+<p><strong>Note</strong>: Before specifying the <code>-power_db_directory</code> parameter, ensure that a power database is created in the binary format by using the <code>set_db power_write_db true</code> attribute.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;" valign="top">
+<p><code>-power_domain</code> {<code>all</code> | <strong>{</strong><code><em>power_domain_list</em></code><strong>}</strong><code><em>}</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1220.0px;" valign="top">
+<p>Specifies all power domains or lists power domains to be included in the report. It prints a summary of power break down for each domain before listing power for each instance in the domain.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-power_density_tiles <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">
+<p>Specifies the number of tiles used for power density calculation.</p>
+
+<p><em>Default</em>: <code>100</code></p>
+
+<p><strong>Note</strong>: When dividing a design into equal-sized tiles, it might not always fit perfectly into a square grid. For example, if you want to create NxN tiles for the top design, the design&#8217;s size might not align exactly with these dimensions. This means the tiles in the last row and the last column could be different in size to cover the remaining part of the design. All other tiles, however, in the (N-1)x(N-1) area, will be the same size.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-power_density_tiles_row_column {<em>value1</em> <em>value2</em>}</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">
+<p>Defines the number of tiles by rows * columns.&#xa0; <em>value1</em> is the number of tile rows and <em>value2</em> is the number of tile columns.</p>
+
+<p>The following example specifies to perform power density aware vector profiling using 2 tile rows and 2 column rows:<code><br />set_db power_method vector_profile power_vector_profile_mode power_density power_worst_step_size 10ns<br />report_power&#xa0; -power_density_tiles_row_column&#xa0; {2 2} -time_based_report -out_file tiling1.rpt</code></p>
+
+<p>The following is the vector profile report for this command:</p>
+
+<p><code>Tile 0_0_0 5.06 5.33 14.95 14.555</code><br /><code>Tile 1_0_1 14.95 5.33 24.84 14.555</code><br /><code>Tile 2_1_0 5.06 14.555 14.95 23.78<br />Tile 3_1_1 14.95 14.555 24.84 23.78</code><br /><code>...<br />...</code></p>
+
+<p><strong>Note</strong>: When dividing a design into equal-sized tiles, it might not always fit perfectly into a square grid. For example, if you want to create NxN tiles for the top design, the design&#8217;s size might not align exactly with these dimensions. This means the tiles in the last row and the last column could be different in size to cover the remaining part of the design. All other tiles, however, in the (N-1)x(N-1) area, will be the same size.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-power_density_tiles_size {<em>value1</em> <em>value2</em>}</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Defines the absolute tile size. <em>value1</em> is the horizontal width of a tile (in micron) and <em>value2</em> is the vertical height of a tile (in micron).</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-power_unit <em>unit</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Sets the power unit to be used for power report generation. The default unit is mW (miliAmps).</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code><code>-print_memory_power</code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;"><div class="content-wrapper">
+<p>Specifies to report power values for the memory and macro cells under separate groups (<code>Memory</code> and <code>Macro</code>).</p>
+
+<p>The following is a snapshot of the power report showing separate groups for memory and macro cells:</p>
+
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732480650/732480651.png" data-linked-resource-container-id="732480650" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="memory_power.png" data-linked-resource-id="732480651" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="250" src="attachments/732480650/732480651.png" tabindex="0" /></span></p>
+</div>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-group_type <em>user_defined_group_name</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;"><div class="content-wrapper">
+<p>Specifies to report power (internal/switching/leakage/total) for a user-defined collection of cells that are stated under a power group in the power summary report. You can use the following Tempus commands to create power groups:</p>
+<ul><li><code>define_property</code> - define a property.</li><li><code>set_property</code> - assign the defined property (group type) and its value (power group) to a list of cells.</li></ul>
+<p>The use model of the <code>-group_type</code> parameter is:<code><br />report_power -group_type <em>user_defined_group_type</em></code></p>
+
+<p>Here, <code><em>user_defined_group_type</em></code> is the user-defined power group type applied to a list of cells in a design. When the <code>-group_type</code> parameter is specified, the command reports power for the power groups associated with the specified group type in the power summary report.</p>
+
+<p><strong>Example</strong>:</p>
+
+<p>The following command defines the&#xa0;<code><code>poly_bias</code></code> property (group type) on library cells:<code><br />define_property poly_bias -obj_type lib_cell -type string</code></p>
+
+<p>The following commands apply the property&#xa0;<code><code>poly_bias</code></code> with the group name <code>P0</code> and <code>P10</code> to the collection of cells:<code><br />set_property [get_lib_cells -of_objects [get_cells -<code>hierarchical </code> * -filter {ref_name=~*PB0*}]] poly_bias&#xa0; P0<br />set_property [get_lib_cells -of_objects [get_cells -<code>hierarchical </code> * -filter {ref_name=~*PB10*}]] poly_bias&#xa0; P10</code></p>
+
+<p>The following command reports power for the user-defined power groups that are associated with the property<code> <code>poly_bias</code></code>:<br /><code>report_power -out_file basic_group_type.rpt -group_type poly_bias</code></p>
+
+<p>The following is a snippet of the power report that shows the user-defined power groups <code>P0</code> and <code>P10</code> that are associated with the property<code><code> poly_bias,</code></code>in addition to the existing groups (sequential, macro, IO, and so on):</p>
+
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732480650/732480652.png" data-linked-resource-container-id="732480650" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="user_defined_group.png" data-linked-resource-id="732480652" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732480650/732480652.png" tabindex="0" width="600" /></span></p>
+</div>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;" valign="top">
+<p><code>-register_gating_efficiency</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1220.0px;" valign="top">
+<p>Generates a report that includes the Register Gating Efficiency (RGE) and Data Aware Gating Efficiency (DAGE) for all sequential cell instances as well as different hierarchies in the design. Average RGE and DAGE for different hierarchies is reported. It also displays a section on ICG cluster information, that is, information about registers at the fanout of each ICG instance along with their RGE metrics.</p>
+
+<p>Register Gating Efficiency is calculated as:</p>
+
+<p><code>RGE = 1 - (toggles at register clock pin/root clock toggles)</code></p>
+
+<p>When you generate an RGE report using the command <code>report_power &#8211;register_gating_efficiency &#8211;out_file <em>rge.rpt</em></code>, the following information will be displayed:</p>
+<ul><li><strong>Register-gating Efficiency Report</strong> - for each clock domain, it includes the toggle rate, number of registers, number of clock gates, average clock toggle at registers, average toggle savings at registers, and&#xa0;average toggle savings histogram.&#xa0;</li><li><strong>Register Gating Opportunities Report</strong>&#xa0;- this report is sorted based on the Q/CLK toggle ratio. When a register&#39;s Q/CLK ratio is greater than .25 (25%), Q toggles every other clock cycle. However, when it is less than 25%, there is a gating opportunity to reduce power.</li></ul>
+<p>Data Aware Gating Efficiency is calculated as:</p>
+
+<p><code>DAGE = 1 - ((toggles at clock pin - 2*toggles at Q pin)/(root clock toggles))</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code><code><code>-report_prefix</code> <em>prefix</em></code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Specifies a prefix for the report in which the top-level summary of the power consumption information is written. All the new report names will be <code><em>prefix</em>.*.rpt</code>, and the detailed summary will be <code><em>prefix</em>.rpt</code>.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;" valign="top">
+<p><code>-sort</code> {<code>internal | switching | leakage | total</code>}</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1220.0px;" valign="top">
+<p>Sorts the instance-based power consumption data by <code>internal</code>, <code>switching</code>, <code>leakage</code>, or <code>total</code> power.</p>
+
+<p><em>Default</em>: <code>total</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><code>-stat</code></td>
+<td class="confluenceTd" style="width: 1220.0px;">
+<p>Reports a set of statistics on the net status after propagation, for example, duty, transition density, or activity. This parameter is useful in viewing and debugging user-defined activity factors after the power run is complete.</p>
+
+<p><strong>Example</strong>:<br /><code>report_power -time_based_report -distribute -out_file power.rpt -stat<br />-------------------------------------------------------------------------------------------</code><br /><strong><code>-- Net status after propagation --</code></strong><br /><code>-------------------------------------------------------------------------------------------</code><br /><code>Net&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Transition Density&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Duty&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Activity&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Ref. Freq</code><code><br />-------------------------------------------------------------------------------------------</code><br /><code>VDDA1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1.25e+08 </code><br /><code>VSSA1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1.25e+08 </code><br /><code>...</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code><code><code>-thermal_conductivity_inputs&#xa0; <em><code>file_name</code></em></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Specifies a file containing the thermal conductivity value for layers. You can use this parameter to include the thermal conductivity value of the following layers in the power map file:<ul><li>Silicon</li><li>Metal&#xa0;&#xa0; &#xa0;</li><li>Dielectric</li><li>Micro Bump (optional for 3DIC design)</li><li>Fill material in micro bump layer&#xa0; (optional for 3DIC design)</li></ul>
+<p>The thermal conductivity file format is:<br /><strong>Section 1 (layer type based thermal conductivity value)<br /></strong></p>
+
+<p><code>#default</code><br /><code>$<strong>layer_type1</strong> $thermal_conductivity_parameter1</code><br /><code>$<strong>layer_type2</strong> $thermal_conductivity_parameter2</code><br /><code>...</code></p>
+
+<p><strong>Section 2 (layer name based thermal conductivity value)</strong></p>
+
+<p><code>#perlayer</code><br /><span style="color:var(--ds-text,#172b4d);"><code>$<strong>layer1_name</strong> $thermal_conductivity_parameter1 $dielectric_thermal_conductivity_1</code></span><br /><span style="color:var(--ds-text,#172b4d);"><code>$<strong>layer2_name</strong> $thermal_conductivity_parameter2 $dielectric_thermal_conductivity_2</code></span><br /><span style="color:var(--ds-text-accent-blue,#0055cc);"><code>...</code></span></p>
+
+<p>Here,</p>
+<ul><li>You can either specify both Section 1 (layer type based) and Section 2 (layer name based), or specify one of the two sections. If both sections are specified, then layer name based section takes precedence over layer type based section.</li><li>The layer name based section has thermal conductivity value and its dielectric layer&#8217;s thermal conductivity value for each metal/via layer.</li><li>If section 2 has no parameters defined, the software will use the default parameters defined in the section 1.</li></ul>
+<p><strong>Example</strong>:<br />###default<br /><code>Metal&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 430</code><br /><code>Silicon&#xa0;&#xa0;&#xa0; 250</code><br /><code>Dielectric 0.6</code></p>
+
+<p>###Perlayer<br /><code>Metal1&#xa0;&#xa0;&#xa0; 430&#xa0;&#xa0;&#xa0; 0.4&#xa0;&#xa0;&#xa0; </code><br /><code>Via1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 410&#xa0;&#xa0;&#xa0; 0.5&#xa0;&#xa0; &#xa0;</code><br /><code>Metal2&#xa0;&#xa0;&#xa0; 390&#xa0;&#xa0;&#xa0; 0.5&#xa0;&#xa0; &#xa0;</code><br /><code>Via2&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 410&#xa0;&#xa0;&#xa0; 0.5&#xa0;</code><br />...</p>
+
+<p>For information on the thermal conductivity input file and power map file, refer to the &quot;Static Power, IRdrop and EM Analysis&quot; chapter in<em> Voltus User Guide</em>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code><code>-thermal_leakage_temperature {<em>temp1</em> <em>temp2</em> <em>temp3</em> &#8230;}</code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Defines the temperature to calculate leakage for the power map file.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code><code><code><code><code>-thermal_leakage_temperature_scale_table {$<em>temp1</em> $<em>scalefactor1</em> $<em>temp2</em> $<em>scalefactor2</em> $<em>temp3</em> $<em>scalefactor3</em> .....}</code></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">
+<p>Specifies the global scale factor for a temperature value to enable scaling of the leakage power values coming from the input dotlib file. This parameter allows you to scale the power values only at certain specific temperatures.</p>
+
+<p>This parameter allows you to generate a multi-temperature leakage power map table from a single input dotlib file in the power map generation flow. <code>-thermal_leakage_temperature_scale_table
+     </code>and <code>-thermal_leakage_temperature_scale_table_file
+     </code>are mutually exclusive.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code><code>-thermal_leakage_temperature_scale_table_file</code> <code><em>filename</em></code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">
+<p>Specifies a file containing the user-defined temperature values and the corresponding scale factors for each library, cell, or instance. The format of the file is:</p>
+
+<p><code>#Type Name temp1 temp2 temp3 temp4</code><br /><code>Lib&#xa0; &#xa0; <em>library_name</em>&#xa0;&#xa0; <em>scalefactor@temp1</em>&#xa0;&#xa0; <em>scalefactor@temp2</em>&#xa0; <em>scalefactor@temp3</em>&#xa0;&#xa0; <em>scalefactor@temp4</em></code><br /><code>Cell&#xa0;&#xa0; <em>cell_name</em></code><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; <em>scalefactor@temp1</em>&#xa0;&#xa0; <em>scalefactor@temp2</em>&#xa0; <em>scalefactor@temp3</em>&#xa0;&#xa0; <em>scalefactor@temp4</em></code><br /><code>inst&#xa0;&#xa0; <em>instance_name</em>&#xa0; <em>scalefactor@temp1</em>&#xa0;&#xa0; <em>scalefactor@temp2</em>&#xa0; <em>scalefactor@temp3</em>&#xa0;&#xa0; <em>scalefactor@temp4</em></code></p>
+
+<p>This parameter allows you to generate a multi-temperature leakage power map table from a single input dotlib file in the power map generation flow.&#xa0; <code>-thermal_leakage_temperature_scale_table
+     </code>and <code>-thermal_leakage_temperature_scale_table_file
+     </code>are mutually exclusive.<br /><br /><u><strong>File Format Example for the Type <span style="color:var(--ds-text-accent-blue,#0055cc);">Lib</span></strong></u>:</p>
+
+<p><code>#Type Name&#xa0; &#xa0; &#xa0;&#xa0;&#xa0;&#xa0; 25 50 125 150</code><br /><code>Lib&#xa0;&#xa0; fast&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1 2 10 100</code><br /><code>Lib&#xa0;&#xa0; bufao&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1 2 10 100</code><br /><code>Lib&#xa0;&#xa0; header&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1 2 10 100</code><br /><code>Lib&#xa0;&#xa0; pso_ring_wc&#xa0; 1 2 10 100</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code><code>-thermal_material_file <em>filename</em></code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Specifies the name of a file containing the user-specified substrate layer thickness. The layer thickness value for the power map generation flow can either be a user-specified value or derived from the technology file. If both the values are available, the user-specified value takes precedence.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-thermal_power_map_bottom_layer <em>layer_name</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Writes zero metal density tables for layers lower than the user-specified layer in the power map file. This parameter prevents duplication of metal density tables when merging the top and block thermal power map files.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code><span>-thermal_power_map_density_table_tiles</span> {<em>Xint</em> <em>Yint</em>}</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Specifies the number of tiles in the X and Y directions for the metal density table.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code><code>-thermal_power_map_file <em>file_name</em></code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Generates the power map file with the specified name in the output directory.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-thermal_power_map_format {simple | stack }</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Generates a tile-based power map file in the simple or stack format to perform accurate thermal analysis. You must use the stack format to support multiple dies in a package for thermal analysis.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-thermal_power_map_format_version {new|default</code>}</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">
+<p>Determines whether to generate the default or the new power map file format. When set to <code>new</code>, the power map file format with non-uniform tile numbers for the power (<code><code><code><code><code><code>-thermal_power_map_power_table_tiles</code></code></code></code></code></code>) and metal density tables (<code><code><code><code><code>-thermal_power_map_density_table_tiles</code></code></code></code></code>) can be generated.</p>
+
+<p>The following are the features of the new report format:</p>
+<ul><li>
+<p>version number added to the header &quot;Version : 2020.0&quot;</p>
+</li><li>
+<p>nx/ny under the &quot;DIE_AREA&quot; section has been removed</p>
+</li><li>
+<p>XCOR/YCOR for each layer has been removed</p>
+</li><li>
+<p>nx/ny has been added for the POWER and METAL_DENSITY sections</p>
+</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code><code><code><code><code>-thermal_power_map_header_include_file&#xa0;</code>&#xa0;<em>filename</em></code></code>&#xa0;</code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Specifies a file that contains comments or additional information to be included in the header section of the power map file.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code><span>-thermal_power_map_power_table_tiles</span> {<em>Xint</em> <em>Yint</em>}</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Specifies the number of tiles in the X and Y directions for the power table.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code><span>-thermal_power_map_si_unit</span> {true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">
+<p>Specifies to change chip thermal power map units to SI in the thermal power map file. This parameter was introduced to support the thermal power map file format used by foundry.&#xa0; When this parameter is set to <code>true</code>, the values for all the power map parameters (length, power, and thermal conductivity) will be reported in the SI units.</p>
+<ul><li><strong>Length Unit:</strong>&#xa0; default is <code>um</code> and SI is <code>m</code></li><li><strong>Power Unit</strong>: default is <code>mW</code> and SI is <code>W</code></li><li><strong>Metal/Silicon Thermal Conductivity Unit</strong>: default is <code>mW/(um * C)</code> and SI is <code>W/(m * C)</code></li></ul>
+<p><em>Default</em> : <code>true</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code><code>-thermal_power_map_tiles {<em>xint</em> <em>yint</em>}</code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Defines the tile number in the X and Y direction. By default 10*10 will be used.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-thermal_power_map_top_layer <em>layer_name</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Writes zero metal density tables for layers higher than the user-specified layer in the power map file. This parameter prevents duplication of metal density tables when merging the top and block thermal power map files.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;" valign="top">
+<p><code>-threshold</code> <code><em>value</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1220.0px;" valign="top">
+<p>Filters out the instances whose total power dissipation is more than the specified value. Units are in milliwatts.</p>
+
+<p><em>Default</em>: <code>0</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;" valign="top">
+<p><code>-threshold_voltage_group { all | </code><code><em>group_name</em></code><code>}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1220.0px;" valign="top">
+<p>Reports leakage by voltage threshold group in the power report. This parameter supports the argument <code>all</code> (default value) or any other string, such as hvt or lvt.</p>
+
+<p><em>Default</em>: <code>all</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-time_based_report</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Writes out a detailed VCD profiling report into the file that you specify.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-time_unit <em>unit</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Sets the time unit to be used for power report generation. The default unit is ns (nanoseconds).</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code><code><code><code><code>-toggle_rate</code></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">Specifies to dump out instance-based activity to the outfile. The toggle rate for each instance is based on the clock frequency to which it belongs. If multiple clocks are reaching the instance, then the fastest clock is used as a reference.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-use_geometry_cell_size {true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1220.0px;">
+<p>Specifies whether to use the actual geometry or placement bounding box for macro PGV cell size during generation of tile-based power map file. This parameter is used when a macro&#39;s power is distributed across multiple tiles. When this parameter is set to <code>true</code>, the geometry-based bounding box will be used for power map generation and power will be distributed evenly across tiles.</p>
+
+<p><em>Default</em> : <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;" valign="top">
+<p><code>-view</code> <code><em>view_name</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 106.0px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1220.0px;" valign="top">
+<p>Specifies the active timing view that was created using the multi-mode multi-corner (MMMC) <code>set_analysis_view</code> <code>-setup|-hold</code> command. Power analysis is performed for the specified view. The command prints the <code>MMMC</code> view name in the output file even if you do not specify the <code>-view</code> parameter.</p>
+
+<p>If <code>report_power -view <em>view_name</em></code> is set, it will override the view set in the <code>power_view</code> attribute. However, if you specify the <code>set_analysis_view</code> <code>-dynamic</code> and <code>-leakage</code> parameters, then the view set using these <code>set_analysis_view</code> command parameters has higher priority over the <code>report_power -view</code> command.</p>
+
+<p><em>Default</em> : Uses current view in Voltus.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="report_power-Examples">Examples</h4>
+<ul><li>The following command reports the amount of power consumed by the clock nets clk and test_clk (including leaf flip-flop power) and writes the output information to a power report file named clk_pwr.rep: <br /><code>report_power -clock_network{clk test_clk} \</code><br /><code> -include_sequential_in_clock -out_file clk_pwr.rep</code></li></ul><ul><li>The following command reports the amount of power consumed down to hierarchy level 3 from the top and writes the output information to a power report file named hier.rep: <br /><code>report_power -hierarchy 3 -out_file hier.rep</code></li></ul><ul><li>The following command compresses the power report file pg_net.rep with gzip: <br /><code>report_power -out_file pg_net.rep.gz</code></li></ul><ul><li>The following command reports the amount of power consumed by leaf-level instances that match ECO* and writes the output information to a power report file named inst.rep: <br /><code>report_power -insts ECO* -out_file inst.rep</code></li></ul><ul><li>The following command reports the amount of power consumed by all cells that match buf*6 and writes the output information to a power report file named cell.rep: <br /><code>report_power -cell buf*6 -out_file cell.rep</code></li></ul><ul><li>The following command reports the amount of power consumed by all I/O and sequential cells and writes the output information to a power report file named cell_type.rep: <br /><code>report_power -cell_type {io sequential} -out_file cell_type.rep</code></li></ul><ul><li>The following command sorts the instance-based power consumption data by leakage power and writes the output information to a power report file named sort.rep: <br /><code>report_power -sort leakage -out_file sort.rep</code></li></ul><ul><li>The following command reports the total power of all instances whose total power dissipation is less than 1 milliwatt and writes the output information to a power report file named threshold.rep: <br /><code>report_power -threshold 1 -out_file threshold.rep</code></li></ul><ul><li>The following command reports the net switching power, load capacitance, toggle rate, and switching values for each net in the design, reports the top 100 nets with the highest net switching power, and writes the output information to a power report file named net.rep: <br /><code>report_power -net -nworst 100 -out_file net.rep</code></li></ul><ul><li>The following command reports the amount of power consumed by each power domain and writes the output information to a power report file named pd_all.rep: <br /><code>report_power -power_domain all -out_file pd_all.rep</code></li></ul><ul><li>The following command reports the amount of power consumed by each power domain PD2 and writes the output information to a power report file named pd.rep: <br /><code>report_power -power_domain PD2 -out_file pd.rep</code></li></ul><ul><li>The following command reports the amount of power consumed by view view_max-hp-max-lp1 and writes the output information to a power report file named view.rep: <br /><code>report_power -view view_max-hp-max-lp1 -out_file view.rep</code></li></ul><ul><li>The following command reports the amount of power consumed by each instance connected to power nets vdd and vdd1 and writes the output information to a power report file named pg_net.rep: <br /><code>report_power -pg_net {vdd vddl} -out_file pg_net.rep</code></li></ul><ul><li>The following command reports the leakage for the threshold voltage group HVT: <br /><code>report_power -leakage -threshold_voltage_group { HVT }</code></li><li>The following command writes out a detailed vector profiling report&#xa0;for the combinational and macro cell types in the <code>vectorprofile.rpt</code> file:<br /><code>report_power -time_based_report -out_file vectorprofile.rpt -cell_type {combinational macro}</code></li><li>The following command is an example of generating multiple reports at the same time:
+<p><code><code>report_power -out_dir static_power -report_prefix design -net {name1}&#xa0;&#8211;insts {inst_name} </code></code></p>
+
+<p>The following reports will be generated:</p>
+
+<p><code>static_power/design.rpt</code><br /><code>static_power/design.netpwr.rpt</code><br /><code>static_power/design.<code>instpwr</code>.rpt</code></p>
+</li><li>
+<p>The following command generates a power map file in the simple format for the specified tile:<code><br />report_power -out_file powermeter.txt 
+-thermal_power_map_file powermap.txt -thermal_power_map_tiles { 4 6 } 
+-thermal_power_map_format simple</code></p>
+</li><li>The following command specifies to report the power content for the <code>inst1</code> hierarchical instance in the <code>report.<code>hierinstpwr.rpt</code></code> report:<code><br />report_power -output static -report_prefix report -clock_network {all} -instances * -no_wrap -hierarchy {all} <span style="color:var(--ds-text,#172b4d);">-hierarchical_instances inst1</span> -cell_type {all}</code></li></ul><ul><li>Example of the output of the power report. <br /><code>*----------------------------------------------------------------------------</code><br /><code>*&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;-&#xa0;&#xa0;- Version&#xa0;&#xa0;64-bit </code><br /><code>*&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Date &amp; Time:&#xa0;&#xa0;&#xa0;&#xa0;2008-Jan-27 15:49:51 (2008-Jan-27 23:49:51 GMT)</code><br /><code>*----------------------------------------------------------------------------</code><br /><br /><code>*&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Design: dtmf_chip</code><br /><code> *</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Liberty Libraries used:</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; /sev//DTMF_CHIP/TIMING/max/scmetropmk_cmos10lp_rvt_ss_1p08v_125c.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; /sev/DTMF_CHIP/TIMING/max/scmetropmk_cmos10lp_rvt_ss_0p8v_1p08v_125c.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; /sev/DTMF_CHIP/TIMING/max/scmetropmk_cmos10lp_rvt_ss_0p8v_125c.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; /sev/DTMF_CHIP/TIMING/max/scmetropmk_cmos10lp_lvt_ss_1p08v_125c.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; /sevDTMF_CHIP/TIMING/max/scmetropmk_cmos10lp_lvt_ss_0p8v_1p08v_125c.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; /sev/DTMF_CHIP/TIMING/max/scmetropmk_cmos10lp_lvt_ss_0p8v_125c.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; /sev/DTMF_CHIP/TIMING/max/scmetropmk_cmos10lp_hvt_ss_1p08v_125c.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; /sev/DTMF_CHIP/TIMING/max/scmetropmk_cmos10lp_hvt_ss_0p8v_1p08v_125c.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; /sev/DTMF_CHIP/TIMING/max/scmetropmk_cmos10lp_hvt_ss_0p8v_125c.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;/sev/DTMF_CHIP/TIMING/max/scmetro_cmos10lp_rvt_ss_1p08v_125c.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;/sev/DTMF_CHIP/TIMING/max/scmetro_cmos10lp_rvt_ss_0p8v_125c.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;/sev/DTMF_CHIP/TIMING/max/scmetro_cmos10lp_lvt_ss_1p08v_125c.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;/sev/DTMF_CHIP/TIMING/max/scmetro_cmos10lp_lvt_ss_0p8v_125c.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;/sev/DTMF_CHIP/TIMING/max/scmetro_cmos10lp_hvt_ss_1p08v_125c.lib</code><br /><code> * &#xa0;&#xa0;&#xa0;&#xa0;/sev/DTMF_CHIP/TIMING/max/scmetro_cmos10lp_hvt_ss_0p8v_125c.lib</code><br /><code> * &#xa0;&#xa0;&#xa0;&#xa0;/sev/TIMING/max/rom_512x16A_ss_1v08_125c_syn.lib</code><br /><code> * &#xa0;&#xa0;&#xa0;&#xa0;/sev/DTMF_CHIP/TIMING/max/pllclk_slow.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; /sev/DTMF_CHIP/TIMING/max/iometroil_cmos10lp_hvt_ss_1p08v_2p3v_2p5v_125c.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; /sev/DTMF_CHIP/TIMING/max/iometroil_cmos10lp_hvt_ss_0p8v_2p3v_2p5v_125c.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; /sev/DTMF_CHIP/TIMING/min/scmetropmk_cmos10lp_rvt_ff_1p32v_m40c.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; /sev/DTMF_CHIP/TIMING/min/scmetropmk_cmos10lp_rvt_ff_1p1v_1p32v_m40c.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; /sev/DTMF_CHIP/TIMING/min/scmetropmk_cmos10lp_lvt_ff_1p32v_m40c.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; /sev/DTMF_CHIP/TIMING/min/scmetropmk_cmos10lp_lvt_ff_1p1v_1p32v_m40c.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; /sev/DTMF_CHIP/TIMING/min/scmetropmk_cmos10lp_hvt_ff_1p32v_m40c.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; /sev/DTMF_CHIP/TIMING/min/scmetropmk_cmos10lp_hvt_ff_1p1v_1p32v_m40c.lib</code><br /><code> * </code><br /><br /><code>/sev/DTMF_CHIP/TIMING/min/scmetro_cmos10lp_rvt_ff_1p32v_m40c.lib</code><br /><code> * </code><br /><code> /sev/DTMF_CHIP/TIMING/min/scmetro_cmos10lp_lvt_ff_1p32v_m40c.lib</code><br /><code> * </code><br /><code> /sev/DTMF_CHIP/TIMING/min/scmetro_cmos10lp_hvt_ff_1p32v_m40c.lib</code><br /><code> * </code><br /><code> /sev/DTMF_CHIP/TIMING/min/rom_512x16A_ff_1v32_m40c_syn.lib</code><br /><code> * </code><br /><code> /sev/DTMF_CHIP/TIMING/min/pllclk_fast.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; /sev/DTMF_CHIP/TIMING/min/iometroil_cmos10lp_hvt_ff_1p32v_2p7v_2p5v_m40c.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; /sev/DTMF_CHIP/TIMING/min/iometroil_cmos10lp_hvt_ff_1p1v_2p7v_2p5v_m40c.lib</code><br /><code> *</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Power Domain used:</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Rail:&#xa0;&#xa0;&#xa0;&#xa0; VDD_AO&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Voltage:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1.32</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Rail: VDD_TDSPCore&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Voltage:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1.32</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Rail: VDD_TDSPCore_R&#xa0;&#xa0;&#xa0;&#xa0;Voltage:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1.32</code><br /><code> *</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Parasitic Files used:</code><br /><code> * /sev/DTMF_CHIP/SPEF/dtmf_chip.decoup.spef</code><br /><code> *</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; DEF Files used:</code><br /><code> * /sev/DTMF_CHIP/DEF/dtmf_chip.def</code><br /><code> *</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Power Units = 1mW</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Time Units = 1e-09 secs</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; report_power</code><br /><code> -----------------------------------------------------------------------------</code><br /><code>&#xa0; Total Power</code><br /><code> -----------------------------------------------------------------------------</code><br /><code> Total Internal Power:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.01943(62.6774%)</code><br /><code> Total Switching Power:&#xa0;&#xa0;&#xa0;&#xa0; 0.01057(34.0968%)</code><br /><code> Total Leakage Power:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.001(3.2258%)</code><br /><code> Total Power:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.031</code><br /><code> -----------------------------------------------------------------------------</code><br /><code>Group&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Internal&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;Switching&#xa0;&#xa0;&#xa0;&#xa0; Leakage&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Total&#xa0;&#xa0;Percentage </code><br /><code> Power&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Power&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Power&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Power&#xa0;&#xa0;(%)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;</code><br /><code> -----------------------------------------------------------------------------</code><br /><code> Sequential&#xa0;&#xa0;&#xa0; 0.0006738&#xa0;&#xa0; 0.0002215&#xa0;&#xa0; 4.045e-05&#xa0;&#xa0; 0.0009358&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;3.019</code><br /><code> Macro &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0.0004916&#xa0;&#xa0; 1.515e-05&#xa0;&#xa0; 0.0002609&#xa0;&#xa0; 0.0007677&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;2.477</code><br /><code> IO &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0.01743&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0.009085&#xa0;&#xa0;&#xa0; 0.0003172&#xa0;&#xa0;&#xa0;0.02683&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;86.56</code><br /><code> Combinational 0.0008324&#xa0;&#xa0;&#xa0;0.001247&#xa0;&#xa0;&#xa0; 0.0003815&#xa0;&#xa0;&#xa0;0.002461&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;7.941</code><br /><code> -----------------------------------------------------------------------------</code><br /><code> Total 0.01943&#xa0;&#xa0;&#xa0;&#xa0; 0.01057&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.001&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.031&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 100</code><br /><code> -----------------------------------------------------------------------------</code><br /><code> Rail&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &#xa0; Voltage&#xa0;&#xa0; Internal&#xa0;&#xa0; Switching &#xa0;&#xa0;Leakage Total&#xa0;&#xa0;Percentage &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Power &#xa0;&#xa0;&#xa0;&#xa0;Power &#xa0;&#xa0;&#xa0;&#xa0; Power &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Power&#xa0;&#xa0;(%)</code><br /><code> -----------------------------------------------------------------------------</code><br /><code> VDD_AO&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1.32&#xa0;&#xa0;0.0008238&#xa0;&#xa0; 0.0003404&#xa0;&#xa0; 0.0002694&#xa0;&#xa0;&#xa0;&#xa0;0.001434&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 4.625</code><br /><code> VDD_TDSPCore</code><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1.32&#xa0;&#xa0; 0.001126&#xa0;&#xa0;&#xa0;&#xa0;0.001022&#xa0;&#xa0; 0.0003931&#xa0;&#xa0;&#xa0;&#xa0;0.002541&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 8.197</code><br /><code> VDD_TDSPCore_R</code><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1.32&#xa0;&#xa0;5.833e-06&#xa0;&#xa0; 3.253e-07&#xa0;&#xa0; 8.371e-07&#xa0;&#xa0; 6.996e-06&#xa0;&#xa0;&#xa0;&#xa0; 0.02257</code><br /><br /><code> </code><br /><code>Clock&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Internal&#xa0;&#xa0; Switching&#xa0;&#xa0;&#xa0;&#xa0; Leakage&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Total&#xa0;&#xa0;Percentage </code><br /><code> &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &#xa0; &#xa0;&#xa0; &#xa0;&#xa0;&#xa0; Power&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Power&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Power&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Power&#xa0;&#xa0;(%)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;</code><br /><code> -----------------------------------------------------------------------------</code><br /><br /><code>m_digit_clk&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0</code><br /><code> m_ram_clk&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0</code><br /><code> m_dsram_clk&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0</code><br /><code> m_spi_clk&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;1.018e-06&#xa0;&#xa0;&#xa0;&#xa0;1.09e-06&#xa0;&#xa0; 2.572e-08&#xa0;&#xa0; 2.134e-06&#xa0;&#xa0;&#xa0;&#xa0;0.006884</code><br /><code> m_rcc_clk&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;1.282e-05&#xa0;&#xa0; 1.513e-05&#xa0;&#xa0; 2.672e-07&#xa0;&#xa0; 2.821e-05&#xa0;&#xa0;&#xa0;&#xa0; 0.09103</code><br /><code> m_clk&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;5.039e-05&#xa0;&#xa0; 7.278e-05&#xa0;&#xa0; 7.658e-07&#xa0;&#xa0; 0.0001239&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0.3998</code><br /><code> refclk&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;1.11e-05&#xa0;&#xa0; 3.017e-05&#xa0;&#xa0; 2.488e-07&#xa0;&#xa0; 4.152e-05&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.134</code><br /><code> -----------------------------------------------------------------------------</code><br /><code> Total&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;7.533e-05&#xa0;&#xa0; 0.0001192&#xa0;&#xa0; 1.307e-06&#xa0;&#xa0; 0.0001958&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0.6317</code><br /><code> -----------------------------------------------------------------------------</code><br /><br /><code>*&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Power Distribution Summary: </code><br /><code> *&#xa0;&#xa0;Highest Average Power:&#xa0;&#xa0;&#xa0;&#xa0; IOPADS_INST/Prefclkip (PBCSCT2B):&#xa0;&#xa0;&#xa0;&#xa0; 0.003727</code><br /><code> *&#xa0; Highest Leakage Power: DTMF_INST/ROM_512x16_0_INST (rom_512x16A):&#xa0;8.899e-05</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Total Cap:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;2.46221e-10 F</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Total instances in design:&#xa0;&#xa0;8525</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Total instances in design with no power:&#xa0;&#xa0;&#xa0;&#xa0;24</code><br /><code> * &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Total instances in design with no activty:&#xa0;&#xa0;&#xa0;&#xa0;24</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Total Fillers and Decap:&#xa0;&#xa0;&#xa0;&#xa0; 8</code><br /><code> -----------------------------------------------------------------------------</code></li></ul><ul><li>Next command creates a leakage report (see example report below): <br /><code>report_power -leakage</code><br /><code>*----------------------------------------------------------------------------</code><br /><code> * &#xa0; &#xa0;Tempus Timing Signoff Solution 08.10-b050_1 (64bit) 08/21/2008 19:23 (Linux 2.6)</code><br /><code> *</code><br /><code> *</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Date &amp; Time:&#xa0;&#xa0;&#xa0;&#xa0;2008-Aug-24 21:34:17 (2008-Aug-25 04:34:17 GMT)</code><br /><code> *</code><br /><code> *----------------------------------------------------------------------------</code><br /><code> *</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Design: dma_mac</code><br /><code> *</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Liberty Libraries used: </code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; DATA/timing_libs//tcbn65lp_LVL_c060217wc0d90d9.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; DATA/timing_libs//tcbn65lpcgwc.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; DATA/timing_libs//tcbn65lplvtwc.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; DATA/timing_libs//tcbn65lpwc.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; DATA/timing_libs//tsdn65lpa1024x32m8f_100a_wc.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; DATA/timing_libs//tsdn65lpa128x16m8f_100a_wc.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; DATA/timing_libs//tcbn65lpcgwc0d72.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; DATA/timing_libs//tcbn65lplvtwc0d72.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; DATA/timing_libs//tcbn65lpwc0d72.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; DATA/timing_libs//tsdn65lpa1024x32m8f_0p84v_wc.lib</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; DATA/timing_libs//tsdn65lpa128x16m8f_0p84v_wc.lib</code><br /><code> *</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Power Domain used: </code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Rail:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;VDDlu&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Voltage:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.84 </code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Rail:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VDDm&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Voltage:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1.08 </code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Rail:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;VDD&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Voltage:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1.08 </code><br /><code> *</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Power Units = 1mW</code><br /><code> *</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Time Units = 1e-09 secs </code><br /><code> *</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; report_power -out_file Leakage.rep -leakage</code><br /><code> *</code><br /><code> -----------------------------------------------------------------------------</code><br /><code> Total Power </code><br /><code> -----------------------------------------------------------------------------</code><br /><code> Total Leakage Power:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.1879 </code><br /><code> -----------------------------------------------------------------------------</code><br /><code> Group&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Leakage&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Percentage </code><br /><code> &#xa0; &#xa0;&#xa0; &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Power&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; (%)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;</code><br /><code> -----------------------------------------------------------------------------</code><br /><code> Sequential&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0.0127&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 6.756 </code><br /><code> Macro&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &#xa0;&#xa0; 0.1556&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;82.8 </code><br /><code> IO&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0 </code><br /><code> Combinational&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0.01962&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 10.44 </code><br /><code> -----------------------------------------------------------------------------</code><br /><code> Total&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.1879&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 100 </code><br /><code> -----------------------------------------------------------------------------</code><br /><code> Rail&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Voltage&#xa0;&#xa0; Leakage&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Percentage </code><br /><code> &#xa0; &#xa0; &#xa0; &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Power&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; (%)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;</code><br /><code> -----------------------------------------------------------------------------</code><br /><code> VDDau&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0 </code><br /><code> VDDlu&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0.84&#xa0;&#xa0;&#xa0;&#xa0;0.06477&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 34.47 </code><br /><code> VDDm&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1.08&#xa0;&#xa0; 0.003587&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1.909 </code><br /><code> VDD&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;1.08&#xa0;&#xa0;&#xa0;&#xa0; 0.1195&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 63.62 </code><br /><br /><code> Clock&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Leakage&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Percentage </code><br /><code> &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &#xa0; &#xa0; &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Power&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; (%)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;</code><br /><code> -----------------------------------------------------------------------------</code><br /><code> phy_rxclk_2&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0 </code><br /><code> phy_txclk_2&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0.0004786&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0.2547 </code><br /><code> phy_rxclk_1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0 </code><br /><code> phy_txclk_1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 3.39e-05&#xa0;&#xa0;&#xa0;&#xa0; 0.01804 </code><br /><code> clk&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.001723&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0.9171 </code><br /><code> -----------------------------------------------------------------------------</code><br /><code> Total&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.002236&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;1.19 </code><br /><code> -----------------------------------------------------------------------------</code><br /><br /><code> </code><br /><code>-----------------------------------------------------------------------------</code><br /><br /><code>*&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Power Distribution Summary: </code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Highest Average Power: ethernet_mac_2/tx_fifo_module_from_dma/fifo1/dual_port_</code><br /><code> &#xa0;&#xa0; ram_4_tx_fifo/ram2P1024x32/ram (TSDN65LPA1024X32M8F):&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0.02424 </code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Highest Leakage Power: ethernet_mac_2/tx_fifo_module_from_dma/fifo1/dual_port_</code><br /><code> &#xa0;&#xa0; ram_4_tx_fifo/ram2P1024x32/ram (TSDN65LPA1024X32M8F):&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0.02424 </code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Total Cap:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;1.01625e-10 F</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Total instances in design: 29235</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Total instances in design with no power:&#xa0;&#xa0;3596</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Total instances in design with no activty:&#xa0;&#xa0; 115</code><br /><code> *&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Total Fillers and Decap:&#xa0;&#xa0;&#xa0;&#xa0; 0</code><br /><code> -----------------------------------------------------------------------------</code><br /><code>&#xa0; </code><br /><code>Total leakage power = 0.187903 mW</code><br /><code>&#xa0; Cell usage statistics:&#xa0;&#xa0;</code><br /><code>&#xa0; Library tsdn65lpa128x16m8f_1v08, 1 cells ( 0.003900%) , 0.01016 mW ( &#xa0;&#xa0;&#xa0;5.407063%&#xa0;&#xa0;)</code><br /><code>&#xa0; Library tsdn65lpa1024x32m8f_1v08, 6 cells ( 0.023402%), 0.145427 mW ( &#xa0;&#xa0;&#xa0;77.394568%&#xa0;&#xa0;) </code><br /><code>&#xa0; Library tcbn65lp_LVL_c060217wc0d90d9 , 120 cells ( 0.468037%), 0.000175605 mW &#xa0;&#xa0;&#xa0;( 0.093455%&#xa0;&#xa0;)</code><br /><br /><code>&#xa0; Library unknown , 3881 cells ( 15.137096%) , 0.00630072 mW ( 3.353178%&#xa0;&#xa0;) </code><br /><code>&#xa0; Library tcbn65lpcgwc , 118 cells ( 0.460236%) , 0.000625092 mW ( 0.332667%&#xa0;&#xa0;) </code><br /><code>&#xa0; Library tcbn65lplvtwc , 3762 cells ( 14.672959%) , 0.0110529 mW ( 5.882233%&#xa0;&#xa0;) </code><br /><code>&#xa0; Library tcbn65lpwc , 17751 cells ( 69.234370%) , 0.0141619 mW ( 7.536835%&#xa0;&#xa0;)</code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="report_inst_power.html" id="prev" title="report_inst_power">report_inst_power</a></em></b><b><em><a href="report_thermal.html" id="nex" title="report_thermal">report_thermal</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

@@ -1,0 +1,364 @@
+
+<html><head><title>set_analysis_mode</title>
+<meta name="page_sequence" content="19119000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287370" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_analysis_mode" />
+<meta name="Keywords" content="set global analysis modes,timing analysis" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Timing Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287370" />
+<meta name="NextFile" content="set_analysis_view.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="select_boundary_model_constraints.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- set_analysis_mode" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="select_boundary_model_constraints.html" title="select_boundary_model_constraints">select_boundary_model_constrai ...</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_analysis_view.html" title="set_analysis_view">set_analysis_view</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_analysis_mode</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>set_analysis_mode<span class="confluence-anchor-link" id="set_analysis_mode-set_analysis_mode"></span><span id="set_analysis_mode-set_analysis_mode"></span> <br />[-help]<br />[-aging&#xa0;{true | false}]<br />[-aocv {true | false}]<br />[-enable_ipd&#xa0;{true | false}]<br />[-reset]<br />[-skew {true | false}] <br />[-checkType {setup | hold}] <br />[-warn {true | false}] <br />[-clockPropagation {sdcControl | forcedIdeal | autoDetectClockTree}]<br />[-asyncChecks {async | noAsync | asyncOnly}] <br />[-clkSrcPath {true | false}] <br />[-useOutputPinCap {true | false}]<br />[-timing_robustness {true | false}]&#xa0;<br />[-timeBorrowing {true | false}]<br />{-graph_pba&#xa0;{true | false}]<br />[-honorClockDomains {true | false}]<br />[-log {true | false}]<br />[-multi_input_switching_mode {0 | 1 | 2 | 3}]<br />[-propSlew {true | false}] <br />[-clockGatingCheck {true | false}] <br />[-sequentialConstProp {true | false}] <br />[-timingSelfLoopsNoSkew {true | false}] <br />[-analysisType {single | bcwc | onChipVariation}] <br />[-socv&#xa0;{true | false}]<br />[-cppr {none | both | setup | hold}] <br />[-timingEngine {statistical | static}] </code><br /></code></p>
+
+<p>Sets global analysis modes for timing analysis. The software uses these modes for all timing analysis commands unless you specify specific modes in the reporting commands. The modes that you specify in the reporting commands override these modes.</p>
+
+<p>When you use the <code>set_analysis_mode</code> command, the software sets the following defaults:</p>
+<ul><li>Sets the constants to be propagated while building the timing graph. The software reads the constants from the timing constraints file or the netlist.</li></ul><ul><li>Sets the analysis mode to accept the module-level timing constraints of the internally specified <code><em>set_input_delay</em></code> and <code><em>set_output_delay</em></code> variables for the I/Os of the module for running timing analysis and timing optimization. <br />The software applies the <code>set_input_delay</code> command and the <code>set_output_delay</code> command on internal pins during timing analysis.</li></ul><ul><li>Treats the latches as latches.</li></ul><ul><li>Reports the end points as many times as the number of clocks that control that end point.</li></ul><h4 id="set_analysis_mode-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="wrapped relative-table confluenceTable" style="width: 99.9064%;"><colgroup><col style="width: 22.962%;" /><col style="width: 76.9953%;" /></colgroup><tbody><tr><td class="confluenceTd"><code>-help</code></td>
+<td class="confluenceTd">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd"><code>-aging&#xa0;{true | false}</code></td>
+<td class="confluenceTd">
+<p>Enables timing-aware aging analysis.</p>
+
+<p>The aging feature must be enabled before the timing updates are done.</p>
+
+<p><strong>Note</strong>: You cannot disable this feature in the same session later.</p>
+
+<p><em>Default</em>: <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-analysisType {single | bcwc | onChipVariation}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Sets the timing analysis type to single, best case, worst case, or on-chip variation.</p>
+<ul><li><code>single</code>: Scales the delay values based on one operating condition.</li><li><code>bcwc</code>: Checks the design for two extreme operating conditions. The software uses the maximum delays for all paths during setup checks and the minimum delays for all paths during hold checks.</li><li><code>onChipVariation</code>: Calculates the delay for one path based on the maximum operating condition, while calculating the delay for another path based on the minimum operating condition for setup or hold checks.</li></ul>
+<p><em>Default:</em> <code>onChipVariation</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-aocv {true | false}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Sets the analysis mode to advanced on-chip variation (AOCV) analysis.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-asyncChecks {async | noAsync | asyncOnly}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Reports timing violations for asynchronous timing checks, including recovery and removal, and other checks on pins defined as preset or clear in the Liberty file.</p>
+<ul><li><code>async</code>: Reports timing checks on pins that are defined as preset or clear in the Liberty file.</li><li><code>noAsync</code>: Reports timing violations while ignoring the two time arc attributes.</li><li><code>asyncOnly</code>: Reports only recovery and removal checks.</li></ul>
+<p><em>Default:</em> <code>async</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-checkType {setup | hold}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Checks the design for setup or hold violations in the current analysis.</p>
+
+<p><em>Default:</em> <code>setup</code></p>
+
+<p><strong>Note: </strong>When simultaneous setup/hold mode analysis is on, this parameter does not have any impact. You can use the <code>report_timing</code> <code>-late</code>/<code>-early</code> parameter to report setup/hold timing reports.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-clkSrcPath {true | false}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Reports combinational paths from the clock source to the timing checks on data pins.</p>
+
+<p><strong>Note: </strong>If <code>-clkSrcPath false</code> is specified and the clock portion of the path is considered as ideal (due to the SDC constraints or the <code>-clockPropagation forcedIdeal</code> parameter setting), the delay calculation software treats the clock nets as ideal nets when calculating the delays and slews along the data path.</p>
+
+<p>For all pre-clock tree synthesis (CTS) steps, the software uses <code>-clkSrcPath false </code>in combination with <code>-clockPropagation forcedIdeal</code> to calculate the delays and slews along the data path.</p>
+
+<p>For all post-CTS flow steps, the software uses the default <code>-clkSrcPath</code> <code>true</code> in combination with <code>-clockPropagation sdcControl</code> to calculate the delays and slews along the data path.</p>
+
+<p><em>Default:</em> <code>true</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-clockGatingCheck {true | false}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Reports the gating checks.</p>
+
+<p><em>Default:</em> <code>true</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-clockPropagation {sdcControl | forcedIdeal | autoDetectClockTree}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies how to determine whether clock end points are interpreted as having either ideal or propagated clock timing.</p>
+
+<p><em>Default:</em> <code>sdcControl</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>&#xa0;</code><code>&#xa0;</code></p>
+</td>
+<td class="confluenceTd" valign="top"><ul><li><code>sdcControl</code>: Reports the timing violations considering clock tree and enables propagating clocks to report clock latency. You must set the set_propagated_clock constraint to propagate the clocks.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>&#xa0;</code><code>&#xa0;</code></p>
+</td>
+<td class="confluenceTd" valign="top"><ul><li><code>forcedIdeal</code>: Does not report the timing violations considering the clock tree.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top"><ul><li><code>autoDetectClockTree</code>: This parameter is obsolete. The timing system will revert to <code style="letter-spacing: 0.0px;">sdcControl</code>&#xa0;if this parameter is specified.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-cppr {none | both | setup | hold}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Removes pessimism from clock paths that have a portion of the clock network in common between the clock source and clock destination paths.</p>
+
+<p>The pessimism is introduced when the timing analysis tools assume that the common path has different delay values for two different paths in the case of on-chip variation. The pessimism can also be because of clock reconvergence in the clock network. The pessimism affects all analysis modes, including single, best case-worst case (<code>bcwc</code>), and on-chip variation.</p>
+
+<p><em>Default:</em> <code>none</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top"><ul><li><code>none</code>: Disables removal of clock reconvergence pessimism.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top"><ul><li><code>both: </code>Enables removal of clock reconvergence pessimism for both setup and hold modes. When <code style="letter-spacing: 0.0px;">set_analysis_mode</code> <code style="letter-spacing: 0.0px;">-cppr</code> is specified (without any arguments), the value is set to <code style="letter-spacing: 0.0px;">both</code>.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top"><ul><li><code>setup</code>: Enables removal of clock reconvergence pessimism in setup mode only.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top"><ul><li><code>hold</code>: Enables removal of clock reconvergence pessimism in hold mode only.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd"><code>-enable_ipd&#xa0;{true | false}</code></td>
+<td class="confluenceTd"><div class="content-wrapper">
+<p>Enables&#xa0;IPD analysis.&#xa0;</p>
+
+<p>For more information, refer to the&#xa0;<a class="message-url" href="../tempusUG/analysisandreporting.html#ipd">Inter Power Domain (IPD) Analysis</a>&#xa0;chapter in the <em>Tempus User Guide</em>.&#xa0;&#xa0;</p>
+</div>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-graph_pba&#xa0;{true | false}</code></td>
+<td class="confluenceTd">When specified, the software performs partial PBA analysis during GBA to reduce GBA pessimism.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-honorClockDomains {true | false}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Honors clock domains.</p>
+
+<p><em>Default:</em> <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-log {true | false}</code></td>
+<td class="confluenceTd">
+<p>Writes warning messages to the log file.</p>
+
+<p><em>Default:</em>&#xa0;true</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-multi_input_switching_mode {0 | 1 | 2 | 3}</code></td>
+<td class="confluenceTd"><span style="color:var(--ds-text,#172B4D);">Sets the multiple input switching (MIS) mode.&#xa0;You can specify one of the following options. When set to:</span><ul style="text-align: left;"><li>0: Simultaneous input switching is not considered.&#xa0;</li><li>1: MIS analysis considers cells for which multiple inputs of a cell are tied together (tied-inputs).</li><li>2: MIS analysis considers both the tied-inputs and the inputs of cells switching independent to each other.</li><li>3: Enables derate-based MIS. When MIS-derate is enabled, Tempus will automatically disable AMIS-simulation.</li></ul>
+<p><em>Default</em>: 0</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>-propSlew {true | false}</span></code></td>
+<td class="confluenceTd">
+<p>Controls whether slews in early path delay calculation are degraded as they pass across the interconnect from driver to receiver. You can specify a value of false to turn off interconnect slew degradation for early paths and have the driver slews copied to the receivers. Early path delay calculation affects all Hold paths in best-case/worst-case analysis mode, captures clock paths in on-chip variation Setup analysis, and clock launch and data paths in on-chip variation Hold analysis.</p>
+
+<p>&#xa0;<em>Default:</em>&#xa0;true</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-reset</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Resets parameters to their default values. The <code>-reset</code> parameter <em>must</em> be the first parameter specified. If you specify <code>-reset</code> by itself, the software resets all <code>set_analysis_mode</code> parameters to their default values. If you specify parameters after <code>-reset</code>, the software resets only those parameters to their default values.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-sequentialConstProp {true | false}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Propagates constants through sequential elements. If you specify <code>-sequentialConstProp false</code>, constants will stop at sequential elements.</p>
+
+<p><em>Default:</em> <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-skew {true | false}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Reports clock skew. The <code>-skew false</code> setting treats all clock latencies as 0.</p>
+
+<p><em>Default:</em> <code>true</code></p>
+
+<p>With the <code>-skew</code> <code>true</code> setting, you can specify the <code>-clockPropagation</code> parameter.</p>
+<ul><li>Using the default <code>-skew true -clockPropagation</code> <code>sdcControl</code> setting accounts for the clock latency during timing analysis and proceeds as follows:</li></ul><ul><ul><li>If the <code>set_propagated_clock</code> command is specified in the timing constraint file, the clock latency is computed from the netlist (propagated mode).</li></ul></ul><ul><ul><li>If the <code>set_clock_latency</code> command is specified in the timing constraint file, the clock latency specified in the constraint is used.</li></ul></ul>
+<p>Otherwise, no latency is reported (ideal mode)</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-socv&#xa0;{true | false}</code></td>
+<td class="confluenceTd">
+<p>Enables SOCV analysis.</p>
+
+<p><em>Default</em>: <code>false</code>&#xa0;</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-timeBorrowing {true | false}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Considers time borrowing during timing analysis. Time borrowing is the amount of time borrowed by a previous logic.</p>
+
+<p><em>Default:</em> <code>true</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-timingEngine {statistical | static}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the type of timing analysis to perform.</p>
+<ul><li><code>statistical</code>: Sets to analysis mode to statistical static timing analysis (SSTA).</li><li><code>static</code>: Performs static timing analysis.</li></ul>
+<p><em>Default:</em> <code>static</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-timing_robustness {true | false}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Enables PTR analysis.</p>
+
+<p>The Parametric Timing Robustness (PTR) analysis calculates the probability of an entire chip meeting timing requirements, instead of relying on the probabilities of individual paths to compute the robustness of a chip.&#xa0;</p>
+
+<p><em>Default:</em>&#xa0;<code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>-timingSelfLoopsNoSkew {true | false}</span></code></td>
+<td class="confluenceTd">
+<p>Eliminates clock skew due to clock uncertainty for a path starting and ending at the same register. If the clock skew is not eliminated, the timing for such paths is pessimistic.</p>
+
+<p><strong>Note:&#xa0;</strong>&#xa0;Use this parameter before building the timing graph.</p>
+
+<p><em>Default:</em>&#xa0;<code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-useOutputPinCap {true | false}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Includes the output pin capacitance when calculating delay values. When you specify <code>-useOutputPinCap false</code>, the software excludes only the pin capacitance of the driver for which you are calculating the delay.</p>
+
+<p><em>Default:</em> <code>true</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-warn {true | false}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Displays warning messages as the timing constraints file is read.</p>
+
+<p><em>Default:</em> <code>true</code></p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_analysis_mode-Examples">Examples</h4>
+<ul><li>The following command sets timing analysis to report clock skew, suppresses warning messages, and checks for setup timing:<br /><code>tempus&gt;&#xa0;set_analysis_mode -checkType setup -skew true -warn false</code></li></ul><ul><li>The following command sets the timing analysis type to onChipvariation, with cppr enabled for both setup as well as hold checks:<br /><code>tempus&gt; set_analysis_mode -analysisType onChipVariation -cppr both<br /></code></li><li>The following command enables the advanced on-chip variation mode in the design:<br /><code>tempus&gt; set_analysis_mode -aocv true<br /></code></li><li>The following command disables the clock-gating checks:<br /><code>tempus&gt; set_analysis_mode -clockGatingCheck false<br /></code></li><li>The following command forces the tool to treat all the clocks as ideal networks, even if the clocks are defined as propagated in the constraints:<br /><code>tempus&gt; set_analysis_mode -clockPropagation forcedIdeal<br /></code></li><li>The following command results in the propagation of constants through the sequential elements:<br /><code>tempus&gt; set_analysis_mode -sequentialConstProp true<br /></code></li><li>The following command disables the time borrowing in the design:<br /><code>tempus&gt; set_analysis_mode -timeBorrowing false</code></li></ul><h4 id="set_analysis_mode-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="get_analysis_mode.html">get_analysis_mode</a></code></li><li><code><a href="report_analysis_mode.html">report_analysis_mode</a></code></li><li><code><a href="report_timing.html">report_timing</a></code></li><li><code><a href="set_aging_analysis_mode.html">set_aging_analysis_mode</a></code></li><li><code><a href="set_aging_activity.html">set_aging_activity</a></code></li><li><code><a href="create_aging_stress_profile.html">create_aging_stress_profile</a> </code></li><li><code><a href="create_spice_deck.html">create_spice_deck</a></code></li><li><code><a href="../tempustxtcmdref/set_ipd_rail_voltage.html" rel="nofollow" style="text-decoration: none;">set_ipd_rail_voltage</a></code></li><li><code><a href="../tempustxtcmdref/create_pg_net_group.html" rel="nofollow" style="text-decoration: none;">create_pg_net_group</a></code></li><li><a href="create_ipd_configuration.html"><code>create_ipd_configuration</code></a></li><li><code><a href="../tempustxtcmdref/report_ipd_configuration.html" rel="nofollow" style="text-decoration: none;">report_ipd_configuration</a></code></li><li><code><a href="../tempustxtcmdref/write_ipd_scope.html" rel="nofollow" style="text-decoration: none;">write_ipd_scope</a></code></li><li><code><a href="../tempustxtcmdref/read_ipd_scope.html" rel="nofollow" style="text-decoration: none;">read_ipd_scope</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="select_boundary_model_constraints.html" id="prev" title="select_boundary_model_constraints">select_boundary_model_constrai ...</a></em></b><b><em><a href="set_analysis_view.html" id="nex" title="set_analysis_view">set_analysis_view</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

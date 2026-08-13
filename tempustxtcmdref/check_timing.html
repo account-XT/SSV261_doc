@@ -1,0 +1,591 @@
+
+<html><head><title>check_timing</title>
+<meta name="page_sequence" content="19015000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287328" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="check_timing" />
+<meta name="Keywords" content="check timing constraints,object list" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Analysis,REPORTS," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287328" />
+<meta name="NextFile" content="compare_timing_context.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="check_library.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- check_timing" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="check_library.html" title="check_library">check_library</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="compare_timing_context.html" title="compare_timing_context">compare_timing_context</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>check_timing</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>&#xa0;<code><code><code>check_timing <span class="confluence-anchor-link" id="check_timing-check_timing"></span><span id="check_timing-check_timing"></span><br /><code>[-help]</code><br /><code>[-check_only&#xa0;<em>warning_list</em>]<br />[-clock_crossing_output_format {summary | csv}]</code><br /><code>[-exclude_warning&#xa0;<em>warning_list</em>]</code><br /><code>[-include_warning&#xa0;<em>warning_list</em>]</code><br /><code>[-tcl_list]<br />[-type&#xa0;<em>type_list</em>]</code><br /><code>[-verbose]</code><br /><code>[-view&#xa0;<em>view_name</em>]</code><br /><code>[&gt; &lt;file_name[.gz]&gt;]</code><br /><code>[&gt;&gt; &lt;file_name[.gz]&gt;]</code><br /><code>[<em>port_or_pin_list</em>]</code></code></code></code></p>
+
+<p>Performs a variety of consistency and completeness checks on the timing constraints specified for a design.&#xa0;</p>
+
+<p>The checks include arrival time and external delay (or required time) for each clock in a multiple-clock system. In addition, clock and data connectivity are checked to ensure that clock/data is propagated as expected. The clock gating points are also reported.</p>
+
+<p>The <code>check_timing</code> command considers constants applied to a pin while reporting warnings.</p>
+<div><div aria-label="Info" class="confluence-information-macro  confluence-information-macro-information" role="region"><span class="aui-icon aui-icon-small aui-iconfont-info-filled confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>Use the <code>check_timing</code> command before using any timing analysis commands. Warnings (listed in the <a href="#check_timing-table">Table</a>) will be displayed when problems occur. For best results, re-run the <code>check_timing</code> command after resolving each warning. Redirecting the output to a file is the quickest way to re-run the command.</p>
+</div>
+</div>
+</div>
+<h4 id="check_timing-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="2">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-check_only <em>warning_list</em></code></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Allows you to specify warning types. For example, the following command lists the specified warnings only:</p>
+
+<p><code>check_timing -check_only {uncons_endpoint clock_crossing}</code></p>
+
+<p>This list can also include warnings that are not listed by default.</p>
+
+<p>Valid entries in the <em>warning_list</em> are:</p>
+
+<p><code>clock_clipping_freq, clock_clipping_gate, clock_crossing, clock_expected, clock_gating_controlling_edge_unknown, clock_gating_no_data, clock_missing_at_sequential_output, clock_not_propagated, clocks_masked_by_another_clock, const_collision, data_check_multiple_reference_signal, data_check_no_reference_signal, ideal_clock_waveform, invalid_pll_configuration, loop, master_clk_edge_not_reaching, missing_clock_groups, missing_drive, multiple_clock, no_drive, no_gen_clock_source, no_input_delay, partial_input_delay, pulse_non-pulse_clock_merge, signal_level, uncons_endpoint,&#xa0;uncons_endpoints_due_to_case_analysis</code></p>
+
+<p><code>clock_expected, clock_not_propagated, no_gen_clock_source, master_clk_edge_not_reaching, data_check_multiple_reference_signal, multiple_clock, data_check_no_reference_signal, clock_gating_no_data, clock_gating_controlling_edge_unknown, clock_missing_at_sequential_output, clocks_masked_by_another_clock, uncons_endpoint, max_delay_constrained_internal_endpoint, no_input_delay, partial_input_delay, no_drive, loop, ideal_clock_waveform, clock_crossing, clock_clipping_gate, clock_clipping_freq, const_collision, signal_level, constant_clock_pin ,missing_drive, reconvergent_clock, unexpandable_clock and missing_clock_groups</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-clock_crossing_output_format {summary | csv}</code></td>
+<td class="confluenceTd" colspan="2">Specifies the format of the clock crossing report to be generated - as a summary or in CSV format.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>{&gt; | &gt;&gt;} </code><code><em>file_name</em></code></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>When specified with <code>&gt;</code>, writes the report to the specified file name. If the file already exists, the software overwrites it.</p>
+
+<p>When specified with <code>&gt;&gt;</code>, writes the report to the specified file name. If the file already exists, the software concatenates the report to the end of the file.</p>
+
+<p>The <code><em>filename</em></code> parameter must be the last argument in the list. The <code><em>filename</em></code> and <code>-tcl_list</code> parameters are mutually exclusive; you cannot specify them together.</p>
+
+<p><strong>Note: </strong>To write a compressed report, add the <code>.gz</code> extension to the file name.</p>
+
+<p><em>Default:</em> Report is displayed on standard output without being saved.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-exclude_warning <em>warning_list</em></code></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Excludes the specified warning types when generating the report. Use this parameter to exclude any of the warnings included in the report by default.</p>
+
+<p>By default, the software includes the following warnings in the report: <code>clock_expected</code>, <code>loop</code>, <code>ideal_clock_waveform</code>, <code>master_clk_edge_not_reaching</code>, <code>partial_input_delay</code>, <code>no_input_delay</code>, <code>no_drive</code>, <code>no_gen_clock_source</code>, <code>uncons_endpoint</code>, <code>uncons_endpoints_due_to_case_analysis</code>.</p>
+
+<p>The complete list of warnings and their descriptions is given in <a href="#check_timing-Table">Table</a>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-include_warning <em>warning_list</em></code></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Includes the specified warning types when generating the report. Use this parameter to add any of the warnings not included in the report by default.</p>
+
+<p>By default, the software reports all warnings except the following: <code>clock_clipping_gate</code>, <code>const_collision</code>, <code>clock_crossing,clock_not_propagated</code>,<code> missing_drive</code>,<code> multiple_clock</code>,<code> data_check_multiple_reference_signal</code>,<code> data_check_no_reference_signal</code>,<code> clock_gating_no_data, clock_gating_controlling_edge_unknown</code>,<code> clock_missing_at_sequential_output</code>,<code> signal_level</code>, <code>clocks_masked_by_another_clock</code>.</p>
+
+<p>The complete list of warnings and their descriptions is given in <a href="#check_timing-Table">Table</a>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code><em>port_or_pin_list</em></code></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Lists pins or ports. For example:</p>
+
+<p><code>check_timing -verbose [get_ports in*]</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-tcl_list</code></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Produces the report in TCL list format instead of a tabular format. This is useful for integrating timing with custom TCL functions, and also for customizing report generation.</p>
+
+<p>The <code>-tcl_list</code> and <code><em>filename</em></code> parameters are mutually exclusive; you cannot specify them together.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-type <em>type_list</em></code></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Limits the checks to the specified type.</p>
+
+<p><em>Default</em>: Check types that have any violations will be reported.</p>
+
+<p>To report all the checks, you can use the <code><a href="timing_check_timing_report_all_checks.html">timing_check_timing_report_all_checks</a></code> global variable. When set to <code>true</code>, the software reports all checks performed by the&#xa0;<code>check_timing</code> command, even if no violations are found. By default, this global variable is set to&#xa0;<code>false</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p><code>clock_clipping: </code>Warns when there is a problem with clock gating that can result in clock clipping.</p>
+
+<p>Reports the following warnings:</p>
+<ul><li><a href="#check_timing-clock_clipping_freq">clock_clipping_freq</a></li></ul><ul><li><a href="#check_timing-clock_clipping_gate">clock_clipping_gate</a></li></ul></td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p><code>clocks: </code>Reports the following clock warnings:</p>
+<ul><li><a href="#check_timing-clock_crossing">clock_crossing</a></li></ul><ul><li><a href="#check_timing-clock_expected">clock_expected</a></li></ul><ul><li><a href="#check_timing-clock_not_propagated">clock_not_propagated</a></li></ul><ul><li><a href="#check_timing-ideal_clock_waveform">ideal_clock_waveform</a></li></ul><ul><li><a href="#check_timing-master_clk_edge_not_reaching">master_clk_edge_not_reaching</a></li></ul><ul><li><a href="#check_timing-no_gen_clock_source">no_gen_clock_source</a></li></ul></td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p><code>clock_gating_inferred: </code>Warns when inferred clock-gating checks are not analyzed by the software, even if a clock signal reaches and is used downstream in the clock tree.</p>
+
+<p>Reports the following warnings.</p>
+<ul><li><a href="#check_timing-clock_gating_controlling_edge_unknown">clock_gating_controlling_edge_unknown</a></li></ul><ul><li><a href="#check_timing-clock_gating_no_data">clock_gating_no_data</a></li></ul></td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p><code>constant_collision: </code>Warns when there is a constant collision on a net connected to the pin or if there is a contradiction on a pin.</p>
+
+<p>Constant collision occurs when a net is driven simultaneously by conflicting values, and a constant contradiction occurs when a constant constraint on a pin conflicts with the driven value.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p><code>endpoints: </code>For output ports, warns if no output delay constraint is applied to the port or if a specific (min/max rise/fall) output delay is missing. It also warns when an output delay constraint is applied without clock information.</p>
+
+<p>For all endpoints (output ports and register data pins), it warns if any incoming signal is unconstrained.</p>
+
+<p>Also warns if a clock arrives where a clock is not expected, or if multiple signals arrive at an endpoint.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p><code>inputs: </code>Reports the following input delay, arrival time assertion, and drive assertion warnings:</p>
+<ul><li><a href="#check_timing-partial_input_delay">partial_input_delay</a></li></ul><ul><li><a href="#check_timing-missing_drive">missing_drive</a></li></ul><ul><li><a href="#check_timing-no_input_delay">no_input_delay</a></li></ul><ul><li><a href="#check_timing-no_drive">no_drive</a></li></ul>
+<p><code>loops: </code>Warns when a combinational loop is detected. Reports the loop and the arc used to break the loop. The <code>-pin</code> option is ignored in this case.</p>
+
+<p>Also reports loops caused by generated clocks.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-verbose</code></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Gives detailed information about the warnings. When specified, warnings are grouped and sorted by warning type.</p>
+
+<p><em>Default:</em> Gives a summary of how many warnings of each type exist.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-view <em>view_name</em></code></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Reports warning(s) that belong to the specified view.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="check_timing-CommandOrder">Command Order</h4>
+
+<p>Use this command after setting all the constraints but before generating any timing reports.</p>
+<h4 id="check_timing-WarningMessages"><em>Warning Messages</em></h4>
+
+<p>The following table shows the <code>check_timing</code> warning messages.</p>
+
+<p><span class="confluence-anchor-link" id="check_timing-table"></span></p>
+
+<p><strong>Table</strong>:&#xa0;<strong>check_timing Warning Messages &#xa0;</strong></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td bgcolor="#CCCCCC" class="confluenceTd" valign="middle">
+<p><strong>Warning</strong></p>
+</td>
+<td bgcolor="#CCCCCC" class="confluenceTd" valign="middle">
+<p><strong>Description</strong></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top"><div class="content-wrapper">
+<p><span class="confluence-anchor-link" id="check_timing-clock_clipping_gate"></span><code>clock_clipping_gate</code></p>
+</div>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning</strong>: Clock clipping possible due to wrong gate type or wrong trigger for data input.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top"><div class="content-wrapper">
+<p><span class="confluence-anchor-link" id="check_timing-clock_clipping_freq"></span><code>clock_clipping_freq</code></p>
+</div>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning</strong>: Clock clipping possible due to incompatible clock signal and data signal frequencies.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top"><div class="content-wrapper">
+<p><span class="confluence-anchor-link" id="check_timing-clock_crossing"></span><code>clock_crossing</code></p>
+</div>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning</strong>: Clock domains interact.</p>
+
+<p><strong>Comments: </strong>Checks clock interactions between multiple clock domains in the design.</p>
+
+<p>When you specify this parameter, the Timing Check Crossing Clocks report shows the interaction between clocks in the design. It indicates whether the paths between the clocks are&#xa0;<code>False</code> or <code>Partial False.</code></p>
+
+<p>If a clock launches one or more paths, which are captured by other clocks, the report lists all pairs of crossing clocks.</p>
+<ul><li>This includes inferred clock gating with a different reference and signal clock.</li></ul><ul><li>If a path has been disabled using the <code>set_disable_timing</code> command, crossing clocks on that path are not reported.</li></ul>
+<p>If all the paths between two clocks are false paths or if they are exclusive/asynchronous clocks, the path is marked as&#xa0;<code>False</code>. The false path can be defined on clocks, for example, <code>set_false_path -clock_to CLK</code>,&#xa0;or on pins or ports, such as&#xa0;-through buf1/Y.</p>
+
+<p>If only part of the paths are set as false paths or exclusive/asynchronous clocks, the path is marked as <code>Partial False</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top"><ul><li>If a false path is defined only for one check type (say, setup), the crossing clocks are marked as <code>Partial </code><code>False</code> if the simultaneous setup hold mode is set to <code>on</code>. The crossing clocks are marked <code>False</code> if the analysis type is set up and the simultaneous setup hold mode is set to&#xa0;<code>off</code>.</li></ul><ul><li>If only one edge (rise/fall) of a particular clock pair has false paths (say, using <code>-clock_fall</code>), then the path is marked as a <code>Partial </code><code>False</code>.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" valign="top"><div class="content-wrapper">
+<p><span class="confluence-anchor-link" id="check_timing-clock_expected"></span><code>clock_expected</code></p>
+</div>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning:</strong> Clock not found where clock is expected.</p>
+
+<p><strong>Comments: </strong>Indicates that no clock signal is defined at the clock pin.</p>
+
+<p>See <a href="create_clock.html">create_clock</a>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top"><div class="content-wrapper">
+<p><span class="confluence-anchor-link" id="check_timing-clock_gating_controlling_edge_unknown"></span><code>clock_gating_controlling_edge_unknown</code>&#xa0;</p>
+</div>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning:</strong> Unknown controlling edge to perform clock gating check.</p>
+
+<p><strong>Comments: </strong>Reports library cells with complex functions (MUX or AOI ) where controlling the edge of the signal to perform a clock gating check cannot be determined automatically.</p>
+
+<p>You need&#xa0; detero specify the correct edge by the <code>-high</code>/<code>-low</code> option using the <code>set_clock_gating_check</code> command to resolve this warning.</p>
+
+<p><strong>Note: </strong>The software does not report this warning when either:</p>
+<ul><li><code>set_disable_clock_gatin</code><code>g_check </code>command is applied on such pins, or</li></ul><ul><li>global settings to disable clock gating checks are on.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" valign="top"><div class="content-wrapper">
+<p><span class="confluence-anchor-link" id="check_timing-clock_gating_no_data"></span><code>clock_gating_no_data</code></p>
+</div>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning:</strong> No data signal reaching clock-gating enable pin</p>
+
+<p><strong>Comments: </strong>Reports clock gating enable pins where no valid data signal arrives.</p>
+
+<p>You need to do either of the following:</p>
+<ul><li>specify a valid data signal to reach the enable pin of clock-gating cells, or</li></ul><ul><li>remove any path exceptions or disabled checks that block a valid data signal from reaching the enable pin</li></ul>
+<p><strong>Note: </strong>The software does not report this warning when either</p>
+<ul><li><code>set_disable_clock_gatin</code><code>g_check </code>is applied on such pins, or</li></ul><ul><li>global settings to disable clock gating checks are on.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>clocks_masked_by_another_clock</code>&#xa0;</p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning:</strong> Clock(s) in fanin cone are dropped due to another clock</p>
+
+<p><strong>Comments: </strong>Reported timing pins on which creation of a regular or a generated clock causes clock(s) in fanins of such pins have been blocked or masked from propagating further.</p>
+
+<p>However, for pins having only a master clock waveform on the fanin, this warning is not reported.</p>
+
+<p>You can use the detailed mode (<code>-verbose</code> option) to report the names of all the incoming clock waveforms that have been blocked.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>clock_missing_at_sequential_output</code>&#xa0;</p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning:</strong> Found latency phase at sequential output on clock tree instead of clock phase</p>
+
+<p><strong>Comments: </strong>Reports output pins of sequential elements that lie on source clock tree for the generated clocks created downstream and do not have any valid clock phase. This indicates possible missing clock related checks (e.g., clock gating) on downstream clock tree.</p>
+
+<p>You can add clocks on this pin or downstream clock tree only if no valid clock exists until the downstream generated clock creation point.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top"><div class="content-wrapper">
+<p><span class="confluence-anchor-link" id="check_timing-clock_not_propagated"></span><code>clock_not_propagated</code></p>
+</div>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning:</strong> Clock not propagated</p>
+
+<p><strong>Comments: </strong>Reports ideal clocks reaching the reference pin of a timing check.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top"><div class="content-wrapper">
+<p><span class="confluence-anchor-link" id="check_timing-const_collision"></span><code>const_collision</code></p>
+</div>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning:</strong> Constant collision</p>
+
+<p><strong>Comments: </strong>See <a href="set_case_analysis.html">set_case_analysis</a>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>data_check_multiple_reference_signal</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning:</strong> Multiple clocked signals are reaching data check reference pin</p>
+
+<p><strong>Comments: </strong>Reports on reference pins for non sequential timing check (data check) where more than one reference data arrives.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>data_check_no_reference_signal</code>&#xa0;</p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning:</strong> No clocked signal is reaching data check reference pin</p>
+
+<p><strong>Comments: </strong>Reports reference pins for non- sequential timing check (data check) where no valid reference signal (data phase) arrives.</p>
+
+<p>You can do one of the following to resolve such warnings:</p>
+<ul><li>add valid reference signals to reach such reference pins</li></ul><ul><li>remove path exceptions or disabled arcs that are blocking such reference signals</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" valign="top"><div class="content-wrapper">
+<p><span class="confluence-anchor-link" id="check_timing-ideal_clock_waveform"></span><code>ideal_clock_waveform</code></p>
+</div>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning:</strong> Clock waveform is ideal.</p>
+
+<p><strong>Comments: </strong>Reports clocks that are ideal and are not propagated. This warning type is reported by default (unless <code style="line-height: 1.4285715;">-exclude_warning</code> or <code style="line-height: 1.4285715;">-check_only</code> parameter is specified).</p>
+
+<p>You can use the <code><a href="set_propagated_clock.html">set_propagated_clock</a></code> command to avoid this warning.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>invalid_pll_configuration</code></td>
+<td class="confluenceTd">
+<p><strong>Warning:</strong> No valid path exists from output pin to feedback pin of PLL.</p>
+
+<p><strong>Comments</strong>: Shows PLL (phase locked loop) check warnings. These checks allow you to identify and fix issues in the PLL flow.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top"><div class="content-wrapper">
+<p><span class="confluence-anchor-link" id="check_timing-loop"></span><code>loop</code></p>
+</div>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning:</strong> Timing loop found in the design</p>
+
+<p><strong>Comments: </strong>Indicates that there are timing loops in the design. It also includes loops caused by generated clocks.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top"><div class="content-wrapper">
+<p><span class="confluence-anchor-link" id="check_timing-master_clk_edge_not_reaching"></span></p>
+
+<p><code>master_clk_edge_not_reaching</code></p>
+</div>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning:</strong> Master clock edge does not reach the generated clock target.</p>
+
+<p><strong>Comments: </strong>This warning means that rise/fall latency edge is not reaching to create generated clock root from the master clock. You can verify if the path that is seeing this warning is actually broken, or edge is somewhere disabled earlier on this path. There is a global <code>timing_enable_genclk_edge_based_source_latency</code> that controls how the software selects generated clock source latency paths. Details of this global can be found at the Tempus text command reference.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top"><div class="content-wrapper">
+<p><span class="confluence-anchor-link" id="check_timing-partial_input_delay"></span><code>partial_input_delay</code></p>
+</div>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning:</strong> Indicates that a rise or fall input delay assertion is not applied.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>pulse_non-pulse_clock_merge</code></td>
+<td class="confluenceTd">
+<p><strong>Warning</strong>: <span>Merge of pulse and non-pulse clock paths.</span></p>
+
+<p><strong>Comments</strong>: <span>Reports points where a pulse clock and a non-pulse clock merges.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>missing_clock_groups</span></code></td>
+<td class="confluenceTd">
+<p><strong>Warning</strong>: Set clock group related checking.</p>
+
+<p><strong>Comments: </strong>Reports any potential issues with the defined clock grouping data.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top"><div class="content-wrapper">
+<p><span class="confluence-anchor-link" id="check_timing-missing_drive"></span><code>missing_drive</code></p>
+</div>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning:</strong> Missing specific (rise/fall) drive constraint</p>
+
+<p><strong>Comments: </strong>Either a rise or fall drive constraint is applied and the other one is missing.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>multiple_clock</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning:</strong> Multiple clocks are reaching clock reference pin.</p>
+
+<p><strong>Comments: </strong>Reports clock pins of sequential or clock gating cells where more than one clock waveform arrives.</p>
+
+<p>This warning is for information only, and the software performs timing analysis across all such clocks.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top"><div class="content-wrapper">
+<p><span class="confluence-anchor-link" id="check_timing-no_input_delay"></span><code>no_input_delay</code></p>
+</div>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning:</strong> No input delay assertion with or without <code>-clock</code> option specified.</p>
+
+<p><strong>Comments: </strong>See <code><a href="set_input_delay.html">set_input_delay</a></code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top"><div class="content-wrapper">
+<p><span class="confluence-anchor-link" id="check_timing-no_drive"></span><code>no_drive</code></p>
+</div>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning:</strong> No drive constraint</p>
+
+<p><strong>Comments: </strong>See <code><a href="set_driving_cell.html">set_driving_cell</a> </code>and <code><a href="set_drive.html">set_drive</a></code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top"><div class="content-wrapper">
+<p><span class="confluence-anchor-link" id="check_timing-no_gen_clock_source"></span><code>no_gen_clock_source</code></p>
+</div>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning:</strong> No clock source found for generated clock</p>
+
+<p><strong>Comments: </strong>Indicates that the source pin of the clock generated by the <code><a href="create_clock.html">create_clock</a> </code>command is not driven by a clock source.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top"><div class="content-wrapper">
+<p><span class="confluence-anchor-link" id="check_timing-signal_level"></span><code>signal_level</code></p>
+</div>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning:</strong> Driver pin voltage value does not match the sink pin voltage level</p>
+
+<p><strong>Comments: </strong>Reports net driver/receiver pin pairs for which the pin voltage does not match.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top"><div class="content-wrapper">
+<p><span class="confluence-anchor-link" id="check_timing-uncons_endpoint"></span><code>uncons_endpoint</code></p>
+</div>
+</td>
+<td class="confluenceTd" valign="top">
+<p><strong>Warning:</strong> No constrained signal reaching pin.</p>
+
+<p><strong>Comments: </strong>For output ports: Primary output port has no implicit timing check. Use <code><a href="set_output_delay.html">set_output_delay</a></code>, <code><a href="set_max_delay.html">set_max_delay</a></code>, or <code><a href="set_min_delay.html">set_min_delay</a></code> to create a valid constraint.</p>
+
+<p>For register data pins: There is no valid clock reaching the CK pin of the register data pin. Check for missing <code><a href="create_clock.html">create_clock</a> </code>for the clock network.</p>
+
+<p>The endpoints are reported as unconstrained in both early and late timing. This does not cover all cases and scenarios that can cause endpoints to become unconstrained. To cover all possible cases, you can use the&#xa0;<code><a class="external-link" href="../tempustxtcmdref/report_analysis_coverage.html" rel="nofollow">report_analysis_coverage</a></code> command.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><div class="content-wrapper">
+<p><span class="confluence-anchor-link" id="check_timing-uncons_endpoints_due_to_case_analysis"></span><code>uncons_endpoints_due_to_case_analysis</code></p>
+</div>
+</td>
+<td class="confluenceTd">
+<p><strong>Warning:&#xa0;</strong>Unconstrained signal arriving at endpoint due to case analysis</p>
+
+<p><strong>Comments: </strong>Reports unconstrained endpoints due to case analysis.</p>
+
+<p>To enable this warning, you must set the&#xa0;<span style="color:var(--ds-text,#172b4d);"><a href="timing_report_check_timing_unconstrained_endpoints_due_to_constants.html"><code>timing_report_check_timing_unconstrained_endpoints_due_to_constants</code></a> global variable </span>to <code>true</code>.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="check_timing-Examples">Examples</h4>
+
+<p>Here are some examples.</p>
+<ul><li>Consider the following example:<br /><br /><code style="line-height: 1.4285715;">in---------|&gt;-----------|&gt;---------out<br /><br /></code><code style="line-height: 1.4285715;">buf1 buf2<br /><br /></code>The Timing Check Crossing Clocks reports False or Partial False in some of the scenarios given below:<br /><br /><code>a) set_input_delay</code> with respect to CLK1 on in and set_output_delay with respect to CLK2 on out:&#xa0;<br /><code>From Clock&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Crossing Clocks</code><br /><code>------------------------------------------</code><br /><code>CLK1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;CLK2</code><br /><br /><code>b) set_input_delay</code> with respect to CLK1 on in, set_output_delay with respect to CLK2 on out, and set_false_path -to CLK2 (clock-based false path):<br /><code>From Clock&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Crossing Clocks</code><br /><code>-------------------------------------------</code><br /><code>CLK1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;CLK2&#xa0;&#xa0;(False)</code><br /><br />c) If the set_false_path becomes set_false_path -rise_to CLK2, the following is reported:<code><br />From Clock&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Crossing Clocks</code><br /><code>-------------------------------------------</code><br /><code>CLK1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;CLK2&#xa0;&#xa0;(Partial False)</code><br /><br />The following command displays the default summary report:&#xa0;<br /><code>tempus&gt; check_timing</code><br /><code>-------------------------------------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; TIMING CHECK SUMMARY</code><br /><code>--------------------------------------------------------------------------------</code><br /><code>Warning &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Warning Description &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Number of</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Warnings</code><br /><code>--------------------------------------------------------------------------------</code><br /><code>ideal_clock_waveform &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Clock waveform is ideal &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;1</code><br /><code>clock_expected &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Clock not found where clock is expected &#xa0; &#xa0; &#xa0; &#xa0;3</code><br /><code>master_clk_edge_not_reaching &#xa0;Master clock edge does not reach the <br />&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; generated clock target &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 2</code><br /><code>no_drive &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;No drive assertion &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 8</code><br /><code>no_input_delay &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;No input delay assertion with respect <br />&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; to clock &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 4</code><br /><code>uncons_endpoint &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Unconstrained signal arriving at end point &#xa0; &#xa0; 5</code><br /><code>--------------------------------------------------------------------------------</code></li><li>
+<p>The following command displays a specified type of warning using the <code style="line-height: 1.4285715;">-type</code> option if a timing loop is found in the design:&#xa0;<br /><code>tempus&gt; &#xa0;check_timing -type loops</code></p>
+
+<p><code>-------------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; TIMING CHECK SUMMARY</code><br /><code> -------------------------------------------------------</code><br /><code> Warning &#xa0; &#xa0; &#xa0;Warning Description &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Number of</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Warnings</code><br /><code> -------------------------------------------------------</code><br /><code> loop &#xa0; &#xa0; &#xa0; &#xa0; Timing loop found in the design &#xa0;0</code><br /><code> -------------------------------------------------------</code></p>
+</li></ul><ul><li>The following command provides more information about problems and prints a summary using the <code>-verbose</code> option: <br /><code><code>tempus&gt; check_timing -verbose<br /></code></code>
+<p><code>-------------------------------------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; TIMING CHECK SUMMARY</code><br /><code> -------------------------------------------------------------------------------------</code><br /><code> Warning &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Warning Description &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Number of</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Warnings</code><br /><code> -------------------------------------------------------------------------------------</code><br /><code> ideal_clock_waveform &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Clock waveform is ideal &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;1</code><br /><code> clock_expected &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Clock not found where clock is expected &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;3</code><br /><code> master_clk_edge_not_reaching &#xa0;Master clock edge does not reach the <br />&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; generated clock target &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 2</code><br /><code> no_drive &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;No drive assertion &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 8</code><br /><code> no_input_delay &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;No input delay assertion with respect to clock &#xa0; 4</code><br /><code> uncons_endpoint &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Unconstrained signal arriving at end point &#xa0; &#xa0; &#xa0; 5</code><br /><code> ------------------------------------------------------------------------------------</code><br /><code> ------------------------------------------</code><br /><code> TIMING CHECK DETAIL</code><br /><code> ------------------------------------------</code><br /><code> Pin &#xa0; &#xa0; &#xa0; &#xa0; Warning</code><br /><code> ------------------------------------------------------</code><br /><code> u99/CK &#xa0; &#xa0; &#xa0;Clock not found where clock is expected</code><br /><code> u5/CK &#xa0; &#xa0; &#xa0; Clock not found where clock is expected</code><br /><code> u8/CK &#xa0; &#xa0; &#xa0; Clock not found where clock is expected</code><br /><code> u8/Q &#xa0; &#xa0; &#xa0; &#xa0;Master clock edge does not reach the target for generated clock GCLK4</code><br /><code> CLK1 &#xa0; &#xa0; &#xa0; &#xa0;No drive assertion</code><br /><code> in1 &#xa0; &#xa0; &#xa0; &#xa0; No drive assertion</code><br /><code> in1 &#xa0; &#xa0; &#xa0; &#xa0; No input delay assertion with respect to clock</code><br /><code> out1 &#xa0; &#xa0; &#xa0; &#xa0;Unconstrained signal arriving at end point</code><br /><code> -------------------------------------------------------</code><br /><code> -------------------------</code><br /><code> TIMING CHECK IDEAL CLOCKS</code><br /><code> -------------------------</code><br /><code> Clock &#xa0;Waveform</code><br /><code> ------------------------</code><br /><code> CLK1</code><br /><code> ------------------------</code></p>
+</li></ul><ul><li>When&#xa0;<code>timing_report_check_timing_unconstrained_endpoints_due_to_constants</code> global variable is enabled, the case analysis warnings are reported as shown below:<br /><code>tempus 11&gt; check_timing</code><br /><code>----------------------------------------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; TIMING CHECK SUMMARY </code><br /><code>----------------------------------------------------------------------------------</code><br /><code>Warning&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Warning Description&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Number of </code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Warnings </code><br /><code>----------------------------------------------------------------------------------</code><br /><code>clock_expected&#xa0; &#xa0; &#xa0; &#xa0;Clock not found where clock is expected&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 4202</code><br /><code>no_drive&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;No drive assertion&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;241</code><br /><code>no_input_delay&#xa0; &#xa0; &#xa0; &#xa0;No input delay assertion with respect to clock&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;</code><code>160</code><br /><code>uncons_endpoint&#xa0; &#xa0; &#xa0; Unconstrained signal arriving at end point&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;145259</code><br /><strong><code>uncons_endpoints_due_to_case_analysis</code></strong><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;&gt;&gt;&gt;&gt;Unconstrained signal arriving at end point due to case analysis</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 5969437</code><br /><code>----------------------------------------------------------------------------------</code></li></ul><h4 id="check_timing-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="report_timing.html">report_timing</a></code></li><li><code><a href="set_input_delay.html">set_input_delay</a></code></li><li><code><a href="create_clock.html">create_clock</a></code></li><li><code><a href="set_case_analysis.html">set_case_analysis</a></code></li><li><code><a href="set_output_delay.html">set_output_delay</a></code></li><li><code><a href="set_max_delay.html">set_max_delay</a></code></li><li><code><a href="set_min_delay.html">set_min_delay</a></code></li><li><code><a href="set_drive.html">set_drive</a></code></li><li><code><a href="set_driving_cell.html">set_driving_cell</a></code></li><li><code><a href="set_false_path.html">set_false_path</a></code></li><li><code><a href="set_clock_gating_check.html">set_clock_gating_check</a></code></li><li><code><a href="set_disable_clock_gating_check.html">set_disable_clock_gating_check</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="check_library.html" id="prev" title="check_library">check_library</a></em></b><b><em><a href="compare_timing_context.html" id="nex" title="compare_timing_context">compare_timing_context</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

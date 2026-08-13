@@ -1,0 +1,208 @@
+
+<html><head><title>SI Delay Reporting</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823905" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="SI Delay Reporting" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823905" />
+<meta name="NextFile" content="analysisandreporting_siglitchanalysis.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_performingsianalysis.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- SI Delay Reporting" />
+<meta name="Keywords" content="si delay reporting" />
+<meta name="topic_type" content="process" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Delay Calculation,Signal Integrity,SI Analysis,Stylus" />
+<meta name="prod_subfeature" content="SI Analysis,Delay Calculation, Signal Integrity" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_performingsianalysis.html" title="Performing Signal Integrity Delay Analysis">Performing Signal Integrity De ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_siglitchanalysis.html" title="SI Glitch Analysis - An Overview">SI Glitch Analysis - An Overvi ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:sidelayreporting" title="SI Delay Reporting"></a><h3>
+<a id="pgfId-1010537"></a><a id="13814"></a>SI Delay<a id="SIDelayReporting"></a> Reporting</h3>
+
+<p>
+<a id="pgfId-1010538"></a>There are several commands for generating reports on SI effects on delay:</p>
+<ul><li>
+<a id="pgfId-1045234"></a><a href="../tempustxtcmdref/report_timing.html">report_timing</a></li><li>
+<a id="pgfId-1045251"></a><a href="../tempustxtcmdref/report_delay_calculation.html">report_delay_calculation</a> <code>-si</code><code></code></li><li>
+<a id="pgfId-1045408"></a><a href="../tempustxtcmdref/report_noise.html">report_noise</a> <code>-delay {max | min}</code><code></code></li><li>
+<a id="pgfId-1045445"></a><a href="../tempustxtcmdref/get_property.html">get_property</a></li></ul>
+
+
+
+<p>
+<a id="pgfId-1010543"></a>These are explained below.</p>
+
+<h4>
+<a id="pgfId-1010544"></a>Using report_timing without Separating Delta Delay on Data</h4>
+
+<p>
+<a id="pgfId-1010545"></a>The <a href="../tempustxtcmdref/report_timing.html">report_timing</a>command, by default, does not separate the delta delay on data (delta delay is always separated for clock). You can set the incr_delay option of the <a href="../tempustxtcmdref/report_timing_format.html">report_timing_format</a> global variable to display the delta delays of nets. It is recommended to use the <code>report_timing</code> <code>&#8211;net</code> parameter for generating comprehensive reports. For example,</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052709"></a>tempus &gt; set_global report_timing_format {hpin cell slew incr_delay delay arrival}<br />tempus &gt; report_timing &#8211;net<br />--------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052710"></a>Path 1: VIOLATED Setup Check with Pin seg3/u9/CK</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052711"></a>Endpoint:&#160;&#160; seg3/u9/D (v) checked with&#160;&#160;leading edge of &#39;CLK_W_3&#39;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052712"></a>Beginpoint: seg3/u3/Q (v) triggered by&#160;&#160;leading edge of &#39;CLK_W_3&#39;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052713"></a>Path Groups: {CLK_W_3}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052714"></a>Other End Arrival Time            1.029<br />- Setup                           0.153<br />+ Phase Shift                     2.000<br />- Uncertainty                     1000.000<br />= Required Time                  -997.124<br />- Arrival Time                    3.839<br />= Slack Time                     -1000.963<br />  Clock Rise Edge                 0.000<br />  + Clock Network Latency (Prop)  1.202<br />  = Beginpoint Arrival Time       1.202</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052715"></a>----------------------------------------------------------------<br />Pin             Cell          Slew    Incr      Delay     Arrival<br />                                      Delay               Time<br />----------------------------------------------------------------<br />seg3/u3/CK       -       0.094     -         -         1.203<br />seg3/u3/Q        DFF     0.340     0.000     0.368     1.571<br />seg3/u4/A -&gt;     BUF     0.341     0.000     0.011     1.581<br />seg3/u4/Y        BUF     0.003     0.000     0.165     1.746<br />seg3/u5/A        INV     0.005     0.000     0.003     1.749<br />seg3/u5/Y        INV     0.516     0.000     0.225     1.975<br />seg3/u6/A        INV     0.627     0.000     0.317     2.292<br />seg3/u6/Y        INV     0.913     0.000     0.634     2.926<br />seg3/u7/A        BUF     0.914     0.000     0.008     2.934<br />seg3/u7/Y        BUF     0.655     0.000     0.492     3.426<br />seg3/u7_a/A      BUF     0.659     0.000     0.121     3.547<br />seg3/u7_a/Y      BUF     0.003     0.000     0.269     3.817<br />seg3/u8/A        BUF     0.003     0.000     0.001     3.818<br />seg3/u8/Y        BUF     0.042     0.000    -0.009     3.809<br />seg3/u9/D&#160;&#160;      DFF     0.071     0.000     0.031     3.839</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052716"></a>-------------------------------------------------------------</pre>
+<h4>
+<a id="pgfId-1010558"></a>Using report_timing with Separating Delta Delay on Data</h4>
+
+<p>
+<a id="pgfId-1010559"></a>You can use the following commands to report delta delay on data separately under the <code>Incr Delay</code> column in the timing report:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1010560"></a>tempus &gt; <a href="../tempustxtcmdref/set_si_mode.html">set_si_mode</a> -separate_delta_delay_on_data true<br />tempus &gt; <a href="../tempustxtcmdref/report_timing.html">report_timing</a> &#8211;net</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052738"></a>---------------------------------------------------------<br />Path 1: VIOLATED Setup Check with Pin seg3/u9/CK<br />Endpoint:   seg3/u9/D (v) checked with  leading edge of &#39;CLK_W_3&#39;<br />Beginpoint: seg3/u3/Q (v) triggered by  leading edge of &#39;CLK_W_3&#39;<br />Path Groups: {CLK_W_3}<br />Other End Arrival Time          1.029<br />- Setup                         0.153<br />+ Phase Shift                   2.000<br />- Uncertainty                   1000.000<br />= Required Time                -997.124<br />- Arrival Time                  3.839<br />= Slack Time                   -1000.963<br />Clock Rise Edge                 0.000<br />+ Clock Network Latency (Prop)&#160;&#160;1.202</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052739"></a>     = Beginpoint Arrival Time       1.202</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1296051"></a>------------------------------------------------------------<br />Pin            Cell     Slew      Incr      Delay     Arrival<br />                                  Delay               Time <br />------------------------------------------------------------<br />seg3/u3/CK     -       0.094     -         -         1.203<br />seg3/u3/Q      DFF     0.340     0.073     0.368     1.571<br />seg3/u4/A -&gt;   BUF     0.341     0.002     0.011     1.581<br />seg3/u4/Y      BUF     0.003     0.000     0.165     1.746<br />seg3/u5/A      INV     0.005     0.000     0.003     1.749<br />seg3/u5/Y      INV     0.516     0.120     0.225     1.975<br />seg3/u6/A      INV     0.627     0.160     0.317     2.292<br />seg3/u6/Y      INV     0.913     0.025     0.634     2.926<br />seg3/u7/A      BUF     0.914     0.005     0.008     2.934<br />seg3/u7/Y      BUF     0.655     0.051     0.492     3.426<br />seg3/u7_a/A    BUF     0.659     0.061     0.121     3.547<br />seg3/u7_a/Y    BUF     0.003     0.000     0.269     3.817<br />seg3/u8/A      BUF     0.003     0.000     0.001     3.818<br />seg3/u8/Y      BUF     0.042     0.008     -0.009    3.809<br />seg3/u9/D      DFF     0.071     0.009     0.031     3.839<br />-----------------------------------------------------------</pre>
+<h4>
+<a id="pgfId-1010572"></a>Using report_timing with lumpedOnNet Option</h4>
+
+<p>
+<a id="pgfId-1010573"></a>By default, Tempus calculates the delay, including SI for each arc, and if you choose to view the SI delay separately, it will show as annotated to each arc. Alternatively, you can choose to annotate the SI delay solely to the net. You can use the following command to lump the delta delay all onto the net:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052746"></a>tempus &gt; <a href="../tempustxtcmdref/set_si_mode.html">set_si_mode</a> <code>-delta_delay_annotation_mode</code> <code>lumpedOnNet</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1320400"></a>tempus &gt; <a href="../tempustxtcmdref/report_timing.html">report_timing</a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052757"></a>-----------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052758"></a>Path 1: VIOLATED Setup Check with Pin seg3/u9/CK</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052759"></a>Endpoint:&#160;&#160; seg3/u9/D (v) checked with&#160;&#160;leading edge of &#39;CLK_W_3&#39;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052760"></a>Beginpoint: seg3/u3/Q (v) triggered by&#160;&#160;leading edge of &#39;CLK_W_3&#39;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052761"></a>Path Groups: {CLK_W_3}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052762"></a>Other End Arrival Time           1.029<br />- Setup                          0.153<br />+ Phase Shift                    2.000<br />- Uncertainty                    1000.000<br />= Required Time                  -997.124<br />- Arrival Time                   3.839<br />= Slack Time                    -1000.963<br />Clock Rise Edge                  0.000<br />+ Clock Network Latency (Prop)   1.202<br />= Beginpoint Arrival Time&#160;&#160;      1.202</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052763"></a>---------------------------------------------------------------------<br />    Pin                Cell       Slew      Incr      Delay     Arrival<br />                                           Delay               Time</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052764"></a>---------------------------------------------------------------------<br />   seg3/u3/CK          -          0.094     -         -         1.202<br />   seg3/u3/Q           DFF        0.340     0.000     0.295     1.498<br />   seg3/u4/A -&gt;        BUF        0.341     0.075     0.084     1.581<br />   seg3/u4/Y           BUF        0.003     0.000     0.165     1.746<br />   seg3/u5/A           INV        0.005     0.000     0.003     1.749<br />   seg3/u5/Y           INV        0.516     0.000     0.106     1.855<br />   seg3/u6/A           INV        0.627     0.279     0.437     2.292<br />   seg3/u6/Y           INV        0.913     0.000     0.609     2.901<br />   seg3/u7/A           BUF        0.914     0.030     0.033     2.934<br />   seg3/u7/Y           BUF        0.655     0.000     0.441     3.375<br />   seg3/u7_a/A         BUF        0.659     0.113     0.172     3.547<br />   seg3/u7_a/Y         BUF        0.003     0.000     0.269     3.816<br />   seg3/u8/A           BUF        0.003     0.000     0.001     3.818<br />   seg3/u8/Y           BUF        0.042     0.000     -0.017    3.801<br />   seg3/u9/D           DFF        0.071     0.017     0.038     3.839<br />  --------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1088055"></a></pre>
+<h4>
+<a id="pgfId-1010586"></a>Using report_delay_calculation -si Command</h4>
+
+<p>
+<a id="pgfId-1010587"></a>You can use the <a href="../tempustxtcmdref/report_delay_calculation.html">report_delay_calculation</a> command to report the delay calculation information for a cell or net timing arc. When <code>-si</code> parameter is specified, the software will report the SI components, including incremental delay. For example,</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052775"></a>tempus &gt; report_delay_calculation -from seg3/u5/Y -to seg3/u6/A -si</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052780"></a>-------------------------------------------------------------<br />From pin  : seg3/u5/Y<br />Cell      : INV<br />Library   : cell_w<br />To pin    : seg3/u6/A<br />Cell      : INV<br />Library   : cell_w<br />Base or SI: SI delay<br />Delay type: net</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052781"></a>-----------------------------------------<br />RC Summary for net seg3/n5<br />----------------------------------------<br />Number of capacitance : 17<br />Net capacitance       : 0.293534 pF<br />Total rise capacitance: 0.320849 pF<br />Total fall capacitance: 0.320780 pF<br />Number of resistance  : 17<br />Total resistance      : 567.671387 Ohm<br />-----------------------------------------<br />SI information for rise<br />------------------------------------------------------<br />Victim timing window  :  1.3501 ns 2.3798 ns  CLK_W_3<br />---------------------------------------------------------------------------------<br />Attacker    Status  Direction  Slew         Coupling cap  Fanout  Voltage  Bump     Timing window       Clock<br />---------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052782"></a>seg1/n5     PE      Fall       0.331500 ns 0.138787 pF     1    1.08 v    0.183600 v  1.6194 ns 2.7454 ns  CLK_W_1<br />seg2/n5     SY      Fall       0.358000 ns 0.138787 pF     1    1.08 v    0.183600 v  1.4860 ns 2.5635 ns  CLK_W_2<br />---------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052783"></a>SI information for fall<br />-------------------------------------------------------------------------<br />Victim timing window  :  1.7978 ns 3.0247 ns  CLK_W_3<br />------------------------------------------------------------------------<br />Attacker    Status  Direction  Slew         Coupling cap  Fanout  Voltage  Bump     Timing window       Clock<br />-------------------------------------------------------------------------<br />seg1/n5     PE      Rise       0.834500 ns 0.138787 pF     1    1.08 v    0.108000 v  1.4145 ns 2.2281 ns  CLK_W_1<br />seg2/n5     SY      Rise       0.589833 ns 0.138787 pF     1    1.08 v    0.140400 v  1.2541 ns 1.9973 ns  CLK_W_2<br />---------------------------------------------------------------------------------<br />Model types<br />--------------------------------------------------<br />Net&#160;&#160;       Term        Cell        Model</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052784"></a>-------------------------------------------------<br />seg3/n5     seg3/u5/Y   INV         NLDM<br />seg3/n5     seg3/u6/A   INV         NLDM<br />seg1/n5     Y           INV         NLDM<br />seg2/n5&#160;&#160;   Y           INV         NLDM</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1010617"></a>---------------------------------------------------<br />                           Rise         Fall<br />---------------------------------------------------<br />Incr Net Delay          : 0.279000 ns   0.053500 ns<br />Net delay               : 0.436700 ns   0.155600 ns<br />From pin transition time: 0.515600 ns   0.215500 ns<br />To pin transition time  : 0.626900 ns   0.272200 ns<br />---------------------------------------------------<br />Abbreviative attacker status and filtered reason:<br />---------------------------------------------------<br />SY:  Synchronous<br />INF:  Attacker with infinite timing window<br />PE :  Filtered due to physical exclusion<br />UF :  Filtered by user<br />SB :  Filtered due to small bump<br />TA :  Filtered because of timing window does not overlap<br />LC :  Filtered due to logical correlation<br />ACT:  Attacker is Active.<br />-------------------------------------------------------</pre>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1032125"></a>To access attacker information, you need to make the <a href="../tempustxtcmdref/set_si_mode.html">set_si_mode</a><code> -enable_delay_report</code> to <code>true</code> setting.</div>
+
+<h4>
+<a id="pgfId-1032108"></a>Using report_noise -delay {max | min} Command</h4>
+
+<p>
+<a id="pgfId-1010627"></a>You can use the <a href="../tempustxtcmdref/report_noise.html">report_noise</a> <code>&#8211;delay</code> <code>max</code> <code>&#8211;nets</code> <span class="webflare-courier-new" style="white-space:pre"><em>netName</em></span> command to report incremental delay on nets. For example,</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052807"></a>tempus &gt; report_noise -delay max -nets seg3/n5<br />***************************************************************<br />        Noise Delay Report (for view default_emulate_view)<br />        Generated: Mon Jul 13 09:46:16 2015<br />***************************************************************<br />Report Options:<br />---------------------------------------------------------------<br />-type delay<br />-net seg3/n5<br />-threshold 10 (ps)<br />-delay max<br />[-style default]<br />[-sortBy IncrDelay]<br />----------------------------------------------------------------<br />Type  IncrDelay(ps)  Delay(NomMax/Max)  VictimNet<br />R      279.000        157.700/436.700    seg3/u6/A {seg3/n5}<br />Constituents:<br />       Offset(ps)   Slew(ps)   Xcap(fF)  Edge Status Net<br />Cpl:           -    331.500    138.787    F    PE    seg1/n5<br />Cpl:     -65.000    358.000    138.759    F    SY    seg2/n5<br />----------------------------------------------------------------<br />Type   IncrDelay(ps)  Delay(NomMax/Max)  VictimNet<br />F       53.500        102.100/155.600    seg3/u6/A {seg3/n5}<br />Constituents:<br />      Offset(ps)   Slew(ps)   Xcap(fF)  Edge Status  Net<br />Cpl:           -    834.500    138.787    R    PE    seg1/n5<br />Cpl:&#160;&#160;   395.000    589.833    138.759    R    SY    seg2/n5</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1053059"></a>--------------------------------------------------------------------------------</pre>
+<h4>
+<a id="pgfId-1010651"></a>Using Signal Integrity Attr<a id="SIAttributes"></a>ibutes with get_property Command</h4>
+
+<p>
+<a id="pgfId-1010652"></a>Signal Integrity information can be reported using SI attributes for both graph-based as well as path-based analysis. These attributes can be queried using the <a href="../tempustxtcmdref/get_property.html">get_property</a> command.</p>
+<p>
+<a id="pgfId-1010653"></a>You need to enable SI attributes by setting the <a href="../tempustxtcmdref/timing_report_enable_si_debug.html">timing_report_enable_si_debug</a> global variable to <code>true</code>.</p>
+<p>
+<a id="pgfId-1026462"></a>The use model for using SI attributes for reporting is given below:</p>
+<p>
+<a id="pgfId-1010654"></a>For path-based analysis, the SI attributes can be reported as follows:</p>
+<p>
+<a id="pgfId-1026491"></a>The <a href="../tempustxtcmdref/report_timing.html">report_timing</a> <code>&#8211;retime</code> <span class="webflare-courier-new" style="white-space:pre"><em>option</em></span> <code>-collection</code> command creates a property called <code>timing_points</code> for each corresponding stage of the path. The <code>timing_points</code> property is a pointer that contains information for each stage. Each timing point has a property called <code>si_object</code>, which contains the victim information.</p>
+<p>
+<a id="pgfId-1028425"></a>The following example shows a query on signal integrity attributes for timing points:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1010655"></a>set path [report_timing -through $pin -retime path_slew_propagation -collection ]<br />set tps [ get_property $path timing_points ]<br />foreach_in_collection point $tps {<br />     set x [ get_property $point si_object ]<br />     set vic_name [ get_property $x hierarchical_name ]<br />     puts &quot;victim: $vic_name&quot;<br />     set num_agg [ get_property $x num_attackers ]<br />     puts &quot;Number of attackers: $num_agg&quot;<br />     set aggs [ get_property $x attackers ]<br />     puts &quot;attackers info:&quot;<br />     foreach_in_collection current_agg $aggs {<br />          set active [ get_property $current_agg is_active ]<br />          set state [ get_property $current_agg state ]<br />          set agg_name [get_property $current_agg hierarchical_name]<br />          puts &quot;$agg_name $active $state&quot;<br />     }<br />}</pre>
+
+<p>
+<a id="pgfId-1010656"></a>The above use model is valid for graph-based analysis also. Additionally, for GBA the SI attributes can be reported on the receiver input pin directly instead of timing points. Each pin has a property <code>si_victim</code>, which contains the victim SI information. The following example shows the usage of <code>si_victim</code>, where the number of active attackers are being printed for both rise and fall transitions in maximum delay analysis:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1010657"></a>set vicArray [get_property [get_pins $pin] si_victim &#8211;view $view] <br />foreach_in_collection vic $vicArray {<br />     set view_type [get_property $vic view_type]<br />     set tran [get_property $vic transition]<br />     if {$view_type == &quot;Late&quot;} {<br />         if {$tran == &quot;Rise&quot;} {<br />            set num_att [get_property $vic num_active_attackers]<br />            puts &quot;number of active attackers for rise transition: $num_att&quot;<br />         }<br />         if {$tran == &quot;Fall&quot;} {<br />            set num_att [get_property $vic num_active_attackers]<br />            puts &quot;number of active attackers for fall transition: $num_att&quot;<br />         }<br />    }<br />}</pre>
+
+<p>
+<a id="pgfId-1010658"></a>For more information on signal integrity (SI) attributes/properties, refer to <a href="../tempustxtcmdref/get_property.html">get_property</a> command in the <em>Tempus Text Command Reference Guide</em>.</p>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_performingsianalysis.html" id="prev" title="Performing Signal Integrity Delay Analysis">Performing Signal Integrity De ...</a></em></b><b><em><a href="analysisandreporting_siglitchanalysis.html" id="nex" title="SI Glitch Analysis - An Overview">SI Glitch Analysis - An Overvi ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

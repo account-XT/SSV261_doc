@@ -1,0 +1,161 @@
+
+<html><head><title>Certus Template Scripts</title>
+<meta name="page_sequence" content="13004000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468361" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Certus" />
+<meta name="DocTitle" content="Certus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Certus Template Scripts" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="certusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468361" />
+<meta name="NextFile" content="Recommended_Guidelines_for_Certus.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Certus_Inputs_Requirements.html" />
+<meta name="c_product" content="Certus," />
+<meta name="Product" content="Certus," />
+<meta name="ProductFamily" content="Certus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Certus User Guide -- Certus Template Scripts" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="ctsug261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="certusUGTOC.html">Contents</a></li><li><a class="prev" href="Certus_Inputs_Requirements.html" title="Certus_Inputs_Requirements">Certus_Inputs_Requirements</a></li><li style="float: right;"><a class="viewPrint" href="certusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Recommended_Guidelines_for_Certus.html" title="Recommended_Guidelines_for_Certus">Recommended_Guidelines_for_Cer ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Certus User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Certus Template Scripts</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>Use the template scripts below to run Certus in different modes:</p>
+
+<p><span class="fontgreencadence"><h3 id="CertusTemplateScripts-Script1-CertusDistributedHierarchicalTimingClosure-FullFlatMode"><span style="color:var(--ds-text,#000000);">Script 1 - Certus Distributed Hierarchical Timing Closure - Full Flat Mode</span></h3>
+
+<p><span style="color:var(--ds-text,#000000);">The script below performs distributed hold optimization in full-flat mode and ends with the ECO implementation step. This step performs ECO routing and parasitic extraction for each Certus client, followed by a timing update with the updated parasitics on the timing clients.</span></p>
+
+<p><span style="color:var(--ds-text,#000000);"><code>set_multi_cpu_usage -localCpu 24 -remoteHost 8 -cpuPerRemoteHost 4<br /></code></span><span style="font-family: SFMono-Medium , &quot;SF Mono&quot; , &quot;Segoe UI Mono&quot; , &quot;Roboto Mono&quot; , &quot;Ubuntu Mono&quot; , Menlo , Courier , monospace;letter-spacing: 0.0px;color:var(--ds-text,#000000);">set_distribute_host &lt;your LSF args&gt; -timeOut 10000<br /></span><span style="color:var(--ds-text,#000000);"><code>set eco_setup_view_list {setup_1v setup_2v setup_3v setup_4v} <br /></code></span><span style="color:var(--ds-text,#000000);"><code>set eco_hold_view_list {hold_1v hold_2v hold_3v hold_4v}<br /></code></span><span style="color:var(--ds-text,#000000);"><code>set eco_dynamic_view {setup_3v} ; set eco_leakage_view {setup_3v}</code></span></p>
+<h4 id="CertusTemplateScripts-FilePointingtoallInnovusDBsOpenedforECO"><span style="color:var(--ds-text,#000000);">File Pointing to all Innovus DBs Opened for ECO</span></h4>
+
+<p><span style="color:var(--ds-text,#000000);"><code>set_eco_opt_mode &#8211;distributed_opt_block_restore_file blocks.txt</code></span></p>
+<h4 id="CertusTemplateScripts-LoadstheSTASessionsonTempusClients"><span style="color:var(--ds-text,#000000);">Loads the STA Sessions on Tempus Clients </span></h4>
+
+<p><span style="color:var(--ds-text,#000000);"><code>distribute_read_design -restore_design all -restore_dir \ TIMING_SESSIONS/ -outdir reports</code></span></p>
+<h4 id="CertusTemplateScripts-SetstheDistributedOptionsforCertusClients"><span style="color:var(--ds-text,#000000);">Sets the Distributed Options for Certus Clients</span></h4>
+
+<p><code>set_multi_cpu_usage -remoteHost &lt;equal_to_partition_count&gt; \ <br /></code><code>-cpuPerRemoteHost &lt;value&gt;<br /></code><code>set_distribute_host &lt;your LSF args&gt; -timeOut 10000</code></p>
+<h4 id="CertusTemplateScripts-StartsECOClients"><span style="color:var(--ds-text,#000000);">Starts ECO Clients</span></h4>
+
+<p><code><span style="color:var(--ds-text,#000000);">start_distributed_eco_clients</span></code></p>
+<h4 id="CertusTemplateScripts-RunsHoldFixinginPBAMode"><span style="color:var(--ds-text,#000000);">Runs Hold Fixing in PBA Mode</span></h4>
+
+<p><code><span style="color:var(--ds-text,#000000);">eco_opt_design &#8211;hold</span></code></p>
+<h4 id="CertusTemplateScripts-PerformsecoRoute/extractionandParasiticBack-annotation"><span style="color:var(--ds-text,#000000);">Performs ecoRoute/extraction and Parasitic Back-annotation</span></h4>
+
+<p><code><span style="color:var(--ds-text,#000000);">implement_distributed_eco</span></code></p>
+<h4 id="CertusTemplateScripts-CollectFinalSignoffTimingfromTempusClientsandSavetheFinalInnovusDB"><span style="color:var(--ds-text,#000000);">Collect Final Signoff Timing from Tempus Clients and Save the Final Innovus DB</span></h4>
+
+<p><code><span style="color:var(--ds-text,#000000);">time_design_signoff<br /></span></code><code><span style="color:var(--ds-text,#000000);">export_distributed_eco -out_dir Final -export_only innovus_dbs</span></code></p>
+<h3 id="CertusTemplateScripts-Script2-CertusDistributedHierarchicalTimingClosure-Inter-partitionHighCapacityECOMode"><span style="color:var(--ds-text,#000000);">Script 2- Certus Distributed Hierarchical Timing Closure - Inter-partition High Capacity ECO Mode</span></h3>
+
+<p><span style="font-size: 14.0px;font-weight: 400;letter-spacing: 0.0px;">The script below performs Hold timing closure by enabling existing High capacity ECO for large sub-systems and top level designs. It optimizes the logical inter-partition, meaning that each timing path crosses the boundary of one of the listed partitions. The script ends with the ECO implementation step, which performs ECO routing and parasitic extraction on each Certus client, followed by a timing update with updated parasitics on the timing clients.</span></p>
+
+<p><code><span style="color:var(--ds-text,#000000);">set_multi_cpu_usage -localCpu 24 -remoteHost 8 -cpuPerRemoteHost 4 <br /></span></code><code><span style="color:var(--ds-text,#000000);">set_distribute_host &lt;your LSF args&gt; -timeOut 10000<br /></span></code><code><span style="color:var(--ds-text,#000000);">set eco_setup_view_list {setup_1v setup_2v setup_3v setup_4v} <br /></span></code><code><span style="color:var(--ds-text,#000000);">set eco_hold_view_list {hold_1v hold_2v hold_3v hold_4v}<br /></span></code><code><span style="color:var(--ds-text,#000000);">set eco_dynamic_view {setup_3v} ; set eco_leakage_view {setup_3v}</span></code></p>
+<h4 id="CertusTemplateScripts-FilePointingtoallInnovusDBsOpenedforECO.1">File Pointing to all Innovus DBs Opened for ECO</h4>
+
+<p><code><span style="color:var(--ds-text,#000000);">set_eco_opt_mode &#8211;distributed_opt_block_restore_file blocks.txt</span></code></p>
+<h4 id="CertusTemplateScripts-ReducestheDBaroundpartition-to-partitionandbetweentop-and-partition"><span style="color:var(--ds-text,#000000);">Reduces the DB around partition-to-partition and between top-and-partition</span></h4>
+
+<p><code><span style="color:var(--ds-text,#000000);">set_distribute_mmmc_mode -enable_high_capacity_eco <br /></span></code><code><span style="color:var(--ds-text,#000000);">set_eco_opt_mode -inter_partition {blockA blockB}</span></code></p>
+<h4 id="CertusTemplateScripts-LoadstheSTASessionsonTempusClients.1"><span style="color:var(--ds-text,#000000);">Loads the STA Sessions on Tempus Clients </span></h4>
+
+<p><code><span style="color:var(--ds-text,#000000);">distribute_read_design -restore_design all -restore_dir \ TIMING_SESSIONS/ -outdir reports</span></code></p>
+<h4 id="CertusTemplateScripts-SetstheDistributedOptionsforCertusClients.1">Sets the Distributed Options for Certus Clients</h4>
+
+<p><code>set_multi_cpu_usage -remoteHost &lt;equal_to_partition_count&gt; \<br /></code><span style="font-family: SFMono-Medium , &quot;SF Mono&quot; , &quot;Segoe UI Mono&quot; , &quot;Roboto Mono&quot; , &quot;Ubuntu Mono&quot; , Menlo , Courier , monospace;letter-spacing: 0.0px;">-cpuPerRemoteHost &lt;value&gt;<br /></span><code>set_distribute_host &lt;your LSF args&gt; -timeOut 10000</code></p>
+<h4 id="CertusTemplateScripts-StartstheCertusClients"><span style="color:var(--ds-text,#000000);">Starts the Certus Clients</span></h4>
+
+<p><code><span style="color:var(--ds-text,#000000);">start_distributed_eco_clients</span></code></p>
+<h4 id="CertusTemplateScripts-RunsHoldFixinginPBAMode.1"><span style="color:var(--ds-text,#000000);">Runs Hold Fixing in PBA Mode</span></h4>
+
+<p><code><span style="color:var(--ds-text,#000000);">eco_opt_design &#8211;hold</span></code></p>
+<h4 id="CertusTemplateScripts-PerformsecoRoute/extractionandParasiticBack-annotations"><span style="color:var(--ds-text,#000000);">Performs ecoRoute/extraction and Parasitic Back-annotations</span></h4>
+
+<p><code><span style="color:var(--ds-text,#000000);">implement_distributed_eco</span></code></p>
+<h4 id="CertusTemplateScripts-CollectsFinalSignoffTimingfromTempusClientsandSavestheFinalInnovusDB"><span style="color:var(--ds-text,#000000);">Collects Final Signoff Timing from Tempus Clients and Saves the Final Innovus DB</span></h4>
+
+<p><code><span style="color:var(--ds-text,#000000);">time_design_signoff<br /></span></code><code><span style="color:var(--ds-text,#000000);">export_distributed_eco -out_dir Final -export_only innovus_dbs</span></code></p>
+<h3 id="CertusTemplateScripts-Script3-DistributedHierarchicalPowerReduction-WithECOImplementationandParasiticBack-annotationLoop">Script 3- Distributed Hierarchical Power Reduction - With ECO Implementation and Parasitic Back-annotation Loop</h3>
+
+<p><span style="color:var(--ds-text,#000000);">The script below performs Power recovery by enabling existing High capacity ECO for large subsystems and top-level designs. It optimizes the logical inter-partition, meaning that each timing path crosses the boundary of exactly&#xa0;one of the listed partitions. The script does the ECO implementation step, which performs ECO routing and parasitic extraction on each Certus client, followed by a timing update with updated parasitics on the timing clients. Next, the Setup timing recovery using Vth swapping only is performed to address any remaining timing violations that would have resulted from extensive ECO during power optimization.</span></p>
+
+<p><code>set_multi_cpu_usage -localCpu 24 -remoteHost 8 -cpuPerRemoteHost 4<br /></code><code>set_distribute_host &lt;your LSF args&gt; -timeOut 10000<br /></code><code>set eco_setup_view_list {setup_1v setup_2v setup_3v setup_4v} <br />set eco_hold_view_list {hold_1v hold_2v hold_3v hold_4v}<br /></code><code>set eco_dynamic_view {setup_3v} ; set eco_leakage_view {setup_3v}<br /></code><code>set_eco_opt_mode &#8211;distributed_opt_block_restore_file blocks.txt <br /></code><code>set_distribute_mmmc_mode -enable_high_capacity_eco<br /></code><code>set_eco_opt_mode -inter_partition {blockA blockB}<br /></code><code>distribute_read_design -restore_design all -restore_dir TEMPUS_SESSIONS/ -outdir reports<br /></code><code>set_multi_cpu_usage -remoteHost &lt;equal_to_partition_count&gt; \<br /></code><code>-cpuPerRemoteHost &lt;value&gt;<br /></code><code>set_distribute_host &lt;your LSF args&gt; -timeOut 10000<br /></code><code>start_distributed_eco_clients <br /></code><code>set_eco_opt_mode -max_slack 1000 &#xa0;<br /></code><code>set_eco_opt_mode -allow_multiple_incremental true<br /></code><code>set_eco_opt_mode -verbose false <br /></code><code>eco_opt_design &#8211;power<br /></code><code>implement_distributed_eco</code></p>
+<h4 id="CertusTemplateScripts-PerformsSetupTimingRecoverytoFixanyTimingGapsPostECOImplementation"><span style="color:var(--ds-text,#000000);">Performs Setup Timing Recovery to Fix any Timing Gaps Post ECO Implementation</span></h4>
+
+<p><code><span style="color:var(--ds-text,#000000);">set_eco_opt_mode &#8211;setup_recovery true -max_slack 0 <br /></span></code><code><span style="color:var(--ds-text,#000000);">eco_opt_design &#8211;setup</span></code></p>
+</span></p>
+
+<p><strong>Related Topics</strong></p>
+<ul><li data-uuid="03bb2964-0b5e-4307-aedf-a562b2010c04"><a href="Certus_Product_Overview.html" rel="nofollow">Certus Product Overview</a></li><li data-uuid="d966f31f-8afc-4b56-8c77-e83a1022f14f"><a href="Certus_Licensing_Requirements.html" rel="nofollow">Certus Licensing Requirements</a></li><li data-uuid="474d6ce0-dcaa-4ccf-a711-a31bac9222cc"><a href="Certus_Inputs_Requirements.html" rel="nofollow">Certus Inputs Requirements</a></li><li data-uuid="8998df5f-f937-4b29-8384-4da17a2f6cba"><a href="Recommended_Guidelines_for_Certus.html" rel="nofollow">Recommended Guidelines for Certus</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Certus_Inputs_Requirements.html" id="prev" title="Certus_Inputs_Requirements">Certus_Inputs_Requirements</a></em></b><b><em><a href="Recommended_Guidelines_for_Certus.html" id="nex" title="Recommended_Guidelines_for_Certus">Recommended_Guidelines_for_Cer ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

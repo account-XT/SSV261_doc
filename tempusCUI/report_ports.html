@@ -1,0 +1,168 @@
+
+<html><head><title>report_ports</title>
+<meta name="page_sequence" content="37083000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287398" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="report_ports" />
+<meta name="Keywords" content="port names,report timing constraints ports" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Timing Analysis," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287398" />
+<meta name="NextFile" content="report_reference.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="report_pg_net_group.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- report_ports" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="report_pg_net_group.html" title="report_pg_net_group">report_pg_net_group</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="report_reference.html" title="report_reference">report_reference</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>report_ports</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>report_ports<span class="confluence-anchor-link" id="report_ports-report_ports"></span><span id="report_ports-report_ports"></span> <br />[-type {[input] | [source_insertion] | [insertion] | [clock_root] <br />| [uncertainty] | [arrival] | [required] | [external] | [clk_arrival] <br />| [port_cap] | [fanout_load] | [fanout_load_limit] | [drive_resistance] <br />| [drive_cell] | [slew_time] | [slew_limit] | [constant] | external_detail <br />| drive_resistance_detail}]<br />[-include_pins] <br />[-pins <code><em>port_name_list</em></code>] <br />[-view <code><em>view_name</em></code>] <br />[&gt; <code><em>filename</em></code> | -tcl_list]</code> <br /></code></p>
+
+<p>Reports timing constraints on ports. By default, the command reports all timing constraints on all ports of the current module.</p>
+
+<p>The direction (<em>DIR</em>) column of the generated report can contain one of the following abbreviations:</p>
+<ul><li><code>IN</code> indicates that the pin is an input pin.</li></ul><ul><li><code>OUT</code> indicates that the pin is an output pin.</li></ul><ul><li><code>INTL</code> indicates that the pin is an internal pin (a pin inside the instance boundary).</li></ul>
+<p>The <em>Clock Name</em> column of the report can contain the following symbols:</p>
+<ul><li><code>D</code> indicates it is a data signal in the clock domain.</li></ul><ul><li><code>C</code> indicates it is a clock signal in the clock domain.</li></ul><ul><li><code>P</code> indicates it is a positive phase.</li></ul><ul><li><code>N </code>indicates it is a negative phase.</li></ul><ul><li>Asterisk (<code>*</code>) indicates there is a timing exception associated with the signal.
+<p><strong>Note: </strong>Currently, it is not possible to expand the asterisk to determine which exception is associated with the reported timing phase.</p>
+</li></ul><h4 id="report_ports-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table class="confluenceTable cadenceTable cadDefaultfont" id="cadDefaultfont" style="width: 720px;"><colgroup><col style="width: 300px;" /><col style="width: 340px;" /></colgroup><tbody><tr><td class="confluenceTd" valign="top">
+<p><code>&gt; </code><code><em>filename</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Writes the report to the specified file name. If the file already exists, the software overwrites it.</p>
+
+<p>The <code><em>filename</em></code> parameter must be the last argument in the list. The <code><em>filename</em></code> and <code>-tcl_list</code> parameters are mutually exclusive; you cannot specify them together.</p>
+
+<p><strong>Note: </strong>To write a compressed report, add the <code>.gz</code> extension to the file name.</p>
+
+<p><em>Default:</em> Report is displayed on standard output without being saved.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-include_pins</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Reports timing constraints on instance pins, as well as on ports.</p>
+
+<p><em>Default:</em> Reports timing constraints on ports only.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-pins </code><code><em>port_name_list</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the pins or ports to be reported. Pins can be specified by name, or by object ID in a Tcl list.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-tcl_list</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Produces the report in Tcl list format instead of a tabular format. This is useful for integrating timing with custom Tcl functions, and also for customizing report generation.</p>
+
+<p>The <code>-tcl_list</code> and <code><em>filename</em></code> parameters are mutually exclusive; you cannot specify them together.</p>
+
+<p><br /></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-type {</code><code><em>assertion_type</em></code><code> | </code><code><em>assertion_type_list</em></code><code>}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Generates the report for the specified analysis view only. You can specify this parameter only when the software is in multi-mode multi-corner timing analysis mode.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>-view&#xa0;</span><em>view_name</em></code></td>
+<td class="confluenceTd">Specifies the view name.</td>
+</tr>
+</tbody></table></div>
+
+<p><span style="font-weight: 600;letter-spacing: -0.003em;">Examples</span></p>
+<ul><li>The following command reports details of the specified list of pins:<br /><code>tempus &gt; report_ports -pins scan_en&#xa0;</code><br /><code>----------------------------------------------------------------------------------------&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Early &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Late &#xa0; &#xa0; &#xa0;&#xa0;</code><br /><code>----------------------------------------------------------------------------------------&#xa0;</code><br /><code>Pin Name&#xa0; &#xa0;Dir&#xa0; &#xa0;Assertion&#xa0; &#xa0;Clock Name&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Rise&#xa0; &#xa0; Fall&#xa0; &#xa0; Rise&#xa0; &#xa0; Fall &#xa0;&#xa0;</code><br /><code>----------------------------------------------------------------------------------------</code><br /><code>scan_en&#xa0; &#xa0; IN&#xa0; &#xa0; input&#xa0; &#xa0; &#xa0; &#xa0;m_clk(D)(P)(scan_fast_RCMIN)&#xa0; 4.000 &#xa0; 4.000 &#xa0; 4.000 &#xa0; 4.000</code><br /><code>scan_en&#xa0; &#xa0; IN&#xa0; &#xa0; input&#xa0; &#xa0; &#xa0; &#xa0;m_clk(D)(P)(scan_slow_RCMAX)&#xa0; 4.000 &#xa0; 4.000 &#xa0; 4.000 &#xa0; 4.000</code><br /><code>----------------------------------------------------------------------------------------</code><br /><code>Pin Name&#xa0; &#xa0;Di&#xa0; &#xa0; Assertion&#xa0; &#xa0;Value&#xa0; View &#xa0;&#xa0;</code><br /><code>----------------------------------------------------</code><br /><code>scan_en&#xa0; &#xa0; IN&#xa0; &#xa0; constant&#xa0; &#xa0; 0&#xa0; &#xa0; &#xa0; func_slow_RCMAX</code><br /><code>scan_en&#xa0; &#xa0; IN&#xa0; &#xa0; constant&#xa0; &#xa0; 0&#xa0; &#xa0; &#xa0; func_fast_RCMAX</code><br /><code>---------------------------------------------------</code></li><li>The following command reports details of the specified list of pins: Reports timing constraints on instance pins, as well as on ports.<br /><code>tempus &gt; report_ports -include_pins &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;</code><br /><code>----------------------------------------------------------------------------&#xa0;&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Early &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Late &#xa0; &#xa0; &#xa0;&#xa0;</code><br /><code>----------------------------------------------------------------------------&#xa0;</code><br /><code>Pin Name&#xa0; &#xa0; Dir&#xa0; &#xa0;Assertion&#xa0; &#xa0; Clock Name&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Rise &#xa0; Fall &#xa0; Rise &#xa0; Fall &#xa0;&#xa0;</code><br /><code>----------------------------------------------------------------------------&#xa0;&#xa0;</code><br /><code>INT/p97/Z &#xa0; OUT&#xa0; &#xa0;clock_root &#xa0; clk(sn_fast_RMIN) &#xa0; -&#xa0; &#xa0; &#xa0; -&#xa0; &#xa0; &#xa0; -&#xa0; &#xa0; &#xa0; -</code><br /><code>INT/p97/Z &#xa0; OUT&#xa0; &#xa0;clock_root&#xa0; &#xa0;clk(sn_slow_RCMIN)&#xa0; -&#xa0; &#xa0; &#xa0; -&#xa0; &#xa0; &#xa0; -&#xa0; &#xa0; &#xa0; -</code><br /><code>INT/p97/Z &#xa0; OUT&#xa0; &#xa0;clock_root&#xa0; &#xa0;clk(sn_fast_RCMAX)&#xa0; -&#xa0; &#xa0; &#xa0; -&#xa0; &#xa0; &#xa0; -&#xa0; &#xa0; &#xa0; -</code><br /><code>INT/p97/Z &#xa0; OUT&#xa0; &#xa0;clock_root&#xa0; &#xa0;clk(sn_slow_RCMAX)&#xa0; -&#xa0; &#xa0; &#xa0; -&#xa0; &#xa0; &#xa0; -&#xa0; &#xa0; &#xa0; -</code></li><li>The following command shows a port report, as shown in the following example:<br /><code>tempus &gt;&#xa0;report_ports<br /></code>
+<p><code>-------------------------------------------------------------------------</code><br /><code>Early Late</code><br /><code>-------------------------------------------------------------------------</code><br /><code>Pin &#xa0; &#xa0; Dir &#xa0; &#xa0; Assertion &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Clock Name &#xa0; Rise &#xa0; &#xa0;Fall &#xa0; Rise &#xa0;Fall</code><br /><code>Name</code><br /><code>-------------------------------------------------------------------------</code><br /><code>CLK1 &#xa0; IN &#xa0; &#xa0; &#xa0; clock_root &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;CK2(C)(P)</code><br /><code>CLK2 &#xa0; IN &#xa0; &#xa0; &#xa0; clock_root &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;CLK2(C)(P)</code><br /><code>CLK3 &#xa0; IN &#xa0; &#xa0; &#xa0; clock_root &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;CLK3(C)(P)</code><br /><code>IN1 &#xa0; &#xa0;IN &#xa0; &#xa0; &#xa0; drive_resistance &#xa0; &#xa0;*(D)(P) &#xa0; &#xa0; &#xa0;2.000 &#xa0;2.000 &#xa0;2.000 &#xa0;2.000</code><br /><code>IN2 &#xa0; &#xa0;IN &#xa0; &#xa0; &#xa0; drive_resistance &#xa0; &#xa0;*(D)(P) &#xa0; &#xa0; &#xa0;2.000 &#xa0;2.000 &#xa0;2.000 &#xa0;2.000</code><br /><code>IN3 &#xa0; &#xa0;IN &#xa0; &#xa0; &#xa0; drive_cell &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;*(D)(P) &#xa0; &#xa0; &#xa0;INV &#xa0; &#xa0;INV &#xa0; &#xa0;INV &#xa0; &#xa0;INV</code><br /><code>OUT1 &#xa0; OUT &#xa0; &#xa0; &#xa0;external &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;GCLK1(C)(P) &#xa0;1.000 &#xa0;1.000 &#xa0;1.000 &#xa0;1.000</code><br /><code>OUT2 &#xa0; OUT</code><br /><code>OUT3 &#xa0; OUT&#xa0; &#xa0; &#xa0; derived_clock&#xa0; &#xa0; &#xa0; &#xa0;GCLK4(C)(P)</code><br /><code>--------------------------------------------------------------------------</code><br /><code>Pin &#xa0; Dir &#xa0; &#xa0;Assertion &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Value</code><br /><code>Name</code><br /><code>----------------------------------------------------------</code><br /><code>CLK3 &#xa0; IN &#xa0; slew_limit &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;( 0.900 : )</code><br /><code>CLK3 &#xa0; IN &#xa0; port_cap_limit &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;( 0.020 : 0.900 )</code><br /><code>CLK3 &#xa0; IN &#xa0; fanout_load_limit &#xa0; &#xa0; &#xa0; 5.000</code><br /><code>CLK2 &#xa0; IN &#xa0; slew_limit &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;( 0.900 : )</code><br /><code>CLK2 &#xa0; IN &#xa0; port_cap_limit &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;( 0.020 : 0.900 )</code><br /><code>CLK2 &#xa0; IN &#xa0; fanout_load_limit &#xa0; &#xa0; &#xa0; 5.000</code><br /><code>CLK1 &#xa0; IN &#xa0; slew_limit &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;( 0.900 : )</code><br /><code>CLK1 &#xa0; IN &#xa0; port_cap_limit &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;( 0.020 : 0.900 )</code><br /><code>CLK1 &#xa0; IN &#xa0; fanout_load_limit &#xa0; &#xa0; &#xa0; 5.000</code><br /><code>IN3 &#xa0; &#xa0;IN &#xa0; slew_limit &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;( 0.900 : )</code><br /><code>IN3 &#xa0; &#xa0;IN &#xa0; port_cap &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;( 1.500 : : 2.600 )</code><br /><code>IN3 &#xa0; &#xa0;IN &#xa0; port_wire_cap &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; ( 1.200 : : 3.000 )</code><br /><code>IN3 &#xa0; &#xa0;IN &#xa0; port_cap_limit &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;( 0.020 : 0.900 )</code><br /><code>IN3 &#xa0; &#xa0;IN &#xa0; fanout_load_limit &#xa0; &#xa0; &#xa0; 5.000</code></p>
+
+<p><code>IN2 &#xa0; &#xa0;IN &#xa0; slew_limit &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;( 0.900 : )</code><br /><code>IN2 &#xa0; &#xa0;IN &#xa0; port_cap &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;( 1.500 : : 2.600 )</code><br /><code>IN2 &#xa0; &#xa0;IN &#xa0; port_wire_cap &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; ( 1.200 : : 3.000 )</code><br /><code>IN2 &#xa0; &#xa0;IN &#xa0; port_cap_limit &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;( 0.020 : 0.900 )</code><br /><code>IN2 &#xa0; &#xa0;IN &#xa0; fanout_load_limit &#xa0; &#xa0; &#xa0; 5.000</code><br /><code>IN1 &#xa0; &#xa0;IN &#xa0; slew_limit &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;( 0.900 : )</code><br /><code>IN1 &#xa0; &#xa0;IN &#xa0; port_cap &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;( 1.500 : : 2.600 )</code><br /><code>IN1 &#xa0; &#xa0;IN &#xa0; port_wire_cap &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; ( 1.200 : : 3.000 )</code><br /><code>IN1 &#xa0; &#xa0;IN &#xa0; port_cap_limit &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;( 0.020 : 0.900 )</code><br /><code>IN1 &#xa0; &#xa0;IN &#xa0; fanout_load_limit &#xa0; &#xa0; &#xa0; 5.000</code><br /><code>OUT3 &#xa0; OUT &#xa0;slew_limit &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;( 0.900 : )</code><br /><code>OUT3 &#xa0; OUT &#xa0;port_cap_limit &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;( 0.020 : 0.900 )</code><br /><code>OUT2 &#xa0; OUT &#xa0;slew_limit &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;( 0.900 : )</code><br /><code>OUT2 &#xa0; OUT &#xa0;port_cap_limit &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;( 0.020 : 0.900 )</code><br /><code>OUT1 &#xa0; OUT &#xa0;slew_limit &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;( 0.900 : )</code><br /><code>OUT1 &#xa0; OUT &#xa0;port_cap_limit &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;( 0.020 : 0.900 )</code></p>
+</li></ul><ul><li>The following command shows&#xa0;<code>source_insertion</code>&#xa0;and&#xa0;<code>uncertainty&#xa0;</code>assertion type options as&#xa0;shown in the following example:<br /><code>tempus &gt; report_ports -type clock_root source_insertion input -pins clk in<br /><span>tempus &gt; report_ports -type {uncertainty source_insertion} -pins CLK1</span></code>
+<p><code>---------------------------------------------------------------</code><br /><code>Early Late</code><br /><code>---------------------------------------------------------------</code><br /><code>Pin &#xa0; &#xa0;Dir &#xa0;Assertion &#xa0; &#xa0;     Clock   Rise &#xa0; &#xa0;Fall &#xa0;Rise &#xa0; Fall</code><br /><code>Name &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;     &#xa0;Name</code><br /><code>----------------------------------------------------------------</code><br /><code>CLK1 &#xa0; IN &#xa0; source_insertion *(C)(P) &#xa0;-0.500 -0.500 -0.500 -0.500</code><br /><code>----------------------------------------------------------------</code><br /><br /><code>Pin &#xa0; &#xa0;Dir &#xa0;Assertion &#xa0; &#xa0;Value</code><br /><code>Name</code><br /><code>------------------------------------------------------------</code><br /><code>CLK1 &#xa0;IN &#xa0;  uncertainty &#xa0;0.400(T) 0.400(T) 0.400(T) 0.400(T)</code><br /><code>------------------------------------------------------------<br /></code></p>
+</li></ul><ul><li>The following command shows&#xa0;<code>clock_root&#xa0;</code>and&#xa0;<code>uncertainty&#xa0;</code>assertion type options as&#xa0;shown in the following example:<br /><code><span>tempus &gt; report_ports -type {input uncertainty clock_root}</span></code>
+<p><code>---------------------------------------------------------------</code><br /><code>Early Late</code><br /><code>---------------------------------------------------------------</code><br /><code>Pin &#xa0; &#xa0;Dir &#xa0;Assertion &#xa0; Clock Name &#xa0; &#xa0;Rise &#xa0; Fall &#xa0; Rise &#xa0; Fall</code><br /><code>Name</code><br /><code>---------------------------------------------------------------</code><br /><code>CLK1 &#xa0; IN &#xa0; clock_root &#xa0;CLK_W_1(C)(P)</code><br /><code>in1 &#xa0; &#xa0;IN &#xa0; input &#xa0; &#xa0; &#xa0; @(D)(P) &#xa0; &#xa0; &#xa0; 1.000 &#xa0;1.000 &#xa0;1.000 &#xa0;1.000</code><br /><code>---------------------------------------------------------------</code><br /><br /><code>Pin &#xa0; Dir &#xa0;Assertion &#xa0; &#xa0;Value</code><br /><code>Name</code><br /><code>-----------------------------------------------------------</code><br /><code>CLK1 &#xa0;IN &#xa0; uncertainty &#xa0;0.400(T)  0.400(T) 0.400(T) 0.400(T)</code><br /><code>-----------------------------------------------------------</code></p>
+</li></ul><h4 id="report_ports-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="report_clocks.html">report_clocks</a></code></li><li><code><a href="report_nets.html">report_nets</a></code></li><li><code><a href="report_timing.html#report_timing-report_timing">report_timing</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="report_pg_net_group.html" id="prev" title="report_pg_net_group">report_pg_net_group</a></em></b><b><em><a href="report_reference.html" id="nex" title="report_reference">report_reference</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

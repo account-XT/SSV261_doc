@@ -1,0 +1,223 @@
+
+<html><head><title>write_thermal_model</title>
+<meta name="page_sequence" content="24032000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666273" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="write_thermal_model" />
+<meta name="Keywords" content="chip-centric thermal analysis,Voltus Thermal Model" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Static/Dynamic Power Analysis," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusTCRcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666273" />
+<meta name="NextFile" content="Power_Route_Category_Attributes.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="write_tcf.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Text Reference Manual  -- write_thermal_model" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltuscuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusTCRcomTOC.html">Contents</a></li><li><a class="prev" href="write_tcf.html" title="write_tcf">write_tcf</a></li><li style="float: right;"><a class="viewPrint" href="voltusTCRcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Power_Route_Category_Attributes.html" title="Power_Route_Category_Attributes">Power_Route_Category_Attribute ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Text Reference Manual <br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>write_thermal_model</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span id="write_thermal_model-write_thermal_model"></span><span class="confluence-anchor-link" id="write_thermal_model-write_thermal_model"></span> <code><br />write_thermal_model<br />[-help]<br />[-leakage_temperature_scale_table <span style="color:var(--ds-text,#172b4d);">{$</span><em style="text-align: left;">temp1</em><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span>$</span><em style="text-align: left;">scalefactor1</em><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span>$</span><em style="text-align: left;">temp2</em><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span>$</span><em style="text-align: left;">scalefactor2</em><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span>$</span><em style="text-align: left;">temp3</em><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span>$</span><em style="text-align: left;">scalefactor3</em><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span>.....}</span>]<br />[-leakage_temperature_scale_table_file <em style="text-align: left;">filename</em>]<br />[-metal_density_file <em style="text-align: left;">filename</em>] <br />[-power_db <em>path_to_power_database</em>]<br />[-vtm_si_unit {true | false}] <br />[-vtm_conductivity_inputs <em style="text-align: left;">filename</em>]<br />[-vtm_densitytable_tile {<em>Xint</em> <em>Yint</em>}] <br />[-vtm_file <em style="text-align: left;">filename</em>] <br />[-vtm_format&#xa0;<span style="color:var(--ds-text,#172b4d);">{simple | stack}</span>&#xa0;] <br />[-vtm_format_version&#xa0;<code style="text-align: left;">{new | default</code><span style="color:var(--ds-text,#172b4d);">}</span>&#xa0;]<br />[-vtm_header_include_file <em style="text-align: left;">filename</em>]<br />[-vtm_leakage_temperature&#xa0;{<em>temp1</em> <em>temp2</em> <em>temp3</em>}&#xa0;] <br />[-vtm_output_dir <em>directory</em>]<br /></code><code>[-vtm_powertable_tile {<em>Xint</em> <em>Yint</em>} ] <br />[-vtm_tile {<em>Xint</em> <em>Yint</em>}]<br /> [-vtm_tile_size {<em>$X_um</em> <em>$Y_um</em>}]<br /></code></p>
+
+<p><br /></p>
+
+<p>Sets the parameters for extracting the metal density information. This command must be specified before the&#xa0;<code>extract_metal_density</code> command.</p>
+<h4 id="write_thermal_model-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd"><code>-help</code></td>
+<td class="confluenceTd"><span style="color:var(--ds-text,#172b4d);">Outputs the command usage and a brief description about the command parameters.</span></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-leakage_temperature_scale_table <span style="color:var(--ds-text,#172b4d);">{$</span><em style="text-align: left;">temp1</em><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span>$</span><em style="text-align: left;">scalefactor1</em><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span>$</span><em style="text-align: left;">temp2</em><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span>$</span><em style="text-align: left;">scalefactor2</em><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span>$</span><em style="text-align: left;">temp3</em><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span>$</span><em style="text-align: left;">scalefactor3</em><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span>.....}</span></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1"><p style="text-align: left;">Specifies the global scale factor for a temperature value to enable scaling of the leakage power values coming from the input dotlib file. This parameter allows you to scale the power values only at certain specific temperatures.</p>
+<p style="text-align: left;">This parameter allows you to generate a multi-temperature leakage power map table from a single input dotlib file in the power map generation flow.<span>&#xa0;</span><code>-leakage_temperature_scale_table<span>&#xa0;</span></code>and<span>&#xa0;</span><code>-leakage_temperature_scale_table_file<span>&#xa0;</span></code>are mutually exclusive.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-leakage_temperature_scale_table_file <em style="text-align: left;">filename</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd"><p style="text-align: left;">Specifies a file containing the user-defined temperature values and the corresponding scale factors for each library, cell, or instance. The format of the file is:</p>
+<p style="text-align: left;"><code>#Type Name temp1 temp2 temp3 temp4</code><br /><code>Lib&#xa0; &#xa0;<span>&#xa0;</span><em>library_name</em>&#xa0;&#xa0;<span>&#xa0;</span><em>scalefactor@temp1</em>&#xa0;&#xa0;<span>&#xa0;</span><em>scalefactor@temp2</em>&#xa0;<span>&#xa0;</span><em>scalefactor@temp3</em>&#xa0;&#xa0;<span>&#xa0;</span><em>scalefactor@temp4</em></code><br /><code>Cell&#xa0;&#xa0;<span>&#xa0;</span><em>cell_name</em></code><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;<span>&#xa0;</span><em>scalefactor@temp1</em>&#xa0;&#xa0;<span>&#xa0;</span><em>scalefactor@temp2</em>&#xa0;<span>&#xa0;</span><em>scalefactor@temp3</em>&#xa0;&#xa0;<span>&#xa0;</span><em>scalefactor@temp4</em></code><br /><code>inst&#xa0;&#xa0;<span>&#xa0;</span><em>instance_name</em>&#xa0;<span>&#xa0;</span><em>scalefactor@temp1</em>&#xa0;&#xa0;<span>&#xa0;</span><em>scalefactor@temp2</em>&#xa0;<span>&#xa0;</span><em>scalefactor@temp3</em>&#xa0;&#xa0;<span>&#xa0;</span><em>scalefactor@temp4</em></code></p>
+<p style="text-align: left;">This parameter allows you to generate a multi-temperature leakage power map table from a single input dotlib file in the power map generation flow.&#xa0;<span>&#xa0;<code>-leakage_temperature_scale_table&#xa0;</code>and&#xa0;<code>-leakage_temperature_scale_table_file&#xa0;</code>are mutually exclusive.</span><br /><br /><u><strong>File Format Example for the Type<span>&#xa0;</span><span style="color:var(--ds-text-accent-blue,#0055cc);">Lib</span></strong></u>:</p>
+<p style="text-align: left;"><code>#Type Name&#xa0; &#xa0; &#xa0;&#xa0;&#xa0;&#xa0; 25 50 125 150</code><br /><code>Lib&#xa0;&#xa0; fast&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1 2 10 100</code><br /><code>Lib&#xa0;&#xa0; bufao&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1 2 10 100</code><br /><code>Lib&#xa0;&#xa0; header&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1 2 10 100</code><br /><code>Lib&#xa0;&#xa0; pso_ring_wc&#xa0; 1 2 10 100</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-metal_density_file <em style="text-align: left;">filename</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the VTM metal density file generated by the <code>extract_metal_density</code> command.&#xa0;</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-power_db <em>path_to_power_database</em></code></td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the path to the power database with cell boundary box, location, and rotation information. This is generated by specifying the&#xa0;<code>set_power_analysis_mode -save_bbx true</code> parameter.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-vtm_si_unit&#xa0;<span style="color:var(--ds-text,#172b4d);">{true | false}</span></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the unit definition for power and length. The possible arguments are:</p>
+<ul><li><code>true</code>: unit will be in m and W.</li><li><code>false</code>: unit will be um and mW.</li></ul>
+<p>Default is <code>true</code> with unit m(meter) for length and W(Watt) for power.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-vtm_conductivity_inputs <em style="text-align: left;">filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">This parameter is same as the <code>set_metal_density_options -thermal_conductivity_file</code> parameter. When you want to overwrite the thermal conductivity defined in the metal density file, you can provide a new thermal conductivity file using the <code>write_thermal_model</code> <code>-vtm_conductivity_inputs&#xa0;</code>command.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-vtm_densitytable_tile&#xa0;{<em>Xint</em> <em>Yint</em>}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies the number of tiles in the X and Y directions for the metal density tables only.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-vtm_file <em style="text-align: left;">filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies the name of the output Voltus thermal model file.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-vtm_format&#xa0;<span style="color:var(--ds-text,#172b4d);">{simple | stack}</span>&#xa0;</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p><span style="color:var(--ds-text,#172b4d);">Generates a tile-based power map file in the simple or stack format to perform accurate thermal analysis.<span>&#xa0;</span></span></p>
+
+<p><span style="color:var(--ds-text,#172b4d);">The possible arguments are:</span></p>
+<ul><li><span style="color:var(--ds-text,#172b4d);"><code>simple</code>: generates only power tables without metal density tables.</span></li><li><span style="color:var(--ds-text,#172b4d);"><code>stack</code>: generates both power and metal density tables. </span></li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-vtm_format_version&#xa0;<code style="text-align: left;">{new | default</code><span style="color:var(--ds-text,#172b4d);">}</span>&#xa0;</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1"><p style="text-align: left;">Determines whether to generate the default or the new power map file format. This parameter allows you to have different tile number between the power table and the metal density table. When set to<span>&#xa0;</span><code>new</code>, the power map file format with non-uniform tile numbers for the power (<code>-vtm_powertable_tile</code>) and metal density tables (<code>-vtm_densitytable_tile</code>) can be generated.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-vtm_header_include_file <em style="text-align: left;">filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1"><span style="color:var(--ds-text,#172b4d);">Allows you to define extra header information like file location.</span></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-vtm_leakage_temperature&#xa0;{<em>temp1</em> <em>temp2</em> <em>temp3</em>}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies the leakage temperature values used for trilib (single voltage but different temperatures dot libs) in the power calculation flow to output user-defined temperature points&#8217; leakage power tables.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-vtm_output_dir <em>directory</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1"><span style="color:var(--ds-text,#172b4d);">Specifies the directory path to the Voltus thermal model output folder.</span></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-vtm_powertable_tile {<em>Xint</em> <em>Yint</em>}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies the number of tiles in the X and Y directions for the power tables only.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-vtm_tile {<em>Xint</em> <em>Yint</em>}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies the number of tiles in the X and Y directions for the generated Voltus thermal model file. The default is 10x10.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-vtm_tile_size {<em>$X_um</em> <em>$Y_um</em>}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies the unit tile size in the X and Y directions for the generated thermal model file.</td>
+</tr>
+</tbody></table></div>
+<h4 id="write_thermal_model-Examples">Examples</h4>
+<ul><li>
+<p>The following command is an example of the trilib Tcl command, that is, uses the temperature in <code>vtm_leakage_temperature</code> to calculate the leakage:<br /><code>write_thermal_model \</code><br /><code>-power_db powerdb \</code><br /><code>-metal_density_file vtm_MD_db/my_chip.rpt \</code><br /><code>-vtm_output_dir ./vtm_output \</code><br /><code>-vtm_leakage_temperature {20 50 80}</code></p>
+
+<p><br /></p>
+</li><li>
+<p>The following command is an example of the mix-usage Tcl command, that is, some instances have trilib data while other instances only have a single library:<br /><code>write_thermal_model \</code><br /><code>-power_db powerdb \</code><br /><code>-metal_density_file vtm_MD_db/my_chip.rpt \</code><br /><code>-vtm_output_dir ./vtm_output \</code><br /><code>-vtm_leakage_temperature {20 50 80} \</code><br /><code>-leakage_temperature_scale_table {0 1 20 2 50 3 100 10}</code></p>
+</li></ul><h4 id="write_thermal_model-RelatedTopics">Related Topics</h4>
+<ul><li><code><a href="extract_metal_density.html">extract_metal_density</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="write_tcf.html" id="prev" title="write_tcf">write_tcf</a></em></b><b><em><a href="Power_Route_Category_Attributes.html" id="nex" title="Power_Route_Category_Attributes">Power_Route_Category_Attribute ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

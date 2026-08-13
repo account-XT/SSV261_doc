@@ -1,0 +1,138 @@
+
+<html><head><title>add_route_via_defs</title>
+<meta name="page_sequence" content="19001000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666205" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="add_route_via_defs" />
+<meta name="Keywords" content="auto-generate vias, nanoroute, default and non-default rules, ndrs, wire widths vias, routing rule, drc via enclosure rules" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Design Import," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusTCRcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666205" />
+<meta name="NextFile" content="add_route_vias_Category_Attributes.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Import_and_Export_Commands_and_Attributes.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Text Reference Manual  -- add_route_via_defs" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltuscuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusTCRcomTOC.html">Contents</a></li><li><a class="prev" href="Import_and_Export_Commands_and_Attributes.html" title="Import_and_Export_Commands_and_Attributes">Import_and_Export_Commands_and ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusTCRcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="add_route_vias_Category_Attributes.html" title="add_route_vias_Category_Attributes">add_route_vias_Category_Attrib ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Text Reference Manual <br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>add_route_via_defs</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>add_route_via_defs<span class="confluence-anchor-link" id="add_route_via_defs-add_route_via_defs"></span><span id="add_route_via_defs-add_route_via_defs"></span><br />-help<br /></code>[ -ndr_only ]<br /></code></p>
+
+<p>This command is used to auto-generate vias required by nanoroute for the&#xa0;default and non-default rules (NDRs). The vias are based on the wire-widths of&#xa0;the routing-rule and are created to meet all the DRC via enclosure rules with variations&#xa0;for good pin-access, variations of double-cut vias for good double-cut&#xa0;via utilization, and min-area vias required for stacked-vias that have no route connected&#xa0;to meet the min-area metal rule.</p>
+
+<p>The command only creates vias in the current software session; they are not saved and restored for usage in a later software session. So this command&#xa0;is normally only used for experimentation, or possibly if you just want temporary extra DFM vias to be used for this one session. If you want to save the vias for usage by nanoroute in later software sessions, use <code>add_route_vias_auto&#xa0;true</code>. The command is not set to &quot;on&quot; by default as add_route_vias Category attributes are&#xa0;set to <code>false</code> by default.</p>
+
+<p>The command requires correct DRC rules (e.g. enclosure, spacing, minimum-cut, min-area rules, etc), and at least one LEF VIARULE GENERATE statement (or OpenAccess standardViaDef) for every via layer used for routing (as required by OpenAccess).&#xa0;The cut enclosure values in the VIARULE GENERATE statement are not used except for old LEF technology files (LEF version 5.5 and older)&#xa0;that have no enclosure rules (this is not recommended usage, but is kept for backward compatability). The VIARULE cut-spacing values are ignored&#8211;only the DRC cut-spacing values are used.</p>
+
+<p>No predefined vias are required (e.g LEF VIA DEFAULT, or NONDEFAULTRULE USEVIA or an OpenAccess validVias list for any routing ConstraintGroup are not needed).</p>
+
+<p>Any predefined&#xa0;vias that do exist, are kept unless <code>add_route_vias_delete_via_before_generation</code> is used (see below).&#xa0; Generated vias are compared to predefined vias and if they are geometrically identical, that specific generated via is not kept so no duplicate vias&#xa0;are created.</p>
+
+<p><strong>Note:</strong> NDRs that have the same widths as the default rule will inherit the same&#xa0;vias, including any pre-defined vias.</p>
+<h4 id="add_route_via_defs-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="confluenceTable cadenceTable cadDefaultfont" id="cadDefaultfont" style="width: 720px;"><colgroup><col style="width: 300px;" /><col style="width: 340px;" /></colgroup><tbody><tr><td class="confluenceTd">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd">
+<p>Prints a brief description that includes the type and default information for each <code>add_route_via_defs</code> parameter.</p>
+
+<p>For a detailed description of the command and all of its parameters, use the <code>man</code> command: <br /><code>man add_route_via_defs</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-ndr_only</code></td>
+<td class="confluenceTd">
+<p>Specifies vias generation for non-default rules only.</p>
+
+<p>When specified, it generates signal routing vias for all NDR (non-default rules) and skips generating via for default rule.</p>
+
+<p>It is always used for designs having full set of default rule vias, but not sufficient non-default rule vias.</p>
+
+<p>&#xa0;</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="add_route_via_defs-Example">Example</h4>
+<ul><li><code>add_route_via_defs </code><br />Will add auto-generated vias to any existing vias for all routing rules.</li><li>
+<p>The following command generates vias for all NDRs, including the NDRs created by&#xa0;create_route_rule&#xa0;command.<br /><code>add_route_via_defs &#8211;ndr_only</code></p>
+
+<p>You must use <code style="line-height: 1.42857;">add_route_vias_auto true</code> and <code style="line-height: 1.42857;">add_route_vias_ndr_only true</code> in the flow.</p>
+</li></ul><h4 id="add_route_via_defs-Seealso:">See also:</h4>
+<ul><li><code><a href="write_via_defs.html">write_via_defs</a></code>&#xa0;to write out the vias and look at them.</li></ul>
+<p></p>
+
+<p>&#xa0;</p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Import_and_Export_Commands_and_Attributes.html" id="prev" title="Import_and_Export_Commands_and_Attributes">Import_and_Export_Commands_and ...</a></em></b><b><em><a href="add_route_vias_Category_Attributes.html" id="nex" title="add_route_vias_Category_Attributes">add_route_vias_Category_Attrib ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

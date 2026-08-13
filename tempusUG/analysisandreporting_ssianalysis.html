@@ -1,0 +1,288 @@
+
+<html><head><title>Analysis Of Simultaneous Switching Inputs - SSI</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823912" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Analysis Of Simultaneous Switching Inputs - SSI" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823912" />
+<meta name="NextFile" content="analysisandreporting_ssireporting.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_pathbasedanalysisessence.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Analysis Of Simultaneous Switching Inputs - SSI" />
+<meta name="Keywords" content="ssi analysis" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Analysis,Stylus" />
+<meta name="prod_subfeature" content="Timing Analysis" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_pathbasedanalysisessence.html" title="Path-Based Analysis Essence">Path-Based Analysis Essence</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_ssireporting.html" title="Reporting in SSI Mode">Reporting in SSI Mode</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:ssianalysis" title="Analysis Of Simultaneous Switching Inputs - SSI"></a><style>/*<![CDATA[*/
+/**/
+/**/
+/**/
+/**/
+h1 { counter-reset: heading 4;}
+/**/
+/**/
+/**/
+/**/
+/*]]>*/</style><h2>
+<a id="pgfId-1014070"></a><a id="43554"></a>Analysis Of Simultaneous Switching Inputs - SSI</h2>
+
+<ul><li>
+<a id="pgfId-1014074"></a><a href="analysisandreporting_ssianalysis.html#16180">SSI Overview</a></li><li>
+<a id="pgfId-1039259"></a><a href="analysisandreporting_ssianalysis.html#49521">Implementation</a></li><li>
+<a id="pgfId-1039263"></a><a href="analysisandreporting_ssireporting.html#39170">Reporting in SSI Mode</a></li><li>
+<a id="pgfId-1014086"></a><a href="analysisandreporting_considerationspba.html#37816">Considerations for Path-Based Analysis (PBA)</a></li></ul>
+
+
+
+
+<h3>
+<a id="pgfId-1014088"></a><a id="16180"></a>SSI Overview</h3>
+
+<p>
+<a id="pgfId-1014089"></a>Multiple input cells that have an underlying transistor topology with parallel P or N device pulling the output up or down respectively, can exhibit accelerated delays when multiple inputs are switching in the same direction. If a secondary input switches within a specified delay window with respect to the primary transition, the delay from the initial transition will be smaller.</p>
+<p>
+<a id="pgfId-1014090"></a>The example below shows a NAND gate implementation with parallel PMOS pull-up transistors, and a NOR gate with parallel NMOS pull-down devices:</p>
+
+<p class="webflare-indent1"><strong>Figure -76
+<a id="pgfId-1014091"></a>NAND gate implementation</strong></p>
+<p>
+<a id="pgfId-1014095"></a></p>
+<div class="webflare-div-image">
+<img width="364" height="271" src="images/analysisandreporting-93.gif" /></div>
+
+<p>
+<a id="pgfId-1014096"></a>Simultaneous falling transitions at the NAND gate&#8217;s A and B inputs will accelerate the rising output transition. Conversely, rising transitions of the NOR gate&#8217;s A and B inputs within a specified proximity window will accelerate the output falling delay.</p>
+<p>
+<a id="pgfId-1014097"></a>Current characterization approaches typically consider a single-input switching. In real-world scenarios where multiple inputs of a cell can be switching at the same time, the delay of a particular arc can be substantially less.</p>
+<p>
+<a id="pgfId-1014098"></a>Faster delays on early paths increase pessimism. Guard-banding approaches can be used to derate the early paths &#8211; but doing this globally can lead to overall increased pessimism over the whole design.</p>
+<p>
+<a id="pgfId-1014099"></a>With SSI enabled, simultaneous switching effects can be detected by the software and specific SSI derating factors provided by the user can be applied in those cases. When these timing-guided derating assertions are applied, the overall guard-band derating can be reduced &#8211; resulting in an overall less pessimistic analysis.</p>
+
+<h3>
+<a id="pgfId-1014101"></a><a id="49521"></a>Implementation</h3>
+
+<p>
+<a id="pgfId-1014102"></a>The implementation of the simultaneous switching input (SSI) derating functionality involves additional syntax provided to the <a href="../tempustxtcmdref/set_timing_derate.html">set_timing_derate</a> constraint, library properties for defining the switching sensitivity delay window, and a set of heuristics of determining which input phase arrival times should be considered as interacting, and therefore, subject to possible SSI derating.</p>
+
+<h4>
+<a id="pgfId-1014103"></a>SSI Derating Command Syntax</h4>
+
+<p>
+<a id="pgfId-1014104"></a>The SSI derating is controlled by the <code>set_timing_derate &#8211;input_switching</code> parameter. You can use this parameter to configure SSI derating on specific library cells when they are analyzed on early data paths, typically, the data paths for Hold analysis. For example,</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054077"></a>set_timing_derate 0.5 &#8211;fall &#8211;data &#8211;early &#8211;input_switching [get_lib_cells NOR2X]</pre>
+
+<p>
+<a id="pgfId-1014106"></a>By using additional <code>set_timing_derate</code> options, you can configure the derate behavior for different delay corners or operating voltage domains:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054082"></a>set_timing_derate 0.5 &#8211;fall &#8211;data &#8211;early <br />&#8211;delay_corner tt_800 -power_domain pdDefault<br />&#8211;input_switching [get_lib_cells NOR2*] </pre>
+<h4>
+<a id="pgfId-1014108"></a>Controlling the SSI Proximity Window</h4>
+
+<p>
+<a id="pgfId-1014109"></a>In order for a secondary signal transition to affect the delay from the initial input switching, it must occur within a certain proximity of the first input&#8217;s transition. By default, the proximity window is equivalent to the early input-to-output delay from the first transitioning input pin.</p>
+<p>
+<a id="pgfId-1014110"></a>In the diagram below, pin A is the first input to switch. For a transition at B to affect the delay from A to Y, it must transition after A has transitioned, but before Y has completed its transition to the new state.</p>
+
+<p class="webflare-indent1"><strong>Figure -77
+<a id="pgfId-1014111"></a>SSI Proximity Window </strong></p>
+<p>
+<a id="pgfId-1014115"></a></p>
+<div class="webflare-div-image">
+<img width="639" height="203" src="images/analysisandreporting-94.gif" /></div>
+
+<p>
+<a id="pgfId-1014116"></a>The switching proximity window can be configured by utilizing library-level user-defined properties.</p>
+<p>
+<a id="pgfId-1014117"></a>The <code>k_input_switching_window_rise</code> and <code>k_input_switching_window_fall</code> properties need to be first defined using the following syntax:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1014118"></a><a href="../tempustxtcmdref/define_property.html">define_property</a> -type float -object_type lib k_input_switching_window_rise</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1014119"></a>define_property -type float -object_type lib k_input_switching_window_fall</pre>
+
+<p>
+<a id="pgfId-1014120"></a>You can then set the proximity factor on a per library basis:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1014121"></a><a href="../tempustxtcmdref/set_property.html">set_property</a> [get_libs slow] k_input_switching_window_rise 1.1</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1014122"></a>set_property [get_libs slow] k_input_switching_window_fall 1.1</pre>
+
+<p>
+<a id="pgfId-1014123"></a>The property definitions and settings are preserved persistently in the SDC file if the design is saved.</p>
+
+<h4>
+<a id="pgfId-1014124"></a>Heuristics for Selecting Interacting Clock Phases</h4>
+
+<p>
+<a id="pgfId-1014125"></a>Based on the clocking relationships of the signals arriving on the input pins of a cell configured for SSI, the software will determine if the SSI derate should always be applied, never be applied, or applied based on the evaluation of the proximity window. Conservative analysis requires applying the SSI derate, unless it can be shown that the inputs are not interacting. The following table summarizes the situations where SSI should be applied or not applied:</p>
+<table class="webflareTable" id="#id1014126">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1014128">
+<a id="pgfId-1014128"></a>Condition</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1014130">
+<a id="pgfId-1014130"></a>SSI Behavior</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1014132">
+<a id="pgfId-1014132"></a>Notes</span>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1014134"></a>Data are derived from synchronous clock phases of the same frequency and phase</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1014136"></a>Evaluate SSI switching window</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1014138"></a> </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1014140"></a>Data are derived from synchronous clock phases of different frequency or different phase</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1014142"></a>Apply SSI derate always</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1014144"></a> </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1014146"></a>Data are derived from physically-exclusive clocks</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1014148"></a>Do not evaluate SSI</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1014150"></a> </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1014152"></a>Data are derived from logically-exclusive clocks</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1014154"></a>Evaluate switching window if clocks are same period, phase, and are synchronous</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1014156"></a> </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1014158"></a>Data are derived from asynchronous clocks</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1014160"></a>Apply SSI derate always</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1014162"></a>Applied if an asynchronous clock is present on any input</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1014164"></a>Data arrival on same pin from multiple clocks that are synchronous, have the same period, and phase</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1014166"></a>Evaluate switching window based on worst-casing of arrival times</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1014168"></a> </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1014170"></a>Data arrival from two physically exclusive clocks</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1014172"></a>Checks for each clock are done separately between the inputs to see if a non-exclusive relationship exists between clocks of one input pin versus clocks of the other</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1014174"></a> </p>
+</td>
+</tr>
+</tbody></table>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_pathbasedanalysisessence.html" id="prev" title="Path-Based Analysis Essence">Path-Based Analysis Essence</a></em></b><b><em><a href="analysisandreporting_ssireporting.html" id="nex" title="Reporting in SSI Mode">Reporting in SSI Mode</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

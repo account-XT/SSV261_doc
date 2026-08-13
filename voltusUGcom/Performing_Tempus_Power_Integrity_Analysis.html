@@ -1,0 +1,281 @@
+
+<html><head><title>Performing Tempus Power Integrity Analysis</title>
+<meta name="page_sequence" content="33003000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666209" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Performing Tempus Power Integrity Analysis" />
+<meta name="Keywords" content="power,integrity,IR-aware,rail,ground,net,parasitic,PI" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="IR Drop-Aware Optimization," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666209" />
+<meta name="NextFile" content="Tempus_Power_Integrity_Result_Analysis.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Tempus_Power_Integrity_Flow.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Performing Tempus Power Integrity Analysis" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Tempus_Power_Integrity_Flow.html" title="Tempus_Power_Integrity_Flow">Tempus_Power_Integrity_Flow</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Tempus_Power_Integrity_Result_Analysis.html" title="Tempus_Power_Integrity_Result_Analysis">Tempus_Power_Integrity_Result_ ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Performing Tempus Power Integrity Analysis</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="PerformingTempusPowerIntegrityAnalysis-23456"></span></p>
+
+<p>The following procedure describes the various inputs and outputs of the Tempus Power Integrity (PI) analysis flow.</p>
+<h4 id="PerformingTempusPowerIntegrityAnalysis-RequiredInputFiles"><em> Required Input Files</em></h4>
+<ul><li>Design data (LEF, timing libraries, netlist, SDC, DEF, SPEF)</li><li>Technology PGV</li></ul><h4 id="PerformingTempusPowerIntegrityAnalysis-Procedure"><em> Procedure</em></h4>
+
+<p>To perform Tempus PI analysis, complete the following steps:</p>
+
+<p><strong>Step 1: Performing Tempus STA Analysis Using IR Derates</strong><span class="confluence-anchor-link" id="PerformingTempusPowerIntegrityAnalysis-18836"></span></p>
+<ol><li>
+<p>Load the design data.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /></colgroup><tbody><tr><td class="confluenceTd" scope="col"><code>read_physical -lefs $lefs</code><br /><code>read_mmmc ../design/viewDefinition.tcl</code><br /><code>read_netlist ../design/postRouteOpt.enc.dat/super_filter.v.gz -top super_filter</code><br /><code>init_design</code><br /><code>read_def ../design/super_filter.def.gz</code></td>
+</tr>
+</tbody></table></div>
+
+<p><br /></p>
+
+<p><strong>Tcl command - Snippet of viewDefinition.tcl</strong>:</p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1">
+<p><code>create_library_set -name LS_wc_1p00 -timing ./standard_cells_1p00_125C.lib</code><br /><code>create_library_set -name LS_wc_0p90 -timing ./standard_cells_0p90_125C.lib ;<strong># This library set will be used to improve interpolation later in the flow</strong></code><br /><code>create_library_set -name LS_wc_0p85 -timing ./standard_cells_0p85_125C.lib</code><br /><code>create_rc_corner -name RC_wc_125 temperature 125</code></p>
+
+<p><code>create_timing_condition &#8211;name TC1 &#8211;library_set LS_wc_1p00&#xa0;</code><br /><code>create_timing_condition &#8211;name TC2 &#8211;library_set LS_wc_0p85</code><br /><code>create_delay_corner -name DC_wc_1p00 -rc_corner RC_wc_125 -timing_condition TC1&#xa0;</code><br /><code>create_delay_corner -name DC_wc_0p85 -rc_corner RC_wc_125 -timing_condition TC2&#xa0;</code><br /><code>create_constraint_mode -name CM_wc -sdc_files ./design.sdc</code></p>
+
+<p><code>create_analysis_view -name AV_wc_1p00 -constraint_mode CM_wc -delay_corner DC_wc_1p00 ;<strong># This is the non-derated/non-margined view at 1.0v for IR drop analysis</strong></code><br /><code>create_analysis_view -name AV_wc_0p85 -constraint_mode CM_wc -delay_corner DC_wc_0p85 ;<strong># This is the traditional STA view at 0.85V with voltage margined/derated for IR drop analysis</strong></code></p>
+</td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Specify the SPEF file for signal net parasitic information.<br /><strong>Tcl command</strong>:</p>
+<div class="table-wrap"><table class="webflareTable webflareTableIndent wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code><code>read_spef -rc_corner&#xa0;&#xa0;RC_wc_125 ../design/postRouteOpt_RC_wc_125.spef.gz</code></code></pre></td>
+</tr>
+</tbody></table></div>
+</li><li>
+<p>Define the analysis views to be used for setup and hold analysis, and update timing for the design.<br /><strong>Tcl command</strong>:</p>
+<div class="table-wrap"><table class="webflareTable webflareTableIndent wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code><code>set_analysis_view -setup {AV_wc_1p00 </code><strong>AV_wc_0p85</strong><code>} -hold {AV_wc_1p00 </code><strong>AV_wc_0p85</strong><code>}</code></code></pre></td>
+</tr>
+</tbody></table></div>
+</li></ol>
+<p><strong>Step 2:Performing Voltus Power and IR Drop Analysis (EIV DB Generation)</strong><span class="confluence-anchor-link" id="PerformingTempusPowerIntegrityAnalysis-84658"></span></p>
+<ol><li>
+<p>Specify the directory where the power results will be stored.<br /><strong>Tcl command</strong>:</p>
+<div class="table-wrap"><table class="webflareTable webflareTableIndent wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code>set_power_output_dir dynVecLessPowerResults</code></pre></td>
+</tr>
+</tbody></table></div>
+</li><li>
+<p>Define the power analysis mode. The Tempus PI analysis flow is applicable only to the dynamic vectorless power calculation method.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /></colgroup><tbody><tr><td class="confluenceTd" scope="col"><code>set_db \</code><br /><code>&#xa0; &#xa0; power_method &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; dynamic_vectorless \</code><br /><code>&#xa0; &#xa0; power_disable_static true \</code><br /><code>&#xa0; &#xa0; power_enable_state_propagation &#xa0; &#xa0;true \</code><br /><code>&#xa0; &#xa0; power_honor_combinational_logic_on_clock_net false \</code><br /><code>&#xa0; &#xa0; power_report_instance_switching_info all \</code><br /><code>&#xa0; &#xa0; power_grid_libraries { \</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; ../data/pgv_dir/tech_pgv/techonly.cl \</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; ../data/pgv_dir/stdcell_pgv/stdcells.cl \</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; ../data/pgv_dir/macro_pgv/macros_pll.cl \</code><br /><code>&#xa0; &#xa0; } \</code><br /><code>&#xa0;<strong> &#xa0; power_enable_tempus_pi true \</strong></code><br /><strong><code>&#xa0; &#xa0; power_ir_derated_timing_view AV_wc_0p85 \</code></strong><br /><strong><code>&#xa0; &#xa0; power_enable_pba_for_tempus_pi true</code></strong></td>
+</tr>
+</tbody></table></div>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>The following are the attributes specific to the Tempus PI analysis flow:</p>
+<ul><li><code>power_enable_tempus_pi true</code> - specifies to enable the Tempus PI analysis flow.</li><li><code>power_ir_derated_timing_view view_name</code> - specifies the name of the timing view used to calculate timing slack and to rank the flops. This attribute must be specified if there are multiple views.&#xa0;<br />The <code>-power_ir_derated_timing_view</code> attribute defines the timing view used to detect the IR-sensitive paths using a lower voltage than the actual analysis. This lower voltage simulates the IR drop for each instance in the design. The software uses this view to prioritize the end-points that need to be prioritized for switching.</li><li><code>power_enable_pba_for_tempus_pi true</code> - specifies to enable the Path-Based Analysis (PBA) for slack calculation. By default (<code>false</code>), the Graph-Based Analysis (GBA) is used.</li></ul></div>
+</div>
+</span></p>
+</li><li>
+<p>Optional. Define default activities for various points in the design.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /></colgroup><tbody><tr><td class="confluenceTd" scope="col"><p class="webflare-courier-new codeContent"><code>set_default_switching_activity -input_activity 0 \</code></p>
+<p class="webflare-courier-new codeContent"><code>&#xa0; -period 4.0 -clock_gates_output_ratio   0.5 -sequential_activity 0.2</code></p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p>The default switching activity for sequential cells (<code>-sequential_activity</code>) in percentage (ratio 0.0 to 1.0) specifies the number of fully expanded data paths that will be scheduled to switch in the Tempus PI flow.</p>
+</span></p>
+</li><li>
+<p>Optional, but recommended. Define the power simulation period and resolution.<br /><strong>Tcl command</strong>:</p>
+<div class="table-wrap"><table class="webflareTable webflareTableIndent wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code><code>set_dynamic_power_simulation -resolution 50ps -period 320ns</code></code></pre></td>
+</tr>
+</tbody></table></div>
+
+<p><span class="fontredcadence">
+<p><span style="color:var(--ds-text,#172b4d);">The dynamic power simulation period defines the number of power analysis cycles to be run.</span></p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p><span style="color:var(--ds-text,#172b4d);">The user-defined sequential activity per cycle (</span><code>set_default_switching_activity&#xa0;-sequential_activity</code>) and the total power analysis simulation period (<code>set_dynamic_power_simulation -period</code><span style="color:var(--ds-text,#172b4d);">) control the number of critical path end-points that will be covered per simulation cycle and the total simulation time. Allowing a larger power simulation period will allow Tempus PI to cover all the end-points.</span></p>
+</div>
+</div>
+</span></p>
+</li><li>
+<p>Run power analysis.<br /><strong>Tcl command</strong>:</p>
+<div class="table-wrap"><table class="webflareTable webflareTableIndent wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code><code>report_power</code></code></pre></td>
+</tr>
+</tbody></table></div>
+</li><li>
+<p>Define the rail simulation resolution, and specify the location of the binary current files generated through dynamic power analysis (step 5).<br /><strong>Tcl command</strong>:</p>
+<div class="table-wrap"><table class="webflareTable webflareTableIndent wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code><code>set_dynamic_rail_simulation -resolution 50ps<br /></code></code><code><code>set_power_data -scale 1 -format current [glob dynVecLessPowerResults/*.ptiavg]</code></code></pre></td>
+</tr>
+</tbody></table></div>
+</li><li>
+<p>Define the rail analysis mode.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /></colgroup><tbody><tr><td class="confluenceTd" scope="col"><code>set_rail_analysis_config \</code><br /><code>&#xa0; &#xa0; -method &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; dynamic \</code><br /><code>&#xa0; &#xa0; -accuracy &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; hd \</code><br /><code>&#xa0; &#xa0; -analysis_view &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;AV_wc_1p00 \</code><br /><code>&#xa0; &#xa0; -power_grid_libraries { \</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; ../data/pgv_dir/tech_pgv/techonly.cl \</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; ../data/pgv_dir/stdcell_pgv/stdcells.cl \</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; ../data/pgv_dir/macro_pgv/macros_pll.cl \</code><br /><code>&#xa0; &#xa0; } \</code><br /><code>&#xa0; &#xa0; -enable_rlrp_analysis &#xa0; &#xa0; &#xa0; true \</code><br /><code>&#xa0; &#xa0; -verbosity true \</code><br /><code>&#xa0; &#xa0; -temperature 125 \</code><br /><code>&#xa0; &#xa0; -eiv_eval_window switching \</code><br /><code>&#xa0; &#xa0; -eiv_method {bestavg worstavg}</code></td>
+</tr>
+</tbody></table></div>
+
+<p><code><span style="color:var(--ds-text,#172b4d);"><br /></span></code></p>
+</span></p>
+</li><li>
+<p>Optional. If you do not load the CPF file, use the <code>set_pg_nets</code> command to define the power nets in the design, and assign attributes to these nets. Then, use <code>set_rail_analysis_domain</code> to define the power domains.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /></colgroup><tbody><tr><td class="confluenceTd" scope="col"><code>set_pg_nets -net VDD_AO -voltage 1 -threshold 0.95 -force</code><br /><code>set_pg_nets -net VDD_column -voltage 1 -threshold 0.95 -force</code><br /><code>set_pg_nets -net VDD_ring -voltage 1 -threshold 0.95 -force</code><br /><code>set_pg_nets -net VDD_external -voltage 1 -threshold 0.95 -force</code><br /><code>set_pg_nets -net VSS -voltage 0.0 -threshold 0.05 -force</code><br /><code>set_rail_analysis_domain -domain_name ALL -power_nets { VDD_AO VDD_external } -ground_nets VSS</code></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Define the location of the voltage sources for each power/ground net.<br /><strong>Tcl command</strong>:</p>
+<div class="table-wrap"><table class="webflareTable webflareTableIndent wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code><code>set_power_pads -net VDD_AO -format xy -file ../design/super_filter_VDD_AO.pp<br /></code></code><code><code>set_power_pads -net VDD_external -format xy -file ../design/super_filter_VDD_external.pp<br /></code></code><code><code>set_power_pads -net VSS -format xy -file ../design/super_filter_VSS.pp</code></code></pre></td>
+</tr>
+</tbody></table></div>
+</li><li>
+<p>Run rail analysis.<br /><strong>Tcl command</strong>:<br /><br /></p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /></colgroup><tbody><tr><td class="confluenceTd" scope="col"><code>report_rail -output_dir ./dynVecLessRailResults -type domain ALL</code></td>
+</tr>
+</tbody></table></div>
+
+<p><code><span style="color:var(--ds-text,#172b4d);"><br /></span></code></p>
+</span></p>
+
+<p><br /></p>
+
+<p>The Voltus console will display rail analysis statistics, as shown in the following snippet:</p>
+<pre class="webflare-pre-block webflare-courier-new">Rail Analysis completed successfully.</pre><pre class="webflare-pre-block webflare-courier-new">Finished Rail Analysis at 19:32:45 02/10/2019 (cpu=0:01:12, real=0:02:33, peak mem=1697.00MB)</pre><pre class="webflare-pre-block webflare-courier-new">Current Voltus IC Power Integrity Solution resource usage: (total cpu=0:09:48, real=1:06:51, mem=1697.00MB)</pre><pre class="webflare-pre-block webflare-courier-new">***Info: Found 70 instances with IR drop violations in design based on eiv_method: Worst and eiv_eval_window: elapse.</pre></li></ol>
+<p><strong>Step 3:Performing Tempus IR-Aware STA Using EIV Database (any IR Derates Removed)</strong><span class="confluence-anchor-link" id="PerformingTempusPowerIntegrityAnalysis-66533"></span></p>
+<ol><li>
+<p>Calculate IR-aware slack by specifying the IR analysis output as input to the Tempus run:<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /></colgroup><tbody><tr><td class="confluenceTd" scope="col"><code>update_delay_corner -name DC_wc_1p00 \</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;-timing_condition {TC1 TC2} \</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;-irdrop_data ./dyn_rail_phaseIII/ALL_25C_dynamic_1</code><br /><code>set_analysis_view -setup {AV_wc_1p00} -hold {AV_wc_1p00}</code><br /><code>update_timing -full</code><br /><code>report_timing -max_paths 200000 -retime path_slew_propagation -retime_mode exhaustive &gt; pi_timing.pba.rpt</code></td>
+</tr>
+</tbody></table></div>
+</span></p>
+
+<p><br /></p>
+
+<p>The final analysis within Tempus PI is done at the non-derated voltage corner (that is, 1.0V in the <code>viewDefinition.tcl</code> example). Therefore, the <code>AV_wc_1p00</code> view is selected for analysis, and the corresponding delay corner (<code>DC_wc_1p00</code>) is updated to enable voltage tri-lib interpolation by specifying multiple library sets (<code>-library_set</code>)at various voltages (1.00V, 0.90V and 0.85V).</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>The following are the parameters specific to the Tempus PI analysis flow:</p>
+</div>
+</div>
+<ul><li><code>-irdrop_data </code><span class="webflare-courier-new" style="white-space: pre;"><em>directory_name</em></span><code> </code>- specifies the IR drop files or directory of files to apply to both the early and late delay calculation for the specified delay corner object.</li></ul></li></ol>
+<p><strong>Step 4: Tempus ECO Fixing</strong></p>
+<div aria-label="Info" class="confluence-information-macro  confluence-information-macro-information" role="region"><span class="aui-icon aui-icon-small aui-iconfont-info-filled confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>In the 19.11 release, the Tempus PI feature can only identify the IR-sensitive timing critical paths and report timing with IR drop voltages. The ECO fixing of timing violations will be supported in a future release.</p>
+</div>
+</div>
+<h4 id="PerformingTempusPowerIntegrityAnalysis-Output"><em> Output</em></h4>
+
+<p>The rail output directory will contain the following information:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><th class="confluenceTh" colspan="1" rowspan="1">
+<p>Directory Name</p>
+</th><th class="confluenceTh" colspan="1" rowspan="1">
+<p>Description</p>
+</th></tr>
+<tr class=""><td class="confluenceTd" colspan="1" rowspan="1">
+<p>&lt;<span class="webflare-courier-new"><em>domainName</em></span>&gt;_&lt;temperature&gt;_dynamic_&lt;<span class="webflare-courier-new"><em>X</em></span>&gt;</p>
+</td>
+<td class="confluenceTd" colspan="1" rowspan="1">
+<p>For each run, an output directory is generated with the default name <em>&lt;domainName&gt;_&lt;temperature&gt;_dynamic_&lt;X&gt;</em>. <em>&lt;domainName&gt;</em> will be replaced with <code>ALL</code> if all domains are to be analyzed (<code>report_rail -output_dir dir -type domain ALL</code>), or with <em>&lt;netName&gt;</em> if a power net is to be analyzed. The output directory contains state directories for each net, such as VDD and VSS.</p>
+
+<p>Each state directory contains the following:</p>
+<ul><li><code>results</code> &#8211; a file that gives a summary of the rail analysis results for various plots, such as tc (tap current), rc (resistor current), and so on.</li><li><code>Reports</code> &#8211; a folder that contains a list of useful report files that contain all power-grid integrity data.</li><li>Auto-generated GIF files of the rail analysis plots</li></ul></td>
+</tr>
+</tbody></table></div>
+
+<p><code><span style="color:var(--ds-text,#172b4d);"><br /></span></code></p>
+</span></p>
+
+<p><br /></p>
+
+<p>The current work directory contains the timing report:</p>
+<div class="table-wrap"><table class="webflareTable webflareTableIndent wrapped confluenceTable"><tbody><tr><th class="webflareTh confluenceTh" colspan="1" rowspan="1">
+<p>Directory Name</p>
+</th><th class="webflareTh confluenceTh" colspan="1" rowspan="1">
+<p>Description</p>
+</th></tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>&lt;<span class="webflare-courier-new" style="white-space: pre;"><em>timing_report</em></span>&gt;.rpt</p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>A timing report that provides information about the various paths in the design. The <code>report_timing &gt;</code> &lt;<span class="webflare-courier-new" style="white-space: pre;"><em>timing_report</em></span>&gt;.rpt command is used to generate the report and write it to the specified file name. For more information on Tempus commands, refer to <em>Tempus Text Command Reference</em>.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="PerformingTempusPowerIntegrityAnalysis-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Tempus_Power_Integrity_Flow.html">Tempus Power Integrity Flow</a></li><li><a href="Tempus_Power_Integrity_Result_Analysis.html">Tempus Power Integrity Result Analysis</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Tempus_Power_Integrity_Flow.html" id="prev" title="Tempus_Power_Integrity_Flow">Tempus_Power_Integrity_Flow</a></em></b><b><em><a href="Tempus_Power_Integrity_Result_Analysis.html" id="nex" title="Tempus_Power_Integrity_Result_Analysis">Tempus_Power_Integrity_Result_ ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

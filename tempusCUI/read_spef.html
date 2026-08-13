@@ -1,0 +1,211 @@
+
+<html><head><title>read_spef</title>
+<meta name="page_sequence" content="37041000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287381" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="read_spef" />
+<meta name="Keywords" content="build timing graph,calculate delays,load resistors capacitors interconnects" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Timing Analysis," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287381" />
+<meta name="NextFile" content="read_timing_context.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="read_sdf.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- read_spef" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="read_sdf.html" title="read_sdf">read_sdf</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="read_timing_context.html" title="read_timing_context">read_timing_context</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>read_spef</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>read_spef</code><span class="confluence-anchor-link" id="read_spef-read_spef"></span><span id="read_spef-read_spef"></span> <br /><code>[-help]</code><br /><code><em>file_name_list</em></code><br /><code>[-decoupled]</code><br /><code>[-extended]<br />[-idx]</code><br /><code>[-keep_star_node_locations]</code><br /><code>[-rc_corner&#xa0;<em>list_of_rc_corners</em>]</code><br /><code>[-scale_rc]<br />[<span>-skip_star_node_locations]</span><br /> [-spef_field&#xa0;<em>integer_list</em>]<br /><code>[-via_variation_file <em>via_variation_file</em></code><span style="color:var(--ds-text,#172b4d);">]<br />[-wire_variation_file <em>wire_variation_file</em>]</span><br /><br /></code></p>
+
+<p>Loads resistors and capacitors for the interconnects in SPEF into the Tempus&#xa0;database to calculate delays or build a timing graph. Use this command to read in a SPEF file generated by a third-party extraction tool.</p>
+
+<p>You can use this command to load a SPEF file, which is compressed (<code>.gzip</code>) format.</p>
+
+<p><strong>Note: </strong>This command supports multi-threaded SPEF reading scalable upto a maximum of four CPUs. The number of CPUs can be specified using the&#xa0;standard use model of Tempus.</p>
+<h4 id="read_spef-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd"><code>-help</code></td>
+<td class="confluenceTd">Outputs a brief description that includes type and default information for each <code>read_spef</code> parameter. For a detailed description of the command and all of its parameters, use the man command: <code>man read_spef</code>.</td>
+</tr>
+<tr><td class="confluenceTd"><code>-decoupled</code></td>
+<td class="confluenceTd">Grounds the coupling capacitances in the SPEF file and merges the capacitances on the same node. This parameter can be used only for static timing analysis and cannot be used for SI analysis.</td>
+</tr>
+<tr><td class="confluenceTd"><code>-extended</code></td>
+<td class="confluenceTd">Enables the reading of &#8220;<code>$llx=&lt;value1&gt; $lly=&lt;value2&gt; $urx=&lt;value3&gt; $ury=&lt;value4&gt; $LAYER=&lt;number&gt;&#8221;&#xa0;</code>to set the layer number for nodes of a resistance from Quantus extended SPEF file. It also reads in extended&#xa0;<code>*LAYER_MAP&#xa0;</code><code>section</code>, if it is present. This parameter can also read in&#xa0;<code>&#8220;$l=&lt;length&gt; $w=&lt;width&gt; $si_w=&lt;swidth&gt; $lvl=&lt;number</code><code>&gt;&#8221;&#xa0;</code>to set the width, silicon width, or layer for nodes of a resistance from StarRC extended SPEF file.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><em><code>file_name_list</code></em></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies a SPEF file or list of SPEF files as input for flat chip or hierarchical SPEF stitching respectively.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-idx</code></td>
+<td class="confluenceTd"><span style="color:var(--ds-text,#172b4d);">Enables Inter-Die Extraction (IDX) SPEF reading. IDX SPEF models the Inter-Die capacitive impact in the form of coupling and ground capacitances. Individual die and IDX SPEFs need to be extracted by Quantus and in the extended SPEF (xSPEF) format.&#xa0; The</span><span style="color:var(--ds-text,#172b4d);">&#xa0;</span><code style="text-align: left;">-extended</code><span style="color:var(--ds-text,#172b4d);">&#xa0;</span><span style="color:var(--ds-text,#172b4d);">parameter is also required to be specified to read the xSPEF format. The software also supports multiple IDX SPEF reading. Flat die-level SPEFs need to be specified along with IDX SPEFs. With the</span><span style="color:var(--ds-text,#172b4d);">&#xa0;</span><code style="text-align: left;">-idx</code><span style="color:var(--ds-text,#172b4d);">&#xa0;</span><span style="color:var(--ds-text,#172b4d);">parameter, die-level and IDX SPEFs can be specified in any order.</span></td>
+</tr>
+<tr><td class="confluenceTd"><span><code>-keep_star_node_locations</code> </span></td>
+<td class="confluenceTd"><span>Enables the reading of the </span><code>*N</code><span> statements in the SPEF file. The </span><code>*N</code><span> statements define the location of the RC nodes.</span></td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-rc_corner <em>list_of_rc_corners</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Annotates the parasitics to the predefined RC corners for multi-corner analysis. You can specify a list of RC corners to be annotated.&#xa0;If you want to use SPEF information when calculating delays in multi-mode multi-corner analysis (MMMC) mode, you must annotate the parasitics for all RC corners in the design.</p>
+
+<p>A few examples are provided below to explain different scenarios of specifying rc corners are their corresponding corner indices and SPEF files.</p>
+<ul><li><code>read_spef</code>&#xa0;<code>&#8211;rc_corner {rcCorner1 rcCorner2 rcCorner3 rcCorner4 rcCorner5</code>&#xa0;}&#xa0;<code>&#8211;spef_field {1 2 3 4 5}</code>&#xa0;<code>rc-spef.gz&#xa0;&#xa0;<br /><br /></code>This means that SPEF file can contain parasitics from N RC corners and names of RC corners in the RC corner list map to the index fields specified using the&#xa0;<code>&#8211;spef_field</code>&#xa0;option as shown above. Assuming that the SPEF file,&#xa0;<code>rc-spef.gz</code>&#xa0;has RC fields from the specified five RC corners, the above command would be interpreted as follows:&#xa0;<br />1st field in SPEF maps to RC corner,&#xa0;<code>rcCorner1&#xa0;<br /></code>2nd field in SPEF maps to RC corner,&#xa0;<code>rcCorner2&#xa0;<br /></code>3rd field in SPEF maps to RC corner,&#xa0;<code>rcCorner3</code>&#xa0;<br />4th field in SPEF maps to RC corner,&#xa0;<code>rcCorner4</code>&#xa0;, and&#xa0;<br />5th field in SPEF maps to RC corner,&#xa0;<code>rcCorner5</code></li></ul><ul><li><code>read_spef &#8211;rc_corner {rc_max rc_min} &#8211;spef_field {2 5} rc-spef.gz</code></li></ul><p style="margin-left: 30.0px;">Assuming&#xa0;<code>rc-spef.gz</code>&#xa0;in above example has RC fields from &quot;N&quot; RC corners, the above command would read SPEF data for two RC corners only and would be interpreted as follows:&#xa0;<br />2nd field in SPEF maps to RC corner, rc_max&#xa0;<br />5th field in SPEF maps to RC corner,&#xa0;<code>rc_min&#xa0;<br /></code></p>
+<ul><li>
+<p><code>read_spef &#8211;rc_corner {rcCorner1 rcCorner2 rcCorner3} &#8211;spef_field {1 1 3} rc-spef.gz&#xa0;<br /><br /></code>Assuming&#xa0;<code>rc-spef.gz</code>&#xa0;in the above example has RC fields from N RC corners, the above command would read SPEF data for 3 RC corners only and would be interpreted as follows:</p>
+
+<p>1st field in SPEF maps to RC corner,&#xa0;<code>rcCorner1&#xa0;<br /></code>1st field in SPEF also maps to RC corner,&#xa0;<code>rcCorner2&#xa0;<br /></code>3rd field in SPEF maps to RC corner,&#xa0;<code>rcCorner3</code>&#xa0;<code><br /></code></p>
+</li></ul><ul><li><code>read_spef &#8211;rc_corner {rcCorner1 rcCorner2 rcCorner3 rcCorner4 rcCorner5} &#8211;spef_field {1 2 3 4 5} {top.spef.gz block1.spef.gz block2.spef.gz}&#xa0;<br /><br /></code>In the above example, hierarchical design SPEF files are read in. It reads top level multi-field SPEF file followed by the multi-field SPEF files from&#xa0;<code>block1</code>and&#xa0;<code>block2</code>&#xa0;.</li></ul>
+<p><strong>Note:</strong>&#xa0;SPEF reading will not be triggered until SPEF files for all active RC corners are specified.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-scale_rc</code></td>
+<td class="confluenceTd"><span>Scales the SPEF read in for the specified corner as per the </span><code>postRoute_cap</code><span>, </span><code>postRoute_xcap</code><span>, and </span><code>postRoute_res</code><span> scale factors defined using the <code><a href="create_rc_corner.html">create_rc_corner</a></code></span><span> and <code><a href="update_rc_corner.html">update_rc_corner</a></code></span><span> commands.</span></td>
+</tr>
+<tr><td class="confluenceTd"><code>-skip_star_node_locations</code></td>
+<td class="confluenceTd">
+<p>Ignores the <span>*N statements</span> in the SPEF file. <span>The *N statements define the location of the RC nodes.&#xa0;</span></p>
+
+<p><span><strong>Note</strong>: By default, the software ignores the *N statements while reading SPEF.<br /></span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-spef_field <em>integer_list</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the field of the triplet values in spef to be loaded.</p>
+
+<p><strong>Note:&#xa0;</strong>This parameter is relevant only when the&#xa0;<code>-rc_corner</code>&#xa0;parameter is specified.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code style="text-align: left;">-via_variation_file <em>via_variation_file</em></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd"><p style="text-align: left;">Specifies the name of the file for modeling via variation. The contents of the file include all the via layer names with corresponding MEAN_SHIFT and STDDEV so that all the VIA resistance in SPEF can be mapped to their own variation multiplier. This option is used to specify the via_variation file only when the design has a single corner.</p>
+<p style="text-align: left;">For example,</p>
+<p style="text-align: left;"><code>read_spef<br />&#xa0; &#xa0; -rc_corner rcCornerName \</code></p>
+<p style="text-align: left;"><code>-via_variation_file<span>&#xa0;</span><em>viaVariationFileName</em></code></p>
+<p style="text-align: left;">A sample via_variation file is provided below:</p>
+<p style="text-align: left;"><code>// corner_name &#xa0;: rcMax</code></p>
+<p style="text-align: left;"><code>// wildcard to cover default</code><br /><code>object_type&#xa0;&#xa0;&#xa0;&#xa0; : design</code><br /><code>delay_type &#xa0;&#xa0;&#xa0;&#xa0; : via</code></p>
+<p style="text-align: left;"><code>layer_name&#xa0; &#xa0;&#xa0;&#xa0; : *</code></p>
+<p style="text-align: left;"><code>area&#xa0;&#xa0;&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; : 0.20 0.40 0.80</code></p>
+<p style="text-align: left;"><code>// no nominal for wildcard default</code><br /><code>table_min_sigma : 0.80 0.90 0.95</code></p>
+<p style="text-align: left;"><code>table_max_sigma : 1.60 1.30 1.15</code></p>
+<p style="text-align: left;"><code>table_meanshift : 0.05 0.03 0.02</code></p>
+<p style="text-align: left;"><code>table_stdev &#xa0;&#xa0;&#xa0;&#xa0;: 0.10 0.05 0.02</code></p>
+<p style="text-align: left;"><code>// per via layer data</code><br /><code>object_type &#xa0;&#xa0;&#xa0; : design</code><br /><code>delay_type &#xa0;&#xa0;&#xa0;&#xa0; : via</code><br /><code>layer_name&#xa0; &#xa0;&#xa0;&#xa0; : VIA1</code></p>
+<p style="text-align: left;"><code>Area&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; : 0.0004 0.0008 0.0016</code></p>
+<p style="text-align: left;"><code>table_min_sigma : 0.80 0.90 0.95</code></p>
+<p style="text-align: left;"><code>table_max_sigma : 1.60 1.30 1.15</code></p>
+<p style="text-align: left;"><code>table_meanshift : 0.015 0.015 0.012</code></p>
+<p style="text-align: left;"><code>table_stdev &#xa0;&#xa0;&#xa0;&#xa0;: 0.214 0.150 0.117</code></p>
+<p style="text-align: left;"><code>object_type&#xa0;&#xa0;&#xa0;&#xa0; : design</code></p>
+<p style="text-align: left;"><code>delay_type&#xa0; &#xa0;&#xa0;&#xa0; : via</code></p>
+<p style="text-align: left;"><code>layer_name&#xa0; &#xa0;&#xa0;&#xa0; : VIA2</code></p>
+<p style="text-align: left;"><code>area&#xa0; &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; : 0.0004 0.0008 0.0016</code></p>
+<p style="text-align: left;"><code>table_min_sigma : 0.80 0.90 0.95</code></p>
+<p style="text-align: left;"><code>table_max_sigma : 1.60 1.30 1.15</code></p>
+<p style="text-align: left;"><code>table_meanshift : 0.015 0.012 0.014</code></p>
+<p style="text-align: left;"><code>&#8230;..</code></p>
+<p style="text-align: left;"><code>&#8230;&#8230;</code></p>
+<p style="text-align: left;"><code>table_stdev : 0.223 0.183 0.140</code></p>
+<p style="text-align: left;"><span style="color:var(--ds-text-accent-lime-bolder,#37471f);"><strong>Note</strong>: E<span style="color:var(--ds-text-accent-lime-bolder,#37471f);">ach line in the file lists the basic components of the statistical variation approach.</span></span></p>
+<p style="text-align: left;"><span style="color:var(--ds-text-accent-lime-bolder,#37471f);">The values in the &quot;area&quot; line list all possible areas. In the above example, the area line lists three cases that can happen in the design. It can list different number of cases, for example one or four. The subsequent lines list the corresponding values matching to the areas defined in the area line.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-wire_variation_file <em>wire_variation_file</em></code><br />&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;</td>
+<td class="confluenceTd"><p style="text-align: left;"><span style="color:var(--ds-text,#172b4d);">When specified, the software loads the wire variation side file.</span></p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="read_spef-Examples">Examples</h4>
+<ul><li>The following command loads the SPEF file <code>TOPCHIP_SP.spef</code> for a flat chip methodology for RC corner, <code>corner1</code>: <br /><code>read_spef -rc_corner corner1 TOPCHIP_SP.spef</code></li></ul><ul><li>The following command loads multiple SPEF files for hierarchical SPEF stitching: <br /><code>read_spef -rc_corner corner1 { PTN/results_conv/results_conv.spef tdsp_core/</code><code>tdsp_core/tdsp_core.spef PTN/TOPCHIP_SP/TOPCHIP_SP.spef }</code></li></ul><ul><li>The following commands a) setup the appropriate scale factors for the corners <code>RCmax</code> and <code>RCmin</code> b) scale the SPEF read for the defined corners <code>RCmax</code> and <code>RCmin</code>: <br /><code>=== MMMC setup ====</code><br /><br /><code>create_rc_corner -name RCmax -postRoute_cap 1.4 -post_route_xcap 1.4 -</code><code>postRoute_res 1.4</code><br /><code>create_rc_corner -name RCmin -postRoute_cap 0.8 -post_route_xcap 0.8 -</code><code>postRoute_res 0.8</code><code><br /></code><code>...</code><br /><br /><code>=== run script===</code><code><br /></code><code>...</code><br /><br /><code>read_spef -rc_corner RCmax typSPEF.spef -scale_rc</code><code><br /></code><code>read_spef -rc_corner RCmin typSPEF.spef -scale_rc</code></li><li>The following command loads a SPEF file&#xa0;<code>pnta-spef.gz</code>&#xa0;that has RC fields from 5 RC corners:<br /><code>read_spef &#8211;rc_corner {rcCorner1 rcCorner2 rcCorner3 rcCorner4 rcCorner5} &#8211;spef_field {1 2 3 4 5} pnta-spef.gz</code>
+<p>The above command will be interpreted as follows:</p>
+
+<p><code>1st field in SPEF maps to RC corner rcCorner1&#xa0;</code><br /><code>2nd field in SPEF maps to RC corner rcCorner2</code><br /><code>3rd field in SPEF maps to RC corner rcCorner3&#xa0;</code><br /><code>4th field in SPEF maps to RC corner rcCorner4&#xa0;</code><br /><code>5th field in SPEF maps to RC corner rcCorner5</code></p>
+</li><li>The following command loads a SPEF file&#xa0;<code>pnta-spef.gz</code>&#xa0;that&#xa0;has RC fields from N RC corners:<br /><code>read_spef -rc_corner {rc_corner1 rc_corner2} -spef_field {2 5} pnta-spef.gz</code>
+<p>The above command will read SPEF data for 2 RC corners only and will be interpreted as follows:<br /><code>2nd field in SPEF maps to RC corner rc_corner1</code><br /><code>5th field in SPEF maps to RC corner rc_corner2</code></p>
+</li><li>The following command loads a SPEF file&#xa0;<code>pnta-spef.gz</code>&#xa0;that&#xa0;has RC fields from N RC corners:<br /><code>read_spef &#8211;rc_corner {rcCorner1 rcCorner2 rcCorner3} &#8211;spef_field {1 1 3} pnta-spef.gz</code>
+<p>The above command will read SPEF data for 3 RC corners only and will be interpreted as follows:<br /><code>1st field in SPEF maps to RC corner rcCorner1&#xa0;</code><br /><code>1st field in SPEF maps to RC corner rcCorner2 as well.&#xa0;</code><br /><code>3rd field in SPEF maps to RC corner rcCorner3</code></p>
+</li><li>The following command loads hierarchical design SPEF files. The software reads the top level multi-field SPEF file followed by the multi-field SPEF file from&#xa0;<code>block1</code>&#xa0;and&#xa0;<code>block2</code>:<br /><code>read_spef -rc_corner {rcCorner1 rcCorner2 rcCorner3 rcCorner4 rcCorner5} -spef_field {1 2 3 4 5} {top.spef.gz block1.spef.gz block2.spef.gz}</code></li></ul><h4 id="read_spef-RelatedCommands"><strong>Related Commands</strong><a href="../tempustxtcmdref/apply_spef_transform.html" rel="nofollow" style="font-family: monospace;">&#xa0;</a></h4>
+<ul><li><code><a href="create_rc_corner.html">create_rc_corner</a></code></li><li><code><a href="update_rc_corner.html">update_rc_corner</a></code></li><li><code><a href="report_annotated_parasitics.html">report_annotated_parasitics</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="read_sdf.html" id="prev" title="read_sdf">read_sdf</a></em></b><b><em><a href="read_timing_context.html" id="nex" title="read_timing_context">read_timing_context</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

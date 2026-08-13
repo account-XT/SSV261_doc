@@ -1,0 +1,169 @@
+
+<html><head><title>set_max_tran_per_freq</title>
+<meta name="page_sequence" content="19132000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287375" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_max_tran_per_freq" />
+<meta name="Keywords" content="max_transition,adds maximum transition per frequency table" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Timing Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287375" />
+<meta name="NextFile" content="set_multi_input_switching_mode.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_max_cap_per_freq.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- set_max_tran_per_freq" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="set_max_cap_per_freq.html" title="set_max_cap_per_freq">set_max_cap_per_freq</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_multi_input_switching_mode.html" title="set_multi_input_switching_mode">set_multi_input_switching_mode</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_max_tran_per_freq</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>
+    <code>set_max_tran_per_freq<span class="confluence-anchor-link" id="set_max_tran_per_freq-set_max_tran_per_freq"></span>
+      <span id="set_max_tran_per_freq-set_max_tran_per_freq"></span> <br />[-help]<br /></code>[-force]</code><br /><code> -freq &lt;<em>string</em>&gt;</code><br /><code> [-lib &lt;<em>string</em>&gt;]</code><br /><code> -pins &lt;<em>string</em>&gt;</code><br /><code> -tran &lt;<em>string</em>&gt;<code> </code> <br /></code></p>
+
+<p>Adds a maximum transition per frequency table to the existing <code>max_transition</code> statement in the timing library. Timing analysis uses this table to detect violations.</p>
+
+<p>The timing engine derives the frequency of an instance from the clock domain to which it is connected (the fastest clock domain, if there is more than one). If the instance is a clock instance (that is, part of the clock tree), the actual clock frequency is used. If the instance is part of the combinational logic (that is, a flip-flop, or the logic connected to the output of a flip-flop), the frequency used equals one-half of the associated clock domain frequency because a flip-flop output can only toggle at one-half the rate of the input clock. For example, a clock of 1.0 Mhz has 1,000,000 rise and fall transitions per second; however, the output of a flip-flop connected to a 1.0 Mhz clock can only have 500,000 rise and fall transitions per second.</p>
+
+<p>Timing analysis computes frequency directly from the toggle count format (TCF) file.</p>
+<h4 id="set_max_tran_per_freq-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="wrapped relative-table confluenceTable" style="width: 100.0%;"><colgroup><col style="width: 18.8293%;" /><col style="width: 81.111%;" /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-force</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Computes the maximum transition from the interpolated <code>-freq</code> and <code>-tran</code> values only and ignores any previously defined <code>max_transition</code> values for these pins in the library.</p>
+
+<p><em>Default:</em> Uses the worst case (minimum value) between the <code>.lib</code> <code>max_transition</code> values and the interpolated <code>-tran</code> values.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-freq&#xa0;&lt;<em>string</em>&gt;</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a list of at least two frequency values that must be greater than or equal to 0. You must specify the same number of <code>-freq</code> and <code>-tran</code> values, and the frequency values must be specified in ascending order.</p>
+
+<p><em>Type:</em> Float, specified in units of Hz</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-lib&#xa0;&lt;<em>string</em>&gt;</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Modifies only the matching cell-pins in the specified library.</p>
+
+<p><em>Default:</em> Modifies the matching cell-pins in all libraries.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-pins&#xa0;&lt;<em>string</em>&gt;</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Adds the new transition constraints to the specified set of cells and pins. You can specify input, output, or inout pins. The asterisk (<code>*</code>) wildcard character can be used in a cell or pin name. If a table associated with the pin already exists, it is replaced with the new table.</p>
+
+<p>For analysis and optimization, the software uses the most restrictive (the lowest transition) value from either the table or the <code>.lib</code> <code>max_transition</code>. If you also specify the -force parameter, the <code>max_transition</code> value is ignored. The final value can be further modified using <code>.sdc </code> <code>set_max_transition</code> statements.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-tran&#xa0;&lt;<em>string</em>&gt;&#xa0;</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a list of transition values that must be greater than or equal to 0. You must specify the same number of <code>-freq</code> and <code>-tran</code> values.</p>
+
+<p>The software derives the maximum transition limit from a linear interpolation (or extrapolation) for a given frequency value using two frequency values in the table. For interpolation, the software uses the closest value above the frequency and the closest value below the frequency. For extrapolation, the software uses the two closest values to the frequency.</p>
+
+<p><em>Type:</em> Float, specified in units of ns</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_max_tran_per_freq-CommandOrder">Command Order</h4>
+
+<p>Use this command any time after loading the timing library files (that is, after importing or restoring the design).</p>
+<h4 id="set_max_tran_per_freq-Examples">Examples</h4>
+
+<p>Assume all output pins of a library have a <code>max_transition</code> value of 0.9 ns from the library file.</p>
+<ul><li>The following command sets the frequency dependent <code>max_transition</code> to 1.0 ns at a frequency of 100 Mhz, and to 0.7 ns at a frequency of 200 Mhz, for pins matching <code>in*</code> of cells matching <code>*</code> (that is, all cells) in the library named <code>slow</code>: <br /><code>
+      <span>tempus&gt;</span>
+      <span>&#xa0;</span>set_max_tran_per_freq -lib slow -freq {100e6 200e6} -tran {1.0 0.7} -pins {* in*}</code> <br /><br />As a result, at 300 Mhz, an <code>and2</code> cell input pin named <code>in1</code> has an extrapolated <code>max_transition</code> value of 0.4ns. An extrapolation to 50 Mhz results in a <code>max_transition</code> value of 1.15 ns. However, the 1.15 ns value is greater than the existing <code>.lib</code> <code>max_transition</code> value of 0.9 ns; therefore, timing analysis uses the 0.9 value.</li></ul><ul><li>The following command applies the same constraints to all libraries with cell names matching <code>dff*</code> that have a pin named <code>clk</code>: <br /><code>
+      <span>tempus&gt;</span>
+      <span>&#xa0;</span>set_max_tran_per_freq -force -freq {100e6 200e6} -tran {1.0 0.7} -pins {dff* clk}</code> <br />
+<p><strong>Note: </strong>The original <code>.lib</code> <code>max_transition</code> value is ignored because the <code>-force</code> parameter is specified; therefore, an extrapolation to 50 Mhz results in a final <code>max_transition</code> limit of 1.15 ns.</p>
+</li></ul><h4 id="set_max_tran_per_freq-RelatedCommands">Related Commands</h4>
+<ul><li><code><span style="color:var(--ds-text,#000000);"><a href="set_max_cap_per_freq.html">set_max_cap_per_freq</a></span></code></li><li><code><a href="report_constraint.html">report_constraint</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_max_cap_per_freq.html" id="prev" title="set_max_cap_per_freq">set_max_cap_per_freq</a></em></b><b><em><a href="set_multi_input_switching_mode.html" id="nex" title="set_multi_input_switching_mode">set_multi_input_switching_mode</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

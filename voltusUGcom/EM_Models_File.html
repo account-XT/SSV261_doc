@@ -1,0 +1,566 @@
+
+<html><head><title>EM Models File</title>
+<meta name="page_sequence" content="41017000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666249" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="EM Models File" />
+<meta name="Keywords" content="EM,QRC,risk-based,limit-based" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Rail Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666249" />
+<meta name="NextFile" content="EM_Only_ICT_File.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Dynamic_Trigger_File_During_Rail_Analysis.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- EM Models File" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Dynamic_Trigger_File_During_Rail_Analysis.html" title="Dynamic_Trigger_File_During_Rail_Analysis">Dynamic_Trigger_File_During_Ra ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="EM_Only_ICT_File.html" title="EM_Only_ICT_File">EM_Only_ICT_File</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>EM Models File</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="EMModelsFile-46842"></span></p>
+
+<p>The EM Models file specifies the models needed for Electromigration analysis. If you do not not specify an Electromigration model file, the software will select Electromigration models from the QRC technology file.</p>
+
+<p>Sample file name: <code>em_models.txt</code></p>
+
+<p>Command:<code> set_rail_analyis_mode -em_models </code><span class="webflare-courier-new" style="white-space: pre;"><em>file </em></span>and<span class="webflare-courier-new" style="white-space: pre;"><em> </em></span><code>set_rail_analyis_mode -process_techgen_em_rules {true | false}</code></p>
+
+<p>Format:</p>
+
+<p><strong>Limit-based EM Model Syntax</strong></p>
+<pre><code>em_model {<br /><em># Width Independent parameters are not affected by width or area
+</em>[em_vcwidth &lt;value&gt;]
+[em_W_n &lt;value&gt;]
+[em_recover &lt;value&gt;]
+<em># Parameters applying specifically to narrow or wide wires
+</em>[em_jmax_ac_avg_n  &lt;value&gt;] 
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+[em_jmax_ac_avg_w  &lt;value&gt;] 
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+[em_jmax_ac_peak_n  &lt;value&gt;] 
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+[em_jmax_ac_peak_w  &lt;value&gt;] 
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+[em_jmax_ac_rms_n  &lt;value&gt;] 
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+[em_jmax_ac_rms_w  &lt;value&gt;] 
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+[em_jmax_ac_rec_n  &lt;value&gt;] 
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+[em_jmax_ac_rec_w  &lt;value&gt;] 
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+[em_jmax_dc_avg_n  &lt;value&gt;] 
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+[em_jmax_dc_avg_w  &lt;value&gt;] 
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+[em_jmax_dc_peak_n  &lt;value&gt;] 
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+[em_jmax_dc_peak_w  &lt;value&gt;] 
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+[em_jmax_dc_rms_n  &lt;value&gt;] 
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+[em_jmax_dc_rms_w  &lt;value&gt;] 
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+
+<em># Width dependent parameters for a conductor or diffusion layer
+</em>[em_jmax_ac_avg &lt;value&gt; | &lt;value_1&gt; &lt;width_1&gt; [...] | EQU &lt;fn(E)&gt; ]
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+ [jmax_lifetime &lt;lifetime1&gt; &lt;scale1&gt; [&lt;lifetime2&gt; &lt;scale2&gt;.....]
+ [via_range &lt;value&gt;]
+[em_jmax_ac_peak &lt;value&gt; | &lt;value_1&gt; &lt;width_1&gt; [...] | EQU &lt;fn(E)&gt; ]
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+ [jmax_lifetime &lt;lifetime1&gt; &lt;scale1&gt; [&lt;lifetime2&gt; &lt;scale2&gt;.....]
+ [via_range &lt;value&gt;]
+[em_jmax_ac_rms &lt;value&gt; | &lt;value_1&gt; &lt;width_1&gt; [...] | EQU &lt;fn(E)&gt; ]
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+ [jmax_lifetime &lt;lifetime1&gt; &lt;scale1&gt; [&lt;lifetime2&gt; &lt;scale2&gt;.....]
+ [via_range &lt;value&gt;]
+[em_jmax_ac_rec &lt;value&gt; | &lt;value_1&gt; &lt;width_1&gt; [...] | EQU &lt;fn(E)&gt; ]
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+ [jmax_lifetime &lt;lifetime1&gt; &lt;scale1&gt; [&lt;lifetime2&gt; &lt;scale2&gt;.....]
+ [via_range &lt;value&gt;]
+[em_jmax_dc_avg &lt;value&gt; | &lt;value_1&gt; &lt;width_1&gt; [...] | EQU &lt;fn(E)&gt; ]
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+ [jmax_lifetime &lt;lifetime1&gt; &lt;scale1&gt; [&lt;lifetime2&gt; &lt;scale2&gt;....]
+ [via_range &lt;value&gt;] [L  &lt; | &lt;= | &gt; | &gt;=   &lt;value in microns&gt;]
+ [W &lt; | &lt;= | &gt; | &gt;=   &lt;value in microns&gt;]
+[em_jmax_dc_peak &lt;value&gt; | &lt;value_1&gt; &lt;width_1&gt; [...] | EQU &lt;fn(E)&gt; ]
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+ [jmax_lifetime &lt;lifetime1&gt; &lt;scale1&gt; [&lt;lifetime2&gt; &lt;scale2&gt;.....]
+ [via_range &lt;value&gt;] [L  &lt; | &lt;= | &gt; | &gt;=   &lt;value in microns&gt;]
+     [W &lt; | &lt;= | &gt; | &gt;=   &lt;value in microns&gt;]
+[em_jmax_dc_rms &lt;value&gt; | &lt;value_1&gt; &lt;width_1&gt; [...] | EQU &lt;fn(E)&gt; ]
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+ [jmax_lifetime &lt;lifetime1&gt; &lt;scale1&gt; [&lt;lifetime2&gt; &lt;scale2&gt;....]
+ [via_range &lt;value&gt;] [L  &lt; | &lt;= | &gt; | &gt;=   &lt;value in microns&gt;]
+     [W &lt; | &lt;= | &gt; | &gt;=   &lt;value in microns&gt;]
+
+<em># Area dependent parameters for a via layer</em>
+[em_jmax_ac_avg &lt;value&gt; | &lt;value_1&gt; &lt;area_1&gt; [...] | EQU &lt;fn(E)&gt;]  
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+ [jmax_lifetime &lt;lifetime1&gt; &lt;scale1&gt; [&lt;lifetime2&gt; &lt;scale2&gt;.....]
+ [current_direction up|down|both] [via_range &lt;value&gt;]
+[em_jmax_ac_peak &lt;value&gt; | &lt;value_1&gt; &lt;area_1&gt; [...] | EQU &lt;fn(E)&gt;]  
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+ [jmax_lifetime &lt;lifetime1&gt; &lt;scale1&gt; [&lt;lifetime2&gt; &lt;scale2&gt;.....]
+ [current_direction up|down|both] [via_range &lt;value&gt;]
+[em_jmax_ac_rms &lt;value&gt; | &lt;value_1&gt; &lt;area_1&gt; [...] | EQU &lt;fn(E)&gt;]  
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+ [jmax_lifetime &lt;lifetime1&gt; &lt;scale1&gt; [&lt;lifetime2&gt; &lt;scale2&gt;.....]
+ [current_direction up|down|both] [via_range &lt;value&gt;]
+[em_jmax_ac_rec &lt;value&gt; | &lt;value_1&gt; &lt;area_1&gt; [...] | EQU &lt;fn(E)&gt;]  
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+ [jmax_lifetime &lt;lifetime1&gt; &lt;scale1&gt; [&lt;lifetime2&gt; &lt;scale2&gt;.....]
+ [current_direction up|down|both] [via_range &lt;value&gt;]
+[em_jmax_dc_avg &lt;value&gt; | &lt;value_1&gt; &lt;area_1&gt; [...] | EQU &lt;fn(E)&gt;]  
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+ [jmax_lifetime &lt;lifetime1&gt; &lt;scale1&gt; [&lt;lifetime2&gt; &lt;scale2&gt;....]
+ [current_direction up|down|both] [via_range &lt;value&gt;]
+ [L  &lt; | &lt;= | &gt; | &gt;=   &lt;value in microns&gt;]
+     [W &lt; | &lt;= | &gt; | &gt;=   &lt;value in microns&gt;]
+[em_jmax_dc_peak &lt;value&gt; | &lt;value_1&gt; &lt;area_1&gt; [...] | EQU &lt;fn(E)&gt;]  
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+ [jmax_lifetime &lt;lifetime1&gt; &lt;scale1&gt; [&lt;lifetime2&gt; &lt;scale2&gt;....]
+ [current_direction up|down|both] [via_range &lt;value&gt;]
+ [L  &lt; | &lt;= | &gt; | &gt;=   &lt;value in microns&gt;]
+     [W &lt; | &lt;= | &gt; | &gt;=   &lt;value in microns&gt;]
+[em_jmax_dc_rms &lt;value&gt; | &lt;value_1&gt; &lt;area_1&gt; [...] | EQU &lt;fn(E)&gt;]  
+ [jmax_factor &lt;temp1&gt; &lt;scale1&gt; [&lt;temp2&gt; &lt;scale2&gt; ...]]
+ [jmax_lifetime &lt;lifetime1&gt; &lt;scale1&gt; [&lt;lifetime2&gt; &lt;scale2&gt;.......]
+ [current_direction up|down|both] [via_range &lt;value&gt;]
+ [L  &lt; | &lt;= | &gt; | &gt;=   &lt;value in microns&gt;]
+     [W &lt; | &lt;= | &gt; | &gt;=   &lt;value in microns&gt;] 
+}</code></pre>
+<p><strong>Risk-based EM Model Syntax</strong></p>
+
+<p>em_model {<br /><em> # Width Independent parameters are not affected by width </em> [em_vcwidth &lt;value&gt;] [em_W_n &lt;value&gt;] [em_m &lt;value&gt;] [em_n &lt;value&gt;] [em_sigma &lt;value&gt;] <em> # Parameters applying specifically to narrow or wide wires </em> [em_A_n&#xa0;&#xa0;&lt;value&gt;]<br />[em_A_w &lt;value&gt;]<br />[em_Ea_n &lt;value&gt;]<br />[em_Ea_w &lt;value&gt;]<br /><em> # Width/Area PWL parameters </em> [em_A &lt;value&gt;] [em_Ea &lt;value&gt;] }</p>
+
+<p><strong>Parameters for both Risk-based and Limit-based Analysis</strong></p>
+
+<p><br /></p>
+<div class="table-wrap"><table class="webflareTable wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_vcwidth</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Optional parameter for <code>Via</code> layers that defines the width of a standard via in microns. The analysis tool assumes that the via is square, so it squares a side to obtain the area. Do not specify this parameter for conductor or diffusion layers. If PWL value/area pairs or an equation is defined then vcwidth is not required to calculate current density limits and it is ignored.</p>
+
+<p><strong>Default: </strong>0 for metal layers and 0.5 for cut layers<br /><strong>Range:</strong> Any integer or floating point number</p>
+
+<p><code>vcwidth</code> is specified as microns instead of meters to be consistent with the rest of the ICT file.</p>
+
+<p><br /></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_W_n</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Optional parameter that specifies the wire width in microns below which a line is considered narrow. <strong>Note:</strong> all lines are considered wide unless you specify otherwise using this parameter. <br /><strong>Default:</strong> 0<br /><strong>Range: </strong>Any integer or floating point number.</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><strong>Parameters for Risk-based Analysis</strong></p>
+
+<p><br /></p>
+<div class="table-wrap"><table class="webflareTable wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_A</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Optional parameter that specifies the value of A when current densities are defined in PWL format. Its unit is specified as: <br />A<sup>2</sup>h/kcm<sup>4</sup>.</p>
+
+<p><strong>Default: </strong>700<br /><strong>Range: </strong>A positive integer or floating point number</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_A_n</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the value of A to use for narrow lines. Its unit is specified as: A<sup>2</sup>h/kcm<sup>4</sup>.</p>
+
+<p><strong>Default: </strong>700<br /><strong>Range: </strong>A positive integer or floating point number</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_A_w</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the value of A to use for wide lines. Its unit is specified as: A<sup>2</sup>h/kcm<sup>4</sup>.</p>
+
+<p><strong>Default: </strong>45000<br /><strong>Range: </strong>A positive integer or floating point number</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><br /></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_Ea</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Optional parameter that specifies the activation energy value to use for PWL linear interpolation. Its unit is in electron volts.</p>
+
+<p><strong>Default: </strong>0.8 ev<br /><strong>Range: </strong>A positive integer or floating point number</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_Ea_n</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the activation energy value to use for narrow lines. Its unit is specified in electron volts.</p>
+
+<p><strong>Default: </strong>0.8 ev<br /><strong>Range: </strong>A positive integer or floating point number</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_Ea_w</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Specifies the activation energy value to use for wide lines. Its unit is specified in electron volts.</p>
+
+<p><strong>Default: </strong>0.6 ev<br /><strong>Range: </strong>A positive integer or floating point number</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_m</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Optional parameter that specifies the temperature coefficient used by Black&#8217;s equation for electromigration risk assessment.</p>
+
+<p><strong>Default: </strong>1<br /><strong>Range: </strong>A positive integer or floating point number</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_n</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Optional parameter that specifies the current exponent used by Black&#8217;s equation for electromigration risk assessment.</p>
+
+<p><strong>Default: </strong>2.0 for metal layers; 1.0 for Via layers<br /><strong>Range: </strong>A positive integer or floating point number</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_sigma</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Optional parameter that specifies the value to be used in the lognormal failure rate model for predicting the lifetime of a circuit.</p>
+
+<p><strong>Default:</strong> 0.7<br /><strong>Range: </strong>A positive integer or floating point number</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><strong>Parameters for Limit-based Analysis:</strong></p>
+
+<p><br /></p>
+<div class="table-wrap"><table class="webflareTable wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_jmax_ac_avg</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Optional parameter that specifies the maximum AC average current density which can either be defined as a single value, a PWL table, or an equation (<code>EQU</code>).</p>
+
+<p>For a conductor or diffusion layer the PWL table is defined as the current density limit value based on the wire width. For via layers it is defined as the current density limit value based on the via area.</p>
+
+<p><strong>Default: </strong>None</p>
+
+<p><strong>Range: </strong>A positive integer or floating point number, a PWL table, or an equation (<code>EQU</code>). The value should be specified before any qualifiers (<code>jmax_factor</code>, <code>current_direction</code>, and <code>via_range</code>). The qualifiers themselves are not order dependent and may be specified as needed.</p>
+
+<p><br /></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_jmax_ac_avg_n</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>This optional parameter is essentially the same as <code>em_jmax_ac_avg</code>, with the exception that it is specified for narrow wires (as defined by <code>em_W_n</code>). In addition, this parameter only accepts a single value, not a PWL table or an equation (EQU).</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_jmax_ac_avg_w</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>This optional parameter is essentially the same as <code>em_jmax_ac_avg</code>, with the exception that it is specified for wide wires (as defined by <code>em_W_n</code>). In addition, this parameter only accepts a single value, not a PWL table or an equation (EQU).</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_jmax_ac_peak</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Optional parameter that specifies the maximum AC peak current density which can either be defined as a single value, a PWL table, or an equation (<code>EQU</code>).</p>
+
+<p>For a conductor or diffusion layer the PWL table is defined as the current density limit value based on the wire width. For via layers it is defined as the current density limit value based on the via area.</p>
+
+<p><strong>Default: </strong>None</p>
+
+<p><strong>Range: </strong>A positive integer or floating point number, a PWL table, or an equation (<code>EQU</code>). The value should be specified before any qualifiers (<code>jmax_factor</code>, <code>current_direction</code>, and <code>via_range</code>). The qualifiers themselves are not order dependent and may be specified as needed.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_jmax_ac_peak_n</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>This optional parameter is essentially the same as <code>em_jmax_ac_peak</code>, with the exception that it is specified for narrow wires (as defined by <code>em_W_n</code>). In addition, this parameter only accepts a single value, not a PWL table or an equation (EQU).</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_jmax_ac_peak_w</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>This optional parameter is essentially the same as <code>em_jmax_ac_peak</code>, with the exception that it is specified for wide wires (as defined by <code>em_W_n</code>). In addition, this parameter only accepts a single value, not a PWL table or an equation (EQU).</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_jmax_ac_rms</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Optional parameter that specifies the maximum AC RMS current density which can either be defined as a single value, a PWL table, or an equation (<code>EQU</code>).</p>
+
+<p>For a conductor or diffusion layer the PWL table is defined as the current density limit value based on the wire width. For via layers it is defined as the current density limit value based on the via area.</p>
+
+<p><strong>Default: </strong>None</p>
+
+<p><strong>Range: </strong>A positive integer or floating point number, a PWL table, or an equation (<code>EQU</code>). The value should be specified before any qualifiers (<code>jmax_factor</code>, <code>current_direction</code>, and <code>via_range</code>). The qualifiers themselves are not order dependent and may be specified as needed.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_jmax_ac_rms_n</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>This optional parameter is essentially the same as <code>em_jmax_ac_rms</code>, with the exception that it is specified for narrow wires (as defined by <code>em_W_n</code>). In addition, this parameter only accepts a single value, not a PWL table or an equation (EQU).</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_jmax_ac_rms_w</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>This optional parameter is essentially the same as <code>em_jmax_ac_rms</code>, with the exception that it is specified for wide wires (as defined by <code>em_W_n</code>). In addition, this parameter only accepts a single value, not a PWL table or an equation (EQU).</p>
+
+<p><br /></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_jmax_ac_rec</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Optional parameter that specifies the maximum recovery AC current density which can either be defined as a single value, a PWL table, or an equation (<code>EQU</code>).</p>
+
+<p>For a conductor or diffusion layer the PWL table is defined as the current density limit value based on the wire width. For via layers it is defined as the current density limit value based on the via area.</p>
+
+<p><strong>Default: </strong>None</p>
+
+<p><strong>Range: </strong>A positive integer or floating point number, a PWL table, or an equation (<code>EQU</code>). The value should be specified before any qualifiers (<code>jmax_factor</code>, <code>current_direction</code>, and <code>via_range</code>). The qualifiers themselves are not order dependent and may be specified as needed.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_jmax_ac_rec_n</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>This optional parameter is essentially the same as <code>em_jmax_ac_rec</code>, with the exception that it is specified for narrow wires (as defined by <code>em_W_n</code>). In addition, this parameter only accepts a single value, not a PWL table or an equation (EQU).</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_jmax_ac_rec_w</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>This optional parameter is essentially the same as <code>em_jmax_ac_rec</code>, with the exception that it is specified for wide wires (as defined by <code>em_W_n</code>). In addition, this parameter only accepts a single value, not a PWL table or an equation (EQU).</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_jmax_dc_avg</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Optional parameter that specifies the maximum DC average current density which can either be defined as a single value, a PWL table, or an equation (<code>EQU</code>).</p>
+
+<p>For a conductor or diffusion layer the PWL table is defined as the current density limit value based on the wire width. For via layers it is defined as the current density limit value based on the via area.</p>
+
+<p><strong>Default: </strong>1.0e+5 A/cm<sup>2</sup> for conductor layers, 0.001A/via for via layers.</p>
+
+<p><strong>Range: </strong>A positive integer or floating point number, a PWL table, or an equation (<code>EQU</code>). The value should be specified before any qualifiers (<code>jmax_factor</code>, <code>current_direction</code>, and <code>via_range</code>). The qualifiers themselves are not order dependent and may be specified as needed.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_jmax_dc_avg_n</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>This optional parameter is essentially the same as <code>em_jmax_dc_avg</code>, with the exception that it is specified for narrow wires (as defined by <code>em_W_n</code>). In addition, this parameter only accepts a single value, not a PWL table or an equation (EQU).</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_jmax_dc_avg_w</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>This optional parameter is essentially the same as <code>em_jmax_dc_avg</code>, with the exception that it is specified for wide wires (as defined by <code>em_W_n</code>). In addition, this parameter only accepts a single value, not a PWL table or an equation (EQU).</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_jmax_dc_peak</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>em_jmax_dc_peak is the maximum DC peak current density which can either be defined as a single value, a PWL table, or an equation (<code>EQU</code>).</p>
+
+<p>For a conductor or diffusion layer the PWL table is defined as the current density limit value based on the wire width. For via layers it is defined as the current density limit value based on the via area.</p>
+
+<p><strong>Default: </strong>1.0e+7 A/cm<sup>2</sup> for conductor layers, 0.001A/via for via layers.</p>
+
+<p><strong>Range: </strong>A positive integer or floating point number, a PWL table, or an equation (<code>EQU</code>). The value should be specified before any qualifiers (<code>jmax_factor</code>, <code>current_direction</code>, and <code>via_range</code>). The qualifiers themselves are not order dependent and may be specified as needed.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_jmax_dc_peak_n</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>This optional parameter is essentially the same as <code>em_jmax_dc_peak</code>, with the exception that it is specified for narrow wires (as defined by <code>em_W_n</code>). In addition, this parameter only accepts a single value, not a PWL table or an equation (EQU).</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_jmax_dc_peak_w</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>This optional parameter is essentially the same as <code>em_jmax_dc_peak</code>, with the exception that it is specified for wide wires (as defined by <code>em_W_n</code>). In addition, this parameter only accepts a single value, not a PWL table or an equation (EQU).</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_jmax_dc_rms</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>em_jmax_dc_rms is the maximum DC RMS current density which can either be defined as a single value, a PWL table, or an equation (<code>EQU</code>).</p>
+
+<p>For a conductor or diffusion layer the PWL table is defined as the current density limit value based on the wire width. For via layers it is defined as the current density limit value based on the via area.</p>
+
+<p><strong>Default: </strong>1.0e+6 A/cm<sup>2</sup> for conductor layers, 0.001A/via for via layers.</p>
+
+<p><strong>Range: </strong>A positive integer or floating point number, a PWL table, or an equation (<code>EQU</code>). The value should be specified before any qualifiers (<code>jmax_factor</code>, <code>current_direction</code>, and <code>via_range</code>). The qualifiers themselves are not order dependent and may be specified as needed.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_jmax_dc_rms_n</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>This optional parameter is essentially the same as <code>em_jmax_dc_rms</code>, with the exception that it is specified for narrow wires (as defined by <code>em_W_n</code>). In addition, this parameter only accepts a single value, not a PWL table or an equation (EQU).</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_jmax_dc_rms_w</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>This optional parameter is essentially the same as <code>em_jmax_dc_rms</code>, with the exception that it is specified for wide wires (as defined by <code>em_W_n</code>). In addition, this parameter only accepts a single value, not a PWL table or an equation (EQU).</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>em_recover</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Optional parameter that specifies the recovery factor used for calculating the average current density with recovery. You can set the recovery factor to -1.0 when you want to account for the average of the absolute current (avg(abs(current))) so that the negative current does not cancel the positive current values in arriving at the average current result.</p>
+
+<p><strong>Default: </strong>1</p>
+
+<p><strong> Range: </strong>A positive integer or floating point number</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p>Example:</p>
+<pre><code>
+# Jmax Calculation: e.g. METAL_1<br /></code><code># Imax = 0.36*2.6*(w-0.02)<br /></code><code># For w= 0.12u, Imax = 0.36*2.0*(mA/u)*(0.1u) = 0.09mA&#xa0; <br /></code><code># Here (0.36*2.6) multiplying factor is the current density limit J.<br /></code><code># Now, Jmax = Imax/(Thickness*width) = 0.09 e-3 (Amp)/(0.24e-4*0.12e-4) (cm^2) = 0.3e+5 A/cm^2 <br /></code><code># Thickness for the layer can be found in icecaps.ict file.<br /></code><code># For different width, you can generate the PWL limits and the software will<br /></code><code># interpolate between these values based on width of the resistor.</code></pre><pre><code># e.g. <br /></code><code># model METAL_1 jmax_dc_avg&#xa0;&#xa0;=&#xa0;&#xa0; &quot;0.25e+5 0.1e-6 0.3e+5 0.12e-6 0.38e+5 0.14e-6 1.25e+5 0.16e-6 1.61e+5 0.2e-6 2.51e+5 0.3e-6 5.21e+5 .6e-6 8.81e+5 1e-6 35.8e+5 4e-6&quot;;&#xa0;&#xa0;#[A/cm^2]&#xa0;&#xa0;pwl limits according to widths.<br /></code><code># Where first value is calculated Jmax and second is width. &quot;Jmax width1 Jmax width2 Jmax width3....</code></pre><pre><code>## METAL_8<br /></code><code>model METAL_8 TREF&#xa0;&#xa0;         =   110 <br /></code><code>model METAL_8 Tc1&#xa0;&#xa0;          =   0.0000<br /></code><code>model METAL_8 Tc2&#xa0;&#xa0;          =   0.0000<br /></code><code>model METAL_8 thickness&#xa0;&#xa0;    =   0.7744e-06; #Meters<br /></code><code>model METAL_8 jmax_dc_avg&#xa0;&#xa0;=&#xa0;&#xa0; &quot;0.74e+5 0.1e-6 0.93e+5 0.12e-6 1.11e+5 0.14e-6 1.3e+5 0.16e-6 1.67e+5 0.2e-6 2.6e+5 0.3e-6 3.72e+5 .42e-6 5.39e+5 0.6e-6 9.11e+5 1e-6 37e+5 4e-6&quot;;&#xa0;&#xa0;#[A/cm^2]&#xa0;&#xa0;pwl limits according to widths. <br /></code><code>#model METAL_8 jmax_dc_peak&#xa0;&#xa0;=&#xa0;&#xa0; 4.950e+05;&#xa0;&#xa0;#[A/cm^2]</code></pre><pre><code>## VIA_7<br /></code><code>model VIA_7 TREF&#xa0;&#xa0;&#xa0;&#xa0;   =   110<br /></code><code>model VIA_7 Tc1&#xa0;&#xa0;          =   0.0000<br /></code><code>model VIA_7 Tc2&#xa0;&#xa0;          =   0.0000<br /></code><code>model VIA_7 vcwidth&#xa0;&#xa0;      =   0.36e-06;  #Meters<br /></code><code>model VIA_7 jmax_dc_avg_w&#xa0;&#xa0;=&#xa0;&#xa0; 1.452e-03;&#xa0;&#xa0;#[A/Via] <br /></code><code>#model VIA_7 jmax_dc_peak&#xa0;&#xa0;=&#xa0;&#xa0; 0.713e-03;&#xa0;&#xa0;#[A] </code></pre><pre><code>## METAL_7<br /></code><code>model METAL_7 TREF&#xa0;&#xa0;         =   110 <br /></code><code>model METAL_7 Tc1&#xa0;&#xa0;          =   0.0000<br /></code><code>model METAL_7 Tc2&#xa0;&#xa0;          =   0.0000<br /></code><code>model METAL_7 thickness&#xa0;&#xa0;    =   0.2986e-06; #Meters<br /></code><code>model METAL_7 jmax_dc_avg&#xa0;&#xa0;=&#xa0;&#xa0; &quot;0.69e+5 0.1e-6 0.87e+5 0.12e-6 1.04e+5 0.14e-6 1.21e+5 0.16e-6 1.56e+5 0.2e-6 2.43e+5 0.3e-6 5.05e+5 .6e-6 8.53e+5 1e-6 34.65e+5 4e-6&quot;;&#xa0;&#xa0;#[A/cm^2]&#xa0;&#xa0;pwl limits according to widths. <br /></code><code>#model METAL_7 jmax_dc_peak&#xa0;&#xa0;=&#xa0;&#xa0; 4.950e+05;&#xa0;&#xa0;#[A/cm^2]<br /><br /></code><code>## VIA_6<br /></code><code>model VIA_6 TREF&#xa0;&#xa0;&#xa0;&#xa0;   =   110<br /></code><code>model VIA_6 Tc1&#xa0;&#xa0;          =   0.0000<br /></code><code>model VIA_6 Tc2&#xa0;&#xa0;          =   0.0000<br /></code><code>model VIA_6 vcwidth&#xa0;&#xa0;      =   0.13e-06;  #Meters<br /></code><code>model VIA_6 jmax_dc_avg_w&#xa0;&#xa0;=&#xa0;&#xa0; 0.189e-03;&#xa0;&#xa0;#[A/Via] <br /></code><code>#model VIA_6 jmax_dc_peak&#xa0;&#xa0;=&#xa0;&#xa0; 0.713e-03;&#xa0;&#xa0;#[A] </code></pre><pre><code><br /></code><code>## METAL_8<br /></code><code>model METAL_8 TREF&#xa0;&#xa0;         =   110 <br /></code><code>model METAL_8 Tc1&#xa0;&#xa0;          =   0.0000<br /></code><code>model METAL_8 Tc2&#xa0;&#xa0;          =   0.0000<br /></code><code>model METAL_8 thickness&#xa0;&#xa0;    =   0.7744e-06; #Meters<br /></code><code>model METAL_8 jmax_dc_avg&#xa0;&#xa0;=&#xa0;&#xa0; &quot;0.74e+5 0.1e-6 0.93e+5 0.12e-6 1.11e+5 0.14e-6 1.3e+5 0.16e-6 1.67e+5 0.2e-6 2.6e+5 0.3e-6 3.72e+5 .42e-6 5.39e+5 0.6e-6 9.11e+5 1e-6 37e+5 4e-6&quot;;&#xa0;&#xa0;#[A/cm^2]&#xa0;&#xa0;pwl limits according to widths. <br /></code><code>#model METAL_8 jmax_dc_peak&#xa0;&#xa0;=&#xa0;&#xa0; 4.950e+05;&#xa0;&#xa0;#[A/cm^2]</code></pre><pre><code>## VIA_7</code></pre><pre><code>model VIA_7 TREF&#xa0;&#xa0;&#xa0;&#xa0;   =   110<br /></code><code>model VIA_7 Tc1&#xa0;&#xa0;          =   0.0000<br /></code><code>model VIA_7 Tc2&#xa0;&#xa0;          =   0.0000<br /></code><code>model VIA_7 vcwidth&#xa0;&#xa0;      =   0.36e-06;  #Meters<br /></code><code>model VIA_7 jmax_dc_avg_w&#xa0;&#xa0;=&#xa0;&#xa0; 1.452e-03;&#xa0;&#xa0;#[A/Via] <br /></code><code>#model VIA_7 jmax_dc_peak&#xa0;&#xa0;=&#xa0;&#xa0; 0.713e-03;&#xa0;&#xa0;#[A] </code></pre><pre><code>## METAL_7<br /></code><code>model METAL_7 TREF&#xa0;&#xa0;         =   110 <br /></code><code>model METAL_7 Tc1&#xa0;&#xa0;          =   0.0000<br /></code><code>model METAL_7 Tc2&#xa0;&#xa0;          =   0.0000<br /></code><code>model METAL_7 thickness&#xa0;&#xa0;    =   0.2986e-06; #Meters<br /></code><code>model METAL_7 jmax_dc_avg&#xa0;&#xa0;=&#xa0;&#xa0; &quot;0.69e+5 0.1e-6 0.87e+5 0.12e-6 1.04e+5 0.14e-6 1.21e+5 0.16e-6 1.56e+5 0.2e-6 2.43e+5 0.3e-6 5.05e+5 .6e-6 8.53e+5 1e-6 34.65e+5 4e-6&quot;;&#xa0;&#xa0;#[A/cm^2]&#xa0;&#xa0;pwl limits according to widths. <br /></code><code>#model METAL_7 jmax_dc_peak&#xa0;&#xa0;=&#xa0;&#xa0; 4.950e+05;&#xa0;&#xa0;#[A/cm^2]</code></pre><pre><code>## VIA_6<br /></code><code>model VIA_6 TREF&#xa0;&#xa0;&#xa0;&#xa0;   =   110<br /></code><code>model VIA_6 Tc1&#xa0;&#xa0;          =   0.0000<br /></code><code>model VIA_6 Tc2&#xa0;&#xa0;          =   0.0000<br /></code><code>model VIA_6 vcwidth&#xa0;&#xa0;      =   0.13e-06;  #Meters<br /></code><code>model VIA_6 jmax_dc_avg_w&#xa0;&#xa0;=&#xa0;&#xa0; 0.189e-03;&#xa0;&#xa0;#[A/Via] <br /></code><code>#model VIA_6 jmax_dc_peak&#xa0;&#xa0;=&#xa0;&#xa0; 0.713e-03;&#xa0;&#xa0;#[A] </code></pre><pre><code>## VIA_3<br /></code><code>model VIA_3 TREF&#xa0;&#xa0;&#xa0;&#xa0;   =   110<br /></code><code>model VIA_3 Tc1&#xa0;&#xa0;          =   0.0000<br /></code><code>model VIA_3 Tc2&#xa0;&#xa0;          =   0.0000<br /></code><code>model VIA_3 vcwidth&#xa0;&#xa0;      =   0.13e-06;  #Meters<br /></code><code>model VIA_3 jmax_dc_avg_w&#xa0;&#xa0;=&#xa0;&#xa0; 0.189e-03;&#xa0;&#xa0;#[A/Via] <br /></code><code>#model VIA_3 jmax_dc_peak&#xa0;&#xa0;=&#xa0;&#xa0; 0.713e-03;&#xa0;&#xa0;#[A] </code></pre><pre><code>## METAL_3<br /></code><code>model METAL_3 TREF&#xa0;&#xa0;         =   110 <br /></code><code>model METAL_3 Tc1&#xa0;&#xa0;          =   0.0000<br /></code><code>model METAL_3 Tc2&#xa0;&#xa0;          =   0.0000<br /></code><code>model METAL_3 thickness&#xa0;&#xa0;    =   0.2986e-06; #Meters<br /></code><code>model METAL_3 jmax_dc_avg&#xa0;&#xa0;=&#xa0;&#xa0; &quot;0.69e+5 0.1e-6 0.87e+5 0.12e-6 1.04e+5 0.14e-6 1.21e+5 0.16e-6 1.56e+5 0.2e-6 2.43e+5 0.3e-6 5.05e+5 .6e-6 8.53e+5 1e-6 34.65e+5 4e-6&quot;;&#xa0;&#xa0;#[A/cm^2]&#xa0;&#xa0;pwl limits according to widths. <br /></code><code>#model METAL_3 jmax_dc_peak&#xa0;&#xa0;=&#xa0;&#xa0; 4.950e+05;&#xa0;&#xa0;#[A/cm^2]</code></pre><pre><code>## VIA_2<br /></code><code>model VIA_2 TREF&#xa0;&#xa0;&#xa0;&#xa0;   =   110<br /></code><code>model VIA_2 Tc1&#xa0;&#xa0;          =   0.0000<br /></code><code>model VIA_2 Tc2&#xa0;&#xa0;          =   0.0000<br /></code><code>model VIA_2 vcwidth&#xa0;&#xa0;      =   0.13e-06;  #Meters<br /></code><code>model VIA_2 jmax_dc_avg_w&#xa0;&#xa0;=&#xa0;&#xa0; 0.189e-03;&#xa0;&#xa0;#[A/Via] <br /></code><code>#model VIA_2 jmax_dc_peak&#xa0;&#xa0;=&#xa0;&#xa0; 0.713e-03;&#xa0;&#xa0;#[A] </code></pre><pre><code>## METAL_2<br /></code><code>model METAL_2 TREF&#xa0;&#xa0;         =   110 <br /></code><code>model METAL_2 Tc1&#xa0;&#xa0;          =   0.0000<br /></code><code>model METAL_2 Tc2&#xa0;&#xa0;          =   0.0000</code><code>
+model METAL_2 thickness&#xa0;&#xa0;    =   0.2986e-06; #Meters</code><code>
+model METAL_2 jmax_dc_avg&#xa0;&#xa0;=&#xa0;&#xa0; &quot;0.69e+5 0.1e-6 0.87e+5 0.12e-6 1.04e+5 0.14e-6 1.21e+5 0.16e-6 1.56e+5 0.2e-6 2.43e+5 0.3e-6 5.05e+5 .6e-6 8.53e+5 1e-6 34.65e+5 4e-6&quot;;&#xa0;&#xa0;#[A/cm^2]&#xa0;&#xa0;pwl limits according to widths. </code><code>
+#model METAL_2 jmax_dc_peak&#xa0;&#xa0;=&#xa0;&#xa0; 4.950e+05;&#xa0;&#xa0;#[A/cm^2]<br /></code><code>
+## VIA_1</code><code>
+model VIA_1 TREF&#xa0;&#xa0;&#xa0;&#xa0;   =   110</code><code>
+model VIA_1 Tc1&#xa0;&#xa0;          =   0.0000</code><code>
+model VIA_1 Tc2&#xa0;&#xa0;          =   0.0000</code></pre><pre><code>
+# vcwidth is the default via width.</code><code>
+model VIA_1 vcwidth&#xa0;&#xa0;      =   0.13e-06;  #Meters</code><code>
+model VIA_1 jmax_dc_avg_w&#xa0;&#xa0;=&#xa0;&#xa0; 0.189e-3;&#xa0;&#xa0;#[A/Via] </code><code>
+#model VIA_1 jmax_dc_peak&#xa0;&#xa0;=&#xa0;&#xa0; 0.713e-03;&#xa0;&#xa0;#[A] <br /></code><code>
+## METAL_1</code><code>
+model METAL_1 TREF&#xa0;&#xa0;         =   110 </code><code>
+model METAL_1 Tc1&#xa0;&#xa0;          =   0.0000</code><code>
+model METAL_1 Tc2&#xa0;&#xa0;          =   0.0000</code><code>
+model METAL_1 thickness&#xa0;&#xa0;    =   0.24e-06; #Meters</code><code>
+model METAL_1 jmax_dc_avg&#xa0;&#xa0;=&#xa0;&#xa0; &quot;0.25e+5 0.1e-6 0.3e+5 0.12e-6 0.38e+5 0.14e-6 0.42e+5 0.16e-6 0.54e+5 0.2e-6 0.83e+5 0.3e-6 1.75e+5 0.6e-6 2.96e+5 1e-6 11.96e+5 4e-6&quot;;&#xa0;&#xa0;#[A/cm^2]&#xa0;&#xa0;pwl limits according to widths. </code><code>
+#model METAL_1 jmax_dc_peak&#xa0;&#xa0;=&#xa0;&#xa0; 4.950e+05;&#xa0;&#xa0;#[A/cm^2]<br /></code><code>
+# CONT</code><code>
+model CONT TREF&#xa0;&#xa0;&#xa0;&#xa0;   =   110</code><code>
+model CONT Tc1&#xa0;&#xa0;          =   0.0000</code><code>
+model CONT Tc2&#xa0;&#xa0;          =   0.0000</code><code>
+model CONT vcwidth&#xa0;&#xa0;      =   0.12e-06;  #Meters</code><code>
+model CONT jmax_dc_avg_w&#xa0;&#xa0;=&#xa0;&#xa0; 0.294e-3;&#xa0;&#xa0;#[A/Cont] </code><code>
+#model CONT jmax_dc_peak&#xa0;&#xa0;=&#xa0;&#xa0; 0.713e-03;&#xa0;&#xa0;#[A] </code></pre><h4 id="EMModelsFile-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="EM_Only_ICT_File.html">EM Only ICT File</a></li><li><a href="Dynamic_Trigger_File_During_Rail_Analysis.html">Dynamic Trigger File During Rail Analysis</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Dynamic_Trigger_File_During_Rail_Analysis.html" id="prev" title="Dynamic_Trigger_File_During_Rail_Analysis">Dynamic_Trigger_File_During_Ra ...</a></em></b><b><em><a href="EM_Only_ICT_File.html" id="nex" title="EM_Only_ICT_File">EM_Only_ICT_File</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

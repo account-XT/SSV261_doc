@@ -1,0 +1,374 @@
+
+<html><head><title>check_power_vias</title>
+<meta name="page_sequence" content="15004000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666114" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="check_power_vias" />
+<meta name="Keywords" content="power rail overlap checks, missing power grid vias, check orthogonal power routes, adjacent routing layers, horizontal routes, vertical routes" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Verify," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusTCRcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666114" />
+<meta name="NextFile" content="create_marker.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="check_pg_shorts.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Text Reference Manual  -- check_power_vias" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltuscuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusTCRcomTOC.html">Contents</a></li><li><a class="prev" href="check_pg_shorts.html" title="check_pg_shorts">check_pg_shorts</a></li><li style="float: right;"><a class="viewPrint" href="voltusTCRcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="create_marker.html" title="create_marker">create_marker</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Text Reference Manual <br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>check_power_vias</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>check_power_vias<span class="confluence-anchor-link" id="check_power_vias-check_power_vias"></span><span id="check_power_vias-check_power_vias"></span> <br /></code>[-help] <br />[-append] <br />[-area {<em>x1</em> <em>y1</em> <em>x2</em> <em>y2</em>}] <br />[-check_fill]<br />[-check_wire_pin_overlap] <br />[-cut_area_ratio <em>value</em>]<br />[-edge_to_edge]<br /><span>[-error&#xa0;</span><em>integer</em><span>]<br />[-exclude_region_file <em>check_file</em>]</span><br /><span>[-hookup_pitch&#xa0;</span><em>pitch_value</em><span>]<br />[-ignore_objects {drc_fill | io_wire}] </span><br /><span>[-ignore_partial_overlap {true | false | <em>value</em>}]</span><br />[-layer_range <strong>{</strong><em>bottomLayer</em> <em>topLayer</em><strong>}</strong>]<br />[-nets <strong>{</strong><em>netNames</em><strong>}</strong>&#xa0;| -selected] <br />[-non_orthogonal_check [-non_orthogonal_distance {x y}]]<br /><span>[</span><span>-pitch&#xa0;</span><em>pitch_value</em><span>]</span> <br />[-rail_layers <em>layer_name]</em> <br />[-report <em>file</em>]<br />[-search_range {x y}] <br />[-shielding] <br />[-stacked_via]<br />[-stripe_layers <em>layer_list</em>]<br />[-stripe_rule <em>value</em>]<br />[-what_if_report <em>filename</em>]<br />[-width_range<em> string</em>]<br /></code></p>
+
+<p>This command has a variety of power-rail overlap checks to look for missing power-grid vias. By default, it checks that orthogonal power-routes on adjacent routing layers have a via between them at every intersection. For example, there should be a via at the point where a Metal3 power stripe overlaps a Metal2 power stripe. By default, horizontal routes get checked only for overlaps with vertical routes. If the power shapes are polygon, the polygon is split into rectangles and the rectangles are used to decide the direction.&#xa0;Support for checking stacked vias between non-adjacent routing layers is optional. Violations are highlighted in the layout window, and a text report is generated with the location of the missing vias.</p>
+<h4 id="check_power_vias-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable" style="width: 1822.0px;"><colgroup><col style="width: 315.0px;" /><col style="width: 1506.0px;" /></colgroup><tbody><tr><td class="confluenceTd" style="width: 296.0px;" valign="top">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd" style="width: 1526.0px;" valign="top">
+<p>Outputs a brief description that includes type and default information for each <code>check_power_vias</code> parameter.</p>
+
+<p>For a detailed description of the command and all of its parameters, use the <code>man</code> command: <code>man check_power_vias</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;" valign="top">
+<p><code>-append</code></p>
+</td>
+<td class="confluenceTd" style="width: 1526.0px;" valign="top">
+<p>Specifies that all previous <code>check_power_vias</code> settings will be kept.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;" valign="top">
+<p><code>-area </code><code><em>x1 y1 x2 y2</em></code></p>
+</td>
+<td class="confluenceTd" style="width: 1526.0px;" valign="top">
+<p>Specifies the coordinates of the area to be checked.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;" valign="top">
+<p><code>-check_wire_pin_overlap</code></p>
+</td>
+<td class="confluenceTd" style="width: 1526.0px;">
+<p>Specifies that wire overlaps of pin shapes should also be checked. By default, only wire overlaps with wires are checked.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;"><code>-non_orthogonal_distance {<em>x y</em>}</code></td>
+<td class="confluenceTd" style="width: 1526.0px;">
+<p>Specifies distances for finding missing via within a specified window for a non-orthogonal check, with <em><code>x</code></em> and <code>y</code> representing the distance in the horizontal and vertical directions, respectively.</p>
+
+<p>When the <code>x</code> or <code>y</code> distance is provided,&#xa0;<code>check_power_vias</code>&#xa0;checks if the wire is parallel with another wire. If yes, it checks:</p>
+<ul><li>The via center to via center spacing between parallel wires against the value <em>x (y)&#xa0;</em></li><li>The via center to wire end distance against the value <em>x/2 (y/2)</em>&#xa0;</li></ul>
+<p>If the actual distance is greater than the required distance in either case, it marks a violation.</p>
+
+<p>When the&#xa0;<code>x</code>&#xa0;or&#xa0;<code>y</code>&#xa0;distance is not provided or set to&#xa0;<code>0</code>, the via to via distances are not checked.</p>
+
+<p><strong>Note</strong>: This parameter can only be specified with the <code>-non_orthogonal_check</code> parameter.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;" valign="top">
+<p><code>-check_fill</code></p>
+</td>
+<td class="confluenceTd" style="width: 1526.0px;" valign="top">
+<p>Specifies that tied-off metal fill should also be checked. Floating fill is still ignored.</p>
+
+<p><em>Default</em>: Metal fill will be ignored.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;"><code><span>-edge_to_edge</span></code></td>
+<td class="confluenceTd" style="width: 1526.0px;"><span>Checks the non-orthogonal distance from edge to edge within a layer.</span></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;"><code><span>-error&#xa0;</span><em>integer</em></code></td>
+<td class="confluenceTd" style="width: 1526.0px;">Specifies the maximum number of errors to report.</td>
+</tr>
+<tr><td class="confluenceTd" style="text-align: left;width: 296.0px;"><code>-exclude_region_file<span>&#xa0;</span><em>check_file</em></code></td>
+<td class="confluenceTd" style="text-align: left;width: 1526.0px;"><div class="content-wrapper">
+<p>Ignores missing VIA checks within the specified<span>&#xa0;</span><code>check_file</code><span>&#xa0;</span>regions for a cell extension area. The<span>&#xa0;</span><code>check_file</code><span>&#xa0;</span>format can be a set of the following values:</p>
+<ul><li><code>cell</code>: Specifies the cell type.</li><li><code>ext_layer_bottom</code>: Specifies the extension area bottom layer.</li><li><code>ext_layer_top</code>: Specifies the extension area top layer.</li><li><code>ext_x</code>: Specifies the extension length in the X direction.</li><li><code>ext_y</code>: Specifies the extension length in the X direction.</li><li><code>exc_x</code>: Specifies the exception length in the X direction.</li><li><code>exc_y</code>:&#xa0;Specifies the exception length in the Y direction.</li></ul>
+<p><strong>Example 1:</strong></p>
+
+<p>The following set of&#xa0;<code>check_file</code><span>&#xa0;</span>formats&#xa0;ignores missing VIA check within the yellow rectangle (in the output), but checks missing VIA within the blue rectangle:</p>
+
+<p><code>FTV_CELL, B_M0, B_M1, X, Y, X&#8217;, Y&#8217;<br />INV_D2, M0, M1, X2, Y2, X2&#8217;, Y2&#8217;</code></p>
+
+<p>Following is the output:</p>
+
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732480290/732480296.png" data-linked-resource-container-id="732480290" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image2022-11-21_15-32-28.png" data-linked-resource-id="732480296" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732480290/732480296.png" tabindex="0" width="600" /></span></span></span></p>
+
+<p><strong>Example 2:</strong></p>
+
+<p>The following set of&#xa0;<code>check_file</code><span>&#xa0;</span>formats&#xa0;ignores missing VIA check within the yellow rectangle (in the output):</p>
+
+<p><code>FTV_CELL, B_M0, B_M1, X, Y</code><br /><code>INV_D2, M0, M1, X2, Y2</code></p>
+
+<p>Following is the output:</p>
+
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732480290/732480291.png" data-linked-resource-container-id="732480290" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image2022-11-21_15-35-17.png" data-linked-resource-id="732480291" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732480290/732480291.png" tabindex="0" width="600" /></span></span></span></p>
+</div>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;"><code><span>-hookup_pitch&#xa0;</span><em>pitch_value</em></code></td>
+<td class="confluenceTd" style="width: 1526.0px;"><span>Specifies the distance between two vias, which are on the filler instance and are greater than or equal to the given value.</span></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;"><code>[-ignore_objects {drc_fill | io_wire}]</code></td>
+<td class="confluenceTd" style="width: 1526.0px;"><span style="color:var(--ds-text,#172b4d);">Skips checking the power vias of the specified wire type.</span></td>
+</tr>
+<tr><td class="confluenceTd"><code><span>-ignore_partial_overlap {true | false | <em>value</em>}</span></code></td>
+<td class="confluenceTd"><div class="content-wrapper">
+<p>Specifies <span><span style="color:var(--ds-text,#172b4d);">if the partially overlapped metal layers need to be checked for missing vias</span></span>. Specify one of the following parameter values:</p>
+<ul><li><code>true</code>: Ignores checking the vias missing in partially overlapped metal layers.</li><li><code>false</code>: Checks the vias missing in partially overlapped metal layers.</li><li>
+<p><code><em>value</em></code>: Checks the vias missing in partially overlapped metal layers on and above the specified portion of <code><em>value</em></code> range from 0 to 1. For example, specifying the <code><em>value</em></code> as 0.2 will check the vias missing in partially overlapped metal layers on or above 20% of the overlapped wires.</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>The instance pin and physical pin shapes are considered as wires.</p>
+</div>
+</div>
+</li></ul>
+<p><em>Default</em>: <code>false</code></p>
+</div>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;" valign="top">
+<p><code>-layer_range</code> {<code><em>bottomLayer</em></code> <code><em>topLayer</em></code>}</p>
+</td>
+<td class="confluenceTd" style="width: 1526.0px;">
+<p>Checks for the missing stacked vias between the bottom and top layers. It also checks for the missing vias between all the adjacent intermediate layers, but does not check for the stacked vias between the intermediate layers.&#xa0;While using this parameter, you can specify full layer names like&#xa0;<code>METAL1</code>, or abbreviations like&#xa0;<code>1</code>. For example, <code>check_power_vias -layer_range {2 5}</code> checks for missing stacked vias between overlapping <code>metal2</code> and <code>metal5</code>, and also missing vias for overlapping <code>2/3</code>, <code>3/4</code>, <code>4/5</code>.</p>
+
+<p>This parameter checks the missing adjacent vias if&#xa0;<code>bottomLayer</code>&#xa0;is specified, but&#xa0;<code>topLayer</code>&#xa0;is not, with considering that&#xa0;<code>topLayer</code>&#xa0;is just one layer above. To review the missing stacked via or missing adjacent via DRC marker, use the&#xa0;<code><a href="gui_show_markers.html">gui_show_markers</a></code>&#xa0;command for filtering the DRC marker. For&#xa0;example:</p>
+<ol><li>To display&#xa0;only the&#xa0;missing stacked via DRC markers, run:<br /><code>gui_show_markers -all -filter {stacked via} -search_description -filter_mode AND</code></li><li>To display&#xa0;only the&#xa0;missing via DRC markers between the adjacent layers, run:<br /><code>gui_show_markers -all -filter {adjacent via} -search_description -filter_mode AND</code></li></ol>
+<p>See&#xa0;<code><a href="gui_show_markers.html">gui_show_markers</a></code>&#xa0;for more information on the&#xa0;command&#xa0;usage.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;"><code><span>-pitch&#xa0;</span><em>pitch_value</em></code></td>
+<td class="confluenceTd" style="width: 1526.0px;"><span>Specifies the distance between two vias, which are not on the filler instance and are greater than or equal to the given value.</span></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1822.0px;"><code>-rail_layers&#xa0;<em>layer_name</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1526.0px;">
+<p>Specifies a single power rail layer for missing via (only the via above power rail) check.&#xa0;The check depends on the <code>-stripe_rule</code> option. When <code>-stripe_rule</code> is specified, the via to via distance should be less than or equal to the specified value. If a distance value is not specified with the <code>-stripe_rule</code> option, the check is ignored.</p>
+
+<p>See the examples below.&#xa0;</p>
+
+<p>The <code>-rail_layers</code> option is not controlled by <code>-layer_range</code>. You can specify a power rail layer other than that specified with <code>-layer_range</code> for checks against the <code>stripe_rule</code> and <code>search_range</code> rules.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;"><code>-stripe_layers <em>layer_list</em></code></td>
+<td class="confluenceTd" style="width: 1526.0px;">
+<p>Specifies the power stripe layers to be checked for a valid connection path from power rail to power stripe. The check depends on the <code>-search_range</code> option. If <code>-search_range</code> is specified, at least one valid connection path should be found from the power rail to power stripe in that search range. If a search range is not specified with the <code>-search_range</code> option, the check is ignored.</p>
+
+<p>You can specify the power rail layer with the <code>-rail_layers</code> option. By default, only the uppermost power rail layer is checked.</p>
+<div><div>
+<p>See the examples below.&#xa0;</p>
+
+<p>The <code>-stripe_layers</code> option is not controlled by <code>-layer_range</code>. You can specify power stripe layers other than that specified with <code>-layer_range</code> for checks against the <code>search_range</code> rule.</p>
+</div>
+</div>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;" valign="top">
+<p><code>-nets</code> <code><strong>{</strong></code><code><em>netNames</em></code><code><strong>}</strong></code></p>
+</td>
+<td class="confluenceTd" style="width: 1526.0px;">
+<p>Specifies the names of the power nets that will be checked. A single net or a list of nets enclosed in curly braces({}) or quotes (&quot; &quot;) can be specified. Wildcards (* and ?) are supported. For example, when you specify <code>check_power_vias</code> <code>-nets</code> {<code>v*</code>}, all PG net names having initial letter as <code>v</code> are checked.</p>
+
+<p><strong>Note: </strong>Currently, wildcards are supported for checking PG nets only.</p>
+
+<p><em>Default</em>: All power grid nets.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;" valign="top">
+<p><code>-non_orthogonal_check</code></p>
+</td>
+<td class="confluenceTd" style="width: 1526.0px;">
+<p>Checks the overlap area for non-orthogonal crossing wires (e.g. wires that are both in the same direction) in adjacent as well as non-adjacent layers. Checks for missing vias between two or more parallel wires. The via center-to-center distance between parallel wires should be less than or equal to the specified spacing</p>
+
+<p>If this parameter is not specified, horizontal wires get checked only against vertical wires.</p>
+
+<p><strong>Note</strong>: You can use <code>-non_orthogonal_distance&#xa0;{x y}</code>&#xa0;parameter with&#xa0;<code>-non_orthogonal_check</code>&#xa0;to&#xa0;find missing vias within a specified window.&#xa0;When the <code>x</code> or <code>y</code> distance is provided,&#xa0;<code>check_power_vias</code>&#xa0;checks if the wire is parallel with another wire. If yes, it checks the via center-center spacing and via center-wire end distance&#xa0;between parallel wires.&#xa0;If the actual distance is greater than the required distance, it marks a violation.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;" valign="top">
+<p><code>-report file</code></p>
+</td>
+<td class="confluenceTd" style="width: 1526.0px;" valign="top">
+<p>Specifies the name of the output file for the report.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;"><code>-search_range {x y}</code></td>
+<td class="confluenceTd" style="width: 1526.0px;">
+<p>Specifies a rectangle area with <code>XY</code>. There should be one valid connection from power rail to power stripe in the specified area. By default, the valid connection would be searched from the uppermost power rail layer to all the power stripe layers. You can use the <code>-rail_layers</code> option to specify the power rail layer, and the <code>-stripe_layers</code> option to limit the power stripe layers. With the <code>-rail_layers</code> and <code>-stripe_layers</code> options, only the specified power rail and power stripes layers are used for valid connection check.</p>
+
+<p>The x and y values are floats in units of microns.</p>
+
+<p>Refer to the <strong>Examples</strong> section for search range examples.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;"><code>-selected</code></td>
+<td class="confluenceTd" style="width: 1526.0px;">
+<p><span>Checks for the missing vias between the selected PG wires and other intersecting selected/unselected PG wires. When this parameter is used with the&#xa0;</span><code>-check_wire_pin_overlap</code><span>&#xa0;parameter, it checks for the missing vias between the intersection of selected PG wires and pins of the selected instances. This parameter eliminates the requirement of running the command on the entire design, and hence improves the run time.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;" valign="top">
+<p><code>-shielding</code></p>
+</td>
+<td class="confluenceTd" style="width: 1526.0px;" valign="top">
+<p>Specifies that shielding wires should also&#xa0;be checked. By default, shielding wires are not checked.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;" valign="top">
+<p><code>-stacked_via</code></p>
+</td>
+<td class="confluenceTd" style="width: 1526.0px;">
+<p>Checks for missing vias between all non-adjacent as well as adjacent layers.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;"><code>-stripe_rule <em>value</em></code></td>
+<td class="confluenceTd" style="width: 1526.0px;">
+<p>Specifies in microns the distance for power via. Only the power via above the power rail is checked. If the via to via center-to-center spacing is greater than the specified value, a violation marker is created.</p>
+
+<p>You can specify the power rail layer with <code>-rail_layers</code> for checking. By default, only the power via above the uppermost power rail is checked against the rule.</p>
+
+<p>Refer to the <strong>Examples</strong> section for stripe rule examples.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;" valign="top">
+<p><code>-cut_area_ratio <em>value</em></code><code>&#xa0;</code><code>&#xa0;</code><code>&#xa0;</code><code>&#xa0;</code></p>
+</td>
+<td class="confluenceTd" style="width: 1526.0px;" valign="top">Checks if the cut area in the metal intersection area&#xa0;is sufficient.
+<p><code>cut_area_ratio = Total cut area / Metal intersect area</code></p>
+
+<p>If the actual ratio is less than specified ratio, <code>check_power_vias</code> marks it as violation.</p>
+
+<p>By default, the metal intersection area is the metal overlap area.&#xa0;If&#xa0;<code>setAddStripeMode -via_using_exact_crossover_size</code>&#xa0;is set to <code>false</code>, the partial overlapped metal will be extended to full width intersection area.&#xa0;</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1822.0px;"><code>-what_if_report <em>filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1526.0px;">
+<p>Writes out <code>check_power_vias</code> violations data into a ECO file that can be used directly as input for whatIf rail analysis. When you specify this parameter, the missing via information generated can be used as input for what-if virtual wires.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1822.0px;"><code>-width_range <em>string</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 296.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1526.0px;">
+<p>Specifies the metal width to be considered. <code>check_power_vias</code> uses the specified width range to filter wires. Only the bottom and top wires that fall in the range are checked.</p>
+
+<p>The <em><code>string</code></em> value takes the following format:</p>
+
+<p><code>-width_range <strong>{</strong><em>minWidth</em> maxWidth [layerName &#8230;] [<em>minWidth maxWidth [layerName</em> &#8230;]] &#8230; <strong>} </strong></code></p>
+<ul><li>If <em><code>minWidth</code></em> is 0, all wires with width less than specified <em><code>maxWidth</code></em> will be checked.&#xa0;</li><li>If <em><code>maxWidth</code></em> is 0, all wires with width greater than specified <em><code>minWidth</code></em> will be checked.</li><li>If <em><code>layerName</code></em> is specified in the string, <code>widthRange</code> is enabled only for the specified layer.</li><li>If no <em><code>layerName</code></em> is specified in the string, <code>widthRange</code> is enabled for all non-specified layers.&#xa0;</li></ul>
+<p>Refer to the <strong>Examples</strong> section for width range&#xa0;examples.</p>
+
+<p><strong>Note:</strong> Use braces or quotation marks to&#xa0;enclose the string value for <code>widthRange</code>.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="check_power_vias-Examples">Examples</h4>
+<ul><li>
+<p>Specifies that all vias for all powergrid nets will be checked, except for metal fill and shielding wires, and reports it to a file called <code>power_via.report</code>:</p>
+
+<p><code>check_power_vias&#xa0;</code><code>-report power_via.report</code></p>
+</li></ul><ul><li>
+<p>The following command checks for missing stacked vias between <code>METAL5</code> and <code>METAL8</code> layer intersections on the VSS net. In addition, it checks for missing vias between <code>METAL5-METAL6</code>, <code>METAL6-METAL7</code> and <code>METAL7-METAL8</code> layer intersections. The violations are reported in the <code>powerVia.rpt</code> file and highlighted in GUI.</p>
+
+<p><code>check_power_vias</code><code> -</code><code>layer_range</code><code> {METAL5 METAL8}&#xa0;</code><code>-nets VSS -report powerVia.rpt</code></p>
+
+<p><span class="confluence-embedded-file-wrapper"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732480290/732480295.gif" data-linked-resource-container-id="732480290" data-linked-resource-container-version="1" data-linked-resource-content-type="image/gif" data-linked-resource-default-alias="verifyPowerVia.gif" data-linked-resource-id="732480295" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732480290/732480295.gif" tabindex="0" /></span></p>
+</li></ul><ul><li>The following command checks that the overlapping power routes on adjacent layers have vias that cover at least 70% of the overlap area.. <br /><code>check_power_vias</code><code> -</code><code>cut_area_ratio</code><code> 0.7 </code></li></ul><ul><li>The following command checks that the overlapping power routes have vias that cover at least 70% of the overlap area for layers between&#xa0;<code>METAL3</code>&#xa0;and <code>METAL4</code>. <br /><code>check_power_vias</code><code> -</code><code>cut_area_ratio</code><code> 0.7 </code><code>-layer_range</code><code> {METAL3 METAL4} </code></li></ul><ul><li>The following command checks for wires overlaps for all pin shapes included, enclosed, or touched by the specified area: <br /><code><code>check_power_vias</code> -area {100 100 1000 1000} <code>-check_wire_pin_overlap</code></code><br /><br /></li><li>
+<p>The following command checks wires with width greater than <code>0.032</code> and less than <code>0.096</code> for all layers:</p>
+
+<p><code>check_power_vias&#xa0;-width_range {0.032 0.096}</code></p>
+
+<p><br /></p>
+</li><li>
+<p>The following command checks wires with width in the&#xa0;<code>0.032</code>&#xa0;~&#xa0;<code>0.096</code>&#xa0;range for M1/M2 and width <code>0.038~0.114</code> for M3/M4. For other layers, there is no width control:</p>
+
+<p><code>check_power_vias -width_range {0.032 0.096 M1 M2 0.038 0.114 M3 M4}</code></p>
+
+<p><br /></p>
+</li><li>
+<p>The following command checks wires with width in the&#xa0;<code>0.032</code>&#xa0;~&#xa0;<code>0.096</code>&#xa0;range for M1/M2. For other layers, it checks wires with&#xa0;width in the&#xa0;<code>0.038~0.114</code>&#xa0;range:</p>
+
+<p><code>check_power_vias -width_range {0.032 0.096 M1 M2 0.038 0.114}</code></p>
+
+<p><br /></p>
+</li><li>The following command checks&#xa0;the via between power rail layer <code>M2</code> and <code>M3</code>. If the&#xa0;via&#39;s center-to-center distance is more than <code>17u</code>, the tool reports a violation and places a marker on the power rail wires.<br /><pre>check_power_vias -stripe_rule 17 -rail_layers M2</pre>
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732480290/732480292.png" data-linked-resource-container-id="732480290" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image2013-3-28 14:11:45.png" data-linked-resource-id="732480292" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732480290/732480292.png" tabindex="0" width="500" /></span></p>
+</li><li>The following command checks the valid connection for <code>M2</code> power rail to stripe layer <code>M4</code> and <code>M5</code> with the search rectangle area <code>10*5</code>. In the diagram below, there is no violation as the connection is built from <code>M2</code> to <code>M4</code>. If the <code>V34</code> vias are removed, then there is a violation as the connection cannot be built from <code>M2</code> to <code>M4</code>.<br /><pre>check_power_vias -search_range {10 5} -rail_layers M2 -stripe_layers {M4 M5}</pre><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732480290/732480293.png" data-linked-resource-container-id="732480290" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image2013-3-28 14:44:16.png" data-linked-resource-id="732480293" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732480290/732480293.png" tabindex="0" width="500" /></span></li></ul>
+<p><br /></p>
+
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="check_pg_shorts.html" id="prev" title="check_pg_shorts">check_pg_shorts</a></em></b><b><em><a href="create_marker.html" id="nex" title="create_marker">create_marker</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

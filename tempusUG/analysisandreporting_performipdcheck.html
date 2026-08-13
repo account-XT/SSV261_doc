@@ -1,0 +1,193 @@
+
+<html><head><title>Performing IPD Logic Checks</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823916" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Performing IPD Logic Checks" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823916" />
+<meta name="NextFile" content="analysisandreporting_aginganalysis.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_ipdchecksupported.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Performing IPD Logic Checks" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="0" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_ipdchecksupported.html" title="Supported IPD Logic Checks">Supported IPD Logic Checks</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_aginganalysis.html" title="Aging-Aware STA Analysis">Aging-Aware STA Analysis</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:performipdcheck" title="Performing IPD Logic Checks"></a><h3>
+<a id="pgfId-2420888"></a>Performing IPD Logic Checks<a id="24477"></a></h3>
+
+<p>
+<a id="pgfId-2419841"></a>The IPD logic checks can be performed in IPD analysis mode. To enable IPD analysis, the following setting is required at the top of Tempus script:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054275"></a><a href="../tempustxtcmdref/set_analysis_mode.html">set_analysis_mode</a> -enable_ipd true</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2421489"></a><code></code></pre>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-2419873"></a>The designs with power intent specification can be enabled for these checks post the <a href="../tempustxtcmdref/update_timing.html">update_timing</a> command.</div>
+<p>
+<a id="pgfId-2420074"></a>To report IPD logic checks in a design, use the following command:</p>
+<ul><li>
+<a id="pgfId-2419876"></a><a href="../tempustxtcmdref/check_ipd_logic.html">check_ipd_logic</a> </li></ul>
+
+<h4>
+<a id="pgfId-2421851"></a>Examples</h4>
+
+<p>
+<a id="pgfId-2419911"></a>The following command reports all the IPD logic checks in the design:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419912"></a>check_ipd_logic -multi_pd_type all -outfile ipd_logic_check_report -verbose</pre>
+
+<p>
+<a id="pgfId-2419913"></a>The output of ipd_logic_check_report.rpt report is as shown below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419939"></a>##################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419940"></a># Multiple Power Domain Crossings On Data Paths&#160;&#160;#</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419941"></a>##################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419942"></a>1.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419943"></a>Beginpoint: ff1/D (clk1)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419944"></a>Endpoint: ff2/Q (clk1)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419945"></a>PD1-&gt;PD2 lvl_cell1/Y</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419946"></a>PD2-&gt;PD3 lvl_cell2/Y</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419947"></a>2.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419948"></a>Beginpoint: ff3/D (clk1)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419949"></a>Endpoint: ff4/Q (clk2)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419950"></a>PD1-&gt;PD2 lvl_cell3/Y</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419951"></a>PD2-&gt;PD3 lvl_cell2/Y</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419952"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419953"></a>##########################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419954"></a># Clock Divergence Data&#160;&#160;#</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419955"></a>##########################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419956"></a>1.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419957"></a>Beginpoint: ff4/D (clk2)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419958"></a>Endpoint: ff5/Q (clk2)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419959"></a>PD1-&gt;PD2 lvl_cell5/Y (L) level_cell6/Y (C)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419960"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419961"></a>##########################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419962"></a># Multiple Clock Power Domain Crossings&#160;&#160;#</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419963"></a>##########################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419964"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419965"></a>#######################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419966"></a>#Early Check Path Count Summary Output#</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419967"></a>#######################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419968"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419969"></a>Multiple IPD Data Crossing : 2</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419970"></a>------------------------------------
+Count&#160;&#160;&#160;&#160;       Power Domain <br />------------------------------------<br />2             PD1-&gt;PD2-&gt;PD3<br /></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419975"></a>IPD Clock Divergence : 1<br />------------------------------------<br />Count          Power Domain <br />------------------------------------<br />1&#160;&#160;            PD1-&gt;PD2</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2419981"></a>Multiple IPD Clock Crossing : 0<br />------------------------------------<br />Count          Power Domain <br />------------------------------------<br />ipd_logic_check.tcl<br /></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2420028"></a>##################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2420029"></a># Multiple Power Domain Crossings On Data Paths&#160;&#160;#</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2420030"></a>##################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2420031"></a>report_timing -through lvl_cell1/Y -through lvl_cell2/Y</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2420032"></a>report_timing -through lvl_cell3/Y -through lvl_cell2/Y</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2420033"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2420034"></a>##########################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2420035"></a># Clock Divergence Data&#160;&#160;#</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2420036"></a>##########################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2420037"></a>report_timing -from ff4/D -clock_from clk1 -to ff5/Q -clock_to clk2</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2420038"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2420039"></a>##########################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2420040"></a># Multiple Clock Power Domain Crossings&#160;&#160;#</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2420041"></a>##########################################</pre>
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_ipdchecksupported.html" id="prev" title="Supported IPD Logic Checks">Supported IPD Logic Checks</a></em></b><b><em><a href="analysisandreporting_aginganalysis.html" id="nex" title="Aging-Aware STA Analysis">Aging-Aware STA Analysis</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

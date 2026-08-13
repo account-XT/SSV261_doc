@@ -1,0 +1,204 @@
+
+<html><head><title>Performing Base Delay Analysis</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823901" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Performing Base Delay Analysis" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823901" />
+<meta name="NextFile" content="analysisandreporting_basedelayreporting.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_limitationsdelaycalculators.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Performing Base Delay Analysis" />
+<meta name="Keywords" content="performing base delay analysis" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Delay Calculation,Stylus" />
+<meta name="prod_subfeature" content="Delay Calculation" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_limitationsdelaycalculators.html" title="Limitations of Traditional Delay Calculators">Limitations of Traditional Del ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_basedelayreporting.html" title="Base Delay Reporting">Base Delay Reporting</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:performingbasedelayanalysis" title="Performing Base Delay Analysis"></a><h3>
+<a id="pgfId-1009548"></a><a id="89675"></a>Performing Base Delay Analysis</h3>
+
+<p>
+<a id="pgfId-1009549"></a>To overcome the shortcomings of Traditional Delay Calculators, Tempus provides two different approaches for performing delay calculations. These are described below:</p>
+<ul><li>
+<a id="pgfId-1009551"></a><a href="analysisandreporting_performingbasedelayanalysis.html#32762">Equivalent Waveform Model (EWM)</a></li><li>
+<a id="pgfId-1014752"></a><a href="analysisandreporting_performingbasedelayanalysis.html#67372">Waveform Propagation</a></li></ul>
+
+
+<h4>
+<a id="pgfId-1009552"></a><a id="32762"></a>Equivalent Waveform Model (EWM)</h4>
+
+<p>
+<a id="pgfId-1015619"></a>To achieve accuracy, the waveform shapes are required to be included during delay calculations. The equivalent waveform model (EWM) computes equivalent receiver output based on the input waveform shapes and adjusts the interconnect delay accordingly. The adjustment in delay compensates for any inaccuracies that delay calculation might cause in the next stage due to lack of waveform shape information. The EWM approach provides a technique for producing higher accuracy results when compared to Spice.</p>
+<p>
+<a id="pgfId-1015621"></a>When a stage is analyzed during delay calculation, a pre-defined waveform from the library (based on single input slew value) is used as a stimulus. When the EWM mode is not enabled, the input slew is measured from the actual waveform computed during the previous stage analysis. This may have entirely different characteristics compared to the pre-defined waveform used in the current stage. As a result, the delay impact due to waveform shape differences may be affected. </p>
+<p>
+<a id="pgfId-1009555"></a>The following figure illustrates delay calculation without EWM.</p>
+
+<p class="webflare-indent1"><strong>Figure -6
+<a id="pgfId-1009556"></a>Delay Calculation without EWM</strong></p>
+<p>
+<a id="pgfId-1009560"></a></p>
+<div class="webflare-div-image">
+<img width="566" height="292" src="images/analysisandreporting-7.gif" /></div>
+
+<p>
+<a id="pgfId-1009561"></a>The following figure illustrates delay calculation with EWM.</p>
+
+<p class="webflare-indent1"><strong>Figure -7
+<a id="pgfId-1009562"></a>Delay Calculation with EWM</strong></p>
+<p>
+<a id="pgfId-1009566"></a></p>
+<div class="webflare-div-image">
+<img width="665" height="293" src="images/analysisandreporting-8.gif" /></div>
+
+<p>
+<a id="pgfId-1009567"></a>When EWM is enabled, the software computes the delay impact of waveform shapes on receiver cells, and computes the delay impact - thus providing an overall improvement in path delay accuracy. When EWM is enabled in SI analysis, the software provides delay adjustments based on the receiver noise response to a noisy transition. This helps to reduce the SI pessimism that will be reported if the total delay is measured on noisy waveforms at the receiver input. </p>
+
+<h4><em>
+<a id="pgfId-1009568"></a>Use Model</em></h4>
+
+<p>
+<a id="pgfId-1009569"></a>Equivalent waveform model can be enabled by using the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052339"></a><a href="../tempustxtcmdref/set_delay_cal_mode.html">set_delay_cal_mode</a> -equivalent_waveform_model no_propagation</pre>
+<h4>
+<a id="pgfId-1009572"></a><code></code>Waveform Propagation<a id="67372"></a></h4>
+
+<p>
+<a id="pgfId-1015674"></a>The waveform shapes have a significant impact on delay calculations. Traditionally, delay calculation uses a single pre-driver waveform for specific slew value at the cell input to compute the response on the output of a cell.</p>
+<p>
+<a id="pgfId-1015676"></a>Consider two libraries characterized with pre-driver cells, BUFX16 and BUFX2. An accurate delay on all the instances driven by BUFX16 will be reported, when the library uses BUFX16 as a pre-driver cell. In this case, the instance I4 produces more accurate results as the input waveform matches with the pre-driver waveform. The accuracy of other cells is impacted due to a difference in results for the pre-driver cell versus the actual driving cell. To facilitate actual waveform propagation through a path, the waveform propagation feature stores the actual waveform instead of a single slew value at the input of each cell. </p>
+<p>
+<a id="pgfId-1015678"></a>As shown in the figure below, both the BUFX16 slew (in grey) and BUFX2 slew (in black) have the same value but their waveform shapes are different. The same slew having different waveform shapes can produce different delays. The delay accuracy is a function of input waveform shapes, even if the slew values are same. If the input waveform shape is different from the input waveform used for cell characterization, the delay accuracy will be significantly affected.</p>
+<p>
+<a id="pgfId-1015680"></a>The waveform propagation feature is supported in both graph- and path-based analysis modes.</p>
+<p>
+<a id="pgfId-1009575"></a>The following figure illustrates waveform impact on delay.</p>
+
+<p class="webflare-indent1"><strong>Figure -8
+<a id="pgfId-1009577"></a>Waveform impact on delay</strong></p>
+<p>
+<a id="pgfId-1009581"></a></p>
+<div class="webflare-div-image">
+<img width="454" height="216" src="images/analysisandreporting-9.gif" /></div>
+<h4><em>
+<a id="pgfId-1009582"></a>Requirements for Waveform Propagation</em></h4>
+
+<p>
+<a id="pgfId-1009583"></a>The waveform propagation using ECSM models will be more accurate with additional receiver pincap points. Cadence recommends at least eight points. The last three points can be the lower slew threshold, delay measurement point, and upper slew threshold. The rest of the five points must be selected to represent the tail waveform accurately. It is also recommended to have actual pre-driver waveform in the ECSM libraries.</p>
+
+<h4><em>
+<a id="pgfId-1009584"></a>Use Model</em></h4>
+
+<p>
+<a id="pgfId-1009585"></a>Waveform propagation can be enabled by using the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052345"></a><a href="../tempustxtcmdref/set_delay_cal_mode.html">set_delay_cal_mode</a> -equivalent_waveform_model propagation</pre>
+<h4><em>
+<a id="pgfId-1009587"></a><code></code>EWM-Only vs Waveform Propagation</em></h4>
+
+<p>
+<a id="pgfId-1009588"></a><strong>EWM-Only</strong></p>
+<ul><li>
+<a id="pgfId-1015737"></a>Real waveform tail impact on the next stage is predicted and added to the current wire delay.</li><li>
+<a id="pgfId-1015731"></a>The receiver cell is assumed to be the driver lumped load.</li></ul>
+
+<p>
+<a id="pgfId-1009591"></a><strong>Waveform Propagation</strong></p>
+<ul><li>
+<a id="pgfId-1015775"></a>Real waveforms are stored and used as input for the next stage. The input waveform tail impact is used at the appropriate point.</li><li>
+<a id="pgfId-1009593"></a>Unlike EWM-Only, the waveform propagation computes accurate impact of the tail as it uses distributed parasitics of wires.</li></ul>
+
+
+<h4><em>
+<a id="pgfId-1009594"></a>EWM and Waveform Propagation - Impact on the Flow</em></h4>
+
+<p>
+<a id="pgfId-1015797"></a>The base delay flow is impacted in the following ways, when you use the equivalent waveform model or waveform propagation methodology:</p>
+<ul><li>
+<a id="pgfId-1015799"></a>Enabling equivalent waveform modeling increases runtime by 10% - with no significant increase in the memory.</li><li>
+<a id="pgfId-1009597"></a>Enabling waveform propagation increases runtime by 15%. There is an 8% increase in the memory in graph-based analysis (GBA) mode, and no significant memory changes take place in the path-based analysis (PBA) mode.</li></ul>
+
+
+<h4><em>
+<a id="pgfId-1009598"></a>Normalized Driver Waveform in Library</em></h4>
+
+<p>
+<a id="pgfId-1015823"></a>The normalized driver waveform (pre-driver waveform) should be added to a library while characterizing so that delay can be computed accurately (as there can be different waveforms with the same slew). There are two types of pre-drivers &#8211; active and analytical. Cadence recommends that you use the active pre-driver. The active pre-driver waveform has a longer tail than the analytical pre-driver, and thus represents the real design scenario. In the absence of NDWs (normalized driver waveform) in a library, Tempus auto-generates analytic pre-driver waveforms.</p>
+<p>
+<a id="pgfId-1009600"></a>An example of a normalized driver waveform in a library is given below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1009601"></a>normalized_driver_waveform (waveform_template_name) { <br />    driver_waveform_name : &quot;PreDriver20.25:rise&quot;; <br />    index_1 (&quot;0.00233, 0.01301, 0.05092, 0.1233, 0.2361, 0.3943, 0.6026&quot;); <br />    index_2 (&quot;0, 0.083, 0.166, 0.25, 0.333, 0.417, 0.5, 0.583, 0.666, 0.75, 0.833, 0.917,1&quot;); <br />      values ( \ <br />        &quot;0, 0.00037, 0.0005041, 0.0006424, 0.0008009, 0.0009783, 0.001179, 0.00140, 0.00166, 0.001995 0.002375, 0.002833, 0.003389&quot;, \ <br />        &quot;0, 0.00220 0.0029643 0.003777, 0.004709, 0.005752, 0.006935, 0.00828374, 0.00988784, 0.0117336, 0.013969, 0.0166759, 0.0199283&quot;, \ <br />        &quot;0, 0.00862494, 0.0116002, 0.01473, 0.0184297, 0.0225117, 0.0271421, 0.0324164, 0.0386937, 0.0459165, 0.05466, 0.06571, 0.0779846&quot;, \ <br />        &quot;0, 0.0208867, 0.0280917, 0.0357977, 0.0446304, 0.0545157, 0.065729, 0.0785015, 0.0937029, 0.111194, 0.132378, 0.15803, 0.188852&quot;, \ <br />        &quot;0, 0.0399897, 0.0537844, 0.0685384, 0.0854496, 0.104376, 0.125845, 0.150299, 0.179404, 0.212893, 0.253452, 0.302566, 0.361577&quot;, \</pre>
+<h4><em>
+<a id="pgfId-1035631"></a>Timing Library Requirement for Accurate Analysis for 16nm and Below</em></h4>
+
+<p>
+<a id="pgfId-1035633"></a>The ECSM/CCS library characterization for 16nm static timing analysis (STA) signoff meets the challenges of accurate timing analysis in 20nm. In order to meet accuracy demands for process nodes 16nm and below, the following are recommended:</p>
+<ul><li>
+<a id="pgfId-1035636"></a>8-piece pin capacitances in ECSM timing libraries</li><li>
+<a id="pgfId-1035637"></a>2-piece pin capacitance in CCS Timing libraries</li><li>
+<a id="pgfId-1035638"></a>N -piece pin capacitance in CCS Timing libraries</li><li>
+<a id="pgfId-1035612"></a>2% - 98% ECSM waveform range</li></ul>
+
+
+
+
+<h4><em>
+<a id="pgfId-1009607"></a>ECSM Libraries with 8-Piece Pin Capacitances</em></h4>
+
+<p>
+<a id="pgfId-1009608"></a>The 8-piece pin capacitance in the ECSM timing libraries are required to accurately model back miller current. Traditionally, the receiver pin capacitance in an ECSM library characterization is measured at the slew thresholds - that may be 30% to 70% of the VDD. As a result, the use of such thresholds in the ECSM libraries may result in some missing important data at the tail of the waveform. The 3-piece capacitance tables are extended to 8-piece tables for 20nm nodes to better capture the waveform distortions due to back miller current at the waveform tail. The selection of 8-piece pin capacitance is made such that the required 20nm waveform distortion information can be captured correctly. Since the waveform distortion happens mostly at the tail of waveforms, the pin-cap thresholds are selected so that there are more points on the tail.</p>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_limitationsdelaycalculators.html" id="prev" title="Limitations of Traditional Delay Calculators">Limitations of Traditional Del ...</a></em></b><b><em><a href="analysisandreporting_basedelayreporting.html" id="nex" title="Base Delay Reporting">Base Delay Reporting</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

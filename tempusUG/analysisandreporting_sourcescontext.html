@@ -1,0 +1,120 @@
+
+<html><head><title>Sources of Inaccuracy in Context Analysis</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823930" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Sources of Inaccuracy in Context Analysis" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823930" />
+<meta name="NextFile" content="analysisandreporting_limitationscontextanalysis.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_mimflow.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Sources of Inaccuracy in Context Analysis" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="general" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Analysis,Stylus" />
+<meta name="prod_subfeature" content="Timing Analysis" />
+<meta name="new_topic" content="Yes" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_mimflow.html" title="MIM Flow Examples">MIM Flow Examples</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_limitationscontextanalysis.html" title="Limitations of Context Analysis Flow">Limitations of Context Analysi ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:sourcescontext" title="Sources of Inaccuracy in Context Analysis"></a><h3>
+<a id="pgfId-2946375"></a>Sources of Inaccuracy in Context Analysis<a id="66053"></a></h3>
+<h4>
+<a id="pgfId-2946376"></a>Inaccuracy Due to Boundary Parasitics </h4>
+
+<p>
+<a id="pgfId-2946377"></a>The distributed parasitic of top-level portion of the input/output interface nets are lumped in block context analysis. This may result in inaccuracy during timing as well as glitch analysis with Context. Two types of nets will be impacted because of this:</p>
+<ul><li>
+<a id="pgfId-2946379"></a>Net on the block reg-reg path that has coupling with interface nets</li></ul>
+<p>
+<a id="pgfId-2946381"></a>Example: net1 in below figure has coupling with net3. Since net3 is an interface net, during Top flat STA, its parasitics are distributed across Top and Block. However, in block context analysis, top portion of the net3 will not be present. Because of this, aggressor net3 will have different SI impact on net1 in Top Flat vs Block Context Analysis. </p>
+<ul><li>
+<a id="pgfId-2946383"></a>Net on the block reg-reg path that fanout to the top-level instances as well</li></ul>
+<p>
+<a id="pgfId-2946385"></a>Example: net2 in below figure is part of reg-reg path (FF2-FF3) and it also fanout to the top level instances. In Top Flat STA, net2 will have parasitics distributed across Top and Block. However, in Block Context STA, portion of the top level parasitics are lumped as port load. Because of this, delay of net2 is computed differently in Top flat and Block Context STA.</p>
+
+<p>
+<a id="pgfId-2946446"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="185" src="images/analysisandreporting-191.gif" /></div>
+<h4>
+<a id="pgfId-2946450"></a>Pessimism due to Slew/Load Worst Cases in MIM</h4>
+
+<p>
+<a id="pgfId-2946451"></a>The output load on a block port may vary across all the instances of the block at top level. In MIM Timing Context, worst load across all the instances will be modeled in GBA.</p>
+<p>
+<a id="pgfId-2946452"></a>Similarly, slew of the top level signal arriving at the block input port may vary across all the instances of the block at top level. In MIM Timing Context, worst early/late slew across all the instances will be modeled in GBA. PBA uses instance-specific slew/load, hence addressing the pessimism due to worst-case.</p>
+
+<h4>
+<a id="pgfId-2945736"></a>Pessimism Due to Wider TW in MIM</h4>
+<p>
+<a id="pgfId-2946478"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="163" src="images/analysisandreporting-192.gif" /></div>
+
+<p>
+<a id="pgfId-2946497"></a>In context analysis, early/late latency and arrival is worst-case across the MIM instances. So, timing windows of a block net in the MIM timing/glitch context analysis will be union of the TWs of same net across all the top level instances of the block. </p>
+<p>
+<a id="pgfId-2946499"></a>Hence SI analysis of a path in block MIM Context analysis can be pessimistic than the top level timing analysis of the same path across all the top level instances of block. </p>
+
+<h4>
+<a id="pgfId-2946500"></a>Design Requirements for Accurate Context Analysis</h4>
+
+<p>
+<a id="pgfId-2946501"></a>The top and Block STA environments should meet the following criteria for accurate Block Context Analysis:</p>
+<ul><li>
+<a id="pgfId-2946503"></a>Block constraints should correlate with top constraints</li><li>
+<a id="pgfId-2946504"></a>All the block boundary clocks should be either automatically mapped by the tool or manually mapped by the user in block Timing Context run. For clocks to be mapped automatically, tool expects 1-to-1 mapping between block and top clocks. </li><li>
+<a id="pgfId-2946505"></a>Tempus setup (Netlist, SPEF, Library, power intent, and settings) should be consistent between the two runs. </li><li>
+<a id="pgfId-2946506"></a>Recommendation is hierarchical extraction of such blocks to avoid flat vs block SPEF differences.</li></ul>
+
+
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_mimflow.html" id="prev" title="MIM Flow Examples">MIM Flow Examples</a></em></b><b><em><a href="analysisandreporting_limitationscontextanalysis.html" id="nex" title="Limitations of Context Analysis Flow">Limitations of Context Analysi ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

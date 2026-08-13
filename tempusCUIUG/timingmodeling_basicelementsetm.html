@@ -1,0 +1,475 @@
+
+<html><head><title>Basic Elements of Timing Model Extraction</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845241" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Basic Elements of Timing Model Extraction" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845241" />
+<meta name="NextFile" content="timingmodeling_loaddependantnetworks.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="timingmodeling_etmgenerationmmmc.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- Basic Elements of Timing Model Extraction" />
+<meta name="Keywords" content="Basic Elements of Timing Model Extraction" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Modeling,Stylus" />
+<meta name="prod_subfeature" content="Timing Modeling" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="timingmodeling_etmgenerationmmmc.html" title="ETM Generation for MMMC Designs">ETM Generation for MMMC Design ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="timingmodeling_loaddependantnetworks.html" title="Secondary Load Dependent Networks">Secondary Load Dependent Netwo ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:basicelementsetm" title="Basic Elements of Timing Model Extraction"></a><h3>
+<a id="pgfId-1017883"></a><a id="71317"></a>Basic Elements of<a id="ExtractedTimingModels-BasicElementsofTimingModelExtraction"></a> Timing Model Extraction</h3>
+
+<p>
+<a id="pgfId-1017884"></a>The following basic elements are relevant to model extraction:</p>
+<ul><li>
+<a id="pgfId-1017888"></a><a href="timingmodeling_basicelementsetm.html#10599">Nets</a> &#8211; internal and boundary nets</li><li>
+<a id="pgfId-1017892"></a><a href="timingmodeling_basicelementsetm.html#34513">Timing Paths</a> - check and delay paths &#8211; in2reg, in2out, and reg2out paths</li><li>
+<a id="pgfId-1017896"></a><a href="timingmodeling_basicelementsetm.html#80528">Minimum Pulse Width and Period Checks</a></li><li>
+<a id="pgfId-1017900"></a><a href="timingmodeling_basicelementsetm.html#70294">Path Exceptions</a> &#8211; false, multi-cycle, min delay, max delay, disable timing</li><li>
+<a id="pgfId-1017904"></a><a href="timingmodeling_basicelementsetm.html#57207">Constants</a></li><li>
+<a id="pgfId-1017908"></a><a href="timingmodeling_basicelementsetm.html#82334">Unconstrained Paths</a></li><li>
+<a id="pgfId-1017916"></a><a href="timingmodeling_basicelementsetm.html#28367">Clock Gating Checks</a></li><li>
+<a id="pgfId-1024328"></a><a href="timingmodeling_basicelementsetm.html#76594">Annotate Delays, Slews, and Load</a></li><li>
+<a id="pgfId-1017920"></a><a href="timingmodeling_basicelementsetm.html#38865">Design Rules</a></li><li>
+<a id="pgfId-1017924"></a><a href="timingmodeling_basicelementsetm.html#49844">Clocks</a> - created clocks and generated clocks</li></ul>
+
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-1017925"></a>These are explained in the following sections.</p>
+
+<h4>
+<a id="pgfId-1017927"></a><a id="10599"></a>Nets</h4>
+
+<p>
+<a id="pgfId-1017928"></a>Nets can mainly be classified into two types &#8211; boundary nets and internal nets. The nets which are directly connected to the input or output ports of the block are termed as the boundary nets. The nets which drive and are driven by some internal instance pin of the block are termed as the internal nets. Model extraction treats both the nets differently as boundary nets are always related and connected to the context.</p>
+<ul><li>
+<a id="pgfId-1017929"></a><strong>Boundary Nets</strong><br />
+<a id="pgfId-1017930"></a>The boundaries are connected to the context. So the RC data for them may change if the context of the block changes at a later stage. To be better context independent the model should not consider SPEF or DSPEF data for their delay calculation and a separate SPEF/DSPEF file for the boundary nets can be stitched to the top level data while instantiating the extracted model.<br /><div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1017933"></a>Currently, the software does not output the SPEF file for boundary nets which can be used at the top level. To solve this problem, you need to create the top level SPEF file for boundary nets of this block or use the default behavior to consider the boundary nets RC data for model extraction.</div></li><li>
+<a id="pgfId-1017934"></a><strong>Internal Nets</strong><br />
+<a id="pgfId-1017935"></a>As the internal nets connect the pins for the internal instance of the block, they are in no way dependent on the context environment. So the RC data defined for the internal nets is used as it is for delay calculation and is added in the extracted paths. If no RC is defined for these nets, then the wire load models are used to calculate their delays.<br />
+<a id="pgfId-1017936"></a>However, if a load or resistance is annotated using the <a href="../tempusCUI/set_load.html">set_load</a>/<code></code><a actuate="user" class="URL" href="../tempusCUI/set_resistance.html" show="replace" xml:link="simple">set_resistance</a> command, then it will override the annotated SPEF or the applied wire load model.<br />
+<a id="pgfId-1017937"></a>If the nets are annotated with the delays using the <a href="../tempusCUI/set_annotated_delay.html">set_annotated_delay</a> command or SDF annotation, then the annotated delay is used instead of the calculated delays. In case of incremental delays the addition of calculated and incremental delays is used.</li></ul>
+
+
+
+
+
+
+
+<h4>
+<a id="pgfId-1017939"></a><a id="34513"></a>Timing Paths</h4>
+
+<p>
+<a id="pgfId-1017940"></a>Timing paths are broadly divided in four types:</p>
+<ul><li>
+<a id="pgfId-1017941"></a>In2reg</li><li>
+<a id="pgfId-1017942"></a>reg2out</li><li>
+<a id="pgfId-1017943"></a>in2out</li><li>
+<a id="pgfId-1017944"></a>reg2reg: The reg2reg paths are not relevant to the model extraction process.</li></ul>
+
+
+
+<p>
+<a id="pgfId-1017945"></a>These are described below.</p>
+<ul><li>
+<a id="pgfId-1017946"></a><strong>In2Reg Paths
+</strong>A In2reg path is a setup/hold check that starts from an input port and is captured at a flop or gating element by a clock. So the in2reg type of paths are captured in equivalent setup or hold checks. The setup/hold values to be written in ETM are calculated using the data path delay, the setup/hold value of the library cell and the clock path delay. The equations can be written as follows.<br />
+<a id="pgfId-1017947"></a>Setup arc value = data path delay (input to flop) + setup value of flop &#8211; clock path delay (clock source to clk pin)
+Hold arc value = data path delay (input to flop) - hold value of flop &#8211; clock path delay (clock source to clk pin)<br />
+<a id="pgfId-1017948"></a>The value for these arcs is the function of the transition on the input port and the transition at the clock source. If a flop is captured by multiple clocks then separate setup/hold arcs are extracted with respect to each clock source.</li><li>
+<a id="pgfId-1017949"></a><strong>Reg2out Paths
+</strong>The reg2out paths are paths starting from a register and ending up on an output port. These paths are a combination of trigger arcs (of starting register) and the combinational delay from sink of trigger arc to the output port. So for such paths an equivalent trigger/sequential arc is modeled in the extracted model. The delay for the arc will be equal to:<br />
+<a id="pgfId-1017950"></a>Sequential arc delay = delay (clock source to CK of register) + delay (register CK pin to out port).<br />
+<a id="pgfId-1017951"></a>The delay for these arcs is a function of the slew at the clock source and the capacitance at the output port. As the extracted model can be used for max as well as min analysis, two arcs are preserved in the model to represent the longest and the shortest path. Different types (rising_edge/falling_edge) of arcs are extracted for the different valid clock edges.</li><li>
+<a id="pgfId-1017952"></a><strong>In2Out Paths
+</strong>The in2out paths are the path starting from an input port and ending up on an output port. These paths are pure combinational paths. So for such paths an equivalent combinational arc is modeled in the extracted model. The delay for the arc will be equal to:<br />
+<a id="pgfId-1017953"></a>Combinational arc delay = delay (delay of all elements in the path)<br />
+<a id="pgfId-1017954"></a>The delay for these arcs is a function of the slew at the input port and the capacitance at the output port. As the extracted model can be used for max as well as min analysis, two arcs are preserved in the model to represent the longest and the shortest combinational path. In case if no path exists for a particular transition (rise/fall), half unate (combinational_rise /combinational_fall) arcs will be extracted. The timing sense for the arc will depend on the function of worst (early/late) paths.</li></ul>
+
+
+
+
+
+
+
+
+
+<h4>
+<a id="pgfId-1017956"></a><a id="80528"></a>Minimum Pulse Width and Period Checks</h4>
+
+<p>
+<a id="pgfId-1017957"></a>The minimum pulse width and period constraints defined at the CK pin of the registers are transferred to the clock source pins during model extraction.</p>
+<p>
+<a id="pgfId-1017958"></a>There may be several different type of registers in the fanout of a clock source. So while transferring the minimum pulse width to the clock source you can use the worst values present on the fanout registers. The pulse width is calculated as:</p>
+<ul><li>
+<a id="pgfId-1017959"></a>pulse width = MAX(Arrival time of Launch clock Path - Arrival time of Capture Clock Path + pulse width at clock pins from library)</li></ul>
+<p>
+<a id="pgfId-1017960"></a>The minimum period for any clock pin is calculated in the same way as the minimum pulse width. The minimum period is calculated as:</p>
+<ul><li>
+<a id="pgfId-1017961"></a>Min Period = MAX(Arrival time of Launch clock Path - Arrival time of Capture Clock Path + Min Period at clock pins from library)</li></ul>
+<p>
+<a id="pgfId-1017962"></a>These checks can be modeled in the following three ways:</p>
+<ul><li>
+<a id="pgfId-1017963"></a><a href="timingmodeling_basicelementsetm.html#70678">Library Attribute</a></li><li>
+<a id="pgfId-1017964"></a><a href="timingmodeling_basicelementsetm.html#85450">Scalar Tables</a></li><li>
+<a id="pgfId-1017965"></a><a href="timingmodeling_basicelementsetm.html#72716">Arc-Based Modeling</a></li></ul>
+
+
+<p>
+<a id="pgfId-1017966"></a>These are explained below.</p>
+
+<h4><em>
+<a id="pgfId-1017967"></a><a id="70678"></a>Library Attribute</em></h4>
+
+<p class="webflare-indent1">
+<a id="pgfId-1022550"></a>By default, these checks are written as library attributes in ETM.</p>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1017968"></a>pin (CLKIN2 ) {<br />   clock : true ;<br />   min_period : 2.0554;<br />   min_period : 2.6248;<br />   min_pulse_width_low : 0.2773;<br />   min_pulse_width_high : 0.7673;</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1017969"></a>}</pre>
+<p class="webflare-indent1">
+<a id="pgfId-1017970"></a>If <code>min_period</code> checks corresponding to both rise and fall transitions are present in a design, then they wiil be modeled as duplicate entries in ETM when written as library attributes. To avoid duplicate entries we can model these checks as scalar tables or arcs, where rise and fall transition of <code>min_period</code> checks can be modeled as shown in following sections. These arcs will be honored by the timer depending on the context, hence will be more accurate.</p>
+
+<h4><em>
+<a id="pgfId-1017971"></a><a id="85450"></a>Scalar Tables</em></h4>
+
+<p class="webflare-indent1">
+<a id="pgfId-1022556"></a>If the <a href="../tempusCUI/timing_Category_Attributes.html">timing_extract_model_write_clock_checks_as_scalar_tables</a> attribute is set to <code>true</code>, then these checks will be written as scalar tables as shown below:</p>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1017972"></a>pin (CLKIN2 ) {<br />   clock : true ;<br />   timing() {<br />      timing_type : minimum_period ;<br />      rise_constraint (scalar){<br />         values( &quot; 2.0554&quot;);<br />         }<br />      fall_constraint (scalar){<br />         values( &quot; 2.6248&quot;);<br />         }<br />      related_pin :&quot; CLKIN2 &quot;;<br />  }<br />   timing() {<br />      timing_type : min_pulse_width ;<br />      rise_constraint (scalar){<br />         values( &quot; 0.7673&quot;);<br />         }<br />      fall_constraint (scalar){<br />         values( &quot; 0.2773&quot;);<br />         }<br />      related_pin :&quot; CLKIN2 &quot;;<br />  }<br />}</pre>
+
+<h4><em>
+<a id="pgfId-1017973"></a><a id="72716"></a>Arc-Based Modeling</em></h4>
+
+<p class="webflare-indent1">
+<a id="pgfId-1022583"></a>These checks can also be written as arcs by setting the <a href="../tempusCUI/timing_Category_Attributes.html">timing_extract_model_write_clock_checks_as_arc</a> attribute to <code>true</code>. In this case the resulting arc is the function of rise/fall slew of CLK port, hence delay and slew propagation of the clock network for rise and fall transitions is considered for writing these arcs. The arc-based modeling of clock-style checks is more accurate and is recommended for use.</p>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1017974"></a>pin (CLKIN2 ) {<br />    clock : true ;<br />    timing() {<br />        timing_type : minimum_period ;<br />        rise_constraint (lut_timing_2 ){<br />           values(&quot; 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000&quot;);<br />           }<br />        fall_constraint (lut_timing_2 ){<br />           values(&quot; 2.000, 2.000, 2.000, 2.000, 2.000, 2.000, 2.000&quot;);<br />           }<br />        related_pin :&quot; CLKIN2 &quot;;<br />    }<br />    timing() {<br />        timing_type : min_pulse_width ;<br />        rise_constraint (lut_timing_2 ){<br />            values(&quot;0.767, 0.767, 0.767, 0.767, 0.742, 0.087, 0.100&quot;);<br />            }<br />        fall_constraint (lut_timing_2 ){<br />            values(&quot;0.201, 0.201, 0.201, 0.201, 0.238, 0.247, 0.2636&quot;);<br />            }<br />        related_pin :&quot; CLKIN2 &quot;;<br />    }</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1017975"></a>}</pre>
+
+<h4>
+<a id="pgfId-1017977"></a><a id="70294"></a>Path Exceptions</h4>
+
+<p>
+<a id="pgfId-1017978"></a>Timing extraction flow honors path exceptions defined in the given constraints&#39; file. Typically, the following path exceptions are used:</p>
+<ul><li>
+<a id="pgfId-1017979"></a><a href="../tempusCUI/set_false_path.html">set_false_path</a></li><li>
+<a id="pgfId-1017980"></a><a href="../tempusCUI/set_multicycle_path.html">set_multicycle_path</a></li><li>
+<a id="pgfId-1017981"></a><a href="../tempusCUI/set_min_delay.html">set_min_delay</a></li><li>
+<a id="pgfId-1017982"></a><a href="../tempusCUI/set_max_delay.html">set_max_delay</a></li></ul>
+
+
+
+<p>
+<a id="pgfId-1017983"></a>For more information on handling of these exceptions, refer to section &#8220;<h-hot>Constraint Generation during Model Extraction</h-hot>&#8221;.</p>
+
+<h4>
+<a id="pgfId-1017985"></a><a id="57207"></a>Constants</h4>
+
+<p>
+<a id="pgfId-1017986"></a>The case analysis and constants are propagated while extracting a model. When you specify the <a href="../tempusCUI/set_case_analysis.html">set_case_analysis</a> command, you can use the following attribute to control how constants, propagated at o/p or bi-di ports, are modeled in ETM:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1017987"></a>set <a href="../tempusCUI/timing_Category_Attributes.html">timing_extract_model_case_analysis_in_library</a> true (or false)</pre>
+
+<p>
+<a id="pgfId-1017988"></a>When set to <code>false</code>, the software models the propagated or applied constants to output ports in the generated constraints&#8217; file (which is generated using the <code></code><a actuate="user" class="URL" href="../tempusCUI/write_timing_model.html" show="replace" xml:link="simple">write_timing_model</a> <code>-assertions</code> command).</p>
+<p>
+<a id="pgfId-1017989"></a>When set to <code>true</code>, the software models the propagated constants to output ports written as pin functions in the extracted model.</p>
+
+<h4>
+<a id="pgfId-1017991"></a><a id="82334"></a>Unconstrained Paths</h4>
+
+<p>
+<a id="pgfId-1017992"></a>The unconstrained end points exist when proper launch/capture clock phase is not propagated at the desired endpoint due to any exceptions. The unconstrained input ports due to false path exceptions are ignored and are not modeled during ETM extraction. The unconstrained combinational IO paths due to false path exceptions are ignored and are not modeled during ETM extraction. The unconstrained trigger arcs are calculated during ETM extraction. </p>
+
+<h4>
+<a id="pgfId-1017996"></a><a id="28367"></a>Clock Gating Checks</h4>
+
+<p>
+<a id="pgfId-1017997"></a>If integrated clock gating (ICG) cells are used for gating the clocks, then these arcs are preserved as setup/hold arcs. If combinational cells are used for gating, then these arcs will be preserved as no-change arcs between a clock pin and its enabling signal pin. If you wish to extract these checks as regular setup/hold checks, you can set the <a href="../tempusCUI/timing_Category_Attributes.html">timing_extract_model_gating_as_nochange_arc</a> attribute to <code>false</code>.</p>
+<p>
+<a id="pgfId-1017998"></a>Depending on the type of clock gating situation, no change checks are inferred as follows:</p>
+
+<p class="webflare-indent1"><strong>Figure -4
+<a id="pgfId-1018000"></a>no_change Checks Modeling</strong></p>
+<p>
+<a id="pgfId-1018004"></a></p>
+<div class="webflare-div-image">
+<img width="433" height="324" src="images/timingmodeling-6.gif" /></div>
+<h4><em>
+<a id="pgfId-1018005"></a>Simple Clock Gating with AND or Logic</em></h4>
+
+<p>
+<a id="pgfId-1018006"></a>The following diagram shows clock gating AND/OR logic:</p>
+
+<p>
+<a id="pgfId-1018010"></a></p>
+<div class="webflare-div-image">
+<img width="244" height="59" src="images/timingmodeling-7.gif" /></div>
+
+<p>
+<a id="pgfId-1018011"></a>A simple AND gate check will be as follows:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1018012"></a>timing () {<br />timing_type: nochange_high_high;<br />}<br />timing () {<br />timing_type: nochange_low_high;<br />}</pre>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1018013"></a>After extracting the clock gating check arc the signal downstream the gate output is not propagated to the clock pins of the registers.</div>
+
+<h4><em>
+<a id="pgfId-1018014"></a>Clock Gating with Blackbox or Unknown Logic</em></h4>
+
+<p>
+<a id="pgfId-1018015"></a>In case of clock gating with unknown logic, as shown below, no_change checks will be checked with respect to both the rising edge and the falling edge of the clock signal.</p>
+
+<p>
+<a id="pgfId-1018019"></a></p>
+<div class="webflare-div-image">
+<img width="286" height="74" src="images/timingmodeling-8.gif" /></div>
+<h4><em>
+<a id="pgfId-1018020"></a>No Clock Gating Logic</em></h4>
+
+<p>
+<a id="pgfId-1018021"></a>There are some gates, such as multiplexers or XOR gates, where a clock signal cannot control the clock gate, as shown below.</p>
+
+<p>
+<a id="pgfId-1018025"></a></p>
+<div class="webflare-div-image">
+<img width="262" height="87" src="images/timingmodeling-9.gif" /></div>
+
+<p>
+<a id="pgfId-1018026"></a>In such cases, no checks are inferred so you need to explicitly set the gating check if you want these interface paths to be extracted in the ETM. To know where static timing analyzer will not infer the gating in such situations, you can use the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1018027"></a>check_timing -check_only clock_gating_controlling_edge_unknown &#8211;verbose</pre>
+<h4>
+<a id="pgfId-1018029"></a><a id="76594"></a>Annotate Delays, Slews, and Load</h4>
+
+<p>
+<a id="pgfId-1018030"></a>Model extraction uses the back annotated delay slews and the load information during the extraction process and reflect the effect in the extracted model. Here is a small description how these are used.</p>
+<ul><li>
+<a id="pgfId-1018031"></a><strong>Annotated Delays
+</strong>The annotated delays using SDF or the <code></code><a actuate="user" class="URL" href="../tempusCUI/set_annotated_delay.html" show="replace" xml:link="simple">set_annotated_delay</a> command override the calculated delay (from library or RC data) value for the arc; however, the output slew for the arcs is used as calculated. In case of incremental delays the delta delay is added to the calculated arc delay.</li><li>
+<a id="pgfId-1018032"></a><strong>Annotated Slews
+</strong>Annotated slews are ignored during timing model extraction. These constraints are dumped in assertions file generated with the <code></code><a actuate="user" class="URL" href="../tempusCUI/write_timing_model.html" show="replace" xml:link="simple">write_timing_model</a> <code>-assertions</code> parameter.</li><li>
+<a id="pgfId-1018033"></a><strong>Annotated Load
+</strong>Annotated load overrides the pin capacitance defined in the library, and is used for delay calculations.</li></ul>
+
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1018034"></a>The annotated delays are generated with a particular context and remain true for that context (transition times) only. So annotating the delays/slews makes the model context dependent. So to create a context independent model it is recommended not to annotate the SDF.</div>
+
+<h4>
+<a id="pgfId-1018036"></a><a id="38865"></a>Design Rules</h4>
+
+<p>
+<a id="pgfId-1018037"></a>Model extraction uses the design rules defined in the library. The worst (smaller for max design rules and vice-versa) among all the fanout pins (topologically first level) is used for the input ports and the worst of all the fanin pins (topologically first level) is used for the output ports.</p>
+<p>
+<a id="pgfId-1018038"></a>If design rule limits are defined at the pin and library level, the design rule from the pin is chosen, rather than the worst of the pin and library level, because the pin level information overrides the cell level, which in turn overrides the library level information. If design rule violations (DRV) are coming from the constraints, then you can choose them based on the following setting:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1018039"></a>set <a href="../tempusCUI/timing_Category_Attributes.html">timing_extract_model_consider_design_level_drv</a> true (or false)</pre>
+
+<p>
+<a id="pgfId-1018040"></a>When set to <code>false</code>, the user-asserted design level DRVs are not considered while modeling DRVs in the extracted timing model.</p>
+<p>
+<a id="pgfId-1018041"></a>When set to <code>true</code>, the user-asserted design level DRVs are considered while modeling DRVs into the extracted timing model.</p>
+
+<h4>
+<a id="pgfId-1018043"></a><a id="49844"></a>Clocks</h4>
+
+<ul><li>
+<a id="pgfId-1022752"></a><a href="timingmodeling_basicelementsetm.html#27189">Created Clocks</a></li><li>
+<a id="pgfId-1022770"></a><a href="timingmodeling_basicelementsetm.html#70560">Generated Clocks</a></li><li>
+<a id="pgfId-1022806"></a><a href="timingmodeling_basicelementsetm.html#93810">Clocks with Sequential and Combinational Arcs</a></li></ul>
+
+
+
+<h4><em>
+<a id="pgfId-1018044"></a><a id="27189"></a>Created Clocks</em></h4>
+
+<p>
+<a id="pgfId-1018045"></a>If the <a href="../tempusCUI/create_clock.html">create_clock</a> assertion is applied on the pin of a design (not port), then the pin is modeled as an internal pin with the same name as that of the clock asserted on it. If a clock is created on a design port, then this port will be preserved as ETM I/O pin, with the same name as that of the port itself.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1018046"></a>create_clock [get_ports {CLKIN}] -name clk -period 3 -waveform {0 1.5}<br />create_clock [get_pins buf5/Y] -name clk3 &#8211;period 3 -waveform {0 1.5}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1018047"></a>    pin (CLKIN ) {<br />       clock : true ;<br />       direction : input ;<br />       capacitance : 0.0042;<br />   }<br />   pin (clk3 ) {<br />       clock : true ;<br />       direction : internal ;<br />       capacitance : 0.0110;<br />   }</pre>
+<h4><em>
+<a id="pgfId-1018048"></a><a id="70560"></a>Generated Clocks</em></h4>
+
+<p>
+<a id="pgfId-1018049"></a>The generated clocks that defined in a hierarchical block are supposed to be a part of the block itself and do not come from the top level. So ETM preserves generated clocks inside the model as internal pins using the Liberty generated_clock construct. The name of any such internal pin is the same as that of the generated clock.</p>
+<p>
+<a id="pgfId-1018050"></a>Some of the examples are described below.</p>
+<p>
+<a id="pgfId-1018051"></a><strong>Example 1: Single generated clock on a single pin</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1018052"></a><a href="../tempusCUI/create_generated_clock.html">create_generated_clock</a> &#8211;name gclk &#8211;source [get_ports clk] &#8211;divide_by 2 [get_pins buf1/A]</pre>
+
+<p>
+<a id="pgfId-1018053"></a>During the extraction process the pin &#8220;buf1/A&#8221; will be preserved as an internal pin in the library with name gclk. The model will show as follows:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1018054"></a>generated_clock (gclk) {<br />master_pin : clk;<br />divided_by : 2;<br />clock_pin : &#8220;gclk &#8220;;<br />} <br />pin (gclk ) { <br />clock: true ; <br />direction: internal ;<br />.<br />.<br />}</pre>
+<pagesection id="#id1018055">
+<a id="pgfId-1018055"></a><strong>Example 2: Multiple clocks on the same pin</strong></pagesection>
+
+<p>
+<a id="pgfId-1018056"></a>There are some design scenarios when multiple generated clocks are defined on a single pin. This asserts multiple clock definitions on the pins. In this case, during model extraction the pin is duplicated with the name of the clock. For example, in a design if there are two clock definitions, such as:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1018057"></a>create_generated_clock &#8211;name gclk1 &#8211;source [get_ports clk] &#8211;add &#8211;master_clock CLK &#8211;divide_by 2 [get_pins buf1/A]<br />create_generated_clock &#8211;name gclk2 &#8211;source [get_ports clk] &#8211;add &#8211;master_clock CLK &#8211;divide_by 2 [get_pins buf1/A]</pre>
+
+<p>
+<a id="pgfId-1018058"></a>During the extraction process the pin buf1/A will be preserved as an internal pin with names gclk1 and gclk2. The model will be as follows:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1018059"></a>generated_clock (gclk1) {<br />master_pin : clk;<br />divided_by : 2;<br />clock_pin : &#8220;gclk1 &#8220;;<br />} <br />generated_clock (gclk2) {<br />master_pin : clk;<br />divided_by : 2;<br />clock_pin : &#8220;gclk2 &#8220;;<br />} <br />pin (gclk1) { <br />clock: true; <br />direction: internal;<br />&#8230;..<br />}<br />pin (gclk2) { <br />clock: true; <br />direction: internal;<br />&#8230;..<br />}</pre>
+
+<p>
+<a id="pgfId-1018060"></a><strong>Example 3: Generated clocks on multiple pins</strong></p>
+<p>
+<a id="pgfId-1018061"></a>When a generated clock is defined on multiple pins, the software asserts a single clock definition on multiple pins. To handle this scenario, all the pins asserted with this clock are preserved as internal pins in the model with the name <code>[clock_name_&lt;count&gt;]</code> and the generated_clock construct is written in the model with all the pin names in the clock_pin attributes with a space between them. For example, consider a netlist having clock definitions on multiple pins.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1018062"></a>create_generated_clock &#8211;name gclk1 &#8211;source [get_ports clk] &#8211;add &#8211;master_clock CLK &#8211;divide_by 2 [get_pins {buf1/A buf2/A}]</pre>
+
+<p>
+<a id="pgfId-1018063"></a>During the extraction process, the pin buf1/A will be preserved as an internal pin in the library with the name gclk1_1; and the pin buf2/A will be preserved as an internal pin with name gclk1. The model will be as follows:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1018064"></a>generated_clock (gclk1) {<br />master_pin : clk;<br />divided_by : 2;<br />clock_pin : &#8220;gclk1_1 gclk1 &#8220;;<br />} <br />pin (gclk1_1) { <br />clock: true; <br />direction: internal;<br />&#8230;<br />}<br />pin (gclk1) { <br />clock: true; <br />direction: internal;<br />&#8230;<br />}</pre>
+
+<p>
+<a id="pgfId-1018065"></a>In this case when a ETM is read, two generated clocks gclk1_1 and gclk1 will be created on two internal pins - gclk1_1 and gclk1, respectively. Any constraint coming from the top level will match only with clock gclk1, and not with gclk1_1. To avoid such a situation, you can set <a href="../tempusCUI/timing_Category_Attributes.html">timing_library_generated_clock_use_group_name</a> attribute to <code>true</code>. When this attribute is enabled, the original clock (gclk1) is generated at two internal pins - gclk1_1 and gclk1. </p>
+<p>
+<a id="pgfId-1055884"></a>The <a href="../tempusCUI/report_clocks.html">report_clocks</a> command shows the following output:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1018067"></a>------------------------------------------------------------------------<br />                        Clock Descriptions<br />------------------------------------------------------------------------<br />Clock Name  Source                     Period  Lead    Trail   Gen  Prop<br />------------------------------------------------------------------------<br />clk         clkin                      3.600   0.000   1.800   n    y<br />gclk1       BLOCK/gclk1_1 BLOCK/gclk1  7.200   0.000   3.600   y    y<br />------------------------------------------------------------------------<br />On turning off this global, report_clocks will return:<br />------------------------------------------------------------------------<br />                        Clock Descriptions<br />---------------------------------------------------------------<br />Clock Name   Source         Period   Lead    Trail   Gen Prop<br />---------------------------------------------------------------<br />clk          clkin          3.600    0.000   1.800   n   y<br />gclk1        BLOCK/gclk1    7.200    0.000   3.600   y   y<br />gclk1_1      BLOCK/gclk1_1  7.200    0.000   3.600   y   y<br />----------------------------------------------------------</pre>
+
+<p>
+<a id="pgfId-1031230"></a><strong>Example 4: Multiple clocks on master clock root pin</strong></p>
+<p>
+<a id="pgfId-1031231"></a>Liberty supports the <code>master_pin</code> attribute inside a <code>generated_clock</code> group definition, which refers to the pin where the corresponding master clock is defined.</p>
+<p>
+<a id="pgfId-1031233"></a>Please note that you are not allowed to define a master clock name in the <code>generated_clock</code> group in Liberty. Due to this, the software may infer an incorrect master for the generated clock <code>genclk - </code>if multiple clocks are defined on the <code>CLKIN</code> pin.</p>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1031236"></a>generated_clock ( genclk ) {</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1031237"></a>divided_by : 2 ;</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1031238"></a>clock_pin : &quot; genclk &quot;;</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1031239"></a>master_pin : CLKIN ;</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1031240"></a>}</pre>
+<p>
+<a id="pgfId-1031144"></a>Hence, for the correct master clock association with the generated clocks, you need to provide the <a href="../tempusCUI/create_generated_clock.html">create_generated_clock</a> definition with the corresponding master clock, while reading the ETM at the top level.</p>
+<p>
+<a id="pgfId-1018068"></a><strong>Example 5: Generated clock in case of multi-ETM instantiation at top</strong></p>
+<p>
+<a id="pgfId-1018069"></a>When the <a href="../tempusCUI/timing_Category_Attributes.html">timing_prefix_module_name_with_library_generated_clock</a> attribute is set to <code>true</code>, the software appends the instance name to the clock pin name when creating a generated clock. </p>
+<p>
+<a id="pgfId-1037824"></a>For example, assume that the cell for instance a/b in the timing library contains the following generated clock group:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1018070"></a>generated_clock ( genclk1 ) {<br />      divided_by    :  2 ;<br />      clock_pin     :  &quot; genclk1 &quot;;<br />      master_pin    :  CLKIN ;<br />}</pre>
+
+<p>
+<a id="pgfId-1018071"></a>By default (<code>true</code>), the software creates a generated clock with the name - <code>genclk1</code>. </p>
+<p>
+<a id="pgfId-1037842"></a>When set to <code>false</code>, the software uses only the clock pin name when creating a generated clock. </p>
+<p>
+<a id="pgfId-1018072"></a>If ETM is instantiated at the top level as BLOCK1 and BLOCK2, then by default the <a href="../tempusCUI/report_clocks.html">report_clocks</a> command output will show the following:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1018073"></a>----------------------------------------------------------<br />                      Clock Descriptions<br />----------------------------------------------------------------------------<br />Clock Name     Source          Period  Lead   Trail   Generated   Propagated<br />----------------------------------------------------------------------------<br />BLOCK1/genclk1 BLOCK1/genclk1  7.200   0.000  3.600   y           y<br />BLOCK2/genclk1 BLOCK2/genclk1  7.200   0.000  3.600   y           y<br />----------------------------------------------------------------------------</pre>
+
+<p>
+<a id="pgfId-1018074"></a>If you do not want to differentiate between <code>genclk1</code> generated in various ETM instantiations, you can set <code></code>timing_prefix_module_name_with_library_generated_clock attribute to <code>false</code>. In this case, the <code>report_clocks</code> command will show the following output:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1018075"></a>-----------------------------------------------------------------------<br />                     Clock Descriptions<br />-----------------------------------------------------------------------<br />Clock Name  Source          Period   Lead   Trail  Generated Propagated<br />-----------------------------------------------------------------------<br />genclk1     BLOCK2/genclk1  7.200    0.000  3.600  y         y<br />-----------------------------------------------------------------------</pre>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1018076"></a>You will need to ensure that the constraints are applied with respect to the generated clock naming. If required, you can remove the library generated clocks and then apply the specified generated clocks so that minimal changes are required in the constraints.</div>
+
+<h4><em>
+<a id="pgfId-1018077"></a><a id="93810"></a>Clocks with Sequential and Combinational Arcs</em></h4>
+
+<p>
+<a id="pgfId-1018078"></a>Consider a case where both the sequential and combinational arcs exist between a clock (CLK) and an output (OUT) pin. If any of the early/late sequential/combination arcs are missing (due to a path exception) between the CLK and OUT pins, the CLK pin is duplicated as two pins with _SEQ_pin and _COMB_pin suffixes. All the combinational arcs starting from this clock root to the duplicated pin are bound with the &#8220;_COMB_pin&#8221; suffix and all the sequential arcs are bound to be duplicated pin with the &#8220;_SEQ_pin&#8221; suffix.</p>
+
+<p class="webflare-indent1"><strong>Figure -5
+<a id="pgfId-1018079"></a>Sequential and combinational arcs between a clock</strong></p>
+<p>
+<a id="pgfId-1018083"></a></p>
+<div class="webflare-div-image">
+<img width="431" height="139" src="images/timingmodeling-10.gif" /></div>
+
+<p>
+<a id="pgfId-1018084"></a>The following will be created in the ETM:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1018085"></a>pin (CLKIN_SEQ_pin ) {<br />    clock : true ;<br />    direction : internal ;<br />    capacitance : 0.0110;<br />    }<br />pin (CLKIN_COMB_pin ) {<br />    clock : true ;<br />    direction : internal ;<br />    capacitance : 0.0110;<br />    }<br />pin (DATAOUT ) {<br />    direction : output ;<br />    timing() {<br />        timing_type : combinational ;<br />        fall_transition (lut_timing_3 ){ &#8230; }<br />        related_pin :&quot; CLKIN_COMB_pin &quot;;<br />    }<br />    timing() {<br />        timing_type : rising_edge ;<br />        fall_transition (lut_timing_3 ){ &#8230; }<br />        related_pin :&quot; CLKIN_SEQ_pin &quot;;<br />    }</pre>
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="timingmodeling_etmgenerationmmmc.html" id="prev" title="ETM Generation for MMMC Designs">ETM Generation for MMMC Design ...</a></em></b><b><em><a href="timingmodeling_loaddependantnetworks.html" id="nex" title="Secondary Load Dependent Networks">Secondary Load Dependent Netwo ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

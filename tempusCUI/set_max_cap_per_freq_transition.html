@@ -1,0 +1,178 @@
+
+<html><head><title>set_max_cap_per_freq_transition</title>
+<meta name="page_sequence" content="37114000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="gsatish" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287410" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_max_cap_per_freq_transition" />
+<meta name="Keywords" content="set maximum capacitance of pin design,maximum capacitance" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Timing Analysis," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287410" />
+<meta name="NextFile" content="set_max_transition_per_freq.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_max_cap_per_freq.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- set_max_cap_per_freq_transition" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="set_max_cap_per_freq.html" title="set_max_cap_per_freq">set_max_cap_per_freq</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_max_transition_per_freq.html" title="set_max_transition_per_freq">set_max_transition_per_freq</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_max_cap_per_freq_transition</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>set_max_cap_per_freq_transition <span id="set_max_cap_per_freq_transition-set_max_cap_per_freq_transition"></span>&#xa0;<span class="confluence-anchor-link">&#xa0;</span><br />[-help]<br />-cap {&#xa0;{<code><em>cap11</em></code>&#xa0;<code><em>cap12 cap13</em></code>&#8230;} {<code><em>cap21 cap22 cap23</em></code>} {<code><em>cap31 cap32 cap33</em></code>&#8230;}}&#xa0;<br />[-force]<br />-freq {<code><em>freq1</em></code>&#xa0;<code><em>freq2 freq3</em></code>&#8230;}&#xa0;<br /><code>[-input_pin&#xa0;<code><em>inputpin</em></code>]</code>&#xa0;<br />[-lib <em>libName</em>]&#xa0;<br />-pins {<code><em>cell</em></code>&#xa0;output<code><em>pin</em></code>}&#xa0;</code><br />-transition {freq1 freq2 ...}<br /></code></p>
+
+<p>Sets the maximum capacitance of a pin in the design. Considers both the input transition time and the output frequency. If the maximum capacitance exceeds this value, the&#xa0;<code><a href="report_constraint.html">report_constraint</a></code><code>&#xa0;-drv_violation_type max_capacitance</code>&#xa0;command displays a capacitance violation.</p>
+
+<p>You can use this command any time after loading the timing library files (that is, after importing or restoring the design).</p>
+<h4 id="set_max_cap_per_freq_transition-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">
+<p>Outputs a brief description that includes type and default information for each<code>set_max_cap_per_freq_transition</code>&#xa0;parameter.</p>
+
+<p>For a detailed description of the command and all of its parameters, use&#xa0;<code>man set_max_cap_per_freq_transition</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;<code>-cap {{</code><code><em>cap11</em></code><code><em>cap12 cap13</em></code><code>&#8230;} {</code><code><em>cap21 cap22 cap23&#8230;</em></code><code>}&#xa0;</code><code>{</code><code><em>cap31 cap32 cap33&#8230;</em></code><code>}}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a table of capacitance values with the maximum output pin capacitances associated with&#xa0;<code>-freq</code>&#xa0;and&#xa0;<code>-transition</code>&#xa0;values. The total number of<code>&#xa0;-cap</code>&#xa0;values must be the total number&#xa0;<code>-freq</code>&#xa0;values times the total number of&#xa0;<code>-transition</code>&#xa0;values. The&#xa0;<code>-freq</code>&#xa0;and&#xa0;<code>-transition </code>values must be specified before&#xa0;<code>-cap</code>.</p>
+
+<p>The capacitance values are floats in units of pico farad and all values must be greater than or equal to zero. The capacitance table uses frequency as the first index and the input transition as the second index. For example,&#xa0;<code>cap11</code>,<code>cap12</code>, and&#xa0;<code>cap13</code>&#xa0;are for&#xa0;<code>freq1</code>, while&#xa0;<code>c12</code>,&#xa0;<code>c22</code>, and&#xa0;<code>c32</code>&#xa0;correspond to the input transition&#xa0;<code>tran2</code>.</p>
+
+<p>The maximum capacitance is derived from a linear interpolation (or extrapolation) for a given frequency value and a transition value using two frequency values and two transition values n the table (closest above and below for interpolation, the two closest for extrapolation.</p>
+
+<p><em>Type:</em>&#xa0;Float, specified in units of pF</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-force</code></p>
+</td>
+<td class="confluenceTd">
+<p>Computes the maximum capacitance from the interpolated&#xa0;<code>-freq, -transition,&#xa0;</code>and&#xa0;<code>-cap</code>&#xa0;values only, and ignores any previously defined<code>max_capacitance</code>&#xa0;values for these pins in the library.</p>
+
+<p><em>Default:</em>&#xa0;(<code>-force</code>&#xa0;not specified) Computes the maximum capacitance using the worst case (minimum value) between the library&#xa0;<code>max_capacitance</code>&#xa0;values and the interpolated&#xa0;<code>-cap</code>&#xa0;values.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-freq {</code><code><em>freq1</em></code><code><em>freq2 freq3</em></code><code>&#8230;}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a list of at least two frequency values with the toggle frequencies at the output pin. Frequency values must be increasing, and the total number of frequency values cannot exceed 255.</p>
+
+<p><em>Type:</em>&#xa0;Float, specified in units of Hz. All values must be equal to or greater than&#xa0;<code>0</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;<code>-input_pin&#xa0;</code><code><em>inputpin</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the input pin name corresponding to the input transition values in&#xa0;as specified using the <code>-transition</code> parameter. If the&#xa0;<code>-<em>inputpin</em></code>&#xa0;parameter is not specified,&#xa0;then <code>-transition</code>&#xa0;parameter values correspond to all the input pins.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-lib <em>libName&#xa0;</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the library name from inside a&#xa0;<code>.lib</code>&#xa0;file to update the cell-pins.</p>
+
+<p><em>Default:</em>&#xa0;If a library name is not specified, modifies the matching cell-pins in all libraries</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-pins {</code><code><em>cell</em></code><code>&#xa0;output</code><code><em>pin</em></code><code>}</code>&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p>Adds the new capacitance constraints to the specified set of cells and pins. You can specify output or inout pins; input pins are ignored. The asterisk (<code>*</code>) wildcard character can be used in a cell or pin name.</p>
+
+<p>If there is already a table associated with the same input-output pair (input pins are specified using&#xa0;<code>-input_pin</code>), it is replaced with the new constraints; otherwise, it is added to the output maximum capacitance table list.</p>
+
+<p>For analysis and optimization, the software uses the most restrictive (the lowest capacitance) value from either the table or the&#xa0;<code>.lib</code><code>max_capacitance</code>. If you also specify the&#xa0;<code>-force</code>&#xa0;parameter, the <code>max_capacitance</code>&#xa0;value is ignored. The final value can be further modified using&#xa0;<code>.sdc&#xa0;</code><code>set_max_capacitance</code>&#xa0;statements.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-transition {freq1 freq2 ...}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a list of at least two transition values with the input transition times. Transition times must be increasing in value, and the total number of transition times cannot exceed 255.</p>
+
+<p><em>Type:</em>&#xa0;Float, specified in units of nanoseconds, and all values must be equal to or greater than&#xa0;<code>0</code>.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_max_cap_per_freq_transition-Examples">Examples</h4>
+<ul><li>The following command establishes a maximum capacitance table for all pins and on all the cells in the libraries:<br /><code>set_max_cap_per_freq_transition -force -pins {* *} -freq {1e8 1.25e8 1.5e8} \<br />-transition {450 475 500} -cap {{0.022 0.017 0.012} {0.02 0.014 0.01} {0.018 0.013 0.008}}</code><br /><br />The table is shown below:<br /><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 450 &#xa0; &#xa0; &#xa0;475 &#xa0; &#xa0; &#xa0;500</code><br /><code>1e8 &#xa0; &#xa0; &#xa0; 0.022 &#xa0; &#xa0;0.017 &#xa0; &#xa0;0.012</code><br /><code>1.25e8 &#xa0; &#xa0;0.02 &#xa0; &#xa0; 0.014 &#xa0; &#xa0;0.01</code><br /><code>1.5e8 &#xa0; &#xa0; 0.018 &#xa0; &#xa0;0.013 &#xa0; &#xa0;0.008&#xa0;</code></li></ul><h4 id="set_max_cap_per_freq_transition-RelatedCommands">Related Commands</h4>
+<ul><li><code><span style="color:var(--ds-text,#172b4d);"><a href="set_max_cap_per_freq.html">set_max_cap_per_freq</a></span></code></li><li><code><a href="../tempusCUI/set_max_transition_per_freq.html" rel="nofollow">set_max_transition_per_freq</a></code></li><li><code><a href="report_constraint.html">report_constraint</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_max_cap_per_freq.html" id="prev" title="set_max_cap_per_freq">set_max_cap_per_freq</a></em></b><b><em><a href="set_max_transition_per_freq.html" id="nex" title="set_max_transition_per_freq">set_max_transition_per_freq</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

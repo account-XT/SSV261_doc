@@ -1,0 +1,262 @@
+
+<html><head><title>gui_show_markers</title>
+<meta name="page_sequence" content="15006000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287123" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="gui_show_markers" />
+<meta name="Keywords" content="get list of violations, design database, generate markers for violations, geometry violations, metal density violations, violation markers" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Stylus,Stylus," />
+<meta name="prod_subfeature" content="Verify,GUI," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287123" />
+<meta name="NextFile" content="read_markers.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="delete_markers.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- gui_show_markers" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="delete_markers.html" title="delete_markers">delete_markers</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="read_markers.html" title="read_markers">read_markers</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>gui_show_markers</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>gui_show_markers<span class="confluence-anchor-link" id="gui_show_markers-gui_show_markers"></span><span id="gui_show_markers-gui_show_markers"></span> <br />[-help] <br />[-ac_limit]&#xa0;<br />[-all]<br />[-append]&#xa0;<br />[-area&#xa0;{<em>x1 y1 x2 y2</em>}]&#xa0;<br />[-connectivity] <br />[-density] <br /><span>[-display_by_layer]</span><br />[-geometry]<br />[-max_error_per_type <em>value</em>] <br />[-no_false_marker] <br />[-overlap] <br />[-process_antenna]<br /> [-search_description]<br />[-short] <br />[-filter_query&#xa0;<em>LO_formula</em> | {-filter <em>filterString</em>&#xa0;-filter_mode {AND | OR | NOT}}]&#xa0;<br /></code><br /></code></p>
+
+<p>Displays a list of violations in the. The software generates markers for the violations after you use one or more verification commands.</p>
+<h4 id="gui_show_markers-GeometryorMetalDensityViolations">Geometry or Metal Density Violations</h4>
+
+<p>Updates geometry and metal density violation markers incrementally during an Tempus&#xa0;session--that is, it displays the markers generated the first time you run the <code>check_metal_density</code>&#xa0;command and adds new markers, or deletes markers, on subsequent runs during the same session. If the software finds violations during a subsequent run that were already found previously, the browser display does not change, as there is no incremental update.</p>
+
+<p>The browser can make incremental changes because <code>check_metal_density</code>&#xa0;can check a small area of the design and update the database. As a result of this behavior, Tempus&#xa0;saves the information from the first verification run.</p>
+<h4 id="gui_show_markers-Connectivity,ProcessAntennas,orACLimitViolations">Connectivity, Process Antennas, or AC Limit Violations</h4>
+
+<p>Overwrites connectivity, process antenna, and AC limit violation markers if the <code>check_process_antenna</code>, or <code>check_ac_limits</code>&#xa0;commands are run more than once during an Tempus&#xa0;session. These commands are net-based, not area-based, so the browser does not make incremental updates for them. As a result of this behavior, Tempus&#xa0;does not keep the information from the first verification run.</p>
+<h4 id="gui_show_markers-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" valign="top">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Outputs a brief description that includes type and default information for each <code>gui_show_markers</code> parameter.</p>
+
+<p>For a detailed description of the command and all of its parameters, use the <code>man</code> command: <br /><code>man gui_show_markers</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-ac_limit</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Displays AC limit violations.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-all</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Displays all the violations that are present in the design.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-append</code></p>
+</td>
+<td class="confluenceTd">
+<p><span style="color:var(--ds-text,#172b4d);">Appends accumulated filtered markers to the existing markers in violation browser.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top"><code>-area <strong>{</strong><em>x1 y1 x2 y2</em><strong>}</strong></code>
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the coordinates of the area whose violations to display. For example, <code>gui_show_markers -area {0 0 </code><code>100 100}</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-connectivity</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Displays connectivity violations.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-density</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Displays metal density violations.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-display_by_layer</code></td>
+<td class="confluenceTd">Displays the list of violations by the layer instead of route type.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top"><code>-filter <em>filterString</em></code>
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies a text string in the violation message. Violation Browser searches the message of each violation and displays only the violations whose messages match the search conditions.</p>
+
+<p>To specify a list of strings, separate each string with a space.</p>
+
+<p>To specify a literal string with space in it, enclose the string in double quotation marks.</p>
+
+<p>For example, you can specify strings such as the following:</p>
+<ul><li><code>METAL5</code></li></ul><ul><li><code>(600, 500)</code></li></ul><ul><li><code>METAL3 (700, 400)</code></li></ul><ul><li><code>&quot;Pin of Net&quot;</code></li></ul></td>
+</tr>
+<tr><td class="confluenceTd" valign="top"><code>-filter_mode {AND | OR | NOT}</code>
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the condition for searching multiple strings in the violation browser. You cannot filter complex expressions because the <code>AND</code>, <code>OR</code>, and <code>NOT</code> parameters are mutually exclusive.</p>
+<ul><li>The <code>AND</code> and <code>OR</code> conditions work on single strings or multiple strings.</li></ul><ul><li>The <code>NOT</code> condition works only on a single string.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd"><code>-filter_query <em>LO_formula</em></code></td>
+<td class="confluenceTd">
+<p>Specifies a complex logical expression for filtering violations. This option cannot be used along with <code>-filter</code> or <code>-filter_mode</code>. You can specify the AND, OR, and NOT conditions in the search expression. Use:</p>
+<ul><li><code>&amp;&amp;</code>&#xa0;between strings in the expression to specify the AND condition.</li><li><code>||</code>&#xa0;between strings in the expression to specify the OR condition.</li><li>! before a string to specify the NOT condition. Note that ! is an one&#39;s complement operator. So for example, <code>!{object(net1) &amp;&amp; layer(m2)}</code> is not allowed.</li></ul>
+<p>The <code>-filter_query</code> parameter supports searches in the object, layer, and description areas. The area can be specified using the <code>object</code>, <code>layer</code>, and <code>desc</code>&#xa0;keywords. For example:</p>
+
+<p><code>object(net1) || layer(m2) &amp;&amp; desc(xxx)</code><br /><br />You can also use the wildcards * and ? in the search expression. For example:<br /><code>!object(clk*) &amp;&amp; layer(m?)</code></p>
+
+<p>To specify a literal string with space in it, enclose the string in double quotation marks. For example:</p>
+
+<p><code>!object(clk*) &amp;&amp; desc(&quot;prl spacing&quot;)</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-geometry</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Displays geometry violations.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-max_error_per_type&#xa0;<em>value</em></code></td>
+<td class="confluenceTd">
+<p>Specifies a limit for the number of violations parsed for each violation type. For example, if you set&#xa0;<code>gui_show_markers -max_error_per_type 500</code>, the Violation Browser parses and displays only 500 markers per error type. Use this parameter if you are loading a large DRC file with millions of violations to prevent the databse from becoming slow while loading the file and to limit the number of violations you review in the browser.</p>
+
+<p>By default, the Violation Browser displays&#xa0;<strong>all</strong>&#xa0;markers.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-no_false_marker</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Prevents Tempus from displaying false violations.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-overlap</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Displays overlaps in the design.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-process_antenna</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Displays process antenna violations.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-search_description</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Searches for text in the violation message and the violation description.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-short</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Displays short violations.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="gui_show_markers-Examples">Examples</h4>
+
+<p>The following command displays all violations whose marker title contains <code>METAL3</code>:</p>
+
+<p><code>gui_show_markers -all -filter METAL3</code></p>
+
+<p>The following command displays geometry violations whose marker title contains <code>METAL3</code> or <code>tdsp</code>:</p>
+
+<p><code>gui_show_markers -geometry -filter {METAL3 tdsp} -filter_mode OR</code></p>
+
+<p>The following command displays geometry violations whose marker title or marker description field contains <code>Min</code> and <code>0.24</code> and <code>METAL3</code>:</p>
+
+<p><code>gui_show_markers -geometry -filter {Min 0.24 METAL3} -filter_mode AND -search_description</code></p>
+
+<p>The following command displays violations occurring on Metal4 or Metal5 layers but excludes short violations:</p>
+
+<p><code>gui_show_markers -filter_query {</code><code>!Short &amp;&amp; (m4 || m5)}</code></p>
+<h4 id="gui_show_markers-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="check_ac_limits.html">check_ac_limits</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="delete_markers.html" id="prev" title="delete_markers">delete_markers</a></em></b><b><em><a href="read_markers.html" id="nex" title="read_markers">read_markers</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

@@ -1,0 +1,775 @@
+
+<html><head><title>SOCV Data Flow</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823911" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="SOCV Data Flow" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823911" />
+<meta name="NextFile" content="analysisandreporting_timingbehaviorsocvmode.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_socvanalysis.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- SOCV Data Flow" />
+<meta name="Keywords" content="socv data flow" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Analysis,Stylus" />
+<meta name="prod_subfeature" content="Timing Analysis" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_socvanalysis.html" title="Statistical On-Chip Variation (SOCV) Analysis">Statistical On-Chip Variation  ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_timingbehaviorsocvmode.html" title="Timing Behaviors in SOCV Analysis Mode">Timing Behaviors in SOCV Analy ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:socvdataflow" title="SOCV Data Flow"></a><h4>
+<a id="pgfId-1013386"></a><a id="98199"></a>SOCV Data Flow</h4>
+
+<p>
+<a id="pgfId-1013387"></a>SOCV analysis requires only the addition of variation libraries to the typical timing sign-off and closure configuration. Variation data can be provided either as a Cadence SOCV library or as Liberty Variation Format (LVF) library. Tempus fully supports both library formats including modeling for variation on delay, transition, and constraints.</p>
+
+<p class="webflare-indent1"><strong>Figure -72
+<a id="pgfId-1013388"></a>SOCV Data Flow</strong></p>
+<p>
+<a id="pgfId-1013392"></a></p>
+<div class="webflare-div-image">
+<img width="377" height="285" src="images/analysisandreporting-81.gif" /></div>
+<h4>
+<a id="pgfId-1013394"></a><a id="10963"></a>Reading Variation Library Data</h4>
+
+<p>
+<a id="pgfId-1013395"></a>Tempus provides both a single-corner and MMMC use model, which can accommodate SOCV or LVF format variation libraries.</p>
+<p>
+<a id="pgfId-1013396"></a>In single-corner mode, you can use the following parameter to read Cadence SOCV format libraries:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053696"></a><a href="../tempustxtcmdref/read_lib.html">read_lib</a> &#8211;socv [list libA.socv libB.socv &#8230; ]</pre>
+
+<p>
+<a id="pgfId-1013398"></a><code></code>To read Liberty libraries with integrated LVF data, you should read the library in the same manner as a non-LVF Liberty timing library.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053701"></a>read_lib [list libA-LVF.lib libB-LVF.lib &#8230;]</pre>
+
+<p>
+<a id="pgfId-1013400"></a>When working in an MMMC environment, you should specify the variation libraries as part of the <a href="../tempustxtcmdref/create_library_set.html">create_library_set</a> command in your MMMC configuration file. To incorporate Cadence SOCV format libraries:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1013401"></a>create_library_set -name libsetMax <br />-timing [list <br />${library_path_1}/lib1.lib <br />${library_path_1}/lib2.lib <br />] <br />-socv [list <br />${socv_lib_path}/lib1.socv <br />${socv_lib_path}/lib2.socv <br />]</pre>
+
+<p>
+<a id="pgfId-1013402"></a>To use Liberty libraries with merged LVF data, simply load the Liberty libraries with the <code>create_library_set -timing</code> parameter.</p>
+
+<h4>
+<a id="pgfId-1013404"></a><a id="78821"></a>Using AOCV Derati<a id="aocvderating"></a>ng Libraries with SOCV Analysis</h4>
+
+<p>
+<a id="pgfId-1013405"></a>Tempus allows the option of using AOCV libraries to provide variation modeling data for the SOCV flow. This method can be used for initial experimentation and testing of the SOCV flow, but lacks the accuracy required for signoff. Using AOCV as a source will provide only variation on delay; no variation on transition or constraints.</p>
+<p>
+<a id="pgfId-1013406"></a>To utilize the AOCV bootstrap method, you must set the timing global variables to control transformation of AOCV data. These settings must be made before loading any timing library data.</p>
+<p>
+<a id="pgfId-1013407"></a>To enable the transformation process, use the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053718"></a>set <a href="../tempustxtcmdref/timing_library_infer_socv_from_aocv.html">timing_library_infer_socv_from_aocv</a> true</pre>
+
+<p>
+<a id="pgfId-1013409"></a><code></code>The AOCV derating libraries are characterized to a particular sigma value - without additional guidance the transformation process will consider the AOCV library to be at 3-sigma. To define the characterization sigma of the AOCV libraries, you can make the following setting:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053724"></a>set <a href="../tempustxtcmdref/timing_library_scale_aocv_to_socv_to_n_sigma.html">timing_library_scale_aocv_to_socv_to_n_sigma</a> 4.5</pre>
+
+<p>
+<a id="pgfId-1013411"></a>You should specify reading the AOCV libraries in the same way as for normal AOCV analysis.</p>
+<p>
+<a id="pgfId-1013412"></a>For single-corner mode, use the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053730"></a><a href="../tempustxtcmdref/read_lib.html">read_lib</a> &#8211;aocv {myLib.aocv &#8230;}</pre>
+
+<p>
+<a id="pgfId-1013414"></a><code></code>For a MMMC environment, you can make the following settings:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1013415"></a>create_library_set -name libsetMax <br />-timing [list <br />     ${library_path_1}/lib1.lib <br />     ${library_path_1}/lib2.lib <br />] <br />-aocv [list <br />     ${aocv_lib_path}/lib1.aocv <br />     ${aocv_lib_path}/lib2.aocv <br />]</pre>
+<h4>
+<a id="pgfId-1013417"></a><a id="76009"></a>SOCV <a id="SOCVAnalysis"></a>Analysis</h4>
+
+<p>
+<a id="pgfId-1013418"></a>The SOCV analysis is essentially an optimized, single parameter statistical analysis, that is built on the underlying Tempus SSTA analysis engine. From a user-interface point of view, the software is able to present results in terms of discrete values for delays, arrivals, and slacks. The interface can also show statistical representation of data.</p>
+
+<h4>
+<a id="pgfId-1013420"></a><a id="38260"></a>Enabling SOCV Analysis</h4>
+
+<p>
+<a id="pgfId-1013421"></a>The SOCV analysis can be enabled using the <a href="../tempustxtcmdref/set_analysis_mode.html">set_analysis_mode</a> <code>-socv</code> parameter, as shown below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053747"></a><a href="../tempustxtcmdref/set_analysis_mode.html">set_analysis_mode</a> -socv true -analysisType onChipVariation -cppr both</pre>
+<h4>
+<a id="pgfId-1013424"></a><code></code>Configuring SOCV Max Operation<a id="85354"></a></h4>
+
+<p>
+<a id="pgfId-1013425"></a>During arrival and required timing propagation, timing data values are represented concurrently by statistical mean and sigma values. At the output of multi-input gates, the statistical arrival times must be merged in a conservative operation. There are several options for controlling the statistical Max operation.</p>
+
+<p class="webflare-indent1"><strong>Figure -73
+<a id="pgfId-1013426"></a>SOCV Max Operation</strong></p>
+<p>
+<a id="pgfId-1013430"></a><strong>
+</strong>
+</p>
+<div class="webflare-div-image">
+<img width="515" height="278" src="images/analysisandreporting-82.gif" /></div>
+
+<p>
+<a id="pgfId-1013431"></a>Selection of the Max operation can be controlled by making the following setting:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053753"></a>set <a href="../tempustxtcmdref/timing_socv_statistical_min_max_mode.html">timing_socv_statistical_min_max_mode</a> mean_and_three_sigma_bounded</pre>
+
+<p>
+<a id="pgfId-1013433"></a><code></code>In this mode, the worst-case calculations of mean value and standard deviation are performed separately.</p>
+
+<h4>
+<a id="pgfId-1013466"></a><a id="30025"></a>SOCV Analysis Reporting</h4>
+
+<p>
+<a id="pgfId-1013467"></a>Reports in SOCV analysis mode will, by default, present timing data in discrete numbers rather than as statistical quantities. If desired, the timing report can be configured to report the statistical mean and sigma of the various timing data. The format of the timing report can be customized by a combination of global settings and <a href="../tempustxtcmdref/report_timing.html">report_timing</a> <code>&#8211;format</code> options.</p>
+<p>
+<a id="pgfId-1013468"></a>All the timing calculations are performed in the statistical domain. For example, adding delays along a path to determine an arrival time calculation of slack-based on subtraction of arrival and required times. Discrete representations of these values are computed as mean + n*sigma &#8211; where n is typically 3.0.</p>
+
+<h4>
+<a id="pgfId-1013470"></a><a id="18445"></a>Path Reporting <a id="PathReportingWithDiscreteValues"></a>With Discrete Values</h4>
+
+<p>
+<a id="pgfId-1013471"></a>The default timing report is configured to report timing quantities as discrete numbers rather than as statistical quantities. The <code>report_timing</code> fields: slew, delay, and arrival will still report discrete numeric values.</p>
+<p>
+<a id="pgfId-1013472"></a>As a result of calculating arrival times in the statistical realm, adding the current delay to the previous arrival will generally not add up exactly to the next arrival time in the report:</p>
+
+<p>
+<a id="pgfId-1013476"></a></p>
+<div class="webflare-div-image">
+<img width="529" height="190" src="images/analysisandreporting-83.gif" /></div>
+
+<p>
+<a id="pgfId-1013477"></a>The statistical mean and sigma representation of timing data is converted to discrete values by the formula: mean + n-sigma, where n is a user-specifiable value. To control the sigma multiplier, you can use the <a href="../tempustxtcmdref/set_socv_reporting_nsigma_multiplier.html">set_socv_reporting_nsigma_multiplier</a> command. This command supports n-sigma specification per view per setup/hold combination.</p>
+<p>
+<a id="pgfId-1013478"></a>To apply sigma multiplier to the specified view in setup mode, use the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1013479"></a>set_socv_reporting_nsigma_multiplier -setup 2.5 -view std_max_setup</pre>
+<h4>
+<a id="pgfId-1013481"></a><a id="50549"></a>Path Reporting with Statistical Data</h4>
+
+<p>
+<a id="pgfId-1013482"></a>The <a href="../tempustxtcmdref/report_timing.html">report_timing</a> command now supports additional statistical report fields when operating in SOCV mode.</p>
+<ul><li>
+<a id="pgfId-1013483"></a>The delay_mean and delay_sigma fields provide statistical data for each timing arc</li><li>
+<a id="pgfId-1013484"></a>The slew_mean and slew_sigma fields provide data for transitions</li><li>
+<a id="pgfId-1013485"></a>The arrival_mean and arrival_sigma fields provide the statistical information for arrival timing</li></ul>
+
+
+<p>
+<a id="pgfId-1013486"></a>The conversion of statistical quantities in the report to discrete values is computed by:</p>
+<ul><li>
+<a id="pgfId-1013487"></a>New mean is the sum of the means: µ3 = µ1 +µ2</li><li>
+<a id="pgfId-1013488"></a>New sigma is the root-sum-squared of sigmas: <img width="13" height="19" src="images/analysisandreporting-84.gif" />
+3 = <img width="13" height="19" src="images/analysisandreporting-85.gif" />
+1^2 + <img width="13" height="19" src="images/analysisandreporting-86.gif" />
+2^2<br />
+<a id="pgfId-1013492"></a><div class="webflare-div-image">
+<img width="652" height="303" src="images/analysisandreporting-87.gif" /></div></li></ul>
+
+
+
+
+<h4>
+<a id="pgfId-1013494"></a><a id="17376"></a>Summary Section Reporting</h4>
+
+<p>
+<a id="pgfId-1013495"></a>The summary section of the <a href="../tempustxtcmdref/report_timing.html">report_timing</a> report is where the final arrival and required times are calculated, and the path slack is determined. Other quantities such as CPPR, Uncertainty, and Setup/Hold checks values are also accounted in this section&#8217;s calculations. Like the detailed path report, all calculations are initially performed using statistical arithmetic of the mean and sigma values. The discrete representations of these values are reported based on the via mean +n-sigma conversion.</p>
+<p>
+<a id="pgfId-1013496"></a>By default, the <code>report_timing</code> command output will display discrete representations of the data in the summary section of the report. For example,</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053787"></a>report_timing -from [all_reg] -to [all_reg] &gt; socv_nonverbose.rpt</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053788"></a>###############################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053789"></a>Path 1: MET Setup Check with Pin lsi/A1/CP <br />Endpoint:   lsi/A1/D  (v) checked with  leading edge of &#39;clk2&#39;<br />Beginpoint: lsi/A15/Q (v) triggered by  leading edge of &#39;clk2&#39;<br />Path Groups: {clk2}<br />Other End Arrival Time          6.012<br />- Setup                         0.021<br />+ Phase Shift                  20.000<br />+ CPPR Adjustment               0.006<br />= Required Time                25.995<br />- Arrival Time                  6.080<br />= Slack Time                   19.921<br />     Clock Rise Edge                  6.000<br />     + Clock Network Latency (Prop)   0.019<br />     = Beginpoint Arrival Time        6.019<br />     -----------------------------------------------------------------------<br />     Instance   Arc             Cell       Delay     Arrival     Required  <br />                                                     Time        Time  <br />     ----------------------------------------------------------------------<br />     lsi/A15    CP ^            -          -         6.019       25.951  <br />     lsi/A15    CP ^ -&gt; Q v     TG_P45     0.065     6.080       26.003  <br />     lsi/A1     D v             TG_P45     0.000     6.080       26.003  <br />     ----------------------------------------------------------------------</pre>
+
+<p>
+<a id="pgfId-1013501"></a>To enable the display of related statistical representation of data in the summary section, you can set the following global variable to <code>true</code>:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1095654"></a><a href="../tempustxtcmdref/timing_report_enable_verbose_ssta_mode.html">timing_report_enable_verbose_ssta_mode</a></pre>
+
+<p>
+<a id="pgfId-1013503"></a>With this setting, additional details will be added to the <code>report_timing</code> summary section. The current &#8220;n&#8221; value for n-sigma conversion is shown, along with the mean and sigma components for each data value. For example,</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053805"></a>report_timing -from [all_reg] -to [all_reg] &gt; socv_verbose.rpt</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053806"></a>###############################################################</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053807"></a>Path 1: MET Setup Check with Pin lsi/A1/CP <br />Endpoint:   lsi/A1/D  (v) checked with  leading edge of &#39;clk2&#39;<br />Beginpoint: lsi/A15/Q (v) triggered by  leading edge of &#39;clk2&#39;<br />Path Groups: {clk2}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053808"></a>Other End Arrival Time          6.012 (-3.00S) |  6.014  |  0.001<br />- Setup                         0.021 (+3.00S) |  0.011  |  0.003<br />+ Phase Shift                  20.000<br />+ CPPR Adjustment               0.006 (+3.00S) |  0.000  |  0.002<br />= Required Time                25.995 (-3.00S) | 26.003  |  0.003<br />- Arrival Time                  6.080 (+3.00S) |  6.067  |  0.004<br />= Slack Time                   19.921 (-3.00S) | 19.936  |  0.005<br />    Clock Rise Edge                    6.000<br />      + Clock Network Latency (Prop)   0.019 (+3.00S)  |  0.014  |  0.002<br />      = Beginpoint Arrival Time        6.019 (+3.00S)  |  6.014  |  0.002<br />---------------------------------------------------------------------------<br />    Instance   Arc            Cell         Delay      Arrival    Required  <br />                                                      Time       Time  <br />    -----------------------------------------------------------------------<br />    lsi/A15    CP ^           -            -          6.019      25.951  <br />    lsi/A15    CP ^ -&gt; Q v    TG_P45       0.065      6.080      26.003  <br />    lsi/A1     D v            TG_P45       0.000      6.080      26.003  <br />    -----------------------------------------------------------------------</pre>
+<h4>
+<a id="pgfId-1013509"></a><a id="20474"></a>Sample Initialization and Configuration Scripts<a id="SampleInitializationandConfigurationScripts"></a></h4>
+<h4><em>
+<a id="pgfId-1013510"></a>Single-Corner Use Model (non-MMMC) - SOCV Native Libraries</em></h4>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053813"></a>set timing_socv_statistical_min_max_mode three_sigma_bounded<br />set_socv_reporting_nsigma_multiplier -setup 2.5<br />set timing_report_enable_verbose_ssta_mode true</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053814"></a>set report_timing_format {timing_point edge cell slew load \<br />delay_mean delay_sigma delay \<br />arrival_mean arrival_sigma arrival}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053815"></a>read_lib ${LIB_DIR}/standard.lib<br />read_lib -socv [list ${LIB_DIR}/socv/standard.socv]</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053816"></a>read_verilog ./test.v<br />set_top_module test<br />read_sdc ./test.sdc</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053817"></a>set_analysis_mode -socv true -cppr both</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053818"></a>report_timing</pre>
+<h4><em>
+<a id="pgfId-1013517"></a>Single-Corner Use Model (non-MMMC) - LVF Native Libraries</em></h4>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053823"></a>set timing_socv_statistical_min_max_mode three_sigma_bounded<br />set_socv_reporting_nsigma_multiplier -setup 2.5<br />set timing_report_enable_verbose_ssta_mode true</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053824"></a>set report_timing_format {timing_point edge cell slew load \<br />delay_mean delay_sigma delay \<br />arrival_mean arrival_sigma arrival}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053825"></a>read_lib ${LIB_DIR}/standard-lvf.lib</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053826"></a>read_verilog ./test.v<br />set_top_module test<br />read_sdc ./test.sdc</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053827"></a>set_analysis_mode -socv true -cppr both</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053828"></a>report_timing</pre>
+<h4><em>
+<a id="pgfId-1013524"></a>Single-Corner Use Model (non-MMMC) - AOCV Bootstrap Mode</em></h4>
+
+<p>
+<a id="pgfId-1013525"></a>When running in AOCV bootstrap mode, load the AOCV libraries. Before loading any library information, you must ensure that the required timing library global variables have been set.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053838"></a>set timing_library_infer_socv_from_aocv true</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053839"></a>set timing_library_scale_aocv_to_socv_to_n_sigma 3</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053840"></a>set timing_socv_statistical_min_max_mode three_sigma_bounded</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053841"></a>set_socv_reporting_nsigma_multiplier -setup 2.5</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053842"></a>set timing_report_enable_verbose_ssta_mode true</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053843"></a>set report_timing_format \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053844"></a>{timing_point edge cell slew load \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053845"></a>delay_mean delay_sigma delay \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053846"></a>arrival_mean arrival_sigma arrival}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053847"></a>read_lib ${LIB_DIR}/standard.lib</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053848"></a>read_lib -aocv [list ${LIB_DIR}/aocv/standard.aocv]</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053849"></a>read_verilog ./test.v</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053850"></a>set_top_module test</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053851"></a>read_sdc ./test.sdc</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053852"></a>set_analysis_mode -socv true -cppr both</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053853"></a>report_timing</pre>
+<h4><em>
+<a id="pgfId-1013542"></a>MMMC Use Model Using Native SOCV or LVF Libraries</em></h4>
+
+<p>
+<a id="pgfId-1013543"></a>In MMMC configurations, library data is provided through a MMMC library set object, using the <a href="../tempustxtcmdref/report_timing.html">create_Iibrary_set</a> command. </p>
+<p>
+<a id="pgfId-1074178"></a>In the following examples native SOCV or LVF format library is used to make changes in the MMMC configuration file.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053864"></a>set timing_socv_statistical_min_max_mode three_sigma_bounded</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053865"></a>set_socv_reporting_nsigma_multiplier -setup 2.5</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053866"></a>set timing_report_enable_verbose_ssta_mode true</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053867"></a>set report_timing_format {timing_point edge cell slew load \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053868"></a>delay_mean delay_sigma delay \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053869"></a>arrival_mean arrival_sigma arrival}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053870"></a>read_view_definition ./viewDef.tcl</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053871"></a>read_verilog ./test.v</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053872"></a>set_top_module test</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053873"></a>set_analysis_mode -socv true -cppr both</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053874"></a>report_timing</pre>
+
+<p>
+<a id="pgfId-1013555"></a><strong>Common MMMC Initialization Script With Native SOCV or LVF</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1013556"></a>create_library_set -name libsetMax \<br />-timing [list ${library_path_1}/lib1.lib ${library_path_1}/lib2.lib ] \<br />-socv [list \<br />    ${socv_lib_path}/lib1.socv \<br />    ${socv_lib_path}/lib2.socv \<br />]</pre>
+
+<p>
+<a id="pgfId-1013557"></a><strong>Portion of MMMC Configuration Script (viewDef.tcl) for Loading Native SOCV Libraries</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1013558"></a>create_library_set -name libsetMax \<br />-timing [list \<br />     ${library_path_1}/lib1-lvf.lib \<br />     ${library_path_1}/lib2-lvf.lib \<br />] \</pre>
+
+<p>
+<a id="pgfId-1029499"></a><strong>Portion of MMMC Configuration Script (viewDef.tcl) For Loading AOCV Libraries</strong></p>
+<p>
+<a id="pgfId-1013560"></a><strong>MMMC Use Model&#8211; AOCV Bootstrap Mode</strong></p>
+<p>
+<a id="pgfId-1013561"></a>When running in AOCV bootstrap mode, load the AOCV libraries. You must ensure that the required timing library global variablesare set before loading any library information.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053884"></a>set timing_library_infer_socv_from_aocv true<br />set timing_library_scale_aocv_to_socv_to_n_sigma 3</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053885"></a>set timing_socv_statistical_min_max_mode three_sigma_bounded<br />set_socv_reporting_nsigma_multiplier -setup 2.5<br />set timing_report_enable_verbose_ssta_mode true</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053886"></a>set report_timing_format {timing_point edge cell slew load \<br />delay_mean delay_sigma delay \<br />arrival_mean arrival_sigma arrival}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053887"></a>read_view_definition ./viewDef.tcl</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053888"></a>read_verilog ./test.v<br />set_top_module test</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053889"></a>set_analysis_mode -socv true -cppr both<br />report_timing</pre>
+
+<p>
+<a id="pgfId-1013568"></a><strong>MMMC Initialization Script for AOCV Bootstrap Mode</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1013569"></a>create_library_set -name libsetMax \<br />-timing [list \<br />    ${library_path_1}/lib1.lib \<br />    ${library_path_1}/lib2.lib \<br />] \<br />-aocv [list \<br />     ${aocv_lib_path}/lib1.aocv \<br />     ${aocv_lib_path}/lib2.aocv \<br />]</pre>
+<h4>
+<a id="pgfId-1013572"></a><a id="69068"></a>Variation Library Formats</h4>
+
+<p>
+<a id="pgfId-1013573"></a>The Cadence SOCV library format and the standardized Liberty Variation Format (LVF) provide essentially the same information: variation sigma for delay, transition, and constraints per arc, indexed by load and slew.</p>
+
+<h4><em>
+<a id="pgfId-1013574"></a>Liberty Variation Format (LVF)</em></h4>
+
+<p>
+<a id="pgfId-1013575"></a>The detailed specifications of Liberty LVF for variation on delay and transition are available from OpenSource Liberty Version 2013.12.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1013576"></a>cell (cell_name) {<br />ocv_derate_distance_group: ocv_derate_group_name;<br />...<br />pin | bus | bundle (name) {<br />direction: input | output;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1013577"></a>timing() {<br />  ...<br />   ocv_sigma_cell_rise(delay_lu_template_name){<br />     sigma_type: early | late | early_and_late;<br />     index_1 (&quot;float, ..., float&quot;);<br />     index_2 (&quot;float, ..., float&quot;);<br />     values ( &quot;float, ..., float&quot;, \<br />         ..., \<br />         &quot;float, ..., float&quot;);<br />  }</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1013578"></a>   ocv_sigma_cell_fall(delay_lu_template_name){<br />      sigma_type: early | late | early_and_late;<br />      index_1 (&quot;float, ..., float&quot;);<br />      index_2 (&quot;float, ..., float&quot;);<br />         values ( &quot;float, ..., float&quot;, \<br />         ..., \<br />        &quot;float, ..., float&quot;);<br />     }<br />    ...<br />  } /* end of timing */<br />  ...<br />  } /* end of pin */<br />...</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1023331"></a></pre>
+<h4>
+<a id="pgfId-1023329"></a><a id="20957"></a>Sample Variation on Delay Template from Liberty 2013.12</h4>
+<h4>
+<a id="pgfId-1013581"></a><a id="73540"></a>Cadence SOCV Library Format (.socv)</h4>
+
+<p>
+<a id="pgfId-1013582"></a>The SOCV library format is as follows:</p>
+
+<p>
+<a id="pgfId-1023421"></a></p>
+<div class="webflare-div-image">
+<img width="668" height="442" src="images/analysisandreporting-88.gif" /></div>
+<p>
+<a id="pgfId-1023439"></a></p>
+<div class="webflare-div-image">
+<img width="667" height="223" src="images/analysisandreporting-89.gif" /></div>
+
+<p>
+<a id="pgfId-1013590"></a>The following table describes the SOCV Library Attributes:</p>
+<table class="webflareTable" id="#id1013591">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1013593">
+<a id="pgfId-1013593"></a>SOCV Library Attribute</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1013595">
+<a id="pgfId-1013595"></a>Attribute Type</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1013597">
+<a id="pgfId-1013597"></a>Description</span>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013599"></a>object_type</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013601"></a>library | design</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013603"></a>Use library to indicate that the SOCV data is with respect to library cells.&#160;&#160;Use design, for design-specific data such as spatial derate multipliers.</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013605"></a>object_spec</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013607"></a>libName/libCellName</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013609"></a>Specifies the internal library name and library cell name that is consistent with a Liberty timing library that has been loaded in the session.</p>
+<p>
+<a id="pgfId-1013610"></a>The SOCV library is considered an adjunct library file which inherits certain attributes &#8211; such as PVT from the master Liberty library.</p>
+<p>
+<a id="pgfId-1013611"></a>Simple wildcard expressions are allowed for both libName and libCellName.</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013613"></a>pin</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013615"></a>pinName</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013617"></a>The output or constrained pin name of the arc being represented by this section.</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013619"></a>pin_direction</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013621"></a>rise | fall</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013623"></a>The direction of the transition at the output pin.</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013625"></a>related_pin</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013627"></a>pinName</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013629"></a>The related pin name of the arc being represented by this section.</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013631"></a>related_direction</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013633"></a>rise | fall</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013635"></a>The direction of the transition at the related pin.</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013637"></a>type</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013639"></a>delay   | slew  | <br />setup   | hold  | <br />recovery| removal</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013641"></a>Indicates whether the current arc section is modeling variation on delay, transition, or constraints.</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013643"></a>when</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013645"></a>Liberty compliant &#8216;when&#8217; attribute string</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013647"></a>The Liberty &#8216;when&#8217; attribute string consistent with the same timing arc in the Liberty library.</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013649"></a>related_transition</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013651"></a>float+</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013653"></a>Comma-separated list of transition indices on the arc&#8217;s related_pin.</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013655"></a>output_loading</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013657"></a>float+</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013659"></a>Comma-separated list of output load indices.</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013661"></a>constraint_transition</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013663"></a>float+</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013665"></a>For constraint data, a comma-separated list of transitions on the arc&#8217;s constrained pin.</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013667"></a>sigma</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013669"></a>2-D table of float</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013671"></a>Table of variation data indexed by transition and load.</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013673"></a>late_distance</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013675"></a>float+</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013677"></a>Comma-separated list of distance values.</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013679"></a>late_distance_derate</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013681"></a>float+</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013683"></a>1-D table of spatial derating factors for application to late paths.</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013685"></a>early_distance</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013687"></a>float+</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013689"></a>Comma-separated list of distance values.</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013691"></a>early_distance_derate</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013693"></a>float+</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1013695"></a>1-D table of spatial derating factors for application to late paths.</p>
+
+</td>
+</tr>
+</tbody></table>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_socvanalysis.html" id="prev" title="Statistical On-Chip Variation (SOCV) Analysis">Statistical On-Chip Variation  ...</a></em></b><b><em><a href="analysisandreporting_timingbehaviorsocvmode.html" id="nex" title="Timing Behaviors in SOCV Analysis Mode">Timing Behaviors in SOCV Analy ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

@@ -1,0 +1,120 @@
+
+<html><head><title>Voltus-Sigrity Package Analysis Flow</title>
+<meta name="page_sequence" content="27007000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666186" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Voltus-Sigrity Package Analysis Flow" />
+<meta name="Keywords" content="model,extraction,package,IC,die,ground" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Package Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666186" />
+<meta name="NextFile" content="Creating_Package_Model_using_GUI.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Package_to_Die_Mapping.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Voltus-Sigrity Package Analysis Flow" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Package_to_Die_Mapping.html" title="Package_to_Die_Mapping">Package_to_Die_Mapping</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Creating_Package_Model_using_GUI.html" title="Creating_Package_Model_using_GUI">Creating_Package_Model_using_G ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Voltus-Sigrity Package Analysis Flow</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="VoltusSigrityPackageAnalysisFlow-89608"></span></p>
+
+<p>Voltus-Sigrity Package Analysis (SPA), the IC-centric Chip-Package co-simulation flow, has Sigrity embedded in Voltus to provide an accurate and easy-to-use power signoff solution for a highly-coupled Power Delivery Network (PDN).</p>
+
+<p>It allows you to access the Sigrity package analysis tools from the Voltus environment for:</p>
+<ul><li>Package model generation</li><li>Package-aware static and dynamic rail analysis</li><li>Package IR drop analysis</li><li>Chip-package result co-display and cross reference</li><li>Access to Sigrity MCP editor, if required</li></ul><div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>This feature requires the Voltus-SPA license and Sigrity version 2015 QIR3 or later.</p>
+</div>
+</div>
+<h4 id="VoltusSigrityPackageAnalysisFlow-SampleTclScriptforPackageExtractionandAnalysis">Sample Tcl Script for Package Extraction and Analysis</h4>
+
+<p>The following example illustrates a code snippet for package extraction and analysis:</p>
+
+<p><span class="fontredcadence">
+<p>#-------------------------------------------------------------------<br /># Static Rail Analysis Setup<br />#-------------------------------------------------------------------</p>
+<pre><code>set_rail_analysis_config \<br />   -method                     static \<br />   -accuracy                   xd \<br />   -analysis_view             AV_wc_on \<br />   -power_grid_libraries         { \<br />        ../data/pgv_dir/tech_pgv/techonly.cl \<br />        ../data/pgv_dir/stdcell_pgv/stdcells.cl \<br />        ../data/pgv_dir/macro_pgv/macros_pll.cl \<br />    } \<br />    -use_em_view_list           ../data/voltus/em_view.list \<br />    -enable_rlrp_analysis      true \<br />    -verbosity true \<br />    -unconnected_die_package_pins error  \<br />    -temperature 125<br /></code></pre>
+<p>#-------------------------------------------------------------------<br /># Package Extraction <br />#-------------------------------------------------------------------</p>
+<pre><code>set_advanced_package_options \<br />    -tool_path /home/sigrity/tools/bin/ <br />    -net_mapping_file net_mapping.txt<br />
+extract_package ALL \
+&#xa0;&#xa0;  -workspace ../rak_xim_pkg_model/C1_Voltus_4L.spd \<br />    -package_board_name FPBGA144 \<br />    -package_die_name CD1 \<br />    -output_dir rak_xim_pkg_model_voltus_cpf \<br />    -reference_net VSS<br /></code></pre>
+<p>#--------------------------------------------------------------------<br /># Rail Analysis<br />#--------------------------------------------------------------------</p>
+<pre><code>report_rail \<br />    -output_dir          ./spa_cpf \<br />    -type                       domain \<br />                                   ALL                              <br /></code></pre>
+<p>#--------------------------------------------------------------------<br /># Package Analysis <br />#--------------------------------------------------------------------</p>
+<pre><code>report_package ALL \<br />    -type dc \<br />    -workspace /../sigrity/rak_pdc_irdrop/test.spd \<br />    -package_board_name FPBGA144_Signal02 \<br />    -package_die_name CD1_Signal01 \<br />    -output_dir rak_pdc_irdrop_voltus_cpf \<br />    -result_name rak_pdc_irdrop_voltus \<br />    -package_pin_current_file<br />     /../spa_cpf/ALL_125C_avg_1/Reports/super_filter_pkg_iv.rpt<br />
+view_package_results \
+&#xa0;&#xa0;  -type dc</code></pre></span></p>
+<pre><br /></pre><h4 id="VoltusSigrityPackageAnalysisFlow-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Creating_Package_Model_using_GUI.html">Creating Package Model using GUI</a></li><li><a href="Rail_Analysis_including_Package_Model.html">Rail Analysis including Package Model</a></li><li><a href="Analyzing_Package_Model_in_GUI.html">Analyzing Package Model in GUI</a></li><li><a href="Viewing_Package_Analysis_Results.html">Viewing Package Analysis Results</a></li><li><a href="Access_Sigrity_Tools_from_Voltus.html">Access Sigrity Tools from Voltus</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Package_to_Die_Mapping.html" id="prev" title="Package_to_Die_Mapping">Package_to_Die_Mapping</a></em></b><b><em><a href="Creating_Package_Model_using_GUI.html" id="nex" title="Creating_Package_Model_using_GUI">Creating_Package_Model_using_G ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

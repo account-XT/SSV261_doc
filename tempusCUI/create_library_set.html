@@ -1,0 +1,164 @@
+
+<html><head><title>create_library_set</title>
+<meta name="page_sequence" content="37016000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287372" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="create_library_set" />
+<meta name="Keywords" content="library set name,TCL list of timing and cdB/UDN libraries" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Timing Analysis," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287372" />
+<meta name="NextFile" content="create_opcond.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="create_ipd_configuration.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- create_library_set" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="create_ipd_configuration.html" title="create_ipd_configuration">create_ipd_configuration</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="create_opcond.html" title="create_opcond">create_opcond</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>create_library_set</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>create_library_set<span class="confluence-anchor-link" id="create_library_set-create_library_set"></span><span id="create_library_set-create_library_set"></span><br />[-help]<br />[-library_side_file <em>string</em>] <br />-name <code><em>libSetName</em></code> <br />[-timing {<code><em>lib1</em></code>.lib <code><em>lib2</em></code>.lib <code><em>lib3</em></code>.lib ...}]&#xa0;<br />[-aocv <em>string</em>] <br />[-si {<code><em>lib1</em></code>.cdb <code><em>lib2</em></code>.cdb <code><em>lib3</em></code>.udn <code><em>lib4</em></code>.udn...}]</code> <br />[-socv <em>string</em>]<br /></code></p>
+
+<p>Associates a TCL list of timing and cdB/UDN libraries with a specified library set name. Library sets allow a group of library files to be treated as a single entity so that higher-level descriptions (delay calculation corners) can simply refer to the library configuration by name. The same library set can be referenced multiple times by different delay calculation corners.</p>
+
+<p><strong>Note: </strong>You must have a set of timing libraries specified in the configuration file for the software to initialize properly. When configuring your multi-mode multi-corner environment, you can choose to specify these libraries in your own custom library set, or refer to them through the two library set definitions that are automatically initialized from the configuration file: <code>default_libs_min</code> and <code>default_libs_max</code>.</p>
+
+<p><strong>Note</strong>: The&#xa0;<code>create_library_set</code>&#xa0;command determines the priority of ECSM vs CCS data (if both are present). The software&#xa0;first checks for ECSM construct, if it is missing then CCS construct is loaded.</p>
+<div>
+<p><br /></p>
+<div aria-label="Info" class="confluence-information-macro  confluence-information-macro-information" role="region"><span class="aui-icon aui-icon-small aui-iconfont-info-filled confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">&#xa0;The order in which you define timing libraries is important. The software considers the first library you specify in the list as the master library, with each successive library having a lower priority.</div>
+</div>
+
+<p><br /></p>
+</div>
+<h4 id="create_library_set-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table class="confluenceTable cadenceTable cadDefaultfont" id="cadDefaultfont" style="width: 720px;"><colgroup><col style="width: 300px;" /><col style="width: 340px;" /></colgroup><tbody><tr><td class="confluenceTd"><code>-help</code></td>
+<td class="confluenceTd">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-aocv <em>string</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the aocv libraries to include in the library set.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-library_side_file <em>string</em></code></td>
+<td class="confluenceTd">Specifies the library side file.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-name </code><code><em>libSetName</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name for the library set being created. This name is used to associate the library list with a specific delay calculation corner.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-si {</code><code><em>lib1</em></code><code>.cdb </code><code><em>lib2</em></code><code>.cdb </code><code><em>lib3</em></code><code>.udn </code><code><em>lib4</em></code><code>.udn</code>&#8230;<code>}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies cdB libraries and/or user-defined noise (UDN) models to include in the library set. The cdB and/or UDN libraries are required for performing signal integrity analysis.</p>
+
+<p><strong>Note</strong>: You can use this parameter for CCS-N or ECSM-N models, that is, for cdBs only.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-socv <em>string</em></code></td>
+<td class="confluenceTd">
+<p>Specifies the SOCV libraries to include in the library set.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-timing {</code><code><em>lib1</em></code><code>.lib </code><code><em>lib2</em></code><code>.lib </code><code><em>lib3</em></code><code>.lib</code>&#8230;<code>}</code></p>
+</td>
+<td class="confluenceTd"><div class="content-wrapper">
+<p>Specifies the timing libraries to include in the library set.</p>
+
+<p><strong>Note: </strong>Libraries intended for use in an ECSM-based multi-library interpolation must be grouped within an additional level of Tcl list structure to identify the intended usage to the library subsystem. Specify three timing libraries that are characterized at different voltages (typically the lower and upper voltage bounds, and a third intermediate point). All voltages required by the software will be interpolated from this set of libraries. The libraries in the set can differ only in the characterization voltage; they must be identical to each other in all other aspects. However, if you want to perform multi-temperature based library interpolation, you can use two library files that are characterized at different temperatures for each voltage value. See the examples for creating an ECSM-based multi-library set and multi-temperature based library interpolation in the Examples section.</p>
+<div aria-label="Info" class="confluence-information-macro  confluence-information-macro-information" role="region"><span class="aui-icon aui-icon-small aui-iconfont-info-filled confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>The ECSM and CCS libraries can be very large and loading them may take significant time. You can convert the ASCII NLDM (Liberty .lib), ECSM, and CCS libraries to a binary version using the <code>write_ldb</code> command. For conversion of libraries to a binary version, refer to <code><a href="write_ldb.html">write_ldb</a></code>.</p>
+
+<p>Instead of the original ASCII libraries, you can specify these binary libraries in the configuration file:</p>
+<ul><li><strong>Original MMMC setup file</strong>: <code>create_library_set -name libName -timing &quot;AAA.lib BBB.ecsm CCC.ccs&quot;</code></li><li><strong>New MMMC setup file</strong>: <code>create_library_set -name libName -timing &quot;AAA.ldb BBB.ldb CCC.ldb&quot;</code></li></ul></div>
+</div>
+</div>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="create_library_set-Examples">Examples</h4>
+<ul><li>The following command creates a library set that associates timing libraries and cdB libraries with a nominal voltage of 1 volt with the library name IsCOM-1V:<br /><code>tempus &gt; create_library_set&#xa0;<br />-name IsCOM-1V -timing [list stdcell_F_1V.lib ram_F.lib pad.lib]<br />-si [list stdcell_F_2.cdb ram_F.cdb pad.cdb]</code></li></ul><ul><li>The following command creates a library set that can be used to specify the 2-volt version of a core cell library, which could be associated later with a 2-volt MSMV power domain specified in the design:<br /><code>tempus &gt;&#xa0;create_library_set&#xa0;<br />-name IsCOM-2V&#xa0;<br />-timing [list stdcell_F_2V.lib]</code></li></ul><ul><li>The following command creates an ECSM-based multi-library set called triLibFast. The libraries are grouped within an additional level of Tcl list structure to identify the intended usage to the library subsystem.<br /><code>tempus &gt;&#xa0;create_library_set&#xa0;<br />-name triLibFast<br />-timing [list&#xa0;<br />&#xa0; &#xa0; &#xa0; &#xa0; [list stdcell_F_1V.lib stdcell_F_2V.lib stdcell_F_3V.lib]<br />&#xa0; &#xa0; &#xa0; &#xa0; ]<br />&#xa0; &#xa0; &#xa0; &#xa0; ram_F.lib pads.lib<br />&#xa0; &#xa0; &#xa0; &#xa0; ]</code></li></ul><ul><li>The following command performs multi-temperature based library interpolation for libraries characterized at 0.7, 1.0, and 1.1 volts, each of which is also characterized using -40 and -35 temperature values:<br /><code>tempus &gt;&#xa0;create_library_set&#xa0;<br />-name Trilib&#xa0;<br />-timing {{ stdcell_0.7_temp-40.lib stdcell_0.7_temp-35.lib stdcell_1.0_temp-40.lib stdcell_1.0_temp-35.lib stdcell_1.1_temp-40.lib stdcell_1.1_temp-35.lib } mem.lib io.lib }</code></li></ul><h4 id="create_library_set-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="update_library_set.html">update_library_set</a></code><code>&#xa0;</code><code>&#xa0;</code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="create_ipd_configuration.html" id="prev" title="create_ipd_configuration">create_ipd_configuration</a></em></b><b><em><a href="create_opcond.html" id="nex" title="create_opcond">create_opcond</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

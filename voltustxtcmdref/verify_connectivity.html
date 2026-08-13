@@ -1,0 +1,402 @@
+
+<html><head><title>verify_connectivity</title>
+<meta name="page_sequence" content="14001000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666254" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the text commands in Voltus IC Power Integrity Solution." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="verify_connectivity" />
+<meta name="Keywords" content="identify unconnected wires, geometric antennas, unconnected pins, loops, partial routing, unrouted nets, generate violation markers, report violations" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Verify," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666254" />
+<meta name="NextFile" content="verify_PG_short.html" />
+<meta name="Group" content="Voltus Text Command Reference" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Verify_Commands.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution Text Command Reference -- verify_connectivity" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="epstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="Verify_Commands.html" title="Verify_Commands">Verify_Commands</a></li><li style="float: right;"><a class="viewPrint" href="voltustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="verify_PG_short.html" title="verify_PG_short">verify_PG_short</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>verify_connectivity</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="verify_connectivity-verify_connectivity"></span> <code><br /><code>verify_connectivity<br />[-help]<br />[-allPGPinPort]<br />[-append] <br />[-conn_loop | -geom_loop | -geom_connect] <br />[-divide_power_net] <br />[-error <code><em>integer</em></code>]<br /></code></code><code><code><span>[-geom_connect]<br />[-geom_loop]<br />[-marker_on_highest_layer]</span><br />[-net <code><em>net_names</em></code> | -selected]<br />[-no_antenna] <br />[-no_floating_metal]<br />[-no_open]<br />[-no_soft_PG_connect]<br />[-no_unconn_pin] <br />[-no_unrouted_net] <br />[-no_weak_connect] <br /><span>[-preferred_top_layer&#xa0;</span><em>integer</em><span>]<br /></span>[-raw_viol_mark] <br /><span>[-remove_old_open_vio]</span><br />[-report <code><em>filename</em></code>]<br />[-selected]<br />[-type {all | special | regular}]<br /><span>[-use_new_open_vio]</span><br />[-use_virtual_connection] <br />[-warning <code><em>value</em></code>]</code> <br /></code></p>
+
+<p>Detects conditions such as opens, unconnected wires (geometric antennas), unconnected pins, loops, partial routing, and unrouted nets; generates violation markers in the design window; reports violations. Running this command does not have database impact unless you save the design, which also saves the violation markers.</p>
+
+<p>The Verify Connectivity feature uses&#xa0;<code><a href="set_multi_cpu_usage.html">set_multi_cpu_usage</a></code> and other multi-CPU commands for multi-threading. For more information, see the&#xa0;<a href="Multiple-CPU_Processing_Commands.html">Multiple-CPU Processing Commands</a> chapter in the&#xa0;<em>Voltus Text Command Reference </em>document.</p>
+<h4 id="verify_connectivity-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><tbody><tr><td class="confluenceTd">
+<p><code><code>-append</code></code></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Displays incremental results in the Violation Browser. By default, violation markers are over-written with new results during each <code>verify _connectivity</code> run. When you specify this parameter, violation markers are appended to the violations of the previous <code>verify_connectivity</code> run.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code><code>-allPGPinPort</code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2"><span>Verifies all PG ports connection.</span></td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-conn_loop</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Checks for connectivity loops in regular wires.</p>
+
+<p>Detects connectivity loops based on the end points of the center line of a regular wire segment or the center of a via.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-divide_power_net</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Divides power nets into four subareas for connectivity verification. Use this parameter to decrease memory usage in 32-bit machines with limited memory. This parameter might increase or decrease the run time, depending on the design.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-error <em>integer</em></code></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p><br /></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Specifies the maximum number of errors to report. The command stops when the maximum value is reached. <br /><em>Default:</em> <code>1000</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-geom_connect</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Checks for connectivity violations of regular wires. Uses a geometrical model instead of the center-line model. In other words, if the wires overlap at any point, they are considered to be connected--they do not have to connect at the center line.</p>
+
+<p>Use this parameter if you manually change the routing or use a third-party router that does not route using the centerline connection routing technique.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-geom_loop</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Checks for loop violations of regular nets using a geometrical model. The nets do not have to overlap on the center line. When you specify this parameter, the Innovus software does not perform any other connectivity checks.</p>
+
+<p>Use this parameter if you use a third-party router that does not route using the centerline connection routing technique. In this case, the <code>-conn_loop</code> parameter might not detect connectivity loop violations.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code><span>-marker_on_highest_layer</span></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2">Reports the opening on the highest layer of the pin, which has more than one shape.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-net <em>net_names</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Specifies that connectivity should be verified for specified nets only. If you specify more than one net, separate the net names with space and surround the list of net names with braces or quotes. You can use wildcards (<code>*</code> and <code>?</code>) when you specify net names.</p>
+
+<p><strong>Note: </strong>The <code>-net</code> and <code>-selected</code> parameters are mutually exclusive.</p>
+
+<p><em>Default: </em>If you do not specify either the <code>-nets</code> or the <code>-selected</code> parameter, <code>verify_connectivity</code> verifies all nets.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-no_antenna</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Ignores violations due to unconnected wires (also called geometrical antennas or dangling wires).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-no_floating_metal</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Ignores floating metals that are not connected to any pin shapes.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-no_open</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Ignores open violations.</p>
+
+<p><strong>Note: </strong>This parameter automatically turns on the <code>-no_un_conn_pin</code> parameter, because open and unconnected pin verification are performed together.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-no_unconn_pin</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Ignores violations due to pins that are not connected to any other objects.</p>
+
+<p><strong>Note: </strong>This parameter is specified automatically when you specify the <code>-no_open</code> parameter.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-no_unrouted_net</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Ignores nets that are not routed.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code><code>-no_weak_connect</code></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Disables checking for routing to more than one port of the weakly connected pin ports.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-no_soft_PG_connect</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Disables checking of soft Power/Ground connects. By default, <code>verify_connectivity</code> checks the connectivity on masterslice layers. If <code>-</code>no_soft_PG_connect option is specified, connectivity on these layers is ignored.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code><span>-preferred_top_layer&#xa0;</span><em>integer</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2">Specifies the preferred top metal layer. When this parameter is used, <code>verify_connectivity</code> does not check the specified top layer and above layers.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code><span>-remove_old_open_vio</span></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2">Removes old open violations.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-raw_viol_mark</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Displays violation markers for opens as the bounding box of the island. By default, violation markers for opens are displayed as polygons that include all wires, pins, and vias that connect to the island.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-report <em>filename</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Specifies the report file for connectivity violation data.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-selected</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Specifies that connectivity should be checked for selected nets.</p>
+
+<p><strong>Note: </strong>The <code>-net</code> and <code>-selected</code> parameters are mutually exclusive.</p>
+
+<p><em>Default: </em>If you do not specify either the <code>-nets</code> or the <code>-selected</code> parameter, <code>verify_connectivity</code> verifies all nets.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-type {all | regular | special}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Specifies the type of wires to verify. <code>verify_connectivity</code> is only concerned with the type of the wire and via (special or regular) and not the type of the pin. Irrespective of the <code>type</code> specified, all unconnected terminals (special and regular) are always reported unless <code>-noUnConnPin</code> is on. <br /><em>Default:</em> <code>all</code></p>
+
+<p><strong>Note: </strong>To check connectivity for whole nets, you do not need to specify a type.</p>
+
+<p><strong>Note: </strong>A pin-open violation is listed under VC DRC type &quot;Problem(s) (ENCVFC-92): Pieces of the net are not connected together&quot;. Such a violation means the isolated open island only includes some pins&#39; shapes that come from at least two different ports or pins.</p>
+
+<p>Choose one of the following:</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p><code>all</code></p>
+</td>
+<td class="confluenceTd">
+<p>Checks all wires, including those that have been previously verified.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><code>regular</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Reports all unconnected pins and open islands that do not include any special wire and via. Does not check a net that has no regular objects (wire, via, pin).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><code>special</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Reports all unconnected pins and open islands that do not include any regular wire and via. Does not report isolated open islands that have any regular wire and via.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code><span>-use_new_open_vio</span></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd" colspan="2">Uses an open violation marker to show unconnected objects.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-use_virtual_connection</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Implies a virtual connection for all bumps and external I/O pins of the same net. Set this parameter to override default behavior of <code>verify_connectivity</code>, in which bumps and external I/O pins of the same net are not considered to be interconnected. It is useful in flip chip designs, where the power bumps are connected outside the chip.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-warning <em>value</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Specifies the maximum number of warnings to report.<br /><em>Default:</em> <code>50</code><code><br /></code><em>Range: </em><code>0</code> to <code>1000000</code><code><br /></code><em>Type:</em> Integer</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="verify_connectivity-Examples">Examples</h4>
+<ul><li>The following command verifies connectivity for all nets and generates a maximum of 50 error and 50 warning messages: <br /><code>verify_connectivity -type all -error 50 -warning 50</code></li></ul><ul><li>The following command reports special unconnected pins and open islands that do not include any regular wire and via <br /><code>verify_connectivity -type special -no_antenna -error 1000 -warning 50</code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Verify_Commands.html" id="prev" title="Verify_Commands">Verify_Commands</a></em></b><b><em><a href="verify_PG_short.html" id="nex" title="verify_PG_short">verify_PG_short</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

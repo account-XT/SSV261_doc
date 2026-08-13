@@ -1,0 +1,170 @@
+
+<html><head><title>set_pll_timing</title>
+<meta name="page_sequence" content="26095000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="apokhara" />
+<meta name="CreateDate" content="2026-04-12" />
+<meta name="CreateTime" content="1776062505" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="" />
+<meta name="DocTitle" content="Litmus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_pll_timing" />
+<meta name="Keywords" content="command,PLL,timing,phase,locked,loop,insertion,delay,clock,adjustment" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="TIMING_CONST," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="litmus_comref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-12" />
+<meta name="ModifiedTime" content="1776062505" />
+<meta name="NextFile" content="set_propagated_clock.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_output_delay.html" />
+<meta name="c_product" content="Litmus," />
+<meta name="Product" content="Litmus," />
+<meta name="ProductFamily" content="Litmus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Litmus Text Command Reference -- set_pll_timing" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="litmus26comref" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+<script type="text/javascript" src="styles/shCore1.js">/*<![CDATA[*//*]]>*/</script><script type="text/javascript" src="styles/shCore.js">/*<![CDATA[*//*]]>*/</script><script type="text/javascript" src="styles/shBrushCpp.js">/*<![CDATA[*//*]]>*/</script><script type="text/javascript" src="styles/shBrushJava.js">/*<![CDATA[*//*]]>*/</script><script type="text/javascript" src="styles/shBrushXml.js">/*<![CDATA[*//*]]>*/</script><script type="text/javascript" src="styles/shBrushPython.js">/*<![CDATA[*//*]]>*/</script><script type="text/javascript" src="styles/shBrushPowerShell.js">/*<![CDATA[*//*]]>*/</script><link rel="stylesheet" href="styles/shCoreDefault.css" type="text/css" /><link rel="stylesheet" href="styles/shCoreMidnight.css" type="text/css" /><script type="text/javascript">/*<![CDATA[*/
+SyntaxHighlighter.all();
+/*]]>*/</script>
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="litmus_comrefTOC.html">Contents</a></li><li><a class="prev" href="set_output_delay.html" title="set_output_delay">set_output_delay</a></li><li style="float: right;"><a class="viewPrint" href="litmus_comref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_propagated_clock.html" title="set_propagated_clock">set_propagated_clock</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Litmus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_pll_timing</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>set_pll_timing</code><br /><code>[-help]<br /><em>inst</em><br />-pll_feedback_pin &lt;feedback pin name&gt;<br />-pll_output_clock &lt;clock name or ID&gt;<br />-pll_output_pin &lt;output pin name&gt;<br />-pll_reference_pin &lt;reference pin name&gt;</code></p>
+
+<p>This command identifies phase locked loop (PLL) insertion delays and the associated&#xa0;generated clock(s) that require adjustment.&#xa0;To remove the effect of clock tree latency, PLLs can be used to adjust the delay on the PLL output clock waveform so that the effective edges of the clock at the clock tree endpoints are aligned with the reference edges of the input clock to the PLL.</p>
+
+<p>When you use the&#xa0;<code>set_pll_timing</code>&#xa0;command, the software uses the settings to&#xa0;automatically calculate and apply a delay offset to a PLL output clock to compensate for internal clock tree latency.</p>
+
+<p>The&#xa0;<code>set_pll_timing</code>&#xa0;command works in conjunction with a generated clock definition to provide the correct clock timing at the output&#xa0;of the PLL. To use this command, you must first assert a generated clock on the&#xa0;<code>set_pll_timing -pll_output_pin</code>. The&#xa0;<code>-source</code>&#xa0;option of the&#xa0;<code>create_generated_clock</code>&#xa0;command must also match the&#xa0;<code>-pll_reference_pin</code>&#xa0;specified by the&#xa0;<code>set_pll_timing&#xa0;</code>command.</p>
+<h4 id="set_pll_timing-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="relative-table wrapped confluenceTable" style="width: 100.0%;"><colgroup><col style="width: 35.549%;" /><col style="width: 64.3399%;" /></colgroup><tbody><tr><td class="confluenceTd">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd">
+<p>Prints out the command usage.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code><em>inst</em>
+          </code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the instance name or the object ID of a PLL cell, on the basis of which the reference pins, feedback pins, or the output pins will be searched.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-pll_feedback_pin &lt;feedback pin name&gt;<br /></code></td>
+<td class="confluenceTd" colspan="1">Specifies the name of the PLL feedback pin.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-pll_output_clock &lt;clock name or ID&gt;<br /></code></td>
+<td class="confluenceTd" colspan="1">Specifies the generated clock on the PLL output.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-pll_output_pin &lt;output pin name&gt;<br /></code></td>
+<td class="confluenceTd" colspan="1">Specifies the PLL clock output pin name.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-pll_reference_pin &lt;reference pin name&gt;<br /></code></td>
+<td class="confluenceTd" colspan="1">Specifies the PLL reference pin name.</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_pll_timing-Examples">Examples</h4>
+
+<p>Here are some examples.</p>
+<ul><li>
+<p>The following example shows the defined clocks in a sample design:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false">% create_clock [get_ports {clk_in}] -name CLK -period 6 -waveform {0 3}&#xa0;
+% create_generated_clock -name GCLK1 -source [get_pins {mypll/CLK}] -multiply_by 1 -master_clock [get_clocks {CLK}] -add [get_pins {mypll/GCLK}]</pre>
+</div>
+</div>
+
+<p>The following&#xa0;<code>report_timing</code>&#xa0;command shows the insertion delay values at various points in the timing report:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false">% report_timing -from_rise mypll/GCLK -to_rise mypll/CEN -point_to_point</pre>
+</div>
+</div>
+
+<p><code><code><code><code>Path 1:Endpoint: mypll/CEN (^) (unconstrained output)<br /></code></code></code></code></p>
+
+<p><code>Beginpoint: mypll/GCLK (^) triggered by leading edge of &#39;GCLK1&#39;</code>&#xa0;<br /><code>Arrival Time 0.496</code>&#xa0;<br /><code>Analysis View: default_analysis_view_setup</code>&#xa0;<br /><code>------------------------------------------------------------&#xa0;</code>&#xa0;<br /><code>Pin &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Cell &#xa0; &#xa0; &#xa0;Delay &#xa0; Arrival &#xa0; Generated Clock&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Time &#xa0; &#xa0; &#xa0;Adjustment&#xa0;</code><br /><code>------------------------------------------------------------&#xa0;</code>&#xa0;<br /><code>mypll/CLK &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.112&#xa0;</code><br /><code>mypll/GCLK -&gt; &#xa0;PLL &#xa0; &#xa0; &#xa0; 0.133 &#xa0;0.246 &#xa0; &#xa0; GCLK1 Adj. = 0.000</code>&#xa0;<br /><code>clkTreeL0/Y &#xa0; &#xa0;CLKBUFX1 &#xa0;0.139 &#xa0;0.385&#xa0;</code><br /><code>clkTreeL1_1/Y &#xa0;CLKBUFX1 &#xa0;0.118 &#xa0;0.503&#xa0;</code><br /><code>mypll/CEN -&gt; &#xa0; PLL &#xa0; &#xa0; &#xa0;-0.007 &#xa0;0.496&#xa0;</code><br /><code>-----------------------------------------------------------<br /></code></p>
+
+<p>From the above table, it can be seen that the rise insertion delay of clock CLK at pin mypll/CLK is 0.112ns.</p>
+
+<p>Now, the following command will adjust the source latency of clock GCLK1 such that the edges at mypll/CLK and myPLL/CEN are aligned i.e. the clock&#39;s rising edge should reach mypll/CEN at 0.112ns only:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false">% set_pll_timing [get_cells mypll] -pll_reference_pin CLK -pll_feedback_pin CEN -pll_output_pin GCLK -pll_output_clock [get_clocks GCLK1]</pre>
+</div>
+</div>
+</li><li>
+<p>The following&#xa0;<code>report_timing</code>&#xa0;command shows the&#xa0;source latency of GCLK clock as -0.138ns, and the clock reaches mypll/CEN pin at 0.112ns (same as on mypll/CLK):</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false">% report_timing -from_rise mypll/GCLK -to_rise mypll/CEN -point_to_point</pre>
+</div>
+</div>
+
+<p><code>Path 1:Endpoint: mypll/CEN (^) (unconstrained output)</code>&#xa0;<br /><code>Beginpoint: mypll/GCLK (^) triggered by leading edge of &#39;GCLK1&#39;</code>&#xa0;<br /><code>Arrival Time 0.112</code>&#xa0;<br /><code>Analysis View: default_analysis_view_setup</code>&#xa0;<br /><code>+ Source Insertion Delay 0.112</code>&#xa0;<br /><code>- PLL Feedback Delay 0.250</code>&#xa0;<br /><code>= Beginpoint Arrival Time -0.138</code>&#xa0;<br /><code>-----------------------------------------------------------------</code>&#xa0;<br /><code>Pin &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Cell &#xa0; &#xa0; &#xa0; Delay &#xa0; &#xa0;Arrival &#xa0; &#xa0;Generated Clock&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Time &#xa0; &#xa0; &#xa0; Adjustment&#xa0;</code><br /><code>-----------------------------------------------------------------</code>&#xa0;<br /><code>mypll/GCLK -&gt; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; -0.138 &#xa0; &#xa0;GCLK1 Pll Adj. = 0.000</code>&#xa0;<br /><code>clkTreeL0/Y &#xa0; &#xa0; CLKBUFX1 &#xa0; 0.139 &#xa0; &#xa0;0.001&#xa0;</code><br /><code>clkTreeL1_1/Y &#xa0; CLKBUFX1 &#xa0; 0.118 &#xa0; &#xa0;0.120&#xa0;</code><br /><code>mypll/CEN -&gt; &#xa0; &#xa0;PLL &#xa0; &#xa0; &#xa0; -0.007 &#xa0; &#xa0;0.112&#xa0;</code><br /><code>-----------------------------------------------------------------</code>&#xa0;</p>
+</li></ul><h4 id="set_pll_timing-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="create_generated_clock.html">create_generated_clock</a></code></li><li><code><a href="create_clock.html">create_clock</a></code></li><li><code><a href="reset_pll_timing.html">reset_pll_timing</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_output_delay.html" id="prev" title="set_output_delay">set_output_delay</a></em></b><b><em><a href="set_propagated_clock.html" id="nex" title="set_propagated_clock">set_propagated_clock</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

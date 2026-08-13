@@ -1,0 +1,124 @@
+
+<html><head><title>set_selectively_expanded_modules</title>
+<meta name="page_sequence" content="25067000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="apokhara" />
+<meta name="CreateDate" content="2026-04-12" />
+<meta name="CreateTime" content="1776062450" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="" />
+<meta name="DocTitle" content="Litmus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_selectively_expanded_modules" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="litmus_comref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-12" />
+<meta name="ModifiedTime" content="1776062450" />
+<meta name="NextFile" content="set_table_style.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_path_adjust_group.html" />
+<meta name="c_product" content="Litmus," />
+<meta name="Product" content="Litmus," />
+<meta name="ProductFamily" content="Litmus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Litmus Text Command Reference -- set_selectively_expanded_modules" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="litmus26comref" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="litmus_comrefTOC.html">Contents</a></li><li><a class="prev" href="set_path_adjust_group.html" title="set_path_adjust_group">set_path_adjust_group</a></li><li style="float: right;"><a class="viewPrint" href="litmus_comref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_table_style.html" title="set_table_style">set_table_style</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Litmus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_selectively_expanded_modules</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><span class="confluence-anchor-link" id="set_selectively_expanded_modules-set_selectively_expanded_modules"></span><span id="set_selectively_expanded_modules-set_selectively_expanded_modules"></span>set_selectively_expanded_modules</code><br /><code>[-help]<br /></code></p>
+
+<p>While performing Static Timing Analysis (STA) or Engineering Change Orders (ECO), very large designs often contain modules with a high number of instantiations. Creating RTL-level configurations for smaller portions of such designs is often challenging.</p>
+
+<p>The <code>set_selectively_expanded_modules</code> command addresses this issue by specifying modules with instantiations that are to be abstracted, or are not timed, based on the specifications set through the <code>set_expanded_hinsts</code> command.</p>
+
+<p>This reduces memory usage and runtime significantly during the STA and ECO processes. It helps in handling large designs on smaller machines and facilitates ECO implementation without the need of manually partition the design into smaller segments.</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body"><ul><li>This command is recommended exclusively for modules with high instantiation counts and is not recommended to use for single-instance modules.</li><li>All STA views must use consistent flattening specifications. For ECO, the same netlist and flattening specifications must be loaded to ensure alignment.</li></ul></div>
+</div>
+<h4 id="set_selectively_expanded_modules-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="relative-table wrapped confluenceTable" style="width: 65.2222%;"><colgroup class=""><col class="" style="width: 29.2969%;" /><col class="" style="width: 70.7031%;" /></colgroup><tbody class=""><tr class=""><td class="confluenceTd"><code>-help</code></td>
+<td class="confluenceTd">
+<p>Prints a brief description that includes the type and default information for each <code>set_selectively_expanded_modules</code>&#xa0;parameter.</p>
+
+<p>For a detailed description of the command and all its parameters, use the man command:</p>
+
+<p><code>man set_selectively_expanded_modules</code></p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_selectively_expanded_modules-Examples"><span>Examples</span></h4>
+<ul><li><span>The following command set presents an example of instantiation of <code>a</code> and c modules, which are selectively expanded</span><span><span>:<br /></span></span><code>read_lib my_lib</code><br /><code>read_verilog my_verilog &#xa0; # instantiations of modules &#8220;a&#8221; and &#8220;c&#8221; are to be selectively expanded</code><br /><code>set_selectively_expanded_modules &#8220;a c&#8221;&#xa0; &#xa0;# expand &#8220;u1&#8221; and &#8220;u1/u2&#8221;</code><br /><code>set_expanded_hinsts &#8220;u1 u1/u2&#8221;; # No order requirement: &#8220;u1/u2 u1&#8221;&#xa0;&#xa0; is OK, too</code><br /><span><span><span><code>set_top_module top</code><br />Netlist:<br /></span></span></span><code>module top;</code><br /><code>&#xa0; a u1; a u2;</code><br /><code>endmodule</code><br /><code>module a;</code><br /><code>&#xa0; b u1; c u2; c u3;</code><br /><code>endmodule</code><br /><code>module b;</code><br /><code>&#xa0; BUFX2 u1;</code><br /><code>endmodule</code><br /><code>module c;</code><br /><code>&#xa0; BUFX2 u1;</code><br /><span><span><code>endmodule</code><br /><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image confluence-content-image-border" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/720024294/720024298.png" data-linked-resource-container-id="720024294" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image-2025-10-15_11-29-6.png" data-linked-resource-id="720024298" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="337" src="attachments/720024294/720024298.png" tabindex="0" width="500" /></span><br />Following is the expansion result of the above example:<br /></span></span><code>COMPONENTS 4 ;</code><br /><code>&#xa0; - u1/u1/u1 BUFX2 ;</code><br /><code>&#xa0; - u1/u2/u1 BUFX2 ;</code><br /><code>&#xa0; - u1/u3 c ;</code><br /><code>&#xa0; - u2 a ;<span>END COMPONENTS</span></code></li><li><span>The following command set presents an example of instantiation of c module, which is selectively expanded</span><span><span>:<br /></span></span><code>read_lib my_lib</code><br /><code>read_verilog my_verilog&#xa0; # instantiations of modules &#8220;c&#8221; are to be selectively expanded</code><br /><code>set_selectively_expanded_modules &#8220;c&#8221;&#xa0; &#xa0;# expand &#8220;u1/u2&#8221;, &#8220;u2/u2&#8221; and &#8220;u2/u3&#8221;</code><br /><code>set_expanded_hinsts &#8220;u1/u2 u2/u2 u2/u3&#8221;<br /></code><span><span><span><code>set_top_module top</code><br />Netlist:<br /></span></span></span><code>module top;</code><br /><code>&#xa0; a u1; a u2;</code><br /><code>endmodule</code><br /><code>module a;</code><br /><code>&#xa0; b u1; c u2; c u3;</code><br /><code>endmodule</code><br /><code>module b;</code><br /><code>&#xa0; BUFX2 u1;</code><br /><code>endmodule</code><br /><code>module c;</code><br /><code>&#xa0; BUFX2 u1;</code><br /><span><span><code>endmodule</code><br /><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image confluence-content-image-border" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/720024294/720024297.png" data-linked-resource-container-id="720024294" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image-2025-10-15_11-30-53.png" data-linked-resource-id="720024297" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/720024294/720024297.png" tabindex="0" width="500" /></span><br />Following is the expansion result of the above example:<br /></span></span><code>COMPONENTS 6 ;</code><br /><code>&#xa0; - u1/u1/u1 BUFX2 ;</code><br /><code>&#xa0; - u1/u2/u1 BUFX2 ;</code><br /><code>&#xa0; - u1/u3 c ;</code><br /><code>&#xa0; - u2/u1/u1 BUFX2 ;</code><br /><code>&#xa0; - u2/u2/u1 BUFX2 ;</code><br /><code>&#xa0; - u2/u3/u1 BUFX2 ;</code><br /><code>END COMPONENTS</code></li><li><span>The following command set presents an example of instantiation of <code>b</code> and c modules, which are selectively expanded</span><span><span>:<br /></span></span><code>read_lib my_lib</code><br /><code>read_verilog my_verilog &#xa0; # instantiations of modules &#8220;b&#8221; and &#8220;c&#8221; are to be selectively expanded</code><br /><code>set_selectively_expanded_modules &#8220;b c&#8221;&#xa0; &#xa0;# expand &#8220;u2/u1&#8221;, &#8220;u2/u2&#8221; and &#8220;u2/u3&#8221;</code><br /><code>set_expanded_hinsts &#8220;u2/u1 u2/u2 u2/u3&#8221;</code><br /><code>set_top_module top</code><br /><span><span>Netlist:<br /></span></span><code>module top;</code><br /><code>&#xa0; a u1; a u2;</code><br /><code>endmodule</code><br /><code>module a;</code><br /><code>&#xa0; b u1; c u2; c u3;</code><br /><code>endmodule</code><br /><code>module b;</code><br /><code>&#xa0; BUFX2 u1;</code><br /><code>endmodule</code><br /><code>module c;</code><br /><code>&#xa0; BUFX2 u1;</code><br /><code>endmodule</code><span><br /><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image confluence-content-image-border" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/720024294/720024296.png" data-linked-resource-container-id="720024294" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image-2025-10-15_11-32-35.png" data-linked-resource-id="720024296" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/720024294/720024296.png" tabindex="0" width="500" /></span><br />Following is the expansion result of the above example:<br /></span><code>COMPONENTS 6 ;</code><br /><code>&#xa0; - u1/u1 b ;</code><br /><code>&#xa0; - u1/u2 c ;</code><br /><code>&#xa0; - u1/u3 c ;</code><br /><code>&#xa0; - u2/u1/u1 BUFX2 ;</code><br /><code>&#xa0; - u2/u2/u1 BUFX2 ;</code><br /><code>&#xa0; - u2/u3/u1 BUFX2 ;</code><br /><code>END COMPONENTS</code></li><li><span>The following command set presents an example of instantiation the a module, which is selectively expanded</span><span><span>:<br /></span></span><code>read_lib my_lib</code><br /><code>read_verilog my_verilog&#xa0; # instantiations of modules &#8220;a&#8221; are to be selectively expanded</code><br /><code>set_selectively_expanded_modules &#8220;a&#8221;&#xa0; # do not expand any instantiation of &#8220;a&#8221;</code><br /><code>set_expanded_hinsts &#8220;&#8221;; # Note: same result if this line is removed</code><br /><code>set_top_module top</code><br /><span><span><span>Netlist:<br /></span></span></span><code>module top;</code><br /><code>&#xa0; a u1; a u2;</code><br /><code>endmodule</code><br /><code>module a;</code><br /><code>&#xa0; b u1; c u2; c u3;</code><br /><code>endmodule</code><br /><code>module b;</code><br /><code>&#xa0; BUFX2 u1;</code><br /><code>endmodule</code><br /><code>module c;</code><br /><code>&#xa0; BUFX2 u1;</code><br /><code>endmodule</code><br /><span><span><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image confluence-content-image-border" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/720024294/720024295.png" data-linked-resource-container-id="720024294" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image-2025-10-15_11-34-7.png" data-linked-resource-id="720024295" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/720024294/720024295.png" tabindex="0" width="500" /></span><br />Following is the expansion result of the above example:<br /></span></span><code>COMPONENTS 2 ;</code><br /><code>&#xa0; - u1 a ;</code><br /><code>&#xa0; - u2 a ;</code><br /><code><span>END COMPONENTS</span></code></li></ul>
+<p><span>Related Topics</span></p>
+
+<p><code><a href="../tempusCUI/get_selectively_expanded_modules.html">get_selectively_expanded_modules</a></code></p>
+
+<p><code></code></p>
+
+<p></p>
+
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_path_adjust_group.html" id="prev" title="set_path_adjust_group">set_path_adjust_group</a></em></b><b><em><a href="set_table_style.html" id="nex" title="set_table_style">set_table_style</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

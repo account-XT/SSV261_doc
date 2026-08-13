@@ -1,0 +1,123 @@
+
+<html><head><title>TCL Command Example for Domain-based Through-Silicon Via Flow</title>
+<meta name="page_sequence" content="31001000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666202" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="TCL Command Example for Domain-based Through-Silicon Via Flow" />
+<meta name="Keywords" content="TSV,Tcl,domain,pad,bumps" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Multi-Die Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666202" />
+<meta name="NextFile" content="TCL_Command_Example_for_Domain-based_System-in-Package_Flow.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Through-Silicon_Via_and_System-in-Package.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- TCL Command Example for Domain-based Through-Silicon Via Flow" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Through-Silicon_Via_and_System-in-Package.html" title="Through-Silicon_Via_and_System-in-Package">Through-Silicon_Via_and_System ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="TCL_Command_Example_for_Domain-based_System-in-Package_Flow.html" title="TCL_Command_Example_for_Domain-based_System-in-Package_Flow">TCL_Command_Example_for_Domain ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>TCL Command Example for Domain-based Through-Silicon Via Flow</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="fontredcadence">
+<p>The following is the TCL command example for setting up and running domain-based TSV analysis:</p>
+
+<p><code>set_power_data -format current -scale 1 {./data/tier1_static_power/static_VDD.ptiavg} -die_instance_name mother_die</code><br /><code>set_power_data -format current -scale 1 {./data/tier2_static_power/static_VDD.ptiavg} -die_instance_name daughter_die</code><br /><code>set_power_data -format current -scale 1 {./data/tier1_static_power/static_VSS.ptiavg} -die_instance_name mother_die</code><br /><code>set_power_data -format current -scale 1 {./data/tier2_static_power/static_GND.ptiavg} -die_instance_name daughter_die</code></p>
+
+<p><code>set_rail_analysis_config </code></p>
+<pre><code>-method static \<br />-die_mode multi-die \<br />-die_instance_name mother_die \<br />-accuracy hd\<br />-power_grid_libraries {./data/libgen/accurate_io_tier1/accurate_ios.cl \<br />./data/libgen/accurate_std_tier1/accurate_stdcells.cl} \<br />-report_via_current_direction false <br />-read_thermal_map map1.file </code></pre><pre><code>
+set_rail_analysis_config </code></pre><pre><code>-method static \<br />-die_mode multi-die \<br />-die_instance_name daughter_die \<br />-accuracy hd \<br />-power_grid_libraries {./data/libgen/accurate_std_tier2/accurate_stdcells.cl \<br />./data/libgen/fast_block_tier2/fast_allcells.cl} \<br />-report_via_current_direction false<br />-read_thermal_map map2.file </code></pre><div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>The <code>-die_mode</code> parameter specifies to perform multi-die analysis and the <code>-die_instance_name</code> parameter specifies the die instance name. You can use the <code>-read_thermal_map</code> parameter to use the distribution temperature defined in the specified thermal map file of each die generated from thermal analysis to do resistance scaling. The <code>set_rail_analysis_</code>config command parameters are specified for both master and slave die.</p>
+</div>
+</div>
+<pre><code>
+set_pg_nets -net VDD -voltage 1.08 -threshold 0.9 -tolerance 0.3 -die_instance_name mother_die -force<br />set_pg_nets -net VDD -voltage 1.08 -threshold 0.9 -tolerance 0.3 -die_instance_name daughter_die -force<br />set_pg_nets -net VSS -voltage 0 -threshold 0.12 -tolerance 0.3 -die_instance_name mother_die -force<br />set_pg_nets -net GND -voltage 0 -threshold 0.12 -tolerance 0.3 -die_instance_name daughter_die -force</code><code>
+set_power_data -format current -scale 1 {./data/tier1_static_power/static_VDD.ptiavg} -die_instance_name mother_die<br />set_power_data -format current -scale 1 {./data/tier2_static_power/static_VDD.ptiavg} -die_instance_name daughter_die<br />set_power_data -format current -scale 1 {./data/tier1_static_power/static_VSS.ptiavg} -die_instance_name mother_die<br />set_power_data -format current -scale 1 {./data/tier2_static_power/static_GND.ptiavg} -die_instance_name daughter_die</code></pre><pre><code>set_power_pads -net VDD -format xy -file ./data/VDD_t1.pp -die_instance_name mother_die<br />set_power_pads -net VDD -format xy -file ./data/VDD_t2.pp -die_instance_name daughter_die<br />set_power_pads -net VSS -format xy -file ./data/VSS_t1.pp -die_instance_name mother_die<br />set_power_pads -net GND -format xy -file ./data/GND_t2.pp -die_instance_name daughter_die</code></pre><pre><code> ./data/mother_die.def -die_instance_name mother_die</code></pre><pre><code>set_power_def_files ./data/daughter_die.def -die_instance_name daughter_die</code></pre><div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>Specify these commands for each die instance by specifying the instance name using the <code>-die_instance_name</code> parameter. For example, you can specify the power grid nets, power data, power pad file, and DEF file for each die instance.</p>
+</div>
+</div>
+<pre><code>set_rail_analysis_domain -domain_name pd -power_nets &quot;mother_die/VDD daughter_die/VDD&quot; -ground_nets &quot;mother_die/VSS daughter_die/GND&quot;</code></pre><div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>Use the <code>set_rail_analysis_domain</code> command to specify the die name/ net name pairs for power and ground nets in the specified domain.</p>
+</div>
+</div>
+<pre><code>set_multi_die_analysis_mode -analysis_name tsv -die_list {mother_die daughter_die} \<br /></code><code>-stacked_die_mapping_file ./data/pwr.mapping</code></pre>
+<p>The pad location file and the bump mapping file support embedded bumps in the hierarchical TSV design flow.</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>Specify the <code>set_multi_die_analysis_mode</code> command to specify the multi-die analysis type (tsv), list of die instances, and the mapping file containing the connections between the two stacked die.</p>
+</div>
+</div>
+<pre><code>report_rail -type domain -output_dir . pd </code><code>
+exit</code></pre></span></p>
+<h4 id="TCLCommandExampleforDomainbasedThroughSiliconViaFlow-RelatedTopics"><em>Related Topics</em></h4>
+<ul><li><a href="Through-Silicon_Via_and_System-in-Package.html">Through-Silicon Via and System-in-Package</a></li><li><a href="TCL_Command_Example_for_Domain-based_System-in-Package_Flow.html">TCL Command Example for Domain-based System-in-Package Flow</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Through-Silicon_Via_and_System-in-Package.html" id="prev" title="Through-Silicon_Via_and_System-in-Package">Through-Silicon_Via_and_System ...</a></em></b><b><em><a href="TCL_Command_Example_for_Domain-based_System-in-Package_Flow.html" id="nex" title="TCL_Command_Example_for_Domain-based_System-in-Package_Flow">TCL_Command_Example_for_Domain ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

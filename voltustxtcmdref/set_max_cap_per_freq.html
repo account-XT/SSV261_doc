@@ -1,0 +1,178 @@
+
+<html><head><title>set_max_cap_per_freq</title>
+<meta name="page_sequence" content="20006000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666336" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the text commands in Voltus IC Power Integrity Solution." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_max_cap_per_freq" />
+<meta name="Keywords" content="timing library,frequency,violations,maximum capacitance,electromigration" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Signal ElectroMigration," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666336" />
+<meta name="NextFile" content="set_max_tran_per_freq.html" />
+<meta name="Group" content="Voltus Text Command Reference" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="report_freq_violation.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution Text Command Reference -- set_max_cap_per_freq" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="epstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="report_freq_violation.html" title="report_freq_violation">report_freq_violation</a></li><li style="float: right;"><a class="viewPrint" href="voltustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_max_tran_per_freq.html" title="set_max_tran_per_freq">set_max_tran_per_freq</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_max_cap_per_freq</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="set_max_cap_per_freq-set_max_cap_per_freq"></span> <code><br /><code>set_max_cap_per_freq <br />[-help]<br />[-cap {<code><em>cap1</em></code> <code><em>cap2</em></code> &#8230;}]<br />[-force] <br />[-freq {<code><em>freq1</em></code> <code><em>freq2</em></code> &#8230;}]<br />[-lib <code><em>libName</em></code>] <br />-pins {<code><em>cell</em></code> <code><em>pin</em></code>}</code> <br /></code></p>
+
+<p>Adds a maximum capacitance per frequency table to the existing <code>max_capacitance</code> statement in the timing library.</p>
+
+<p>Within-cell, DC electromigration limits vary with varying frequency of transition. The software manages DC electromigration using a maximum capacitance limit based on switching frequency. This is driven by maxCapPerFreq data in the liberty. The violations can be reported using the&#xa0;<code><a href="report_design_rule.html">report_design_rule</a></code> command in Voltus. These constraints can be set for cell pins manually using this command.</p>
+
+<p>Timing analysis uses this table to detect violations, and <code>optDesign</code> in&#xa0;Innovus can be used to repair violations.</p>
+<h4 id="set_max_cap_per_freq-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table bgcolor="#FFFFFF" cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><tbody><tr><td class="confluenceTd" style="width: 43.6458px;">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd" style="width: 574.537px;">
+<p>Prints out the command usage.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 618.183px;" valign="top">
+<p><code>-cap {</code><code><em>cap1</em></code><code><em>cap2</em></code><code><em>...</em></code><code>}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 43.6458px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 574.537px;" valign="top">
+<p>Specifies a list of capacitance values that must be greater than or equal to 0. You must specify the same number of <code>-freq</code> and <code>-cap</code> values.</p>
+
+<p>The software derives the maximum capacitance from a linear interpolation (or extrapolation) for a given frequency value using two frequency values in the table. For interpolation, the software uses the closest value above the frequency, and the closest value below the frequency. For extrapolation, the software uses the two closest values to the frequency.</p>
+
+<p><em>Type:</em> Float, specified in units of pF</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 43.6458px;" valign="top">
+<p><code>-force</code></p>
+</td>
+<td class="confluenceTd" style="width: 574.537px;" valign="top">
+<p>Computes the maximum capacitance from the interpolated <code>-freq</code> and <code>-cap</code> values only and ignores any previously defined <code>max_capacitance</code> values for these pins in the library.</p>
+
+<p><em>Default:</em> Computes the maximum capacitance using the worst case (minimum value) between the library <code>max_capacitance</code> values and the interpolated <code>-cap</code> values.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 618.183px;" valign="top">
+<p><code>-freq {</code><code><em>freq1</em></code><code><em>freq2</em></code><code><em>...</em></code><code>}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 43.6458px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 574.537px;" valign="top">
+<p>Specifies a list of at least two frequency values that must be greater than or equal to 0. You must specify the same number of <code>-freq</code> and <code>-cap</code> values, and the frequency values must be specified in ascending order.</p>
+
+<p><em>Type:</em> Float, specified in units of Hz</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 618.183px;" valign="top">
+<p><code>-lib </code><code><em>libName</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 43.6458px;" valign="top"><br /></td>
+<td class="confluenceTd" style="width: 574.537px;" valign="top">
+<p>Specifies the library name inside liberty. For example, library (<code>slowlvt</code>) inside slow.lib. The library name should be specified as <code>slowlvt</code>.</p>
+
+<p>Modifies only the matching cell-pins in the specified library.</p>
+
+<p><em>Default:</em> Modifies the matching cell-pins in all libraries</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 618.183px;" valign="top">
+<p><code>-pins {</code><code><em>cell</em></code><code><em>pin</em></code><code>} </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 43.6458px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 574.537px;" valign="top">
+<p>Adds the new capacitance constraints to the specified set of cells and pins. You can specify output or inout pins. The asterisk (<code>*</code>) wildcard character can be used in a cell or pin name. If a table associated with the pin already exists, it is replaced with the new table.</p>
+
+<p>For analysis and optimization, the software uses the most restrictive (the lowest capacitance) value from either the table or the <code>.lib</code> <code>max_capacitance</code>. If you also specify the <code>-force</code> parameter, the <code>max_capacitance</code> value is ignored. The final value can be further modified using <code>.sdc </code><code>set_max_capacitance</code> statements.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_max_cap_per_freq-Example">Example</h4>
+
+<p>Assume all output pins of a library have a <code>max_capacitance</code> of 3.5 pF from the library file.</p>
+<ul><li>The following command sets the frequency dependent <code>max_capacitance</code> to 3.0 pF at a frequency of 100 Mhz, and to 1.5 pF at a frequency of 200 Mhz, for all output or inout pins for all cells in the library named <code>fast</code>: <br /><code>set_max_cap_per_freq -lib fast -freq {100e6 200e6} -cap {3.0 1.5} -pins {* *}</code><br /><br />As a result, for a net at 300 Mhz, an and2 cell output pin has an extrapolated <code>max_capacitance</code> value of 0 pF (which means the cell cannot be used at that frequency). An extrapolation to 50 Mhz results in a <code>max_capacitance</code> value of 3.75 pF. However, the 3.75 pF value is greater than the existing <code>.lib</code> <code>max_capacitance</code> limit of 3.5 pF; therefore timing analysis uses the 3.5 pF value.</li></ul><ul><li>The following command applies the same constraints to all libraries with cell names matching <code>dff*</code> that have a pin named <code>Qbar</code>: <br /><code>set_max_cap_per_freq -force -freq {100e6 200e6} -cap {3.0 1.5} -pins {dff* Qbar}</code><br /><br />The original <code>.lib</code> <code>max_capacitance</code> limit is ignored because the <code>-force</code> parameter is specified; therefore extrapolation to 50 Mhz results in a final <code>max_capacitance</code> constraint value of 3.75 pF.</li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="report_freq_violation.html" id="prev" title="report_freq_violation">report_freq_violation</a></em></b><b><em><a href="set_max_tran_per_freq.html" id="nex" title="set_max_tran_per_freq">set_max_tran_per_freq</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

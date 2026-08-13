@@ -1,0 +1,162 @@
+
+<html><head><title>Power and Rail Analysis Text Reports</title>
+<meta name="page_sequence" content="21032000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468589" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Power and Rail Analysis Text Reports" />
+<meta name="Keywords" content="power,report,HTML,database,analysis" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468589" />
+<meta name="NextFile" content="Power-Grid_Integrity_Reports.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Rail_Plots_for_Visualizing_Rail_Results_using_Rail_Results_Viewer.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- Power and Rail Analysis Text Reports" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="Rail_Plots_for_Visualizing_Rail_Results_using_Rail_Results_Viewer.html" title="Rail_Plots_for_Visualizing_Rail_Results_using_Rail_Results_Viewer">Rail_Plots_for_Visualizing_Rai ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Power-Grid_Integrity_Reports.html" title="Power-Grid_Integrity_Reports">Power-Grid_Integrity_Reports</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Power and Rail Analysis Text Reports</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>In addition to auto-generated HTML reports, Voltus can incrementally generate text reports for all analysis types, post analysis. These reports can be generated using the <code>report_power_rail_results</code> command and report option. You are required to load state directory which has rail analysis results. The power reports can be generated after restoring the power database.</p>
+
+<p><span class="fontredcadence">
+<p><strong>Example Tcl Flow</strong></p>
+
+<p># Import design</p>
+
+<p><code>read_design &#8230;</code></p>
+
+<p># Load rail analysis state directory</p>
+
+<p><code>read_power_rail_results -rail_directory ALL_25C_avg_1/VSS</code></p>
+
+<p># IR drop report</p>
+
+<p><code>report_power_rail_results -plot ir -filename VSS.irdrop.report</code></p>
+
+<p># Resistance analysis report</p>
+
+<p><code>report_power_rail_results -plot rlrp -filename VSS.resistance.report</code></p>
+
+<p># Current density (EM) violation report</p>
+
+<p><code>report_power_rail_results -plot rj -filename VSS.currentdensity.report</code></p>
+
+<p># Sensitivity analysis report</p>
+
+<p><code>report_power_rail_results -plot rs -filename VSS.sensitivity.report</code></p>
+
+<p># Instance-based least resistance path report without violation report</p>
+
+<p><code>report_power_rail_results -filename rlrp.report -limit 0 -rlrp_inst A/B/C</code></p>
+</span></p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>The parameter <code>-limit 0</code> effectively turns off the violation report.</p>
+</div>
+</div>
+
+<p>There are two ways to generate static power reports in Voltus:</p>
+<ul><li>Using <code>report_power</code> after restoring power database</li><li>Using <code>report_power_rail_results</code> after restoring power database</li></ul>
+<p>Both methods generate report in different format.In general, <code>report_power</code> has more detailed options to generate power distribution reports, e.g. for design hierarchy, cell type, instance, clock domain, power domain etc. In contrast, <code>report_power_rail_results</code> can only generate global power, activity and frequency reports to highlight worst-case values.</p>
+
+<p><span class="fontredcadence">
+<p><strong>Example Tcl flow</strong></p>
+
+<p><span style="font-family: SFMono-Medium , &quot;SF Mono&quot; , &quot;Segoe UI Mono&quot; , &quot;Roboto Mono&quot; , &quot;Ubuntu Mono&quot; , Menlo , Courier , monospace;letter-spacing: 0.0px;"># Restore power database</span></p>
+
+<p><code>restore_power_database -file power.db<br />report_power -clock_network all -outfile clock.rpt <br />report_power -instances inst1 <br />report_power -cell CKBUF <br />report_power -hierarchy dma_dut -outfile dma_dut.pwr<br />report_power -pg_net VDD -outfile VDD.pwr</code></p>
+
+<p>OR</p>
+<pre><code>report_power_rail_results -plot ip -filename total_power.rpt<br />report_power_rail_results -plot ip_s -filename switching_power.rpt<br />report_power_rail_results -plot ip_i -filename internal_power.rpt<br />report_power_rail_results -plot ip_l -filename leakage_power.rpt<br />report_power_rail_results -plot freq -filename freq.rpt<br />report_power_rail_results -plot td -filename transition_density.rpt<br />report_power_rail_results -plot load -filename load_cap.rpt</code></pre></span></p>
+<pre><br /></pre>
+<p><strong>Example IR Drop Report</strong></p>
+
+<p><code>
+###############################################################<br /># Generated by: Cadence Voltus IC Power Integrity Solution 09.10-b057_1<br /># OS: Linux x86_64(Host ID tfopvsv4004)<br /># Generated on: Fri Aug 28 22:08:39 2009<br /># Command: read_power_rail_results -rail_directory irdrop_results/...<br />###############################################################<br />VALUE (V) LOCATION (nm) LAYER<br />1.05664587 {662200 1342000 667000 1342000} M1<br />1.05672038 {657400 1342000 662200 1342000} M1<br />1.05686557 {652600 1342000 657400 1342000} M1<br />1.05711162 {667500 1342000 673300 1342000} M1<br />1.05747104 {647900 1342000 652500 1342000} M1<br />1.0579921 {536160 2018800 537840 2018800} M1<br />1.05799508 {538520 2018800 538840 2018800} M1<br />1.05799508 {538680 2018975 538680 2019325} M1<br />1.05799568 {538560 2018800 539440 2018800} M1<br />&#8230;..</code></p>
+
+<p><strong>Example Effective Instance Voltage Report</strong></p>
+<pre><code>
+###############################################################<br /># Generated by: Cadence Voltus IC Power Integrity Solution 09.10-b057_1<br /># OS: Linux x86_64(Host ID tfopvsv4004)<br /># Generated on: Fri Aug 28 22:08:21 2009<br /># Command: read_power_rail_results -rail_directory irdrop_results/...<br />###############################################################<br />VALUE (V) INSTANCE<br />1.02425003 clk__L13_I3<br />1.02438998 dma_dut/dmamaster_dut/internal_memory/RAM4096x32/g977<br />1.02464008 clk__L13_I4<br />1.02498007 dma_dut/dmamaster_dut/internal_memory/RAM4096x32/g978<br />1.02550006 clk__L11_I2<br />1.02680993 clk__L13_I2<br />1.02904999 clk__L12_I2<br />1.02925003 clk__L15_I4</code></pre><pre><code>
+--------</code></pre>
+<p><strong>Example Current Density Report</strong></p>
+<pre><code>
+###############################################################<br /># Generated by: Cadence Voltus IC Power Integrity Solution 09.10-b057_1<br /># OS: Linux x86_64(Host ID tfopvsv4004)<br /># Generated on: Fri Aug 28 22:08:29 2009<br /># Command: report_power_rail_results -plot rj -filename ./irdrop_result...<br />###############################################################</code></pre><pre><code>
+VALUE () LOCATION (nm) LAYER<br />7.08138275 {157570 819200 157570 819200} M7<br />7.04982233 {157570 2000800 157570 2000800} M7<br />6.83572531 {157570 1819200 157570 1819200} M7<br />6.51245785 {157570 2019200 157570 2019200} M7<br />6.26489735 {157570 1200800 157570 1200800} M7<br />6.13188887 {157570 2001720 157570 2001720} M7<br />5.97691965 {157570 2018280 157570 2018280} M7<br />5.88610029 {157570 1019200 157570 1019200} M7</code></pre>
+<p>In addition to text reports, you can measure the worst IR drop, total current and capacitance values in the region interactively using &quot;<em>Draw</em>&quot; and &quot;<em>Measure</em>&quot; buttons in Power &amp; Rail Results form. This feature is also supported through Tcl command as follows,</p>
+
+<p><code>read_power_rail_results -rail_directory ALL_25C_dynamic_1/VDD<br />report_power_rail_results -region {0 0 100 100}</code></p>
+<pre><code>Region: (38.0275, 1144.72) (53.2615, 1245.33)<br />Tap Current: 7.33398e-05 A<br />Worst IR: 0.96455 V<br />Grid Capacitance: 7.8342e-17 F<br />Intrinsic Capacitance(C1): 6.97428e-16 F<br />Load Capacitance(C2): 7.56275e-14 F<br />Decap Required: 0 F</code></pre><h4 id="PowerandRailAnalysisTextReports-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Power-Grid_Integrity_Reports.html">Power-Grid Integrity Reports</a></li><li><a href="Layer-based_IR_Drop_Report.html">Layer-based IR Drop Report</a></li><li><a href="Power_and_Rail_Analysis_HTML_Reports.html">Power and Rail Analysis HTML Reports</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Rail_Plots_for_Visualizing_Rail_Results_using_Rail_Results_Viewer.html" id="prev" title="Rail_Plots_for_Visualizing_Rail_Results_using_Rail_Results_Viewer">Rail_Plots_for_Visualizing_Rai ...</a></em></b><b><em><a href="Power-Grid_Integrity_Reports.html" id="nex" title="Power-Grid_Integrity_Reports">Power-Grid_Integrity_Reports</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

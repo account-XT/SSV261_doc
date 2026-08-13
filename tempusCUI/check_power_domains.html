@@ -1,0 +1,233 @@
+
+<html><head><title>check_power_domains</title>
+<meta name="page_sequence" content="25002000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287260" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="check_power_domains" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287260" />
+<meta name="NextFile" content="clone_msv_gate.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="add_pg_netlist_power_intent.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- check_power_domains" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="add_pg_netlist_power_intent.html" title="add_pg_netlist_power_intent">add_pg_netlist_power_intent</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="clone_msv_gate.html" title="clone_msv_gate">clone_msv_gate</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>check_power_domains</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>check_power_domains<span class="confluence-anchor-link" id="check_power_domains-check_power_domains"></span><span id="check_power_domains-check_power_domains"></span> <br />[-help]<br />[-all_inst_in_power_domain]<br />[-always_on_bias]<br /><span>[-always_on_buffer_type]<br />[-antenna_diode {<em>fileName </em>...}]<br />[-cell_bind {</span><em>cell ...</em><span>}]</span><br />[-drc_file <em>string</em>]<br />[-lib_binding_voltage]<br />[-lib_cell_binding]<br />[-global_connection [<em>module_name_list</em>]]<br />[-nets_missing_iso [<em>fileName</em>]<br />[-ignore_net_to_port_iso]<br />[-ignore_net_to_port_shifter] <br />[-place [-place_report <em>report_name</em>]]<br />[-power_switch]<br />[-power_within_min_gap]<br />[-retention {<em>fileName ...</em>}]<br />[-nets_missing_shifter [<em>fileName</em>] [-ignore_net_to_port_shifter]] <br /></code></p>
+
+<p>Verifies whether the power domains are set up correctly in terms of timing library binding and PG connection. This command also checks whether any power domains overlap. The <code>check_power_domains</code> command checks that libraries specified for each power domain of each <code>dc_corner</code> are complete for each power domain member list.</p>
+<h4 id="check_power_domains-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="confluenceTable cadenceTable cadDefaultfont" id="cadDefaultfont" style="width: 900px;"><colgroup><col style="width: 300px;" /><col style="width: 600px;" /></colgroup><tbody><tr><td class="confluenceTd" style="width: 244.0px;">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd" style="width: 1546.0px;">
+<p>Outputs a brief description that includes type and default information for each <code>check_power_domains</code> parameter.</p>
+
+<p>For a detailed description of the command and all of its parameters, use the <code>man</code> command: <br /><code>man check_power_domains.</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 244.0px;">
+<p><code>-all_inst_in_power_domain</code></p>
+</td>
+<td class="confluenceTd" style="width: 1546.0px;">
+<p>Verifies all instances are in the power domain.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 244.0px;"><code><span>-always_on_bias</span></code></td>
+<td class="confluenceTd" style="width: 1546.0px;">Checks the <span><code>always_on_bias</code> net connection.</span></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 244.0px;"><code>-always_on_buffer_type</code></td>
+<td class="confluenceTd" style="width: 1546.0px;">
+<p>Checks if the AO buffer in each domain has correct type in terms of AO Nwell design and IEEE1801 Nwell specification.</p>
+
+<p><em>Data_type</em><span>:&#xa0;</span><span>bool, optional</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><span>-antenna_diode {<em>fileName </em>...}</span></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 244.0px;"><span><br /></span></td>
+<td class="confluenceTd" style="width: 1546.0px;">
+<p>Verifies antenna diode-related low power violations for the specified file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 244.0px;"><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">-cell_bind {</span><em>cell ...</em><span style="color:var(--ds-text-accent-teal-bolder,#164555);">}</span></code></td>
+<td class="confluenceTd" style="width: 1546.0px;"><span>Checks </span><span>against all views and power domains </span><span>if binding exists in the list of specified cells.</span></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 244.0px;"><code><span>-drc_file&#xa0;</span><em>fileName</em></code></td>
+<td class="confluenceTd" style="width: 1546.0px;">Creates the Design Rule Checking (DRC) violation markers and save those in the specified file.</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 244.0px;"><code>-lib_binding_voltage</code></td>
+<td class="confluenceTd" style="width: 1546.0px;">
+<p><span>Checks voltage against the binding library.</span><span><br /></span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 244.0px;">
+<p><code>-lib_cell_binding</code></p>
+</td>
+<td class="confluenceTd" style="width: 1546.0px;">
+<p>Verifies that all cells are bound to correct timing library cells.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1790.0px;"><code>-global_connection </code><code><em>module_name_list</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 244.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1546.0px;">
+<p>Verifies that power and ground pins of instances within the power domain are connected to the power and ground nets of that power domain. In addition, this parameter verifies that the tie-high and tie-low connections of an instance are connected to the same power and ground nets of the power domain to which the cell belongs. If you do not specify a list of module names, all modules are verified.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 244.0px;">
+<p><code>-nets_missing_iso</code></p>
+</td>
+<td class="confluenceTd" style="width: 1546.0px;">
+<p>Verifies if the nets are missing isolation instances according to the power intent file. It also checks if the isolation uses right type of cell specified in the IEEE1801 map_isolation_cell command (if any).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 244.0px;">
+<p><code>-ignore_net_to_port_iso</code></p>
+</td>
+<td class="confluenceTd" style="width: 1546.0px;">
+<p>Ignores the nets connecting to I/O when verifying isolation using <code>-nets_missing_iso</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 244.0px;">
+<p><code>-ignore_net_to_port_shifter</code></p>
+</td>
+<td class="confluenceTd" style="width: 1546.0px;">
+<p>Ignores the nets connecting to I/O when verifying shifter using <code>-nets_missing_shifter</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 244.0px;">
+<p><code>-place</code></p>
+</td>
+<td class="confluenceTd" style="width: 1546.0px;">
+<p>Verifies if the instances are placed in the boundary of their power domain.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1790.0px;"><code>-place_report</code>&#xa0;<code><em>report_name</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 244.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1546.0px;">
+<p>Specifies a name and location for the report generated when you use this command with the <code>-place</code> parameter.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 244.0px;">
+<p><code>-power_switch</code></p>
+</td>
+<td class="confluenceTd" style="width: 1546.0px;">
+<p>Verifies whether each row in the power domains contain at least one power switch. The command issues a warning message detailing which rows do not contain at least one switch. It also checks if the power switch uses right type of cell specified in the IEEE1801 <code>map_power_switch_cell</code> command (if any).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1790.0px;"><code>-power_within_min_gap</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 244.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1546.0px;">
+<p>Verifies that the power domain ring is within the distance specified by the <code style="text-align: left;">update_power_domain<span>&#xa0;</span></code><code style="text-align: left;">-gap_sides</code><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span>command parameter</span>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1790.0px;"><code>-retention {<em>fileName ...</em>}</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 244.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1546.0px;">
+<p>Specifies a name for storing the verify retention information. It checks if the retention uses the right type of cell specified in the IEEE1801 <code>map_retention_cell</code> command (if any).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 244.0px;">
+<p><code>-nets_missing_shifter</code></p>
+</td>
+<td class="confluenceTd" style="width: 1546.0px;">
+<p>Verifies if the nets are missing level shifter according to the power intent file. It also checks if the level shifter uses right type of cell specified in the IEEE1801 <code>map_level_shifter_cell</code> command (if any).</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="check_power_domains-Examples">Examples</h4>
+
+<p>The following command issues warning messages if instances that are not members of a power domain are placed within that power domain boundary, or if any power domains overlap:</p>
+
+<p><code>check_power_domains -place</code></p>
+<h4 id="check_power_domains-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="report_power_domains.html">report_power_domains</a></code></li><li><code><a href="update_power_domain.html">update_power_domain</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="add_pg_netlist_power_intent.html" id="prev" title="add_pg_netlist_power_intent">add_pg_netlist_power_intent</a></em></b><b><em><a href="clone_msv_gate.html" id="nex" title="clone_msv_gate">clone_msv_gate</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

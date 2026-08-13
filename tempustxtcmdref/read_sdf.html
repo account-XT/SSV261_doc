@@ -1,0 +1,244 @@
+
+<html><head><title>read_sdf</title>
+<meta name="page_sequence" content="19052000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287343" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="read_sdf" />
+<meta name="Keywords" content="ovi sdf file,annotate delay information" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Timing Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287343" />
+<meta name="NextFile" content="read_spdf.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="read_path_descriptions.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- read_sdf" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="read_path_descriptions.html" title="read_path_descriptions">read_path_descriptions</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="read_spdf.html" title="read_spdf">read_spdf</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>read_sdf</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>read_sdf<span class="confluence-anchor-link" id="read_sdf-read_sdf"></span><span id="read_sdf-read_sdf"></span> <br /><span>[-help]</span><br /><em>sdf_file_name</em><br /><span>[-continue_on_error]</span><br /><span>[-ilm_filter]</span><br /><span>[-increment]</span><br /><span>[-overwrite_incremental_delay]</span><br /><span>[-path&#xa0;</span><em>instanceName</em><span>]</span><br /><span>[-persistent]&#xa0;</span><br /><span>[-print_summary]</span><br /><span>[-scale&#xa0;</span><em>float</em><span>]</span><br /><span>[-strict_cond_matching]</span><br /><span>[-view&#xa0;</span><em>viewName</em><span>]</span><br /><span>[-sdf_field {min|typ|max} | [-early_sdf_field {min|typ|max}] [-late_sdf_field {min|typ|max}]</span></code></code></p>
+
+<p>Reads an OVI Standard Delay Format (SDF) file and annotates user-specified delay information from the SDF file into the timing system. You can use the <code>read_sdf</code> command to supply pre-calculated delays and timing check values from an external delay calculator, or from a previous Tempus session.</p>
+
+<p>The <code>read_sdf</code> command can read SDF files in versions 2.1 and 3.0, and both plain-text and GNU zipped (.gz) formats. The command and the Tempus software do not support the Timing Environment section of the SDF specification.</p>
+
+<p>The SDF file can provide one, two, or three different values for each timing arc delay or timing check value. These values are passed in the min, typ, or max SDF delay fields, represented as min:typ:max.</p>
+
+<p>The Tempus software provides multiple delay placeholders to store the calculated or annotated delay information:</p>
+<ul><li>In single-corner (<code><a href="set_analysis_mode.html">set_analysis_mode</a></code> <code>-analysisType single</code>) analysis mode, only max delays are available.</li></ul><ul><li>In best-case worst-case (<code>set_analysis_mode</code><code> -analysisType bcwc</code>) mode, a min delay slot is provided for storing min delays used for hold analysis. A max delay slot stores delays used for setup analysis.</li></ul><ul><li>In on-chip variation (<code>set_analysis_mode</code><code> -analysisType onChipVariation</code>) mode, the early delay slots store delays used for calculated early arrival times. The late delay slot stores delays used for calculated late arrival times.</li></ul><ul><li>In multi-corner mode, an early and a late delay slot are provided for each multi-mode multi-corner analysis view.</li></ul>
+<p>The <code>read_sdf</code> command provides parameters for controlling how the SDF min:typ:max triplet values are mapped into the Tempus software&#39;s delay slots. The correct mapping depends on how the delay information in the SDF file was generated and what type of analysis you are performing.</p>
+<p align="left"><span class="confluence-embedded-file-wrapper"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/720023497/720023498.png" data-linked-resource-container-id="720023497" data-linked-resource-container-version="2" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="timinganalysisT.13.1.3.png" data-linked-resource-id="720023498" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/720023497/720023498.png" tabindex="0" /></span></p>
+
+<p>The timing system provides special handling for annotating incremental delays. These delays typically represent plus or minus offsets due to crosstalk effects. Incremental delay annotation to the Tempus software can be done by:</p>
+<ul><li>Importing an incremental SDF file (SDF has an internal <code>INCREMENT</code> keyword) using the <code>read_sdf</code> command.</li></ul><ul><li>Tcl sourcing a file of <code>set_annotated_delay -net -delta_only</code> constraints.</li></ul>
+<p>The incremental delay annotations can be viewed in the <code>report_timing</code> report by adding the <code>incr_delay</code> option to the <code>report_timing -format</code> list, or to the <code>report_timing_format</code> global variable.</p>
+<h4 id="read_sdf-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-continue_on_error</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Continues to read the file if an error occurs. By default, when an error occurs, the <code>read_sdf</code> command stops reading the file. Use this parameter to attempt to continue reading the file, if possible.</p>
+
+<p><strong>Note: </strong>Use caution if you continue, because some annotations could be missing due to the errors. Use the <code>report_annotated_parasitics</code> command to find missing annotations. If the file is corrupted, obtain a new SDF file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-early_sdf_field {min | typ | max} </code></p>
+</td>
+<td class="confluenceTd">
+<p>Annotates the early delay from the specified SDF field.</p>
+
+<p>In single-corner mode, all setup and hold analyses use the max delays. The software ignores any min/early delay information.</p>
+
+<p>In best-case worst-case mode, use this parameter to specify which SDF field to use for hold analysis.</p>
+
+<p>In on-chip variation mode, the software uses the early delay to calculate fast paths.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-ilm_filter</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Ignores ILM-related errors. By default, the <code>read_sdf</code> command does not ignore errors reported due to missing arcs in the core ILM.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-increment</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Increments the total delay without affecting the delta delay.</p>
+
+<p>By default, when the SDF file contains the INCREMENT delay type, the <code>read_sdf</code> command adjusts the delta delay slot to model SI cross-talk push-out/pull-in effects. When this option is used, the INCREMENT delays will be applied against the static base delay values instead.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-late_sdf_field {min | typ | max}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Annotates the late delay from the specified SDF field.</p>
+
+<p>In single-corner mode, use this parameter to specify which of the SDF triplet values to annotate for both setup and hold checks.</p>
+
+<p>In best-case worst-case mode, use this parameter to specify which SDF field to use for setup analysis.</p>
+
+<p>In on-chip variation mode, the software uses the late delay for the calculation of slow paths.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-overwrite_incremental_delay</code></p>
+</td>
+<td class="confluenceTd">
+<p>When annotating an incremental SDF file, it replaces any pre-existing delta delays with the new SDF values. The total delay will be equivalent to the original base delay, plus the new delta delay.</p>
+
+<p>If the delays in the incremental SDF file represent crosstalk delay push-outs from a signal integrity analysis, use the <code>-overwrite_incremental_delay</code> parameter to ensure that any stale data from a previous analysis is removed.</p>
+
+<p>By default, when an incremental SDF file (SDF has an internal <code>INCREMENT</code> keyword) is annotated, the delays are added to the base delay and also stored separately as delta delays. If an additional incremental SDF file is annotated, the software adds the existing base and delta delays with the new values.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-path </code><code><em>instanceName</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the instance in the design to which the specified SDF file should be applied.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-persistent </code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Keeps the delays from certain SDF files persistently in use during various steps of the timing optimization. Use this parameter to support pre-timed structures, such as clock meshes.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-print_summary</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Outputs the summary information of annotated delays.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-scale </code><code><em>float</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Overrides the automatic scaling of SDF delays to library units with the given value. To disable all scaling, use a value of 1.0.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-sdf_field {min | typ | max}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Annotates the delay from the specified SDF slot.</p>
+
+<p>In single-corner and best-case worst-case modes, the software uses this value for both setup and hold analysis.</p>
+
+<p>In on-chip variation mode, the software uses the same value from the specified SDF slot for both the early and late delays of the specified arc.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>sdf_filename</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the SDF file that has the back annotation data.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-strict_cond_matching</code></p>
+</td>
+<td class="confluenceTd">
+<p>Annotates only the conditions that are an exact syntax-to-syntax match between the SDF file and the <code>.lib</code> file.</p>
+
+<p><em>Default:</em> Uses looser conditional matching rules between the <code>.lib</code> and SDF arc specifications.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-view </code><code><em>viewName</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Annotates the specified analysis view(s) with the delays from the SDF file. You can use this parameter only when you are in multi-mode multi-corner analysis mode.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="read_sdf-Examples">Examples</h4>
+
+<p>Here are some examples.</p>
+<ul><li>The following command annotates delay information from the SDF min field into the min/early slots, and maps the SDF max field data to the max/late delay slots: <br /><code>tempus&gt; read_sdf <em>sdf_filename</em> </code><br /><br />Given the following SDF, the default annotation would be:<br /><br />(INTERCONNECT C1/Y RS/CK (0.123:0.456:0.789) (0.123:0.456:0.789))</li></ul><ul><ul><li>In single-corner analysis mode, a delay of 0.789 ns is annotated to the max delay slot.</li></ul></ul><ul><ul><li>In best-case worst-case mode, a delay of 0.123 ns is annotated to the min delay slot, and a value of 0.789 ns is placed in the max delay slot.</li></ul></ul><ul><ul><li>In on-chip variation mode, a delay of 0.123 is used for early delays, and a value of 0.789 ns is used for late delays.</li></ul></ul><ul><li>The following command annotates the SDF typ field to both the early and late delay slots: <br /><code>tempus&gt; read_sdf -sdf_field typ <em>sdf_filename</em></code></li></ul><ul><li>The following command annotates the SDF typ field to the early delay slot, and the SDF max field to the late delay slot: <br /><code>tempus&gt; read_sdf -early_sdf_field typ -late_sdf_field max <em>sdf_filename</em></code></li></ul><ul><li>The following command annotates the SDF typ field to the late delay slot. The early delay slot is annotated with the default min SDF field: <br /><code>tempus&gt; read_sdf -late_sdf_field typ <em>sdf_filename</em></code></li></ul><h4 id="read_sdf-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="write_sdf.html">write_sdf</a></code></li><li><code><a href="set_analysis_mode.html">set_analysis_mode&#xa0;</a></code></li><li><code><a href="set_annotated_delay.html">set_annotated_delay</a></code></li><li><code><a href="report_timing.html">report_timing</a></code></li><li><code><a href="report_annotated_parasitics.html">report_annotated_parasitics</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="read_path_descriptions.html" id="prev" title="read_path_descriptions">read_path_descriptions</a></em></b><b><em><a href="read_spdf.html" id="nex" title="read_spdf">read_spdf</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

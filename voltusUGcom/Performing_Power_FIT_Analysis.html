@@ -1,0 +1,120 @@
+
+<html><head><title>Performing Power FIT Analysis</title>
+<meta name="page_sequence" content="37004000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666226" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Performing Power FIT Analysis" />
+<meta name="Keywords" content="design,MMMC,dynamic,activity,self-heat,power,RMS" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Statistical ElectroMigration Budgeting," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666226" />
+<meta name="NextFile" content="Performing_Signal_FIT_Analysis.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Performing_Self-Heat_Analysis.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Performing Power FIT Analysis" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Performing_Self-Heat_Analysis.html" title="Performing_Self-Heat_Analysis">Performing_Self-Heat_Analysis</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Performing_Signal_FIT_Analysis.html" title="Performing_Signal_FIT_Analysis">Performing_Signal_FIT_Analysis</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Performing Power FIT Analysis</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>To perform power FIT analysis:</p>
+<ol><li>
+<p>Specify the power nets, power domain, location of the voltage sources, and static current files created during power analysis:.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>set_pg_nets -net VDD -voltage 0.9 -threshold 0.7<br /></code><code>set_pg_nets -net VSS -voltage 0.0 -threshold 0.05<br /></code><code>set_rail_analysis_domain -domain_name ALL -power_nets {VDD} -ground_nets {VSS}<br /></code><code>set_power_data -format current { \<br />    </code><code>static_db/static_VDD.ptiavg \<br />    </code><code>static_db/static_VSS.ptiavg \<br />    </code><code>}<br /></code><code>set_power_pads -net VDD -format xy -file ../PLOC/VDD.ploc<br /></code><code>set_power_pads -net VSS -format xy -file ../PLOC/VSS.ploc</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Define the rail analysis mode with the SEB parameters.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>set_rail_analysis_config\<br /></code><code>    -method                     static \<br />    </code><code>-accuracy                   hd \<br />    </code><code>-temperature                125 \<br />    </code><code>-power_grid_libraries $pgv \<br />    </code><code>-enable_seb true \<br />    </code><code>-seb_table seb_table.txt \ <br />    </code><code>-env_temperature 85 \ <br />    </code><code>-em_threshold 0.0 \<br />    </code><code>-check_thermal_aware_em true \ <br />    </code><code>-ict_em_models $ictem</code></pre></td>
+</tr>
+</tbody></table></div>
+
+<p><code><span style="color:var(--ds-text,#172b4d);"><br /></span></code></p>
+</span></p>
+</li><li>
+<p>Run rail analysis.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="relative-table wrapped confluenceTable" style="width: 29.7832%;"><colgroup class=""><col class="" style="width: 100.0%;" /></colgroup><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>report_rail -type domain -output_dir static_rail core</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+
+<p>The Voltus console will display rail analysis statistics, as shown in the following snippet:</p>
+<pre class="webflare-pre-block webflare-courier-new">Rail Analysis completed successfully.</pre><pre class="webflare-pre-block webflare-courier-new">Finished Rail Analysis at 11:56:53 08/20/2018 (cpu=0:00:20, real=0:00:34, peak mem=1218.10MB)</pre><pre class="webflare-pre-block webflare-courier-new">Current Voltus IC Power Integrity Solution resource usage: (total cpu=0:03:56, real=0:58:07, mem=1218.10</pre></li></ol><h4 id="PerformingPowerFITAnalysis-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Setting_up_and_Running_Power_EM_and_Signal_EM_Analyses_for_FIT_Calculation.html">Setting up and Running Power EM and Signal EM Analyses for FIT Calculation</a></li><li><a href="Performing_Self-Heat_Analysis.html">Performing Self-Heat Analysis</a></li><li><a href="Performing_Signal_FIT_Analysis.html">Performing Signal FIT Analysis</a></li><li><a href="Power_SEB_Output_Report.html">Power SEB Output Report</a></li><li><a href="Signal_SEB_Output_Report.html">Signal SEB Output Report</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Performing_Self-Heat_Analysis.html" id="prev" title="Performing_Self-Heat_Analysis">Performing_Self-Heat_Analysis</a></em></b><b><em><a href="Performing_Signal_FIT_Analysis.html" id="nex" title="Performing_Signal_FIT_Analysis">Performing_Signal_FIT_Analysis</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

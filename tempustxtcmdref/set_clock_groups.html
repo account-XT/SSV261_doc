@@ -1,0 +1,178 @@
+
+<html><head><title>set_clock_groups</title>
+<meta name="page_sequence" content="20062000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287433" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_clock_groups" />
+<meta name="Keywords" content="set clock groups,set,clock,groups,clock groups" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Constraints," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287433" />
+<meta name="NextFile" content="set_clock_latency.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_clock_gating_check.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- set_clock_groups" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="set_clock_gating_check.html" title="set_clock_gating_check">set_clock_gating_check</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_clock_latency.html" title="set_clock_latency">set_clock_latency</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_clock_groups</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="set_clock_groups-set_clock_groups"></span><span id="set_clock_groups-set_clock_groups"></span><code>set_clock_groups&#xa0;<br />[-help]</code><br /><code>[-comment &lt;<em>string</em>&gt;]&#xa0;</code><br /><code>[-group &lt;<em>clock_list</em>&gt;]</code><br /><code>[-name &lt;<em>name</em>&gt;]&#xa0;</code><br /><code>[-logically_exclusive ] | [-physically_exclusive ] | [ [-asynchronous ] [-allow_paths ]]</code></p>
+
+<p>Defines clock groups with specified clock definitions. The software assigns all clocks that are defined after you use the <code>set_clock_groups</code> command to a default clock group. The software does not apply clock groupings on a master clock to the generated child clocks.&#xa0;</p>
+
+<p>To report the defined clock groups, you can use the following command:<br /><code><a href="report_clocks.html">report_clocks</a> -groups &lt;<em>name</em>&gt;</code></p>
+
+<p>If there is an overlap in the clock group specification, the software uses the following precedence to resolve the behavior:</p>
+<ol><li>Physically exclusive</li><li>Asynchronous</li><li>Logically exclusive</li></ol>
+<p>The software drops any explicit false path assertions between clocks that you have set as either physically or logically exclusive or asynchronous using the <code>set_clock_groups</code> command.</p>
+
+<p>An alternative to setting the clocks as physically or logically exclusive using the <code>set_clock_groups</code> command is to use the multi-mode mechanism. Generally in an implementation flow, sequential setting of active clocks cannot be used. For concurrent analysis of different modes, you can use an multi-mode based approach to drive IPO instead of using the <code>set_clock_groups</code> command. For more information on multi-mode multi-corner analysis, see <em>P</em><em>erforming Multi-Mode Multi-Corner Timing Analysis and Optimization</em> chapter in the <em>Tempus</em><em> User Guide</em>.</p>
+
+<p><strong>Note</strong>: If the&#xa0;<code>set_clock_groups&#xa0;</code>constraint is added incrementally in SI mode, an explicit&#xa0;<code><a href="update_timing.html">update_timing</a></code>&#xa0;<code>-full</code>&#xa0;command is required (before&#xa0;<code><a href="report_timing.html">report_timing</a></code>&#xa0;or&#xa0;<code><a href="report_constraint.html">report_constraint</a></code>) for SI full accuracy.</p>
+<h4 id="set_clock_groups-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="wrapped relative-table confluenceTable" style="width: 100.0%;"><colgroup><col style="width: 24.2286%;" /><col style="width: 75.6885%;" /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-allow_paths</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Allows paths between asynchronous clock groups to be traced in timing analysis. These paths are blocked by default. When you use this option, the software still considers the paths to be asynchronous for signal integrity considerations. Signal integrity analysis does not support the <code>-allow_paths</code> parameter. Use the <code>-allow_paths</code> parameter with the <code>-asynchronous</code> parameter.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-asynchronous</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Defines clock group with asynchronous clocks. Asynchronous clocks have no specified phase relationship. The software considers asynchronous nets to have infinite timing window overlap for signal integrity considerations and considers these as false paths for timing analysis. Use the <code>-allow_paths</code> parameter to trace these paths in timing analysis.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-comment </code><code><em>string</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Allows you to insert comments. The comments are read but are ignored with a one-time warning message. They are not used during timing analysis reporting nor are they written out during saving of constraints.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-group</code> <code><em>clock_list</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Defines a set of clocks that are exclusive or asynchronous to the clocks defined in all other groups. If you define only one group, then all clocks not in the group implicitly belong to a default clock group. The software automatically adds any new clocks that you define after the <code>set_clock_groups</code> command to this default clock group.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-logically_exclusive</code></p>
+</td>
+<td class="confluenceTd">
+<p>Defines clock group with clocks that do not have any functional paths between them, but coexist in the design at the same time. The software considers aggressor interactions between these clocks for signal integrity considerations, but considers these as false paths for timing analysis.</p>
+
+<p><strong>Note: </strong>The <code>-logically_exclusive</code> parameter does not have any impact on SI analysis.</p>
+
+<p>For example, clocks selected via a clock mux select.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-name <em>name</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the names of the clock groups to be added.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-physically_exclusive</code></p>
+</td>
+<td class="confluenceTd">
+<p>Defines clock group with clocks that cannot exist in the design at the same time. The software does not consider aggressor interactions between clock groups that are physically exclusive for signal integrity considerations.</p>
+
+<p>From the perspective of SI analysis, all attackers that are physically exclusive with the victim net are ignored for both glitch and noise-on-delay analysis. Attacker nets that belong to physically exclusive groups cannot attack together. In this case, all sets of attackers belonging to all the physically exclusive groups are evaluated and the set of nets that has the highest impact on SI analysis is chosen.</p>
+
+<p>For timing analysis, the software considers these clock groups as false paths.</p>
+
+<p>Example: multiple clocks defined on the same source pin</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_clock_groups-Examples">Examples</h4>
+
+<p>Here are some examples.</p>
+<ul><li>The following commands assert two different clocks on the same clock root port, and uses <code>set_clock_groups</code> to isolate them from each other:&#xa0;<br /><code>tempus &gt; create_clock -name SYSCLK -period 10 [get_ports sclk]</code><br /><code><span>tempus &gt;&#xa0;</span>create_clock -name SCANCLK -period 100 -add [get_ports sclk]</code><br /><code><span>tempus &gt;&#xa0;</span>set_clock_groups -name PHY_EX_SCLK -physically_exclusive&#xa0;</code><code>-group {SYSCLK} -group {SCANCLK}</code>&#xa0;</li></ul><ul><li>The following command declares a single bus clock to be asynchronous to all of the other on board clocks in the design (which remain in the default clock group):<br /><code><span>tempus &gt;&#xa0;</span>set_clock_groups -name ASYNCH_BUS -asynchronous -group {BUSCLK}</code><br />Assume a design with four clocks CLK1, CLK2, CLK3, and CLK4. &#xa0;&#xa0;</li></ul><ul><li>The following command&#xa0;defines CLK1 physically exclusive to CLK2, CLK3 as well as CLK4.<br /><code><span>tempus &gt;&#xa0;</span>set_clock_groups &#8211;name group1 &#8211;group CLK1 &#8211;physically_exclusive</code></li></ul><ul><li>The following command defines CLK1 and CLK2 to be physically exclusive to CLK3 and CLK4.<br /><code><span>tempus &gt;&#xa0;</span>set_clock_groups &#8211;name group2 &#8211;group {CLK1 CLK2}&#xa0;<span>&#8211;physically_exclusive</span> &#xa0;</code></li></ul><ul><li>The following command defines CLK1 and CLK2 as physically exclusive to CLK3<br /><code><span>tempus &gt;&#xa0;</span>set_clock_groups &#8211;name group3 &#8211;group {CLK1 CLK2} -group {CLK3} &#8211;physically_exclusive</code></li></ul><ul><li>The following command defines the following:<br /><code><span>tempus &gt;&#xa0;</span>set_clock_groups &#8211;name group4 &#8211;group {CLK1} -group {CLK2} &#8211;group {CLK3} &#8211;physically_exclusive</code><br /><ul><li>CLK1 physically exclusive to CLK2 and CLK3.</li><li>CLK2 physically exclusive to CLK1 and CLK3.</li><li>CLK3 physically exclusive to CLK1 and CLK2.</li></ul></li></ul><ul><li>The following example shows that the clock group {clkA clkB} is asynchronous only to&#xa0;clock group {clkC clkD}:<br /><code><span>tempus &gt;&#xa0;</span><span style="font-family: monospace;line-height: 1.4285715;">set_clock_groups -asynchronous -group {clkA clkB} -group {clkC clkD}&#xa0;</span></code>
+<p>If an extra clock clkE is defined in the design, then &#xa0;timing check will be allowed in between the first group to clkE and second<br />group to clkE.</p>
+</li></ul><ul><li>In the following example since only one clock group is specified with the&#xa0;command <code>set_clock_groups</code> command, so the specified clock group is considered to&#xa0;be asynchronous to all the other clocks in the design:<br /><code>tempus &gt;&#xa0;set_clock_groups -asynchronous -group {clkA clkB}</code><br /><code>tempus &gt;&#xa0;set_clock_groups -asynchronous -group {clkC clkD}</code></li></ul><h4 id="set_clock_groups-RelatedCommands">Related Commands</h4>
+<ul><li><code><span><a href="create_clock.html">create_clock&#xa0;</a></span></code></li><li><code><a href="reset_clock_groups.html">reset_clock_groups</a>&#xa0;</code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_clock_gating_check.html" id="prev" title="set_clock_gating_check">set_clock_gating_check</a></em></b><b><em><a href="set_clock_latency.html" id="nex" title="set_clock_latency">set_clock_latency</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

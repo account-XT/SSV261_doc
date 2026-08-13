@@ -1,0 +1,186 @@
+
+<html><head><title>report_area</title>
+<meta name="page_sequence" content="20021000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287167" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="report_area" />
+<meta name="Keywords" content="hierarchy,modules,standard cell,LEF" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="General Commands," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="5" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287167" />
+<meta name="NextFile" content="report_dangling_ports.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="rename_snapshot.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- report_area" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="rename_snapshot.html" title="rename_snapshot">rename_snapshot</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="report_dangling_ports.html" title="report_dangling_ports">report_dangling_ports</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>report_area</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code><span id="report_area-report_area"></span><span class="confluence-anchor-link" id="report_area-report_area"></span>report_area</code><code><br /></code>[-help] <br /><code>[-detail]<br />[-hierarchical_instance&#xa0;<em>hinst_name</em>]<br />[-include_physical]</code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;&#xa0;<br /><code>[-min_area&#xa0;<em>area_per_module</em>]&#xa0;</code><br /><code>[-min_count&#xa0;<em>instance_count</em>]<br />[-out_file <em>filename</em>]</code><br /><code>[-show_leaf_cells]</code><br /><code>[-show_msv_cells]</code><br /><code>[-sort_by {name count area}]</code><br /><code>[-table_style {horizontal vertical}]&#xa0; <br />[<span style="color:var(--ds-text,#172b4d);">-summary |&#xa0;</span>-depth&#xa0;<em>depth_of_hierarchy</em>]&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;</code><br /></code></p>
+
+<p>Reports the combined standard cell area in each of the hierarchy modules and the top-level design.&#xa0;Also reports the cell area based on different cell types if the&#xa0;<code>-detail&#xa0;</code>option is specified.</p>
+
+<p><strong>Note</strong>: The units used in the report depend on the units used in the library. The area for each module is calculated from all the standard cells within each module using the LEF information.</p>
+<h4 id="report_area-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd">
+<p>Prints a brief description that includes type and default information for each &#xa0;<code>report_area&#xa0;</code> parameter.</p>
+
+<p>For a detailed description of the command and all of its parameters, use the <code>man</code> command:</p>
+
+<p><code>man report_area&#xa0;</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-depth <em>depth_of_hierarchy</em></code></p>
+</td>
+<td class="confluenceTd">Specifies the depth of hierarchy, <span style="color:var(--ds-text,#172b4d);">all levels if not specified; the top of the hierarchy (design) is 1.</span></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-detail</code></td>
+<td class="confluenceTd" colspan="1">Reports the area in different cell type (buffer, inverter, combinational, flop, latch, clock_gate, macro, physical).</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-hierarchical_instance&#xa0;<em>hinst_name</em></code></td>
+<td class="confluenceTd" colspan="1">Reports the area of the leaf instances in the specified hierarchical instance. You can use the&#xa0;<code>-depth</code> parameter to control the analysis depth of the specified hierarchical instance.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-include_physical</code></td>
+<td class="confluenceTd" colspan="1">Specifies to include physical cells in the area calculation and report. By default, it <span style="color:var(--ds-text,#172b4d);">reports only logical cells.</span></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-min_count&#xa0;<em>instance_count</em>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;</code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;</td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the minimum instance count per module. The generated output reports the area of hinsts with number of instances greater than the specified <code>min_count value</code>.</p>
+
+<p><em>Default</em>: <code>0</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-min_area&#xa0;<em>area_per_module</em>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;</code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;</td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the minimum area per module. The generated output reports the area of hinsts with area greater than the specified <code>min_area lib_units</code>.</p>
+
+<p><em>Default</em>: <code>0</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-out_file <em>filename</em></code></td>
+<td class="confluenceTd" colspan="1">Specifies the name of the output file.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-show_leaf_cells</code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies to include the leaf cells at the design level and each hinst level. These are the instances whose&#xa0;parent is the hinst display.</p>
+
+<p><em>Default</em>: <code>0</code> (Shows the hinst children in the report)</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-show_msv_cells</code></td>
+<td class="confluenceTd" colspan="1">
+<p>Includes multiple supply voltage cells in the report.</p>
+
+<p><strong>Note:</strong> This parameter is used with <code>-table_style vertical</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-sort_by {name count area}</code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the order of hinst names.</p>
+
+<p><em>Default</em>: <code>name</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span style="color:var(--ds-text,#172b4d);">-summary</span></code></td>
+<td class="confluenceTd" colspan="1">Prints the area summary for the&#xa0;design. It is equivalent&#xa0; &quot;<code>-depth 0</code>&quot;.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-table_style {horizontal vertical}</code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies whether the base report should be expanded in the vertical or horizontal direction.</p>
+
+<p><em>Default</em>: <code>horizontal</code> &#xa0;&#xa0;</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="report_area-Examples">Examples</h4>
+<ul><li>The following command reports the <span style="color:var(--ds-text,#172b4d);">top-level of the hierarchy (design):<br /></span><code>report_area -depth 1</code></li></ul><p style="margin-left: 40.0px;"><code>Hinst Name&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Module Name&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Inst Count&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Total Area</code><br /><code>---------------------------------------------------------------------------------------------------------------</code><br /><code>dtmf_recvr_core&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 8234&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;207975.789</code><br /><code>ARB_INST&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; arb&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 90&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;221.578</code><br /><code>DATA_SAMPLE_MUX_INST&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; data_sample_mux&#xa0; &#xa0; &#xa0; &#xa0; 69&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;83.790</code><br /><code>DIGIT_REG_INST&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; digit_reg&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 11&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;59.052</code></p>
+<ul><li>The following command reports the cell area based on different cell types along with cell area of the top-level design:<br /><code>report_area -depth 1 -detail</code></li></ul><p style="margin-left: 40.0px;"><code>Hinst Name&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Module Name&#xa0; &#xa0; &#xa0; Inst Count&#xa0; &#xa0;Total Area&#xa0; &#xa0;Buffer&#xa0; &#xa0; &#xa0;Inverter&#xa0; &#xa0; Combinational&#xa0; &#xa0;Flop&#xa0; &#xa0; &#xa0; &#xa0; Latch&#xa0; &#xa0; Clock Gate&#xa0; &#xa0;Macro&#xa0; &#xa0; &#xa0; Physical</code></p>
+<p style="margin-left: 40.0px;"><code>----------------------------------------------------------------------------------------------------------------------------------------------------------------</code></p>
+<p style="margin-left: 40.0px;"><code>dtmf_recvr_core&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;8234&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;07975.789&#xa0; &#xa0; 1151.514&#xa0; &#xa0;1604.512&#xa0; &#xa0; 81148.322&#xa0; &#xa0; &#xa0; &#xa0;4389.532&#xa0; &#xa0; 0.000&#xa0; &#xa0; 0.000&#xa0; &#xa0; &#xa0; &#xa0; 77866.281&#xa0; 0.000</code></p>
+<p style="margin-left: 40.0px;"><code>ARB_INST&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;arb&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 90&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;221.578&#xa0; &#xa0; &#xa0; 6.118&#xa0; &#xa0; &#xa0; 12.236&#xa0; &#xa0; &#xa0; 51.870&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 151.354&#xa0; &#xa0; &#xa0;0.000&#xa0; &#xa0; 0.000&#xa0; &#xa0; &#xa0; &#xa0; 0.000&#xa0; &#xa0; &#xa0; 0.000</code></p>
+<p style="margin-left: 40.0px;"><code>DATA_SAMPLE_MUX_INST&#xa0; &#xa0;data_sample_mux&#xa0; 69&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;83.790&#xa0; &#xa0; &#xa0; &#xa0;23.674&#xa0; &#xa0; &#xa0;18.354&#xa0; &#xa0; &#xa0; 41.762&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.000&#xa0; &#xa0; &#xa0; &#xa0;0.000&#xa0; &#xa0; 0.000&#xa0; &#xa0; &#xa0; &#xa0; 0.000&#xa0; &#xa0; &#xa0; 0.000</code></p>
+<ul><li class="MsoNormal">The following command reports the area of the leaf instances in the specified hierarchical instance, <code>DATA_SAMPLE_MUX_INST</code>:<br /><code>report_area -hierarchical_instance&#xa0; DATA_SAMPLE_MUX_INST</code></li></ul><p style="margin-left: 40.0px;"><code>Hinst Name&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Module Name&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Inst Count&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Total Area</code></p>
+<p style="margin-left: 40.0px;"><code>-----------------------------------------------------------------------------------------</code></p>
+<p style="margin-left: 40.0px;"><code>DATA_SAMPLE_MUX_INST&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;69&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;83.790</code></p>
+<ul><li>The following command reports the physical cells in the area calculation:<br /><code>report_area -include_physical<br /></code><br /><code>Hinst Name&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Module Name&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Inst Count&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Total Area</code><br /><code>-------------------------------------------------------------------------------------------</code><br /><code>dtmf_recvr_core&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 8234&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;207975.789</code><br /><code>ARB_INST&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;arb&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;90&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;221.578</code><br /><code>DATA_SAMPLE_MUX_INST&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;data_sample_mux&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;69&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;83.790</code><br /><code>DIGIT_REG_INST&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;digit_reg&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;11&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;59.052</code><br /><code>DMA_INST&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;dma&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;126&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 336.756</code></li></ul><p style="margin-left: 40.0px;"><br /></p>
+<ul><li>The following command shows the leaf cells at each hinst level:<br /><code>report_area -show_leaf_cells<br /><br />Hinst Name&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Module Name&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Inst Count&#xa0; &#xa0; &#xa0; &#xa0; Total Area</code><br /><code>--------------------------------------------------------------------------------------------</code><br /><code>dtmf_recvr_core&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;8234&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 207975.789</code><br /><code>(Leaf Cells)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 408&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;117724.285</code><br /><code>ARB_INST&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; arb&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;90&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 221.578</code><br /><code>(Leaf Cells)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 90&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 221.578</code><br /><code>DATA_SAMPLE_MUX_INST&#xa0; &#xa0; &#xa0; data_sample_mux&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;69&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 83.790</code><br /><code>(Leaf Cells)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 69&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 83.790</code></li><li>The following command shows the multiple supply voltage cells and prints the area summary for the design.<br /><code>report_area -show_msv_cells -table_style {vertical} -summary</code><br /><br /><code>Hinst Name&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Module Name&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Inst Count&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Total Area</code><br /><code>---------------------------------------------------------------------------------------------</code><br /><code>dtmf_recvr_core&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;8234&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;207975.789</code></li><li>The following command shows the minimum area per module along with the multiple supply voltage cells:<br /><code>report_area -min_area 81 -show_leaf_cells</code><br /><br /><code>Hinst Name&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Module Name&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Inst Count&#xa0; &#xa0; &#xa0; Total Area</code><br /><code>---------------------------------------------------------------------------------------------------------------</code><br /><code>dtmf_recvr_core&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;8234&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 207975.789</code><br /><code> (Leaf Cells)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 408&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;117724.285</code><br /><code>ARB_INST&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; arb&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;90&#xa0;&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;221.578</code><br /><code>(Leaf Cells)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 90&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 221.578</code><br /><code>DATA_SAMPLE_MUX_INST&#xa0; &#xa0; &#xa0; &#xa0; data_sample_mux&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;69&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 83.790</code><br /><code>(Leaf Cells)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 69&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 83.790</code><br /><code>DMA_INST&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; dma&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;126&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;336.756</code><br /><code>(Leaf Cells)&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 126&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;336.756</code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="rename_snapshot.html" id="prev" title="rename_snapshot">rename_snapshot</a></em></b><b><em><a href="report_dangling_ports.html" id="nex" title="report_dangling_ports">report_dangling_ports</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

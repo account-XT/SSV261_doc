@@ -1,0 +1,139 @@
+
+<html><head><title>IR Drop Aware Critical Path Analysis Using Spice</title>
+<meta name="page_sequence" content="32007000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666207" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="IR Drop Aware Critical Path Analysis Using Spice" />
+<meta name="Keywords" content="IR drop,aware,Spice,netlist,voltage,instance" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="IR Drop-Aware Optimization," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666207" />
+<meta name="NextFile" content="IR_Drop_Aware_Clock_Jitter_Analysis_Using_Spice.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Performing_Clock_Jitter_Analysis.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- IR Drop Aware Critical Path Analysis Using Spice" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Performing_Clock_Jitter_Analysis.html" title="Performing_Clock_Jitter_Analysis">Performing_Clock_Jitter_Analys ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="IR_Drop_Aware_Clock_Jitter_Analysis_Using_Spice.html" title="IR_Drop_Aware_Clock_Jitter_Analysis_Using_Spice">IR_Drop_Aware_Clock_Jitter_Ana ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>IR Drop Aware Critical Path Analysis Using Spice</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>Tempus supports IR drop aware spice analysis of timing paths. It writes out sensitized spice netlist for given timing path and invokes Spectre simulator to do spice simulations. Upon completion of spice simulations, Tempus reads back the spice report and generates delay comparison table between spice delays and Tempus internal delay calculator.</p>
+
+<p>When IR drop files are read into Tempus, Tempus automatically creates a constant voltage source for each instance in the spice netlist with voltage specified in the IR drop file for that particular instance.</p>
+
+<p><span class="fontredcadence">
+<p><strong style="letter-spacing: 0.0px;">Spice Simulations with Constant IR Drop Voltage Per Instance</strong></p>
+
+<p>Spice deck created using <code>write_spice_deck</code> command after reading IR drop files automatically creates constant voltage source per each instance.</p>
+
+<p>The following is the syntax of <code>write_spice_deck</code> command:</p>
+<pre><code>write_spice_deck [-report_timing_cmd {report_timing_options} \ <br /> -power_nets {power nets} -ground_nets {ground nets} \<br /> -spice_model_files &lt;spice model files&gt; \<br /> -spice_subckt_files &lt;spice sub circuit file&gt; \<br />
+ -
+out_dir
+ &lt;output directory for spice run&gt;\
+ -run_path_simulation 
+</code></pre>
+<p><strong>Example</strong>:</p>
+<pre><code>write_spice_deck [-report_timing_cmd {-from i_5/CK -path_type full_clock}\ <br /> -power_nets {VDD VNW} -ground_nets {VSS VPW} \<br /> -spice_model_files &quot;spmodels.sp&quot; \<br /> -spice_subckt_files &quot;cmos10lphvt_m.cdl&quot; \<br /> -out_dir path_spice_deck_max \<br /> -run_path_simulation </code></pre>
+<p>To be able to run Spectre simulator, it should be in your search path or use <code>-spectre_exe_path</code> option to specify full path to Spectre.</p>
+</span></p>
+
+<p><strong>Spice Comparison Reports</strong></p>
+<pre><code>
++------------------+---------------+<br /> | Report | report_timing |<br /> +---------------------+---------------+</code></pre><pre><code>
+| Module | top |<br />| Timing | LATE |    <br />| Slew Propagation | WORST |  <br />| Operating Condition | nomi |  <br />| PVT Mode | max |  <br />| Tree Type | worst_case |   <br />| Process | 1.000 |   <br />| Voltage | 0.850 |   <br />| Temperature | 125.000 |   <br />| time unit | 1.000 ns |   <br />| capacitance unit | 1.000 pF |  <br />| resistance unit | 1.000 kOhm |</code></pre><pre><code>
++---------------------------------+-----------------------------+</code></pre><pre><code>
+Path 1 : MET Setup Check with Pin i_7/CK<br />Endpoint : i_7/D (v) checked with leading edge of &#39;CLK&#39;<br />Beginpoint : i_5/Q (v) triggered by leading edge of &#39;CLK&#39;</code></pre><pre><code>
++----------------------------------------+</code></pre><pre><code>
+Other End Arrival Time 0.414<br /> - Setup 0.428<br /> + Phase Shift 10.000<br /> = Required Time 9.986</code></pre><pre><code>
++----------------------------------------+</code></pre><pre><code>
+- Arrival Time 1.821<br /> = Slack Time 8.166</code></pre><pre><code>
++----------------------------------------+</code></pre><pre><code>
+Clock Rise Edge 0.000<br /> = Beginpoint Arrival Time 0.000</code></pre><pre><code>
++----------------------------------------+</code></pre><pre><code>
+Table : timing on the data path </code></pre><pre><code>
++------+----------+-------------+-------+------+---------+-------+----------+</code></pre><pre><code>
+| net | instance | cell | pin | edge | arrival | delay | sArrival |sDelay |</code></pre><pre><code>
++------+----------+-------------+-------+------+---------+-------+----------++</code></pre><pre><code>
+| clk1 | | | clk1 | ^ | 0.000 | | 0.000 | |<br />| n_0 | i_0 | CLKBUFX1MTH | i_0/Y | ^ | 0.135 | 0.135 | 0.132 | 0.132 |   <br />| n_1 | i_1 | CLKBUFX1MTH | i_1/Y | ^ | 0.415 | 0.280 | 0.389 | 0.256 |    <br />| n_2 | i_2 | CLKBUFX1MTH | i_2/Y | ^ | 0.642 | 0.227 | 0.647 | 0.259 |   <br />| n_3 | i_3 | CLKBUFX1MTH | i_3/Y | ^ | 0.809 | 0.167 | 0.799 | 0.152 |   <br />| n_4 | i_4 | CLKBUFX1MTH | i_4/Y | ^ | 1.047 | 0.238 | 1.002 | 0.203 |   <br />| n_5 | i_5 | DFFSRX1MTH | i_5/Q | v | 1.600 | 0.554 | 1.639 | 0.636 |   <br />| n_6 | i_6 | BUFX5MTH | i_6/Y | v | 1.821 | 0.220 | 1.862 | 0.223 |    <br />| | i_7 | DFFSRX1MTH | i_7/D | v | 1.821 | 0.000 | 1.862 | 0.000 |</code></pre><pre><code>
++------+----------+-------------+-------+------+---------+-------+----------+</code></pre><pre><code>
+Table : timing on the clock path</code></pre><pre><code>
++------+----------+-------------+--------+------+---------+-------+---------+</code></pre><pre><code>
+| net | instance | cell | pin | edge | arrival | delay | sArrival |sDelay |</code></pre><pre><code>
++------+----------+-------------+--------+------+---------+-------+----------+</code></pre><pre><code>
+| clk1 | | | clk1 | ^ | 0.000 | | 0.000 | |  <br />| n_0 | i_0 | CLKBUFX1MTH | i_0/Y | ^ | 0.135 | 0.135 | 0.132 | 0.132 |    <br />| n_1 | i_1 | CLKBUFX1MTH | i_1/Y | ^ | 0.415 | 0.280 | 0.389 | 0.256 |   <br />| | i_7 | DFFSRX1MTH | i_7/CK | ^ | 0.415 | 0.000 | 0.389 | 0.000 | </code></pre><pre><code>
++------+----------+-------------+--------+------+---------+-------+-----------+</code></pre><h4 id="IRDropAwareCriticalPathAnalysisUsingSpice-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="IR_Drop_Impact_on_Timing.html">IR Drop Impact on Timing</a></li><li><a href="IR_Drop_Effect_on_Delays.html">IR Drop Effect on Delays</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Performing_Clock_Jitter_Analysis.html" id="prev" title="Performing_Clock_Jitter_Analysis">Performing_Clock_Jitter_Analys ...</a></em></b><b><em><a href="IR_Drop_Aware_Clock_Jitter_Analysis_Using_Spice.html" id="nex" title="IR_Drop_Aware_Clock_Jitter_Analysis_Using_Spice">IR_Drop_Aware_Clock_Jitter_Ana ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

@@ -1,0 +1,249 @@
+
+<html><head><title>Performing Multi-Die Analysis</title>
+<meta name="page_sequence" content="26003000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468617" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Performing Multi-Die Analysis" />
+<meta name="Keywords" content="multi-die,3dic,interposer,logic,package model" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Multi-Die Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468617" />
+<meta name="NextFile" content="Viewing_Rail_Results.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Data_Requirements_for_Multi-Die_Analysis.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- Performing Multi-Die Analysis" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="Data_Requirements_for_Multi-Die_Analysis.html" title="Data_Requirements_for_Multi-Die_Analysis">Data_Requirements_for_Multi-Di ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Viewing_Rail_Results.html" title="Viewing_Rail_Results">Viewing_Rail_Results</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Performing Multi-Die Analysis</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>To perform multi-die analysis, complete the following steps:</p>
+<ol><li>
+<p>Read multi-die design. This step involves importing the design data for the logic (LDIE1 and LDIE2) and interposer dies (IDIE). The -die_instance_name is used to specify the DEF file for each die instance name.</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1">
+<p><code><span style="color:var(--ds-text,#172b4d);">specify_def $DIE1_DEF -die_instance_name LDIE1<br />specify_def $DIE1_DEF -die_instance_name LDIE2</span></code><br /><code><span style="color:var(--ds-text,#172b4d);">specify_def $INTERPOSER_DEF -die_instance_name IDIE</span></code></p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><code><br /></code></p>
+</span></p>
+</li><li>
+<p>Set up rail analysis for each die instance. This step involves defining the rail analysis attributes for the logic and interposer die instances. The rail analysis attributes can be uniquely configured for each die.</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1">
+<p><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">set_rail_analysis_mode -method dynamic \&#8230;\&#8230;\</span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">-enable_xp true -die_mode 3dic \</span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">-die_instance_name LDIE1 </span></code><br class="atl-forced-newline" /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">set_rail_analysis_mode -method dynamic \&#8230;\&#8230;\</span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">-enable_xp true -die_mode 3dic \</span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">-die_instance_name LDIE2 </span></code><br class="atl-forced-newline" /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">set_rail_analysis_mode -method dynamic \</span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">-enable_xp true -die_mode 3dic \</span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">-die_instance_name IDIE</span></code><br />The <code>-die_instance_name</code> and <code>-die_mode</code> parameters are mandatory for multi-die analysis.</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><code><br /></code></p>
+</span></p>
+</li><li>
+<p>Specify the current files for logic dies. This step involves specifying the location of the current files generated during dynamic power analysis for the logic die instances. This is not required for the interposer die as this die does not consume current.</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre>set_power_data -format current [glob &quot;./ldie1 /dynamic_*.ptiavg&quot;] -scale 1 -die_instance_name LDIE1<br />set_power_data -format current [glob &quot;./ldie2 /dynamic_*.ptiavg&quot;] -scale 2 -die_instance_name LDIE2</pre></td>
+</tr>
+</tbody></table></div>
+
+<p><code><br /></code></p>
+</span></p>
+</li><li>
+<p>Define power nets. This step involves defining the power/ground nets and their attributes for each die instance.</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1">
+<p><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">set_pg_nets -net VDD_AO -force -voltage 1.1 -threshold 1.08 -die_instance_name LDIE1</span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">set_pg_nets -net VSS -force -voltage 0.0 -threshold 0.12 -die_instance_name LDIE1</span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">set_pg_nets -net VDD_AO -force -voltage 1.1 -threshold 1.08 -die_instance_name LDIE2</span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">set_pg_nets -net VSS -force -voltage 0.0 -threshold 0.12 -die_instance_name LDIE2</span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">set_pg_nets -net VDD_AO -force -voltage 1.1 -threshold 1.08 -die_instance_name IDIE</span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">set_pg_nets -net VSS -force -voltage 0.0 -threshold 0.12 -die_instance_name IDIE</span></code></p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><code><br /></code></p>
+</span></p>
+</li><li>
+<p>Specify voltage sources (Power Pad Location File). This step involves specifying the PG net voltage source location file for each die instance. The interposer die&#39;s both sides (top/bottom) connect to another die or package design, therefore, its related P/G ports (or bumps) need to be defined in the ploc file.</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1">
+<p><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">set_power_pads -format xy -net VDD_AO -file ../LDIE/PADS/VDD_AO.ploc -die_instance_name LDIE1</span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">set_power_pads -format xy -net VSS -file ../LDIE/PADS/VSS.ploc -die_instance_name LDIE1</span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">set_power_pads -format xy -net VDD_AO -file ../LDIE/PADS/VDD_AO.ploc -die_instance_name LDIE2</span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">set_power_pads -format xy -net VSS -file ../LDIE/PADS/VSS.ploc -die_instance_name LDIE2</span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">set_power_pads -format xy -net VDD_AO -file ../Interposer/PLOC/Int_VDD_AO.ploc -die_instance_name IDIE</span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">set_power_pads -format xy -net VSS -file ../Interposer/PLOC/Int_VSS.ploc -die_instance_name IDIE</span></code></p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><span style="color:var(--ds-text-accent-teal-bolder,#164555);">The format of the .ploc file is: <br /><code>vsrc name X(um) Y(um) LEF/Tech Layer type=vsrc|nonvsrc &lt;R&gt; &lt;C &gt; &lt;L &gt;</code></span><br /><span style="color:var(--ds-text-accent-teal-bolder,#164555);">Here,</span></p>
+<ul><li><span style="color:var(--ds-text-accent-teal-bolder,#164555);">&quot;<strong>vsrc</strong>&quot;: indicates a real voltage source that connects to the ideal voltage source or pin of the package netlist. This is the location where the package is stitched.</span></li><li><span style="color:var(--ds-text-accent-teal-bolder,#164555);">&quot;<strong>nonvsrc</strong>&quot;: indicates a non-real voltage source that does not connect to an ideal voltage, but is used for connecting to another die&#39;s non-real voltage source or to a die&#39;s Spice port.</span></li></ul>
+<p><span style="color:var(--ds-text-accent-teal-bolder,#164555);">In the context of the examples given in this document, the LDIE to IDIE connection will be of the type &quot;nonvsrc&quot; and the IDIE to package connection will be of the type &quot;vsrc&quot;.</span><br /><br />The following table gives a snippet of the .ploc file types:</p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd">
+<p>LDIE to IDIE connection .ploc</p>
+</td>
+<td class="confluenceTd">
+<p>IDIE to LDIE (top) and IDIE to package (bottom) .ploc</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>LDIE_GND_BUMP1 120.0 60.0 Metal9 type=<strong>nonvsrc</strong> LDIE_GND_BUMP2 240.0 60.0 Metal9 type=<strong>nonvsrc</strong> LDIE_GND_BUMP3 120.0 180.0 Metal9 type=<strong>nonvsrc</strong> LDIE_GND_BUMP4 240.0 180.0 Metal9 type=<strong>nonvsrc</strong> LDIE_GND_BUMP5 120.0 300.0 Metal9 type=<strong>nonvsrc</strong></p>
+</td>
+<td class="confluenceTd">
+<p>BUMP_GND_2 255 75 AP type=<strong>nonvsrc</strong> BUMP_GND_1 135 75 AP type=<strong>nonvsrc</strong> BUMP_GND_44 605 622 MB type=<span style="color:var(--ds-icon-accent-teal,#2898bd);">vsrc</span> BUMP_GND_43 485 622 MB type=<span style="color:var(--ds-icon-accent-teal,#2898bd);">vsrc</span> BUMP_GND_42 245 622 MB type=<span style="color:var(--ds-icon-accent-teal,#2898bd);">vsrc</span></p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p>Here,</p>
+<ul><li>LDIE-to-IDIE connection .ploc &#8211; has a single-layer Metal9 with a connection to the bottom side (interposer) and no connection/stack on the top side. The layer has the type nonvsrc, indicating ploc for connectivity.</li><li>IDIE to LDIE and IDIE to package .ploc &#8211; has 2 layers of ploc, AP and MB. The AP layer has the type nonvsrc indicating ploc for connectivity to the top (LDIE), and the MB layer has the type vsrc indicating ploc for ideal voltage source location to the bottom side (package).</li><li>The ploc file with types vsrc and nonvsrc can also be applied in the Voltus single-die mode, in which the tool treats vsrc as an ideal voltage source and ignores nonvsrc voltage sources.</li></ul>
+<p><strong>Note</strong>: It is recommended to specify the <code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">set_rail_analysis_mode </span><span style="color:var(--ds-text-accent-teal-bolder,#164555);">-enable_multi_die_connectivity_check </span>true</code> parameter to check if the voltage source with type=nonvsrc has a resistance path to any voltage source with type=vsrc inside each die. The purpose is to find out if the connected type vsrc is floating and to ignore this vsrc during rail analysis.</p>
+</span></p>
+</li><li>
+<p><strong style="letter-spacing: 0.0px;">&#xa0;</strong>Import die model (HBM) on die interposer (Optional). This step involves importing the die model on die interposer or on package netlist. When a die A has shared P/G network with a logic die B through an interposer die and wants its effect to be considered during IR drop analysis of die B, you can use the set_die_model command to import the die model of die A.</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1">
+<p><code>set_die_model -spice ../DieModel/core_nportModel.sp.subckt -mapping ../DieModel/die_model.map <span style="color:var(--ds-text-accent-teal-bolder,#164555);">-die_instance_name LDIE3</span></code></p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><code><br /></code></p>
+</span></p>
+</li><li>
+<p>Specify die instance names and die mapping file.&#xa0; This step involves specifying the list of die instances with dies in the DEF format. It also specifies the mapping file to define connection between dies (between interposer and logic die). This file provides the information on bump-to-bump mapping (one bump from interposer die and the other bump from logic die) and Voltus will use the connection relationship to build die to die&#39;s P/G logical connection for multi-die rail analysis.</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1">
+<p><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">set_multi_die_analysis_mode -name multi_die -die_list {LDIE1 LDIE2 IDIE} -stacked_die_mapping ../StackMap/bump.map</span></code><br /><br /></p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><code><br /></code></p>
+</span></p>
+
+<p>The format of the 6-column mapping file is: <br /><strong>IDIE_INST_NAME</strong>(idie_inst_name)&#xa0; &#xa0; &#xa0;<strong>Inet_name</strong>&#xa0; &#xa0; &#xa0;<strong>Ibump_name\</strong><br /><strong>LDIE_INST_NAME</strong>(ldie_inst_name)&#xa0; &#xa0; <strong>Lnet_name</strong>&#xa0; &#xa0; <strong>Lbump_name</strong><br /><br />Here,</p>
+<ul><li>The first 3 columns are for the interposer die instance name, net name, and bump name(vsrc name), and the last 3 columns are for the logic die instance name, net name, and bump name.</li><li>The die instance names are written in upper case that is followed by the die instance names specified in the rail TCL for each die instance name.</li><li>The file is split in two sections, POWER and GROUND.</li><li>Voltus will read the information about $die_instance_name/$Inet_name/$Ibump_name for die/die power/ground connection.</li></ul>
+<p>The following is a snippet of the mapping file:<br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">POWER&#xa0; {<br /> IDIE(idie) VDD_AO BUMP_PWR_1 LDIE1(ldie1) VDD_AO LDIE_PWR_BUMP1<br /> IDIE(idie) VDD_AO BUMP_PWR_2 LDIE1(ldie1) VDD_AO LDIE_PWR_BUMP2<br /> IDIE(idie) VDD_AO BUMP_PWR_3 LDIE1(ldie1) VDD_AO LDIE_PWR_BUMP3 </span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">.... }</span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">GROUND { </span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">IDIE(idie) VSS BUMP_GND_1 LDIE1(ldie1) VSS LDIE_GND_BUMP1 </span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">IDIE(idie) VSS BUMP_GND_2 LDIE1(ldie1) VSS LDIE_GND_BUMP2 </span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">...... </span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">IDIE(idie) VSS BUMP_GND_13 LDIE2(ldie2) VSS LDIE_GND_BUMP1 </span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">IDIE(idie) VSS BUMP_GND_14 LDIE2(ldie2) VSS LDIE_GND_BUMP2 </span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">IDIE(idie) VSS BUMP_GND_15 LDIE2(ldie2) VSS LDIE_GND_BUMP3 </span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">...}</span></code></p>
+</li><li>
+<p><span style="letter-spacing: 0.0px;">Specify the package model and the package terminal mapping file.</span><strong style="letter-spacing: 0.0px;">&#xa0;</strong>This step involves defining the package and specifying the package terminal mapping file (PTMF format) for die to package connection. In this example, the package netlist will be hooked only to the interposer die. Thus, the mapping should be between the package netlist and the interposer die instance. Therefore, the PTMF file should be in the multi-die mode format having die instance name combined with voltage source name. (Single die mode PTMF will not have any die instance name defined).</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1">
+<p><code>set_package -spice ../Package/design_single_PinBaseSPICE.ckt -mapping ../Package/map.ptmf -subckt design_single_PinBaseSPICE</code></p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><code><br /></code></p>
+</span></p>
+
+<p>The format of the PTMF mapping file is: <br /><span style="color:var(--ds-text-accent-teal-bolder,#164555);">###PKG to die connection (when in single die mode) </span><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">package_port pin voltage_source</span></code><br /><span style="color:var(--ds-text-accent-teal-bolder,#164555);">##BGA Definition (when in single die mode) </span><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">package_BGA_port power|ground_pin power|ground_net_name</span></code><br /><span style="color:var(--ds-text-accent-teal-bolder,#164555);">###PKG to die connection (when in multi-die mode) </span><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">package_port pin die_inst_name/voltage_source</span></code><br /><span style="color:var(--ds-text-accent-teal-bolder,#164555);">##BGA Definition (when in multi-die die mode) </span><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">package_BGA_port power|ground_pin die_inst_name/power|ground_net_name</span></code><br /><br />The following is a snippet of the mapping file: <br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">CD1_BUMP_PWR_19 pin IDIE/BUMP_PWR_19 </span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">CD1_BUMP_PWR_20 pin IDIE/BUMP_PWR_20 </span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">............. </span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">CD1_BUMP_GND_28 pin IDIE/BUMP_GND_28 </span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">CD1_BUMP_GND_44 pin IDIE/BUMP_GND_44 </span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">............. </span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">BGA_A2 power_pin IDIE/VDD_AO </span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">BGA_A4 power_pin IDIE/VDD_AO </span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">............. </span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">BGA_A1 ground_pin IDIE/VSS </span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">BGA_A5 ground_pin IDIE/VSS </span></code><br /><code><span style="color:var(--ds-text-accent-teal-bolder,#164555);">.............</span></code><br /><br />You can also use the MCP Editor utility to make a die/package connection mapping by importing the package netlist and ploc files before importing to pkg netlist.</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1">
+<p>To call the MCP Editor utility through Voltus, you can use the <code>map_die_package</code> command.<br /><code>map_die_package -package_model_file test_pkg.spi \</code><br /><code>-net_pad_file_pair {{VDD1 VDD.pp} {VSS VSS.pp }} ALL</code></p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><code><br /></code></p>
+</span></p>
+</li><li>
+<p>Specify package model with the package terminal mapping header inside. This step involves defining the package netlist, the netlist that specifies the package terminal mapping file (PTMF format) header for the die to package connection. In this example, the package netlist will be hooked to the interposer die. The mapping should be between the package netlist and the interposer die instance.</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1">
+<p><span style="color:var(--ds-text-accent-teal-bolder,#164555);"><code>set_package -spice ../Package/design_single_PinBaseSPICE_withPTMF.ckt</code></span></p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><code><br /></code></p>
+</span></p>
+
+<p>The format of the PTMF mapping header in package model is:<br /><code>###PKG to die connection&#xa0; </code><br /><code>*[Mapping Begin]</code><br /><code>*[Device] <u>Die</u>&#xa0; #-&gt; Keyword &#8220;<u>Die</u>&#8221; connect to die voltage source</code><br /><code>*[Component] PKG_Component_defined_in_Sigrity</code><br /><code>*[DieInstance] die_inst_name</code></p>
+
+<p><code>*package_port pin voltage_source</code></p>
+
+<p><code>##BGA Definition </code><br /><code>*[Device] <u>Board</u>&#xa0;&#xa0; #-&gt; Keyword &#8220;Board&#8221; connect to ideal voltage sources.</code><br /><code>*[Component] PKG_Component_defined_in_Sigrity</code><br /><code>*[DieInstance] die_inst_name</code></p>
+
+<p><code>package_BGA_port power_pin|ground_pin PG_net_name</code></p>
+
+<p>The following is a snippet of the mapping file:<br /><code>*[Mapping Begin]</code><br /><code>*[Device] Die</code><br /><code>*[Component] PKG_InFO</code><br /><code>*[DieInstance] IDIE</code><br /><code>* CD1_BUMP_PWR_19 pin BUMP_PWR_19</code><br /><code>* CD1_BUMP_PWR_20 pin BUMP_PWR_20</code><br /><code>.............</code><br /><code>* CD1_BUMP_GND_26 pin BUMP_GND_26</code><br /><code>* CD1_BUMP_GND_27 pin BUMP_GND_27</code><br /><code>*[Device] Board</code><br /><code>*[Component] PKG</code><br /><code>*[DieInstance] IDIE</code><br /><code>* BGA_A2 power_pin VDD_AO</code><br /><code>* BGA_A4 power_pin VDD_AO</code><br /><code>.............</code><br /><code>* BGA_F2 ground_pin VSS</code><br /><code>* BGA_A3 ground_pin VSS</code><br /><code>*[Mapping End]</code></p>
+</li><li>
+<p>Run<span style="letter-spacing: 0.0px;"> </span>rail analysis.<strong style="letter-spacing: 0.0px;"> </strong>This step involves running Voltus IR drop analysis on the die side. Note that the power and ground net names specified in set_rail_analysis_domain will be in the $die_instance_name/$net_name format which is different from the single-die mode with only the net name.</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1">
+<p><code>set_rail_analysis_domain -name ALL \</code><br /><code>-pwrnets {LDIE2/VDD_AO LDIE1/VDD_AO IDIE/VDD_AO} \</code><br /><code>-gndnets {LDIE2/VSS LDIE1/VSS IDIE/VSS} </code><br class="atl-forced-newline" /><code>analyze_rail </code><code>-type domain </code><code>-output StaticRailResults </code><code>ALL</code></p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><code><br /></code></p>
+</span></p>
+</li></ol><h4 id="PerformingMultiDieAnalysis-RelatedTopics"><em>Related Topics</em></h4>
+<ul><li><a href="Supported_Multi-Die_Configurations.html">Supported Multi-Die Configurations</a></li><li><a href="Data_Requirements_for_Multi-Die_Analysis.html">Data Requirements for Multi-Die Analysis</a></li><li><a href="Voltus_Multi-die_IR_Analysis.html">Voltus Multi-die IR Analysis</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Data_Requirements_for_Multi-Die_Analysis.html" id="prev" title="Data_Requirements_for_Multi-Die_Analysis">Data_Requirements_for_Multi-Di ...</a></em></b><b><em><a href="Viewing_Rail_Results.html" id="nex" title="Viewing_Rail_Results">Viewing_Rail_Results</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

@@ -1,0 +1,1453 @@
+
+<html><head><title>set_power_analysis_mode</title>
+<meta name="page_sequence" content="30002019" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287562" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_power_analysis_mode" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Power Calculation," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287562" />
+<meta name="NextFile" content="set_power_calc_temperature.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_power.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- set_power_analysis_mode" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="set_power.html" title="set_power">set_power</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_power_calc_temperature.html" title="set_power_calc_temperature">set_power_calc_temperature</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_power_analysis_mode</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>set_power_analysis_mode<span class="confluence-anchor-link" id="set_power_analysis_mode-set_power_analysis_mode"></span><span id="set_power_analysis_mode-set_power_analysis_mode"></span><br /></code>[-reset]<br />[-add_simulation {true | false}]<br />[-adjust_input_activity_in_iterations {true | false}]<br />[-adjust_macro_activity_in_iterations {true | false}]<br />[-annotation_detail_report {true | false}] <br />[-average_rise_fall_cap {true | false}] <br />[-binary_db_name <em>filename</em> ]<br />[-block_independent_peakpower<span style="color:var(--ds-text,#172b4d);">&#xa0;</span>{true | false}<span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span></span>]<br />[-boundary_gate_leakage_file <em>filenname</em>]<br />[-boundary_gate_leakage_report {true | false}]<br />[-boundary_leakage_cell_property_file <em>filenname</em>]<br />[-boundary_leakage_edge_annotation_file <em>filenname</em>]<br />[-boundary_leakage_multi_pgpin_support {true | false}]<br />[-boundary_leakage_pessimism_removal {true | false}]<br />[-boundary_leakage_pxe_support {true | false}]<br />[&#8211;bulk_pins {<em>bulk_pin_list</em>}]<br />[-capacity {low|medium|high}]<br />[-case_insensitive_mapping {true | false}]<br />[-clock_source_as_clock {true | false}]<br />[-comprehensive_automapping {true | false}]<br />[-constant_override {true | false}]<br />[-corner {min|max}]<br />[-create_binary_db {true | false}] <br />[-create_driver_db&#xa0; {true | false}]<br />[-create_gui_db {true | false}]<br />[-current_generation_method { avg | peak }]<br />[-decap_cell_list <em>cell_list</em> ] <br />[-default_frequency <em>value</em>]<br />[-default_slew <em>value</em>]<br />[-default_supply_voltage <em>value</em>]<br />[-disable_clock_gate_clipping {true | false} ]<br />[-disable_leakage_scaling {true | false}]<br />[-disable_static {true | false}]<br />[-distribute_switching_power {true | false}] <br />[-distributed_combine_report_format {none | detailed | reduced}]<br />[-distributed_setup <em>file</em>]<br />[-domain_based_clipping&#xa0; {true | false} ]<br />[-dynamic_glitch_filter &#xa0; <em>value</em>]<br />[-dynamic_vectorless_ranking_methods {load | clock | vector_activity}]<br />[-enable_auto_mapping {true | false}]<br />[-enable_duty_prop_with_global {true | false}]<br />[-enable_dynamic_current_slew_load_interpolation {true | false}]<br />[-enable_dynamic_scaling {true | false}]<br />[<span style="color:var(--ds-text,#172b4d);">-enable_flop_state_propagation&#xa0;{true | false}</span>]<br />[-enable_generated_clock {true | false}] <br />[-enable_input_net_power {true | false}]<br />[-enable_mt_in_vectorbasedflow&#xa0; {true | false} ]<br />[-enable_pba_for_tempus_pi {true | false}]<br />[&#8211;enable_power_target_flow {true | false}]<br />[&#8211;enable_rtl_vectorbased_dynamic_analysis {true | false}]<br />[-enable_scan_report {true | false}]<br />[-enable_slew_based_ccs_pin_cap {true | false}]<br />[-enable_state_propagation {true | false}]<br />[-enable_tempus_pi {true | false}]<br />[-enable_xp {true | false}]<br />[-enhanced_blackbox_avg {true | false}] <br />[-enhanced_blackbox_max {true | false}]<br />[-equivalent_annotation {true | false}]<br /><span style="color:var(--ds-text,#172b4d);"><span>[</span></span>-event_based_leakage_power {true | false}]<br />[<span style="color:var(--ds-text,#172b4d);">-external_load_config_file&#xa0;<em>filename</em></span>]<br />[-extraction_tech_file <em>filename</em>]<br />[-extractor_include <em>filename</em>]<br />[-fanout_limit <em>value</em> ]<br />[-flatten_xpgv_block_instances&#xa0; <em>filename</em>]<br />[-force_library_merging {true | false}]<br />[-from_x_transition_factor <em>value</em>]<br />[-from_z_transition_factor <em>value</em>]<br />[-generate_activity_mapping_report {true | false}]<br />[-generate_current_for_rail <em>railnames</em> ] <br />[-generate_flop_ranking_data <em>directoryname</em>]<br />[-generate_leakage_power_map_based_on_calculated_leakage {true | false}]<br />[-generate_static_report_from_state_propagation {true | false}]<br />[-handle_glitch {true|false}] <br />[-handle_tri_state {false|true} ]<br />[-hier_delimiter <em>character</em>]<br />[-honor_combinational_logic_on_clock_net {true | false}]<br />[-honor_negative_energy {true | false}]<br />[-honor_net_activity {true | false}]<br />[-hybrid_analysis<span style="color:var(--ds-text,#172b4d);">&#xa0;</span>{true | false}]<br />[-ignore_control_signals {true | false}]<br />[-ignore_data_phase_for_clk {true | false}]<br />[-ignore_end_toggles_in_profile {true | false}]<br />[-ignore_glitches_at_same_time_stamp {true | false}]<br />[-ignore_inout_pin_cap {true | false}]<br />[-include_seq_clockpin_power {true | false}]<br />[-include_timing_in_current_file {true | false}]<br />[-ir_derated_timing_view <em>view_name</em>]<br />[-keep_clock_gate_ratio_in_iterations {true | false}]<br />[-leakage_scale_factor_for_temp <em>scale</em> ]<br />[-library_preference {voltage | ecsm_ccsp}]<br />[-mbff_toggle_behavior { simultaneous | independent | sbff }]<br />[-merge_switched_net_currents {true | false}]<br />[-method { static | dynamic_vectorless | dynamic_vectorbased | dynamic_mixed_mode | event_based | vector_profile}]<br />[-min_leaf_count <em>value</em>]<br /><span style="color:var(--ds-text,#172b4d);">[-multi_scenario_simulation {true | false}]</span><br />[-off_pg_nets <em>net</em> _list]<br />[-output_current_data_prefix <em>prefix</em> ]<br />[-partition_twf {true | false}]<br />[-pin_based_twf {true | false}]<br />[-power_grid_library <strong>{</strong> <em>library</em> _list <strong>}</strong> ] <br />[-power_include_initial_x_transitions {true | false}]<br />[-power_match_state_for_logic_x <em>value</em> ] <br />[-precision <em>value</em>]<br />[-pre_simulation_empty_period&#xa0;<em>period</em>]<br />[-pre_simulation_period&#xa0;<em>period</em>]<br />[-pre_simulation_power_exclude_period&#xa0;<em>period</em>] <br />[-quit_on_activity_coverage_threshold <em>threshold_value</em> ] <br />[-read_rcdb {true | false}]<br /><span style="color:var(--ds-text,#172b4d);">[-relax_arc_match {true | false}]</span><br />[-report_black_boxes {true | false}] <br />[-report_idle_instances {true | false}]<br />[-report_instance_switching_info {all | output_logic | none} ]<br />[-report_instance_switching_list <em>filename</em>]<br />[-report_library_usage {true | false}]<br />[-report_missing_bulk_connectivity {true | false}]<br />[&#8211;report_missing_input {true | false}]<br />[-report_missing_nets { true|false }]<br />[-report_scan_chain_stats {true | false}]<br />[-report_stat {true | false}]<br />[-report_time_display_fraction_digits <em>value</em>]<br />[-report_twf_attributes {detailed | summary}]<br />[-reuse_flop_ranking_data <em>directoryname</em>]<br />[-reuse_flop_ranking_data_hier <em>blockname</em>]<br />[-scale_to_sdc_clock_frequency {true | false}]<br />[-scan_chain_activity {design_name&#xa0; chain_name&#xa0; activity_number} | {vectorless&#xa0; activity_number}]<br />[-scan_chain_name {<em>design_name</em>&#xa0; <em>chain_name</em>&#xa0; <em>pattern</em>}]<br />[-scan_control_file <em>filename</em>]<br />[-scan_mbff_chain_type <em>type</em>]<br />[-settling_buffer <em>value</em>]<br />[<span style="color:var(--ds-text,#172b4d);">-</span><span style="color:var(--ds-text,#172b4d);">smart_window</span><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;{true | false}</span></span>]<br />[-split_bus_power {true | false}] <br />[-start_time_alignment {true |false}]<br />[-state_dependent_leakage {true | false}]<br />[-stateprop_ignore_unannot_pins {true | false}] <br />[-static_multi_mode_scenario_file&#xa0; <em>filename</em>]<br />[-static_netlist {verilog | def}]<br />[-switching_power_on_rise_only {true | false}]<br />[-thermal_input_file <em>file</em>]<br />[-thermal_leakage_temperature_scale_table_file <em>filename</em>]<br />[-to_x_transition_factor <em>value</em>]<br />[-to_z_transition_factor <em>value</em>]<br />[-transition_factor_based_duty {true | false} ]<br />[-transition_time_method {min | avg | max}] <br />[-twf_delay_annotation {min | avg | max}]<br />[&#8211;twf_load_cap {min | avg | max}]<br />[-use_cell_leakage_power_density {true | false}]<br />[-use_fastest_clock_for_dynamic_scheduling {true | false}]<br />[-use_lef_for_missing_cells {true | false}] <br />[-use_zero_delay_vector_file {true | false}]<br />[-vector_profile_mode {activity | event_based | power_density | transient}]<br />[-worst_case_vector_activity&#xa0; {true | false}] <br />[-worst_step_size <em>value</em>]<br />[-worst_window_count <em>value</em>]<br />[<span style="color:var(--ds-text,#172b4d);">-worst_window_coverage { top | tile }</span>]<br />[-worst_window_reports {full | worst | both}]<br />[-worst_window_size <em>value</em>]<br />[-worst_window_type&#xa0;{ power | activity | delta_power | delta_activity | ir | critical_inst_power } ]<br />[-write_boundary_leakage_edge_annotation {true | false}]<br />[-write_default_uti {true | false}]<br />[-write_dynamic_currents {true | false}]<br />[-write_profiling_db {true | false}]<br />[<span style="color:var(--ds-text,#172b4d);">-write_simulation_db&#xa0;{true | false}</span>]<br />[-write_static_currents {true | false}]<br />[-x_count_transition_using_3_states {true | false}] <br />[-x_transition_factor <em>value</em> ] <br />[-z_transition_factor <em>value</em> ] <br />[&#8211;zero_delay_vector_toggle_shift <em>value</em>]<br /></code></p>
+
+<p>Sets the parameters for doing the power analysis.</p>
+
+<p><span style="font-weight: 600;letter-spacing: -0.003em;">Parameters</span></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="2">
+<p><code><code>-analysis_view</code> <em>mmmc</em>_<code><em>view</em> </code><br /></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the power analysis library view (for MMMC setup). You can specify only one analysis view at a time.</p>
+
+<p><strong>Note: </strong> You can also use <code>-view</code> instead of <code>-</code> <code>analysis_view </code>to specify the power analysis library view.</p>
+
+<p>If <code>report_power -view</code> <code> <em>view</em> </code> is specified, this view will override <code>-analysis_view </code>setting.</p>
+
+<p>There is no default.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-average_rise_fall_cap</code> <code>{true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>When set to true, the software uses the average of rise and fall capacitance from the liberty file.</p>
+
+<p><em>Default</em> : <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-binary_db_name </code> <code> <em>filename</em> </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the name of the binary power database file (<code>filename.db</code>).</p>
+
+<p>You can specify this parameter in scenarios where more than one db is generated and you need to track which one was generated in which mode when the restoring the db, or if your design has several blocks and analysis is done on one block all the time and all the databases are named <code>power.db</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>&#8211;bulk_pins {<em>bulk_pin_list</em>}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Defines power and ground bulk LEF pins for the design.</p>
+
+<p>Use this parameter when library cells have bulk pins defined in LEF but the liberty file does not contain power associated with these pins. If a liberty file does not have body bias definition, power analysis does not distribute power to the body bias domain.</p>
+
+<p><strong>Note</strong>: The <code>-bulk_pins</code> parameter cannot be reset using the <code>set_power_analysis_mode -reset</code> parameter.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code><code><code>-capacity {low|medium|high}</code></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Enables segmented power processing. When this parameter is specified, the software performs concurrent processing of vector simulation annotation, power calculation, and report construction.</p>
+
+<p>This parameter enables performance optimization with some trade-off on memory consumption and runtime. The arguments of the <code>-capacity</code> parameter are:</p>
+<ul><li><code>low</code> - reduces memory for a flat run.</li><li><code>medium</code> -&#xa0;further reduces memory with moderate increase in runtime (1.2X).</li><li><code>high</code> - maximum memory reduction at about 2X runtime.</li></ul>
+<p>The <code>-capacity</code> parameter is used for reducing memory when processing long simulation vectors. In case of the FSDB and SHM format activity file, the runtime can increase up to 2X.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span style="color:var(--ds-text,#172b4d);">-case_insensitive_mapping {true | false}</span></code></td>
+<td class="confluenceTd" colspan="1"><br /></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies whether instance name mapping between the RTL netlist and GATE level netlist in the mapping file is case sensitive or not. When set to <code>true</code>, the name mappings are not case sensitive.</p>
+
+<p><em>Default</em>: <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-clock_source_as_clock {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies to use the correct clock frequency for activity calculation. If you stop the arrival of the clock signal by setting <code>set_case_analysis</code> to <code>0</code>, the transition density at the output net of the flop is calculated using the correct clock frequency instead of the default frequency.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-constant_override {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies to give higher precedence to propagated constants defined using the <code>set_case_analysis</code> command. It allows propagated constants to override global activity.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-corner {min|max}    </code></td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>&#xa0;</code></p>
+</td>
+<td class="confluenceTd">
+<p>Defines the library corner (for non-MMMC setup).</p>
+<ul><li><code>min</code> corner means power calculator will use min timing libraries for the power calculation.</li></ul><ul><li><code>max</code> corner means power calculator will use max timing libraries for the power calculation.</li></ul>
+<p><em>Default</em> : <code>max</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-create_binary_db</code> <code>&#xa0;</code> <code> {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>A value of <code>true</code> creates a binary database of power results.&#xa0;</p>
+
+<p><em>Default</em> : <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code><code>-create_driver_db</code> <code><code>{true | false}</code></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to determine all the drivers/receivers on the ground net.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-current_generation_method { avg | peak }</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies the current waveform generation method during dynamic power analysis. The two possible arguments of this parameter are:<br class="confluenceTd" /><ul><li><code>avg</code>&#xa0; - Specifies to use the average current value of each time step. The output current filename is <code><em>filename</em>.ptiavg</code>. The default value is <code>avg</code>.</li><li><code>peak</code> -&#xa0;Specifies to use the peak current value of each time step. The output current filename is <code><em>filename</em>.ptipeak</code>. It is recommended to use the <code>peak</code> method when using the&#xa0;Composite Current Source Power (CCSP) Liberty files.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-default_frequency <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to set the default frequency in the MHz unit for net not annotated by TWF. You can specify a numerical value without unit.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-default_slew <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to set the default slew in the ns unit for net not annotated by TWF. You can specify a numerical value without unit.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-default_supply_voltage <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to set a default voltage for power nets in a scenario where the power engine cannot determine the voltage of these nets. The default value of this parameter is <code>1.0</code>.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>-disable_clock_gate_clipping</code> <code><code><code><code>{true | false}</code><br /></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies to enable clock gate output clipping so that the output transition density of an ICG cell does not exceed the input clock pin transition density.</p>
+
+<p><em>Default</em> : <code>true&#xa0;     </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code>-disable_leakage_scaling</code> <code>{true | false}</code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies to exclude leakage power during scaling factor computation when target power is specified using the <code>set_power</code> command. When <code><span class="confluence-link">set_power_analysis_mode</span></code> <code>-disable_leakage_scaling</code> is set to <code>true</code>, the leakage power does not get scaled, and only the internal and switching components are scaled to meet the user-specified total power.</p>
+
+<p>This parameter is relevant only for the <code>set_power</code> commands for which total power is specified, and has no effect for the <code>set_power</code> command specified with the <code>&#8211;internal</code>, <code>-switching</code>, or <code>-leakage</code> parameters.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-disable_static {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>When set to true in the dynamic vector-based or dynamic vectorless flows, the command performs only dynamic analysis and turns-off static power calculation.</p>
+
+<p><em>Default</em> : <code>true</code></p>
+
+<p><strong> <strong>Note: </strong> </strong>When you perform static power calculation in the dynamic power analysis flow, you can use either the <code>-disable_static</code> or <code>-write_static_currents</code> parameter to enable static power calculation and write static current file. If only <code>-disable_static</code> is set to <code>false</code> and <code>-write_static_currents</code> is not set, the tool automatically sets <code>-write_static_currents</code> to <code>true</code>. Similarly, if <code>-write_static_currents</code> is set to <code>true</code>, and <code>-disable_static</code> is not set, the tool automatically sets <code>-disable_static</code> to <code>false</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>-distributed_setup</code> <em>file</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies a file containing the customized setup details for running power analysis in the distributed mode. <code><em><br class="confluenceTd" /></em></code><br />The specified file has 4 columns:</p>
+
+<p><code>INST/CELL &lt;<em>name</em>&gt; hier/block &lt;<em>power.inc</em>&gt;</code></p>
+
+<p>where,</p>
+<ul><li class="_mce_tagged_br"><code>INST/CELL</code>: Keyword indicating cell or instance to be run in the distributed mode. Cell can be useful for repeated DEF blocks.</li><li><p class="_mce_tagged_br"><em><code>name</code></em>: Name of the hierarchical block or instance.</p>
+</li><li><p class="_mce_tagged_br"><code>hier/block</code>: Keyword indicating hierarchy or block. <code>hier</code> implies that the full hierarchy will be preserved by including the DEFs from top to the block, and <code>block</code> implies that only the lower level DEF will be included</p>
+</li><li><p class="_mce_tagged_br"><em><code>power.inc</code></em>: name of the power include file. This column is optional.</p>
+</li></ul>
+<p>The unspecified instance/cell will be run with the top level as a single group. Each distributed block/instance should have corresponding TWF and SPEF to improve runtime.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-decap_cell_list </code> <code> <em>cell_list</em> </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the physical only cells, such as decap cells, to include in the power report.</p>
+
+<p><strong>Note: </strong> This is only supported for Static Power Analysis.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-domain_based_clipping<code><code> <code>{true | false}</code><br /></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Determines the frequency to be used to clip propagated activity that is too high. When set to <code>false</code>, the frequency of the fastest clock in the design is used. If you set this parameter to <code>true</code>, the fastest clock domain on the net is used to clip propagated activity.</p>
+
+<p><em>Default</em>: <code>false<br /></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>-dynamic_glitch_filter</code> <code><em>value</em></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Sets the absolute threshold time (in ns) for filtering glitches in net toggles. When you specify a time value for this parameter, glitches in net toggles that are equal to or smaller in width than the specified time value are removed.</p>
+
+<p><em>Default</em>: -1</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-dynamic_power_view <em>view_name</em><br /></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies a separate dynamic analysis view for power calculation.</p>
+
+<p>You can set the <code>-dynamic_power_view</code> as the analysis view for dynamic, net, and total power calculation. If you do not specify this parameter, the 1st setup view will be assumed as dynamic view and will be used to calculate power.</p>
+
+<p>Ensure that the specified views are well defined from both a Power and Timing point of view.</p>
+
+<p><strong>Note</strong>: You can specify the same or different views as the leakage and dynamic views for optimization and signoff.</p>
+<ul><li>If the leakage and dynamic view is to be the same, then run the following command:<br /><code>set_power_analysis_mode &#8211;leakage_power_view power_view_name &#8211;dynamic_power_view power_view_name</code></li><li>If the leakage and dynamic view is to be different, then run the following command:<br /><code>set_power_analysis_mode &#8211;leakage_power_view leakage_view_name -dynamic_power_view dynamic_view_name</code></li></ul>
+<p>For more information, refer to the &#8220;Specifying the Correct Power Views for Optimization&#8221; section in the <strong>Optimizing Timing chapter</strong> of <em>Innovus User Guide</em>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-dynamic_vectorless_ranking_methods {load | clock | vector_activity}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to change the ranking method from the default to the following:<ul><li><code>load</code> - Prioritizes scheduling&#xa0;cells with higher fanout</li><li><code><code>clock -</code></code> Prioritizes scheduling cells associated with faster clocks</li><li><code>vector_activity</code> - Prioritizes scheduling&#xa0;cells with higher activity</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-enable_auto_mapping {true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies to automatically perform instance name mapping between the RTL netlist and GATE level netlist. This parameter allows you to map the RTL vector to the Gate level netlist without a mapping file.</p>
+
+<p>You can use this parameter with the <code><span class="confluence-link">read_activity_file</span></code> <code>-name_mapping_rule &lt;<em>filename</em>&gt;</code> command parameter to specify a file containing customized or design-specific rules.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-enable_duty_prop_with_global {true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to propagate duty cycle with the global switching activity setting for all data nets in the dynamic vectorless analysis flow.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-enable_dynamic_scaling {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd"><div class="content-wrapper">
+<p>Enables <code>set_power</code> scaling for dynamic power analysis. The power and scaling specifications are used to scale dynamic current on both the power and ground currents of the specified instance/cell.</p>
+
+<p>This parameter honors the user-defined average (static) power for leaf-level instances and hierarchies (instances/cells/modules) along with power net specification in the dynamic current scaling flows such that the average of the dynamic current is equal to the assigned average power. When you specify this parameter, the average of the dynamic current of these leaf-level instances will match the scaled static power numbers.</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>This parameter is not supported in the state-propagation-based vectorless flow (<code>set_power_analysis_mode -enable_state_propagation true</code>). It is applicable only to the probability-based vectorless flow.</p>
+</div>
+</div>
+
+<p>Default: <code>false</code></p>
+</div>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-enable_generated_clock {true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies to get generated clock frequency during activity propagation for static power analysis. The default value of this parameter is <code>true</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-enable_input_net_power {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies to calculate the switching power of input nets.</p>
+
+<p>Default is <code>false</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-enable_mt_in_vectorbasedflow&#xa0;{true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies to enable multi-threading for the VCD/FSDB based dynamic vector-based flows.</p>
+
+<p>Default is <code>false</code>. To enable multi-threading in the vector-based flows, set this parameter to <code>true</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-enable_pba_for_tempus_pi {true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1"><div class="content-wrapper">
+<p>Specifies to enable the Path-Based Analysis (PBA) for slack calculation in the Tempus Power Integrity (Tempus PI) flow. By default, the Graph-Based Analysis (GBA) is used.&#xa0; Default is <code>false</code>.</p>
+
+<p>This parameter is only applicable to the state-propagation-based vectorless flow (<code>set_power_analysis_mode -method dynamic_vectorless -enable_state_propagation true</code>).</p>
+</div>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>&#8211;enable_rtl_vectorbased_dynamic_analysis {true | false}</code> </code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies to take an RTL or partial VCD/FSDB file as input and use that for dynamic vector-based flow. This parameter allows you to estimate current even for instances which are missing from the activity file.</p>
+
+<p>You must use this parameter in conjunction with the &#xa0;<code>&#8211;method dynamic_vectorbased</code> parameter. Default is <code>false</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-enable_scan_report {true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies to generate all the scan mode analysis reports. The following reports will be generated:</p>
+<ul><li><code>voltus_power.scanff.duplicated.rpt</code> - flip-flops that are specified in multiple chains</li><li><code>voltus_power.scanff.missing.rpt</code> - flip-flops that are missing in the scan control file but exist in the design</li><li><code>voltus_power.scanff.nonassigned.rpt</code> - flip-flops that do not exist in the design and are dropped from the scan control file</li><li><code>voltus_power.scanff.nonscan</code>.rpt - assigned flip-flops that have no scan-out pin</li><li><code>voltus_power.scanff.nonswitched.rpt</code> - non-switching flip-flops in the scan control file</li><li><code>voltus_power.scanff.rpt</code> - detailed scan chain report containing global statistics for all scan chains and statistics for each scan chain in the design</li><li><code>voltus_power.scanff.stateconflict.rpt</code> - flip-flops that have conflicting state assignment</li></ul>
+<p><em>Default</em> : <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-enable_state_propagation {true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies to enable the vectorless&#xa0;state-propagation-based dynamic analysis flow. Default is <code>false</code>.</p>
+For more information, refer to the&#xa0;<strong>State-Propagation-Based Vectorless Methodology</strong> section in the &quot;<em><u>Dynamic Power and IRDrop Analysis</u></em>&quot; chapter of the <em>Voltus User Guide</em>.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-enable_tempus_pi <code><code><code><code><code><code><code>{true | false}</code></code></code></code></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1"><div class="content-wrapper">
+<p>Specifies to enable the&#xa0;Tempus PI analysis flow. When this parameter is set to <code>true</code>, data path scheduling is timing-aware, that is, scheduling is based on timing slacks. Default is <code>false</code>.</p>
+
+<p>This parameter is only applicable to the state-propagation-based vectorless flow (<code>set_power_analysis_mode -method dynamic_vectorless -enable_state_propagation true</code>).</p>
+
+<p>For more information, refer to the <span style="color:var(--ds-text-accent-blue,#0055cc);"><em><a class="message-url" href="../tempusUG/tempus_pi.html">Tempus Power Integrity Analysis</a></em></span> chapter in the <em>Tempus User Guide</em>.</p>
+</div>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>-enable_xp {true | false}</code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies to run&#xa0;standalone report generation in the XP mode.</p>
+
+<p><em>Default</em> : <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-enhanced_blackbox_avg</code> <code>{true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies to use the average toggle rate of related inputs for enhanced blackbox propagation.</p>
+
+<p><em>Default</em> : <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-enhanced_blackbox_max</code> <code> {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies to use the maximum toggle rate of related inputs for enhanced blackbox propagation.</p>
+
+<p><em>Default</em> : <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-extraction_tech_file <em>filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies the extraction technology file to be used for top-level power-grid extraction.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-fanout_limit <em>value</em>    </code></td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>&#xa0;</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the fanout limit for nets. If an instance has nets more than or equal to the fanout limit, its switching/internal/leakage power is taken to be zero.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code>-flatten_xpgv_block_instances</code></code> <code><code><em>filename</em></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies a file that includes a list of block instances that use DEF instead of xPGV for power analysis, that is, specify the instances that are not to be used as xPGV. This parameter allows you to specify a few instances of the same block that will use DEF, and the others that will use xPGV at the top-level. If you do not specify this parameter, and if both DEF and xPGV are given for a block, xPGV takes precedence over DEF.</p>
+
+<p><u>Instance List File Format:</u><br /><code>INST|CELL&#xa0; &lt;<em>instance_name/cell_name</em>&gt;&#xa0; &lt;<em>block_instance_name</em>|All|None&gt; </code></p>
+
+<p>In this file, you can specify if a block is using a DEF by specifying the block instance name, or with the <code>All</code> or <code>None</code> keywords. <code>All</code> indicates that all instances are using DEF, and <code>None</code> indicates that none of the instances are using DEF.</p>
+
+<p><u>Example</u>:<code><br />INST instA&#xa0; /top/x1/x12/instA</code></p>
+
+<p>For a design with three blocks, if you want to use the DEF and xPGV as following:</p>
+
+<p>Block_1 - &gt; A1 (xPGV ) &amp; A2 (DEF)<br />Block_2 - &gt; B1 &amp; B2 (xPGV for both instances)<br />Block_3 - &gt; C1 &amp; C2 (DEF for both instances)</p>
+
+<p>The specified file will contain the following information:<br /><code>INST Block_1 A2</code><br /><code><code>INST </code>Block_2 None</code><br /><code><code>INST </code>Block_3 All</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-from_x_transition_factor <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies how transitions from X to 0/1 are counted. The default value is <code>0.5</code>.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-from_z_transition_factor <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies how transitions from Z to 0/1 are counted. The default value is <code>0.25</code>.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-generate_current_for_rail</code> <code> <em>railnames</em> </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Generates current files for the specified rail.</p>
+
+<p>By default, the command generates current files for all power rails.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-generate_static_report_from_state_propagation <code>{true | false}</code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies to directly generate the static power analysis result based on the RTL-VCD input and state-propagation. When this parameter is specified, the&#xa0;RTL vector power analysis flow does not require the generation of a TCF/FSDB file. This parameter is applicable only to the RTL vector-based dynamic power analysis flow.</p>
+
+<p><em>Default</em> : <code>false</code>&#xa0; <code><br /></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-handle_glitch {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br />&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p>A transition is defined as a glitch when the time difference between two sequential toggles are less than half of the rise transition time + fall transition time in the vector-based static power calculation.</p>
+
+<p>If set to <code>true</code>, glitch power will be identified and calculated according to this definition and it will be reported in a separate column. Switching or internal power calculation does not include power due to glitches.</p>
+
+<p>If set to <code>false</code>, glitch power will not be identified, and the respective power will be calculated as normal signal switches. Hence, the total power will be a little higher.</p>
+
+<p><em>Default</em> : <code>false</code> <code>&#xa0;</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-handle_tri_state {false|true}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>When set to <code>true</code>, all tristate device enable pin values will be taken into account when determining the propagation of the activity through tristate gates.</p>
+
+<p><em>Default</em> : <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-hier_delimiter <em>character</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies the hierarchical delimiter in the DEF file. The default hierarchical delimiter is a forward slash (<strong>/</strong>) but can be changed by setting the <code>-hier_delimiter</code> parameter. You can use this parameter to override the existing hierarchical delimiter.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-honor_combinational_logic_on_clock_net {true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the behavior of combination logic on clock net.</p>
+<ul><li><code>true</code> (default) - specifies to honor activity propagation through combinational logic.</li><li><code>false</code> - specifies that the combination logic will be treated like a combinational clockgate.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-honor_negative_energy {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>A value of <code>true</code> specifies that Voltus will keep negative internal energy numbers from the<code>.lib</code> internal power table. When set to false, negative power is treated as 0.</p>
+
+<p><em>Default</em> : <code>true</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>-honor_net_activity {true | false}</code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies to use activity from the <code>Net</code> section of the Switching Activity Interchange Format (SAIF) file for power calculation and optimization, and to ignore the pin-based state-dependent path delay (SDPD) activity. The default value of this parameter is <code>true</code>.</p>
+
+<p>When this parameter is set to <code>false</code>, the power calculation engine can use both the net-based and pin-based activity. In this case, precedence will be given to activity from net or pin that appears later in the SAIF file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-ignore_control_signals {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>A value of <code>true</code> specifies that control signals will be ignored when propagating activity.</p>
+
+<p><em>Default</em> : <code>true</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code><code>-ignore_data_phase_for_clk</code> {true | false}</code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to ignore data frequency in the clock path for the clock instances in the design. When this parameter is set to <code>true</code>, the software propagates only the fastest clock pin frequency instead of the data pin frequency for activity propagation through clock network. The default value is <code>false</code>. In the default mode, the software picks the fastest frequency between the data phase and clock phase on that pin.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>-ignore_glitches_at_same_time_stamp</code> <code><code>{true | false}</code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies to ignore glitches at the same transient time in the vector-based static and dynamic power analysis flow. When <code>-ignore_glitch_at_same_time_stamp</code> is set to <code>true</code>, only the last signal value change is honored, and all the preceding value changes at the same time stamp are ignored. The last signal value will overwrite the previous value for the same signal at the same time stamp, so the last value will represent the state of the signal at that time stamp.</p>
+
+<p><em>Default</em> : <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-ignore_inout_pin_cap {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>When set to <code>true</code>, ignores the bidirectional pin capacitances (<code>direction : inout</code>) defined for I/O cells in the .lib file, when calculating switching power and internal power; this also includes the default capacitance value for <code>inout</code> pins.</p>
+
+<p><em>Default</em> : <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-ignore_end_toggles_in_profile {true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>By default, the software profiles the toggles in the user-selected vector time window by steps including the toggles at the start/end boundary of the window. In each step, the toggles on the start boundary edge of the step is counted in the current step; the toggles on the end boundary edge is counted in the next step.</p>
+
+<p>When this parameter is set to <code>false</code>, the toggles on the end boundary edge is also counted in the last step, as there is no next step to it. This may lead to double count of the power profile for the last step, especially for zero-delay vector profiling. The default of this parameter is <code>false</code>.</p>
+
+<p>When this parameter is set to <code>true</code>, the software ignores the toggle on the end boundary of the last step.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-include_seq_clockpin_power </code> <code>{true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Reports the clock pin power of flip-flops as part of the clock network power.</p>
+
+<p><em>Default</em> : <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-ir_derated_timing_view <em>view_name</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the name of the timing view used to calculate timing slack and to rank the flops in the Tempus PI flow. This parameter must be specified if there are multiple views.</p>
+
+<p>The <code>-ir_derated_timing_view</code> parameter defines the timing view used to detect the IR-sensitive paths using a lower voltage than the actual analysis. This lower voltage simulates the IR-drop for each instance in the design. The software uses this view to prioritize the end-points that need to be prioritized for switching.</p>
+
+<p>This parameter is only applicable to the state-propagation-based vectorless flow (<code>set_power_analysis_mode -method dynamic_vectorless -enable_state_propagation true</code>).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-leakage_power_view <em>view_name</em><br /></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies a separate leakage analysis view for power calculation.</p>
+
+<p>You can set the <code>-leakage_power_view</code> as the analysis view for leakage power calculation. If you do not specify this parameter, the 1st setup view will be assumed as leakage view and will be used to calculate power.</p>
+
+<p>The leakage view can be inactive only if <code>-state_dependent_leakage</code> is set to <code>false</code>. Ensure that the specified views are well defined from both a Power and Timing point of view.</p>
+
+<p><strong>Note</strong>: You can specify the same or different views as the leakage and dynamic views for optimization and signoff.</p>
+<ul><li>If the leakage and dynamic view is to be the same, then run the following command:<br /><code>set_power_analysis_mode &#8211;leakage_power_view power_view_name &#8211;dynamic_power_view power_view_name</code></li><li>If the leakage and dynamic view is to be different, then run the following command:<br /><code>set_power_analysis_mode &#8211;leakage_power_view leakage_view_name -dynamic_power_view dynamic_view_name</code></li></ul>
+<p>For more information, refer to the &#8220;Specifying the Correct Power Views for Optimization&#8221; section in the <strong>Optimizing Timing chapter</strong> of <em>Innovus User Guide</em>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-leakage_scale_factor_for_temp</code> <code> <em> scale</em> </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Performs a linear scaling of the leakage power for temperature in all libraries. This replaces the k-factor for temperature in the .lib file. For process and voltage, the scaling will continue to be based on the corresponding k-factors in the .lib file. A value of 0.8 scales the leakage power in the library to 80 percent. A value of 1.2 scales the leakage power in the library to 120 percent.</p>
+
+<p><em>Default</em> : <code>1</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-library_preference {voltage | ecsm_ccsp}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Instances of the same cell can be attached to different power domains in a design. If you have specified different PVT libraries, then the software will by default bind each instance to the closest library definition.</p>
+
+<p>You can use this parameter to select either the closest&#xa0;Effective Current Source Model (ECSM)/Composite Current Source-power (CCSP), or the closest voltage library for the instance:</p>
+<ul><li><code>voltage</code>: when specified, enables library binding to the closest voltage library.</li><li><code>ecsm_ccsp</code>:&#xa0;when specified, enables library binding to the closest ECSM/CCSP library.</li></ul>
+<p>The default is <code>voltage</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-mbff_toggle_behavior { simultaneous | independent | sbff }</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies the toggle behavior of multi-bit flip-flops (MBFF). The possible arguments are:<ul><li><code>simultaneous</code>: The multiple bits of the MBFF will toggle or not toggle at the same time. The MBFF will be considered as one flip-flop.</li><li><code>independent</code>: The multiple bits of the MBFF will toggle independently. The MBFF will be considered as one flip-flop.</li><li><code>sbff</code>: The MBFF will be considered as multiple Single-Bit Flip-Flops (SBFFs). Each bit will be considered as one flip-flop, and will toggle independently.</li></ul>
+<p>The default value is <code>independent</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-merge_switched_net_currents { true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies to merge switched net currents into always-on currents. For designs with a large number of switched nets, this parameter helps improve performance by merging switched net instance currents with always-on instance currents. However, when this parameter is set to <code>true</code>, you will not be able to use the generated current files to run power-up analysis.</p>
+
+<p><em>Default</em> : <code>false </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-method {</code> <code> static | dynamic_vectorless | dynamic_vectorbased</code> |&#xa0; <code><code><code>dynamic_mixed_mode</code></code></code> <code>}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the type of analysis to be performed. You can perform two types of power analysis, namely static and dynamic.</p>
+<ul><li><code>static</code> - specifies to perform static power analysis to calculate average power.</li></ul>
+<p>Dynamic power analysis can be a vector-based or vectorless approach.</p>
+<ul><li><code>dynamic_vectorbased</code> - uses the full VCD output of a logic simulator to identify the instances that are switching and when they switch.</li><li><code><code>dynamic_vectorless</code></code> - uses the timing arrival window information from a static timing analysis tool to determine when instances switch. A timing arrival window describes when a signal can change within a clock cycle. An additional algorithm then determines the instances that switch.</li><li>
+<p><code><code><code>dynamic_mixed_mode</code></code></code> - specifies to combine the vector-based and vectorless (mixed) dynamic analysis. This flow can be used in the following cases:</p>
+<ul><li><strong>case 1</strong>: vectors are not available for every block of a full-chip design. <br />In this case, the software uses the vectorless methodology for blocks with incomplete vectors</li><li>
+<p><strong>case 2</strong>: blocks with vectors having unannotated combinational/ sequential logic. <br />In this case, the software performs state propagation for the missing combinational/&#xa0;sequential logic. It uses the vectorless methodology for a logic cone that does not have the primary inputs or flops annotated from the vector, and then performs state propagation</p>
+
+<p>To enable the dynamic mixed mode analysis flow, you must specify the following commands:</p>
+
+<p><code>set_default_switching_activity &#8211;clock_gates_output 2.0 -global_activity &lt;activity&gt;</code><br /><code>set_power_analysis_mode &#8211;method dynamic_mixed_mode</code><br /><code>read_activity_file &#8211;scope &lt;&gt; -block &lt;&gt; </code>-&gt; (for available blocks)</p>
+</li></ul></li></ul>
+<p><em>Default</em> : <code>static</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-min_leaf_count <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies the minimum number of leaf instances required for writing the hierarchy data in the profiling database. It allows you to restrict the number of hierarchies for which waveforms are reported in the profiling database when using both the <code>-write_profiling_db</code> and <code>report_power -hierarchy</code> parameters.
+<p>The default value of this parameter is <code>0</code>. Any hierarchy whose leaf instance count in its complete sub-tree is less than the <code>-min_leaf_count</code> value will be skipped from getting reported in the profiling database. This parameter can be used to skip very small hierarchies and as a result save on the database writing time and disk space.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-off_pg_nets <em>net</em>_list<br /></code></td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>&#xa0;</code></p>
+</td>
+<td class="confluenceTd">
+<p>The name of the power rails that will be turned off. The net name can contain instance hierarchy if appropriate. This data will be taken&#xa0; into account when figuring out the list of power gates which are switched off.</p>
+
+<p><strong>Note: </strong> A net is turned off if all connected power gates are turned off by control signals. When a net is off, all of the instances connected to the net will only contribute leakage current into the connecting nets.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-output_current_data_prefix</code> <code> <em>prefix</em> </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a prefix to the static or dynamic current files generated by the software. When power analysis is done in the multi-CPU mode, the output current data directory name and the underlying current files will also use the same prefix by default.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-partition_twf <code>{true | false}</code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to read the input TWF data (flat or hierarchical TWF files), and generate block-level TWFs. <code><br class="confluenceTd" /></code>
+<p>The default is <code>false</code>. This parameter must be specified when the block/partition level TWF files are not available.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-pin_based_twf <code>{true | false}</code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies whether to generate pin-based TWF or net-based TWF. The default value is <code>false</code>.<ul><li>When set to <code>false</code>, a net-based TWF file is generated. Net-based TWF file is smaller in size and therefore results in faster processing.</li><li>When set to <code>true</code>, a pin-based TWF file is generated. Pin-based TWF file is bigger in size and requires longer processing time, however, is more accurate because the slews numbers are pin-based.</li></ul>
+<p><strong>Note:</strong> This parameter must be used with the <code>read_sdc</code> command.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-power_grid_library </code> <strong>{</strong> <code> <em>library_list</em> </code> <strong>}</strong></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the name of the Cadence power cell libraries (<code>.cl</code>). You can also specify a list of defined power-grid libraries having decap cells tagged in them.</p>
+
+<p><strong>Note</strong>: When specifying a list of PGVs to power analysis using the <code>set_power_analysis_mode</code> command, you must specify the technology library as the first PGV library in the list, followed by the standard and macro PGV libraries. The selection between the standard and macro PGV library is order based. Therefore, if multiple power-grid libraries are specified for a cell, the power engine maps the cell with the first library after the technology library.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-power_include_initial_x_transitions {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Controls how the initial X state toggle should be counted. The initial X state means the state at time <code>0</code>.</p>
+
+<p>The default value is <code>true</code>. This means that the software counts the power caused by the <code>X-&gt;0</code> or <code>X-&gt;1</code> toggle. When set to <code>false</code>, the software does not count the power caused by the initial X state toggle.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-power_match_state_for_logic_x </code> <code> <em>value</em> </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Controls how the logic X will be evaluated in the boolean function of the &#39;<code>when</code>&#39; state of a power table. The default value is <code>0</code>.</p>
+
+<p>The parameter uses the following arguments:</p>
+<ul><li><code>0</code> - regards X as 0</li></ul><ul><li><code>1</code> - regards X as 1</li></ul><ul><li><code>x/X</code> - regards X as neither <code>0</code> nor <code>1</code>, that is, whenever there is any X logic in it, the boolean function will be evaluated false.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-precision <em>value</em><br /></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies precision of decimal range [1-8] to ensure consistent decimal places are displayed for each power component. The default value is <code>8</code>. This parameter is used for precision handling in <code>report_instance_power</code> and <code>report_power</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-quit_on_activity_coverage_threshold</code> <code> <em>threshold_value</em> </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the activity (VCD/FSDB/TCF) coverage threshold value. This parameter allows you to control the acceptable activity coverage that you are expecting and enforce the software to quit when it does not meet the criteria. When you specify the threshold value, the software exits if the real activity coverage is below the threshold.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-read_rcdb {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies to write a SPEF file containing only the total C for signal nets and pass it to the Dynamic Power engine. Dynamic power analysis requires only the total C for signal nets. Therefore, instead of writing a large SPEF file (with distributed RC) from the RCDB, this parameter specifies to create and pass a SPEF file with only total C for all the signal nets. This significantly reduces the parasitic annotation time in the Dynamic Power engine.</p>
+
+<p><em>Default</em> : <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-report_black_boxes {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specify this parameter to report cells that are used as black boxes.</p>
+
+<p>A black box is a cell which is either missing from the liberty file or has no functionality defined in the liberty file.</p>
+
+<p><em>Default</em> : <code>false</code></p>
+
+<p>This is an optional parameter.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>-<code>report_idle_instances</code> {true | false}</code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to generate a report (<code>idleinstance.rpt</code>) that lists all the idle or non-switching instances.
+<p>The default value is <code>false</code>.</p>
+
+<p>The following is a snippet of the&#xa0;<code>idleinstance.rpt</code> report:<br /><code>DFF22/DFF&#xa0;&#xa0;&#xa0; F</code><br /><code>DFF42/DFF&#xa0;&#xa0;&#xa0; F</code><br /><code>...</code></p>
+
+<p>Here, the first column is the instance name and the second column is the type of instance (<code>F</code> indicates flop and <code>C</code> indicates combinational).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-report_instance_switching_info {all | output_logic | none}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to generate a report for combinational instance switched during state-propagation. In the output file, it contains the toggle time, instance name, input pin event, and output pin event for each switching event of the combination gate. The possible arguments of this parameter are:<ul><li><code>all</code> - Specifies to report instance toggle information for both input and output pins. When this parameter is set to <code>all</code>, the switching of both the input and output pins of all the instances are reported in the <code>voltus_power.stateprop.switchinst</code> file and the switching of flops are reported in the <code>voltus_power.stateprop.switchsrc</code> file.</li><li><code>output_logic</code>&#xa0;- Specifies to report instance toggle information for the output pins only. When this parameter is set to <code>output_logic</code>, the switching of the output pins of all the instances are reported in the <code>voltus_power.stateprop.switchinst</code> file and the switching of flops are reported in the <code>voltus_power.stateprop.switchsrc</code> file.</li><li><code>none</code> - Disables generation of instance toggle report. This is the default option. When this parameter is set to <code>none</code>, only switching of flops are reported in the <code>voltus_power.stateprop.switchsrc</code> file. The file does not report switching of instances.</li></ul>
+<p>The default value is <code>none</code>. This parameter is used for generating switching details of state-propagation and should be specified only for debugging purpose.</p>
+
+<p>The following is a snippet of the <code>voltus_power.stateprop.switchinst</code> report:</p>
+
+<p><code>*------------------------------------------------</code><br /><code>*Switch Time&#xa0;&#xa0; Instance Name&#xa0;&#xa0; Pin Name&#xa0;&#xa0; Logic</code><br /><code>*------------------------------------------------</code><br /><code>*</code><br /><code>&#xa0;&#xa0; 0.097&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; B11/BUFF&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; I&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; rise &#xa0;</code><br /><code>&#xa0;&#xa0; 0.097&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; DFF11/DFF&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Q&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; rise</code><br />...</p>
+
+<p>&#xa0;Here,</p>
+<ul><li><code>Switch Time</code>: switching time of instances that can be either combinational or sequential</li><li><code>Instance Name</code>: instance name</li><li><code>Pin Name</code>: input/output pin of the instance</li><li><code>Logic</code>: present logic of the pin that can be either &quot;rise&quot; or &quot;fall&quot;</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>-report_instance_switching_list</code> <em>filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies to generate a report (<code>voltus_power.stateprop.switchlist</code>) containing all the switching times for the specified instances when the <code>-enable_state_propagation</code> parameter is set to <code>true</code>.</p>
+
+<p>The format of the specified file is:<code><br /><em>instname1</em></code><br /><em><code>instname2</code></em><br /><code>...</code></p>
+
+<p>The following is the format of the&#xa0;<code>voltus_power.stateprop.switchlist</code> report:</p>
+
+<p><code>*-----------------------------------------------------------------------------------------</code><br /><code>*Instance Name &#xa0; Pin Name&#xa0;&#xa0; Pin Direction &#xa0; Frequency&#xa0;&#xa0; Switch Time</code><br /><code>*-----------------------------------------------------------------------------------------</code><br /><code>*</code></p>
+
+<p>Here,</p>
+<ul><li><code>Instance Name</code>: instance name that can be either combinational or sequential</li><li><code>Pin Name</code>: name of the input/output pin of the instance</li><li><code>Pin Direction</code>: indicates whether the pin is an INPUT (I) or OUTPUT (O) pin</li><li><code>Frequency</code>: clock frequency</li><li><code>Switch Time</code>:&#xa0;gives the switching pattern for the instance, that is, &lt;<em>time1</em>&gt; &lt;<em>logic</em>&gt; &lt;<em>time2</em>&gt; &lt;<em>logic</em>&gt;. The logic of the pin can be &quot;<code>r</code>&quot; or &quot;<code>f</code>&quot;. <code>r</code> indicates rise and <code>f</code> indicates fall.</li></ul>
+<p>The following is a snippet of the&#xa0;<code>voltus_power.stateprop.switchlist</code> report:</p>
+<code><code>*-----------------------------------------------------------------------------------------</code><br /><code>*Instance Name &#xa0; Pin Name&#xa0;&#xa0; Pin Direction &#xa0; Frequency&#xa0;&#xa0; Switch Time</code><br /><code>*-----------------------------------------------------------------------------------------</code><br /><code>*</code><br /><code>&#xa0;&#xa0;&#xa0;DFF11/DFF&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; QN &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; O &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 100&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.106 f 10.107 r&#xa0; </code><br /><code>&#xa0;&#xa0;&#xa0;DFF11/DFF&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; Q &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; O &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 100&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.097 r 10.099 f<br /></code><code>&#xa0;&#xa0; DFF11/DFF&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; CP &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; I &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 100&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.059 r 5.056 f 10.059 r 15.056 ...<br />...</code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-report_library_usage <code>{true | false}</code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies to report library usage statistics in a text report. The report contains information such as, cell name, library format used (CCSP/ECSM/NLPM) for each cell, library name, and so on. This parameter allows you to perform library integrity checking for debugging purpose.</p>
+
+<p><em>Default</em> : <code>false</code></p>
+
+<p>The format of the text report with sample content is given below:</p>
+
+<p><u>Example</u>:</p>
+
+<p><code><strong>#cell_name&#xa0; net_name&#xa0;&#xa0;&#xa0; op_voltage&#xa0; lib_voltage&#xa0;&#xa0; lib_format&#xa0;&#xa0; &#xa0; missing_tables&#xa0;&#xa0; library_name</strong><br />INV&#xa0;&#xa0; &#xa0; &#xa0;&#xa0;&#xa0; VDD,VDDA&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.9&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1.0&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; NLDM&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; leakage,timing&#xa0;&#xa0;&#xa0; &#xa0; A<br />INV&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VDDC&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.75&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.75&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; CCSP,NLDM&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; leakage&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; B</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-report_missing_bulk_connectivity {true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to report missing bulk pins in the missing input report (<code>-report_missing_input</code>).</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-report_missing_input {true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies to report&#xa0;missing netlist information in input files, such as library, LEF/DEF, PGV, SPEF, TWF, and missing logical connectivity for cell instance (PGNET).</p>
+
+<p>The name of the report file is: <code>&lt;<em>prefix</em>&gt;_missingdata.&lt;spef|lefdef|lib|pgv|twf|pgnet&gt; </code></p>
+
+<p>Following is the use model:</p>
+
+<p><code>set_power_analysis_mode &#8211;report_missing_input true <br /></code><code>report_power -output &lt;dirname&gt; &#8211;report_prefix &lt;prefix&gt;&#xa0; </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>-report_missing_nets { true|false }</code><br /></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Controls reporting of missing nets in both static and dynamic power analysis. <br />
+<p>This parameter controls reporting for TWF and activity files in static analysis, and controls reporting for TWF/SDC/SPEF and activity files in dynamic analysis.</p>
+
+<p><em>Default</em> : <code>false  </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-report_scan_chain_stats {true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to generate a report file called <code>voltus_power.scanchain.stat</code> during scan mode analysis that contains scan chain statistics. <br class="confluenceTd" />
+<p>The default value is <code>false</code>.</p>
+
+<p>The report has 2 parts:</p>
+<ul><li><strong>Global Statistics</strong>: this section has the cumulative statistics of all scan chains in the design</li><li><strong>Chain Statistics</strong>: this section has the statistics for each scan chain in the design</li></ul>
+<p>The Global and Chain Statistics sections have the following information:</p>
+<ul><li><code>Total</code>: total instances specified in the control file or in a scan chain</li><li><code>AssignedFF</code>: flip-flops defined in the scan control file which exist in the design</li><li><code>SwitchedFF</code>: flip-flops that have switching event at the output</li><li><code>Non-ScanFF</code>: flip-flops that have no scan-out pin</li><li><code>DuplicatedFF</code>: flip-flops that are specified in multiple chains</li><li><code>StateConflictFF</code>: flip-flops that have conflicting state assignment</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-report_stat {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Reports a set of statistics on the instance power, instance power density, clock power, or transition density. This parameter is useful in viewing and debugging user defined activity factors.</p>
+
+<p><em>Default</em> : <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-report_time_display_fraction_digits <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Sets the number of fractional digits or decimal places displayed for the instance switching time values in the <code>voltus_power.stateprop.switchinst</code> file. This parameter displays fractional digits that show the exact time difference if there are two events (rise/fall) of an instance switching at the same time.</p>
+
+<p><em>Default</em> : <code>-1</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>-report_twf_attributes {detailed | summary}</code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1"><div class="content-wrapper">
+<p>Controls the generation of the TWF attribute report based on the TWF attributes that are specified using the <code>set_twf_attribute</code> command.</p>
+
+<p>The possible arguments are:</p>
+<ul><li><code>summary</code> - generates a summarized static timing analysis report &#8220;<code>voltus_power.twf_attribute.summary</code>&#8221; that displays the number of user-defined TWF attributes (delay, slew, and slack values for both the rise and fall transitions) and the number of annotated TWF attributes for dynamic power analysis. The following is a snippet of the report:<br /><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/720024142/720024148.png" data-linked-resource-container-id="720024142" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="twf_summary.png" data-linked-resource-id="720024148" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/720024142/720024148.png" tabindex="0" width="500" /></span></li><li><code>detailed</code> - generates a detailed static timing analysis report &#8220; <code>voltus_power.twf_attribute.detailed</code>&#8221; that includes the summary report, and a detailed report of the rise and fall transitions for the TWF attributes of each annotated instance/pin. It also includes the shift arrival time report.<br /><br />This argument also allows you to generate a report&#xa0;<code>voltus_power.twf.rpt</code> containing the TWF statistics to highlight clock-frequency and delay used for the static and dynamic power calculation.
+<p>The TWF statistics report is generated only if:</p>
+<ul><li>the <code>read_twf</code> command is specified before <code>set_power_analysis_mode</code></li><li>the <code>set_power_analysis_mode -method static -static_netlist def</code> or <code>set_power_analysis_mode -method dynamic_vectorless | dynamic_vectorbased</code> command is specified.</li></ul>
+<p>The format of the <code>voltus_power.twf.rpt</code> report is:<code><br /># Voltus TWF Statistics</code><code><br /># Units: Freq (Hz), Delay (second), Slew (second)</code><code><br /># TWF File List:</code><br /><code># <em>&#xa0;&#xa0;&#xa0; TWF_file1</em></code><br /><code># <em>&#xa0;&#xa0;&#xa0; TWF_fileN</em></code><br /><br /><code>USER DEFINED TWF ATTRIBUTE STATISTICS<br /><code>&lt;Clock Freq&gt; &lt;Min Rise_Delay&gt; &lt;Rise Delay&gt; 
+&lt;Max Rise Delay&gt; &lt;Min Fall Delay&gt; &lt;Fall Delay&gt; &lt;Max
+ Fall Delay&gt; &lt;Net&gt;</code><br /></code></p>
+<br />The <code>USER DEFINED TWF ATTRIBUTE STATISTICS</code> section is included in the report only if the TWF attributes are defined using the <code>set_twf_attribute</code> command.</li></ul>
+<p><u><strong>Example</strong></u>:</p>
+
+<p>#check all instances of inst_C1 get shifted by 3ns<br /><code>set_twf_attribute -pin inst_C1 -shift_arrival_time 3</code><br /><br />#check all instances of inst_D1 get shifted by 3ns<br /><code>set_twf_attribute -net inst_D1 -shift_arrival_time 3</code><br /><br /><code>set_power_analysis_mode
+ -method dynamic_vectorless -create_binary_db false -disable_static 
+false -enable_state_propagation true -current_generation_method peak 
+-power_grid_library /../library_pv.cl -report_twf_attributes summary</code></p>
+</div>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-reset</code></p>
+</td>
+<td class="confluenceTd">
+<p>Resets all or specified parameters to their default values.</p>
+
+<p>When you specify only the <code>-reset</code> parameter, the software resets all parameters for the <code>set_power_analysis_mode</code> command.</p>
+
+<p>When resetting specific parameters, the <code>-reset</code> parameter must be the first followed by the specific parameter. For example, you can specify the following command to reset only the <code>-method</code> parameter while keeping all other parameters&#39; values unchanged:</p>
+
+<p><code>set_power_analysis_mode -reset -method</code></p>
+
+<p><strong>Note: </strong> When resetting a specific parameter, you must not specify any arguments for that parameter.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-scale_to_sdc_clock_frequency {true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies to enable the VCD clock frequency to be scaled up to the SDC clock frequency. This allows you to match the VCD clock to the SDC clock to run analysis. By default, the clock frequency is scaled based on the activity file (Default: <code>false</code>). When you set the <code>-scale_to_sdc_clock_frequency</code> parameter to <code>true</code>, the power report and current waveforms apply the after-scaled clock frequency.</p>
+
+<p>The default behavior for clock frequency scaling in the RTL and Gate level VCD flows is different, as described below:</p>
+<ul><li><strong>RTL VCD</strong> - By default, the clock frequency is scaled to the SDC clock frequency (<code>-scale_to_sdc_clock_frequency true</code>) when the RTL VCD flow is enabled (<code>set_power_analysis_mode -enable_rtl_vectorbased_dynamic_analysis true</code>). <br />You can disable clock frequency scaling by setting the <code>set_power_analysis_mode -scale_to_sdc_clock_frequency</code> parameter to <code>false</code>.</li><li><strong>Gate VCD</strong> - By default, scaling of the clock frequency is disabled (<code>-scale_to_sdc_clock_frequency false</code>) . <br />You can enable the VCD clock frequency to be scaled up to the SDC clock frequency by setting the <code>set_power_analysis_mode -scale_to_sdc_clock_frequency</code> parameter to <code>true</code>. This works only when <code>set_power_analysis_mode -use_zero_delay_vector_file</code> is set to <code>true</code>, which means that the gate VCD is a zero-delay gate VCD.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>-scan_chain_name {<em>design_name</em>&#xa0; <em>chain_name</em>&#xa0; <em>pattern</em>}</code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies to automatically generate a scan-chain control file from a scan-chain based DEF file for the shift mode scan-chain analysis. This parameter allows you to create a control file for a large-sized DEF containing long chains or for multiple-DEF files. The generated scan-chain control file is saved in the power output directory.</p>
+
+<p>The use model of the parameter is:</p>
+<ul><li><code>-scan_chain_name {all pattern}</code> - generate scan control file for all scan chains.<br /><strong>Example</strong>: <code><code>-scan_chain_name</code> {all 11010}</code></li><li><code>-scan_chain_name {design_name&#xa0; chain_name&#xa0; pattern}</code> - generate scan control file for a specific chain.<br /><strong>Example</strong>: <code><code>-scan_chain_name</code></code> <code>{counter AutoChain_1_seg1_clk_rising 10010}</code></li></ul>
+<p>Using this parameter, you can generate the control file for both flat and hierarchical DEFs.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-scan_control_file <em>filename</em><br /></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the scan control file name required to run the Scan Mode Analysis flow.</p>
+
+<p>The scan control file contains details about the scan analysis mode used for testing<em>. </em>For more information, refer to <a href="#set_power_analysis_mode-scan_file">Scan Control File Format</a>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-scan_mbff_chain_type <em>type</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies the type of multi-bit scan flip-flop.<ul><li><code>liberty</code> - specifies to use the syntax in Liberty to decide the multi-bit flip-flop type.</li><li><code>serial</code> - specifies to pick the first flop as the starting flop, and treat the scan chain as serial, regardless of .lib.</li><li><code>parallel</code> - specifies to treat the scan chain as parallel, regardless of .lib.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code>-settling_buffer <em>value</em></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the settling buffer time (in ps unit) between multiple windows of a VCD file. This parameter is used when you specify multiple pairs of the start time and end time for the non-overlapping multiple windows specified in an activity file (using the <code>read_activity_file</code> command).</p>
+
+<p>Multiple current waveforms representing multiple VCD windows are merged into a single continuous current waveform. To capture the waveform for signals at the edge of user windows, a buffer time is added between the windows being stitched. This buffer time ensures that the stitched waveform is contiguous. The generated waveform hence has the duration of user windows and the intervening settling buffers. The default settling buffer period is 400ps. You must specify the buffer value without unit.</p>
+
+<p>The following is an example of this feature:</p>
+
+<p><code>set_power_analysis_mode </code><code>-verbosity true \</code><br /><code>&#xa0;&#xa0;&#xa0; -settling_buffer 200 </code><code>-report_missing_nets true</code></p>
+
+<p><code>read_activity_file \</code><br /><code>&#xa0;&#xa0;&#xa0; -format&#xa0; VCD </code><code>-scope&#xa0; adder/u1 \</code><br /><code>&#xa0;&#xa0;&#xa0; -start&#xa0; {0ps 2000ps} </code><code>-end&#xa0;&#xa0;&#xa0; {1100ps 3100ps} \</code><br /><code>&#xa0;&#xa0;&#xa0; -block&#xa0; ../vcd/dut_5buf_full_chip.vcd</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-split_bus_power {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>A value of <code>false</code> applies the internal power number to each individual bit.</p>
+
+<p>A value of <code>true</code> divides the internal power number by bus width, before applying it to the bus bit.</p>
+
+<p><em>Default</em> : <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-state_dependent_leakage {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>When set to <code>false</code>, power analysis performs state independent leakage power calculation.</p>
+
+<p><em>Default</em> : <code>true</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-static_multimode_scenario_file <em>filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies a file with information on instance scaling scenario for the static multi-mode IR analysis flow. When this parameter is specified, Power Analysis creates the multi-mode static current file that is used during rail analysis. The format of the input file is:<br /><code>INST_NAME &#xa0;&#xa0; &#xa0;&#xa0;&#xa0;PIN_NAME&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;SCALE_FACTOR_1 &#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &#8230;..&#xa0;&#xa0; SCALE_FACTOR_N</code></p>
+
+<p>Here, the first column indicates the macro instance name, the second column indicates the pin name, followed by multiple current scaling factors. Each column of the scaling factor is referred to as a scenario. You must specify positive values only for scale factors.</p>
+
+<p>The following is a snippet from the specified input file:<br /><code>top/macroA&#xa0;&#xa0;&#xa0;&#xa0; VDD&#xa0;&#xa0;&#xa0;&#xa0; 1&#xa0;&#xa0;&#xa0;&#xa0; 0.5&#xa0;&#xa0;&#xa0;&#xa0; 0.5&#xa0;&#xa0;&#xa0;&#xa0; 1</code><br /><code>top/macroA&#xa0;&#xa0;&#xa0;&#xa0; VDDM&#xa0;&#xa0;&#xa0; 0.5&#xa0;&#xa0; 0.5&#xa0;&#xa0;&#xa0;&#xa0; 0.5&#xa0;&#xa0;&#xa0;&#xa0; 1</code><br /><code>top/macroB&#xa0;&#xa0;&#xa0;&#xa0; VDD&#xa0;&#xa0;&#xa0;&#xa0; 0.5&#xa0;&#xa0; 1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.5&#xa0;&#xa0;&#xa0;&#xa0; 0.5</code></p>
+
+<p>If scale factors are not specified for certain scenarios, the tool will automatically use the instance&#8217;s last stored scale factor value to complete current file generation.</p>
+
+<p>In the following example, scale factor value <code>0.45</code> will be used in the 3rd and 4th scenario for instanceC, and scale factor value <code>0.35</code> will be used in the 4th scenario for instanceD:<code><br />instanceA VDD 0.45 0.55 0.65 0.31<br />instanceB VDD 0.31 0.5 0.67 0.21<br />instanceC VDD 0.25 0.45<br />instanceD VDD 0.31 0.25 0.35</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-static_netlist {verilog | def}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies to perform static power analysis using a Verilog or DEF only neltist.&#xa0;</p>
+
+<p>By default, the static power analysis is performed using the Verilog netlist as the primary netlist. Using this parameter, you can specify DEF when a DEF netlist with logical connectivity is available, and use it as primary and not consider the Verilog netlist.</p>
+
+<p>This parameter is also enabled when <code>set_rail_analysis_mode -report_power_in_parallel</code> is <code>true</code> for static power computation.</p>
+
+<p><em>Default</em> : <code>verilog</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-start_time_alignment {true |false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies to align all the signals of the activity file at time zero. When set to <code>true</code>, the simulation period is <code>max(endtime - starttime)</code>. When it is <code>false</code>, the simulation period is <code>max(endtime)- </code> <code>min(startime)</code>.</p>
+
+<p><em>Default</em> : <code>true</code></p>
+
+<p><strong>Note: </strong> This parameter is not supported in the vector profiling flow. In the vector profiling flow, the start time will always be the <code>min(starttime)</code> and the end time will always be <code>max(endtime)</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-thermal_input_file <em>file</em><br /></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies to read a power map file to perform thermal analysis. Thermal input file contains die area divided into tiles, and temperature value for each tile. This temperature of each tile is used to calculate power of all the instances that fall in that tile&#39;s bounding box.</p>
+
+<p>The format of the thermal input file is:</p>
+
+<p><code>DIE_TEMPERATURE_MAP</code> <br /><code>DIE_AREA&#xa0;&#xa0; xmin(um) ymin(um) xmax(um) ymax(um) nx(int) ny(int)</code></p>
+
+<p><code>NUMBER_OF_LAYERS&#xa0;&#xa0;&#xa0; nLayers(int)<br />LAYER&#xa0;&#xa0;&#xa0; layer_name(string) <br />TEMPERATURE</code></p>
+<code>XCOOR&#xa0;&#xa0;&#xa0; x0(0)&#xa0;&#xa0;&#xa0; x0(1)&#xa0;&#xa0;&#xa0; x0(2)... ...x0(nx-1) </code> <br /><code>YCOOR&#xa0;&#xa0;&#xa0; y0(0)&#xa0;&#xa0;&#xa0; y0(1)&#xa0;&#xa0;&#xa0; y0(2)... ...y0(ny-1)</code> <br />
+<p><code>T0(0,0)&#xa0;&#xa0; &#xa0;T0(1,0)&#xa0;&#xa0; &#xa0;...&#xa0;&#xa0; &#xa0;T0(nx-1,0)</code> <br /><code>T0(0,1)&#xa0;&#xa0; &#xa0;T0(1,1)&#xa0;&#xa0; &#xa0;...&#xa0;&#xa0; &#xa0;T0(nx-1,1)</code></p>
+
+<p><code>:&#xa0;&#xa0; &#xa0; &#xa0;&#xa0; &#xa0; &#xa0;&#xa0;&#xa0; </code> <br /><code>T0(0,ny-1)&#xa0;&#xa0; &#xa0;T0(1,ny-1)&#xa0;&#xa0; &#xa0; &#xa0;&#xa0; &#xa0;T0(nx-1,ny-1)</code> <br /><code>END_TEMPERATURE</code> <br /><code>END_LAYER</code> <br /><code>END_DIE_TEMPERATURE_MAP</code>&#xa0;</p>
+
+<p>where,</p>
+<ul><li><code>DIE_AREA</code> specifies the coordinates of the four points of die outline as well as the tile number in X and Y direction.</li><li><code>NUMBER_OF_LAYERS</code> is the number of layers in each die instance</li><li><code>LAYER</code> specifies the LEF layer name</li><li>XCOOR and YCOOR are the coordinates of each tile</li><li><code>T0(0,0)</code> &#8230;. is the temperature value assigned to a tile at a specific coordinate</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-to_x_transition_factor <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies how 0/1 to X transitions are counted. The default value is <code>0.5</code>.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-to_z_transition_factor <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies how 0/1 to Z transitions are counted. The default value is <code>0.25</code>.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-transition_time_method {min | avg | max}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the minimum, maximum, or average transition time method that will be used with the integrated timer or the external TWF.</p>
+
+<p><em>Default</em> : <code>max</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>-twf_delay_annotation {min | avg | max}</code> </code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Allows you to choose between min, max, or avg arrival times from the timing window file (TWF). The arrival time is annotated to the vectors processed from the RTL VCD/FSDB Zero-Delay flows. The default value is <code>avg</code>.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>&#8211;twf_load_cap {min | avg | max}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Allows you to select minimum, maximum, or average value of TWF external load or capacitance for power calculation.</p>
+
+<p><em>Default</em> : <code>max&#xa0;
+          </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-use_cell_leakage_power_density {true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies to use library leakage density times area (<code>default_leakage_power_density</code>), if defined, instead of the library&#39;s default cell leakage power (<code>default_cell_leakage_power</code>). This is used when leakage power for cells are missing or not defined.</p>
+
+<p>The default value of this parameter is <code>true</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-use_fastest_clock_for_dynamic_scheduling </code><code>{true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to use only the respective fastest clock associated with each net or pin to schedule events for a given simulation period.&#xa0; The default value of this parameter is <code>false</code>.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>-use_lef_for_missing_cells </code></code><code>{true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Allows a combination of LEF and PGV in the dynamic analysis flow. The default value of this parameter is <code>false</code>.
+<p>If there are cells that are common to LEF and PGV, the PGV cell will get the precedence.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-use_zero_delay_vector_file {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Enables zero delay mode in vector-based dynamic analysis to avoid pessimism in current estimation. When set to <code>true</code>, the software reads the cycle accurate (zero delay) VCD/FSDB file and adds the timing/delay information from the Timing Analyzer or external TWF file to the VCD/FSDB file.</p>
+
+<p>Default: <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-vector_profile_mode {activity | event_based | power_density | transient}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the method used to perform vector profiling. The possible arguments are:</p>
+<ul><li><code>activity</code> - performs activity profiling. This parameter generates only the worst activity report, and does not generate the average power report. The name of the file is as specified using the <code>report_power -outfile</code> parameter.</li><li><code>event_based</code> - generates the average power report. This is the average power of all events in the user-specified window. This report includes a summary based on the power components, cell type, power rail, and clock network. The worst window report is captured in a file specified with the <code>report_power -outfile</code> parameter, and the report is suffixed by <code>&#8216;.avgpower</code>&#8217;. When <code>-outfile</code> is not specified, the <code>vectorprofile.report.avgpower</code> report file is created.</li><li><code>power_density</code> - performs area or power density profiling. For this method, power is reported for each tile of the design, where design can be considered to be physically divided into equal area tiles. By default, a design is divided in 10x10 tiles.</li><li><code>transient</code> - generates the event-based average power report and current files for the worst power window.</li></ul>
+<p>This parameter must be specified with the <code>-method vector_profile</code> parameter.</p>
+
+<p><em>Default</em>: <code><code>event_based</code></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code><code><code>-worst_case_vector_activity</code> <code>{true | false}</code></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to use the worst activity value when multiple vectors are specified in the static power calculation flow. The default value is <code>false</code>.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-worst_step_size <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the step size or resolution for vector profiling. Activity/ Power profiling is carried out for every step size that you specify.</p>
+
+<p>When this parameter is used with <code><code><code>-worst_window_size</code></code></code>, the specified step size is the resolution at which window sliding is performed. The supported time units are s, ms, us, ns, and ps. If no explicit time unit is specified, the default ns will be applied.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code>-worst_window_count <em>value</em></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the number of worst windows from the last vector profile run to be used for dynamic power analysis. It provides n top windows with maximum activity/power/IR. This parameter is used when you need to combine dynamic power analysis and vector profiling for multiple worst-case windows in a single run.</p>
+
+<p><em>Default</em>:&#xa0;1 (implements single worst window)</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code>-worst_window_size <em>value</em></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the duration of dynamic analysis. This parameter is used for sliding window vector profiling that involves sliding the profiling windows by using a very small resolution value to get the window with the worst current profile. <code><code><code>-worst_window_size</code></code></code> must be specified with <code>-worst_step_size</code>.</p>
+
+<p>The supported time units are s, ms, us, ns, and ps. If no explicit time unit is specified, the default ns will be applied.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code>-worst_window_type&#xa0;{ power | activity | delta_power | delta_activity | ir | critical_inst_power }</code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the window type to be used for multi-window analysis. The possible arguments are:</p>
+<ul><li><code>power</code> - worst instance power</li><li><code>activity</code> - worst instance activity</li><li><code>delta_power</code> - worst dp/dt (rate of change of power)</li><li><code>delta_activity</code> - worst da/dt (rate of change of activity)</li><li><code>ir</code> - worst IR</li><li><code>critical_inst_power</code> -&#xa0;worst power for critical/IR-sensitive instance (worst timing and IR)</li></ul>
+<p><em>Default</em>: <code>power</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-write_default_uti <code><code>{true | false}</code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>For instances that are not hooked to any power/ground rail, the current for these instances are reflected in the default static current files:</p>
+<ul><li><code>static_default_ground_rail.ptiavg</code></li><li><code>static_default_power_rail.ptiavg</code></li></ul>
+<p>Default: <code>true</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-write_profiling_db {true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p>Writes out profiling databases which can later be viewed as histograms using the SimVision interface. You can specify this parameter during both the activity and power vector profiling.</p>
+
+<p>The profiling databases support instance level and power/ground net histograms. It creates an output file name with the <code>*.trn</code> extension.</p>
+
+<p><em>Default</em> : <code>false </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-write_static_currents {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>A value of <code>true</code> tells Voltus to generate the current data files per net.</p>
+
+<p><em>Default</em> : <code>false </code></p>
+
+<p><strong>Note: </strong> When you perform static power calculation in the dynamic power analysis flow, you can use either the <code>-disable_static</code> or <code>-write_static_currents</code> parameter to enable static power calculation and write static current file. If only <code>-disable_static</code> is set to <code>false</code> and <code>-write_static_currents</code> is not set, the tool automatically sets <code>-write_static_currents</code> to <code>true</code>. Similarly, if <code>-write_static_currents</code> is set to <code>true</code>, and <code>-disable_static</code> is not set, the tool automatically sets <code>-disable_static</code> to <code>false</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-x_transition_factor </code> <code> <em>value</em> </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>When using VCD/FSDB, one can specify how transitions to and from X are counted. These transitions are defined as shown in <span class="confluence-link">Table 18-1</span>. Transitions to and from the X state will be treated as full transitions multiplied by the specified factor.</p>
+
+<p><strong>Note: </strong> 0 -&gt; X -&gt; 1 or 1 -&gt; X -&gt; 0 count as full transitions and they are not controlled by the parameter.</p>
+
+<p><em>Default</em> : <code>0.5</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-z_transition_factor</code> <code> <em> value</em> </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>When using VCD/FSDB, one can specify how transitions to and from Z are counted. These transitions are defined as shown in <span class="confluence-link">Table 18-1</span>. Transitions to and from the Z state will be treated as full transitions multiplied by the specified factor.</p>
+
+<p><strong>Note: </strong> 0 -&gt; XZ-&gt; 1 or 1 -&gt; Z-&gt; 0 count as full transitions and they are not controlled by the <code>parameter</code>.</p>
+
+<p><em>Default</em> : <code>0.25</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>&#8211;zero_delay_vector_toggle_shift <em>value</em></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">Specifies to shift the current waveform in the zero-delay VCD flow. This parameter is useful in removing the idle period for the current waveform result with a long idle period (small flat current) before the first high current peak because of delay annotation. The parameter allows to offset the idle period from the delay values.
+<p>The use model is given below:<code><br />set_power_analysis_mode &#8211;zero_delay_vector_toggle_shift -3.0ns</code></p>
+
+<p>The default value is 0ns. The supported time units are s, ms, us, ns, and ps. The default unit is ns. You can specify a negative or a positive value. A positive value means right shift in the timeline or add more delay to the original arrival time, and a negative value means left shift in the timeline or trim the unwanted idle period.</p>
+
+<p>The <code>-zero_delay_vector_toggle_shift</code> parameter enables you to make a more realistic current waveform that can be easily aligned with the other current waveforms.</p>
+<strong>Note</strong>: This parameter is similar to the <code>set_twf_attribute -shift_arrival_time</code> parameter, with the only difference that <code>-zero_delay_vector_toggle_shift</code> supports both positive and negative values while<code> -shift_arrival_time</code> supports only a positive value.</td>
+</tr>
+</tbody></table></div>
+
+<p><strong><br /></strong></p>
+
+<p><strong>&#xa0;</strong></p>
+
+<p>&#xa0;Table 18-1&#xa0; <strong>Transitions from/to X and Z values and</strong></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><tbody><tr><td bgcolor="#cccccc" class="confluenceTd" valign="top">
+<p><strong>Transition</strong></p>
+</td>
+<td bgcolor="#cccccc" class="confluenceTd" valign="top">
+<p><strong>Definition</strong></p>
+</td>
+<td bgcolor="#cccccc" class="confluenceTd" valign="top">
+<p><strong>Default</strong></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>to/from X</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><code>[ 0 or 1 or Z] &lt;-&gt; X</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><code>0.5</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>to/from Z</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><code>[ 0 or 1 ] &lt;-&gt; Z</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><code>0.25</code></p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><span class="confluence-anchor-link" id="set_power_analysis_mode-scan_file"></span></p>
+<h4 id="set_power_analysis_mode-ScanControlFileFormat">Scan Control File Format</h4>
+
+<p>The use model for the Scan Mode Analysis flow is:</p>
+
+<p><code>set_power_analysis_mode -method dynamic_vectorbased -scan_control_file <em>filename</em></code></p>
+
+<p>The format of the scan control file is:</p>
+
+<p><code>MODE = [ SHIFT | VECTORLESS]</code><br /><code>VECTORLESS_GLOBAL_ACTIVITY = &lt;factor&gt; [Between 0 &#8211; 1]</code><br /><code>&lt;chain_name&gt; &lt;flop_inst&gt; &lt;initial_state&gt; &lt;master_cell_name&gt; &lt;scale&gt; &lt;mode&gt; &lt;scan_in_pin&gt; &lt;scan_out_pin&gt; &lt;scan_en_pin&gt;</code></p>
+
+<p>Note that &lt;<code>chain_name</code>&gt; is optional, &lt;<code>initial_state</code>&gt; is optional in vector-less mode, and &lt;<code>master_cell_name</code>&gt;, &lt;<code>scale</code>&gt;, &lt;<code>mode</code>&gt;, &lt;<code>scan_in_pin</code>&gt;, &lt;<code>scan_out_pin</code>&gt;, &lt;<code>scan_en_pin</code>&gt; are optional and only needed for the first internal scan flop inside one macro.</p>
+
+<p>Where,</p>
+<ul><li><code>Mode</code> specifies the mode used for scan design analysis. The two modes are: <code>SHIFT</code> and <code>VECTORLESS</code>.</li><li><code>VECTORLESS_GLOBAL_ACTIVITY</code> specifies the activity specification used in the <code>VECTORLESS</code> mode.</li><li><code>chain_name</code> is the name of the scan chain.</li><li><code>initial_state</code> is the initial state of all scan flops.</li><li><code>master_cell_name</code> is the name of the macro.</li><li><code>scale</code> is the scaling factor applied to the current.</li><li><code>mode</code> is mode name of the scan mode in the PGV view.</li><li><code>scan_in_pin</code> is the macro&#8217;s scan_in pin name.</li><li><code>scan_out_pin</code> is the macro&#8217;s scan_out pin name.</li><li><code>scan_en_pin</code> is the macro&#8217;s scan_enable pin name.</li></ul><h4 id="set_power_analysis_mode-Examples">Examples</h4>
+<ul><li>The following command uses the negative internal power from the .lib files during analysis, specifies that the transitions that are to and from the Z state will be multiplied by.2, and specifies that the transitions that are to and from the X state will be multiplied by .45: <br /><code>tempus&gt; set_power_analysis_mode -honor_negative_energy true \</code><br /><code> -z_transition_factor .2 \ </code><br /><code>-x_transition_factor .45</code></li></ul><ul><li>The following command resets the -honor_negative_energy parameter to its default value: <br /><code>tempus&gt; set_power_analysis_mode -reset -honor_negative_energy</code></li></ul><ul><li>The following command resets all set_power_analysis_mode parameters to their default values: <br /><code>tempus&gt; set_power_analysis_mode -reset</code></li><li>The following command ignores leakage power, and scales only the switching and internal power by the specified scale factor:<code><br /><code>tempus&gt;</code> set_power &#8211;instance top.block2 2mW<span class="confluence-link"><br /><code>tempus&gt;</code> set_power_analysis_mode</span></code> <code>-disable_leakage_scaling</code> <code>true</code></li></ul><ul><li>The following command sets up dynamic power analysis. <br /><code>tempus&gt; set_power_analysis_mode \</code><br /><code> &#xa0;&#xa0;&#xa0; -method dynamic_vectorless \</code><br /><code> &#xa0;&#xa0;&#xa0; -corner max \</code><br /><code> &#xa0;&#xa0;&#xa0; -create_binary_db true \</code><br /><code> &#xa0;&#xa0;&#xa0; -write_static_currents true \</code><br /><code> &#xa0;&#xa0;&#xa0; -honor_negative_energy true \</code><br /><code> &#xa0;&#xa0;&#xa0; -ignore_control_signals false \</code><br /><code> &#xa0;&#xa0;&#xa0; -power_grid_library { fast_allcells.cl }</code></li></ul><ul><li>The following command adds a prefix SM_ to the current data directory and the underlying current files: <br /><code>tempus&gt; set_power_analysis_mode -ouput_current_data_prefix SM_</code><br /><br />The following current files are generated:<br /><code>SM_dynamic_VDD.ptiavg </code><br /><code> ./SM_PTIData/SM_dynamic_1_VDD.ptiavg</code><br /><code> ./SM_PTIData/SM_dynamic_2_VDD.ptiavg</code></li></ul><ul><li>The following command is another example of dynamic power analysis. <br /><code>tempus&gt; set_power_analysis_mode \</code><br /><code> &#xa0;&#xa0;&#xa0; -method dynamic_vectorless \</code><br /><code> &#xa0;&#xa0;&#xa0; -analysis_view AVmac2off \</code><br /><code> &#xa0;&#xa0;&#xa0; -off_pg_nets VDDlu \</code><br /><code> &#xa0;&#xa0;&#xa0; -create_binary_db true \</code><br /><code> &#xa0;&#xa0;&#xa0; -write_static_currents true \</code><br /><code> &#xa0;&#xa0;&#xa0; -honor_negative_energy true \</code><br /><code> &#xa0;&#xa0;&#xa0; -ignore_control_signals false \</code><br /><code> &#xa0;&#xa0;&#xa0; -power_grid_library {accurate_stdcells.cl TSDN65LPA1024X32M8F.cl</code></li><li>
+<p>The following command is an example of the state-propagation-based dynamic vectorless flow, and also specifies to generate a report (<code>voltus_power.stateprop.switchlist</code>) containing all the switching times for the instances specified in the <code>inst_list</code> file:<br /><code><code>tempus&gt;</code> set_power_analysis_mode -method dynamic_vectorless -enable_state_propagation true <code>-report_instance_switching_list</code> inst_list</code></p>
+</li><li>The following is an example of performing standalone power report generation in the XP mode:<code><br /><code><code>tempus&gt;</code></code> set_power_analysis_mode&#xa0;</code><code>-method dynamic_vectorless \</code><code><br />-enable_state_propagation true \</code><code><br />-power_grid_library {&#xa0; /pgv_dir/tech_pgv/techonly.cl&#xa0; /pgv_dir/stdcell_pgv/stdcells.cl /pgv_dir/macro_pgv/macros_pll.cl }\ </code><code><strong>-extraction_tech_file</strong> /qrcTechFile </code><code><strong>-enable_xp</strong> true</code><br />...<br /><code><code><code>tempus&gt;</code></code> report_power</code></li></ul><h4 id="set_power_analysis_mode-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="get_power_analysis_mode.html">get_power_analysis_mode</a></code></li><li><code><a href="report_power.html">report_power</a></code></li><li><code><a href="read_activity_file.html">read_activity_file</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_power.html" id="prev" title="set_power">set_power</a></em></b><b><em><a href="set_power_calc_temperature.html" id="nex" title="set_power_calc_temperature">set_power_calc_temperature</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

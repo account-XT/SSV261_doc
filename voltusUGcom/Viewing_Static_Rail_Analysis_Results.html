@@ -1,0 +1,152 @@
+
+<html><head><title>Viewing Static Rail Analysis Results</title>
+<meta name="page_sequence" content="23031000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666162" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Viewing Static Rail Analysis Results" />
+<meta name="Keywords" content="static,plots,analysis,GUI,instance,net" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666162" />
+<meta name="NextFile" content="Rail_Plots_for_Visualizing_Rail_Results_using_Rail_Results_Viewer.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Setting_up_and_Running_Static_Rail_Analysis.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Viewing Static Rail Analysis Results" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Setting_up_and_Running_Static_Rail_Analysis.html" title="Setting_up_and_Running_Static_Rail_Analysis">Setting_up_and_Running_Static_ ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Rail_Plots_for_Visualizing_Rail_Results_using_Rail_Results_Viewer.html" title="Rail_Plots_for_Visualizing_Rail_Results_using_Rail_Results_Viewer">Rail_Plots_for_Visualizing_Rai ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Viewing Static Rail Analysis Results</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>The rail analysis results can be debugged in the context of physical layout using interactive rail analysis plots. Voltus allows you to visualize rail analysis results in the design using the Rail Results Viewer.</p>
+<h4 id="ViewingStaticRailAnalysisResults-RequiredInputFiles"><em> Required Input Files</em></h4>
+<ul><li>Design data (LEF, netlist, DEF)</li><li>Power database generated during static power calculation</li><li>Rail analysis output directory</li></ul><h4 id="ViewingStaticRailAnalysisResults-Procedure"><em> Procedure</em></h4>
+
+<p>To visualize rail results using rail results viewer, complete the following steps:</p>
+<ol><li>
+<p>Load the design data through the command line or through the GUI.<br /><strong>GUI</strong>: Select <em>File</em> - Read Design.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>read_physical -lefs $lefs<br /></code><code>read_mmmc ../design/viewDefinition.tcl<br /></code><code>read_netlist ../design/postRouteOpt.enc.dat/super_filter.v.gz -top super_filter<br /></code><code>init_design</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>Load the rail data through the command line or through the GUI.<br /><strong>GUI</strong>:<ol><li>Select <em>Power &amp; Rail</em> - Power &amp; Rail Plots.<br />The Power &amp; Rail Plots form appears. This form is the main window for displaying the rail analysis results. <br /><div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481286/732481287.gif" data-linked-resource-container-id="732481286" data-linked-resource-container-version="1" data-linked-resource-content-type="image/gif" data-linked-resource-default-alias="static-58.gif" data-linked-resource-id="732481287" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481286/732481287.gif" tabindex="0" width="653" /></span></div>
+</li><li>Click the <em>DB Setup</em> button.<br />The Power &amp; Rail Setup form appears.<br /><br /><div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481286/732481288.gif" data-linked-resource-container-id="732481286" data-linked-resource-container-version="1" data-linked-resource-content-type="image/gif" data-linked-resource-default-alias="static-59.gif" data-linked-resource-id="732481288" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481286/732481288.gif" tabindex="0" width="676" /></span></div>
+</li><li>You can enter the power database or click <em>Browse</em> next to the <em>Power Database</em> field, and select a location from the <span class="webflare-courier-new" style="white-space: pre;"><em>Binary DB File</em></span> browser window.</li><li>You can enter the rail output directory or click <em>Browse</em> next to the <em>Rail Database</em> field, and select a location from the <span class="webflare-courier-new" style="white-space: pre;"><em>Rail State Directory</em></span> browser window.</li><li>In the <em>Selective Loading</em> section, you can select the following fields to reduce the amount of the rail analysis data being loaded into the GUI:<ul><li><em>Nets</em> - Specify whether all nets (<em>All</em>) or selected nets (<em>Partial</em>) are to be loaded into the GUI. If you select <em>Partial</em>, click the <em>Select</em> button to select the required power and ground nets. The selected nets will appear in the <em>Nets</em> tab of the Power &amp; Rail Layers/Nets form.</li><li><em>IV Window</em> - Load the instance voltage data for the selected EIV window.</li><li><em>IV Method Type</em> - Load the instance voltage data for the specified EIV computing method.</li></ul></li><li>Click <em>OK</em>.</li></ol>
+<p><strong>Tcl command</strong>:</p>
+<div class="table-wrap"><table class="webflareTable webflareTableIndent wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code>
+<code>read_power_rail_results -power_db staticPowerResults/staticPower.db -rail_directory staticRailResults/ALL_125C_avg_1</code></code></pre></td>
+</tr>
+</tbody></table></div>
+</li><li>Optional. You can select the nets or layers to be viewed through the command line or through the GUI.<br /><strong>GUI</strong>:<ol><li>Click the <em>Layers/Nets</em> button on the Power &amp; Rail Plots form. <br />The Power &amp; Rail Layers/Nets form appears. <br /><div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481286/732481289.gif" data-linked-resource-container-id="732481286" data-linked-resource-container-version="1" data-linked-resource-content-type="image/gif" data-linked-resource-default-alias="static-60.gif" data-linked-resource-id="732481289" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481286/732481289.gif" tabindex="0" width="653" /></span></div>
+</li><li>In the <em>Layers</em> tab, select or clear the check boxes adjacent to the specific layers whose visibility you want to turn on or off in the <em>Visible</em> column, and to control the processing of individual layers in the <em>Report</em> column. Then, use the slider control to control the transparency of the rail analysis output and the design database.</li><li>In the <em>Nets</em> tab, select or clear the check boxes adjacent to the power or ground nets to modify the display of nets. The <em>Nets</em> tab allows you to control the display of the switch and always-on nets in the GUI. When you load an always-on net state directory, the <em>Power Nets</em> section shows both the always-on and switch nets as a sub-tree under each net, as shown below: <br /><div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481286/732481290.gif" data-linked-resource-container-id="732481286" data-linked-resource-container-version="1" data-linked-resource-content-type="image/gif" data-linked-resource-default-alias="static-61.gif" data-linked-resource-id="732481290" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481286/732481290.gif" tabindex="0" width="676" /></span></div>
+</li><li>Click <em>OK</em>.</li></ol>
+<p><br /><strong>Tcl command</strong>:<br /><br /></p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>
+gui_set_power_rail_layers_nets -disable_visible_layers {Metal7 Via5 Via4 Via3} -disable_report_layers {Metal7 Via5 Via4 Via3} -disable_visible_signal_em_layers {} -disable_nets VDD_AO</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>In the Power &amp; Rail Plots form, select the <em>Rail </em>radio button and select a rail analysis type from the drop-down list. <br />The selected plot will be overlaid on the design.<br /><br /><div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481286/732481291.gif" data-linked-resource-container-id="732481286" data-linked-resource-container-version="1" data-linked-resource-content-type="image/gif" data-linked-resource-default-alias="static-62.gif" data-linked-resource-id="732481291" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481286/732481291.gif" tabindex="0" width="676" /></span></div>
+
+<p><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence">
+<p><br /></p>
+
+<p><br /></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>#Displays the specified plot<br /></code><code>gui_set_power_rail_display -plot ir -filter_max 0.0038 \<br />                       -filter_min 1.00001e-05<br />#Displays the specified plot and generates a report (power_rail_&lt;<span class="webflare-courier-new"><em>plot_type</em></span>&gt;.rpt) in the current working directory<br />report_power_rail_results -plot  tc<br /></code><code>#Clear the display</code><code>
+gui_set_power_rail_display -plot none</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Set the filter options, as required. When a plot type is selected, the filter values automatically get filled in.</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>You can select the <em>Auto Apply for Color Scale</em> checkbox to automatically redraw the layout after modifying the range values. If you do not select this checkbox, you can click the <em>Apply</em> button to manually redraw the layout.</p>
+</div>
+</div>
+</li><li>Select the <em>Result Browser</em> option to display the Results Browser form. Based on the plot selected, this form allows you to check the resistor or instance information.</li><li>Select the <em>Voltage Source </em>check box to view nets with their voltage sources. If you want to view voltage sources of specific nets, you can clear the check boxes adjacent to the remaining power/ground nets in the <em>Nets</em> tab of the Power &amp; Rail Layers/Nets form.</li><li>Click <em>Measure</em> and draw an area in the main window to view the tap current and capacitance of the specified region. The following is an example of the information that will be displayed in the Voltus console:<br /><pre class="webflare-pre-block webflare-courier-new">Net: VDD_AO</pre><pre class="webflare-pre-block webflare-courier-new">Region: (20.842, 100.715) (47.0065, 115.105)</pre><pre class="webflare-pre-block webflare-courier-new">Tap Current: 1.16205e-05 A</pre><pre class="webflare-pre-block webflare-courier-new">Tap Current On Unconnected Grids: 0 A</pre><pre class="webflare-pre-block webflare-courier-new">Worst IR: 0.884208 V</pre><pre class="webflare-pre-block webflare-courier-new">Grid Capacitance: 0 F</pre><pre class="webflare-pre-block webflare-courier-new">Intrinsic Capacitance(C1): 0 F</pre><pre class="webflare-pre-block webflare-courier-new">Load Capacitance(C2): 0 F</pre><pre class="webflare-pre-block webflare-courier-new">Decap Required: 0 F</pre></li><li>For the <em>rlrp</em> rail plot, if you select an object (instance or resistor) and click the <em>Trace</em> button, Voltus highlights the least effective resistance path from the object to the nearest voltage source, and will open the Resistance Path form. This form will list the break down of all resistor segments in the rlrp path. You can select a resistor in the Resistance Path form, single click to select/zoom, and double click to query. Click the <em>Clear</em> button to clear the RLRP path. The RLRP path will be retained until you click the <em>Clear</em> button. If you select/deselect a resistor on the RLRP path to view its attributes, the RLRP path will continue to be displayed.<br />The Resistance Path form has the following fields, in addition to information on the layer/via name, and node coordinates (location for each segment in the least resistance path):<ul><li><em>Power Gate</em> - specifies if a resistor is identified as a power-gate Ron resistor for easy identification.</li><li><em>Resistance (Cumulative)</em> - displays each resistance and cumulative resistance (in bracket) from a voltage source to the specific resistor.</li><li><em>Voltage Drop (Cumulative)</em> - displays voltage drop of each resistance (based on the worst IR drop that occurred between two connected nodes), and the cumulative voltage drop (in bracket) from a voltage source to the specific resistor.</li><li><em>Auto Zoom Level</em> - enables you to specify the appropriate zoom level and improve visibility. The zoom levels are &quot;+2, +1, 0, 1, 2&quot;. 0 is selected by default. The prefix &quot;+&quot; means zoom-in whereas &quot;-&quot; means zoom-out.</li><li><em>Auto Select</em> - allows you to highlight any resistor on the list and the resistor will be auto-zoomed.</li><li><em>Show Single Path</em> - allows you to select and view a single RLRP path. For an instance with multiple RLRP paths, the single path display feature allows you to debug the desired path easily.</li><li><em>Enable Multi Segments Selection</em> - allows you to select multiple resistors in the RLRP path. When you select the <em>Enable Multi Segments Selection</em> check box and double-click on a row in the Resistance Path form, the Attribute Viewer form appears, as shown below:<br /><div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481286/732481292.gif" data-linked-resource-container-id="732481286" data-linked-resource-container-version="1" data-linked-resource-content-type="image/gif" data-linked-resource-default-alias="static-63.gif" data-linked-resource-id="732481292" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481286/732481292.gif" tabindex="0" width="680" /></span></div>
+</li></ul>
+<p>The form shows multiple objects/resistors. You can click the <em>Prev/Next</em> button, or select a resistor from the drop-down list, to view the details of each resistor. <br />The rlrp report at the command prompt contains 2 parts: a detailed report showing each rlrp segment information, and a summary report showing information for each layer.<br /><br /></p>
+
+<p><span class="fontredcadence"><div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>The rail analysis must include RLRP analysis (<code>set_rail_analysis_config &#8211;enable_rlrp_analysis true</code>) in order to have the required data for this functionality.</p>
+</div>
+</div>
+</span></p>
+</li><li>Click the <em>Apply</em> button on the Power &amp; Rail Plots form. <br />Selecting <em>Apply</em> will accept the changes, and <em>Reset</em> will set it to default values. By default, the range does not auto update. You can click the <em>Reset</em> button to auto-scale.</li><li>Experiment with the remaining rail plots.</li></ol><h4 id="ViewingStaticRailAnalysisResults-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Rail_Plots_for_Visualizing_Rail_Results_using_Rail_Results_Viewer.html">Rail Plots for Visualizing Rail Results using Rail Results Viewer</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Setting_up_and_Running_Static_Rail_Analysis.html" id="prev" title="Setting_up_and_Running_Static_Rail_Analysis">Setting_up_and_Running_Static_ ...</a></em></b><b><em><a href="Rail_Plots_for_Visualizing_Rail_Results_using_Rail_Results_Viewer.html" id="nex" title="Rail_Plots_for_Visualizing_Rail_Results_using_Rail_Results_Viewer">Rail_Plots_for_Visualizing_Rai ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

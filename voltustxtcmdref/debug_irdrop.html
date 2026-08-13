@@ -1,0 +1,287 @@
+
+<html><head><title>debug_irdrop</title>
+<meta name="page_sequence" content="18018000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666316" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the text commands in Voltus IC Power Integrity Solution." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="debug_irdrop" />
+<meta name="Keywords" content="debug,RCA,root,cause,hotspot,violation,IR drop" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Rail Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666316" />
+<meta name="NextFile" content="extract_package.html" />
+<meta name="Group" content="Voltus Text Command Reference" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="create_what_if_shape.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution Text Command Reference -- debug_irdrop" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="epstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="create_what_if_shape.html" title="create_what_if_shape">create_what_if_shape</a></li><li style="float: right;"><a class="viewPrint" href="voltustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="extract_package.html" title="extract_package">extract_package</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>debug_irdrop</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="debug_irdrop-debug_irdrop"></span> <code><br /><code>debug_irdrop</code><br />[-help]<br />[-eco_report]<br />[-enable_xp {true | false}]<br />[-net <em>netname</em> | -domain <em>domainname</em>]<br />[-net_threshold <em>value</em> | -domain_threshold <em>value</em>]<br />[-non_violating_instslimit <em>value</em>]<br />[-nworst_instances <em>value</em>] <br style="" />[-output_directory <em>dir</em>]<br />-state_directory <em>dir</em><br />[-summary_only]<br /><code><code>[-region {x1 y1 x2 y2 }| -nregion <em>value</em>]</code></code><br />[-tile_row_col {<em>X</em> <em>Y</em>}]<br />[-tile_size {<em>X</em> <em>Y</em>}]</code></p>
+
+<p>Specifies to automatically identify the region with worst IRdrops and EM violations, and provide necessary information to determine and fix the root cause.&#xa0; The reports are consolidated for each region to find root-cause. Root cause analysis is done by identifying top 10 instances in each hotspot and report the following:</p>
+<ul><li>Hotspot Region Coordinate</li><li>Timing Library Analysis</li><li>Power-Grid View Analysis</li><li>Power-Grid Integrity Analysis</li><li>IR-Drop Composition</li><li>Root Cause Analysis</li></ul>
+<p>You must specify this command after running the <code>analyze_rail</code> command.</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>The&#xa0;<code><code>debug_irdrop</code></code> command requires a VTS-XL license.</p>
+</div>
+</div>
+
+<p><br /></p>
+<h4 id="debug_irdrop-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /><col /></colgroup><tbody><tr><td class="confluenceTd">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Outputs a brief description that includes the type and default information for each <code><code>debug_irdrop</code></code> parameter.</p>
+
+<p>For a detailed description of the command and all of its parameters, use the man command man <code><code>debug_irdrop</code></code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code><code>-domain <code><code><em>domainname</em></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2">Specifies the name of the power domain.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code><code><code>-domain_threshold <em>value</em></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2">Specifies the minimum allowed voltage for the domain being analyzed. The value will be in percentage. This parameter behavior is same as the <code>set_rail_analysis_domain -threshold</code> parameter.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code>-eco_report</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2">Specifies to generate a file with IR drop information that can be used by Tempus ECO to fix IR voltage drop for all instances in a design. The report (<code>eco.ird</code>) is generated in the specified output directory (<code>debug_irdrop -</code><code>output_directory</code>).</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code>-enable_xp {true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies to identify the worst IR drop and EM violations regions in the Extensively Parallel (XP) mode&#xa0;wherein processing is distributed over a large number of machines.</p>
+
+<p><em>Default</em> : <code><span>false</span></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code><code>-net <em>netname</em></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2">Specifies the name of the power or ground net that you want to analyze.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code><code><code>-net_threshold <em>value</em></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2">Specifies the minimum allowed voltage for the power net being analyzed. The value must be an absolute number. This parameter behavior is same as the <code>set_pg_nets -threshold</code> parameter.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code><code>-non_violating_instslimit <em>value</em></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2">Reports non-violating instances within hotspots (violating tiles) that are close to the threshold value. This parameter allows you to define a limit (sub-threshold) that can be used to report the non-violating instances that are close to the threshold.
+<p>For example, if the<code> -net_threshold</code> or <code>-domain_threshold</code> is <code>60mV</code>, and <code>-non_violating_instslimit</code> is <code>3mV</code> close to the threshold, the <code>debug_irdrop</code> command will report all the violating instances above the domain/net threshold and also the non-violating instances which are in the range of 60mV-57mV. This information about the non-violating instances can be used for IR improvement in the Timing-aware IR Drop Fixing flow.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code><code><code>-nregion <em>value</em></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2">Specifies the number of regions to be analyzed. The default value is <code>3</code>.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code>-nworst_instances <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2">Specifies the number of worst instances to be reported. The default value is 5.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3">
+<p>&#xa0;<code>-output_directory <em>dir</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies the output directory in which the&#xa0;Irdrop and EM violation results will be saved in.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3">
+<p>&#xa0;<code><code><code>-region {<em>x1</em> <em>y1</em> <em>x2</em> <em>y2</em> }</code></code></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies the region containing the worst instances. The default unit of <em>x1 y1 x2 y2</em> is in database units.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3">
+<p><code>-state_directory <em>dir</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies the top-level state directory that is generated by the dynamic IR drop analysis. This state directory contains analysis of all nets associated with the power domain. This is the output directory in which the results of the <code>analyze_rail</code> command is stored (for example, core_25C_dynamic_1).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code>-summary_only</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2">Specifies to generate a violation summary report that displays a summary of the IR drop violation distribution for all the cells. In addition, the report also displays the summary of the IR drop violation distribution for the standards cells. If this parameter is specified, the detailed IR report is not generated.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code>-tile_row_col {X Y}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2">
+<p>Specify the number of tiles in the x and y direction. The <code>-tile_row_col</code> and <code>-tile_size</code> parameters enable tile-based analysis of the hotspot regions. Tile-based analysis divides the design into user-defined tile size, and reports IR drop violations on each tile.&#xa0;&#xa0;</p>
+
+<p>The default value is <code>100um^2 (10x10 tiles)</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code>-tile_size {X Y}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2">Specify the size of tiles in the x and y direction. The <code>-tile_row_col</code> and <code>-tile_size</code> parameters enable tile-based analysis of the hotspot regions. Tile-based analysis divides the design into user-defined tile size, and reports IR drop violations on each tile.&#xa0;</td>
+</tr>
+</tbody></table></div>
+
+<p><span class="confluence-embedded-file-wrapper"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732480101/732480102.png" data-linked-resource-container-id="732480101" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="debug_irdrop.png" data-linked-resource-id="732480102" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732480101/732480102.png" tabindex="0" /></span></p>
+<h4 id="debug_irdrop-Examples">Examples</h4>
+<ul><li>The following command generates IR debug report for the <code>VSS</code> net in the specified output directory: <br /><code>debug_irdrop -state_directory dynamic_rail/core_25C_dynamic_1/VSS -net VSS -output_directory IR_DEBUG_VSS -nworst_instances 10</code></li><li>The following command&#xa0;generates a violation summary report that displays a summary of the IR drop violation distribution:<br /><code>debug_irdrop -summary_only</code>
+<p><span>The following is a sample summary report:</span></p>
+
+<p><code>Summary For All Cells:</code></p>
+
+<p><code>Worst IR drop: 0.123326V</code></p>
+
+<p><code>Specified IR drop threshold: 0.09V</code></p>
+
+<p><code>Worst IR drop violation: 0.033326V</code></p>
+
+<p><code>Total IR drop violation: 29.9416V</code></p>
+
+<p><code>IR drop violation distribution</code></p>
+
+<p><code>Violation Range&#xa0;&#xa0; Violation Count&#xa0; Accumulated Violation count&#xa0; Total Violation(V)&#xa0; Accumulated Total Violation(V)</code></p>
+
+<p><code>120mV ~ 125mV:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 3&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 3&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.094411&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.094411&#xa0;&#xa0;&#xa0;</code></p>
+
+<p><code>115mV ~ 120mV:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 32&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 35&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.858654&#xa0; &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;0.953065&#xa0;&#xa0;&#xa0;</code></p>
+
+<p><code>110mV ~ 115mV:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 72&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 107&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1.57548&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 2.52854&#xa0;&#xa0;&#xa0;</code></p>
+
+<p><code>105mV ~ 110mV:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 150&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 257&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 2.57834&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 5.10688&#xa0;&#xa0;&#xa0;</code></p>
+
+<p><code>100mV ~ 105mV:&#xa0; &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;586&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 843&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 6.95461&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 12.0615&#xa0;&#xa0;&#xa0;</code></p>
+
+<p><code>95mV ~ 100mV:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &#xa0;1518&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 2361&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 11.115&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 23.1765&#xa0;&#xa0;&#xa0;</code></p>
+
+<p><code>90mV ~ 95mV:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &#xa0;&#xa0;3013&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 5374&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;6.76508&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 29.9416&#xa0;&#xa0;&#xa0;</code></p>
+
+<p><br /></p>
+
+<p><code>Summary For StdCells:</code></p>
+
+<p><code>Worst IR drop: 0.123326V</code></p>
+
+<p><code>Specified IR drop threshold: 0.09V</code></p>
+
+<p><code>Worst IR drop violation: 0.033326V</code></p>
+
+<p><code>Total IR drop violation: 29.9416V</code></p>
+
+<p><code>IR drop violation distribution</code></p>
+
+<p><code>Violation Range&#xa0;&#xa0; Violation Count&#xa0; Accumulated Violation count&#xa0; Total Violation(V)&#xa0; Accumulated Total Violation(V)</code></p>
+
+<p><code>120mV ~ 125mV:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 3&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 3&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.094411&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.094411&#xa0;&#xa0;&#xa0;</code></p>
+
+<p><code>115mV ~ 120mV:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 32&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 35&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.858654&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0.953065&#xa0;&#xa0;&#xa0;</code></p>
+
+<p><code>110mV ~ 115mV:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 72&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 107&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1.57548&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 2.52854&#xa0;&#xa0;&#xa0;</code></p>
+
+<p><code>105mV ~ 110mV:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 150&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &#xa0;&#xa0;257&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 2.57834&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 5.10688&#xa0;&#xa0;&#xa0;</code></p>
+
+<p><code>100mV ~ 105mV:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 586&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 843&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 6.95461&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 12.0615&#xa0;&#xa0;&#xa0;</code></p>
+
+<p><code>95mV ~ 100mV:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &#xa0;&#xa0;1518&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 2361&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 11.115&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;23.1765&#xa0;&#xa0;&#xa0;</code></p>
+
+<p><code>90mV ~ 95mV:&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &#xa0;&#xa0;3013&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 5374&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 6.76508&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 29.941</code></p>
+</li></ul><h4 id="debug_irdrop-RelatedTopics">Related Topics</h4>
+<ul><li><em>&quot;<u>Static Power, IRdrop and EM Analysis</u>&quot; </em>and<em> &quot;<u>Dynamic Power and IRDrop Analysis</u>&quot;</em> in <em>Voltus User Guide</em></li></ul>
+<p><br /></p>
+
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="create_what_if_shape.html" id="prev" title="create_what_if_shape">create_what_if_shape</a></em></b><b><em><a href="extract_package.html" id="nex" title="extract_package">extract_package</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

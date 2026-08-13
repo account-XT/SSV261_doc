@@ -1,0 +1,127 @@
+
+<html><head><title>Fully Distributed and Coupled RLCK Package SPICE Model</title>
+<meta name="page_sequence" content="25003000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468611" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Fully Distributed and Coupled RLCK Package SPICE Model" />
+<meta name="Keywords" content="SPICE,package,model,node" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Package Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468611" />
+<meta name="NextFile" content="SPICE_Package_Model_Format.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Simple_Lumped_RLC_Pin_Package_Model.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- Fully Distributed and Coupled RLCK Package SPICE Model" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="Simple_Lumped_RLC_Pin_Package_Model.html" title="Simple_Lumped_RLC_Pin_Package_Model">Simple_Lumped_RLC_Pin_Package_ ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="SPICE_Package_Model_Format.html" title="SPICE_Package_Model_Format">SPICE_Package_Model_Format</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Fully Distributed and Coupled RLCK Package SPICE Model</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>The package SPICE models used in Voltus can be from different package modeling tools. However, the models generated using Sigrity XtractIM is better integrated with Voltus.</p>
+
+<p><strong>Set SPICE Package Subckt in Tcl</strong></p>
+
+<p>You can specify the SPICE package model in the Tcl command as below:</p>
+
+<p><span class="fontredcadence"><pre><code>set_package -spice &lt;file&gt; [-mapping &lt;file&gt;] [-offset {x y}] [-rotate &lt;rotation_angle_in_degress&gt;] [-flip {true | false}]</code></pre>
+<p>where <code>[-mapping &lt;</code><span class="webflare-courier-new"><em>file</em></span><code>&gt;]</code>, <code>[-offset {</code><span class="webflare-courier-new"><em>x y</em></span><code>}]</code>, <code>[-rotate &lt;</code><span class="webflare-courier-new"><em>rotation_angle_in_degress</em></span><code>&gt;]</code>, and <code>[-flip {true | false}]</code> are optional parameters. They are not required if the package model is extracted by Sigrity XtractIM and if it contains the die placement information. If the die placement information is not available in the XtractIM package model, or the package model is from third-party tools, then you can use either the MCP Editor utility to create a mapping file, or some of these parameters to instruct rail analysis how to connect the package model properly.</p>
+</span></p>
+
+<p><code>
+</code></p>
+
+<p><strong>Set SPICE Package Subckt in GUI</strong></p>
+
+<p>You can also specify a package model and mapping file in Power &amp; Rail - Run Rail Analysis form, as shown below:</p>
+<div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481508/732481509.gif" data-linked-resource-container-id="732481508" data-linked-resource-container-version="1" data-linked-resource-content-type="image/gif" data-linked-resource-default-alias="runrailanalysispackage.GIF" data-linked-resource-id="732481509" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481508/732481509.gif" tabindex="0" width="650" /></span></div>
+
+<p><strong>Controlled and Dependent Sources</strong></p>
+
+<p>In addition to the RLCK elements, Voltus supports the following &quot;Controlled&quot; or &quot;Dependent&quot; sources in the package model:</p>
+<ul><li>Voltage controlled voltage source (VCVS)</li><li>Current controlled current source (CCCS)</li><li>Voltage controlled current source (VCCS)</li><li>Current controlled voltage source (CCVS)</li></ul>
+<p>The format of these sources are given below:</p>
+<pre><code>Exxx n+ n- &lt;VCVS&gt; in+ in- gain<br /></code><code>Fxxx n+ n- &lt;CCCS&gt; vn1 gain<br /></code><code>Gxxx n+ n- &lt;VCCS&gt; in+ in- transconductance<br /></code><code>Hxxx n+ n- &lt;CCVS&gt; vn1 transresistance</code></pre>
+<p>where,</p>
+
+<p>n+ and <code>n-</code> are the positive and negative terminals of the dependent source, respectively.</p>
+
+<p><code>in+</code> and <code>in-</code> are the positive and negative terminals of the controlling voltage source, respectively.</p>
+
+<p><code>vn1</code> is the zero value voltage source used to measure the controlling current.</p>
+
+<p><strong>Example</strong></p>
+<pre><code>.SUBCKT INV_5_5<br />+ VDDIN_1 VDD<br />R1 VDDIN_1 2 3<br />R2 2 0 5<br />R3 2 3 3<br />R4 3 0 5<br />R5 3 4 3<br />Evx 4 VDD VCVS 2 0 0.1<br />Evx1 4 VDD 2 0 0.2<br />Gvx 4 VDD VCCS 2 0 0.3<br />Gvx1 4 VDD 2 0 0.4<br />.ENDS</code></pre><h4 id="FullyDistributedandCoupledRLCKPackageSPICEModel-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="SPICE_Package_Model_Format.html">SPICE Package Model Format</a></li><li><a href="Package_to_Die_Mapping.html">Package to Die Mapping</a></li><li><a href="Simple_Lumped_RLC_Pin_Package_Model.html">Simple Lumped RLC Pin Package Model</a></li><li><a href="RDL0_or_Off-Chip_Package_Tracing.html">RDL0 or Off-Chip Package Tracing</a></li><li><a href="Static_and_Dynamic_Rail_Analysis_including_Package_Model.html">Static and Dynamic Rail Analysis including Package Model</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Simple_Lumped_RLC_Pin_Package_Model.html" id="prev" title="Simple_Lumped_RLC_Pin_Package_Model">Simple_Lumped_RLC_Pin_Package_ ...</a></em></b><b><em><a href="SPICE_Package_Model_Format.html" id="nex" title="SPICE_Package_Model_Format">SPICE_Package_Model_Format</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

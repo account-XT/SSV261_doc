@@ -1,0 +1,112 @@
+
+<html><head><title>Reporting in Path-Based Analysis</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823912" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Reporting in Path-Based Analysis" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823912" />
+<meta name="NextFile" content="analysisandreporting_pathbasedreportingmodels.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_gbavspbacomparision.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Reporting in Path-Based Analysis" />
+<meta name="Keywords" content="reporting path based analysis" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Analysis,REPORTS,Stylus" />
+<meta name="prod_subfeature" content="Timing Analysis, Reports" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_gbavspbacomparision.html" title="GBA vs PBA Comparison">GBA vs PBA Comparison</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_pathbasedreportingmodels.html" title="Path-Based Analysis Reporting Models">Path-Based Analysis Reporting  ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:reportingpathbasedanalysis" title="Reporting in Path-Based Analysis"></a><h3>
+<a id="pgfId-1013945"></a><a id="12676"></a>Reporting in <a id="ReportinginPathBasedAnalysis"></a>Path-Based Analysis</h3>
+<h4>
+<a id="pgfId-1013946"></a>Commands for PBA Reporting</h4>
+
+<p>
+<a id="pgfId-1013947"></a>You can use the following commands to report violations in PBA mode:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1013948"></a><a href="../tempustxtcmdref/report_constraint.html">report_constraint</a> &#8211;retime &lt;<code><em>option</em></code>&gt;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1013949"></a>report_timing &#8211;retime &lt;<code><em>option</em></code>&gt;</pre>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1013950"></a>To generate the analysis summary file, you can use the following options with the <a href="../tempustxtcmdref/report_timing.html">report_timing</a> command - to give high value of nworst and max_path to get good coverage. The report summary will be stored in the pba.summ file.</div>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1013951"></a>report_timing -retime path_slew_propagation -max_paths &lt;&gt; -nworst &lt;&gt; -path_type summary_slack_only -&lt;late/early&gt; -analysis_summary_file pba.summ</pre>
+<h4>
+<a id="pgfId-1013952"></a>Sample Report Showing GBA vs PBA Timing Results</h4>
+
+<p>
+<a id="pgfId-1013953"></a>The following example demonstrates GBA vs PBA timing results. Given below is the GBA report for pin &#8220;A&#8221;:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053995"></a>Path 1: VIOLATED Setup Check with Pin u5/CK<br />Endpoint: u5/D (^) checked with leading edge of &#39;CLK_W_4&#39;<br />Beginpoint: u2/Q (^) triggered by leading edge of &#39;CLK_W_4&#39;<br />Other End Arrival Time            0.453<br />- Setup                           0.210<br />+ Phase Shift                    10.000<br />+ CPPR Adjustment                 0.000<br />- Uncertainty                    10.000<br />= Required Time                   0.243<br />- Arrival Time                    1.587<br />= Slack Time                     -1.344<br />Clock Rise Edge                       0.000<br />+ Clock Network Latency (Prop)        0.455<br />= Beginpoint Arrival Time             0.455<br />-------------------------------------------------------------------------<br />Load     Slew     Delay    Arrival    Cell   Arc          Pin      Required<br />                           Time                                    Time<br />-------------------------------------------------------------------------<br />0.205    0.178    -        0.455      -      CK ^         u2/CK    -0.889<br />0.020    0.107    0.268    0.723      DFF    CK ^ -&gt; Q ^  u2/Q     -0.621<br />0.020    0.107    0.002    0.725      BUF    -            u3/A     -0.619<br />0.011    0.093    0.075    0.800      BUF    A ^ -&gt; Y ^   u3/Y     -0.544<br />0.011&#160;&#160;  <strong>0.093</strong>    0.000    0.800      AND    -            <strong>ua1/A</strong> -&gt; -0.544<br />0.011    2.002    0.071    0.871      AND    A ^ -&gt; Y ^   ua1/Y    -0.473<br />0.011    2.002    0.000    0.871      BUF    -            u4/A     -0.473<br />0.006    1.951    0.716    1.587      BUF    A ^ -&gt; Y ^   u4/Y      0.243<br />0.006    1.951    0.000    1.587      DFF    -            u5/D      0.243<br />-------------------------------------------------------------------------</pre>
+
+<p>
+<a id="pgfId-1013955"></a>The slew through &#8220;A&#8221; pin is 0.093ns and B pin is 1.068ns (not shown in the above report). During GBA, the software performs slew merging and uses 1.068ns as the slew through &#8220;A&#8221; pin. Hence, a lot of pessimism is added in this analysis, which can be removed if PBA is used.</p>
+<p>
+<a id="pgfId-1013956"></a>To enable PBA mode, you can use the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1013957"></a>report_timing -retime path_slew_propagation</pre>
+
+<p>
+<a id="pgfId-1013958"></a>Given below is the result of PBA analysis of the above path. The highlighted red numbers show how PBA numbers remove pessimism induced due to slew merging in GBA.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1013959"></a>To report re-timed numbers, you can add retime_slew, retime_delay, and retime_incr_delay options to the <code>report_timing_format</code> global variable or use the <code>report_timing -format</code> parameter.</div>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1013960"></a>Path 1: VIOLATED Setup Check with Pin u5/CK<br />Endpoint: u5/D (^) checked with leading edge of &#39;CLK_W_4&#39;<br />Beginpoint: u2/Q (^) triggered by leading edge of &#39;CLK_W_4&#39;<br />Retime Analysis { Path-Slew }<br />Other End Arrival Time          0.453<br />- Setup                         0.068<br />+ Phase Shift                  10.000<br />+ CPPR Adjustment               0.000<br />- Uncertainty                  10.000<br />= Required Time                 0.385<br />- Arrival Time                  0.934<br />= Slack Time                   -0.549 --&gt; PBA Slack<br />= Slack Time(original)         -1.344 --&gt; GBA Slack<br />Clock Rise Edge                      0.000<br />+ Clock Network Latency (Prop)       0.455<br />= Beginpoint Arrival Time            0.455<br />---------------------------------------------------------------------------------<br />Load  Slew   Retime  Delay   Retime  Arrival  Cell  Arc      Pin      Required <br />             Slew            Delay   Time                             Time <br />---------------------------------------------------------------------------------<br />0.205  0.178  0.178   -      -       0.455   -     CK ^       u2/CK   -0.094<br />0.020  0.107  0.107  0.268   0.268   0.723   DFF   CK ^-&gt; Q^  u2/Q     0.174<br />0.020  0.107  0.107  0.002   0.002   0.725   BUF   -          u3/A     0.176<br />0.011  0.093  0.093  0.075   0.075   0.800   BUF   A  ^-&gt; Y^  u3/Y     0.251<br />0.011  0.093  0.093  0.000   0.000   0.800   AND   -          ua1/A -&gt; 0.251<br />0.011  2.002  0.079  0.071   0.071   0.871   AND   A  ^-&gt; Y^  ua1/Y    0.322<br />0.011  2.002  0.079  0.000   0.000   0.871   BUF   -          u4/A     0.322<br />0.006  1.951  0.062  0.716   0.064   0.934   BUF   A  ^-&gt; Y   u4/Y     0.385<br />0.006  1.951  0.062  0.000   0.000   0.934   DFF   -          u5/D     0.385<br />---------------------------------------------------------------------------------</pre>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1013961"></a>The <a href="../tempustxtcmdref/timing_disable_retime_clock_path_slew_propagation.html">timing_disable_retime_clock_path_slew_propagation</a> global variable controls whether retiming is done for both data as well as clock paths.</div>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_gbavspbacomparision.html" id="prev" title="GBA vs PBA Comparison">GBA vs PBA Comparison</a></em></b><b><em><a href="analysisandreporting_pathbasedreportingmodels.html" id="nex" title="Path-Based Analysis Reporting Models">Path-Based Analysis Reporting  ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

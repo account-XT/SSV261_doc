@@ -1,0 +1,2583 @@
+
+<html><head><title>make_cdB Commands</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-03-26" />
+<meta name="CreateTime" content="1774520063" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="The make_cdB noise characterizer utility creates a cdB noise library for use with signal integrity analyzers." />
+<meta name="DocTitle" content="make_cdB Noise Characterizer User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="make_cdB Commands" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="makecdb" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-03-26" />
+<meta name="ModifiedTime" content="1774520063" />
+<meta name="NextFile" content="globals.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design" />
+<meta name="PrevFile" content="noise_library.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="make_cdB Noise Characterizer User Guide -- make_cdB Commands" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="0" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="makecdb2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="makecdbTOC.html">Contents</a></li><li><a class="prev" href="noise_library.html" title="Noise Library Characterization">Noise Library Characterization</a></li><li style="float: right;"><a class="viewPrint" href="makecdb.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="globals.html" title="Global Variables">Global Variables</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>make_cdB Noise Characterizer User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<h1>2
+<a id="pgfId-1032955"></a></h1>
+<h1>
+<a id="pgfId-1033512"></a><hr />
+make_cdB Commands<hr />
+</h1>
+
+<ul><li>
+<a id="pgfId-1035418"></a><a href="commands.html#66432">bb_set_bidi</a></li><li>
+<a id="pgfId-1075586"></a><a href="commands.html#92416">bb_set_input</a></li><li>
+<a id="pgfId-1075592"></a><a href="commands.html#55934">bb_set_output</a></li><li>
+<a id="pgfId-1075598"></a><a href="commands.html#52992">create_ecsm_si_lib</a></li><li>
+<a id="pgfId-1075605"></a><a href="commands.html#57420">generate_cell_lib</a></li><li>
+<a id="pgfId-1075612"></a><a href="commands.html#25138">merge_cdb</a></li><li>
+<a id="pgfId-1075619"></a><a href="commands.html#43141">message_handler</a></li><li>
+<a id="pgfId-1075626"></a><a href="commands.html#34130">pcdb</a></li><li>
+<a id="pgfId-1075633"></a><a href="commands.html#62008">print_net</a></li><li>
+<a id="pgfId-1075640"></a><a href="commands.html#92334">read_dotlib</a></li><li>
+<a id="pgfId-1075647"></a><a href="commands.html#82278">redirect_output</a></li><li>
+<a id="pgfId-1075654"></a><a href="commands.html#80698">regenerate_cell_lib</a></li><li>
+<a id="pgfId-1075661"></a><a href="commands.html#59233">report_library</a></li><li>
+<a id="pgfId-1075668"></a><a href="commands.html#63547">reset_redirection</a></li><li>
+<a id="pgfId-1075675"></a><a href="commands.html#94028">set_cell_input_slewlist</a></li><li>
+<a id="pgfId-1075682"></a><a href="commands.html#20914">set_message_hook</a></li><li>
+<a id="pgfId-1075689"></a><a href="commands.html#27835">set_net</a></li><li>
+<a id="pgfId-1075696"></a><a href="commands.html#19836">set_port</a></li><li>
+<a id="pgfId-1075703"></a><a href="commands.html#58611">set_run_mode</a></li><li>
+<a id="pgfId-1075710"></a><a href="commands.html#29483">set_simwrap_mode</a></li><li>
+<a id="pgfId-1075723"></a><a href="commands.html#23551">set_supply</a></li><li>
+<a id="pgfId-1075729"></a><a href="commands.html#23934">set_supply_char_vals</a></li><li>
+<a id="pgfId-1075736"></a><a href="commands.html#82266">validate_cell_lib</a></li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3>
+<a id="pgfId-1073588"></a><a id="66432"></a>bb_set_bidi</h3>
+<a id="pgfId-1073723"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+bb_set_bidi 
+[-vhtolerance float]
+[-vltolerance float]
+[-cap float]
+[-cannotfloat] 
+[-vddres float]
+[-gndres float]
+[-vhnoise {time_value_pairs}]
+[-vlnoise {time_value_pairs}] {ports}</code></pre>
+
+<p>
+<a id="pgfId-1073773"></a>Marks the specified ports as a bidirectional input/output port. This command has most of the features of the <code>set_input</code> and <code>set_output</code> commands. The defaults for inputs and outputs are used for bidirectionals.</p>
+
+<h4>
+<a id="pgfId-1073769"></a>Parameters</h4>
+<p>
+<a id="pgfId-1074221"></a></p>
+<table class="webflareTable" id="#id1074507">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1073853"></a><code>-vhtolerance </code><span class="webflare-courier-new" style="white-space:pre"><em>float</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1073872"></a>Sets the VH DC input noise margin in Volts on the port. See the output_tolerance global variable.</p>
+<p>
+<a id="pgfId-1073823"></a>Default: 40 percent of the default VDD/GND swing below nominal VDD.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1073825"></a><code>-vltolerance</code> <span class="webflare-courier-new" style="white-space:pre"><em>float</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1073909"></a>Sets the VL DC input noise margin in Volts on the port. See the output_tolerance global variable.</p>
+<p>
+<a id="pgfId-1073827"></a>Default: 40 percent of the default VDD/GND swing above nominal ground</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1073942"></a><code>-cap</code> <span class="webflare-courier-new" style="white-space:pre"><em>float</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1073964"></a>Sets the capacitance-to-ground value at the port. Units in farads. For example 5e-15.</p>
+<p>
+<a id="pgfId-1073944"></a>Default: 0 farads</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1073938"></a><code>-cannotfloat</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1073995"></a>Specifies that this port cannot float.</p>
+<p>
+<a id="pgfId-1073940"></a>Default: Bidirectional ports are allowed to float.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1073934"></a><code>-vddres</code> <span class="webflare-courier-new" style="white-space:pre"><em>float</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1074026"></a>Specifies the RH resistance of the static port model in Ohms.</p>
+<p>
+<a id="pgfId-1073936"></a>Default: 1000.0</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1073930"></a><code>-gndres</code> <span class="webflare-courier-new" style="white-space:pre"><em>float</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1074054"></a>Specifies the RL resistance of the static port model in Ohms.</p>
+<p>
+<a id="pgfId-1073932"></a>Default: 1000.0</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1073926"></a><code>-vhnoise</code> <span class="webflare-courier-new" style="white-space:pre"><em>{time_value_pairs}</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1073928"></a>Specifies a list of time-value pairs representing the VH waveform to be applied at the ports. Values are specified in absolute voltages.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1074120"></a><code>-vlnoise</code> {time_value_pairs}</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1074122"></a>Specifies a list of time-value pairs representing the VL waveform to be applied at the ports.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1074116"></a><code>{ports}</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1074118"></a>Specifies a required list of ports to be set as bidirectional.</p>
+</td>
+</tr>
+</tbody></table>
+
+<p>
+<a id="pgfId-1073812"></a>Example</p>
+
+<a id="pgfId-1074244"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+bb_set_bidi adr</code></pre>
+
+<p>
+<a id="pgfId-1074240"></a>where net <code>adr</code> is set as bidirectional.</p>
+
+<h3>
+<a id="pgfId-1074268"></a><a id="92416"></a>bb_set_input </h3>
+<a id="pgfId-1074294"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+bb_set_input
+[-vhtolerance float]
+[-vltolerance float]
+[-cap float] 
+{ports}</code></pre>
+
+<p>
+<a id="pgfId-1074355"></a>Marks the specified ports as UDN inputs.</p>
+
+<h4>
+<a id="pgfId-1074557"></a>Parameters</h4>
+<p>
+<a id="pgfId-1074601"></a></p>
+<table class="webflareTable" id="#id1074558">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1074560"></a><span class="webflare-courier-new" style="white-space:pre"><em>-vhtolerance float</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1074640"></a>Sets the VH DC input noise margin, in Volts, that this port can tolerate. See the output_tolerance global variable.</p>
+<p>
+<a id="pgfId-1074563"></a>Default: 40 percent of the default VDD/GND swing below nominal VDD swing.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1074565"></a><span class="webflare-courier-new" style="white-space:pre"><em>-vltolerance float</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1074671"></a>Sets the VL dc input noise margin, in Volts, that this port can tolerate. See the output_tolerance global variable.</p>
+<p>
+<a id="pgfId-1074568"></a>Default: 40 percent of the default VDD/GND swing above nominal ground voltage</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1074570"></a><span class="webflare-courier-new" style="white-space:pre"><em>-cap float</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1074703"></a>Sets the capacitance-to-ground loading to be applied at the port. Units in farads. For example 5e-15.</p>
+<p>
+<a id="pgfId-1074573"></a>Default: 0 farads</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1074575"></a><code>{ports}</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1074578"></a>Specifies a required list of port names to be set as UDN inputs.</p>
+</td>
+</tr>
+</tbody></table>
+
+<p>
+<a id="pgfId-1074746"></a>Example</p>
+
+<a id="pgfId-1074748"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+bb_set_input {porta portb}</code></pre>
+
+<p>
+<a id="pgfId-1074370"></a>where <code>nets</code>, <code>porta</code> and <code>portb</code>, are set as primary inputs.</p>
+
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 2-1
+<a id="pgfId-1074795"></a>Internal Slew Characterization</strong></pi-para-indent>
+<p>
+<a id="pgfId-1074817"></a></p>
+<div class="webflare-div-image">
+<img width="668" height="249" src="images/commands-2.gif" /></div>
+<h3>
+<a id="pgfId-1074792"></a><a id="55934"></a>bb_set_output</h3>
+<a id="pgfId-1074869"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+bb_set_output 
+[-vddres float] 
+[-gndres float] 
+[-canfloat] 
+[-cap float]
+[-vhnoise {time_value_pairs}] 
+[-vlnoise {time_value_pairs}] {ports}</code></pre>
+
+<p>
+<a id="pgfId-1074865"></a>Marks the specified ports as a UDN output.</p>
+
+<h4>
+<a id="pgfId-1074919"></a>Parameters</h4>
+<p>
+<a id="pgfId-1074940"></a></p>
+<table class="webflareTable" id="#id1074920">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1074922"></a><span class="webflare-courier-new" style="white-space:pre"><em>-vddres float</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1074972"></a>Specifies the RH resistance of the static port model in Ohms.</p>
+<p>
+<a id="pgfId-1074925"></a>Default: 1000.0</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1074927"></a><span class="webflare-courier-new" style="white-space:pre"><em>-gndres float</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1075003"></a>Specifies the RL resistance of the static port model in Ohms.</p>
+<p>
+<a id="pgfId-1074930"></a>Default: 1000.0</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1074932"></a><span class="webflare-courier-new" style="white-space:pre"><em>-canfloat</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1075031"></a>Specifies that this port is allowed to float.</p>
+<p>
+<a id="pgfId-1074935"></a>Default: Output ports are not allowed to float</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1074937"></a><code>-cap float</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1075059"></a>Sets the capacitance to ground at the port.</p>
+<p>
+<a id="pgfId-1074939"></a>Default: 0</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1075085"></a>-vhnoise {time_value_pairs}</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1075087"></a>Specifies a list of time-value pairs representing the VH waveform to be applied at the output ports.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1075081"></a>-vlnoise {time_value_pairs}</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1075083"></a>Specifies a list of time-value pairs representing the VL waveform to be applied at the output ports.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1075077"></a>{ports}</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1075079"></a>Specifies a required list of ports to be set as UDN outputs.</p>
+</td>
+</tr>
+</tbody></table>
+
+<p>
+<a id="pgfId-1074915"></a>Example</p>
+
+<a id="pgfId-1075181"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+bb_set_output {porta portb}</code></pre>
+
+<p>
+<a id="pgfId-1075177"></a>where the <code>nets</code>, <code>porta</code> and <code>portb</code>, are set as primary outputs.</p>
+
+<h3>
+<a id="pgfId-1053382"></a><a id="52992"></a>create_ecsm_si_lib</h3>
+<a id="pgfId-1053406"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+create_ecsm_si_lib 
+-cdb <em>cdb_name</em> 
+-synlib <em>lib_name </em></code></pre>
+
+<p>
+<a id="pgfId-1053460"></a>Generates a <code>.lib</code> file containing ECSM-SI extensions by using an existing cdB and a <code>.lib</code> file as input. </p>
+
+<h4>
+<a id="pgfId-1053493"></a>Parameters</h4>
+<p>
+<a id="pgfId-1068515"></a></p>
+<table class="webflareTable" id="#id1068523">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068525"></a><code>-cdb </code><span class="webflare-courier-new" style="white-space:pre"><em>cdb_name</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068527"></a>Specifies the name of the input cdB noise library.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068529"></a><code>-synlib </code><span class="webflare-courier-new" style="white-space:pre"><em>lib_name</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068531"></a>Specifies the name of the input <code>.lib</code> file.</p>
+</td>
+</tr>
+</tbody></table>
+<h4>
+<a id="pgfId-1053481"></a>Example</h4>
+
+<ul><li>
+<a id="pgfId-1053534"></a>The following command creates an ECSM-SI .lib named <code>my_ecsm_si_typical.lib</code> by using the <code>base.cdB</code> and <code>typical.lib</code> files as input:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1053535">
+<a id="pgfId-1053535"></a>set_parm filename_prefix my_ecsm_si_</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1053526">
+<a id="pgfId-1053526"></a>create_ecsm_si_lib -cdb base.cdB -synlib typical.lib</pre></li></ul>
+
+
+
+<h3>
+<a id="pgfId-1034212"></a><a id="57420"></a>generate_cell_lib</h3>
+<a id="pgfId-1034214"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+generate_cell_lib 
+[-all] 
+[-bit_cell_list <em>bit_cell_list</em>] 
+[-ccc_print_large <em>value</em>] 
+-cell_list {<em>list</em>} 
+[-ecsm_si]
+-file_list {<em>list</em>} 
+[-filler_list {<em>list_of_cells</em>}] 
+-gnd {<em>netnames</em>} 
+[-maxsize {<em>integer</em>}] 
+[-skip {<em>list</em>}] 
+[-skip_failed_cells] 
+[-spectre_file_list {<em>list_of_spectre_files</em>}] 
+[-strip_supply] 
+[-text] 
+[-tolerance] 
+[-udn_list {<em>list</em>}] 
+-vdd {<em>netnames</em>}</code></pre>
+
+<p>
+<a id="pgfId-1042747"></a>Generates the noise library that can be used to represent the cells while performing signal integrity analysis. The <code>set_supply</code>, <code>set_net</code>, and <code>set_port</code> commands (for unbuffered cells) must be run before the <code>generate_cell_lib</code> command for correct noise characterization. </p>
+
+<div class="webflare-information-macro webflare-macro-information">
+<a id="pgfId-1042769"></a>
+It is mandatory to specify the <a href="commands.html#23551">set_supply</a> command before the <code>generate_cell_lib</code> command.</div>
+
+<p>
+<a id="pgfId-1042756"></a>This command is supported by the <code>make_cdB</code> utility, a noise characterization tool that encapsulates the essential information inside a cell for noise analysis purposes. Resistances, capacitances, and noise tolerance characteristics for each cell are taken into account. The characterized cdB noise library usually has a <code>.</code>cdB extension. </p>
+<p>
+<a id="pgfId-1034216"></a>Ensure that you use the <a href="commands.html#92334">read_dotlib</a> command to specify a timing library file for port direction settings before using this command. In addition, specify all the required make_cdB global variables and other Tcl commands before issuing this command.</p>
+<p>
+<a id="pgfId-1034219"></a>This command should be issued only once in each call to the <code>make_cdB</code> utility.</p>
+
+<h4>
+<a id="pgfId-1034222"></a>Parameters</h4>
+<p>
+<a id="pgfId-1071061"></a></p>
+<table class="webflareTable" id="#id1071078">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071534"></a><code>-all</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071536"></a>Characterizes all unique subcircuits in the SPICE files specified in <code>-file_list</code>. This option can lead to longer run times because library cells are often built from smaller component cells that are characterized. It also can cause errors when <code>make_cdB</code> attempts to calibrate subcircuits that are not placeable and do not have valid default parameters, such as L and W. Do not use this option with the <code>-cell_list</code> option.<br />
+<strong>Important</strong>: Option <code>-all</code> is obsolete and has been replaced by the <code>-cell_list</code> option. Although the <code>-all</code> option will continue to work, the software will issue a warning message indicating that this option is obsolete. To avoid the warning message, update your script to replace the <code>-all</code> option will the <br /><code>-cell_list</code> option.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071538"></a><code>-bit_cell_list </code><span class="webflare-courier-new" style="white-space:pre"><em>bit_cell_list</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071540"></a>Specifies a list of bit cells present in the memory. When this option is used, make_cdB automatically creates the empty black-boxes for the subcircuits of the specified bit cells by ignoring any internal devices.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071542"></a><code>-ccc_print_large </code><span class="webflare-courier-new" style="white-space:pre"><em>value</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071544"></a>Reports the names of all channel-connected components (CCCs) that have more than the specified number of transistors.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071546"></a><code>-cell_list {</code><span class="webflare-courier-new" style="white-space:pre"><em>list</em></span><code>}</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071548"></a>Specifies a required list of cells in the cell library that are characterized for noise.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071550"></a><code>-ecsm_si</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071552"></a>Generates a Liberty (.lib) library that contains effective current source model (ECSM)-based noise data. <br />
+Before you use this option, you must load a Liberty (<code>.lib</code>) library using the <code>read_dotlib</code> command. <br />
+<strong>Note</strong>: The output Liberty library, which contains ECSM-noise data, can be used as input to Encounter Timing System for performing noise analysis.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071554"></a><code>-file </code><span class="webflare-courier-new" style="white-space:pre"><em>string</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071556"></a>Specifies the required output noise library file name.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071558"></a><code>-file_list {</code><span class="webflare-courier-new" style="white-space:pre"><em>list</em></span><code>}</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071560"></a>Specifies a required list of SPICE files that contain the transistor-level netlist of the cells and SPICE model files. If the SPICE models are specified using the library (<code>.lib</code>) format, they cannot be directly loaded. Instead, create a main SPICE file and load this file.<br />
+<strong>Note</strong>: Use this option to load an ECHO file generated using a transistor-level signal integrity analysis tool.<br />
+<strong>Important</strong>: The cdB noise library is calibrated at the temperature specified by the <code>.temp</code> command in the SPICE format input files. If the temperature is not specified in the SPICE files, then the default temperature specified in the BSIM SPICE models is used during calibration. You must provide a comment line as the first line in the SPICE file (in title at the top of the file) because the signal integrity analyzer and the <code>make_cdB</code> SPICE netlist parser ignore the first line in the SPICE file.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071562"></a><code>-filler_list {</code><span class="webflare-courier-new" style="white-space:pre"><em>list_of_cells</em></span><code>}</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071564"></a>Specifies a list of filler cells that need to be characterized.<br />A filler cell is a cell that the <code>make_cdB</code> utility characterizes only for capacitance and for which no noise reporting is done.<br /><strong>Note</strong>: Do not specify filler cells using the <code>-cell_list</code> option.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071566"></a><code>-gnd {</code><span class="webflare-courier-new" style="white-space:pre"><em>netnames</em></span><code>}</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071568"></a>Specifies a list of net names to be treated as ground. Any supply name that contains a colon delimiter and a suffix will be treated as a supply if the prefix to the colon is specified in the <code>-gnd</code> list. For example, <code>gnd:3</code>.<br /><strong>Note</strong>: There are no default supply net names. The circuit supply nets must be specified.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071570"></a><code>-maxsize {<span class="webflare-courier-new" style="white-space:pre"><em>integer</em></span><code>}</code></code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071572"></a>Specifies that cells with a transistor count above this limit are characterized for gate level, but have a minimized transistor-level representation. Logical information does not propagate through this cell. This limit is not applied to cells specified in the <br /><code>-udn_list</code>.This limit also helps to prevent excessive run time and memory usage when the <code>-all</code> option is used.<br /><em>Default</em>: 100<br />
+<strong>Note</strong>: When the number of transistors in a cell exceeds the<br /><code>-maxsize</code>, the <code>make_cdB</code> utility issues a warning and then creates an ECHO for the transistor-level representation of the cell. The maximum legal value for the <code>-maxsize</code> option is <code>2000</code>. This limitation helps to avoid excessively large noise libraries. <br />
+When an ECHO is utilized for the transistor-level view of a cell, the signal integrity analyzer is not able to propagate noise through that cell.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071574"></a><code>-skip {</code><span class="webflare-courier-new" style="white-space:pre"><em>list</em></span><code>}</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071576"></a>Specifies a list of cells that are not calibrated. This command is particularly useful when used in combination with, but is not limited to, the <code>-all</code> option.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071578"></a><code>-skip_failed_cells</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071580"></a>Causes all cells that have failed calibration on any pin to be excluded from the noise library. <br /><em>Default</em>: Include all cells in the noise library.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071582"></a><code>-spectre_file_list {</code><span class="webflare-courier-new" style="white-space:pre"><em>list_of_spectre_files</em></span><code>}</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071584"></a>Specifies a list of valid Spectre<sup>&#174;</sup> files. You can combine both SPICE and Spectre netlists as part of the Spectre netlist. The Spectre simulator includes support for the SPICE netlist from the Spectre netlist. For example, a top-level Spectre netlist can include both SPICE and Spectre in a single file:<br />
+<strong>Top-level Spectre Netlist File</strong>:<br /><code>simulator lang=spectre<br />include &quot;model_pt.spe&quot;<br />
+simulator lang=spice
+.include inv_chain.spi
+</code><strong>Note</strong>: Make sure to include the <code>simulator lang=spectre</code> line at the beginning of each Spectre netlist.<br />
+After you set up the Spectre file netlist, you can use it as follows:
+<code>generate_cell_lib -spectre_file_list {top.scs}<br /></code><strong>CMI Requirements<br /></strong>The signal integrity analyzer supports the standard elements of Spectre and the models that are dynamically loaded by Spectre using the compiled model interface (CMI) shared object feature.<br /><strong><br /></strong>If you are reading Spectre files that contain CMI elements, this option requires specifying the locations of the shared object files that contain the descriptions of the additional elements. <br /></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071586"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071588"></a>To specify the locations of these shared object files, use the <code>cmiconfig</code> utility described in Chapter 4, Syntax, Configuring CMI Shared Objects in the <em>Spectre</em><sup>&#174;</sup><em> Circuit Simulator Reference</em>, which is shipped with the MMSIM release.<br />
+For example:
+<code>setenv CMI_CONFIG /path1/user_cmiconfig<br /></code>where <code>user_cmiconfig</code> contains instructions to load the CMI <code>libusermodel.so</code> file, such as:<code> <br />load /path2/libusermodel.so</code></p>
+<p>
+<a id="pgfId-1075250"></a><code><br /></code><strong>Note</strong>: The <code>.so</code> DLL files are platform specific and must be compiled for the platform that is being run.<br />
+All nets specified as <code>-vdd</code> and <code>-gnd</code> should have a matching global declaration in the Spectre files.<br />
+This option requires that you have Spectre included in your PATH. The generation of temporary files in the current directory is minimal.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071590"></a><code>-strip_supply</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071592"></a>Drops power supply ports from the port list of each cell. During signal integrity analysis, the cell ports are stored in the noise library.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071594"></a><code>-text</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071596"></a>Requests a text output format. The output file is named using a <code>.txt</code> extension. The text output is only created if all input files are text. For example, if the signal integrity analyzer reads in an encrypted cdB noise library, all cdB noise libraries and ECHO models are encrypted.<br /><em>Default</em>: Without this option, only a binary version is output.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071598"></a><code>-tolerance</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071600"></a>Activates cell-level DC tolerance. After this option is set, the V<sub>H</sub> or V<sub>L</sub> DC tolerance of a cell can be changed by using the <a href="globals.html#69573"><h-hot>port_vh_noise_tolerance</h-hot><code></code></a> or <a href="globals.html#23076"><h-hot>port_vl_noise_tolerance</h-hot><code></code></a> global variables.<br />
+<strong>Note</strong>: By default, make_cdB automatically computes the V<sub>L</sub> or V<sub>H</sub> tolerance. Using the <code>-tolerance</code> option enables you to override the automatic calculation using the <code>port_vl_noise_tolerance</code> or <code>port_vh_noise_tolerance</code> global variables, which is not recommended.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071658"></a><code>-udn_list {</code><span class="webflare-courier-new" style="white-space:pre"><em>list</em></span><code>}</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071660"></a>Specifies a list of cells in the cell library that are converted into a user-defined noise (UDN) model. The cells in this list are calibrated for gate-level analysis only. They do not contain transistor-level information for use in delay and sensitivity analysis. All cells in the UDN list must not be included in any other list such as <code>-cell_list</code>. </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071654"></a><code>-vdd {</code><span class="webflare-courier-new" style="white-space:pre"><em>netnames</em></span><code>}</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071656"></a>Specifies a list of net names to be treated as supply. Any supply name that contains a colon delimiter and a suffix will be treated as a supply if the prefix to the colon is specified in the <code>-vdd</code> list. For example, <code>vdd:3</code>.<br /><strong>Note</strong>: There are no default supply net names. The circuit supply nets must be specified.</p>
+</td>
+</tr>
+</tbody></table>
+<h4>
+<a id="pgfId-1039526"></a>Examples</h4>
+
+<ul><li>
+<a id="pgfId-1039527"></a>The following command characterizes the <code>XOR</code> cells in the cell library for noise, loads the <code>main.spi</code> SPICE file that contains the transistor-level netlist and SPICE models, and outputs the noise library file as <code>cells.cdB</code>:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1034244">
+<a id="pgfId-1034244"></a>read_dotlib timing.lib</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1039539">
+<a id="pgfId-1039539"></a>generate_cell_lib -cell_list { XOR } -file_list { main.spi } -file cells.cdB</pre>
+<a id="pgfId-1034245"></a>where <code>main.spi</code> contains:<pre class="webflare-pre-block webflare-courier-new" id="#id1034246">
+<a id="pgfId-1034246"></a><code>* title</code></pre><pre class="webflare-pre-block webflare-courier-new" id="#id1034247">
+<a id="pgfId-1034247"></a><code>.lib model_lib.spi tt</code></pre><pre class="webflare-pre-block webflare-courier-new" id="#id1034248">
+<a id="pgfId-1034248"></a><code>.include cells.spi</code></pre></li></ul>
+
+
+
+
+
+
+
+
+
+<h3>
+<a id="pgfId-1034287"></a><a id="25138"></a>merge_cdb</h3>
+<a id="pgfId-1034289"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+merge_cdb 
+[-cdb {<em>list</em>}]
+[-no_unique]
+[-text] 
+-file <em>filename</em> </code></pre>
+
+<p>
+<a id="pgfId-1034290"></a>Concatenates multiple noise library files into a single noise library file. If duplicate <code>.bbox</code> or <code>.subckt</code> definitions are found, the first definition is kept and all others are ignored. By default, this command outputs the merged cdB in encrypted format.</p>
+
+<h4>
+<a id="pgfId-1034291"></a>Parameters</h4>
+<p>
+<a id="pgfId-1068839"></a></p>
+<table class="webflareTable" id="#id1068818">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068820"></a><code>-cdb </code><span class="webflare-courier-new" style="white-space:pre"><em>{list}</em></span> </p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068822"></a>Specifies the names of the cdB noise libraries to concatenate.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068824"></a><code>-file </code><span class="webflare-courier-new" style="white-space:pre"><em>filename </em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068826"></a>Specifies the required output file name.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068828"></a><code>-no_unique</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068830"></a>Allows all <code>.bbox</code> and <code>.subckt</code> definitions to be kept, even if duplicated.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068832"></a><code>-text</code> </p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068834"></a>Requests a text output format for the merged cdB. All input cdBs must be in text format to use this option.<br /><strong>Note</strong>: When this option is specified, make_cdB generates the merged cdB in text as well as encrypted format.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068836"></a><code>-uniq_models</code> </p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1068838"></a>Retains only unique transistor models (<code>.model</code> definitions) in the merged cdB. When you specify this option, the software detects duplicate models in the input cdB files and retains only one definition for such models in the resultant merged cdB. Even if the model names are different the software detects the identical models based on the parameter values, and retains only one definition.</p>
+</td>
+</tr>
+</tbody></table>
+<h4>
+<a id="pgfId-1034296"></a>Examples</h4>
+
+<ul><li>
+<a id="pgfId-1034297"></a>The following command concatenates the <code>stdcel.cdb</code> and <code>custom.cdb</code> noise libraries into a single cdB noise library named <code>main.cdb</code>.<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1034298">
+<a id="pgfId-1034298"></a>merge_cdb -cdb {stdcel.cdb custom.cdb} -file main.cdb</pre></li><li>
+<a id="pgfId-1053129"></a>The following command merges two cdB files and generates a cdB file without duplicate model definitions:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1053130">
+<a id="pgfId-1053130"></a>merge_cdb -cdb { lab1.cdb lab2.cdb } -file test_merge -text -uniq_models</pre></li></ul>
+
+
+
+
+<h3>
+<a id="pgfId-1034329"></a><a id="43141"></a>message_handler</h3>
+<a id="pgfId-1034331"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+message_handler 
+[-msg_count_summary {OFF | ON}] 
+[-no_format] 
+[-revive]
+[-set_constraints {{-id <em>message_id_list</em> | -level <em>message_level </em>|
+-context <em>ctxt_list</em> -thislevelonly} | -constraint {0 | <em>positive_integer</em> | 
+-1 | <em>msg_id_limit</em>}] 
+[-set_error_limit <em>number</em>] 
+[-set_info_limit <em>number</em>] 
+[-set_msg_level {ERROR | DEFAULT | VERBOSE | ALL | msg_level}] 
+[-set_output_policy {-file <em>filename</em> | -discard_file <em>filename</em> | -gzip |
+-detail {terse | normal | high}}] 
+[-set_screen_display {OFF | ON}] 
+[-set_warn_limit <em>number</em>] 
+[-show_constraints { -id | -global | -context | -level | -all}]
+[-show_current_msg_level] 
+[-show_msg_level <em>message_id</em>] 
+[-show_report {-id {<em>message_id_list</em> | ALL} | -context {<em>message_ctxt_list</em> | ALL}}] 
+[-suspend]</code></pre>
+
+<p>
+<a id="pgfId-1041930"></a>Lets you control the detail and the types of messages that make_cdB displays. A message contains the message severity level, message ID, and message content. For example:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1041931"></a>INFO:(SI-6050) Now using /tmp/make_cdb_linws9.Cadence.COM_28215 (32361 MB available)</pre>
+
+<p>
+<a id="pgfId-1036883"></a>where:</p>
+
+<p>
+<a id="pgfId-1036905"></a></p>
+<table class="webflareTable" id="#id1036884">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1036886"></a><code>INFO:</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1036888"></a>Specifies the message severity level. make_cdB supports three message severity levels: <code>ERROR</code>, <code>WARNING</code>, and <code>INFO</code>. Each message severity level is associated with a message level.</p>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1041544"></a>make_cdB does not print the message level with the message. To get the message level for a message, use the following command:
+<code>message_handler -show_msg_level </code><span class="webflare-courier-new" style="white-space:pre"><em>message_id</em></span></div>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1041510"></a><code>SI-6050</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1041512"></a>Specifies the message ID.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1041514"></a><code>Now using...</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1041516"></a>Specifies the message content.</p>
+</td>
+</tr>
+</tbody></table>
+<h4>
+<a id="pgfId-1034354"></a>Parameters</h4>
+<p>
+<a id="pgfId-1071837"></a></p>
+<table class="webflareTable" id="#id1071851">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071853"></a><code>-msg_count_summary <br />{OFF | ON}</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071856"></a>Outputs statistics on the number and types (message levels) of messages make_cdB encounters during the run. make_cdB provides these statistics at the end of a run, when the message handler is closed by the application, or when you use the <br /><code>-show_report</code> option. Selecting the <code>OFF</code> argument will not provide statistics at the end of the run. <br /><em>Default</em>: <code>OFF</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071946"></a><code>-no_format</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071948"></a>Turns off message formatting to keep messages from wrapping at the 80-column width limit. Each message will be displayed on one line. This option is useful when you <code>grep</code> for specific message information that is displayed on multiple lines.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071942"></a><code>-revive</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071944"></a>Revives the message handler by updating the message settings.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1071938"></a><code>-set_constraints {-id </code><span class="webflare-courier-new" style="white-space:pre"><em>message_id_list</em></span><code> | -level </code><span class="webflare-courier-new" style="white-space:pre"><em>message_level</em></span><code> |<br />-context <span class="webflare-courier-new" style="white-space:pre"><em>ctxt_list</em></span><code> -thislevelonly}<br />-constraint {0 | </code><span class="webflare-courier-new" style="white-space:pre"><em>positive_integer</em></span><code> | -1 |<br /></code><span class="webflare-courier-new" style="white-space:pre"><em>msg_id_limit</em></span><code>}<br />-id </code><span class="webflare-courier-new" style="white-space:pre"><em>message_id_list</em></span></code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071934"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071936"></a>Controls the number of messages that make_cdB displays based on the message ID and the constraint that is set. You can only use this option if you know the message IDs of the messages you want to display. You can get the message IDs from the messages generated by make_cdB.<br />
+<strong>Note</strong>: You can also use this option to either suppress or display non-SI messages, such as <code>TECHLIB</code>, <code>CTE</code>, and <code>FNP</code>. For example, to suppress all the messages with the <code>TECHLIB-342</code> ID, use the following command: <br /><code>message_handler -set_constraints { -id TECHLIB-342 -constraint 0 }</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071930"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071932"></a>When controlling the display of non-SI message IDs, it is not possible to set a number for the total messages the software will suppress or display. All the messages with the specified ID will either be suppressed (<code>-constraint 0</code>) or displayed (<code>- constraint -1</code>).<br />
+<code>-level </code><span class="webflare-courier-new" style="white-space:pre"><em>message_level</em></span><code> <br /></code>Controls the number of messages that make_cdB displays based on the message level and the constraint that is set. What <span class="webflare-courier-new" style="white-space:pre"><em>message_level</em></span> you use is dependent on what messages you want make_cdB to display. To find the message level for a message, use the <code>-show_msg_level</code> option.<br /><code>-context </code><span class="webflare-courier-new" style="white-space:pre"><em>ctxt_list</em></span><code> [-thislevelonly]<br /></code>Controls the number of messages that make_cdB generates based on the message context and the constraint that is set. The <br /><code>-thislevelonly</code> option is used exclusively with the <br /><code>-context</code> option and applies the constraint only to messages of the specified context type and its message level. <br />Omitting this option applies the constraint to all messages of the specified context type regardless of its message level. To find the message level for a message, use the <code>-show_msg_level</code> option.<br />
+<code>-constraint {0 | </code><span class="webflare-courier-new" style="white-space:pre"><em>positive_integer</em></span><code> | -1}| </code><span class="webflare-courier-new" style="white-space:pre"><em>msg_id_limit</em></span><code> <br /></code>Specifies a constraint for an individual message ID type or a global constraint for all message ID types. These constraints limit the total number of messages that make_cdB displays.<br /><code>{0 | </code><span class="webflare-courier-new" style="white-space:pre"><em>positive_integer</em></span><code> | -1}</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071926"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071928"></a>Sets a constraint on an individual message ID type that is specified with the <code>-id</code>, <code>-level</code>, or <code>-context</code> options.<br /><code>0</code>: Use this option to discard messages of a particular type.<br /><span class="webflare-courier-new" style="white-space:pre"><em>positive_integer</em></span>: Use this option to output a specified number of messages.<br /><code>-1</code>: Use this option to output all messages.<br />
+<strong>Note</strong>: If a constraint is set, and the message ID, message level, and message context all match a specific message, make_cdB applies the constraint in the following order of precedence: message ID, message level, global constraints, and context constraints.<br />
+<span class="webflare-courier-new" style="white-space:pre"><em>msg_id_limit</em></span> <br />Sets a global constraint to limit the total number of messages that are displayed for each message ID type. make_cdB stops displaying messages of the same message ID type if the number of messages are above the specified limit. For example:<br /><code>-set_constraints { -constraint 300 }<br /></code>When a message of a specific message ID type reaches a count of <code>300</code>, that message ID type will no longer be displayed.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071922"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071924"></a><strong>Note</strong>: The <code>msg_id_limit</code> option provides a global constraint to all message ID types, with the following exceptions:<br />When using the <code>msg_id_limit</code> option in combination with setting a constraint for an individual message ID type, such as:<br /><code>-set_constraints { -id SI-xxxx -constraint </code><span class="webflare-courier-new" style="white-space:pre"><em>y</em></span> }<br />The constraint for the individual message ID type will take precedence.<br />
+<strong>Note</strong>: The individual message ID takes the highest precedence followed by level, global constraints, and context constraints.<br />When using the <code>msg_id_limit</code> option to set a global constraint for all message ID types, the following message ID types will remain unconstrained unless they are specifically constrained using the <br /><code>-set_constraints</code> <code>-id</code> option:<br /><code>SI-9513</code> 
+<code>SI-9514 <br />SI-500 <br />SI-100 <br />SI-6000 <br />SI-2000</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071918"></a><code>-set_error_limit </code><span class="webflare-courier-new" style="white-space:pre"><em>number</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072137"></a>Sets a limit to the number of ERROR messages that make_cdB displays. You can set this <span class="webflare-courier-new" style="white-space:pre"><em>number</em></span> to any value. If you set this <span class="webflare-courier-new" style="white-space:pre"><em>number</em></span> to <code>0</code>, make_cdB will not display any error messages. If you set this <span class="webflare-courier-new" style="white-space:pre"><em>number</em></span> to <code>-1</code>, make_cdB displays all error messages. <br />
+You can use this option multiple times. Each time it is used make_cdB overwrites the previous limit. For example, if you do not want error messages to appear when running the <code>set_supply</code> and <code>set_net</code> commands, but want all error messages to appear after running the <code>set_net</code> command, use this option as follows:<br />
+<code>message_handler -set_error_limit 0<br />set_supply...<br />set_net...<br />message_handler -set_error_limit -1<br />...</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071914"></a><code>-set_info_limit </code><span class="webflare-courier-new" style="white-space:pre"><em>number</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072180"></a>Sets a limit to the number of INFO messages that make_cdB displays. You can set this <span class="webflare-courier-new" style="white-space:pre"><em>number</em></span> to any value. If you set this <span class="webflare-courier-new" style="white-space:pre"><em>number</em></span> to <code>0</code>, make_cdB will not display any info messages. If you set this <span class="webflare-courier-new" style="white-space:pre"><em>number</em></span> to <code>-1</code>, make_cdB displays all info messages. <br />
+You can use this option multiple times. Each time it is used make_cdB overwrites the previous limit. For example, if you do not want info messages to appear when running the <code>set_supply</code> and <code>set_net</code> commands, but want all info messages to appear after running the <code>set_net</code> command, use this option as follows:<br />
+<code>message_handler -set_info_limit 0<br />set_supply...<br />set_net...<br />message_handler -set_info_limit -1<br />...</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1071910"></a><code>-set_msg_level {ERROR | DEFAULT | VERBOSE | ALL | </code><span class="webflare-courier-new" style="white-space:pre"><em>msg_level</em></span><code>}</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071906"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071908"></a>Sets the types of messages that make_cdB displays.<br /><em>Default</em>: <code>ERROR<br /></code><code>ERROR<br /></code>Displays all <code>ERROR</code> messages generated by make_cdB.<br />Message level: 39<br />
+<code>DEFAULT<br /></code>Displays all <code>ERROR</code> messages, important <code>WARNING</code> messages, and important <code>INFO</code> messages generated by make_cdB.<br />Message level: 49<br />
+<code>VERBOSE<br /></code>Displays all <code>ERROR</code> messages, all <code>WARNING</code> messages, and important <code>INFO</code> messages generated by make_cdB.<br />Message level: 58<br /><code>ALL<br /></code>Displays all <code>ERROR</code> messages, all <code>WARNING</code> messages, and all <code>INFO</code> messages generated by make_cdB.<br />Message level: 255<br />
+<span class="webflare-courier-new" style="white-space:pre"><em>msg_level</em></span><code> <br /></code>Specifies a message level from 10 to 255. make_cdB will not display messages that have a message level above this specified <span class="webflare-courier-new" style="white-space:pre"><em>msg_level</em></span>. Message level 58 is a typical message level setting. This displays all <code>ERROR</code> messages, all <code>WARNING</code> messages, and important <code>INFO</code> messages. <br />
+<xrefstd>Table&#160;2-1 below describes the <code>message_handler</code> message levels:</xrefstd></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1071902"></a><code>-set_output_policy {-file </code><span class="webflare-courier-new" style="white-space:pre"><em>filename</em></span><code> | -discard_file </code><span class="webflare-courier-new" style="white-space:pre"><em>filename</em></span><code> </code>| <br /><code>-gzip | -detail {terse | normal | high}}</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071898"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071900"></a><code>-gzip | -detail {terse | normal | high}}<br /></code>Controls how you want make_cdB to output messages. Use this option to specify a global policy that you want applied to messages.<br /><code>-file </code><span class="webflare-courier-new" style="white-space:pre"><em>filename</em></span><code> <br /></code>Stores the messages in the specified file.<br />
+<code>-discard_file </code><span class="webflare-courier-new" style="white-space:pre"><em>filename</em></span><code> <br /></code>Stores the messages that are not displayed as specified by the <code>-set_msg_level</code> or <code>-set_constraints</code> options. make_cdB stores the messages in a file specified by <span class="webflare-courier-new" style="white-space:pre"><em>filename</em></span>. If this argument is not specified, make_cdB discards those messages.<br />
+<code>-gzip<br /></code>Writes the log file and discard file in gzip format.<br />
+<code>-detail {terse | normal | high}<br /></code>Determines the detail of the messages shown. Selecting the <code>high</code> argument tells make_cdB to search the message file for messages with a high level of detail. <br />If the detailed message format is not found, make_cdB uses the <code>normal</code> format.<br /><em>Default</em>: <code>normal</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1071894"></a><code>-set_screen_display {OFF | ON}</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071890"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071892"></a>Turns the screen display on or off. If you turn the screen display off, messages with a level of 0 and messages with a level between 250 and 255 will only be displayed.<br /><em>Default</em>: <code>ON</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1071886"></a><code>-set_warn_limit </code><span class="webflare-courier-new" style="white-space:pre"><em>number</em></span></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071882"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072360"></a>Sets a limit to the number of WARNING messages that make_cdB displays. You can set this <span class="webflare-courier-new" style="white-space:pre"><em>number</em></span> to any value. If you set this <span class="webflare-courier-new" style="white-space:pre"><em>number</em></span> to <code>0</code>, make_cdB will not display any warning messages. If you set this <span class="webflare-courier-new" style="white-space:pre"><em>number</em></span> to <code>-1</code>, make_cdB displays all warning messages. <br />
+You can use this option multiple times. Each time it is used, make_cdB overwrites the previous limit. For example, if you do not want warning messages to appear when running the <code>set_supply</code> and <code>set_net</code> commands, but want all warning messages to appear after running the <code>set_net</code> command, use this option as follows:<br />
+<code>message_handler -set_warn_limit 0<br />set_supply...<br />set_net...<br />message_handler -set_warn_limit -1<br />...</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1071878"></a><code>-show_constraints { -id|-global|-context|-level|-all }</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071874"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071876"></a>Displays the constraints of the specified type or all constraints. This option accepts the following arguments:<br />
+<code>-id</code>: Displays the message IDs and the constraints set for them.<br />
+<code>-global</code>: Displays the global constraint.<br />
+<code>-context</code>: Displays the message contexts and the constraints set for them.<br />
+<code>-level</code>: Displays the message levels and the constraints set for them.<br />
+<code>-all</code>: Displays all constraints regardless of the type.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071870"></a><code>-show_current_msg_level</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1071872"></a>Displays the current message level that is set.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1072415"></a><code>-show_msg_level </code><span class="webflare-courier-new" style="white-space:pre"><em>message_id</em></span></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072411"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072457"></a>Provides the message level of the message specified by <span class="webflare-courier-new" style="white-space:pre"><em>message_id</em></span>. For example:<br /><code>message_handler -show_msg_level CADSI_WARN<br />
+</code>where make_cdB provides the message level of the message that contains the <code>CADSI_WARN</code> message ID.<br />
+<strong>Note</strong>: You can only use this option if you know the message ID of the message. You can get the message ID from the messages generated by make_cdB.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1072407"></a><code>-show_report {-id {</code><span class="webflare-courier-new" style="white-space:pre"><em>message_id_list </em></span><code>| ALL} | -context {<span class="webflare-courier-new" style="white-space:pre"><em>message_ctxt_list </em></span><code>| ALL}</code>}</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072403"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072405"></a>Shows a report on all messages generated by the software that match the <code>message_id_list</code> or the <code>message_ctxt_list</code>. If the <code>ALL</code> keyword is specified, all message IDs or contexts are generated. <br />
+<code>-id {</code><span class="webflare-courier-new" style="white-space:pre"><em>message_id_list </em></span><code>| ALL}<br /></code>Calculates and shows the number of messages with the specified message IDs. When the <code>ALL</code> keyword is specified, the software reports the total number of messages generated for all message IDs.<br />
+<code>-context {</code><span class="webflare-courier-new" style="white-space:pre"><em>message_ctxt_list</em></span><code> | ALL}<br /></code>Calculates and shows the number of messages with the specified message context. When the <code>ALL</code> keyword is specified, the software reports the total number of messages generated for all message contexts.<br />
+<strong>Note</strong>: The outputs generated by <code>-id</code> and <code>-context</code> are independent of each other even though it is possible to use them together with a single <code>-show_report</code> option.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072399"></a><code>-suspend</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072401"></a>Suspends all messages, but make_cdB updates the number of messages, message levels, and message contexts for each message.</p>
+</td>
+</tr>
+</tbody></table>
+
+<p>
+<a id="pgfId-1041854"></a></p>
+
+<h4>Table 2-1
+<a id="pgfId-1041888"></a>Message Levels and their Description</h4>
+<table class="webflareTable" id="#id1041855">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1041857">
+<a id="pgfId-1041857"></a>Message Handler msg_level</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1041859">
+<a id="pgfId-1041859"></a>Description</span>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1041861"></a>0-10</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1041863"></a>Specifies the message levels assigned to generic messages. make_cdB displays these messages by default.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1041865"></a>11-39</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1041867"></a>Specifies the message levels assigned to error messages prefixed with the <code>ERROR</code> severity level. When specifying a <code>msg_level</code> in this range, make_cdB displays all error messages that have a message level at or below the specified <code>msg_level</code>.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1041869"></a>40-45</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1041871"></a>Specifies the message levels assigned to important warning messages prefixed with the <code>WARNING</code> severity level. When specifying a <code>msg_level</code> in this range, make_cdB displays all important warning messages that have a message level at or below the specified <code>msg_level</code>. This includes all error messages since they have message levels below the specified <code>msg_level</code>.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1041873"></a>46-49</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1041875"></a>Specifies the message levels assigned to important information messages prefixed with the <code>INFO</code> severity level. When specifying a <code>msg_level</code> in this range, make_cdB displays all important information messages that have a message level at or below the specified <code>msg_level</code>. This includes all important warning messages and all error messages since they have message levels below the specified <code>msg_level</code>.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1041877"></a>50-58</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1041879"></a>Specifies the message levels assigned to warning messages prefixed with the <code>WARNING</code> severity level. When specifying a <code>msg_level</code> in this range, make_cdB displays all warning messages that have a message level at or below the specified <code>msg_level</code>. This includes all important information messages, all important warning messages, and all error messages since they have message levels below the specified <code>msg_level</code>.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1041881"></a>59-150</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1041883"></a>Specifies the message levels assigned to information messages prefixed with the <code>INFO</code> severity level. When specifying a <code>msg_level</code> in this range, make_cdB displays all information messages that have a message level at or below the specified <code>msg_level</code>. This includes all warning messages, all important information messages, and all error messages since they have message levels below the specified <code>msg_level</code>.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1041885"></a>151-255</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1041887"></a>Not used at this time.</p>
+</td>
+</tr>
+</tbody></table>
+<h4>
+<a id="pgfId-1034440"></a>Examples</h4>
+
+<ul><li>
+<a id="pgfId-1034441"></a>The following command outputs statistics on the number and type of messages make_cdB encounters during the run. <br /><pre class="webflare-pre-block webflare-courier-new" id="#id1034442">
+<a id="pgfId-1034442"></a>message_handler -msg_count_summary ON</pre></li><li>
+<a id="pgfId-1034443"></a>The following commands limit the number messages you see to a specific message ID type. Using these commands greatly reduces the log file size.<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1034444">
+<a id="pgfId-1034444"></a>message_handler -set_constraint { -id ID1 -constraint 5 }</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1034445">
+<a id="pgfId-1034445"></a>message_handler -set_constraint { -id ID2 -constraint 0}</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1034446">
+<a id="pgfId-1034446"></a>message_handler -set_constraint { -id ID3 -constraint -1}</pre>
+<a id="pgfId-1034447"></a>where the messages having <code>ID1</code> appear only five times, messages having <code>ID2</code> do not appear at all, and messages having <code>ID3</code> always appear.</li><li>
+<a id="pgfId-1034448"></a>The following command limits the number of error messages to 50.<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1034449">
+<a id="pgfId-1034449"></a>message_handler -set_err_limit 50</pre></li><li>
+<a id="pgfId-1034451"></a>The following command stores messages in a file named <code>run.log</code>.<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1034452">
+<a id="pgfId-1034452"></a>message_handler -set_output_policy {-file ./run.log}</pre></li><li>
+<a id="pgfId-1043374"></a>The following command displays the message IDs and the constraint set for them: <br /><pre class="webflare-pre-block webflare-courier-new" id="#id1043375">
+<a id="pgfId-1043375"></a>message_handler -show_constraints { -id }</pre></li><li>
+<a id="pgfId-1046092"></a>The following command reports the total number of messages generated with the ID, <code>SI-6050</code>:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1046096">
+<a id="pgfId-1046096"></a>message_handler -show_report {-id SI-6050}</pre></li><li>
+<a id="pgfId-1046093"></a>The following command reports the total number of messages generated for all message IDs and the message context, <code>make_cdb</code>:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1046101">
+<a id="pgfId-1046101"></a>message_handler -show_report {-id ALL -context make_cdb}</pre></li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3>
+<a id="pgfId-1047865"></a><a id="34130"></a>pcdb</h3>
+<a id="pgfId-1047868"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+pcdb
+[-all] 
+[-cell_list {<em>list</em>}] 
+[-no_ports] 
+[-pin_cap]<em> 
+</em>[-tolerance] 
+[-version] 
+-cdb {<em>list</em>}</code></pre>
+
+<p>
+<a id="pgfId-1034513"></a>Prints information about cells and user-defined noise (UDN) models inside cdB noise libraries. make_cdB prints the following information:</p>
+<ul><li>
+<a id="pgfId-1035248"></a>cdB noise library version</li><li>
+<a id="pgfId-1067829"></a>Spectre release version, if using the SIMI interface</li><li>
+<a id="pgfId-1035249"></a>Tool release version for each cdB noise library and cell or UDN name</li><li>
+<a id="pgfId-1039010"></a>Temperature used to characterize the cell or UDN</li><li>
+<a id="pgfId-1035250"></a>Port list with port direction (if available)</li><li>
+<a id="pgfId-1039011"></a>Supply (VDD) and ground (GND) net names with voltage values</li><li>
+<a id="pgfId-1047871"></a>VH and VL tolerance values</li></ul>
+
+
+
+
+
+
+
+<h4>
+<a id="pgfId-1034515"></a>Parameters</h4>
+<p>
+<a id="pgfId-1069315"></a></p>
+<table class="webflareTable" id="#id1069286">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069288"></a><code>-all</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069290"></a>Prints all cells and UDNs in the noise libraries. </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069292"></a><code>-cdb {</code><span class="webflare-courier-new" style="white-space:pre"><em>list</em></span><code>} </code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069294"></a>Specifies a required list of cdB noise libraries from which cell and UDN information is extracted.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069296"></a><code>-cell_list {</code><span class="webflare-courier-new" style="white-space:pre"><em>list</em></span><code>}</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069298"></a>Reports information about the list of cells.<br /><strong>Note</strong>: If you use the <code>-cell_list</code> option with the <code>-all</code> option, the <code>-all</code> option will be ignored.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069300"></a><code>-no_ports</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069302"></a>Outputs only cell and UDN names. No port names are output. <br /><strong>Note</strong>: When you use the <code>-no_ports</code> option, the <code>-pin_cap</code> option is ignored and the voltage information is not displayed.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069304"></a><code>-pin_cap </code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069306"></a>Prints pin capacitance values in the noise library. <br /><strong>Note</strong>: If the <code>-no_ports</code> option is specified, the <code>-pin_cap</code> option is ignored.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069308"></a><code>-tolerance </code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069310"></a>Prints the VH and VL tolerance values of the input cdB. This is particularly useful when the input cdB is encrypted and you want to determine the tolerance values.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069312"></a><code>-version </code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069314"></a>Prints the version of make_cdB used to create the cdb.</p>
+</td>
+</tr>
+</tbody></table>
+<h4>
+<a id="pgfId-1069316"></a>Examples</h4>
+
+<ul><li>
+<a id="pgfId-1034523"></a>The following command extracts cell and UDN information from the cdB noise library (<code>lab1.cdB</code>) and prints the cell or UDN name, cdB noise library version number, temperature, port list with port directions, port capacitance, and voltage for the <code>inv</code> list of cells:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1039382">
+<a id="pgfId-1039382"></a>pcdb -cell_list { inv } -cdb { lab1.cdB } -pin_cap</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1039512">
+<a id="pgfId-1039512"></a>FILE NAME      CELL NAME     PORT SEQUENCE, PORT CAPACITANCE,VOLTAGE</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1039513">
+<a id="pgfId-1039513"></a>----------     ---------     ---------------------------------------</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1039514">
+<a id="pgfId-1039514"></a>lab1.cdB</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1039105">
+<a id="pgfId-1039105"></a>VERSION 1</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1039106">
+<a id="pgfId-1039106"></a>RELEASE UNKNOWN</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1039107">
+<a id="pgfId-1039107"></a>TEMPERATURE 25</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1039108">
+<a id="pgfId-1039108"></a>(This file has model info)</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1039109">
+<a id="pgfId-1039109"></a>     1. inv (cell)</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1039110">
+<a id="pgfId-1039110"></a>        1. in (INPUT), 1.28e-15</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1039494">
+<a id="pgfId-1039494"></a>        2. out (OUTPUT), 1.77e-15, VDD 3.3 gnd 0</pre></li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+<h3>
+<a id="pgfId-1073318"></a><a id="62008"></a>print_net</h3>
+<a id="pgfId-1073345"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+print_net
+-cell
+{<em>net_name</em>}</code></pre>
+
+<p>
+<a id="pgfId-1073390"></a>Prints dangling nets.</p>
+
+<h4>
+<a id="pgfId-1073397"></a>Parameters</h4>
+<p>
+<a id="pgfId-1073407"></a></p>
+<table class="webflareTable" id="#id1073415">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1073417"></a><code>-cell </code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1073419"></a>Specifies the cell name.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1073421"></a><span class="webflare-courier-new" style="white-space:pre"><em>net_name</em></span> </p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1073423"></a>Specifies the net names.</p>
+</td>
+</tr>
+</tbody></table>
+<h4>
+<a id="pgfId-1073451"></a>Examples</h4>
+
+<ul><li>
+<a id="pgfId-1073461"></a>The following command prints dangling nets for the BUF cell:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1073471">
+<a id="pgfId-1073471"></a>print_net -cell BUF {A2_65}</pre></li></ul>
+
+
+<h3>
+<a id="pgfId-1039634"></a><a id="92334"></a>read_dotlib</h3>
+<a id="pgfId-1039862"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+read_dotlib 
+<em>dotlib_library_filename</em> | { <em>list_of_dotlib_filenames</em> }</code></pre>
+
+<p>
+<a id="pgfId-1039856"></a>Reads the timing library files and extracts pin directions. </p>
+
+<h4>
+<a id="pgfId-1040143"></a>Parameters</h4>
+<p>
+<a id="pgfId-1069344"></a></p>
+<table class="webflareTable" id="#id1069358">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069360"></a><span class="webflare-courier-new" style="white-space:pre"><em>dotlib_library_filename</em></span> </p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069362"></a>Specifies the name of the .<code>lib</code> library. This name can be a fully qualified file name or a relative file name. </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069364"></a><span class="webflare-courier-new" style="white-space:pre"><em>list_of_dotlib_filenames</em></span> </p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069366"></a>Specifies multiple dotlib library filenames. Use curly braces to specify multiple library filenames, for example:<br /><code>{lib1 lib2 lib3}</code>.</p>
+</td>
+</tr>
+</tbody></table>
+<h4>
+<a id="pgfId-1040206"></a>Example</h4>
+
+<ul><li>
+<a id="pgfId-1040207"></a>The following command reads the <code>example.lib</code> timing library file:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1057599">
+<a id="pgfId-1057599"></a>read_dotlib example.lib</pre></li></ul>
+
+
+<h3>
+<a id="pgfId-1057603"></a><a id="82278"></a>redirect_output</h3>
+<a id="pgfId-1057605"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+redirect_output
+<em>log_file_name</em></code></pre>
+
+<p>
+<a id="pgfId-1057631"></a>Redirects the resulting outputs from a set of make_cdB commands to a log file that you specify.</p>
+
+<h4>
+<a id="pgfId-1069478"></a>Parameters</h4>
+<p>
+<a id="pgfId-1069479"></a></p>
+<table class="webflareTable" id="#id1069486">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069488"></a><span class="webflare-courier-new" style="white-space:pre"><em>log_file_name</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069490"></a>Specifies the name of the log file being used for redirection.</p>
+</td>
+</tr>
+</tbody></table>
+<h4>
+<a id="pgfId-1057634"></a>Example</h4>
+
+<ul><li>
+<a id="pgfId-1057635"></a>The following command redirects the output from a set of make_cdB commands to the <span class="webflare-courier-new" style="white-space:pre"><em>log_file_name</em></span> that you specify:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1057636">
+<a id="pgfId-1057636"></a>redirect_output <code><em>log_file_name</em></code></pre><pre class="webflare-pre-block webflare-courier-new" id="#id1057637">
+<a id="pgfId-1057637"></a><code><em>command01</em></code></pre><pre class="webflare-pre-block webflare-courier-new" id="#id1057638">
+<a id="pgfId-1057638"></a><code><em>command02</em></code></pre><pre class="webflare-pre-block webflare-courier-new" id="#id1057639">
+<a id="pgfId-1057639"></a>...</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1057640">
+<a id="pgfId-1057640"></a>reset_redirection</pre></li></ul>
+
+
+
+
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1057606"></a>Use the <a href="commands.html#63547">reset_redirection</a> command to nullify the effects of the redirection.</div>
+
+<h3>
+<a id="pgfId-1057623"></a><a id="80698"></a>regenerate_cell_lib</h3>
+<a id="pgfId-1035424"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+regenerate_cell_lib 
+[-infile <em>string</em>] 
+[-outfile <em>string</em>] 
+[-temperature] 
+[-text] 
+[-version_string <em>cdB_version</em>]</code></pre>
+
+<p>
+<a id="pgfId-1035425"></a>Converts an old cdB noise library file to the latest cdB noise library file version.</p>
+
+<div class="webflare-information-macro webflare-macro-information">
+<a id="pgfId-1042674"></a>
+It is mandatory to specify the <a href="commands.html#23551">set_supply</a> command before the <code>regenerate_cell_lib</code> command.</div>
+
+<p>
+<a id="pgfId-1053164"></a>The <code>regenerate_cell_lib</code> command supports multi-voltage cdB regeneration. This means that you can regenerate an existing cdB to create a new cdB with cells characterized at different voltage values specified during regeneration. </p>
+<p>
+<a id="pgfId-1041191"></a>See <em>Regenerating the cdB Noise Library</em> in the <em>make_cdB Noise Characterizer User Guide</em> for more information.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1041192"></a>Use the <a href="commands.html#92334">read_dotlib</a> command to specify a timing library file for port direction settings before using this command. By default, make_cdB uses the port direction settings from the old cdB noise library file.</div>
+
+<div class="webflare-information-macro webflare-macro-information">
+<a id="pgfId-1050012"></a>
+This command should be issued only once in each call to the <code>make_cdB</code> utility.</div>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1068482"></a>The <code>regenerate_cell_lib</code> command does not work with SIMI.</div>
+
+<h4>
+<a id="pgfId-1035426"></a>Parameters</h4>
+<p>
+<a id="pgfId-1069590"></a></p>
+<table class="webflareTable" id="#id1069604">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069606"></a><code>-infile </code><span class="webflare-courier-new" style="white-space:pre"><em>string</em></span> </p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069608"></a>Specifies the required file name or location of the old cdB noise library file.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069610"></a> <code>-outfile </code><span class="webflare-courier-new" style="white-space:pre"><em>string</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069612"></a>Specifies the output file name or location of the new cdB noise library file. <br /><em>Default</em>: Adds file name <code>${input_cdb}.new</code> to the directory of the old cdB noise library file. If this file name exists, file name <code>${input_cdb}.new.1</code> is used or the suffix is incremented until a valid file name is found.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069641"></a><code>-temperature</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069643"></a>Specifies the temperature for the regenerated cdB noise library file. If not specified, the temperature value of the old cdB noise library file is used.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069637"></a><code>-text</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069639"></a>Generates a text version of the new cdB noise library file using the output file name with a <code>.txt</code> extension. <br />
+<strong>Note</strong>: If the original cdB noise library file that your converting is encoded or not in text format, no text output is generated.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069633"></a><code>-version_string </code><span class="webflare-courier-new" style="white-space:pre"><em>string</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069635"></a>Provides a tag to identify the cdB noise library file versions you are using. This is useful in situations where you generate several versions of the cdB noise library file for the same cells, such as for different voltages, process corners, and so on. You can view the version strings using the <code>-version</code> option of the <code>pcdb</code> command.</p>
+</td>
+</tr>
+</tbody></table>
+<h4>
+<a id="pgfId-1035605"></a>Examples</h4>
+
+<ul><li>
+<a id="pgfId-1037435"></a>The following commands convert a cdB noise library file from version 4.0 to the latest version, which is identified as <code>rechar-to-4.3.2</code>:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1037441">
+<a id="pgfId-1037441"></a>#Use set_parm as shown, when tiehi and tielo cells are present.</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1037442">
+<a id="pgfId-1037442"></a>set_parm port_vdd_r 1</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1037443">
+<a id="pgfId-1037443"></a>set_parm port_gnd_r 1</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1037444">
+<a id="pgfId-1037444"></a></pre><pre class="webflare-pre-block webflare-courier-new" id="#id1037445">
+<a id="pgfId-1037445"></a>set_supply -vdd 1.8 -gnd 0</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1037446">
+<a id="pgfId-1037446"></a>set_net -vdd 1.5 { vdda }</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1037447">
+<a id="pgfId-1037447"></a>regenerate_cell_lib -infile old.cdB \</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1037448">
+<a id="pgfId-1037448"></a>                    -outfile new.cdB \</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1037436">
+<a id="pgfId-1037436"></a>                    -version_string rechar-to-4.3.2</pre></li><li>
+<a id="pgfId-1053171"></a>The following commands recharacterize an existing text-based cdB file at multiple voltages:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1053172">
+<a id="pgfId-1053172"></a>set_run_mode 12</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1053173">
+<a id="pgfId-1053173"></a>set_parm bind_supply_to_port 1</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1053174">
+<a id="pgfId-1053174"></a></pre><pre class="webflare-pre-block webflare-courier-new" id="#id1053175">
+<a id="pgfId-1053175"></a>set_supply -vdd 3.3 -gnd 0.0</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1053176">
+<a id="pgfId-1053176"></a>set_supply -vdd 1.7 -gnd 0.0</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1053177">
+<a id="pgfId-1053177"></a>set_net -vdd 2.0 { VDD2 }</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1053178">
+<a id="pgfId-1053178"></a>set_net -nomvdd 3.3 -vdd 3.3 VDD</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1053179">
+<a id="pgfId-1053179"></a>set_net -nomvdd 1.7 -vdd 1.7 VDD</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1053180">
+<a id="pgfId-1053180"></a></pre><pre class="webflare-pre-block webflare-courier-new" id="#id1053181">
+<a id="pgfId-1053181"></a>set_port -dir in TOP {IN1}</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1053182">
+<a id="pgfId-1053182"></a>set_port -dir out TOP {OUT1}</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1053183">
+<a id="pgfId-1053183"></a>set_port -dir out TOP {OUT2}</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1053184">
+<a id="pgfId-1053184"></a>set_port -dir out TOP {OUT3}</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1053185">
+<a id="pgfId-1053185"></a></pre><pre class="webflare-pre-block webflare-courier-new" id="#id1053169">
+<a id="pgfId-1053169"></a>regenerate_cell_lib -infile test.cdB.txt -text</pre></li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3>
+<a id="pgfId-1057870"></a><a id="59233"></a>report_library</h3>
+<a id="pgfId-1057872"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+report_library 
+[-library <em>library_name</em>] 
+[-cells [<em>pattern</em>]] 
+[-wireloads]
+[-operating_conditions] 
+[-pvt {min | typ | max}]
+[-tcl_list] 
+[{&gt; | &gt;&gt;} <em>filename</em>]</code></pre>
+
+<p>
+<a id="pgfId-1057873"></a>Generates a report about the technology library used in the design.</p>
+
+<h4>
+<a id="pgfId-1057874"></a>Parameters</h4>
+<p>
+<a id="pgfId-1069836"></a></p>
+<table class="webflareTable" id="#id1069847">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069849"></a><code>{&gt; | &gt;&gt;} </code><span class="webflare-courier-new" style="white-space:pre"><em>filename</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069851"></a>Specifies the name of the file in which the report is saved. The <span class="webflare-courier-new" style="white-space:pre"><em>filename</em></span> argument must be the last argument in the list. If the file name is not specified, the report is displayed on the standard output without being saved. Since the report is often large, text may be lost if you do not save the report to a file.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069853"></a><code>-cells [</code><span class="webflare-courier-new" style="white-space:pre"><em>pattern</em></span><code>]</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069855"></a>Reports information about all cells in the library. If a <span class="webflare-courier-new" style="white-space:pre"><em>pattern</em></span> is specified, only the cell names in the library that match the pattern are reported.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069885"></a><code>-library </code><span class="webflare-courier-new" style="white-space:pre"><em>library_name</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069887"></a>Reports contents of the specified library, including non-target libraries.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069881"></a><code>-operating_conditions</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069883"></a>Reports information on all the operating conditions in the library. &#160;&#160;&#160;&#160;If none of the <code>-cells</code>, <code>-wireloads</code>, and <code>-operating_conditions</code> options are specified, the report contains information about all the cells, wire-load models, and operating conditions.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069877"></a><code>-pvt {min | typ | max}</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069879"></a>Reports library data for a particular PVT (process, voltage, temperature) corner. Specify only one PVT corner per command. <em>Default</em>: The library data is reported for the <code>max</code> PVT corner only. If the library is a merged library, the order of reporting is <code>max</code> if it exists, then <code>typ</code> if it exists, and finally <code>min</code> if neither <code>max</code> or <code>typ</code> data exists. <br /><strong>Note</strong>: If you have a merged library, use multiple commands with different <code>-pvt</code> options to report all the data.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069873"></a><code>-tcl_list</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069875"></a>Produces the report in a Tcl list, not a readable report. This is useful for integrating timing with custom Tcl functions and also for customizing report generation.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069869"></a><code>-wireloads</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1069871"></a>Reports information on all the wire-load models in the library.</p>
+</td>
+</tr>
+</tbody></table>
+<h4>
+<a id="pgfId-1065338"></a>Examples</h4>
+
+<ul><li>
+<a id="pgfId-1057923"></a>The following command reports the contents of the technology library to the file named <code>library.rep</code>:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1057924">
+<a id="pgfId-1057924"></a><code>report_library library.rep</code></pre></li><li>
+<a id="pgfId-1057925"></a>The following command reports all cells matching the string <code>AO*</code> in library <code>lca300kv</code>:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1057926">
+<a id="pgfId-1057926"></a><code>report_library -library lca300kv -cells AO*</code></pre></li><li>
+<a id="pgfId-1061349"></a>The following commands use a merged library:<ul><li>
+<a id="pgfId-1061351"></a>This command shows only the operating conditions for the <code>max</code> PVT, which are those from the <code>-max</code> library:<br /><ffi2-fig-frame-in-2 id="#id1061359">
+<a id="pgfId-1061359"></a></ffi2-fig-frame-in-2><div class="webflare-div-image">
+<img width="580" height="135" src="images/commands-4.gif" /></div></li><li>
+<a id="pgfId-1057938"></a>This command shows the operating conditions that come from the <code>-min</code> library:<br /><ffi2-fig-frame-in-2 id="#id1057946">
+<a id="pgfId-1057946"></a></ffi2-fig-frame-in-2><div class="webflare-div-image">
+<img width="580" height="160" src="images/commands-5.gif" /></div></li></ul></li></ul>
+
+
+
+
+
+
+
+
+
+
+
+<h3>
+<a id="pgfId-1057218"></a><a id="63547"></a>reset_redirection</h3>
+<a id="pgfId-1057379"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+reset_redirection</code></pre>
+
+<p>
+<a id="pgfId-1057668"></a>Nullifies the effect of the last <a href="commands.html#82278">redirect_output</a> command and reverts redirection to the state it was in before issuing this command.</p>
+
+<h4>
+<a id="pgfId-1057669"></a>Parameters</h4>
+
+<p>
+<a id="pgfId-1057670"></a>None.</p>
+
+<h4>
+<a id="pgfId-1057671"></a>Example</h4>
+
+<ul><li>
+<a id="pgfId-1057672"></a>The following <code>reset_redirection</code> command will nullify the effect of the <code>redirect_output</code> command after completion:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1057673">
+<a id="pgfId-1057673"></a>redirect_output <code><em>log_file_name</em></code></pre><pre class="webflare-pre-block webflare-courier-new" id="#id1057674">
+<a id="pgfId-1057674"></a>command01</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1057675">
+<a id="pgfId-1057675"></a>command02</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1057676">
+<a id="pgfId-1057676"></a>...</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1057380">
+<a id="pgfId-1057380"></a>reset_redirection</pre></li></ul>
+
+
+
+
+
+
+<h3>
+<a id="pgfId-1034548"></a><a id="94028"></a>set_cell_input_slewlist</h3>
+<a id="pgfId-1034550"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_cell_input_slewlist 
+{<em>slew_values</em>} 
+{<em>list_of_cell_names</em>}</code></pre>
+
+<p>
+<a id="pgfId-1034551"></a>Lets you provide your own slew values when characterizing for slew propagation. The specified cells get characterized for slew propagation using the slew values that you select. Use this command during noise characterization.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1042669"></a>The slews from the Liberty transition tables are used if a library has been loaded for a specified cell.</div>
+
+<h4>
+<a id="pgfId-1034552"></a>Parameters</h4>
+<p>
+<a id="pgfId-1070087"></a></p>
+<table class="webflareTable" id="#id1070101">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070103"></a><code>{</code><span class="webflare-courier-new" style="white-space:pre"><em>slew_values</em></span><code>}</code> </p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070105"></a>Specifies the slew values that you select to characterize for slew propagation.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070107"></a><code>{</code><span class="webflare-courier-new" style="white-space:pre"><em>list_of_cell_names</em></span><code>}</code> </p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070109"></a>Specifies the list of cells being characterized.</p>
+</td>
+</tr>
+</tbody></table>
+<h4>
+<a id="pgfId-1034556"></a>Examples</h4>
+
+<ul><li>
+<a id="pgfId-1034557"></a>The following command characterizes the cell (BUFF) for slew propagation using a set of five slew values. To use this command, write this command in the <code>make_cdB</code> Tcl file prior to using the <code>generate_cell_lib</code> command:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1034558">
+<a id="pgfId-1034558"></a>set_cell_input_slewlist {1e-11 3e-11 6e-11 7e-11 9e-11} {BUFF}</pre></li></ul>
+
+
+<h3>
+<a id="pgfId-1042985"></a><a id="20914"></a>set_message_hook</h3>
+<a id="pgfId-1042987"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_message_hook 
+-id <em>msg_id</em> 
+[-level { ERROR | WARNING | INFO | ALL | <em>msg_id_range </em>}] 
+[-no_show] 
+-proc <em>tcl_procedure</em> 
+[-exit]</code></pre>
+
+<p>
+<a id="pgfId-1042988"></a>Adds callbacks associated with messages using their message IDs. You need to define a Tcl procedure and source it before using this command. For more information about creating a Tcl procedure, see <a href="commands.html#67010">&#8220;Sample Tcl File with a User-Defined Tcl Procedure&#8221;</a>.</p>
+<p>
+<a id="pgfId-1043327"></a>Ensure that you source the location of the procedure from the Tcl file that you provide to make_cdB.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1042993"></a>Do not create a Tcl procedure with the same name as that of an existing make_cdB command. make_cdB will abort if it encounters a Tcl procedure with the same name as that of an existing command.</div>
+
+<h4>
+<a id="pgfId-1042994"></a>Parameters</h4>
+<p>
+<a id="pgfId-1072618"></a></p>
+<table class="webflareTable" id="#id1072629">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072631"></a><code>-exit</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072681"></a>Exits after executing the callback when the specified message is encountered.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072635"></a><code>-id </code> <span class="webflare-courier-new" style="white-space:pre"><em>msg_id</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072637"></a>Specifies the alphanumeric message ID of the message for which you want to add a callback.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072663"></a><code>-level { ERROR | WARNING | INFO | ALL | </code><span class="webflare-courier-new" style="white-space:pre"><em>msg_id_range</em></span><code> }</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072665"></a>Sets callbacks on message levels. This option accepts the following arguments:<br />
+<code>ERROR</code>: Sets callbacks on messages with the ERROR severity level.<br />
+<code>WARNING</code>: Sets callbacks on messages with the WARNING severity level.<br />
+<code>INFO</code>: Sets callbacks on messages with the INFO severity level.<br />
+<code>ALL</code>: Sets callbacks on all messages regardless of their severity level.<br />
+<span class="webflare-courier-new" style="white-space:pre"><em>msg_id_range</em></span>: Sets callbacks on a range of message IDs. For example a value of <code>1000-2000</code> will set callbacks on all messages with message IDs between <code>1000</code> and <code>2000</code>.<br />
+<strong>Note</strong>: Do not use the <code>-level</code> option with the <code>-id</code> option.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072659"></a><code>-no_show</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072661"></a>Hides the original message.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072655"></a><code>-proc</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072657"></a>Specifies the Tcl procedure to call when make_cdB encounters the specified message ID.</p>
+</td>
+</tr>
+</tbody></table>
+<h4>
+<a id="pgfId-1043001"></a>Example</h4>
+
+<ul><li>
+<a id="pgfId-1043002"></a>The following command calls the Tcl procedure, <code>callback_1111</code>, whenever make_cdB encounters a message with the <code>SI-1111</code> ID:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1043003">
+<a id="pgfId-1043003"></a>set_message_hook -id SI-1111 -proc callback_1111</pre></li><li>
+<a id="pgfId-1043004"></a>The following command instructs make_cdB to exit whenever a message with ERROR severity level is encountered:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1043005">
+<a id="pgfId-1043005"></a>set_message_hook -level ERROR -proc error_callback -exit</pre></li></ul>
+
+
+
+
+<h4>
+<a id="pgfId-1043007"></a><a id="67010"></a>Sample Tcl File with a User-Defined Tcl Procedure</h4>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1043008"></a>proc <code><em>tcl_procedure</em></code> { <code><em>id</em></code> <code><em>message</em></code> } {</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1043009"></a># <code><em>tcl_procedure</em></code> is a user-defined Tcl procedure.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1043010"></a># <code><em>id</em></code> is the numeric message ID. </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1043011"></a># <code><em>message</em></code> is a message string that is output.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1043012"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1043013"></a>   puts &quot;Hit SI-$id Error. Cell information missing from dotlib. Exiting\n&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1043014"></a> </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1043015"></a>}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1043016"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1043017"></a># Instruct the message handler to attach the callback to the specified message ID.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1043018"></a>set_message_hook -id <code><em>msg_id</em></code> -proc <code><em>tcl_procedure </em></code><code>-exit</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1043019"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1043020"></a># Proceed with the normal run.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1043021"></a>generate_cell_lib ...</pre>
+<h3>
+<a id="pgfId-1034649"></a><a id="27835"></a>set_net</h3>
+<a id="pgfId-1034651"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_net 
+[-vdd <em>float</em>] 
+[-gnd <em>float</em>] 
+{<em>netnames</em>} 
+[-nomvdd <em>value</em>] 
+[{<em>cellnames</em>}] </code></pre>
+<div class="webflare-information-macro webflare-macro-information">
+<a id="pgfId-1034653"></a>
+Sets alternate power and ground voltages, including supply variations caused by power-supply noise, such as I/R drop (used with the <code>make_cdB</code> utility).</div>
+
+<p>
+<a id="pgfId-1034655"></a>Use the <code>set_net</code> command when calibrating cells with <code>make_cdB</code>. The <code>make_cdB</code> function uses a transistor-level netlist. This command is required only when there are supply nets that operate under different voltage parameters. The local mode of the <code>set_net</code> command overrides the global mode of the <code>set_supply</code> command. This command must be specified before using the <a href="commands.html#57420"><h-hot>generate_cell_lib</h-hot><code></code></a> command. </p>
+<p>
+<a id="pgfId-1075385"></a>This command should only be used in a <code>make_cdB</code> Tcl file to set alternative power and ground voltages. The supplies that you define using the set_net command must also be defined during signal integrity analysis.</p>
+
+<h4>
+<a id="pgfId-1034658"></a>Parameters</h4>
+<p>
+<a id="pgfId-1070264"></a></p>
+<table class="webflareTable" id="#id1070278">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070280"></a> <code>{</code><span class="webflare-courier-new" style="white-space:pre"><em>cellnames</em></span><code>}</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070282"></a>Specifies a list of cells to which to apply the supply information.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070284"></a> <code>-gnd </code><span class="webflare-courier-new" style="white-space:pre"><em>float</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070286"></a>Specifies the nominal ground voltage. <br /><em>Default</em>: 0.0</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070313"></a><code>{</code><span class="webflare-courier-new" style="white-space:pre"><em>netnames</em></span>}</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070315"></a>Specifies a required list of nets to which to apply the supply information.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070309"></a><code>-nomvdd </code><span class="webflare-courier-new" style="white-space:pre"><em>value</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070311"></a>Specifies the nominal power supply value, which is used with the <code>-vdd</code> option to associate voltage pairs with a VDD name. This option is used for generating multi-VDD cdBs for Multiple Supply Multiple Voltage (MSMV) cells.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070305"></a><code>-vdd </code><span class="webflare-courier-new" style="white-space:pre"><em>float</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070307"></a>Specifies the nominal supply voltage. <br /><em>Default</em>: 3.3</p>
+</td>
+</tr>
+</tbody></table>
+<h4>
+<a id="pgfId-1034666"></a>Examples</h4>
+
+<ul><li>
+<a id="pgfId-1034667"></a>The following command sets the supply voltage for net <code>vdda</code> as 2.5V:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1034668">
+<a id="pgfId-1034668"></a>set_net -vdd 2.5 {vdda} </pre></li><li>
+<a id="pgfId-1034669"></a>The following command sets the ground voltage for net <code>gnda</code> as 0V (default):<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1034670">
+<a id="pgfId-1034670"></a>set_net -gnd 0 {gnda} </pre></li><li>
+<a id="pgfId-1034671"></a>The following command sets the supply voltage for net <code>vdda</code> in the cell <code>aoi1</code> as 1.8V:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1034672">
+<a id="pgfId-1034672"></a>set_net -vdd 1.8 {vdda} {aoi1}</pre></li><li>
+<a id="pgfId-1038449"></a>The following sequence of commands associates voltage pairs with VDD names to generate multi-VDD cdB for MSMV cells:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1038456">
+<a id="pgfId-1038456"></a>set_net -nomvdd 1.2 -vdd 0.6 VDD1</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1038458">
+<a id="pgfId-1038458"></a>set_net -nomvdd 1.8 -vdd 0.8 VDD2</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1038450">
+<a id="pgfId-1038450"></a>set_net -nomvdd 2.6 -vdd 1.3 VDD3</pre></li></ul>
+
+
+
+
+
+
+
+
+
+
+<h3>
+<a id="pgfId-1046026"></a><a id="19836"></a>set_port</h3>
+<a id="pgfId-1067462"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_port 
+[-cap <em>float</em>] 
+[-dir <em>string</em>] 
+[-DCvhtol <em>float</em>] 
+[-DCvltol <em>float</em>] 
+[-gnd_res <em>float</em>] 
+[-noprop] 
+[-order {<em>ordered_list</em>}] 
+[-sleep] 
+[-skip_arc_characterize] 
+[-vdd_res <em>float</em>] 
+<em>cellname</em> {<em>portnames</em>} </code></pre>
+
+<p>
+<a id="pgfId-1067466"></a>Sets cell port properties. Incorrect cell port direction causes incorrect noise characterization. Use this command with the <code>make_cdB</code> utility. The signal integrity analyzer can read the port direction from timing library files or SPEF files.</p>
+
+<h4>
+<a id="pgfId-1042424"></a>Parameters</h4>
+<p>
+<a id="pgfId-1072869"></a></p>
+<table class="webflareTable" id="#id1072877">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072879"></a><code>-cap </code><span class="webflare-courier-new" style="white-space:pre"><em>float</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072881"></a>Overrides the default cell port capacitance.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072883"></a><span class="webflare-courier-new" style="white-space:pre"><em>cellname</em></span><code> {</code><span class="webflare-courier-new" style="white-space:pre"><em>portnames</em></span><code>}</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072885"></a>Specifies the required name of the cell and the required list of port names on that cell.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072940"></a><code>-dir </code><span class="webflare-courier-new" style="white-space:pre"><em>string</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072942"></a>Overrides the default cell port direction. <br />Valid values: <code>in</code><em>, </em><code>out</code><em>, </em><code>bidi</code>.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072936"></a><code>-DCvhtol </code><span class="webflare-courier-new" style="white-space:pre"><em>float</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072938"></a>Specifies the cell port VH tolerance (in volts) for input and bidirectional ports. The value specified with this option overrides the default cell port VH tolerance.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072932"></a><code>-DCvltol </code><span class="webflare-courier-new" style="white-space:pre"><em>float</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072934"></a>Specifies the cell port VL tolerance (in volts) for input and bidirectional ports. The value specified with this option overrides the default cell port VL tolerance.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072928"></a><code>-gnd_res </code><span class="webflare-courier-new" style="white-space:pre"><em>float</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072930"></a>Specifies the cell port ground resistance (in ohms) for output and bidirectional ports. The value specified with this option overrides the default cell port ground resistance.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072924"></a><code>-noprop</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072926"></a>Disables noise propagation for the specified ports. If this option is set, the specified ports are treated as UDN ports while reporting DC tolerance violations during signal integrity analysis.<br />
+<strong>Note</strong>: Use this option to disable noise propagation for analog ports.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072920"></a><code>-order {<span class="webflare-courier-new" style="white-space:pre"><em>ordered_list</em></span><code>}</code></code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072922"></a>Overrides the default cell port ordering with the specified order.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072916"></a><code>-skip_arc_characterize</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072918"></a><strong>Important</strong>: Use this option only if you are having problems with arc characterization or receive a warning message.<br />
+Turns off arc characterization on the specified ports of a specified cell. For example: 
+<code>set_port -skip_arc_characterize </code><span class="webflare-courier-new" style="white-space:pre"><em>cellname</em></span><code> {</code><span class="webflare-courier-new" style="white-space:pre"><em>portnames</em></span><code>}<br /></code>This option also turns off arc characterization for tiehi and tielo ports. Use this option in cases where <code>make_cdB</code> may not recognize the uncharacterizable ports.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072912"></a><code>-sleep</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072914"></a>Identifies the sleep input ports in the specified cell. A sleep port puts the cell in low-power sleep mode by switching off the power gating transistors. To identify a sleep port named <code>NSLEEP</code> in <code>CELL1</code>, use the following command:<br /><code>set_port -dir in -sleep CELL1 {NSLEEP}</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072908"></a><code>-vdd_res </code><span class="webflare-courier-new" style="white-space:pre"><em>float</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1072910"></a>Specifies the cell port VDD resistance (in ohms) for output and bidirectional ports. The value specified with this option overrides the default cell port VDD resistance.</p>
+</td>
+</tr>
+</tbody></table>
+<h4>
+<a id="pgfId-1034711"></a>Examples</h4>
+
+<ul><li>
+<a id="pgfId-1034712"></a>The following commands set ports <code>d0</code> and <code>d1</code> of cell <code>mux21</code> as cell inputs:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1034713">
+<a id="pgfId-1034713"></a>set_port -dir in mux21 d0 </pre><pre class="webflare-pre-block webflare-courier-new" id="#id1034714">
+<a id="pgfId-1034714"></a>set_port -dir in mux21 d1</pre></li></ul>
+
+
+
+<h3>
+<a id="pgfId-1035071"></a><a id="58611"></a>set_run_mode</h3>
+<a id="pgfId-1035073"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_run_mode [11] [12]</code></pre>
+
+<p>
+<a id="pgfId-1035075"></a>Sets individual variables to their appropriate values according to a particular usage model. Run mode affects accuracy, run time, and memory usage. In general, a larger run mode value gives higher accuracy but longer run time and higher memory usage. You can customize your run mode by setting a predefined run mode value closest to your usage model, then altering individual variables if necessary. </p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1047473"></a>The <code>set_run_mode</code> command must be specified as the first entry in your command file, even before any of the global variables. This is because the <code>set_run_mode</code> command can override the global variable settings.</div>
+
+<h4>
+<a id="pgfId-1035076"></a>Parameters</h4>
+<p>
+<a id="pgfId-1070458"></a></p>
+<table class="webflareTable" id="#id1070472">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070474"></a> <code>11</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070476"></a>Specifies a list of cells to which to apply the supply information.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070478"></a><code>12</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070480"></a>Specifies the nominal ground voltage. <br /><em>Default</em>: 0.0</p>
+</td>
+</tr>
+</tbody></table>
+
+<p>
+<a id="pgfId-1042434"></a><strong>Important</strong>: Modes 11 and 12 are the only options that <code>make_cdB</code> supports.</p>
+
+<h4>
+<a id="pgfId-1035078"></a>Examples</h4>
+
+<ul><li>
+<a id="pgfId-1034859"></a>The following command performs a rough coupling analysis with capacitance only:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1034860">
+<a id="pgfId-1034860"></a>set_run_mode 11</pre></li><li>
+<a id="pgfId-1034861"></a>The following command performs coupling analysis with resistances and capacitances:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1034862">
+<a id="pgfId-1034862"></a>set_run_mode 12</pre></li></ul>
+
+
+
+
+<h3>
+<a id="pgfId-1050018"></a><a id="29483"></a>set_simwrap_mode</h3>
+<a id="pgfId-1050033"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_simwrap_mode 
+-sim [ mixed | simi ]
+[-use_spectre_from_installation]</code></pre>
+
+<p>
+<a id="pgfId-1050036"></a>Specifies whether to use the Spectre simulator or a combination of both Berkeley Spice (BSpice) and Spectre simulators during characterization. The ability to run the Spectre simulator enables you to perform characterization of common modeling interface (CMI) based circuits, which are not supported by BSpice. </p>
+<p>
+<a id="pgfId-1050038"></a>This command provides you the flexibility to choose the simulator of your choice during characterization. </p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1067849"></a>ETS can read both CMI and regular CDBs in the same session.</div>
+
+<div class="webflare-information-macro webflare-macro-information">
+<a id="pgfId-1050094"></a>
+Before using this command, ensure that the Spectre executable is available in your path.</div>
+<h4>
+<a id="pgfId-1050044"></a>Parameters </h4>
+<p>
+<a id="pgfId-1070519"></a></p>
+<table class="webflareTable" id="#id1070530">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070532"></a> <code>-sim [ mixed | simi ]</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070534"></a>Specifies the simulator to use during characterization. Use one of the following values:<br />
+<code>mixed</code>: Uses both BSpice and Spectre simulators.<br />
+<code>simi</code>: Uses the Spectre simulator only.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-1073291"></a><code>-use_spectre_from_installation</code> <code></code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1073286"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1073288"></a>Picks up the Spectre path from makeCDB installation.</p>
+</td>
+</tr>
+</tbody></table>
+<h4>
+<a id="pgfId-1050125"></a>Example</h4>
+
+<p>
+<a id="pgfId-1050126"></a>The following command specifies that the BSpice as well as the Spectre SPICE simulator should be used during characterization:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1050128"></a>set_simwrap_mode -sim mixed</pre>
+<h3>
+<a id="pgfId-1048005"></a><a id="23551"></a>set_supply</h3>
+<a id="pgfId-1048008"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_supply 
+[-vdd <em>float</em>] 
+[-gnd <em>float</em>]</code></pre>
+
+<p>
+<a id="pgfId-1034942"></a>Sets up global variables for power and ground voltages. </p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1038400"></a>You must specify the global supplies before issuing the <a href="commands.html#57420">generate_cell_lib</a> command.</div>
+<p>
+<a id="pgfId-1038395"></a>You can issue multiple <code>set_supply</code> commands with the <code>-vdd</code> option to generate a multi-VDD cdB. When you specify multiple voltages with the <code>set_supply</code> command, make_cdB characterizes the specified cells at each of the specified voltages. After the characterization is complete, the characterization information for each of the specified voltages is stored in the output cdB file. The multi-VDD cdB can be specified in the signal integrity analyzer to perform noise analysis. During noise analysis, if different instances of a cell are operating at different voltages, the signal integrity analyzer selects the correct characterization data from the multi-VDD cdB. </p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1041316"></a>To define specific supply voltages of certain supply nets, which is required while working with multiple supplies operating at different voltages, use the <a href="commands.html#27835">set_net</a> command.</div>
+
+<h4>
+<a id="pgfId-1034948"></a>Parameters</h4>
+<p>
+<a id="pgfId-1070608"></a></p>
+<table class="webflareTable" id="#id1070622">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070624"></a> <code>-gnd </code><span class="webflare-courier-new" style="white-space:pre"><em>float</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070674"></a>Specifies the nominal ground voltage. <br /><em>Default</em>: 0.0</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070644"></a><code>-vdd </code><span class="webflare-courier-new" style="white-space:pre"><em>float</em></span></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070646"></a>Specifies the nominal supply voltage. <br /><em>Default</em>: 3.3</p>
+</td>
+</tr>
+</tbody></table>
+<h4>
+<a id="pgfId-1034960"></a><strong>Examples</strong></h4>
+
+<ul><li>
+<a id="pgfId-1034961"></a>The following command sets the <code>set_supply</code> voltage to 3.5V and ground voltage to 0V: <br /><pre class="webflare-pre-block webflare-courier-new" id="#id1034962">
+<a id="pgfId-1034962"></a>set_supply -vdd 3.5 -gnd 0.0</pre></li><li>
+<a id="pgfId-1038409"></a>The following example shows how to use the <code>set_supply</code> command to generate a multi-VDD cdB:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1038422">
+<a id="pgfId-1038422"></a>set_supply -vdd 1.2</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1038424">
+<a id="pgfId-1038424"></a>set_supply -vdd 1.32</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1038410">
+<a id="pgfId-1038410"></a>set_supply -vdd 1.4</pre></li></ul>
+
+
+
+
+
+
+<h3>
+<a id="pgfId-1038315"></a><a id="23934"></a>set_supply_char_vals</h3>
+<a id="pgfId-1038317"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_supply_char_vals 
+-nets {<em>list</em>} 
+-values {<em>list</em>} 
+[{ <em>cellnames </em>}]</code></pre>
+
+<p>
+<a id="pgfId-1038318"></a>Defines the set of supply voltages. This command can be used to override the following <code>make_cdB</code> default calculations: 0.9 VDD, 0.8 VDD, 0.7 VDD, 0.6 VDD, 0.5 VDD.</p>
+
+<h4>
+<a id="pgfId-1038320"></a>Parameters</h4>
+<p>
+<a id="pgfId-1070739"></a></p>
+<table class="webflareTable" id="#id1070750">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070752"></a> <code>{ </code><span class="webflare-courier-new" style="white-space:pre"><em>cellnames </em></span><code>}</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070754"></a>Specifies the cells for which this command is called.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070756"></a><code>-nets {</code><span class="webflare-courier-new" style="white-space:pre"><em>list</em></span><code>}</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070758"></a>Specifies the net names to apply multiple supplies to.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070782"></a><code>-values {</code><span class="webflare-courier-new" style="white-space:pre"><em>list</em></span><code>}</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070784"></a>Specifies the VDD values to apply to the nets. Units in volts.</p>
+</td>
+</tr>
+</tbody></table>
+<h4>
+<a id="pgfId-1038325"></a>Examples</h4>
+
+<ul><li>
+<a id="pgfId-1038326"></a>The following commands assume the circuit has three supply nets (<code>VCCA</code>, <code>VCC</code>, <code>VCCDRV</code>) that operate at 1V, 1.2V, and 2.5V respectively. Assume there is a cell called <code>mycell</code> that has ports for a supply net called <code>VDD</code>. In the circuit a different supply net is passed into each instance of <code>mycell</code>. <br /><pre class="webflare-pre-block webflare-courier-new" id="#id1038327">
+<a id="pgfId-1038327"></a><strong>make_cdb command file:</strong></pre><pre class="webflare-pre-block webflare-courier-new" id="#id1038328">
+<a id="pgfId-1038328"></a>set_supply -vdd 2.5 -gnd 0.0</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1038329">
+<a id="pgfId-1038329"></a>set_supply_char_vals -nets { VDD } -values { 1 1.2 2.5 } { mycell }</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1041153">
+<a id="pgfId-1041153"></a>generate_cell_lib -cell_list mycell -vdd vdd</pre>
+<a id="pgfId-1041154"></a>The following could be the multiple voltage design using <code>mycell</code>:<pre class="webflare-pre-block webflare-courier-new" id="#id1041155">
+<a id="pgfId-1041155"></a><strong>Circuit:</strong></pre><pre class="webflare-pre-block webflare-courier-new" id="#id1038333">
+<a id="pgfId-1038333"></a>...</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1038334">
+<a id="pgfId-1038334"></a>x1 a b c vss vcc mycell</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1038335">
+<a id="pgfId-1038335"></a>x2 d e f vss vcca mycell</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1038336">
+<a id="pgfId-1038336"></a>x3 g h l vss vccdrv mycell</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1038337">
+<a id="pgfId-1038337"></a>...</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1038338">
+<a id="pgfId-1038338"></a><strong>Cell description (mycell.sp):</strong></pre><pre class="webflare-pre-block webflare-courier-new" id="#id1038339">
+<a id="pgfId-1038339"></a>*</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1038340">
+<a id="pgfId-1038340"></a>.lib models.sp TT</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1038341">
+<a id="pgfId-1038341"></a>.subckt mycell i1 i2 i3 gnd vdd</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1038342">
+<a id="pgfId-1038342"></a>...</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1038343">
+<a id="pgfId-1038343"></a>.ends</pre></li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3>
+<a id="pgfId-1037380"></a><a id="82266"></a>validate_cell_lib</h3>
+<a id="pgfId-1041165"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+validate_cell_lib 
+-cdb { <em>list_of_cdb_files</em> }</code></pre>
+
+<p>
+<a id="pgfId-1041166"></a>Performs a static analysis of the specified list of cdB noise library files and validates the accuracy of their data. It checks the cdB noise libraries to limit the potential for data corruption during processing (generation, encryption, and output) and during the transfer of data. <code>validate_cell_lib</code> generates messages to the console, that includes the number of cells that were validated and the number of error messages that were generated for each cell. You can use this command at any time during a single run.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1041173"></a>Use the <a href="commands.html#92334">read_dotlib</a> command to specify a timing library file for port direction settings before using the <code>validate_cell_lib</code> command. </div>
+
+<h4>
+<a id="pgfId-1034998"></a>Parameters</h4>
+<p>
+<a id="pgfId-1070877"></a></p>
+<table class="webflareTable" id="#id1070898">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070900"></a> <code>-cdb {</code> <span class="webflare-courier-new" style="white-space:pre"><em>list_of_cdb_files</em></span> <code>}</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1070902"></a>Specifies the list of cdB noise library files that require validation.</p>
+</td>
+</tr>
+</tbody></table>
+<h4>
+<a id="pgfId-1035002"></a>Examples</h4>
+
+<ul><li>
+<a id="pgfId-1035003"></a>The following command validates the <code>lab1.cdB</code> file and provides the results:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1035004">
+<a id="pgfId-1035004"></a>validate_cell_lib -cdb lab1.cdB</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1035005">
+<a id="pgfId-1035005"></a></pre><pre class="webflare-pre-block webflare-courier-new" id="#id1035006">
+<a id="pgfId-1035006"></a>INFO : Cell &#8216;inv&#8217; validated. Found 0 errors and 0 warnings. [validate_cell_lib]</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1035008">
+<a id="pgfId-1035008"></a>***************************SUMMARY*****************************</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1035009">
+<a id="pgfId-1035009"></a>CELLNAME    ERRORS  WARNINGS</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1035010">
+<a id="pgfId-1035010"></a>-----------------------------------------</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1035011">
+<a id="pgfId-1035011"></a>1. inv    0  0</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1035012">
+<a id="pgfId-1035012"></a>***************************************************************</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1041242">
+<a id="pgfId-1041242"></a>INFO : (SI-0100)</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1047242">
+<a id="pgfId-1047242"></a>1 cell validated. Found 0 errors and 0 warnings. [validate_cell_lib]</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1047277">
+<a id="pgfId-1047277"></a></pre></li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="noise_library.html" id="prev" title="Noise Library Characterization">Noise Library Characterization</a></em></b><b><em><a href="globals.html" id="nex" title="Global Variables">Global Variables</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

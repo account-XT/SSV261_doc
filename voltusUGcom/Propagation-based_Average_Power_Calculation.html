@@ -1,0 +1,189 @@
+
+<html><head><title>Propagation-based Average Power Calculation</title>
+<meta name="page_sequence" content="23005000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666146" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Propagation-based Average Power Calculation" />
+<meta name="Keywords" content="activity,propagation,power,calculation,cell,activity" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666146" />
+<meta name="NextFile" content="Event-Based_Power_Analysis.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Vector-based_Average_Power_Calculation.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Propagation-based Average Power Calculation" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Vector-based_Average_Power_Calculation.html" title="Vector-based_Average_Power_Calculation">Vector-based_Average_Power_Cal ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Event-Based_Power_Analysis.html" title="Event-Based_Power_Analysis">Event-Based_Power_Analysis</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Propagation-based Average Power Calculation</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="PropagationbasedAveragePowerCalculation-80147"></span></p>
+
+<p>The power engine calculates the switching probability, as well as static state probability, of each net in the design. The propagation based approach is vector-independent and provides coverage for all nets in a design.</p>
+
+<p>However, the accuracy depends on good starting values, that is, information about the switching probabilities at the primary inputs in a design. Simple examples are clock and reset or enable inputs. Obtaining an accurate prediction without information about the switching probabilities of these special inputs is difficult, and in most cases an inaccurate prediction causes an over estimation of the power consumption.</p>
+<h4 id="PropagationbasedAveragePowerCalculation-ActivityPropagationinthePowerEngine">Activity Propagation in the Power Engine</h4>
+
+<p>Activity propagation inside the power engine can be divided into following categories.</p>
+<ul><li><strong>Activity Propagation through Combinational Cells </strong><br />Activity propagation through combinational cells is easier. The power engine gets function of combinational cell from .lib and uses the function to propagate activity through combinational cells. The power engine also propagates duty cycle through combinational cells. The only tricky part is when there are combinational loops inside design. In this case the power engine seeds activity at input to break combinational loop. The seeded activity is based upon internal heuristic of power engine and takes into account activity of other neighboring pins.</li><li><strong>Activity Propagation through Sequential Cells</strong><br />Activity Propagation through sequential cell is based upon activity of input pin, set or reset pin, and scan enable pin. However most of sequential cells are in sequential loops like state machines which make activity propagation through sequential cell based on heuristics by seeding activity at input of sequential cell. Therefore it is recommended to provide activity at outputs of sequential cells. With the power engine you can use either the <code>set_default_switching_activity</code> command to specify the average activity on sequential cells or use RTL, VCD, or TCF for seeding activity at sequential cells.<br />As seen in the example below, the activity at the output of the sequential cell in the loop can not be resolved using propagation. In this case, iterating the loop to determine the activity at the output Q of the sequential cell will result in diminishing activity towards 0. It proves that using heuristic method to compute activity in sequential loop is an intractable problem for propagation based power calculation. Therefore, in order to get good average power numbers for the design under test, you must always specify the average activity at the output of the sequential cell using the above mentioned command. In addition, you can override this default activity using VCD or TCF.</li></ul>
+<p><br /></p>
+<div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481186/732481187.gif" data-linked-resource-container-id="732481186" data-linked-resource-container-version="1" data-linked-resource-content-type="image/gif" data-linked-resource-default-alias="static-18.gif" data-linked-resource-id="732481187" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481186/732481187.gif" tabindex="0" width="678" /></span></div>
+<ul><li><strong>Activity Propagation through Macros </strong><br />The major component of power in macros is internal power. Internal power of macros is highly sensitive to activity on read and write signals. Small change in activity of the read or write signal can cause large change in internal power numbers. Therefore, it is recommended that users specify activity at the read and write signals of macros.</li><li><strong>Activity Propagation through Clock Network and Clock Gates </strong><br />For accurate propagation through clock network it is important that users specify the TWF file which has clock frequency of generated clocks as well. The activity propagation of clock through clock gating cells depends upon activity of clock enable signal. Since clock enable is a signal net, it will generally have low activity unless specified, which will cause lot of optimism in power calculation. Therefore, it is recommended that users should specify activity at enable of clock gating cells for proper propagation through clock network. You can use the <code>set_default_switching_activity</code> command in Voltus for specifying average activity at enable signal of all clock gating cells.</li></ul><h4 id="PropagationbasedAveragePowerCalculation-RecommendedMethodologyforActivityPropagation"><strong>Recommended Methodology for Activity Propagation</strong></h4>
+
+<p>The following diagram explains the recommended methodology for activity propagation. The accuracy of results increase as you specify more inputs to the power engine. At the very least users should specify the average sequential activity, which is MUST for accurate activity propagation.</p>
+
+<p><br /></p>
+<div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481186/732481188.gif" data-linked-resource-container-id="732481186" data-linked-resource-container-version="1" data-linked-resource-content-type="image/gif" data-linked-resource-default-alias="static-19.gif" data-linked-resource-id="732481188" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481186/732481188.gif" tabindex="0" width="678" /></span></div>
+
+<p>Here are some of examples which depict how well the above methodology works:</p>
+
+<p><br /></p>
+<div class="table-wrap"><table class="webflareTable wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><strong> Design</strong></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><strong> Input TCF (from VCD)</strong></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><strong> Input TCF and Avg seq activity (from VCD)</strong></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><strong> VCD</strong></p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Testcase1</p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>75.83</p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>96.90</p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>70.75</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Testcase2</p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>148.80</p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>230.0</p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>199</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Testcase3</p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>279.46</p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>258.45</p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>195</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>Testcase4</p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>243.48</p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>243.24</p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>170</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p>The table clearly shows that if you specify just activity on inputs then the result vary from -25% from +45% whereas if you specify average sequential activity of design then results are pessimistic by 25-30%, which is expected because combinational activity propagation is meant to be pessimistic.</p>
+
+<p>Here are another two examples which show how well results correlate after specifying activity at Macros and clock gating cells.</p>
+
+<p>Testcase 5:</p>
+<ul><li>Expected power = ~375mW</li><li>Power after specifying default input activity = 225mW</li><li>Power after specifying default input activity + macro activity = 254mW</li><li>Power after specifying default input activity + macro activity + clock gating activity = 370mW</li></ul>
+<p>Testcase 6:</p>
+<ul><li>Expected power = 10W</li><li>Power after specifying default input activity = 5.5W</li><li>Power after specifying clock gating activity + Macro activity = 10.8W</li></ul><h4 id="PropagationbasedAveragePowerCalculation-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Types_of_Static_Average_Power.html">Types of Static Average Power</a></li><li><a href="Calculation_of_Internal__Leakage_and_Switching_Power_with_State_Dependency.html">Calculation of Internal, Leakage and Switching Power with State Dependency</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Vector-based_Average_Power_Calculation.html" id="prev" title="Vector-based_Average_Power_Calculation">Vector-based_Average_Power_Cal ...</a></em></b><b><em><a href="Event-Based_Power_Analysis.html" id="nex" title="Event-Based_Power_Analysis">Event-Based_Power_Analysis</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

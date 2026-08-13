@@ -1,0 +1,184 @@
+
+<html><head><title>distribute_views</title>
+<meta name="page_sequence" content="18004000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287138" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="distribute_views" />
+<meta name="Keywords" content="distribute the specified analysis views to the Tempus client" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="MMMC," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287138" />
+<meta name="NextFile" content="get_distributed_variables.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="distribute_read_db.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- distribute_views" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="distribute_read_db.html" title="distribute_read_db">distribute_read_db</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="get_distributed_variables.html" title="get_distributed_variables">get_distributed_variables</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>distribute_views</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>distribute_views<span class="confluence-anchor-link" id="distribute_views-distribute_views"></span><span id="distribute_views-distribute_views"></span><br />[help]<br />[-combine_num_views]<br />[-force_distribute]&#xa0;</code><br /><code>-views <code style="line-height: 1.4285;"><em>list_of_views<br /></em></code>-script <em>filename</em></code>&#xa0;<br /><code>[-write_db {<code style="line-height: 1.4285;"><em>list_of_views</em></code> | all}]</code><br /><code><code style="line-height: 1.4285;">[&#8211;set_analysis_view_log</code>]</code></p>
+
+<p>Distributes the specified analysis views to the Tempus client(s), then sources the specified command script to perform timing and signal integrity analysis.</p>
+
+<p>The <code>distribute_views</code> command is used for distributed multi-mode multi-corner (DMMMC) timing analysis only.&#xa0;Distributed multi-mode multi-corner timing analysis is executed in batch mode. You can use the&#xa0;<code>distribute_command</code>&#xa0;for running a single command interactively.</p>
+
+<p>By default, this command distributes a single view per Tempus client. The command can also perform concurrent multi-mode multi-corner timing analysis (CMMMC), within the DMMMC framework. You can combine the analysis views for CMMMC analysis on Tempus client(s). This can be done in the following two ways:</p>
+<ol><li>Delay corner based auto grouping :&#xa0;<br />You can specify a simple list of view names in the <code style="line-height: 1.4285;">-view</code> option and use the <code style="line-height: 1.4285;">-combine_num_views</code> option to specify the maximun number of views to be combined per Tempus client.&#xa0;For example<br /><code>tempus &gt;&#xa0;distribute_views &#8211;combine_num_views&#xa0;4 -views {setup1 setup2 setup3 setup4 setup5 setup6 setup7 setup8} -script ...<br /><br /></code>Assuming setup1 to setup4 have delay corner dc1 and setup5 to setup8 have delay corner dc2 then above example will group setup1 to setup4 to Tempus client1 and setup5 to setup8 will be grouped to Tempus client2<br /><br /></li><li>User controlled view grouping:<br />You can specify a list of&#xa0;list format for combining multiple concurrent views on Tempus client(s). For example,<br /><code>distribute_views -views { {setup1 setup2 setup3 setup4 } { setup5 setup6 setup7 setup8 } } -script ...<br /><br /></code>The above command will group setup1 to setup4 views to Tempus client1 will group setup5 to setup8 views to Tempus client2 irrespective of the delay corner.&#xa0;To get optimum runtime while using view grouping, it is recommended to use delay corner based auto grouping as mentioned in example 1 above.</li></ol>
+<p>In this release, Tempus supports one step method for generating merged MMMC view report from DMMMC master shell. After running the <code>distribute_views</code> command, you can issue a single <code>report_timing/report_constraint</code> command, which generates reports collectively from all active distributed views (that is, views available for interactive DMMMC analysis). The merged output report is arranged as per slack/criticality order across active views.<br />All the options of report_constraint command, except <code>-connection_class</code>, and all the options of <code>report_timing</code> command are supported in this mode.</p>
+<h4 id="distribute_views-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-combine_num_views</code></td>
+<td class="confluenceTd" colspan="1">Combines upto N views (having same delay corner) to run at the same time on the same Tempus client.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-force_distribute</code></td>
+<td class="confluenceTd" colspan="1">
+<p>Forces the full timing update for given set of views (specified in subsequent distribute_views command) even if those views are already active on Tempus client(s).</p>
+
+<p>By default The existing active view(s) will not be re-analyzed and the remaining views from the distribution list will be dispatched for full timing update.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-write_db {</code><code><em>list_of_views</em></code> <code>| all}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Saves the design session information for the specified analysis views.</p>
+
+<p>You can use the <code>-write_db all</code> option to save all the distributed multi-mode multi-corner (DMMMC) sessions with views that are specified using the <code>-views</code> parameter.</p>
+
+<p>The design information is saved in the following location:</p>
+
+<p><code>${outdir}/&lt;viewname&gt;/&lt;topcell.enc.dat&gt;</code></p>
+
+<p>where <code>${outdir}</code> is the location specified using the <code>distribute_read_design -outdir</code> command.</p>
+
+<p><strong>Note: </strong>When you specify this parameter, any previously saved sessions in <code>outdir</code> will be overwritten.</p>
+
+<p>When the <code>-write_db</code> parameter is specified, a distributed OpenAccess (OA) database will be created in the following format during a distributed MMMC run:</p>
+
+<p><code>LibName = $outDir</code><br /><code>CellName = same as OA design Cell Name</code><br /><code>Views = List of MMMC Views</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-script </code><code><em>filename</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the file that contains list of commands for reading in the necessary parasitic files and the reporting commands required for timing and signal integrity analysis.</p>
+
+<p>Commands for reading parasitic information must be specified in the script before the reporting commands. You must specify parasitic files specific for all RC corners. For example:</p>
+
+<p><code>read_spef -rc_corner corner1 rc1.spef</code></p>
+
+<p><code>read_spef -rc_corner corner2 rc2.spef</code></p>
+
+<p><code>read_spef -rc_corner corner3 rc3.spef</code></p>
+
+<p><code>read_spef -rc_corner corner4 rc4.spef</code></p>
+
+<p>If the file includes report commands that redirect their output to a specified file the software generates the file in the active view directory, in the output directory specified with the <code>distribute_read_design</code> command.</p>
+
+<p>(for example: for below command specified in the script</p>
+
+<p>&#xa0;report_timing &gt;rt.rpt</p>
+
+<p>software will generate rt.rpt file in ${outdir}/&lt;viewname&gt; directory for each active view where ${outdir} is the location specified using the distribute_read_design -outdir command.</p>
+
+<p>For report commands with no redirection specified, the software generates the report in the corresponding log file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>&#8211;set_analysis_view_log</code></td>
+<td class="confluenceTd" colspan="1">Redirects <code>set_analysis_view</code> run log to set_analysis_view_&lt;viewname&gt;.log file.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-views</code> <code><em>list_of_views</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies views to distribute for analysis.</p>
+
+<p><strong>Note</strong>: The&#xa0;<code>-views</code>&#xa0;parameter is mandatory when the&#xa0;<code>-set_analysis_view_log</code>&#xa0;and&#xa0;<code>-combine_num_views</code>&#xa0;parameters are specified.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="distribute_views-Examples">Examples</h4>
+
+<p>Here are some examples.</p>
+<ul><li>The following example command script <code>run_dmmmc.tcl</code> lists the commands used to perform distributed multi-mode multi-corner timing analysis. The script performs distributed analysis for four views on four Tempus&#xa0;clients&#xa0;and then saves the design: <code><br /></code><code>tempus &gt; set_multi_cpu_usage -remote_host 4</code><br /><code><span>tempus &gt;&#xa0;</span>distribute_read_db \</code><br /><code> -design_script /stm1/timing/demo_dist_proc/preamble.tcl \</code><br /><code>-out_dir $output_directory</code><br /><br /><code>set views [list lmin-rmax lmin-rmin lmax-rmin lmax-rmax]</code><br /><code><span>tempus &gt;&#xa0;</span>distribute_views \</code><br /><code>&#xa0;-views $views \</code><br /><code>&#xa0; -script /stm1/timing/demo_dist_proc/commands.tcl \</code><br /><code>&#xa0; &#xa0;-write_db {all}</code><br /><br /><code><span>tempus &gt;&#xa0;</span>reset_servers</code></li></ul><ul><li>The following command script <code>commands.tcl</code> generates <code>setup.rpt</code> and <code>hold.rpt</code> reports for all the four views: <code><br /></code><code>tempus &gt; read_spef -rc_corner rmin /stm1/timing/demo_dist_proc/min.spef.gz</code><br /><code>tempus &gt; read_spef -rc_corner rmax /stm1/timing/demo_dist_procmax.spef.gz</code><br /><code>tempus &gt; report_timing -late &gt; setup.rpt</code><br /><code>tempus &gt; report_timing -early &gt; hold.rpt</code></li></ul><ul><li>The following command script <code>report_common.tcl</code> generates&#xa0;<code>setup.rpt</code> and <code>hold.rpt</code> reports for two views each: <br /><code>set mySetupViews &quot;lmax-rmin lmax-rmax&quot;</code><br /><code>set myHoldViews &quot;lmin-rmax lmin-rmin&quot;</code><br />&#xa0; <br />###### REPORTS FOR SETUP VIEWS ####<br /><code>[get_db [get_db analysis_views -if {.is_setup||.is_hold} ] .name -u]</code><br /><code>set reportSetup 0 </code><br /><code>foreach vName $currentView { if { [lsearch $mySetupViews $vName ] != -1 } { set reportSetup 1 ; break; } }</code><br /><code> if { $reportSetup } {</code><br /><code>## ALL Setup View reporting Commands</code><br /><code>report_timing -late &gt; setup.rpt</code><br /><code>}</code><br /><br />###### REPORTS FOR HOLD VIEWS ####<br /><code>set currentView [analysis_views] ; </code><br /><code>set reportHold 0 </code><br /><code>foreach vName $currentView { if { [lsearch $myHoldViews $vName ] != -1 } { set reportHold 1 ; break; } }</code><br /><code>if { $reportHold } {</code><br /><br />## ALL Hold View reporting Commands<br /><code>report_timing -early &gt; hold.rpt</code><br /><code>}</code></li></ul><h4 id="distribute_views-RelatedTopics">Related Topics</h4>
+<ul><li><a class="message-url" href="../tempusUG/dmmmc.html">Distributed Multi-Mode Multi-Corner Timing Analysis</a>&#xa0;chapter&#xa0;in the <em>Tempus </em><em>User Guide</em></li></ul><h4 id="distribute_views-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="set_multi_cpu_usage.html">set_multi_cpu_usage</a></code></li><li><code><a href="read_spef.html">read_spef</a><span style="font-family: Courier New;">&#xa0;</span></code></li><li><code><a href="report_timing.html">report_timing</a><span style="font-family: Courier New;">&#xa0;</span></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="distribute_read_db.html" id="prev" title="distribute_read_db">distribute_read_db</a></em></b><b><em><a href="get_distributed_variables.html" id="nex" title="get_distributed_variables">get_distributed_variables</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

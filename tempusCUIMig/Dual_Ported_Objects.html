@@ -1,0 +1,116 @@
+
+<html><head><title>Dual Ported Objects</title>
+<meta name="page_sequence" content="13003000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="leenap" />
+<meta name="CreateDate" content="2026-03-26" />
+<meta name="CreateTime" content="1774517249" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Stylus Common UI Migration Guide" />
+<meta name="DocTitle" content="Stylus Common UI Migration Guide" />
+<meta name="DocType" content="Migration" />
+<meta name="FileTitle" content="Dual Ported Objects" />
+<meta name="Keywords" content="Tcl, Dual Ported Object, DPO, programming interface, string form, design object, SDC commands" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Stylus,Stylus,Stylus," />
+<meta name="prod_subfeature" content="Tcl/DB Commands,Tcl/DB Commands, Tcl/DB Commands," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUIMig" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-03-26" />
+<meta name="ModifiedTime" content="1774517249" />
+<meta name="NextFile" content="Significant_get_db_Objects.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Legacy_vs._Stylus_Common_UI_Database_Object_Commands.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Stylus Common UI Migration Guide -- Dual Ported Objects" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="innovusCUIMig261" />
+<meta name="confluence-version" content="7.19.19" />
+<meta name="ecms-plugin-version" content="04.21.019" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUIMigTOC.html">Contents</a></li><li><a class="prev" href="Legacy_vs._Stylus_Common_UI_Database_Object_Commands.html" title="Legacy_vs._Stylus_Common_UI_Database_Object_Commands">Legacy_vs._Stylus_Common_UI_Da ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIMig.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Significant_get_db_Objects.html" title="Significant_get_db_Objects">Significant_get_db_Objects</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Stylus Common UI Migration Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Dual Ported Objects</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>The Stylus Common UI uses the Tcl Dual Ported Objects (DPO) concept.&#xa0;A DPO is a Tcl_Obj in the Tcl C++ programming interface. The object pointer is kept as a C++ pointer inside Tcl unless Tcl forces it to be converted to its &quot;dual&quot; string form. In normal usage it never gets converted to a string which is more efficient, but if you do a <code>puts $var</code> or return the value to the shell to echo to the <code>xterm</code>, it is converted to its string form.</p>
+<ul><li>The string form is normally the name of the object preceded by the&#xa0;<code>obj_type</code>, so a&#xa0;<span>layer&#xa0;</span>object string form might look like &#xa0;<span>layer:metal1</span>.&#xa0;</li><li>A design object name has the current design name included, so an instance named<code>&#xa0;i1/i2</code>&#xa0;&#xa0;in design top, looks like&#xa0;&#xa0;<code>inst:top/i1/i2</code>.</li><li>An object with no name like a wire, just shows the pointer hex-value like&#xa0;&#xa0;<code>wire:0x22222222</code>.</li></ul>
+<p><code>get_db/set_db</code><span style="">&#xa0;commands allow both a DPO list and a collection from SDC commands like <code>get_pins</code> as input, but only returns objects in a DPO Tcl list.</span></p>
+
+<p>For example, if your design is called top, then the output is something like this:</p>
+<pre>set i1_insts [get_db insts i1/*]</pre><pre>inst:top/i1/i2 inst:top/i1/i3 ...</pre>
+<p>You can also use the DPO name directly for input. So the last three queries in the table above could be done more easily this way:</p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><th class="confluenceTh"><strong>Using Returned DPO Value</strong></th><th class="confluenceTh"><strong>Using DPO Name Directly</strong></th></tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>get_db [get_db layers metal1] </span><strong>.</strong><span>width</span></code></td>
+<td class="confluenceTd" colspan="1">
+<p><code>get_db layer:metal1 <strong>.</strong>width</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>get_db [get_db pins i1/p1] </span><strong>.</strong><span>arrival_max_fall</span></code></td>
+<td class="confluenceTd" colspan="1"><code>get_db pin:top/i1/p1 <strong>.</strong>arrival_max_fall</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>get_db [get_db clock_trees clk1] </span><strong>.</strong><span>cts_target_max_transition_time_early</span></code></td>
+<td class="confluenceTd" colspan="1"><code>get_db clock_tree:top/clk1 <strong>.</strong>cts_target_max_transition_time_early</code></td>
+</tr>
+</tbody></table></div>
+<h4 id="DualPortedObjects-References">References</h4>
+
+<p>For more information, see:</p>
+<ul><li><code><a href="../TCRcom/get_db.html">get_db</a></code></li><li><code><a href="../TCRcom/set_db.html">set_db</a></code></li><li><a class="message-url" href="../DBcom/DBcomTOC.html">Stylus Common UI Database Object Information</a>&#xa0;manual</li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Legacy_vs._Stylus_Common_UI_Database_Object_Commands.html" id="prev" title="Legacy_vs._Stylus_Common_UI_Database_Object_Commands">Legacy_vs._Stylus_Common_UI_Da ...</a></em></b><b><em><a href="Significant_get_db_Objects.html" id="nex" title="Significant_get_db_Objects">Significant_get_db_Objects</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

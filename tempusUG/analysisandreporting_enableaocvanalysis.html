@@ -1,0 +1,420 @@
+
+<html><head><title>Enabling AOCV Analysis</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823909" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Enabling AOCV Analysis" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823909" />
+<meta name="NextFile" content="analysisandreporting_handleocvwithaocv.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_aocvlibraryformats.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Enabling AOCV Analysis" />
+<meta name="Keywords" content="enable aocv analysis" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Analysis,Stylus" />
+<meta name="prod_subfeature" content="Timing Analysis" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_aocvlibraryformats.html" title="Using AOCV Derating Library Formats">Using AOCV Derating Library Fo ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_handleocvwithaocv.html" title="Handling OCV Derating with AOCV">Handling OCV Derating with AOC ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:enableaocvanalysis" title="Enabling AOCV Analysis"></a><h4>
+<a id="pgfId-1012697"></a><a id="96985"></a>Enabling AOCV Analysis</h4>
+
+<p>
+<a id="pgfId-1012698"></a>AOCV analysis can be enabled by using the following command variables.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053532"></a><a href="../tempustxtcmdref/set_analysis_mode.html">set_analysis_mode</a> &#8211;aocv true</pre>
+<h4>
+<a id="pgfId-1012700"></a><code></code>Reading AOCV Libraries<a id="75312"></a></h4>
+<h4>
+<a id="pgfId-1012701"></a>SMSC Environment</h4>
+
+<p>
+<a id="pgfId-1012702"></a>In SMSC environment, the AOCV libraries can be read using the command below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053538"></a><a href="../tempustxtcmdref/read_lib.html">read_lib</a> &#8211;aocv &quot;myDerateLib.aocv.lib&quot;</pre>
+<h4>
+<a id="pgfId-1012704"></a><code></code>MMMC Environment</h4>
+
+<p>
+<a id="pgfId-1012705"></a>In MMMC environment, the AOCV libraries can be read using the <a href="../tempustxtcmdref/create_library_set.html">create_library_set</a> command.</p>
+<p>
+<a id="pgfId-1012706"></a>For example:<br /><code>create_library_set &#8211;name slow &#8211;timing slow.lib &#8211;aocv test.aocv.lib</code></p>
+<p>
+<a id="pgfId-1012707"></a>In case, the library set is already created, it can be updated to read the new AOCV library or update the existing library using the <a href="../tempustxtcmdref/update_library_set.html">update_library_set</a> command.</p>
+<p>
+<a id="pgfId-1012708"></a>For example:<br /><code>update_library_set &#8211;name slow &#8211;aocv test.aocv.lib</code></p>
+
+<h4>
+<a id="pgfId-1012710"></a><a id="59623"></a>Stage Counts and t<a id="StageCounts"></a>heir Properties for Launch and Capture Paths</h4>
+
+<p>
+<a id="pgfId-1012711"></a>Most cells in a clock path have both launch stage counts and capture stage counts. This means a clock buffer exists in a launch path and a capture path simultaneously so the buffer has its own launch stage count property and capture stage count property. This section covers a comprehensive explanation for the launch stage count and capture stage count.</p>
+<p>
+<a id="pgfId-1012712"></a>The following four timing paths in the figure below explain launch and capture stage counts:</p>
+<ul><li>
+<a id="pgfId-1012713"></a>The timing path from Input to RS/D (input to reg path)</li><li>
+<a id="pgfId-1012714"></a>The timing path from RS/CK to RT1/D (reg to reg path)</li><li>
+<a id="pgfId-1012715"></a>The timing path from RS/CK to RT2/D (reg to reg path)</li><li>
+<a id="pgfId-1012716"></a>The timing path from RT2/CK to output1 (reg to output path)<br /><strong>Figure -67
+<a id="pgfId-1012717"></a>Timing Paths</strong><br />
+<a id="pgfId-1012721"></a><strong>
+</strong>
+<div class="webflare-div-image">
+<img width="668" height="293" src="images/analysisandreporting-73.gif" /></div></li></ul>
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-1012722"></a>The following default settings are assumed:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053556"></a><code>set </code><a href="../tempustxtcmdref/timing_aocv_analysis_mode.html">timing_aocv_analysis_mode</a><code> launch_capture; #(default)<br />set </code><a href="../tempustxtcmdref/timing_aocv_use_cell_depth_for_net.html">timing_aocv_use_cell_depth_for_net</a><code> false; #(default: false)</code></pre>
+<h4>
+<a id="pgfId-1012724"></a><code></code>Stage Counting Graph Based Analysis (GBA)</h4>
+
+<p>
+<a id="pgfId-1012725"></a>Graph-based AOCV analysis does choose a pessimistic situation so each cell has to its own pessimistic property (only one value, not two or more values like PBA) such as the late launch stage count for cell, early capture stage count for cell, and so on.</p>
+<p>
+<a id="pgfId-1012726"></a>The following figure includes the launch cell and net stage counts:</p>
+
+<p class="webflare-indent1"><strong>Figure -68
+<a id="pgfId-1012727"></a>Launch cell and net stage counts</strong></p>
+<p>
+<a id="pgfId-1012731"></a><strong>
+</strong>
+</p>
+<div class="webflare-div-image">
+<img width="668" height="290" src="images/analysisandreporting-74.gif" /></div>
+
+<p>
+<a id="pgfId-1012732"></a>The stage counts of C1 and C2 for launch paths in the above example are as follows:</p>
+<p>
+<a id="pgfId-1012733"></a>The clock port is connected to input pin of C1.</p>
+<ol><li>
+<a id="pgfId-1012734"></a>From the clock port, there are 4 launch paths which include C1 and C2. that is, path from the clock port through C1/C2/C3/RS/U1/U5 to RT1.</li><li>
+<a id="pgfId-1012735"></a>The launch path from the clock port through C1/C2/C3/RS/U1/U2/U3/U4 to RT2.</li><li>
+<a id="pgfId-1012736"></a>The launch path from the clock port through C1/C2/C4/RT1 through some combination logic to the FF on the top-right side.</li><li>
+<a id="pgfId-1012737"></a>The launch path from the clock port through C1/C2/C4/RT2 to the output port.</li></ol>
+
+
+
+<p>
+<a id="pgfId-1012738"></a>The last path is the shortest launch path that includes C1 and C2 and each launch cell stage count is 4 (C1, C2, C4, and RT2).</p>
+<p>
+<a id="pgfId-1012739"></a>Next, stage count is reset to 0 at the common point C2/Y.</p>
+<p>
+<a id="pgfId-1012740"></a>In case of the launch path, which includes C3/RS/U1, each stage count of C3/RS/U1 is 4/4/4 for the end point RT1 and stage count of 6/6/6 for the end point RT2.</p>
+<p>
+<a id="pgfId-1012741"></a>Now, the problem of choosing the stage count occurs on C3/RS/U1 because the cells exist in the same launch path in the case of the two timings paths (RS to RT1 and RS to RT2) and have different stage count based in path-based AOCV analysis.</p>
+<p>
+<a id="pgfId-1012742"></a>Therefore, to maintain pessimism, the smaller stage count 4 is chosen. So, each launch cell stage count of C3/RS/U1 is 4 in case of graph-based AOCV analysis. U5 has a stage count of 4 and U2/U3/U4 has a stage count of 6, respectively. Smaller stage count means more variation, so it is mapped to the worse AOCV derate for late and early.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1012743"></a>In GBA, the algorithm requires resetting of stage count at clock branch points- a major source of pessimism.</div>
+<p>
+<a id="pgfId-1012744"></a>In the given figure, another common point occurs at the pin C4/Y. which is connected to RT1/CK and RT2/CK. So, state count is reset to 0 at the C4/Y pin. The stage count of the path from the C4/Y through RT1 is longer than that of the path from the C4/Y through RT2 to the output port. RT2 has stage count of 1 and RT1 has a stage count of a value greater than 1 and C4 has a stage count of 2.</p>
+<p>
+<a id="pgfId-1012745"></a>The following table summarizes the graph-based launch cell stage counts of the above example:</p>
+<table class="webflareTable" id="#id1012746">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1012748">
+<a id="pgfId-1012748"></a>Segment</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1012750">
+<a id="pgfId-1012750"></a>Members</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1012752">
+<a id="pgfId-1012752"></a>Stage Count</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1012754">
+<a id="pgfId-1012754"></a>Stage Path</span>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012756"></a>Clock root -&gt; CPPR Common Point (C2/Y)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012758"></a>C1-C2</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012760"></a>4</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012762"></a>C1-C2-C4-RT2</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012764"></a>CPPR Common Point (C2/Y) -&gt; <br />Launch Clock Branch Point (RS) -&gt; Data Path Branch</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012766"></a>C3-RS-U1</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012768"></a>4</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012770"></a>C3-RS-U1-U5</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012772"></a>Data Path Branch -&gt; Data Path Endpoint</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012774"></a>U5</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012776"></a>4</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012778"></a>C3-RS-U1-U5</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012780"></a>Data Path Branch -&gt; Data Path Endpoint</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012782"></a>U2-U3-U4</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012784"></a>6</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012786"></a>C3-RS-U1-U2-U3-U4</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012788"></a>CRPR Common Point (C2/Y) -&gt; <br />CRPR Common Point (C4/Y)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012790"></a>C4</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012792"></a>2</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012794"></a>C4-RT2</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012796"></a>CRPR Common Point (C4/Y) -&gt; Launch Clock Branch Point (RT2) -&gt; data Path Endpoint</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012798"></a>RT2</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012800"></a>1</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012802"></a>RT2</p>
+</td>
+</tr>
+</tbody></table>
+
+<h4>
+<a id="pgfId-1012804"></a>Stage Counting Path-Based Analysis (PBA)</h4>
+
+<p>
+<a id="pgfId-1012805"></a>The method to calculate the stage count under path-based AOCV mode is intuitive.</p>
+<p>
+<a id="pgfId-1012806"></a>The following figure includes the launch cell and net stage counts:</p>
+
+<p class="webflare-indent1"><strong>Figure -69
+<a id="pgfId-1012807"></a>Launch cell and net stage counts</strong></p>
+<p>
+<a id="pgfId-1012811"></a></p>
+<div class="webflare-div-image">
+<img width="663" height="287" src="images/analysisandreporting-75.gif" /></div>
+
+<p>
+<a id="pgfId-1012812"></a>Firstly, look for the CPPR common point on the clock launch path and the capture path of a timing path.</p>
+<p>
+<a id="pgfId-1012813"></a>To derive the common point from RS to RT1:-</p>
+<ul><li>
+<a id="pgfId-1012814"></a>The launch path from RS to RT1:
+clock-&gt;C1-&gt;C2-&gt;C3-&gt;RS-&gt;U1-&gt;U5-&gt;RT1/D </li><li>
+<a id="pgfId-1012815"></a>The capture path from RS to RT1:
+clock-&gt;C1-&gt;C2-&gt;C4-&gt;RT1/CK.</li></ul>
+
+<p>
+<a id="pgfId-1012816"></a>So, the common point (pin) of the above timing path is the C2/Y pin.</p>
+<p>
+<a id="pgfId-1012817"></a>To derive the common point from RS to RT2:</p>
+<ul><li>
+<a id="pgfId-1012818"></a>The launch path from RS to RT2:
+clock-&gt;C1-&gt;C2-&gt;C3-&gt;RS-&gt;U1-&gt;U2-&gt;U3-&gt;U4-&gt;RT2/D.</li><li>
+<a id="pgfId-1012819"></a>The capture path from RS to RT2:
+clock-&gt;C1-&gt;C2-&gt;C4-&gt;RT2/CK.</li></ul>
+
+<p>
+<a id="pgfId-1012820"></a>So, the common point (pin) of the above timing path is the C2/Y pin.<br />Now, for calculation purpose, the stage count at C2/Y is reset to 0, as shown in below figure.</p>
+
+<p class="webflare-indent1"><strong>Figure -70
+<a id="pgfId-1012821"></a>Stage count at C2/Y reset to 0</strong></p>
+<p>
+<a id="pgfId-1012825"></a><strong>
+</strong>
+</p>
+<div class="webflare-div-image">
+<img width="668" height="251" src="images/analysisandreporting-76.gif" /></div>
+
+<p>
+<a id="pgfId-1012826"></a>Therefore, the launch path from the pin C2/Y to RT1/D has a stage count of 4, that is,<br />C3(1)-&gt;RS(2)-&gt;U1(3)-&gt;U5(4)-&gt;RT1/D</p>
+<p>
+<a id="pgfId-1012827"></a>The launch path from the pin RS to RT2/D has a stage count of 6, that is,<br />C3(1)-&gt;RS(2)-&gt;U1(3)-&gt;U2(4)-&gt;U3(5)-&gt;U4(6)-&gt;RT2/D</p>
+<table class="webflareTable" id="#id1012828">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1012830">
+<a id="pgfId-1012830"></a>Segment</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1012832">
+<a id="pgfId-1012832"></a>Members</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1012834">
+<a id="pgfId-1012834"></a>Stage Count</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1012836">
+<a id="pgfId-1012836"></a>Stage Path</span>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012838"></a>Launch Clock Branch Point -&gt;</p>
+<p>
+<a id="pgfId-1012839"></a>Data Path Endpoint (RS to RT1)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012841"></a>C3-RS-U1-U5</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012843"></a>4</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012845"></a>C3-RS-U1-U5</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012847"></a>Launch Clock Branch Point -&gt;</p>
+<p>
+<a id="pgfId-1012848"></a>Data Path Endpoint (RS to RT2)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012850"></a>C3-RS-U1-U2-U3-U4</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012852"></a>6</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012854"></a>C3-RS-U1-U2-U3-U4</p>
+</td>
+</tr>
+</tbody></table>
+<p>
+<a id="pgfId-1012856"></a>The table above summarizes the stage count of the 2 launch paths in PBA.</p>
+<p>
+<a id="pgfId-1012857"></a>Based on above derived stage count, the tool calculates the diagonal distance for the timing path and then gets the AOCV derate values from the AOCV derating library with the stage count and the distance.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1012858"></a>The <code>report_timing</code> command can be used to report each cell&#8217;s AOCV derate and each net&#8217;s AOCV derate.</div>
+<p>
+<a id="pgfId-1012859"></a>So, think over which AOCV derates of the cells/nets on the common path are used for the common parts. In the above example, you have to check the stage counts of the cells C1 and C2 on the common path and AOCV derates of the cells. The stage count (SC) calculation on the common path cells is relating to graph-based AOCV analysis.</p>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_aocvlibraryformats.html" id="prev" title="Using AOCV Derating Library Formats">Using AOCV Derating Library Fo ...</a></em></b><b><em><a href="analysisandreporting_handleocvwithaocv.html" id="nex" title="Handling OCV Derating with AOCV">Handling OCV Derating with AOC ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

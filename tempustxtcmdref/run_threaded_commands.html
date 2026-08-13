@@ -1,0 +1,126 @@
+
+<html><head><title>run_threaded_commands</title>
+<meta name="page_sequence" content="17003000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287293" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="run_threaded_commands" />
+<meta name="Keywords" content="multi-thread mode,multi-threading,distributed MMMC" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Multi-CPU," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287293" />
+<meta name="NextFile" content="set_multi_cpu_usage.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="get_multi_cpu_usage.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- run_threaded_commands" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="get_multi_cpu_usage.html" title="get_multi_cpu_usage">get_multi_cpu_usage</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_multi_cpu_usage.html" title="set_multi_cpu_usage">set_multi_cpu_usage</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>run_threaded_commands</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>run_threaded_commands<span class="confluence-anchor-link" id="run_threaded_commands-run_threaded_commands"></span><span id="run_threaded_commands-run_threaded_commands"></span>&#xa0;<br />{&#xa0;</code><br /><code>command_1 &gt; file_1&#xa0;</code><br /><code>command_2 &gt; file_2&#xa0;</code><br /><code>command_3 &gt; file_3&#xa0;</code><br /><code>&#8230;&#xa0;</code><br /><code>}&#xa0;</code></p>
+
+<p>Specifies commands to run in multi-thread mode and executes them in parallel. You can use multi-thread mode for simultaneous setup and hold analysis. Multi-thread mode does use more memory than single-thread mode, but it improves the overall performance.</p>
+
+<p>You can use the <code>run_threaded_commands</code> command in distributed MMMC mode to perform super threading.</p>
+
+<p>The&#xa0;<code>run_threaded_commands</code>&#xa0;command&#xa0;should only be used when a command is not internally multi-threaded. This is because when this command is run&#xa0;threading takes place at the command level and each command runs with a single thread. So even if a command is multi-threaded internally, it does not utilize more than one thread.</p>
+
+<p><strong>Note</strong>: Multiple threads writing to the same log file may cause run time degradation. It is recommended to use the&#xa0;<a href="redirect.html"><code>redirect</code></a> command to redirect the command output directly to the respective files in order to reduce the I/O cost. For example,&#xa0;</p>
+
+<p><code>run_threaded_commands {</code><br /><code>redirect {source generate_reports.tcl} &gt; logfile_1</code><br /><code>redirect {command2 } &gt; logfile_2</code><br /><code>.....</code><br /><code>}</code></p>
+
+<p>You can redirect the commands inside <code>run_threaded_commands</code> to a distinct file, with some exceptions.</p>
+
+<p><strong>Note: </strong>You do not need to redirect the following commands to a file because you can specify a file for the output:</p>
+<ul><ul><li><code>write_global_slack_report</code></li></ul></ul><ul><ul><li><code>write_sdc</code></li></ul></ul><ul><ul><li><code>source</code></li></ul></ul><ul><ul><li><code>redirect</code></li></ul></ul>
+<p>Each command inside the <code>run_threaded_commands</code> consumes one distributed license. To avoid consuming extra licenses, the software does&#xa0;not pass commented commands to the thread queue. If you specify ten commands in the list, and only four CPUs are available, then the system uses the&#xa0;first four commands for parallel processing. The fifth command is run as soon as any one of the four commands are executed. The software does&#xa0;not wait for all the four commands/jobs to be finish before scheduling the next four commands/jobs.</p>
+
+<p><strong>Note</strong>: The&#xa0;<code>run_threaded_commands</code>&#xa0;expects timing to be updated before the commands are launched in parallel. If timing is not&#xa0;updated, then&#xa0;<code>run_threaded_commands</code>&#xa0;will internally update the timer.</p>
+
+<p>You can specify one or more of the following timing analysis reporting commands to run in multi-thread mode:</p>
+<ul><li><code>check_timing</code></li></ul><ul><li><code>report_analysis_coverage</code></li></ul><ul><li><code>report_annotated_check</code></li></ul><ul><li><code>report_annotated_delay</code></li></ul><ul><li><code>report_case_analysis</code></li></ul><ul><li><code>report_cell_instance_timing</code></li></ul><ul><li><code>report_clock_timing</code></li></ul><ul><li><code>report_constraint</code></li></ul><ul><li><code>report_cppr</code></li></ul><ul><li><code>report_critical_instance</code></li></ul><ul><li><code>report_inactive_arcs</code></li></ul><ul><li><code>report_min_pulse_width</code></li></ul><ul><li><code>report_mode</code></li></ul><ul><li><code>report_path</code></li></ul><ul><li><code>report_path_exceptions</code></li></ul><ul><li><code>report_path_groups</code></li></ul><ul><li><code>report_ports</code><code><br /></code></li></ul><ul><li><code>report_slack_histogram</code></li></ul><ul><li><code>report_timing</code></li></ul><ul><li><code>report_timing_lib</code></li></ul><ul><li><code>write_global_slack_report</code></li></ul><ul><li><code>write_sdc</code></li></ul><ul><li><code>write_sdf</code> <br />Include this command with caution, as it incurs a penalty on memory.</li></ul><ul><li><code>write_timing_windows</code> <br />Include this command with caution, as it incurs a penalty on memory.</li></ul>
+<p>In addition, you can also include the following commands:</p>
+<ul><li><code>source</code></li></ul><ul><li><code>redirect</code><code><br /></code></li></ul>
+<p><strong>Note</strong>: The <code>run_threaded_commands</code> command is recommended for multi-threaded reporting commands. However, this command should be used only on commands that are time consuming.<code><br /></code></p>
+<h4 id="run_threaded_commands-CommandOrder">Command Order</h4>
+<ul><li>Specify the following global variable before running <code>run_threaded_commands</code>: <br /><code>set_global <a href="timing_enable_simultaneous_setup_hold_mode.html#timing_enable_simultaneous_setup_hold_mode-timing_enable_simultaneous_setup_hold_mode">timing_enable_simultaneous_setup_hold_mode</a> true</code></li></ul><ul><li>Invoke the <code><a href="set_multi_cpu_usage.html#set_multi_cpu_usage-set_multi_cpu_usage">set_multi_cpu_usage</a></code> command before <code>run_threaded_commands</code>.</li></ul><ul><li>Invoke <code>run_threaded_commands</code> before any of the commands to run in multi-thread mode.</li></ul><h4 id="run_threaded_commands-Parameters">Parameters</h4>
+
+<p>None</p>
+<h4 id="run_threaded_commands-Examples">Examples</h4>
+<ul><li>The&#xa0;following command will run the first 3 commands in parallel since the number of CPUs is set to 3. The fourth command will launch as soon as&#xa0;any one of the first 3 commands/jobs finish.<br /><br /><code>tempus &gt; set_multi_cpu_usage -localCpu 3</code><br /><code>tempus &gt; run_threaded_commands {&#xa0;</code><br /><code>check_timing &gt; check_timing.rpt&#xa0;</code><br /><code>redirect &quot;report_analysis_coverage&quot; &gt; report_analysis_coverage.rpt&#xa0;</code><br /><code>write_sdf base.sdf&#xa0;</code><br /><code>write_sdc base.sdc&#xa0;</code><br /><code>report_constraint -all_violators -nosplit &gt; report_constraint_all_viol.rpt.gz report_constraint -max_delay -nosplit &gt;</code><br /><code>report_constraint_max_delay.rpt.gz&#xa0;</code><br /><code>report_constraint -min_delay -nosplit &gt; report_constraint_min_delay.rpt.gz&#xa0;</code><br /><code>source generate_reports.tcl&#xa0;</code><br /><code>}</code></li></ul><h4 id="run_threaded_commands-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="report_timing.html">report_timing</a></code></li><li><code><a href="set_multi_cpu_usage.html#set_multi_cpu_usage-set_multi_cpu_usage">set_multi_cpu_usage</a></code></li><li><a href="redirect.html"><code>redirect</code></a></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="get_multi_cpu_usage.html" id="prev" title="get_multi_cpu_usage">get_multi_cpu_usage</a></em></b><b><em><a href="set_multi_cpu_usage.html" id="nex" title="set_multi_cpu_usage">set_multi_cpu_usage</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

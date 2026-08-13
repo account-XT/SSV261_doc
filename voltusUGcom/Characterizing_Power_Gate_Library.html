@@ -1,0 +1,113 @@
+
+<html><head><title>Characterizing Power Gate Library</title>
+<meta name="page_sequence" content="30002000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666198" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Characterizing Power Gate Library" />
+<meta name="Keywords" content="transistor,power,gating,IR drop,netlist,library,netlist,cell" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Rush Current Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666198" />
+<meta name="NextFile" content="Fine-Grain_Memory_Characterization.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Types_of_Power_Gates.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Characterizing Power Gate Library" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Types_of_Power_Gates.html" title="Types_of_Power_Gates">Types_of_Power_Gates</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Fine-Grain_Memory_Characterization.html" title="Fine-Grain_Memory_Characterization">Fine-Grain_Memory_Characteriza ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Characterizing Power Gate Library</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="CharacterizingPowerGateLibrary-39383"></span></p>
+
+<p>During library generation of the power-gate cell, Voltus characterizes the power gate&#39;s on-resistance (Ron), the leakage current (Ileakage) when the power-gate is off, and the saturation current (Idsat) of the power gate. The information is then stored in the cell library, which is then used by Voltus during IR-drop analysis. Optionally you have the ability to override the Ron, leakage and saturation currents for the power-gates if desired.</p>
+<h4 id="CharacterizingPowerGateLibrary-RequiredInputFiles"><em> Required Input Files</em></h4>
+
+<p>The library generation of power-gate cells requires:</p>
+<ul><li>LEF</li><li>Extraction tech file</li><li>Layermap of LEF and extraction tech file</li><li>SPICE netlist and SPICE device models<br />For power gate cell PGV characterization, the SPICE netlist with device x, y coordinates is recommended to be used to generate the detail EM view having the exact Ron resistors in the specific locations to represent the power gate transistors. It is important to have a clear and accurate resistance network of power gate cells so that the overall IR-drop and EM analysis of the low-power design is accurate.</li><li>Power-gate cell&#39;s always on and switched pin</li></ul>
+<p>If SPICE netlist is not available, Voltus can not characterize Ron, Idsat and Ileakage parameters for the power-gate. In this case, you must specify estimated parameters for each power-gate cell manually.</p>
+<h4 id="CharacterizingPowerGateLibrary-Procedure"><em> Procedure</em></h4>
+
+<p>To perform power-gate cell characterization:</p>
+<ol><li>Select <em>Power &amp; Rail</em> - <em>Set PowerGrid Library Mode</em>.<br />The following form appears:<br /><div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481579/732481581.png" data-linked-resource-container-id="732481579" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="setpglibmode_std.png" data-linked-resource-id="732481581" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481579/732481581.png" tabindex="0" width="650" /></span></div>
+</li><li>Set <em>Cell Type</em> to <em>Std Cells</em> to use SPICE subcircuit for view generation.</li><li>Specify <em>Filler Cell Names</em> and <em>Decap Cell Names</em> (optional) to perform decap optimization during rail analysis.</li><li>Select <em>Simulation</em>, and specify the netlist in the <em>Spice subckt netlist</em> field to characterize cell capacitance and current for the power-gate cell.</li><li>Specify <em>Spice Model</em> and <em>Corners</em> for device current and capacitance characterization.</li><li>Specify <em>Extraction Tech File</em> and <em>LEF Layermap</em>.</li><li>Specify <em>Power Pins</em>, <em>Voltages</em>, and <em>Ground Pins</em>. Ensure that the always-on and switched pin voltages are same.</li><li>Click the <em>Advanced</em> tab.<br />The following form appears:<br /><div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481579/732481580.png" data-linked-resource-container-id="732481579" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="setpglibmode_tech_advanced.png" data-linked-resource-id="732481580" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481579/732481580.png" tabindex="0" width="650" /></span></div>
+</li><li><em>Cell List File</em> and <em>Cell Decap File</em> are optional fields.</li><li>Select <em>Power Gate Cell Characterization</em>.</li><li>Specify power-gate cell name</li><li>Specify always-on power pin name</li><li>Specify switch power pin name</li><li>If spice subckts are provided, Ron, Idsat and Ileakage will be disabled.</li><li>Click <em>Add</em> to add the power-gate cell information to the listbox.</li><li>Similarly add all power-gate cell information to the listbox.</li><li>Click <em>OK</em> to characterize the power-gate library.</li></ol><h4 id="CharacterizingPowerGateLibrary-TclCommandExampleforGeneratingPower-GateCellLibrary">Tcl Command Example for Generating Power-Gate Cell Library</h4>
+
+<p>The following is the Tcl script to generate power-gate cell library:</p>
+
+<p><span class="fontredcadence"><pre><code>set_pg_library_mode </code></pre><pre><code>-extraction_tech_file RCgen.tch <br />-lef_layer_map lefdef.map <br />-cell_type stdcells <br />-power_pins { VDD 1.08 VDDO 1.08 VDDG 1.08 } <br />-ground_pins { VSS GND VSSG } <br />-cells_file built_cells_list <br />-temperature -40 <br />-spice_models models/v1d1_usage.l <br />-spice_corners { ss_lib } <br />-spice_subckts { typical_max_m40.spice } <br />-power_switch_parameters { { cell1 VDDG VDD } { cell2 VDDG VDD } } </code></pre>
+<p><br /></p>
+<pre><code>write_pg_library -out_dir temp</code></pre></span></p>
+<pre><em style="font-weight: 600;letter-spacing: -0.003em;">Related Topics</em></pre><ul><li><a href="Types_of_Power_Gates.html">Types of Power Gates</a></li><li><a href="Power_Gate_Library_Report.html">Power Gate Library Report</a></li><li><a href="Fine-Grain_Memory_Characterization.html">Fine-Grain Memory Characterization</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Types_of_Power_Gates.html" id="prev" title="Types_of_Power_Gates">Types_of_Power_Gates</a></em></b><b><em><a href="Fine-Grain_Memory_Characterization.html" id="nex" title="Fine-Grain_Memory_Characterization">Fine-Grain_Memory_Characteriza ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

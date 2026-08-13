@@ -1,0 +1,260 @@
+
+<html><head><title>set_max_delay</title>
+<meta name="page_sequence" content="26083000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="apokhara" />
+<meta name="CreateDate" content="2026-04-12" />
+<meta name="CreateTime" content="1776062499" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="" />
+<meta name="DocTitle" content="Litmus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_max_delay" />
+<meta name="Keywords" content="command,maximum,delay,timing,path,exceptions" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="TIMING_CONST," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="litmus_comref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-12" />
+<meta name="ModifiedTime" content="1776062499" />
+<meta name="NextFile" content="set_max_fanout.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_max_capacitance.html" />
+<meta name="c_product" content="Litmus," />
+<meta name="Product" content="Litmus," />
+<meta name="ProductFamily" content="Litmus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Litmus Text Command Reference -- set_max_delay" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="litmus26comref" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+<script type="text/javascript" src="styles/shCore1.js">/*<![CDATA[*//*]]>*/</script><script type="text/javascript" src="styles/shCore.js">/*<![CDATA[*//*]]>*/</script><script type="text/javascript" src="styles/shBrushCpp.js">/*<![CDATA[*//*]]>*/</script><script type="text/javascript" src="styles/shBrushJava.js">/*<![CDATA[*//*]]>*/</script><script type="text/javascript" src="styles/shBrushXml.js">/*<![CDATA[*//*]]>*/</script><script type="text/javascript" src="styles/shBrushPython.js">/*<![CDATA[*//*]]>*/</script><script type="text/javascript" src="styles/shBrushPowerShell.js">/*<![CDATA[*//*]]>*/</script><link rel="stylesheet" href="styles/shCoreDefault.css" type="text/css" /><link rel="stylesheet" href="styles/shCoreMidnight.css" type="text/css" /><script type="text/javascript">/*<![CDATA[*/
+SyntaxHighlighter.all();
+/*]]>*/</script>
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="litmus_comrefTOC.html">Contents</a></li><li><a class="prev" href="set_max_capacitance.html" title="set_max_capacitance">set_max_capacitance</a></li><li style="float: right;"><a class="viewPrint" href="litmus_comref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_max_fanout.html" title="set_max_fanout">set_max_fanout</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Litmus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_max_delay</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>set_max_delay<span class="confluence-anchor-link" id="set_max_delay-set_max_delay"></span><span id="set_max_delay-set_max_delay"></span>&#xa0;<br />[-help]<br />[-combinational_from_to]<br />[{-from |-rise_from | -fall_from}&#xa0;<code><em>from_list</em></code>]&#xa0;<br />[{-through | -rise_through | -fall_through}&#xa0;<code><em>through_list</em></code>]&#xa0;<br />[{-to | -rise_to | -fall_to}&#xa0;<code><em>to_list</em></code>]<br />[-comment&#xa0;<code><em>string</em></code>]&#xa0;<br />[-rise]&#xa0;<br />[-fall]&#xa0;<br /><code><em>value</em></code>&#xa0;</code><br /></code></p>
+
+<p>Specifies a maximum delay for a timing path. The&#xa0;<code>set_max_delay</code>&#xa0;command takes precedence over other path exceptions specified for the same path, except for the&#xa0;<code>set_false_path</code>&#xa0;command.</p>
+
+<p>Use either the&#xa0;<code>-from</code>,&#xa0;<code>-to,</code>&#xa0;or&#xa0;<code>-through</code>&#xa0;option with the&#xa0;<code>set_max_delay</code>&#xa0;command to identify the paths. Specifying both the&#xa0;<code>-from</code>&#xa0;and&#xa0;<code>-to</code>&#xa0;options identifies a path with specific starting and ending points.</p>
+
+<p>When you specify a sequential cell name for starting point of the timing path, the valid path starts from the clk pin. This means the latency and delay from clk to output Q is also included in the delay. For path segmentation, you can specify the path to start from Q output of the register by adding /Q after the cell name. In this case, path from clk to Q is not considered in the calculation.</p>
+
+<p>Use only one&#xa0;<code>-from</code>,&#xa0;<code>-rise_from</code>, or&#xa0;<code>-fall_from</code>,&#xa0;<code>-to</code>,&#xa0;<code>-rise_to,</code>&#xa0;or&#xa0;<code>-fall_to</code>&#xa0;parameter per command. You can use multiple&#xa0;<code>-through</code>&#xa0;parameters in the same command.</p>
+
+<p><strong>Note</strong>: If the&#xa0;<code>set_max_delay&#xa0;</code>constraint is added incrementally in SI mode, an explicit&#xa0;&#xa0;<code>update_timing -full</code>&#xa0;command is required (before&#xa0;<code><a href="report_timing.html">report_timing</a></code>&#xa0;or <code>report_constraint</code>) for SI full accuracy.</p>
+<h4 id="set_max_delay-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-combinational_from_to</code></td>
+<td class="confluenceTd" colspan="1">Defines a path defined by <code>-from</code>/<code>-to</code> pins as combinational.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-comment </code><code><em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Allows you to insert comments. The comments are read but are ignored with a one-time warning message. They are not used during timing analysis reporting nor are they written out during saving of constraints.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-fall</code></p>
+</td>
+<td class="confluenceTd">
+<p>Apply the assertion at the falling edge of the signal on the path endpoints.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-from |</code><code>-rise_from |</code><code>-fall_from </code><code><em>from_list</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a list of timing paths start points. The <code><em>from_list</em></code> argument can contain either object IDs or hierarchical names relative to the current module or clock names. The pins can be on intermediate hierarchical boundaries. The <code><em>from_list</em></code> argument can be a collection.</p>
+
+<p>The valid start points are:</p>
+<ul><li>Input port</li></ul><ul><li>Bidirectional port</li></ul><ul><li>Clock pin of sequential cell <br />Clock pin of sequential cell is one of the following:</li></ul><ul><li>Structural clock pin that is part of latch or flip-flop.</li></ul><ul><li>Inferred clock pin in cells like macro cells. A pin is an inferred clock pin if it is associated with one of the following:</li></ul><ul><li>Reference end of setup check</li></ul><ul><li>Reference end of hold check</li></ul><ul><li>Reference end of removal check</li></ul><ul><li>Reference end of recovery check</li></ul><ul><li>Minimum period check</li></ul><ul><li>Minimum pulse width check</li></ul><ul><li>Pin associated with <code>set_input_delay</code></li></ul>
+<p>Specify one of the following:</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>-from:</code></p>
+
+<p>Applies the maximum delay constraint to all paths originating from the <code><em>from_list</em></code> list. If a clock is specified as the <code>-from</code> object, all primary inputs and registers clocked by that clock are used as start points.</p>
+
+<p>By default, the <code>-from</code> option applies the constraint to both the rising and the falling edges.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>-rise_from</code>: Applies the maximum delay constraint at the rising edge of the signal on the from pins.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>-fall_from</code>: Applies the maximum delay constraint at the falling edge of the signal on the from pins.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-rise</code></p>
+</td>
+<td class="confluenceTd">
+<p>Applies the assertion at the rising edge of the signal on the path endpoints.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-through | </code><code>-rise_through | </code><code>-fall_through </code><code><em>through_list</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a list of timing paths through points.</p>
+
+<p>The <code><em>through_list</em></code> argument can contain either object IDs or hierarchical names relative to the current module or clock names. The pins can be on intermediate hierarchical boundaries. The <code><em>through_list</em></code> argument can be a collection.</p>
+
+<p>Specify one of the following:</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>-through:</code></p>
+
+<p>When you use this parameter without using the <code>-from</code> or <code>-to</code> options, all paths that go through the specified pins have the specified delay. When you use it with both the <code>-from</code> and <code>-to</code> options, any path starting at any pin on the <code>-from</code> list <em>and </em>going through any point on the <code>-through</code> pin list <em>and </em>going to any point on the <code>-to</code> list is affected by the constraint.</p>
+
+<p>By default, the <code>-through</code> option applies the constraint to both the rising and the falling edges.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>-rise_through</code>: Applies the assertion at the rising edge of the signal on the through pins.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>-fall_through</code>: Applies the assertion at the falling edge of the signal on the through pins.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-to</code><code>| </code><code>-rise_to | </code><code>-fall_to </code><code><em>to_list</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a list of timing paths end points.</p>
+
+<p>The <code><em>to_list</em></code> argument can contain either object IDs or hierarchical names relative to the current module or clock names. The pins can be on intermediate hierarchical boundaries. The <code><em>to_list</em></code> argument can be a collection.</p>
+
+<p>The valid end points are:</p>
+<ul><li>Output port</li></ul><ul><li>Bidirectional port</li></ul><ul><li>Data pin of sequential cell <br />Data pin of sequential cell is one of the following:</li></ul><ul><li>Structural data pin that is part of latch or flip-flop.</li></ul><ul><li>Inferred data pin in cells like macro cells. A pin is an inferred data pin if it is associated with one of the following:</li></ul><ul><li>Signal end of setup check</li></ul><ul><li>Signal end of hold check</li></ul><ul><li>Signal end of non-sequential setup check</li></ul><ul><li>Signal end of non-sequential hold check</li></ul><ul><li>Signal end of removal check</li></ul><ul><li>Signal end of recovery check</li></ul><ul><li>Pin associated with <code>set_external_delay</code></li></ul><ul><li>Data pin of clock gating cell</li></ul>
+<p>Select from one of the following:</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>-to: </code>Applies the maximum delay constraint to all paths ending in the <code>-to</code> pin list. If a clock is specified as the <code>-to</code> object, all primary outputs and registers clocked by that clock are used as endpoint.</p>
+
+<p>By default, the <code>-to</code> option applies the constraint to both the rising and the falling edges.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>-rise_to</code>: Applies the maximum delay constraint at the rising edge of the signal on the to pins.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>-fall_to</code>: Applies the maximum delay constraint at the falling edge of the signal on the to pins.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code><em>value</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the maximum delay value.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_max_delay-Examples">Examples</h4>
+
+<p>The following command specifies that all paths from&#xa0;<code>in1</code>&#xa0;to&#xa0;<code>out1</code>&#xa0;must have delays less than&#xa0;<code>10</code>&#xa0;units:</p>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false">%&#xa0;set_max_delay 10 -from in1 -to out1</pre>
+</div>
+</div>
+<h4 id="set_max_delay-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="create_clock.html">create_clock</a></code></li><li><code><a href="set_false_path.html">set_false_path</a></code></li><li><code><a href="set_input_delay.html">set_input_delay</a></code></li><li><code><a href="set_min_delay.html">set_min_delay</a></code></li><li><code><a href="set_multicycle_path.html">set_multicycle_path</a></code></li><li><code><a href="set_output_delay.html">set_output_delay</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_max_capacitance.html" id="prev" title="set_max_capacitance">set_max_capacitance</a></em></b><b><em><a href="set_max_fanout.html" id="nex" title="set_max_fanout">set_max_fanout</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

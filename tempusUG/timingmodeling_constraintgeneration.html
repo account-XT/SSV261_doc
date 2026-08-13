@@ -1,0 +1,174 @@
+
+<html><head><title>Constraint Generation during Model Extraction</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823951" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Constraint Generation during Model Extraction" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823951" />
+<meta name="NextFile" content="timingmodeling_parallelarcsetm.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="timingmodeling_pointselection.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Constraint Generation during Model Extraction" />
+<meta name="Keywords" content="Constraint Generation during Model Extraction" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Modeling,Stylus" />
+<meta name="prod_subfeature" content="Timing Modeling" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="timingmodeling_pointselection.html" title="Characterization Point Selection">Characterization Point Selecti ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="timingmodeling_parallelarcsetm.html" title="Parallel Arcs in ETM">Parallel Arcs in ETM</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:constraintgeneration" title="Constraint Generation during Model Extraction"></a><h3>
+<a id="pgfId-1018134"></a><a id="64915"></a>Constraint Generat<a id="ConstraintGeneration"></a>ion during Model Extraction</h3>
+
+<p>
+<a id="pgfId-1018135"></a>The extracted models need to be validated before they are transferred to other designers to be used for a top level analysis or optimization flow. For validation purposes, we need a subset of the original timing constraints and further a subset of these constraints is needed for fitting the model in a top level netlist.</p>
+<p>
+<a id="pgfId-1018136"></a>The model extraction process will output a timing library and two constraint files containing the subset of the original constraint. One of these constraint files will be used for a standalone validation of the model compared to the original netlist. By default model.asrt and model.asrt.latchInferredMCP will be written in the CWD. If the <a href="../tempustxtcmdref/do_extract_model.html">do_extract_model</a> <code>-assertions test.asrt</code> command is specified, then three assertion files are generated, named -test.asrt. test.asrt.latchInferredMCP, and top_model.asrt. The other constraint file (top_model.asrt) will be used when the extracted model will be stitched to a top level netlist and test.asrt will be used for standalone model validation.</p>
+<p>
+<a id="pgfId-1018137"></a>Two separate constraint files are required for the following:</p>
+<ul><li>
+<a id="pgfId-1018138"></a>Standalone validation will need all the context parameters of the design.</li><li>
+<a id="pgfId-1018139"></a>STA or optimization flow when stitched to a top level environment, the context parameter will be automatically coming from the top level. So some of the constraints (in the above file) need to be filtered.</li></ul>
+
+<p>
+<a id="pgfId-1022823"></a>The following sections describe constraints in a model extraction flow:</p>
+<ul><li>
+<a id="pgfId-1022863"></a><a href="timingmodeling_constraintgeneration.html#97361">False Path Exceptions</a></li><li>
+<a id="pgfId-1022882"></a><a href="timingmodeling_constraintgeneration.html#66872">Multi-Cycle Path Exceptions</a></li></ul>
+
+
+<h4><em>
+<a id="pgfId-1018141"></a><a id="97361"></a>False Path Exceptions</em></h4>
+
+<p>
+<a id="pgfId-1018142"></a>If the <a href="../tempustxtcmdref/set_false_path.html">set_false_path</a> constraint is applied through some internal pins/ports, then those paths/arcs are removed during extraction.</p>
+<p>
+<a id="pgfId-1018143"></a>If the <code>set_false_path</code> constraint is applied between clocks or a clock and a port, then these paths are removed and these exceptions are saved in a top_model.asrt as well as test.asrt file.</p>
+
+<h4><em>
+<a id="pgfId-1018144"></a><a id="66872"></a>Multi-Cycle Path Exceptions</em></h4>
+
+<p>
+<a id="pgfId-1018145"></a>If multi-cycle paths through pins/ports are applied, then during extraction the worst paths through them mapped to the IO ports are calculated and the exceptions through these IOs are dumped in the top_model.asrt file.</p>
+<p>
+<a id="pgfId-1018146"></a>Consider the following design scenario with multi-cycle path exception applied at A.</p>
+
+<p class="webflare-indent1"><strong>Figure -7
+<a id="pgfId-1018147"></a>Multi-cycle path exception</strong></p>
+<p>
+<a id="pgfId-1018151"></a></p>
+<div class="webflare-div-image">
+<img width="439" height="194" src="images/timingmodeling-12.gif" /></div>
+
+<p>
+<a id="pgfId-1018152"></a>If there is no path from IN1/OUT1 and IN2/OUT2, the multi-cycle path will be pushed to IN2/OUT1. Since there are other paths going through these ports, multi-cycle paths cannot be pushed to IN2/OUT1 and cycle adjustment is done in delay values of the arcs. This will make the model context dependent. </p>
+<p>
+<a id="pgfId-1018153"></a>When you set <a href="../tempustxtcmdref/timing_extract_model_disable_cycle_adjustment.html">timing_extract_model_disable_cycle_adjustment</a> global variable to <code>true</code>, the software will disable the cycle adjustment to make ETM context independent. You will have to manually apply the multi-cycle path at the top level while using this ETM.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1018154"></a>You should examine the constraint file (&#8221;top_model.asrt&#8221;), as these constraints are just indicative of what is needed to be modeled at the top level. In certain situations, it may not be possible to extract all possible exceptions for top level due to limitations of liberty to model them correctly for a given path in case of conflicts.</div>
+<ul><li>
+<a id="pgfId-1018155"></a><a href="../tempustxtcmdref/set_disable_timing.html">set_disable_timing</a><br />
+<a id="pgfId-1123367"></a>If the <code>set_disable_timing</code> constraint is applied on any arc, then this arc gets disabled and is not used for the extraction purpose. Thus, such arcs are handled internally by the tool and are not written in any of the constraint files. Also, the path broken by them will not be extracted during ETM generation.</li><li>
+<a id="pgfId-1018156"></a><a href="../tempustxtcmdref/set_case_analysis.html">set_case_analysis</a><br />
+<a id="pgfId-1123370"></a>Constants applied/propagated by the <code>set_case_analysis</code> command can be written as a function attribute of pins in the ETM by setting the <a href="../tempustxtcmdref/timing_extract_model_case_analysis_in_library.html">timing_extract_model_case_analysis_in_library</a> global variable to <code>true</code>. This can be written in the ETM-validation constraint file generated by setting this global variable to <code>false</code>.</li><li>
+<a id="pgfId-1018157"></a><a href="../tempustxtcmdref/create_clock.html">create_clock</a><br />
+<a id="pgfId-1123373"></a>The pins/ports having <code>create_clock</code> definitions on them are preserved in the timing model. If a clock is created on some internal pin then the pin name needs to be modified to reflect the instance name of the extracted model. This is achieved using the same variable approach.<pre class="webflare-pre-block webflare-courier-new" id="#id1018158">
+<a id="pgfId-1018158"></a>[get_pins &#8220;$ETM_CORE/pin1 $ETM_CORE/pin2 $ETM_CORE/pin3&#8221;]</pre>
+<a id="pgfId-1018159"></a>When the extracted model is stitched to some top level netlist, then the clock definitions are supposed to come from the top level netlist itself. So that such clock definitions are not needed to be dumped in the top level constraint file, but need to exist in the assertion file for standalone validation.</li><li>
+<a id="pgfId-1018160"></a><a href="../tempustxtcmdref/create_generated_clock.html">create_generated_clock</a><br />
+<a id="pgfId-1123376"></a>The pins having the <code>create_generated_clock</code> defined on them are preserved in the extracted model as internal pins. As generated clocks are very much intended for the block itself and are not supposed to be coming from the top level, liberty provides syntax to define the generated clocks in the timing model. You can use the following use model:<pre class="webflare-pre-block webflare-courier-new" id="#id1018161">
+<a id="pgfId-1018161"></a>generated_clock (gclk) {
+clock_pin : gclk ;
+master_pin : clk ;
+multiplied by : 2 ;
+}</pre>
+<a id="pgfId-1018162"></a>While loading a model, the software names the generated clocks after their target pin names, so while dumping the generated clocks in the library the target pin name is modified to the clock name itself. This facilitates the same name of generated clock names in the original netlist and the extracted model. This name changing cuts down the need to modify other constraints (clock uncertainty/path exceptions) related to this clock. In this case it is not required to dump these generated clocks as a separate constraint.</li><li>
+<a id="pgfId-1018163"></a><a href="../tempustxtcmdref/set_input_delay.html">set_input_delay</a>/<a href="../tempustxtcmdref/set_output_delay.html">set_output_delay</a><br />
+<a id="pgfId-1123379"></a>The constraints like <code>set_input_delay</code> and <code>set_output_delay</code> lie in this category. Though these constraints can be applied on ports as well as some internal pins. Such constraints applied on some internal pins are of no use for the extracted models, as in an extracted model only interface timing is considered.<br />
+<a id="pgfId-1038382"></a>The constraints applied on the ports need not any change as the port will be preserved with the same name. So these constraints are dumped out in the assertion file for validation and do not have any impact on the generated ETM. These need not to be dumped out for the top level constraint file as in a top level the data must be coming to the port from some other top level register or port. So the input delay value is supposed to be the delay of path from top level register/port to this port.</li><li>
+<a id="pgfId-1018164"></a><a href="../tempustxtcmdref/set_max_transition.html">set_max_transition</a>/<a href="../tempustxtcmdref/set_max_capacitance.html">set_max_capacitance</a><br />
+<a id="pgfId-1123382"></a>If these constraints exist in the SDC file for block and the <a href="../tempustxtcmdref/timing_extract_model_consider_design_level_drv.html">timing_extract_model_consider_design_level_drv</a> global variable is set to <code>false</code>, then these max_cap/max_trans constraints (from SDC) will not have any impact on the generated model.<br />
+<a id="pgfId-1018165"></a>If the <code>timing_extract_model_consider_design_level_drv</code> global variable is set to <code>true</code>, then these constrains are considered while generating the timing model. The conservative value of max_transition defined at a library cell associated with a port or <code>set_max_transition</code> defined in the SDC is chosen for all the ports. Similarly, in case of max_capacitance, a conservative value defined at a library cell associated with a port or defined in the SDC is chosen for all the output ports.<br /><div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1018166"></a>The <code>set_max_transition</code>/<code>set_max_transition</code> constraint defined in the SDC is always dumped in the side constraints file that is read during validation.</div></li><li>
+<a id="pgfId-1018167"></a><a href="../tempustxtcmdref/set_load.html">set_load</a>/<a href="../tempustxtcmdref/set_resistance.html">set_resistance</a>/<a href="../tempustxtcmdref/set_annotated_transition.html">set_annotated_transition</a><br />
+<a id="pgfId-1123385"></a>The <code>set_load</code>, <code>set_resistance</code>, or <code>set_annotated_transition</code> constraints can be applied on pins as well as ports. The constraints applied on internal pins are handled in the extraction flow during delay calculation and are included in the model. But the constraints applied on the ports are treated as out-of-context environment and need to be written out in the constraints file to be read for model validation.</li><li>
+<a id="pgfId-1018168"></a><a href="../tempustxtcmdref/set_annotated_delay.html">set_annotated_delay</a>/<a href="../tempustxtcmdref/set_annotated_check.html">set_annotated_check</a><br />
+<a id="pgfId-1123388"></a>The <code>set_annotated_delay</code> or <code>set_annotated_check</code> constraint is applied on the internal arcs as incremental or absolute values. The annotated delays/checks are handled in the extraction flow during delay calculation, so these are included in the model. This constraint is not written out in any of the constraint files.</li><li>
+<a id="pgfId-1018169"></a><a href="../tempustxtcmdref/set_input_transition.html">set_input_transition</a>/<a href="../tempustxtcmdref/set_driving_cell.html">set_driving_cell</a><br />
+<a id="pgfId-1123391"></a>The <code>set_input_transition</code> or <code>set_driving_cell</code> constraints are applied only on ports. At the top level, the input transition at ETM pins depends upon the transition of the signal coming from the top-level circuitry. Similarly, the driving cell is needed only at the block level to replicate the actual driver of ETM at the top level. Hence, these are written only in the validation constraint file.</li><li>
+<a id="pgfId-1018170"></a><a href="../tempustxtcmdref/set_clock_uncertainty.html">set_clock_uncertainty</a>/<a href="../tempustxtcmdref/set_clock_latency.html">set_clock_latency</a><br />
+<a id="pgfId-1123394"></a>By default, the clock uncertainty or clock latency constraints are written in the validation constraint file. But if the <code>timing_extract_model_include_latency_and_uncertainty</code> global variable is set to <code>true</code>, then these values will be taken care of during ETM characterization. And the delay tables in ETM are written with these values included.</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="timingmodeling_pointselection.html" id="prev" title="Characterization Point Selection">Characterization Point Selecti ...</a></em></b><b><em><a href="timingmodeling_parallelarcsetm.html" id="nex" title="Parallel Arcs in ETM">Parallel Arcs in ETM</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

@@ -1,0 +1,182 @@
+
+<html><head><title>set_clock_latency</title>
+<meta name="page_sequence" content="39064000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287470" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_clock_latency" />
+<meta name="Keywords" content="clock list,ideal internal clock value,external clock arrival delay" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Timing Constraints," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287470" />
+<meta name="NextFile" content="set_clock_sense.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_clock_groups.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- set_clock_latency" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="set_clock_groups.html" title="set_clock_groups">set_clock_groups</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_clock_sense.html" title="set_clock_sense">set_clock_sense</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_clock_latency</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>set_clock_latency <span id="set_clock_latency-set_clock_value"></span><span class="confluence-anchor-link" id="set_clock_latency-set_clock_latency"></span><br /></code>[-help]</code><br /><code> &lt;<em>value</em>&gt;</code><br /><code> &lt;<em>obj_list</em>&gt;</code><br /><code> [-clock &lt;<em>clock_list</em>&gt;]</code><br /><code> [-clock_gate]</code><br /><code> [-fall]</code><br /><code> [-max]</code><br /><code>[-min]</code><br /><code> [-rise]</code><br /><code> [-source [-early ] [-late ] [-dynamic &lt;<em>jitter_val</em>&gt;]]</code></p>
+
+<p>Specifies ideal internal clock value and external clock arrival delay.</p>
+
+<p>Clock value has two components:</p>
+<ul><li>Source value:</li></ul><ul><ul><li>Specified using the <code>-source</code> parameter and is the delay from the external clock generator to the clock port of the design.</li></ul></ul><ul><ul><li>Applied when the clock is either ideal or propagated.</li></ul></ul><ul><ul><li><code>set_clock_latency</code> set on a clock port has higher precedence than <code>set_clock_latency</code> set on a clock waveform.</li></ul></ul><ul><ul><li>Specified on clock waveforms with both the <code>set_input_delay</code> command and the <code>set_output_delay</code> command.</li></ul></ul><ul><li>Network value (clock tree delay):</li></ul><ul><ul><li>Default value type and is the delay from the clock port to the register.</li></ul></ul><ul><ul><li>Applied only when the clock is ideal. When the clock is propagated, this delay is replaced by the actual clock tree delays.</li></ul></ul><ul><ul><li>Specified on a clock waveform or a clock port is ignored if the clock is propagated.</li></ul></ul><ul><ul><li><code>set_clock_latency</code> set on a timing pin has higher precedence than <code>set_clock_latency</code> set on a waveform.</li></ul></ul><ul><ul><li>If there are multiple <code>set_clock_latency</code> and <code>set_propagated_clock</code> assertions between the clock waveform, clock root and clock endpoint, the closest assertion to the clock endpoint takes precedence.</li></ul></ul><ul><ul><li>Specified on internal circuit pins or hierarchical ports and used in the fanout cone of the network value pin, when a clock is ideal.</li></ul></ul>
+<p>Use the <code>set_clock_latency</code> command in two ways:</p>
+<ul><li>To specify clock value for a clock waveform:</li></ul><ul><ul><li>Use the following syntax for source value associated with a clock signal: <br /><code>set_clock_latency [-source] [-early | -late] [-min ][-max]</code><code><em> value </em></code><code><em>obj_list</em></code></li></ul></ul><ul><ul><li>Use the following syntax for network value associated with a clock signal: <br /><code>set_clock_latency [-min] [-max]</code><code><em> value</em></code> <code><em>obj_list</em></code></li></ul></ul>
+<p>You cannot specify the <code>-late</code> and <code>-early</code> parameters for network value.<br /><br />Specifying value on a port or pin overrides any previous value specified on the port pin or waveform. The <code><em>obj_list</em></code> argument is the list of the clock waveform names as specified by the <a href="create_clock.html#create_clock-create_clock">create_clock</a> command.</p>
+<ul><li>To specify clock value on clock pins:</li></ul><ul><ul><li>Use the following syntax for source delay on a clock port: <br /><code>set_clock_latency -source [-early | -late] [-rise] [-fall]</code><br /><code><em>insertion_delay</em></code> <code><em>obj_list</em></code></li></ul></ul><ul><ul><li>Use the following syntax for network delay on a clock pin: <br /><code>set_clock_latency [-min] [- max] [-rise] [-fall]</code><br /><code><em>insertion_delay </em>-pin</code> <code><em>obj_list</em></code></li></ul></ul>
+<p>When a clock is ideal, the last specification along a path is used. This is useful when you want to intentionally skew the clock tree and model the physical hierarchical clock tree.</p>
+<h4 id="set_clock_latency-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table class="wrapped relative-table confluenceTable" style="width: 100.0%;"><colgroup><col style="width: 20.4249%;" /><col style="width: 79.5113%;" /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-clock </code><code><em>clock_list</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Associates clock value constraints, placed at the pin level, with a specific clock. This makes it possible to specify a different value per clock.</p>
+
+<p><strong>Note: </strong>You cannot use the <code>-clock</code> parameter with clock waveform objects.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-clock_gate</code></td>
+<td class="confluenceTd">Allows setting the local clock value on pin or port objects. This setting overwrites the existing value of clock gating cells and is used when performing timing checks against the specified pins or ports.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-dynamic <em>jitter_val</em></code><em>&#xa0;</em></td>
+<td class="confluenceTd" colspan="1">Specifies the portion of source clock latency value that can have cycle-to-cycle variation. When calculating CPPR adjustment this portion is removed from CPPR adjustment for different clock edge checks (e.g., setup), but it remains as part of cppr adjustment for same clock edge checks (e.g., hold).</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-early | </code><code>-late</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies clock arrival time with respect to the early or the late time of the clock signal. In setup analysis, launch path is the late path and capture path is the early path. In hold analysis, launch path is the early path and the capture path is the late path. If neither parameter is specified, the default is both early and late. Use these parameters only with the <code>-source</code> parameter. You cannot use these parameters with network value. Specify the clock value at the given operating corner.</p>
+
+<p><strong>Note: </strong>The <code>-min</code> and <code>-max</code> parameters refer to the operating corner and the <code>-early</code> and <code>-late</code> parameters refer to the clock arrival time at the source. Use the <code>-early</code> and <code>-late</code> parameters with the <code>-source</code> parameter to specify the four different clock latencies.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>value</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the value of the latency, in library units, as a floating point.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>obj_list</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies a list of clock waveform names or a list of pins to associate with the clock value. The pin can be a port or an instance pin.</p>
+
+<p>Setting source value on a pin is ignored.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-max</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the clock value for a particular operating corner. Apply the <code>-max</code> parameter to the maximum operating corner.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-min</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the clock value for a particular operating corner. Apply the <code>-min</code> parameter to the minimum operating corner.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-rise |&#xa0;</code><code>-fall</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the <code>-rise</code> or <code>-fall</code> parameter to the waveform at register clock pins for ideal value and to the waveform at the source for source value. Ideal network value does not change polarity when crossing negative unate arcs.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-source</code></p>
+</td>
+<td class="confluenceTd" valign="top"><p style="text-align: left;">Specifies the source latency. If you do not use the&#xa0;<code>-source</code>&#xa0;parameter, the network latency will be applied.</p>
+<p style="text-align: left;"><span style="color:var(--ds-text,#172b4d);">You can use the<span>&#xa0;</span></span><code><a href="timing_Category_Attributes.html">timing_generated_clocks_inherit_ideal_latency</a></code><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span>attribute to include the closest applied network latency for ideal inheritance.<span>&#xa0;However, when the&#xa0;</span></span><span style="color:var(--ds-text,#172b4d);"><span><code>-source</code> parameter is used, the software will completely override any inheritance.&#xa0;</span></span></p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_clock_latency-Examples">Examples</h4>
+<ul><li>The following set of commands enable you to create a clock using the&#xa0;<code>create_clock</code>&#xa0;command and apply latency to the created clock using the&#xa0;<code>set_clock_latency</code>&#xa0;command:<br /><code>tempus &gt; create_clock CLK2 -period 20 [get_ports {clkA clkB clkD}]</code><br /><code>tempus &gt;&#xa0;set_clock_latency -source 2 {clkB clkD} # Define port settings</code><br /><code>tempus &gt;&#xa0;set_clock_latency -rise 5 {clkB clkD} # Define port settings</code><br /><code>tempus &gt; set_clock_latency 3 -early -late -source CLK1 # Define latency and waveform settings</code></li></ul><h4 id="set_clock_latency-RelatedCommands">Related Commands</h4>
+<ul><li><a href="reset_clock_latency.html"><code>reset_clock_latency</code></a></li><li><code><a href="create_clock.html">create_clock</a></code></li><li><code><a href="set_clock_transition.html">set_clock_transition</a></code></li><li><code><a href="set_clock_uncertainty.html">set_clock_uncertainty</a></code></li><li><code><a href="set_input_delay.html">set_input_delay</a></code></li><li><code><a href="set_output_delay.html">set_output_delay</a></code></li><li><code><a href="set_propagated_clock.html">set_propagated_clock</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_clock_groups.html" id="prev" title="set_clock_groups">set_clock_groups</a></em></b><b><em><a href="set_clock_sense.html" id="nex" title="set_clock_sense">set_clock_sense</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

@@ -1,0 +1,183 @@
+
+<html><head><title>write_twf</title>
+<meta name="page_sequence" content="19171000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287394" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="write_twf" />
+<meta name="Keywords" content="generate timing window file,twf file" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Timing Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287394" />
+<meta name="NextFile" content="Timing_Constraint_Commands.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="write_timing_windows.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- write_twf" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="write_timing_windows.html" title="write_timing_windows">write_timing_windows</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Timing_Constraint_Commands.html" title="Timing_Constraint_Commands">Timing_Constraint_Commands</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>write_twf</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>write_twf<span class="confluence-anchor-link" id="write_twf-write_twf"></span><span id="write_twf-write_twf"></span> <br /><code>-help</code><br /><code><em>outfile</em></code><br /><code>[-exclude_instances <em>string</em>]&#xa0;<br />[-format <em>string</em>]</code><br /><code>[-include_instances <em>string</em>]<br />[-include_lib_cells <em>string</em>]</code><br /><code>[-pin]<br />[-power_compatible]</code><br /><code>[-ssta_sigma_multiplier <em>float</em>]<br />[-third_party_file_format <em>string</em>]</code><br /><code>[-view <em>string</em>]</code><br /><code>[-voltage_threshold <em>string</em>]</code><br /></code></code></p>
+
+<p>Generates a timing window file (TWF). &#xa0;The TWF file mainly contains the earliest and the latest possible arrival times that a signal may arrive on a net or a pin.</p>
+
+<p>The format of a timing window file&#xa0;consists of eight pairs of data as given below:</p>
+
+<p><code>(NET &lt;netname&gt;</code></p>
+
+<p><code>minRTW:maxRTW minRt:maxRt minRDr:maxRDr minRSlk:maxRSlk minFTW:maxFTW minFt:maxFt minFDr:maxFDr minFSlk:maxFSlk)</code></p>
+
+<p>Where:</p>
+<ul><li><code>minRTW</code>: Minimum rise arrival time</li><li><code>maxRTW</code>: Maximum rise arrival time</li><li><code>minRt</code>: Minimum&#xa0;rise transition time</li><li><code>maxRt</code>: Maximum&#xa0;rise transition time</li><li><code>minRDr</code>: Minimum&#xa0;rise source resistance</li><li><code>maxRDr</code>: Maximum&#xa0;rise source resistance</li><li><code>minRSlk</code>: Minimum&#xa0;rise slack time</li><li><code>maxRSlk</code>: Maximum&#xa0;rise slack time</li><li><code>minFTW</code>: Minimum&#xa0;fall timing window</li><li><code>maxFTW</code>: Maximum&#xa0;fall timing window</li><li><code>minFt</code>: Minimum&#xa0;fall transition time</li><li><code>maxFt</code>: Minimum&#xa0;fall transition time</li><li><code>minFDr</code>: Minimum&#xa0;fall source resistance</li><li><code>maxFDr</code>: Maximum&#xa0;fall source resistance</li><li><code>minFSlk</code>: Minimum&#xa0;fall slack time</li><li><code>maxFSlk</code>: Maximum&#xa0;fall slack time</li></ul><h4 id="write_twf-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table class="wrapped relative-table confluenceTable" style="width: 100.0%;"><colgroup><col style="width: 23.6858%;" /><col style="width: 76.2546%;" /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-exclude_instances <em>string</em>&gt;</code>&#xa0; &#xa0; &#xa0; &#xa0;</td>
+<td class="confluenceTd" colspan="1">Specifies a list of hierarchical instances to be excluded from the TWF file.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-format <em>string</em></code></td>
+<td class="confluenceTd" colspan="1"><p style="text-align: left;"><span style="color:var(--ds-text,#172B4D);">Specifies the name of the format to be used for TWF generation.</span></p>
+<p style="text-align: left;"><span style="color:var(--ds-text,#172B4D);"><strong>Note</strong>: This parameter supports third-party TWF generation.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-include_instances <em>string</em> &#xa0;</code> &#xa0; &#xa0; &#xa0;</td>
+<td class="confluenceTd" colspan="1">Specifies a list of hierarchical instances to be included in the TWF file.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-include_lib_cells <em>string</em></span></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the library cells that require the input timing window.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>outfile</em></code></p>
+</td>
+<td class="confluenceTd" valign="top"><p style="text-align: left;">Specifies the name of the output file.</p>
+<p style="text-align: left;">The<span>&#xa0;</span><code><em>out_file<span>&#xa0;</span></em></code>parameter must be the last argument in the list. To write a compressed file, add the<span>&#xa0;</span><code>.gz</code><span>&#xa0;</span>extension to the file name.</p>
+<p style="text-align: left;"><span style="color:var(--ds-text,#172B4D);"><strong>Note</strong>: This parameter supports third-party TWF generation.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-pin</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Generates a TWF for each pin instead of each net.</p>
+
+<p><em>Default</em>: Generates a TWF for the crosstalk analysis tool, which contains timing windows on each net.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-power_compatible</span></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Generates a timing window file (TWF) that can be used during power analysis.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-ssta_sigma_multiplier</code> <code><em>float</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a sigma multiplier between <code>0</code> and <code>3</code>. The value that you specify increases the arrival window by that amount, and the worst slack value is generated. The transition and impedance values are not impacted.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-third_party_file_format <em>string</em></span></code></td>
+<td class="confluenceTd" colspan="1">
+<p><span style="color:var(--ds-text,#172B4D);">Specifies the name of the third-party file format to be used during TWF generation. You can specify the &lt;ir_drop&gt; or &lt;jitter&gt; format option.</span></p>
+
+<p><strong>Note</strong>: This parameter supports third-party TWF generation.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-view <em>string</em></code> &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;</td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the name of the analysis view.</p>
+
+<p><strong>Note</strong>: This parameter supports third-party TWF generation.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-voltage_threshold <em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies voltage threshold values for generating a Timing Window File (TWF). All the slews in the TWF file will be scaled to these values. The lower threshold must be less than the higher threshold.</p>
+
+<p><em>Value range:</em> <code>0</code> to <code>100</code></p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="write_twf-Examples">Examples</h4>
+<ul><li>The <code>write_twf</code><code> -voltage_threshold {20 80}</code> command writes the following in the TWF file: <br /><code>(VOLTAGE_THRESHOLD 20 80)&#xa0;</code></li><li>The following example shows third-party TWF report with IR drop option:</li></ul><p style="margin-left: 40.0px;"><code>&#xa0; &#xa0;<strong>I m_clk__I10</strong><br /></code><code>S A 0.508 0.509 0.175 0.195<br /></code><code>S Z 0.077 0.064 0.054 0.054<br /></code><code>K Z -- -- -- --<br /></code><code>T Z 1 -- -- 2.353 2.280 3 f<br /></code><code>T Z 1 0.374 0.268 2.353 2.280 3 r</code></p>
+<p style="margin-left: 40.0px;">Third-party TWF report with Jitter option is shown below:<br /><code>&#xa0; &#xa0;<strong>I m_clk__I10</strong><br /></code><code>T Z 1 -- -- 2.353 2.280 3 f<br /></code><code>T Z 1 0.374 0.268 2.353 2.280 3 r</code></p>
+<p style="margin-left: 40.0px;">Where I - Instance, S - slew data, and K - slack data.</p>
+<h4 id="write_twf-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="../tempusCUI/read_twf.html" rel="nofollow">read_twf</a></code></li><li><code><span><a href="write_timing_windows.html">write_timing_windows</a></span></code></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="write_timing_windows.html" id="prev" title="write_timing_windows">write_timing_windows</a></em></b><b><em><a href="Timing_Constraint_Commands.html" id="nex" title="Timing_Constraint_Commands">Timing_Constraint_Commands</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

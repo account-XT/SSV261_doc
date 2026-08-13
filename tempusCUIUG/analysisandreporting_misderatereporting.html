@@ -1,0 +1,266 @@
+
+<html><head><title>MIS-Derate Reporting</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845213" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="MIS-Derate Reporting" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845213" />
+<meta name="NextFile" content="analysisandreporting_vtskewanalysis.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_amisderatetuning.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- MIS-Derate Reporting" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="0" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_amisderatetuning.html" title="AMIS-Derate Tuning Mechanism">AMIS-Derate Tuning Mechanism</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_vtskewanalysis.html" title="Voltage Threshold Skew Modeling and Analysis">Voltage Threshold Skew Modelin ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:misderatereporting" title="MIS-Derate Reporting"></a><h3>
+<a id="pgfId-2574916"></a>MIS-Derate Reporting <a id="12994"></a></h3>
+
+<p>
+<a id="pgfId-2577380"></a>The MIS-Derates can be reported using the following commands:</p>
+<ul><li>
+<a id="pgfId-2577443"></a><a href="../tempusCUI/report_timing.html">report_timing</a></li><li>
+<a id="pgfId-2577461"></a><a href="../tempusCUI/report_delay_calculation.html">report_delay_calculation</a></li></ul>
+
+<p>
+<a id="pgfId-2577492"></a>These are described below.</p>
+
+<h4>
+<a id="pgfId-2574986"></a>report_timing</h4>
+
+<p>
+<a id="pgfId-2574917"></a>The <code>report_timing</code> command supports the <code>retime_mis_derate</code> column (in PBA mode only) and shows the details in the timing report output.</p>
+<p>
+<a id="pgfId-2575097"></a>For example, the following command generates MIS-derate output as shown below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574922"></a>tempus &gt; report_timing -early -from in2 -to_fall out&#160;&#160;-net \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574923"></a>     -retime path_slew_propagation -format {instance arc cell retime_delay \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574924"></a>     retime_slew retime_mis_derate arrival}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574925"></a>-------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574926"></a>Path 1: MET Early External Delay Assertion </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574927"></a>Endpoint:&#160;&#160; out (v) checked with&#160;&#160;leading edge of &#39;CLK&#39;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574928"></a>Beginpoint: in2 (v) triggered by&#160;&#160;leading edge of &#39;CLK&#39;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574929"></a>Path Groups: {CLK}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574930"></a>Retime Analysis { Data Path-Slew SI WP AMIS }</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574931"></a>Other End Arrival Time&#160;&#160;        0.000</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574932"></a>- External Delay&#160;&#160;              0.000</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574933"></a>+ Phase Shift&#160;&#160;                 0.000</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574934"></a>= Required Time&#160;&#160;               0.000</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574935"></a>  Arrival Time                  0.452</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574936"></a>  Slack Time                    0.452</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574937"></a>= Slack Time(original)&#160;&#160;        0.426</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574938"></a>     Clock Rise Edge                      0.000</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574939"></a>     + Input Delay                        0.010</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574940"></a>     = Beginpoint Arrival Time            0.010</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574941"></a>     ------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574942"></a>     Instance  Arc          Cell              Retime  Retime  <strong>Retime</strong>  Arrival  </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574943"></a>                                              Delay   Slew    <strong>MIS</strong>     Time  </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574944"></a>                                                              <strong>D</strong>erate&#160;&#160;  </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574945"></a>     ------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574946"></a>     -         in2 v        -                 -       0.001   -       0.010  </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574947"></a>     i0        -            U32B_NAND2X20     0.000   0.002   <strong>1</strong>.000&#160;&#160; 0.010&#160;&#160;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574948"></a>     i0        i1 v -&gt; o ^  U32B_NAND2X20     0.004   0.006   <strong>0</strong>.740&#160;&#160; 0.015&#160;&#160;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574949"></a>     i1        -            E25B_CKINVX1      0.019   0.032   <strong>1</strong>.000&#160;&#160; 0.034&#160;&#160;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574950"></a>     i1        i ^ -&gt; o v   E25B_CKINVX1      0.311   0.393   <strong>1</strong>.000&#160;&#160; 0.345&#160;&#160;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574951"></a>     i6        -            U32B_NAND2X20     0.036   0.394   <strong>1</strong>.000&#160;&#160; 0.381&#160;&#160;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574952"></a>     i6        i0 v -&gt; o ^  U32B_NAND2X20     0.021   0.092   <strong>0</strong>.500&#160;&#160; 0.402&#160;&#160;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574953"></a>     i8        -            U32B_NAND4IX4     0.023   0.099   <strong>1</strong>.000&#160;&#160; 0.425&#160;&#160;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574954"></a>     i8        i2 ^ -&gt; o v  U32B_NAND4IX4     0.027   0.042   <strong>0</strong>.750&#160;&#160; 0.452&#160;&#160;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574955"></a>     -         -            tst               0.000   0.042   <strong>1</strong>.000&#160;&#160; 0.452&#160;&#160;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574956"></a>      ------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2574728"></a>INFO: Path Based Analysis (PBA) performed on total &#39;1&#39; paths</pre>
+<h4>
+<a id="pgfId-2575311"></a>report_delay_calculation </h4>
+
+<p>
+<a id="pgfId-2575438"></a>The command below shows the following report output:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575317"></a><code>report_delay_calculation -from i0/i1 -to i0/o -min -mis</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575319"></a><code>-------------------------------------------------------------</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575320"></a><code>From pin</code>   <code>: i0/i1</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575321"></a><code>To Pin</code>     <code>: i0/o</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575322"></a><code>Cell</code>       <code>: U32B_NAND2X20</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575323"></a><code>Library&#160;&#160;  : lb2hpm_sc12v_ff025</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575324"></a><code>Arc sense&#160;&#160;: negative unate</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575325"></a><code>Delay type : cell delay</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575326"></a><code></code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575327"></a><code>Base or SI: SI delay</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575328"></a><code>--------------------------------------------------------</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575329"></a><code>RC Summary for net n3</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575330"></a><code>--------------------------------------------------------</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575331"></a><code>Number of capacitance : 3</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575332"></a><code>Net capacitance&#160;&#160;     : 0.046090 pF</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575333"></a><code>Total rise capacitance: 0.047103 pF</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575334"></a><code>Total fall capacitance: 0.047090 pF</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575335"></a><code>Number of resistance&#160;&#160;: 2</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575336"></a><code>Total resistance&#160;&#160;    : 2200.000000 Ohm</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575337"></a><code>--------------------------------------------------------</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575338"></a><code>                         Rise            Fall</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575339"></a><code>--------------------------------------------------------</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575340"></a><code>Input transition time&#160;&#160;: 0.002300 ns&#160;&#160;   0.002300 ns </code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575341"></a><code>Cell delay&#160;&#160;           : 0.004000 ns     0.006300 ns </code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575342"></a><strong>MIS Derate&#160;&#160;             : 0.741240          1.000000</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575343"></a><code>Output transition time : 0.005700 ns&#160;&#160;   0.019100 ns </code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575344"></a><code>--------------------------------------------------------</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575346"></a><strong>Advanced MIS information</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575347"></a><strong>------------------------------------------------------------------------</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575348"></a><strong>MIS enabled arcs</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575349"></a><strong>   Input_pin   Transition   Output_pin   Transition</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575350"></a><strong>------------------------------------------------------------------------</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575351"></a><strong>    i1         fall         o            rise</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2580205"></a><strong></strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575353"></a><strong>Main input information</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575354"></a><strong>   Pin     Slew         Direction  Timing Window          Clock</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575355"></a><strong>------------------------------------------------------------------------</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575356"></a><strong>   i1      0.005015 ns  fall       0.0103 ns : 0.0103 ns  CLK</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575357"></a><strong></strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575358"></a><strong>Side inputs information</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575359"></a><strong>   Pin   Status  Slew         Direction  Timing Window          Clock</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575360"></a><strong>------------------------------------------------------------------------</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575361"></a><strong>   i0    ACT     0.005015 ns  fall       0.0003 ns : 0.0003 ns  CLK</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575362"></a><strong></strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575363"></a><strong>Overlap Alignment Mode (Estimated early arrival and slew at to_pin)</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575364"></a><strong></strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575365"></a><strong>   From_pin   To_pin    Arrival      Slew</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575366"></a><strong>------------------------------------------------------------------------</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575367"></a><strong>   i0         o         0.01131 ns   0.02394 ns</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575368"></a><strong>   i1         o         0.01226 ns   0.02323 ns</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2575418"></a><strong>------------------------------------------------------------------------</strong></pre>
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_amisderatetuning.html" id="prev" title="AMIS-Derate Tuning Mechanism">AMIS-Derate Tuning Mechanism</a></em></b><b><em><a href="analysisandreporting_vtskewanalysis.html" id="nex" title="Voltage Threshold Skew Modeling and Analysis">Voltage Threshold Skew Modelin ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

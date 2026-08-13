@@ -1,0 +1,466 @@
+
+<html><head><title>High Capacity ECO Flow for Timing and Power Closure</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823946" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="High Capacity ECO Flow for Timing and Power Closure" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823946" />
+<meta name="NextFile" content="SignoffECO_nodelocations.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="SignoffECO_hierarchicaleco.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- High Capacity ECO Flow for Timing and Power Closure" />
+<meta name="Keywords" content="high capacity eco flow" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="ECO,Stylus" />
+<meta name="prod_subfeature" content="ECO" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="SignoffECO_hierarchicaleco.html" title="Hierarchical ECO Optimization">Hierarchical ECO Optimization</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="SignoffECO_nodelocations.html" title="Generating Node Locations in Parasitic Data">Generating Node Locations in P ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:highcapacityecoflow" title="High Capacity ECO Flow for Timing and Power Closure"></a><style>/*<![CDATA[*/
+/**/
+/**/
+/**/
+/**/
+h1 { counter-reset: heading 8;}
+/**/
+/**/
+/**/
+/**/
+/*]]>*/</style><h2>
+<a id="pgfId-2149910"></a><a id="89899"></a>H<a id="highcapacityflow"></a>igh Capacity ECO Flow for Timing and Power Closure</h2>
+
+<p>
+<a id="pgfId-2150022"></a>The High Capacity ECO flow is used to perform timing and power closure on large netlists. This flow allows a huge reduction of the database being used during the ECO phase and therefore reduces the memory peak and runtime significantly. </p>
+<p>
+<a id="pgfId-2150024"></a>Based on the user-defined settings, the database is reduced using any of the following methods:</p>
+<ul><li>
+<a id="pgfId-2150026"></a>Reduction based on the timing violations seen during STA (Setup/Hold/DRV).</li><li>
+<a id="pgfId-2150027"></a>Reduction based on a list of partitions to be optimized for inter or intra timing paths.</li><li>
+<a id="pgfId-2150028"></a>Reduction based on the user-defined path groups and a list of DRV-violated nets or pins.</li></ul>
+
+
+<p>
+<a id="pgfId-2150029"></a>To use this flow, Tempus ECO follows two approaches:</p>
+<ul><li>
+<a id="pgfId-2150031"></a>Run STA in independent Tempus sessions (SMSC, or CMMMC, or DMMMC) to collect the ECO timing DB. And then run an ECO session (MMMC) with Physical data to perform timing/power closure. This methodology is known as the Two Sessions flow. In this flow, the settings must be provided during the STA sessions before performing ECO DB generation to determine the criteria for database reduction.<br /><div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-2150032"></a>This methodology also supports D-STA for ECO timing DB generation.</div></li></ul>
+
+<p>
+<a id="pgfId-2150087"></a>The following figure describes the flow steps required for the user to complete initial STA for ECO DB generation, ECO physical-aware timing/power closure, ECO implementation at the block and top levels, and final STA with implemented ECO.</p>
+
+
+
+<p class="webflare-indent1"><strong>Figure -8
+<a id="pgfId-2150175"></a>Steps for Completing STA</strong></p>
+
+<p>
+<a id="pgfId-2150137"></a></p>
+<div class="webflare-div-image">
+<img width="668" height="177" src="images/SignoffECO-10.gif" /></div>
+
+<p>
+<a id="pgfId-2150156"></a><strong>Step 1</strong>: Run full flat timing analysis and ECO DB generation for each view.</p>
+<p>
+<a id="pgfId-2150157"></a><strong>Step 2</strong>: Physical aware timing closure in MMMC mode on a reduced violating zone database.</p>
+<p>
+<a id="pgfId-2150158"></a><strong>Step 3</strong>: Implement ECOs independently at top-level and block-level in the Placement and Route (P&amp;R) tool.</p>
+<p>
+<a id="pgfId-2150172"></a><strong>Step 4</strong>: Run full flat final timing analysis.</p>
+<ul><li>
+<a id="pgfId-2149969"></a>Run Tempus Paradime to start Tempus clients (one per view), and each client collects data so that the master session can run ECO fixing in MMMC mode with Physical data to perform timing/power closure. This methodology is known as the Paradime flow. In this flow, the settings must be provided before the distributed design is loaded on clients to decide on what criteria the database should be reduced. </li></ul>
+<p>
+<a id="pgfId-2150488"></a>The following figure describes the different flow steps required for the user to run Tempus Paradime for ECO physical-aware timing/power closure, ECO implementation at the block and top-only levels, and final STA with implemented ECO.</p>
+
+
+
+
+<p class="webflare-indent1"><strong>Figure -9
+<a id="pgfId-2150094"></a>Steps for Running Tempus Paradime</strong></p>
+
+<p>
+<a id="pgfId-2150096"></a></p>
+<div class="webflare-div-image">
+<img width="668" height="161" src="images/SignoffECO-11.gif" /></div>
+
+<p>
+<a id="pgfId-2150551"></a><strong>Step 1</strong>: Start Paradime with Physical data on saved sessions and select the desired sub-part of the design to focus on (for example, top-only, or some partitions, or some path groups, or some endpoints.)</p>
+<p>
+<a id="pgfId-2150552"></a><strong>Step 2: Implement ECOs independently at top-level or block-level in the P&amp;R tool.</strong></p>
+<p>
+<a id="pgfId-2150862"></a>Step 3: Run full flat final timing analysis.</p>
+<p>
+<a id="pgfId-2150976"></a>To use the flow set up, below are the templates for the Two Sessions and Paradime flows, which use three different database reduction modes:</p>
+<p>
+<a id="pgfId-2150978"></a>Template 1: The Two Sessions flow performs full chip Hold timing closure on a reduced database based on the timing violations seen during STA. You can choose to enable either GBA or PBA mode. </p>
+<p>
+<a id="pgfId-2151314"></a>Session1: The STA session can be SMSC, MMMC, or DMMMC. </p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688267"></a>&lt;load_design_logical_mode_with_SPEF&gt;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688268"></a>set_eco_opt_mode -enable_high_capacity_eco true</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688269"></a>set_eco_opt_mode -retime path_slew_propagation \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688270"></a> -max_path 5000000 -nworst 50 \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688271"></a> -max_slack 0 -pba_effort high</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688272"></a>set_eco_opt_mode -save_eco_opt_db HC-ECO-DB</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688273"></a>set_power_analysis_mode -dynamic_power_view setup_ss_1p170v</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688274"></a>set_eco_opt_mode -save_eco_opt_db HC-ECO-DB</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688275"></a>write_eco_opt_db</pre>
+
+<p>
+<a id="pgfId-2150978"></a>Session2: The ECO DB directory must be provided in the script before the design is loaded.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688280"></a>set_multi_cpu_usage -localCpu 32</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688281"></a>set_eco_opt_mode -load_eco_opt_db HC-ECO-DB</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688282"></a>read_lib -lef {../libs/lef/FreePDK45_lib_v1.0.lef\ &#160;&#160;&#160;&#160;../libs/MACRO/LEF/pllclk.lef \ &#160;&#160;&#160;&#160;../libs/MACRO/LEF/ram_256X16A.lef \ &#160;&#160;&#160;&#160;../libs/MACRO/LEF/rom_512x16A.lef }</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688283"></a>read_view_definition viewDefinition.tcl</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688284"></a>read_verilog &#8220;top.v blockA.v blockB.v&#8221;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688285"></a>set_top_module top</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688286"></a>set_filler_mode &lt;options&gt;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688287"></a>merge_hierarchical_def top.def blockA.def blockB.def</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688288"></a>&lt;load SPEFs&gt;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688289"></a>set_eco_opt_mode -pba_effort high</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688290"></a>set_eco_opt_mode -partition_list_file partition.txt</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688291"></a>set_eco_opt_mode -optimize_replicated_modules true </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688292"></a>eco_opt_design -hold</pre>
+
+<p>
+<a id="pgfId-2151087"></a>Template 2: The Two Sessions flow to perform inter-partition Hold timing closure on a reduced database based on a user-defined partition during STA.</p>
+<p>
+<a id="pgfId-2151088"></a>Session 1: The STA session can be SMSC, MMMC or DMMMC. </p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688297"></a>&lt;load_design_logical_mode_with_SPEF&gt;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688298"></a>set_eco_opt_mode -enable_high_capacity_eco true</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688299"></a>set_eco_opt_mode -inter_partition {blockA blockB}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688300"></a>set_eco_opt_mode -intra_partition {} </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688301"></a>set_eco_opt_mode -retime path_slew_propagation \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688302"></a> -max_path 5000000 -nworst 50 \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688303"></a> -max_slack 0 -pba_effort high</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688304"></a>set_eco_opt_mode -save_eco_opt_db HC-ECO-DB</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688305"></a>set_power_analysis_mode -dynamic_power_view setup_ss_1p170v</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688306"></a>set_eco_opt_mode -save_eco_opt_db HC-ECO-DB</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688307"></a>write_eco_opt_db</pre>
+
+<p>
+<a id="pgfId-2151396"></a>Session 2: The ECO DB directory must be provided in the script before the design is loaded.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688312"></a>set_multi_cpu_usage -localCpu 32</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688313"></a>set_eco_opt_mode -load_eco_opt_db HC-ECO-DB</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688314"></a>read_lib -lef {../libs/lef/FreePDK45_lib_v1.0.lef\ &#160;&#160;&#160;&#160;../libs/MACRO/LEF/pllclk.lef \ &#160;&#160;&#160;&#160;../libs/MACRO/LEF/ram_256X16A.lef \ &#160;&#160;&#160;&#160;../libs/MACRO/LEF/rom_512x16A.lef }</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688315"></a>read_view_definition viewDefinition.tcl</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688316"></a>read_verilog &#8220;top.v blockA.v blockB.v&#8221;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688317"></a>set_top_module top</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688318"></a>set_filler_mode &lt;options&gt;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688319"></a>merge_hierarchical_def top.def blockA.def blockB.def</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688320"></a>&lt;load SPEFs&gt;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688321"></a>set_eco_opt_mode -inter_partition {blockA blockB}&#160; </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688322"></a>set_eco_opt_mode -intra_partition {} &#160;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688323"></a>set_eco_opt_mode -pba_effort high</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688324"></a>set_eco_opt_mode -partition_list_file partition.txt</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688325"></a>set_eco_opt_mode -optimize_replicated_modules true </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688326"></a>eco_opt_design &#8211;hold </pre>
+
+<p>
+<a id="pgfId-2151400"></a>The same template can be used to perform inter-partition Power recovery.</p>
+<p>
+<a id="pgfId-2151107"></a>Template 3: The Two Sessions flow performs DRV, Setup, Hold timing closure on a reduced database based on the user-defined Setup/Hold path_groups and a list of DRV pins during STA.</p>
+<p>
+<a id="pgfId-2151108"></a>Session 1: The STA session can be SMSC, MMMC or DMMMC. </p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688331"></a>&lt;load_design_logical_mode_with_SPEF&gt;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688332"></a>&lt;TCL script which creates mySetupPG and myHoldPG path_groups&gt;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688333"></a>set_eco_opt_mode -enable_high_capacity_eco true</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688334"></a>set_eco_opt_mode -include_setup_path_groups {mySetupPG}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688335"></a>set_eco_opt_mode -include_hold_path_groups {myHoldPG}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688336"></a>set_eco_opt_mode -select_drv_pin_file {myDRVPinList.txt}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688337"></a>set_eco_opt_mode -retime path_slew_propagation \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688338"></a> -max_path 5000000 -nworst 50 \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688339"></a> -max_slack 0 -pba_effort high</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688340"></a>set_eco_opt_mode -save_eco_opt_db HC-ECO-DB</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688341"></a>set_power_analysis_mode -dynamic_power_view setup_ss_1p170v</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688342"></a>set_eco_opt_mode -save_eco_opt_db HC-ECO-DB</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688343"></a>write_eco_opt_db</pre>
+
+<p>
+<a id="pgfId-2151622"></a>Session 2: The ECO DB directory must be provided in the script before the design is loaded.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688348"></a>set_multi_cpu_usage -localCpu 32</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688349"></a>set_eco_opt_mode -load_eco_opt_db HC-ECO-DB</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688350"></a>read_lib -lef {../libs/lef/FreePDK45_lib_v1.0.lef\ &#160;&#160;&#160;&#160;../libs/MACRO/LEF/pllclk.lef \ &#160;&#160;&#160;&#160;../libs/MACRO/LEF/ram_256X16A.lef \ &#160;&#160;&#160;&#160;../libs/MACRO/LEF/rom_512x16A.lef }</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688351"></a>read_view_definition viewDefinition.tcl</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688352"></a>read_verilog &#8220;top.v blockA.v blockB.v&#8221;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688353"></a>set_top_module top</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688354"></a>set_filler_mode &lt;options&gt;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688355"></a>merge_hierarchical_def top.def blockA.def blockB.def</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688356"></a>&lt;load SPEFs&gt;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688357"></a>set_eco_opt_mode -include_setup_path_groups {mySetupPG}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688358"></a>set_eco_opt_mode -include_hold_path_groups {myHoldPG}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688359"></a>set_eco_opt_mode -select_drv_pin_file {myDRVPinList.txt}&#160;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688360"></a>set_eco_opt_mode -pba_effort high</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688361"></a>set_eco_opt_mode -partition_list_file partition.txt</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688362"></a>set_eco_opt_mode -optimize_replicated_modules true </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688363"></a>eco_opt_design &#8211;drv; eco_opt_design &#8211;setup; eco_opt_design -hold </pre>
+
+<p>
+<a id="pgfId-2151139"></a>Template 4: The Paradime flow performs a full chip Hold timing closure on a reduced database based on timing violations from the STA clients. You can choose to enable either GBA or PBA mode.</p>
+<p>
+<a id="pgfId-2151140"></a>The STA saved session can be SMSC or MMMC.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688368"></a>setDistributeHost -local -timeout 10000</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688369"></a>set_multi_cpu_usage -localCpu 24 -remoteHost 4 -cpuPerRemoteHost 4 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688370"></a>set_distribute_mmmc_mode -eco true</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688371"></a>set_distribute_mmmc_mode -merge_view_definitions</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688372"></a>set_distribute_mmmc_mode -enable_high_capacity_eco </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688373"></a>set eco_setup_view_list {setup_1v setup_2v setup_3v setup_4v}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688374"></a>set eco_hold_view_list {hold_1v hold_2v hold_3v hold_4v}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688375"></a>set eco_dynamic_view {setup_3v} ; set eco_leakage_view {setup_3v}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688376"></a>set eco_lef_file_list &#8220;tech.lef std.lef ram_256X16A.lef&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688377"></a>set eco_def_file_list &#8220;top.def blockA.def blockB.def &quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688378"></a>set_distribute_mmmc_mode -set_filler_mode {-corePrefix FILL}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688379"></a>distribute_read_design -restore_design all -restore_dir \ &#160;&#160;&#160;&#160;PARADIME_SESSIONS_211/ -outdir reports_Paradime</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688380"></a>set_eco_opt_mode -retime path_slew_propagation -nworst 50 \&#160;&#160;&#160;&#160; -max_paths 5000000 -max_slack 0 -pbaEffort high</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688381"></a>set_eco_opt_mode -partition_list_file partition.txt</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688382"></a>set_eco_opt_mode -optimize_replicated_modules true </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688383"></a>eco_opt_design -hold</pre>
+
+<p>
+<a id="pgfId-2151196"></a>Template 5: The Paradime flow performs inter-partition Hold timing closure on a reduced database based on a user-defined partition seen on the STA clients.</p>
+<p>
+<a id="pgfId-2151197"></a>The STA saved session can be SMSC or MMMC. You can use the same template to perform inter-partition Power recovery.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688388"></a>setDistributeHost -local -timeout 10000</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688389"></a>set_multi_cpu_usage -localCpu 24 -remoteHost 4 -cpuPerRemoteHost 4 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688390"></a>set_distribute_mmmc_mode -eco true</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688391"></a>set_distribute_mmmc_mode -merge_view_definitions</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688392"></a>set_distribute_mmmc_mode -enable_high_capacity_eco </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688393"></a>set_eco_opt_mode -inter_partition {blockA blockB}&#160;&#160;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688394"></a>set_eco_opt_mode -intra_partition {} </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688395"></a>set eco_setup_view_list {setup_1v setup_2v setup_3v setup_4v}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688396"></a>set eco_hold_view_list {hold_1v hold_2v hold_3v hold_4v}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688397"></a>set eco_dynamic_view {setup_3v} ; set eco_leakage_view {setup_3v}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688398"></a>set eco_lef_file_list &#8220;tech.lef std.lef ram_256X16A.lef&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688399"></a>set eco_def_file_list &#8220;top.def blockA.def blockB.def &quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688400"></a>set_distribute_mmmc_mode -set_filler_mode {-corePrefix FILL}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688401"></a>distribute_read_design -restore_design all -restore_dir \ &#160;&#160;&#160;&#160;PARADIME_SESSIONS_211/ -outdir reports_Paradime</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688402"></a>set_eco_opt_mode -retime path_slew_propagation -nworst 50 \&#160;&#160;&#160;&#160; -max_paths 5000000 -max_slack 0 -pbaEffort high</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688403"></a>set_eco_opt_mode -partition_list_file partition.txt</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688404"></a>set_eco_opt_mode -optimize_replicated_modules true </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2151161"></a>eco_opt_design -hold</pre>
+
+<p>
+<a id="pgfId-2151225"></a>Template 6 : The Paradime flow performs DRV, Setup, Hold timing closure on a reduced database based on the user-defined Setup/Hold path_groups and a list of DRV pins.</p>
+<p>
+<a id="pgfId-2151226"></a>The STA saved session can be SMSC or MMMC.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688410"></a>setDistributeHost -local -timeout 10000</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688411"></a>set_multi_cpu_usage -localCpu 24 -remoteHost 4 -cpuPerRemoteHost 4 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688412"></a>set_distribute_mmmc_mode -eco true</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688413"></a>set_distribute_mmmc_mode -merge_view_definitions</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688414"></a>set_distribute_mmmc_mode -enable_high_capacity_eco </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688415"></a>set_eco_opt_mode -path_group_file_name {TCL script which creates mySetupPG and myHoldPG path_groups} </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688416"></a>set_eco_opt_mode -include_setup_path_groups {mySetupPG}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688417"></a>set_eco_opt_mode -include_hold_path_groups {myHoldPG}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688418"></a>set_eco_opt_mode -select_drv_pin_file {myDRVPinList.txt}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688419"></a>set eco_setup_view_list {setup_1v setup_2v setup_3v setup_4v}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688420"></a>set eco_hold_view_list {hold_1v hold_2v hold_3v hold_4v}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688421"></a>set eco_dynamic_view {setup_3v} ; set eco_leakage_view {setup_3v}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688422"></a>set eco_lef_file_list &#8220;tech.lef std.lef ram_256X16A.lef&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688423"></a>set eco_def_file_list &#8220;top.def blockA.def blockB.def &quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688424"></a>set_distribute_mmmc_mode -set_filler_mode {-corePrefix FILL}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688425"></a>distribute_read_design -restore_design all -restore_dir \ &#160;&#160;&#160;&#160;PARADIME_SESSIONS_211/ -outdir reports_Paradime</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688426"></a>set_eco_opt_mode -retime path_slew_propagation -nworst 50 \&#160;&#160;&#160;&#160; -max_paths 5000000 -max_slack 0 -pbaEffort high</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688427"></a>set_eco_opt_mode -partition_list_file partition.txt</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3688428"></a>set_eco_opt_mode -optimize_replicated_modules true </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2388818"></a>eco_opt_design &#8211;drv; eco_opt_design &#8211;setup; eco_opt_design -hold </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3167930"></a></pre>
+
+
+
+<h4><em>
+<a id="pgfId-2433476"></a>Related Topics</em></h4>
+
+<ul><li>
+<a id="pgfId-2465783"></a><a href="SignoffECO_ecoflow.html#59262">Signoff ECO Flow</a></li><li>
+<a id="pgfId-2465843"></a><a href="SignoffECO_highcapacityecoflow.html#89899">High Capacity ECO Flow for Timing and Power Closure</a></li><li>
+<a id="pgfId-2433538"></a><a href="SignoffECO_metalecoflow.html#41930">Metal ECO Flow</a></li></ul>
+
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="SignoffECO_hierarchicaleco.html" id="prev" title="Hierarchical ECO Optimization">Hierarchical ECO Optimization</a></em></b><b><em><a href="SignoffECO_nodelocations.html" id="nex" title="Generating Node Locations in Parasitic Data">Generating Node Locations in P ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

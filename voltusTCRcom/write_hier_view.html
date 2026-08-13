@@ -1,0 +1,354 @@
+
+<html><head><title>write_hier_view</title>
+<meta name="page_sequence" content="28045000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666315" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="write_hier_view" />
+<meta name="Keywords" content="create,hierarchy,hierarchical rail analysis,hierarchical power-grid view" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Rail Analysis," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusTCRcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666315" />
+<meta name="NextFile" content="write_power_pads.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="write_die_model.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Text Reference Manual  -- write_hier_view" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltuscuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusTCRcomTOC.html">Contents</a></li><li><a class="prev" href="write_die_model.html" title="write_die_model">write_die_model</a></li><li style="float: right;"><a class="viewPrint" href="voltusTCRcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="write_power_pads.html" title="write_power_pads">write_power_pads</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Text Reference Manual <br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>write_hier_view</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span id="write_hier_view-write_hier_view"></span><span class="confluence-anchor-link" id="write_hier_view-write_hier_view"></span> <code><br /><code>write_hier_view<br />[-help]<br />[-block_lef <em>lef_file </em>| -block_stream <em>gds_file</em>]<br />[-block_lef <em>lef_file</em> | -stream_port_file <em>gds_port_file</em>]<br />[-cell_name <em>name</em>]<br />[&#8211;cluster_via1_ports {true | false}]<br />[-cluster_via_rule { {<em>via_layer1</em> <em>number_of_equidistant_vias</em>}...}]<br />[-cluster_via_size <em>value</em>]<br />[-compress_power_grid_db {true | false}]<br />[-def <em>list_of_DEF_files</em>]<br />[-extraction_mode {fast | accurate}]<br />[-extraction_work_directory <em>path_to_extraction_work_directory</em>]<br />[-force_library_merge {true | false}]<br />[-ground_pins {<em>pin1</em> <em>pin2</em> ...<em>pinN</em>}]<br />[&#8211;ignore_decaps {true | false}]<br />[&#8211;ignore_fillers {true | false}]<br />[&#8211;ignore_shorts {true | false}]<br />[-libgen_command_file <em>file</em>]<br />-library_name <code><em>name</em><br />[-max_via_cluster_mode {true | false}]<br />[-oa_reference_libs <em>OA_reference_libs</em>]</code><br />[-output_dir <code><em>dir</em></code>]<br />[-parasitic_extractor_command_file <em>filename</em>]<br />[-power_grid_view_libraries <code><em>primitive_cells.cl</em></code>]<br />[-power_pins {<code><em>pin1</em></code> <code><em>value1</em></code> <code><em>pin2</em></code> <code><em>value2</em></code> ...<code><em>pinN</em></code> <code><em>valueN</em></code>}]</code><br /><br /></code></p>
+
+<p><br /></p>
+
+<p>Creates a hierarchical power-grid view. The hierarchical PGV generation of a block is part of the top-level Hierarchical Rail Analysis.</p>
+<h4 id="write_hier_view-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 817.0px;"><colgroup><col style="width: 116.0px;" /><col style="width: 700.0px;" /></colgroup><tbody><tr><td class="confluenceTd">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd">
+<p>Outputs a brief description that includes type and default information for each <code>write_hier_view parameter.</code></p>
+
+<p>For a detailed description of the command and all of its parameters, use the&#xa0;man&#xa0;command:</p>
+
+<p>man <code>write_hier_view</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" valign="top">
+<p><code>-block_lef </code><code><em>lef_file</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the block LEF file. The <code><em>lef_file</em></code> must have all power pin port geometries defined for the hierarchical block.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" valign="top">
+<p><code>-block_stream </code><code><em>gds_file</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>In absence of block LEF, you can specify block GDS and port label file to generate hierarchical power-grid view.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-cell_name </code><code><em>name</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the block cell name as specified in the block DEF file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>&#8211;cluster_via1_ports {true | false}</code></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">
+<p>Designs with follow-pin routing on M1 and M2 layers have standard cells library LEF with M1, M2, and VIA1 ports. This parameter specifies to cluster VIA1 ports for such cells in order to improve overall extraction and rail analysis performance.</p>
+
+<p><em>Default</em>: <code>true</code></p>
+
+<p>This parameter is set to <code>true</code> by default to improve VIA1 port handling in designs with M1 and M2 follow-pin routing. This parameter gives significantly better performance by clustering equidistant VIA1 ports defined in cell LEF without significant loss of accuracy. However, if you specify a clustering rule, the user specification takes precedence over automated&#xa0;VIA1 clustering.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-cluster_via_rule { {<em>via_layer1</em> <em>number_of_equidistant_vias</em>}...}</code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">
+<p>Controls the number of vias to cluster on a layer basis. The VIA clustering rule specified using this parameter will override the default clustering rule for a given accuracy mode.</p>
+
+<p>The following command will cluster 100 equidistant VIA1 cuts, 200 equidistant VIA2 cuts, and 300 equidistant VIA7 cuts:</p>
+
+<p><code>write_hier_view &#8211;cluster_via_rule { {VIA1 100}} {VIA2 200} {VIA7 300}}</code></p>
+
+<p>The rest of the VIAs will be clustered using the default clustering rule depending upon the rail analysis accuracy mode.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-cluster_via_size <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">
+<p>Specifies the size of the via array to cluster all via layers except VIA1 (layer between Metal1 and Metal2).</p>
+
+<p>The default value is <code>625</code> (25x25 via array), except when running static analysis using HD mode. The default for static HD mode is <code>16</code> (4x4), primarily to preserve more accuracy for EM analysis.</p>
+
+<p><em>Default</em>: <code>625</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-compress_power_grid_db {true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">
+<p>Specifies to compress the output files generated by extraction and rail analysis to save disk space usage. This parameter reduces disk space requirement from the extraction and rail analysis stages at approximately 5-10% performance penalty.</p>
+
+<p><em>Default</em>: <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" valign="top">
+<p><code>-def </code><code><em>list_of_DEF_files</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies a list of block DEF files for hierarchical analysis.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" valign="top">
+<p><code>-extraction_mode {fast | accurate}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Determines what power-grid views will be created, dependent on whether fast or accurate extraction is to be done. By default, hierarchical PGV generates both detailed and reduced views.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-extraction_work_directory <em>path_to_extraction_work_directory</em></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">
+<p>Specifies to re-use the extracted power-grid database to generate HPGV. This parameter is only supported to generate hierarchical extraction view of a block in the design.</p>
+
+<p>The specified extraction work directory must contain the extracted data for all the nets for which the hierarchical extraction view needs to be generated.</p>
+
+<p>This parameter is mutually exclusive with the&#xa0; <code>-def</code> parameter of the <code>write_hier_view</code> command.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>-force_library_merge</code> <code><code>{true | false}</code></code></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">Specifies to force merge PGVs with different resistivity and layers. It uses the technology information of the first library. If multiple tech-only PGVs are specified, it will take the first tech-only PGV definition and the first cell definition. If you are merging a tech-only PGV with other PGVs, it will keep the tech-only technology definition and the first cell definition.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" valign="top">
+<p><code>-ground_pins {</code><code><em>pin1</em></code><code><em>pin2</em></code><code><em>...pinN</em></code><code>} </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies a list of ground nets of the block.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>&#8211;ignore_decaps {true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">
+<p>Ignores decap cells during rail analysis. It ignores cells that are tagged as DECAP cells during library characterization or set as decap cells using the <code>set_rail_analysis_mode &#8211;decap_cell_list</code> command parameter. If decaps are used to preserve connectivity on the follow-pin routing, you must set this parameter to <code>false</code>. Ignoring decaps during dynamic analysis is not recommended.</p>
+
+<p><em>Default</em>: <code>true </code>for static, <code>false</code> for dynamic</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>&#8211;ignore_fillers {true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">Ignores filler cells during rail analysis if the list of filler cells are defined in PGV generation, or specified as fillers using the <code>set_rail_analysis_mode -filler_cell_list </code>command parameter. During rail analysis, ignore library cells that are tagged as FILLER cells and have no capacitance associated with the interface nodes. If fillers are used to preserve connectivity on the follow-pin routing, you must set this parameter to <code>false</code>.<br />
+<p><em>Default</em>: <code>true</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>&#8211;ignore_shorts {true | false}</code></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">
+<p>Ignores shorts that are found during extraction and continues hierarchical PGV generation. However, <code>-ignore_shorts</code> cannot be applied if the design contains GDS.</p>
+
+<p><em>Default</em>: <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" valign="top">
+<p><code>-libgen_command_file </code><code><em>file</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the file name of a power-grid library generation (libgen) command file. When specified, it will be included in the auto-generated <code>libgen.cmd</code> file at the end as <code>include </code><code>&lt;file&gt;</code>. This parameter allows you to provide a file that includes specific library generation options.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" valign="top">
+<p><code>-library_name </code><code><em>name</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the library that the block power-grid view will be placed in. A <code>.cl </code>extension will automatically be added to the name.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" valign="top">
+<p><code>-max_via_cluster_mode {true | false}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the extractor to cluster vias automatically to reduce the RC elements by clustering vias into one node, therefore reducing the IR drop analysis runtime in dynamic mode. It is based on the notion that current evenly distributes through all vias of an array via.</p>
+
+<p><em>Default</em>: <code>true</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" valign="top">
+<p><code>-oa_reference_libs </code><code><em>OA_Reference_libs</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Reads OpenAccess reference libraries.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-output_dir </code><code><em>dir</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the output directory that the results will be saved in.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-parasitic_extractor_command_file <em>filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">Specifies the name of the file input to the extractor invoked by the Library Generation engine. This file contains information about the cells in the design and is used for resistance and capacitance extraction.&#xa0;For variables and functions that can be placed in this command file, see<em>&#xa0;<span>Extractor Options </span></em><span>in</span><em><span> </span>Voltus Text Command Reference</em>. In general, this parameter is used for debugging purposes.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" valign="top">
+<p><code>-power_grid_view_libraries </code><code><em>primitive_cells.cl</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies a list of primitive cell libraries for hierarchical PGV generation.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" valign="top">
+<p><code>-power_pins {</code><code><em>pin1</em></code><code><em>value1</em></code><code><em>pin2</em></code><code><em>value2 ...pinN</em></code><code><em>valueN</em></code><code>} </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies a list of power nets and the nominal voltage of those nets.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-stream_port_file </code><code><em>gds_port_file</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>In absence of block LEF, you can specify block GDS and port label file to generate hierarchical power-grid view.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="write_hier_view-Examples">Examples</h4>
+<ul><li>The following command generates a hierarchical power-grid view for the hierarchical block using LEF and extraction directories for VDD and VSS nets: <br /><code>write_hier_view -block_lef blockA.lef -extraction_work_directory&#xa0;work -library_name blockA&#xa0; &#8211;power_grid_view_libraries ./pgv/stdcells.cl&#xa0; &#8211;power_nets {vdd 1.2} &#8211;ground_nets {gnd} &#8211;cell_name blockA</code><br /><br />The design.lef must have all power pin port geometries defined for the hierarchical block. The generated hierarchical PGV library is blockA.cl. The library is in binary format and it stores the block&#39;s connectivity to the top-level based on the provided LEF data. It stores the extracted power-grid network and current distribution from the provided directories.</li><li>The following command specifies to force merge PGVs with different resistivity and layers:<br /><code>write_hier_view&#xa0; \<br /><span style="color:var(--ds-text,#172b4d);">&#xa0; -force_library_merge true \</span><br />&#xa0; -library_name lib1&#xa0; \<br />&#xa0; -view hier_extraction_view \<br />&#xa0; -power_grid_view_libraries {../accurate_stdcells_A.cl ../accurate_stdcells_A.cl ... ../accurate_stdcells_AN.cl } \<br />&#xa0; -def {../design.def.gz} \<br />&#xa0; -cell_name&#xa0; CELLA \<br />&#xa0; -power_pins {VDD 1.32} \<br />&#xa0; -ground_pins {VSS} \<br />&#xa0; -block_lef {./design.lef}&#xa0; \<br />&#xa0; -extraction_mode accurate \</code><br /><code>write_pg_library -output pgv</code></li></ul><h4 id="write_hier_view-RelatedTopics">Related Topics</h4>
+<ul><li>&quot;<u>Hierarchical Rail Analysis</u>&quot; in the&#xa0;<em>Voltus User Guide</em> <br />&#xa0;</li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="write_die_model.html" id="prev" title="write_die_model">write_die_model</a></em></b><b><em><a href="write_power_pads.html" id="nex" title="write_power_pads">write_power_pads</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

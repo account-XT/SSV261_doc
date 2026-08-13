@@ -1,0 +1,188 @@
+
+<html><head><title>Flowkit</title>
+<meta name="page_sequence" content="15000000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="leenap" />
+<meta name="CreateDate" content="2026-03-26" />
+<meta name="CreateTime" content="1774530246" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Stylus Common UI Migration Guide" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Migration Guide" />
+<meta name="DocType" content="Migration" />
+<meta name="FileTitle" content="Flowkit" />
+<meta name="Keywords" content="standalone Tcl files, flow objects, basic flow sequence, design initialization commands, multi-tool flow, flow definitions, sub-flow, flow execution" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Stylus,Stylus,Stylus," />
+<meta name="prod_subfeature" content="Flowkit,Flowkit,Flowkit," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="3" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusMIGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-03-26" />
+<meta name="ModifiedTime" content="1774530246" />
+<meta name="NextFile" content="flowtool.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Foundation_Flows.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Migration Guide -- Flowkit" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="innovusCUIMig261" />
+<meta name="confluence-version" content="7.19.19" />
+<meta name="ecms-plugin-version" content="04.21.019" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusMIGcomTOC.html">Contents</a></li><li><a class="prev" href="Foundation_Flows.html" title="Foundation_Flows">Foundation_Flows</a></li><li style="float: right;"><a class="viewPrint" href="voltusMIGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="flowtool.html" title="flowtool">flowtool</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Migration Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <div style="width: 100%; font-size: 32px; text-align: left;               font-weight: bold;">5</div>
+<h1 style="margin: 4px 0 4px;"><span>Flowkit</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>Flowkit enables the previous step scripts (standalone Tcl files) become flow objects, which are stored in the database. In the example below, the flow block is defined as a flow of sub-flows, which map to the same basic flow sequence as the foundation flow:</p>
+
+<p><code>create_flow -name block {flow:fplan flow:prects flow:cts flow:route flow:postroute}</code></p>
+
+<p>Also, there is&#xa0;<code>design_config.tcl</code>, which contains the design initialization commands and the&#xa0;<code>mmmc_config.tcl</code>, which is the flowkit equivalent of the&#xa0;<code>view_definition.tcl</code>&#xa0;files. The&#xa0;<code><em>tool</em>_steps.tcl</code>&#xa0;file contains the&#xa0;<code>create_flow_step</code>&#xa0;commands for the steps associated with a particular tool (Genus, Innovus, or Tempus). For a multi-tool flow (as depicted below), the block flow would be pre-pended with&#xa0;<code>flow:synth</code>&#xa0;(genus) and post-pended with&#xa0;<code>flow:sta</code>&#xa0;(tempus).</p>
+
+<p>Since the flow definitions for the (sub)flows specify the tool, flowkit knows how to launch them. Example:</p>
+
+<p><code><span>create_flow -name prects -tool <span class="fontredcadence">tempus</span> {flow_start run_place_opt flow_finish}</span></code></p>
+<h3 id="Flowkit-TheFlowkitStylusFlow">The Flowkit Stylus Flow</h3>
+
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/712492759/712492760.png" data-linked-resource-container-id="712492759" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="Flowkit Stylus Flow.png" data-linked-resource-id="712492760" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/712492759/712492760.png" width="400" /></span></p>
+
+<p>Each of the sub-flow consists of the flow steps. The flow customization is done by creating the specified flow steps and attaching them before or after one of these flow steps.&#xa0;</p>
+
+<p>For example, the previous&#xa0;<code>pre_cts</code>&#xa0;plug-in in the foundation flow would be handled in the following way. Consider a plug-in file (<code>plug/pre_cts.tcl</code>) that contains the following:</p>
+
+<p><code>set_interactive_constraint_modes [all_constraint_modes -active]</code></p>
+
+<p><code>set_clock_uncertainty -setup 0.050 [get_clocks {CLK}]</code></p>
+
+<p><code>set_clock_uncertainty -hold 0.003 [get_clocks {CLK}]</code></p>
+
+<p><code>reset_propagated_clock [all_clocks]</code></p>
+
+<p><code>reset_propagated_clock [get_ports [get_property [all_clocks] sources]]</code></p>
+
+<p>The stylus flowkit&#xa0;<code>cts</code>&#xa0;flow is defined as the following sequence of steps:</p>
+
+<p><code><span>create_flow &#8211;name cts &#8211;tool&#xa0;</span><span><span class="fontredcadence">tempus</span></span><span>&#xa0;\</span></code></p>
+
+<p><code>{flow_start add_clock_spec build_clock_tree add_tieoffs flow_finish}</code></p>
+
+<p>You can create a flow step that contains the plug-in commands (if necessary, convert the legacy plug-in commands to Common UI commands and use&#xa0;<code>convert_legacy_to_common_ui</code>).</p>
+
+<p><code>create_flow_step &#8211;name pre_cts {</code></p>
+
+<p><code>set_interactive_constraint_modes [all_constraint_modes -active]</code></p>
+
+<p><code>set_clock_uncertainty -setup 0.050 [get_clocks {CLK}]</code></p>
+
+<p><code>set_clock_uncertainty -hold 0.003 [get_clocks {CLK}]</code></p>
+
+<p><code>reset_propagated_clock [all_clocks]</code></p>
+
+<p><code>reset_propagated_clock [get_ports [get_property [all_clocks] sources]]</code></p>
+
+<p><code>}</code></p>
+
+<p>This flow step would then be added to the flow before the&#xa0;<code>add_clock_spec</code>&#xa0;flow step:</p>
+
+<p><code>edit_flow &#8211;append flow_step:pre_cts &#8211;before flow_step:add_clock_spec</code></p>
+
+<p>The flow execution is managed by a new executable called flowtool, as show below, so make is no longer necessary.</p>
+
+<p>The foundation flow&#xa0;<code>setup.tcl</code>&#xa0;contained variable definitions that the code generator would use to create the command sequence and determine the flow step sequence (for example,&#xa0;<code>place_opt_design</code>&#xa0;and&#xa0;<code>fix_hold</code>). With a flowkit,&#xa0;<code>write_flow_template</code>&#xa0;allows you to enable features that control the step content and the sequence of the flow templates that are generated.&#xa0;</p>
+
+<p>With respect to the variable definition in the&#xa0;<code>setup.tcl</code>&#xa0;that is used to map commands or command options, the large majority of these now map directly to Common UI attributes, which makes the need for a layer of abstraction unnecessary:</p>
+
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/712492759/712492761.png" data-linked-resource-container-id="712492759" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="Flow 1.png" data-linked-resource-id="712492761" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/712492759/712492761.png" width="600" /></span></p>
+
+<p>Additionally, the rest of the vars were used to define the timing information for the MMMC view definition file generation (for example,&#xa0;<code>library_sets</code>,&#xa0;<code>rc_corners</code>,&#xa0;<code>delay_corners</code>,&#xa0;<code>constraint_modes</code>, and&#xa0;<code>analysis_views</code>). The Common UI (and hence the flowkit) requires additional migration of the view definition file. In particular, the new MMMC syntax has a new object called the timing condition. Here is an example of converting a legacy MMMC file to CUI syntax:</p>
+
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/712492759/712492763.png" data-linked-resource-container-id="712492759" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="Flow 2.png" data-linked-resource-id="712492763" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/712492759/712492763.png" width="600" /></span></p>
+
+<p>The timing condition object defines the operating condition and library set:</p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><th class="confluenceTh">Parameter</th><th class="confluenceTh">Description</th></tr>
+<tr><td class="confluenceTd"><code>-help</code></td>
+<td class="confluenceTd">Displays the command usage.</td>
+</tr>
+<tr><td class="confluenceTd"><code>-library_sets <em>string</em></code></td>
+<td class="confluenceTd">Specifies the list of libsets to associate to this timing condition.</td>
+</tr>
+<tr><td class="confluenceTd"><code>-name <em>tc_name</em></code></td>
+<td class="confluenceTd">Specifies unique name for the timing condition.</td>
+</tr>
+<tr><td class="confluenceTd"><code>-opcond <em>string</em></code></td>
+<td class="confluenceTd">Specifies single name of an operating condition.</td>
+</tr>
+<tr><td class="confluenceTd"><code>-opcond_library <em>string</em></code></td>
+<td class="confluenceTd">Specifies name of library to search for the named opcond.</td>
+</tr>
+</tbody></table></div>
+
+<p>In addition, the&#xa0;<code>timing_condition</code>&#xa0;argument to&#xa0;<code>create_delay_corner</code>&#xa0;supports the new syntax for power domain binding:</p>
+
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/712492759/712492762.png" data-linked-resource-container-id="712492759" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="Flow 3.png" data-linked-resource-id="712492762" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/712492759/712492762.png" width="600" /></span></p>
+
+<p>The command&#xa0;<code>update_delay_corner</code>&#xa0;is no longer necessary because the power domains are bound directly to a timing condition using the&#xa0;<code>@</code>&#xa0;syntax.</p>
+
+<p><span class="fontredcadence"><h4 id="Flowkit-RelatedInformation">Related Information</h4>
+<ul><li>Flowkit Commands and Attributes</li><li>flowtool</li></ul></span></p>
+
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Foundation_Flows.html" id="prev" title="Foundation_Flows">Foundation_Flows</a></em></b><b><em><a href="flowtool.html" id="nex" title="flowtool">flowtool</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

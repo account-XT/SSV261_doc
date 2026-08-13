@@ -1,0 +1,194 @@
+
+<html><head><title>Running Constraint Promotion</title>
+<meta name="page_sequence" content="18004000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="apokhara" />
+<meta name="CreateDate" content="2026-04-12" />
+<meta name="CreateTime" content="1776062302" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="" />
+<meta name="DocTitle" content="Litmus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Running Constraint Promotion" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="litmus_ug" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-12" />
+<meta name="ModifiedTime" content="1776062302" />
+<meta name="NextFile" content="Constraint_Promotion_Results.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Promotion_Configuration.html" />
+<meta name="c_product" content="Litmus," />
+<meta name="Product" content="Litmus," />
+<meta name="ProductFamily" content="Litmus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Litmus User Guide -- Running Constraint Promotion" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="litmus26ug" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+<script type="text/javascript" src="styles/shCore1.js">/*<![CDATA[*//*]]>*/</script><script type="text/javascript" src="styles/shCore.js">/*<![CDATA[*//*]]>*/</script><script type="text/javascript" src="styles/shBrushCpp.js">/*<![CDATA[*//*]]>*/</script><script type="text/javascript" src="styles/shBrushJava.js">/*<![CDATA[*//*]]>*/</script><script type="text/javascript" src="styles/shBrushXml.js">/*<![CDATA[*//*]]>*/</script><script type="text/javascript" src="styles/shBrushPython.js">/*<![CDATA[*//*]]>*/</script><script type="text/javascript" src="styles/shBrushPowerShell.js">/*<![CDATA[*//*]]>*/</script><link rel="stylesheet" href="styles/shCoreDefault.css" type="text/css" /><link rel="stylesheet" href="styles/shCoreMidnight.css" type="text/css" /><script type="text/javascript">/*<![CDATA[*/
+SyntaxHighlighter.all();
+/*]]>*/</script>
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="litmus_ugTOC.html">Contents</a></li><li><a class="prev" href="Promotion_Configuration.html" title="Promotion_Configuration">Promotion_Configuration</a></li><li style="float: right;"><a class="viewPrint" href="litmus_ug.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Constraint_Promotion_Results.html" title="Constraint_Promotion_Results">Constraint_Promotion_Results</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Litmus User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Running Constraint Promotion</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>Once the design is initialized and promotion configuration parameters are defined, the actual Constraint Promotion step is triggered using the <code>promote_hierarchical_constraints</code> command. This step performs the core Promotion Analysis, applying user-defined priority ordering, conflict resolution strategies, and evaluating registered block‑level SDCs. The following illustration shows where this operation takes place in the Constraint Promotion Flow:</p>
+
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image confluence-content-image-border" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/745809531/745809532.png" data-linked-resource-container-id="745809531" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image-2026-2-6_11-59-21-1.png" data-linked-resource-id="745809532" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="318" src="attachments/745809531/745809532.png" tabindex="0" width="700" /></span></p>
+<h2 id="RunningConstraintPromotion-ConstraintPromotionCommand">Constraint Promotion Command</h2>
+
+<p>The <code>promote_hierarchical_constraints</code> command supports flexible invocation modes: global promotion, per-block promotion, or per‑constraint‑type promotion. This makes it easy to use for<span class="inline-comment-marker" data-ref="8c52ddaa-8dd8-4a8b-b075-166ece5c1a91">&#xa0;to</span> both full‑chip hierarchical signoff and targeted incremental debugging scenarios.</p>
+<h3 id="RunningConstraintPromotion-CommandUsage">Command Usage</h3>
+<div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="brush: java; gutter: false">promote_hierarchical_constraints [-help] \
+[-blocks &lt;string&gt;] \
+[-instances &lt;string&gt;] \
+[-types &lt;string&gt;] \
+[&gt; &lt;file&gt;] [&gt;&gt; &lt;file&gt;]</pre>
+</div>
+</div>
+<h3 id="RunningConstraintPromotion-Options">Options</h3>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" scope="col"><code><strong>-help</strong></code></td>
+<td class="confluenceTd" scope="col">
+<p>Prints command usage.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><strong>-blocks &lt;string&gt;</strong></code></td>
+<td class="confluenceTd">Promotes constraints for specific module(s).</td>
+</tr>
+<tr><td class="confluenceTd"><code><strong>-instances &lt;string&gt;</strong></code></td>
+<td class="confluenceTd">Promotes constraints only for listed instances.</td>
+</tr>
+<tr><td class="confluenceTd"><code><strong>-types &lt;string&gt;</strong></code></td>
+<td class="confluenceTd">Promotes only selected constraint classes.</td>
+</tr>
+<tr><td class="confluenceTd"><code><strong>&gt; &lt;file&gt;</strong></code></td>
+<td class="confluenceTd">Writes the promoted SDC to a specific output file.</td>
+</tr>
+<tr><td class="confluenceTd"><code><strong>&gt;&gt; &lt;file&gt;</strong></code></td>
+<td class="confluenceTd">
+<p>Appends to an existing file.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h3 id="RunningConstraintPromotion-Examples">Examples</h3>
+<h4 id="RunningConstraintPromotion-Promoteonlyselectedinstances:">Promote only selected instances:</h4>
+
+<p><code>promote_hierarchical_constraints -instances {U1 U2}</code></p>
+<h4 id="RunningConstraintPromotion-Promoteonlyclockcreationconstraints:">Promote only clock creation constraints:</h4>
+
+<p><code>promote_hierarchical_constraints -types &quot;create_clock create_generated_clock&quot;</code></p>
+<h4 id="RunningConstraintPromotion-Promoteonlycaseanalysissettings:">Promote only case analysis settings:</h4>
+
+<p><code>promote_hierarchical_constraints -types set_case_analysis</code></p>
+<h4 id="RunningConstraintPromotion-Writeoutputdirectlytoafile:">Write output directly to a file:</h4>
+
+<p><code>promote_hierarchical_constraints &gt; promote.sdc</code></p>
+<h2 id="RunningConstraintPromotion-RootAttributesControllingPromotion">Root Attributes Controlling Promotion</h2>
+
+<p><span class="inline-comment-marker" data-ref="12abc707-1df6-46e8-9de6-e0d7515c8b58">Root attributes can be used</span> to refine how specific classes of constraints are interpreted during constraint propagation. These attributes are useful when block-level constraints <span class="inline-comment-marker" data-ref="c09a8e2c-dd74-482e-abfd-df4e1f73144d">include</span> internal IO delays, loads, or clock structures that may require special handling.</p>
+<h3 id="RunningConstraintPromotion-AvailableAttributes">Available Attributes</h3>
+<div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><th class="confluenceTh">Attribute</th><th class="confluenceTh">Default</th><th class="confluenceTh">Description</th></tr>
+<tr class=""><th class="confluenceTh"><strong><code>timing_promote_boundary_path_exceptions</code></strong></th><td class="confluenceTd">true</td>
+<td class="confluenceTd">Enables promotion of exceptions involving block boundary ports.</td>
+</tr>
+<tr class=""><th class="confluenceTh"><strong><code>timing_promote_in_out_delay_over_combinational_cone</code></strong></th><td class="confluenceTd">true</td>
+<td class="confluenceTd">Allows input/output delays to propagate through combinational logic when promoting constraints.</td>
+</tr>
+<tr class=""><th class="confluenceTh"><strong><code>timing_promote_internal_set_input_delay</code></strong></th><td class="confluenceTd">false</td>
+<td class="confluenceTd">Controls promotion of <code>set_input_delay</code> inside blocks.</td>
+</tr>
+<tr class=""><th class="confluenceTh"><strong><code>timing_promote_internal_set_output_delay</code></strong></th><td class="confluenceTd">false</td>
+<td class="confluenceTd">Controls promotion of <code>set_output_delay</code> inside blocks.</td>
+</tr>
+<tr class=""><th class="confluenceTh"><strong><code>timing_promote_set_load_over_combinational_cone</code></strong></th><td class="confluenceTd">false</td>
+<td class="confluenceTd">Enables promotion of load constraints across combinational logic.</td>
+</tr>
+<tr class=""><th class="confluenceTh"><strong><code>timing_disable_promotion_clock_prefix</code></strong></th><td class="confluenceTd">false</td>
+<td class="confluenceTd">Removes instance name prefixes from promoted clock names if no conflict exists.</td>
+</tr>
+<tr class=""><th class="confluenceTh"><strong><code>timing_promote_clock_to_top_port</code></strong></th><td class="confluenceTd">false</td>
+<td class="confluenceTd">Allows block‑level clocks to be promoted directly to top-level ports.</td>
+</tr>
+<tr><th class="confluenceTh"><code><strong><span style="color:var(--ds-text,#172b4d);">timing_disable_promotion_clock_group_prefix</span></strong></code></th><td class="confluenceTd">false</td>
+<td class="confluenceTd">
+<p><span style="color:var(--ds-text,#172b4d);">Disables the automatic addition of instance name prefixes to clock group names after promotion.</span></p>
+
+<p><strong><span style="color:var(--ds-text,#172b4d);">Example:</span></strong></p>
+
+<p>Input Block SDC: <code>set_clock_groups -name blk_clk_grp -physically_exclusive -group {CLK} -group {CLK2}</code></p>
+
+<p>Default: <code>set_db timing_disable_promotion_clock_group_prefix false</code></p>
+
+<p>Expected Promoted Constraint: <code>set_clock_groups -name blk/blk_clk_grp -physically_exclusive  -group  [get_clocks {CLK}] -group [get_clocks {CLK2}]</code></p>
+
+<p>With <code>set_db timing_disable_promotion_clock_group_prefix true</code></p>
+
+<p>Expected Promoted Constraint: <code>set_clock_groups -name blk_clk_grp -physically_exclusive  -group  [get_clocks {CLK}] -group [get_clocks {CLK2}]</code></p>
+</td>
+</tr>
+</tbody></table></div>
+<h3 id="RunningConstraintPromotion-TypicalUseCases">Typical Use Cases</h3>
+<ul><li>Enabling <code>timing_promote_boundary_path_exceptions</code> ensures correct propagation of false paths or multicycle paths defined on block IO.</li><li>Disabling prefix removal (<code>timing_disable_promotion_clock_prefix</code>) preserves hierarchical uniqueness in multi‑IP environments.</li><li>Enabling <code>timing_promote_clock_to_top_port</code> can simplify SoC‑level clock modeling when block clocks directly drive SoC pins.</li></ul>
+<p>These options provide low‑level control <span class="inline-comment-marker" data-ref="d420d5cb-3932-4215-93b8-eb1690dd26af">to enable</span> working with complex or non‑uniform block constraint topologies.</p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Promotion_Configuration.html" id="prev" title="Promotion_Configuration">Promotion_Configuration</a></em></b><b><em><a href="Constraint_Promotion_Results.html" id="nex" title="Constraint_Promotion_Results">Constraint_Promotion_Results</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

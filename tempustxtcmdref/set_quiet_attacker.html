@@ -1,0 +1,138 @@
+
+<html><head><title>set_quiet_attacker</title>
+<meta name="page_sequence" content="23045000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287502" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_quiet_attacker" />
+<meta name="Keywords" content="set coupled nets,non-attackers,silent nets,quiet attacker" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="SI Analysis,Signal Integrity," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287502" />
+<meta name="NextFile" content="set_si_mode.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_outbound_report.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- set_quiet_attacker" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="set_outbound_report.html" title="set_outbound_report">set_outbound_report</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_si_mode.html" title="set_si_mode">set_si_mode</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_quiet_attacker</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><span id="set_quiet_attacker-set_quiet_attacker"></span>set_quiet_attacker <br /><code>[-help]</code><br /><code>[-analysis_type {early | late}]</code><br /><code>[-attacker&#xa0;<em>string</em>]&#xa0;</code><br /><code>[-transition {rise | fall}]</code><br /><code>[-victim&#xa0;<em>string</em>]</code><br /><code>[-view&#xa0;<em>string</em>]</code></code></p>
+
+<p>Specifies one or more coupled nets as non-attackers (silent) for the delay and glitch analysis of a given victim net.</p>
+
+<p>You can run the&#xa0;<code>update_glitch</code>&#xa0;or&#xa0;<code>update_timing</code>&#xa0;command and view the results in the&#xa0;<code>report_noise</code>&#xa0;or&#xa0;<code>report_timing</code>&#xa0;command output.</p>
+<h4 id="set_quiet_attacker-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-analysis_type {early | late}</code></td>
+<td class="confluenceTd" colspan="1"><span>Specifies the analysis type for which the attackers will be assumed quiet. If no value is specified, attackers are skipped for both </span><code>early/late</code><span> analysis.&#xa0;</span></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-attacker <em>string</em></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the attackers that should be made quiet for the given victim net(s). If no attacker is specified, all the aggressors of the given victim(s) will be ignored.</p>
+
+<p><strong>Note</strong>: If no victim is specified, the specified attackers are made quiet for&#xa0;all victim nets in the design.&#xa0;</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-transition {rise | fall}</code></td>
+<td class="confluenceTd" colspan="1">Specifies the victim transition for which attackers will be assumed quiet. If no value is specified, attackers are skipped for both <code>rise</code> and <code>fall</code> transitions&#xa0;of the victim net.&#xa0;</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-victim <em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a list of victim nets for which attackers should be made quiet. Specific attackers can be skipped using the <code>-attacker</code> option of this command. If the <code>-attacker</code> option is not specified, all the attackers of the given nets are made silent, and SI analysis will not be performed on these nets.</p>
+
+<p><strong>Note</strong>: If this option is not specified, the attackers specified in the <code>-attacker</code> option are made quiet for all the nets in the design. &#xa0;</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-view <em>string</em></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies the view for which attackers should be made quiet. If no view is specified, attackers are assumed quiet in all views.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_quiet_attacker-Examples">Examples</h4>
+
+<p>Consider a design having an attacker <code>agg</code> to victim nets <code>vic1</code> and <code>vic2</code>. The following command sets the attacker <code>agg</code> as quiet for both the victim nets <code>vic1</code> and <code>vic2</code>.<br /><code>tempus &gt; set_quiet_attacker &#8211;attacker {agg}</code></p>
+<ul><li>The following command&#xa0;sets the attackers A1 and A2 as quiet when V1 is rising during late analysis. <br /><code>tempus &gt;&#xa0;set_quiet_attacker &#8211;victim V1 &#8211;attacker A1 A2 &#8211;transition rise &#8211;analysis_type late</code></li></ul><ul><li>The following command sets the attacker&#xa0;A1 quiet for victim V1 in the analysis view VIEW1. In this case,&#xa0;A1 may be a valid attacker during SI analysis for victim V1 in views other than VIEW1. <br /><code>tempus &gt;&#xa0;set_quiet_attacker &#8211;victim V1 &#8211;attacker A1 &#8211;view {VIEW1}</code></li></ul>
+<p>Consider a design having victim&#xa0;<code>vic</code>&#xa0;with attackers&#xa0;<code>agg1</code>&#xa0;and&#xa0;<code>agg2</code>:</p>
+<ul><li>The following command sets both the attackers, <code>agg1</code>&#xa0;and&#xa0;<code>agg2</code>, as quiet for the victim net <code>vic</code>.<br /><code>tempus &gt;&#xa0;set_quiet_attacker &#8211;victim {vic}</code></li></ul><ul><li>The following command sets the attacker&#xa0;<code style="font-size: 10.0pt;line-height: 13.0pt;">agg1</code>&#xa0;as quiet for the given victim net&#xa0;<code style="font-size: 10.0pt;line-height: 13.0pt;">vic<br class="_mce_tagged_br" /></code><code><span>tempus &gt;&#xa0;</span>set_quiet_attacker &#8211;attacker {agg1} &#8211;victim {vic}</code></li></ul><h4 id="set_quiet_attacker-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="report_noise.html">report_noise</a></code></li><li><code><a href="report_timing.html">report_timing</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_outbound_report.html" id="prev" title="set_outbound_report">set_outbound_report</a></em></b><b><em><a href="set_si_mode.html" id="nex" title="set_si_mode">set_si_mode</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

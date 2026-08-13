@@ -1,0 +1,122 @@
+
+<html><head><title>Setting Up the Certus Runtime Environment</title>
+<meta name="page_sequence" content="12002000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468354" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Certus" />
+<meta name="DocTitle" content="Certus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Setting Up the Certus Runtime Environment" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="certusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468354" />
+<meta name="NextFile" content="Launching_the_Certus_Console.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Certus_Product_and_Installation_Information.html" />
+<meta name="c_product" content="Certus," />
+<meta name="Product" content="Certus," />
+<meta name="ProductFamily" content="Certus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Certus User Guide -- Setting Up the Certus Runtime Environment" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="ctsug261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="certusUGTOC.html">Contents</a></li><li><a class="prev" href="Certus_Product_and_Installation_Information.html" title="Certus_Product_and_Installation_Information">Certus_Product_and_Installatio ...</a></li><li style="float: right;"><a class="viewPrint" href="certusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Launching_the_Certus_Console.html" title="Launching_the_Certus_Console">Launching_the_Certus_Console</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Certus User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Setting Up the Certus Runtime Environment</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>If <code>install_dir</code> is the location of the Certus installation, then you should set up the runtime environment as follows:</p>
+<ul><li>Add the <code>install_dir/bin</code> directory to the path. The bin directory has links to all the public executable files in the install hierarchy.</li><li>If you want the Certus man pages to be available with the Unix man command, then you can add the <code>install_dir/share/certus/man</code> to the MANPATH envar.</li><li>If you want the Stylus Common UI Certus man pages to be available with the Unix man command, then you can add <code>install_dir/share/certus/stylus </code>to the MANPATH envar.</li><li>If you want the Tcl man pages to be available with the Unix man command, then you can add the <code>install_dir/share/tcltools/man</code> to the MANPATH envar.</li></ul>
+<p>For example, you can add the following to the startup shell script:</p>
+
+<p><code>set install_dir = /tools/certus22.1/lnx86 set path = ($install_dir/bin $path)</code></p>
+
+<p><code>setenv MANPATH $install_dir/share/certus/man:$install_dir/share/tcltools/ man:$MANPATH</code></p>
+
+<p><strong>Note: </strong></p>
+
+<p>When Certus launches, it automatically adds the legacy or Stylus CUI man pages (if the&#xa0;<code>-stylus</code> parameter is specified), and the Tcl man pages at the beginning of the current MANPATH inside Certus. Therefore, within Certus, the <code>man</code> command will show both the sets of man pages before any other man pages.</p>
+<h3 id="SettingUptheCertusRuntimeEnvironment-TemporaryFileLocations">Temporary File Locations</h3>
+
+<p>Each Certus session creates a temporary directory to store temporary files at the beginning of the run.</p>
+
+<p>By default, <code>ssv_tmpdir</code> is created in the <code>/tmp</code> directory. If the Unix envar <code>TMPDIR</code> is set, <code>ssv_tmpdir</code> is created inside <code>$TMPDIR</code>.</p>
+
+<p>The name of the <code>tmp_dir</code> will appear as given below:</p>
+
+<p><code>ssv_tmpdir_\[pid\]_xxxxxx </code></p>
+
+<p>Where <code>_xxxxxx</code> is a string that is added to make the directory unique.&#xa0;For example:</p>
+
+<p><code>ssv_tmpdir_10233_nfp9ez </code></p>
+
+<p>The temporary directory is automatically removed on exit or if the run is terminated with a catchable signal (for example, SIGSEGV).</p>
+<h4 id="SettingUptheCertusRuntimeEnvironment-RelatedTopics">Related Topics</h4>
+<ul><li data-uuid="594d9c58-1527-4881-96dc-ca3bcccf929e"><span class="plugin_pagetree_children_span"><a href="Installation_and_Startup.html">Installation and Startup</a></span></li><li data-uuid="a1e38c02-0fa3-43c3-be1b-add140e7cbe6"><a href="Certus_Product_and_Installation_Information.html">Certus Product and Installation Information</a></li><li data-uuid="97f01b1b-6413-4cd6-911e-44fb7cd61ebb"><span class="plugin_pagetree_children_span"><a href="Launching_the_Certus_Console.html">Launching the Certus Console</a></span></li><li data-uuid="4d225fb0-bc51-4112-998a-f3130cdfe189"><span class="plugin_pagetree_children_span"><a href="Starting_the_Certus_Software.html">Starting the Certus Software</a></span></li><li data-uuid="089b5fb7-bbaa-4bef-8dd6-52cb7b585bd1"><span class="plugin_pagetree_children_span"><a href="Accessing_Certus_Documentation_and_Help.html">Accessing Certus Documentation and Help</a></span></li></ul>
+<p><br /></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Certus_Product_and_Installation_Information.html" id="prev" title="Certus_Product_and_Installation_Information">Certus_Product_and_Installatio ...</a></em></b><b><em><a href="Launching_the_Certus_Console.html" id="nex" title="Launching_the_Certus_Console">Launching_the_Certus_Console</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

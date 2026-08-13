@@ -1,0 +1,143 @@
+
+<html><head><title>specify_def</title>
+<meta name="page_sequence" content="12029000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666244" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the text commands in Voltus IC Power Integrity Solution." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="specify_def" />
+<meta name="Keywords" content="DEF file,read_def" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Design Import," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666244" />
+<meta name="NextFile" content="specify_lib.html" />
+<meta name="Group" content="Voltus Text Command Reference" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_top_module.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution Text Command Reference -- specify_def" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="epstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="set_top_module.html" title="set_top_module">set_top_module</a></li><li style="float: right;"><a class="viewPrint" href="voltustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="specify_lib.html" title="specify_lib">specify_lib</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>specify_def</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="specify_def-specify_def"></span> <code><br /><code>specify_def <br /><code><em>-help<br /></em></code></code></code><code><code><code><em>fileNameList</em></code><br /><code><em>[-die_instance_name dieinstname]</em></code></code> <br /></code></p>
+
+<p>Specify the name of the DEF file(s). This command can be used in lieu of <code>read_def </code>command for analysis purpose. When you use the <code>specify_def</code> command, the software passes specified DEF files to the power and rail analysis programs for internal processing without loading their physical data in memory. As a result, you will not be able to display and query layout of the design. These programs will only process the necessary data from DEF file(s). The usage of this command is recommended in dynamic power analysis, and static and dynamic rail analysis for large (&gt;5M components) designs with hierarchical DEFs or in general to obtain better performance during analysis. You will be able to save memory and runtime that takes to load design during analysis. Once the analysis is complete, you can subsequently load DEFs in the same or new session using the <code>read_def -</code><code>specialnets_components &lt;DEFs&gt;</code> command to view design layout and analysis results.</p>
+
+<p>Note that for MSMV design, in order to use <code>specify_def</code>, static power analysis mode will require CPF (Common Power Fomat) that defines logical connectivity of the instances to power nets. If CPF is not available, you can optionally run dynamic power analysis which calculates dynamic as well as static power.</p>
+
+<p>The DEF files must be specified in the top-down order of the design hierarchy, that is, top-level DEF, followed by block-level DEF, and then sub-block DEF. This is illustrated in the following example script:</p>
+<h4 id="specify_def-Exampleflowscriptwithspecify_def:">Example flow script with <code><strong>specify_def</strong></code>:</h4>
+
+<p><code>read_lib -lef &lt;LEFs&gt;</code><br /><code>read_lib &lt;timing libs&gt;</code><br /><code>read_verilog &lt;verilog file(s)&gt;</code><br /><code>set_top_module &lt;design name&gt;</code><br /><code>read_sdc &lt;timing constraints&gt;</code><br /><code>read_spef -decoupled &lt;signal parasitics file(s)&gt;</code><br /><code>specify_def &lt;top.def&gt; &lt;block.def&gt; &lt;sub_block.def&gt; </code></p>
+<h4 id="specify_def-#-----powercalculation-----------------------------#"><em>#----- power calculation -----------------------------#</em></h4>
+
+<p><code>read_spef -decoupled ../DATA/spef/dma_mac.spef.gz</code><br /><br /><code># Option (-dynamic_only true) available to turn off static power calculation during dynamic power calculation</code><br /><code>set_power_analysis_mode -reset</code><br /><code>set_power_analysis_mode -method dynamic_vectorless -create_binary_db true -write_static_currents true</code><br /><code>set_dynamic_power_simulation -period 14ns -resolution 50ps</code><br /><code>set_default_switching_activity -input_activity 0.2 -seq_activity 0.15 -clock_gates_output 2.0 -period 10.0</code><br /><code>report_power</code></p>
+<h4 id="specify_def-#-----railanalysis----------------------------#"><em>#----- rail analysis ----------------------------#</em></h4>
+
+<p><code>set_rail_analysis_mode -method dynamic -accuracy fast_accurate -power_grid_library { stdcells.cl memories.cl }</code><br /><code>set_power_data -reset</code><br /><code>set_power_data -format current {dynamic_VDD.ptiavg dynamic_VSS.ptiavg}</code><br /><code>set_pg_nets -net VDD -voltage 1.08 -threshold 0.972 -tolerance 0.3</code><br /><code>set_pg_nets -net VSS -voltage 0.0 -threshold 0.108 -tolerance 0.3</code><br /><code>set_rail_analysis_domain -name allDomains -pwrnets {VDD VDDm} -gndnets VSS</code><br /><code>set_power_pads -net VDD -format xy -file ../DATA/vstorm/dma_mac-VDD.ppl</code><br /><code>set_power_pads -net VSS -format xy -file ../DATA/vstorm/dma_mac-VSS.ppl</code><br /><code>analyze_rail -type domain allDomains</code></p>
+<h4 id="specify_def-#-----loadDEFandviewresults----------------------------#"><em>#----- load DEF and view results ----------------------------#</em></h4>
+
+<p><code>read_def -specialnets_components &lt;top.def&gt; &lt;block.def&gt; &lt;sub_block.def&gt;</code><br /><code>start_gui</code><br /><code>view_analysis_results</code></p>
+<p align="left"><br /></p>
+<div class="table-wrap"><table bgcolor="#FFFFFF" cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><tbody><tr><td class="confluenceTd" style="width: 100.764px;">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd" style="width: 517.419px;">
+<p>Prints out the command usage.&#xa0;</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 618.183px;" valign="top">
+<p><code><code>-d</code>ie_instance_name </code><code><em>dieinstname</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 100.764px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 517.419px;" valign="top">
+<p>Specifies the die instance name for multi-die analysis. This option is only available in multi-die analysis (<code>set_rail_analysis_mode</code> <code>-die_mode multi-die</code>).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 100.764px;" valign="top">
+<p><code><em>fileNameList</em></code></p>
+</td>
+<td class="confluenceTd" style="width: 517.419px;" valign="top">
+<p>Specifies the DEF filenames but not to load in (string, required).</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><br /></p>
+
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_top_module.html" id="prev" title="set_top_module">set_top_module</a></em></b><b><em><a href="specify_lib.html" id="nex" title="specify_lib">specify_lib</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

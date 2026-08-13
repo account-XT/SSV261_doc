@@ -1,0 +1,135 @@
+
+<html><head><title>Distributed Static Timing Analysis Flow</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823941" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Distributed Static Timing Analysis Flow" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823941" />
+<meta name="NextFile" content="dsta_dstacommands.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="dsta_dstalogfile.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Distributed Static Timing Analysis Flow" />
+<meta name="Keywords" content="dsta flow" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="DSTA,Stylus" />
+<meta name="prod_subfeature" content="DSTA" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="dsta_dstalogfile.html" title="DSTA Log Files">DSTA Log Files</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="dsta_dstacommands.html" title="Additional Commands Supported in DSTA">Additional Commands Supported  ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:dstaflow" title="Distributed Static Timing Analysis Flow"></a><style>/*<![CDATA[*/
+/**/
+/**/
+/**/
+/**/
+h1 { counter-reset: heading 7;}
+/**/
+/**/
+/**/
+/**/
+/*]]>*/</style><h2>
+<a id="pgfId-1001089"></a><a id="59713"></a>Distributed Static Timing Analysis Flow</h2>
+
+<p>
+<a id="pgfId-1001098"></a>The DSTA flow consists of the following steps:</p>
+<ul><li>
+<a id="pgfId-1001107"></a>Define and start DSTA clients:
+<a href="../tempustxtcmdref/set_multi_cpu_usage.html">set_multi_cpu_usage</a><br /><pre class="webflare-pre-block webflare-courier-new" id="#id1014762">
+<a id="pgfId-1014762"></a>set_distribute_host ...</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1014767">
+<a id="pgfId-1014767"></a>}</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1014770">
+<a id="pgfId-1014770"></a><a href="../tempustxtcmdref/distribute_start_clients.html">distribute_start_clients</a></pre></li><li>
+<a id="pgfId-1014775"></a>Load the design. The constraints must be read after the parasitics.<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1014807">
+<a id="pgfId-1014807"></a>source load_libs.tcl</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1014810">
+<a id="pgfId-1014810"></a>source load_netlist.tcl</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1014813">
+<a id="pgfId-1014813"></a>source load_parasitics.tcl</pre></li><li>
+<a id="pgfId-1014818"></a>Initiate DSTA partitioning:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1014821">
+<a id="pgfId-1014821"></a><a href="../tempustxtcmdref/distribute_partition.html">distribute_partition</a></pre></li><li>
+<a id="pgfId-1014828"></a>Load constraints and time the design:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1014833">
+<a id="pgfId-1014833"></a>source load_constraints.tcl</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1014836">
+<a id="pgfId-1014836"></a><a href="../tempustxtcmdref/update_timing.html">update_timing</a> &#8211;full</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1019434">
+<a id="pgfId-1019434"></a>distribute_print_client_usage</pre></li><li>
+<a id="pgfId-1014851"></a>Generate PBA reports:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1014856">
+<a id="pgfId-1014856"></a>set reportName rt_max_200K.rpt.gz</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1014859">
+<a id="pgfId-1014859"></a><a href="../tempustxtcmdref/report_timing.html">report_timing</a> -late -max_paths 200000 -nworst 1 -path_type \</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1014862">
+<a id="pgfId-1014862"></a>full_clock -net &gt; $reportName</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1014865">
+<a id="pgfId-1014865"></a>set reportName rt_max_pba_200K.rpt.gz</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1014868">
+<a id="pgfId-1014868"></a>set maxPathCnt 200000</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1014871">
+<a id="pgfId-1014871"></a>set nWorstCnt 1</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1014874">
+<a id="pgfId-1014874"></a>report_timing -retime path_slew_propagation -max_paths $maxPathCnt \</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1014877">
+<a id="pgfId-1014877"></a>-nworst $nWorstCnt -path_type full_clock &gt; $reportName</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1021632">
+<a id="pgfId-1021632"></a></pre><pre class="webflare-pre-block webflare-courier-new" id="#id1021623">
+<a id="pgfId-1021623"></a>If a pre-defined sorting criteria is not defined, then the timing report output is displayed in any order.</pre><br /><div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1021541"></a>The path numbers that are assigned to each path in the timing report are not reported in DSTA output reports.</div></li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="dsta_dstalogfile.html" id="prev" title="DSTA Log Files">DSTA Log Files</a></em></b><b><em><a href="dsta_dstacommands.html" id="nex" title="Additional Commands Supported in DSTA">Additional Commands Supported  ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

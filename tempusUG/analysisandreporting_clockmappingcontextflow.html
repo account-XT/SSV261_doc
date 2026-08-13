@@ -1,0 +1,220 @@
+
+<html><head><title>Clock Mapping in Context Flow</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823923" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Clock Mapping in Context Flow" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823923" />
+<meta name="NextFile" content="analysisandreporting_clockmappingapproaches.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_contextconstraintshandling.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Clock Mapping in Context Flow" />
+<meta name="Keywords" content="clock mapping context flow" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Timing Analysis,REPORTS,Stylus" />
+<meta name="prod_subfeature" content="Timing Analysis, Reports" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_contextconstraintshandling.html" title="Constraints Handling with Timing Context Analysis">Constraints Handling with Timi ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_clockmappingapproaches.html" title="Clock Mapping Approaches">Clock Mapping Approaches</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:clockmappingcontextflow" title="Clock Mapping in Context Flow"></a><h3>
+<a id="pgfId-2251030"></a><a id="98848"></a>Clock Mapping in Context Flow</h3>
+<h3>
+<a id="pgfId-2251031"></a>What is Clock Mapping</h3>
+
+<p>
+<a id="pgfId-2252470"></a>The Timing Context stores various types of data, the following four type of data are associated with top level clocks: </p>
+<ul><li>
+<a id="pgfId-2251033"></a>Latency of top level clock signals entering the block as clock phase</li><li>
+<a id="pgfId-2251034"></a>Arrival of top level data signals entering the block as data phase </li><li>
+<a id="pgfId-2251035"></a>Required time at block output port</li><li>
+<a id="pgfId-2251036"></a>Path Exceptions impacting the block interface paths </li></ul>
+
+
+
+<p>
+<a id="pgfId-2251037"></a>Tempus identifies the equivalent block and top level clocks to accurately assert the top level data with correct block level clocks during STA with Timing Context. This process of identifying the equivalent top and block clock pair is called clock mapping, and such clocks are called the mapped top and block clocks, respectively. Any top level clock whose corresponding block clock cannot be identified is called an unmapped top clock. Similarly, any block level clock whose corresponding top clock cannot be identified is called an unmapped block clock.</p>
+<p>
+<a id="pgfId-2251038"></a>Tempus also writes out clock mapping reports, which can help to review the mapped or unmapped clock and data phases. </p>
+<p>
+<a id="pgfId-2251039"></a>By default, Tempus does not allow the Timing Context analysis in the presence of unmapped top level clocks (either entering block as clock phase or data phase) and stops the context reading with error TA-1024. To continue the analysis with unmapped top level clock phases, the following global variable should be used before context reading:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3055138"></a>set timing_hierarchical_context_continue_on_top_block_clock_mismatch true </pre>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-2251041"></a>All the unmapped block/top clocks and their associated constraints are dropped from analysis in block STA run with Timing Context. Hence, you need to always review the unmapped clocks reported in clock mapping output file.</div>
+
+<h3>
+<a id="pgfId-2260359"></a>Types of Data Mapping</h3>
+
+<ul><li>
+<a id="pgfId-2260382"></a><a href="analysisandreporting_clockmappingcontextflow.html#10369">Clock Phase Mapping</a></li><li>
+<a id="pgfId-2260396"></a><a href="analysisandreporting_clockmappingcontextflow.html#12808">Data Phase Mapping</a></li><li>
+<a id="pgfId-2260403"></a><a href="analysisandreporting_clockmappingcontextflow.html#99775">Path Exception-Based Mapping</a></li><li>
+<a id="pgfId-2260410"></a><a href="analysisandreporting_clockmappingcontextflow.html#33550">Block Internal Clock Mapping</a></li></ul>
+
+
+
+
+<h4>
+<a id="pgfId-2251042"></a><a id="10369"></a>Clock Phase Mapping</h4>
+
+<p>
+<a id="pgfId-2251043"></a>The following example represents a simple case of clock phase mapping, where:</p>
+<ul><li>
+<a id="pgfId-2251044"></a>In block STA, the clock CLK is defined on port P1 of the block. This clock has period of 10ns with rising edge at 0ns and falling edge at 5ns. </li><li>
+<a id="pgfId-2251045"></a>In Top STA, the clock phase of CLK enters the block port P1. This clock has period of 10 units with rising edge at 0ns and falling edge at 5ns. </li><li>
+<a id="pgfId-2251046"></a>The top level CLK will be mapped to block level CLK. </li></ul>
+
+
+<p>
+<a id="pgfId-2260029"></a>The figure below illustrates clock phase mapping:</p>
+
+<p>
+<a id="pgfId-2251050"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="153" src="images/analysisandreporting-147.gif" /></div>
+
+<p>
+<a id="pgfId-2251051"></a>For the mapped block clock BCLK, the following properties will be derived from an equivalent mapped top clock:</p>
+<ul><li>
+<a id="pgfId-2251052"></a>Rise and fall latency at block port P1</li><li>
+<a id="pgfId-2251053"></a>Rise and fall transition (slew) at block port P1</li><li>
+<a id="pgfId-2251054"></a>Polarity of clock signal at block port P1</li><li>
+<a id="pgfId-2251055"></a>Top level pin-based uncertainty (i.e., uncertainty at fanin of block/P1)</li></ul>
+
+
+
+
+<h4>
+<a id="pgfId-2251056"></a><a id="12808"></a>Data Phase Mapping</h4>
+
+<p>
+<a id="pgfId-2251057"></a>The figure below shows a simple case of data phase mapping, where:</p>
+<ul><li>
+<a id="pgfId-2251058"></a>Block-level design has two virtual clocks, VCLK1 and VCLK2. The port DIN has data phase with respect to VCLK1 (<code>set_input_delay</code>) and port DOUT has data phase with respect to VCLK2 (<code>set_output_delay</code>).</li><li>
+<a id="pgfId-2251059"></a>In the Top level design, TCLK1 enters the block as data phase (at DIN port). And TCLK2 captures the data from DOUT port of the block.</li><li>
+<a id="pgfId-2251060"></a>In context analysis, TCLK1 data phase will be mapped with block virtual clock VCLK1. The TCLK2 data phase will be mapped with block virtual clock VCLK2.<br /><strong>Figure -124
+<a id="pgfId-2251061"></a>Data Phase Mapping</strong><br />
+<a id="pgfId-2251064"></a><div class="webflare-div-image">
+<img width="666" height="216" src="images/analysisandreporting-148.gif" /></div></li></ul>
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-2251065"></a>For mapped data phase, the following properties will be derived from the top level:</p>
+<ul><li>
+<a id="pgfId-2251066"></a>Arrival time and transition at input ports</li><li>
+<a id="pgfId-2251067"></a>Required time at output port</li></ul>
+
+
+<h4>
+<a id="pgfId-2251068"></a><a id="99775"></a>Path Exception-Based Mapping</h4>
+
+<p>
+<a id="pgfId-2251069"></a>The path exception-based mapping refers to mapping of block internal clocks that have top level path exceptions interacting with the block IO. </p>
+<p>
+<a id="pgfId-2251070"></a>The figure below shows path exception-based mapping:</p>
+
+<p>
+<a id="pgfId-2251077"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="304" src="images/analysisandreporting-149.gif" /></div>
+
+<ul><li>
+<a id="pgfId-2251071"></a>The clock iCLK is defined inside the block and its clock/data phase does not interact with block IO. Hence, this clock is not mapped under clock or data phase mapping. </li><li>
+<a id="pgfId-2251072"></a>However, there is a top level false path from top level flop T_FF to block internal clock iCLK. Since this exception is associated with block IO, it will be modeled in Context.</li></ul>
+
+<p>
+<a id="pgfId-2251073"></a>To apply this exception in block Context Analysis, the block internal clock iCLK needs to be mapped with top level clock iCLK.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-2251078"></a>The block iCLK will be mapped to top iCLK, only if they pass the auto clock mapping rules. </div>
+
+<h4>
+<a id="pgfId-2251079"></a><a id="33550"></a>Block Internal Clock Mapping</h4>
+
+<p>
+<a id="pgfId-2251080"></a>The clocks that are defined internal to the blocks are also mapped. The source clocks (<a href="../tempustxtcmdref/create_clock.html">create_clock</a> based) are automatically mapped when the clock is defined on the same pin in both the top and block constraints and have a matching clock property. The generated clocks are mapped based on the matching clock names.</p>
+<p>
+<a id="pgfId-2251081"></a>Some of the unmapped internal clocks may not impact reading data from context, but it does indicate potential constraints mis-correlation between top level and block constraints. The correlation between the Top and Block constraints is critical for accurate context analysis.</p>
+
+<h3>
+<a id="pgfId-2251082"></a><a id="20869"></a>Types of Clock Mapping</h3>
+
+<p>
+<a id="pgfId-2251083"></a>The following two types of clock mapping are supported in the context flow:</p>
+<ul><li>
+<a id="pgfId-2251084"></a><strong>Auto Clock Mapping</strong>: The software automatically maps the Top and Block STA clocks based on the auto clock mapping rules. The clocks which do not satisfy the rules remain unmapped (unless mapped by the user).</li><li>
+<a id="pgfId-2251085"></a><strong>User Clock Mapping</strong>: You can specify the Top and Block clock pair for mapping. The user-specified clocks are mapped by the software irrespective of whether they follow the auto clock mapping rules. The user-specified clock mapping has a higher priority and will override auto clock mapping. If you map the Top and Block level clocks of different waveforms, then the block level waveform will be used during analysis. </li></ul>
+
+<p>
+<a id="pgfId-2251086"></a>For a successful user clock mapping, the following are required:</p>
+<ul><li>
+<a id="pgfId-2251087"></a>The block and top level clocks should be present at the same block port</li><li>
+<a id="pgfId-2251088"></a>Internal clocks should interact with block IO (Path exception-based)</li><li>
+<a id="pgfId-2251089"></a>If a top level clock enters the block only as data phase, then you should map it with block virtual clocks only</li></ul>
+
+
+<p>
+<a id="pgfId-2251090"></a>An example of user-defined clock mapping to map top level TCLK with block level BCLK clock is given below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3055154"></a>read_timing_context -clock_mapping_file clkMap.txt</pre>
+
+<p>
+<a id="pgfId-2251092"></a>Given below are contents of clkMap.txt:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3055159"></a>set_timing_context_clock_mapping -top_clock TCLK -block_clock BCLK -view &lt;analysisViewName&gt;</pre>
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_contextconstraintshandling.html" id="prev" title="Constraints Handling with Timing Context Analysis">Constraints Handling with Timi ...</a></em></b><b><em><a href="analysisandreporting_clockmappingapproaches.html" id="nex" title="Clock Mapping Approaches">Clock Mapping Approaches</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

@@ -1,0 +1,308 @@
+
+<html><head><title>set_distribute_host</title>
+<meta name="page_sequence" content="13003000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666253" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the text commands in Voltus IC Power Integrity Solution." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_distribute_host" />
+<meta name="Keywords" content="multi-cpu processing,distributed processing,CPU configuration,superthreading,lsf,rsh,sge,ssh,get_distributed_host" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Distributed Processing," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666253" />
+<meta name="NextFile" content="set_multi_cpu_usage.html" />
+<meta name="Group" content="Voltus Text Command Reference" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="get_multi_cpu_usage.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution Text Command Reference -- set_distribute_host" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="epstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="get_multi_cpu_usage.html" title="get_multi_cpu_usage">get_multi_cpu_usage</a></li><li style="float: right;"><a class="viewPrint" href="voltustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_multi_cpu_usage.html" title="set_multi_cpu_usage">set_multi_cpu_usage</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_distribute_host</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="set_distribute_host-set_distribute_host"></span> <code><br /><code>set_distribute_host<br />[-help]<br />[-add&#xa0;<em>string</em>]<br />[-args&#xa0;<em>string</em>]<br />[-custom]<br />[-custom_script&#xa0;<em>string</em>]<br />[-custom_script_list&#xa0;<em>string</em>]<br />[-local]<br />[-lsf]&#xa0;<br />[-nc]<br />[-noWaitTaskComeUp]<br />[-queue&#xa0;<em>string</em>]<br />[-remove&#xa0;<em>string</em>]<br />[-reportLsfInfo]<br />[-resource&#xa0;<em>string</em>]<br />[-shellTimeout&#xa0;<em>integer</em>]<br />[-single_cpu_lsf_args&#xa0;<em>string</em>]<br />[-ssh]&#xa0;<br />[-timeOut <em>integer</em>] <br />[-env_script <em>string</em>]<br /></code><br /></code></p>
+
+<p>Specifies the multiple-CPU processing configuration for distributed processing. The software finds hosts from the last <code>set_distribute_host</code> command specified before a distributed processing command starts.</p>
+
+<p>Use&#xa0;<code><a href="get_distribute_host.html">get_distribute_host</a></code> to display the current settings for the <code>set_distribute_host</code> command.</p>
+<div aria-label="Info" class="confluence-information-macro  confluence-information-macro-information" role="region"><span class="aui-icon aui-icon-small aui-iconfont-info-filled confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>This command is required for distributed processing.</p>
+</div>
+</div>
+<div>
+<p><br /></p>
+</div>
+<h4 id="set_distribute_host-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><colgroup><col /><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-add </code><code><strong>{</strong></code><code><em>hostName1</em></code> <code><em>hostName2</em></code><code> ...</code><code><strong>}</strong></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Adds the specified hosts to the <code>rsh/ssh</code> configuration. If you specify more than one host, separate each host name with a space.</p>
+
+<p>Each time you specify a host, the software uses it to run one client process. To run more than one client process on a host, specify it more than once. For example, if you have two machines that each has two CPUs and you want to use both CPUs in both machines, type a command like the following:</p>
+
+<p>set_distribute_host -rsh -add {<code><em>machine1 machine2</em></code> \<br />&#xa0;&#xa0;&#xa0;&#xa0;<code><em>machine1 machine2</em></code><code>}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-args </code><code><em>arguments</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Specifies any additional arguments you need to provide to the Load Sharing Facility (LSF) job submission command.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-custom -custom_script </code><code><em>script</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Specifies a custom script to run distributed processing.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code>-custom_script_list {{{<em>string1</em>} <em>count1</em>} {{<em>string2</em>} <em>count2</em>} ...{{<em>stringN</em>} <em>countN</em>}}</code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies to customize the launch of multiple jobs, based on resources required for these jobs. This parameter allows you to specify multiple launch strings in order of priority with a maximum allowed job count for each string.</p>
+
+<p>If you request for N number of jobs, the command starts submitting jobs starting from <em><code>string1</code></em>, until the corresponding count is reached, at which point it starts submitting the next string in the list. Therefore, the command submits the first &quot;<em><code>count1</code></em>&quot; jobs with <em><code>string1</code></em>, the next &quot;<em><code>count2</code></em>&quot; jobs with <em><code>string2</code></em> and so on. It stops when the total submitted jobs has reached the requested number (N).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code><code>-env_script &quot;<em>script</em>&quot;</code></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd" colspan="2">Specifies a user-defined shell environment script that is run for each of the slave hosts. The parameter allows you to pass these environment settings to the slave hosts by including them in the shell environment script. The license variables used by the software are also automatically passed to the slave hosts to avoid license errors.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Outputs the command usage and a brief description about the command parameters.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-local</code></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Runs all distributed processing jobs on the master machine.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-lsf</code></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Specifies a Load Sharing Facility configuration. If you do not specify any parameters for <code>-lsf,</code> the software uses default settings.</p>
+<div>
+<p><strong>Note:</strong> To use this parameter, LSF must already be set up (typically by specifying the LSF_ENVDIR and LSF_SERVERDIR environment variables) and bsub must be in your search path. Contact your LSF administrator for details.</p>
+</div>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-nc</code></td>
+<td class="confluenceTd" colspan="2">Specifies to use network computer for distributed processing.</td>
+</tr>
+<tr><td class="confluenceTd"><code><code><code>-noWaitTaskComeUp</code></code></code></td>
+<td class="confluenceTd" colspan="2">Specifies to not wait for tasks that are delayed or are not likely to occur.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-queue </code><code><em>queue_name</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Specifies the queue for the LSF configuration.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-remove {</code><code><em>hostName1</em></code><code><em>hostName2</em></code><code> ... | all}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Removes the specified hosts or all hosts from the <code>rsh/ssh</code> configuration. If you specify more than one host, separate each host name with a space.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-reportLsfInfo</code></td>
+<td class="confluenceTd" colspan="2">Specifies to report LSF information in a single report. This parameter allows you to collect the system statistics on the status of the distributed jobs. It has the following information:<ul><li>Host name for master and clients</li><li>Number of CPUs on each machine that are being used by a process</li><li>Job ID/PID for each client process</li><li>Total memory used on each machine</li><li>Total virtual memory used on each machine</li><li>Total CPU time used on each machine</li></ul>
+<p>You must specify this parameter with the <code>-lsf</code> parameter.</p>
+
+<p>To get the LSF information, specify the <code>get_distribute_host -reportLsfInfo</code> command parameter. You must specify the <code>get_distribute_host -reportLsfInfo</code> only after the clients exit to obtain the client CPU time. If you specify this command before the client exits, the command gives a warning message.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-resource </code><code><em>resource_string</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Specifies a resource string for the LSF queue.</p>
+
+<p><strong>Note:</strong> The correct resource string is specific to your installation. Contact your LSF administrator for the appropriate parameters and values.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-shellTimeout </code><code><em>seconds</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Specifies the number of seconds the host machine waits for <code>rsh/ssh</code> machines to become available for multiple-CPU processing.<br /><em>Default:</em> <code>5</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3" valign="top">
+<p><code>-single_cpu_lsf_args</code> <code><em>lsf_arguments</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Specifies the <code>bsub</code> options. For information, see the LSF documentation.</p>
+
+<p><strong>Note: </strong>You must use this parameter to adjust the LSF argument for a single CPU application. Alternatively, use the <code>-args</code> parameter to adjust the LSF argument for an application that runs in the Superthreading mode.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-timeout</code></p>
+</td>
+<td class="confluenceTd" colspan="2" valign="top">
+<p>Specifies the default timeout for a submitted job that will never start. The timeout value should include the waiting time for both the host and the license. This functionality prevents the master machine from hanging when the clients do not come up for some reason.</p>
+
+<p>After timeout, a warning message appears informing you that the distributed CPUs did not come online within the expected time. The master will continue waiting for the clients and it is up to you to continue waiting or kill the run if there are problems with the Distributed Resource Management (DRM) system.</p>
+
+<p>A sample warning message is given below:</p>
+
+<p>Task id 2 did not come up within the specified timeout period (300 seconds). Use <code>set_distribute_host -timeout</code> to change the value. This may be a real error due to incorrect or incomplete platform/machine specification provided via set_distribute_host to your distributed resource management system (LSF/Sun Grid Engine etc.). If running locally (<code>set_distribute_host -local</code>), the current machine may be overloaded with too many jobs and swapping (check free memory and CPUs with top). For local runs, consider reducing the number of CPUs you are using via the <code>set_multi_cpu_usage</code> command or free up some memory by killing other memory intensive processes.</p>
+
+<p><em>Default:</em> <code>30</code><code>(local/rsh/custom)</code><code>and</code><code> 3600</code><code>(lsf)</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-ssh</code></td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies a secure shell configuration.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_distribute_host-Examples">Examples</h4>
+<h4 id="set_distribute_host-rsh"><em>rsh</em></h4>
+
+<p>The following command creates an <code>rsh</code> configuration and adds hosts <code>host10</code>, <code>host11</code>, and <code>host12</code>:<br /><code>set_distribute_host -rsh -add {host10 host11 host12}</code></p>
+
+<p>The following commands create an <code>rsh</code> configuration with <code>host1</code> and <code>host2</code> as remote hosts and then adds <code>host3</code> and <code>host4</code> to the configuration:<br /><code>set_distribute_host -rsh -add {host1 host2}</code><br /><code>set_distribute_host -rsh -add {host3 host4}</code></p>
+<h4 id="set_distribute_host-LSF"><em>LSF</em></h4>
+
+<p>The following command uses an existing LSF environment, and relies on the general LSF set up by the system administrator. In this example, the name of the queue implies that all the machines have 4 Gb of memory.<br /><code>set_distribute_host -lsf -queue mem4G</code></p>
+
+<p>The following command schedules a LSF job named <code>bigQueue</code> to run on a Linux machine for a maximum of 30 minutes. No other jobs can run on the machine while <code>bigQueue</code> is running.<br /><code>set_distribute_host -lsf -queue bigQueue -args {-x -W 30} \</code><br /><code>&#xa0;&#xa0;&#xa0;-resource {OSNAME==Linux}</code></p>
+
+<p>The following command schedules a LSF job named <code>smallQueue</code> to run on Linux machines with minimum speed of 2000 MHz.<br /><code>set_distribute_host -lsf -queue smallQueue -args {-W 20} \</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;-resource {OSNAME==Linux &amp;&amp; SPEED&gt;2000}</code></p>
+
+<p><strong>Note: </strong>Check with your LSF administrator for the correct values for the resource string, as the parameters and their values differ in each installation. For example, the parameter name for the speed of the machine might be <code>MHZ</code> instead of <code>SPEED</code> (as in the preceding example), and the units might be specified in gigahertz instead of megahertz.</p>
+
+<p>The following command specifies to report LSF information:</p>
+
+<p><code>set_distribute_host -lsf -args &quot;-q lnx64&quot; -reportLsfInfo</code></p>
+
+<p>You can use the following command to save the LSF information in the specified file:</p>
+
+<p><code>get_distribute_host -reportLsfInfo lsf.log</code></p>
+<h4 id="set_distribute_host-Local"><em>Local</em></h4>
+
+<p>The following command runs all distributed processing jobs on the machine on which you are running the master version of the Voltus software:<br /><code>set_distribute_host -local</code></p>
+<h4 id="set_distribute_host-Custom"><em>Custom</em></h4>
+
+<p>The following command runs distributed processing with a custom script:<br /><code>set_distribute_host -custom -custom_script {bsub -q bigQueue -x -R &quot;OS==Linux &amp;&amp; memory&gt;20000&quot;} </code></p>
+
+<p>The following command runs distributed processing with a custom script list:<br /><code><code>set_distribute_host</code> -custom -custom_script_list {{{bsub -P ICD -W 2 -q admin -R &quot;OSNAME==Linux &amp;&amp; OSREL==EE50&quot;}1} {{rsh hpc1 -e} 1}}</code></p>
+
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="get_multi_cpu_usage.html" id="prev" title="get_multi_cpu_usage">get_multi_cpu_usage</a></em></b><b><em><a href="set_multi_cpu_usage.html" id="nex" title="set_multi_cpu_usage">set_multi_cpu_usage</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

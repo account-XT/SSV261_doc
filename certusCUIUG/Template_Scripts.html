@@ -1,0 +1,154 @@
+
+<html><head><title>Template Scripts</title>
+<meta name="page_sequence" content="14002000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775467536" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Certus" />
+<meta name="DocTitle" content="Certus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Template Scripts" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="certusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775467536" />
+<meta name="NextFile" content="Manual_ECO.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Hierarchical_Top_Boundary_Model_ECO_Flow.html" />
+<meta name="c_product" content="Certus," />
+<meta name="Product" content="Certus," />
+<meta name="ProductFamily" content="Certus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Certus Stylus User Guide -- Template Scripts" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="ctsug261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="certusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="Hierarchical_Top_Boundary_Model_ECO_Flow.html" title="Hierarchical_Top_Boundary_Model_ECO_Flow">Hierarchical_Top_Boundary_Mode ...</a></li><li style="float: right;"><a class="viewPrint" href="certusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Manual_ECO.html" title="Manual_ECO">Manual_ECO</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Certus Stylus User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Template Scripts</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p></p>
+<div class="toc-macro rbtoc1775467521658">
+<ul class="toc-indentation">
+<li><a href="#TemplateScripts-Template1">Template 1</a></li>
+<li><a href="#TemplateScripts-Template2">Template 2</a></li>
+<li><a href="#TemplateScripts-Template3">Template 3</a></li>
+</ul>
+</div>
+<h3 id="TemplateScripts-Template1">Template 1</h3>
+
+<p>The Certus flow performs hold timing closure on a Top+BM database based on timing violations from the Top+BM STA clients. You can decide to enable either GBA or PBA mode.</p>
+
+<p><span class="fontgreencadence">
+<p><strong>BM Generation Session</strong></p>
+
+<p>The BM session can be SMSC, MMMC, or D-MMMC.</p>
+
+<p><code>set_db timing_full_context_flow 1</code><br /><code>set_db timing_sum_cc_for_all_small_aggressors 1</code><br /><code>set_db timing_write_aggressors_to_disk 1</code><br /><code>set_db timing_enable_model_accurate_nef 1</code><br /><code>set_db timing_enable_filter_fanin_cone 1</code><br /><code>timing_enable_boundary_model_eco</code><br /><code>&#8230;</code><br /><code>create_boundary_model -overwrite -no_extended_fanin &#xa0;\</code><br /><code>-latch_effort_low -skip_constants -exclude_no_delay_ports &#xa0;\</code><br /><code>-dir BM_${BlockName}_${view} -overwrite</code><br /><code>The STA saved session can be SMSC or MMMC.</code></p>
+
+<p><strong>Top+BM STA Session</strong></p>
+
+<p><code>timing_enable_boundary_model_eco</code><br /><code>&lt;load_Top+BM_design&gt;</code><br /><code>write_db view1.enc</code></p>
+
+<p><strong>Certus Session</strong></p>
+
+<p><code>set_distributed_hosts -local -time_out 10000</code><br /><code>set_multi_cpu_usage -local_cpu 24 -remote_host 4 -cpu_per_remote_host 4</code><br /><code>set_distributed_mmmc_mode -enable_high_capacity_eco</code><br /><code>set_db eco_setup_view_list {setup_1v setup_2v setup_3v setup_4v}</code><br /><code>set_db eco_hold_view_list {hold_1v hold_2v hold_3v hold_4v}</code><br /><code>set_db eco_dynamic_view {setup_3v}</code><br /><code>set_db eco_leakage_view {setup_3v}</code><br /><code>set_db opt_signoff_distributed_optimization_block_restore_file blocks.txt</code><br /><code>set_db opt_signoff_optimize_replicated_modules true</code><br /><code>distribute_read_db -restore_design all -restore_dir \</code><br /><code>STA_211/ -out_dir reports_Paradime</code><br /><code>set_distributed_hosts &lt;your LSF args&gt; -time_out 10000</code><br /><code>start_distributed_eco_clients</code><br /><code>opt_signoff -hold</code></p>
+</span></p>
+<h3 id="TemplateScripts-Template2">Template 2</h3>
+
+<p>The Certus flow performs inter-partition Hold timing closure on a Top+BM database using a user-defined partition. The boundary model generation flow will remain the same as specified in Template 1.</p>
+
+<p>The STA saved session can be SMSC or MMMC. The same template can be used to perform the inter-partition Power recovery.</p>
+
+<p><span class="fontgreencadence">
+<p><strong>Top+BM STA Session</strong></p>
+
+<p><code>timing_enable_boundary_model_eco</code><br /><code>&lt;load_Top+BM_design&gt;</code><br /><code>write_db view1.enc</code></p>
+
+<p><strong>Certus Session</strong></p>
+
+<p><code>set_distributed_hosts -local -time_out 10000</code><br /><code>set_multi_cpu_usage -local_cpu 24 -remote_host 4 -cpu_per_remote_host 4</code><br /><code>set_distributed_mmmc_mode -enable_high_capacity_eco</code><br /><code>set_db opt_signoff_distributed_optimization_block_restore_file blocks.txt</code><br /><code>set_db eco_setup_view_list {setup_1v setup_2v setup_3v setup_4v}</code><br /><code>set_db eco_hold_view_list {hold_1v hold_2v hold_3v hold_4v}</code><br /><code>set_db eco_dynamic_view {setup_3v}</code><br /><code>set_db eco_leakage_view {setup_3v}</code><br /><code>set_db opt_signoff_inter_partition {blockA blockB}</code><br /><code>set_db opt_signoff_intra_partition {}</code><br /><code>set_db opt_signoff_optimize_replicated_modules true</code><br /><code>distribute_read_db -restore_design all -restore_dir \</code><br /><code>STA_211/ -out_dir reports_Paradime</code><br /><code>set_distributed_hosts &lt;your LSF args&gt; -time_out 10000</code><br /><code>start_distributed_eco_clients</code><br /><code>opt_signoff -hold</code></p>
+</span></p>
+<h3 id="TemplateScripts-Template3">Template 3</h3>
+
+<p>The Certus flow performs DRV, Setup, and Hold timing closure on a Top+BM database using the user-defined Setup/Hold path_groups and a list of DRV pins. The boundary model generation flow will remain the same as specified in Template 1.</p>
+
+<p>The STA saved session can be SMSC or MMMC.</p>
+
+<p><span class="fontgreencadence">
+<p><strong>Top+BM STA Session</strong></p>
+
+<p><code>timing_enable_boundary_model_eco</code><br /><code>&lt;load_Top+BM_design&gt;<br />write_db view1.enc</code></p>
+
+<p><strong>Certus Session</strong></p>
+
+<p><code>set_distributed_hosts -local -time_out 10000&#xa0;</code><br /><code>set_multi_cpu_usage -local_cpu 24 -remote_host 4 -cpu_per_remote_host 4&#xa0;</code><br /><code>set_distributed_mmmc_mode -enable_high_capacity_eco&#xa0;</code><br /><code>set_db opt_signoff_distributed_optimization_block_restore_file blocks.txt&#xa0;</code><br /><code>set_db opt_signoff_path_group_file_name {TCL script which creates mySetupPG and myHoldPG path_groups}&#xa0;</code><br /><code>set_db opt_signoff_include_setup_path_groups {mySetupPG}&#xa0;</code><br /><code>set_db opt_signoff_include_hold_path_groups {myHoldPG}&#xa0;</code><br /><code>set_db opt_signoff_select_drv_pin_file {myDRVPinList.txt}&#xa0;</code><br /><code>set_db eco_setup_view_list {setup_1v setup_2v setup_3v setup_4v}&#xa0;</code><br /><code>set_db eco_hold_view_list {hold_1v hold_2v hold_3v hold_4v}&#xa0;</code><br /><code>set_db eco_dynamic_view {setup_3v}&#xa0;</code><br /><code>set_db eco_leakage_view {setup_3v}&#xa0;</code><br /><code>set_db opt_signoff_optimize_replicated_modules true&#xa0;</code><br /><code>distribute_read_db -restore_design all -restore_dir \&#xa0;</code><br /><code>STA_211/ -out_dir reports_Paradime&#xa0;</code><br /><code>set_distributed_hosts &lt;your LSF args&gt; -time_out 10000&#xa0;</code><br /><code>start_distributed_eco_clients&#xa0;</code><br /><code>opt_signoff -drv; opt_signoff -setup; opt_signoff -hold</code></p>
+</span></p>
+
+<p><strong>Related Topics</strong></p>
+<ul><li><span class="plugin_pagetree_children_span"><a href="Certus_Licensing_Requirements_src_contextnavpagetreemode.html" rel="nofollow">Certus Licensing Requirements</a></span></li><li><span class="plugin_pagetree_children_span"><a href="Certus_Inputs_Requirements_src_contextnavpagetreemode.html" rel="nofollow">Certus Inputs Requirements</a></span></li><li><span class="plugin_pagetree_children_span"><a href="Certus_Template_Scripts_src_contextnavpagetreemode.html" rel="nofollow">Certus Template Scripts</a></span></li><li><a href="Hierarchical_Top_Boundary_Model_ECO_Flow.html">Hierarchical Top+Boundary Model ECO Flow</a></li><li><span class="plugin_pagetree_children_span"><a href="Recommended_Guidelines_for_Certus_src_contextnavpagetreemode.html" rel="nofollow">Recommended Guidelines for Certus</a></span></li></ul>
+<p><br /></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Hierarchical_Top_Boundary_Model_ECO_Flow.html" id="prev" title="Hierarchical_Top_Boundary_Model_ECO_Flow">Hierarchical_Top_Boundary_Mode ...</a></em></b><b><em><a href="Manual_ECO.html" id="nex" title="Manual_ECO">Manual_ECO</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

@@ -1,0 +1,160 @@
+
+<html><head><title>Setting Up Signoff ECO Environment</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845236" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Setting Up Signoff ECO Environment" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845236" />
+<meta name="NextFile" content="SignoffECO_ecousemodel.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="SignoffECO_ecoflow.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- Setting Up Signoff ECO Environment" />
+<meta name="Keywords" content="terminate ECO,Set ECO environment,end ECO session,start ECO" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="ECO,Stylus" />
+<meta name="prod_subfeature" content="ECO" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="SignoffECO_ecoflow.html" title="Signoff ECO Flow">Signoff ECO Flow</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="SignoffECO_ecousemodel.html" title="Signoff Optimization Use Models">Signoff Optimization Use Model ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:ecoenvironment" title="Setting Up Signoff ECO Environment"></a><style>/*<![CDATA[*/
+/**/
+/**/
+/**/
+/**/
+h1 { counter-reset: heading 8;}
+/**/
+/**/
+/**/
+/**/
+/*]]>*/</style><h2>
+<a id="pgfId-999372"></a><a id="61809"></a>Setting Up Signoff ECO Environment</h2>
+
+<p>
+<a id="pgfId-1951809"></a>This topic describes the tasks that you perform to set the ECO environment, and the commands to start and terminate ECO.</p>
+<p>
+<a id="pgfId-1951810"></a>The input and output data, and various fixing methodologies and targets for setting up the ECO environment are as follows:</p>
+<p>
+<a id="pgfId-999450"></a><strong>Input Data</strong></p>
+<ul><li>
+<a id="pgfId-999460"></a>Technology data (timing libraries)</li><li>
+<a id="pgfId-999469"></a>Design data (Verilog, MMMC, SPEF)</li><li>
+<a id="pgfId-999478"></a>Optional design data (DEF, CPF/UPF, ILM, and LEF)</li></ul>
+
+
+<p>
+<a id="pgfId-999487"></a><strong>Timing and Power Optimization Methodology and Targets</strong></p>
+<ul><li>
+<a id="pgfId-999497"></a>Uses cell swapping, cell resizing, and buffer/inverter insertion and deletion. </li><li>
+<a id="pgfId-999506"></a>Fixes timing violations, such as:<ul><li>
+<a id="pgfId-999515"></a>Hold timing </li><li>
+<a id="pgfId-999524"></a>Setup timing </li><li>
+<a id="pgfId-999533"></a>Design Rule (max_cap/max_tran)</li><li>
+<a id="pgfId-999542"></a>SI violations (SI Slew, SI Xtalk and SI Glitch)</li><li>
+<a id="pgfId-999551"></a>Reduces Power and Area: </li><li>
+<a id="pgfId-999560"></a>Area reduction</li><li>
+<a id="pgfId-999569"></a>Leakage power reduction</li><li>
+<a id="pgfId-999578"></a>Dynamic power reduction</li><li>
+<a id="pgfId-999587"></a>Leakage and dynamic power reduction concurrently</li></ul></li></ul>
+
+
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-999596"></a><strong>Output Data</strong></p>
+<ul><li>
+<a id="pgfId-999606"></a>Detailed reporting on all the ECOs being performed.</li><li>
+<a id="pgfId-999615"></a>Detailed diagnostic reports on the remaining violations that are not fixed.</li><li>
+<a id="pgfId-999624"></a>Standard format ECO file.</li><li>
+<a id="pgfId-999633"></a>Final timing summary reports.</li></ul>
+
+
+
+
+
+
+<h4>
+<a id="pgfId-999651"></a><a id="35060"></a>Starting ECO</h4>
+
+<p>
+<a id="pgfId-999660"></a>To start a ECO session, type the following command with the appropriate parameters on the UNIX/Linux command line.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3700860"></a>tempus &gt; tempus -stylus -files &lt;file_name&gt; -tso</pre>
+
+
+<h4>
+<a id="pgfId-999679"></a><a id="50810"></a>Terminating ECO</h4>
+
+<p>
+<a id="pgfId-999688"></a>To end a ECO session, type &quot;<code>exit</code>&quot; in the Tempus shell.</p>
+
+
+
+<h4><em>
+<a id="pgfId-2429200"></a>Related Topics</em></h4>
+
+<ul><li>
+<a id="pgfId-2429204"></a><a href="SignoffECO_overview.html#85337">Signoff ECO Overview</a></li><li>
+<a id="pgfId-2461934"></a><a href="SignoffECO_signoffecokeyfeatures.html#93599">Key Features of Signoff ECO</a></li><li>
+<a id="pgfId-2429229"></a><a href="SignoffECO_ecoflow.html#59262">Signoff ECO Flow</a></li><li>
+<a id="pgfId-2460551"></a><a href="SignoffECO_ecousemodel.html#75204">Signoff Optimization Use Models</a></li><li>
+<a id="pgfId-2429216"></a><a href="SignoffECO_ecotechniques.html#67633">Basic Signoff ECO Optimization Techniques</a></li></ul>
+
+
+
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="SignoffECO_ecoflow.html" id="prev" title="Signoff ECO Flow">Signoff ECO Flow</a></em></b><b><em><a href="SignoffECO_ecousemodel.html" id="nex" title="Signoff Optimization Use Models">Signoff Optimization Use Model ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

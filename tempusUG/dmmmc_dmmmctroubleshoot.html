@@ -1,0 +1,108 @@
+
+<html><head><title>Important Guidelines and Troubleshooting DMMMC</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823940" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Important Guidelines and Troubleshooting DMMMC" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823940" />
+<meta name="NextFile" content="dsta.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="dmmmc_dmmmceco.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Important Guidelines and Troubleshooting DMMMC" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="0" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="dmmmc_dmmmceco.html" title="Running Interactive ECO on Multiple Views in DMMMC Mode">Running Interactive ECO on Mul ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="dsta.html" title="Distributed Static Timing Analysis">Distributed Static Timing Anal ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:dmmmctroubleshoot" title="Important Guidelines and Troubleshooting DMMMC"></a><style>/*<![CDATA[*/
+/**/
+/**/
+/**/
+/**/
+h1 { counter-reset: heading 6;}
+/**/
+/**/
+/**/
+/**/
+/*]]>*/</style><h2>
+<a id="pgfId-1001579"></a><a id="86739"></a>Important Guidelines and Troubleshooting DMMMC</h2>
+
+<p>
+<a id="pgfId-1001588"></a>This section provides information on various kinds of error scenarios.</p>
+<p>
+<a id="pgfId-1001597"></a>Specify all the parasitic file loading commands (pertinent to all RC corners used in the design) in the analysis.tcl (Script 3) script that are accepted as an argument to the <a href="../tempustxtcmdref/distribute_views.html">distribute_views</a> command.</p>
+<ul><li>
+<a id="pgfId-1001609"></a>If distributed MMMC session is not getting launched, you need to check the following:<ul><li>
+<a id="pgfId-1001618"></a>There are no errors in your design loading file (design_load.tcl) that is used as an argument to the <a href="../tempustxtcmdref/distribute_read_design.html">distribute_read_design</a> command.</li><li>
+<a id="pgfId-1001630"></a>If the error message &#8220;<code>Unable to open socket, connection refused&#8221;</code> is displayed, then check for items listed in bullets &#8216;c&#8217; to &#8216;g&#8217;. In all these cases, the DMMMC system will issue the appropriate error/warning messages.</li><li>
+<a id="pgfId-1001650"></a>Log on to the machines specified as resources to the DMMMC session. You must have direct login access to these machines (that is, without requiring a password at the time of login). Update your host settings to avoid this issue.</li><li>
+<a id="pgfId-1001659"></a>Make sure that the specified Tempus clients in the DMMMC setup are not heavily loaded. Enough resources should be available on each Tempus client to process a view.</li><li>
+<a id="pgfId-1001668"></a>If using LSF mode, then the required LSF variable and environmental settings should be done prior to the launch. Similarly, for rsh the DMMMC system assumes you have configured the RSH access to the Tempus client properly.</li><li>
+<a id="pgfId-1001677"></a>The commands that are supported beyond timing and noise analysis flow are not used in the scripts. The MMMC parameters and options related to RC extraction must be removed from the design_load.tcl to run the flow smoothly.</li></ul></li><li>
+<a id="pgfId-1001686"></a>The <a href="../tempustxtcmdref/set_analysis_view.html">set_analysis_view</a> command is not allowed in any of the scripts that are accepted as input to the DMMMC system. Specify a list of views using the <code>distribute_views</code> command. This command will distribute these views internally to the Tempus clients for processing.</li><li>
+<a id="pgfId-1001700"></a>All merging commands work on the Tempus master and the output of these commands will be placed in the specified output file. These merge commands will not follow the protocol of moving the output reports to the specific output area, as mentioned above. This applies to any command that is capable of generating an output specific to a view.</li><li>
+<a id="pgfId-1001709"></a>Single machine MMMC and distributed MMMC cannot be used concurrently in the same Tempus master session.</li><li>
+<a id="pgfId-1001718"></a>DMMMC is a batch mode execution feature - distributed save/restore and interactive command entry capabilities are supported in Tempus.</li><li>
+<a id="pgfId-1008404"></a>Merged noise report will not specify the view name for each record of delay/glitch. You will see multiple entries of records where each record will correspond to a specific Tempus client. To match the record to a view and make noise reports handy, you need to generate text reports along with the merged view text report.</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="dmmmc_dmmmceco.html" id="prev" title="Running Interactive ECO on Multiple Views in DMMMC Mode">Running Interactive ECO on Mul ...</a></em></b><b><em><a href="dsta.html" id="nex" title="Distributed Static Timing Analysis">Distributed Static Timing Anal ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

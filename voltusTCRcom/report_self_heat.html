@@ -1,0 +1,149 @@
+
+<html><head><title>report_self_heat</title>
+<meta name="page_sequence" content="28019000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666304" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="report_self_heat" />
+<meta name="Keywords" content="BEOL,FEOL,delta-T RMS,dynamic RMS current,self-heating effects,self-heating effects,SHE" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Rail Analysis," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusTCRcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666304" />
+<meta name="NextFile" content="report_signal_resistance.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="report_resistance.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Text Reference Manual  -- report_self_heat" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltuscuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusTCRcomTOC.html">Contents</a></li><li><a class="prev" href="report_resistance.html" title="report_resistance">report_resistance</a></li><li style="float: right;"><a class="viewPrint" href="voltusTCRcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="report_signal_resistance.html" title="report_signal_resistance">report_signal_resistance</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Text Reference Manual <br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>report_self_heat</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span id="report_self_heat-analyze_resistance"></span><span class="confluence-anchor-link" id="report_self_heat-report_self_heat"></span><code>report_self_heat<br /></code><code>[-help]<br />[-output_directory&#xa0;&#xa0; <em>dir_name</em>]<br />[-parameter_file <em>filename</em>]<br />[-power_domain <em>rail_domain_name</em>]<br /><br /></code></p>
+
+<p>Runs Self-Heating Effect (SHE) analysis on a single die or multiple dies. This command must be specified after defining the SHE properties using the&#xa0;<code>set_self_heat_analysis_mode</code> command.</p>
+
+<p>The <code>report_self_heat&#xa0;</code>command will use the static power data to compute delta T FEOL for all instances in the design. This command:</p>
+<ul><li>computes the RMS currents on signal wires</li><li>computes the RMS currents on power network wires</li><li>generates Detail Delta Temperature File (ddt), Instance Delta Temperature File (idt), and Tile Delta Temperature File (tdt)</li></ul><div aria-label="Info" class="confluence-information-macro  confluence-information-macro-information" role="region"><span class="aui-icon aui-icon-small aui-iconfont-info-filled confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>Self-heat analysis (<code>report_self_heat</code>) should be performed for the entire design, that is, you must use domain analysis with all PG nets (<code>-power_domain ALL</code>).</p>
+</div>
+</div>
+<h4 id="report_self_heat-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd">
+<p>Outputs a brief description that includes the type and default information for each <code>report_self_heat</code> parameter.</p>
+
+<p>For a detailed description of the command and all of its parameters, use the man command <code>man </code><code>report_self_heat</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-output_directory&#xa0;&#xa0; <em>dir_name</em></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">
+<p>Specifies the directory name for storing the self-heat analysis results. When you specify this parameter, the following result files are saved in the specified directory:</p>
+<ul><li>Rail analysis output directory</li><li>Detail delta temperature file</li><li>Instance delta temperature file</li><li>Tile delta temperature file</li></ul>
+<p>If <code>-output_directory</code> is not specified, by default the self-heat analysis results are stored in the current working directory.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-parameter_file <em>filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">
+<p><span style="color:var(--ds-text,#172b4d);">Specifies the self-heating effect (SHE) analysis parameter file name (param.sh) required for SHE calculations. This file, provided by the foundry, contains essential alpha and beta coupling factors that the tool uses for coupledT calculations when modeling heat transfer from devices to metal layers.</span></p>
+
+<p><span style="color:var(--ds-text,#172b4d);"><strong>Sample File</strong>:</span></p>
+
+<p><code>HEADER {</code><br /><code>FILE := Thermal_Coupling.ircx</code><br /><code>}</code><br /><br /><code>BETA_C1_OD := 0.0055</code><br /><code>BETA_C2_OD := -0.00065</code><br /><code>BETA_C3_OD := 0.85000</code><br /><br /><code>* SELFHEAT_TABLE 17 5 (LAYER:V, ALPHA_CONNECT_OD:V, ALPHA_OVERLAP_OD:V, ALPHA_HIGHR:V, BETA_HIGHR:V)</code><br /><code>FIELD&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; ALPHA_CONNECT_OD&#xa0; &#xa0;ALPHA_OVERLAP_OD&#xa0; &#xa0; &#xa0;ALPHA_HIGHR&#xa0;&#xa0;&#xa0; BETA_HIGHR</code><br /><code>LAYER</code><br /><code>AP&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.90&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.30&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.35&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.85</code><br /><code>M15&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; .90&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.30&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.35&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.85&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;</code><br /><code>M14&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.90&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.30&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.35&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.85&#xa0;&#xa0;&#xa0;&#xa0;</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-power_domain <em>rail_domain_name</em></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">Specifies the domain name of the rail.</td>
+</tr>
+</tbody></table></div>
+<h4 id="report_self_heat-Examples">Examples</h4>
+<ul><li>The following command is an example of <code>report_self_heat</code> command in the multi-die analysis flow:<br /><code>set_self_heat_analysis_mode \<br />-die_instance_name die0 \<br />-alpha_parameters {{M1 0.74 0.85} {M2 0.62 0.85} {M3 0.53 0.85} ....} \<br />-beta_parameters {0.00423 -0.00045 0.81534}\<br />-instance_power_file ./dynamic_power.rpt \<br />-cell_thermal_resistance_file TRF.txt \<br />-instance_delta_temperature_file sh_itm.txt \<br />-tile_delta_temperature_file sh_ttm.txt \<br />-tiles {10 10} \<br />-detail_delta_temperature_file power_detail_die0.rpt<br /></code>
+<p><code>set_self_heat_analysis_mode \</code><br /><code>-die_instance_name die1 \</code><br /><code>-alpha_parameters {{M1 0.74 0.85} {M2 0.62 0.85} {M3 0.53 0.85} ...} \</code><br /><code>-beta_parameters {0.00423 -0.00045 0.81534}\</code><br /><code>-instance_power_file ./dynamic_power.rpt \</code><br /><code>-cell_thermal_resistance_file TRF.txt \</code><br /><code>-instance_delta_temperature_file sh_itm.txt \</code><br /><code>-tile_delta_temperature_file sh_ttm.txt \</code><br /><code>-tiles {10 10} \</code><br /><code>-detail_delta_temperature_file power_detail_die1.rpt</code></p>
+
+<p><code>set_self_heat_analysis_mode \</code><br /><code>-die_instance_name die2 \</code><br /><code>-alpha_parameters {{M1 0.74 0.85} {M2 0.62 0.85} {M3 0.53 0.85} ...} \</code><br /><code>-beta_parameters {0.00423 -0.00045 0.81534}\</code><br /><code>-instance_power_file ./dynamic_power.rpt \</code><br /><code>-cell_thermal_resistance_file TRF.txt \</code><br /><code>-instance_delta_temperature_file sh_itm.txt \</code><br /><code>-tile_delta_temperature_file sh_ttm.txt \</code><br /><code>-tiles {10 10} \</code><br /><code>-detail_delta_temperature_file power_detail_die2.rpt</code></p>
+
+<p><code>report_self_heat -power_domain core</code></p>
+<code> <br /></code></li></ul><h4 id="report_self_heat-RelatedTopics">Related Topics</h4>
+<ul><li>&quot;<span class="confluence-link">Self-Heating Effect Analysis</span>&quot; in the <em>Voltus User Guide</em></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="report_resistance.html" id="prev" title="report_resistance">report_resistance</a></em></b><b><em><a href="report_signal_resistance.html" id="nex" title="report_signal_resistance">report_signal_resistance</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

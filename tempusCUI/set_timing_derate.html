@@ -1,0 +1,363 @@
+
+<html><head><title>set_timing_derate</title>
+<meta name="page_sequence" content="37127000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287414" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_timing_derate" />
+<meta name="Keywords" content="early late paths,delay scaling derating factors" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Timing Analysis," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287414" />
+<meta name="NextFile" content="set_timing_library.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_timing_context_view_mapping.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- set_timing_derate" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="set_timing_context_view_mapping.html" title="set_timing_context_view_mapping">set_timing_context_view_mappin ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_timing_library.html" title="set_timing_library">set_timing_library</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_timing_derate</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>set_timing_derate<span class="confluence-anchor-link" id="set_timing_derate-set_timing_derate"></span><span id="set_timing_derate-set_timing_derate"></span><br />[-help]<br />[<em>obj_list</em>]<br />[<em>value</em>]&#xa0;<br />[-add]<br />[-cell_check]<br />[-cell_delay]<br />[-clock]<br />[-clock_period_check]<br />[-corner]<br />[-data]<br />[-dynamic]<br />[-early <em>float</em>] <br /><span>[-fall]<br />[-increment]<br />[-input_switching]</span><br />[-late <em>float</em>]<br /><span>[-mean]</span><br />[-min | -max | -delay_corner <code><em>delayCornerName</em></code>]<br />[-multiply]<br />[-net_delay]<br />[-power_domain <em>string</em>]<br />[-pulse_width_check]<br />[-retain_delay] <br /><span>[-rise]<br />[-sigma]</span><br />[-static]<br />[-statistical]<br />[-transition]<br /></code><br /></code></p>
+
+<p>Sets delay scaling or derating factors for early and late paths in the current design. You use this command to perform scaled on-chip variation around best-case and worst-case corners. The timing scaling factors affect the delay values generated in the timing reports. You can set scaling factors for data paths, clock paths, minimum and maximum operating conditions.</p>
+
+<p>If you do not specify the <code>-clock</code> or <code>-data</code> parameter, the software applies the scaling factors to both clock and data paths. If you specify only one of the two parameters, <code>-data</code> or <code>-clock</code>, the software uses the last defined value for the other.</p>
+
+<p>Similarly, if you do not specify the <code>-min</code> or <code>-max</code> parameter, the software applies the scaling factor to both minimum and maximum operating conditions. You should only use the <code>-min</code> or <code>-max</code> parameter for best-case worst-case analysis. If you specify them in on-chip variation (OCV) mode, the software will use the <code>-min</code> <code>-early</code> derating factor for early path scaling, and the <code>-max</code> <code>-late</code> derating factor for late path adjustments.</p>
+
+<p>When there are separate max and min libraries specified, only those <code>set_timing_derate</code> constraints are honored that are specified with max library. The constraints specified with min library are ignored.</p>
+
+<p>In MMMC mode, for delay corners having different late and early library sets, only those <code>set_timing_derate</code> constraints are honored that are specified with late library set of the delay corner. The constraints specified with early library set are ignored.</p>
+
+<p><strong>Note: </strong>The <code>set_timing_derate</code> command can only be used on the command line. You cannot import it as part of an SDC file.</p>
+
+<p><strong>Note</strong>: If the&#xa0;<code>set_timing_derate</code>&#xa0;constraint is added incrementally in SI mode, an explicit&#xa0;<code><a href="update_timing.html">update_timing</a></code>&#xa0;<code>-full</code>&#xa0;command is required (before&#xa0;<code><a href="report_timing.html">report_timing</a></code>&#xa0;or&#xa0;<code><a href="report_constraint.html">report_constraint</a></code>) for SI full accuracy.</p>
+<h4 id="set_timing_derate-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="confluenceTable cadenceTable cadDefaultfont" id="cadDefaultfont" style="width: 720px;"><colgroup><col style="width: 300px;" /><col style="width: 340px;" /></colgroup><tbody><tr><td class="confluenceTd"><code>-help</code></td>
+<td class="confluenceTd">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-add</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Incrementally adds or subtracts derates. You can also apply derates on specific leaf instances.</p>
+
+<p>This parameter also support nets objects.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-cell_check</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies scaling on timing checks. Use the <code>-cell_check</code> option with the <code>-early</code> option to specify scaling on hold arcs and use with the <code>-late</code> option to specify scaling on setup arcs.</p>
+
+<p>When you specify this parameter, derating factors are also applied to user constraints such as <code>set_output_delay</code>, <code>set_data_check</code>, and <code>set_clock_gating_check</code>.</p>
+
+<p>The <code>-cell_check</code> parameter by default does not apply check derate to output external delay (e.g., <code>set_output_delay</code>). To enable this feature, you can set the <code>timing_apply_check_derate_to_external_output_d</code><code>elay</code> timing attribute to <code>true</code>. When set to <code>true</code>, this attribute applies cell derate to the top boundary port.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-cell_delay</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies scaling on cell delays.</p>
+
+<p>If neither the <code>-cell_delay</code> nor the <code>-net_delay</code> option is specified, the specified scaling factor applies to both types of delays.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-clock </code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Applies the derating factors to clock paths only.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-clock_period_check</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies derate values for clock period checks.</p>
+
+<p><strong>Note</strong>: This parameter cannot be specified with the <code>-clock</code>, <code>-data</code>, <code>-cell_check</code>, <code>-cell_delay</code>,&#xa0;<code>-early</code>, <code>-retain_delay</code>, or <code>-net_delay</code> parameter.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-corner</code></td>
+<td class="confluenceTd">
+<p>Applies derating on cells or nets that are modeled as corner data elements. The specified derating factor is applied to both the mean and sensitivities of the delays (corner objects can have propagated sensitivities).<br />A cell with no timing arc data in a library that has any sensitivity information with respect to any parameter defined in SPDF are considered as a corner object. All cells that do not qualify are considered to be statistical objects. <br />A net with parasitic data that has no sensitivity information with respect to any parameter defined in SPDF is considered as a corner object. All nets that do not qualify are considered to be statistical objects.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-data </code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Applies the derating factors to data paths only.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-delay_corner </code><code><em>delayCornerName</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Applies the derating factor to the specified delay calculation corner or a list of delay corners.</p>
+
+<p><strong>Note</strong>: The timing derate can be applied to corners&#xa0;associated with active views only.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>derate_value</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the derating value to be used.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-dynamic</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Applies the specified derating factor to the delta portion of the net and cell delays. &#xa0;The delay typically models SI crosstalk adjustments from detailed RC analysis or annotation.</p>
+
+<p>You can use this parameter in conjunction with the <code>-net_delay</code> or <code>-cell_delay</code> parameter to target the derate to desired components of the overall stage delay.</p>
+
+<p>The delay calculation controls allow for the SI crosstalk impact to be apportioned to the cell delay and/or net delay. You should coordinate the use of <code>-dynamic</code> derate with your delay calculation configuration.&#xa0;For more information, you can refer to the following <a href="si_Category_Attributes.html">si attributes</a>:&#xa0;</p>
+<ul><li><code>si_delay_delta_annotation_mode</code></li><li><code>si_delay_separate_on_data</code></li></ul>
+<p><strong>Notes</strong></p>
+<ul><li data-uuid="321bd0bc-69a4-4970-bc3a-491a842920ef">To apply the derate with <code>-dynamic</code>, you must specify <code>si_delay_separate_on_data&#xa0;true</code> setting.&#xa0;</li><li data-uuid="84ce910b-53ac-4847-8994-7b37c44cbc35">When <code>-dynamic</code> is specified with:<ul><li data-uuid="744e8e0a-db99-4846-8be2-21b9c86e519d"><code>si_delay_delta_annotation_mode </code><code>lumpedOnNet</code>, derate applies only to the SI component of net<br />delays.</li><li data-uuid="0c3b13d7-a67d-4f10-934a-ed2e3c5e15f8"><code>si_delay_delta_annotation_mode </code><code>arc</code>, derate applies to SI components of both cell and net<br />delays.</li><li><code>-cell_delay</code> parameter and&#xa0;<code>si_delay_delta_annotation_mode </code><code>arc</code>, derate applies only to the SI component of cell delays.</li><li><code>-net_delay</code>, the derate applies to the SI component of net delays.</li></ul></li></ul><ul><li data-uuid="1931148e-2215-4401-8ee3-fb8a57c01f7b"><span>You cannot specify </span><code>-dynamic</code><span> with </span><code>-mean</code><span> or </span><code>-sigma</code><span> parameter.</span></li></ul></td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-early <em>float</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies that the derating factor applies to early paths. Early paths are launching clock during hold analysis, receiving clock during setup analysis and datapath during hold analysis.</p>
+
+<p><strong>Note</strong><span>: To use this parameter, you must specify </span><code>-delay_corner</code><span>.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-fall</code></td>
+<td class="confluenceTd">
+<p>Applies the derating factor to falling delay and check arcs based on the transition direction at the arc&#8217;s sink pin.</p>
+
+<p>This parameter can be used to selectively apply timing derates for the fall arcs (cell, net, or check arcs).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-increment</code></td>
+<td class="confluenceTd">
+<p><span style="color:var(--ds-text,#172b4d);">Incrementally adds the derate value to the total derate value in all the modes - OCV, AOCV, and SOCV mode. </span></p>
+
+<p><span style="color:var(--ds-text,#172b4d);">The <code>set_timing_derate</code> command saves two different values &#8211; the &#8220;base&#8221; derate and the &#8220;incremental&#8221; derate. When the <code>-incremental</code> parameter is specified, the software populates the incremental derates.&#xa0;&#xa0;</span></p>
+<p style="text-align: left;"><strong>Notes</strong>:&#xa0;&#xa0;</p>
+<ul style="text-align: left;"><li>This parameter is used to specify incremental derates for leaf cell instances or library cell objects only.</li><li><code>&#8211;increment</code><span>&#xa0;</span>and<span>&#xa0;</span><code>-multiply</code><span>&#xa0;</span>are mutually exclusive parameters.</li><li><code>&#8211;increment</code>/<code>-multiply</code><span>&#xa0;</span>are supported with existing parameters, such as, &#xa0;<code>-late</code>/<code>-early</code>,<span>&#xa0;</span><code>&#8211;rise</code>/<code>-fall</code>,<span>&#xa0;</span><code>-mean</code>/<code>-sigma.</code></li><li>Unlike base transition derate, the derate values with<span>&#xa0;</span><code>-increment</code>/<code>-multiply</code><span>&#xa0;</span>can be greater or smaller than 1.</li><li>Base transition derate values will be limited to: Late &gt;= 1.0 &#xa0;and &lt; 100.0, Early &lt;= 1.0 and &gt; 0.0.</li></ul><p style="text-align: left;">By default, a limit check on total derate value will be performed during transition for delay calculation. If the total transition derate is out of range, a warning message will be issued.</p>
+<p style="text-align: left;">By default, the incremental derates are overwritten. To disable this behavior, you can use the following global variables:</p>
+<ul style="text-align: left;"><li><code>timing_derate_incremental_adjust_additive_mode</code>: Incremental derates are added to each other to obtain the final incremental derate value.</li><li><code>timing_derate_incremental_multiply_accumulative_mode</code>: Incremental derates are multiplied with each other to obtain the final incremental derate value.</li></ul>
+<p><span style="color:var(--ds-text,#000000);">For more information, see <a href="timing_Category_Attributes.html">timing category attributes</a>.</span></p>
+
+<p><span style="color:var(--ds-text,#000000);"><strong>Note</strong>: The <code>-increment</code> parameter is mutually exclusive with <code>-pulse_width_check<span>, </span></code><code>-clock_period_check</code>, and&#xa0;<code>-input_switching</code> parameters.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-input_switching</code></td>
+<td class="confluenceTd">Considers the given derate as simultaneous switching input (SSI) derate that is applicable to early paths only.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-late <em>float</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies that the derating factor applies to late paths. Late paths are receiving clock during hold analysis, launching clock during setup analysis and data path during setup analysis.</p>
+
+<p><strong>Note</strong><span>: To use this parameter, you must specify </span><code>-delay_corner</code><span>.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-max</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Applies the derating factor to the maximum operating condition during best-case worst-case analysis. This parameter is ignored during on-chip variation analysis.</p>
+
+<p><strong>Note:</strong> You cannot use the <code>-max</code> parameter when the software is in multi-mode multi-corner (MMMC) mode. You must use the <code>-delay_corner</code> parameter instead.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-mean</code></td>
+<td class="confluenceTd">
+<p><span>Controls nominal derating. </span><span>You can apply separate derating the mean components of the delay. </span></p>
+
+<p><span>This parameter can be used in the SOCV analysis flow to specify a derating factor for the mean component of delays. For cell delays and checks, the <code>-mean</code> parameter is supported on library cell and instance objects. For net delays, it is supported as a global level derate factor. </span></p>
+
+<p><span>The <code>-multiply</code> and <code>-add</code> option can be used with the <code>-mean</code> parameter to provide an incremental adjustment to a previously specified mean base derate.&#xa0;</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-min </code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Applies the derating factor to the minimum operating condition during best-case worst-case analysis. This parameter is ignored during on-chip variation analysis.</p>
+
+<p><strong>Note: </strong>You cannot use the <code>-min</code> parameter when the software is in multi-mode multi-corner (MMMC) mode. You must use the <code>-delay_corner</code> parameter instead.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-multiply</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Incrementally multiplies derates. You can also apply derates on specific leaf instances. This parameter also support nets objects.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-net_delay</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies scaling on net delays.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>object_list</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the list of instances, library cells, or nets to which the derating will be applied.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-power_domain <em>string</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Allows you to specify a specific power domain for the timing derate factors to be applied.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-pulse_width_check</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies derate values for pulse width checks.</p>
+
+<p><strong>Note: </strong>The <code>-pulse_width_check</code> and <code>-clock_period_check</code> parameters are mutually exclusive.</p>
+
+<p>To apply check derating to pulse width checks, set the <code>timing_enable_derating_for_pulse_width_checks</code> attribute to <code>true</code>. By default, the attribute is set to <code>false</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-retain_delay </code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies scaling on retain constructs. If you specify both <code>-retain_delay</code> and <code>-cell_delay</code> parameters, the software uses the retain_delay value for retain construct scaling. If you do not specify the <code>-retain_delay</code> parameter, retain constructs are scaled in the same manner as cell delays.</p>
+
+<p><span>You cannot specify </span><code>-retain_delay</code><span>&#xa0;with </span><code>-mean</code><span> or </span><code>-sigma</code><span> parameters.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-rise</code></td>
+<td class="confluenceTd">
+<p>Applies the derating factor to rising delay and check arcs based on the transition direction at the arc&#8217;s sink pin.</p>
+
+<p>This parameter can be used to selectively apply timing derates for the rise arcs (cell, net, or check arcs).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-sigma</code></td>
+<td class="confluenceTd">
+<p><span>Controls derating on the variation component. </span><span>You can apply separate derating to the sigma components of the delay.</span></p>
+
+<p><span><span>This parameter can be used </span>in the SOCV analysis flow to specify a derating factor for the variation component of delays. For cell delays and checks, the <code>-sigma</code> parameter is supported on library cell and instance objects. &#xa0;For net delays, it is supported as a global level derate factor.</span></p>
+
+<p><span>The <code>-multiply</code> and <code>-add</code> options can be used with the <code>-sigma</code> parameter to provide an incremental adjustment to a previously specified sigma base derate.&#xa0;</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-static</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Applies the specified derating factor to the non-delta portion of net delays only.</p>
+
+<p>You can specify <code>-net_delay</code> or <code>-cell_delay</code> parameter with the <code>-static </code>parameter.</p>
+
+<p>You cannot specify <code>-static</code> with <code>-mean</code> or <code>-sigma</code> parameters.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>-statistical</span></code></td>
+<td class="confluenceTd">
+<p>Applies derating on cells or nets that are modeled as statistical data elements. The specified derating factor is applied to both the mean and sigma of delays.<br />If both <code>set_timing_derate &#8211;corner</code> and <code>&#8211;statistical</code> options are not specified, the derating factor is applied on variation and corner objects equally. This is equivalent to issuing to two separate <code>set_timing_derate</code> commands, one with <code>&#8211;statistical</code> option and the other with <code>&#8211;corner</code> option.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-transition</code></td>
+<td class="confluenceTd">
+<p>Specifies scaling on transitions. When specified, the software allows derate transition and stretch waveforms.</p>
+
+<p>For incremental derates applied to the base derate (without the <code>&#8211;increment</code> parameter), you can use the following parameters with the <code>-transition</code> parameter:</p>
+<ul><li>&#xa0;<code>&#8211;increment</code> parameter adds to the base derate to obtain the final derate.</li><li><code>&#8211;multiply</code> parameter multiplies the incremental derate with the base derate to obtain the final derate value (<code>&#8211;increment</code> parameter is not required).</li><li>Validity of final derate value (same limits as base transition derate) is applied only during timing analysis, and not at the time of constraint processing.</li></ul>
+<p><strong>Note</strong>: You can use the <code>-transition</code> parameter with the following parameters:</p>
+<ul><li><code>-delay_corner</code></li><li><code>-early/-late</code></li><li><code>-rise/-fall</code></li><li><code>-mean/-sigma</code></li><li><code>-increment</code></li><li><code>-multiply&#xa0;</code></li></ul></td>
+</tr>
+</tbody></table></div>
+<h4 id="set_timing_derate-Examples">Examples</h4>
+<ul><li>The following command (1) can be used when the software is in on-chip variation analysis mode to add pessimism to both the setup and hold analyses by making the early paths 20 percent faster: <br />&#xa0;<code>set_db timing_analysis_type ocv</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;...</code><br /><code>(1)&#xa0;set_timing_derate -early 0.8 -late 1.0</code></li></ul><ul><li>The following example uses two <code>set_timing_derate</code> commands to set the scaling factors independently for the min and max corners. When the software is in best-case worst-case analysis mode:</li></ul><ul><ul><li>Command (1) adds pessimism to the setup analysis by making the latching clock path 20 percent faster.</li></ul></ul><ul><ul><li>Command (2) adds pessimism to the hold analysis by making the latching clock path 10 percent slower. <br /><code>(1)&#xa0;set_timing_derate -max -early 0.8 -late 1.0 </code><br /><code>(2)&#xa0;set_timing_derate -min -early 1.0 -late 1.1 </code></li></ul></ul><ul><li>When the software is in on-chip variation analysis mode, there is only one active delay corner; therefore, the <code>-min</code> and <code>-max</code> parameters should not be used. The following command sequence will generate a warning: <br /><code>set_db timing_analysis_type ocv</code><br /><code>...</code><br /><code>set_timing_derate -min -early 0.8 -late 0.9 </code><br /><code>set_timing_derate -max -early 1.1 -late 1.2</code> <br /><br />In this situation, the software uses <code>0.8</code> for derating early paths, and <code>1.2</code> for derating late paths.</li></ul><ul><li>The following command sets the early path scaling factor of 0.85 for instance <code>MULT_9</code> cell delays: <br /><code>set_timing_derate -early -cell_delay 0.85 [get_cells {MULT_9}] </code></li></ul><ul><li>The following command sets the early path scaling factor of 0.75 for the net named <code>MUX2/Z</code>: <br /><code>set_timing_derate -net_delay -early 0.75 [get_nets {MUX2/Z}] </code></li></ul><ul><li>The following command specifies power domain <code>PD1</code> for derating instances: <br /><code>set_timing_derate -power_domain PD1 -cell_delay 1.1</code></li></ul><ul><li>In the following example, a design having max library as &#39;slow&#39; and min library as &#39;fast&#39;, only the first two <code>set_timing_derate</code> constraints are honored: <br /><code>set_timing_derate -late 1.2 [get_lib_cells {slow/BUFX1}] -cell_delay</code><br /><code>set_timing_derate -early 0.8 [get_lib_cells {slow/BUFX1}] -cell_delay</code><br /><code>set_timing_derate -late 1.1 [get_lib_cells {fast/BUFX1}] -cell_delay</code><br /><code>set_timing_derate -early 0.9 [get_lib_cells {fast/BUFX1}] -cell_delay</code></li></ul><ul><li>Consider the following library sets, in MMMC mode: <br /><code>create_library_set -name libset1 -timing slow.lib</code><br /><code>create_library_set -name libset2 -timing fast.lib</code><br /><code>create_delay_corner -name corner1 -late_library_set libset1 -early_library_set libset2</code><br /><br />From the following <code>set_timing_derate</code> constraints the first and last are honored:<br /><code>set_timing_derate -late 1.2 -cell_delay [get_lib_cells slow/*] -delay_corner corner1</code><br /><code>set_timing_derate -early 2.3 -cell_delay [get_lib_cells slow/*] -delay_corner corner1</code><br /><code>set_timing_derate -late 3.4 -cell_delay [get_lib_cells fast/*] -delay_corner corner1</code><br /><code>set_timing_derate -early 4.5 -cell_delay [get_lib_cells fast/*] -delay_corner corner1</code></li></ul><ul><li>
+<p>The following command can be used when the software is in on-chip variation analysis mode to add pessimism to both the setup&#xa0;and hold analyses by making the early paths 20 percent faster:&#xa0;<br /><code>set_db timing_analysis_type ocv</code><br /><code>...</code><br /><code>set_timing_derate -early 0.8 -late 1.0</code><br /><br />This command adds pessimism to the setup analysis by making the latching clock path 20 percent faster.</p>
+</li></ul><ul><li>The following example uses two&#xa0;<code>set_timing_derate</code>&#xa0;commands to set the scaling factors independently for the min and max corners.&#xa0;When the software is in best-case worst-case analysis mode:<ul><li>The following command sets the early path scaling factor of 0.85 for instance MULT_9 cell delays:<br /><code>set_timing_derate -early -cell_delay 0.85 [get_cells {MULT_9}</code>]</li><li>The following command sets the early path scaling factor of 0.75 for the net named MUX2/Z:<br /><code>set_timing_derate -net_delay -early 0.75 [get_nets {MUX2/Z}]</code></li></ul></li><li>The following command specifies power domain PD1 for derating instances:<br /><code>set_timing_derate -power_domain PD1 -cell_delay 1.1</code></li><li>The&#xa0;following&#xa0;command shows library object level support for clock (and pulse width) check options:<code><br /><code>set_timing_derate -delay_corner -clock_period_check 1.05 [<em>object_list</em>]</code><br /></code></li><li>The following command sets an increment derate of 0.5 on mean and 0.8 on sigma of the cell:<br /><code>set_timing_derate -increment 0.8 -sigma &#xa0;MP_32_INST/p11A</code><br /><code>set_timing_derate -increment 0.5 -mean &#xa0;MP_32_INST/p11A</code><br />&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;&#xa0;<br />To increment the sigma derate further by 0.9, you can use the following command:<br /><code>set_timing_derate -increment 0.9 -sigma &#xa0;MP_32_INST/p11A</code><br /><br />The resultant sigma derate can be calculated as 1+0.9=1.9. <br /><br />When the <code>timing_derate_incremental_adjust_additive_mode</code> global variable is set to <code>true</code>, the resultant sigma derate will be 1+0.8+0.9=2.7.</li></ul><h4 id="set_timing_derate-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="report_timing_derate.html">report_timing_derate</a></code></li><li><code><a href="reset_timing_derate.html">reset_timing_derate</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_timing_context_view_mapping.html" id="prev" title="set_timing_context_view_mapping">set_timing_context_view_mappin ...</a></em></b><b><em><a href="set_timing_library.html" id="nex" title="set_timing_library">set_timing_library</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

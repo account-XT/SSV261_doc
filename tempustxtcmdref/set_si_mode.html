@@ -1,0 +1,647 @@
+
+<html><head><title>set_si_mode</title>
+<meta name="page_sequence" content="23046000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287503" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_si_mode" />
+<meta name="Keywords" content="signal integrity configuration,signal integrity settings,si mode settings" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="SI Analysis,Signal Integrity," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287503" />
+<meta name="NextFile" content="set_via_variation_mode.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_quiet_attacker.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- set_si_mode" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="set_quiet_attacker.html" title="set_quiet_attacker">set_quiet_attacker</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_via_variation_mode.html" title="set_via_variation_mode">set_via_variation_mode</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_si_mode</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>set_si_mode<span class="confluence-anchor-link" id="set_si_mode-set_si_mode"></span><span id="set_si_mode-set_si_mode"></span></code><br /><code>[-help] </code><br /><code>[-reset]</code><br /><code>[-accumulated_small_attacker_factor <em>double</em>]<br />[-accumulated_small_attacker_mode {cap | current | zero_mean}]</code><br /><code>[-accumulated_small_attacker_threshold <em>double</em>]</code><br /><code>[-attacker_alignment {path | path_overlap | <span>timing_aware_edge | input_arrival</span>}]</code><br /><code>[-clock_delta_delay_threshold <em>double</em>]</code><br /><code>[-clocks {asynchronous | synchronous}]<br />[-constrained_input_threshold_failure_point {input | both}]</code><br /><code>[-delay_only {true | false}]</code><br /><code>[-delta_delay_annotation_mode {lumpedOnNet | arc}]</code><br /><code>[-delta_delay_threshold <em>double</em>]<br />[-double_switching {none | clock | data_sequential | all}]&#xa0;<br />[-enable_advanced_flow {true | false}]<br />[-enable_bus_attacker_correlation {true | false}]</code><br /><code>[-enable_delay_report {true | false}]</code><br /><code>[-enable_double_clocking_check {true | false}]<br />[-enable_drv_with_delta_slew {true | false}]<br />[-enable_dynamic_receiver_peak_limits {true | false}]<br />[-enable_glitch_propagation &#xa0;{true | false}]&#xa0;<br />[-enable_glitch_propagation_spice_deck {true|false}]&#xa0;&#xa0;</code><br /><code>[-enable_glitch_report {true | false}]<br />[-enable_lle_glitch {true | false}]</code><br /><code>[-enable_logical_correlation {true | false}]<br /><span>[-enable_overshoot_undershoot_glitch {true | false}]<br />[-enable_two_stage_driver_weakening&#xa0;<span>{true | false}]<br />[-enable_user_defined_bus_merging {true | false}]</span></span><br />[-enable_virtual_attacker_constituent_report {true | false}]<br />[-glitch_accuracy_level &lt;<em>int</em>&gt;]<br />[-glitch_analysis_type {source | full_propagation}]</code><br /><code>[-hold_slack <em>double</em>]</code><br /><code>[-individual_attacker_simulation_filtering {true | false}]<br />[-individual_attacker_clock_threshold <em>float</em>]</code><br /><code>[-individual_attacker_threshold <em>double</em>]<br />[-input_glitch_full_propagation_threshold&#xa0;<em>double</em>]<br />[-input_glitch_full_propagation_vh_threshold&#xa0;<em>double</em>]<br />[-input_glitch_full_propagation_vl_threshold&#xa0;<em>double</em>]</code><br /><code>[-input_glitch_threshold <em>double</em>]</code><br /><code>[-input_glitch_vh_threshold <em>double</em>]</code><br /><code>[-input_glitch_vl_threshold <em>double</em>]<br /></code><code>[-nonlinear_attacker_slew {true | false}]</code><br /><code>[-num_si_iteration <em>int</em>]</code><br /><code>[-receiver_clk_peak_limit <em>double</em>]</code><br /><code>[-receiver_latch_peak_limit <em>double</em>]</code><br /><code>[-receiver_peak_limit <em>double</em>]<br />[-report_max_virtual_attacker_constituents <em>int</em>]<br />[-secondary_attacker_decoupling_factor <em>double</em>]</code><br /><code>[-separate_delta_delay_on_data {true | false}]</code><br /><code>[-setup_slack <em>double</em>]</code><br /><code>[-si_reselection {delta_delay | slack}]</code><br /><code>[-si_reselection_delay_threshold <em>double</em>]<br />[-skip_noise_model_check <em>pins</em>]</code><br /><code>[-skip_tw &lt;nets&gt;]</code><br /><code>[-switch_prob <em>double</em>]</code><br /><code>[-unconstrained_net_use_inf_tw {true | false}]</code><br /><code>[-use_infinite_TW {true | false}]<br />[-virtual_inter_die_attacker_slew &lt;<em>value</em>&gt;]<br /><br /></code></p>
+
+<p>Sets signal integrity configuration parameters used for crosstalk analysis and repair.</p>
+<h4 id="set_si_mode-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd"><code>-help</code></td>
+<td class="confluenceTd">Outputs a brief description that includes type and default information for each&#xa0;<code>set_si_mode</code> parameter. For a detailed description of the command and all of its parameters, use the man command:&#xa0;<code>man set_si_mode</code></td>
+</tr>
+<tr><td class="confluenceTd"><code>-reset</code></td>
+<td class="confluenceTd">
+<p>Resets all or specified options to their default value.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-accumulated_small_attacker_factor <em>double</em></code></td>
+<td class="confluenceTd">
+<p>Specifies the multiplication factor that controls the effect of the cap mode on the accumulated small attacker. An accumulated small attacker is an imaginary attacker that represents the sum of all the weak attackers on a specified net. To reduce pessimism when using the accumulated small attacker, adjust this value to anything between 0 and 1. A value of 0 means that the cap mode accumulated by a small attacker will not be used.</p>
+
+<p><em style="background-color: transparent;font-size: 10.0pt;line-height: 13.0pt;">Default</em>:<code style="background-color: transparent;font-size: 10.0pt;line-height: 13.0pt;">1</code></p>
+
+<p><strong>Note</strong>: This option does not work with the current mode accumulated small attackers, which is the default for process sizes 45nm and below.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-accumulated_small_attacker_mode {cap | current | zero_mean}</code></td>
+<td class="confluenceTd"><p style="text-align: left;">Specifies whether to use the current matching-based method for accumulated small attackers. You can specify the following options:</p>
+<ul style="text-align: left;"><li><code>cap</code>: Uses the accumulated small attacker method, which matches the total coupling capacitance of an attacker with the small attackers that are being virtualized. This is the default mode for all process nodes above 45nm.</li><li><code>current</code>: Uses the current matching-based method for accumulated small attackers. With this method, the transitions of virtual attackers are modeled using Piece Wise Linear (PWL) waveforms. The PWL waveforms are generated so that the current induced by the transition matches the total current induced by all accumulated small attacker components.</li><li><code>zero_mean</code>: Uses the accumulation method where a series of small attackers (that is, attackers with less than the individual attacker threshold value), are assumed to transition in opposing directions and cancel one another in aggregate.</li></ul><p style="text-align: left;"><em>Default</em>:<span>&#xa0;</span><code>current</code><span>&#xa0;</span>- for 45nm and below process nodes.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-accumulated_small_attacker_threshold &lt;double&gt;</code></p>
+</td>
+<td class="confluenceTd">
+<p>Changes the accumulated small attacker glitch threshold. If the virtual attacker produces a glitch whose peak is below this threshold, the component coupling capacitors of the accumulated small attacker are split into two ground capacitors and there is no accumulated small attacker for the victim. The value is specified as a ratio&#xa0;of VDD.</p>
+
+<p>To disable the accumulated small attacker, set the value greater than or equal to 1.</p>
+
+<p><em>Default</em>: <code>10.01</code></p>
+
+<p>By default, this option is disabled.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-attacker_alignment {path | path_overlap | <span>timing_aware_edge | input_arrival</span>}</code></td>
+<td class="confluenceTd"><div class="content-wrapper">
+<p>Specifies the attacker alignment. You can use the following options:</p>
+<ul><li><code>path</code>: The victim worst arrival edge is used while determining the attackers. Crosstalk impact is computed according to the latest/earliest arrival edge of victim for max/min analysis.</li><li><code>path_overlap</code>: The full timing window of victim is considered while determining the attackers. Crosstalk impact is calculated according the victim edge, lying anywhere in timing window, which may experience maximum impact.</li><li><code>timing_aware_edge</code>: Realistic analysis similar to path-based analysis is performed. Each attacker&#8217;s impact is annotated on victim transition where attacker timing window edge aligns with the victim. However, to ensure GBA bounds PBA analysis, the timing-aware edge mode handles some nets based on their timing properties in GBA analysis.</li><li><code>input_arrival</code>: The attackers use timing windows formed by 2-sigma arrivals regardless of the analysis sigma multiplier. The victim driver input arrivals will be used for SI computation. Also, the mean victim timing window and edge will be used for SI computation in GBA and PBA modes, respectively.&#xa0;&#xa0;<br />This behavior allows pessimism reduction in GBA SI analysis with narrower timing windows. And provides a more accurate PBA SI analysis, with no dependency of driver cell GBA delays.<br /><span style="color:var(--ds-text,#000000);">For more information, refer to the <a class="message-url" href="../tempusUG/analysisandreporting_performingsianalysis.html">Attacker Selection Based on Alignment</a> section in the <em>Tempus User Guide</em>.&#xa0;&#xa0;</span></li></ul>
+<p><em>Default</em>: <code>input_arrival</code></p>
+</div>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-clock_delta_delay_threshold <em>double</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the value above which the clock delta delay should be calculated.</p>
+
+<p><code><em>Default</em>: -1</code>.</p>
+
+<p><span>The <code>-clock_delta_delay_threshold</code> parameter provides a way to specify different delta delay thresholds for clock nets only.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-clocks {asynchronous | synchronous}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Treats the clocks either synchronous or asynchronous to each other.</p>
+
+<p><em>Default</em>: <code>synchronous</code>&#xa0;</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-constrained_input_threshold_failure_point {input | both}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Allows you to control the glitch failure criteria when a user specifies an object-specific RIP threshold.</p>
+
+<p>When set to&#xa0;<code>input</code>, the software skips ROP analysis and performs RIP-based failure check on the receiver pins for cases where object-specific RIP threshold is set using the&#xa0;<code><a href="../tempustxtcmdref/set_glitch_threshold.html" rel="nofollow">set_glitch_threshold</a></code>&#xa0;<code>-failure_point</code>&#xa0;<code>input</code>&#xa0;<code>-net</code>&#xa0;(or&#xa0;<code>-pin</code>) command.</p>
+
+<p>When set to&#xa0;<code>both</code>, the software performs both RIP and ROP failure checks, wherever possible. If user-specified RIP failure criteria is violated, then it will be flagged as a RIP violation. If RIP criteria passes and receiver noise models exist, then the ROP is computed and checked against the ROP failure threshold for failure determination.</p>
+
+<p>For the following cases where the object-specific RIP thresholds are not specified, the command behavior remains unchanged:</p>
+<ul><li>For receiver pins with noise models present, ROP-based failure check is performed. The RIP-based failure criteria is not checked at all.</li><li>For receiver pins with noise models missing, the RIP-based failure criteria is checked for violations.</li></ul>
+<p><em>Default</em>: <code>input</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-delta_delay_annotation_mode {lumpedOnNet | arc}]</code></p>
+</td>
+<td class="confluenceTd">
+<p>Calculates the delay for each arc (cell arc and net arc) in a path. By default, AAE calculates the delay, including SI for each arc and if the user chooses to view the SI delay separately, it would show annotated to each arc.</p>
+
+<p>Alternatively, you can choose to annotate the SI delay solely to the net. In this case, the worst-case arc is used to calculated the SI delay and it is annotated solely to the net.</p>
+
+<p><code>lumpedOnNet</code>: Lumps the delta delay on a the net, if it is broken out.</p>
+
+<p><code>arc</code>: Separates the delta delay on each cell arc and net arc, as calculated.</p>
+
+<p><em>Default</em>: <code>arc</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-delta_delay_threshold &lt;double&gt;</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies a threshold value for a design below which the crosstalk impact will be removed on a given net. Using this parameter, Tempus removes the SI impact on a stage if the impact is less than the specified threshold. The threshold value is specified in seconds.</p>
+
+<p><em>Default</em>: <span style="font-family: monospace;">-1</span></p>
+
+<p>By default, the software uses the <code>-delta_delay_threshold</code> settings. If you set the <code>-clock_delta_delay_threshold</code> parameter, then it will be used for the clock nets.</p>
+
+<p>When a threshold value using -<code>delta_delay_threshold</code> parameter is specified (and the default value of <code>-clock_delta_delay_threshold</code> parameter is used), then Tempus will use the <code>-delta_delay_threshold</code> value for both data and clock.</p>
+
+<p>If you define values for both <code>-delta_delay_threshold</code> and <code>-clock_delta_delay_threshold</code> parameters, then Tempus will use the user-defined settings for data and <span>clock, respectively.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-double_switching {none | clock | data_sequential | all}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the type of data (clock, data sequential, or all) for which double switching analysis will be performed.</p>
+
+<p><em>Default</em><span>: </span><code>none</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-delay_only {true | false}</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Performs noise-on-delay analysis exclusively. This means that when you use this parameter, the software does not perform glitch analysis and only performs noise-on-delay analysis. In addition, this parameter performs SI analysis.</p>
+
+<p>To enable glitch noise, you can use the <code>-enable_glitch_report</code> parameter or run the <code>update_glitch</code> command.</p>
+
+<p><span>Note that </span><code>-delay_only</code><span> cannot be used with </span><code>-enable_glitch_report</code>.</p>
+
+<p><em>Default</em><span>: </span><code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-enable_advanced_flow {true | false}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Enables advanced SI analysis.</p>
+
+<p>When set to <code>true</code>, the advanced SI analysis flow is enabled, in which attacker slews are computed by establishing a signoff-accurate base delay calculation before SI analysis begins. Apart from accuracy benefits, it also provides runtime benefits through enhanced reuse from signoff-accurate base iteration.</p>
+
+<p>When set to <code>false</code>, a fast pre-SI analysis is performed for attacker slew computation.</p>
+
+<p><em>Default</em>: <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-enable_bus_attacker_correlation {true | false}</code></td>
+<td class="confluenceTd">
+<p>Enables the software to treat bus bits as correlated attackers.</p>
+
+<p>When set to <code>true</code>, the bits of bus type nets are grouped together based on their cumulative weight.</p>
+
+<p>The bus bits that act as attackers to a specific victim are treated as a group. All the attackers are grouped into different bundles where normal (non-bus) attackers form one group and bits of the same bus form multiple other groups. In case of a victim that has a number of small couplings to bits of a bus, the combined effect of a full bus can be used to decide whether an attacker is significant.</p>
+
+<p><em>Default</em>: <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>&#8211;enable_double_clocking_check {true | false}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Enables double clocking check in AAE.</p>
+
+<p>This option enables double clocking analysis and <code style="line-height: 1.4285715;"><a href="report_double_clocking.html">report_double_clocking</a></code> command can be run to print a report.</p>
+
+<p><em>Default</em>: <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-enable_delay_report {true | false}</code></td>
+<td class="confluenceTd">
+<p>Enables SI delay reports.</p>
+
+<p>For generating the SI delay report, use the following:</p>
+
+<p><code>set_si_mode &#8211;enable_delay_report true;&#xa0;</code><br /><code>report_noise &#8211;delay max -txtfile max_delay.txt;&#xa0;</code><br /><code>report_noise &#8211;delay min &#8211;txtfile min_delay.txt</code></p>
+
+<p>To run <code>report_noise -delay</code>, you need to set this parameter prior to <code>update_timing</code>.</p>
+
+<p><em>Default</em>: <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-enable_drv_with_delta_slew {true | false}</code> &#xa0;&#xa0;</td>
+<td class="confluenceTd">
+<p>When set to <code>true</code>, the <code>max_transition</code> violations are reported based on the SI slews. Also, this parameter is mandatory to allow SI slew reporting/fixing by the <a href="eco_opt_design.html"><code>eco_opt_design</code></a> command and should be applied prior running the <code><a href="write_eco_opt_db.html">write_eco_opt_db</a></code> command.</p>
+
+<p><em>Default</em>: <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-enable_dynamic_receiver_peak_limits {true | false}</code></td>
+<td class="confluenceTd">
+<p>Enables automatic computation of ROP threshold value of two-stage cells, using the CCS-noise data on timing arcs.</p>
+
+<p>When set to <code>true</code>, the software computes the noise threshold for the last stage from the table of DC currents.</p>
+
+<p><em>Default</em><span>: </span><code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">&#xa0;<code>-enable_lle_glitch {true | false}</code></td>
+<td class="confluenceTd">
+<p>Enables SI glitch analysis for LLE.&#xa0;</p>
+
+<p><em>Default</em><span>: </span><code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>&#8211;enable_logical_correlation&#xa0;{true | false}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Enables the AAE-SI logical correlation. Logical correlation refers to the correlation of logic between (aggressor) nets that are connected to each other. A simple case would be input and output nets of an inverter never switch in the same direction, so they cannot be attackers to the same net simultaneously.</p>
+
+<p><em>Default</em>: <code>false</code></p>
+
+<p><strong>Note</strong>: You can also use this parameter for Glitch Analysis.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-enable_glitch_propagation&#xa0;{true | false}</code></td>
+<td class="confluenceTd">
+<p>Enables glitch propagation through single-stage cells and driver weakening through single-stage and dual-stage cells. When this attribute is set to <code>true</code>, the software does not delete the glitch waveform saved on instance input pins. The waveform is later used by Spice deck to propagate a glitch at the next stage receiver pin.</p>
+
+<p><em>Default</em>: <code>false</code></p>
+
+<p><strong>Note</strong>: The software does not support glitch propagation for multi-stage cells.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-enable_glitch_propagation_spice_deck&#xa0;{true | false}</code></td>
+<td class="confluenceTd">
+<p>Enables the driver input glitch waveform to be printed in the SPICE deck, such that SPICE can also perform single-stage glitch propagation. When this option is set to <code>true</code>, the software does not delete the glitch waveform saved on instance input pins. The waveform is later used by Spice Deck to propagate a glitch at the next stage receiver pin.</p>
+
+<p><em>Default</em>: <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>&#8211;enable_glitch_report {true | false}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Enables AAE SI glitch analysis.</p>
+
+<p>For generating a glitch report, use the following:</p>
+
+<p><code>set_si_mode &#8211;enable_glitch_report true;&#xa0;</code><br /><code>report_noise &#8211;txtfile glitch.txt</code></p>
+
+<p>Note that you cannot use <code>-enable_glitch_report</code> with <code>-delay_only</code> because the <code>-delay_only</code> option does not perform glitch analysis, and as a result, no glitch is reported.</p>
+
+<p><em>Default</em>: <code>false</code></p>
+
+<p><strong>Note</strong>:&#xa0;For SI glitch fixing, you must set the&#xa0;<code>-enable_glitch_report</code> parameter to <code>true</code>. When a <code>false</code> setting is detected, the software will display a warning during glitch fixing.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-enable_overshoot_undershoot_glitch {true | false}</code></td>
+<td class="confluenceTd">
+<p>Enables o<span>vershoot/undershoot analysis and reporting.</span></p>
+
+<p>The lifespan of transistors is characterized by their overshoot and undershoot values. If a transistor is consistently exposed to a certain percentage of overshoot/undershoot, it may have a reduced lifespan.</p>
+
+<p><em>Default</em>: <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-enable_two_stage_driver_weakening &#xa0;{true | false}</code></td>
+<td class="confluenceTd"><div class="content-wrapper">
+<p>Enables the two-stage driver weakening mode.</p>
+
+<p>A non-failing significant glitch at the input of a two-stage driver can propagate through the first stage and weaken the second stage. This might cause the crosstalk-induced glitch to amplify at the next stage receiver (though it may not be significant enough to propagate). When two-stage driver weakening is enabled, the software considers the weakened holding resistance for the two-stage driver for glitch analysis.</p>
+
+<p>The following diagram illustrates two-stage driver weakening:</p>
+
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/720023972/720023975.png" data-linked-resource-container-id="720023972" data-linked-resource-container-version="6" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="stage-driver.png" data-linked-resource-id="720023975" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="170" src="attachments/720023972/720023975.png" tabindex="0" /></span></p>
+
+<p>The dual-stage driver weakening honors the glitch propagation threshold criteria.</p>
+
+<p><strong>Note</strong>: This feature is supported only with CCS-N models.</p>
+
+<p><em>Default</em>: <code>true</code></p>
+</div>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-enable_user_defined_bus_merging {true | false}</code></td>
+<td class="confluenceTd"><div class="content-wrapper">
+<p>Enables bus merging feature - if a net is in two groups, then the groups are merged.</p>
+
+<p><em>Default</em>: <code>false</code></p>
+</div>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-enable_virtual_attacker_constituent_report {true | false}</code></td>
+<td class="confluenceTd">
+<p>Enables virtual attacker constituent reporting.</p>
+
+<p><span>The virtual attacker constituent reporting feature is useful for identifying significant buses and their bits - this information can be used for glitch fixing.&#xa0;</span></p>
+
+<p>This feature is enabled when the <code>set_si_mode</code>&#xa0;<code>-enable_bus_attacker_correlation</code> parameter is set to <code>true</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-glitch_accuracy_level &lt;<em>int</em>&gt;</code></td>
+<td class="confluenceTd">
+<p>Specifies the accuracy levels for glitch analysis.&#xa0;</p>
+
+<p><em>Default</em>: 0</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-glitch_analysis_type {source | full_propagation}</code></td>
+<td class="confluenceTd">
+<p>Specifies the glitch analysis type - <code>source</code> or <code>full_propagation</code>.</p>
+<ul><li><code>full_propogation</code>: Propagates glitch noise through single and 2-stage cells with CCSN (for example, inv or buf), and stops glitch propagation at any sequential cell, or 3 or more stage cell input.</li><li><code>source</code>: Propagates glitch through 1-stage cells only, and performs driver weakening through 2-stage cells with CCSN.</li></ul>
+<p><em>Default</em>:&#xa0;<code>source</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-hold_slack <em>&lt;double&gt;</em></code></td>
+<td class="confluenceTd">
+<p>Specifies the slack reselection threshold for hold.</p>
+
+<p><em>Default</em>:<code>-1e-12 </code>seconds</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-individual_attacker_clock_threshold <em>float</em></code></td>
+<td class="confluenceTd">
+<p>Sets the glitch tolerance for individual attacker nets on victim clock nets. Tempus estimates the noise contributed by an individual attacker to the clock victim. If the peak of this noise exceeds the value of individual_attacker_clock_threshold, the attacker is significant and is individually reported in the constituents section of the report. Otherwise, this aggressor becomes eligible for the virtual attacker. If the virtual attacker peak does not exceed the value of accumulated_small_attacker_threshold, the aggressor nets in the virtual attacker are grounded, and there is no virtual attacker. If individual_attacker_clock_threshold is not specified, then clock nets will use the individual_attacker_threshold value instead.</p>
+
+<p>Note: Minimum allowed individual attacker for clock nets to be kept is 0.1% of vdd, which is equivalent to an <code>individual_attacker_clock_threshold</code> of <code>0.001</code>.</p>
+
+<p><em>Default</em>: 1.5% or 0.015</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-individual_attacker_threshold &lt;<em>double</em>&gt;</code></p>
+</td>
+<td class="confluenceTd">
+<p>Sets the glitch tolerance for individual attacker nets on the victim net. Tempus estimates the noise contributed by an individual attacker to the victim. If the peak of this noise exceeds the value of <code>individual_attacker_threshold</code>, the attacker is significant and is individually reported in the constituents section of the report. Otherwise, this aggressor becomes eligible for the virtual attacker. If the virtual attacker peak does not exceed the value of <code>accumulated_small_attacker_threshold</code>, the aggressor nets in the virtual attacker are grounded, and there is no virtual attacker.</p>
+
+<p><strong>Note</strong>: The minimum allowed individual attacker count is <code>0.1%</code> of vdd, which is equivalent to an <code>individual_attacker_threshold</code> of <code>0.001</code>.</p>
+
+<p><em>Default</em>: 1.5% or 0.015</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-individual_attacker_simulation_filtering </code><br /><code>{true | false}</code></td>
+<td class="confluenceTd">
+<p>Uses electrical filtering to reduce pessimism by preserving small attackers when their simulated value is below the individual attacker threshold.</p>
+
+<p><em>Default</em>: <code>true</code></p>
+
+<p><strong>Note</strong>: This option can only be used when the accumulated small attacker is turned off (<code>-accumulated_small_attacker_threshold</code> is<code> 1.00</code> or larger).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-input_glitch_full_propagation_threshold&#xa0;<em>double</em></code></td>
+<td class="confluenceTd">Specifies the receiver input glitch threshold beyond which Tempus will not propagate the glitch in full-propagation mode, and an RIP violation will be flagged.</td>
+</tr>
+<tr><td class="confluenceTd"><code>-input_glitch_full_propagation_vh_threshold&#xa0;<em>double</em></code></td>
+<td class="confluenceTd">
+<p>Specifies the receiver VH input glitch threshold beyond which Tempus will not propagate the glitch in full-propagation mode, and an RIP violation will be flagged.</p>
+
+<p>This parameter takes precedence over <code>-input_glitch_full_propagation_threshold</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-input_glitch_full_propagation_vl_threshold&#xa0;<em>double</em></code></td>
+<td class="confluenceTd">
+<p>Specifies the receiver VL input glitch threshold beyond which Tempus will not propagate the glitch in full-propagation mode, and an RIP violation will be flagged.</p>
+
+<p>This option takes precedence over <code>-input_glitch_full_propagation_threshold</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd"><strong>Note</strong>: These parameters can be used only when full propagation mode is enabled using the <code>-glitch_analysis_type</code> <code>full_propagation</code> parameter.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-input_glitch_threshold <em>&lt;double&gt;</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the input glitch failure&#xa0;threshold value during AAE analysis.</p>
+
+<p><em>Default</em>: <code>0.4</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-input_glitch_vh_threshold <em>&lt;double&gt;</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the input glitch <code>vh</code> failure threshold value during AAE analysis.</p>
+
+<p><em>Default</em>: <code>0.4</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-input_glitch_vl_threshold <em>&lt;double&gt;</em></code></td>
+<td class="confluenceTd">
+<p>Specifies the input glitch <code>vl</code> failure threshold value during AAE analysis.</p>
+
+<p><em>Default</em>: <code>0.4</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-nonlinear_attacker_slew {true | false}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Uses a non-linear attacker. If set to <code>false</code>, it uses a linear attacker.</p>
+
+<p><em>Default</em>: <code>true</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-num_si_iteration value</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the maximum number of timing window iterations that should be performed during SI delay analysis. Performing delay analysis results in changes to the timing windows, potentially altering the victim/attacker net combinations. Timing window iterations enable the software to reach a point where the delay changes are negligible.</p>
+
+<p><em>Default</em>: <code>2</code></p>
+
+<p><strong>Note</strong>: The minimum allowed number of timing window iterations for SI analysis is <code>2</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-receiver_clk_peak_limit <em>double</em></code></td>
+<td class="confluenceTd">
+<p>Defines the glitch check limit for clock inputs in receiver peak mode. This parameter is specified as the percentage of the power net voltage.</p>
+
+<p><em>Default</em> : <code>0.05</code> (<span style="font-family: monospace;">5</span> percent of VDD)</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-receiver_latch_peak_limit <em>double</em></code></td>
+<td class="confluenceTd">
+<p>Defines the glitch check limit for latch inputs in receiver peak mode. This parameter is specified as a ratio of vdd.</p>
+
+<p><em>Default</em> : <code>0.1</code> (<code>10</code> percent of VDD)</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-receiver_peak_limit <em>double</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Defines the receiver peak/glitch peak limit at all nodes. The value specified for this parameter is a ratio of vdd.&#xa0;</p>
+
+<p><em>Default</em>: <code>0.15</code> &#xa0;&#xa0;</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-report_max_virtual_attacker_constituents <em>int</em></code></td>
+<td class="confluenceTd">
+<p>Specifies the maximum number of virtual attacker constituents to report.</p>
+
+<p>This feature works only when bus virtual attacker constituent reporting is enabled using the <code style="font-family: monospace;">set_si_mode</code>&#xa0;<code>-enable_virtual_attacker_constituent_report</code> <code>true</code> setting.</p>
+
+<p><em>Default</em>: 5</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-secondary_attacker_decoupling_factor &lt;double&gt;</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies decoupling factor for secondary aggressors.</p>
+
+<p><em>Default</em>: 1</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-separate_delta_delay_on_data {true | false}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Separates the delta delay on data (the delta delay is always separated for the clock).</p>
+
+<p>Works with<code><br /></code><code>-delta_delay_annotation_mode</code> to determine where the separated delay shows in the timing reports. Default is the delta delay, which is not separated out.</p>
+
+<p>Using this parameter, you can increase the runtime/memory.</p>
+
+<p><em>Default</em>: <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-setup_slack &lt;double&gt;</code></td>
+<td class="confluenceTd">
+<p>Specifies the slack reselection threshold for setup.</p>
+
+<p><em>Default</em>:<code>-1e-12</code> seconds</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-si_reselection {delta_delay | slack}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the SI reselection criteria during timing window iterations.</p>
+
+<p><code>delta_delay</code>: Reselects a net for calculation if the delta delay on the net is greater than the delay value.</p>
+
+<p><code>slack</code>: Reselects nets with failing slack values during timing-window iterations.</p>
+
+<p><em>Default</em>: <code>slack</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-si_reselection_delay_threshold <em>double</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Allows you to change the delay reselection criteria.</p>
+
+<p>You can specify <br /><code><code>-si_reselection_delay_threshold</code></code> with the <code><code>-delta_delay</code></code> parameter only.</p>
+
+<p><em>Default</em><span>: </span><code>1e-11</code></p>
+
+<p><span>Units in </span><span>seconds</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>-skip_noise_model_check <em>pins</em></span></code></td>
+<td class="confluenceTd">
+<p>Specifies a list of pins for which the noise model check will not take place.</p>
+
+<p>Default= &quot; &quot;</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-skip_tw &lt;nets&gt;</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><span>Specifies the list of nets for which the timing window is to be skipped. The timing window becomes infinite for the net when it is both a victim and aggressor.</span></p>
+
+<p>When specified, only the last setting is retained. The <code>set_si_mode -skip_tw</code> command settings, prior to the previous setting, are ignored.</p>
+
+<p><em>Default</em><span>:</span><code> &quot; &quot;</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-switch_prob &lt;double&gt;</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Sets the attacker switching probability. If you specify a value less than <code>0.0</code> or more than <code>1.0</code>, the switching probability is automatically set to the default value of <code>0.3</code>.</p>
+
+<p><em>Default</em>: <code>0.3</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-use_infinite_TW {true | false}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Uses infinite timing windows in a single SI run.</p>
+
+<p><em>Default</em>: <code>false</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-unconstrained_net_use_inf_tw {true&#xa0;| false}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies that unconstrained nets will have an infinite timing window. To turn this off and use a constrained timing window, set this to <code>false</code>.</p>
+
+<p><em>Default</em>: <code>true</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-virtual_inter_die_attacker_slew &lt;<em>value</em>&gt;</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the virtual inter-die attacker slew value.</p>
+
+<p><em>Default</em>:&#xa0;<code>2.5e-11</code> (float)</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_si_mode-Examples">Examples</h4>
+<ul><li>The following command runs AAE, keeping all individual attackers larger than <code style="font-size: 10.0pt;line-height: 13.0pt;">0.01*</code>VDD and not using any accumulated small attackers:&#xa0;<br /><code>tempus&gt; set_si_mode -individual_attacker_threshold 0.01&#xa0;-accumulated_small_attacker_threshold 10.01</code></li></ul><ul><li>The following command sets the glitch peak limit at <code>0.5*vdd</code> at data nodes, <code>0.1*vdd</code> at clock nodes, and <code>0.2*vdd</code> at latch nodes.<br /><code><span>tempus&gt;&#xa0;</span>set_si_mode&#xa0;-receiver_peak_limit&#xa0;&#xa0;0.5 -receiver_latch_peak_limit&#xa0;0.2 -receiver_clk_peak_limit&#xa0;0.1<br /></code></li><li>To keep all attackers less than&#xa0;<code>set_si_mode &#8211;individual_attacker_threshold</code>,&#xa0;whose accumulated glitch bump exceeds 1% of VDD, you can use the following command<br /><code>tempus&gt;&#xa0;set_si_mode &#8211;accumulated_small_attacker_threshold 0.01</code></li></ul><h4 id="set_si_mode-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="get_si_mode.html">get_si_mode</a></code></li><li><code><a href="report_delay_calculation.html">report_delay_calculation</a></code></li><li><code><a href="report_timing.html">report_timing</a></code></li><li><code><a href="report_noise.html">report_noise</a></code></li><li><code><a href="update_glitch.html">update_glitch</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_quiet_attacker.html" id="prev" title="set_quiet_attacker">set_quiet_attacker</a></em></b><b><em><a href="set_via_variation_mode.html" id="nex" title="set_via_variation_mode">set_via_variation_mode</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

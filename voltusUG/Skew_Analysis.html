@@ -1,0 +1,131 @@
+
+<html><head><title>Skew Analysis</title>
+<meta name="page_sequence" content="30004000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468630" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Skew Analysis" />
+<meta name="Keywords" content="skew,clock,IR drop,switching,report,register" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="IR Drop-Aware Optimization," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468630" />
+<meta name="NextFile" content="Jitter_Analysis.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Library_Setup_for_Innovus.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- Skew Analysis" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="Library_Setup_for_Innovus.html" title="Library_Setup_for_Innovus">Library_Setup_for_Innovus</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Jitter_Analysis.html" title="Jitter_Analysis">Jitter_Analysis</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Skew Analysis</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="SkewAnalysis-72698"></span></p>
+
+<p>Skew is the difference in arrival times of clock at launch and capture registers. In the on-chip variation mode, the launch flop uses late paths and capture flop uses early paths. Late path delays are computed based on IR drop observed during high switching activity and Early path delays are computed based on IR drop observed during low switching activity.</p>
+
+<p><br /></p>
+<div><span class="confluence-embedded-file-wrapper"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481641/732481642.gif" data-linked-resource-container-id="732481641" data-linked-resource-container-version="1" data-linked-resource-content-type="image/gif" data-linked-resource-default-alias="launch.gif" data-linked-resource-id="732481642" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481641/732481642.gif" tabindex="0" /></span></div>
+
+<p>High switching activity results into higher voltage drop means lower operating voltages. Lower operating voltages result in larger net/cell delays. Low switching activity results into lower voltage drop means higher operating voltages (but less than nominal voltage). Higher operating voltages result in smaller net/cell delays.</p>
+
+<p>Clock skew analysis can be performed in Tempus using the <code>report_clock_timing -type skew</code> command.</p>
+<h4 id="SkewAnalysis-ClockSkewReportforaRegisterPair"><strong>Clock Skew Report for a Register Pair</strong></h4>
+
+<p>The following is the clock skew report for a register pair without IR drop delays and with IR drop delays:</p>
+
+<p>Without IR Drop Delays</p>
+<pre><code>
+
+Skew Latency Clock Pin
+</code></pre><pre><code>---------------------------------------------------------------------------
+&#xa0;&#xa0;    1.079   rise DTMF_INST/RESULTS_CONV_INST/upper1336/\dout_reg[7]/CK
+</code></pre><pre><code>0.802 0.278&#xa0;&#xa0; rise DTMF_INST/RESULTS_CONV_INST/LP_OBS_DFT_tpi_flop/CK
+</code></pre>
+<p>With IR Drop Delays</p>
+<pre><code>Skew Latency Clock Pin<br />---------------------------------------------------------------------------<br />      1.124   rise DTMF_INST/RESULTS_CONV_INST/upper1336/\dout_reg[7] /CK</code></pre><pre><code>0.824 0.300&#xa0;&#xa0; rise DTMF_INST/RESULTS_CONV_INST/LP_OBS_DFT_tpi_flop/CK</code></pre>
+<p><code>report_clock_timing</code> command has the <code>-verbose</code> option, which generates detailed reports.</p>
+
+<p>Detailed Report without IR Drop Delays</p>
+<pre><code>Clock: m_rcc_clk</code></pre><pre><code>Skew Latency Clock Pin</code></pre><pre><code>---------------------------------------------------------------------------<br />      1.079   ri   DTMF_INST/RESULTS_CONV_INST/upper1336/\dout_reg[7] /CK</code><code>
+0.802 0.278&#xa0;&#xa0; ri&#xa0;&#xa0; DTMF_INST/RESULTS_CONV_INST/LP_OBS_DFT_tpi_flop/CK</code></pre><pre><code>Launch Clock latency Path<br />Clock Fall Edge 8.000<br />= Beginpoint Arrival Time 8.000<br />Other End Path:</code></pre><pre><code>---------------------------------------------------------------------------------<br />Instance Arc Cell Delay Clock Latency<br /></code><code>---------------------------------------------------------------------------------<br />DTMF_INST/TEST_CONTROL_INST/g40 Y v 0.000<br />DTMF_INST/RESULTS_CONV_INST/g6001 A v -&gt; Y ^ INVX10MTH 0.277 0.277<br />DTMF_INST/RESULTS_CONV_INST/RC_CGIC_INST CK ^ -&gt; ECK ^ TLATNTSCAX12MTH 0.800 1.077<br />DTMF_INST/RESULTS_CONV_INST/upper1336/\dout_reg[7] CK ^ SDFFQNX1MTH 0.002 1.079<br />-----------------------------------------------------------------------------------------------------------------------------------------------------------------</code></pre><pre><code>Capture Clock latency Path<br />Clock Fall Edge 8.000 <br />= Beginpoint Arrival Time 8.000<br />Other End Path:</code></pre><pre><code>------------------------------------------------------------------------------------------------------------------------------------------------------------------<br />Instance Arc Cell Delay Clock Latency<br />------------------------------------------------------------------------------------------------------------------------------------------------------------------</code></pre><pre><code>DTMF_INST/TEST_CONTROL_INST/g40 Y v 0.000<br />DTMF_INST/RESULTS_CONV_INST/g6001 A v -&gt; Y ^ INVX10MTH 0.277 0.277<br />DTMF_INST/RESULTS_CONV_INST/LP_OBS_DFT_tpi_flop CK ^ SDFFQNX1MTH 0.001 0.278<br />---------------------------------------------------------------------------------</code></pre>
+<p><code>Detailed Report with IR Drop Delays</code></p>
+<pre><code>Clock: m_rcc_clk<br />Skew Latency Clock Pin<br />---------------------------------------------------------------------------<br />      1.124   ri   DTMF_INST/RESULTS_CONV_INST/upper1336/\dout_reg[7] /CK<br />0.824 0.300&#xa0;&#xa0; ri&#xa0;&#xa0; DTMF_INST/RESULTS_CONV_INST/LP_OBS_DFT_tpi_flop/CK</code></pre><pre><code>
+Launch Clock latency Path<br />Clock Fall Edge 8.000<br />= Beginpoint Arrival Time 8.000<br />Other End Path:</code><code>
+---------------------------------------------------------------------------------<br />Instance Arc Cell Delay Clock Latency<br />---------------------------------------------------------------------------------</code></pre><pre><code>DTMF_INST/TEST_CONTROL_INST/g40 Y v 0.000<br />DTMF_INST/RESULTS_CONV_INST/g6001 A v -&gt; Y ^ INVX10MTH 0.298 0.298<br />DTMF_INST/RESULTS_CONV_INST/RC_CGIC_INST CK ^ -&gt; ECK ^ TLATNTSCAX12MTH 0.823 1.121<br />DTMF_INST/RESULTS_CONV_INST/upper1336/\dout_reg[7] CK ^ SDFFQNX1MTH 0.003 1.124</code><code>
+---------------------------------------------------------------------------------</code></pre><pre><code>Capture Clock latency Path<br />Clock Fall Edge 8.000 <br />= Beginpoint Arrival Time 8.000<br />Other End Path:<br />---------------------------------------------------------------------------------</code></pre><pre><code>Instance Arc Cell Delay Clock Latency<br />---------------------------------------------------------------------------------<br />DTMF_INST/TEST_CONTROL_INST/g40 Y v 0.000<br />DTMF_INST/RESULTS_CONV_INST/g6001 A v -&gt; Y ^ INVX10MTH 0.284 0.284<br />DTMF_INST/RESULTS_CONV_INST/LP_OBS_DFT_tpi_flop CK ^ SDFFQNX1MTH 0.016 0.300<br />---------------------------------------------------------------------------------</code></pre>
+<p>Delay reported for instance <code>DTMF_INST/RESULTS_CONV_INST/g6001</code> without IR drop is 0.277ns for both late and early paths. When min/max IR drop files are provided, IR drop caused the instance <code>DTMF_INST/RESULTS_CONV_INST/g6001</code> delay to increase from 0.277 to 0.298ns for late path (using max delays) and 0.284ns for early path (using min delays).</p>
+
+<p>Overall there is 22ps timing jump due to IR drop.</p>
+<h4 id="SkewAnalysis-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="IR_Drop_Impact_on_Timing.html">IR Drop Impact on Timing</a></li><li><a href="Voltus_Setup_for_Power_and_IR_Drop.html">Voltus Setup for Power and IR Drop</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Library_Setup_for_Innovus.html" id="prev" title="Library_Setup_for_Innovus">Library_Setup_for_Innovus</a></em></b><b><em><a href="Jitter_Analysis.html" id="nex" title="Jitter_Analysis">Jitter_Analysis</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

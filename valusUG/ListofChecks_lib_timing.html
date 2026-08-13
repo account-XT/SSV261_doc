@@ -1,0 +1,2664 @@
+
+<html><head><title>LIB_TIMING</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-03-26" />
+<meta name="CreateTime" content="1774516562" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Valus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="LIB_TIMING" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="valusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-03-26" />
+<meta name="ModifiedTime" content="1774516562" />
+<meta name="NextFile" content="ListofChecks_lib_noise.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="ListofChecks.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Valus User Guide -- LIB_TIMING" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="0" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="valusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="valusUGTOC.html">Contents</a></li><li><a class="prev" href="ListofChecks.html" title="Valus Checks">Valus Checks</a></li><li style="float: right;"><a class="viewPrint" href="valusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="ListofChecks_lib_noise.html" title="LIB_NOISE">LIB_NOISE</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Valus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:lib_timing" title="LIB_TIMING"></a><h2>
+<a id="pgfId-958270"></a><a id="18697"></a>LIB_TIMING</h2>
+
+<p>
+<a id="pgfId-923892"></a>The LIB_TIMING checks are performed during the validation of timing attributes/groups of a library. These checks consist of a number of specific checks for NLDM data, ECSM timing data, and CCS timing data.</p>
+
+
+<p>
+<a id="pgfId-1030215"></a></p>
+<table class="webflareTable" id="#id1029094">
+<tbody><tr>
+<th class="webflareTh" colspan="5" rowspan="1">
+<span class="tbl-head" id="#id1059411">
+<a id="pgfId-1059411"></a>LIB_TIMING</span>
+</th>
+</tr>
+<tr>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1029096">
+<a id="pgfId-1029096"></a>Message Prefix</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1029098">
+<a id="pgfId-1029098"></a>ID</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1029100">
+<a id="pgfId-1029100"></a>Message</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1029102">
+<a id="pgfId-1029102"></a>Severity</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1029104">
+<a id="pgfId-1029104"></a>Description</span>
+</th>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029106"></a>VALUS</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029108"></a>14</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029110"></a>The %s capacitances %s table group %s%s%s for %s transition in pin &#39;%s&#39; of cell &#39;%s&#39; is not in the range of min cap value.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029112"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029114"></a>For correct calculation of delay value the capacitances value should be more than or equal to min cap value.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029116"></a>VALUS</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029118"></a>1008</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029120"></a>Identified trigger arcs with timing sense &#39;non_unate&#39; and having only &#39;rise&#39; or &#39;fall&#39; table. These trigger arcs can have only half unateness.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029122"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029124"></a>The trigger arcs with only rise or fall table cannot have unateness non_unate. These trigger arcs can have only half unateness i.e positive_unate/negative_unate. This can cause incorrect timing analysis. The generated library should be further looked for correctness.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029126"></a>VALUS</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029128"></a>1011</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029130"></a>Identified more than 2 parallel arcs with timing type &#39;%s&#39; between &#39;%s&#39;-&gt;&#39;%s&#39; pins of cell &#39;%s&#39;. The number of parallel arcs cannot be more than 2, between pins pair.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029132"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029134"></a>Between a pin pair there can be 2 parallel arc possible. One for early and another for late. When more than 2 parallel arcs are present, the generated library should be further checked for correctness.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029136"></a>VALUS</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029138"></a>1026</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029140"></a>The function specified on the pin &#39;%s&#39; is &#39;%s&#39;, but a timing arc is missing between pins &#39;%s&#39; and &#39;%s&#39; of cell &#39;%s&#39;. This missing timing arc can cause issues in timing analysis.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029142"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029144"></a>The timing arc needs to be present from all the input pins specified in the function to the output pin. Absence of timing arc can cause inaccuracy during timing analysis.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029146"></a>VALUS</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029148"></a>1029</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029150"></a>Identified missing tables &#39;%s&#39; and &#39;%s&#39; for the combinational arc in pin &#39;%s&#39; of cell &#39;%s&#39;. This can cause issue during timing analysis.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029152"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029154"></a>For a combinational arc al the four tables - (cell_rise and rise_transition) and (cell_fall and fall_transition) should be defined. For combinational_rise, cell_rise and rise_transition should be present and for combinational_fall, cell_fall and fall_transition should be present.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029156"></a>VALUS</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029158"></a>36</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029160"></a>The timing arc(s) with related pin &#39;%s&#39; timing_type &#39;%s&#39; is closed for the when condition but not for the Input Pin (s) &#39;%s&#39; in pin &#39;%s&#39; for cell &#39;%s&#39;.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029162"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029164"></a>The when condition in a timing arc(s) should be closed for a specific related pin and timing type. Otherwise this can cause problems during timing analysis.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029166"></a>VALUS</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029168"></a>1014</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029170"></a>Missing ECSM capacitance group on timing arc/input pin. This can cause loss of accuracy during delay calculation.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029172"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029174"></a>It is observed when ECSM capacitance group is present, it can provide accurate delay calculation results.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029176"></a>VALUS</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029178"></a>1015</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029180"></a>Missing %s on input/inout pin %s of cell %s.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029182"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029184"></a>It is observed when ECSM/CCS receiver capacitance group is present, it can provide accurate delay calculation results.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029186"></a>VALUS</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029188"></a>1028</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029190"></a>The %s slew index &#39;%f&#39; is %s than the normalized driver waveform %s defined slew range (%f to %f) in %s table in pin %s of cell %s. This value should be inside the NDW range.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029192"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029194"></a>The boundary timing table arc slew indices should be within the normalized driver waveform slew indices range. Indices beyond this can cause issues during timing analysis.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029196"></a>VALUS</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029198"></a>1034</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029200"></a>Identified negative values in &#39;%s&#39; table of timing arc. The table values should not have negative values.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029202"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029204"></a>This message is issued when cell_rise/cell_fall tables in timing arc of a non-ETM cell and rise_transition/fall_transition tables in timing arc of any cell have negative values. To fix the issue, re-characterize the library with appropriate settings, such that the delay and transition tables have positive values.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029206"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029208"></a>420</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029210"></a>Number of ecsm_waveforms in the &#39;%s&#39; table on pin %s of cell %s does not match the number of transition table axis points specified in the template &#39;%s&#39;. Ignoring waveform data.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029212"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029214"></a>The number of ecsm_waveforms must match the number of data points in the transition table for correct waveform lookup. If this is not the case, waveform data for the transition group is ignored.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029216"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029218"></a>421</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029220"></a>Invalid ecsm_waveform group name %s specified in pin %s of cell %s. Ignoring waveform data.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029222"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029224"></a>Waveform group name must be a digit and the value of the digit must not be greater than or equal to the total number of entries in the output transition table. All the waveforms must start from 0.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029226"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029228"></a>428</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029230"></a>Number of index_1 points does not match with the number of values points for the %s waveform group %s specified in pin %s of cell %s Ignoring waveform data.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029232"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029234"></a>This message is issued when the total number of index_1 points are not equal to the total number of values specified in pin of cell for ECSM power/PGDC group. To fix the issue, re-characterize the library with appropriate settings, such that the index_1 is correctly defined.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029236"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029238"></a>432</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029240"></a>Unknown ecsm_capacitance type defined in pin %s of cell %s. Ignoring ecsm_capacitance defined in the pin.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029242"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029244"></a>The ecsm_capacitance type should be either rise or fall. If a value other than rise or fall is encountered, the ecsm_capacitance information will be ignored</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029246"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029248"></a>935</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029250"></a>No indices specified for the ecsm capacitance in pin %s of cell %s. Ignoring ecsm_capacitance defined in the pin.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029252"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029254"></a>The index_1 attribute needs to be defined for ecsm_capacitance. If it is not defined, the ecsm_capacitance information will be ignored</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029256"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029258"></a>1006</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029260"></a>The normalized_driver_waveform &#39;%s&#39; specified as &#39;%s&#39; for pin &#39;%s&#39; in cell &#39;%s&#39; was not found in the library</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029262"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029264"></a>This message is issued when the normalized_driver_waveform is specified as driver_waveform/driver_waveform_rise/driver_waveform_fall for a pin in a cell but is not found in library. To fix the issue, re-characterize the library with appropriate settings, such that the library does not use undefined normailzed_driver_waveform.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029266"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029268"></a>1007</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029270"></a>Incorrect axis type specified in the template &#39;%s&#39; for driver waveform. The template and all normalized_driver_waveform groups using this template would be ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029272"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029274"></a>This message is issued when the axis type is specified in the normalized_driver_waveform group template is not correct. The valid axes are input_net_transition and normalized_voltage. The template and all normalized_driver_waveform groups using this template would be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the template should be specified with correct axis type.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029276"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029278"></a>1186</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029280"></a>The &#39;%s&#39; table found for timing group with timing_type %s.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029282"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029284"></a>This message is issued when attributes cell_rise/cell_fall/rise_transition/fall_transition are found for timing group with sequential timing arcs. To fix the issue, re-characterize the library with appropriate settings, such that the correct attributes are specified for sequential timing arcs.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029286"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029288"></a>1213</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029290"></a>For &#39;%s&#39; timing group defined on line %d, related_pin %s is not same as the pin %s.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029292"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029294"></a>This message is issued when the attribute related_pin name is not same as the parent pin name for &#39;min_pulse_width&#39; and &#39;minimum_period&#39; timing groups. To fix the issue, re-characterize the library with appropriate settings, such that the correct related_pin value is set.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029296"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029298"></a>1214</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029300"></a>For &#39;%s&#39; timing group defined on line %d, related_pin is same as the parent pin &#39;%s&#39;.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029302"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029304"></a>This message is issued when the attribute related_pin name is defined same as parent pin for timing arcs other than min_pulse_width and minimum_period. To fix the issue, re-characterize the library with appropriate settings, such that the correct related_pin value is set.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029306"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029308"></a>1216</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029310"></a>The reference time values &#39;%f&#39; and &#39;%f&#39; defined for vector groups on line &#39;%d&#39; and &#39;%d&#39; respectively are different, even though their input_transition_time index is same.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029312"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029314"></a>This message is issued when values of the reference_time and input_net_transition attributes are inconsistent inside the output_current_rise or output_current_fall group. To fix the issue, re-characterize the library with appropriate settings, such that there is no such inconsistency.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029316"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029318"></a>1229</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029320"></a>The first value %f for &#39;%s&#39; group defined on line %d is the &#39;%s&#39; value.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029322"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029324"></a>This message is issued when the first value of the current waveform in CCS library is not correctly specified. The first value in the &#39;values&#39; attribute of the group &#39;output_current_rise&#39; cannot be the maximum value and the first value in the &#39;values&#39; attribute of the group &#39;output_current_fall&#39; cannot be the minimum value. To fix the issue, re-characterize the library with appropriate settings, such that the correct values are specified.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029326"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029328"></a>1232</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029330"></a>The input_transition_time index values &#39;%f&#39; and &#39;%f&#39; defined for vector groups on line &#39;%d&#39; and &#39;%d&#39; respectively are different, even though their respective reference time is same.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029332"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029334"></a>This message is issued when values of the reference_time and input_net_transition attributes are inconsistent inside the output_current_rise or output_current_fall group. To fix the issue, re-characterize the library with appropriate settings, such that there is no such inconsistency.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029336"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029338"></a>1233</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029340"></a>Number of values in ecsm_waveform_set in the transition table %s on line %d in pin %s of cell %s does not match the number of transition table axis points specified in the template. Ignoring waveform data.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029342"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029344"></a>The number of values in ecsm_waveform_set must match the number of data points in the transition table for correct waveform lookup. If this is not the case, waveform data for the transition group is ignored.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029346"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029348"></a>1236</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029350"></a>The ecsm_waveform_set group on line %d in the transition table %s in pin %s of cell %s does not have valid index_1 attribute specified. Ignoring waveform data.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029352"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029354"></a>Attribute index_1 is mandatory attribute in ecsm_waveform_set group which represents the normalized output voltage sample points which are shared by all voltage waveforms represented by the ecsm_waveform_set group. It can be specified at the group level or at the template level. If it is not specified, waveform data for the transition group is ignored.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029356"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029358"></a>1263</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029360"></a>Unknown capacitance type &#39;%s&#39; defined for %s in cell %s.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029362"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029364"></a>The ecsm_capacitance/ecsm_capacitance_set type should be either rise or fall. If a value other than rise or fall is encountered, the ecsm_capacitance information will be ignored</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029366"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029368"></a>12<a id="1296"></a>96</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029370"></a>This library has both CCS and ECSM data. CCS checks will not be thorough for library constructs which have corresponding ECSM data available.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029372"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029374"></a>In case both CCS and ECSM data is present, ECSM data is given priority for timing and power. In this case, CCS data will get ignored and only ECSM data will be used for all the internal tool calculations for the conflicting groups.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029376"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029378"></a>1306</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029380"></a>The group %s with name &#39;%s&#39; already defined for %s of cell %s. This will be ignored</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029382"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029384"></a>The ecsm_waveform group with same name already exists. First will be retained and rest will be ignored</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029386"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1042280"></a>13<a id="1313"></a>13</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029390"></a>For cell &#39;%s&#39;, in group &#39;%s&#39;, voltage swing on pin/bus/bundle &#39;%s&#39; with load &#39;%f&#39; and slew &#39;%f&#39; is &#39;%.1f%&#39;, should at least reach second slew threshold.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029392"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029394"></a>This message is issued when the voltage swing defined for cell on pin/bus/bundle in output_current_rise /output_current_fall vector group with specified load and slew is not reaching the second slew threshold. To fix the issue, re-characterize the library with appropriate settings, such that the full voltage swing is reached.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029406"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029408"></a>13<a id="1336"></a>36</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029410"></a>The first or last value in %s attribute is not equal %d or %d respectively. The attribute will be ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029412"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029414"></a>This message is issued when the first/last value of the attribute receiver_capacitance_rise_threshold_pct/receiver_capacitance_fall_threshold_pct is incorrectly defined. The valid value of first and last point for receiver_capacitance_rise_threshold_pct attribute is [0.0, and 100] and for receiver_capacitance_fall_threshold_pct attribute is [100, and 0.0]. Such attribute will be ignored. This may impact accuracy in delay and glitch analysis. To fix the issue, re-characterize the library with appropriate settings, such that the threshold values are correctly defined at library level.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029416"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029418"></a>13<a id="1337"></a>37</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029420"></a>The library has &#39;%s&#39; groups defined but the &#39;%s&#39; definition is missing from library group. All &#39;%s&#39; groups will be ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029422"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029424"></a>This message is issued when the attribute receiver_capacitance_rise_threshold_pct/receiver_capacitance_fall_threshold_pct is missing at library level but receiver_capacitance_rise/receiver_capacitance_fall groups are defined. Complete set of receiver_capacitance groups will be ignored. This may impact accuracy in delay and glitch analysis. To fix the issue, re-characterize the library with appropriate settings, such that the threshold values are not undefined.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029426"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029428"></a>1338</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029430"></a>The segment value for &#39;%s&#39; group for %s and cell &#39;%s&#39; has value %d which is not in the expected range [1, %d]. The group will be ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029432"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029434"></a>This message is issued when the attribute segment defined for receiver_capacitance_rise/receiver_capacitance_fall group is out of range as per segment definition. The valid range of segment attribute is 1 to N where N is the number of {threshold points -1} defined in the attribute receiver_capacitance_rise_threshold_pct/receiver_capacitance_fall_threshold_pct. For example if seven threshold points are defined then valid range of segment attribute would be {threshold points -1} that is six. Complete set of receiver_capacitance groups will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the segment values are defined correctly.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029436"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029438"></a>1339</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029440"></a>The &#39;%s&#39; groups for all segments in the range [1, %d] for %s and cell &#39;%s&#39; are not defined. The segment &#39;%d&#39; is missing. The &#39;%s&#39; groups will be ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029442"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029444"></a>This message is issued when the receiver_capacitance_rise/receiver_capacitance_fall group for all the segments is not defined. The valid range of segment attribute is 1 to N where N is the number of {threshold points -1} defined in the attribute receiver_capacitance_rise_threshold_pct/receiver_capacitance_fall_threshold_pct. Complete set of receiver_capacitance groups will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the receiver_capacitance groups are defined for all segment values.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029446"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029448"></a>1340</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029450"></a>The value %s specified for variable_%d for &#39;%s&#39; group &#39;%s&#39; is invalid. This template group is used in &#39;%s&#39; (line %d). For this group valid variable values are %s only. The group &#39;%s&#39; will be ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029452"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029454"></a>This message is issued when invalid variable is defined in the template used for specifc groups. For example variable time specified for the receiver_capacitance_rise/receiver_capacitance_fall group is invalid, the valid values are input_net_transition and total_output_net_capacitance. These groups with invalid template will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the defined variable should be valid.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029456"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029458"></a>1341</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029460"></a>The %s index values for &#39;%s&#39; group (line %d) for %s and cell &#39;%s&#39; do not match among all segments. These &#39;%s&#39; groups will be ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029462"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029464"></a>This message is issued when there is mismatch in the index values of input_net_transition/total_output_net_capacitance defined for receiver_capacitance_rise/receiver_capacitance_fall group at pin or timing level. Complete set of receiver_capaciatnce groups will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the index values should be same.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029466"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029468"></a>1342</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029470"></a>The %s group with segment value &#39;%d&#39; is redefined at line %d for %s and cell &#39;%s&#39;. The last definition will be considered.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029472"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029474"></a>This message is issued when the receiver_capacitance_rise/receiver_capacitance_fall group with the same segment value is defined more than once at pin or timing level. The multiple definition of same segment value is not allowed. Last definition will be considered and rest will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the segment value is correctly defined.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029476"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029478"></a>1343</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029480"></a>The %s group can have only one or two dimensional tables. All %s groups for %s and cell &#39;%s&#39; will be ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029482"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029484"></a>This message is issued when the dimensions of receiver_capacitance_rise/receiver_capacitance_fall table is more than two. The receiver_capacitance group can have only one or two dimensional tables. Complete set of receiver_capaciatnce groups will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the table dimension should be correct.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029486"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029488"></a>1344</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029490"></a>The size of %s tables for %s and cell &#39;%s&#39; do not match among all segments. All &#39;%s&#39; groups will be ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029492"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029494"></a>This message is issued when there is mismatch in the size of receiver_capacitance_rise/receiver_capacitance_fall tables among all the segments defined at pin or timing level. Complete set of receiver_capacitance groups will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the receiver_capacitance tables should be matched.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029496"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029498"></a>1347</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029500"></a>Identified mismatch in the number of pins specified in the attributes pin_names and pin_name_map for the cell &#39;%s&#39; for sensitization group &#39;%s&#39;. The sensitization group for that cell will be ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029502"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029504"></a>This message is issued when there is mismatch in the number of pins specified in pin_names attribute at library level and pin_name_map attribute at cell/timing level for the sensitization group. The sensitization group for that cell will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the pins are correctly defined.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029506"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029508"></a>1348</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029510"></a>Referred sensitization group &#39;%s&#39; in cell &#39;%s&#39; is not defined at library level. The sensitization group for that cell will be ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029512"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029514"></a>This message is issued when the sensitization group name specified in sensitization_master attribute at cell/timing level is not defined at library level. The sensitization group for that cell will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the undefined sensitization group is not referred.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029516"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029518"></a>1349</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029520"></a>The attributes &#39;%s&#39; defined with value (&#39;%d&#39;) for cell &#39;%s&#39; is invalid, the value should not be 0.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029522"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029524"></a>This message is issued when the attributes wave_rise_sampling_index and wave_fall_sampling_index are defined with &#39;0&#39; value in sensitization group. Such attribute will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the attributes are defined correctly.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029526"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029528"></a>1350</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029530"></a>The attribute &#39;%s&#39; defined with value &#39;%d&#39; for cell &#39;%s&#39; is invalid, the value should not be greater than the number of entries in {wave_rise/wave_fall} -1 (&#39;%d&#39;).</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029532"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029534"></a>This message is issued when the attributes wave_rise_sampling_index and wave_fall_sampling_index are defined with the value which is greater than the number of entries in {wave_rise/wave_fall} -1. Such attribute will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the attributes are defined correctly.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029536"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029538"></a>1351</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029540"></a>The number of entries (&#39;%d&#39;) in the attribute &#39;%s&#39; defined for cell &#39;%s&#39; is greater than the number of entries in {wave_rise/wave_fall}-1 (&#39;%d&#39;). The attribute will be ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029542"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029544"></a>This message is issued when the number of entries defined in the attributes wave_rise_time_interval and wave_fall_time_interval are greater than the number of entries in {wave_rise/wave_fall} -1. Such attribute will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the attributes are defined correctly.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029546"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029548"></a>1352</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029550"></a>The attribute &#39;%s&#39; has undefined vector ID (%d) for the sensitization group (%s) specified for cell &#39;%s&#39;. The attribute is ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029552"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029554"></a>This message is issued when the attributes wave_rise and wave_fall are defined with incorrect vector ID in the sensitization group. Such attribute will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the attributes are defined correctly.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029556"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029558"></a>1353</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029560"></a>The vector ID (&#39;%d&#39;) defined is already present in sensitization group &#39;%s&#39;. Last definition of the vector ID will be considered. Vector ID should be unique.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029562"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029564"></a>This message is issued when the sensitization group has two or more vectors with the same vector ID. If duplicate vector IDs are present then tool will use the last vector with that ID. To fix the issue, re-characterize the library with appropriate settings, such that the vector ID defined should be unique.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029566"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029568"></a>1354</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029570"></a>The sensitization_master attribute is not present in cell &#39;%s&#39; but cell contains sensitization information. Sensitization group information for that cell will be ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029572"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029574"></a>This message is issued when the sensitization_master attribute is not defined at cell level but cell contains sensitization information. sensitization_master attribute is required attribute if cell contains sensitization information. Sensitization group information for that cell will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the attribute is completely specified.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029576"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029578"></a>1355</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029580"></a>Pin &#39;%s&#39; specified in pin_name_map attribute at cell/timing level is either not present or refers to bus/bundle in cell &#39;%s&#39;. The sensitization group for that cell will be ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029582"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029584"></a>This message is issued when the pin specified for the sensitization in the pin_name_map attribute at cell or timing level either does not exist or refers to bus/bundle in cell. The sensitization group for that cell will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the pins are correctly specified.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029586"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029588"></a>1356</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029590"></a>The number of pins in pin_names (&#39;%d&#39;) do not match with the number of pins specified (&#39;%d&#39;) in the vector attribute of sensitization group &#39;%s&#39;.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029592"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029594"></a>This message is issued when the size of the attribute pin_names does not match with the number of columns of the second argument of vector attribute in the sensitization group. All the attributes defined for the sensitization group for that cell/timing will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the size of pin_names attribute is defined correctly.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029596"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029598"></a>1357</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029600"></a>The attribute vector defined with vector ID (&#39;%d&#39;) in sensitization group &#39;%s&#39; is negative. Vector ID should not be negative.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029602"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029604"></a>This message is issued when the attribute vector is specified with negative vector ID in the sensitization group. Such vector attribute will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the vector ID is defined correctly.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029606"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029608"></a>1358</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029610"></a>One or more vector values defined in the vector with ID &#39;(%d)&#39; in sensitization group &#39;%s&#39; are invalid. This vector attribute will be ignored</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029612"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029614"></a>This message is issued when the attribute vector is specified with invalid value in the sensitization group. The valid values are {0,1,X,Z} . The attribute vector will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the vector values are defined correctly.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029616"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1033814"></a>13<a id="1398"></a>98</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029620"></a>The &#39;%s&#39; waveform specified in cell &#39;%s&#39; has very long tail with time value reaching &#39;%f&#39;. The last &#39;%d&#39; points in waveform will be ignored and tool will complete the waveform using extrapolation for timing analysis. The last time point considered is &#39;%f&#39; and the first time point ignored is &#39;%f&#39;.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029622"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029624"></a>This message is issued when there are points in CCS timing waveform (output_curent_rise/output_current_fall) which results in very long tail in waveform. These long tails in waveform if used as such may cause issues in delay and glitch calculations. The waveform has very big values in time index. Tool ignores such bad points and completes the waveform using extrapolation for timing analysis. Such waveform indicate issue in characterization and should be reviewed.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029626"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029628"></a>13<a id="1399"></a>99</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029630"></a>Attributes tied_off and related_pin present in timing group for pin &#39;%s&#39; of cell &#39;%s&#39;. Attribute related_pin cannot be specified on a tied_off output pin.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029632"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029634"></a>This message is issued when tied_off output pin consists related_pin attribute in the timing group. To fix the issue, re-characterize the library with appropriate settings, such that the related_pin is not specified for tied_off output pin.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029636"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029638"></a>14<a id="1401"></a>01</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029640"></a>The timing arc defined on pin &#39;%s&#39; of cell &#39;%s&#39; with timing_sense &#39;%s&#39; and related_pin &#39;%s&#39; has invalid when attribute &#39;%s&#39;. The when condition is not compatible with the pin function &#39;%s&#39;.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029642"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029644"></a>This message is issued when timing_arc is defined with invalid when condition for specified timing_sense and related_pin attributes. For example: in case of two input Mux (S0 I0 + !S0 I1) for related pin I0, the valid timing arcs are ((S0 I1) and (S0 !I1)) or (S0), which implies that output will toggle on toggling I0 only if S0=0. If when condition is defined as (!S0 I1), which is an invalid when condition as there would be no transition in this condition at the output. To fix the issue, re-characterize the library with appropriate settings, such that the timing arc is defined with correct when condition.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029646"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029648"></a>14<a id="1403"></a>03</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029650"></a>The timing arc defined on pin &#39;%s&#39; of cell &#39;%s&#39; with timing_sense &#39;%s&#39; and related_pin &#39;%s&#39; is not defined for all possible &#39;when&#39; conditions. As per the pin function &#39;%s&#39;, the timing arc(s) with when condition &#39;%s&#39; are not defined.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029652"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029654"></a>This message is issued when timing arc(s) are missing for reported when condition expression for specified pin function and default arc is also not specified. For example, in case of two input Mux (S0 I0 + !S0 I1) for related pin I0, the valid timing arcs are ((S0 I1) and (S0 !I1)) or (S0), which implies that output will toggle on toggling I0 only if S0=0. If any of the arc ((S0 I1) and (S0 !I1)) is missing, it will be an invalid condition. To fix the issue, re-characterize the library with appropriate settings, such that the timing arc for all valid combinations are specified.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029656"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029658"></a>14<a id="1404"></a>04</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029660"></a>The timing arc defined on pin &#39;%s&#39; of cell &#39;%s&#39; with related_pin &#39;%s&#39; has incorrect timing sense &#39;%s&#39;. As per the when condition &#39;%s&#39; and pin function &#39;%s&#39;, the timing sense should be &#39;%s&#39;.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029662"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029664"></a>This message is issued when timing_sense is invalid as per the &#39;when&#39; condition defined for timing arc. For example, in case of two input Mux (S0 I0 + !S0 I1) for related pin I0, the valid timing arcs are ((S0 I1) and (S0 !I1)) or (S0), which implies that output will toggle on toggling I0 only if S0=0. This implies positive unate relationship between I0 and output. Attribute timing_sense with &#39;negative_unate&#39; for this condition would be incorrect. To fix the issue, re-characterize the library with appropriate settings, such that the timing arc is specified with correct timing_sense</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029666"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029668"></a>14<a id="1405"></a>05</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029670"></a>The timing arc defined on pin &#39;%s&#39; of cell &#39;%s&#39; with related_pin &#39;%s&#39; has incorrect timing sense &#39;%s&#39;. As per the pin function &#39;%s&#39;, the timing sense should be &#39;%s&#39;.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029672"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029674"></a>This message is issued when the timing sense defined for timing arc is not consistent with the function of pin. For example, in case of inverter, which has function (!A) then arc should have a negative_unate timing sense. To fix the issue, re-characterize the library with appropriate settings, such that the timing_sense and function are consistent.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029676"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029678"></a>14<a id="1406"></a>06</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029680"></a>The timing arc defined on pin &#39;%s&#39; of cell &#39;%s&#39; has related_pin &#39;%s&#39;. As per the pin function &#39;%s&#39;, the timing arc is not valid.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029682"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029684"></a>This message is issued when timing_arc defined for specified &#39;related_pin&#39; attribute is invalid as per the pin function. To fix the issue, re-characterize the library with appropriate settings, such that the timing arc is correctly defined.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029686"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029688"></a>14<a id="1407"></a>07</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029690"></a>There is no combinational timing arc defined on pin &#39;%s&#39; of cell &#39;%s&#39; with related pin &#39;%s&#39;. As per the pin function &#39;%s&#39;, there should be at least one timing arc defined.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029692"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029694"></a>This message is issued when timing_arc is not defined for specified &#39;related_pin&#39; attribute as per the pin function. To fix the issue, re-characterize the library with appropriate settings, such that the timing arc is defined for all possible valid condition.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1039099"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1039123"></a>14<a id="1416"></a>16</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1039158"></a>The receiver capacitance %s groups are missing in the timing group%s specified for %s of cell &#39;%s&#39;.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1039173"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1039188"></a>This message is issued when either the rise group (receiver_capacitance1_rise/receiver_capacitance2_rise or receiver_capacitance_rise) or the fall group (receiver_capacitance1_fall/receiver_capacitance2_fall or receiver_capacitance_fall) is missing in the timing arc. Moreover, there is no corresponding pin level receiver_capacitance group with the default or same when condition having the missing information. To fix the issue, re-characterize the library with appropriate settings, such that the receiver_capacitance group is defined correctly</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1052419"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1052421"></a>146<a id="1467"></a>7 </p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1052423"></a>The &#39;dynamic_current&#39; waveform specified in cell &#39;%s&#39; has very long tail with long tail ratio &#39;%f&#39; and time value reaching &#39;%f&#39;. This may impact the accuracy of transient power analysis.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1052425"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1052427"></a>This message is issued when there are points in CCS power waveform resulting in very long tail with long tail ratio exceeding the specified threshold. The long tail ratio is calculated as (T3-T2)/(T2-T1), where T1 is start time, T2 is peak time and T3 is end time. The threshold can be controlled using global &#39;set timing_library_ccsp_long_tail_threshold&#39; in tempus and using command set_valus_mode -ccsp_long_tail_threshold in Valus. These long tails in waveform if used as such may cause issues in accuracy of power analysis. To fix the issue, review the characterization and modify it with appropriate values.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1059221"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1059223"></a>1468 <a id="1468"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1059225"></a>The &#39;%s&#39; group on cell &#39;%s&#39;%s, has when condition &#39;%s&#39; which is not mutually exclusive with when condition &#39;%s&#39;.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1059227"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1059229"></a>This message is issued when the leakage_power or internal_power groups, present on a cell or pin respectively, have when conditions which are not mutually exclusive. For example, if two equivalent internal_power groups have when conditions &#39;D &amp; !SE&#39; and &#39;D &amp; SE&#39;, they will be mutually exclusive. But if they have when conditions &#39;D&#39; and &#39;D &amp; SE&#39;, then they will not be mutually exclusive. To fix this issue, you should modify the specified when conditions such that they are mutually exclusive. </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1059116"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1059118"></a>1469<a id="1469"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1059120"></a>The total net capacitance for slew point %s, in receiver capacitance table for cell &#39;%s&#39;, %s, is negative (&#39;%f&#39;). Check capacitance tables in library starting at line &#39;%d&#39; and review the library characterization setup, if needed.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1059122"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1059124"></a>This message is issued when the total net capacitance across segments for the given slew and load points in the receiver capacitance table on a pin or timing arc is negative. To fix this, check the capacitance tables in the library and review the characterization setup, if needed.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1060436"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1060488"></a>1482<a id="1482"></a></p>
+<p>
+<a id="pgfId-1060438"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1060450"></a>The &#39;%s&#39; waveform specified in cell &#39;%s&#39; has very long beginning with time values as small as &#39;%f&#39;. The first &#39;%d&#39; points in waveform will be ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1060442"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1060523"></a>This message is issued when there are points in CCS timing waveform (output_curent_rise/output_current_fall), which results in very slow beginning. These small time points in waveform if used as such may cause issues in delay and glitch calculations. Tempus ignores such bad points. Such waveforms indicate issues in characterization and should be reviewed.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029696"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029698"></a>90<a id="9067"></a>67</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029700"></a>Missing %s delay value for the path from pin %s to pin %s in the cell %s. Path is not generated. The data in the timing library is incomplete. This can result in a loss of accuracy during delay calculation.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029702"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029704"></a>This message is issued when delay and retain values are not specified for the path. Path is not generated if either delay or slew value is missing. To fix the issue, re-characterize the libraries such that delay and retain values are specified correctly.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029706"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029708"></a>9093</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029710"></a>Incorrect timing_type specified in timing group of pin &#39;%s&#39; with related pin name &#39;%s&#39; in cell &#39;%s&#39;, ignoring arc.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029712"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029714"></a>This message is issued when the incorrect timing_type is specified. Such timing arc will be ignored. Arcs from clock_gate_clock_pin and clock_gate_enable_pin to clock_gate_out_pin should be of combinational timing_type. To fix the issue, re-characterize the library with appropriate settings, such that the correct timing_type is defined.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029716"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029718"></a>9119</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029720"></a>Missing related pin %s for a timing group of pin %s in cell %s.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029722"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029724"></a>This message is issued when the related_pin is specified for a timing group but is not defined in the cell. To fix the issue, re-characterize the library with appropriate settings, such that the related_pin is defined.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029726"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029728"></a>9137</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029730"></a>Mismatch in bus width in timing arc with related pin &#39;%s&#39; in pin &#39;%s&#39; of cell &#39;%s&#39;. Ignoring the timing arc.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029732"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029734"></a>The bus width of path between source bus pin and target bus pin should match otherwise that timing arc would be ignored.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029736"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029738"></a>91<a id="9140"></a>40</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029740"></a>No timing sense found for the timing arc at (line no : %d) for cell %s. This is a required attribute for delay timing arcs.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029742"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029744"></a>Timing Sense is a required attribute for delay arcs. If missing can cause issues during timing analysis.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029746"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029748"></a>9141</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029750"></a>Identified delay/slew table(s) for timing arc at (line no :%d) with timing type &#39;%s&#39; for cell &#39;%s&#39;. This timing group is check arc and cannot have delay/slew tables.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029752"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029754"></a>The cell_rise, cell_fall, rise_transition. fall_transition table are not expected in min_pulse_width arc. These arcs can have only rise_constraint or fall_constraint tables.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029756"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029758"></a>9143</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029760"></a>Timing group defined in library has either missing or incorrectly defined lookup tables(s) for cell &#39;%s&#39;. This timing group will be ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029762"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029764"></a>Timing groups in library without any delay, transition, or constraint tables are not allowed. The timing group without any indices on lookup table or its referred template is not allowed. All such timing groups in the library will be ignored. To resolve the issue, modify the timing arc definition by adding cell_rise rise_transition/rise_constraint table or cell_fall/fall_transition/fall_constraint table.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029766"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029768"></a>338</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029770"></a>Linear timing property &#39;%s&#39; found on pin &#39;%s&#39; of cell &#39;%s&#39; in the non-linear library &#39;%s</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029772"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029774"></a>This message is issued when the non-linear library contains a linear model cell or update a linear model cell to a non-linear library.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029776"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029778"></a>422</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029780"></a>The output transition table &#39;%s&#39; for pin &#39;%s&#39; of cell &#39;%s&#39; is not a function of capacitive load. No ECSM data is available for this transition group. Capacitive load indices are required for generating the ECSM data.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029782"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029784"></a>This message is issued when the output transition table is not a function of capacitive load. Such ECSM data will not be available. To fix the issue, re-characterize the library with appropriate settings, such that the capacitive load indices are defined.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029786"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029788"></a>430</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029790"></a>Values of the %s waveform group %s should monotonically increase in pin %s of cell %s</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029792"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029794"></a>This warning is encountered if the ECSM waveform in the timing library is not monotonically increasing or monotonically decreasing. ECSM waveform models the v-t relationship for a signal. The voltage should monotonically increase (for rise waveforms) and monotonically fall(for fall waveforms). If there is glitch in the waveform the above message is issued. To avoid this warning, fix the ECSM waveform data in the library so that there are no glitches in the waveform.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029796"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029798"></a>437</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029800"></a>The ecsm_waveform_set group in pin &#39;%s&#39; cell &#39;%s&#39; is redefined with different axis points</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029802"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029804"></a>Number of index and value points defined in the ecsm_waveform_set group should be same. If the index points are redefined, the number of redefined index points should be same as the number of index points defined in the original template</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029806"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029808"></a>458</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029810"></a>The %s index of ECSM capacitances table %s %s in pin &#39;%s&#39; of cell &#39;%s&#39; is greater than pin&#39;s capacitances value</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029812"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029814"></a>For correct calculation of delay value the capacitances value should be less than or equal to pin&#39;s cap value.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029816"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029818"></a>800</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029820"></a>For the timing arc of pin &#39;%s&#39; of cell &#39;%s&#39;, the value &#39;%s&#39; specified for the user defined attribute domino_arc_typeis invalid. This attribute is being ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029822"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029824"></a>This message is issued when the value defined for domino_arc_type for the timing arc of pin of cell for user defined group is invalid. The valid values of domino_arc_type are clock_precharge, clock_eval and data_eval. The attribute will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the valid value is defined.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029826"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029828"></a>809</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029830"></a>Time values of the vector group number &#39;%d&#39; specified in &#39;%s&#39; group of the timing arc in pin &#39;%s&#39; of cell &#39;%s&#39;, should monotonically increase.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029832"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029834"></a>This message is issued when the time values specified in the vector groups output_current_fall and output_current_rise of the timing arc in pin of cell do not monotonically increase. To fix the issue, re-characterize the library with appropriate settings, such that the time values for output_current_fall and output_current_rise groups vector are monotonic.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029836"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029838"></a>810</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029840"></a>Both the &#39;%s&#39; groups must be specified for the timing arc in pin &#39;%s&#39; of cell &#39;%s&#39;. The receiver capacitance data for this timing arc is ignored</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029842"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029844"></a>This message is issued when any of the receiver_capacitance1_rise, receiver_capacitance1_fall, receiver_capacitance2_rise, receiver_capacitance2_fall is missing for the timing arc in pin of the cell of receiver_capacitance group. All of them must be defined if any one of them is defined. Such receiver_capacitance data for this timing arc will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the receiver_capacitance group is defined correctly.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029846"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029848"></a>814</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029850"></a>Number of vector groups(%d) specified in &#39;%s&#39; group of timing arc in pin &#39;%s&#39; of cell &#39;%s&#39; do not match unique slew/load(%dx%d) pair value. This output current group will be ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029852"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029854"></a>This message is issued when there is mismatch in the number of vector groups and unique slew/load pair. For this output current group, conversion of the CCS vector groups to ECSM waveform groups is ignored for timing analysis. This may impact delay calculation accuracy. Re-characterize the library such that output current group is specified correctly.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029856"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029858"></a>816</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029860"></a>The receiver_capacitance group specified over the output pin &#39;%s&#39; of cell &#39;%s&#39; is ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029862"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029864"></a>This message is issued when the receiver_capacitance group is specified on the output pin of cell. The receiver_capacitance group can be defined on input pin or inout pin at pin level. The receiver_capacitance group will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the receiver_capacitance group is not specified on output pin of the cell.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029866"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029868"></a>817</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029870"></a>The receiver capacitance %s groups are missing in the the receiver capacitance group %s specified for %s of cell &#39;%s&#39;.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029872"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029874"></a>This message is issued when either of the rise group (receiver_capacitance1_rise/receiver_capacitance2_rise) or fall group (receiver_capacitance1_fall/receiver_capacitance2_fall) is missing for pin in the receiver_capacitance group for a &#39;when&#39; condition. If there are duplicate &#39;when&#39; conditions, this data must be present for at least one of the &#39;when&#39; condition. In such case, other receiver_capacitance group with same &#39;when&#39; condition need not have all 4 groups. They can just have either rise or fall groups. To fix the issue, re-characterize the library with appropriate settings, such that the receiver_capacitance group is defined correctly.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029876"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029878"></a>818</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029880"></a>Only input_net_transition axis is expected for &#39;%s&#39; group defined within receiver_capacitance group specified on the pin &#39;%s&#39; of cell &#39;%s&#39;. This receiver_capacitance group is ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029882"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029884"></a>This message is issued when the invalid axis is defined for receiver_capacitance1_rise/receiver_capacitance2_rise/receiver_capacitance1_fall/receiver_capacitance2_fall on the pin of the cell for receiver_capacitance group. The valid axis is only input_net_transition. Such receiver_capacitance group will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the input_net_transition axis should be specified for receiver_capacitance group.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029886"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029888"></a>819</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029890"></a>The number of cap values is not equal to the number of time index points for the &#39;%s&#39; group specified in pin &#39;%s&#39; of cell &#39;%s&#39;. This receiver_capacitance group is ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029892"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029894"></a>This message is issued when the number of capacitance value is specified for receiver_capacitance_rise1/receiver_capacitance_rise2/receiver_capacitance_fall1/receiver_capacitance_fall2 are not equal to the number of time index points. Such receiver_capacitance group will be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the number of cap value should be equal to the number of time index points.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029896"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029898"></a>820</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029900"></a>Undefined template &#39;%s&#39; for the &#39;%s&#39; group specified for the pin &#39;%s&#39; of cell &#39;%s&#39;. The receiver capacitance data for this pin is ignored.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029902"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029904"></a>This message is issued when an undefined template is used in receiver_capacitance1_rise/receiver_capacitance2_rise/ receiver_capacitance1_fall/receiver_capacitance2_fall groups. Such receiver_capacitance data for this pin would be ignored. To fix the issue, re-characterize the library with appropriate settings, such that the template used is defined in library.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029906"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029908"></a>827</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029910"></a>The support to threshold construct in ecsm capacitance group has be provided post ECSM VERSION 1.2. The library ECSM VERSION is %s, therefore the threshold construct will be ignored for the ecsm capacitance group in pin &#39;%s&#39; and cell &#39;%s&#39;.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029912"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029914"></a>This message is issued when threshold_pct construct in ecsm_capacitance group is specified in library but the ECSM VERSION&lt;1.2. Threshold construct will be ignored for the ecsm capacitance group.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029916"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029918"></a>904</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029920"></a>Cell &#39;%s&#39; has both edge and combinational arcs between pins &#39;%s&#39; and &#39;%s&#39;. Such arcs can cause problems in the timing analysis flow.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029922"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029924"></a>For correct timing analysis both combinational and edge arcs should not be present between two pins.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029926"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029928"></a>1104</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029930"></a>Time values of the %s specified in &#39;%s&#39; group of cell &#39;%s&#39;, should monotonically increase.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029932"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029934"></a>This message is issued when the time values specified in the ccs_power vector group of a cell do not monotonically increase. To fix the issue, re-characterize the library with appropriate settings, such that the time value for the ccs_power vector group are monotonic.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029936"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029938"></a>1105</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029940"></a>Vector groups specified in &#39;%s&#39; group of cell &#39;%s&#39; are not defined for every slew and load pair value. This may lead to undesirable analysis results.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029942"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029944"></a>This message is issued when vector group is not defined for each load and slew pair. The vector group should be defined for each slew and load pair and number of vector group should match with slew * cap value pair. To fix the issue, re-characterize the library with appropriate settings such that corresponding vector groups are defined for each slew and load pair.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029946"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029948"></a>1108</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029950"></a>No normalized driver waveform found in this library. This can cause accuracy issues during delay calculation.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029952"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029954"></a>The normalized driver waveform is required for higher precision during delay calculation.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029956"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029958"></a>1131</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029960"></a>The normalized driver waveform &#39;%s&#39; will be extrapolated to span the voltage range 0 to 1.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029962"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029964"></a>This message is issued when the voltage range of normalized_driver_waveform is specified within the range of 0 to 1 but does not span fully from 0 to 1. In such cases, tool will extrapolate to span the voltage from 0 to 1. To fix the issue, re-characterize the library with appropriate settings, such that the normalized_driver_waveform should be defined with appropriate voltage range.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029966"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029968"></a>1148</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029970"></a>Found redefined indices in the ecsm_capacitance group of timing arc section of cell &#39;%s&#39;. Indices cannot be redefined in the ecsm_capacitance group of timing arc section as this group would use the indices of transition table. This can cause issues during delay calculation.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029972"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029974"></a>In timing arc section, the ECSM Capacitance group defined is 2 dimensional and would use the indices of transition table. The ECSM capacitance are not expected to have index_1 or index_2 defined in this group of timing arc section.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029976"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029978"></a>1251</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029980"></a>For cell &#39;%s&#39;, arc &#39;%s&#39;, &#39;CCS &#39;%s&#39; waveform has more than one peak &#39;%s&#39; at line %d. Review the multiple peaks and ensure that these are as per the expectations.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029982"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029984"></a>This message is issued when CCS output current waveform (rise/fall) has distortions and has more than one peak. Review the multiple peaks and ensure that these are as per the expectations. The default threshold value for maximum peak violation is 0.95. To change the default value in valus, use the command line option &#39;set_valus_mode -ccs_current_peak_tolerance&#39;</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029986"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029988"></a>1255</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029990"></a>The &#39;%s&#39; table on the timing arc has %s as &#39;%s&#39; on pin &#39;%s&#39; for cell &#39;%s&#39; but it has no &#39;ecsm_capacitance %s&#39; tables. Ensure that the corresponding ecsm_capacitance/ecsm_capacitance_set tables are present.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029992"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029994"></a>This message is issued when complete ECSM data is not present for a timing arc. For example, in timing arc, if ecsm waveform data is present but corresponding ecsm capacitance data is missing then software issues this message. This incomplete data can lead to inaccuracy in timing analysis. To fix this issue, re-characterize the library such that ECSM data is complete for the mentioned timing arc.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029996"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1029998"></a>12<a id="1279"></a>79</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030000"></a>For cell &#39;%s&#39;, in group &#39;%s&#39;, voltage swing on pin/bus/bundle &#39;%s&#39; with load &#39;%f&#39; and slew &#39;%f&#39; is &#39;%.1f%&#39;, should be within five percent of &#39;%s&#39;.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030002"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030004"></a>Using current waveform for the cell pin in the library, tool converts it to calculate the charging voltage. If the calculated voltage does not reach a particular threshold (within ~5% of VDD voltage) then this message is issued. This may impact accuracy in delay and glitch analysis. To fix the issue, re-characterize the library with appropriate settings, such that the full voltage swing is reached.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030006"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030008"></a>1280</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030010"></a>The group &#39;%s&#39; has not been specified corresponding to the group &#39;%s&#39;, but &#39;%s&#39; data has been specified corresponding to other groups on the same arc, on %s for cell &#39;%s&#39;.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030012"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030014"></a>This message is issued when the CCS timing/ECSM/LVF/FIT data is defined for one or more slew tables but missing on other slew tables within the same arc. The valid slew groups are rise_transition, fall_transition, retain_rise_slew, retain_fall_slew, ocv_sigma_rise_transition, ocv_sigma_fall_transition, ocv_sigma_cell_rise, ocv_sigma_cell_fall, ocv_sigma_rise_constraint and ocv_sigma_fall_constraint. To fix the issue, re-characterize the library with appropriate settings, such that the CCS timing/ECSM waveform/LVF/FIT data is defined corresponding to all group within the same arc.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030016"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030018"></a>1281</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030020"></a>The timing arc on %s for %s &#39;%s&#39; has CCS timing driver information, but CCS timing receiver information is missing.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030022"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030024"></a>This message is issued when the CCS timing driver information is specified but CCS timing receiver information is missing for the timing arc on pin of the cell. The CCS receiver data on arc is a mandatory if CCS driver model information is present. The valid CCS receiver model pairs are receiver_capacitance1_rise, receiver_capacitance2_rise and receiver_capacitance1_fall, receiver_capacitance2_fall. To fix the issue, re-characterize the library with appropriate settings, such that timing arc should be specified with both driver and receiver information.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030026"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030028"></a>1282</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030030"></a>%s data has been defined on one or more %s for %s &#39;%s&#39; but is missing for the %s on %s of the cell.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030032"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030034"></a>This message is issued when the CCS timing/ECSM waveform/LVF/FIT data is specified on one or more timing arc on pin of the cell and missing for another timing arc on pin of the cell. Only those timing arcs will be considered which have slew tables present on them. The valid slew groups are rise_transition, fall_transition, retain_rise_slew, retain_fall_slew, ocv_sigma_rise_transition, ocv_sigma_fall_transition, ocv_sigma_cell_rise, ocv_sigma_cell_fall, ocv_sigma_rise_constraint and ocv_sigma_fall_constraint. To fix the issue, re-characterize the library with appropriate settings, such that CCS timing/ECSM waveform/LVF/FIT data is defined for all timing arcs of all pins of the cell.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030036"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030038"></a>1283</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030040"></a>The &#39;%s&#39; timing group is defined, but its corresponding &#39;%s&#39; timing group is missing for %s in cell &#39;%s&#39;.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030042"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030044"></a>The message is issued when the setup_rising/setup_falling timing_type is defined but its corresponding timing_type hold_rising/hold_falling is not defined in the timing group. To fix the issue, re-characterize the library with appropriate settings, such that setup and hold timing arcs are present in pair for fall/rise transitions.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030046"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030048"></a>1284</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030050"></a>The &#39;%s&#39; table indices do not match in %s timing group on line %d and %s timing group for %s in cell &#39;%s</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030052"></a>&#39;Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030054"></a>This message is issued when there is discrepancy in number of indices of rise_constraint/fall_constraint table for setup_rising and hold_rising timing group. To fix the issue, re-characterize the library with appropriate settings, such that the indices match in constraint tables.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030056"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030058"></a>1285</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030060"></a>The sum of values in &#39;%s&#39; table of %s timing group on line %d and corresponding %s timing group, is below %fps for %s in cell &#39;%s</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030062"></a>&#39;Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030064"></a>This message is issued when the sum of values of rise_constraint/fall_constraint table for setup_rising/setup_falling and corresponding hold_rising/hold_falling timing group is less than the minimum value. This sum can only be zero or any positive value specified using min_value. To fix the issue, re-characterize the library with appropriate settings, such that the sum of values matches the specified value. Default value of min_value is zero.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030066"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030068"></a>1293</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030070"></a>For group &#39;%s&#39;, number of vector groups defined is less than four.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030072"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030074"></a>There should be a minimum of four vector groups defined within an output_current_rise or output_current_fall group.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030076"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030078"></a>1294</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030080"></a>For group &#39;%s&#39;, less than two vector groups are defined having unique values of &#39;%s&#39;.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030082"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030084"></a>There should be a minimum of four vector groups defined within an output_current_rise or output_current_fall group. Current information should be specified for at least two different values of input slew and two different values of output load.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030086"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030088"></a>1345</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030090"></a>This library contains both multi-segmented CCS receiver capacitance models and the older two piece receiver capacitance models. The multi-segmented CCS receiver capacitance models will be used in analysis.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030092"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030094"></a>This message is issued when the library contains both multi-segmented CCS receiver capacitance model and the two piece receiver capacitance model. The multi-segmented CCS receiver capacitance models will be used for analysis.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030096"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030098"></a>1360</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030100"></a>The voltage values for %s group in &#39;%s&#39; is not %s at point close to %f (%s at &#39;%f&#39;). The value should %s in the tolerance range of %f.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030102"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030104"></a>The voltage waveform for rise/fall transition should start at point close to 0/1 and end at close to 1/0.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030106"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030108"></a>1361</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030110"></a>The number of index/values points found is &#39;%d&#39;. The number of sample points(index/values) should be 10 or more than 10 for accurate delay calculation.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030112"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030114"></a>The number of sample time and voltage points should be more than 10 for accurate delay calculation.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030116"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030118"></a>1362</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030120"></a>The sample points for ECSM waveform number %d in %s transition are not near the %s threshold.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030122"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030124"></a>The number of sample time and voltage points should be more than 10 for accurate delay calculation.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030126"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030128"></a>1363</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030130"></a>The slew value %f for ECSM waveform number %d in %s transition for %s of cell &#39;%s&#39; does not match the corresponding NLDM slew value %f.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030132"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030134"></a>This message is issued when the slew value calculated from ECSM waveform (e.g slew = time values at (upper slew threshold-lower slew threshold)) for rise/fall transition does not match with corresponding NLDM slew value. This can cause delay calculation discrepancies.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030136"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030138"></a>1367</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030140"></a>The delay value &#39;%f&#39; calculated for CCS waveform for &#39;%s&#39; vector group on %s of cell &#39;%s&#39; does not match with the corresponding NLDM delay value &#39;%f&#39; at line &#39;%d&#39; and has &#39;%.2g%&#39; error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030142"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030144"></a>This message is issued when there is mismatch in delay value calculated for CCS timing waveform and its corresponding NLDM delay value. The percentage error is calculated with reference to NLDM delay value.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030146"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030148"></a>1368</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030150"></a>The slew value &#39;%f&#39; calculated for CCS waveform for &#39;%s&#39; vector group on %s of cell &#39;%s&#39; does not match with the corresponding NLDM slew value &#39;%f&#39; at line &#39;%d&#39; and has &#39;%.2g%&#39; error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030152"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030154"></a>This message is issued when there is mismatch in slew value calculated for CCS timing waveform and its corresponding NLDM slew value. The percentage error is calculated with reference to NLDM slew value.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030156"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030158"></a>13<a id="1394"></a>94</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030160"></a>Missing %s delay value for the path from pin %s to pin %s in the cell %s. Path is not generated. The data in the timing library is incomplete. This can result in a loss of accuracy during delay calculation.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030162"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030164"></a>This message is issued when delay/retain values are not specified for the path. Path is not generated if either delay or slew value is missing. To fix the issue, re-characterize the libraries such that delay/retain values are specified correctly</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030166"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030168"></a>13<a id="1395"></a>95</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030170"></a>The library level attribute(s) receiver_capacitance_rise_threshold_pct or(and) receiver_capacitance_fall_threshold_pct are defined in library but the library has no &#39;receiver_capacitance_rise&#39; and &#39;receiver_capacitance_fall&#39; groups.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030172"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030174"></a>This message is issued when library level attribute(s) receiver_capacitance_rise_threshold_pct or(and) receiver_capacitance_fall_threshold_pct are defined in library but the library has no &#39;receiver_capacitance_rise&#39; and &#39;receiver_capacitance_fall&#39; groups. If this is intentional, you can ignore this message. Otherwise, to fix the issue, re-characterize the libraries with appropriate settings.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030176"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030178"></a>14<a id="1402"></a>02</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030180"></a>The timing arc defined on pin &#39;%s&#39; of cell &#39;%s&#39; with timing_sense &#39;%s&#39; and related_pin &#39;%s&#39; is not defined for all possible &#39;when&#39; conditions but default arc is present in library. As per the pin function &#39;%s&#39;, the timing arc(s) with when condition &#39;%s&#39; are not defined.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030182"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030184"></a>This message is issued when timing arc(s) are missing for reported when condition expression for specified pin function but default arc is present. For example, in case of two input Mux (S0 I0 + !S0 I1) for related pin I0, the valid timing arcs are ((S0 I1) and (S0 !I1)) or (S0), which implies that output will toggle on toggling I0 only if S0=0. If any of the arc ((S0 I1) and (S0 !I1)) is missing, it will be an invalid condition. To fix the issue, re-characterize the library with appropriate settings, such that the timing arc for all valid combinations are specified.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1049647"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1049649"></a>14<a id="1463"></a>63</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1049707"></a>The retain group attribute(s) &#39;%s&#39; is/are present in the timing arc defined for pin &#39;%s&#39; in cell &#39;%s&#39; but the corresponding timing group attribute(s) &#39;%s&#39; is/are missing. Tool will use retain group information for the corresponding missing timing groups in delay calculation.</p>
+<p>
+<a id="pgfId-1049651"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1049653"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1049655"></a>This message is issued when one or more retain group attributes (retaining_rise, retaining_fall, retain_rise_slew, retain_fall slew) are present in a timing arc but the corresponding timing group attributes (cell_rise, cell_fall, rise_transition, fall_transition) are missing. The tool uses retain groups for the corresponding missing timing groups in delay calculation.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1049829"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1049831"></a>14<a id="1465"></a>65</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1049833"></a>The timing arc defined on pin &#39;%s&#39; of cell &#39;%s&#39; with timing_sense &#39;%s&#39; and related_pin &#39;%s&#39; has invalid when attribute &#39;%s&#39;. The pin &#39;%s&#39; specified in when attribute is not valid for this arc</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1049835"></a>Error</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1049837"></a>This message is issued when timing_arc is defined with invalid when condition for specified related_pin attribute. The pin specified in the when condition is not valid for the given timing arc.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030186"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030188"></a>9068</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030190"></a>Missing %s slew value for the path from pin %s to pin %s in the cell %s. %s. The data in the timing library is incomplete. This can result in a loss of accuracy during delay calculation.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030192"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030194"></a>This warning is encountered if the delay tables (cell_rise/cell_fall) are specified between a pin pair in the cells and output slew(rise_transition/fall_transition) tables are missing. It is imperative to have both the delay and slew tables to accurately model the slew propagation and hence delay for the cell driven by the cell in question. If the output slew table is missing, the output slew is set to 0 for this cell which would definitely cause wrong delay calculation for the cell driven by the cell in question. To avoid this warning make sure that the timing libraries have complete delay and slew data.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030196"></a>TECHLIB</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030198"></a>9124</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030200"></a>Missing when or sdf_cond attributes in the min_pulse_width group of pin &#39;%s&#39; in cell &#39;%s&#39;.</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030202"></a>Warning</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1030204"></a>Missing when or sdf_cond attributes in the min_pulse_width group of pin &lt;Pin&gt; in cell &lt;Cell&gt;. Attributes when and sdf_cond define the enabling condition for the timing check. Both attributes are required in the min_pulse_width group.</p>
+</td>
+</tr>
+</tbody></table>
+
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="ListofChecks.html" id="prev" title="Valus Checks">Valus Checks</a></em></b><b><em><a href="ListofChecks_lib_noise.html" id="nex" title="LIB_NOISE">LIB_NOISE</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

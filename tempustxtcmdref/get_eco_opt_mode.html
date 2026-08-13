@@ -1,0 +1,139 @@
+
+<html><head><title>get_eco_opt_mode</title>
+<meta name="page_sequence" content="27002000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287536" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="get_eco_opt_mode" />
+<meta name="Keywords" content="ECO optimization,buffer instance,delay instance,incremental mode,DRV violation,setup timing,signoff eco" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="ECO," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287536" />
+<meta name="NextFile" content="merge_hierarchical_def.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="eco_opt_design.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- get_eco_opt_mode" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="eco_opt_design.html" title="eco_opt_design">eco_opt_design</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="merge_hierarchical_def.html" title="merge_hierarchical_def">merge_hierarchical_def</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>get_eco_opt_mode</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>get_eco_opt_mode<span class="confluence-anchor-link" id="get_eco_opt_mode-get_eco_opt_mode"></span><span id="get_eco_opt_mode-get_eco_opt_mode"></span></code><br /><code>[-help]&#xa0;</code><br /><code>[-reset]&#xa0;</code><br /><code>[-add_inst {true|false}]</code><br /><code>[-add_load&#xa0;{true|false}]</code><br /><code>[-allow_multiple_incremental {true|false}]</code><br /><code>[-allow_skewing {true|false}]</code><br /><code>[-along_route_buffering {true|false}]</code><br /><code>[-buffer_cell_list cell_list]</code><br /><code>[-check_type {early | late | both}]</code><br /><code>[-clock_cell_list {}]</code><br /><code>[-clock_max_level &lt;INT&gt;]</code><br /><code>[-delete_inst {true | false}]</code><br /><code>[-drv_margin &lt;FLOAT&gt;]</code><br /><code>[-disable_geometry_checks {true|false}]</code><br /><code>[-eco_file_prefix name]</code><br /><code>[-fix_clock_drv {true|false}]</code><br /><code>[-fix_data_drv&#xa0;{true|false}]</code><br /><code>[-fix_glitch&#xa0;{true|false}]</code><br /><code>[-fix_hold_allow_setup_optimization {true|false}]&#xa0;</code><br /><code>[-fix_hold_allow_setup_tns_degrade {true|false}]</code><br /><code>[-fix_hold_with_margin &lt;FLOAT&gt;]</code><br /><code>[-fix_ir_drop {true|false}]</code><br /><code>[-fix_max_cap&#xa0;{true|false}]</code><br /><code>[-fix_max_tran&#xa0;{true|false}]</code><br /><code>[-fix_si_slew&#xa0;{true|false}]</code><br /><code>[-fix_slack_in_range_lower_limit]</code><br /><code>[-fix_slack_in_range_upper_limit]</code><br /><code>[-fix_xtalk&#xa0;{true|false}]</code><br /><code>[-hold_target_slack number]</code><br /><code>[-hold_xtalk_delta_threshold &lt;DOUBLE&gt;]</code><br /><code>[-hold_xtalk_slack_threshold &lt;DOUBLE&gt;]</code><br /><code>[-ignore_drv_checks&#xa0;{true|false}]</code><br /><code>[-keep_temp_files {true|false}]</code><br /><code>[-legal_only&#xa0;{true|false}]</code><br /><code>[-load_cell_list &lt;cell_list&gt;]&#xa0;</code><br /><code>[-load_eco_opt_db name]</code><br /><code>[-load_irdrop_db name]</code><br /><code>[-max_cap_margin &lt;float&gt;]</code><br /><code>[-max_slack &lt;FLOAT&gt;]</code><br /><code>[-max_paths &lt;paths&gt;]</code><br /><code>[-max_run_time&#xa0;&lt;minutes&gt;]</code><br /><code>[-max_tran_margin &lt;float&gt;]&#xa0;</code><br /><code>[-nworst &lt;INT&gt;]</code><br /><code>[-optimize_core_only {true|false}]</code><br /><code>[-optimize_sequential_cells {true|false}]</code><br /><code>[-optimize_replicated_modules {true|false}]</code><br /><code>[-partition_list_file &lt;string&gt;]</code><br /><code>[-pba_effort {medium|high}]</code><br /><code>[-power_opt_focus {total|leakage|dynamic|leakageOnly|dynamicOnly}]&#xa0;</code><br /><code>[-post_sta_tcl file ]</code><br /><code>[-pre_sta_tcl file ]&#xa0;</code><br /><code>[-prefix_name string ]</code><br /><code>[-pruned_block_name string&#xa0;]</code><br /><code>[-resize_inst {true|false}]</code><br /><code>[-retime {none| aocv | path_slew_propagation | aocv_path_slew_propagation}]</code><br /><code>[-routing_congestion_aware&#xa0;{true|false}]</code><br /><code>[-save_eco_opt_db &lt;dir_name&gt;]</code><br /><code>[-select_hold_endpoints string]</code><br /><code>[-select_drv_net_file&#xa0;&lt;FILE&gt;]</code><br /><code>[-select_setup_endpoints string]&#xa0; &#xa0;</code><br /><code>[-setup_recovery&#xa0;{true|false}]&#xa0;</code><br /><code>[-setup_target_slack number]&#xa0;</code><br /><code>[-setup_xtalk_delta_threshold &lt;DOUBLE&gt;]</code><br /><code>[-setup_xtalk_slack_threshold &lt;DOUBLE&gt;]</code><br /><code>[-skip_drv_net_file &lt;FILE&gt;]</code><br /><code>[-specify_hold_endpoints_margin string]</code><br /><code>[-specify_setup_endpoints_margin string]</code><br /><code>[-swap_inst {true | false}]</code><br /><code>[-verbose {true | false}]<br /><span style="color:var(--ds-text,#172B4D);">[-quiet]</span><br /></code></p>
+
+<p>Displays the following information about a specified parameter in the Tempus log file and in the Tempus console:</p>
+<ul><li>Parameter name</li></ul><ul><li>Current value</li></ul><ul><li>Type (Boolean, string, and so on)</li></ul><ul><li>Whether the user set the current value</li></ul>
+<p>If you do not specify a parameter, the software displays information for all of the parameters.</p>
+<h4 id="get_eco_opt_mode-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">
+<p>Outputs a brief description that includes type and default information for each&#xa0;<code>get_eco_opt_mode</code>&#xa0;parameter.</p>
+
+<p>For a detailed description of the command and all of its parameters, use the&#xa0;<code>man</code>&#xa0;command:<br /><code>man get_eco_opt_mode</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>parameter_names</code></p>
+</td>
+<td class="confluenceTd">
+<p>Displays information for the specified parameters. You can specify one or more parameters.</p>
+
+<p>See <code><a href="set_eco_opt_mode.html#set_eco_opt_mode-set_eco_opt_mode">set_eco_opt_mode</a></code> for descriptions.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-quiet</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Displays the current settings for the specified parameters in Tcl list format only.</p>
+
+<p>If you specify <code>-quiet</code> without any parameters, the software displays the current settings of all <code><a href="set_eco_opt_mode.html#set_eco_opt_mode-set_eco_opt_mode">set_eco_opt_mode</a></code> parameters in Tcl list format.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="get_eco_opt_mode-Examples">Examples</h4>
+
+<p>The following command displays the parameter name as &quot;<code>-add_inst</code>&quot;, the default value as &quot;<code>true</code>&quot;, and the current value set in the tool as &quot;<code>true</code>&quot;.</p>
+
+<p><code>tempus&gt;&#xa0;get_eco_opt_mode -add_inst</code></p>
+
+<p>The output is displayed as shown below:</p>
+
+<p><code>-add_inst true&#xa0; # bool, default=true</code><br /><code>true</code></p>
+<h4 id="get_eco_opt_mode-RelatedCommands">Related Commands</h4>
+
+<p><code><a href="set_eco_opt_mode.html">set_eco_opt_mode</a></code></p>
+
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="eco_opt_design.html" id="prev" title="eco_opt_design">eco_opt_design</a></em></b><b><em><a href="merge_hierarchical_def.html" id="nex" title="merge_hierarchical_def">merge_hierarchical_def</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

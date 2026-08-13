@@ -1,0 +1,118 @@
+
+<html><head><title>Statistical ElectroMigration Budgeting</title>
+<meta name="page_sequence" content="35000000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468646" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Statistical ElectroMigration Budgeting" />
+<meta name="Keywords" content="instance,detail,instance,delta,analysis,file,format" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Self-Heating Effect Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468646" />
+<meta name="NextFile" content="Statistical_ElectroMigration_Budgeting_Flow.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Delta_Temperature_File_Formats.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- Statistical ElectroMigration Budgeting" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="Delta_Temperature_File_Formats.html" title="Delta_Temperature_File_Formats">Delta_Temperature_File_Formats</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Statistical_ElectroMigration_Budgeting_Flow.html" title="Statistical_ElectroMigration_Budgeting_Flow">Statistical_ElectroMigration_B ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <div style="width: 100%; font-size: 32px; text-align: left;               font-weight: bold;">25</div>
+<h1 style="margin: 4px 0 4px;"><span>Statistical ElectroMigration Budgeting</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>Statistical ElectroMigration Budgeting (SEB) enables you to meet the ElectroMigration (EM) reliability targets by performing a statistical interconnect EM analysis based on the current modeling and thermal analysis of the design. This feature leverages the statistical nature of EM reliability to compute the level of the EM risk for all design rule violations. SEB analysis requires fixing of only those violations that add significant risk. This reduces the design verification time and improves performance while ensuring that the design meets its chip-level reliability goals.</p>
+
+<p>The Voltus SEB flow involves:</p>
+<ul><li>Measuring the total chip failure rate by EM analysis</li><li>Checking if the total failure rate meets the product requirement</li></ul>
+<p><strong>Failure in Time</strong></p>
+
+<p>Failures in Time (FIT) is a factor to represent the chip failure rate. Following is the definition of FIT:</p>
+
+<p>1 FIT = One failure per 109 product hours</p>
+
+<p>= One failure in 1000 products through 106 hours</p>
+
+<p>= One failure in 105 products through 104 hours</p>
+
+<p>= or any other combination between products and hours as long as the product of the two is 109</p>
+
+<p>Voltus will calculate the FIT value for each resistor of metal and via. The tool will follow the foundry EM definition to calculate FIT.</p>
+
+<p>The ElectroMigration FIT equation is given below:</p>
+<div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481804/732481806.png" data-linked-resource-container-id="732481804" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="fit_1_cadence.png" data-linked-resource-id="732481806" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="170" src="attachments/732481804/732481806.png" tabindex="0" /></span></div>
+
+<p>The following is the detailed description of the Median Time to Failure (MTF) equation:</p>
+<div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481804/732481805.png" data-linked-resource-container-id="732481804" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="fit_2.png" data-linked-resource-id="732481805" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="146" src="attachments/732481804/732481805.png" tabindex="0" /></span></div>
+<ul><li>LT = lifetime of product in hour</li><li>erf() = error function</li><li>S<sub>DC</sub> = DC EM severity ratio, I<sub>DC</sub>/I<sub>limit</sub><ul><li>I<sub>DC</sub>: DC current of design</li><li>I<sub>limit</sub>: DC EM limit from foundry design rule manual and calculated at T<sub>ambient</sub></li></ul></li><li>MTF(T<sub>ambient</sub>) = median time to failure in hour (from foundry)</li><li>σ= sigma, spread in lifetime distribution (from foundry)</li><li>n = current density exponent (from foundry)</li><li>Ea = activate energy (from foundry)</li><li>k = Boltzmann&#39;s constant</li><li>T = absolute temperature in K</li></ul><h4 id="StatisticalElectroMigrationBudgeting-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Statistical_ElectroMigration_Budgeting_Flow.html">Statistical ElectroMigration Budgeting Flow</a></li><li><a href="Setting_up_and_Running_Power_EM_and_Signal_EM_Analyses_for_FIT_Calculation.html">Setting up and Running Power EM and Signal EM Analyses for FIT Calculation</a></li><li><a href="Viewing_FIT_GUI_Map.html">Viewing FIT GUI Map</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Delta_Temperature_File_Formats.html" id="prev" title="Delta_Temperature_File_Formats">Delta_Temperature_File_Formats</a></em></b><b><em><a href="Statistical_ElectroMigration_Budgeting_Flow.html" id="nex" title="Statistical_ElectroMigration_Budgeting_Flow">Statistical_ElectroMigration_B ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

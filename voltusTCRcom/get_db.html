@@ -1,0 +1,457 @@
+
+<html><head><title>get_db</title>
+<meta name="page_sequence" content="14013000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666103" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="get_db" />
+<meta name="Keywords" content="returns objects attributes, database, filtering, dual-ported objects, dpo, object list, traverse related objects, access attributes, string form, netlist name, current design name" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Tcl/DB Commands," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusTCRcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666103" />
+<meta name="NextFile" content="get_db_Category_Attributes.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="get_computed_shapes.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Text Reference Manual  -- get_db" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltuscuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusTCRcomTOC.html">Contents</a></li><li><a class="prev" href="get_computed_shapes.html" title="get_computed_shapes">get_computed_shapes</a></li><li style="float: right;"><a class="viewPrint" href="voltusTCRcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="get_db_Category_Attributes.html" title="get_db_Category_Attributes">get_db_Category_Attributes</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Text Reference Manual <br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>get_db</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>get_db<span class="confluence-anchor-link" id="get_db-get_db"></span><span id="get_db-get_db"></span><br />[-help]<br />{[<em>start&#xa0;</em>[<em>chain</em>]&#xa0;<span>[</span><em>pattern1&#xa0;</em><span>[</span><em>pattern2</em><span>&#xa0;..]&#xa0;[[-if <em>expression</em>] | [-expr <em>expression</em>]]&#xa0;[-dbu] [-foreach <em>tcl_body</em>] [-index&#xa0;{<em>object</em> |&#xa0;<em>obj_type1 name1</em>&#xa0;[object | obj<em>_type2 name2 &#8230;</em>]}] [-invert] [-regexp] [-match_hier] [-unique]&#xa0;</span>[-computed]<span>}</span><br />[-category <em>category</em>]<br />[-depth {[<em>min</em>] <em>max</em>}]<br />[-skip_fail]<br /></code></p>
+
+<p>Returns objects and attributes in the database with different types of filtering. The&#xa0;<code>get_db</code>&#xa0;commands takes&#xa0;a dual-ported object, dual-ported object list or a collection as input, then uses a period (.) to traverse to other related objects or to access attributes.&#xa0;You can use additional periods to traverse the data base schema.</p>
+
+<p><strong>Note</strong>: A Dual-Ported Object (DPO) is a Tcl_Obj in the C++ programming interface. The pointer is kept as a C++ pointer inside Tcl unless Tcl forces it to be evaluated as a string. In normal usage it never gets converted to a string which is more efficient, but if you do a &quot;puts $var&quot; or return the value to the shell, it will be converted to its &quot;dual&quot; string form.</p>
+<ul><li>The string form is normally a useful name preceded by the&#xa0;<code>obj_type</code>, so a<code>&#xa0;base_cell</code>&#xa0;object string form might look like&#xa0;<code>base_cell:and2</code>.&#xa0;</li><li>A netlist name will have the current design name included, so an instance named<code>&#xa0;i1/i2</code>&#xa0;in design top, would look like&#xa0;<code>inst:top/i1/i2</code>.</li><li>An object with no name like a wire, will just show the pointer hex-value like&#xa0;<code>wire:0x22222</code>.</li></ul>
+<p>The&#xa0;<code>get_db</code>&#xa0;command accepts collections as an input but it only returns objects in dual-ported object list form.&#xa0;</p>
+
+<p>For descriptions on all&#xa0;objects and attributes, see <a class="message-url" href="../DBcom/DBcomTOC.html">Common UI Database Object Information</a>.</p>
+
+<p>The root object has the current design data under the&#xa0;<code>current_design</code>&#xa0;attribute, while technology and library data are normally directly accessible as root attributes (e.g. layers and base_cells).&#xa0;The <code>root</code> object is the default starting point if there is no input list or collection given.</p>
+
+<p>You can query a root attribute in any of the following ways:</p>
+<ul><li><code>get_db / .layers</code>&#xa0;<br />where, &#xa0;&#8216;/&#8217; is the notation for the root object</li><li><code>get_db layers</code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;<br />This implicitly starts at the root. In this usage, no &quot;.&quot; is used before the &quot;layers&quot; attribute name.</li></ul>
+<p>For example, you can use the following command to get all the driver-pins of all nets in <code>current_design</code>:<br /><code>&gt;get_db current_design .nets.drivers</code></p>
+
+<p><strong>Note</strong>: The&#xa0;<code>current_design</code>&#xa0;is implicitly created by the&#xa0;<code><a href="init_design.html">init_design</a></code>&#xa0;or the&#xa0;<code>read_db</code>&#xa0;commands.</p>
+
+<p>Frequently used&#xa0;current_design attributes like insts or hinsts (hierarchical insts) have root attribute aliases (or shortcuts). These attributes can be accessed by just typing&#xa0;the root attribute alias name.<br />For example, the following commands gets all instances of the current design with names that start with <code>i1/i2*</code>:</p>
+<ul><li><code>get_db current_design .insts i1/i2*</code></li><li><code>get_db insts i1/i2*</code>&#xa0;&#xa0;<br />Where, insts is a root attribute alias for current_design .insts</li></ul>
+<p>Some of the more commonly used aliases from the <code>current_design</code> attributes include: <code>nets</code>, <code>pins</code>, <code>insts</code>, <code>hnets</code>, <code>hpins</code>, and <code>hinsts</code>.</p>
+
+<p>The <code>get_db</code>&#xa0;command supports auto-complete when you press the &lt;<code>Tab&gt;</code>&#xa0;key. It will give a list of all matching attributes starting with the letters entered so far, or it will complete the name if it is unique.&#xa0;</p>
+
+<p>For example:<br /><code>&gt;get_db insts .par&lt;Tab&gt;</code><br /><code>parent partition</code></p>
+
+<p>If you press the&#xa0;<code>&lt;Shift+Tab&gt;</code>&#xa0;keys together, the matching attributes are displayed along with their help string, like this:</p>
+
+<p><code>&gt;get_db insts .par&lt;Shift+Tab&gt;</code></p>
+
+<p><code>parent # The parent of the inst, which is either a hinst for an instance within hierarchy or the design object for an instance at the&#xa0;toplevel.</code><br /><code>partition # If this inst is a physical black_box, this partition will carry the pin constraints and related data for the blackbox. Otherwise&#xa0;it is empty.</code></p>
+
+<p>There are two database definition objects:&#xa0;<code>obj_type</code>&#xa0;and&#xa0;<code>attribute</code>. If you want to query all the details for an attribute definition on an&#xa0;<code>obj_type</code>, rather than an attribute value, use the following command:</p>
+
+<p><code>&gt;get_db attribute:&lt;obj_type&gt;/&lt;attribute_name&gt; .*</code></p>
+
+<p>You can use&#xa0;<code>get_db</code>&#xa0;to query user-defined properties from LEF. Following is the&#xa0;mapping between the LEF&#xa0;<code>objectType</code>&#xa0;and database object:</p>
+
+<p><code>LAYER -&gt; layer</code><br /><code>LIBRARY -&gt; design&#xa0;</code><br /><code>MACRO -&gt; base_cell</code><br /><code>NONDEFAULTRULE -&gt; route_rule</code><br /><code>PIN -&gt; base_pin</code><br /><code>VIA -&gt; via_def&#xa0;</code><br /><code>VIARULE -&gt; via_def_rule</code></p>
+
+<p><strong>Note:</strong>&#xa0;If&#xa0;<code>PROPERTYDEFINITION</code>&#xa0;is defined for&#xa0;<code>LIBRARY</code>, the&#xa0;<code>PROPERTY</code>&#xa0;will be mapped as a design attribute with a&#xa0;<code>tech_lef_property_*</code>&#xa0;prefix.</p>
+<h4 id="get_db-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd">
+<p>Outputs a brief description that includes <span>the </span>type and default information for each <code>get_db</code> parameter.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-category&#xa0;<em>category</em></code></td>
+<td class="confluenceTd">
+<p>Specifies a category of root attributes to return. This is intended to return all the root attributes associated with one application category. You cannot use a <em>start</em> argument with the <code>-category</code> option, so this option cannot be used for anything but root attributes. The return value is list of root attribute names.</p>
+
+<p>Example:</p>
+
+<p>The following command can be used to see all the root attributes associated with the category place:</p>
+
+<p><code>get_db &#8211;category place</code></p>
+
+<p>The output is as follows:</p>
+
+<p><code>place_design_floorplan_mode place_design_refine_place place_detail_allow_border_pin_abut ...</code></p>
+
+<p>You can view the complete list of categories with the get_db categories command as follows:</p>
+
+<p><code>innovus 1&gt; get_db categories</code></p>
+
+<p><code>active_logic_view add_endcaps add_fillers add_rings ...</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><em><code>chain</code></em></td>
+<td class="confluenceTd">
+<p>Specifies the&#xa0;<code><em>chain</em></code> in the form <code>[<em>.attribute_name1</em> [<em>.attribute_name2</em>]...]</code>. A chain always starts with a <code>&quot;.&quot;</code>.</p>
+
+<p>The specified attribute names are valid for each level of the traversal in the <code><em>chain</em></code>.</p>
+
+<p>Example:</p>
+
+<p>The following command returns the names of pins of <code>$my_insts</code></p>
+
+<p><code>get_db $my_insts .pins.name</code></p>
+
+<p>If the chain has a * or ? in the attribute name, it will be expanded to all matching attribute names, and the display will show the attribute name and current value for every object. This is intended for interactive usage, and no values are returned to Tcl. Values that may require significant time to compute (like timing data that requires the timing-graph) will only be displayed if <code>-computed</code> is given.</p>
+
+<p>For example:</p>
+
+<p><code>get_db $my_insts .b*</code></p>
+
+<p><code>Object: inst:top/i1</code></p>
+
+<p><code>base_cell: base_cell:BUFX2</code></p>
+
+<p><code>bbox: {34.32 10.08 38.94 15.12}</code></p>
+
+<p><code>Object: inst:top/i2</code></p>
+
+<p><code>...</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>-computed</span></code></td>
+<td class="confluenceTd">
+<p>Forces <code>get_db</code> to output the values of attributes that may require significant time to compute <span>(like timing data that requires the timing-graph) when browsing many attributes at the same time. This is intended for interactive usage when using a pattern match with * or ? for an attribute name. If only a single attribute name is given, then the value is always returned.</span></p>
+
+<p>Example:</p>
+
+<p><code>&gt;get_db $my_pins .slack_max*</code></p>
+
+<p><code>Object: pin:top/inst$odd/Y</code></p>
+
+<p><code>slack_max: NC</code></p>
+
+<p><code>slack_max_edge: NC</code></p>
+
+<p><code>...</code></p>
+
+<p><code>&gt;get_db $my_pins .slack_max* -computed #if timing-graph not available yet, it will be computed</code></p>
+
+<p><code>Object: pin:top/inst$odd/Y</code></p>
+
+<p><code>slack_max: 550.12</code></p>
+
+<p><code>slack_max_edge: rise</code></p>
+
+<p><code>...</code></p>
+
+<p><code>&gt;get_db $my_pins .slack_max #single attribute names always return value and force computation if needed</code></p>
+
+<p><code>550.12 ...</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-dbu</code></td>
+<td class="confluenceTd">
+<p>Indicates that attribute values (coord, pt, rect, polygon, area, ...) should be returned as an int in database units.<br /><br /><em>Default</em>: If not given, the value returned is a double in microns (or microns**2).</p>
+
+<p>Examples:</p>
+<ul><li>In the following command the return type is&#xa0;a double in microns.&#xa0;<br /><code>get_db $my_inst .location</code><br /><code>{1.0 1.0}</code></li></ul><ul><li>In the following command the return type is an&#xa0;int in database units.<br /><code>get_db -dbu $my_inst .location</code><br /><code>{1000 1000}</code><code><br /></code></li></ul></td>
+</tr>
+<tr><td class="confluenceTd"><code><span>-depth {[</span><em>min</em><span>]&#xa0;</span><em>max</em><span>}</span></code></td>
+<td class="confluenceTd">
+<p>Specifies the hierarchy depth range. It expands each <code>design</code> or <code>hinst</code> object in the input list into a list of <code>design</code> or <code>hinst</code> objects by descending the hinst hierarchy from <em><code>min</code></em> to <em><code>max</code></em> depth. The default value of <em><code>min</code></em> is <code>0</code>, if not specified. <code>0</code> here signifies the level of the starting object.</p>
+
+<p>The <code>-depth</code> expansion happens first, and the resulting expanded list is then processed as the input list of objects by <code>get_db</code>.</p>
+
+<p>For example: <br /><code>get_db hinst:top/h1 -depth {0 1}</code><br />Returns <code>hinst:top/h1</code>, and the first level of hinsts below it.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>-expr&#xa0;</span><em>expression</em></code></td>
+<td class="confluenceTd">
+<p>Returns the object if the <code><em>expression</em></code> is true. The <code><em>expression</em></code> argument is a strict Tcl expression that can be passed as is to the Tcl expression command. It has a pre-defined Tcl array named <code>$obj</code> that is populated by <code>get_db</code> with any attribute or chain value for each object as they are visited, and <code>$obj(.)</code> returns the object itself. For example,</p>
+
+<p><code>get_db insts -expr {$obj(.base_cell.name) eq &quot;AND2&quot;}&#xa0;&#xa0; #all insts that are AND2</code></p>
+
+<p>Normally the <code>-if <em>expression</em></code> parameter is faster for simple expressions, but it is limited to a few operators, and simple <code>$var</code> substitution. If you need a full Tcl expression semantics including the proc calls inside [], special char escaping, or complex <code>$var</code> substitution, you must use <code>-expr</code>.</p>
+
+<p>This parameter can be used with a <code><em>chain</em></code> and <code>pattern</code> like this:</p>
+<p style="margin-left: 0.0in;"><code><span>get_db $my_insts&#xa0;.pins i1/* -expr {$obj(.base_name) eq &quot;A&quot;}</span></code></p>
+<p style="margin-left: 0.0in;"><span>Here, the </span><code><span>i1/*</span></code><span> pattern is checked first for pin names that match </span><code><span>i1/*</span></code><span>, then the pin <code>.base_name</code> is checked if it is equals &quot;<code>A&quot;</code>.</span></p>
+
+<p><span><code>-expr</code> cannot be used at the same time with <code>-if</code>.</span><span><br /></span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-foreach&#xa0;<em>tcl_body</em></code></td>
+<td class="confluenceTd">
+<p>Specifies a list of Tcl commands to process for each object. This parameter avoids the overhead of creating long lists of objects. The Tcl array <code>$obj()</code> is populated with the attributes of each object when it is visited, and <code>$obj(.)</code> is the object itself. The Tcl commands&#xa0;break&#xa0;and&#xa0;continue&#xa0;also work as expected in a <code>foreach</code> loop (break stops the traversal of any more objects and <code>get_db</code> returns).</p>
+
+<p>Unlike inside&#xa0;<code>-if</code>, the&#xa0;<code>tcl_body</code>&#xa0;is strict Tcl. The <code>.<em>attribute</em></code> names are not substituted, you must use <code>$obj()</code> to access the attribute values instead. If you have a&#xa0;<code><em>pattern</em></code>&#xa0;or <code>-if</code>, or <code>-expr</code> usage, then <code>-foreach</code> only processes each <code>object</code> that matches the&#xa0;<code><em>pattern</em></code>, <code>-if</code>, or <code>-expr</code> expression.</p>
+
+<p>The following command prints the names of every inst that starts with &quot;abc&quot; and is an AND2 gate:</p>
+
+<p><code>get_db insts abc* -if {.base_cell.name == AND2} -foreach {puts $obj(.name)}</code></p>
+
+<p>It returns the total number of <code>insts</code> that are printed.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-if&#xa0;<em>expression</em></code></td>
+<td class="confluenceTd">
+<p>Specifies a boolean expression, with extensions to make pattern matching simpler.</p>
+<ul><li>== and != do not require a quoted string, and they support pattern matching with * and ?.&#xa0;</li><li>Other operators like &gt;, &lt;, &lt;=, &gt;=, &amp;&amp;, ||, and the unary negate operator ! are supported.</li><li>Parentheses &#8220;( )&#8221; can be used to group complex expressions.</li></ul>
+<p><strong>Note:</strong> Unlike the &lt;pattern&gt; argument, inside the -if expression, you cannot use a string pattern to implicitly match the .name attribute of an object. You must use the .name field directly. For example, the following command will not match anything because .base_cell will become something like <code>base_cell:AND2</code>.</p>
+
+<p><code>&gt;get_db insts -if {.base_cell == buf*}              #matches nothing</code></p>
+
+<p>use either of these instead:</p>
+
+<p><code>get_db insts -if {.base_cell.name == buf*}         #match the .name attribute</code></p>
+
+<p><code>get_db insts -if {.base_cell == base_cell:buf*}    #match the DPO name directly</code></p>
+
+<p><strong>Note</strong>: If you use an attribute that is an object list (like .pins), every object in the list is tested in an &#8220;implicit OR&#8221;, so if any of them pass, the expression is matched.</p>
+
+<p>Handling of indexed attributes inside of the <code>-if</code> statement:</p>
+<ul><li>The <code>-index</code> option is kept outside of the <code>-if</code> statement</li><li>The <code>-index</code> option MUST be valid for ALL attributes inside the <code>-if</code> statement otherwise an error occurs</li></ul>
+<p>Examples:</p>
+<ul><li>The following command finds all instances with <code>base_cell</code> names that matches &#8220;<code>buf*</code>&#8221;.<br /><code>get_db insts -if {.base_cell.name == buf*}</code></li></ul><ul><li>The following command returns all insts that have one or more pins that match <code>CLK*</code>.&#xa0;Only one copy of the matching inst object is returned, even if multiple pin names match CLK*.<br /><code>get_db insts -if {.pins.base_name == CLK*}</code></li><li>The following command gets all pins where <code>delay_max_rise</code> is greater than 5 or <code>slew_max_fall</code> is smaller than 8.&#xa0;This is a valid command as both delay* and slew* are attributes indexed by <code>view</code> (<code>view</code> is a legal abbreviation of <code>analysis_view</code>).<br /><code>get_db pins&#xa0;-if {.delay_max_rise &gt; 5 || .slew_max_fall &lt; 8 }&#xa0; -index {view v1}</code></li></ul>
+<p><strong>Note:</strong> The <code>-if</code> parameter does not support the usage of embedded Tcl command as operands. Use the <code>-expr</code> for this requirement.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-index&#xa0;{<em>object</em> | <em>obj_type1 name1 </em>[<em>object</em> | <em>obj_type2 name2 &#8230;</em>]}</code></td>
+<td class="confluenceTd">
+<p>Some attributes represent an array of values. For example, a <code>pin .slack_max_rise</code> attribute has a different value for each <code>analysis_view</code> and each <code>clock</code> that can affect that pin. With no index, a default method defined for that attribute is used (for example, the maximum, or minimum of all values in the array). For <span><code>slack_max_rise</code> with no <code>-index</code> value, the value returned</span> is the worst-case slack across all <code>analysis_views</code> and <code>clocks</code>.</p>
+
+<p>If you want to return a specific value, you must include the index value. The index values are object pointers, or a pair of <code>obj_type</code> name and object name (for example <code>clock clk1</code>). The word <code>view</code> is accepted as an abbreviation for <code>analysis_view</code>.</p>
+
+<p>For example:</p>
+
+<p><code>get_db $my_pins .slack_max_rise -index &quot;view func_wc_cworst&quot;</code></p>
+
+<p>Will return the worst case <code>.slack_max_rise</code> for the <code>analysis_view func_wc_cworst</code> across all clocks. This attribute also accepts a clock index, so you can further refine it like this:</p>
+
+<p><code><span>get_db $my_pins .slack_max_rise -index</span> &#8220;view func_wc_cworst clock clk1&#8221;</code></p>
+
+<p>To get the value for that specific <code>analysis_view</code> and <code>clock</code>.</p>
+
+<p>In the special case of a clock and <code>analysis_view</code> as shown above, a clock object is sufficient for both, because a clock object is based on both the clock name and the view name. So you could also do this:</p>
+
+<p><code>set my_clk_obj [get_db clocks -if {.view_name == func_wc_worst &amp;&amp; .base_name == clk1}]</code></p>
+
+<p><code>get_db $my_pins .slack_max_rise -index $my_clk_obj</code></p>
+
+<p>The <code>-index</code> parameter also accepts a pattern of attribute name to be matched. While specifying an attribute pattern string with <code>-index</code>, attributes that do not support <code>-index</code>, will return their normal value. But the attributes that support <code>-index</code>&#xa0;will return the values specified by the index. For example:</p>
+
+<p><code>get_db net:dtmf_recvr_core/scan_out2 .* -index {view func-wc_cworst}</code></p>
+
+<p>Will return all the attributes and values for the <code>net</code> object. Any attribute that supports a view index will return the value for that view, while the other attributes will return the value as if <code>-index</code> was not specified.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-invert</code></td>
+<td class="confluenceTd">
+<p>Negates the <code><em>pattern,</em></code> <code>-if <em>expression, </em>and -expr <em>expression </em></code>filters to return the objects/attributes that do not match instead of the ones that do.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-match_hier</code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies that the <code>*</code> in the <code><em>pattern</em></code> and <code><em>expression</em></code> expands to the next hierarchical divider character <code>/</code> instead of a complete string match.</p>
+
+<p>Example:</p>
+
+<p>The following command matches i1, i2, but not i1/i2.</p>
+
+<p><code>get_db insts i* -match_hier</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><em>pattern1&#xa0;</em><span>[</span><em>pattern2</em><span>&#xa0;..]</span></code></td>
+<td class="confluenceTd">
+<p><span>Specifies string pattern(s)</span>, where:</p>
+<p style="margin-left: 30.0px;">* matches 0 or more of any characters</p>
+<p style="margin-left: 30.0px;">? matches exactly one character</p>
+More complex patterns require <code>-regexp</code> or <code>-if</code> expression.
+<p>Refer to the following examples:</p>
+<ul><li>The following command finds all instance names starting with A:<br /><code>get_db insts .name A*</code><br /><code>A0 A1/A2 &#8230;</code></li><li>The pattern matching can also work directly on a dual-ported object. In that case, it will match the &#8216;.name&#8217; attribute of the object, but return the object rather than the .name string. This matching works only for objects that have a <code>.name</code> attribute defined. For example, the following command finds all instance objects (not names) with a name starting with A:</li></ul><p style="margin-left: 30.0px;"><code>get_db insts A*</code><br /><code>inst:top/A0 inst:top/A1/A2 &#8230;</code></p>
+<ul><li><span>The pattern matching can also work to </span>match multiple lists of the name patterns. Refer to the following example:</li></ul><p style="margin-left: 30.0px;"><code>get_db insts */BC* *TC*<br />CG/BC1 CG/BC2 TC1 TC2 TC3 TC4<br /></code></p>
+
+<p><strong>Note</strong>: For the special case where a pattern string starts with &#8216;.&#8217; you need to use an extra &#8216;.&#8217; (an empty attribute name) <br />so that &#8216;.text&#8217; is treated as a pattern and not as an attribute name.</p>
+<ul><li>The following command finds all nets whose names equal to <code>.odd_name<br />get_db nets . .odd_name</code></li><li>The following command finds all instance names starting with A or B:<br /><code>get_db insts A* B*</code></li></ul></td>
+</tr>
+<tr><td class="confluenceTd"><code>-regexp</code></td>
+<td class="confluenceTd">
+<p>Specifies that <code><em>pattern</em></code> use <em>regexp</em> syntax instead of the simple * and ? style. It does not change the <code>-if</code> pattern matching.</p>
+
+<p>See the example below to understand the usage of the <code>-</code><code>regexp</code>&#xa0;parameter:</p>
+
+<p><code>get_db insts -regexp {u_warmreset_cntr/reset_cntr_reg_(\d+)_}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-skip_fail</code></td>
+<td class="confluenceTd">
+<p>Skips the fail error, when the object does not have such an attribute, or the object/attribute itself cannot be recognized.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><em><code>start</code></em></td>
+<td class="confluenceTd">
+<p>The starting objects or root attributes. Can be an object list, collection, root (/), or root attribute.</p>
+
+<p>Example:</p>
+<ul><li>The following command returns the root attribute <code>insts</code> that is an object list of all <code>insts</code> in <code>current_design</code>.<br /><code>&gt;get_db insts</code></li></ul><ul><li>The following command starts from a dual-ported object list or collection of objects in the Tcl variable <code>$my_list</code>, and returns a dual-ported object list.<br /><code>&gt;get_db $my_list</code></li></ul><ul><li>The following command returns a root attribute that is a simple value.<br /><code>&gt;get_db timing_cap_unit</code><code><br /></code></li><li>
+<p>If the name has a * or ?, it will be expanded to all matching root attribute names, and the display will show the attribute names and current value. This is intended for interactive usage, and no values are returned to Tcl. For example,</p>
+</li></ul><p style="margin-left: 30.0px;"><code>&gt;get_db timing*</code></p>
+<p style="margin-left: 30.0px;"><code>Object: root:/</code></p>
+<p style="margin-left: 30.0px;"><code>timing_allow_input_delay_on_clock_source: false</code></p>
+<p style="margin-left: 30.0px;"><code>timing_analysis_aocv: false</code></p>
+<p style="margin-left: 30.0px;"><code>...</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-unique</code></td>
+<td class="confluenceTd">
+<p>Removes <span>duplicate entries from the </span>return list. If the specified attribute is a list, this parameter returns a unique set of lists., and does not uniquifies the elements within the list. In such a case, use <code>lsort</code>.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="get_db-Built-InSub-attributes"><span style="letter-spacing: -0.003em;">Built-In Sub-attributes</span></h4>
+
+<p>The types <code>rect</code>, <code>line</code>, <code>point</code>, and <code>polygon</code> have built-in sub-attributes. For a full list of all built-in sub-attributes, see&#xa0;<a class="message-url" href="../DBcom/DBcomTOC.html">Common UI Database Object Information</a>.</p>
+
+<p>Example:</p>
+
+<p>The <code>rect</code> type has built-in sub-attributes like:</p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><tbody><tr><td class="confluenceTd">area</td>
+<td class="confluenceTd">Area of rect</td>
+</tr>
+<tr><td class="confluenceTd">dx</td>
+<td class="confluenceTd">Delta x</td>
+</tr>
+<tr><td class="confluenceTd">dy</td>
+<td class="confluenceTd">Delta y</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">ll</td>
+<td class="confluenceTd" colspan="1">Lower-left point</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">ur</td>
+<td class="confluenceTd" colspan="1">Upper-right point</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">width</td>
+<td class="confluenceTd" colspan="1">Shorter of dx and dy</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">length</td>
+<td class="confluenceTd" colspan="1">Longer of dx and dy</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">perimeter&#xa0;</td>
+<td class="confluenceTd" colspan="1">Length of the rect perimeter</td>
+</tr>
+</tbody></table></div>
+
+<p>A&#xa0;<code>point</code> has sub-attributes like:</p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><tbody><tr><td class="confluenceTd">x</td>
+<td class="confluenceTd">X coordinate</td>
+</tr>
+<tr><td class="confluenceTd">y</td>
+<td class="confluenceTd">Y coordinate</td>
+</tr>
+</tbody></table></div>
+
+<p>Like other attributes you can chain them together.</p>
+
+<p>For example, an inst object has a .bbox (bounding box) that is type &#8220;rect&#8221;. Here are some operations allowed on the .bbox attribute of an inst.</p>
+<div><p class="CodeCxSpFirst"><code>get_db $my_inst .bbox</code><br /><code>{1.0 2.0 3.0 4.0}</code><br /><code>get_db $my_inst .bbox.ll</code><br /><code>{1.0 2.0}</code><br /><code>get_db $my_inst .bbox.area</code><br /><code>4.0</code><br /><code>get_db $my_inst .bbox.ll.x</code><br /><code>1.0</code><br /><code>set box [get_db $my_inst .bbox]</code><br /><code>{1.0 2.0 3.0 4.0}</code><br /><code>get_db $box .ll</code><br /><code>{1.0 2.0}</code></p>
+<h4 class="CodeCxSpFirst" id="get_db-Examples">Examples</h4>
+<ul><li>
+<p>The following command finds insts with names starting with PTN* that have at least one pin capacitance &gt; 0.1. The pattern is checked first, and those that pass will be tested with the <code>-if</code> expression.&#xa0;Inside the <code>-if</code> expression, there are many <code>.pins</code> for one inst, so each pin is tested. &#xa0;If any of the pins have a capacitance &gt; 0.1, the single inst will be matched.<br /><code><span>get_db insts PTN2* -if {.pins.capacitance_max_rise&#xa0; &gt; 0.1}</span></code>&#xa0;</p>
+</li><li>
+<p>The following command returns insts that are not physical-only cells whose name matches <code>i1/i2*</code>.<br /><code><span>get_db insts i1/i2* -if {!.is_physical}<br /></span></code></p>
+</li><li>
+<p>The two commands below generate the same list of pins from <code>$my_insts</code> that have a base_name <code>clk</code>. The first uses a * pattern to match all pins, while the second has no pattern and defaults to all pins, so both cases check the <code>-if</code> expression for all pins of <code>$my_insts</code>.</p>
+<p class="CodeCxSpFirst"><code>get_db&#xa0;$my_insts .pins * -if {.base_name == clk}<br />get_db&#xa0;$my_insts .pins&#xa0; -if {.base_name == clk}<br /></code></p>
+</li><li>The following command finds&#xa0;<code>buf1</code> cell instances connected to nets named <code>clk</code> and changes their placement status to <code>fixed</code>. <br /><strong>Note</strong>: The examples below is inefficient and used to illustrate different methods of traversal done in different styles. A more efficient method would be to start from the nets and looking at their pin connections directly.<br />Example 1:<br /><p class="CodeCxSpFirst"><code>set cell_name buf1</code><br /><code>set net_name clk</code><br /><code>foreach inst_obj [get_db insts] {</code><br /><code>&#xa0; &#xa0; &#xa0; set cell_obj [get_db $inst_obj .base_cell]</code><br /><code>&#xa0; &#xa0; &#xa0; if { [get_db $cell_obj .name] == $cell_name } {</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;foreach pin_obj [get_db $inst_obj .pins] {</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;if { [get_db $pin_obj .net.name] == $net_name } {</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;set_db $inst_obj .place_status fixed</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;}</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;}</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0;}</code><br /><code>}</code></p>
+<br />Example 2: Same output using full traversal style with intermediate variables. The second <code>-if</code> returns true if any of the .pins.net.name match <code>$net_name</code> (implicit OR).<br /><code>set buf1_list [get_db insts -if {.base_cell.name&#xa0;== $cell_name}]</code><br /><code>set buf1_clk1_list [get_db $buf1_list -if {.pins.net.name&#xa0;== $net_name}]</code><br /><code>set_db $buf1_clk1_list .place_status fixed</code><br /><br />Example 3: Same output using full traversal style (fully chained)<br /><code>set_db [get_db insts -if {.base_cell.name&#xa0;== $cell_name &amp;&amp;&#xa0;.pins.net.name&#xa0;== $net_name}] .place_status fixed</code><br /><br />Example 4:&#xa0;Or use the <code>-foreach</code> method so no list is returned, but the number of buffers processed is returned.<br /><code>get_db insts -if {.base_cell.name&#xa0;== $cell_name &amp;&amp; .<a class="external-link" href="https://pins.net.name" rel="nofollow">pins.net.name</a></code><code>&#xa0;== $net_name}&#xa0;&#8211;foreach {set_db $obj(.) .place_status fixed}<br /></code></li></ul><ul><li>
+<p>The following command finds all the insts named <code>i1/i2</code> that end with <code>_buf</code>:<br /><code>get_db insts i1/i2/*_buf</code><br />Or your could start inside the <code>hinst</code> named <code>i1/i2</code>:<br /><code>get_db [get_db hinsts i1/i2] .insts *_buf</code><br />Or use the hinst dual-ported object name directly. Note that netlist dual-ported object names have the design name included, so if <code>top</code> is the design name you could do this:<br /><code>get_db hinst:top/i1/i2 .insts *_buf</code></p>
+</li><li>
+<p>The following command gets <code>arrival_max_rise</code> for the <code>analysis_view setup_test</code> for all pins. Here the abbreviation &quot;view&quot; is allowed for analysis_view.<br /><code>get_db pins .arrival_max_rise -index &quot;view setup_test&quot;<br /></code></p>
+</li><li>
+<p>The following command finds insts that have a cell_port named CK and that pin is connected to a net named clk*:<br /><code>get_db insts -if {.lib_cells.lib_pins.name == */CK &amp;&amp; .pins.net.name == clk*}<br /></code></p>
+</li><li>
+<p>&#xa0;The following command uses -foreach to find the first inst named u1/* with .place_status &quot;fixed&quot; and then break. It uses strict Tcl inside the -foreach.<br /><code>get_db insts u1/* -foreach { if {[string match fixed $obj(.place_status)]} { puts&#xa0;$obj(.name) ; break } }<br /></code></p>
+</li></ul><ul><li>The following&#xa0;<code>get_db</code>&#xa0;command uses&#xa0;<code>-foreach</code>&#xa0;to count the number of each base_cell used in the netlist inside the cell_count Tcl array. You can then use <code>array get cell_count</code> to see a list of all the <code>base_cell</code> names and how many times they are used in the netlist.<br /><code>get_db insts .base_cell -foreach {incr cell_count($obj(.name))}</code></li><li>The following&#xa0;<code>get_db</code>&#xa0;command&#xa0;displays all the details of the <code>flow_template_type</code> attribute of the <code>root obj_type</code>:<br /><code>get_db attribute:root/flow_template_type .*</code><br /><code>Object: attribute:root/flow_template_type</code><br /><code>base_name: flow_template_type</code><br /><code>category: flow</code><br /><code>check_function: {}</code><br /><code>compute_function: {}</code><br /><code>data_type: string</code><br /><code>default_value: {}</code><br /><code>help: {Type of template being run.}</code><br /><code>indices:</code><br /><code>is_computed: false</code><br /><code>is_obsolete: false</code><br /><code>is_settable: true</code><br /><code>is_user_defined: true</code><br /><code>name: root/flow_template_type</code><br /><code>obj_type: obj_type:root</code><br /><code>set_function: {}</code><br /><code>skip_in_db: false</code></li><li>The following example depicts the use of the <code>-if</code> parameter to find all HVT insts:<br /><code>get_db insts -if {.base_cell.name == *_HVT}</code></li><li>
+<p>The following command returns all hinsts 1 or 2 levels inside the design:<br /><code>get_db design:top -depth {1 2}</code><br /><code>hinst:top/h1 hinst:top/h1/h2</code></p>
+</li><li>
+<p>The following command finds all <code>local_insts</code> of each <code>hinst</code> at depth 2 that have <code>.dont_touch == true</code>:<br /><code>get_db design:top .local_insts -depth {2 2} &#8211;if { .dont_touch == true } </code><br /><code>inst:top/h1/h2/i1 inst:top/h1/h2/i2</code></p>
+</li><li>
+<p>All the following commands return inst with <code>.name i1/i2</code>:<code><br /></code></p>
+<p class="CodeCxSpFirst"><code>set a i1/i2</code><br /><code>get_db insts i1/i2</code><br /><code>get_db insts -expr {$obj(.name) eq $a}</code><br /><code>get_db insts -expr {[get_db $obj(.) .name] eq &#8220;i1/i2&#8221;}</code></p>
+</li><li><p class="CodeCxSpFirst">The following command&#xa0;returns all nets with more than 5 loads:<br /><code>get_db nets -expr { [llength $obj(.loads)] &gt; 5 }</code></p>
+</li><li>The following command&#xa0;returns all insts with <code>base_cell.name AND2</code>:<br /><code>get_db insts -expr {$obj(.base_cell.name) eq &#8220;AND2&#8221;}</code></li></ul></div>
+<h4 id="get_db-RelatedTopics">Related Topics</h4>
+<ul><li>For details on&#xa0;LEF&#xa0;property definitions, see the &#39;Property Definitions&#39; section on the&#xa0;<a class="message-url" href="../lefdefref/LEFSyntax.html">LEF Syntax</a>&#xa0;chapter in the&#xa0;<em>LEF/DEF Language Reference.</em></li><li>For information on how to set DB attributes, see the&#xa0;<code><a href="set_db.html">set_db</a></code>&#xa0;command.</li><li>For information on how to reset attribute values, see the &#xa0;<code><a href="reset_db.html">reset_db</a></code> command.</li><li>For a list of objects attributes that can be queried for information or changed, see <a class="message-url" href="../DBcom/DBcomTOC.html">Common UI Database Object Information</a>.</li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="get_computed_shapes.html" id="prev" title="get_computed_shapes">get_computed_shapes</a></em></b><b><em><a href="get_db_Category_Attributes.html" id="nex" title="get_db_Category_Attributes">get_db_Category_Attributes</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

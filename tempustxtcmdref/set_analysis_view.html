@@ -1,0 +1,174 @@
+
+<html><head><title>set_analysis_view</title>
+<meta name="page_sequence" content="19120000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287370" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_analysis_view" />
+<meta name="Keywords" content="define analysis views,setup hold analysis" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Timing Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287370" />
+<meta name="NextFile" content="set_aocv_thresholds.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_analysis_mode.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- set_analysis_view" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="set_analysis_mode.html" title="set_analysis_mode">set_analysis_mode</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_aocv_thresholds.html" title="set_aocv_thresholds">set_aocv_thresholds</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_analysis_view</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>set_analysis_view<span class="confluence-anchor-link" id="set_analysis_view-set_analysis_view"></span><span id="set_analysis_view-set_analysis_view"></span><br /></code>[-help]</code><br /><code>[-drv <em>string</em>]</code><br /><code>[-dynamic <em>string</em>]<br />[-ir <em>string</em>]</code><br /><code>[-leakage <em>string</em>]</code><br /><code>[-update_timing]</code><br /><code>[-setup <em>string&#xa0;</em>| -hold <em>string</em>]</code></p>
+
+<p>Defines the analysis views to use for setup and hold analysis and optimization. You must define at least one setup and one hold analysis view. The &quot;active&quot; views represent the different design variations that will be analyzed. These views can be changed throughout the flow to utilize different subsets of views. The libraries and data are loaded into the system that are required to support the selected set of active views.&#xa0;</p>
+
+<p>When the <code>set_analysis_view</code> command is issued, it will cause a full timing reset. During a timing reset, all the interconnect parasitics, delays, and timing slacks will be&#xa0;recalculated.</p>
+
+<p>The order in which you specify the views with the <code>-setup</code> and <code>-hold</code> parameters is important. By default, the first views defined in the <code>-setup</code> and <code>-hold</code> lists are the default views. The default views serve two purposes:</p>
+<ul><li>Provide the library data that is used during the design initialization process.</li><li>Indicate to parts of the application that are not MMMC-aware, which view&#39;s information to use for a particular analysis step (in most cases, the default view is the first setup or hold view). You can use the <code><a href="set_default_view.html">set_default_view</a></code> command to change the default view to any currently active view without incurring a timing reset. This control is not frequently used since most applications either support MMMC or provide a direct control for selecting the appropriate view to use for that specific analysis.</li></ul>
+<p>Using the <code>set_default_view</code> command does not affect software performance because it only uses views that are already active in the design. If you use the <code>set_analysis_view</code> command to change the default views, the existing timing and delay calculation data is reset.</p>
+
+<p>Use this command after creating multiple analysis views (<code><a href="create_analysis_view.html#create_analysis_view-create_analysis_view">create_analysis_view</a></code>).</p>
+
+<p><strong>Note</strong>: The&#xa0;<code>set_analysis_view</code>&#xa0;command does not work in an incremental manner for setting parameters.&#xa0;Each&#xa0;invocation of this command must include the full specification of all the active views required for analysis.</p>
+<h4 id="set_analysis_view-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="confluenceTable cadenceTable cadDefaultfont" id="cadDefaultfont" style="width: 720px;"><colgroup><col style="width: 300px;" /><col style="width: 340px;" /></colgroup><tbody><tr><td class="confluenceTd"><code>-help</code></td>
+<td class="confluenceTd">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd"><code>-drv <em>string</em></code></td>
+<td class="confluenceTd">
+<p>Selects specific views&#xa0;for DRV analysis, e.g., max_transition and max_capacitance checking.</p>
+
+<p>When this parameter is specified, additional analysis views are specified for DRV analysis, so the timing system efficiently computes the required data for these checks. This methodology is efficient with respect to memory and performance, because not all the views, as full Setup views, are included.</p>
+
+<p>The following guidelines should be followed when selecting DRV views:</p>
+<ul><li>Any setup views that require DRV analysis should not be specified as DRV views. The setup views are automatically considered for DRV.</li><li>If a subset of hold-only views requires DRV analysis, they should be specified as DRV views as well. The timing system will augment the timing information normally computed for Hold views with additional data required for the DRV analysis.</li><li>Additional views that are not active setup or hold views can be specified as DRV only views. The system will efficiently compute the required data for performing accurate DRV checks.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd"><code>-dynamic <em>string</em></code></td>
+<td class="confluenceTd">
+<p>Sets a view as a dynamic view.</p>
+
+<p>Delay calculation is required to provide transition times. Delay calculation should not perform SI analysis if the&#xa0;delay corner is only required for the dynamic power. The timer is not required to propagate required times or perform&#xa0;slack computations.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-hold <em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Sets the active views for hold analysis.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-ir <em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the IR view.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-leakage <em>string</em></code></td>
+<td class="confluenceTd">
+<p>Sets a view as a leakage view.</p>
+
+<p>The timing libraries must be loaded, if not already in use. The Timer constant propagation is required, whereas delay calculation is not required.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-setup <em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Sets the active views for setup analysis.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-update_timing</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Reloads the configuration described by the MMMC view and mode objects. When the timing global <code><a href="timing_defer_mmmc_object_updates.html">timing_defer_mmmc_object_updates</a></code> is set to <code>true</code>, this parameter is required to update the MMMC timing environment.</p>
+
+<p>The <code>-update_timing</code> parameter may be specified without any <code>-setup</code> or <code>-hold</code> arguments. In this case, the data associated with the current set of setup and/or hold views will be loaded. If no active setup or hold views exist, then using this parameter alone may display an error.</p>
+
+<p>The <code>-update_timing</code> parameter may also be used in conjunction with the <code>-setup</code> and <code>-hold</code> options. In this case, the newly specified setup/hold view configuration will be loaded with the updated MMMC object information.</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p>When you issue the&#xa0;<code>set_analysis_view</code> command, the software will perform a timing reset, so that only the new active view information is loaded. The software requires the&#xa0;<code>-setup</code>&#xa0;and&#xa0;<code>-hold</code>&#xa0;view&#xa0;parameters to be explicitly specified for each&#xa0;<code>set_analysis_view</code> command run. If these parameters are not specified, the software issues an error message. Any optional settings, such as&#xa0;<code>-leakage</code>&#xa0;or&#xa0;<code>-dynamic</code> views, will&#xa0;be reset if they are not specified with the new&#xa0;<code>set_analysis_view</code>&#xa0;command.</p>
+
+<p><strong>Note</strong>: It is recommended to use the same power view for both leakage and dynamic, that is, both the <code>-dynamic</code> and <code>-leakage</code> parameters should have the same user-specified view settings.</p>
+<h4 id="set_analysis_view-Examples">Examples</h4>
+<ul><li>The following command sets missionWCCOM and mission2WCCOM as the active views for setup analysis, and missionBCCOM and testBCCOM as the active views for hold analysis:&#xa0;<br /><code><span>tempus&gt;</span><span>&#xa0;</span>set_analysis_view -setup {missionWCCOM mission2WCCOM} -</code><code>hold {missionBCCOM testBCCOM}</code></li></ul><h4 id="set_analysis_view-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="create_analysis_view.html">create_analysis_view</a></code></li><li><a href="update_analysis_view.html"><code>update_analysis_view</code></a></li><li><code><a href="set_default_view.html">set_default_view</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_analysis_mode.html" id="prev" title="set_analysis_mode">set_analysis_mode</a></em></b><b><em><a href="set_aocv_thresholds.html" id="nex" title="set_aocv_thresholds">set_aocv_thresholds</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

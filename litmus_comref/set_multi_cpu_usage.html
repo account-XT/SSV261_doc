@@ -1,0 +1,150 @@
+
+<html><head><title>set_multi_cpu_usage</title>
+<meta name="page_sequence" content="23002000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="apokhara" />
+<meta name="CreateDate" content="2026-04-12" />
+<meta name="CreateTime" content="1776062398" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="" />
+<meta name="DocTitle" content="Litmus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_multi_cpu_usage" />
+<meta name="Keywords" content="command,mutiple,cpu,usage,threads,threading,processing,computers,superthreading" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="MULTI_CPU_PROCESS," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="litmus_comref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-12" />
+<meta name="ModifiedTime" content="1776062398" />
+<meta name="NextFile" content="System_Commands_-_Basic_Tool-Tcl_Commands.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="report_resource.html" />
+<meta name="c_product" content="Litmus," />
+<meta name="Product" content="Litmus," />
+<meta name="ProductFamily" content="Litmus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Litmus Text Command Reference -- set_multi_cpu_usage" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="litmus26comref" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="litmus_comrefTOC.html">Contents</a></li><li><a class="prev" href="report_resource.html" title="report_resource">report_resource</a></li><li style="float: right;"><a class="viewPrint" href="litmus_comref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="System_Commands_-_Basic_Tool-Tcl_Commands.html" title="System_Commands_-_Basic_Tool-Tcl_Commands">System_Commands_-_Basic_Tool-T ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Litmus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_multi_cpu_usage</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>set_multi_cpu_usage&#xa0;<span id="set_multi_cpu_usage-set_multi_cpu_usage"></span>
+    <span class="confluence-anchor-link" id="set_multi_cpu_usage-set_multi_cpu_usage"></span>
+    <br />[-help]<br />
+  </code> <code>[-local_cpu integer]<br />
+  </code> <code>[-keep_license {true|false}]<br />
+  </code> <code>[-release_license]</code></p>
+
+<p>Specifies the number of threads to use for multi-threading.</p>
+<div aria-label="Info" class="confluence-information-macro  confluence-information-macro-information" role="region"><span class="aui-icon aui-icon-small aui-iconfont-info-filled confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>This command is required for multi-threading.</p>
+</div>
+</div>
+
+<p>The&#xa0;<code>set_multi_cpu_usage&#xa0;</code>command enables multi-threaded timing reporting under the following conditions:</p>
+<ul><li><code>timing_report_group_based_mode</code>&#xa0;attribute is set to&#xa0;<code>true</code>. If there are multiple paths with the same slack then the selection can change on multiple runs. This may result in some changes in the&#xa0;<code>report_timing</code>&#xa0;output.</li><li><code>report_analysis_coverage</code>&#xa0;command is in non-verbose mode.</li><li><code>check_timing &#8211;include clock_crossing</code>&#xa0;parameter is specified.</li></ul><h4 id="set_multi_cpu_usage-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup> <col /> <col /> <col /> </colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="2">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>
+            <span>-local_cpu {integer}</span>
+          </code></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies the number of CPUs on the local machine . This parameter is required for multi-threading.</p>
+
+<p><em>Default: </em><code>4</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>
+            <span>-keep_license {true | false}</span>
+          </code></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies whether to keep the acquired multiple CPU-licenses until the current session ends.</p>
+
+<p>Specify this parameter before running any commands that require multiple-CPU applications. To release all multiple-CPU licenses immediately, use -release_license option.</p>
+
+<p><em>Default: </em> <code>true</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><span> <code>-release_license</code> </span></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Releases all multiple-CPU license(s) immediately. By default, the software holds multiple-CPU licenses until the end of the current session.</p>
+
+<p>To specify that the software release multiple-CPU licenses after every multiple-CPU command runs, use -keep_license option.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_multi_cpu_usage-Examples">Examples</h4>
+
+<p>Here are some examples.</p>
+<ul><li>The following command specifies that 8 CPUs can be used on a local machine for multi-threading. This is based on the assumption that 8 CPUs are available on the local machine; otherwise the software will utilize the available CPUs:<br /><code>litmus&gt; set_multi_cpu_usage -local_cpu 8</code></li><li>The following command releases all the multi-CPU licenses immediately:<br /><code>litmus&gt; set_multi_cpu_usage -release_license</code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="report_resource.html" id="prev" title="report_resource">report_resource</a></em></b><b><em><a href="System_Commands_-_Basic_Tool-Tcl_Commands.html" id="nex" title="System_Commands_-_Basic_Tool-Tcl_Commands">System_Commands_-_Basic_Tool-T ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

@@ -1,0 +1,122 @@
+
+<html><head><title>Save a Database in Voltus and Innovus</title>
+<meta name="page_sequence" content="18005000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666117" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Save a Database in Voltus and Innovus" />
+<meta name="Keywords" content="constraint,database,power,timing,parasitics" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Design Import," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666117" />
+<meta name="NextFile" content="Run_Analysis_without_Creating_a_Physical_Database.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Import_Large_Hierarchical_Design.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Save a Database in Voltus and Innovus" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Import_Large_Hierarchical_Design.html" title="Import_Large_Hierarchical_Design">Import_Large_Hierarchical_Desi ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Run_Analysis_without_Creating_a_Physical_Database.html" title="Run_Analysis_without_Creating_a_Physical_Database">Run_Analysis_without_Creating_ ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Save a Database in Voltus and Innovus</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="SaveaDatabaseinVoltusandInnovus-60226"></span></p>
+
+<p><span class="fontredcadence">
+<p>The <code>write_db</code> command in Voltus&#xa0;&#xa0;can be used to save timing graph, signal net parasitics, Verilog, timing constraints, power constraints, and reference to design data.</p>
+
+<p>The <code>write_db</code> command in Voltus&#xa0;&#xa0;saves a power constraints file which saves all the power constraints and modes in the database into a file named <code>&lt;topcellname_power_constraints.tcl&gt;</code>. On restoring the database, this file be sourced to ensure that the same power constraint settings are used in the new session.</p>
+<h4 id="SaveaDatabaseinVoltusandInnovus-SamplePowerConstraintsFile:.1"><em> Sample Power Constraints File:</em></h4>
+
+<p><code>set_default_switching_activity -period 10.000000ns <br />read_activity_file -format VCD -scope adder_tb_e.u1 /../adder_netlist.vcd</code></p>
+
+<p><code>set_db power_write_db false power_handle_glitch false power_handle_tristate true power_honor_negative_energy true power_ignore_control_signals true</code></p>
+
+<p>Optionally, you can use Innovus to create a flattened database.</p>
+
+<p><strong>Tcl command:</strong></p>
+
+<p>The following is the Voltus load and save design Tcl script:</p>
+
+<p><code>read_physical -lefs tech.lef allcells.lef<br />read_libs -min_libs stdcells_min.lib memories_min.lib<br />read_netlist dma.v -top <span class="webflare-courier-new"><em>dma<br /></em></span>init_design<br />read_sdc top.sdc<br />read_def -skip_signal_nets dma.def<br />read_spef dma.spef<br />write_db dma.enc</code></p>
+
+<p>The following is the Tcl script in a new Voltus session:</p>
+
+<p><code>read_db -physical_data dma.enc.dat top_cell_name</code></p>
+</span></p>
+
+<p><code> </code></p>
+<h4 id="SaveaDatabaseinVoltusandInnovus-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Creating_and_Loading_Hierarchical_Databases.html">Creating and Loading Hierarchical Databases</a></li><li><a href="Run_Analysis_without_Creating_a_Physical_Database.html">Run Analysis without Creating a Physical Database</a></li><li><a href="Run_Analysis_without_Design_Loading.html">Run Analysis without Design Loading</a></li><li><a href="Importing_Design.html">Importing Design</a></li></ul>
+<p><br /></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Import_Large_Hierarchical_Design.html" id="prev" title="Import_Large_Hierarchical_Design">Import_Large_Hierarchical_Desi ...</a></em></b><b><em><a href="Run_Analysis_without_Creating_a_Physical_Database.html" id="nex" title="Run_Analysis_without_Creating_a_Physical_Database">Run_Analysis_without_Creating_ ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

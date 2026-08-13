@@ -1,0 +1,240 @@
+
+<html><head><title>Understanding SI Glitch Analysis</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823906" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Understanding SI Glitch Analysis" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823906" />
+<meta name="NextFile" content="analysisandreporting_runsiglitchanalysis.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_siglitchflow.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Understanding SI Glitch Analysis" />
+<meta name="Keywords" content="understand si analysis" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Signal Integrity,SI Analysis,Stylus" />
+<meta name="prod_subfeature" content="SI Analysis, Signal Integrity" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_siglitchflow.html" title="SI Glitch Analysis Flow">SI Glitch Analysis Flow</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_runsiglitchanalysis.html" title="Running Detailed SI Glitch Analysis">Running Detailed SI Glitch Ana ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:understandsianalysis" title="Understanding SI Glitch Analysis"></a><h3>
+<a id="pgfId-1010732"></a><a id="31382"></a>Understanding SI Glitch Analysis</h3>
+
+<p>
+<a id="pgfId-1010733"></a>In order to perform crosstalk functional failure analysis, Tempus first calculates the worst-case glitch that occurs on each victim net when it is not transitioning. This worst-case glitch is created from the worst-case combination of all allowable attackers where the attackers are nets that are coupled to the victim. The set of allowable attackers is determined from both timing and logic relationships between the victim and attacker nets. For example, attackers whose timing is such that they do not overlap are not combined. A unique worst-case glitch is calculated for each receiver (fanout) of the victim. Once the worst-case glitch is determined, Tempus performs a number of additional steps to determine if this glitch is harmful to the functionality of the design being analyzed.</p>
+<p>
+<a id="pgfId-1010734"></a>There are three key components of SI Glitch analysis:</p>
+<ul><li>
+<a id="pgfId-1010738"></a><a href="analysisandreporting_understandsianalysis.html#36383">Glitch Waveform Computation</a></li><li>
+<a id="pgfId-1010742"></a><a href="analysisandreporting_understandsianalysis.html#39089">Glitch Failure Detection</a></li><li>
+<a id="pgfId-1010746"></a><a href="analysisandreporting_understandsianalysis.html#37092">Glitch Propagation</a></li></ul>
+
+
+
+<h4>
+<a id="pgfId-1010748"></a><a id="36383"></a>Glitch Waveform Computation</h4>
+
+<p>
+<a id="pgfId-1010752"></a>For more details, refer to section on <a href="analysisandreporting_performingsianalysis.html#97581">Waveform Computation</a>.</p>
+
+<h4>
+<a id="pgfId-1010754"></a><a id="39089"></a>Glitch Failure Detection</h4>
+
+<p>
+<a id="pgfId-1010755"></a>When worst glitch is computed, Tempus checks if a glitch can result in failure. Tempus uses two criteria for glitch failure by measuring the glitch at input and output of receiver cell, as shown in the figure below.</p>
+<ul><li>
+<a id="pgfId-1010759"></a><a href="analysisandreporting_understandsianalysis.html#68021">Receiver Input Peak (RIP) Check</a></li><li>
+<a id="pgfId-1010763"></a><a href="analysisandreporting_understandsianalysis.html#37679">Receiver Output Peak (ROP) Check</a></li></ul>
+
+<p>
+<a id="pgfId-1010764"></a>These are illustrated in the diagram below.</p>
+
+<p class="webflare-indent1"><strong>Figure -45
+<a id="pgfId-1010765"></a>Glitch representation at input and output of receiver</strong></p>
+<p>
+<a id="pgfId-1010769"></a></p>
+<div class="webflare-div-image">
+<img width="364" height="256" src="images/analysisandreporting-47.gif" /></div>
+<h4><em>
+<a id="pgfId-1010771"></a><a id="68021"></a>Receiver Input Peak (RIP) Check</em></h4>
+
+<p>
+<a id="pgfId-1010772"></a>If a net has a receiver without noise data, then the receiver input peak (RIP) is compared against:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052912"></a><a href="../tempustxtcmdref/set_si_mode.html">set_si_mode</a> -input_glitch_threshold (or -input_glitch_vh_threshold -input_glitch_vl_threshold) <code><em>value</em></code> </pre>
+
+<p>
+<a id="pgfId-1055878"></a><code></code>or</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1055887"></a><a href="../tempustxtcmdref/set_glitch_threshold.html">set_glitch_threshold</a> <code>-failure_point</code> <code>input</code> <code>&#8211;threshold_type</code> <code>failure</code> <code>&#8211;value</code> <code><em>float</em></code> </pre>
+
+<p>
+<a id="pgfId-1055981"></a>In this case, failure can occur if RIP is greater than the tolerance threshold value.</p>
+
+<h4><em>
+<a id="pgfId-1010774"></a><a id="37679"></a>Receiver Output Peak (ROP) Check</em></h4>
+
+<p>
+<a id="pgfId-1010775"></a>Tempus has the capability to compute glitch impact one step inside the cell, that is, at the output of the first Channel Connected Component (CCC) in the cell. This is known as ROP (Receiver Output Peak) analysis. Since CMOS logic acts as a low pass filter, it attenuates the glitch, so that the glitch checked at the output of the first CCC may be less than the glitch at the input of the cell. Using the ROP to determine failure may reduce the number of violation counts.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1099223"></a>In some cases, the ROP may be more than the RIP. The ROP can be as high as VDD in case of a full rail RIP, so any result close to the VDD ROP can be considered reasonable.</div>
+<p>
+<a id="pgfId-1010776"></a>If a net has receiver with noise data (cdB or ECSM-Noise or CCS-Noise), then Tempus propagates the glitch one stage and calculates the Receiver Output Peak (ROP). If the arc is from input to output of the cell, then failure will occur if ROP is greater than the values specified using the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052924"></a><a href="../tempustxtcmdref/set_si_mode.html">set_si_mode</a> -receiver_peak_limit (or -receiver_clk_peak_limit, -receiver_latch_peak_limit) <code><em>double</em></code> </pre>
+
+<p>
+<a id="pgfId-1056017"></a><code></code>or </p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1056027"></a><a href="../tempustxtcmdref/set_glitch_threshold.html">set_glitch_threshold</a> &#8211;failure_point last &#8211;pin_type {clock | data | latch | all} &#8211;threshold_type failure &#8211;value <code><em>float</em></code></pre>
+
+<p>
+<a id="pgfId-1025170"></a>If the arc is from an input to an internal node of a combinational cell, by default failure will occur if ROP is greater than 30% of the VDD value or if it is greater values specified using the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1056045"></a>set_glitch_threshold &#8211;failure_point input &#8211;pin_type {clock | data | latch | all} &#8211;threshold_type failure &#8211;value <code><em>float</em></code></pre>
+
+<p>
+<a id="pgfId-1025173"></a>If the arc is from an input to an internal node of a sequential cell, then failure will occur if ROP is greater than the value specified using the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052935"></a>set_si_mode &#8211;receiver_latch_peak_limit <code><em>double</em></code></pre>
+
+<p>
+<a id="pgfId-1056253"></a>or</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1056256"></a>set_glitch_threshold &#8211;failure_point last &#8211;pin_type latch &#8211;threshold_type failure <br />&#8211;value <code><em>float</em></code></pre>
+<p class="webflare-indent1"><strong>Figure -46
+<a id="pgfId-1010777"></a>ROP (Receiver Output Peak) for single stage cell</strong></p>
+<p>
+<a id="pgfId-1010781"></a></p>
+<div class="webflare-div-image">
+<img width="337" height="230" src="images/analysisandreporting-48.gif" /></div>
+
+<p>
+<a id="pgfId-1010782"></a>In case of single stage receiver cell, as shown in the figure above for Victim Vic, ROP will be performed at the output of receiver cell.</p>
+
+<p class="webflare-indent1"><strong>Figure -47
+<a id="pgfId-1010783"></a>ROP (Receiver Output Peak) for multi-stage cell</strong></p>
+<p>
+<a id="pgfId-1010787"></a></p>
+<div class="webflare-div-image">
+<img width="463" height="229" src="images/analysisandreporting-49.gif" /></div>
+
+<p>
+<a id="pgfId-1010788"></a>While in case of multi-stage cell, as shown in the figure above for Victim V1, ROP will be performed at the output of the first stage of receiver cell XBUF3.</p>
+<p>
+<a id="pgfId-1010789"></a>ROP is computed using the VIVO (Voltage In Voltage Out) current tables from the noise library (cdB), ECSM-N library, or CCS-N library. VIVO tables are characterized for single CCC. Tempus uses VIVO information, stored for the corresponding input pins, for ROP computation.</p>
+
+<p class="webflare-indent1"><strong>Figure -48
+<a id="pgfId-1010790"></a>VIVO model </strong></p>
+<p>
+<a id="pgfId-1010794"></a></p>
+<div class="webflare-div-image">
+<img width="670" height="229" src="images/analysisandreporting-50.gif" /></div>
+<h4>
+<a id="pgfId-1010795"></a>Glitch Failure Flow</h4>
+
+<p>
+<a id="pgfId-1010796"></a>The Glitch Failure Flow diagram is given below.</p>
+
+<p class="webflare-indent1"><strong>Figure -49
+<a id="pgfId-1010797"></a>Glitch Failure Flow</strong></p>
+<p>
+<a id="pgfId-1010801"></a></p>
+<div class="webflare-div-image">
+<img width="417" height="265" src="images/analysisandreporting-51.gif" /></div>
+<h4>
+<a id="pgfId-1010803"></a><a id="37092"></a>Glitch Propagation</h4>
+
+<p>
+<a id="pgfId-1010804"></a>Tempus performs glitch propagation that:</p>
+<ul><li>
+<a id="pgfId-1010805"></a>Allows glitch to propagate and combine with coupling glitch noise along the path.</li><li>
+<a id="pgfId-1010806"></a>Models driver weakening due to glitch coming at the input pin. Due to glitch at driver input, the current capability of the driver reduces leading to larger glitch at the output.</li></ul>
+
+<p>
+<a id="pgfId-1010807"></a>The following figure illustrates the glitch propagation feature:</p>
+
+<p class="webflare-indent1"><strong>Figure -50
+<a id="pgfId-1010808"></a>Glitch Propagation</strong></p>
+<p>
+<a id="pgfId-1010812"></a></p>
+<div class="webflare-div-image">
+<img width="483" height="269" src="images/analysisandreporting-52.gif" /></div>
+
+<p>
+<a id="pgfId-1010813"></a>Driver weakening is needed for single-stage cells, not for multi-stage cells. In single-stage cells, when ROP is not failing, driver weakening may affect the next stage if the coupling on the next stage is big enough to be kept. In multi-stage cells, there is no coupling internal to the cell so glitch propagation does not need to be taken into account. This is because a non-failing glitch is not likely to propagate to the output of the cell.</p>
+
+<h4><em>
+<a id="pgfId-1010814"></a>Single-Stage Glitch Propagation and Driver Weakening</em></h4>
+
+<p>
+<a id="pgfId-1010815"></a>If glitch propagation is enabled, Tempus will propagate the glitch through single-stage cells as long as it is not failing. A glitch is deemed failing when the receiver output peak is greater than the threshold value specified using the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052941"></a><a href="../tempustxtcmdref/set_si_mode.html">set_si_mode</a><code> &#8211;receiver_peak_limit (or -receiver_clk_peak_limit <br />-receiver_latch_peak_limit) </code><code><em>double</em></code> </pre>
+
+<p>
+<a id="pgfId-1056464"></a><code></code>The failing receiver output peaks are not propagated. Even if the input glitch is not large enough to propagate to the output of the single-stage cell, it weakens the driver such that when the output of the cell is attacked, the coupling noise is much larger. Tempus models driver weakening when glitch propagation is enabled.</p>
+<p>
+<a id="pgfId-1010816"></a>Single-stage glitch propagation and driver weakening is enabled automatically when using the <a href="../tempustxtcmdref/update_glitch.html">update_glitch</a> command or by specifying the <a href="../tempustxtcmdref/set_si_mode.html">set_si_mode</a> <code>-enable_glitch_propagation</code> <code>true</code> command before using the <a href="../tempustxtcmdref/report_timing.html">report_timing</a> or <a href="../tempustxtcmdref/update_timing.html">update_timing</a> commands.</p>
+
+<h4><em>
+<a id="pgfId-1010817"></a>Failure Detection with Enabled Noise Propagation</em></h4>
+
+<p>
+<a id="pgfId-1010818"></a>Glitch impact computation starts with the first net in the path and traced downstream. A stage is analyzed taking into account the propagated glitch from last stage and the coupling of current stage. You can compare the total glitch seen at the receiver with the failure threshold. If the glitch exceeds failure threshold, then failure is flagged at the receiver and glitch impact from this stage is not propagated further to downstream logic. If the glitch is less than failure threshold, then the glitch impact at this stage is propagated to downstream logic.</p>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_siglitchflow.html" id="prev" title="SI Glitch Analysis Flow">SI Glitch Analysis Flow</a></em></b><b><em><a href="analysisandreporting_runsiglitchanalysis.html" id="nex" title="Running Detailed SI Glitch Analysis">Running Detailed SI Glitch Ana ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

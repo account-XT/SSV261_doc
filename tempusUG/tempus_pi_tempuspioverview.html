@@ -1,0 +1,398 @@
+
+<html><head><title>Tempus Power Integrity Analysis Overview</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823948" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Tempus Power Integrity Analysis Overview" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823948" />
+<meta name="NextFile" content="tempus_pi_tempuspilicense.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="tempus_pi.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Tempus Power Integrity Analysis Overview" />
+<meta name="Keywords" content="Tempus PI flow,aggressors,power integrity,IR sensitive path,PI key feature" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Power Calculation" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="tempus_pi.html" title="Tempus Power Integrity Analysis">Tempus Power Integrity Analysi ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="tempus_pi_tempuspilicense.html" title="Licensing Requirements">Licensing Requirements</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:tempuspioverview" title="Tempus Power Integrity Analysis Overview"></a><style>/*<![CDATA[*/
+/**/
+/**/
+/**/
+/**/
+h1 { counter-reset: heading 11;}
+/**/
+/**/
+/**/
+/**/
+/*]]>*/</style><h2>
+<a id="pgfId-141636"></a><a id="79008"></a>Tempus Power Integrity Analysis Overview</h2>
+
+<p>
+<a id="pgfId-143151"></a>The Tempus Power Integrity Analysis (Tempus PI) solution provides a capability to run IR analysis that is timing aware, and timing analysis that is IR-aware. Tempus PI is a seamless integration of the Tempus static timing analysis (STA) and Voltus power and IR drop technologies. Both IR analysis and STA analysis can be performed on a single platform, so no external file or database transfer is required.</p>
+<p>
+<a id="pgfId-143152"></a>Traditionally, the IR-aware STA analysis mechanisms involve running either vector-based or vectorless dynamic simulations to compute the IR drop for each instance. As both these approaches are not truly timing-aware, it is very difficult to identify all potential IR-induced STA violations using these approaches.</p>
+<p>
+<a id="pgfId-143153"></a>The primary objective of the Tempus PI flow is to identify timing-critical and IR-sensitive timing paths, to accurately predict IR drop on these paths with directed vectorless analysis, and to enable automated fixing of these critical paths using Tempus ECO. The IR-sensitive timing paths are paths that may have sufficient positive slack but degrade significantly with IR drop. This timing/sensitivity-driven IR analysis is multi-cycle (transient IR simulation), functional, and vectorless. It also involves propagating the states/events of the scheduled critical paths through the fanout combinational logic using the Voltus state propagation engine. </p>
+<p>
+<a id="pgfId-141639"></a>The IR drop and timing events are natively aligned within the tool because Tempus STA analysis and Voltus IR analysis share all information, such as IR drop, timing windows, and switching within the timing windows.The following diagram illustrates the Tempus-Voltus integration in the Tempus PI flow:</p>
+
+<p class="webflare-indent1"><strong>Figure -1
+<a id="pgfId-141640"></a>Tempus PI Flow</strong></p>
+<p>
+<a id="pgfId-141644"></a></p>
+<div class="webflare-div-image">
+<img width="668" height="405" src="images/tempus_pi-2.gif" /></div>
+
+<p>
+<a id="pgfId-141645"></a>The following are the key features of the Tempus PI flow:</p>
+<ul><li>
+<a id="pgfId-141646"></a>Identify IR-sensitive paths - the critical paths are timed using the traditional VDD margins on cell delays using max IR drop. The IR-sensitive paths are not critical paths but can be critical in the IR conditions. These IR-sensitive paths are identified among many paths, such as the resistance sensitive paths, power sensitive paths, timing sensitive paths, IR-sensitive paths for neighboring cells, and user-defined paths. The IR-sensitive critical paths are scheduled to switch in all cycles of the transient IR simulation.</li><li>
+<a id="pgfId-141647"></a>Create functional path switching scenarios - it creates realistic worst-case switching scenarios for the path and for the environment around it. In this flow, the software is aware of the delays along the path, and also the delays of paths in the neighborhood. It creates switching scenarios that are timing slack and timing path aware. </li><li>
+<a id="pgfId-141648"></a>Identify proximity aggressors - it finds proximity aggressors around voltage and time-critical instances based on power-grid resistance and timing sensitivity. These proximity aggressors are modeled to switch at different times within the timing windows from cycle to cycle. The other aggressors are modeled using the vectorless algorithm to meet activity target and package effects.<br /><strong>Figure -2
+<a id="pgfId-141649"></a>Tempus PI Flow</strong><br />
+<a id="pgfId-141653"></a><div class="webflare-div-image">
+<img width="668" height="431" src="images/tempus_pi-3.gif" /></div></li><li>
+<a id="pgfId-141654"></a>Calculate impact of delay/timing on voltage and time critical paths using cycle-cycle voltage statistic.</li></ul>
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-141655"></a>Following is a comparative analysis of a slack report (histogram of timing and number of paths/endpoints for the given design) from the traditional timing signoff flow and a slack report from the Tempus PI flow:</p>
+
+<p>
+<a id="pgfId-141778"></a></p>
+<table class="webflareTable" id="#id141656">
+<tbody><tr>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-141658"></a>Traditional Timing </p>
+<p>
+<a id="pgfId-141659"></a>(With IR Derate)</p>
+</td>
+<td class="webflareTd" colspan="2" rowspan="1">
+<p>
+<a id="pgfId-141663"></a>Tempus Power Integrity</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141667"></a>Slack Range</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141669"></a>Paths</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141671"></a>Slack Range</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141673"></a>Paths</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141675"></a>-50ps : -40ps</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141677"></a>0</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141679"></a>-50ps : -40ps</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141681"></a>0</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141683"></a>-40ps : -30ps</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141685"></a>0</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141687"></a>-40ps : -30ps</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141689"></a>1</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141691"></a>-30ps : -20ps</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141693"></a>0</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141695"></a>-30ps : -20ps</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141697"></a>1</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141699"></a>-20ps : -10ps</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141701"></a>0</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141703"></a>-20ps : -10ps</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141705"></a>1</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141707"></a>-10ps : 0ps</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141709"></a>0</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141711"></a>-10ps : 0ps</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141713"></a>68</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141715"></a>0ps : 10ps</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141717"></a>0</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141719"></a>0ps : 10ps</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141721"></a>231</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141723"></a>10ps : 20ps</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141725"></a>6</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141727"></a>10ps : 20ps</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141729"></a>961</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141731"></a>20ps : 30ps</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141733"></a>99</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141735"></a>20ps : 30ps</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141737"></a>824</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141739"></a>30ps : 40ps</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141741"></a>446</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141743"></a>30ps : 40ps</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141745"></a>3</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141747"></a>40ps : 50ps</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141749"></a>1516</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141751"></a>40ps : 50ps</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141753"></a>2</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141755"></a>50ps : 60ps</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141757"></a>25</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141759"></a>50ps : 60ps</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141761"></a>0</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141763"></a>60ps+</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141765"></a>0</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141767"></a>60ps+</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141769"></a>0</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141771"></a>Total Paths Identified</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141773"></a>2092</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141775"></a>Total Paths Identified</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-141777"></a>2092</p>
+</td>
+</tr>
+</tbody></table>
+
+<p>
+<a id="pgfId-141779"></a>Here, you can observe the following:</p>
+<ul><li>
+<a id="pgfId-141780"></a>There are a total of 2092 paths.</li><li>
+<a id="pgfId-141781"></a>In the case of the traditional timing signoff flow, there are no negative slacks, and the slack bin starts at the +50ps to +60ps range. The worst path is in the +10 to +20ps slack range.</li><li>
+<a id="pgfId-141782"></a>In the case of the Tempus PI true signoff flow, 71 paths are failing timing with negative slack values. The worst path is in the -30ps to -40ps range. </li><li>
+<a id="pgfId-141783"></a>Using the Tempus PI generated vectors with a more aggressive path analysis in the neighborhood, slack has moved to a negative range. This indicates a major shift in the overall delay.<br />
+<a id="pgfId-141784"></a>These 71 failing paths that can affect performance on silicon can be fixed using the Tempus PI ECO feature. </li></ul>
+
+
+
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="tempus_pi.html" id="prev" title="Tempus Power Integrity Analysis">Tempus Power Integrity Analysi ...</a></em></b><b><em><a href="tempus_pi_tempuspilicense.html" id="nex" title="Licensing Requirements">Licensing Requirements</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

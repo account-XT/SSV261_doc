@@ -1,0 +1,114 @@
+
+<html><head><title>MMMC Flow Script</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823913" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="MMMC Flow Script" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823913" />
+<meta name="NextFile" content="analysisandreporting_saverestoremmmc.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_mmmcsetinstancelibraryflow.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- MMMC Flow Script" />
+<meta name="Keywords" content="mmmc flow script" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="MMMC,Timing Library,Stylus" />
+<meta name="prod_subfeature" content="MMMC, Timing Library" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_mmmcsetinstancelibraryflow.html" title="MMMC set_instance_library Flow">MMMC set_instance_library Flow</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_saverestoremmmc.html" title="Save and Restore MMMC set_instance_library Flow">Save and Restore MMMC set_inst ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:mmmcflowscript" title="MMMC Flow Script"></a><h3>
+<a id="pgfId-1667966"></a><a id="60803"></a>MMMC Flow Script</h3>
+
+<p>
+<a id="pgfId-1667967"></a>The MMMC flow sample script is shown below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1667968"></a>set_multi_cpu_usage -localCpu 16</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1667969"></a>set timing_library_read_without_power false</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1667970"></a>read_view_definition setup_func_m40_viewDefinition.tcl</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1667971"></a>read_verilog pg-explicit.v</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1667972"></a>set_top_module top</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1667973"></a>report_instance_library -inst { iP/dff1 iP/and1} &gt; ril_test.rpt</pre>
+
+<p>
+<a id="pgfId-1667974"></a>The library that is used for binding instances with the <code>set_instance_library</code> command must be an active library loaded in the session via active library set defined with the <a href="../tempustxtcmdref/create_library_set.html">create_library_set</a> command.</p>
+<p>
+<a id="pgfId-1667977"></a>The following command is used in the sil.tcl:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1667978"></a>set_instance_library -library newcell.lib -instance {iP/and1 iP/dff1}</pre>
+
+<p>
+<a id="pgfId-1667979"></a>You can use the following command to verify whether the instance of the cell is bound with the library specified with the <code>set_instance_library</code> command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1667980"></a>report_instance_library -inst {iP/and1 iP/dff1} &gt; ril_test.rpt</pre>
+
+<p>
+<a id="pgfId-1667983"></a>The output of the <a href="../tempustxtcmdref/report_instance_library.html">report_instance_library</a> command is given below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1667984"></a>Instance           : iP/dff1 <br />Cell               : C12T32_LL_SDFPQX8 <br />Analysis View      : setup_func_m40 <br />Power Domain       : Default <br />Library/Libset     : new3cell_C32_SC_12_CORE_LL/complete_library_set <br />Library File       : /it/sjclapa06p5_scratch01/aayhis/expire_2021_03_30/scratch_dec/SIL_DOC/sil_view/doc_case/newcell.lib <br /><strong>User Setting&#160;&#160;     : True</strong> <br />Op Cond : P-&gt;1.228000, V-&gt;0.900000, T-&gt;-40.000000 (new3cell_C32_SC_12_CORE_LL/%NOM_PVT)  <br />Cell Type&#160;&#160;        : gateCell</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1667985"></a>Instance           : iP/and1 <br />Cell               : C12T32_LL_AND2X8 <br />Analysis View      : setup_func_m40 <br />Power Domain       : Default <br />Library/Libset     : new3cell_C32_SC_12_CORE_LL/complete_library_set <br />Library File       : /it/sjclapa06p5_scratch01/aayhis/expire_2021_03_30/scratch_dec/SIL_DOC/sil_view/doc_case/newcell.lib <br /><strong>User Setting&#160;&#160;     : True</strong> <br />Op Cond            : P-&gt;1.228000, V-&gt;0.900000, T-&gt;-40.000000 (new3cell_C32_SC_12_CORE_LL/%NOM_PVT) <br />Cell Type&#160;&#160;        : gateCell</pre>
+
+<p>
+<a id="pgfId-1667986"></a>The above output clearly shows the following:</p>
+<ol><li>
+<a id="pgfId-1667987"></a>The library binding was applied for the instance <code>iP/and1</code> and <code>iP/dff1</code> with the help of the <a href="../tempustxtcmdref/set_instance_library.html">set_instance_library</a> command and the library file reported in the <code>report_instance_library</code> output is the same as that applied.</li><li>
+<a id="pgfId-1667990"></a><code>User setting: True</code> indicates that the <code>set_instance_library</code> command has been applied.</li></ol>
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_mmmcsetinstancelibraryflow.html" id="prev" title="MMMC set_instance_library Flow">MMMC set_instance_library Flow</a></em></b><b><em><a href="analysisandreporting_saverestoremmmc.html" id="nex" title="Save and Restore MMMC set_instance_library Flow">Save and Restore MMMC set_inst ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

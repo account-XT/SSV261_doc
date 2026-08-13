@@ -1,0 +1,303 @@
+
+<html><head><title>set_power_data</title>
+<meta name="page_sequence" content="18039000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="anshikag" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666325" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the text commands in Voltus IC Power Integrity Solution." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_power_data" />
+<meta name="Keywords" content="dynamic current,static current,power,set,data" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Rail Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666325" />
+<meta name="NextFile" content="set_power_pads.html" />
+<meta name="Group" content="Voltus Text Command Reference" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_pg_nets.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution Text Command Reference -- set_power_data" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="epstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="set_pg_nets.html" title="set_pg_nets">set_pg_nets</a></li><li style="float: right;"><a class="viewPrint" href="voltustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_power_pads.html" title="set_power_pads">set_power_pads</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_power_data</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="set_power_data-set_power_data"></span> <code><br /><code>set_power_data<br />-reset | {-format {current | ascii | area | <code>ascii_current</code>}<br /></code>[-bias_voltage <em>value</em>]<br />[-cell&#xa0;<em>cellname</em>]</code>&#xa0;<code><code>&#xa0;<br />[-instance <code><em>instance_name</em></code>]<br />[-offset <code><em>offset_value</em></code>]<br />[-power <code><em>value</em></code>]<br />[-scale <code><em>factor</em></code>]<br />[-repeat <code><em>time</em></code>]<br />[-die_instance_name <code><em>dieinstname</em></code>]<br />[<code><em>filename</em></code>]<br /><span style="color:var(--ds-text,#172b4d);">[-power_directory <em>dir</em>]</span><br />[-power_output_directory <em>dir</em>]<br />[<span style="color:var(--ds-text,#172b4d);">-repeat_window</span><span style="color:var(--ds-text-accent-lime-bolder,#37471f);"><span>&#xa0;</span>{<em>start</em> <em>end</em>}</span>]<br />[-strip_hier_instance <em>instance</em>]<br />}</code> <br /></code></p>
+
+<p>Specifies the static and dynamic power or current files for IRdrop and EM analysis. The power data for the design can be generated using the <code>report_power</code> command. This command also has ability to read external ASCII static power files to do static rail analysis. For dynamic analysis, you must use the <code>report_power</code> command to generate dynamic current files.</p>
+
+<p>This command should be specified prior to the <code>analyze_rail</code> command. You must specify the <code>set_power_data</code> command after the <code>report_power</code> command in the flow script if power data is not available.</p>
+<h4 id="set_power_data-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="2">
+<p><code><code>-bias_voltage </code><em>value</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the value of the bias voltage.</p>
+
+<p>This parameter must be set if -format is set to ascii or area.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code><span style="color:var(--ds-text,#172b4d);">-cell<span>&#xa0;</span></span><em style="text-align: left;">cellname</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd"><p style="text-align: left;">Specifies power from the block-level run to multiple instances of the specified block, so you need not to mention power for each instance separately.&#xa0;</p>
+<p style="text-align: left;">For example,</p>
+<p style="text-align: left;"><code>set_power_data -cell BlockA -format current {file1, file2, file3 ...}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code><code>-die_instance_name</code>&#xa0;<em>dieinstname</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the die instance name for multi-die analysis. This option is only available in multi-die analysis (<code>set_rail_analysis_mode -die_mode multi-die</code>).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code><em>filename</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the name of the power data files. The file is optional if -format area is specified.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code><code>-format</code>&#xa0;{current | ascii | area | <code>ascii_current</code>}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the format of the power data.</p>
+
+<p>The power data format can be <code>current, </code><code>ascii</code>, <code>area, </code>or<code> ascii_current.</code></p>
+
+<p>The parameter <code>-bias_voltage</code> must be set if <code>area </code>or <code>ascii </code>is specified.</p>
+<ul><li>When using the current format option, specify the current file (*.ptiavg) that is generated by the power analysis software within Voltus. For example,</li></ul>
+<p><code>set_power_data -format current static_VDD.ptiavg</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd"><div class="content-wrapper"><ul><li>When using the <code>ascii</code> format option, specify the ascii instance based power file, generated by the Power Calculation engine within Voltus. For example, <br /><code>set_power_data -format ascii -bias_voltage 1.08 powermeter.pwr</code><br />
+<p><strong>Note: </strong>The command accepts an ASCII power file in three-column format consisting of <em>instance/cell name</em>, <em>power</em> in W,and <em>power pin name</em>. Lines starting with &quot;#&quot; or &quot;*&quot; are treated as comment lines.</p>
+<br />The format of the three-column input file is as follows:<br /><code>&lt;instance/cell name&gt; &lt;power in Watts&gt; &lt;power pin name&gt;</code><br /><br />Example:<br /><code>top/inst1 0.001 vdd </code><br /><code> top/inst2 0.001 vdd1 </code><br /><code> top/inst3 0.003 vdd3 </code><br /><br />where vdd, vdd1, and vdd3 are power pin names of the instance</li></ul><div>
+<p><br /></p>
+<div aria-label="Info" class="confluence-information-macro  confluence-information-macro-information" role="region"><span class="aui-icon aui-icon-small aui-iconfont-info-filled confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>Although<code> -bias_voltage</code> is a required argument with <code>-format ascii</code>, when 3-column power file format is specified, the program will ignore <code>-bias_voltage</code> and will rely on associated net voltages to determine current for the pins.</p>
+</div>
+</div>
+
+<p><s><br /></s></p>
+</div>
+</div>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd"><ul><li>When using the <code>area</code> format option, specify the total power of the chip in Watts. This power is distributed based on cell area. Optionally, you can specify the known power for macro cells using a file, for example, <br /><code>set_power_data -format area -bias_voltage 1.08 -power 10 cell_power.file</code><br /><br />where, <br /><code>-bias_voltage</code> is the voltage at which power was characterized; If the analysis voltage is different, this power will be scaled accordingly.<br /><code>cell_power.file</code> is in two column format with <code><em>cell_name</em></code><em>power_in_watts</em>.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd"><ul><li>When using the <code>ascii_current</code> format option, specify an ASCII current file for static analysis. The parameter accepts an ASCII file in the three-column format consisting of instance or cell name, current values in Amperes, and power pin name.</li></ul>
+<p>The format of the three-column input file is as follows: <br /><span> <code>&lt;<code><em>instance</em> | <em>cell name</em></code>&gt; &lt;<em>current in Ampere</em>&gt; &lt;<em>power pin name</em>&gt;</code> </span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>&#xa0;<code><code>-help</code></code></code></p>
+</td>
+<td class="confluenceTd">
+<p>Outputs a brief description that includes the type and default information for each <code>set_power_data</code> parameter.</p>
+
+<p>For a detailed description of the command and all of its parameters, use the man command <code>man set_power_data</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code style="color:var(--ds-text,#172b4d);"><code>-instance</code> <em>instance_name</em></code></td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the hierarchical instance name for which the current files are included.</p>
+
+<p>This option is useful when power is calculated for hierarchical partitions of the design, enabling you to read power for the hierarchical partitions at the top-level.</p>
+
+<p>For example,</p>
+
+<p><code>set_power_data -format current -instance xy {dynamic_VDD.ptiavg dynamic_VSS.ptiavg}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>-offset</code>&#xa0;<em>offset_value</em></code></td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the start time offset for current waveforms saved inside the current files.</p>
+
+<p>The default unit is in seconds; However, you can also specify the unit with the offset time value.</p>
+
+<p>This option is useful in the hierarchical flow to align current waveforms of various partitions. It can be also used to shift power-up rush current waveforms generated by the UltraSim software.</p>
+
+<p>For example,</p>
+
+<p><code>set_power_data -format current -offset 1ns -instance xy {dynamic_VDD.ptiavg dynamic_VSS.ptiavg}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>-power</code><em>&#xa0;value</em></code></td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the total power of the chip in Watts and is used with -format area option.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code><span style="color:var(--ds-text,#172b4d);">-power_directory<span>&#xa0;</span></span><em style="text-align: left;">dir</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd"><p style="text-align: left;">Specifies to read the power data from the specified directory for cell power. You can use this parameter to read<span>&#xa0;</span><code>power_results.json</code><span>&#xa0;</span>and automatically identify all the PTI files. If<span>&#xa0;</span><code>power_results.json</code><span>&#xa0;</span>is not found in the specified directory, then the power data could be retrieved from<span>&#xa0;</span><code>dir/voltus_power_output.latest</code>. When specified, the<span>&#xa0;</span><code>-power_directory</code><span>&#xa0;</span>parameter takes precedence and bypasses the<span>&#xa0;</span><code>-format</code><span>&#xa0;</span>parameter.</p>
+<p style="text-align: left;">For example,</p>
+<p style="text-align: left;"><code>set_power_data -cell top_design -power_directory ./power</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code>-power_output_directory</code>&#xa0;&#xa0;&#xa0; <em><code>dir</code></em> </code></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">Specifies the name of the directory that contains the current files required to run power analysis in parallel with rail analysis.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>-repeat</code><em>&#xa0;time</em></code></td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Repeats the dynamic current waveform for the specified time. You must ensure that <code>set_dynamic_rail_simulation -stop</code> is also specified and it matches the repeat duration. This option is only available for current format files during dynamic analysis. The repeat option can be used when multiple current files have different simulation periods or when IR drop analysis needs to be run for longer duration. See example below.</p>
+
+<p><em>Default units</em>: ns.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><span style="color:var(--ds-text,#172b4d);">-repeat_window</span><span style="color:var(--ds-text-accent-lime-bolder,#37471f);"><span>&#xa0;</span>{<em>start</em> <em>end</em>}</span></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">
+<p>Specifies to extract the given window from the current waveform and repeat it. You can pick a window such that the current at the<span>&#xa0;</span><code>start_time</code><span>&#xa0;</span>and<span>&#xa0;</span><code>end_time</code><span>&#xa0;</span>are similar.&#xa0;This parameter allows you to identify and repeat windows where the start and end time have similar values to ensure that the repeated waveform is continuous and that there are no high current values.&#xa0; The unit for the start and end time is ns.</p>
+
+<p>The following command specifies that the pattern between {20ns 80ns} will be repeated until simulation stops:<br /><code>set_power_data -repeat_window {20ns 80ns}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code><code>-reset</code></code></p>
+</td>
+<td class="confluenceTd">
+<p>Overwrites previously specified current data.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code>-scale</code> <em style="color:var(--ds-text,#172b4d);">factor</em></code></td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a scale factor to apply to the current data.</p>
+
+<p>You can use this parameter to scale currents to a more optimistic or pessimistic power-consumption estimate.</p>
+
+<p>This parameter is only for<code> -format current</code> and <code>-format</code> <code>ascii</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-strip_hier_instance <em>instance</em></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">Specifies to use power generated from the top-level rail analysis for block-level rail analysis. This parameter allows you to specify the top-level hierarchical instance name for which the current files are to be included. When the parameter is specified, the tool removes the prefix from the top-level and reads the top-level current (ptiavg) files during the block-level analysis. The parameter is useful when top-level power data is already available, therefore, you do not need to re-run block-level power analysis.</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_power_data-Examples">Examples</h4>
+<ul><li>The following command specifies a format of type current and a scale of 1 for the three given files.: <br /><code>set_power_data -format current -scale 1 {static_VDD_TDSPCore.ptiavg \ static_VDD_TDSPCore_R.ptiavg static_VSS.ptiavg}</code></li></ul><ul><li>The next example specifies two current data files. The first file specifies vdd_vdd.ptipeak. The second one specifies dynamic_VDD.ptiavg and this current data will be repeated every 100ns, which is the stop time specified for the dynamic analysis. <br /><code>set_power_data -format current vdd_vdd.ptipeak</code><br /><code> set_power_data -format current -repeat 100ns dynamic_VDD.ptiavg</code><br /><code> set_dynamic_rail_simulation -stop 100ns</code><br /><code> analyze_rail ...</code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_pg_nets.html" id="prev" title="set_pg_nets">set_pg_nets</a></em></b><b><em><a href="set_power_pads.html" id="nex" title="set_power_pads">set_power_pads</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

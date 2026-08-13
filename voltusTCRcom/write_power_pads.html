@@ -1,0 +1,340 @@
+
+<html><head><title>write_power_pads</title>
+<meta name="page_sequence" content="28046000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666316" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="write_power_pads" />
+<meta name="Keywords" content="DC sources,voltage sources,power pad" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Rail Analysis," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusTCRcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666316" />
+<meta name="NextFile" content="write_power_up_report.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="write_hier_view.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Text Reference Manual  -- write_power_pads" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltuscuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusTCRcomTOC.html">Contents</a></li><li><a class="prev" href="write_hier_view.html" title="write_hier_view">write_hier_view</a></li><li style="float: right;"><a class="viewPrint" href="voltusTCRcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="write_power_up_report.html" title="write_power_up_report">write_power_up_report</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Text Reference Manual <br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>write_power_pads</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="write_power_pads-auto_fetch_dc_sources"></span><span class="confluence-anchor-link" id="write_power_pads-write_power_pads"></span><span id="write_power_pads-create_power_pads"></span>&#xa0;<br /><code>write_power_pads<br />[[-add | -delete] -location {x y}]<br />[-append_to_voltage_source_file]<br />[-auto_fetch]<br /><code>[-cell_list {<em>cell_list</em>} ]<br />[-cell_pin {{<em>cellname1</em> <em>pinname1}</em>...{<em>cellnamen</em> <em>pinnamen</em>}+} ]</code><br />[-clear]<br />[-display]<br />[-format {padcell xy tsv}]<br /><code>[-honor_pin_connection]</code><br /><code>[-instance_list {<em>inst_list</em>} ]<br />[-instance_pin {{<em>instname1</em> <em>pinname1}</em>...{<em>instnamen</em> <em>pinnamen</em>}+} ]</code><br /><code>[-layer {<em>layername</em>}]<br />[-list] </code><br /><code>[-net <em>netname</em></code>]<code><br />[-package_capacitance <em>value</em> ]<br />[-package_inductance <em>value</em> ]<br />[-package_resistance <em>value</em> ]</code><br /><code>[-region {<em>x1</em> <em>y1</em> <em>x2</em> <em>y2</em>}]<br />[-region_pitch {<em>xpitch</em> <em>ypitch</em>}]</code><br /><code>[-snap_distance { true|false }]</code><br /><code>[-voltage_source_file <em>vsrc_file<code><code><em>name</em></code></code></em>]</code><br /><br /></code></p>
+
+<p>Returns a list of DC sources from your design. DC sources are identified in the LEF file as CLASS PAD POWER, or in the DEF file as PIN with +USE POWER/GROUND. If a single port shape is connected to N number of wires, N number of DC sources are reported for that port shape.</p>
+
+<p>You can use one of the following three methods to fetch voltage sources into the database:</p>
+<ul><li>fetch all voltage sources<code><br /></code></li><li>fetch the voltage sources within the specified region of the specified layer controlled by the specified xPitch/yPitch<br />If the voltage sources with the specified xPitch/yPitch are not on the stripe, you can use the <code>-snap_distance</code> parameter to snap the voltage sources to the stripe. As a result, the voltage sources are generated only on the stripes and the xPitch/yPitch is honored. Use this feature to generate mesh type voltage sources on any process layer.</li><li>fetch voltage source for the specified cell/cell pin/instance/instance pin</li></ul>
+<p><br /></p>
+
+<p>You can edit the fetched voltage sources before saving them to a voltage source file. To save the fetched list to a file, use the <code><code>-voltage_source_file</code></code> parameter. By default, voltage sources will not be displayed on GUI after they are saved to file.</p>
+<div aria-label="Info" class="confluence-information-macro  confluence-information-macro-information" role="region"><span class="aui-icon aui-icon-small aui-iconfont-info-filled confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>The&#xa0;&#xa0;<code>write_power_pads&#xa0;</code> command supports hierarchical IR drop analysis for a TSV design. When you specify the&#xa0;<code>write_power_pads </code>command to fetch the voltage sources from the LEF file, the command not only searches for the P/G pin of the pad connected to the specified P/G net, but also fetches for the embedded bump TSV property definition for the P/G pin connected to the P/G net. The port that contains the point defined in the embedded bump property is considered as the embedded bump.</p>
+</div>
+</div>
+
+<p><br /></p>
+<h4 id="write_power_pads-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table class="wrapped relative-table confluenceTable" style="width: 100.0%;"><colgroup><col style="width: 19.322%;" /><col style="width: 5.23731%;" /><col style="width: 75.4685%;" /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-add</code></td>
+<td class="confluenceTd" colspan="2">Adds the location of a new voltage source to memory.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-append_to_voltage_source_file</code></td>
+<td class="confluenceTd" colspan="2">
+<p>Appends the fetched voltage sources to the existing voltage source file. You can use this parameter to fetch voltage sources in the incremental mode.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-auto_fetch</code></td>
+<td class="confluenceTd" colspan="2">Specifies to fetch all voltage sources.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-cell_list {<em>cell_list</em>}</code></p>
+</td>
+<td class="confluenceTd">
+<p><br /></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies the cells from which voltage sources are determined.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3">
+<p><code>-cell_pin {{<em>cellname1</em><em>pinname1}</em>...{<em>cellnamen</em><em>pinnamen}+</em>}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies the cells and their pins from which voltage sources are determined.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-clear</code></td>
+<td class="confluenceTd" colspan="2">
+<p>Clears the display of the DC sources that were specified in the <em>Edit Pad Location</em> form.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-delete <br /></code></td>
+<td class="confluenceTd" colspan="2">Deletes the location of a voltage source from memory.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-display</code></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Loads and displays the pad location data from the specified file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code>-format &#xa0;{padcell | xy | tsv}</code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2">
+<p>The format of the saved pad location file. The choices are Pad File (VoltageStorm), XY File (xy coordinates), and TSV. You can create and save the voltage sources location file with a unique name for the voltage sources (both VDD and VSS).</p>
+
+<p><em>Default</em>: <code>xy</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Outputs the command usage and a brief description about the command parameters.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-honor_pin_connection</code></p>
+</td>
+<td class="confluenceTd">
+<p><br /></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Honors pin wire connection when fetching voltage source location from a power pad. When you specify this parameter, only pins with wire connection are output as voltage sources.</p>
+
+<p>You have the choice to specify whether real wire connection is to be honored or not. Typically, during the sign-off stage, power pads are already fully routed so the unconnected power pads should not be counted in as voltage sources. You can specify this using the -honor_pin_connection parameter. Alternatively, in the early stage, power pads may not have been fully routed so you do not need to set this parameter.</p>
+
+<p><strong>Note: </strong>For a port with shapes at multiple layers, all layer connected shapes are fetched as voltage sources.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-instance_list {<em>inst_list</em>}</code></p>
+</td>
+<td class="confluenceTd">
+<p><br /></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies the instances from which voltage sources are determined.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3">
+<p><code>-instance_pin {{<em>instname1</em><em>pinname1}</em>...{<em>instnamen</em><em>pinnamen}+</em>}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies the instances and their pins from which voltage sources are determined.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">
+<p><code>-layer<em> layerName</em></code></p>
+</td>
+<td class="confluenceTd" colspan="2"><br /></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies the process layer in LEF on which the voltage sources are to be generated.</p>
+
+<p>When the<code> -layer</code> parameter is specified in conjunction with the<code> -region {x1 y1 x2 y2}</code> and <code>-region_pitch {xpitch ypitch}</code> parameters, the layer set here is the layer for which voltage sources are to be fetched. If&#xa0;the&#xa0;<code>-layer</code> parameter is not used together with the <code>-region {x1 y1 x2 y2}</code> and<code> -region_pitch {xpitch ypitch}</code> parameters, the layer set here is for the lowest layer to snap (the default value is <code>M5</code>).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-list</code></td>
+<td class="confluenceTd" colspan="2">Loads and displays all voltage sources from memory.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><code><code>-location {x y}</code></code></code></td>
+<td class="confluenceTd" colspan="2">Specifies the location at which the specified voltage source is to be added or deleted.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">
+<p><code>-net <em>netname</em></code></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies the name of a power net for which to list DC sources.</p>
+
+<p><em>Default:</em> If you do not specify a net name, the power analyzer automatically lists DC sources for all nets.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3">
+<p><code>-package_capacitance <em>value</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies the capacitance value of the package resistance-inductance-capacitance (RLC) model in Farad (F).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3">
+<p><code>-package_inductance <em>value</em> </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies the inductance value of the package resistance-inductance-capacitance (RLC) model in Henry (H).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3"><code>-package_resistance <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2">Specifies the resistance value of the package resistance-inductance-capacitance (RLC) model in Ohm.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3">
+<p><code>-region {<em>x1</em><em> y1 </em><em>x2 </em><em>y2</em>} </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Generates the voltage sources in the specified region.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3">
+<p><code>-region_pitch {<em>xpitch</em><em> ypitch</em>} </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies the region pitch in the x and y direction for the voltage sources.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3">
+<p><code>-snap_distance <em>value</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies the snapping distance constraint from IO/pad pins.&#xa0;If this parameter is not specified with a value, no snapping will be done.</p>
+
+<p><em>Default:</em> 0</p>
+
+<p>Specifies whether to snap DC sources from I/O pad pins to some location on the power structure. When set to true, the software performs autofetch with snapping.</p>
+
+<p>For I/O pad pins that are connected to core ring, the software selects the highest layer and center of the pin as the DC source location. When I/O pad pins are not connected to core ring, the software snaps the location of the I/O pad to somewhere on the core ring. The DC source location should be within the distance of snapping distance constraint from I/O pad pins, and the layer should not be lower than the lowest layer snap constraint.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3">
+<p><code>-voltage_source_file</code>&#xa0;<em><code><code><em>vsrc_file<code><code><em>name</em></code></code></em></code></code></em></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies the name of the voltage source file that is required to save the auto fetched result.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="write_power_pads-Examples">Examples</h4>
+<ul><li>&#xa0;The following command fetches all voltage sources of the net <code>VDD</code>:<br /><code>write_power_pads &#8211;net VDD &#8211;auto_fetch</code></li><li>The following command loads and displays all voltage sources from memory:<br /><code>write_power_pads -list</code></li><li>The following command specifies the location at which the specified voltage source is to be added:<br /><code>write_power_pads -add -net VDD -layer METTOP -location {500 500}</code></li><li>The following command specifies the location from which the specified voltage source is to be deleted:<br /><code>write_power_pads -delete -location {500 500} -layer METTOP -net VDD</code></li><li>
+<p>The following command fetches the voltage sources within the specified region of the layer <code>METAL6 </code>controlled by the specified xpitch/ypitch, and saves the sources to the file <code>report2</code> in the xy format:<br /><code><code>write_power_pads -net VDD -region 100 100 3000 3000 -region_pitch 555 444 -layer METAL6 -format xy -snap_distance 100 -voltage_source_file report2.pp</code></code></p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>In the first example, the output was not saved but it remains in the memory till you specify the second example. Before loading and saving the output of the second example, the first example output in the memory is saved to an auto generated dc source file incrementally, like pp.src, pp1.src, pp2.src, and so on.</p>
+</div>
+</div>
+</li><li>
+<p>The following command fetches voltage source for the cell BUMPCELL in the xy format:<br /><code>write_power_pads -net VDD -cell_list BUMPCELL -format xy</code></p>
+</li><li>The following command clears the voltage sources displayed in the GUI and the fetched voltage sources in the database:&#xa0;<br /><code>write_power_pads -clear</code>&#xa0;</li><li>The following command displays the fetched and saved voltage sources for the net <code>VDD</code> in the file <code>report2</code>&#xa0;:<br /><code>write_power_pads -net VDD &#8211;auto_fetch -voltage_source_file report2.pp -display</code>&#xa0;</li><li>The following command displays voltage sources in the GUI by loading the saved voltage source file&#xa0; <code>report1</code>:<br /><code>write_power_pads -voltage_source_file <code>report1.pp</code> -display</code></li><li>
+<p>The following command saves the fetched voltage sources to the voltage source file <code>report1.pp</code>:<br /><code>write_power_pads -voltage_source_file report1.pp </code></p>
+</li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="write_hier_view.html" id="prev" title="write_hier_view">write_hier_view</a></em></b><b><em><a href="write_power_up_report.html" id="nex" title="write_power_up_report">write_power_up_report</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

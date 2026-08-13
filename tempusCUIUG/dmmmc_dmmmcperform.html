@@ -1,0 +1,259 @@
+
+<html><head><title>Performing Distributed Multi-Mode Multi-Corner Analysis</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845232" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Performing Distributed Multi-Mode Multi-Corner Analysis" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845232" />
+<meta name="NextFile" content="dmmmc_dmmmcdesignload.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="dmmmc_dmmmcoverview.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- Performing Distributed Multi-Mode Multi-Corner Analysis" />
+<meta name="Keywords" content="read flow script,Distributed multi-mode multi-corner analysi,dmmmc" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="MMMC,Stylus" />
+<meta name="prod_subfeature" content="MMMC" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="dmmmc_dmmmcoverview.html" title="DMMMC Overview">DMMMC Overview</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="dmmmc_dmmmcdesignload.html" title="Design Loading and MMMC Configuration Script">Design Loading and MMMC Config ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:dmmmcperform" title="Performing Distributed Multi-Mode Multi-Corner Analysis"></a><style>/*<![CDATA[*/
+/**/
+/**/
+/**/
+/**/
+h1 { counter-reset: heading 6;}
+/**/
+/**/
+/**/
+/**/
+/*]]>*/</style><h2>
+<a id="pgfId-998801"></a><a id="25910"></a>Performing Distributed Multi-Mode Multi-Corner Analysis</h2>
+
+<p>
+<a id="pgfId-998810"></a>Distributed multi-mode multi-corner analysis is performed by running a flow script on the master Tempus server, which then distributes the analysis runs to the user-specified machines. Analysis can further be multi-threaded on these machines.</p>
+<p>
+<a id="pgfId-998819"></a>The software saves all data from the distributed analysis runs in a user-specified output directory (specified with the <a href="../tempusCUI/distribute_read_design.html">distribute_read_design</a> command).</p>
+<ul><li>
+<a id="pgfId-998832"></a>The software generates view-specific reports in directories with the corresponding view name within this directory.</li></ul>
+<p class="webflare-indent1">
+<a id="pgfId-998841"></a>When concurrent multi-mode multi-corner timing analysis (CMMMC) is enabled within a DMMMC framework, the software generates CMMMC session-specific reports in directories with the corresponding CMMMC session names, under a user-defined output directory (specified using the <code>distribute_read_design &#8211;out_dir</code> parameter). The CMMMC session names are cmmmc_1, cmmmc_2, and so on. The software creates a mapping file (<code>views_dir_map.rpt</code>) that maps CMMMC session names to a list of combined views. The master log file contains messages that refer to the mapping file. If the mapping file already exists in the run directory, the software will create the mapping file with name <code>views_dir_map.rpt1</code>, <code>views_dir_map.rpt2</code>, and so on.<br />
+An example of views_dir_map.rpt file is given below:
+<code>Dir: cmmmc_1 Views: {view1 view2}<br />Dir: cmmmc_2 Views: {view3 view4}<br />Dir: cmmmc_3 Views: {view5}<br /></code>For more information on enabling CMMMC, refer to the <a href="../tempusCUI/distribute_views.html">distribute_views</a> command.</p>
+<ul><li>
+<a id="pgfId-998871"></a>In the DMMMC analysis flow, client monitoring is enabled by default. This feature enables robust master/client resource monitoring and re-launches the clients when they fail due to resource overloading. The master monitors the health of clients at regular intervals and writes the information about each client resources (cpu/memory/tmp) in the host-monitor.log file. If the host-monitor log file already exists in the run directory, the software will create the new file with names <code>host-monitor.log1</code>, <code>host-monitor.log2</code> and so on.<br />
+<a id="pgfId-998880"></a>An example report is given below:<pre class="webflare-pre-block webflare-courier-new" id="#id1298785">
+<a id="pgfId-1298785"></a>######################
+Status keys: E excellent, G good, B bad, T terrible.
+Memory values:
+total = Real memory of host
+progs = Real memory used by processes, including swappable cache
+used =  Real memory used by processes, excluding swappable cache
+Started at: 19/09/03 23:45:37
+sj-etam(0)    TMPDIR is : /tmp/ssv_tmpdir_3160_U03VpI
+</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1298786">
+<a id="pgfId-1298786"></a>============ ======== ==================== ======================
+Host         CPU      Memory (GB)             TMPDIR (GB)      (Mb/s)
+name(id)     util %   total progs used   %used  total    avail    rate</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1298787">
+<a id="pgfId-1298787"></a>============ ========  ===== ===== ===== ====== =====================
+23:45:37
+sj-etam(0)   10 E      3    3     3    100 T   44.29    27.45 E  N/A
+23:46:37
+sj-etam(0)   3 E       3    3     3    100 T   44.29    27.47 E  376 E</pre><pre class="webflare-pre-block webflare-courier-new" id="#id1298788">
+<a id="pgfId-1298788"></a>######################</pre></li></ul>
+
+
+
+
+
+<p>
+<a id="pgfId-1006632"></a>The software checks for overloading of client resources and issues appropriate warning messages for over-utilization of client resources. If client resources are over-utilized and the view analysis is not able to proceed, the software will automatically terminate the view job and restart it on another client.<br />
+The DMMMC flow enables the re-launch of clients using the same LSF configuration in the LSF mode, if any overloading (cpu/mem) occurs in clients during view analysis. When <a href="../tempusCUI/set_distributed_hosts.html">set_distributed_hosts</a> <code>-local</code> mode is set, the re-launch feature is disabled.</p>
+
+<h4>
+<a id="pgfId-998947"></a><a id="14076"></a>Handling Scripts</h4>
+
+<p>
+<a id="pgfId-998956"></a>For distributed MMMC analysis, the following TCL scripts are required:</p>
+<ul><li>
+<a id="pgfId-998965"></a><a href="dmmmc_dmmmcperform.html#19063">Master Script</a></li><li>
+<a id="pgfId-998993"></a><a href="dmmmc_dmmmcdesignload.html#40895">Design Loading and MMMC Configuration Script</a></li><li>
+<a id="pgfId-1008649"></a><a href="dmmmc_dmmmcdesignload.html#45566">Parasitic Information, Analysis, and Report Generation Script</a></li></ul>
+
+
+
+<h4>
+<a id="pgfId-999012"></a><a id="19063"></a>Master Script</h4>
+
+<p>
+<a id="pgfId-999021"></a>The master script is the overall flow script that runs the entire Tempus distributed MMMC session. This script includes all generic environment variables, distribution commands, and commands for specifying CPU usage, running DMMMC analysis, and merging reports.</p>
+<p>
+<a id="pgfId-999030"></a>The master script is read into the master Tempus server, which then distributes the analysis runs to the user-specified machines.</p>
+
+<h4><em>
+<a id="pgfId-999040"></a>Creating the Master Script</em></h4>
+
+<p>
+<a id="pgfId-999049"></a>The following steps list the order in which you should define the commands in the master script that are necessary for running a distributed MMMC analysis session.</p>
+<ol><li>
+<a id="pgfId-999058"></a>Specify environment or shell variables to use in the flow.</li><li>
+<a id="pgfId-1006711"></a>Specify distribution infrastructure, such as machine names, and mode of execution (LSF or rsh) by using the <a href="../tempusCUI/set_distributed_hosts.html">set_distributed_hosts</a> command. <br />
+<a id="pgfId-1006714"></a>For example:<pre class="webflare-pre-block webflare-courier-new" id="#id1006717">
+<a id="pgfId-1006717"></a>set_distributed_hosts -rsh -add {hostName1 hostName2 hostName3 hostName4}</pre></li><li>
+<a id="pgfId-999090"></a>Specify the Tempus client usage by using the <a href="../tempusCUI/set_multi_cpu_usage.html">set_multi_cpu_usage</a> <code>-remote_host </code>command. The number specified here must be less than or equal to the number of machines specified in step 2, (if specific machines have been requested using the <code>&#8211;rsh</code> parameter of the set_distributed_hosts command). <br />
+<a id="pgfId-1006741"></a>For example:<pre class="webflare-pre-block webflare-courier-new" id="#id1006738">
+<a id="pgfId-1006738"></a>set_multi_cpu_usage -remote_host 4</pre>
+<a id="pgfId-999118"></a>The following example shows that jobs on each remote host can further be multi-threaded:<pre class="webflare-pre-block webflare-courier-new" id="#id1006756">
+<a id="pgfId-1006756"></a>set_multi_cpu_usage -remote_host 4 -cpu_per_remote_host 4</pre>
+<a id="pgfId-999129"></a>If the LSF distribution is used, then you can specify the number of Tempus clients to be used. The software needs CPU usage information in order to figure out how many licenses the system can use for distribution.</li><li>
+<a id="pgfId-999138"></a>Load the design in distributed mode using the <a href="../tempusCUI/distribute_read_design.html">distribute_read_design</a> command. This requires providing an input script that contains all the design loading commands, except the <a href="../tempusCUI/read_spef.html">read_spef</a> and <a href="../tempusCUI/read_parasitics.html">read_parasitics</a> command. The <code>distribute_read_design</code> command opens N Tempus clients (as specified with <a href="../tempusCUI/set_multi_cpu_usage.html">set_multi_cpu_usage</a> <code>-remote_host</code>) for the Tempus distributed processing session and loads the design script into them. <br />
+<a id="pgfId-1006780"></a>For example:<pre class="webflare-pre-block webflare-courier-new" id="#id1006783">
+<a id="pgfId-1006783"></a>distribute_read_design
+-design_script $rootDir/design_load.tcl
+-outdir $output_directory</pre></li><li>
+<a id="pgfId-999181"></a>Specify the active setup and hold analysis views.<br />
+<a id="pgfId-1006911"></a>For example:<pre class="webflare-pre-block webflare-courier-new" id="#id1006916">
+<a id="pgfId-1006916"></a>set Views [list func_ss_rcmax test_ss_rcmax func_ss_rctyp]</pre></li><li>
+<a id="pgfId-999200"></a>Distribute and analyze views using the <a href="../tempusCUI/distribute_views.html">distribute_views</a> command. This command distributes active setup and hold analysis views to Tempus clients, and sources the specified command script to perform timing and signal integrity analysis.<br />
+<a id="pgfId-1006941"></a>For example: <pre class="webflare-pre-block webflare-courier-new" id="#id1006944">
+<a id="pgfId-1006944"></a>distribute_views 
+-views $Views 
+-script $rootDir/analysis.tcl</pre></li><li>
+<a id="pgfId-999226"></a>Merge the timing and noise reports generated from various servers using the <a href="../tempusCUI/merge_timing_reports.html">merge_timing_reports</a> command.</li><li>
+<a id="pgfId-999245"></a>Close all the Tempus clients using the <a href="../tempusCUI/reset_servers.html">reset_servers</a> command to end the distributed processing session.</li></ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-999265"></a>The following sample master script needs to be provided as input to the Tempus master.</p>
+<p>
+<a id="pgfId-999274"></a><strong>Example: Sample Master Script</strong></p>
+<p>
+<a id="pgfId-999284"></a>#################### Script 1: run.tcl ###############################</p>
+<p>
+<a id="pgfId-999293"></a># Setup the environment variables or shell variables to be used in the flow.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1298893"></a>set runLocal 0<br />set cwd [exec pwd]<br />set outDir &quot;$cwd/dmmmc_logs&quot;</pre>
+
+<p>
+<a id="pgfId-999308"></a># Instructs Tempus to launch jobs in rsh. You can specify the list of machines that can be used to launch utility servers. You can also specify LSF queue (refer to the Tempus Text Command Reference).</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1007002"></a><a href="../tempusCUI/set_distributed_hosts.html">set_distributed_hosts</a> -rsh -add {<code><em>hostname1</em></code> <code><em>hostname2</em></code>}</pre>
+
+<p>
+<a id="pgfId-1007005"></a>or</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1298904"></a>set_distributed_hosts -time_out 300 -lsf -queue lnx64 -args &quot;-P TEMPUS:15.1:PE:build -n ${threadCnt}&quot; -resource &quot;span\[hosts=1\] select\[OSNAME==Linux \]&quot;</pre>
+
+<p>
+<a id="pgfId-999324"></a># Instructs 3 Tempus clients to be used for this session run. Each Tempus client will use 8 CPUs for multi-threading.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1298910"></a><a href="../tempusCUI/set_multi_cpu_usage.html">set_multi_cpu_usage</a> -local_cpu 2 -remote_host 2 -cpu_per_remote_host 4</pre>
+
+<p>
+<a id="pgfId-999337"></a># Invokes the Tempus clients based on the above information and loads Script-2 (design_load.tcl) on each client. Specified &#8220;outDir&#8221; is the area where the Tempus client log files will be generated. All the outputs relevant to this session will be created here. The master log will reside in the directory where the run is launched.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1298916"></a><a href="../tempusCUI/distribute_read_design.html">distribute_read_design</a> -design_script sta_dmmmc.tcl -outdir $outDir</pre>
+
+<p>
+<a id="pgfId-999348"></a># Distributes list of specified analysis views to Tempus clients and processes the commands specified in Script-3 (analysis.tcl) on each client.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1298921"></a>set setupViews [list \<br />func_fast_RCMAX \<br />func_slow_RCMAX \<br />func_fast_RCMIN \<br />func_slow_RCMIN \<br />scan_fast_RCMAX \<br />scan_slow_RCMAX \<br />scan_fast_RCMIN \<br />scan_slow_RCMIN \<br />]<br />distribute_views -views $setupViews -script sta_dmmmc.tcl</pre>
+
+<p>
+<a id="pgfId-999361"></a># Merges the timing report (machine readable format) files from specified views and generates a merged view file. The paths are sorted based on the slack value.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1298927"></a><a href="../tempusCUI/merge_timing_reports.html">merge_timing_reports</a> -view $setupViews -base_report setup_maxpath_machine.rpt -base_dir $outDir &gt; merged_setup_maxpath.rpt</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1298928"></a>merge_timing_reports -view $setupViews -base_report setup_nworst_machine.rpt&#160;&#160;-base_dir $outDir &gt; merged_setup_worst.rpt</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1298929"></a>merge_timing_reports -view $setupViews -base_report hold_maxpath_machine.rpt&#160;&#160;-base_dir $outDir &gt; merged_hold_maxpath.rpt</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1298930"></a>merge_timing_reports -view $setupViews -base_report hold_nworst_machine.rpt&#160;&#160; -base_dir $outDir &gt; merged_hold_worst.rpt</pre>
+
+<p>
+<a id="pgfId-999372"></a>#Close Tempus session</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1007065"></a>exit_servers</pre>
+
+<p>
+<a id="pgfId-999383"></a>For more information on loading a MMMC configuration script, see <hyperlink>
+<a href="dmmmc_dmmmcdesignload.html#40895"></a><h-hot>Design Loading and MMMC Configuration Script</h-hot> on page 420<hyperlink>
+
+
+.</hyperlink></hyperlink></p>
+<p>
+<a id="pgfId-999395"></a>For more information on parasitics, see <a href="dmmmc_dmmmcdesignload.html#45566">Parasitic Information, Analysis, and Report Generation Script</a>.</p>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="dmmmc_dmmmcoverview.html" id="prev" title="DMMMC Overview">DMMMC Overview</a></em></b><b><em><a href="dmmmc_dmmmcdesignload.html" id="nex" title="Design Loading and MMMC Configuration Script">Design Loading and MMMC Config ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

@@ -1,0 +1,1574 @@
+
+<html><head><title>Noise Library Characterization</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-03-26" />
+<meta name="CreateTime" content="1774520065" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="The make_cdB noise characterizer utility creates a cdB noise library for use with signal integrity analyzers." />
+<meta name="DocTitle" content="make_cdB Noise Characterizer User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Noise Library Characterization" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="makecdb" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-03-26" />
+<meta name="ModifiedTime" content="1774520065" />
+<meta name="NextFile" content="commands.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design" />
+<meta name="PrevFile" content="preface.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="make_cdB Noise Characterizer User Guide -- Noise Library Characterization" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="0" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="makecdb2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="makecdbTOC.html">Contents</a></li><li><a class="prev" href="preface.html" title="Preface">Preface</a></li><li style="float: right;"><a class="viewPrint" href="makecdb.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="commands.html" title="make_cdB Commands">make_cdB Commands</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>make_cdB Noise Characterizer User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<h1>1
+<a id="pgfId-1018979"></a><a id="53077"></a></h1>
+<h1>
+<a id="pgfId-998370"></a><hr />
+Noise Library Characterization<hr />
+</h1>
+
+<ul><li>
+<a id="pgfId-1018238"></a><a href="noise_library.html#81563">Overview</a><ul><li>
+<a id="pgfId-1018270"></a><a href="noise_library.html#69366">make_cdB Tcl Scripts</a></li><li>
+<a id="pgfId-1018302"></a><a href="noise_library.html#81907">cdB Contents</a><ul><li>
+<a id="pgfId-1018309"></a><a href="noise_library.html#66038">Propagated Slew</a></li><li>
+<a id="pgfId-1018319"></a><a href="noise_library.html#92334">Arc Current Models</a></li></ul></li><li>
+<a id="pgfId-1018326"></a><a href="noise_library.html#94266">cdB Noise Library Format</a><ul><li>
+<a id="pgfId-1018336"></a><a href="noise_library.html#81986">cdB Noise Library Structure</a></li><li>
+<a id="pgfId-1018349"></a><a href="noise_library.html#89643">Characterized Noise Data</a></li><li>
+<a id="pgfId-1018356"></a><a href="noise_library.html#75520">Cell Information</a></li><li>
+<a id="pgfId-1018363"></a><a href="noise_library.html#81016">Cell Input Data</a></li><li>
+<a id="pgfId-1018370"></a><a href="noise_library.html#21189">Cell Output Data</a></li><li>
+<a id="pgfId-1018377"></a><a href="noise_library.html#41931">Cell Bi-Directional Data</a></li></ul></li></ul></li><li>
+<a id="pgfId-1018343"></a><a href="noise_library.html#42557">Performing Noise Characterization</a><ul><li>
+<a id="pgfId-1018390"></a><a href="noise_library.html#48670">Running make_cdb</a></li><li>
+<a id="pgfId-1018404"></a><a href="noise_library.html#32494">Specifying Power Supply Names</a></li><li>
+<a id="pgfId-1018411"></a><a href="noise_library.html#98459">Setting the Default Power Supplies</a><ul><li>
+<a id="pgfId-1018418"></a><a href="noise_library.html#66621">Setting Global and Local Power Supplies</a></li><li>
+<a id="pgfId-1018428"></a><a href="noise_library.html#93249">Setting Multiple Power Supplies</a></li></ul></li><li>
+<a id="pgfId-1018460"></a><a href="noise_library.html#64874">Identifying the I/Os</a><ul><li>
+<a id="pgfId-1018470"></a><a href="noise_library.html#76730">Extracting Port Directions from Timing Library Files</a></li><li>
+<a id="pgfId-1018480"></a><a href="noise_library.html#47203">Extracting Port Directions Using set_port</a></li></ul></li><li>
+<a id="pgfId-1018487"></a><a href="noise_library.html#98815">Generating the cdB Noise Library</a></li><li>
+<a id="pgfId-1018501"></a><a href="noise_library.html#57481">Regenerating the cdB Noise Library</a><ul><li>
+<a id="pgfId-1018508"></a><a href="noise_library.html#64065">Guidelines for cdB Regeneration</a></li></ul></li><li>
+<a id="pgfId-1018518"></a><a href="noise_library.html#17134">Using Model Libraries in make_cdB</a><ul><li>
+<a id="pgfId-1018528"></a><a href="noise_library.html#12002">Sample SPICE Netlist File</a></li></ul></li><li>
+<a id="pgfId-1018538"></a><a href="noise_library.html#67352">Merging Multiple Noise Libraries</a></li><li>
+<a id="pgfId-1018555"></a><a href="noise_library.html#84306">Printing Cell and UDN Information</a></li></ul></li><li>
+<a id="pgfId-1018562"></a><a href="noise_library.html#67005">User-Defined Noise Model - An Overview</a><ul><li>
+<a id="pgfId-1018571"></a><a href="noise_library.html#97713">Glitch Injection from UDN</a></li><li>
+<a id="pgfId-1018578"></a><a href="noise_library.html#38961">UDN Specification Allows Quiet Net Settings for Floating Nets</a></li><li>
+<a id="pgfId-1018585"></a><a href="noise_library.html#96462">Example UDNs</a><ul><li>
+<a id="pgfId-1018595"></a><a href="noise_library.html#70461">Example of Single UDN Driver Set Quiet</a></li><li>
+<a id="pgfId-1018605"></a><a href="noise_library.html#56219">Example of Single UDN Receiver Set Quiet</a></li><li>
+<a id="pgfId-1018612"></a><a href="noise_library.html#38114">Example of Multi-Driver with UDN Pin Set Quiet</a></li><li>
+<a id="pgfId-1018619"></a><a href="noise_library.html#90056">Example of Multi-Receiver with UDN Pin Set Quiet</a></li></ul></li></ul></li><li>
+<a id="pgfId-1018626"></a><a href="noise_library.html#72333">Additional Information</a><ul><li>
+<a id="pgfId-1018638"></a><a href="noise_library.html#77434">Slew Propagation</a><ul><li>
+<a id="pgfId-1018647"></a><a href="noise_library.html#87443">Characterization</a></li><li>
+<a id="pgfId-1018656"></a><a href="noise_library.html#23247">Analysis</a></li></ul></li><li>
+<a id="pgfId-1018662"></a><a href="noise_library.html#63964">Constructs in Arc Current Models</a></li><li>
+<a id="pgfId-1018674"></a><a href="noise_library.html#13906">Characterizing Different Cell Types</a><ul><li>
+<a id="pgfId-1018680"></a><a href="noise_library.html#98624">Tiehi and Tielo Cells</a></li><li>
+<a id="pgfId-1018689"></a><a href="noise_library.html#51092">RAM Cells</a></li><li>
+<a id="pgfId-1018695"></a><a href="noise_library.html#13068">User-Defined Noise Models</a></li><li>
+<a id="pgfId-1018701"></a><a href="noise_library.html#12357">Filler/Antenna/Decoupling Cells</a></li><li>
+<a id="pgfId-1018712"></a><a href="noise_library.html#97858">Sequential and Combinational Cells</a></li><li>
+<a id="pgfId-1018718"></a><a href="noise_library.html#43023">Level-Shifter Cells</a></li></ul></li><li>
+<a id="pgfId-1018724"></a><a href="noise_library.html#71514">Multi-Voltage Characterization</a></li><li>
+<a id="pgfId-1018733"></a><a href="noise_library.html#97065">Generating an ECSM-Noise Liberty Library</a></li><li>
+<a id="pgfId-1018739"></a><a href="noise_library.html#28649">Guidelines for Characterizing Large Cells</a></li></ul></li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>
+<a id="pgfId-999173"></a><a id="81563"></a>Overview</h2>
+
+<p>
+<a id="pgfId-999372"></a>This chapter describes how to use the <code>make_cdB </code>noise characterizer utility to generate a cdB noise library from transistor-level netlists and SPICE models. In addition, it discusses memory characterization.</p>
+<p>
+<a id="pgfId-999383"></a>Before the signal integrity analyzer performs a comprehensive crosstalk analysis of a cell-based digital circuit, each cell in a cell library can be characterized by the <code>make_cdB </code>utility. Alternatively, cells can be modeled using black-boxes, which include user-defined noise (UDN) models or timing libraries (.lib). However, in this case, crosstalk analysis is not as accurate as compared to using data characterized by <code>make_cdB</code>.</p>
+<p>
+<a id="pgfId-999394"></a>The <code>make_cdb</code> utility analyzes the transistor-level netlist of a cell for noise effects as seen from its input and output ports. It computes the essential information needed for noise analysis and encapsulates it in a cell-level model. The cell-level model contains the subcircuit (subckt) related information for the cell along with the noise and delay characteristics of the ports of the cell.</p>
+<p>
+<a id="pgfId-999405"></a>The characterized noise library typically has a <code>.cdB</code> extension. This resultant cell library (.cdB file) contains a cell-level view and a transistor-level view. The cell-level view contains data, such as pin capacitance, calibrated input noise threshold, and nonlinear output drive strength. The transistor-level view contains the transistor cell subcircuit. However, if the cell is large, the transistor-level view contains only the peripheral transistors connected to ports of the cell. For more information on characterizing large cells, see <a href="noise_library.html#51092">RAM Cells</a>.</p>
+
+<h4>
+<a id="pgfId-999422"></a><a id="69366"></a>make_cdB Tcl Scripts</h4>
+
+<p>
+<a id="pgfId-999431"></a>The <code>make_cdB</code> utility supports a Tcl interface. Most <code>make_cdB</code> scripts contain commands in the following sequence:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-999444"></a>set_supply</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-999454"></a>set_net</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-999464"></a>read_dotlib</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-999474"></a>generate_cell_lib</pre>
+
+<p>
+<a id="pgfId-999484"></a>The following example illustrates the contents of a sample Tcl script, which shows the use of the <code>set_supply </code>and <code>generate_cell_lib</code> commands.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-999498"></a>set_parm port_vdd_r 1 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-999508"></a>set_parm port_gnd_r 1 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-999528"></a>#Set the global supply. VDD is set to 1.5V and GND is set to 0.0V.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-999538"></a>set_supply -vdd 1.5 -gnd 0 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-999558"></a>#Set non-global supplies.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-999568"></a>set_net -vdd 3 vdd3</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-999588"></a># Pick up the pin directions from the wc.lib file.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-999598"></a>read_dotlib wc.lib</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-999618"></a># Generate the CDB for the cell, XOR. </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1014701"></a># Define the transistor level netlist and models for XOR in the SPICE main.spi file.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1014704"></a># Output the CDB in the cells.cdB file.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-999628"></a>generate_cell_lib \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-999638"></a>-vdd { vdd VDD vdd3 VDD3 } \ <br />
+-gnd { gnd GND 0 } \ 
+
+-cell_list { XOR } \ 
+
+-file_list { main.spi } \ 
+
+-file cells.cdB </pre>
+<div class="webflare-information-macro webflare-macro-tip">
+<a id="pgfId-999666"></a>
+Specify the correct supply voltage and other parameters that will be used in any subsequent noise analysis run. If there are inconsistencies between the parameters specified for characterization and those specified for subsequent analysis runs, the noise analysis results will be incorrect.</div>
+<h4>
+<a id="pgfId-999686"></a><a id="81907"></a>cdB Contents</h4>
+
+<p>
+<a id="pgfId-999695"></a>This section describes the cdB contents, which include propagated slew and arc current models.</p>
+
+<h4><em>
+<a id="pgfId-999705"></a><a id="66038"></a>Propagated Slew</em></h4>
+
+<p>
+<a id="pgfId-999714"></a>A cdB contains propagated slew. Slew propagation calculations are used in situations where multistage cells drive the nets. These calculations enable you to propagate the slews available at the inputs of the cell down to the driving channel-connected component (CCC) inputs. For more information about slew propagation, see <a href="noise_library.html#77434">Slew Propagation</a>.</p>
+
+<h4><em>
+<a id="pgfId-999727"></a><a id="92334"></a>Arc Current Models</em></h4>
+
+<p>
+<a id="pgfId-999736"></a>Arc current models, which are used for low effort crosstalk delay modeling during signal integrity analysis, represent the current drawn by the driver as a function of input and output voltage. There are unique tables for each transition and from each last logic stage input (input pin or internal node) to the output. At the input pin, arc current models are used for path based alignment during signal integrity analysis. At the output pin, arc current models are used for low-effort modeling of aggressor and victim drivers. For more information about arc current models, see <a href="noise_library.html#63964">Constructs in Arc Current Models</a>.</p>
+
+<h4>
+<a id="pgfId-999749"></a><a id="94266"></a>cdB Noise Library Format</h4>
+
+<p>
+<a id="pgfId-999758"></a>To perform noise-on-delay and glitch analysis, the signal integrity analyzer requires a noise view for each cell in the circuit. The creation of these noise views is done using the make_cdB utility. This utility automatically characterizes a group of cells or macro blocks to create a binary cdB noise library. The ASCII equivalent format for these noise views is described in this section.</p>
+<p>
+<a id="pgfId-999769"></a><img width="19" height="15" src="images/noise_library-3.gif" />
+ To create a cdB noise library in ASCII format, use the <code>-text</code> option of the <code>generate_cell_lib</code> command. </p>
+
+<h4><em>
+<a id="pgfId-999784"></a><a id="81986"></a>cdB Noise Library Structure</em></h4>
+
+<p>
+<a id="pgfId-999793"></a>The cdB noise library structure includes:</p>
+<ul><li>
+<a id="pgfId-999808"></a>SPICE models used for characterizing the cdB noise library in BSIM3, BSIM4 or MOS9 formats.</li><li>
+<a id="pgfId-999817"></a>Characterized noise data for each cell.</li><li>
+<a id="pgfId-999826"></a>Transistor-level (<code>.subckt</code>) description of each cell in SPICE format.</li></ul>
+
+
+<p>
+<a id="pgfId-999837"></a>The figure below shows the cdB noise library structure.</p>
+
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 1-1
+<a id="pgfId-999848"></a>cdB Noise Library Structure</strong></pi-para-indent>
+<p>
+<a id="pgfId-999859"></a></p>
+<div class="webflare-div-image">
+<img width="376" height="243" src="images/noise_library-4.gif" /></div>
+
+<p>
+<a id="pgfId-999869"></a>The data in sections 1 and 3 are copies of the input data provided to the <code>make_cdB</code> utility. The signal integrity analyzer uses this data to perform a complete transistor-level simulation for certain noise calculations. The characterized noise data for a single cell (section 2) is described in the following sections.</p>
+
+<h4><em>
+<a id="pgfId-999881"></a><a id="89643"></a>Characterized Noise Data</em></h4>
+
+<p>
+<a id="pgfId-999890"></a>The characterized noise data includes information about the cell, input pins, output pins, and bidirectional pins.</p>
+<p>
+<a id="pgfId-999899"></a>This section discusses the following topics:</p>
+<ul><li>
+<a id="pgfId-999914"></a><a href="noise_library.html#75520">Cell Information</a></li><li>
+<a id="pgfId-999933"></a><a href="noise_library.html#81016">Cell Input Data</a></li><li>
+<a id="pgfId-1019382"></a><a href="noise_library.html#21189">Cell Output Data</a></li><li>
+<a id="pgfId-999971"></a><a href="noise_library.html#41931">Cell Bi-Directional Data</a></li></ul>
+
+
+
+
+<h4><em>
+<a id="pgfId-999990"></a><a id="75520"></a>Cell Information</em></h4>
+<a id="pgfId-1000000"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+bb_is_cell </code></pre>
+
+<p>
+<a id="pgfId-1000010"></a>Flag to indicate that this is a cell with a transistor-level view.</p>
+
+<h4><em>
+<a id="pgfId-1000020"></a><a id="81016"></a>Cell Input Data</em></h4>
+<a id="pgfId-1000030"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+bb_set_input [-vhtolerance float] [-vltolerance float] [-cap float] {ports}</code></pre>
+
+<p>
+<a id="pgfId-1000040"></a>Marks the specified ports as UDN inputs.</p>
+<p>
+<a id="pgfId-1000049"></a>For more details, see <a href="commands.html#92416">bb_set_input</a>.</p>
+
+<h4><em>
+<a id="pgfId-1000062"></a><a id="21189"></a>Cell Output Data</em></h4>
+<a id="pgfId-1000072"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+bb_set_output [-vddres float] [-gndres float] [-canfloat] [-cap float] [-vhnoise {time_value_pairs}] [-vlnoise {time_value_pairs}] {ports} </code></pre>
+
+<p>
+<a id="pgfId-1000082"></a>Marks the specified ports as a UDN output.</p>
+<p>
+<a id="pgfId-1000091"></a>For more details, see <a href="commands.html#55934">bb_set_output</a>.</p>
+
+<h4><em>
+<a id="pgfId-1000104"></a><a id="41931"></a>Cell Bi-Directional Data</em></h4>
+<a id="pgfId-1000114"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+bb_set_bidi [-vhtolerance float] [-vltolerance float] [-cap float]
+[-cannotfloat] [-vddres float] [-gndres float]
+[-vhnoise {time_value_pairs}] [-vlnoise {time_value_pairs}] {ports}</code></pre>
+
+<p>
+<a id="pgfId-1000128"></a>Marks the specified ports as a bidirectional input/output port. This command has most of the features of the <code>set_input</code> and <code>set_output</code> commands. The defaults for inputs and outputs are used for bidirectionals.</p>
+<p>
+<a id="pgfId-1000141"></a>For more details, see <a href="commands.html#66432">bb_set_bidi</a><html-code>
+.
+</html-code></p>
+
+<h3>
+<a id="pgfId-1000154"></a><a id="42557"></a>Performing Noise Characterization</h3>
+
+<p>
+<a id="pgfId-1000163"></a>This section describes the tasks you perform to generate the cdB noise library.</p>
+<p>
+<a id="pgfId-1000172"></a>The figure below shows the <code>make_cdB</code> flow. The resultant <code>.cdB</code> file is required as input for performing signal integrity analysis.</p>
+
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 1-2
+<a id="pgfId-1000187"></a>make_cdB Flow</strong></pi-para-indent>
+<p>
+<a id="pgfId-1015224"></a></p>
+
+<p>
+<a id="pgfId-1015218"></a><img width="542" height="282" src="images/noise_library-5.gif" /></p>
+<p>
+<a id="pgfId-1000198"></a></p>
+
+<h4>
+<a id="pgfId-1015339"></a></h4>
+
+<p>
+<a id="pgfId-1015341"></a></p>
+<p>
+<a id="pgfId-1015343"></a></p>
+<p>
+<a id="pgfId-1015345"></a></p>
+<p>
+<a id="pgfId-1015347"></a></p>
+
+<h4>
+<a id="pgfId-1000208"></a><a id="48670"></a>Running make_cdb</h4>
+
+<p>
+<a id="pgfId-1000217"></a>You can run the <code>make_cdB</code> utility in interactive or batch mode from the UNIX prompt.</p>
+<p>
+<a id="pgfId-1000228"></a>To run the <code>make_cdB</code> utility in interactive mode, use the following command:</p>
+
+<a id="pgfId-1000239"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+% make_cdb</code></pre>
+
+<p>
+<a id="pgfId-1000249"></a>To run the <code>make_cdB</code> utility in batch mode, use the following command:</p>
+
+<a id="pgfId-1000260"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+% make_cdb cmdfile.tcl |&amp; tee logfile.log</code></pre>
+
+<p>
+<a id="pgfId-1000273"></a>where, the <code>cmdfile.tcl</code> contains valid <code>make_cdB</code> or Tcl commands and the output of the <code>make_cdb</code> command is replicated to the <code>logfile.log</code> file using the <code>tee</code> command.</p>
+<p>
+<a id="pgfId-1000292"></a>The complete syntax of the <code>make_cdb</code> command is as follows:</p>
+
+<a id="pgfId-1000301"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+make_cdb
+[-v]
+[-c]
+[-check]
+[cmdfile] </code></pre>
+<h4><em>
+<a id="pgfId-1000323"></a>Parameters </em></h4>
+<table class="webflareTable" id="#id1000348">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1000352"></a><code>-c</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1000362"></a>Provides backward compatibility when using netlist view handles in commands.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1000372"></a><code>-check</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1000374"></a>Checks the Tcl code for obvious errors before running <code>make_cdB</code>. Running this check can detect typos in the Tcl code or detect commands that are given in wrong sequence, which could otherwise be overlooked during a <code>make_cdB</code> run and waste valuable time. You can use this option from the command line as follows:</p>
+<a id="pgfId-1000391"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+make_cdb -check batch_file.tcl</code></pre>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1000401"></a><code>cmdfile</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1000403"></a>Specifies the optional command file that contains <code>make_cdB</code> commands to run in batch mode.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1000421"></a><code>-v</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1000423"></a>Prints the <code>make_cdB</code> version in use and the copyright information.</p>
+</td>
+</tr>
+</tbody></table>
+<h4>
+<a id="pgfId-1000446"></a><a id="32494"></a>Specifying Power Supply Names</h4>
+
+<p>
+<a id="pgfId-1000455"></a>The power supply names must be specified using the <code>-vdd</code> and <code>-gnd</code> options. There are no default power supply names, so the default supply voltage is applied as specified in the <code>set_supply</code> command. Additional voltages can be specified on a local basis using the <code>set_net</code> command.</p>
+
+<h4>
+<a id="pgfId-1000473"></a><a id="98459"></a>Setting the Default Power Supplies</h4>
+
+<p>
+<a id="pgfId-1000482"></a>There are two types of default power supplies: global and local. Use the <code>set_supply</code> command to set the global power supply and the <code>set_net</code> command to set the local power supply.</p>
+
+<h4><em>
+<a id="pgfId-1000496"></a><a id="66621"></a>Setting Global and Local Power Supplies</em></h4>
+
+<p>
+<a id="pgfId-1000505"></a>Global power supplies are used during simulation to set circuit voltages.</p>
+<p>
+<a id="pgfId-1000514"></a>Power supply nodes must be identified for the <code>generate_cell_lib</code> command to work properly. These nodes help to identify capacitors connected to supply nets.</p>
+<p>
+<a id="pgfId-1000525"></a><img width="19" height="15" src="images/noise_library-6.gif" />
+To set the global power supplies, use the <code>set_supply</code> command. </p>
+<p>
+<a id="pgfId-1000537"></a>Local power supplies are used when multiple voltages are desired.</p>
+<p>
+<a id="pgfId-1000546"></a><img width="19" height="15" src="images/noise_library-7.gif" />
+To set the local power supplies, use the <code>set_net</code> command. </p>
+<p>
+<a id="pgfId-1000558"></a>The following example illustrates how the <code>set_supply</code> and <code>set_net</code> commands are used to set the global and local power supplies, respectively:</p>
+
+<a id="pgfId-1000571"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_parm port_vdd_r 1 </code></pre>
+<a id="pgfId-1000581"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_parm port_gnd_r 1 </code></pre>
+<a id="pgfId-1000601"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_supply -vdd 1.5 -gnd 0 </code></pre>
+<a id="pgfId-1000611"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_net -vdd 3 vdd3</code></pre>
+<a id="pgfId-1000631"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+read_dotlib wc.lib</code></pre>
+<a id="pgfId-1000641"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+generate_cell_lib \</code></pre>
+<a id="pgfId-1000651"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+-vdd { vdd VDD vdd3 VDD3 } \ 
+
+-gnd { gnd GND 0 } \ 
+
+-cell_list { XOR } \ 
+
+-file_list { main.spi } \ 
+
+-file cells.cdB </code></pre>
+
+<p>
+<a id="pgfId-1000670"></a>In the above example:</p>
+<p>
+<a id="pgfId-1000691"></a>The <code>set_supply</code> command specifies the global power supply. The <code>-vdd </code>option specifies the nominal supply voltage as 1.5V and the <code>-gnd</code> option specifies the value of nominal ground voltage as 0.0V.</p>
+<p>
+<a id="pgfId-1000710"></a>The <code>set_net</code> command specifies the local power supply. The <code>-vdd</code> option specifies the value, <code>3.0V</code>, for the net, <code>vdd3</code>.</p>
+
+<h4><em>
+<a id="pgfId-1000728"></a><a id="93249"></a>Setting Multiple Power Supplies</em></h4>
+
+<p>
+<a id="pgfId-1000737"></a>You set multiple power supplies if a cell can have multiple operating voltages, such as the one used in multiple supply multiple voltage (MSMV) designs. This is not required for proper IR-drop analysis. To set multiple power supplies in <code>make_cdB</code>, use multiple <code>set_supply</code> commands.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1000750"></a>For more information about setting multiple power supplies, see <a href="noise_library.html#71514">Multi-Voltage Characterization</a>.</div>
+
+<h4>
+<a id="pgfId-1000764"></a><a id="64874"></a>Identifying the I/Os</h4>
+
+<p>
+<a id="pgfId-1000773"></a>During noise characterization, the <code>make_cdB</code> utility automatically extracts I/O port directions in the following sequence:</p>
+<ol><li>
+<a id="pgfId-1000784"></a>As specified in the timing library file.</li><li>
+<a id="pgfId-1000793"></a>As specified by the <code>set_port</code> command.</li></ol>
+
+
+<h4><em>
+<a id="pgfId-1000813"></a><a id="76730"></a>Extracting Port Directions from Timing Library Files</em></h4>
+
+<p>
+<a id="pgfId-1000822"></a>To extract the port directions from a ASCII cell timing library, use the <code>read_dotlib</code> command before the <code>generate_cell_lib</code> command, as shown in the following example:</p>
+
+<a id="pgfId-1000836"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_parm port_vdd_r 1 </code></pre>
+<a id="pgfId-1000846"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_parm port_gnd_r 1 </code></pre>
+<a id="pgfId-1000856"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+ </code></pre>
+<a id="pgfId-1000865"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_supply -vdd 1.5 -gnd 0 </code></pre>
+<a id="pgfId-1000875"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_net -vdd 3 vdd3</code></pre>
+
+<p>
+<a id="pgfId-1000895"></a>#The <code>read_dotlib</code> command extracts pin directions from the <code>wc.lib</code> file.</p>
+<p>
+<a id="pgfId-1000905"></a><code>read_dotlib wc.lib</code></p>
+<p>
+<a id="pgfId-1000924"></a><code>generate_cell_lib \</code></p>
+<p>
+<a id="pgfId-1000934"></a><code>-vdd { vdd VDD vdd3 VDD3 } \ <br />
+-gnd { gnd GND 0 } \ 
+
+-cell_list { XOR } \ 
+
+-file_list { main.spi } \ 
+
+-file cells.cdB 
+</code></p>
+
+<h4><em>
+<a id="pgfId-1000955"></a><a id="47203"></a>Extracting Port Directions Using set_port</em></h4>
+
+<p>
+<a id="pgfId-1000964"></a>Ports connected to transistor gates are marked as inputs and ports connected to transistor channels are marked as outputs.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1000973"></a>All input ports that are connected to transistor channels and all bidirectional ports must be declared to the <code>make_cdB</code> tool by using the <code>set_port</code> command.</div>
+<p>
+<a id="pgfId-1000987"></a>To set the port directions manually, use the <code>set_port</code> command, as in the following example:</p>
+
+<a id="pgfId-1000998"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_parm port_vdd_r 1 </code></pre>
+<a id="pgfId-1001008"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_parm port_gnd_r 1 </code></pre>
+<a id="pgfId-1001018"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+ </code></pre>
+<a id="pgfId-1001028"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_supply -vdd 3.3 -gnd 0</code></pre>
+<a id="pgfId-1001038"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_port -dir in NOR2 A1</code></pre>
+<a id="pgfId-1001048"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_port -dir in NOR2 B1</code></pre>
+<a id="pgfId-1001058"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_port -dir out NOR2 O</code></pre>
+<a id="pgfId-1001068"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+generate_cell_lib \</code></pre>
+<a id="pgfId-1001078"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+-cell_list { NOR2 } \ 
+
+-vdd {vdda} -gnd {vssa} \ 
+
+-file_list { cells.sp ../models/model_pt.sp} \ 
+
+-file cells.cdB </code></pre>
+
+<p>
+<a id="pgfId-1001095"></a>In the above example:</p>
+<p>
+<a id="pgfId-1001104"></a>The <code>set_port</code> command is used with the <code>-dir</code> option to specify the input and output pins of the <code>NOR2</code> cell.</p>
+<p>
+<a id="pgfId-1001119"></a><code>A1</code> and <code>B1</code> are input pins of the <code>NOR2</code> cell.</p>
+<p>
+<a id="pgfId-1001133"></a><code>O</code> is the output pin of the <code>NOR2</code> cell.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1001145"></a>Because SPICE does not specify port directions, the <code>make_cdB</code> utility assumes all channel-connected ports to be cell outputs. If a cell contains channel (unbuffered) inputs, you must use the <code>set_port</code> command to override the default port direction.</div>
+
+<h4>
+<a id="pgfId-1001160"></a><a id="98815"></a>Generating the cdB Noise Library</h4>
+
+<p>
+<a id="pgfId-1001169"></a>The <code>generate_cell_lib</code> command generates the cdB noise library that can be used to represent the cells while performing signal integrity analysis. For more information about this command, see <code>generate_cell_lib</code> in the make_cdB Commands chapter.</p>
+<p>
+<a id="pgfId-1001184"></a>If the error log reports missing models when you generate the library, in most cases, these errors are reported due to a mismatch in model names. For example, your netlist may contain devices called <code>mn1</code>, <code>mn2...</code> and <code>mp1</code>, <code>mp2</code>, and so on. While in your models file, these devices may be called <code>nmos</code> and <code>pmos</code> respectively. To correct these errors, you can use <code>.equiv pmos=mp1 nmos=mn1</code> in your SPICE netlist to make the names match (preferred). You can also do a global substitution in the model file to match the name in the netlist.</p>
+
+<h4>
+<a id="pgfId-1001208"></a><a id="57481"></a>Regenerating the cdB Noise Library</h4>
+
+<p>
+<a id="pgfId-1001217"></a>To convert an old cdB noise library file to the latest cdB noise library file version, use the <code>regenerate_cell_lib</code> command, as shown in the following example:</p>
+<p>
+<a id="pgfId-1001230"></a><code>set_parm port_vdd_r 1 </code></p>
+<p>
+<a id="pgfId-1001240"></a><code>set_parm port_gnd_r 1 </code></p>
+<p>
+<a id="pgfId-1001250"></a><code> </code></p>
+<p>
+<a id="pgfId-1001260"></a><code>set_supply -vdd 1.5 -gnd 0</code></p>
+<p>
+<a id="pgfId-1001270"></a><code> </code></p>
+<p>
+<a id="pgfId-1001280"></a><code>set_net -vdd 1.8 VDD</code></p>
+<p>
+<a id="pgfId-1001290"></a><code>set_net -vdd 3.0 VDD3</code></p>
+<p>
+<a id="pgfId-1001300"></a><code>set_net -gnd 0 GND</code></p>
+<p>
+<a id="pgfId-1001310"></a><code> </code></p>
+<p>
+<a id="pgfId-1001320"></a><code>regenerate_cell_lib \</code></p>
+<p>
+<a id="pgfId-1001330"></a><code>-infile old.cdB \ <br />
+-outfile new.cdB \ 
+
+-version_string rechar-to-4.3.2</code> </p>
+<p>
+<a id="pgfId-1001347"></a>The <code>regenerate_cell_lib</code> command supports multi-voltage cdB regeneration. This means that you can regenerate an existing cdB to create a new cdB with cells characterized at different voltage values specified during regeneration. For example:</p>
+<p>
+<a id="pgfId-1001359"></a><code>set_run_mode 12</code></p>
+<p>
+<a id="pgfId-1001379"></a><code>set_supply -vdd 3.3 -gnd 0.0</code></p>
+<p>
+<a id="pgfId-1001389"></a><code>set_supply -vdd 1.7 -gnd 0.0</code></p>
+<p>
+<a id="pgfId-1001399"></a><code>set_net -vdd 2.0 { VDD2 }</code></p>
+<p>
+<a id="pgfId-1001409"></a><code>set_net -nomvdd 3.3 -vdd 3.3 VDD</code></p>
+<p>
+<a id="pgfId-1001419"></a><code>set_net -nomvdd 1.7 -vdd 1.7 VDD</code></p>
+<p>
+<a id="pgfId-1001429"></a><code> </code></p>
+<p>
+<a id="pgfId-1001439"></a><code>set_port -dir in TOP {IN1}</code></p>
+<p>
+<a id="pgfId-1001449"></a><code>set_port -dir out TOP {OUT1}</code></p>
+<p>
+<a id="pgfId-1001459"></a><code>set_port -dir out TOP {OUT2}</code></p>
+<p>
+<a id="pgfId-1001469"></a><code>set_port -dir out TOP {OUT3}</code></p>
+<p>
+<a id="pgfId-1016011"></a></p>
+<p>
+<a id="pgfId-1001489"></a><code>regenerate_cell_lib -infile test.cdB.txt -text</code></p>
+<p>
+<a id="pgfId-1001499"></a>In the above example:</p>
+<ul><li>
+<a id="pgfId-1001509"></a>The input cdB noise library <code>test.cdB</code> will be regenerated using new voltage values.</li><li>
+<a id="pgfId-1001521"></a>Recharacterization will be performed at 3.3 and 1.7 supply voltage values.</li><li>
+<a id="pgfId-1001535"></a>When performing recharacterization using the supply voltage of 3.3v, net VDD will be at 3.3v but net VDD2 will be at 2.0v.</li><li>
+<a id="pgfId-1001555"></a>When performing recharacterization using the supply voltage of 1.7v, net VDD will be at 1.7v but net VDD2 will be at 2.0v.</li></ul>
+
+
+
+
+<h4><em>
+<a id="pgfId-1001575"></a><a id="64065"></a>Guidelines for cdB Regeneration</em></h4>
+
+<p>
+<a id="pgfId-1001585"></a>The following guidelines will help you during cdB regeneration:</p>
+<ul><li>
+<a id="pgfId-1001595"></a>UDNs are preserved in their original form. No recharacterization is done.</li><li>
+<a id="pgfId-1001605"></a>If you need to reset any of the parameter settings for recharacterization, use the <code>set_parm</code> parameters before running this command.</li><li>
+<a id="pgfId-1001617"></a>You should always set the supply nets properly using the <code>set_supply</code> command. If the old cdB noise library file is older than <code>make_cdB</code> version 4.1, you must use the <code>set_supply</code> command to extract the supply voltage information. However, the <code>make_cdB</code> utility automatically extracts the supply voltage information from old cdB noise library files generated with <code>make_cdB</code> version 4.1 or newer.</li><li>
+<a id="pgfId-1001646"></a>If the old cdB noise library file is encoded, you cannot generate a text output file for the new cdB noise library file.</li></ul>
+
+
+
+
+<h4>
+<a id="pgfId-1001656"></a><a id="17134"></a>Using Model Libraries in make_cdB</h4>
+
+<p>
+<a id="pgfId-1001666"></a>To use model libraries, create a main SPICE netlist that contains <code>.include</code> and <code>.lib</code> statements and load this file into <code>make_cdB</code> using the <code>-file_list</code> option of the <code>generate_cell_lib</code> command.</p>
+
+<h4><em>
+<a id="pgfId-1001684"></a><a id="12002"></a>Sample SPICE Netlist File</em></h4>
+<a id="pgfId-1001694"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+* title .lib modelFile typ .include netlistFile</code></pre>
+<a id="pgfId-1001707"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+.temp myTemp</code></pre>
+<a id="pgfId-1001717"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+.lib myLib modelName</code></pre>
+<a id="pgfId-1001730"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+.inc mySpice</code></pre>
+<h4>
+<a id="pgfId-1001741"></a><a id="67352"></a>Merging Multiple Noise Libraries</h4>
+
+<p>
+<a id="pgfId-1001751"></a>To merge multiple noise libraries into a single noise library, use the <code>merge_cdb</code> command.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1001763"></a>If duplicate definitions are found, the first definition is kept and all others are ignored.</div>
+
+<h4>
+<a id="pgfId-1001775"></a><a id="84306"></a>Printing Cell and UDN Information</h4>
+
+<p>
+<a id="pgfId-1001785"></a>To print information about cells and user-defined noise (UDN) models that are inside cdB noise libraries, use the <code>pcdb</code> command.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1001798"></a>The cell or UDN name and port list are printed with port direction.</div>
+
+<h3>
+<a id="pgfId-1001810"></a><a id="67005"></a>User-Defined Noise Model - An Overview</h3>
+
+<p>
+<a id="pgfId-1001819"></a>A User-Defined Noise (UDN) model is created to allow noise analysis of a design that is not yet complete or contains non-digital circuitry. During analysis, a UDN input port is treated as a noise output port, and a UDN output port is treated as a noise input port to the surrounding circuit.</p>
+<p>
+<a id="pgfId-1001828"></a>The UDN&#8217;s are loaded along with the cdB&#8217;s (<code>read_lib -cdb {}</code>).</p>
+<p>
+<a id="pgfId-1001845"></a>You can mark certain ports as UDN input/ouput, or as bi-directional input/output ports. The following UDN commands can be used:</p>
+<ul><li>
+<a id="pgfId-1001854"></a><code>bb_set_bidi</code></li><li>
+<a id="pgfId-1001864"></a><code>bb_set_input</code></li><li>
+<a id="pgfId-1001874"></a><code>bb_set_output </code></li></ul>
+
+
+
+<h4>
+<a id="pgfId-1001884"></a><a id="97713"></a>Glitch Injection from UDN</h4>
+
+<p>
+<a id="pgfId-1001893"></a>Noise can be injected in the circuit through UDNs by placing a glitch waveform on the output pins of a UDN.</p>
+<p>
+<a id="pgfId-1001902"></a>The following UDN syntax includes noise injection:</p>
+
+<a id="pgfId-1001911"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+.bbox mydrv I ZN
+bb_is_udn
+bb_set_input -vhtolerance 0.415 -vltolerance 0.415 -cap 3.44e-15 {I}
+bb_set_output -vddres 196.804679228 -gndres 220.565530019 -cap 2.567848e-15 -vlnoise {0 0 333e-12 0.300 1000e-12 0} -vhnoise {0 1.05 333e-12 0.750 1000e-12 1.05} {ZN}
+.endbb</code></pre>
+
+<p>
+<a id="pgfId-1001929"></a>This will inject both a VL and VH noise waveform into the circuit, wherever the ZN pin connects.</p>
+
+<h4>
+<a id="pgfId-1001939"></a><a id="38961"></a>UDN Specification Allows Quiet Net Settings for Floating Nets</h4>
+
+<p>
+<a id="pgfId-1001948"></a>The quiet net specification inside a UDN indicates the following:</p>
+<p>
+<a id="pgfId-1001957"></a>When the input pin of the UDN is set as quiet, the receiver input peak (RIP) is not checked.</p>
+<p>
+<a id="pgfId-1001966"></a>When the output pin of the UDN is set as quiet and the pin is the only driver for a victim net, the software uses a large Rhold and the driver&#8217;s pin cap, and reports the glitch.</p>
+<p>
+<a id="pgfId-1001977"></a>When the output pin of the UDN is set as quiet and there are other drivers available for the victim net the other valid drivers will be used for glitch analysis and reporting.</p>
+<p>
+<a id="pgfId-1001986"></a>When all the drivers of a net are set as quiet with UDN specifications then the driver will be modeled with a large Rhold and the driver&#8217;s pin cap will be used for glitch analysis and reporting.</p>
+<p>
+<a id="pgfId-1001997"></a>When the output pin of the UDN is set as quiet and it drives an attacker it is held constant using a large Rhold.</p>
+
+<h4>
+<a id="pgfId-1002015"></a><a id="96462"></a>Example UDNs</h4>
+
+<p>
+<a id="pgfId-1002024"></a>To establish the UDN definition, create the following <code>inv.udn</code> file:</p>
+
+<a id="pgfId-1002035"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+.bbox INVUDN BI BO
+bb_set_input -vhtolerance 0.2 -vltolerance 0.2 -cap 100e-15 BI;
+bb_set_output -vddres 1e3 -gndres 1e3 BO;
+.endbb</code></pre>
+
+<p>
+<a id="pgfId-1002051"></a>The following example shows sample UDN syntax:</p>
+
+<a id="pgfId-1002060"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+#quiet attacker
+.bbox INVP3
++ Y VDD VSS A
+bb_set_input -vhtolerance 0.26 -vltolerance 0.26 -cap 2.29e-15 A
+bb_set_output -vddres 8000 -gndres 9000 -cap 4.01e-16 -quiet attacker Y
+.endbb
+#quiet victim
+.bbox INVP16
++ Y VDD VSS A
+bb_set_input -vhtolerance 0.26 -vltolerance 0.26 -cap 2.29e-15 -quiet victim A
+bb_set_output -vddres 8000 -gndres 9000 -cap 4.01e-16 Y
+.endbb
+#quiet both attacker and victim
+.bbox INVP16
++ Y VDD VSS A
+bb_set_input -vhtolerance 0.26 -vltolerance 0.26 -cap 2.29e-15 -quiet all A
+bb_set_output -vddres 8000 -gndres 9000 -cap 4.01e-16 -quiet all Y
+.endbb</code></pre>
+<h4><em>
+<a id="pgfId-1002104"></a><a id="70461"></a>Example of Single UDN Driver Set Quiet</em></h4>
+
+<p>
+<a id="pgfId-1002113"></a>In the following example, <code>int1</code> and <code>int2</code> will not be analyzed because the driver is set to quiet. In this case there will be no glitch on int1 or int2. Also, int1 and int2 will not be valid attackers because the driver is set to quiet. </p>
+
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 1-3
+<a id="pgfId-1002122"></a>Example Syntax</strong></pi-para-indent>
+<p>
+<a id="pgfId-1014516"></a></p>
+<div class="webflare-div-image">
+<img width="386" height="201" src="images/noise_library-8.gif" /></div>
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 1-4
+<a id="pgfId-1002144"></a>Single driver (darkened cells are quiet)</strong></pi-para-indent>
+<p>
+<a id="pgfId-1016377"></a></p>
+<div class="webflare-div-image">
+<img width="288" height="216" src="images/noise_library-9.gif" /></div>
+<h4><em>
+<a id="pgfId-1002157"></a><a id="56219"></a>Example of Single UDN Receiver Set Quiet </em></h4>
+
+<p>
+<a id="pgfId-1002166"></a>In the example below, net2 will be analyzed, but does not show up in the glitch report because the receiver is set to quiet. </p>
+
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 1-5
+<a id="pgfId-1002175"></a>Example Syntax</strong></pi-para-indent>
+<p>
+<a id="pgfId-1016578"></a></p>
+<div class="webflare-div-image">
+<img width="360" height="186" src="images/noise_library-10.gif" /></div>
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 1-6
+<a id="pgfId-1002197"></a>Single receiver (darkened cells are quiet)</strong></pi-para-indent>
+<p>
+<a id="pgfId-1016774"></a></p>
+<div class="webflare-div-image">
+<img width="266" height="217" src="images/noise_library-11.gif" /></div>
+<h4><em>
+<a id="pgfId-1002211"></a><a id="38114"></a>Example of Multi-Driver with UDN Pin Set Quiet</em></h4>
+
+<p>
+<a id="pgfId-1002220"></a>In the following example, <code>int1</code> and <code>int2</code> will be analyzed using &quot;Driver&quot; for the driver because the UDN driver pin is set to quiet. The int1 and int2 are valid attackers because &quot;Driver&quot; is a valid driving cell.</p>
+
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 1-7
+<a id="pgfId-1002229"></a>Example Syntax</strong></pi-para-indent>
+<p>
+<a id="pgfId-1014399"></a></p>
+<div class="webflare-div-image">
+<img width="373" height="222" src="images/noise_library-12.gif" /></div>
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 1-8
+<a id="pgfId-1002251"></a>Multi-driver (darkened cells are quiet)</strong></pi-para-indent>
+<p>
+<a id="pgfId-1016846"></a></p>
+<div class="webflare-div-image">
+<img width="280" height="332" src="images/noise_library-13.gif" /></div>
+<h4><em>
+<a id="pgfId-1002264"></a><a id="90056"></a>Example of Multi-Receiver with UDN Pin Set Quiet</em></h4>
+
+<p>
+<a id="pgfId-1002273"></a>In the example below, int1 and int2 will be analyzed and show up in the glitch report with &quot;Receiver&quot; as the receiving cell; the UDN will not show up in the glitch report. The &quot;Receiver&quot; is the receiving cell with ROP.</p>
+
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 1-9
+<a id="pgfId-1002282"></a>Example Syntax</strong></pi-para-indent>
+<p>
+<a id="pgfId-1016989"></a></p>
+<div class="webflare-div-image">
+<img width="351" height="246" src="images/noise_library-14.gif" /></div>
+<pi-para-indent class="WEBFLARE_NO_LIST_BREAK"><strong>Figure 1-10
+<a id="pgfId-1002304"></a>Multi receiver (darkened cells are quiet)</strong></pi-para-indent>
+<p>
+<a id="pgfId-1017131"></a></p>
+<div class="webflare-div-image">
+<img width="262" height="319" src="images/noise_library-15.gif" /></div>
+<h3>
+<a id="pgfId-1002317"></a><a id="72333"></a>Additional Information</h3>
+
+<ul><li>
+<a id="pgfId-1002375"></a><a href="noise_library.html#77434">Slew Propagation</a></li><li>
+<a id="pgfId-1002394"></a><a href="noise_library.html#63964">Constructs in Arc Current Models</a></li><li>
+<a id="pgfId-1002413"></a><a href="noise_library.html#13906">Characterizing Different Cell Types</a></li><li>
+<a id="pgfId-1002432"></a><a href="noise_library.html#71514">Multi-Voltage Characterization</a></li><li>
+<a id="pgfId-1002451"></a><a href="noise_library.html#97065">Generating an ECSM-Noise Liberty Library</a></li><li>
+<a id="pgfId-1002470"></a><a href="noise_library.html#28649">Guidelines for Characterizing Large Cells</a></li></ul>
+
+
+
+
+
+
+<h4>
+<a id="pgfId-1002489"></a><a id="77434"></a>Slew Propagation</h4>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1002498"></a>Slew propagation characterization is not available for UDNs.</div>
+<p>
+<a id="pgfId-1002510"></a>Slew propagation requires the following steps:</p>
+<ol><li>
+<a id="pgfId-1017266"></a><a href="noise_library.html#87443">Characterization</a>: The signal integrity analyzer characterizes the cell for each input by using a set of slews. This essentially creates a characterization table of data corresponding to each input.</li><li>
+<a id="pgfId-1017242"></a><a href="noise_library.html#23247">Analysis</a>: During analysis, the signal integrity analyzer searches the appropriate slew at the driving CCC input from the characterization table. This involves searching through all the possible inputs of the cell for a propagated slew of the appropriate type, and interpolating or extrapolating the data.</li></ol>
+
+
+<h4><em>
+<a id="pgfId-1002562"></a><a id="87443"></a>Characterization</em></h4>
+
+<p>
+<a id="pgfId-1002572"></a>The signal integrity analyzer feeds in five slews (rise and fall) at each input and determines the propagated slews at all the activated final stage CCC inputs. In situations when a particular final stage CCC input is also an output of the cell, the signal integrity analyzer performs simulations for five different capacitances as well. Each input (rise or fall) slew generates five different slews corresponding to five different capacitances. For each simple CCC input, there are five rise and five fall slews for a cell input pin.</p>
+<p>
+<a id="pgfId-1002582"></a>This data is stored in the cdB noise library using the <code>bb_set_input</code> command.</p>
+<p>
+<a id="pgfId-1002594"></a>For example:</p>
+
+<a id="pgfId-1002604"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+bb_set_input -vhtolerance 0.40 -vltolerance 0.40 -cap 2.63e-15 \
+-slews {5.000000e-11 2.000000e-10 3.000000e-10 4.000000e-10 5.000000e-10 } \
+-rise_prop_to {A B} \
+-Rise {1.075753e-10 6.988136e-11 1.074155e-10 1.094738e-10 1.074488e-10 
+-9.152446e-11 -5.473432e-11 -9.191305e-11 -9.811064e-11 -8.939084e-11 } \
+-fall_prop_to {B} \
+-Fall {-9.153837e-11 -9.373123e-11 -9.117065e-11 -9.196571e-11 -9.134613e-11} {I1}</code></pre>
+<h4><em>
+<a id="pgfId-1002614"></a><a id="23247"></a>Analysis</em></h4>
+
+<p>
+<a id="pgfId-1002624"></a>During analysis, the signal integrity analyzer picks up the driving CCC input net and the type of slew required (FastRise, FastFall, SlowRise, SlowFall). Then for this net and required slew type, the signal integrity analyzer tries to get all the propagated slew data from the inputs. If there is a requirement for a fast fall slew at the net, the signal integrity analyzer finds the fast input slews at all the inputs. For each of these slews, the signal integrity analyzer tries to find the fall slews at the net using the characterization table. The signal integrity analyzer then uses the minimum values. Slews of any type can be found using the characterization data.</p>
+
+<h4>
+<a id="pgfId-1002634"></a><a id="63964"></a>Constructs in Arc Current Models</h4>
+
+<ul><li>
+<a id="pgfId-1002644"></a>bb_vivo_template [-inVDD <em>
+value
+] [-outVdd <em>
+value
+] [-vi <em>
+value
+] 
+[-vo <em>
+value
+] [-current <em>
+table
+] </em></em></em></em></em></li></ul>
+<p>
+<a id="pgfId-1017303"></a>Defines a VIVO template. You must specify this once, but can reuse it multiple times in a cell.</p>
+<table class="webflareTable" id="#id1002685">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002689"></a><code>-inVdd value</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002700"></a>Specifies the Vdd value at the input.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002710"></a><code>-outVdd value</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002712"></a>Specifies the Vdd value at the output.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002731"></a><code>-vi value</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002733"></a>Specifies the voltage-in value used in characterization.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002752"></a><code>-vo value</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002754"></a>Specifies the voltage-out value used in characterization.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002773"></a><code>-current table</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002775"></a>Specifies the current table.</p>
+</td>
+</tr>
+</tbody></table>
+<ul><li>
+<a id="pgfId-1002799"></a>bb_index_vector -val {0 0.222 0.4444}_INDEX1 </li></ul>
+<p>
+<a id="pgfId-1017322"></a>Can be used as an index template. Using this template is not a requirement, but using it could save space.</p>
+<p>
+<a id="pgfId-1002811"></a>In addition to these constructs, the following set of <code>bb_set_arc</code> statements have been added:</p>
+
+<a id="pgfId-1002823"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+bb_set_arc [-from <em>
+arc_input
+] [-to <em>
+arc_output
+] [-dir {in | out | inout}] 
+[-type {inv | n-inv}] [-stimuli { {net0 | 1} ...}] [-gndcap <em>
+value
+] 
+[-millercap <em>
+value
+] [-current <em>
+table
+]</em></em></em></em></em></code></pre>
+<table class="webflareTable" id="#id1017382">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002865"></a><code>-from arc_input</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002876"></a>Specifies from the input of the arc.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002886"></a><code>-to arc_output</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002888"></a>Specifies to the output of the arc.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002907"></a><code>-dir {in | out | inout}</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002909"></a>Specifies the direction type.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002927"></a><code>-type {inv | n-inv}</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002929"></a>Specifies the type as inverting or non-inverting.<br /><em>
+Default
+: inv</em></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002950"></a><code>-stimuli { {net0 | 1} ...}</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002952"></a>Specifies the list of stimuli during characterization.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002970"></a><code>-gndcap value</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002972"></a>Specifies the loading capacitance value.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002991"></a><code>-millercap value</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1002993"></a>Specifies the Miller capacitance value.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1003012"></a><code>-current table</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1003014"></a>Specifies the list of current tables.</p>
+</td>
+</tr>
+</tbody></table>
+
+<p>
+<a id="pgfId-1003038"></a>The following example shows what the arc current model information looks like in a cdB noise library file:</p>
+<p>
+<a id="pgfId-1003048"></a><code>bb_index_vector -val {0.000000 0.366667 0.733333 1.100000 1.466667 1.833333 \</code></p>
+<p>
+<a id="pgfId-1003058"></a><code>2.200000 2.566667 2.933333 3.300000 } VI_INDEX0</code></p>
+<p>
+<a id="pgfId-1003078"></a><code>bb_vivo_template -inVdd -3.3 -outVdd 3.3 -vi VI_INDEX0 -vo VI_INDEX0 \</code></p>
+<p>
+<a id="pgfId-1003088"></a><code>-current { 0.0001756 0.0001703 0.000165 ...} inv_VIVO0</code></p>
+<p>
+<a id="pgfId-1003108"></a><code>bb_set_arc -arctype min_rise -from in -to out -dir in -type inv \</code></p>
+<p>
+<a id="pgfId-1003118"></a><code>-loadcap { 1.6718e-15 } -millercap { 3.11962e-16 } -stimuli { in 1 } inv_VIVO0</code></p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1003128"></a>The text version of the cdB noise library file is now about half the size of previous versions.</div>
+
+<h4>
+<a id="pgfId-1003140"></a><a id="13906"></a>Characterizing Different Cell Types</h4>
+
+<p>
+<a id="pgfId-1003150"></a>The following sections provide information on how to characterize different types of cells:</p>
+<ul><li>
+<a id="pgfId-1003159"></a><a href="noise_library.html#98624">Tiehi and Tielo Cells</a></li><li>
+<a id="pgfId-1003197"></a><a href="noise_library.html#51092">RAM Cells</a></li><li>
+<a id="pgfId-1017483"></a><a href="noise_library.html#13068">User-Defined Noise Models</a></li><li>
+<a id="pgfId-1003235"></a><a href="noise_library.html#12357">Filler/Antenna/Decoupling Cells</a></li><li>
+<a id="pgfId-1017494"></a><a href="noise_library.html#97858">Sequential and Combinational Cells</a></li><li>
+<a id="pgfId-1003254"></a><a href="noise_library.html#43023">Level-Shifter Cells</a></li></ul>
+
+
+
+
+
+
+<h4><em>
+<a id="pgfId-1003273"></a><a id="98624"></a>Tiehi and Tielo Cells</em></h4>
+
+<p>
+<a id="pgfId-1003283"></a>While characterizing tiehi and tielo cells, ensure the following:</p>
+<p>
+<a id="pgfId-1003293"></a>Use the default value for port pull-up and pull-down resistance by setting the <code>port_vdd_r</code> and <code>port_gnd_r</code> variables to 1, respectively.</p>
+<p>
+<a id="pgfId-1003309"></a>Specify the tiehi and tielo cells using the <code>-cell_list</code> option of the <code>generate_cell_lib</code> command.</p>
+<p>
+<a id="pgfId-1003323"></a>The following example shows how to characterize tiehi and tielo cells:</p>
+
+<a id="pgfId-1003333"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+message_handler -set_msg_level DEFAULT</code></pre>
+<a id="pgfId-1003343"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+ </code></pre>
+<a id="pgfId-1003353"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_parm port_vdd_r 1</code></pre>
+<a id="pgfId-1003363"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_parm port_gnd_r 1</code></pre>
+<a id="pgfId-1003373"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+ </code></pre>
+<a id="pgfId-1003383"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_supply -vdd 1.0 -gnd 0.0</code></pre>
+<a id="pgfId-1003393"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+read_dotlib sample.lib</code></pre>
+<a id="pgfId-1003403"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+generate_cell_lib -cell_list { TIEHI TIELO } \</code></pre>
+<a id="pgfId-1003413"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+                  -vdd { VDD } -gnd { VSS VSS1 } \</code></pre>
+<a id="pgfId-1003423"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+                  -file_list { net.SPICE.TT } \</code></pre>
+<a id="pgfId-1003433"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+                  -file sample.cdB \</code></pre>
+<a id="pgfId-1003443"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+                  -text </code></pre>
+<h4><em>
+<a id="pgfId-1003453"></a><a id="51092"></a>RAM Cells</em></h4>
+
+<p>
+<a id="pgfId-1003463"></a>The cdB generated by <code>make_cdB</code> contains a cell-level and a transistor-level view. The transistor-level view is necessary to propagate the noise through the cdB&#39;s and apply propagation based noise filtering. In case of large cells, such as RAM (memory) cells, the transistor-level view contains only the peripheral transistors connected to the pots of the cell. This allows the signal integrity analyzer to propagate noise one level into the cell.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1003474"></a>Characterizing large cells, such as RAM cells using <code>make_cdB</code> and using the generated cdB for signal integrity analysis, might result in high runtime. If the memory block has less than 100K transistors, <code>make_cdB</code> can characterize it in the normal way. However, when the macro size increases, it might be necessary to remove the core of the macro or memory block. This is because <code>make_cdB</code> flattens the block before it performs calibration. The flattening process can consume a lot of memory, often more than what is available, resulting in an early termination of calibration.</div>
+<p>
+<a id="pgfId-1003492"></a>To characterize RAM cells, identify the core of the memory and remove the core bits. A typical RAM cell contains six transistors for a bit. The following is an example of a typical RAM cell:</p>
+
+<a id="pgfId-1003502"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+.SUBCKT CELL WL BL BLB VDD VSS </code></pre>
+<a id="pgfId-1003512"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+XI TT BB VDD INV LN=0.10 WN=0.20 LP=0.15 WP=0.15 </code></pre>
+<a id="pgfId-1003522"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+MN2 BL WL TT VSS NM L=0.15 W=0.15 </code></pre>
+<a id="pgfId-1003532"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+MN1 BLB WL BB VSS NM L=0.15 W=0.15 </code></pre>
+<a id="pgfId-1003542"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+X2 BB TT VDD INV LN=0.10 WN=0.20 LP=0.15 WP=0.15</code></pre>
+<a id="pgfId-1003552"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+.ENDS</code></pre>
+
+<p>
+<a id="pgfId-1003562"></a>To remove the core bits, you can delete all the lines between <code>.SUBCKT</code> and <code>.ENDS</code>. Alternatively, you can create an empty <code>.SUBCKT</code> for the cell and store it in a separate file, which will be called before the main SPICE file to replace the RAM cell in the netlist. The following is an example of an empty SUBCKT for this cell:</p>
+
+<a id="pgfId-1003588"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+*title line </code></pre>
+<a id="pgfId-1003598"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+.SUBCKT CELL WL BL BLB VDD VSS </code></pre>
+<a id="pgfId-1003608"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+.ENDS</code></pre>
+
+<p>
+<a id="pgfId-1003618"></a>When this SUBCKT is properly loaded, all the bit cells are empty. The remaining control logic is characterized by <code>make_cdb</code> for use in the signal integrity analysis. The <code>make_cdb</code> characterization runtime can be minimized by removing as much of the core of the memory as is possible. All that needs to remain is at least two series cells from the boundary pins of the memory block for proper characterization by <code>make_cdb</code>. Assuming that you have created an empty SUBCKT and stored it in a file called <code>dummy_bit_cell.spi</code>, the tcl file for <code>make_cdb</code> will look as follows:</p>
+
+<a id="pgfId-1003638"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_parm port_vdd_r 1 </code></pre>
+<a id="pgfId-1003648"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_parm port_gnd_r 1 </code></pre>
+<a id="pgfId-1003658"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+ </code></pre>
+<a id="pgfId-1003668"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_supply -vdd 1.08 -gnd 0.0 </code></pre>
+<a id="pgfId-1003678"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+ </code></pre>
+<a id="pgfId-1003688"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+#Use the read_dotlib command to extract pin directions from the typical.lib file.</code></pre>
+<a id="pgfId-1003698"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+read_dotlib typical.lib</code></pre>
+<a id="pgfId-1003708"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+ </code></pre>
+<a id="pgfId-1003718"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+# Characterize only the necessary cells (top level cell) by </code></pre>
+<a id="pgfId-1003728"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+# listing the cells in -cell_list option. </code></pre>
+<a id="pgfId-1003738"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+# Avoid using the -all option. Only characterize the needed ones.</code></pre>
+<a id="pgfId-1003748"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+# List all of the vdds and gnds.</code></pre>
+<a id="pgfId-1003758"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+# Load the dummy_bit_cell.spi first using the -bit_cell_list option.</code></pre>
+<a id="pgfId-1003768"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+generate_cell_lib \</code></pre>
+<a id="pgfId-1003778"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+-vdd {VDD} \ 
+
+-gnd {VSS} \ 
+
+-cell_list ram512_4r4s4 \ 
+
+-bit_cell_list { dummy_bit_cell.spi main.spi } \ 
+
+-file ram512_4r4s4.cdB </code></pre>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1003801"></a><code>make_cdb</code> will load the dummy bit cell first, and then it will encounter another subckt by the same name. A warning will be issued that the first definition loaded will be used and the second one will be ignored. This is acceptable, and is the expected behavior.</div>
+
+<h4><em>
+<a id="pgfId-1003814"></a><a id="13068"></a>User-Defined Noise Models</em></h4>
+
+<p>
+<a id="pgfId-1003824"></a>If you have an analog block that has one or more analog pins, <code>make_cdb</code> can characterize a user-defined noise model (UDN) for the analog block. This UDN will contain only the cell-level view and there will be no transistor-level view. This cell-level view contains pin capacitance, calibrated input noise threshold, and Vds-Ids curves representing the nonlinear output drive strength. Use the <code>generate_cell_lib</code> command with the <code>-udn_list</code> option to specify a list of cells in the cell library that should only have UDNs. In the following example, the <code>my_analog_cell</code> UDN is specified with the <code>-udn_list</code> option:</p>
+
+<a id="pgfId-1003844"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_parm port_vdd_r 1 </code></pre>
+<a id="pgfId-1003854"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_parm port_gnd_r 1 </code></pre>
+<a id="pgfId-1003864"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+ </code></pre>
+<a id="pgfId-1003874"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_supply -vdd 1.08 -gnd 0.0 </code></pre>
+<a id="pgfId-1003884"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+ </code></pre>
+<a id="pgfId-1003894"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+#Use the read_dotlib command to extract pin directions from the typical.lib file.</code></pre>
+<a id="pgfId-1003904"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+read_dotlib typical.lib</code></pre>
+<a id="pgfId-1003914"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+ </code></pre>
+<a id="pgfId-1003924"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+#Characterize only the necessary cells (top level cell) by listing the cells</code></pre>
+<a id="pgfId-1003934"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+#in udn_list option.</code></pre>
+<a id="pgfId-1003944"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+#All cells in the UDN list must not be included in any other list such as -cell_list. </code></pre>
+<a id="pgfId-1003954"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+#Avoid using the -all option, only characterize the needed ones.</code></pre>
+<a id="pgfId-1003964"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+#List all of the vdds and gnds.</code></pre>
+<a id="pgfId-1003974"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+#Load the dummy subckts first using the -file_list option.</code></pre>
+<a id="pgfId-1003984"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+generate_cell_lib \</code></pre>
+<a id="pgfId-1003994"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+-vdd {VDD} \ 
+
+-gnd {VSS} \ 
+
+-udn_list { my_analog_cell }\ 
+
+-file_list { main.spi } \ 
+
+-file analog_SS_1.08V_125C.cdB 
+</code></pre>
+<h4><em>
+<a id="pgfId-1004019"></a><a id="12357"></a>Filler/Antenna/Decoupling Cells</em></h4>
+
+<p>
+<a id="pgfId-1004029"></a>A filler cell is a cell for which the only thing characterized by <code>make_cdb</code> is pin capacitance. Filler cells are also called antenna or decoupling cells. No noise reporting is done for a filler cell. Input pins will have just the capacitance and a very high input noise tolerance. The high input noise tolerance will prevent any failures from being reported for the input pins of this cell. These cells do not have active output drivers and often do not have synthesis library definitions. Declare the port direction on the ports of these cells using the <code>set_port</code> command when no synthesis library definition is available. The following example illustrates characterization for the <code>ANTENNA</code> filler cell using the <code>-filler_list</code> option:</p>
+
+<a id="pgfId-1004047"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_parm port_vdd_r 1 </code></pre>
+<a id="pgfId-1004057"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_parm port_gnd_r 1 </code></pre>
+<a id="pgfId-1004067"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+ </code></pre>
+<a id="pgfId-1004077"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_port -dir in ANTENNA I </code></pre>
+<a id="pgfId-1004087"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_supply -vdd 1.2 -gnd 0.0 </code></pre>
+<a id="pgfId-1004097"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+read_dotlib Antenna.lib</code></pre>
+<a id="pgfId-1004107"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+generate_cell_lib \</code></pre>
+<a id="pgfId-1004117"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+-vdd {VDD} \ 
+
+-gnd {VSS GND 0 } \ 
+
+-filler_list { ANTENNA } \ 
+
+-file_list { main.spi } \ 
+
+-file ANTENNA_TT_1.2V_25C.cdB 
+</code></pre>
+<h4><em>
+<a id="pgfId-1004142"></a><a id="97858"></a>Sequential and Combinational Cells</em></h4>
+
+<p>
+<a id="pgfId-1004152"></a>The procedure for characterizing sequential and combinational cells is the same as characterizing any other standard cell. The following example illustrates how to characterize sequential and combinational cells by specifying the <code>DFF1CK_G34</code> sequential cell and the <code>XORF201_G18</code> combinational cell with the <code>-cell_list</code> option:</p>
+
+<a id="pgfId-1004168"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_parm port_vdd_r 1 </code></pre>
+<a id="pgfId-1004178"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_parm port_gnd_r 1 </code></pre>
+<a id="pgfId-1004188"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+ </code></pre>
+<a id="pgfId-1004198"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_supply -vdd 1.08 -gnd 0.0 </code></pre>
+<a id="pgfId-1004208"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+read_dotlib typical.lib</code></pre>
+<a id="pgfId-1004218"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+ </code></pre>
+<a id="pgfId-1004228"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+generate_cell_lib \</code></pre>
+<a id="pgfId-1004238"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+-vdd {VDD} \ 
+
+-gnd {VSS} \ 
+
+-cell_list { DFF1CK_G34 XORF201_G18 } \ 
+
+-file_list { main.spi } \ 
+
+-file out.cdB 
+</code></pre>
+<h4><em>
+<a id="pgfId-1004263"></a><a id="43023"></a>Level-Shifter Cells</em></h4>
+
+<p>
+<a id="pgfId-1004273"></a>To characterize a level-shifter cell, use the <code>set_supply</code> command to specify the nominal voltage and the <code>set_net</code> command to specify the other voltage values.</p>
+<p>
+<a id="pgfId-1004287"></a>The following example shows how to characterize a level-shifter cell:</p>
+
+<a id="pgfId-1004297"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+# Specify the voltages that will be used to characterize each cell.</code></pre>
+<a id="pgfId-1004307"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_supply -vdd 1.08 -gnd 0</code></pre>
+<a id="pgfId-1004317"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+ </code></pre>
+<a id="pgfId-1004327"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+# Specify the voltages for all non-nominal supplies.</code></pre>
+<a id="pgfId-1004337"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_net -vdd 2.0 vdd2v</code></pre>
+<a id="pgfId-1004347"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_net -vdd 3.0 vdd3v</code></pre>
+<a id="pgfId-1004357"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+ </code></pre>
+<a id="pgfId-1004367"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+# Load the timing library.</code></pre>
+<a id="pgfId-1004377"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+read_dotlib level_shifter.lib</code></pre>
+<a id="pgfId-1004387"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+ </code></pre>
+<a id="pgfId-1004397"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+# Generate the noise library for all the cells.</code></pre>
+<a id="pgfId-1004407"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+generate_cell_lib \ 
+
+-cell_list {low2high high2low} \ 
+
+-file_list {main.sp} \ 
+
+-vdd {vdd2v vdd3v vdd} \ 
+
+-gnd {vss} \ 
+
+-file level_shifter.cdB \ 
+
+-text </code></pre>
+
+<p>
+<a id="pgfId-1004437"></a>In the above example:</p>
+<p>
+<a id="pgfId-1004447"></a>The nominal voltage is 1.08V (for vdd).</p>
+<p>
+<a id="pgfId-1004457"></a>There is a 2V supply (<code>vdd2v</code>) and a 3V supply (<code>vdd3v</code>) for the level-shifter as well.</p>
+<p>
+<a id="pgfId-1004471"></a>The main.sp file contains: </p>
+
+<a id="pgfId-1017817"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+* top line is always a comment line
+
+.inc models.sp
+
+.inc level_shifter.sp
+
+.temp 125</code></pre>
+<h4>
+<a id="pgfId-1004494"></a><a id="71514"></a>Multi-Voltage Characterization</h4>
+
+<p>
+<a id="pgfId-1004504"></a>To create a cdB file with cells characterized for multiple voltages, use the <code>set_supply</code> command to specify each voltage. The following example will characterize each cell with VDD listed at <code>1.08V</code>, <code>2.0V</code>, and <code>3.0V</code> and each cell with <code>VDD25</code> at <code>1.5V</code>, <code>2.5V</code>, and <code>3.5V</code>.</p>
+
+<a id="pgfId-1017954"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+# Specify the supply values for characterization</code></pre>
+<a id="pgfId-1017955"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+</code></pre>
+<a id="pgfId-1017956"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_supply -vdd 1.08 -gnd 0</code></pre>
+<a id="pgfId-1017958"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_supply -vdd 2.0 -gnd 0</code></pre>
+<a id="pgfId-1017960"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_supply -vdd 3.0 -gnd 0</code></pre>
+<a id="pgfId-1017962"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_net -nomvdd 2.5 VDD25</code></pre>
+<a id="pgfId-1017964"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_net -nomvdd 3.5 VDD25</code></pre>
+<a id="pgfId-1017966"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+set_net -nomvdd 1.5 VDD25</code></pre>
+<a id="pgfId-1017967"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+</code></pre>
+<a id="pgfId-1017970"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+# Generate the noise library for each cell.</code></pre>
+<a id="pgfId-1017972"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+# Each cell will be characterized at the above voltages.</code></pre>
+<a id="pgfId-1017974"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+generate_cell_lib \</code></pre>
+<a id="pgfId-1017977"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+-cell_list {</code></pre>
+<a id="pgfId-1017979"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+BUF</code></pre>
+<a id="pgfId-1017981"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+DFF</code></pre>
+<a id="pgfId-1017983"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+NV</code></pre>
+<a id="pgfId-1017985"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+CLKBUF</code></pre>
+<a id="pgfId-1017987"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+LVLSHFT</code></pre>
+<a id="pgfId-1017989"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+} \</code></pre>
+<a id="pgfId-1017990"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+</code></pre>
+<a id="pgfId-1017991"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+-vdd { VDD VDD25 } \</code></pre>
+<a id="pgfId-1017993"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+-gnd { VSS } \</code></pre>
+<a id="pgfId-1017995"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+-file_list {</code></pre>
+<a id="pgfId-1017997"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+main.spi</code></pre>
+<a id="pgfId-1017999"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+subckts</code></pre>
+<a id="pgfId-1018001"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+}\</code></pre>
+<a id="pgfId-1018002"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+</code></pre>
+<a id="pgfId-1018003"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+-synlib cell_w.lib \</code></pre>
+<a id="pgfId-1018005"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+-file sample.cdB \</code></pre>
+<a id="pgfId-1004530"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+-text</code></pre>
+<h4>
+<a id="pgfId-1004698"></a><a id="97065"></a>Generating an ECSM-Noise Liberty Library</h4>
+
+<p>
+<a id="pgfId-1004708"></a>To generate a Liberty (<code>.lib</code>) library that contains effective current source model (ECSM)-based noise data, use the <code>-ecsm_si</code> option of the <code>generate_cell_lib</code> command.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1004722"></a>Ensure that you specify the input Liberty library using the <code>read_dotlib</code> command.</div>
+<p>
+<a id="pgfId-1004736"></a>The following example shows how to generate a Liberty file with ECSM-noise extensions:</p>
+
+<a id="pgfId-1004746"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+read_dotlib test.lib</code></pre>
+<a id="pgfId-1004756"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+generate_cell_lib \
+    -vdd {vdd vcc} \
+    -gnd {gnd vss} \
+    -cell_list { \
+        inv buf \
+        } \
+    -file_list { \
+       main.sp \
+       inv_chain.sp \
+       } \
+    -file lab1.sp \
+    -ecsm_si</code></pre>
+
+<p>
+<a id="pgfId-1004766"></a>The above script generates the following files:</p>
+<ul><li>
+<a id="pgfId-1004776"></a><code>make_cdbtest.lib</code>: Contains the ECSM-noise data.</li><li>
+<a id="pgfId-1004787"></a><code>lab1.sp</code>: Contains the SPICE model and subckt information in encrypted format.<br /><div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1004797"></a>To generate the SPICE model and subckt information in text format, use the 
+<code>-text</code> option.</div></li></ul>
+
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1004810"></a>After you generate the above files, you can load them in Encounter Timing System to perform signal integrity analysis. You must load the library and SPICE files in Encounter Timing System using the following commands:</div>
+
+<a id="pgfId-1004822"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+read_lib make_cdbtest.lib</code></pre>
+<a id="pgfId-1004832"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+read_lib -cdb lab1.sp</code></pre>
+<h4>
+<a id="pgfId-1004842"></a><a id="28649"></a>Guidelines for Characterizing Large Cells</h4>
+
+<ul><li>
+<a id="pgfId-1004852"></a>Avoid memory and performance-related issues. <br />
+<a id="pgfId-1018141"></a>Try characterizing subsets of cells at a time. If all the cdB noise libraries need to be in one file, use the <code>merge_cdb</code> command after you have generated the cdB noise libraries for these subsets.</li><li>
+<a id="pgfId-1004875"></a>Avoid putting too much information into the cdB noise library. <br />
+<a id="pgfId-1018153"></a>For noise analysis, the peripheral transistors of the cell are of primary importance. You can set the <code>-maxsize</code> option to a low value and force <code>make_cdB</code> to strip off the non-critical transistors of the cell, and keep only the peripheral ones.</li><li>
+<a id="pgfId-1004891"></a>Avoid using UDNs in the signal integrity analyzer whenever possible. <br />
+<a id="pgfId-1018174"></a>For large cells, such as memories, it is recommended that you black-box the bit cell for cdB characterization in <code>make_cdB</code> and then use the resulting cdB for signal integrity analysis. However, for a purely analog block, it is recommended that you use UDNs. For detailed explanation on how to characterize large macros, such as memories, see <a href="noise_library.html#51092">RAM Cells</a>.</li><li>
+<a id="pgfId-1004914"></a>Avoid processing large channel-connected regions of transistors by setting the following global variables to small values:<ul><li>
+<a id="pgfId-1004923"></a><a href="globals.html#28081">ccc_max_ports</a></li><li>
+<a id="pgfId-1004942"></a><a href="globals.html#47988">ccc_max_fets</a></li><li>
+<a id="pgfId-1004961"></a><a href="globals.html#13130">ccc_max_nets</a></li><li>
+<a id="pgfId-1004980"></a><a href="globals.html#51655">large_ccc_max_fets</a></li></ul></li></ul>
+
+
+
+
+
+
+
+
+
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="preface.html" id="prev" title="Preface">Preface</a></em></b><b><em><a href="commands.html" id="nex" title="make_cdB Commands">make_cdB Commands</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

@@ -1,0 +1,206 @@
+
+<html><head><title>Hierarchical ECO Optimization</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845238" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Hierarchical ECO Optimization" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845238" />
+<meta name="NextFile" content="SignoffECO_highcapacityecoflow.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="SignoffECO_besttotalpower.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- Hierarchical ECO Optimization" />
+<meta name="Keywords" content="hierarchical eco optimization,master clone design" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="ECO,Stylus" />
+<meta name="prod_subfeature" content="ECO" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="SignoffECO_besttotalpower.html" title="Recommendations for Getting Best Total Power Optimization">Recommendations for Getting Be ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="SignoffECO_highcapacityecoflow.html" title="High Capacity ECO Flow for Timing and Power Closure">High Capacity ECO Flow for Tim ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:hierarchicaleco" title="Hierarchical ECO Optimization"></a><style>/*<![CDATA[*/
+/**/
+/**/
+/**/
+/**/
+h1 { counter-reset: heading 8;}
+/**/
+/**/
+/**/
+/**/
+/*]]>*/</style><h2>
+<a id="pgfId-1002898"></a><a id="82909"></a>Hierarchical ECO Optimization</h2>
+
+<p>
+<a id="pgfId-1002907"></a>Very large netlists are usually not implemented flat since the memory usage and runtime would be too large to be productive. In such a case, you apply a hierarchical flow methodology, either bottom-up or top-down, where the top-level netlist and the block-level netlist are implemented in parallel. Once those independent netlists are implemented, you have to assemble the design to perform signoff timing analysis in full flat mode, meaning that the entire design is timed. Most of the time this full flat signoff timing analysis will reveal timing violations on the timing path between top-level and partitions, or even only between partitions. This can be explained by the fact that the input/ouput timing constraints at the block level never models the required time from the top level perfectly, but also because at the top level, each partition is represented by a timing model, which is also never fully accurate. In order to fix those timing violations, the solution is to run the Tempus ECO feature to perform hierarchical chip finishing.</p>
+<p>
+<a id="pgfId-1002916"></a>On a hierarchical design, you have the flexibility to optimize timing only at the top level, or on the top-level and block-level netlists. You can apply the <code>dont_touch</code> attribute on the modules that should not be touched by ECO fixing. The output of the <code>opt_signoff</code> command is an ECO file for the top level and for each identified partition, so that you can go back to implement those ECOs in each of the respective netlists.</p>
+<p>
+<a id="pgfId-1002932"></a>On a hierarchical design, the buffering happens in logical and physical hierarchy-aware mode. This also implies that the partitions&#39; interface remain unchanged.</p>
+<p>
+<a id="pgfId-1002941"></a>In order to perform hierarchical chip finishing in Tempus, there are two main phases that need to be correctly set up:</p>
+<ul><li>
+<a id="pgfId-1002950"></a>Assembling the design
+First, the top-level and all block-level verilog must be loaded in Tempus. Then, the <a href="../tempusCUI/read_hierarchical_def.html">read_hierarchical_def</a> command will merge the top-level DEF and all the block-level DEF files. Next, the <code>read_spef</code> command loads the top-level SPEF and all block-level DEFs for every corner.</li><li>
+<a id="pgfId-1002963"></a>Specifying which modules should be treated as partitions
+In order for the tool to know which modules should be treated as partitions, you have to provide the list of those module cells through an external file. This is done using <code></code><code>set_db</code> <a href="../tempusCUI/opt_signoff_Category_Attributes.html">opt_signoff_partition_list_file</a> <span class="webflare-courier-new" style="white-space:pre"><em>file</em></span>.</li></ul>
+
+
+
+
+<h4>
+<a id="pgfId-1002978"></a><a id="88781"></a>Sample Script for Hierarchical Flow</h4>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3702081"></a><a href="../tempusCUI/read_libs.html">read_libs</a> $liberty<br /><a href="../tempusCUI/read_mmmc.html">read_mmmc</a> filename.tcl<br /><a href="../tempusCUI/read_netlist.html">read_netlist</a> &quot;my_top.v pnt1.v pnt2.v&quot;<br /><a href="../tempusCUI/init_design.html">init_design<br /></a>source timing_settings_and_derating.tcl<br /><a href="../tempusCUI/read_hierarchical_def.html">read_hierarchical_def</a> &quot;my_top.def pnt1.def pnt2.def&quot;read_spef -rc_corner rc_max &quot;my_top_max.spef ptn1_max.spef ptn2_max.spef&quot;<br />read_spef -rc_corner rc_min1 &quot;my_top_min1.spef ptn1_min1.spef ptn2_min1.spef&quot;<br />read_spef -rc_corner rc_min2 &quot;my_top_min2.spef ptn1_min2.spef ptn2_min2.spef&quot;<br />set_db opt_signoff_buffer_cell_list &quot;BUFX1 BUFX2 BUFX8 DLYX1 DLYX4&quot;<br />set_db opt_signoff_read_eco_opt_db myECODB<br />set_db opt_signoff_partition_list_file partition.txt<br />opt_signoff -hold</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1450686"></a></pre>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1003047"></a>You must provide the pointer to the ECO Timing database using <code>set_db opt_signoff_read_eco_opt_db</code> since <code>opt_signoff</code> cannot do it in batch mode for hierarchical designs.</div>
+
+
+
+<h4>
+<a id="pgfId-1003065"></a><a id="51403"></a>Optimization of Master/Clone Designs</h4>
+
+<p>
+<a id="pgfId-1003074"></a>The intent of the Master/Clone design methodology is to build common blocks once and instantiate them multiple times. It is also called a hierarchical implementation with Master/Clones. This methodology allows the duplicated functionality within a chip to be built and verified once, and then instantiated multiple times, thus reducing work load and data storage. Keeping a non-uniquified netlist makes the scope and breadth of late logic changes easier. The logic changes would then be limited to a subset of the chip, reducing the critical path turnaround time and amount of re-verification required to achieve final signoff.</p>
+<p>
+<a id="pgfId-1003083"></a>A cloned block is implemented so that it can operate in the worst-case corner scenario in any of its instantiation but once assembled in its top level, the full flat STA might reveal new timing violations. Master/Clone timing optimization is needed because each clone can have:</p>
+<ul><li>
+<a id="pgfId-1003092"></a>Different physical environments (such as different IO loads )</li><li>
+<a id="pgfId-1003101"></a>Different timing environments (such as change in clock slew/skew/OCV between blocks and flat)</li><li>
+<a id="pgfId-1003110"></a>Different signal integrity environments</li></ul>
+
+
+<p>
+<a id="pgfId-1003119"></a>The Master/Clone timing optimization capability in Signoff ECO is able to fix timing violations and optimize timing in the replicated modules while earlier those would have been treated as <code>dont_touch</code>. Any netlist change will be checked against each clone&#8217;s timing and physical context to ensure that no violations are created. Some of the benefits of Master/Clone timing optimization are:</p>
+<ul><li>
+<a id="pgfId-1003132"></a>Top and CPUs are optimized<br />
+<a id="pgfId-1003141"></a><div class="webflare-div-image">
+<img width="298" height="227" src="images/SignoffECO-8.gif" /></div></li><li>
+<a id="pgfId-1003157"></a>One ECO file for all CPUs</li><li>
+<a id="pgfId-1011719"></a>Generated ECOs are valid for each CPU&#39;s timing context</li><li>
+<a id="pgfId-1003175"></a>Optimal timing closure for full flat timing</li></ul>
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-1003184"></a>The use model for running ECO timing closure on a hierarchical design with unique or replicated instances is the same. </p>
+
+
+
+
+<p class="webflare-indent1"><strong>Figure -7
+<a id="pgfId-1003202"></a>: Illustration of Master Clone Implementation </strong></p>
+
+<p>
+<a id="pgfId-1003214"></a></p>
+<div class="webflare-div-image">
+<img width="667" height="259" src="images/SignoffECO-9.gif" /></div>
+
+<ul><li>
+<a id="pgfId-1003230"></a>Physical/timing context is different for every clone boundary</li><li>
+<a id="pgfId-1003239"></a>Timing optimization works on any kind of path:<ul><li>
+<a id="pgfId-1003257"></a>from FF1 to FF2 on all clones or inter-clones paths too (if any)</li><li>
+<a id="pgfId-1003266"></a>from Top/T1 to Block1/FF1 and from Top/T1 to Block2/FF2</li><li>
+<a id="pgfId-1003275"></a>from Block/FF2 to Top/Z1 and from Block/FF2 to Top/Z2</li><li>
+<a id="pgfId-1003284"></a>Paths crossing multiple clones such as Block1/FF2 to Block2/FF1</li></ul></li><li>
+<a id="pgfId-1003293"></a>Buffering can happen on any of the nets, even the nets crossing the clone boundary</li></ul>
+
+
+
+
+
+
+<p>
+<a id="pgfId-1003302"></a>The Master/Clone use model for a design with 2 clones block 1 and block 2 is given below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3702121"></a>read_libs $liberty<br />read_physical -lefs &quot;$techno_lef $all_lef&quot;<br />read_netlist &quot;my_top.v cellA.v&quot;<br />init_design<br />read_hierarchical_def &quot;my_top.def cellA.def&quot;</pre>
+
+<p>
+<a id="pgfId-1464175"></a>Instead of the above commands, you can specify the command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3702136"></a>read_db physical_data top.enc.dat my_top<br />source viewDefinition_and_derating.tcl<br />read_spef -rc_corner rc_max &#8220;my_top_max.spef cellA_max.spef&#8221;<br />read_spef -rc_corner rc_min1 &#8220;my_top_min1.spef cellA_min1.spef&#8221;<br />read_spef -rc_corner rc_min2 &#8220;my_top_min2.spef cellA_min2.spef&#8221;<br />set_db  opt_signoff_read_eco_opt_db myECODB<br />set_db opt_signoff_partition_list_file partition.txt</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1505869"></a>Content of <code>partition.txt</code> is:<br /></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3702146"></a>cellA<br />set_db opt_signoff_optimize_replicated_modules true<br />opt_signoff -hold</pre>
+
+<p>
+<a id="pgfId-1464179"></a>To run this flow, you must do the following:</p>
+<ul><li>
+<a id="pgfId-1003365"></a>Specify the <code>opt_signoff_optimize_replicated_modules true</code> attribute of the <code>set_db</code> command to optimize timing in the replicated modules. This also enables leakage optimization in the Master/Clone mode. When this command is specified, a single ECO file is generated for each set of clone.</li><li>
+<a id="pgfId-1003378"></a>Specify an ECO Timing database using <code>set_db opt_signoff_read_eco_opt_db</code> since <code></code>opt_signoff cannot generate it automatically when the design is hierarchical.</li><li>
+<a id="pgfId-1003401"></a>When replicated instances have different orientations, the design must be assembled in Tempus because loading one full flat DEF/Verilog will not work. Or you can also load an assembled DB from Innovus.</li></ul>
+
+
+
+
+
+
+<h4><em>
+<a id="pgfId-2433430"></a>Related Topics</em></h4>
+
+<ul><li>
+<a id="pgfId-2433434"></a><a href="SignoffECO_pathbased.html#76320">Path-Based Analysis (PBA) Mode Optimization</a></li><li>
+<a id="pgfId-2433438"></a><a href="SignoffECO_power.html#27253">Total Power Optimization</a></li><li>
+<a id="pgfId-2433462"></a><a href="SignoffECO_timingrecovery.html#72635">Setup Timing Recovery After Large Leakage or Total Power Optimization</a></li><li>
+<a id="pgfId-2433442"></a><a href="SignoffECO_besttotalpower.html#12292">Recommendations for Getting Best Total Power Optimization</a></li></ul>
+
+
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="SignoffECO_besttotalpower.html" id="prev" title="Recommendations for Getting Best Total Power Optimization">Recommendations for Getting Be ...</a></em></b><b><em><a href="SignoffECO_highcapacityecoflow.html" id="nex" title="High Capacity ECO Flow for Timing and Power Closure">High Capacity ECO Flow for Tim ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

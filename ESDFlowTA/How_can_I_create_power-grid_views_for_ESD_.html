@@ -1,0 +1,127 @@
+
+<html><head><title>How can I create power-grid views for ESD?</title>
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2023-09-20" />
+<meta name="CreateTime" content="1695203913" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="" />
+<meta name="DocTitle" content="ESD Analysis Quick Help" />
+<meta name="DocType" content="Getting Started" />
+<meta name="FileTitle" content="How can I create power-grid views for ESD?" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="ESDFlowTA" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2023-09-20" />
+<meta name="ModifiedTime" content="1695203913" />
+<meta name="NextFile" content="How_can_I_perform_bump-to-bump_ESD_analysis_using_IV_curve_PGV_models_.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Can_I_selectively_load_the_Current_Density__rj__result_directory_for_ESD_EM_analysis_.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="23.10" />
+<meta name="RightsManagement" content="Copyright 2023 Cadence Design Systems Inc." />
+<meta name="Title" content="ESD Analysis Quick Help -- How can I create power-grid views for ESD?" />
+<meta name="Version" content="23.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="ESDFlowTA" />
+<meta name="confluence-version" content="7.4.1" />
+<meta name="ecms-plugin-version" content="04.20.006" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="ESDFlowTATOC.html">Contents</a></li><li><a class="prev" href="Can_I_selectively_load_the_Current_Density__rj__result_directory_for_ESD_EM_analysis_.html" title="Can_I_selectively_load_the_Current_Density__rj__result_directory_for_ESD_EM_analysis_">Can_I_selectively_load_the_Cur ...</a></li><li style="float: right;"><a class="viewPrint" href="ESDFlowTA.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="How_can_I_perform_bump-to-bump_ESD_analysis_using_IV_curve_PGV_models_.html" title="How_can_I_perform_bump-to-bump_ESD_analysis_using_IV_curve_PGV_models_">How_can_I_perform_bump-to-bump ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>ESD Analysis Quick Help<br />Product Version 23.10, November 2023</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>How can I create power-grid views for ESD?</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span>The PGVs are preprocessed cell library databases that contain cell geometries and parasitics required for ESD analysis. It is essential to tag the ESD cells in the PGVs because they contain cell pin information and ESD device electrical characteristics like RON/ROFF or IV curves required to perform non-linear ESD analysis. </span></p>
+
+<p><span>To create PGVs for ESD cells, the following parameters of the <code>set_advanced_pg_library_mode</code> command are specified:</span></p>
+<div class="table-wrap"><table class="relative-table wrapped confluenceTable" style="width: 85.5818%;"><colgroup><col style="width: 22.6907%;" /><col style="width: 77.3422%;" /></colgroup><tbody><tr><th class="confluenceTh">Parameter Name</th><th class="confluenceTh">Description</th></tr>
+<tr><td class="confluenceTd" colspan="2"><code>-esd_cells {<em>cell_list</em>}</code> <br /><code>-esd_cells_list_file {<em>esd_cell_list.txt</em>}</code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">
+<p>Specifies the list of ESD cells used in the design.&#160;</p>
+
+<p><strong>File Format</strong>:<br /><code><em>clamp_cell_name</em> <em>clamp_type</em>
+#clamp type can be used to group clamps</code></p>
+
+<p><strong>Example of&#160;<code>-esd_cells_list_file</code> file</strong>:<br /><code>esd_decap_vdd       CLAMPIO <br />esd_decap_core      CLAMPCORE</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-esd_pin_list&#160;<em>{pin1 pin2</em> ....<em>pinN</em>}</code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">Specifies the list of ESD pins in the ESD cell.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-esd_parameters_file <em>filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">
+<p>Specifies the electrical characteristics of the ESD cells.</p>
+
+<p><strong>File Format</strong>:<br /><code>Cell <em>cell_name</em>&#160; <em>Ron</em> <em>Roff</em> <em>power_pin</em> <em>ground_pin</em> <em>voltage</em></code><br /><code>Type <em>esd_cell_type</em> <em>Ron</em> <em>Roff</em> <em>power_pin ground_pin voltage</em><br /></code></p>
+
+<p><strong>Example of <code>-esd_parameters_file</code> file</strong>:<br /><code>Cell esd_decap_vdd 0.9  10000    vdd_esd     vss_esd      0.4 </code></p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="HowcanIcreatepowergridviewsforESD?-Examples:">Examples:</h4>
+<ul><li><code>set_advanced_pg_library_mode -esd_cells {IOESD} -esd_pin_list {VDD TVDD}</code></li><li class="webflare-courier-new codeContent"><code>set_advanced_pg_library_mode -esd_cells_list_file {esd_cell_list} -esd_parameters_file param_file.txt -esd_pin_list {VDD VSS VDDESD VSSESD}</code><br /><br /></li></ul>
+<p><strong>Related Content</strong>:</p>
+<ul><li><a class="message-url" href="../voltusUG/esd.html#firstpage">Performing ESD Analysis</a>&#160;<span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail confluence-external-resource" data-image-src="https://rdwiki.cadence.com/download/thumbnails/276924869/CH_arrow.png?version=1&amp;modificationDate=1562658099000&amp;api=v2" src="attachments/thumbnails/276924869/291374253" width="20" /></span></li><li><a href="How_can_I_perform_bump-to-bump_ESD_analysis_using_IV_curve_PGV_models_.html">How can I perform bump-to-bump ESD analysis using IV curve PGV models?</a></li></ul><!--TASK_ASSISTANT_CONTENT_END-->
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Can_I_selectively_load_the_Current_Density__rj__result_directory_for_ESD_EM_analysis_.html" id="prev" title="Can_I_selectively_load_the_Current_Density__rj__result_directory_for_ESD_EM_analysis_">Can_I_selectively_load_the_Cur ...</a></em></b><b><em><a href="How_can_I_perform_bump-to-bump_ESD_analysis_using_IV_curve_PGV_models_.html" id="nex" title="How_can_I_perform_bump-to-bump_ESD_analysis_using_IV_curve_PGV_models_">How_can_I_perform_bump-to-bump ...</a></em></b></nav><div>
+          For further assistance, contact <a href="https://support.cadence.com">Cadence Online Support</a>. Copyright &#169; 2023, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

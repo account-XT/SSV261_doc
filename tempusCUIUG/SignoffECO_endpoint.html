@@ -1,0 +1,210 @@
+
+<html><head><title>Optimization using Endpoint Control</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845239" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Optimization using Endpoint Control" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845239" />
+<meta name="NextFile" content="SignoffECO_metalecoflow.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="SignoffECO_wiretechnologies.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- Optimization using Endpoint Control" />
+<meta name="Keywords" content="optimization using endpoint control" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="ECO,Stylus" />
+<meta name="prod_subfeature" content="ECO" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="SignoffECO_wiretechnologies.html" title="Optimization Along Wire Topologies">Optimization Along Wire Topolo ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="SignoffECO_metalecoflow.html" title="Metal ECO Flow">Metal ECO Flow</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:endpoint" title="Optimization using Endpoint Control"></a><style>/*<![CDATA[*/
+/**/
+/**/
+/**/
+/**/
+h1 { counter-reset: heading 8;}
+/**/
+/**/
+/**/
+/**/
+/*]]>*/</style><h2>
+<a id="pgfId-1003951"></a><a id="83719"></a>Optimization usin<a id="endpointcontrol"></a>g Endpoint Control</h2>
+
+<p>
+<a id="pgfId-1003960"></a>Tempus ECO supports the following ways for path group-based fixing:</p>
+<ol><li>
+<a id="pgfId-1003969"></a>Endpoint-based inclusion/exclusion per view</li><li>
+<a id="pgfId-1003978"></a>Endpoint-specific slack adjustment per view (both positive and negative adjustments)</li><li>
+<a id="pgfId-1003987"></a>Option to fix only register-to-register paths</li></ol>
+
+
+<p>
+<a id="pgfId-1003996"></a>Path group support for Tempus ECO can be used for hold or setup fixing.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1004005"></a>This feature is currently not supported for DRV or leakage optimization.</div>
+<p>
+<a id="pgfId-1004015"></a><strong>1. Endpoint-based inclusion/exclusion per view</strong></p>
+<p>
+<a id="pgfId-1004025"></a>You can specify endpoints that need to be included or excluded during the optimization for a view with the following <a href="../tempusCUI/set_db.html">set_db</a><code> </code>attributes:</p>
+<ul><li>
+<a id="pgfId-3702424"></a><code><a href="../tempusCUI/opt_signoff_Category_Attributes.html"></a><code>opt_signoff_select_hold_endpoints</code></code></li><li>
+<a id="pgfId-3702426"></a><code><a href="../tempusCUI/opt_signoff_Category_Attributes.html"></a></code><code>opt_signoff_select_setup_endpoints</code></li></ul>
+
+<p>
+<a id="pgfId-1004057"></a><strong>File format:</strong></p>
+
+<a id="pgfId-1004067"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+&lt;View&gt; include/exclude &lt;Endpoints&gt;</code></pre>
+
+<p>
+<a id="pgfId-1004077"></a><code>&lt;View&gt;</code> can be specified as either viewName or V* (if the endpoints are to be included/excluded for all views)</p>
+<p>
+<a id="pgfId-1004091"></a><code>&lt;Endpoints&gt;</code> can be specified in three ways:</p>
+<ul><li>
+<a id="pgfId-1004102"></a>As space-separated list of endpoint names: for example, E1 E2 E3.</li><li>
+<a id="pgfId-1004111"></a>Slack range in nanosecond: <code>&lt;minSlack&gt; &lt;maxSlack&gt;</code>, where all endpoints with the slack greater than or equal to <code>minSlack</code> and slack less than or equal to <code>maxSlack</code> will be included/excluded, for example, -2.0 -1.0.</li><li>
+<a id="pgfId-1004134"></a>E*, if all endpoints for the view need to be included/excluded.</li></ul>
+
+
+<b>Note:</b><br />
+<a id="pgfId-1017332"></a><strong></strong>
+<ul><li>
+<a id="pgfId-1017340"></a>When few pins are excluded from the view, those pins cannot be included back even after overriding the excluded pins, as shown in the below example:<br />
+<a id="pgfId-1017412"></a><code>&gt; V* exclude E*</code><br />
+<a id="pgfId-1017421"></a><code>&gt; V* include inst/FF/D </code></li><li>
+<a id="pgfId-1017343"></a>Tempus default behavior refers to the inclusion of all pins for the view, as shown below:<br />
+<a id="pgfId-1017445"></a><code>&gt; V* include E*</code></li><li>
+<a id="pgfId-1017345"></a>Wildcards cannot be used for including/excluding pins, as shown in the below example:<br />
+<a id="pgfId-1017475"></a><code>&gt; V* include inst/FF/*</code><br />
+<a id="pgfId-1017492"></a><code>&gt; V* include inst*/FF/D</code></li><li>
+<a id="pgfId-1017509"></a>You can set exclude endpoints one by one without using any wild card.</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-1004143"></a><strong>Sample configuration files</strong></p>
+<p>
+<a id="pgfId-1004153"></a>The lines starting with # are comments and will be skipped.</p>
+
+<a id="pgfId-1004162"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+File : hold_exclude_example
+# Exclude endpoints EXECUTE_INST/pc_acc_reg/SE and EXECUTE_INST/read_prog_reg/SE from view core+typ-rcMin for hold fixing
+core+typ-rcMin exclude EXECUTE_INST/pc_acc_reg/SE EXECUTE_INST/read_prog_reg/SE</code></pre>
+<a id="pgfId-1004176"></a><pre class="webflare-courier-new webflare-syx-syntax codeContent"><code>
+File : hold_include_example_with_range
+# Include only the endpoints that have slacks &gt;= -0.5 ns and &lt;= 0.04 ns for view core+best-rcTyp for hold fixing
+core+best-rcTyp include -0.5 0.04</code></pre>
+
+<p>
+<a id="pgfId-1004190"></a><strong>2. Endpoint-specific slack adjustment per view</strong></p>
+<p>
+<a id="pgfId-1004200"></a>You can specify slack adjustment (margin) for selected endpoints during optimization for a view with the following <a href="../tempusCUI/set_db.html">set_db</a> attributes:</p>
+<ul><li>
+<a id="pgfId-3702443"></a><code></code><a href="../tempusCUI/opt_signoff_Category_Attributes.html">opt_signoff_set_hold_endpoints_margin</a></li><li>
+<a id="pgfId-3702445"></a><a href="../tempusCUI/opt_signoff_Category_Attributes.html">opt_signoff_set_setup_endpoints_margin</a></li></ul>
+
+<p>
+<a id="pgfId-1004232"></a><strong>File format:</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1004242"></a>&lt;View&gt; &lt;Margin&gt; &lt;Endpoints&gt;</pre>
+
+<p>
+<a id="pgfId-1004252"></a><code>&lt;View&gt;</code> can be specified as either viewName or V* (if the endpoints are to be included/excluded for all views)</p>
+<p>
+<a id="pgfId-1012120"></a><code>&lt;Margin&gt;</code> is specified as a float value in nanosecond. Margin value is subtracted from the endpoint slack, so a positive margin means that the endpoint slack would be degraded by the margin amount.</p>
+<p>
+<a id="pgfId-1004274"></a><code>&lt;Endpoints&gt;</code> can be specified in three ways:</p>
+<ul><li>
+<a id="pgfId-1004285"></a>As space-separated list of endpoint names: for example, E1 E2 E3.</li><li>
+<a id="pgfId-1004294"></a>Slack range in nanosecond: <code>&lt;minSlack&gt; &lt;maxSlack&gt;</code>, where all endpoints with the slack greater than or equal to <code>minSlack</code> and slack less than or equal to <code>maxSlack</code> would be included/excluded: for example, -2.0 -1.0.</li><li>
+<a id="pgfId-1004317"></a>E* if all endpoints for the view need to be included/excluded.</li></ul>
+
+
+<p>
+<a id="pgfId-1004335"></a><strong>Sample configuration files</strong></p>
+<p>
+<a id="pgfId-1004345"></a>The lines starting with # are comments and would be skipped.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1004354"></a>File : hold_margin_allViews_slackRange_example<br /># Apply margin of 0.1 nanosecond to all endpoints that have slacks between -0.07 to -0.03 for all hold views<br />V* 0.1 -0.07 -0.03<br />File : hold_margin_allEndPoints_example<br /># Apply margin of 0.2 nanosecond to all endpoints for hold view core+typ-rcMin<br />core+typ-rcMin 0.2 E*</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1004374"></a>File : hold_margin_selectedEndPoints_example<br /># Apply margin of 0.6 ns to endpoints TDSP_CORE_MACH_INST/phi_6_reg/SE and TDSP_CORE_MACH_INST/phi_1_reg/SE for hold view core+best-rcTyp<br />core+typ-rcMin 0.6 TDSP_CORE_MACH_INST/phi_6_reg/SE TDSP_CORE_MACH_INST/phi_1_reg/SE</pre>
+
+<p>
+<a id="pgfId-1004388"></a><strong>3. Option to fix only register-to-register paths</strong></p>
+<p>
+<a id="pgfId-1004398"></a>You can choose to optimize timing/leakage/area only on register-to-register paths during <code></code><a href="../tempusCUI/opt_signoff.html">opt_signoff</a> with the options specified below. Other path group configurations will be ignored in this mode. The timing for non-register-to-register paths for fixing mode (hold or setup) will be adjusted to 0, but the timing for other mode (setup during hold fixing/hold during setup fixing) is not affected.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1004410"></a><code></code>set_db <a href="../tempusCUI/opt_signoff_Category_Attributes.html">opt_signoff_optimize_core_only</a> &lt;true/false&gt;<br />read_spef &lt;all corner spef files&gt;<br />update_timing &#8211;full<br />report* commands (optional)</pre>
+
+<p>
+<a id="pgfId-1004452"></a>In addition to timing closure, Tempus ECO is also a solution to reduce overall power consumption of the netlist. At Signoff stage, some amount of timing pessimism is removed due to Path Based Analysis, also called retiming, and that extra timing margin can be used to perform netlist change leading to lesser overall power. This is especially beneficial when AOCV or SOCV timing mode are enabled.</p>
+
+
+
+<h4><em>
+<a id="pgfId-2433694"></a>Related Topics</em></h4>
+
+<ul><li>
+<a id="pgfId-2433706"></a><a href="SignoffECO_wiretechnologies.html#90613">Optimization Along Wire Topologies</a></li></ul>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="SignoffECO_wiretechnologies.html" id="prev" title="Optimization Along Wire Topologies">Optimization Along Wire Topolo ...</a></em></b><b><em><a href="SignoffECO_metalecoflow.html" id="nex" title="Metal ECO Flow">Metal ECO Flow</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

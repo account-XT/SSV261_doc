@@ -1,0 +1,200 @@
+
+<html><head><title>write_xpgv</title>
+<meta name="page_sequence" content="26010000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666283" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="write_xpgv" />
+<meta name="Keywords" content="block xPGV,large digital blocks,extreme modeling" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Power-Grid Library Generation," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusTCRcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666283" />
+<meta name="NextFile" content="Placement_Commands_and_Attributes.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="write_tech_pg_lib.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Text Reference Manual  -- write_xpgv" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltuscuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusTCRcomTOC.html">Contents</a></li><li><a class="prev" href="write_tech_pg_lib.html" title="write_tech_pg_lib">write_tech_pg_lib</a></li><li style="float: right;"><a class="viewPrint" href="voltusTCRcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Placement_Commands_and_Attributes.html" title="Placement_Commands_and_Attributes">Placement_Commands_and_Attribu ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Text Reference Manual <br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>write_xpgv</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span id="write_xpgv-write_xpgv"></span><span class="confluence-anchor-link" id="write_xpgv-write_xpgv"></span> <code><br /><code>write_xpgv <br />-cell <em>cell_name</em><br />[<code><code><code><code>-inst_list <em>inst1</em> inst2 .. <em>instn </em></code></code></code></code>]</code></code><code><code><code><code><br />[<code><code><code><code><code><code><code><code>-libgen_include <em>file_name</em></code></code></code></code></code></code></code></code>]<br />[-multi_mode_config <em>config_file</em>]<br />[-output_dir <em>directory_name</em>]<br />[-rail_include <em>file_name</em>]<br />[-reuse_block_state_directory <em>directory_name</em>]<br />-state_directory <em>directory_name</em></code></code></code></code><code><code><br /><br /></code></code></p>
+
+<p>Creates power-grid view (xPGV) models for large digital blocks.The block xPGV can be generated either after the signoff dynamic IR drop analysis or after the dynamic Early Rail Analysis (ERA) of the block. In both cases, the xPGV is generated using the R-C grid of the block and currents captured at the via layer during the analysis. These block-level xPGVs can then be instantiated during the next level of the design or the top-level full-chip analysis. The next level rail analysis will run faster with the block-level xPGVs because these runs use the power-grid that is modeled inside the xPGV.</p>
+
+<p><br /></p>
+<h4 id="write_xpgv-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">Outputs the command usage.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code><code><code><code>-cell <em>cell_name</em></code></code><br /></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p><span style="color:var(--ds-text-accent-blue,#0055cc);"><span style="color:var(--ds-text,#172b4d);"><strong>Default</strong>: None</span><br /></span></p>
+
+<p><span style="color:var(--ds-text-accent-blue,#0055cc);">(<strong>Mandatory</strong>)</span>&#xa0; Specifies the block name for which xPGV model is generated.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code><code><code><code><code><code><code><code>-inst_list <em>inst1</em> inst2 .. <em>instn</em></code></code></code></code></code></code></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p><strong>Default</strong>: None</p>
+
+<p>Specifies the block instances for which xPGV model is generated.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code><code><code><code><code><code><code><code><code><code><code><code><code><code>-libgen_include <em>file_name</em></code></code></code></code></code></code></code></code></code></code></code></code><br /></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p><strong>Default</strong>: None</p>
+
+<p>Specifies a file that includes additional library generation options that will be run for xPGV model generation.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code><code><code><code>-multi_mode_config</code></code></code></code>&#xa0;<em>config_file</em></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p><strong>Default</strong>: None</p>
+
+<p>Specifies to generate a single xPGV model with different functional modes. Using this parameter, you can specify a file that includes the different modes and the mapping state directory for each mode. When&#xa0;<code><code><code><code><code>-multi_mode_config</code></code></code></code></code> is specified, the block-level currents are saved for multiple voltages and frequency (MvMf) per each functional mode in a single PGV.</p>
+
+<p>During xPGV instantiation, the different modes are automatically selected based on the power domain to which each mode is connected.</p>
+
+<p>The format of the <code><em>config_file</em></code> file is:<br /><code>&lt;<em>modeName1</em>&gt;&#xa0; &lt;<em>stateDir_1</em>&gt;</code><br /><code>&lt;<em>modeName2</em>&gt;&#xa0; &lt;<em>stateDir_2</em>&gt;</code><br /><code> &#8230;</code><br /><code>&lt;<em>modeNameN</em>&gt;&#xa0; &lt;<em>stateDir_N</em>&gt;</code></p>
+
+<p>Before generating MvMf-xPGV, you need to perform multiple rail analysis runs for different corners to generate different state directories (stateDir_*) to be included in the configuration file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code><code><code><code><code><code>-output_dir <em>directory_name</em></code></code></code></code> <br /></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p><strong>Default</strong>: current working directory</p>
+
+<p>Specifies the name of the output directory in which the power-grid library report is created.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code><code><code><code><code><code><code>-rail_include <em>file_name</em></code></code></code></code></code></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p><strong>Default</strong>: None</p>
+
+<p>Specifies a file that includes additional rail analysis options that will be run for xPGV model generation.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code><code><code><code><code><code>-reuse_block_state_directory <em>directory_name</em></code></code></code></code> </code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p><strong>Default</strong>: None</p>
+
+<p>Specifies an existing rail analysis state directory to skip block extraction. The software assumes that the design data (DEFs and GDS) and power-grid libraries are not changed, and will generate xPGV using the extraction data inside the specified state directory. If the state directory does not contain the necessary design and power-grid database files, it will issue an error message and provide information on the missing files.</p>
+
+<p>The <code><code><code><code><code><code><code><code>-reuse_block_state_directory</code></code></code></code></code></code></code></code> parameter is used if the entire design that is analyzed in the rail run should be used to create the xPGV. However, this parameter must not be used in case you require to generate xPGVs for each instance (sub-blocks) of a block. That is, for generating xPGVs for the sub-blocks B and C of the block A (rail analysis was performed on block A), you need to re-extract the block-level grids of B and C as part of xPGV generation for accurate current calculation. In this case, <code>-reuse_block_state_directory</code> must not be specified.</p>
+
+<p>For net based analysis, you should specify net-based state directory, as shown below:</p>
+<ul><li><code><code><code>write_xpgv</code></code>&#xa0;<code><code><code><code><code><code><code><code>-reuse_block_state_directory</code></code></code></code></code></code></code></code> <em>VDD_25C_avg_1</em> </code></li></ul>
+<p>For domain based analysis, you should specify the domain&#39;s state directory, as shown below:</p>
+<ul><li><code><code><code>write_xpgv</code></code>&#xa0;<code><code><code><code><code><code><code><code>-reuse_block_state_directory</code></code></code></code></code></code></code></code> <em>domain_25C_dynamic_1</em> </code></li></ul>
+<p>A new state directory will be generated for the new analysis with soft links to the old state directory files that were reused.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code><code><code><code><code><code><code><code><code>-state_directory <em>directory_name</em></code></code></code></code></code></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="1">
+<p><strong>Default</strong>: None</p>
+
+<p><span style="color:var(--ds-text-accent-blue,#0055cc);">(<strong>Mandatory</strong>)</span> Specifies the path to the rail analysis state directory.</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><br /></p>
+<h4 id="write_xpgv-Examples">Examples</h4>
+<ul><li>
+<p>The following command creates a xPGV library <code><code><code>hier_block.cl</code></code></code>: <br /><code><code><code>write_xpgv -state_directory dynamic_rail/core_125C_dynamic_1/ -cell hier_block -output_dir ../xpgv/</code></code></code></p>
+</li><li>The following command creates an xPGV library&#xa0;<code>super_filter_A</code> with multiple functional modes specified in the <code>mode.config</code> file: <br /><code>write_xpgv -cell super_filter_A&#xa0;<code><code><code><code><code><code>-multi_mode_config</code></code></code></code></code></code> mode.config -output_dir ./mode_mvmf -rail_include rail.inc</code><br />The following is a snippet from the mode.config file:<br /><code>label1 dynamic_rail/core_25C_dynamic_1</code><br /><code>lable2 dynamic_rail/core_25C_dynamic_1</code></li></ul><h4 id="write_xpgv-RelatedTopics">Related Topics</h4>
+<ul><li>&quot;<u>Power-Grid Library Generation</u>&quot; in the&#xa0;<em>Voltus User Guide</em></li></ul>
+<p></p>
+
+<p><br /></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="write_tech_pg_lib.html" id="prev" title="write_tech_pg_lib">write_tech_pg_lib</a></em></b><b><em><a href="Placement_Commands_and_Attributes.html" id="nex" title="Placement_Commands_and_Attributes">Placement_Commands_and_Attribu ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

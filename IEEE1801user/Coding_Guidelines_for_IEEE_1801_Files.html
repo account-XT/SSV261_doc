@@ -1,0 +1,338 @@
+
+<html><head><title>Coding Guidelines for IEEE 1801 Files</title>
+<meta name="page_sequence" content="14000000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="eastham" />
+<meta name="CreateDate" content="2026-03-25" />
+<meta name="CreateTime" content="1774430428" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes how to capture power intent for your design using IEEE 1801, and includes a list of 1801 commands and options supported across Cadence tools." />
+<meta name="DocTitle" content="IEEE 1801 Cross Platform Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Coding Guidelines for IEEE 1801 Files" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="IEEE1801user" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-03-25" />
+<meta name="ModifiedTime" content="1774430428" />
+<meta name="NextFile" content="" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Creating_an_IEEE_1801_File_for_a_DVFS_Design.html" />
+<meta name="c_product" content="Innovus," />
+<meta name="Product" content="Innovus," />
+<meta name="ProductFamily" content="Innovus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="IEEE 1801 Cross Platform Guide -- Coding Guidelines for IEEE 1801 Files" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="IEEE1801user40" />
+<meta name="confluence-version" content="7.19.19" />
+<meta name="ecms-plugin-version" content="04.21.019" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="IEEE1801userTOC.html">Contents</a></li><li><a class="prev" href="Creating_an_IEEE_1801_File_for_a_DVFS_Design.html" title="Creating_an_IEEE_1801_File_for_a_DVFS_Design">Creating_an_IEEE_1801_File_for ...</a></li><li style="float: right;"><a class="viewPrint" href="IEEE1801user.pdf">View/Print PDF</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>IEEE 1801 Cross Platform Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <div style="width: 100%; font-size: 32px; text-align: left;               font-weight: bold;">3</div>
+<h1 style="margin: 4px 0 4px;"><span>Coding Guidelines for IEEE 1801 Files</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>This chapter describes how to develop IEEE 1801 code that is Cadence-compatible.</p>
+
+<p></p>
+<div class="toc-macro rbtoc1774430328293">
+<ul class="toc-indentation">
+<li><a href="#CodingGuidelinesforIEEE1801Files-Background">Background</a></li>
+<li><a href="#CodingGuidelinesforIEEE1801Files-DefinitionofDomainInterfacedomain_def">Definition of Domain Interface</a></li>
+<li><a href="#CodingGuidelinesforIEEE1801Files-IssuesWith-APPLIES_TO">Issues With -APPLIES_TO</a>
+<ul class="toc-indentation">
+<li><a href="#CodingGuidelinesforIEEE1801Files-absent_appliestoWhenAbsent">When Absent</a></li>
+<li><a href="#CodingGuidelinesforIEEE1801Files-ssink_appliestoWhenUsedWith-SOURCE/-SINK">When Used With -SOURCE/-SINK</a></li>
+<li><a href="#CodingGuidelinesforIEEE1801Files-WhenUsedWithan-ELEMENTSListthatSpecifiesaPort">When Used With an -ELEMENTS List that Specifies a Port</a></li>
+</ul>
+</li>
+<li><a href="#CodingGuidelinesforIEEE1801Files-PstVsApsPowerStateTablesVersusadd_power_state">Power State Tables Versus add_power_state</a></li>
+<li><a href="#CodingGuidelinesforIEEE1801Files-set_port_attributes">set_port_attributes</a></li>
+<li><a href="#CodingGuidelinesforIEEE1801Files-AnonymousSupplyforTop-levelPorts">Anonymous Supply for Top-level Ports</a></li>
+<li><a href="#CodingGuidelinesforIEEE1801Files-_Toc365549336PrecedenceRulesforset_isolation,set_level_shifter,andset_repeater">Precedence Rules for set_isolation, set_level_shifter, and set_repeater</a></li>
+<li><a href="#CodingGuidelinesforIEEE1801Files-AvoidDeprecatedandLegacySyntax">Avoid Deprecated and Legacy Syntax</a></li>
+<li><a href="#CodingGuidelinesforIEEE1801Files-MiscellaneousGuidelines">Miscellaneous Guidelines</a></li>
+</ul>
+</div>
+<h2 id="CodingGuidelinesforIEEE1801Files-Background">Background</h2>
+
+<p><span class="inline-comment-marker" data-ref="0b54549b-c2e3-43f2-b9b5-d5089b52d2f2">By following</span> these guidelines, you can develop an IEEE 1801 code that is easily handled by Cadence tools, with the extra benefit of making the power intent more portable. Do note that this document assumes that you are familiar with the basic syntax and semantics of IEEE 1801; it is not a tutorial or guide for the IEEE 1801 language.</p>
+
+<p>There are multiple industrial documents that are related to the IEEE 1801 standard. For convenience, throughout this chapter, they will be referred to as LRM1, LRM2, and LRM2.1, LRM3.0, LRM3.1, and LRM4.0 (LRM stands for Language Reference Manual).</p>
+<ul><li>
+<p><strong>LRM1 </strong></p>
+
+<p><em>Accellera Unified Power Format Standard</em>, Version 1.0, 2007</p>
+
+<p>Also known as UPF 1.0, this language is not part of the IEEE 1801 standard but is the basis for it.</p>
+</li><li>
+<p><strong>LRM2</strong></p>
+
+<p><em>IEEE 1801-2009 Standard for Design and Verification of Low Power Integrated Circuits</em></p>
+
+<p>Also known as UPF 2.0, this is the initial low-power standard developed and implemented by the IEEE Standards Association in 2009.</p>
+</li><li>
+<p><strong>LRM2.1</strong></p>
+
+<p><em>IEEE 1801-2013 Standard for Design and Verification of Low Power Integrated Circuits</em></p>
+
+<p>Also known as UPF 2.1, this is the 2013 update to the IEEE standard for low power.</p>
+</li><li>
+<p><strong>LRM3.0</strong></p>
+
+<p><em>IEEE 1801-2015 Standard for Design and Verification of Low Power Integrated Circuits</em></p>
+
+<p>Also known as UPF 3.0), this is the 2015 update to the IEEE standard for low power.</p>
+</li><li>
+<p><strong>LRM3.1</strong></p>
+
+<p><em>IEEE 1801-2018 Standard for Design and Verification of Low Power Integrated Circuits</em></p>
+
+<p>Also known as UPF 3.1, this is the 2018 update to the IEEE standard for low power.</p>
+</li><li>
+<p><strong>LRM4.0</strong></p>
+
+<p><em>IEEE 1801-2024 Standard for Design and Verification of Low Power Integrated Circuits</em>&#xa0;</p>
+
+<p>Also known as UPF 4.0, this is the 2024 update to the IEEE standard for low power.</p>
+</li></ul>
+<p>Generally, the language&#8212;its commands and options&#8212;have evolved from LRM 1 to LRM4.0. You can specify an explicit version by issuing the <em><code>upf_version</code></em> command with a given value in the power intent file. The values&#xa0;1.0, 2.0, 2.1, 3.0, 3.1, and 4.0, respectively, correspond to LRM1, LRM2, LRM2.1, LRM 3.0, LRM 3.1, and LRM 4.0.</p>
+
+<p>Strictly speaking, despite the evolution and history of the IEEE 1801 standard, the available LRMs define <em>different</em> languages&#8212;backward compatibility has not been maintained, and certain commands and options have been deprecated. In theory, Cadence tools are built upon the 1801-2013 standard; however, this is not always the case. If the 1801-2013 standard is supported by default, you should also be able to use the majority of its commands and options successfully with any of the previous languages. In summary, Cadence&#39;s strategy can be described both syntactically and semantically:</p>
+<ul><li><strong>Syntactically</strong>: The majority of Cadence tools support the first three LRMs. Note that this statement is true in concept only. In practice, there are some commands and options in all the languages that are not supported, and even overall LRM support may be limited with certain tools. Use the <code><em>upf_version</em></code> command to verify the version and syntax when authoring a design. Otherwise, consult the product manuals for those tools that support IEEE 1801 to get more information.</li><li><strong>Semantically</strong>: If a Cadence tool follows LRM2.1, it might ignore the <code><em>upf_version</em></code> command given certain rules.</li></ul><p style="margin-left: 60.0px;"><span>If a command available in LRM1 and LRM2 has the same semantics as that in LRM2.1, the command should work as expected. This scenario represents most cases.</span></p>
+<p style="margin-left: 60.0px;"><span>If a command available in LRM1 and LRM2 has different semantics than that in LRM2.1, you should understand the difference and either control, avoid, or recognize whatever has changed.</span></p>
+<ol><li>
+<p>Control: When the difference is an important one to keep, Cadence provides a proprietary attribute that you can directly control.</p>
+
+<p><strong>Example</strong><span> (see the <a href="#CodingGuidelinesforIEEE1801Files-domain_def">Definition of Domain Interface</a> section for details):</span></p>
+
+<p><span>The definition of </span><em>domain interface</em><span> is different in all three languages. To control which definition to use, &#xa0;you may issue the following command:</span></p>
+
+<p><code><span>set_design_attributes &#8211;elements . &#8211;attribute {domain_interface_def xyz}</span></code></p>
+
+<p><span>For this attribute, </span><code><em>xyz</em></code><span> can be either <code>&quot;1.0&quot;</code>, <code>&quot;2.0&quot;</code>, or <code>&quot;2.1&quot;</code>.</span><span style="letter-spacing: 0.0px;"> </span></p>
+</li><li>
+<p>Avoid: When there is a way to mask the difference and hence completely avoid the difference, you should always do it.</p>
+
+<p><strong>Example</strong><span> (see <a href="#CodingGuidelinesforIEEE1801Files-absent_appliesto">When Absent</a> in the &quot;Issues With -APPLIES_TO&quot; section for details):</span></p>
+
+<p><span>The </span><code>&#8211;applies_to</code><span> option in the </span><code>set_level_shifter</code><span> command is not mandatory. When it is absent, the default value is </span><em>both</em><span>&#xa0;in LRM1, </span><em>outputs</em><span>&#xa0;in LRM2, and <em>none</em> in LRM2.1. Cadence recommends always having it specified in all <code>set_level_shifter</code> commands, thereby avoiding and masking this difference out.</span></p>
+</li><li>
+<p>Recognize: When certain semantics are simply not reasonable, you should recognize them and ignore them.</p>
+
+<p><strong>Example</strong><span> (see <a href="#CodingGuidelinesforIEEE1801Files-ssink_appliesto">When Used With -SOURCE/-SINK</a> in the &quot;Issues With -APPLIES_TO&quot; section for details):</span></p>
+
+<p><span>In LRM2, the following limitation exists for <code>set_isolation</code>:</span></p>
+
+<p><em>&quot;It shall be an error if <code>&#8211;applies_to</code> is specified along with <code>&#8211;source</code> and/or <code>&#8211;sink.</code>&quot;</em></p>
+
+<p><span>This limitation is without merit and is removed in LRM2.1. Cadence tools ignore this and simply follow LRM2.1. </span></p>
+</li></ol>
+<p><span>For the remainder of this document, each section discusses a specific aspect of the semantic differences among the three languages. At the beginning of each section, concise guidelines are provided as a quick reference.</span></p>
+<div class="confluence-information-macro confluence-information-macro-information"><p class="title conf-macro-render">Cadence Product Command and Option Support</p>
+<span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>Please refer to the <a href="IEEE_1801_Supported_Commands_and_Options.html">IEEE 1801 Supported Commands and Options</a> section of this document for individual product command and option support.</p>
+</div>
+</div>
+<h2 id="CodingGuidelinesforIEEE1801Files-DefinitionofDomainInterfacedomain_def">Definition of Domain Interface<span class="confluence-anchor-link" id="CodingGuidelinesforIEEE1801Files-domain_def"></span></h2>
+
+<p><strong>Guidelines:</strong> (If needed)&#xa0;<span>Use </span><code>set_design_attributes &#8211;elements &#8211;attribute {domain_interface_def &lt;1.0/2.0/2.1&gt;}&#xa0;</code><span>to control the definition of a domain interface. </span></p>
+
+<p><span>The semantics of many commands in IEEE 1801 are built upon the concept of the domain interface. The definition of a domain interface differs in all three LRMs. For details, consult the LRMs. As a short summary:</span></p>
+<ol><li>In LRM1: There is no explicit definition. However, the common practice in the industry is to only include the <em>LowConn</em> side of a boundary port.</li><li>In LRM2 (p.89): Include both <em>LowConn</em> and <em>HighConn</em> sides of a boundary port.</li><li>In LRM2.1 (p.6): Include both <em>LowConn</em> and <em>HighConn</em> sides of a boundary port, plus the ports on a macro instance that have a different associated supply set than the connected supply set.</li></ol>
+<p>As an example, the following command:</p>
+
+<p><code>set_isolation iso1 &#8211;domain PD1 &#8211;applies_to outputs ...</code></p>
+
+<p>Would potentially select three different sets of target ports under the three interpretations in the LRMs.&#xa0;<span>In order to set a desirable choice, issue the <code>set_design_attributes</code> command below:</span></p>
+
+<p><code>set_design_attributes &#8211;elements . &#8211;attribute {domain_interface_def xyz}</code></p>
+
+<p>Where <code>xyz</code> can be:</p>
+<ol><li>String &quot;1.0&quot;, which corresponds to the LRM1 bullet above.</li><li>String &quot;2.0&quot;, which corresponds to the LRM2 bullet above.</li><li>String &quot;2.1&quot;, which corresponds to the LRM2.1 bullet above (This value may not be supported by all the Cadence tools yet).</li></ol>
+<p>The <code>set_design_attributes</code> command associates a Cadence proprietary attribute, <code><em>domain_interface_def</em></code>, to the current scope. The command can appear anywhere in the 1801 files, and the setting is effective throughout the entire run. In other words, this command is not order-dependent and can be issued in any scope. If multiple settings on this attribute exist, the attribute&#39;s value must all be the same. <br class="atl-forced-newline" /><br class="atl-forced-newline" />If you do not set this attribute, the default value depends on the <code>upf_version</code> command specified in the input 1801 files:</p>
+<ul><li><span>If the lowest <code>upf_version</code> value throughout all the 1801 input files is &quot;1.0&quot;, this attribute&#39;s value is &quot;UPF&quot;.</span></li><li><span>If the lowest <code>upf_version</code> value throughout all the 1801 input files is &quot;2.0&quot;, this attribute&#39;s value is &quot;1801-2009&quot;.</span></li><li><span>If the lowest <code>upf_version</code> value throughout all the files is &quot;2.1&quot;, this is not currently supported, but when the support is ready, this attribute&#39;s value will be &quot;1801-2013&quot;.</span></li><li><span>If the input 1801 file does not contain the <code>upf_version</code> command, the attribute defaults to &quot;1801-2009&quot;</span></li></ul><h2 id="CodingGuidelinesforIEEE1801Files-IssuesWith-APPLIES_TO">Issues With -APPLIES_TO</h2>
+
+<p><strong><span style="">Guidelines:</span></strong></p>
+<ol><li>Always explicitly specify <code>&#8211;applies_to</code> in <code>set_isolation</code> and <code>set_level_shifter</code>.</li><li>Always view <code>&#8211;applies_to</code> as a filter, with no exceptions.</li></ol>
+<p>Commands <code>set_isolation</code> and <code>set_level_shifter</code>&#xa0;both have the option <code>&#8211;applies_to</code>, which serves as a filter on the candidate ports. The next three subsections discuss issues with&#xa0;<code>&#8211;applies_to</code>.</p>
+<h3 id="CodingGuidelinesforIEEE1801Files-absent_appliestoWhenAbsent"><span class="confluence-anchor-link" id="CodingGuidelinesforIEEE1801Files-absent_appliesto"></span>When Absent</h3>
+
+<p>When the option <code>&#8211;applies_to</code> is absent in a <code>set_isolation</code> or <code>set_level_shifter</code> command, the LRMs have different default values:</p>
+<ol><li>LRM1: &quot;<em>outputs</em>&quot; for <code>set_isolation</code>; &quot;<em>both</em>&quot; for <code>set_level_shifter</code></li><li>LRM2: &quot;<em>outputs</em>&quot; for <code>set_isolation</code> and <code>set_level_shifter</code></li><li>LRM2.1: no defaults for <code>set_isolation</code> and <code>set_level_shifter</code></li></ol>
+<p>As an example, in the following command:</p>
+
+<p><code>set_level_shifter ls1 &#8211;domain PD1</code></p>
+
+<p>The <code><em>&#8211;applies_to</em></code> option is absent. Under the three different defaults in the three LRMs, this command assumes different <code>&#8211;applies_to</code> values. That means this same command will have different behaviors under different interpretations. In order to make your 1801 code more portable and to remove potential mismatched interpretations, Cadence recommends that you always explicitly specify the <code>&#8211;applies_to</code> option.</p>
+<h3 id="CodingGuidelinesforIEEE1801Files-ssink_appliestoWhenUsedWith-SOURCE/-SINK"><span class="confluence-anchor-link" id="CodingGuidelinesforIEEE1801Files-ssink_appliesto"></span>When Used With -SOURCE/-SINK</h3>
+
+<p>In LRM2 (p.93), command <code>set_isolation</code> has the following limitation:&#xa0;</p>
+
+<p><em>&quot;It shall be an error if <code>&#8211;applies_to</code> is specified along with <code>&#8211;source</code> and/or <code>&#8211;sink</code>&quot;</em></p>
+
+<p>This limitation is without merit, as both the&#xa0;<code>&#8211;source and&#xa0;-sink</code> options are filters that work on a different aspect than <code>&#8211;applies_to</code>. Cadence tools ignore this limitation.</p>
+<h3 id="CodingGuidelinesforIEEE1801Files-WhenUsedWithan-ELEMENTSListthatSpecifiesaPort">When Used With an -ELEMENTS List that Specifies a Port</h3>
+
+<p>In LRM1 (p.49), <code>set_isolation</code> has the following limitation between <code>&#8211;elements</code> and <code>&#8211;applies_to</code>:</p>
+
+<p>&quot;<em>If <code>&#8211;elements</code> directly specifies a port by name (not implicitly, by specifying the port&#39;s instance or an ancestor of that instance), then the isolation strategy shall apply to that port regardless of whether that port&#39;s mode matches the one specified by the <code>&#8211;applies_to</code> option.</em>&quot;</p>
+
+<p>This basically means that if <code><em>&#8211;elements</em></code> contains a port name, then <code><em>&#8211;applies_to</em></code> has no effect on that port. In LRM2, there is different terminology but similar semantics. In LRM2.1, there is no such limitation.</p>
+
+<p>Cadence tools follow LRM2.1&#39;s semantics. That is, <code>-applies_to</code> is always honored, regardless of how a candidate port is specified in <code>&#8211;elements</code>. This is better because <code>&#8211;applies_to</code> can be a true filter with no exceptions (Although one potentially unexpected exception is when the <code>&#8211;elements</code> list returns the value of a <code>find_objects</code> command).</p>
+<h2 id="CodingGuidelinesforIEEE1801Files-PstVsApsPowerStateTablesVersusadd_power_state"><span class="confluence-anchor-link" id="CodingGuidelinesforIEEE1801Files-PstVsAps"></span>Power State Tables Versus add_power_state</h2>
+
+<p><strong>Guidelines:</strong> Use the power_state_table (PST) flow to specify legal modes.</p>
+
+<p>When specifying the legal power modes of a design, there are two flows: the PST flow and the <code>add_power_state</code> flow.</p>
+<ol><li>LRM1 describes the PST flow, which basically consists of the following commands: <code>add_port_state</code>, <code>create_pst</code>, and <code>add_pst_state</code>.</li><li>LRM2 introduces the <code>add_power_state</code> flow, which should be able to replace the PST flow, although the PST flow is still part of LRM2.</li><li>LRM2.1 revises the syntax for the&#xa0;<code>add_power_state</code> command, and also further marks the PSTs as deprecated.</li></ol>
+<p>Not all Cadence tools support the <code>add_power_state</code> command. Therefore, Cadence generally recommends using the PST flow. However, for those migrating designs to LRM2.1 or later, Cadence supports the use of the <code>add_power_state</code> command with its revised syntax. After all, using <code>add_power_state</code> properly elevates the user&#39;s abstraction level, especially alleviating an RTL designer from having to deal with physical nets (as is the case with PSTs).</p>
+<div class="confluence-information-macro confluence-information-macro-information"><p class="title conf-macro-render">Xcelium</p>
+<span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>There is no SimVision or Tcl support for the <code>add_power_state</code> command.</p>
+</div>
+</div>
+<h2 id="CodingGuidelinesforIEEE1801Files-set_port_attributes">set_port_attributes</h2>
+
+<p><strong>Guidelines:</strong> For the&#xa0;<code>set_port_attributes</code> command,</p>
+<ol><li>Use only those options below that are supported.</li><li>Avoid the non-standard command <code>set_related_supply_net</code>, unless you are using UPF 1.0.</li></ol>
+<p>The <code>set_port_attributes</code> command has a large number of options. At the time of this document, Cadence recommends that you use only the following options:</p>
+<ul><li><code>&#8211;ports</code> (and <code>&#8211;exclude_ports</code> if needed)</li><li><code>&#8211;elements</code></li><li><code>&#8211;applies_to</code> (the LRM2.1 syntax)</li><li><code>&#8211;driver_supply</code> or <code>&#8211;receiver_supply</code></li></ul>
+<p>With these options, this command can be used to associate the driver or receiver supply sets of top-level ports, which is one of the most important applications of this command. For example:</p>
+
+<p><code>set_port_attributes &#8211;ports {in1 in2} &#8211;driver_supply ss1 </code></p>
+
+<p>Use this command to set the external driver supply for top-level ports <code>in1</code> and <code>in2</code> to be <code>ss1</code>. <br class="atl-forced-newline" />Cadence will support other options for future releases, but only with the syntax described in LRM2.1. This is because:</p>
+<ol><li>LRM1 does not have the command.</li><li>The syntax described in LRM2 is somewhat cumbersome and confusing, especially the different usage of <code>&#8211;applies_to</code>. Cadence does not plan to support these, not even syntactically.</li></ol>
+<p>Also note that, as this command does not exist in LRM1, if a user is authoring a UPF 1.0 file, there is no official way to associate the supplies for top-level ports. To patch this deficiency, an industry practice using a non-standard command <code>set_related_supply_net</code> is often used. Cadence discourages the use of such non-standard commands. However, to support legacy IP written in UPF 1.0, Cadence tools do support this command.</p>
+<h2 id="CodingGuidelinesforIEEE1801Files-AnonymousSupplyforTop-levelPorts">Anonymous Supply for Top-level Ports</h2>
+
+<p><strong><span class="inline-comment-marker" data-ref="dd5dc7ce-8caa-4a6e-93e0-6830db51a6ca">Guidelines</span>:</strong> Always associate supplies for top-level ports.</p>
+
+<p>The previous section (on <code>set_port_attributes</code>) describes how a supply set can be associated with a top-level port. What happens if a user simply does not specify such an association on a top-level port?</p>
+<ol><li>In LRM1 and LRM2, this specific situation is not addressed so the semantics are not clear.</li><li>In LRM2.1, an anonymous supply that is not equivalent to any user-defined supply is implicitly associated with the top-level port.</li></ol>
+<p>Cadence recommends to always explicitly associate a supply set with each top-level port (see the previous section for details). Without such an association, the power intent is usually incomplete, and the software is likely to generate an error. Other&#xa0;<span>tools in the industry assume all top-level ports are implicitly associated with the primary supply of the top module&#39;s power domain. This behavior has no LRM basis and is error prone. Cadence does not recommend this behavior; however, with that said and to increase compatibility for legacy IPs, Cadence provides a proprietary attribute that you can use to control this behavior. You can set this attribute with the following command:&#xa0;</span></p>
+
+<p><code>set_design_attributes &#8211;elements . &#8211;attribute {top_ports_have_anon_supply &lt;0/1&gt;}</code></p>
+
+<p>The Cadence proprietary attribute, <code>top_ports_have_anon_supply</code>, takes a value of either 0 or 1 where 1 is usually the default. For designs that use multiple 1801 files, this attribute&#39;s value depends on the lowest <code>upf_version</code> specified. For example:</p>
+<ul><li>If the lowest <code>upf_version</code> is 1.0 or 2.0 across multiple 1801 files, the value is 0.</li><li>If the lowest <code>upf_version</code> is 2.1 across multiple 1801 files, the value is 1.</li></ul>
+<p>The user can always issue an explicit command to override the default value; however, do note that the guideline is to always associate top-level ports&#39; to supplies. Not associating or relying on the proprietary attribute will create 1801 code that is not portable.</p>
+<h2 id="CodingGuidelinesforIEEE1801Files-_Toc365549336PrecedenceRulesforset_isolation,set_level_shifter,andset_repeater"><span class="confluence-anchor-link" id="CodingGuidelinesforIEEE1801Files-_Toc365549336"></span>Precedence Rules for set_isolation, set_level_shifter, and set_repeater</h2>
+
+<p><strong>Guidelines:</strong></p>
+<ol><li>Avoid relying on <code>&#8211;source</code> and <code>-sink</code> having higher precedence, as stated in LRM2</li><li><span>Avoid relying on bit-blasted ports having higher precedence, as stated in LRM2.1</span></li></ol>
+<p>In commands <code>set_isolation</code>, <code>set_level_shifter</code>, or <code>set_repeater</code>, a target port may be applicable to more than one such command. It is then up to the precedence rules to determine which strategy this target port should take action on. The LRMs&#39; precedence rules have:</p>
+<ol><li>In LRM1, no wording.</li><li>In LRM2 (p.21):<ol><li><em>Direct UPF commands.</em> <em>The power intent is applied through an explicit UPF command reference to a design object.</em></li><li><em>Power intent applied to a parent is inherited by each child and transitively applied to descendents, except when a direct UPF command applies.</em></li><li><em>Strategies specified with both the </em><code><strong>-source</strong></code><em> and </em><code><strong>-sink</strong></code><em> options.</em></li><li><em>Strategies specified with a </em><code><strong>-source</strong></code><em> or </em><code><strong>-sink</strong></code><em>.</em></li></ol></li><li>In LRM2.1 (p.44):<ol><li><em>Command that applies to part of a multi-bit port specified explicitly by name</em></li><li><em>Command that applies to a whole port specified explicitly by name</em></li><li><em>Command that applies to all ports of an instance specified explicitly by name</em></li><li><em>Command that applies to all ports of a specified power domain with a given direction</em></li><li><em>Command that applies to all ports of a specified power domain</em></li></ol></li></ol>
+<p><br class="atl-forced-newline" />Some observations after comparing the two different sets of precedence rules include:</p>
+<p style="margin-left: 30.0px;">Observation A: The general philosophy of &quot;more specific rules wins&quot; is the same (2a, 2b versus 3c, 3d, and 3e).</p>
+<p style="margin-left: 30.0px;">Observation B: LRM2 gives <code>&#8211;source</code>&#xa0;and&#xa0;<code>-sink</code> higher precedence (2c and 2d)</p>
+<p style="margin-left: 30.0px;">Observation C: LRM2.1 gives bit-blasted port higher precedence (3a and 3b)</p>
+
+<p><br class="atl-forced-newline" />For maximum portability in terms of precedence rules, Cadence recommends that the user only rely on the common philosophy shared between the two LRMs (i.e., Observation&#xa0;A above). Conversely speaking, a user should:</p>
+<ul><li>Avoid relying on <code>&#8211;source</code> and <code>-sink</code>being higher precedence (Observation&#xa0;B above)<ul><li>Avoid this simply because this is not in LRM2.1.</li></ul></li><li>Avoid relying on bit-blasted port being higher precedence (Observation C above)<ul><li>Avoid this not only because this is not in LRM2, but also because find_objects may or may not return bit-blasted port names.</li></ul></li></ul>
+<p>Note that precedence rules are there only to increase convenience, as there are enough constructs in these commands that can theoretically make all strategies have disjointed target ports, thereby completely avoiding the application of these rules. With a tradeoff on convenience, you can increase portability.</p>
+
+<p>For example, say port <em>p</em> is applicable to both strategies below:</p>
+
+<p><code>set_isolation iso1 &#8211;domain PD1 &#8211;sink SS2 ...</code><br /><code>set_isolation iso2 &#8211;domain PD1 ...</code></p>
+
+<p>Under LRM2&#39;s precedence rules, strategy <code>iso1</code> has higher precedence (because <code>&#8211;sink</code> is present). However, under LRM2.1&#39;s precedence rules, both strategies have the same precedence. To increase portability, you could either add <code>&#8211;elements</code> to <code>iso1:</code></p>
+
+<p><code>set_isolation iso1 &#8211;domain PD1 &#8211;sink SS2 &#8211;elements p ...</code></p>
+
+<p>Or add another <code>&#8211;sink</code> to <code>iso2:</code></p>
+
+<p><code>set_isolation iso2 &#8211;domain PD1 &#8211;sink SS3 ...</code></p>
+
+<p>As another example, say bit 2 of bus q is applicable to both strategies below:</p>
+
+<p><code>set_isolation iso3 &#8211;domain PD1 &#8211;elements {q[2]} ...</code><br /><code>set_isolation iso4 &#8211;domain PD1 &#8211;elements {q} ...</code></p>
+
+<p>Under LRM2&#39;s precedence rules, these two strategies have the same precedence. However, under LRM2.1&#39;s precedence rules, <em>iso3</em> has higher precedence (because bit 2 is a specific bit of bus <em>q</em>). To increase portability, you could change <code>iso4</code> to either:&#xa0;</p>
+
+<p><code>set_isolation iso4 &#8211;domain PD1 -elements {q[0] q[1] q[3] }) </code></p>
+
+<p>Or:</p>
+
+<p><code>set_isolation iso4 &#8211;domain PD1 &#8211;elements {q} &#8211;exclude_elements {q[2]}</code></p>
+
+<p>Either way would make <code>iso3</code> and <code>iso4</code> have disjointed target ports, thereby avoiding the ambiguous interpretations from different LRMs.</p>
+<h2 id="CodingGuidelinesforIEEE1801Files-AvoidDeprecatedandLegacySyntax">Avoid Deprecated and Legacy Syntax</h2>
+
+<p><strong>Guidelines:</strong> Avoid the deprecated and legacy LRM syntax, if possible.</p>
+
+<p>Starting with LRM2.1, newer iterations of the IEEE 1801 standard mark many commands and options as either deprecated or legacy. While it is not practically possible to completely avoid using them at the current time, Cadence recommends avoiding them when you can.</p>
+
+<p>An example of one option with deprecated values for earlier LRM releases is <code>&#8211;location</code> when used with&#xa0;<code>set_isolation</code> and <code>set_level_shifter</code>:</p>
+<ul><li>In LRM2, the possible values of <code>set_isolation &#8211;location</code> are <code>automatic</code>, <code>fanin</code>, <code>faninout</code>,&#xa0;<code>fanout</code>,&#xa0;<code>other</code>, <code>parent</code>, <code>self</code>, and <code>sibling</code>. The possible values of <code>set_level_shifter -location</code> are <code>automatic</code>, <code>fanout</code>, <code>parent</code>, <code>self</code>, and <code>sibling</code>.&#xa0;</li><li>In LRM2.1, the values <code>fanin</code>, <code>faninout</code>, and <code>sibling</code> are marked for deprecation. Users should simply avoid using these deprecated values.</li></ul>
+<p>Commands that still cannot be avoided at the current time are those used to define PSTs. See the <a href="#CodingGuidelinesforIEEE1801Files-PstVsAps">Power State Tables Versus add_power_state</a> section for more details.</p>
+<div class="confluence-information-macro confluence-information-macro-information"><p class="title conf-macro-render">Xcelium</p>
+<span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>For legacy reasons, Xcelium supports many of the above UPF 1.0 commands and options. Please refer to the <em>Low-Power Simulation Guide (IEEE 1801)</em> documentation for details.</p>
+</div>
+</div>
+<h2 id="CodingGuidelinesforIEEE1801Files-MiscellaneousGuidelines">Miscellaneous Guidelines</h2>
+
+<p>Always specify <code>&#8211;location</code> in <code>set_isolation</code>&#xa0;and <code>set_level_shifter</code>. The default value changed from the initial value (<code>automatic</code>) to the new value (<code>self</code>) starting with LRM2 for <code>set_isolation</code> and LRM2.1 for <code>set_level_shifter</code>. Cadence recommends avoiding the default values, as they differ in the early LRMs.</p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Creating_an_IEEE_1801_File_for_a_DVFS_Design.html" id="prev" title="Creating_an_IEEE_1801_File_for_a_DVFS_Design">Creating_an_IEEE_1801_File_for ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

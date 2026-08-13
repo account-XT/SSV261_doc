@@ -1,0 +1,488 @@
+
+<html><head><title>Performing Tempus PI Analysis</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823949" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Performing Tempus PI Analysis" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823949" />
+<meta name="NextFile" content="tempus_pi_tempuspireporting.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="tempus_pi_tempuspiflow.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Performing Tempus PI Analysis" />
+<meta name="Keywords" content="IR drop,EIV database,IR aware STA,PI analysis input,ECO fixing,PGV,PI analysis output" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Power Calculation" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="tempus_pi_tempuspiflow.html" title="Tempus Power Integrity Flow">Tempus Power Integrity Flow</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="tempus_pi_tempuspireporting.html" title="Tempus PI Result Analysis and Reporting">Tempus PI Result Analysis and  ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:performingtempuspianalysis" title="Performing Tempus PI Analysis"></a><style>/*<![CDATA[*/
+/**/
+/**/
+/**/
+/**/
+h1 { counter-reset: heading 11;}
+/**/
+/**/
+/**/
+/**/
+/*]]>*/</style><h2>
+<a id="pgfId-141829"></a><a id="23456"></a>Performing Tempus PI Analysis </h2>
+
+<p>
+<a id="pgfId-141830"></a>This section describes the various inputs and outputs of the Tempus PI analysis flow.</p>
+
+<h4><em>
+<a id="pgfId-141831"></a>Required Input Files</em></h4>
+
+<ul><li>
+<a id="pgfId-141832"></a>Design data (LEF, timing libraries, netlist, SDC, DEF, SPEF)</li><li>
+<a id="pgfId-141833"></a>Technology PGV</li></ul>
+
+
+<h4><em>
+<a id="pgfId-141834"></a>Procedure</em></h4>
+
+<p>
+<a id="pgfId-141835"></a>To perform Tempus PI analysis, complete the following steps:</p>
+<p>
+<a id="pgfId-141836"></a><strong>Step 1: Tempus STA Analysis Using IR Derates</strong></p>
+<ol><li>
+<a id="pgfId-141837"></a>Load the design data.<br />
+<a id="pgfId-141845"></a><strong>Tcl command</strong>: <br /><table class="webflareTable" id="#id141838">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141840"></a><code>read_lib -lef $lefs</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141841"></a><code>read_view_definition ../design/viewDefinition.tcl</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141842"></a><code>read_verilog ../design/postRouteOpt.enc.dat/super_filter.v.gz</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141843"></a><code>set_top_module super_filter </code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141844"></a>read_def ../design/super_filter.def.gz</pre>
+</td>
+</tr>
+</tbody></table><br />
+<a id="pgfId-141860"></a><strong>Tcl command - Snippet of viewDefinition.tcl</strong>: <br /><table class="webflareTable" id="#id141846">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141848"></a>create_library_set -name LS_wc_1p00 -timing ./standard_cells_1p00_125C.lib</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141849"></a>create_library_set -name LS_wc_0p90 -timing ./standard_cells_0p90_125C.lib ;# This library set will be used to improve interpolation later in the flow</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141850"></a>create_library_set -name LS_wc_0p85 -timing ./standard_cells_0p85_125C.lib</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141851"></a>create_rc_corner -name RC_wc_125 -T 125</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141852"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141853"></a>create_delay_corner -name DC_wc_1p00 -rc_corner RC_wc_125 -library_set LS_wc_1p00 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141854"></a>create_delay_corner -name DC_wc_0p85 -rc_corner RC_wc_125 -library_set LS_wc_0p85 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141855"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141856"></a>create_constraint_mode -name CM_wc -sdc_files ./design.sdc</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141857"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141858"></a>create_analysis_view -name AV_wc_1p00 -constraint_mode CM_wc -delay_corner DC_wc_1p00 ;# This is the non-derated/non-margined view at 1.0v for IR drop analysis</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141859"></a>create_analysis_view -name <strong>AV_wc_0p85</strong> -constraint_mode CM_wc -delay_corner DC_wc_0p85 ;# This is the traditional STA view at 0.85V with voltage margined/derated for IR drop analysis</pre>
+</td>
+</tr>
+</tbody></table></li><li>
+<a id="pgfId-141861"></a>Specify the SPEF file for signal net parasitic information.<br />
+<a id="pgfId-141865"></a><strong>Tcl command</strong>: <br /><table class="webflareTable" id="#id141862">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141864"></a><code>read_spef -rc_corner&#160;&#160;RC_wc_125 ../design/postRouteOpt_RC_wc_125.spef.gz</code></pre>
+</td>
+</tr>
+</tbody></table></li><li>
+<a id="pgfId-143493"></a>Specify the global IR budgets for critical path identification.<br />
+<a id="pgfId-141870"></a><strong>Tcl command</strong>: <br /><table class="webflareTable" id="#id143574">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-143540"></a><code>update_delay_corner -name DC_wc_1p00&#160;&#160;</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-143541"></a><code>-early_estimated_worst_irDrop_factor 0.15 </code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-143542"></a><code>-late_estimated_worst_irDrop_factor 0.15</code></pre>
+</td>
+</tr>
+</tbody></table></li><li>
+<a id="pgfId-143586"></a>Run STA analysis using the voltage derates applied in the previous step.<br />
+<a id="pgfId-143681"></a><strong>Tcl command</strong>: <br /><table class="webflareTable" id="#id143676">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-143678"></a><code>update_timing -full</code></pre>
+</td>
+</tr>
+</tbody></table></li></ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-141871"></a><strong>Step 2:&#160;&#160;Power and IR Drop Analysis (EIV DB Generation)</strong></p>
+<ol><li>
+<a id="pgfId-141872"></a>Specify the directory where the power results will be stored.<br />
+<a id="pgfId-141876"></a><strong>Tcl command</strong>:<br /><table class="webflareTable" id="#id141873">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141875"></a>set_power_output_dir dynVecLessPowerResults</pre>
+</td>
+</tr>
+</tbody></table></li><li>
+<a id="pgfId-141877"></a>Define the power analysis mode. The Tempus PI analysis flow is applicable only to the dynamic vectorless power calculation method.<br />
+<a id="pgfId-141894"></a><strong>Tcl command</strong>: <br /><table class="webflareTable" id="#id141878">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141880"></a><code>set_power_analysis_mode \</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141881"></a><code>    -method                      dynamic_vectorless \</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141882"></a>    -disable_static true \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141883"></a><code>    -enable_state_propagation    true \</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141885"></a><code></code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141886"></a><code>    -power_grid_library         { \</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141887"></a><code>        ../data/pgv_dir/tech_pgv/techonly.cl \</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141888"></a><code>        ../data/pgv_dir/stdcell_pgv/stdcells.cl \</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141889"></a><code>        ../data/pgv_dir/macro_pgv/macros_pll.cl \</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141890"></a><code>    } \</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141891"></a><strong>    -enable_tempus_pi true \</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141893"></a><strong></strong></pre>
+</td>
+</tr>
+</tbody></table></li><li>
+<a id="pgfId-143814"></a>Define switching activity of the design. This is needed for dynamic vectorless analysis.<br />
+<a id="pgfId-143831"></a><strong>Tcl command</strong>: <br /><table class="webflareTable" id="#id143815">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-143877"></a><strong>set_default_switching_activity -input_activity 0 \</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-143878"></a><strong>    -clock_gates_output 2.0 -seq_activity 0.2</strong></pre>
+</td>
+</tr>
+</tbody></table><br />
+<a id="pgfId-141906"></a>The default switching activity for sequential cells (-seq_activity) in percentage (ratio 0.0 to 1.0) specifies the number of fully expanded data paths that will be scheduled to switch in the Tempus PI flow in each cycle.</li><li>
+<a id="pgfId-141907"></a>Define the power simulation period and resolution.<br />
+<a id="pgfId-141911"></a><strong>Tcl command</strong>: <br /><table class="webflareTable" id="#id141908">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141910"></a><code>set_dynamic_power_simulation -resolution 50ps -period 320ns</code></pre>
+</td>
+</tr>
+</tbody></table><br />
+<a id="pgfId-141912"></a>The dynamic power simulation period defines the number of power analysis cycles to be run.<br /><div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-141913"></a>The user-defined sequential activity per cycle (<code>set_default_switching_activity</code> <code>-seq_activity</code>) and the total power analysis simulation period (<code>set_dynamic_power_simulation -period</code>) control the number of critical path end-points that will be covered per simulation cycle and the total simulation time. Allowing a larger power simulation period will allow Tempus PI to cover all the end-points.</div>
+<a id="pgfId-144096"></a>For more information on setting the appropriate values for sequential activity and simulation period, you can refer to section &#8220;<a href="tempus_pi_sequentialactivity.html#11600">Sequential Activity and Simulation Period</a>&quot;.</li><li>
+<a id="pgfId-141914"></a>Run power analysis.<br />
+<a id="pgfId-141918"></a><strong>Tcl command</strong>: <br /><table class="webflareTable" id="#id141915">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141917"></a><code>report_power</code></pre>
+</td>
+</tr>
+</tbody></table></li><li>
+<a id="pgfId-141919"></a>Define the rail analysis mode.<br />
+<a id="pgfId-141936"></a><strong>Tcl command</strong>: <br /><table class="webflareTable" id="#id141920">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141922"></a>set_rail_analysis_mode \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141923"></a>    -method                     dynamic \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141924"></a>    -accuracy                   hd \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141925"></a>    -analysis_view              <strong>AV_wc_1p00</strong> \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141926"></a>    -power_grid_library         { \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141927"></a>        ../data/pgv_dir/tech_pgv/techonly.cl \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141928"></a>        ../data/pgv_dir/stdcell_pgv/stdcells.cl \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141929"></a>        ../data/pgv_dir/macro_pgv/macros_pll.cl \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141930"></a>    } \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141931"></a>    -enable_rlrp_analysis       true \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141932"></a>    -verbosity true \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141933"></a>    -temperature 125 \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141934"></a>    -eiv_eval_window switching \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141935"></a>    -eiv_method {bestavg worstavg}</pre>
+</td>
+</tr>
+</tbody></table></li><li>
+<a id="pgfId-141937"></a>Optional. If you do not load the CPF file, use the <code>set_pg_nets</code> command to define the power nets in the design, and assign attributes to these nets. Then, use <code>set_rail_analysis_domain</code> to define the power domains.<br />
+<a id="pgfId-141946"></a><strong>Tcl command</strong>: <br /><table class="webflareTable" id="#id141938">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141940"></a><code>set_pg_nets -net VDD_AO -voltage 1 -threshold 0.95 -force</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141941"></a><code>set_pg_nets -net VDD_column -voltage 1 -threshold 0.95 -force</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141942"></a><code>set_pg_nets -net VDD_ring -voltage 1 -threshold 0.95 -force</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141943"></a><code>set_pg_nets -net VDD_external -voltage 1 -threshold 0.95 -force</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141944"></a><code>set_pg_nets -net VSS -voltage 0.0 -threshold 0.05 -force</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141945"></a><code>set_rail_analysis_domain -name ALL -pwrnets { VDD_AO VDD_external } -gndnets VSS</code></pre>
+</td>
+</tr>
+</tbody></table></li><li>
+<a id="pgfId-141947"></a>Define the location of the voltage sources for each power/ground net.<br />
+<a id="pgfId-141953"></a><strong>Tcl command</strong>: <br /><table class="webflareTable" id="#id141948">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141950"></a><code>set_power_pads -net VDD_AO -format xy -file ../design/super_filter_VDD_AO.pp</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141951"></a><code>set_power_pads -net VDD_external -format xy -file ../design/super_filter_VDD_external.pp</code></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141952"></a><code>set_power_pads -net VSS -format xy -file ../design/super_filter_VSS.pp</code></pre>
+</td>
+</tr>
+</tbody></table></li><li>
+<a id="pgfId-141954"></a>Define the rail simulation resolution, and specify the location of the binary current files generated through dynamic power analysis (step 5).<br />
+<a id="pgfId-141959"></a><strong>Tcl command</strong>: <br /><table class="webflareTable" id="#id141955">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141957"></a>set_dynamic_rail_simulation -resolution 50ps</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141958"></a>set_power_data -scale 1 -format current [glob dynVecLessPowerResults/*.ptiavg]</pre>
+</td>
+</tr>
+</tbody></table></li><li>
+<a id="pgfId-141960"></a>Run rail analysis.<br />
+<a id="pgfId-141964"></a><strong>Tcl command</strong>: <br /><table class="webflareTable" id="#id141961">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141963"></a>analyze_rail -output ./dynVecLessRailResults -type&#160;&#160;    domain ALL</pre>
+</td>
+</tr>
+</tbody></table><br />
+<a id="pgfId-141965"></a>The Voltus console will display rail analysis statistics, as shown in the following snippet:<pre class="webflare-pre-block webflare-courier-new" id="#id141966">
+<a id="pgfId-141966"></a>Rail Analysis completed successfully.</pre><pre class="webflare-pre-block webflare-courier-new" id="#id141967">
+<a id="pgfId-141967"></a>Finished Rail Analysis at 19:32:45 02/10/2019 (cpu=0:01:12, real=0:02:33, peak mem=1697.00MB)</pre><pre class="webflare-pre-block webflare-courier-new" id="#id141968">
+<a id="pgfId-141968"></a>Current Voltus IC Power Integrity Solution resource usage: (total cpu=0:09:48, real=1:06:51, mem=1697.00MB)</pre><pre class="webflare-pre-block webflare-courier-new" id="#id141969">
+<a id="pgfId-141969"></a></pre><pre class="webflare-pre-block webflare-courier-new" id="#id141970">
+<a id="pgfId-141970"></a>***Info: Found 70 instances with IR drop violations in design based on eiv_method: Worst and eiv_eval_window: elapse.</pre></li></ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-141971"></a><strong>Step 3: Tempus IR-Aware STA Using EIV Database (</strong></p>
+<ol><li>
+<a id="pgfId-141972"></a>Calculate IR-aware slack by specifying the IR analysis output as input to the Tempus run:<br />
+<a id="pgfId-141983"></a><strong>Tcl command</strong>: <br /><table class="webflareTable" id="#id141973">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141975"></a>set_delay_cal_mode -early_irdrop_data_type best_average \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141976"></a>             -late_irdrop_data_type worst_average</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141977"></a>update_delay_corner -name DC_wc_1p00 \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141979"></a>             <strong>-irdrop_data ./dyn_rail_phaseIII/ALL_25C_dynamic_1</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141981"></a>update_timing -full</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144270"></a>report_analysis_summary &gt; pi_summary.gba.rpt</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-141982"></a>report_timing -max_paths 200000 -retime path_slew_propagation -retime_mode exhaustive &gt; pi_timing.pba.rpt</pre>
+</td>
+</tr>
+</tbody></table><div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-141985"></a>The following parameter is specific to the Tempus PI analysis flow:</div><ul><li>
+<a id="pgfId-141986"></a><code>-irdrop_data </code><span class="webflare-courier-new" style="white-space:pre"><em>directory_name</em></span><code> </code>- specifies the IR drop files or directory of files to apply to both the early and late delay calculation for the specified delay corner object.</li></ul></li></ol>
+
+
+
+
+
+
+<p>
+<a id="pgfId-141987"></a><strong>Step 4: Tempus ECO Fixing</strong></p>
+<p>
+<a id="pgfId-144374"></a>Fix the IR drop paths, identified by Tempus PI as timing critical paths, using Tempus ECO.</p>
+
+<p class="webflare-indent1">
+<a id="pgfId-144418"></a><strong>Tcl command</strong>: </p>
+<table class="webflareTable" id="#id144407">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144448"></a>set_eco_opt_mode -retime path_slew_propagation</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144449"></a>set_eco_opt_mode -pba_effort high</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144450"></a>set_eco_opt_mode -allow_multiple_incremental true</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144451"></a>set_eco_opt_mode -verbose true</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144452"></a>set_eco_opt_mode -eco_file_prefix tempus_pi</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144453"></a>checkPlace</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144454"></a>deleteFiller</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144455"></a>eco_opt_design -setup</pre>
+</td>
+</tr>
+</tbody></table>
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="tempus_pi_tempuspiflow.html" id="prev" title="Tempus Power Integrity Flow">Tempus Power Integrity Flow</a></em></b><b><em><a href="tempus_pi_tempuspireporting.html" id="nex" title="Tempus PI Result Analysis and Reporting">Tempus PI Result Analysis and  ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

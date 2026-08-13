@@ -1,0 +1,1246 @@
+
+<html><head><title>Specifying Timing Analysis Mode Types</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845201" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Specifying Timing Analysis Mode Types" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845201" />
+<meta name="NextFile" content="analysisandreporting_clockpathpessimismremoval.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_timinganalysismodes.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- Specifying Timing Analysis Mode Types" />
+<meta name="Keywords" content="timing analysis mode types" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Analysis,Timing Analysis Mode,Stylus" />
+<meta name="prod_subfeature" content="Timing Analysis, Timing Analysis Mode" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_timinganalysismodes.html" title="Timing Analysis Modes">Timing Analysis Modes</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_clockpathpessimismremoval.html" title="Clock Path Pessimism Removal">Clock Path Pessimism Removal</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:timinganalysismodetypes" title="Specifying Timing Analysis Mode Types"></a><h3>
+<a id="pgfId-1011680"></a><a id="77042"></a>Specifying Timing Analysis Mode Types</h3>
+
+<p>
+<a id="pgfId-1011681"></a>The timing analysis mode types are:</p>
+<ul><li>
+<a id="pgfId-1011685"></a><a href="analysisandreporting_timinganalysismodetypes.html#88607">Single Timing Analysis Type Overview</a></li><li>
+<a id="pgfId-1011689"></a><a href="analysisandreporting_timinganalysismodetypes.html#15149">Best-Case Worst-Case (BC-WC) Timing Analysis Mode Overview</a></li><li>
+<a id="pgfId-1011693"></a><a href="analysisandreporting_timinganalysismodetypes.html#15101">On-Chip Variation (OCV) Timing Analysis Mode Type Overview</a></li></ul>
+
+
+
+<h4>
+<a id="pgfId-1011695"></a><a id="88607"></a>Single Timing Analysis Type Overview</h4>
+
+<p>
+<a id="pgfId-1011696"></a>In this mode, the Tempus software uses a single set of delays (using one library group) based on one set of process, temperature, and voltage conditions.</p>
+<p>
+<a id="pgfId-1011697"></a>To set the timing analysis mode as single, you can use the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3006193"></a><a href="../tempusCUI/set_db.html">set_db</a> timing_analysis_type single</pre>
+
+<p>
+<a id="pgfId-1011699"></a>In single analysis mode, only maximum delay values are used for delay calculation. The <code>-max</code> options of commands in constraints are used for both minimum and maximum analysis in single analysis mode. For example, the <a href="../tempusCUI/set_annotated_delay.html">set_annotated_delay</a><code> &#8211;max</code> <code>10</code> command will be used for both minimum and maximum analysis.</p>
+<p>
+<a id="pgfId-1011700"></a>Even with single library group, cell delay can have variation in maximum delay based on sdf_cond, timing derates, and other inputs. In single analysis mode, early and late path delays are the minimum and maximum, respectively, of this range of maximum delay.</p>
+
+<h4>
+<a id="pgfId-1011701"></a>Single Timing Analysis - Setup and Hold Checks</h4>
+
+<p>
+<a id="pgfId-1011702"></a>These are explained in the sections below.</p>
+<p>
+<a id="pgfId-1011703"></a><strong>Setup Check in Single Timing Analysis Mode</strong></p>
+<p>
+<a id="pgfId-1011704"></a>For setup check, the software checks the late launch clock and late data paths against early capture clock path.</p>
+
+<p class="webflare-indent1"><strong>Figure -58
+<a id="pgfId-1011705"></a>Setup Check in Single Timing Analysis Mode</strong></p>
+<p>
+<a id="pgfId-1011709"></a></p>
+<div class="webflare-div-image">
+<img width="563" height="263" src="images/analysisandreporting-62.gif" /></div>
+
+<p>
+<a id="pgfId-1011710"></a>For zero slack value in a setup check, the following condition should be met:</p>
+<p>
+<a id="pgfId-1011711"></a><em>
+launch clock late path
+ <sub>(tLAUNCH_CLK)</sub> + <em>
+data clock late path
+ <sub>(tDATA_DLY) </sub>&lt;= <em>
+capture clock early path
+ <sub>(tCAPTUE_CLK)</sub> + <em>
+clock period
+ - <em>
+setup
+</em></em></em></em></em></p>
+<p>
+<a id="pgfId-1011712"></a><a href="analysisandreporting_timinganalysismodetypes.html#91126">Figure 4-59</a> shows the setup check on a path from FF1 to FF2.</p>
+
+<p class="webflare-indent1"><strong>Figure -59
+<a id="pgfId-1011713"></a><a id="91126"></a>Setup Check in Single Timing Analysis Mode</strong></p>
+<p>
+<a id="pgfId-1011717"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="260" src="images/analysisandreporting-63.gif" /></div>
+
+<p>
+<a id="pgfId-1011718"></a>The software uses a library to calculate the maximum delay. For setup check, the software considers two paths between the two registers, FF1 and FF2 - the late path delay is used to calculate slack during setup check.</p>
+<p>
+<a id="pgfId-1011719"></a>The following values are assumed in this example:<br />Clock period = 4; Clock source latency = none; Clock mode = Propagated</p>
+<table class="webflareTable" id="#id1011720">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011722"></a>Data late path delay</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011724"></a>3.6</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011726"></a>Data early path delay</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011728"></a>1.9</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011730"></a>Launch clock late path delay</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011732"></a>0.8 + 0.6 =1.4</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011734"></a>Capture clock early path delay</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011736"></a>0.8 + 0.5 = 1.3</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011738"></a>Setup</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011740"></a>0.2</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011742"></a>Data arrival time</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011744"></a>1.4 + 3.6 = 5</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011746"></a>Data required time</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011748"></a>4 + 1.3 - 0.2 = 5.1</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011750"></a>Setup Slack</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011752"></a>5.1 - 5 = 0.1</p>
+</td>
+</tr>
+</tbody></table>
+<p>
+<a id="pgfId-1011754"></a><strong>Hold Check in Single Timing Analysis Mode</strong></p>
+<p>
+<a id="pgfId-1011755"></a>For hold check the software compares the early arriving data against the late arriving clock at the endpoint.</p>
+
+<p class="webflare-indent1"><strong>Figure -60
+<a id="pgfId-1011756"></a>Hold Check in Single Timing Analysis Mode </strong></p>
+<p>
+<a id="pgfId-1011760"></a></p>
+<div class="webflare-div-image">
+<img width="492" height="233" src="images/analysisandreporting-64.gif" /></div>
+
+<p>
+<a id="pgfId-1011761"></a>For zero slack value in a hold check, the following condition should be met:</p>
+<p>
+<a id="pgfId-1011762"></a><em>
+launch clock early path
+ <sub>(tLAUNCH_CLK)</sub> + <em>
+data early path
+ <sub>(tDATA_DLY)</sub> =&gt; <em>
+capture clock late path
+ <sub>(tCAPTUE_CLK) </sub>+ <em>
+hold
+</em></em></em></em></p>
+<p>
+<a id="pgfId-1011763"></a>The following example shows the hold check on a path from FF1 to FF2.</p>
+
+<p class="webflare-indent1"><strong>Figure -61
+<a id="pgfId-1011764"></a>Hold Check in Single Timing Analysis Mode </strong></p>
+<p>
+<a id="pgfId-1011768"></a></p>
+<div class="webflare-div-image">
+<img width="667" height="241" src="images/analysisandreporting-65.gif" /></div>
+
+<p>
+<a id="pgfId-1011769"></a>The following values are assumed in this example:</p>
+<p>
+<a id="pgfId-1011770"></a>Clock period = 4; Clock source latency = none; Clock mode = Propagated</p>
+<table class="webflareTable" id="#id1011771">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011773"></a>Data late path delay</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011775"></a>2.6</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011777"></a>Data early path delay</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011779"></a>1.0</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011781"></a>Launch clock early path delay</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011783"></a>0.6 + 0.4 = 1.0</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011785"></a>Capture clock late path delay</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011787"></a>0.6 + 0.3 = 0.9</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011789"></a>Hold</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011791"></a>0.2</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011793"></a>Data arrival time</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011795"></a>1 + 1 = 2</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011797"></a>Data Required Time</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011799"></a>0.2 + 0.9 = 1.1</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011801"></a>Hold Slack</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011803"></a>2 &#8211; 1.1 = 0.9</p>
+</td>
+</tr>
+</tbody></table>
+
+<h4>
+<a id="pgfId-1011806"></a><a id="48419"></a>Performing Timing Analysis in Single Analysis Mode</h4>
+
+<p>
+<a id="pgfId-1011807"></a>To perform timing analysis in single analysis mode, you need to perform the following steps:</p>
+<ul><li>
+<a id="pgfId-1319379"></a>Set the analysis mode to single, setup and propagated clock mode:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1321003">
+<a id="pgfId-1321003"></a><code></code><code></code></pre><pre class="webflare-pre-block webflare-courier-new" id="#id3006206">
+<a id="pgfId-3006206"></a><a href="../tempusCUI/set_db.html">set_db</a> <a href="../tempusCUI/timing_Category_Attributes.html">timing_analysis_type</a> <code>single</code> <a href="../tempusCUI/timing_Category_Attributes.html">timing_analysis_check_type</a> <code>setup</code></pre></li><li>
+<a id="pgfId-1011810"></a>Generate the timing reports for setup:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1321006">
+<a id="pgfId-1321006"></a><a href="../tempusCUI/report_timing.html">report_timing</a></pre></li><li>
+<a id="pgfId-1319391"></a>Set the analysis mode to hold:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1321009">
+<a id="pgfId-1321009"></a><code></code><code></code></pre><pre class="webflare-pre-block webflare-courier-new" id="#id3006218">
+<a id="pgfId-3006218"></a><code>set_db timing_analysis_check_type hold</code></pre></li><li>
+<a id="pgfId-1011814"></a>Generate the timing reports for hold analysis:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1321012">
+<a id="pgfId-1321012"></a><code>report_timing</code></pre></li></ul>
+
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-1011816"></a>Alternatively, you can use the <code>report_timing &#8211;early</code> command with the <code></code>set_db <code>timing_analysis_check_type</code> <code>setup</code> attribute to report hold paths.</p>
+
+<h4>
+<a id="pgfId-1011818"></a><a id="15149"></a>Best-Case Worst-Case (BC-WC) Timing Analysis Mode Overview</h4>
+
+<p>
+<a id="pgfId-1011819"></a>In best-case worst-case (BC-WC) analysis mode, the software uses delays from the maximum library group for all the paths during setup checks and minimum library group for all the paths during hold checks. In this mode, the Tempus software considers two operating conditions and checks both operating conditions in one timing analysis run. To set the timing analysis mode as BC-WC, you can use the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3006235"></a><a href="../tempusCUI/set_db.html">set_db</a> <a href="../tempusCUI/timing_Category_Attributes.html">timing_analysis_type</a> <code>best_case_worst_case</code></pre>
+
+<p>
+<a id="pgfId-1011821"></a>You can use the <a href="../tempusCUI/set_clock_latency.html">set_clock_latency</a> constraint to set the source latency for a clock in both ideal and propagated mode for setup and hold checks. You can also use this constraint to set the network latency for an ideal clock. The specified source or network latency affects the early and late clock paths for both capture and launch clocks for both minimum and maximum operating conditions.</p>
+<p>
+<a id="pgfId-1011822"></a><strong>
+Note</strong>
+: The software considers the network latency, specified using the <code>set_clock_latency -max</code> (or <code>-min</code>) command, for ideal clocks only. In propagated mode, actual clock propagated latency values will be used.</p>
+
+<h4>
+<a id="pgfId-1011824"></a><a id="14277"></a>BC-WC Timing Analysis Mode - Setup and Hold Checks</h4>
+
+<p>
+<a id="pgfId-1011825"></a>These are explained in the sections below.</p>
+<p>
+<a id="pgfId-1011826"></a><strong>Setup Check in BC-WC Mode</strong></p>
+<p>
+<a id="pgfId-1011827"></a>For setup check, the software calculates delay values from the maximum library group for data arrival time, and network delay of both launch and capture clocks (in propagated mode).</p>
+<p>
+<a id="pgfId-1011828"></a>The source latency in both ideal and propagated modes for setup checks is defined in the constraints used by various clock paths as follows:</p>
+<table class="webflareTable" id="#id1011829">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1011831">
+<a id="pgfId-1011831"></a>Clock Path (Operating Condition)</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1011833">
+<a id="pgfId-1011833"></a>Constraint Used</span>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011835"></a>Launch clock late path (max)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011837"></a><code>set_clock_latency<br />-source -late -max value</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011840"></a>Capture clock early path (max)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011842"></a><code>set_clock_latency<br />-source-early -max value</code></p>
+</td>
+</tr>
+</tbody></table>
+<p>
+<a id="pgfId-1011845"></a>The network latency in ideal mode for setup checks is defined in the constraints used by various clock paths as follows: </p>
+<table class="webflareTable" id="#id1011846">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1011848">
+<a id="pgfId-1011848"></a>Clock Path (Operating Condition)</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1011850">
+<a id="pgfId-1011850"></a>Constraint Used</span>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011852"></a>Launch clock late path (max)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011854"></a><code>set_clock_latency<br />-max value</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011857"></a>Capture clock early path (max)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011859"></a><code>set_clock_latency<br />-max value</code></p>
+</td>
+</tr>
+</tbody></table>
+<p>
+<a id="pgfId-1011862"></a>The following example shows the setup check on a path from FF1 to FF2.</p>
+
+<p class="webflare-indent1"><strong>Figure -62
+<a id="pgfId-1011863"></a>Setup Check in BC-WC Timing Analysis Mode</strong></p>
+<p>
+<a id="pgfId-1011867"></a></p>
+<div class="webflare-div-image">
+<img width="668" height="243" src="images/analysisandreporting-66.gif" /></div>
+
+<p>
+<a id="pgfId-1011868"></a>The software uses the max library to scale all delays at WC conditions. The following values are assumed in this example:</p>
+<p>
+<a id="pgfId-1094362"></a>Clock period = 4; Clock source latency = none ; Clock mode = Propagated</p>
+<table class="webflareTable" id="#id1011870">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011872"></a>Data late path delay</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011874"></a>3.5</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011876"></a>Data early path delay</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011878"></a>1.9</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011880"></a>Launch clock late path delay</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011882"></a>0.7 + 0.6 = 1.3</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011884"></a>Capture clock early path delay</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011886"></a>0.7 + 0.5 = 1.2</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011888"></a>Setup</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011890"></a>0.2</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011892"></a>Data arrival time</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011894"></a>1.3 + 3.5 = 4.8</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011896"></a>Data Required Time</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011898"></a>4 + 1.2 - 0.2 = 5</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011900"></a>Setup Slack</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011902"></a>5 - 4.8 = 0.2</p>
+</td>
+</tr>
+</tbody></table>
+<p>
+<a id="pgfId-1011904"></a><strong>HOLD Check in BC-WC Mode</strong></p>
+<p>
+<a id="pgfId-1011905"></a>For hold check, the software uses the delay values from the min library for the data arrival time, and network delay of both launch and capture clocks (in propagated mode).</p>
+<p>
+<a id="pgfId-1011906"></a>The source latency in both ideal and propagated modes for hold checks is defined in the constraints used by various clock paths as follows:</p>
+<table class="webflareTable" id="#id1011907">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1011909">
+<a id="pgfId-1011909"></a>Clock Path (Operating Condition)</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1011911">
+<a id="pgfId-1011911"></a>Constraint Used</span>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011913"></a>Launch clock early path (min)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011915"></a><a href="../tempusCUI/set_clock_latency.html">set_clock_latency</a></p>
+<p>
+<a id="pgfId-1297946"></a><code>-source -early -min value</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011918"></a>Capture clock late path (min)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011921"></a><code>set_clock_latency<br />-source -late -min value</code></p>
+</td>
+</tr>
+</tbody></table>
+<p>
+<a id="pgfId-1011923"></a>The network latency in ideal mode for hold checks is defined in the constraints used by various clock paths as follows:</p>
+<table class="webflareTable" id="#id1011924">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1011926">
+<a id="pgfId-1011926"></a>Clock Path (Operating Condition)</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1011928">
+<a id="pgfId-1011928"></a>Constraint Used</span>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011930"></a>Launch clock early path (min)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011932"></a><code>set_clock_latency<br />-min value</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011935"></a>Capture clock late path (min)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011937"></a><code>set_clock_latency<br />-min value</code></p>
+</td>
+</tr>
+</tbody></table>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1011940"></a>You can also use one library containing two operating conditions in this mode.</div>
+<p>
+<a id="pgfId-1011941"></a>The following example shows the hold check on a path from FF1 to FF2.</p>
+
+<p class="webflare-indent1"><strong>Figure -63
+<a id="pgfId-1011942"></a>Hold Check in BC-WC Timing Analysis Mode</strong></p>
+<p>
+<a id="pgfId-1011946"></a></p>
+<div class="webflare-div-image">
+<img width="626" height="253" src="images/analysisandreporting-67.gif" /></div>
+
+<p>
+<a id="pgfId-1011947"></a>The software uses the min library to scale all delays at BC conditions.</p>
+<p>
+<a id="pgfId-1011948"></a>The following values are assumed in this example:</p>
+<p>
+<a id="pgfId-1011949"></a>Clock period = 4; Clock source latency = none; Clock mode = Propagated</p>
+<table class="webflareTable" id="#id1011950">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011952"></a>Data late path delay</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011954"></a>2.3</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011956"></a>Data early path delay</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011958"></a>1.0</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011960"></a>Launch clock early path delay</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011962"></a>0.5 + 0.4 = 0.9</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011964"></a>Capture clock late path delay</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011966"></a>0.3 + 0.5 = 0.8</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011968"></a>Hold</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011970"></a>0.1</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011972"></a>Data arrival time</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011974"></a>0.9 + 1 = 1.9</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011976"></a>Data required time</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011978"></a>0.1 + 0.8 = 0.9</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011980"></a>Hold Slack</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1011982"></a>1.9 - 0.9 = 1</p>
+</td>
+</tr>
+</tbody></table>
+
+<h4>
+<a id="pgfId-1011985"></a><a id="71183"></a>Performing Timing Analysis in BC-WC Analysis Mode</h4>
+
+<p>
+<a id="pgfId-1011986"></a>To perform timing analysis in BC-WC analysis mode, complete the following steps:</p>
+<ul><li>
+<a id="pgfId-1290592"></a>Set the analysis mode to BC-WC:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id3006248">
+<a id="pgfId-3006248"></a><a href="../tempusCUI/set_db.html">set_db</a> <a href="../tempusCUI/timing_Category_Attributes.html">timing_analysis_type</a> <code>best_case_worst_case</code> <a href="../tempusCUI/timing_Category_Attributes.html">timing_analysis_check_type</a> <code>setup</code></pre></li><li>
+<a id="pgfId-1011989"></a>Generate the timing reports for setup:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1297967">
+<a id="pgfId-1297967"></a><a href="../tempusCUI/report_timing.html">report_timing</a></pre></li><li>
+<a id="pgfId-1011991"></a>Set the analysis mode to hold and propagated clock mode:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id3006260">
+<a id="pgfId-3006260"></a><code></code>set_db timing_analysis_check_type hold</pre></li><li>
+<a id="pgfId-1011993"></a>Generate the timing reports for hold:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1297979">
+<a id="pgfId-1297979"></a><code>report_timing</code></pre></li></ul>
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-1011995"></a>Alternatively, you can use the <code>report_timing &#8211;early</code> command with <code>set_db timing_analysis_check_type</code> setup/<code>hold</code> option to report setup/hold paths.</p>
+
+<h4>
+<a id="pgfId-1011997"></a><a id="15101"></a>On-Chip Variation (OCV) Timing Analysis Mode Type Overview</h4>
+
+<p>
+<a id="pgfId-1011998"></a>In on-chip variation (OCV) mode, the software calculates clock and data path delays based on minimum and maximum operating conditions for setup analysis and vice-versa for hold analysis. These delays are used together in the analysis of each check.</p>
+<p>
+<a id="pgfId-1011999"></a>The OCV is the small difference in the operating parameter value across the chip. Each timing arc in the design can have an early and a late delay to account for the on-chip process, voltage, and temperature variation.</p>
+
+<h4>
+<a id="pgfId-1012001"></a><a id="16112"></a>OCV Timing Analysis Mode - Setup and Hold Checks</h4>
+
+<p>
+<a id="pgfId-1012002"></a>These are explained in the sections below.</p>
+<p>
+<a id="pgfId-1012003"></a><strong>Setup Check in OCV Mode</strong></p>
+<p>
+<a id="pgfId-1012004"></a>In OCV mode setup check, the software uses the timing delay values from the late library set and operating conditions for the data and the launch clock network delay. The software uses the delay values from the early library set and operating conditions for the capturing clock network delay assuming that the clocks are set in propagated mode.</p>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1012005"></a>You can use one library instead of both maximum and minimum libraries, and apply timing derates for performing min/max analysis, respectively.</div>
+<p>
+<a id="pgfId-1012006"></a>The source latency in both ideal and propagated modes for setup checks is defined in the constraints used by various clock paths as follows:</p>
+<table class="webflareTable" id="#id1012007">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012009"></a><strong>Clock Path (Operating Condition)</strong></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012011"></a><strong>Constraint Used</strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012013"></a>Launch clock late path (max)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012015"></a><a href="../tempusCUI/set_clock_latency.html">set_clock_latency</a><code>-source -late -max value</code></p>
+<p>
+<a id="pgfId-1297994"></a>or <code>set_clock_latency -source -late value</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012020"></a>Capture clock early path (min)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012022"></a><code>set_clock_latency -source -early -min value</code></p>
+<p>
+<a id="pgfId-1298016"></a>or <code>set_clock_latency -source -early value</code></p>
+</td>
+</tr>
+</tbody></table>
+<p>
+<a id="pgfId-1012027"></a>The network latency in ideal mode for setup checks is defined in the constraints used by various clock paths as follows:</p>
+<table class="webflareTable" id="#id1012028">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012030"></a><strong>Clock Path (Operating Condition)</strong></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012032"></a><strong>Constraint Used</strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012034"></a>Launch clock late path</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012036"></a><code>set_clock_latency -max value</code></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012039"></a>Capture clock early path</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012041"></a><code>set_clock_latency -min value</code></p>
+</td>
+</tr>
+</tbody></table>
+<p>
+<a id="pgfId-1012044"></a>The following example shows the setup check on a path from FF1 to FF2.</p>
+
+<p class="webflare-indent1"><strong>Figure -64
+<a id="pgfId-1012045"></a>Setup Check in OCV Mode</strong></p>
+<p>
+<a id="pgfId-1012049"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="248" src="images/analysisandreporting-68.gif" /></div>
+
+<p>
+<a id="pgfId-1012050"></a>The software uses the max library for all late path delays and min library for all early path delays.</p>
+<p>
+<a id="pgfId-1012051"></a>The following values are assumed in this example:<br />Clock period = 4; Clock source latency = none; Clock mode = Propagated</p>
+<table class="webflareTable" id="#id1039426">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012054"></a>Data late path delay (max)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012056"></a>3.5</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012058"></a>Data late path delay (min)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012060"></a>3.0</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012062"></a>Launch clock late path delay (max)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012064"></a>0.7 + 0.6 = 1.3</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012066"></a>Capture clock early path delay (min)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012068"></a>0.5 + 0.3 = 0.8</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012070"></a>Setup</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012072"></a>0.2</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012074"></a>Data arrival time</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012076"></a>1.3 + 3.5 = 4.8</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012078"></a>Data Required Time</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012080"></a>4 + 0.8 - 0.2 = 4.6</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012082"></a>Setup Slack</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012084"></a>4.6- 4.8 = -0.2</p>
+</td>
+</tr>
+</tbody></table>
+<p>
+<a id="pgfId-1012086"></a><strong>Hold Check in OCV Mode</strong></p>
+<p>
+<a id="pgfId-1012087"></a>For OCV hold check, the software uses the timing delay values from the early library set and operating conditions for the data arrival time and launch clock network delay. The software uses delay values from the late library set and operating conditions for the capturing clock network delay assuming that the clocks are set in propagated mode.</p>
+<p>
+<a id="pgfId-1012088"></a>The source latency in both ideal and propagated modes for hold checks is defined in the constraints used by various clock paths as follows:</p>
+<table class="webflareTable" id="#id1012089">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012091"></a><strong>Clock Path (Operating Condition)</strong></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012093"></a><strong>Constraint Used</strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012095"></a>Launch clock early path (min)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012097"></a><a href="../tempusCUI/set_clock_latency.html">set_clock_latency</a> <code>-source</code> <code>-early</code> <code>-min</code> <span class="webflare-courier-new" style="white-space:pre"><em>value</em></span></p>
+<p>
+<a id="pgfId-1298019"></a>or <code>set_clock_latency -source -early </code><span class="webflare-courier-new" style="white-space:pre"><em>value</em></span></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012103"></a>Capture clock late path (max)</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012105"></a><code>set_clock_latency -source -late -max </code><span class="webflare-courier-new" style="white-space:pre"><em>value</em></span></p>
+<p>
+<a id="pgfId-1298031"></a>or <code>set_clock_latency -source -late </code><span class="webflare-courier-new" style="white-space:pre"><em>value</em></span></p>
+</td>
+</tr>
+</tbody></table>
+<p>
+<a id="pgfId-1012111"></a>The network latency in ideal mode for hold checks is defined in the constraints used by various clock paths as follows:</p>
+<table class="webflareTable" id="#id1012112">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012114"></a><strong>Clock Path (Operating Condition)</strong></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012116"></a><strong>Constraint Used</strong></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012118"></a>Launch clock early path</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012120"></a><code>set_clock_latency -min </code><span class="webflare-courier-new" style="white-space:pre"><em>value</em></span></p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012123"></a>Capture clock late path</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1012125"></a><code>set_clock_latency -max </code><span class="webflare-courier-new" style="white-space:pre"><em>value</em></span></p>
+</td>
+</tr>
+</tbody></table>
+<p>
+<a id="pgfId-1012128"></a>The following example shows the hold check on the path from FF1 to FF2.</p>
+
+<p class="webflare-indent1"><strong>Figure -65
+<a id="pgfId-1012129"></a>Hold Check in OCV Mode</strong></p>
+<p>
+<a id="pgfId-1012133"></a></p>
+<div class="webflare-div-image">
+<img width="669" height="233" src="images/analysisandreporting-69.gif" /></div>
+
+<p>
+<a id="pgfId-1012134"></a>The software uses the max library to scale all delays at WC conditions and minimum library to scale all delays at BC conditions.</p>
+<p>
+<a id="pgfId-1012135"></a>The following values are assumed in this example:<br />Clock period = 4; Clock source latency = none; Clock mode = Propagated</p>
+<table class="webflareTable" id="#id1012136">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012138"></a>Data early path delay (max)</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012140"></a> </p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012142"></a>Data early path delay (min)</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012144"></a>1.2</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012146"></a>Launch clock early path delay (min)</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012148"></a>0.5 + 0.4 = 0.9</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012150"></a>Capture clock late path delay (max)</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012152"></a>0.7 + 0.5 = 1.2</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012154"></a>Hold</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012156"></a>0.1</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012158"></a>Data arrival time</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012160"></a>0.9 + 1.2 = 2.1</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012162"></a>Data required time</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012164"></a>0.1 + 1.2= 1.3</p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012166"></a>Hold Slack</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012168"></a>2.1 - 1.3 = 0.8</p>
+
+</td>
+</tr>
+</tbody></table>
+
+<h4>
+<a id="pgfId-1012171"></a><a id="65460"></a>Performing Timing Analysis in OCV Mode</h4>
+
+<p>
+<a id="pgfId-1012172"></a>To perform timing analysis in OCV mode, complete the following steps:</p>
+<ul><li>
+<a id="pgfId-1290606"></a>Set the analysis mode to OCV and propagated clock mode:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id3006272">
+<a id="pgfId-3006272"></a><a href="../tempusCUI/set_db.html">set_db</a> <a href="../tempusCUI/timing_Category_Attributes.html">timing_analysis_type</a> <code>ocv</code></pre></li><li>
+<a id="pgfId-1012175"></a>Generate the timing reports for setup:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1298061">
+<a id="pgfId-1298061"></a><a href="../tempusCUI/report_timing.html">report_timing</a> <code>-late</code></pre></li><li>
+<a id="pgfId-1012177"></a>Generate the timing reports for hold:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id1298064">
+<a id="pgfId-1298064"></a><code>report_timing</code> <code>-early</code></pre></li></ul>
+
+
+
+
+
+
+<h4>
+<a id="pgfId-1012180"></a><a id="85292"></a>Using Timing Derates in OCV Analysis Mode</h4>
+
+<p>
+<a id="pgfId-1012181"></a>When the <a href="../tempusCUI/set_timing_derate.html">set_timing_derate</a> command is used, the following paths in OCV mode are affected:</p>
+<table class="webflareTable" id="#id1063286">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1012184">
+<a id="pgfId-1012184"></a>Violations</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1012186">
+<a id="pgfId-1012186"></a>Data</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1012188">
+<a id="pgfId-1012188"></a>Launch Clock</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1012190">
+<a id="pgfId-1012190"></a>Capture Clock</span>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012192"></a>Setup</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012194"></a><code>-late -data</code></p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012196"></a><code>-late -clock</code></p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012198"></a><code>-early -clock</code></p>
+
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012200"></a>Hold</p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012202"></a><code>-early -data</code></p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012204"></a><code>-early -clock</code></p>
+
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+
+<p>
+<a id="pgfId-1012206"></a><code>-late -clock</code></p>
+
+</td>
+</tr>
+</tbody></table>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_timinganalysismodes.html" id="prev" title="Timing Analysis Modes">Timing Analysis Modes</a></em></b><b><em><a href="analysisandreporting_clockpathpessimismremoval.html" id="nex" title="Clock Path Pessimism Removal">Clock Path Pessimism Removal</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

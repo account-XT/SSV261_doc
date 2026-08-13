@@ -1,0 +1,155 @@
+
+<html><head><title>check_design</title>
+<meta name="page_sequence" content="12001000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666228" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the text commands in Voltus IC Power Integrity Solution." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="check_design" />
+<meta name="Keywords" content="power_intent, timing, hierarchical, pin_assign, budget, assign_statements place, opt, cts, route, signoff" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Design Import," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666228" />
+<meta name="NextFile" content="checkTimingLibrary.html" />
+<meta name="Group" content="Voltus Text Command Reference" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Import_Design_Commands.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution Text Command Reference -- check_design" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="epstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="Import_Design_Commands.html" title="Import_Design_Commands">Import_Design_Commands</a></li><li style="float: right;"><a class="viewPrint" href="voltustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="checkTimingLibrary.html" title="checkTimingLibrary">checkTimingLibrary</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>check_design</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code><code>check_design<span class="confluence-anchor-link" id="check_design-check_design"></span><span id="check_design-checkDesign"></span></code><code><br /></code><code>[-help]<br />-format <em>{table detail}<br /></em>-id <em>&lt;string&gt;</em><br />[-out_file <em>fileName</em>] <br />-type {<code>power_intent timing hierarchical pin_assign budget assign_statements place opt cts route signoff all}</code>&#xa0;<br />-no_check<br /></code><code>-type_3d {db tech_lib netlist power_intent timing place floorplan route all}<br /></code></code><br /></code></p>
+
+<p>Checks that all prerequisites to run all or part of the hierarchical or block implementation flow are met.&#xa0;</p>
+
+<p>The <code>check_design</code> command checks the preconditions for major flow steps before they are run. You can run these checks standalone using the check_design command. If there are error in the <code>check_design</code> run, the current script will stop.</p>
+
+<p><br />Some examples of problems that will cause design checks to fail include:</p>
+<ul><li>Cells used in the design that cannot be legally placed</li></ul><ul><li>Tracks misaligned with some or all cell pins</li></ul><ul><li>In advanced processes, power nets that cannot be colored in the expected pattern once cells are placed</li></ul><ul><li>Cell rows that are unblocked for placement but where pin layers are obstructed</li></ul><ul><li>Cell rows that are unusable due to orientation and power rail misalignment</li></ul><ul><li>Cells instantiated in the netlist that have no timing model defined</li></ul><ul><li>Tracks blocked by power grid spacing constraints</li></ul><ul><li>Instances not covered by a true timing path in any view</li></ul><ul><li>ILM model with no clock tree defined</li></ul><ul><li>No hold fixing cells are specified and delay cells are not usable by default</li></ul><ul><li>No clock inverters, buffers, clock gates or logic cells are specified and the library cells are not usable by default</li></ul><ul><li>CTS cannot balance all skew groups without increasing insertion delay</li></ul><ul><li>There are preserved nets and cells in the clock tree that will violate other constraints because they cannot be resized or buffered.</li></ul><h4 id="check_design-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><tbody><tr><td class="confluenceTd" valign="top">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Prints a brief description that includes the type and default information for each <code>check_design</code> parameter.</p>
+
+<p>For a detailed description of the command and all of its parameters, use the <code>man</code> command: <br /><code>man check_design</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><div class="content-wrapper">
+<p><code><span>-format <em>{table detail}</em></span></code></p>
+</div>
+</td>
+<td class="confluenceTd">
+<p>Specifies the table format.</p>
+<ul><li><code>table</code>: to print the results in table format.</li><li><code>detail</code>: to print the results from <code>check_design</code> using the old style of log file. Basically, this is just a way to let user (if necessary) go back to the old style of log file for</li></ul></td>
+</tr>
+<tr><td class="confluenceTd"><div class="content-wrapper">
+<p><code><span>-id &lt;string&gt;</span></code></p>
+</div>
+</td>
+<td class="confluenceTd">
+<p>Check violation list (e.g. &#39;CHKPLC-100&#39;).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>-<span>type</span></span></code></td>
+<td class="confluenceTd">
+<p>Specifies the category of the flow to be checked:</p>
+<ul><li><code>assign_statements</code>: Performs checks for the netlist for assign statements.</li><li><code>power_intent</code>: Performs checks related to MSV setup including power domain/fence checks.</li><li><code>timing</code>: Performs checks related to timing setup integrity. &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;</li></ul><ul><li><code>feedthru</code>: Performs checks related to feedthru insertion for partitioning flows.</li></ul><ul><li><code>pin_assign</code>: Performs checks related to pin assignment for partitioning flows.</li></ul><ul><li><code>budget</code>: Performs checks related to time budgeting for partitioning flows.</li></ul><ul><li><code>place</code>: Performs checks related to placement such as PG rail alignment and pin access issues.</li></ul><ul><li><code>opt</code>: Performs checks related to optimization such as checks for available cells.</li></ul><ul><li><code>cts</code>: Performs checks related to clock tree definition such as constraint targets and route types.</li></ul><ul><li><code>route</code>: Performs checks related to routing such as congestion, placement, and pin access issues.</li></ul><ul><li><code>signoff</code>: Checks related to the signoff activities including extraction and ECOs.</li></ul><ul><li><code>all</code>: Runs all categories.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd"><code>-no_check</code></td>
+<td class="confluenceTd">
+<p>Just echo out all the messages that would be checked, don&#39;t do any checks</p>
+
+<p>Do not run the checks but echo the checks that would run per the categories provided by the user</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-out_file </code><code><em>fileName</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the output report file. Contents dumped to this file are in the Tcl format.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-type_3d</code></p>
+</td>
+<td class="confluenceTd">
+<p>List of 3DIC design categories to check, accepts single &amp; multiple values (one or more categories).</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Import_Design_Commands.html" id="prev" title="Import_Design_Commands">Import_Design_Commands</a></em></b><b><em><a href="checkTimingLibrary.html" id="nex" title="checkTimingLibrary">checkTimingLibrary</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

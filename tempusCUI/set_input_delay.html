@@ -1,0 +1,227 @@
+
+<html><head><title>set_input_delay</title>
+<meta name="page_sequence" content="39081000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="gsatish" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287476" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_input_delay" />
+<meta name="Keywords" content="clock edge input ports input pins,arrival time" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Timing Constraints," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287476" />
+<meta name="NextFile" content="set_input_transition.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_ideal_transition.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- set_input_delay" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="set_ideal_transition.html" title="set_ideal_transition">set_ideal_transition</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_input_transition.html" title="set_input_transition">set_input_transition</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_input_delay</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>set_input_delay<span class="confluence-anchor-link" id="set_input_delay-set_input_delay"></span><span id="set_input_delay-set_input_delay"></span> <br /><span>[-help]</span><br />[-clock <code><em>clock_name</em></code>] <br />[-clock_fall] <br />[-rise] [-fall] <br />[-max] [-min] <br />[-add_delay] <br />[-network_latency_included] <br />[-source_latency_included] <br />[-reference_pin <code><em>pin_name</em></code>] <br />[-level_sensitive] <br /><code><em>value</em></code> <br /><code><em>pin_or_port_list</em></code> </code> <br /></code></p>
+
+<p>Defines the arrival time relative to a clock edge on input ports or internal input pins. This input path delay models the delay from an external register to an input port of the module.</p>
+
+<p>If the input delay is not specified on an input port, it is assumed to be zero.</p>
+
+<p><strong>Note</strong>: If the&#xa0;<code>set_input_delay</code>&#xa0;constraint&#xa0;is added incrementally in SI mode, an explicit&#xa0;<code><a href="update_timing.html">update_timing</a></code>&#xa0;<code>-full</code>&#xa0;command is required (before&#xa0;<code><a href="report_timing.html">report_timing</a></code>&#xa0;or&#xa0;<code><a href="report_constraint.html">report_constraint</a></code>) for SI full accuracy.</p>
+<h4 id="set_input_delay-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-add_delay</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Adds delay information to the existing input delay. The additional delay information can be for multiple paths relative to different clocks or clock edges leading to an input port or internal input pins. If you do not use the <code>-add_delay</code> option, the software uses the last <code>set_input_delay</code> related to a pin when there are multiple <code>set_input_delay</code> statements for the same pin.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-clock </code><code><em>clock_name</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies that the delay is relative to the rising edge of the given clock. If you do not specify the <code>-clock</code> parameter, the delay is relative to time zero. To specify a delay relative to the falling edge of the clock, use the -clock_fall option with the -clock option.</p>
+
+<p>When you specify multiple clocks, an error occurs and the constraint is ignored.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-clock_fall</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies that the delay is relative to the falling edge of the clock. You must specify the -clock parameter with this parameter.</p>
+
+<p><em>Default:</em> Delay is relative to the rising edge.</p>
+
+<p>You cannot specify the <code>-clock_fall</code> parameter without the <code>-clock</code> parameter.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>value</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the value for the path delay.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-fall</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies that the input delay refers to the falling edge of the signal at specified ports or pins. If you do not specify the <code>-fall</code> option, the input delay applies to both the edges.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-level_sensitive</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Models input delay that is launched by a positive level sensitive latch.</p>
+
+<p>Use the <code>-clock</code> parameter to model a positive level sensitive latch, or the <code>-clock_fall</code> parameter to model a negative level sensitive latch.</p>
+
+<p>You cannot specify the <code>-level_sensitive</code> parameter without the <code>-clock</code> parameter.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-max</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies that the delay refers to the setup analysis. If you do not specify the <code>-max</code> parameter, the input delay applies to both setup and hold analysis.</p>
+
+<p><strong>Note</strong>: If for a specific clock the maximum delay is less than the minimum delay, then during analysis the software makes the maximum delay equal to the minimum delay.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-min</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies that the delay refers to the hold analysis. If you do not specify the <code>-min</code> parameter, the input delay applies to both setup and hold analysis.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-network_latency_included</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies that the clock network latency should not be added to the input delay value. If you do not specify this option, the clock network latency of the related clock is added to the input delay value. This parameter has no effect if the specified clock is in propagated mode.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>pin_or_port_list</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies a list of input port or pin names. The pin_or_port_list argument can be a collection.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-reference_pin</code> <code><em>pin_name</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Adds source and network latency of the specified reference pin to the input delay value in propagated mode. A reference pin is a leaf pin in the fanout cone of the clock source of the clock that you specify using the <code>-clock</code> parameter.</p>
+
+<p>You cannot use the <code>-reference_pin</code> parameter to specify multiple pins. If specified, the command issues a warning and accepts the first pin.</p>
+
+<p>You cannot use the <code>-reference_pin</code> parameter with the <code>-network_latency_included</code> or <code>-source_latency_included</code> parameters.</p>
+
+<p>You cannot use the <code>-reference_pin</code> parameter to specify hierarchical pins.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-rise</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies that input delay refers to the rising edge of the signal at the specified ports or pins. If you do not specify the <code>-rise</code> option, the input delay applies to the both edges.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-source_latency_included</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies that the clock source latency should not be added to the input delay value.</p>
+
+<p>With different delay values for <code>-rise/-fall</code> and <code>-min/-max</code>, only the last specified combination of <code>-network_latency_included</code> and <code>-source_latency_included</code> parameters is honored. The specified combination can be one of the following:</p>
+
+<p>a) Either <code>-network_latency_included</code> or <code>-source_latency_included</code></p>
+
+<p>b) Both of these</p>
+
+<p>c) None of these</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_input_delay-Examples">Examples</h4>
+<ul><li>The following command sets an input delay of 1.0 for all inputs in the current design relative to the rising edge of the&#xa0;<code>CLK1</code>&#xa0;clock:<br /><code>tempus &gt; set_input_delay -clock CLK1 1.0 [all_inputs]</code></li></ul><ul><li>The following command sets an input delay of 2.0 for the input&#xa0;<code>IN1</code>&#xa0;port relative to the falling edge of the&#xa0;<code>CLK1</code>&#xa0;clock:<br /><code>tempus &gt;&#xa0;set_input_delay -clock CLK1 2.0 -clock_fall { IN1 }</code></li></ul><ul><li>The following example shows an input&#xa0;<code>IN1</code>&#xa0;port that is constrained by both the rising edge and the falling edge of the same&#xa0;<code>CLK1</code>&#xa0;clock. The&#xa0;<code>-add_delay</code>&#xa0;option prevents the second&#xa0;<code>set_input_delay</code>&#xa0;statement from overwriting the first&#xa0;<code>set_input_delay</code>:<br /><code>tempus &gt;&#xa0;set_input_delay -clock CLK1 1.0 { IN1 }</code><br /><code>tempus &gt;&#xa0;set_input_delay -clock CLK1 -clock_fall -add_delay 2.0 { IN1 }</code></li></ul><ul><li>When multiple&#xa0;<code>-min</code>&#xa0;and&#xa0;<code>-max</code>&#xa0;values are specified relative to the same clock using the&#xa0;<code>-add_delay</code>&#xa0;option at the same port or pin, the worst case value for each case is used. For the&#xa0;<code>-min</code>&#xa0;case the smallest value is retained, and for the&#xa0;<code>-max</code>&#xa0;case the largest value is retained. For example, the input delay value of 1.0 is stored for the shortest path and the value of 4.0 is stored for the longest path in the following example:<br /><code>tempus &gt;&#xa0;set_input_delay -min -clock CLK1 1.0 { IN1 }</code><br /><code>tempus &gt;&#xa0;set_input_delay -min -clock CLK1 2.0 -add_delay { IN1 }</code><br /><code>tempus &gt;&#xa0;set_input_delay -max -clock CLK1 3.0 -add_delay { IN1 }</code><br /><code>tempus &gt;&#xa0;set_input_delay -max -clock CLK1 4.0 -add_delay { IN1 }</code></li></ul><h4 id="set_input_delay-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="all_inputs.html#all_inputs-all_inputs">all_inputs</a></code></li><li><code><a href="create_clock.html#create_clock-create_clock">create_clock</a></code></li><li><code><a href="report_ports.html#report_ports-report_ports">report_ports</a></code></li><li><code><a href="set_load.html#set_load-set_load">set_load</a></code></li><li><code><a href="set_output_delay.html#set_output_delay-set_output_delay">set_output_delay</a></code></li><li><code><a href="report_path_exceptions.html">report_path_exceptions</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_ideal_transition.html" id="prev" title="set_ideal_transition">set_ideal_transition</a></em></b><b><em><a href="set_input_transition.html" id="nex" title="set_input_transition">set_input_transition</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

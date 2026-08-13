@@ -1,0 +1,123 @@
+
+<html><head><title>Generating Power-Grid Library for a Flip Chip Design</title>
+<meta name="page_sequence" content="20024000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468567" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Generating Power-Grid Library for a Flip Chip Design" />
+<meta name="Keywords" content="flip,chip,voltage,rail analysis,characterization,bumps" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Power-Grid Library Generation," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468567" />
+<meta name="NextFile" content="Tcl_Scripts_for_Generating_Different_Types_of_Bump_PGV.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Decap__Filler__and_Damping_Decap_Cells_Characterization.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- Generating Power-Grid Library for a Flip Chip Design" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="Decap__Filler__and_Damping_Decap_Cells_Characterization.html" title="Decap__Filler__and_Damping_Decap_Cells_Characterization">Decap__Filler__and_Damping_Dec ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Tcl_Scripts_for_Generating_Different_Types_of_Bump_PGV.html" title="Tcl_Scripts_for_Generating_Different_Types_of_Bump_PGV">Tcl_Scripts_for_Generating_Dif ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Generating Power-Grid Library for a Flip Chip Design</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="GeneratingPowerGridLibraryforaFlipChipDesign-83374"></span></p>
+
+<p>When running power and rail analysis for a flip chip design, you can create voltage sources for the flip chip to be used in the Rail Analysis flow. The bumps are modeled with several points in a resistor network, and hence avoid false EM violations.</p>
+
+<p>The LEF file of the flip chip bump can be used as a reference. Bumps are usually octagonal, although sometimes they are represented as squares. The following is an example of the bump LEF file:</p>
+<pre><code>
+&#xa0;&#xa0;  VERSION 5.6 ;<br />    BUSBITCHARS &quot;[]&quot; ;<br />    DIVIDERCHAR &quot;/&quot; ;<br />    UNITS<br />     DATABASE MICRONS 1000 ;<br />     END UNITS<br />    MACRO BUMP<br />     CLASS COVER BUMP ;<br />     FOREIGN BUMP -49.45 -49.45 ;<br />     ORIGIN 49.45 49.45 ;<br />     SIZE 98.9 BY 98.9 ;<br />     PIN PAD</code><code>
+&#xa0;&#xa0;      DIRECTION INOUT ;<br />        USE SIGNAL ;<br />        PORT<br />          LAYER AP ;<br />            #RECT -49.45 -49.45 49.45 49.45 ;<br />            POLYGON -20.49 -49.45 20.49 -49.45 49.45 -20.49 49.45<br />            20.49 20.49 49.45 -20.49 49.45 -49.45    20.49 -49.45 -20.49 ;</code><code>
+&#xa0;&#xa0;      END<br />      END PAD<br />    END BUMP<br />   END LIBRARY
+</code></pre><div aria-label="Info" class="confluence-information-macro  confluence-information-macro-information" role="region"><span class="aui-icon aui-icon-small aui-iconfont-info-filled confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>In the LEF file, a polygon shape is used to create an octagonal bump, but the corresponding coordinates that would have been used for a square are commented out.</p>
+</div>
+</div>
+
+<p>The following are the steps for PGV characterization of a flip-chip design:</p>
+<ol><li>Create a file called <code>bump.padfile</code>. This file contains one line, the MACRO name of the bump from the LEF, as shown below:<br /><code>BUMP</code></li><li>Create a file called <code>bump.srcfile</code>, as shown below:<br /><code>CELL BUMP
+     NET PAD
+         PORT {
+        AP -49.45 -49.45 49.45 49.45
+      }
+</code>The <code>CELL</code> and <code>NET</code> names in the voltage source file must match that of the bump LEF file. The <code>NET</code> name is the <code>PIN</code> name from the LEF. Similarly, the port layer name in the voltage source file (AP) is the same layer from the LEF. The commented-out square coordinates in the LEF example can be used to specify the coordinates of the PORT shape which should be a square that encloses the octagonal bump.</li><li>Create the bump power-grid view. You can create a technology-based bump PGV or a standard cell based PGV. When generating a standard cell based PGV, you can:<ul><li>Specify separate pad names for power and ground pins</li><li>Specify a common pad name for power and ground pins</li><li>Specify x, y locations of the voltage sources to be connected to the pad cells</li></ul></li><li>Run Rail analysis.<br />When running rail analysis, use the <code>bump.padfile</code> in the <code>set_power_pads</code> command. The same padfile can be used for any rail, as shown below: <code>set_power_pads \
+  -net VDD \
+  -format padcell \
+  -file bump.padfile
+set_power_pads \
+  -net VSS \
+  -format padcell \
+  -file bump.padfile</code></li></ol>
+<p>All bumps will be recognized as voltage sources, with multiple points inside the bump shape.</p>
+<h4 id="GeneratingPowerGridLibraryforaFlipChipDesign-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Tcl_Scripts_for_Generating_Different_Types_of_Bump_PGV.html">Tcl Scripts for Generating Different Types of Bump PGV</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Decap__Filler__and_Damping_Decap_Cells_Characterization.html" id="prev" title="Decap__Filler__and_Damping_Decap_Cells_Characterization">Decap__Filler__and_Damping_Dec ...</a></em></b><b><em><a href="Tcl_Scripts_for_Generating_Different_Types_of_Bump_PGV.html" id="nex" title="Tcl_Scripts_for_Generating_Different_Types_of_Bump_PGV">Tcl_Scripts_for_Generating_Dif ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

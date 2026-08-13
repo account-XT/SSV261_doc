@@ -1,0 +1,290 @@
+
+<html><head><title>Enabling Proximity Aggressors in Tempus PI</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823949" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Enabling Proximity Aggressors in Tempus PI" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823949" />
+<meta name="NextFile" content="tempus_pi_sequentialactivity.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="tempus_pi_userdefinedcriticalpaths.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Enabling Proximity Aggressors in Tempus PI" />
+<meta name="Keywords" content="aggressor,victim instance,proximity aggressor,timing window" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Power Calculation" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="tempus_pi_userdefinedcriticalpaths.html" title="User-Defined Critical Paths Support">User-Defined Critical Paths Su ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="tempus_pi_sequentialactivity.html" title="Sequential Activity and Simulation Period">Sequential Activity and Simula ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:enablingproximityaggressors" title="Enabling Proximity Aggressors in Tempus PI"></a><style>/*<![CDATA[*/
+/**/
+/**/
+/**/
+/**/
+h1 { counter-reset: heading 11;}
+/**/
+/**/
+/**/
+/**/
+/*]]>*/</style><h2>
+<a id="pgfId-144720"></a><a id="73129"></a>Enabling Proximity Aggressors in Tempus PI</h2>
+
+<p>
+<a id="pgfId-144721"></a>Proximity aggressors refer to those instances which, when switching, can induce additional IR drop on the critical victim instances lying in the vicinity. Such aggressor instances are resistively linked with the victim instances via PG grid.</p>
+<p>
+<a id="pgfId-144722"></a>The Tempus PI flow identifies and schedules the timing-critical and voltage-sensitive paths, along with switching the fanout cone of the critical victim instances using the state propagation algorithm. Though some aggressors for these critical instances are implicitly modeled due to the transient behavior of toggling fanout cones, the aggressor identification and scheduling for each victim instance is not explicitly done, which could lead to optimism in the analysis.</p>
+<p>
+<a id="pgfId-144723"></a>Tempus PI provides an additional capability for proximity aggressor modeling, wherein:</p>
+<ul><li>
+<a id="pgfId-144724"></a>An aggressor database is generated containing top N resistively-linked aggressors to each of the instances in the design, N being user controlled.</li><li>
+<a id="pgfId-144725"></a>The generated aggressor database is consumed by the <code>report_power</code> command to schedule the aggressors for all critical instances.</li><li>
+<a id="pgfId-144726"></a>Timing Window (TW) overlap is checked while scheduling these aggressors, and aggressors that are not overlapping with victim&#39;s TW are dropped.<br />
+<a id="pgfId-144765"></a><strong>Tcl commands</strong>: <br /><table class="webflareTable" id="#id144762">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144788"></a># Specify the number. of aggressors for each victim</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144789"></a>redirect -quiet {puts &quot;setvar proximity_level 10&quot;} &gt; rail.inc</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144790"></a>set_advanced_rail_options -voltus_rail_include_file_begin ./rail.inc</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144791"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144792"></a># Generate proximity aggressor database</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144793"></a>analyze_resistance -domain ALL -output_dir agg_db -method rlrp</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144794"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144795"></a>#Link the generated aggressor DB</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144796"></a>set_power_analysis_mode -specify_aggressor_db_path agg_db/ALL_25C_reff_1</pre>
+</td>
+</tr>
+</tbody></table></li></ul>
+
+
+
+
+
+
+<p>
+<a id="pgfId-94010"></a><strong>Sample Script</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144865"></a># Load the design</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144866"></a>read_lib -lef $lefs</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144867"></a>read_physical -lefs $lefs</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144868"></a>read_view_definitionread_mmmc ../design/viewDefinition.tcl</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144869"></a>read_verilog ../design/postRouteOpt.enc.dat/super_filter.v.gz</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144870"></a>set_top_module super_filter </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144871"></a>read_netlist ../design/postRouteOpt.enc.dat/super_filter.v.gz -top super_filter</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144872"></a>init_design</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144873"></a>read_def ../design/super_filter.def.gz</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144874"></a>read_spef -rc_corner&#160;&#160;RC_wc_125 ../design/postRouteOpt_RC_wc_125.spef.gz</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144875"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144876"></a>#Apply estimated IR drop budgets</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144877"></a>update_delay_corner -name DC_wc_1p00&#160;&#160;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144878"></a>-early_estimated_worst_irDrop_factor 0.15 </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144879"></a>-late_estimated_worst_irDrop_factor 0.15</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144880"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144881"></a>#Configure Tempus PI power analysis </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144882"></a>set_power_output_dir dynVecLessPowerResults</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144883"></a>set_power_analysis_mode \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144884"></a>    -method                      dynamic_vectorless \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144885"></a>    -disable_static true \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144886"></a>    -enable_state_propagation    true \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144887"></a>    -power_grid_library         { \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144888"></a>        ../data/pgv_dir/tech_pgv/techonly.cl \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144889"></a>        ../data/pgv_dir/stdcell_pgv/stdcells.cl \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144890"></a>        ../data/pgv_dir/macro_pgv/macros_pll.cl \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144891"></a>    } \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144892"></a>    -enable_tempus_pi true</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144893"></a>set_default_switching_activity -input_activity 0 \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144894"></a>    -period 4.0 -clock_gates_output_ratio   0.5 -sequential_activity 0.2</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144895"></a>set_dynamic_power_simulation -resolution 10ps -period 20ns</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144896"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144897"></a>#Configure rail analysis</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144898"></a>set_rail_analysis_mode \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144899"></a>    -method                     dynamic \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144900"></a>    -accuracy                   hd \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144901"></a>    -analysis_view              AV_wc_1p00 \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144902"></a>    -power_grid_libraries { \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144903"></a>        ../data/pgv_dir/tech_pgv/techonly.cl \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144904"></a>        ../data/pgv_dir/stdcell_pgv/stdcells.cl \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144905"></a>        ../data/pgv_dir/macro_pgv/macros_pll.cl \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144906"></a>    } \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144907"></a>    -enable_rlrp_analysis       true \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144908"></a>    -verbosity true \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144909"></a>    -temperature 125 \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144910"></a>    -eiv_eval_window switching \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144911"></a>    -eiv_method {bestavg worstavg}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144912"></a>set_pg_nets -net VDD_AO -voltage 1 -threshold 0.95 -force</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144913"></a>set_pg_nets -net VDD_column -voltage 1 -threshold 0.95 -force</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144914"></a>set_pg_nets -net VDD_ring -voltage 1 -threshold 0.95 -force</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144915"></a>set_pg_nets -net VDD_external -voltage 1 -threshold 0.95 -force</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144916"></a>set_pg_nets -net VSS -voltage 0.0 -threshold 0.05 -force</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144917"></a>set_rail_analysis_domain -domain_name ALL -pwrnetspower_nets { VDD_AO VDD_external } -gndnetsground_nets VSS</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144918"></a>set_power_pads -net VDD_AO -format xy -file ../design/super_filter_VDD_AO.pp</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144919"></a>set_power_pads -net VDD_external -format xy -file ../design/super_filter_VDD_external.pp</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144920"></a>set_power_pads -net VSS -format xy -file ../design/super_filter_VSS.pp</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144921"></a>set_dynamic_rail_simulation -resolution 10ps</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144922"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144923"></a># Specify the number of aggressors for each victim</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144924"></a>redirect -quiet {puts &quot;setvar proximity_level 10&quot;} &gt; rail.inc</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144925"></a>set_advanced_rail_options -voltus_rail_include_file_begin ./rail.inc</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144926"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144927"></a>#Generate proximity aggressor DB</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144928"></a>analyze_resistance -domain ALL -output_dir agg_db -method rlrp</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144929"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144930"></a>#Run power analysis</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144931"></a>set_power_analysis_mode -specify_aggressor_db_path agg_db/ALL_25C_reff_1</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144932"></a>report_power</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144933"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144934"></a>#Run rail analysis</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144935"></a>set_power_data -scale 1 -format current [glob dynVecLessPowerResults/*.ptiavg]</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144936"></a>analyze_rail -output_dir ./dynVecLessRailResults -type domain ALL</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144937"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144938"></a>#Run STA using EIV DB</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144939"></a>set_delay_cal_mode -early_irdrop_data_type best_average \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144940"></a>             -late_irdrop_data_type worst_average</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144941"></a>update_delay_corner -name DC_wc_1p00 \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144942"></a>             -irdrop_data ./dyn_rail_phaseIII/ALL_25C_dynamic_1</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144943"></a>update_delay_corner -name DC_wc_1p00 \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144944"></a>             -timing_condition {TC1 TC2} \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144945"></a>             -irdrop_data ./dyn_rail_phaseIII/ALL_25C_dynamic_1</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144946"></a>update_timing -full</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144947"></a>report_analysis_summary &gt; pi_summary.gba.rpt</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-144948"></a>report_timing -max_paths 200000 -retime path_slew_propagation -retime_mode exhaustive -max_slack 0 &gt; pi_timing.pba.rpt</pre>
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="tempus_pi_userdefinedcriticalpaths.html" id="prev" title="User-Defined Critical Paths Support">User-Defined Critical Paths Su ...</a></em></b><b><em><a href="tempus_pi_sequentialactivity.html" id="nex" title="Sequential Activity and Simulation Period">Sequential Activity and Simula ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

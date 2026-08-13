@@ -1,0 +1,150 @@
+
+<html><head><title>Setting Up MSV/CPF-Based Design in DMMMC Mode</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845232" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Setting Up MSV/CPF-Based Design in DMMMC Mode" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845232" />
+<meta name="NextFile" content="dmmmc_dmmmcsetuphold.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="dmmmc_dmmmcandcmmmc.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- Setting Up MSV/CPF-Based Design in DMMMC Mode" />
+<meta name="Keywords" content="Set up CPF,DMMMC Mode,Set Up MSV" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="MMMC,Stylus" />
+<meta name="prod_subfeature" content="MMMC" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="dmmmc_dmmmcandcmmmc.html" title="Performing Concurrent MMMMC Analysis in DMMMC Mode">Performing Concurrent MMMMC An ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="dmmmc_dmmmcsetuphold.html" title="Performing Setup/Hold View Analysis and Reporting">Performing Setup/Hold View Ana ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:dmmmcmsv" title="Setting Up MSV/CPF-Based Design in DMMMC Mode"></a><style>/*<![CDATA[*/
+/**/
+/**/
+/**/
+/**/
+h1 { counter-reset: heading 6;}
+/**/
+/**/
+/**/
+/**/
+/*]]>*/</style><h2>
+<a id="pgfId-1000476"></a><a id="93060"></a>Setting Up MSV/CPF-Based Design in DMMMC Mode</h2>
+
+<p>
+<a id="pgfId-1000485"></a>In this flow, the common power format (CPF) file should not contain any timing-related information. All the library data is present in the <code>viewdefinition.tcl</code> file.</p>
+<p>
+<a id="pgfId-1000494"></a><strong>Script -1 (master.tcl): </strong></p>
+<p>
+<a id="pgfId-1007895"></a>Same as in non-MSV DMMMC flow.</p>
+<p>
+<a id="pgfId-1000504"></a><strong>Script -2 (loadDesign.tcl):</strong></p>
+<p>
+<a id="pgfId-1007898"></a>The following points should be noted while migrating to this flow:</p>
+<ol><li>
+<a id="pgfId-1000514"></a>All the library-related data and operating conditions are defined in the viewdefinition.tcl file.</li><li>
+<a id="pgfId-1000523"></a>Power domains are created in the <code>power.cpf</code> file. This file should not contain any timing or operating conditions-related information.</li><li>
+<a id="pgfId-1000532"></a>Timing data and PVT conditions are linked to power domains, by using the <a href="../tempusCUI/update_delay_corner.html">update_delay_corner</a> <code>&#8211;power_domain</code> command in the <code>viewdefinition.tcl</code> file.</li><li>
+<a id="pgfId-1000555"></a>Before reading the CPF, the <code>update_delay_corner</code> command can be used to:<br />
+<a id="pgfId-1007943"></a>a) Create place-holder domains.<br />
+<a id="pgfId-1007947"></a>b) Populate domains with appropriate MSV data during CPF loading.</li></ol>
+
+
+
+
+
+<p>
+<a id="pgfId-1000574"></a><strong>Sample design_load.tcl:</strong></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1299190"></a>####################### Script 2 : &quot;loadDesign.tcl&quot; #########################<br />##### View definition file does not have LEFs.<br />read_physical -lef {  ../../libs/lef/FreePDK45_lib_v1.0.lef   \<br />../../libs/MACRO/LEF/pllclk.lef  \<br />../../libs/MACRO/LEF/ram_256X16A.lef  \<br />../../libs/MACRO/LEF/rom_512x16A.lef}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1299191"></a>read_mmmc viewDefinition.tcl<br />set_interactive_constraint_modes functional_mode</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1299192"></a># MANUALLY TRANSLATE (WARN-12): Argument &#39;-ignore_undefined_cell&#39; for command &#39;set_top_module&#39; is obsolete in common UI and is removed.<br />set_db init_read_netlist_allow_undefined_cells false<br />read_netlist &quot;../../design/dtmf_recvr_core.v.gz&quot; -top dtmf_recvr_core<br />init_design<br />read_def &quot;../../design/full.def&quot;<br />########################## viewdefinition.tcl ############################<br />##################################################<br /># Define the available libraries<br />##################################################<br />create_library_set -name libset_slow\<br />    -timing\<br />[list ../../libs/liberty/FreePDK45_lib_v1.0_worst.lib\<br />../../libs/MACRO/LIBERTY/pllclk.lib\<br />../../libs/MACRO/LIBERTY/ram_256x16A.lib\<br />../../libs/MACRO/LIBERTY/rom_512x16A.lib]<br />create_library_set -name libset_fast\<br />    -timing\<br />[list ../../libs/liberty/FreePDK45_lib_v1.0_typical.lib\<br />../../libs/MACRO/LIBERTY/pllclk.lib\<br />../../libs/MACRO/LIBERTY/ram_256x16A.lib\<br />../../libs/MACRO/LIBERTY/rom_512x16A.lib]<br /></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1299193"></a>##################################################<br /># Define the available PVT corners<br />##################################################<br />create_rc_corner -name corner_worst_RCMAX\<br />    -pre_route_res 1.2\<br />    -post_route_res {1.2 1.2 1.2}\<br />    -pre_route_cap 1.2\<br />    -post_route_cap {1.2 1.2 1.2}\<br />    -post_route_cross_cap {1.2 1.2 1.2}\<br />    -pre_route_clock_res 0\<br />    -pre_route_clock_cap 0<br />create_rc_corner -name corner_worst_RCMIN\<br />    -pre_route_res 0.8\<br />    -post_route_res {0.8 0.8 0.8}\<br />    -pre_route_cap 0.8\<br />    -post_route_cap {0.8 0.8 0.8}\<br />    -post_route_cross_cap {0.8 0.8 0.8}\<br />    -pre_route_clock_res 0\<br />    -pre_route_clock_cap 0<br /></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1299194"></a>##################################################<br />#Create the timing conditions<br />#################################################<br />create_timing_condition -name default_mapping_tc_2\<br />    -library_sets [list libset_fast]<br />create_timing_condition -name default_mapping_tc_1\<br />    -library_sets [list libset_slow]<br /></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1299195"></a>##################################################<br /># Create the possible delay corners<br /># These are combinations of timing conditions and corners<br />##################################################<br />create_delay_corner -name dly_crnr_slow_RCMAX\<br />    -timing_condition {default_mapping_tc_1}\<br />    -rc_corner corner_worst_RCMAX<br />create_delay_corner -name delay_corner_fast_RCMAX\<br />    -timing_condition {default_mapping_tc_2}\<br />    -rc_corner corner_worst_RCMAX<br />create_delay_corner -name delay_corner_slow_RCMIN\<br />    -timing_condition {default_mapping_tc_1}\<br />    -rc_corner corner_worst_RCMIN<br />create_delay_corner -name delay_corner_fast_RCMIN\<br />    -timing_condition {default_mapping_tc_2}\<br />    -rc_corner corner_worst_RCMIN<br /></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1299196"></a>##################################################<br /># Define the available constraint types<br />##################################################<br />create_constraint_mode -name functional_mode -sdc_files [list ../../design/dtmf_recvr_core.pr.sdc]<br />create_constraint_mode -name scan_mode       -sdc_files [list ../../design/dtmf_recvr_core.scan.sdc]<br />
+##################################################
+# Create the possbile views
+# These are combinations of constraints, and delay corners
+##################################################
+create_analysis_view -name func_slow_RCMAX -constraint_mode functional_mode -delay_corner dly_crnr_slow_RCMAX
+create_analysis_view -name func_fast_RCMAX -constraint_mode functional_mode -delay_corner delay_corner_fast_RCMAX
+create_analysis_view -name func_slow_RCMIN -constraint_mode functional_mode -delay_corner delay_corner_slow_RCMIN
+create_analysis_view -name func_fast_RCMIN -constraint_mode functional_mode -delay_corner delay_corner_fast_RCMIN</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1299197"></a>create_analysis_view -name scan_slow_RCMAX -constraint_mode scan_mode -delay_corner dly_crnr_slow_RCMAX<br />create_analysis_view -name scan_fast_RCMAX -constraint_mode scan_mode -delay_corner delay_corner_fast_RCMAX<br />create_analysis_view -name scan_slow_RCMIN -constraint_mode scan_mode -delay_corner delay_corner_slow_RCMIN<br />create_analysis_view -name scan_fast_RCMIN -constraint_mode scan_mode -delay_corner delay_corner_fast_RCMIN</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1299198"></a>##################################################<br /># Turn on the views that you want to use.<br /># Not all created views need to be used every time.<br />##################################################<br />set_analysis_view -setup [list \<br />func_slow_RCMAX \<br />func_fast_RCMAX \<br />func_slow_RCMIN \<br />func_fast_RCMIN \<br />scan_slow_RCMAX \<br />scan_fast_RCMAX \<br />scan_slow_RCMIN \<br />scan_fast_RCMIN \<br />] -hold [list \<br />func_slow_RCMAX \<br />func_fast_RCMAX \<br />func_slow_RCMIN \<br />func_fast_RCMIN \<br />scan_slow_RCMAX \<br />scan_fast_RCMAX \<br />scan_slow_RCMIN \<br />scan_fast_RCMIN \<br />]</pre>
+
+<p>
+<a id="pgfId-1000786"></a><strong>Script - 3 (sta_dmmmc.tcl):</strong></p>
+<p>
+<a id="pgfId-1007981"></a>This script contains all the SPEF reading, analysis, and reporting commands.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1299208"></a>####################### Script 3: &quot;sta_dmmmc.tcl&quot; ##########################<br />read_spef -rc_corner corner_worst_RCMAX ../../design/SPEF/corner_worst_RCMAX.spef.gz<br />read_spef -rc_corner corner_worst_RCMIN ../../design/SPEF/corner_worst_RCMIN.spef.gz</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1299209"></a>set_db delaycal_enable_si true<br />################################<br /># Setup threading<br />################################<br />set_multi_cpu_usage -local_cpu 2&#160;&#160;   ;# Not using multiple machines</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1299210"></a>################################<br /># Setup some global timer variables<br />################################<br />set_db delaycal_enable_si true ;# Turn on SI analysis<br />set_db si_glitch_enable_report   true ;# Turn on glitch analysis<br /># set_global timing_write_sdf_allow_negative_setuphold_sum true ;# Enable SDF to have negative delays</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1299211"></a>################################<br /># Select report formatting<br />################################<br />set_db timing_report_precision 3<br />set_table_style -name report_timing -max_widths {70}<br />set_db timing_report_fields {hpin edge cell transition&#160;&#160;load delay incr_delay arrival required}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1299212"></a>################################<br /># set timing derates here if you have them<br />################################<br />set_timing_derate -delay_corner dly_crnr_slow_RCMAX -cell_delay -data -early 0.82<br />set_timing_derate -delay_corner dly_crnr_slow_RCMAX -cell_delay -data -late 1.01<br />set_timing_derate -delay_corner dly_crnr_slow_RCMAX -cell_delay -clock -early 0.9<br />set_timing_derate -delay_corner dly_crnr_slow_RCMAX -cell_delay -clock -late 1.1<br />set_timing_derate -delay_corner dly_crnr_slow_RCMAX -net_delay  -data  -early 0.82<br />set_timing_derate -delay_corner dly_crnr_slow_RCMAX -net_delay  -data  -late  1.01<br />set_timing_derate -delay_corner dly_crnr_slow_RCMAX -net_delay  -clock -early 0.9<br />set_timing_derate -delay_corner dly_crnr_slow_RCMAX -net_delay&#160;&#160;-clock -late&#160;&#160;1.1</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1299213"></a>update_timing -full<br />report_constraint -all_violators  &gt; rep.vio.gz<br />report_analysis_coverage &gt; rep.coverage<br />report_timing -path_type endpoint -max_slack 0 &gt; setup.rpt<br />report_timing -path_type endpoint -max_slack 0 -early &gt; hold.rpt</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1299214"></a># Merge these reports later in the main script<br />report_timing -output_format gtd -max_path 10 -max_slack 10 &gt;setup_maxpath_machine.rpt<br />report_timing -output_format gtd -nworst 1 &gt; setup_nworst_machine.rpt<br />report_timing -output_format gtd -max_path 10 -max_slack 10 &gt; hold_maxpath_machine.rpt<br />report_timing -output_format gtd -nworst 1 &gt; hold_nworst_machine.rpt</pre>
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="dmmmc_dmmmcandcmmmc.html" id="prev" title="Performing Concurrent MMMMC Analysis in DMMMC Mode">Performing Concurrent MMMMC An ...</a></em></b><b><em><a href="dmmmc_dmmmcsetuphold.html" id="nex" title="Performing Setup/Hold View Analysis and Reporting">Performing Setup/Hold View Ana ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

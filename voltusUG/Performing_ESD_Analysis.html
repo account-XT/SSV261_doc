@@ -1,0 +1,195 @@
+
+<html><head><title>Performing ESD Analysis</title>
+<meta name="page_sequence" content="24005000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468605" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Performing ESD Analysis" />
+<meta name="Keywords" content="esd,PGVs,clamp,design,rail,power" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="ESD Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468605" />
+<meta name="NextFile" content="ESD_Reports_Analysis.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="ESD_Rule_File_Examples.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- Performing ESD Analysis" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="ESD_Rule_File_Examples.html" title="ESD_Rule_File_Examples">ESD_Rule_File_Examples</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="ESD_Reports_Analysis.html" title="ESD_Reports_Analysis">ESD_Reports_Analysis</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Performing ESD Analysis</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>The following procedure describes the various inputs and outputs of the ESD analysis flow.</p>
+<h4 id="PerformingESDAnalysis-RequiredInputFiles"><em> Required Input Files</em></h4>
+<ul><li>ESD Cell PGVs</li><li>Design data (LEF, netlist, DEF)</li><li>ESD Rule File</li><li>ESD EM technology file</li><li>Technology PGV</li></ul><h4 id="PerformingESDAnalysis-Procedure"><em> Procedure</em></h4>
+
+<p>To perform ESD analysis, complete the following steps:</p>
+<ol><li>
+<p>Create PGVs for ESD cells.&#xa0;<br /><strong>Tcl command</strong>:&#xa0;</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd"><pre><code>read_lib -lef <br />../../design/BONDPAD52.lef ../../design/giolib045_modified.lef </code></pre><pre><code>set_pg_library_mode -celltype techonly -ground_pins { VSS } -power_pins { VDD 1 } -lef_layermap ./lefdef.map -extraction_tech_file ./qrcTechFile</code></pre><pre><code>set_advanced_pg_library_mode -esd_cells_list_file {esd_cell_list} -esd_parameters_file param_file.txt -esd_pin_list {VDD VSS VDDESD VSSESD}</code></pre><pre><code>generate_pg_library -output esd_pgv</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+
+<p>The following parameters are specific to the ESD analysis flow:</p>
+<ul><li><code>-esd_cells_list_file</code> specifies the ESD clamp cells that are to be analyzed.</li><li><code>-esd_pin_list </code>specifies the ESD clamp pins that are to be analyzed. Effective resistance analysis will be done only if the nets are connected to these pins.</li><li><code>-esd_parameters_file</code> specifies the electrical characteristics of the clamp cells.</li></ul><br />The format of the <code>-esd_cells_list_file</code> file is:<pre class="webflare-pre-block webflare-courier-new"><code>&lt;clamp cell name&gt;  &lt;clamp type&gt;
+esd_decap_vdd       CLAMPIO #clamp type can be used to group clamps
+esd_decap_core      CLAMPCORE</code></pre>The format of the <code>-esd_parameters_file</code> file is:<pre class="webflare-pre-block webflare-courier-new"><code>Cell &lt;cell name&gt;  &lt;Ron&gt; &lt;Roff&gt; &lt;power_pin&gt; &lt;ground_pin&gt; &lt;voltage&gt; 
+Cell esd_decap_vdd 0.9  10000    vdd_esd     vss_esd      0.4 </code></pre></li><li>
+<p>Load the design data.<br /><strong>Tcl command</strong>:&#xa0;</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd"><pre><code>read_lib -lef $lefs</code><code>
+specify_def {/data/def/top_final.def&#xa0;&#xa0;/data/def/dmu.def}</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+<pre><br /></pre></li><li>
+<p>Define the rail analysis mode.<br /><strong>Tcl command</strong>:&#xa0;</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd"><pre><code>set_rail_analysis_mode \</code></pre><pre><code>    -method                     static \</code></pre><pre><code>    -accuracy                   hd \</code></pre><pre><code>    -power_grid_library       ./data/pgv_dir/esd_pgv/techonly.cl \</code></pre><pre><code>    -ignore_shorts            true\</code></pre><pre><code>    -enable_rlrp_analysis       true \</code><code>
+    -ict_em_models ./data/ESD_em.ict \</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+<pre><br /></pre></li><li>
+<p>Specify the power/ground net voltages, and define the location of the voltage sources for each power/ground net.<br /><strong>Tcl command</strong>:</p>
+<div class="table-wrap"><table class="webflareTable webflareTableIndent wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code><code>set_pg_nets -net VDD -voltage 0.9 -threshold 0.8 -force</code></code></pre><pre><code><code>set_pg_nets -net VSS -voltage 0 -threshold 0.1 -force</code></code></pre><pre><code><code>set_power_pads -format xy -net VDD -file ./data/top_VDD.pp</code></code></pre><pre><code><code>set_power_pads -format xy -net VSS -file ./data/top_VSS.pp</code></code></pre></td>
+</tr>
+</tbody></table></div>
+</li><li>
+<p>Specify the rail analysis power domain.<br /><strong>Tcl command</strong>:&#xa0;</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd"><pre><code>set_rail_analysis_domain -name PD -pwrnets { VDD } -gndnets { VSS }</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+<pre><br /></pre></li><li>
+<p>Run ESD analysis.<br /><strong>Tcl command</strong>:&#xa0;</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd"><pre><code>analyze_esd_network PD -config_file rule1.txt -output ESD_analysis -type domain -use_power_pad true</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+
+<p>Instead of shorting all nodes of the lowest ESD cell pin layer, you can specify the &#8211;<code>clamp_pin_short_file &lt;</code><span class="webflare-courier-new" style="white-space: pre;"><em>pin_shorting_file</em></span><code>&gt;</code> parameter to specify the list of pin layers to be shorted for bump-to-clamp and clamp-to-clamp resistance checks.<br />The format of the <code>-clamp_pin_short_file</code> file is:</p>
+<pre class="webflare-pre-block webflare-courier-new"><code>#Cell specification
+CELL &lt;cell name&gt; &lt;pin&gt; &lt;layer&gt;
+
+#Instance specification
+INST &lt;instance name&gt; &lt;pin&gt; &lt;layer&gt;
+</code></pre></li></ol>
+<p>The log file will generate the ESD analysis statistics, as shown in the following log file snippet:</p>
+<pre><code>Begin Processing Rule esd_isolation</code></pre><pre><code>Running rule esd_isolation...</code></pre><pre><code>Processing net VDD...</code><code>
+Processing net VSS...</code><code>
+Generating reports for rule esd_isolation...</code></pre><pre><code>Ended Processing Rule esd_isolation: (cpu=0:00:00, real=0:00:00, mem(process/total/peak)=326.27MB/2086.20MB/822.55MB)</code></pre><pre><code>Generating summary of all rules...</code></pre><pre><code>Ended Running ESD Rule Analysis: (cpu=0:00:00, real=0:00:00, mem(process/total/peak)=326.28MB/2086.20MB/822.55MB)</code></pre><pre><code>Rail Analysis Statistics:</code></pre><pre><code>Warning messages:&#xa0;&#xa0;    0</code></pre><pre><code>Error messages:&#xa0;&#xa0;      0</code></pre><pre><code>Rail Analysis completed successfully.</code></pre><pre><code>Finished Rail Analysis at 00:26:44 11/21/2018 (cpu=0:00:12, real=0:00:22, peak mem=822.55MB)</code></pre>
+<p>The <code><span class="fontredcadence">analyze_esd_network</span> </code>command creates a state directory inside the &lt;<span class="webflare-courier-new"><em>output_directory</em></span>&gt; specified with the command. The <code>ESD</code> directory is created inside this state directory. The <code>ESD</code> directory contains a detailed report for each rule along with a summary report for all the rules.&#xa0;</p>
+
+<p>Following is an example of the directory structure:</p>
+
+<p><code>ESD_analysis/top_25C_esd_1/ESD</code></p>
+
+<p>The <code>ESD</code> folder contains the following files:</p>
+<ul><li>b2c_rule_CORE.reff</li><li>b2c_rule_all_clamps.reff</li><li>c2c_rule_core.reff</li><li>esd_isolation.reff</li><li>em_rule_all_nets_VDD_short_VSS_short</li><li>summary.rpt</li></ul><h4 id="PerformingESDAnalysis-Output"><em> Output</em></h4>
+
+<p>The <code>ESD</code> directory will contain the following files:</p>
+<div class="table-wrap"><table class="webflareTable webflareTableIndent wrapped confluenceTable"><tbody><tr><th class="webflareTh confluenceTh" colspan="1" rowspan="1">
+<p>File Name</p>
+</th><th class="webflareTh confluenceTh" colspan="1" rowspan="1">
+<p>Description</p>
+</th></tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>summary.rpt</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>A report that gives a summary of all rules and their pass/fail status.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>&lt;</code><span class="webflare-courier-new" style="white-space: pre;"><em>rule_name</em></span><code>&gt;.reff</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>&lt;</code><span class="webflare-courier-new" style="white-space: pre;"><em>rule_name</em></span><code>&gt;.reff</code> files that contain detailed reports of each type of rule.</p>
+</td>
+</tr>
+<tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p><code>&lt;</code><span class="webflare-courier-new" style="white-space: pre;"><em>em_rule_name</em></span><code>&gt;_&lt;</code><span class="webflare-courier-new" style="white-space: pre;"><em>domain</em></span><code>&gt;/&lt;</code><span class="webflare-courier-new" style="white-space: pre;"><em>net</em></span><code>&gt;</code></p>
+</td>
+<td class="webflareTd confluenceTd" colspan="1" rowspan="1">
+<p>This folder contains current density detailed results.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="PerformingESDAnalysis-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="ESD_Reports_Analysis.html">ESD Reports Analysis</a></li><li><a href="ESD_Rules_Specification.html">ESD Rules Specification</a></li><li><a href="ESD_Rule_File_Examples.html">ESD Rule File Examples</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="ESD_Rule_File_Examples.html" id="prev" title="ESD_Rule_File_Examples">ESD_Rule_File_Examples</a></em></b><b><em><a href="ESD_Reports_Analysis.html" id="nex" title="ESD_Reports_Analysis">ESD_Reports_Analysis</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

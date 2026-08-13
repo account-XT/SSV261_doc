@@ -1,0 +1,350 @@
+
+<html><head><title>SI Glitch Reporting</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823906" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="SI Glitch Reporting" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823906" />
+<meta name="NextFile" content="analysisandreporting_overshootundershootanalysis.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_runsiglitchanalysis.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- SI Glitch Reporting" />
+<meta name="Keywords" content="si glitch reporting" />
+<meta name="topic_type" content="process" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Signal Integrity,SI Analysis,Stylus" />
+<meta name="prod_subfeature" content="SI Analysis, Signal Integrity" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_runsiglitchanalysis.html" title="Running Detailed SI Glitch Analysis">Running Detailed SI Glitch Ana ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_overshootundershootanalysis.html" title="Overshoot-Undershoot Glitch Analysis - An Overview">Overshoot-Undershoot Glitch An ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:siglitchreporting" title="SI Glitch Reporting"></a><h3>
+<a id="pgfId-1010840"></a><a id="50944"></a>SI Glitch Reporting</h3>
+
+<p>
+<a id="pgfId-1010841"></a>You can use the <a href="../tempustxtcmdref/report_noise.html">report_noise</a> command to generate glitch reports. The <code>-format</code> parameter can be used to control the fields to be displayed in a glitch report.</p>
+<p>
+<a id="pgfId-1010844"></a>Given below is a sample report generated using the <code>report_noise</code> command.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052998"></a>-------------------------<br />Glitch Violations Summary<br />-------------------------<br />Number of DC tolerance violations (VH + VL) = 0<br />Number of Receiver Output Peak violations (VH + VL) = 5<br />Number of total problem noise nets = 3<br />---------------------------------------------------------------------------------<br />Peak(mV)   Level   TotalCap(fF)  TotalArea   Width(ps)   Vdd(mV)   Library     VictimNet<br />1071.972&#160;&#160; VH&#160;&#160;    232.84        134.35      250.659     1320      ecsmt xv5/A {vic3}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3052999"></a>Receiver output peak:<br />Value ReceiverNet cell_type<br />1226.940 ( 396.000) xv5/A (NOR4_F4) [data]</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1010849"></a>Constituents:<br />Source  Peak(mV)  Offset(ps)  Slew(ps)  Xcap(fF)  Vdd(mV)  Edge  Status  Net<br />Cpl:    404.669   30.000      22.600    81.242    1320     F     ACT     attc4<br />Cpl:    323.200   25.000      19.800    62.494    1320     F     ACT     attc3<br />Cpl:    203.782   21.000      16.000    37.496    1320     F     ACT     attc2<br />Cpl:    140.000   18.000      14.000    24.998    1320     F     ACT     attc1<br />---------------------------------------------------------------------------------</pre>
+
+<p>
+<a id="pgfId-1010850"></a>The report sections and columns are explained below.</p>
+<p>
+<a id="pgfId-1010851"></a>The top section Glitch Violations Summary shows a summary of each type of violation count.</p>
+<ul><li>
+<a id="pgfId-1010852"></a><strong>Peak</strong> value 1071.972 mV is the glitch at the receiver input pin (RIP).</li><li>
+<a id="pgfId-1010853"></a><strong>Level</strong> can be VH or VL, which shows the type of glitch at receiver input pin. VH is glitch under power rail and VL is glitch over ground rail.</li><li>
+<a id="pgfId-1010854"></a>The pin name xv5/A below <strong>VictimNet</strong> is the receiver input pin having glitch.</li><li>
+<a id="pgfId-1010855"></a><strong>Receiver output peak</strong> (ROP) value 1226.940 is the glitch at the receiver output and 396.000 is the failure threshold for ROP. NOR4_F4 is the receiver library cell.</li><li>
+<a id="pgfId-1010856"></a><strong>Constituents</strong> provide the details of attackers.<ul><li>
+<a id="pgfId-1010857"></a><strong>Source</strong> column: Reports propagated noise as &#8220;Prp&#8221;.</li><li>
+<a id="pgfId-1010858"></a><strong>Status</strong><strong>
+ </strong>
+column: The Status column shows the abbreviated attacker status and filtered reason, as given below:
+<code>SY</code>: Synchronous
+<code>INF</code>: Attacker with infinite timing window
+<code>PE</code>: Filtered due to physical exclusion
+<code>UF</code>: Filtered by user
+<code>SB</code>: Filtered due to small bump
+<code>TA</code>: Filtered because of timing window does not overlap
+<code>LC</code>: Filtered due to logical correlation
+<code>ACT</code>: Attacker is Active.</li></ul></li><li>
+<a id="pgfId-1010859"></a>The following sample report shows the DC tolerance violations:</li></ul>
+
+
+
+
+
+
+
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053005"></a>---------------------------<br />Glitch Violations Summary :<br />--------------------------<br />Number of DC tolerance violations (VH + VL) = 1<br />Number of Receiver Output Peak violations (VH + VL) = 0<br />Number of total problem noise nets = 1<br />----------------------------------------------------------------------<br />Peak(mV)  Level  TotalCap(fF)  TotalArea  Width(ps)  Vdd(mV)  Library          VictimNet<br />530.496   VH     144.06        83.88      316.247    1080     cell_w      u9/D {vic2}<br />Receiver Input Threshold:<br />Value (Threshold) ReceiverNet Receiver failure_type<br />530.496 (433.296) u9/D (DFF) [bbox]</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053006"></a>Constituents:<br />Source  Peak(mV)  Offset(ps)  Slew(ps)  Xcap(fF)  Vdd(mV)  Edge  Status  Net<br />Cpl:   284.770    38.000      24.167    62.007    1080     F     ACT     u1/n8<br />Cpl:   245.673    59.000      76.333    68.138    1080     F     ACT     u3/n8<br />----------------------------------------------------------------------</pre>
+
+<p class="webflare-indent1">
+<a id="pgfId-1010865"></a>In this report glitch at receiver input pin u9/D is more than the threshold.</p>
+<ul><li>
+<a id="pgfId-1010866"></a>The <a href="../tempustxtcmdref/report_noise.html">report_noise</a> <code>-style extended</code> option can be used to report additional information, such as, timing windows of attackers. A sample report is shown below:</li></ul>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1088361"></a>tempus &gt; report_noise -style extended</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053017"></a>-------------------------------------<br />Glitch Violations Summary :<br />--------------------------<br />Number of DC tolerance violations (VH + VL) = 0<br />Number of Receiver Output Peak violations (VH + VL) = 5<br />Number of total problem noise nets = 3</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053018"></a>----------------------------------------------------------------------<br />Peak(mV)  Level  TotalCap(fF)  TotalArea  Width(ps)  Vdd(mV)  Library   VictimNet<br />1071.972   VH    232.84        134.35     250.659    1320     ecsmt xv5/A {vic3}<br />Receiver output peak:<br />Value     ReceiverNet               cell_type<br />1226.940 ( 396.000) xv5/A (NOR4_F4) [data]<br />Stage information:<br />             Cell      Pin<br />Driver     : NOR4_F4   xv4/Y<br />Receiver   : NOR4_F4   xv5/A<br />Constituents:<br />Source   Peak(mV)   Offset(ps) Slew(ps)  Xcap(fF)  Vdd(mV)  Edge  Status  Net<br />Cpl:     404.669    30.000     22.600    81.242    1320     F     ACT     attc4<br />Cpl:     323.200    25.000     19.800    62.494    1320     F     ACT     attc3<br />Cpl:     203.782    21.000     16.000    37.496    1320     F     ACT     attc2<br />Cpl:     140.000    18.000     14.000    24.998    1320     F     ACT     attc1<br />Timing Windows: (NanoSecs)<br />MinTime  MaxTime  Edge  Clock  Net<br />0.180    0.184    R     NULL   vic3<br />0.023    0.023    F     NULL   attc4<br />0.021    0.021    F     NULL   attc3<br />0.019    0.019    F     NULL   attc2<br />0.018    0.018    F     NULL   attc1<br />----------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1088378"></a></pre>
+
+<ul><li>
+<a id="pgfId-1010874"></a>You can use the <a href="../tempustxtcmdref/report_noise.html">report_noise</a> <code>-histogram</code> parameter to print a violation summary and histogram of RIP/ROP. A detailed glitch report is not printed.</li></ul>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1010875"></a>tempus &gt; report_noise -histogram -txtfile rip_rop.hist</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1058472"></a>--------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053034"></a>Glitch Violations Summary :<br />--------------------------<br />Number of DC tolerance violations (VH + VL) = 0<br />Number of Receiver Output Peak violations (VH + VL) = 5<br />Number of total problem noise nets = 3</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053035"></a>Receiver Input Peak Histogram for View : default_emulate_view<br />Percentage of Receiver Vdd  No. of Receivers<br />[ 0,          10       )    0<br />[ 10,         20       )    0<br />[ 20,         30       )    0<br />[ 30,         40       )    0<br />[ 40,         50       )    1<br />[ 50,         60       )    1<br />[ 60,         70       )    2<br />[ 70,         80       )    1<br />[ 80,         90       )    1<br />[ 90,&#160;&#160;       100      )    0</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053036"></a>Receiver Output Peak Histogram for View : default_emulate_view<br />Percentage of Receiver Vdd  No. of Receivers<br />[ 0,          10       )    0<br />[ 10,         20       )    1<br />[ 20,         30       )    0<br />[ 30,         40       )    1<br />[ 40,         50       )    0<br />[ 50,         60       )    0<br />[ 60,         70       )    1<br />[ 70,         80       )    0<br />[ 80,         90       )    0<br />[ 90,         100      )    3<br />------------------------------</pre>
+<h4><em>
+<a id="pgfId-1010879"></a>Exceptions</em></h4>
+
+<p>
+<a id="pgfId-1026579"></a>Here are some exceptions:</p>
+<p>
+<a id="pgfId-1059195"></a>The following command helps in specifying certain attackers as quiet for the victim net. This implies that the net mentioned in this command will not be considered as an attacker for a particular victim net, or all victim nets.</p>
+<ul><li>
+<a id="pgfId-1010880"></a><a href="../tempustxtcmdref/set_quiet_attacker.html">set_quiet_attacker</a></li></ul>
+<p>
+<a id="pgfId-1010881"></a>You can use the following parameter to specify a list of victim/attacker pairs to be made quiet: </p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1010882"></a>set_quiet_attacker -<code>victim</code> <code><em>string</em></code></pre>
+
+<p>
+<a id="pgfId-1010881"></a>If the -<code>attacker</code> parameter is not used, then all the attackers are made silent for the specified victim.</p>
+<p>
+<a id="pgfId-1010883"></a>You can use the following parameter to specify the victim/attacker pair to be made quiet:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1010884"></a>set_quiet_attacker -<code>attacker</code> <code><em>string</em></code></pre>
+
+<p>
+<a id="pgfId-1010885"></a>If the -<code>victim</code> parameter is not used, then the given nets are made silent (as attackers) for all the victim nets in the design.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053077"></a>tempus &gt; set_quiet_attacker -attacker attc4 -victim vic3<br />tempus &gt; update_glitch<br />tempus &gt; report_noise -nets vic3<br />-------------------------------------------------------------------------<br />Glitch Violations Summary:<br />--------------------------<br />Number of DC tolerance violations (VH + VL) = 0<br />Number of Receiver Output Peak violations (VH + VL) = 0<br />Number of total problem noise nets = 0</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053078"></a>-------------------------------------------------------------------------<br />Peak(mV)  Level  TotalCap(fF) TotalArea  Width(ps)  Vdd(mV) Library    VictimNet<br />667.128   VH     232.84       81.45      244.167    1320    ecsmt xv5/A {vic3}<br />Receiver output peak:<br />Value ReceiverNet cell_type<br />93.456 ( 396.000) xv5/A (NOR4_F4) [data]</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053079"></a>Constituents:<br />Source  Peak(mV)  Offset(ps) Slew(ps)  Xcap(fF) Vdd(mV) Edge Status Net<br />Cpl:    323.224   25.000     19.800    62.494   1320    F    ACT    attc3<br />Cpl:    203.808   21.000     16.000    37.496   1320    F    ACT    attc2<br />Cpl:    140.030   18.000     14.000    24.998   1320    F    ACT    attc1<br />Cpl:    0.000     0.000      22.600    81.242   1320    F    UF     attc4<br />------------------------------------------------------------------------- </pre>
+
+<p>
+<a id="pgfId-1010892"></a>In the above noise report, status of attacker <code>attc4</code> is changed to UF (User Filtered).</p>
+<ul><li>
+<a id="pgfId-1010893"></a><a href="../tempustxtcmdref/set_annotated_glitch.html">set_annotated_glitch</a><ul><li>
+<a id="pgfId-1010894"></a>The following parameter allows you to specify the port/pin name at which glitch needs to be annotated:<br />
+<a id="pgfId-1010895"></a><code>set_annotated_glitch -port</code><br />
+<a id="pgfId-1010897"></a>If a glitch is annotated at the driver output/input port, then it is combined with the coupling of the stage. If a glitch is annotated at the receiver input, then it overrides the glitch at receiver input with the annotated glitch.</li><li>
+<a id="pgfId-1059964"></a>The following parameters allow you to specify the type of glitch waveform (vl or vh) to be annotated:<br />
+<a id="pgfId-3053095"></a><code>set_annotated_glitch -vl_glitch/-vh_glitch </code>{waveform with time stamp and voltage value}<br />
+<a id="pgfId-1010901"></a><code></code>The <code>vh_glitch</code> waveform should also be specified starting from &#8220;0&#8221;. The software automatically inverts the waveform depending on receiver voltage.<br />
+<a id="pgfId-1010902"></a>The waveform is specified as PWL with multiple time and voltage points, such as, <code>{time-1 voltage-1 time-2 voltage-2...}</code><br />
+<a id="pgfId-1010903"></a>The <code>set_annotated_glitch -vl_glitch {0 0 110e-12 0.6 310e-12 0}</code> command defines glitch as shown below:<br />
+<a id="pgfId-1010907"></a><div class="webflare-div-image">
+<img width="365" height="142" src="images/analysisandreporting-53.gif" /></div>
+<a id="pgfId-1010908"></a>For VH, the wave should be defined starting from 0V, the software automatically inverts it when applying according to the victim voltage.<br />
+<a id="pgfId-1060075"></a>For victim voltage 1V, the <a href="../tempustxtcmdref/set_annotated_glitch.html">set_annotated_glitch</a> <code>-vh_glitch {0 0 100e-12 0.6 320e-12 0}</code> command defines glitch, as shown below:<br />
+<a id="pgfId-1010912"></a><div class="webflare-div-image">
+<img width="399" height="158" src="images/analysisandreporting-54.gif" /></div></li></ul></li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-1010913"></a>Here&#8217;s a sample report: </p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053131"></a>tempus &gt; set_annotated_glitch -vl_glitch {0 0 100e-12 0.1 200e-12 0.4 300e-12 0.3 600e-12 0} -port u9/D<br />tempus &gt; update_glitch<br />tempus &gt; report_noise -nets n8<br />--------------------------------------------------------------------------------<br />Peak(mV)  Level TotalCap(fF) TotalArea  Width(ps) Vdd(mV) Library          VictimNet<br />399.924&#160;&#160; VL&#160;&#160;  144.11       110.00     550.104   1080    cell_w      u9/D {n8}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053132"></a>Receiver Input Threshold:<br />Value (Threshold) ReceiverNet Receiver failure_type<br />399.924 (431.244) u9/D (DFF) [bbox]</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3053133"></a>Constituents:<br />Source Peak(mV) Offset(ps) Slew(ps) Xcap(fF) Vdd(mV) Edge Status Net<br />Prp:   399.924  --         --       --       --      --          u8/Y<br />********************************************************************************</pre>
+
+<p>
+<a id="pgfId-1010918"></a>The software overrides the glitch value showing up at RIP with the annotated glitch, as glitch is annotated at the receiver input.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1010919"></a><a href="../tempustxtcmdref/set_noise_lib_pin.html">set_noise_lib_pin</a></pre>
+
+<p>
+<a id="pgfId-1010920"></a>This command helps in mapping noise properties of a library cell pin to other library cell pins. The software copies the noise properties of a buffer type cell for a macro cell pin, for which a noise property has not been defined.</p>
+<ul><li>
+<a id="pgfId-1010921"></a><code>set_noise_lib_pin -from &lt;&gt;</code></li></ul>
+<p>
+<a id="pgfId-1010922"></a>Specify the <code>from_library/from_cell/from_pin</code>.</p>
+<ul><li>
+<a id="pgfId-1010923"></a><code>set_noise_lib_pin -to &lt;&gt;</code></li></ul>
+<p>
+<a id="pgfId-1010924"></a>Specify the <code>to_library/to_cell/to_pin</code>.</p>
+<p>
+<a id="pgfId-1010925"></a>For example,</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1010926"></a><code>set_noise_lib_pin -from cell_w_1.6.lib/CLKBUF/A -to memory.lib/MEM_256x32/A</code></pre>
+
+<p>
+<a id="pgfId-1010927"></a>The software will map the noise properties from cdB linked to the specified library, even if there is a difference in voltage values. You must ensure that the voltage values are similar while mapping the properties.</p>
+
+<h4>Table -2
+<a id="pgfId-1025441"></a>Impact of Timing Exceptions on Glitch Analysis.</h4>
+<table class="webflareTable" id="#id1010929">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1010931">
+<a id="pgfId-1010931"></a>Timing Exceptions</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id1010933">
+<a id="pgfId-1010933"></a>Impact on Glitch in Infinite Timing Window Flow</span>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1010935"></a><a href="../tempustxtcmdref/set_case_analysis.html">set_case_analysis</a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1010937"></a>Attacker will be marked as silent, if constant value is input. The net will be analyzed as victim even with the constant value.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1010939"></a><a href="../tempustxtcmdref/set_disable_timing.html">set_disable_timing</a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1010941"></a>Impact due to change in attackers slew, if attacker is lying in the fanout path of disable timing.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1010943"></a><a href="../tempustxtcmdref/set_false_path.html">set_false_path</a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1010945"></a>No impact</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1010947"></a><a href="../tempustxtcmdref/set_multicycle_path.html">set_multicycle_path</a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1010949"></a>No impact</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1010951"></a><a href="../tempustxtcmdref/set_clock_uncertainty.html">set_clock_uncertainty</a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1010953"></a>No impact</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1010955"></a><a href="../tempustxtcmdref/set_clock_groups.html">set_clock_groups</a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-1010957"></a>Impact on noise results due to filtering of some attackers.</p>
+</td>
+</tr>
+</tbody></table>
+<h4><em>
+<a id="pgfId-1010959"></a>Impact of Timing Constraints on Glitch Analysis in Infinite TW Mode</em></h4>
+
+<ul><li>
+<a id="pgfId-1010960"></a><a href="../tempustxtcmdref/set_input_transition.html">set_input_transition</a><br />
+<a id="pgfId-1010961"></a>This input transition command defined at the input ports, serves as a starting point to compute at slew at all nets. If its not defined, the software uses a fast slew of 5ps at input ports.</li><li>
+<a id="pgfId-1010962"></a><a href="../tempustxtcmdref/set_driving_cell.html">set_driving_cell</a><br />
+<a id="pgfId-1010963"></a>This command is required to model holding resistance accurately, if there is coupling at the net connected to the input port.</li><li>
+<a id="pgfId-1010964"></a><a href="../tempustxtcmdref/set_load.html">set_load</a><br />
+<a id="pgfId-1010965"></a>This command sets the load at the output load. This impacts glitch computation on the net connected at the output port.</li></ul>
+
+
+
+
+
+
+<h3>
+<a id="pgfId-1010967"></a><a id="90928"></a>Checking Noise Models</h3>
+
+<p>
+<a id="pgfId-1010968"></a>You can use the <a href="../tempustxtcmdref/check_noise.html">check_noise</a> command before the <a href="../tempustxtcmdref/update_glitch.html">update_glitch</a> command to check consistency and completeness of noise models specified for a design. These checks help to ensure that the right set of models are available to perform SI analysis.</p>
+
+<h3>
+<a id="pgfId-1010970"></a><a id="95142"></a>Library Requirement for Glitch Analysis</h3>
+
+<p>
+<a id="pgfId-1010971"></a>Tempus supports cdB, ECSM-N, and CCS-N library for glitch analysis. The key advantage of moving to ECSM-N/CCS-N is both use the same library for timing and glitch analysis. The cdB library is used only for glitch analysis and a separate timing library is required for timing analysis.</p>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_runsiglitchanalysis.html" id="prev" title="Running Detailed SI Glitch Analysis">Running Detailed SI Glitch Ana ...</a></em></b><b><em><a href="analysisandreporting_overshootundershootanalysis.html" id="nex" title="Overshoot-Undershoot Glitch Analysis - An Overview">Overshoot-Undershoot Glitch An ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

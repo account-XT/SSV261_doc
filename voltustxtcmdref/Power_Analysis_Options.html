@@ -1,0 +1,596 @@
+
+<html><head><title>Power Analysis Options</title>
+<meta name="page_sequence" content="25004000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666351" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the text commands in Voltus IC Power Integrity Solution." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="Power Analysis Options" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666351" />
+<meta name="NextFile" content="Rail_Analysis_Options.html" />
+<meta name="Group" content="Voltus Text Command Reference" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Library_Simulator_Options.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution Text Command Reference -- Power Analysis Options" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="epstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="Library_Simulator_Options.html" title="Library_Simulator_Options">Library_Simulator_Options</a></li><li style="float: right;"><a class="viewPrint" href="voltustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Rail_Analysis_Options.html" title="Rail_Analysis_Options">Rail_Analysis_Options</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Power Analysis Options</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    <div>
+<p>This section lists the PowerMeter options (Power Objects) that do not have an equivalent option in Voltus. PowerMeter uses Power Objects, which indicate the kind of power, the type of method used to calculate the instance-based power consumption, the default for the frequency and voltage, the interconnect parasitic used, the clock specification for the design, and many others. These Power Objects can be included in Voltus using the <code>set_power_include_file</code> command.</p>
+
+<p></p>
+<div class="toc-macro rbtoc1775666195002">
+<ul class="toc-indentation">
+<li><a href="#PowerAnalysisOptions-calCellsToUseWaveEstcalCellsToUseWaveEst">calCellsToUseWaveEst</a></li>
+<li><a href="#PowerAnalysisOptions-calCellsToUseWaveEstFilecalCellsToUseWaveEstFile">calCellsToUseWaveEstFile</a></li>
+<li><a href="#PowerAnalysisOptions-calPinTransitionTimecalPinTransitionTime">calPinTransitionTime</a></li>
+<li><a href="#PowerAnalysisOptions-calRailExcludecalRailExclude">calRailExclude</a></li>
+<li><a href="#PowerAnalysisOptions-calSwitchingCellscalSwitchingCells">calSwitchingCells</a></li>
+<li><a href="#PowerAnalysisOptions-rDefaultNetCaprDefaultNetCap">rDefaultNetCap</a></li>
+<li><a href="#PowerAnalysisOptions-rDefaultPinCaprDefaultPinCap">rDefaultPinCap</a></li>
+<li><a href="#PowerAnalysisOptions-rDynamicSwitchAllBuffersrDynamicSwitchAllBuffers">rDynamicSwitchAllBuffers</a></li>
+<li><a href="#PowerAnalysisOptions-rDynamicSwitchAllClockBuffersrDynamicSwitchAllClockBuffers">rDynamicSwitchAllClockBuffers</a></li>
+<li><a href="#PowerAnalysisOptions-rDynamicSwitchAllFlopsrDynamicSwitchAllFlops">rDynamicSwitchAllFlops</a></li>
+<li><a href="#PowerAnalysisOptions-rEnhancedBlockBoxModerEnhancedBlackboxMode">rEnhancedBlackboxMode</a></li>
+<li><a href="#PowerAnalysisOptions-rEnhancedBlackboxAvgrEnhancedBlackboxAvg">rEnhancedBlackboxAvg</a></li>
+<li><a href="#PowerAnalysisOptions-rEnhancedBlackboxMaxrEnhancedBlackboxMax">rEnhancedBlackboxMax</a></li>
+<li><a href="#PowerAnalysisOptions-rIgnoreBidirCaprIgnoreBidirCap">rIgnoreBidirCap</a></li>
+<li><a href="#PowerAnalysisOptions-rUseFastestClockDomainrUseFastestClockDomain">rUseFastestClockDomain</a></li>
+<li><a href="#PowerAnalysisOptions-rUseLibAdjustTransitionTimerUseLibAdjustTransitionTime">rUseLibAdjustTransitionTime</a></li>
+<li><a href="#PowerAnalysisOptions-rUseUserDefinedCurrentrUseUserDefinedCurrent">rUseUserDefinedCurrent</a></li>
+</ul>
+</div>
+
+<p><br /></p>
+<h2 id="PowerAnalysisOptions-calCellsToUseWaveEstcalCellsToUseWaveEst"><span class="confluence-anchor-link" id="PowerAnalysisOptions-calCellsToUseWaveEst"></span>calCellsToUseWaveEst</h2>
+
+<p><code><code><em>pwrMetObj</em></code> c<code>alCellsToUseWaveEst</code><code><em>cell_name</em></code></code></p>
+
+<p>Allows the user to force triangular estimation on certain cells, even when the ECSM information for those cells is available.</p>
+<h4 id="PowerAnalysisOptions-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table bgcolor="#FFFFFF" cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><tbody><tr><td class="confluenceTd" valign="top">
+<p><code><em>pwrMetObj</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the power object. It can be any TCL string.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>cell_name</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>The name of the cell that will use triangular waveform estimates rather than the enhanced ECSM information in the .lib file.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="PowerAnalysisOptions-Example">Example</h4>
+<ul><li>The following example causes PowerMeter to ignore the ECSM extension information for the xor cells: <br />chip_Pwr <code>calCellsToUseWaveEst</code> xor</li></ul>
+<p><br /></p>
+<h2 id="PowerAnalysisOptions-calCellsToUseWaveEstFilecalCellsToUseWaveEstFile"><span class="confluence-anchor-link" id="PowerAnalysisOptions-calCellsToUseWaveEstFile"></span>calCellsToUseWaveEstFile</h2>
+
+<p><code><code><em>pwrMetObj</em></code> <code>calCellsToUseWaveEstFile</code><code><em>file_name</em></code></code></p>
+
+<p>Allows the user to force triangular estimation on certain cells, even when the ECSM information for those cells is available.</p>
+<h4 id="PowerAnalysisOptions-Parameters.1">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table bgcolor="#FFFFFF" cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><tbody><tr><td class="confluenceTd" valign="top">
+<p><code><em>pwrMetObj</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the power object. It can be any TCL string.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>file_name</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the file that includes the names of cells that will use triangular waveform estimates rather than the enhanced ECSM information in the .lib file.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="PowerAnalysisOptions-Example.1">Example</h4>
+<ul><li>The following example causes PowerMeter to ignore the ECSM extension information for the cells listed in <code>triangular_file.txt</code>: <br />chip_Pwr <code>calCellsToUseWaveEstFile</code> triangular_file.text</li></ul>
+<p><br /></p>
+<h2 id="PowerAnalysisOptions-calPinTransitionTimecalPinTransitionTime"><span class="confluence-anchor-link" id="PowerAnalysisOptions-calPinTransitionTime"></span>calPinTransitionTime</h2>
+<code><br /><code><code><em>pwrMetObj</em></code> calPinTransitionTime <code><em>pin_transition_time_file</em></code> </code> <br /></code>
+<p>You can also specify the name of a file that contains the transition time for specific pins or instances in the design.</p>
+<h4 id="PowerAnalysisOptions-Parameters.2">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table bgcolor="#FFFFFF" cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" valign="top">
+<p><code><em>pwrMetObj</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the power object. It can be any TCL string.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>pin_transition_</em></code><code><em>&#xa0;</em></code><code><em>&#xa0;</em></code><code><em>&#xa0;</em></code><code><em>time_file</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the file containing the transition time for the pins or instances in the design. See <span>&quot;Example&quot;</span> for the format of this file and an example of it.</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><strong>Note: </strong>There are three ways that PowerMeter gets transition times (slews): 1) from TWF, 2) a transition time file (<code><em>pin_transition_time_file</em></code><code>)</code>, or 3) a default transition time (<code>rDefaultTransitionTime</code>). Other than TWF where thresholds are given, the slew thresholds for pin transition time file and default transition time will be assumed to be 0 to 100 by default. If <code>rUseLibAdjustTransitionTime</code> switch is on, the slew thresholds will be assumed to be the ones defined in the first liberty (.lib) file.</p>
+
+<p><strong>Note: </strong>Any negative transition time read from command file or other input file will generate a fatal error.</p>
+<h4 id="PowerAnalysisOptions-Example.2">Example</h4>
+<ul><li>The following example specifies a pin transition-time file named <code>mydesign.slew</code>: <br />ChipPwr calPinTransitionTime mydesign.slew</li></ul><ul><li>Here is an example of the pin transition-time file: <br />VERSION &quot;1.0&quot;<br /> <br />CREATION &quot;12&quot;<br /> <br />CREATOR &quot;NOIDEA&quot;<br /> <br />PROGRAM &quot;power.tcl&quot;<br /> <br />DIVIDERCHAR &quot;_&quot;<br /> <br />DELIMITERCHAR &quot;/&quot;<br /> <br />DESIGN &quot;PG22E2_audclk&quot;<br /> <br />UNITS &quot;TIME 1ps&quot;<br /> <br />InstanceName/PinName Max-Rise Max-Fall Min-Rise Min-Fall<br /> <br />----------------------------------------------------------<br /> <br />&#xa0;<br /> <br />SLOPES ;<br /> <br />- Logic0/input 0.000000 0.000000 0.000000 0.000000<br /> <br />- BITCLK 0.519086 0.350941 0.519086 0.350941<br /> <br />- U123/A 0.519086 0.350941 0.519086 0.350941<br /> <br />- sm2288_clkdiv_110_clk_reg/Q 0.100453 0.062533 0.100453 0.062533<br /> <br />- sm2288_clkdiv_111_U70/A 0.291355 0.098510 0.291355 0.098510<br /> <br />- sm2288_clkdiv_111_U70/B 0.092222 0.070174 0.092222 0.070174<br /> <br />- sm2288_clkdiv_111_U73/A 0.101057 0.073799 0.101057 0.073799<br /> <br />END ;<br /> <br />&#xa0;<br /> <br />The format of the pin transition-time file is as follows:<br /> <br /><code><code><em>instance_name/pin_name max_rise max_fall min_rise min_fall</em></code></code><br /> <br />This syntax contains the following parameters:</li></ul><ul><ul><li><code><em>instance_name</em></code> <br /> Specifies the name of the instance to which the pin is attached.</li></ul></ul><ul><ul><li><code><em>pin_name</em></code> <br /> Specifies the name of the pin.</li></ul></ul><ul><ul><li><code><em>max_rise</em></code> <br /> Specifies the value of the maximum rise time.</li></ul></ul><ul><ul><li><code><em>max_fall</em></code> <br /> Specifies the value of the maximum fall time.</li></ul></ul><ul><ul><li><code><em>min_rise</em></code> <br /> Specifies the value of the minimum rise time.</li></ul></ul><ul><ul><li><code><em>min_fall</em></code> <br /> Specifies the value of the minimum fall time.</li></ul></ul><br />A separator character is required between the instance and the pin names. If no separator character appears in a pin name, the pin is a top pin.<br /> <br />You must also enter in this file a delimiter character in quotation marks--for example, &quot;/&quot;--and the unit for the rise and fall time. If your design is hierarchical, you must specify a divider character to indicate the levels of hierarchy. You can optionally enter the following:<br /><ul><ul><li>The version number of the program that created the file</li></ul></ul><ul><ul><li>The date that the file was created</li></ul></ul><ul><ul><li>The creator of the file</li></ul></ul><ul><ul><li>The name of the program that created the file</li></ul></ul><ul><ul><li>The design name</li></ul></ul>
+<p>LOADS ;</p>
+
+<p>- plltsmc_audclk/OE 0.073629 NA</p>
+
+<p>- sm2288_clkdiv_111_U76/C 0.010614 NA</p>
+
+<p>- sm2288_clkdiv_111_U76/A 0.005532 NA</p>
+
+<p>- sm2288_clkdiv_111_U76/B 0.006345 NA</p>
+
+<p>END ;</p>
+<br />PowerMeter uses only the slew-rate information from the pin transition-time file. It only takes slew information specified on input pins. Information shown above for <code>sm228_clkdiv_110_clk_reg/Q </code>will be ignored. It also does not take information from the <code>LOADS</code> section of the file.<br /> <br />You can generate a pin transition-time file using stand alone&#xa0;Tempus Timing Signoff Solution or in PrimeTime. In Tempus Timing Signoff Solution, use the <code>-Powermeter</code> option of the <code>report_slew</code> command.<br /> <br />See&#xa0;<em>Tempus Timing Signoff Solution </em>manuals for more detail.<br /> <br />In PrimeTime, follow these steps to output the transition times to a file:<br /><ol><li>Perform a delay or timing calculation before outputting the transition times.</li></ol><ul><li>Set the correct search path, link the appropriate libraries, and so forth.</li><li>Invoke PrimeTime by typing the following:</li><li>pt_shell</li><li>Use the <code>read_verilog</code> command to read in the Verilog netlist file.</li><li>Specify the top-level design name with the <code>current_design</code> and <code>link_design</code> commands.</li><li>Read in the DSPF or SPEF file by using the <code>read_parasitics</code> command.</li><li>Source the Cadence-provided script called <code>pt_dump_slopes_loads.tcl</code> by using the following command:</li></ul><br /> source pt_dump_slopes_loads.tcl<br /> <br /> This TCL script is available in the toolbox provided with the PowerMeter software.<br /><ul><li>Output the transition times for the nets in the design by issuing the following command:</li></ul><br /> pt_dump_slopes_loads <code><em>top_level_design</em></code> &gt; <code><em>filename</em></code>.log<br /> <br /> The name of the resulting pin transition-time file is <code><em>top_level_design</em></code>.<code>slopes</code>. <br /><ul><li>You can submit this file to PowerMeter by using this TCL syntax:</li></ul><br /> <code><em>pwrMetObj</em></code> calPinTransitionTime <code><em>top_level_design</em></code>.slopes<br />
+<p><br /></p>
+<h2 id="PowerAnalysisOptions-calRailExcludecalRailExclude"><span class="confluence-anchor-link" id="PowerAnalysisOptions-calRailExclude"></span>calRailExclude</h2>
+
+<p><code><code><em>PwrMetObj</em></code> calRailExclude <code><em>rail_name</em></code></code></p>
+
+<p>Sometimes PowerMeter may guess that a particular net is a power rail when it is not. For these cases the <code>calRailExclude</code> power object may be used.</p>
+<h4 id="PowerAnalysisOptions-Parameters.3">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table bgcolor="#FFFFFF" cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><tbody><tr><td class="confluenceTd" valign="top">
+<p><code><em>pwrMetObj</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the power object. It can be any TCL string.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>rail_name</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>The name of the net that is not a rail.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="PowerAnalysisOptions-Example.3">Example</h4>
+<ul><li>This example specifies that <code>vdd_dummy</code> is not a rail. <br />chipPwr calRailExclude vdd_dummy</li></ul>
+<p><br /></p>
+<h2 id="PowerAnalysisOptions-calSwitchingCellscalSwitchingCells"><span class="confluence-anchor-link" id="PowerAnalysisOptions-calSwitchingCells"></span>calSwitchingCells</h2>
+<code><br /><code><code><em>pwrMetObj</em></code> calSwitchingCells <code><em>filename</em></code></code> <br /></code>
+<p>When you use the vectorless timing-windows-based method of dynamic power-consumption calculation, you can switch all cell types in the design from 0 to 1 or 1 to 0 to observe the impact of simultaneously switching outputs on them. This feature is useful when you want to focus on a particular problem involving different cell types.</p>
+
+<p>You can specify the name of a file that contains the names of all cell types to be switched from 0 to 1 or 1 to 0 and the minimum loading capacitance for each. The instance will be selected for power calculation only when its loading capacitance exceeds the minimum capacitance. See <a href="#PowerAnalysisOptions-rDynamicSwitchAllClockBuffers">&quot;rDynamicSwitchAllClockBuffers&quot;</a> for the format and an example of this file.</p>
+<h4 id="PowerAnalysisOptions-Parameters.4">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table bgcolor="#FFFFFF" cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><tbody><tr><td class="confluenceTd" valign="top">
+<p><code><em>pwrMetObj</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the power object. It can be any TCL string.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>filename</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the file containing the optional minimum loading capacitance value for each cell type in the design. The instance will be selected for power calculation only when its loading capacitance exceeds the minimum capacitance. See <a href="#PowerAnalysisOptions-rDynamicSwitchAllClockBuffers">&quot;rDynamicSwitchAllClockBuffers&quot;</a> for information on the format of this file and an example of it.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="PowerAnalysisOptions-FileFormat">File Format</h4>
+
+<p>The switching cells file is an optional input to PowerMeter for dynamic analysis. It is an ASCII file. Each line is in the following format:</p>
+
+<p><code><em>cellname</em></code> &lt;<code><em>min_loading_cap</em></code>_<code><em>value</em></code>&gt;</p>
+<h4 id="PowerAnalysisOptions-Example.4">Example</h4>
+<ul><li>The following example specifies a switching cells file called <code>switch_599</code>: <br />ChipPwr calSwitchingCells switch_599</li></ul><ul><li>Switching cells file example <br />cakbuf1 20fF<br /> <br />ff1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;15fF<br /> <br />drv1</li></ul>
+<p>The instance will be selected for power calculation only when its loading capacitance exceeds the minimum capacitance.</p>
+
+<p><br /></p>
+<h2 id="PowerAnalysisOptions-rDefaultNetCaprDefaultNetCap"><span class="confluence-anchor-link" id="PowerAnalysisOptions-rDefaultNetCap"></span>rDefaultNetCap</h2>
+<code><br /><code><code><em>pwrMetObj</em></code> rDefaultNetCap <code><em>capacitance</em></code></code> <br /></code>
+<p>Specifies a default net capacitance value if no parasitic capacitance is available.</p>
+<h4 id="PowerAnalysisOptions-Parameters.5">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table bgcolor="#FFFFFF" cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><tbody><tr><td class="confluenceTd" valign="top">
+<p><code><em>pwrMetObj</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the power object. It can be any TCL string.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>capacitance</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the default net capacitance. Default is 0.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="PowerAnalysisOptions-Example.5">Example</h4>
+<ul><li>The following example specifies a default net capacitance of 0.5 picofarads: <br />ChipPwr rDefaultNetCap 0.5e-12</li></ul>
+<p><br /></p>
+<h2 id="PowerAnalysisOptions-rDefaultPinCaprDefaultPinCap"><span class="confluence-anchor-link" id="PowerAnalysisOptions-rDefaultPinCap"></span>rDefaultPinCap</h2>
+<code><br /><code><code><em>pwrMetObj</em></code> rDefaultPinCap <code><em>capacitance</em></code></code> <br /></code>
+<p>Specifies the default pin capacitance.</p>
+<h4 id="PowerAnalysisOptions-Parameters.6">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table bgcolor="#FFFFFF" cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><tbody><tr><td class="confluenceTd" valign="top">
+<p><code><em>pwrMetObj</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the power object. It can be any TCL string.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>capacitance</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the default pin capacitance. Default is 0.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="PowerAnalysisOptions-Example.6">Example</h4>
+<ul><li>The following example specifies a default pin capacitance of 10 femtofarads: <br />ChipPwr rDefaultPinCap 0.01e-12</li></ul>
+<p><br /></p>
+<h2 id="PowerAnalysisOptions-rDynamicSwitchAllBuffersrDynamicSwitchAllBuffers"><span class="confluence-anchor-link" id="PowerAnalysisOptions-rDynamicSwitchAllBuffers"></span>rDynamicSwitchAllBuffers</h2>
+<code><br /><code><code><em>pwrMetObj</em></code> rDynamicSwitchAllBuffers <code><em>threshold_loading_capacitance</em></code></code> <br /></code>
+<p>When you use the vectorless timing-windows-based method of dynamic power-consumption calculation, you can direct PowerMeter to switch all buffer cells that have a loading capacitance greater than the specified value and observe the impact.</p>
+
+<p>When this debugging command is issued, only these specified cells are switched during dynamic analysis. rDynamicSwitchAllBuffers only schedules the buffer cells in the design giving user the visibility of the buffers as they switch. Scheduling is still done using the timing window of the buffer pins in TWF.</p>
+<h4 id="PowerAnalysisOptions-Parameters.7">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table bgcolor="#FFFFFF" cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><tbody><tr><td class="confluenceTd" valign="top">
+<p><code><em>pwrMetObj</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the power object. It can be any TCL string.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>threshold_loading_</em></code><code><em>capacitance</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies a loading capacitance, in farads, for the buffers, above which PowerMeter switches them from 0 to 1 or 1 to 0. If the threshold value is less than 0.0, the switching feature is considered off.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="PowerAnalysisOptions-Example.7">Example</h4>
+<ul><li>In the following example, PowerMeter switches all buffers whose loading capacitance is greater than 30 femtofarads: <br />ChipPwr rDynamicSwitchAllBuffers 30fF</li></ul>
+<p><br /></p>
+<h2 id="PowerAnalysisOptions-rDynamicSwitchAllClockBuffersrDynamicSwitchAllClockBuffers"><span class="confluence-anchor-link" id="PowerAnalysisOptions-rDynamicSwitchAllClockBuffers"></span>rDynamicSwitchAllClockBuffers</h2>
+<code><br /><code><code><em>pwrMetObj</em></code> rDynamicSwitchAllClockBuffers [0|1]</code> <br /></code>
+<p>When you use the vectorless timing-windows-based method of dynamic power-consumption calculation, you can switch all clock buffers in the design and observe the impact.</p>
+
+<p>When this debugging command is issued, only these specified cells are switched during dynamic analysis. rDynamicSwitchAllClockBuffers only schedules the clock buffers in the design giving user the visibility of the clock network switching. Scheduling is still done using the timing window of the clock buffer pins in TWF.</p>
+<h4 id="PowerAnalysisOptions-Parameters.8">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table bgcolor="#FFFFFF" cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><tbody><tr><td class="confluenceTd" valign="top">
+<p><code><em>pwrMetObj</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the power object. It can be any TCL string.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p>[ 0 | 1 ]</p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>If set to 1, turns off the switching of the clock buffers</p>
+
+<p>If set to 0, turns on the switching of the clock buffers.</p>
+
+<p>This command has no default setting.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="PowerAnalysisOptions-Example.8">Example</h4>
+<ul><li>The following example directs PowerMeter to switch the clock buffers: <br />ChipPwr rDynamicSwitchAllClockBuffers 1</li></ul>
+<p><br /></p>
+<h2 id="PowerAnalysisOptions-rDynamicSwitchAllFlopsrDynamicSwitchAllFlops"><span class="confluence-anchor-link" id="PowerAnalysisOptions-rDynamicSwitchAllFlops"></span>rDynamicSwitchAllFlops</h2>
+<code><br /><code><code><em>pwrMetObj</em></code> rDynamicSwitchAllFlops <code><em>threshold_loading_capacitance</em></code></code> <br /></code>
+<p>When you use the vectorless timing-windows-based method of dynamic power-consumption calculation, you can direct PowerMeter to switch all flip-flops and latches that have a loading capacitance greater than the specified value and observe the impact.</p>
+
+<p>When this debugging command is issued, only these specified cells are switched during dynamic analysis. rDynamicSwitchAllFlops only schedules the flip-flops and latches in the design giving user the visibility of the flip-flop and latches as they switch. Scheduling is still done using the timing window of the flip-flop and latch pins in TWF.</p>
+<h4 id="PowerAnalysisOptions-Parameters.9">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table bgcolor="#FFFFFF" cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><tbody><tr><td class="confluenceTd" valign="top">
+<p><code><em>pwrMetObj</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the power object. It can be any TCL string.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><em>threshold_loading_</em></code><code><em>capacitance</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies a loading capacitance, in farads, for the flip-flops and latches, above which PowerMeter switches them from 0 to 1 or 1 to 0. If the threshold value is less than 0.0, the switching feature is considered off.</p>
+
+<p>This command has no default setting</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="PowerAnalysisOptions-Example.9">Example</h4>
+<ul><li>In the following example, PowerMeter switches all flip-flops and latches whose loading capacitance is greater than 20 femtofarads: <br />ChipPwr rDynamicSwitchAllFlops 20fF</li></ul>
+<p><br /></p>
+
+<p><br /></p>
+<h2 id="PowerAnalysisOptions-rEnhancedBlockBoxModerEnhancedBlackboxMode"><span class="confluence-anchor-link" id="PowerAnalysisOptions-rEnhancedBlockBoxMode"></span>rEnhancedBlackboxMode</h2>
+
+<p><code><code><em>pwrMetObj</em></code> rEnhancedBlackboxMode [0|1]</code></p>
+
+<p>To specify whether blackbox propagation takes clock pins and timing arcs into account.</p>
+<h4 id="PowerAnalysisOptions-Definitions:">Definitions:</h4>
+
+<p>The following definitions are needed for the output activity descriptions in the syntax section below.</p>
+<ul><li>Blackbox <br />A blackbox is any instance that has no functional information. For PowerMeter there are two types of blackbox instances:</li></ul><ul><ul><li>An instance with only a port view.</li></ul></ul><ul><ul><li>An instance with a .lib that lacks functional data.</li></ul></ul><ul><li>Designated clock pin <br />A pin on an instance that is designated as a clock because of a .lib clock tag (e.g. clock: true)</li></ul><ul><li>Propagated clock pin <br />A pin on an instance (with or without a .lib) that has no clock tag, but has a clock network propagated to it.</li></ul><ul><li>Related pin <br />An input pin that has a timing arc related to an output pin.</li></ul><h4 id="PowerAnalysisOptions-Parameters.10">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table bgcolor="#FFFFFF" cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><tbody><tr><td class="confluenceTd" valign="top">
+<p><code><em>pwrMetObj</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the power object. It can be any TCL string.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p>[ 0 | 1 ]</p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>If set to 0, blackbox propagation does not take clock pins and timing arcs into account.</p>
+
+<p>If set to 1, see behavior described below.</p>
+
+<p>Default is 0.</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p>If <code>rEhancedBlackboxMode</code> is set to 1, the output activity will be as follows:</p>
+<ul><li>Cell with port view only</li></ul><ul><ul><li>With a propagated clock pin the output activity will be: <br /> min (1/2 propagated clock pin activity, highest non-clock input activity)</li></ul></ul><ul><ul><li>Without a propagated clock pin the output activity will be: <br /> same as input with highest activity</li></ul></ul><ul><li>Cell with .lib and timing arcs but no functional information.</li></ul><ul><ul><li>With a designated clock pin output activity will be: <br /> min (1/2 designated clock pin activity, highest non-clock related-pin input activity)</li></ul></ul><ul><ul><li>Without a designated clock pin output activity will be:</li></ul></ul><ul><ul><ul><li>With a propagated clock pin: <br /> min (1/2 propagated clock pin activity, highest non-clock related-pin input activity)</li></ul></ul></ul><ul><ul><ul><li>Without a propagated clock, output activity will be the same as the related pin with the highest activity.</li></ul></ul></ul><ul><li>Cell with .lib but with no timing arcs or functional information.</li></ul><ul><ul><li>With a designated clock pin output activity will be: <br /> min (1/2 designated clock pin activity, highest non-clock input activity.</li></ul></ul><ul><ul><li>Without propagated clock pin, output activity will be same as the input with highest activity.</li></ul></ul>
+<p>If a cell has multiple designated clock pins, the one with the highest activity will be considered to be the clock pin and any other clock pins will be treated as normal inputs. Propagated clock pins have lower priority and will be treated as normal inputs as well.</p>
+
+<p>If a cell has no designated clock pins but multiple propagated clock pins, the propagated clock pin with the highest activity will take precedence. Other propagated clock pins will be treated as normal inputs.</p>
+<h4 id="PowerAnalysisOptions-Example.10">Example</h4>
+<ul><li>The following example specifies that clock pins and timing arcs are taken into account for blackbox propagation: <br />chip_Pwr <code>rEnhancedBlackboxMode</code> 1</li></ul><h2 id="PowerAnalysisOptions-rEnhancedBlackboxAvgrEnhancedBlackboxAvg"><span class="confluence-anchor-link" id="PowerAnalysisOptions-rEnhancedBlackboxAvg"></span>rEnhancedBlackboxAvg</h2>
+<code><br /><code><code><em>pwrMetObj</em></code> rEnhancedBlackboxAvg [0 | 1]</code> <br /></code>
+<p>Specifies to use the average toggle rate of related inputs for enhanced blackbox propagation.</p>
+<h4 id="PowerAnalysisOptions-Parameters.11">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table bgcolor="#FFFFFF" cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><tbody><tr><td class="confluenceTd" valign="top">
+<p><code><em>pwrMetObj</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the power object. It can be any TCL string.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>[0 | 1]</code></p>
+</td>
+<td class="confluenceTd" valign="top"><ul><li>When you set this to 1, PowerMeter uses the average toggle rate of related inputs for enhanced blackbox propagation.</li></ul><ul><li>When you set this to 0, this functionality is not considered.</li></ul>
+<p><em>Default</em>: 0</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><br /></p>
+
+<p><br /></p>
+<h2 id="PowerAnalysisOptions-rEnhancedBlackboxMaxrEnhancedBlackboxMax"><span class="confluence-anchor-link" id="PowerAnalysisOptions-rEnhancedBlackboxMax"></span>rEnhancedBlackboxMax</h2>
+<code><br /><code><code><em>pwrMetObj</em></code> rEnhancedBlackboxMax [0 | 1]</code> <br /></code>
+<p>Specifies to use the maximum toggle rate of related inputs for enhanced blackbox propagation.</p>
+<h4 id="PowerAnalysisOptions-Parameters.12">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table bgcolor="#FFFFFF" cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><tbody><tr><td class="confluenceTd" valign="top">
+<p><code><em>pwrMetObj</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the power object. It can be any TCL string.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>[0 | 1]</code></p>
+</td>
+<td class="confluenceTd" valign="top"><ul><li>When you set this to 1, PowerMeter uses the maximum toggle rate of related inputs for enhanced blackbox propagation.</li></ul><ul><li>When you set this to 0, this functionality is not considered.</li></ul>
+<p><em>Default</em>: 0</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><br /></p>
+
+<p><br /></p>
+<h2 id="PowerAnalysisOptions-rIgnoreBidirCaprIgnoreBidirCap"><span class="confluence-anchor-link" id="PowerAnalysisOptions-rIgnoreBidirCap"></span>rIgnoreBidirCap</h2>
+<code><br /><code><code><em>pwrMetObj </em></code>rIgnoreBidirCap <code>[0 | 1]</code> </code> <br /></code>
+<p>Ignores the bidirectional pin capacitances.</p>
+<h4 id="PowerAnalysisOptions-Parameters.13">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table bgcolor="#FFFFFF" cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><tbody><tr><td class="confluenceTd" valign="top">
+<p><code><em>pwrMetObj</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the power object. It can be any TCL string.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>[0 | 1]</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>A value of <code>1</code> ignores the capacitance of bidirectional pins in switching power calculation (internal power calculation remains unaffected).</p>
+
+<p><em>Default</em>: <code>0</code></p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><br /></p>
+<h2 id="PowerAnalysisOptions-rUseFastestClockDomainrUseFastestClockDomain"><span class="confluence-anchor-link" id="PowerAnalysisOptions-rUseFastestClockDomain"></span>rUseFastestClockDomain</h2>
+<code><br /><code><code><em>pwrMetObj</em></code> rUseFastestClockDomain [ 0 | 1 ]</code> <br /></code>
+<p>When using clock domain-based assignments (ChipPwr <code>rNoClockDomains 0)</code>and if a net is assigned to multiple clock domains, the rUseFastestClockDomain setting will determine if the highest or lowest frequency will be used.</p>
+<h4 id="PowerAnalysisOptions-Parameters.14">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table bgcolor="#FFFFFF" cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><tbody><tr><td class="confluenceTd" valign="top">
+<p><code><em>pwrMetObj</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the power object. It can be any TCL string.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p>[ 0 | 1 ]</p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>With a value of 0, PowerMeter will use the lowest frequency for clock domain-based activity assignment.</p>
+
+<p>With a value of 1, PowerMeter will use the highest frequency for clock domain-based activity assignment. The default is 1.</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p>This command will be ignored if <code>rNoClockDomains</code> is set to 1.</p>
+
+<p><strong>Note: </strong>When the activity of an input signal is unknown (i.e. no input activity from a file such as VCD or TCF), it will use the product of the default input activity and the frequency of the fastest (or slowest) clock associated with any pin connected to the net.</p>
+<h4 id="PowerAnalysisOptions-Example.11">Example</h4>
+<ul><li>The following example specifies that PowerMeter will use the highest frequency for domain-based activity. <br />ChipPwr rUseFastestClockDomain 1</li></ul>
+<p><br /></p>
+<h2 id="PowerAnalysisOptions-rUseLibAdjustTransitionTimerUseLibAdjustTransitionTime"><span class="confluence-anchor-link" id="PowerAnalysisOptions-rUseLibAdjustTransitionTime"></span>rUseLibAdjustTransitionTime</h2>
+
+<p><code><code><em>pwrMetObj</em></code> rUseLibAdjustTransitionTime [0|1]</code></p>
+
+<p>Provides a way of telling PowerMeter to use the transition threshold from the first .lib.</p>
+<h4 id="PowerAnalysisOptions-Parameters.15">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table bgcolor="#FFFFFF" cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><tbody><tr><td class="confluenceTd" valign="top">
+<p><code><em>pwrMetObj</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the power object. It can be any TCL string.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p>[ 0 | 1 ]</p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>When set to 0, PowerMeter will treat slew thresholds as &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 0-100%.</p>
+
+<p>When set to 1, slews specified by <code>rDefaultTransitionTime</code> and pin transition time file will use thresholds specified in the first .lib.</p>
+
+<p>The default is 0.</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><strong>Note: </strong>For TWF flow, the voltage thresholds given in TWF will be used irrespective of the value of this switch.</p>
+<h4 id="PowerAnalysisOptions-Example.12">Example</h4>
+<ul><li>The following example specifies that the transition threshold should be 0 - 100: <br />chip_Pwr <code>rUseLibAdjustTransitionTime</code> 0</li></ul>
+<p><br /></p>
+<h2 id="PowerAnalysisOptions-rUseUserDefinedCurrentrUseUserDefinedCurrent"><span class="confluence-anchor-link" id="PowerAnalysisOptions-rUseUserDefinedCurrent"></span>rUseUserDefinedCurrent</h2>
+<code><br /><code><code><em>pwrMetObj</em></code> rUseUserDefinedCurrent [0|1]</code> <br /></code>
+<p>Determines whether PowerMeter uses Enhanced Port or Quick Detailed Views or not.</p>
+<h4 id="PowerAnalysisOptions-Parameters.16">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table bgcolor="#FFFFFF" cellpadding="4" cellspacing="0" class="wrapped confluenceTable" style="width: 648.0px;"><tbody><tr><td class="confluenceTd" valign="top">
+<p><code><em>pwrMetObj</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the name of the power object. It can be any TCL string.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p>[ 0 | 1 ]</p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>If set to 0 enhanced port views are ignored.</p>
+
+<p>If set to 1, enhanced port or quick detailed views take precedence over all other views (including .lib).</p>
+
+<p>The default is <code>0</code>.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="PowerAnalysisOptions-Example.13">Example</h4>
+<ul><li>The following example tells PowerMeter not to use Enhanced Port views: <br />ChipPwr rUseUserDefinedCurrent 0</li></ul>
+<p><br /></p>
+
+<p><br /></p>
+
+<p><br /></p>
+</div>
+
+<p><br /></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Library_Simulator_Options.html" id="prev" title="Library_Simulator_Options">Library_Simulator_Options</a></em></b><b><em><a href="Rail_Analysis_Options.html" id="nex" title="Rail_Analysis_Options">Rail_Analysis_Options</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

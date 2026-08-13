@@ -1,0 +1,366 @@
+
+<html><head><title>Binomial Wire Variation Analysis</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823930" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Binomial Wire Variation Analysis" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823930" />
+<meta name="NextFile" content="analysisandreporting_wirevariationreport.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_statisticalwirevariation.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Binomial Wire Variation Analysis" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="0" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_statisticalwirevariation.html" title="Statistical Wire Variation Analysis">Statistical Wire Variation Ana ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_wirevariationreport.html" title="Wire Variation Reporting">Wire Variation Reporting</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:binomialwirevariation" title="Binomial Wire Variation Analysis"></a><h3>
+<a id="pgfId-2394300"></a><a id="77256"></a>Binomial Wire Variation Analysis</h3>
+
+<p>
+<a id="pgfId-2394301"></a>The binomial wire variation analysis performs bounding analysis, where reported timing slack is targeted to bound all different combinations of the possible RC corners.</p>
+<p>
+<a id="pgfId-2394302"></a>Consider the table below, where 2^n combinations are possible for &#39;n&#39; metal layers. Tempus reports the timing slack, which is worst across all 2^n combinations.</p>
+<table class="webflareTable" id="#id2394382">
+<tbody><tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2394384">
+<a id="pgfId-2394384"></a>Skewed RC corner</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2394386">
+<a id="pgfId-2394386"></a>M1 </span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2394388">
+<a id="pgfId-2394388"></a>M2 </span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2394390">
+<a id="pgfId-2394390"></a>&#8230;</span>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2394392">
+<a id="pgfId-2394392"></a>Mn</span>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394394"></a>1</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394396"></a>min</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394398"></a>min</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394400"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394402"></a>min </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394404"></a>2</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394406"></a>min</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394408"></a>min</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394410"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394412"></a>max</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394414"></a>3</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394416"></a>min</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394418"></a>max</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394420"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394422"></a>min </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394424"></a>4</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394426"></a>min</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394428"></a>max</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394430"></a>&#8230;</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394432"></a>max</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394434"></a>5</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394436"></a>max</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394438"></a>min</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394440"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394442"></a>min </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394444"></a>6</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394446"></a>max</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394448"></a>min</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394450"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394452"></a>max</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394454"></a>7</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394456"></a>max</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394458"></a>max</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394460"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394462"></a>min </p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394464"></a>&#8230;</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394466"></a>&#8230;</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394468"></a>&#8230;</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394470"></a>&#8230;</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394472"></a>&#8230;</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394474"></a>2^n</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394476"></a>max</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394478"></a>Max</p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394480"></a></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2394482"></a>max</p>
+</td>
+</tr>
+</tbody></table>
+<p>
+<a id="pgfId-2394342"></a>In contrast to statistical mode, which assumes the wire variation to be Gaussian distribution with given mean and sigma, the binomial mode assumes only two possibilities for each metal layer, it can be either at mean + n*sigma, or at mean - n*sigma. </p>
+<p>
+<a id="pgfId-2394510"></a>You can enable binomial mode using the following setting:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3055370"></a>set_wire_variation_mode -correlation_type binomial</pre>
+
+<p>
+<a id="pgfId-2394512"></a>By default, the wire variation slack sigma is statistically added (root-sum-squared) to the random-cell (SOCV) slack sigma. But to completely bound different skewed RC corners, the settings (as shown below) can be made to consider the wire variation and random-cell variation to be correlated, which will linearly add the wire and cell sigma instead of adding statistically:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3055375"></a>set_wire_variation_mode -wire_cell_variation_correlation 1;&#160;&#160;  #Default: 0</pre>
+
+<p>
+<a id="pgfId-2394514"></a>Additionally, Tempus needs to perform bounding analysis to use n*wireSigma clock and data pins slews at endpoints to look-up the timing checks:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3055380"></a>set_wire_variation_mode -use_nsigma_slew_for_timing_check true;&#160;&#160; #Default:false</pre>
+<h4>
+<a id="pgfId-2394539"></a>Use Model</h4>
+
+<p>
+<a id="pgfId-2394540"></a>The following is a sample legacy UI script to run wire variation analysis in statistical mode:</p>
+<ol><li>
+<a id="pgfId-2394541"></a>Load the timing library containing noise data:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id2394542">
+<a id="pgfId-2394542"></a><a href="../tempustxtcmdref/read_lib.html">read_lib</a> timing.lib</pre></li><li>
+<a id="pgfId-2394543"></a>Schedule reading of a structural, gate-level Verilog netlist:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id2394544">
+<a id="pgfId-2394544"></a><a href="../tempustxtcmdref/read_verilog.html">read_verilog</a> top.v</pre></li><li>
+<a id="pgfId-2394545"></a>Set the top module name, and check for consistency between Verilog netlist and timing libraries:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id2394546">
+<a id="pgfId-2394546"></a><a href="../tempustxtcmdref/set_top_module.html">set_top_module dma_mac</a> top</pre></li><li>
+<a id="pgfId-2394547"></a>Set the proper technology node:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id2394548">
+<a id="pgfId-2394548"></a><a href="../tempustxtcmdref/set_design_mode.html">set_design_mode</a> -process 7</pre></li><li>
+<a id="pgfId-2394549"></a>Load the timing constraints:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id2394550">
+<a id="pgfId-2394550"></a><a href="../tempustxtcmdref/read_sdc.html">read_sdc</a> constraints.sdc</pre></li><li>
+<a id="pgfId-2394551"></a>Load extended SPEF and wire variation side file:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id2394552">
+<a id="pgfId-2394552"></a><code>read_spef</code> -extended top.spef.gz -wire_variation_file wireVar.txt</pre></li><li>
+<a id="pgfId-2394553"></a>Enable SOCV analysis:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id3055420">
+<a id="pgfId-3055420"></a><code>set_analysis_mode</code> -socv true</pre></li><li>
+<a id="pgfId-2394648"></a><code></code>Perform timing analysis:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id2394649">
+<a id="pgfId-2394649"></a><a href="../tempustxtcmdref/update_timing.html">update_timing</a> -full</pre></li><li>
+<a id="pgfId-2394650"></a>Enable wire variation analysis in PBA mode:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id3055431">
+<a id="pgfId-3055431"></a>set timing_enable_wire_variation true</pre></li><li>
+<a id="pgfId-2394652"></a>Configure wire variation analysis:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id3055437">
+<a id="pgfId-3055437"></a><a href="../tempustxtcmdref/set_wire_variation_mode.html">set_wire_variation_mode </a>-correlation_type statistical \</pre><pre class="webflare-pre-block webflare-courier-new" id="#id3055438">
+<a id="pgfId-3055438"></a>            -rc_correlation_factor -1</pre></li><li>
+<a id="pgfId-2394655"></a>Run path-based analysis to report wire variation-aware slacks:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id2394656">
+<a id="pgfId-2394656"></a><a href="../tempustxtcmdref/report_timing.html">report_timing</a> -retime path_slew_propagation</pre></li></ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_statisticalwirevariation.html" id="prev" title="Statistical Wire Variation Analysis">Statistical Wire Variation Ana ...</a></em></b><b><em><a href="analysisandreporting_wirevariationreport.html" id="nex" title="Wire Variation Reporting">Wire Variation Reporting</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

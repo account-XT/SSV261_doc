@@ -1,0 +1,102 @@
+
+<html><head><title>Special Nets Special Wiring Enhancements</title>
+<meta name="page_sequence" content="11003006" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="leenap" />
+<meta name="CreateDate" content="2026-04-07" />
+<meta name="CreateTime" content="1775553241" />
+<meta name="DataType" content="Release information" />
+<meta name="Description" content="Describes new, changed, and removed features for LEF and DEF for version 5.8." />
+<meta name="DocTitle" content="What&#39;s New in LEF/DEF 5.8" />
+<meta name="DocType" content="Release Note" />
+<meta name="FileTitle" content="Special Nets Special Wiring Enhancements" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="lefdefWN" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-07" />
+<meta name="ModifiedTime" content="1775553241" />
+<meta name="NextFile" content="DEF_VIAS_Adds_Mask.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="NETS_Routing_Points_Enhancements.html" />
+<meta name="c_product" content="Innovus," />
+<meta name="Product" content="Innovus," />
+<meta name="ProductFamily" content="Innovus," />
+<meta name="ProductVersion" content="5.8" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="What&#39;s New in LEF/DEF 5.8 -- Special Nets Special Wiring Enhancements" />
+<meta name="Version" content="5.8" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="lefdefWN58migrated" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="lefdefWNTOC.html">Contents</a></li><li><a class="prev" href="NETS_Routing_Points_Enhancements.html" title="NETS_Routing_Points_Enhancements">NETS_Routing_Points_Enhancemen ...</a></li><li style="float: right;"><a class="viewPrint" href="lefdefWN.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="DEF_VIAS_Adds_Mask.html" title="DEF_VIAS_Adds_Mask">DEF_VIAS_Adds_Mask</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>What&#39;s New in LEF/DEF 5.8<br />Product Version 5.8, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Special Nets Special Wiring Enhancements</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>To support multi-mask patterning up to three different masks for the same layers can be added to special nets.</p>
+
+<p>A new <code>VIA</code> statement was added to make it more efficient to specify several power-vias.</p>
+
+<p>Additionally, the route status - cover, fixed, routed, shield, and shape - can be applied to polygons, rectangles, and vias.</p>
+
+<p>Includes the following new syntax (in bold):</p>
+<pre style="margin-left: 30.0px;"><code>[ [+ <strong>COVER</strong> | + <strong>FIXED</strong> | + <strong>ROUTED</strong> | + <strong>SHIELD</strong> <strong><em>shieldNetName</em></strong>]</code></pre><pre style="margin-left: 60.0px;"><code>[+ <strong>SHAPE</strong> <strong><em>shapeType</em></strong>] [+ <strong>MASK</strong> <strong><em>maskNum</em></strong>]</code></pre><pre style="margin-left: 60.0px;"><code>+ POLYGON layerName pt pt pt... </code></pre><pre style="margin-left: 60.0px;"><code>| + RECT layerName pt pt </code></pre><pre style="margin-left: 60.0px;"><code>| + <strong>VIA</strong> <strong><em>viaName</em></strong> [<strong><em>orient</em></strong>] pt ... </code></pre><pre style="margin-left: 30.0px;"><code>| {+ COVER | + FIXED | + ROUTED | + SHIELD shieldNetName} </code></pre><pre style="margin-left: 60.0px;"><code><em>layerName</em> <em>routeWidth</em> </code></pre><pre style="margin-left: 60.0px;"><code>    [+ SHAPE <em>shapeType</em>]</code></pre><pre style="margin-left: 60.0px;"><code>    [+ STYLE <em>styleNum</em>]</code></pre><pre style="margin-left: 60.0px;"><code>    <strong><em>routingPoints</em></strong> </code></pre><pre style="margin-left: 30.0px;"><code>[NEW <em>layerName</em> <em>routeWidth</em> </code></pre><pre style="margin-left: 30.0px;"><code>    [+ SHAPE <em>shapeType</em>]</code></pre><pre style="margin-left: 30.0px;"><code>    [+ STYLE <em>styleNum</em>]</code></pre><pre style="margin-left: 30.0px;"><code>    <strong><em>routingPoints</em></strong> </code></pre><pre style="margin-left: 30.0px;"><code>    ] ... </code></pre><pre style="margin-left: 30.0px;"><code>] ...</code></pre>
+<p>New syntax for routing points:</p>
+<pre style="margin-left: 30.0px;"><code>(<em>x</em> <em>y</em> [<em>extValue</em>] ) </code></pre><pre style="margin-left: 60.0px;"><code>{ [<strong>MASK</strong> <strong><em>maskNum</em></strong>]&#xa0;&#xa0;(<em>x</em> <em>y</em> [<em>extValue</em>] ) </code></pre><pre style="margin-left: 60.0px;"><code>| [<strong>MASK</strong> <strong><em>viaMaskNum</em></strong>] <em>viaName</em> [<em>orient</em>]</code></pre><pre style="margin-left: 60.0px;"><code>    [DO <em>numX</em> BY <em>numY</em> STEP <em>stepX</em> <em>stepY</em>]</code></pre><pre style="margin-left: 30.0px;"><code> }...</code></pre>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="NETS_Routing_Points_Enhancements.html" id="prev" title="NETS_Routing_Points_Enhancements">NETS_Routing_Points_Enhancemen ...</a></em></b><b><em><a href="DEF_VIAS_Adds_Mask.html" id="nex" title="DEF_VIAS_Adds_Mask">DEF_VIAS_Adds_Mask</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

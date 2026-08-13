@@ -1,0 +1,143 @@
+
+<html><head><title>Sample Trigger File for Dynamic PGV Generation</title>
+<meta name="page_sequence" content="20019000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468565" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Sample Trigger File for Dynamic PGV Generation" />
+<meta name="Keywords" content="trigger,dynamic,PGV" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Power-Grid Library Generation," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468565" />
+<meta name="NextFile" content="Sample_Trigger_File_for_Static_PGV_Generation.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Multi-Mode_Power-Grid_View_Generation.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- Sample Trigger File for Dynamic PGV Generation" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="Multi-Mode_Power-Grid_View_Generation.html" title="Multi-Mode_Power-Grid_View_Generation">Multi-Mode_Power-Grid_View_Gen ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Sample_Trigger_File_for_Static_PGV_Generation.html" title="Sample_Trigger_File_for_Static_PGV_Generation">Sample_Trigger_File_for_Static ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Sample Trigger File for Dynamic PGV Generation</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="SampleTriggerFileforDynamicPGVGeneration-41483"></span></p>
+
+<p>The following is an example of the trigger file for dynamic PGV generation:</p>
+
+<p><code>CELL cell1<br />RON_THRESHOLD = 5<br />MODE READ dynamic<br />CONDITIONAL_INPUT = ( !CEN &amp; !WEN )<br />CONDITIONAL_PIN clk4 { RISE }</code></p>
+
+<p><code>CUSTOM_LABEL One<br />VOLTAGE { VDDG 0.6 }<br />FREQ 100<br />RON_FILE ./ronfile1.txt<br />RON_METHOD min<br />OFF_NETS { VVDDG }</code></p>
+
+<p><code>CUSTOM_LABEL two<br />VOLTAGE { VDDG 0.9 }<br />FREQ 100<br />RON_FILE ./ronfile1.txt<br />END_MODE<br />.....<br />END</code></p>
+
+<p>The file specified with the <code>RON_FILE</code> keyword contains multiple on-resistance (Ron) values, that is minimum, maximum, and average, for power gates. The following is a snippet of the RON file:</p>
+
+<p><code>D-Term-Net&#xa0;&#xa0;  S-Term_Net     Avg     Max     Min     Gate</code></p>
+
+<p><code> VDD&#xa0;&#xa0;         VDDG           1       2       3     X2_unmatched</code></p>
+
+<p><code> VDD&#xa0;&#xa0;         VDDG           1       2       3     X3_unmatched</code></p>
+
+<p><code> VDD&#xa0;&#xa0;         VDDG           1       2       3     X5_unmatched</code></p>
+
+<p>The following is a snippet of the additional information related to the multi-mode PGV generation that is added in the library report:</p>
+
+<p><code>RON_THRESHOLD = &lt;value&gt;<br />MODE = &lt;mode/sub_mode&gt;<br />RON_METHOD = &lt;min | avg | max&gt;<br />&lt;Net&gt;&#xa0;&#xa0;&lt;#Powergates &gt; &lt;#Off Powergates&gt; &lt;Status&gt;</code></p>
+
+<p>The following is a snippet of the library report:</p>
+<pre><code>
+.<code>..<br />...<br />MODE = READ<br />CUSTOM_LABEL = one<br />RON_METHOD = min<br />Net              #Powergates         #Off Powergates          Status           <br />VDD               3                    3                     OFF (Derived)       <br />VDDG&#xa0;&#xa0;            3                    2                     ON                  </code></code></pre><pre><code>
+<code>MODE = READ<br />CUSTOM_LABEL = two<br />RON_METHOD = avg<br />Net              #Powergates         #Off Powergates          Status           <br />VDD               3                   2                      OFF (Specified)     <br />VDDG              3                   2                      ON      <br />&#8230;&#8230;.&#xa0;&#xa0;          </code></code></pre>
+<p>This trigger file information is used later by Power Analysis and Rail Analysis to automatically use current waveforms as per the trigger information. During power analysis, you can schedule the desired mode in the following two ways</p>
+<ul><li>Specify the custom label corresponding to a voltage and frequency pair.</li><li>Specify the mode name. In this case, the software selects the closest voltage and frequency pair for the instance based on the instance voltage and fastest frequency.</li></ul>
+<p>The Power Analysis engine supports multiple modes/custom labels in the switch-pattern if they are generated without RON files and off nets. However, if a switch-pattern has a mode generated with RON file or off nets, then the software ignores such modes and only uses the previous modes.</p>
+
+<p>In the following example, the multi-voltage multi-frequency PGV has the following 3 modes, that is, two modes without a RON file and off nets, and the third mode with a RON file and off nets:</p>
+
+<p><code>Read  [ No off nets and RON files in the trigger file ]<br />   CUSTOM_LABEL R1<br />   CUSTOM_LABEL R2</code></p>
+
+<p><code>Write [  No off nets and RON files in the trigger file ]<br />       CUSTOM_LABEL W1<br />       CUSTOM_LABEL W2</code></p>
+
+<p><code>HV_IVD [ With off nets and RON files in the trigger file ]<br />       CUSTOM_LABEL H1<br />       CUSTOM_LABEL H2</code></p>
+
+<p>The following commands describe the use model for mixed multiple modes (with/without RON file/off nets):</p>
+
+<p><span class="fontredcadence"><ul><li><code>set power -instance -dynamic_switch_pattern { R1 H1 W1 }</code><br />Uses the first pattern &quot;<code>R1</code>&quot;.</li><li><code>set power -instance -dynamic_switch_pattern { H1 R1 W1 }</code><br />Uses the first pattern &quot;<code>H1</code>&quot;.</li><li><code>set power -instance -dynamic_switch_pattern { R1 W1 H1}</code><br />Uses &quot;<code>R1</code>&quot; for the 1st cycle and &quot;<code>W1</code>&quot; for the 2nd cycle</li></ul></span></p>
+
+<p><br /></p>
+
+<p>The log information generated during Power Analysis reports the label and the corresponding voltage/frequency pair for the specific instance, as shown below:<br /><code>Instance &#39;I1&#39; is using mode &#39;M1&#39;</code></p>
+
+<p>During Rail Analysis, the specified mode is triggered, and the off nets are removed from the power-grid.</p>
+<h4 id="SampleTriggerFileforDynamicPGVGeneration-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Multi-Mode_Power-Grid_View_Generation.html#MultiModePowerGridViewGeneration-89430">Multi-Mode Power-Grid View Generation</a></li><li><a href="Multi-Voltage_Capacitance_Characterization.html#MultiVoltageCapacitanceCharacterization-84616">Multi-Voltage Capacitance Characterization</a></li><li><a href="Sample_Trigger_File_for_Static_PGV_Generation.html#SampleTriggerFileforStaticPGVGeneration-18122">Sample Trigger File for Static PGV Generation</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Multi-Mode_Power-Grid_View_Generation.html" id="prev" title="Multi-Mode_Power-Grid_View_Generation">Multi-Mode_Power-Grid_View_Gen ...</a></em></b><b><em><a href="Sample_Trigger_File_for_Static_PGV_Generation.html" id="nex" title="Sample_Trigger_File_for_Static_PGV_Generation">Sample_Trigger_File_for_Static ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

@@ -1,0 +1,248 @@
+
+<html><head><title>Performing Static Power Analysis</title>
+<meta name="page_sequence" content="21007000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468575" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Performing Static Power Analysis" />
+<meta name="Keywords" content="power,analysis,static,design,CPF,power,analysis,static,design,CPF,power,analysis,static" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468575" />
+<meta name="NextFile" content="MMMC_Mode_Default_Views.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Event-Based_Power_Analysis.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- Performing Static Power Analysis" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="Event-Based_Power_Analysis.html" title="Event-Based_Power_Analysis">Event-Based_Power_Analysis</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="MMMC_Mode_Default_Views.html" title="MMMC_Mode_Default_Views">MMMC_Mode_Default_Views</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Performing Static Power Analysis</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="PerformingStaticPowerAnalysis-69463"></span></p>
+
+<p>The following procedure describes how to set up the static power analysis mode and then run power analysis.</p>
+<h4 id="PerformingStaticPowerAnalysis-RequiredInputFiles"><em> Required Input Files</em></h4>
+<ul><li>Design data (LEF, netlist, DEF)</li><li>Common Power Format (CPF) file</li><li>SPEF</li></ul><h4 id="PerformingStaticPowerAnalysis-Procedure"><em> Procedure</em></h4>
+
+<p>To perform static power analysis, complete the following steps:</p>
+<ol><li>
+<p>Load the design data through the command line or through the GUI.<br /><strong>GUI</strong>: Select <em>File - Read Design.</em><em><br /></em><strong><strong>Tcl command:<br /></strong></strong></p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>read_lib -lef $lefs</code><code>
+</code></pre><pre><code>read_view_definition ../design/viewDefinition.tcl</code></pre><pre><code>read_verilog ../design/postRouteOpt.enc.dat/super_filter.v.gz</code></pre><pre><code>set_top_module super_filter -ignore_undefined_cell</code></pre><pre><code>read_def ../design/super_filter.def.gz</code></pre></td>
+</tr>
+</tbody></table></div>
+
+<p><code><br /></code></p>
+</span></p>
+</li><li>
+<p>Specify the CPF file for power domain information through the command line or through the GUI.<br /><strong>GUI</strong>: Select <em>File</em> - Load/Commit CPF.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1">
+<p><code>read_power_domain -cpf ../design/super_filter.cpf</code></p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><code><br /></code></p>
+</span></p>
+</li><li>
+<p>Specify the SPEF file for signal net parasitic information through the command line or through the GUI.<br /><strong>GUI</strong>: Select <em>File</em> - Read SPEF.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd"><pre><code>read_spef -rc_corner&#xa0;&#xa0;RC_wc_125 -decoupled\ ../design/postRouteOpt_RC_wc_125.spef.gz</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Define the power analysis mode through the command line or through the GUI.<br /><strong>GUI</strong>: Select <em>Power &amp; Rail </em>- Set Power Analysis Mode.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>set_power_analysis_mode \</code></pre><pre><code>    -reset</code></pre><pre><code>set_power_analysis_mode \</code></pre><pre><code>    -analysis_view              AV_wc_on \</code></pre><pre><code>    -write_static_currents      true \</code></pre><pre><code>    -binary_db_name             staticPower.db \</code></pre><pre><code>    -create_binary_db           true \</code></pre><pre><code>    -method                     static</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Optional. Define the power of an instance or cell, if you do not specify .lib.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>set_power -reset<br /></code><code>set_power -cell pll -pin VDD 0.5 <br /></code><code>set_power -instance u0 -pin VDD 0.5</code></pre></td>
+</tr>
+</tbody></table></div>
+
+<p>You can also specify power-grid views using the <code>set_power_analysis_mode -power_grid_library</code> parameter, instead of specifying .lib or defining a power value with <code>set_power</code>.</p>
+</span></p>
+</li><li>
+<p>Specify the toggle rates on specific instances, nets, and primary inputs, if they are not defined through user attributes, TCF, VCD, or clock constraints.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>set_switching_activity -reset</code></pre><pre><code>set_switching_activity -input_port rst -activity 0.25 -duty 0.30<br />set_switching_activity \</code></pre><pre><code>   -pin [ get_pins -of_objects [ get_cells RC_CGIC* -hierarchical] \</code></pre><pre><code>        -filter &quot;@direction == out&quot; ] \ <br /></code><code>   -activity 0.1</code><code>
+propagate_activity</code></pre></td>
+</tr>
+</tbody></table></div>
+
+<p>You can specify the <code>propagate_activity</code> command to propagate activities in the design and check for activity annotation before running power calculation. This is an optional step because the <code>report_power</code> command will also propagate activities, and then do power calculation based on the propagated activities.</p>
+</span></p>
+</li><li>
+<p>You can check whether the activities were applied properly.<br /><strong>Tcl command</strong>:<br /><br /></p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>get_activity -port&#xa0;&#xa0;rst<br /></code><code>get_activity -pin [ get_pins -of_objects [ get_cells RC_CGIC* -hierarchical] \<br />        </code><code>-filter &quot;@direction == out&quot; ]</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>You can define default activities for the unassigned nets.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>set_default_switching_activity -input_activity 0.3 \</code></pre><pre><code>   -period 4.0 -clock_gates_output_ratio   0.5</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Specify the directory where the power results will be stored.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>set_power_output_dir staticPowerResults</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>Run power analysis through the command line or through the GUI.<br /><strong>GUI</strong>:</li></ol><ul><li>Select <em>Power &amp; Rail </em>- Run Power Analysis to access the <em>Run Power Analysis</em> form that can be used to specify cell/instance power (<code>set_power</code>), toggle rates (<code>set_switching_activity </code>and <code>set_default_switching_activity</code>), power result directory (<code>set_power_output_dir</code>), and then run power analysis (<code>report_power</code>).</li><li>Select <em>Power &amp; Rail</em><em> </em>- <em>Textual Reports</em> - Power Analysis to access the <em>Report Power</em> form that can be used to generate incremental power reports.</li></ul><p style="margin-left: 40.0px;"><strong style="letter-spacing: 0.0px;">Tcl command</strong><span style="letter-spacing: 0.0px;">:<br /></span></p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="relative-table wrapped confluenceTable" style="width: 22.6608%;"><colgroup class=""><col class="" style="width: 100.0%;" /></colgroup><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>report_power -outfile static.rpt<br /></code><code>#Generate additional report formats<br /></code><code>report_power -instances {u0}&#xa0;&#xa0;  -outfile u0.rpt<br /></code><code>report_power -instances {*}&#xa0;&#xa0;   -outfile all.rpt<br /></code><code>report_power -instances {ring}&#xa0;&#xa0;-outfile ring.rpt</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+
+<p><br /></p>
+
+<p><span style="letter-spacing: 0.0px;">The Voltus console will display power statistics, as shown in the following snippet:</span><code style="letter-spacing: 0.0px;">
+Total Power</code></p>
+<pre><code>
+--------------------------------------------------------------------------------</code></pre><pre><code>
+Total Internal Power:        2.30917507 &#xa0;&#xa0;&#xa0;&#xa0;   64.6507%</code></pre><pre><code>Total Switching Power:       1.03379946 &#xa0;&#xa0;&#xa0;&#xa0;   28.9436%</code></pre><pre><code>Total Leakage Power:         0.22879451 &#xa0;&#xa0;&#xa0;&#xa0;    6.4056%</code></pre><pre><code>Total Power:&#xa0;&#xa0;               3.57176907</code><code>
+--------------------------------------------------------------------------------</code></pre><pre><code>
+Ended Static Power Report Generation: (cpu=0:00:00, real=0:00:00,</code></pre><pre><code>mem(process/total/peak)=750.07MB/1877.45MB/750.07MB)</code></pre><pre><code>Begin Creating Binary Database</code></pre><pre><code>Ended Creating Binary Database: (cpu=0:00:00, real=0:00:00,</code></pre><pre><code>mem(process/total/peak)=750.34MB/1877.45MB/750.34MB)</code></pre><h4 id="PerformingStaticPowerAnalysis-Output"><em> Output</em></h4>
+
+<p>The power output directory will contain the following information:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><th class="confluenceTh" colspan="1" rowspan="1">
+<p>File Name</p>
+</th><th class="confluenceTh" colspan="1" rowspan="1">
+<p>Description</p>
+</th></tr>
+<tr class=""><td class="confluenceTd" colspan="1" rowspan="1">
+<p>&lt;<span class="webflare-courier-new"><em>binary_database</em></span>&gt;.db</p>
+</td>
+<td class="confluenceTd" colspan="1" rowspan="1">
+<p>The name of the binary database is specified using the <code>set_power_analysis_mode -binary_db_name</code> parameter. The database can be loaded in the Voltus GUI for viewing and analyzing different types of power plots, and GUI interactive debugging. It cross references the instance names and locations with the power results.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd" colspan="1" rowspan="1">
+<p>staticPower.db.cnstr.tcl</p>
+</td>
+<td class="confluenceTd" colspan="1" rowspan="1">
+<p>This Tcl file stores the commands used to set up power analysis.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd" colspan="1" rowspan="1">
+<p>&lt;<span class="webflare-courier-new"><em>power_report</em></span>&gt;.rpt</p>
+</td>
+<td class="confluenceTd" colspan="1" rowspan="1">
+<p>The name of the power report is specified using the <code>report_power -outfile</code> parameter. The power report summarizes power consumption, by groups (sequential cells, macros, clocks), power net, and clock domain.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd" colspan="1" rowspan="1">
+<p>static_&lt;<span class="webflare-courier-new"><em>net_name</em></span>&gt;.ptiavg</p>
+</td>
+<td class="confluenceTd" colspan="1" rowspan="1">
+<p>This is the current file for each net. The <code>set_power_analysis_mode -write_static_currents</code> parameter will generate the current files that are required for rail analysis.</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p>You can use the <code>set_dc_sources</code> command to specify the operating voltages of the power/ground nets. This command is used to specify a global voltage or voltages for specific power nets in the design.</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>If you do not have a SPEF file, you can use wire load models for load specification which can then be used for static power analysis. The following commands are used to specify wire load models:</p>
+</div>
+</div>
+
+<p><br /></p>
+<ul><li><code>auto_wire_load_selection</code></li><li><code>enable_wire_load_model_support</code></li><li><code>report_wire_load</code></li><li><code>reset_wire_load_mode</code></li><li><code>reset_wire_load_model</code></li><li><code>reset_wire_load_selection_group</code></li><li><code>set_wire_load_mode</code></li><li><code>set_wire_load_model</code></li><li>
+<p><code>set_wire_load_selection_group </code></p>
+<div aria-label="Tip" class="confluence-information-macro  confluence-information-macro-tip" role="region"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>If you have the following commands <code>set_power_output_dir static_power_max
+report_power -outfile design.rpt
+</code>then <code>design.rpt</code> will be dumped to <code>static_power_max</code> directory. If you explicitly specify a directory in the <code>-</code>outfile option such as below, <code>report_power -outfile my_dir/design.rpt
+</code>then <code>design.rpt</code> is saved to <code>my_dir</code> directory and the path setting by <code>set_power_output_dir</code> will be ignored.</p>
+</div>
+</div>
+</li></ul></span></p>
+
+<p><em style="font-weight: 600;letter-spacing: -0.003em;">Related Topics</em></p>
+<ul><li><a href="Propagation-based_Average_Power_Calculation.html">Propagation-based Average Power Calculation</a></li><li><a href="MMMC_Mode_Default_Views.html">MMMC Mode Default Views</a></li><li><a href="Viewing_Static_Power_Analysis_Results.html">Viewing Static Power Analysis Results</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Event-Based_Power_Analysis.html" id="prev" title="Event-Based_Power_Analysis">Event-Based_Power_Analysis</a></em></b><b><em><a href="MMMC_Mode_Default_Views.html" id="nex" title="MMMC_Mode_Default_Views">MMMC_Mode_Default_Views</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

@@ -1,0 +1,132 @@
+
+<html><head><title>write_oa_techfile</title>
+<meta name="page_sequence" content="28012000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287285" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="write_oa_techfile" />
+<meta name="Keywords" content="techLoadDump,write OpenAccess techfile,write oa techfile,Write DFII style file,Write ASCII technology file,OpenAccess,OA" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="OpenAccess (OA)," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287285" />
+<meta name="NextFile" content="Machine_Learning_Commands.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="write_lef_library.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- write_oa_techfile" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="write_lef_library.html" title="write_lef_library">write_lef_library</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Machine_Learning_Commands.html" title="Machine_Learning_Commands">Machine_Learning_Commands</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>write_oa_techfile</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>write_oa_techfile<span class="confluence-anchor-link" id="write_oa_techfile-write_oa_techfile"></span><span id="write_oa_techfile-write_oa_techfile"></span></code><br /><code>[-help] </code><br /><code>[out_file]</code><br /><code>[-include_rules]<br /><span>[-process_node&#xa0;</span><em>coord</em><span>]</span><br /></code></p>
+
+<p>Writes out a DFII style ASCII technology file that can be given to the <code>techLoadDump</code> executable to create an equivalent OpenAccess technology database.</p>
+
+<p>This command is used to create and verify OpenAccess technology files that match LEF technology files. By default, <code>write_oa_techfile</code>&#xa0;writes out only DRC information and no LDRS or VIA information.</p>
+
+<p>The expected flow for new processes is as follows:</p>
+<ol><li>Read a LEF file into the tool with&#xa0;<code>init_design</code>.</li><li>Use&#xa0;<code>write_oa_techfile</code>&#xa0;to write out the tech (<code>.tf</code>)&#xa0;file.</li><li>Run&#xa0;<code>techLoadDump</code>&#xa0;using the&#xa0;<code>.tf</code>&#xa0;file.</li><li>Use&#xa0;<code>lef2oa -pnrLibDataOnly</code>&#xa0;to create the LDRS and vias.&#xa0;</li></ol>
+<p>For more information, refer to the chapter &quot;Technology File Layer Attributes&quot; of the <em>Virtuoso Technology Data ASCII Files Reference</em>.</p>
+<h4 id="write_oa_techfile-Parameter">Parameter</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" width="150px">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd">
+<p>Outputs a brief description that includes type and default information for each <code>write_oa_techfile</code> parameter.</p>
+
+<p>For a detailed description of the command and all of its parameters, use the man command: man <code>write_oa_techfile</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><em><code>out_file</code></em></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the output ASCII file name.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-include_rules</code></td>
+<td class="confluenceTd" colspan="1">Includes LDRS and VIA information in the output tech file. This option should be used only if the LEF default and NDRs do not utilize fixed vias.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-process_node&#xa0;</span><em>coord</em></code></td>
+<td class="confluenceTd" colspan="1">Specifies a process node value in nm. When specified,&#xa0;<code>write_oa_techfile</code>&#xa0;creates a processNode entry in the techfile for processes using the MASK construct. For example, if you specify&#xa0;<code>-process_node 20</code>&#xa0;to indicate a 20nm process,&#xa0;the following entry is included in the control() section of the techfile:
+<p><code>processNode(0.020)</code></p>
+
+<p>If&#xa0;<code>-process_node</code>&#xa0;is not specified and the&#xa0;<code>write_oa_techfile</code>&#xa0;command detects MASK constructs on any layer, it returns an error.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="write_oa_techfile-Examples">Examples</h4>
+<ul><li>The following set of commands updates an OpenAccess technology file with any missing information from a LEF technology file: <br /><code>#Initialize a design using LEF files</code><br /><code>write_lef_library -tech_only lef.lef &#xa0;#A LEF file in canonical</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; #sorted order for easy&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; #comparison with diff</code><br /><code>write_oa_techfile lef.tf &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;#A DFII ASCII tech file&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; #that can be given to&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; #techLoadDump executable</code><br /><code>#Edit existing OA tech file to add any missing information in</code><br /><code>#the&#xa0;lef.tf file</code><br /><code>#Initialize a design using the new OA tech. Then:</code><br /><code>write_lef_library -tech_only oa.lef #A LEF file in canonical&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; #order derived from OA tech</code><br /><code>#Compare the two LEF files. Any differences need to be fixed</code><br /><code>#or explained.</code><br /><code>diff lef.lef oa.lef&#xa0;</code></li></ul><h4 id="write_oa_techfile-RelatedInformation">Related Information</h4>
+<ul><li><code><a href="write_lef_library.html">write_lef_library</a></code></li><li><em>Mixed Signal (MS) Interoperability Guide</em></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="write_lef_library.html" id="prev" title="write_lef_library">write_lef_library</a></em></b><b><em><a href="Machine_Learning_Commands.html" id="nex" title="Machine_Learning_Commands">Machine_Learning_Commands</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

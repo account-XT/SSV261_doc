@@ -1,0 +1,230 @@
+
+<html><head><title>Wire Variation Reporting</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823930" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Wire Variation Reporting" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823930" />
+<meta name="NextFile" content="cmmmc.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_binomialwirevariation.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Wire Variation Reporting" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="0" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_binomialwirevariation.html" title="Binomial Wire Variation Analysis">Binomial Wire Variation Analys ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="cmmmc.html" title="Concurrent Multi-Mode Multi-Corner Timing Analysis">Concurrent Multi-Mode Multi-Co ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:wirevariationreport" title="Wire Variation Reporting"></a><h3>
+<a id="pgfId-2394720"></a>Wire Variation Reporting<a id="86594"></a></h3>
+
+<p>
+<a id="pgfId-2394721"></a>The following additional timing report fields (in <a href="../tempustxtcmdref/report_timing.html">report_timing</a> command output) have been introduced to print wire variation details in a timing path report:</p>
+<ul><li>
+<a id="pgfId-2394722"></a><code>-retime_slew_wire_stddev</code></li><li>
+<a id="pgfId-2394723"></a><code>-retime_delay_wire_stddev</code></li><li>
+<a id="pgfId-2394724"></a><code>-arrival_wire_stddev</code></li></ul>
+
+
+<p>
+<a id="pgfId-2394725"></a>Additionally, the <code>report_timing</code> <code>-retime_delaycal_pins</code> parameter prints the slew and delay sigma per layer for user-specified pins.</p>
+<p>
+<a id="pgfId-2394726"></a>Here is a sample PBA timing report:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2394727"></a>tempus &gt; report_timing -from FF1/QN0 -to FF2/D0 -retime_delaycal_pins NAND_inst1/B</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2401070"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2394775"></a>Path 1: MET Setup Check with Pin FF2/CK</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2394776"></a>Endpoint: FF2/D0&#160;&#160;                  (^) checked with leading edge of &#39;myclk&#39;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2394777"></a>Beginpoint: FF1/QN0 (v) triggered by leading edge of &#39;myclk&#39;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2394779"></a>Path Groups: {reg2reg} </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2394780"></a>Analysis View: viewl</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2394782"></a>Retime Analysis {Data Clock Path-Slew Spatial(CS) SOCV(Ultra)-Corr RC SI WP NCPPR <strong>BOEL</strong>}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2394783"></a>Retime SOCV Analysis {Distance(um) : 323.616}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2394785"></a>                             NSigma          | Mean     | Sigma    |  Stddev</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2394786"></a>Other End Arrival Time&#160;&#160;     1.0369 (o3.00S) | 1.0661   | 0.0098   |  0.0098</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2394787"></a>Setup&#160;&#160;                      0.0149 (+3.00S) | 0.0141   | 0.0003   |  0.0003</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2394788"></a>+ Phase Shift&#160;&#160;              1. 4706</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2394789"></a>+ CPPR Adjustment            0.0516 (+3.00S) | 0.0297   | 0.0073&#160;&#160;&#160;&#160;   |  0.0073</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2394790"></a>Uncertainty&#160;&#160;                0.0441</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2395145"></a>Required Time&#160;&#160;              2.4886 (·3.00S) | 2.5082   |  0.0065  |  0.0065</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2394792"></a>Arrival Time&#160;&#160;               1.7370 (+3.00S) | 1.6516   |  0.0285  |  0.0269</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2394793"></a>Slack Time&#160;&#160;                 0.7744 (·3.00S) | 0.8566   |  0.0274  |  0.0257</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2394794"></a>Slack Time(original)&#160;&#160;       0.6467 (·3.00S) | 0.7461   |  0.0331  |  0.0331</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2394795"></a>     Clock Rise Edge                 0.0000</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2394797"></a>     + Clock Network Latency (Prop)  0.0057 (+3.00S) | 0.0057 | 0.0000 | 0.0000</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2394799"></a>     = Beginpoint Arrival Time       0.0057 (+3.00S) | 0.0057 | 0.0000 | 0.0000</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2397916"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398065"></a>Load&#160;&#160;  <strong>Retime</strong>  Retime  <strong>Retime</strong>  Retime   <strong>Arrival</strong>  Arrival Edge Cell Pin       </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398066"></a>        <strong>Slew</strong>    Slew    <strong>Delay</strong>   Delay    <strong>Wire</strong>     Time                            </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398067"></a>        <strong>Wire</strong>            <strong>Wire</strong>             <strong>Std</strong>09dev&#160;&#160;                                </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398635"></a>        <strong>Stddev</strong>          <strong>Stddev</strong>                                                    </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398069"></a>0.0031&#160;&#160;<strong>0.0000</strong>  0.0158  <strong>-</strong>       -        <strong>0.0000</strong>   0.0057   ^   -     myclk</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398070"></a>0.0031&#160;&#160;<strong>0.0000</strong>  0.0160  <strong>0.0000</strong>  0.0008   <strong>0.000</strong>    0.0065   ^   INV   INVinstl/A</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398071"></a>0.0050&#160;&#160;<strong>0.0000</strong>  0.0092  <strong>0.0000</strong>  0.0081   <strong>0.0000</strong>   0.0146   V   INV   INV=instl/Y</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398072"></a>(skipped)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398073"></a>0.0223&#160;&#160;<strong>0.0001</strong>  0.0460  <strong>0.0001</strong>  0.0044   <strong>0.0067</strong>   1.0915   ^   ICG   ICGinstl/CK</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398074"></a>0.0190&#160;&#160;<strong>0.0000</strong>  0.0484  <strong>0.0000</strong>  0.0562   <strong>0.0067</strong>   1.1424   ^   ICG   ICG=ins/ECK</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398075"></a>0.0190&#160;&#160;<strong>0.0001</strong>  0.0506  <strong>0.0001</strong>  0.0032   <strong>0.0068</strong>   1.1454   ^   FF    FFl/CK</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398076"></a>0.0088&#160;&#160;<strong>0.0000</strong>  0.0987  <strong>0.0000</strong>  0.0976   <strong>0.0068</strong>   1.2290   V   FF    FF1/QN0</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398077"></a>0.0088&#160;&#160;<strong>0.0007</strong>  0.1000  <strong>0.0006</strong>  0.0222   <strong>0.0070</strong>   1.2499   V   BUF   BUF instl/A</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398078"></a>0.0061&#160;&#160;<strong>0.0000</strong>  0.1608  <strong>0.0000</strong>  0.1320   <strong>0.0070</strong>   1.3603   V   BUF   BUF-instl/Y</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398079"></a>0.0061&#160;&#160;<strong>0.0009</strong>  0.1616  <strong>0.0006</strong>  0.0146   <strong>0.0072</strong>   1.3733   V   BUF   BUF-inst2/A</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398080"></a>0.0168&#160;&#160;<strong>0.0000</strong>  0.1937  <strong>0.0000</strong>  0.1636   <strong>0.0072</strong>   1.5170   V   BUF   BUF=inst2/Y</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398081"></a>0.0168&#160;&#160;<strong>0.0016</strong>  0.1952  <strong>0.0010</strong>  0.0329   <strong>0.0078</strong>   1.5473   V   NAND  NAND_instl/B</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398082"></a>0.0007&#160;&#160;<strong>0.0000</strong>  0.0462  <strong>0.0000</strong>  0.0595   <strong>0.0078</strong>   1.5857   ^   NAND  NAND_instl/Y</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398083"></a>0.0001&#160;&#160;<strong>0.0000</strong>  0.0462  <strong>0.0002</strong>  0.0005   <strong>0.0079</strong>   1.5858   ^   INV   INV_inst2/A</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398084"></a>0.0129&#160;&#160;<strong>0.0000</strong>  0.0640  <strong>0.0000</strong>  0.0374   <strong>0.0079</strong>   1.6152   V   INV   INV-inst2/Y</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398085"></a>0.0129&#160;&#160;<strong>0.0005</strong>  0.0773  <strong>0.0007</strong>  0.0185   <strong>0.0081</strong>   1.6317   V   A0I   ADI_instl/Dl</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398086"></a>0.0011&#160;&#160;<strong>0.0000</strong>  0.1029  <strong>0.0000</strong>  0.0830   <strong>0.0081</strong>   1.6983   ^   A0I   ADI_instl/Y</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398087"></a>0.0011&#160;&#160;<strong>0.0004</strong>  0.1030  <strong>0.0004</strong>  0.0056   <strong>0.0082</strong>   1.7028   ^   AND   AND_instl/A</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398088"></a>0.0013&#160;&#160;<strong>0.0000</strong>  0.0207  <strong>0.0000</strong>  0.0454   <strong>0.0082</strong>   1.7363   ^   AND   AND_instl/Y</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2398089"></a>0.0013&#160;&#160;<strong>0.0002</strong>  0.0209  <strong>0.0002</strong>  0.0013   <strong>0.0082</strong>   1.7370   ^   FF    FF2/D0</pre>
+
+<p>
+<a id="pgfId-2397909"></a></p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2404914"></a>(skipped)</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2404915"></a>---------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2404916"></a>Net Sigma Calculation&#160;&#160; Rise&#160;&#160;      Delay Sigma   Slew Sigma</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2405866"></a>---------------------------------------------------------------------------------</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2404918"></a>Via variation&#160;&#160;        (3-sigma)    0.00010 ns                                   </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2404919"></a>Layer Ml -C&#160;&#160;          (3-sigma)    0.00000 ns    0.00000 ns</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2404920"></a>Layer Ml -R&#160;&#160;          (3-sigma)    0.00000 ns    0.00000 ns</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2404921"></a>Layer M2 -C&#160;&#160;          (3-sigma)    0.00014 ns    0.00015 ns</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2404922"></a>Layer M2 R&#160;&#160;           (3-sigma)    0.00000 ns    0.00000 ns</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2404923"></a>Layer M3 C&#160;&#160;           (3-sigma)    0.00057 ns    0.00024 ns</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2404924"></a>Layer M3 -R&#160;&#160;          (3-sigma)    0.00000 ns    0.00000 ns</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2404925"></a>Layer M4 -C&#160;&#160;          (3-sigma)    0.00038 ns    0.00025 ns</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2404926"></a>Layer M4 -R&#160;&#160;          (3-sigma)    0.00000 ns    0.00000 ns</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2404927"></a>Layer MS - C&#160;&#160;         (3-sigma)    0.00063 ns    0.00067 ns</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2404928"></a>Layer MS -R&#160;&#160;          (3-sigma)    0.00014 ns    0.00002 ns</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2404929"></a>Layer M6 - C&#160;&#160;         (3-sigma)    0.00035 ns    0.00083 ns</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2404930"></a>Layer M6 -R&#160;&#160;          (3-sigma)    0.00014 ns    0.00002 ns</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2404931"></a>Layer M7 - C&#160;&#160;         (3-sigma)    0.00072 ns    0.00059 ns</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2404932"></a>Layer M7 -R&#160;&#160;          (3-sigma)    0.00004 ns    0.00000 ns</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2404933"></a>Layer MB - C&#160;&#160;         (3-sigma)    0.00012 ns    0.00030 ns</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2404934"></a>Layer MB -R&#160;&#160;          (3-sigma)    0.00003 ns    0.00000 ns</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2404935"></a>Layer M9 - C&#160;&#160;         (3-sigma)    0.00236 ns    0.00501 ns</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2397913"></a>Layer M9 R&#160;&#160;           (3-sigma)    0.00038 ns    0.00004 ns</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2404965"></a>Total Net Variation&#160;&#160;  (3-sigma)    0.00270 ns    0.00504 ns</pre>
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_binomialwirevariation.html" id="prev" title="Binomial Wire Variation Analysis">Binomial Wire Variation Analys ...</a></em></b><b><em><a href="cmmmc.html" id="nex" title="Concurrent Multi-Mode Multi-Corner Timing Analysis">Concurrent Multi-Mode Multi-Co ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

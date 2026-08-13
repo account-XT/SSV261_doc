@@ -1,0 +1,244 @@
+
+<html><head><title>Querying Context Data on Ports</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823928" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Querying Context Data on Ports" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823928" />
+<meta name="NextFile" content="analysisandreporting_contextclockmappingreport.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_glitchanalysiscontext.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Querying Context Data on Ports" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Analysis,Stylus" />
+<meta name="prod_subfeature" content="Timing Analysis" />
+<meta name="new_topic" content="Yes" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_glitchanalysiscontext.html" title="Glitch Analysis with Timing Context">Glitch Analysis with Timing Co ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_contextclockmappingreport.html" title="Generating Context Clock Mapping Report">Generating Context Clock Mappi ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:contextdataports" title="Querying Context Data on Ports"></a><h3>
+<a id="pgfId-2945241"></a>Querying Context Data on Ports<a id="62195"></a></h3>
+
+<p>
+<a id="pgfId-2945242"></a>Tempus supports querying context information on a port using the <code>c</code>ontext_data object. The <code>context_data</code> object can be used to fetch properties like mapped top and block clocks. This is supported only with port-based clock mapping enabled, when <code><a actuate="user" class="URL" href="../tempustxtcmdref/timing_context_port_based_clock_mapping.html" show="replace" xml:link="simple">timing_context_port_based_clock_mapping</a> </code>is set to <code>true</code>). </p>
+<p>
+<a id="pgfId-2945244"></a>The below steps can be used to query context properties using the <code><a actuate="user" class="URL" href="../tempustxtcmdref/get_property.html" show="replace" xml:link="simple">get_property</a></code> context_data object:</p>
+<p>
+<a id="pgfId-2945264"></a><strong>Step 1</strong>: Create a collection of <code>context_data</code> objects for the specified port. The <code>context_data</code> object can be used for a single port only. An error will be issued if multiple ports are specified.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945266"></a>set CD [get_property [get_ports A] context_data]</pre>
+
+<p>
+<a id="pgfId-2945268"></a>The above command will return a collection of context data objects for the default view, each corresponding to a top level instance and top view. If there are 3 top instances (h1, h2, h3), and 3 top views (tv1, tv2, tv3), then the size of a context_data collection will be shown as 9.</p>
+<p>
+<a id="pgfId-2945270"></a><strong>Step 2</strong>: Query different properties on the above created collection of context_data objects. The following properties are supported with the context_data object:</p>
+
+<p>
+<a id="pgfId-2946541"></a></p>
+<table class="webflareTable" id="#id2946637">
+<tbody><tr>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2946710">
+<a id="pgfId-2946710"></a>Property</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2946712">
+<a id="pgfId-2946712"></a>Command</span>
+</th>
+<th class="webflareTh" colspan="1" rowspan="1">
+<span class="tbl-head" id="#id2946714">
+<a id="pgfId-2946714"></a>Output</span>
+</th>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946645"></a><code>top_instance</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946647"></a><code>get_property $CD top_instance</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946649"></a>Returns all the top instances.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946651"></a><code>top_view</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946653"></a><code>get_property $CD top_view</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946655"></a>Returns all the top views.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946657"></a><code>mapped_top_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946659"></a><code>get_property $CD mapped_top_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946661"></a>Returns all the mapped top clocks.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946663"></a><code>unmapped_top_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946665"></a><code>get_property $CD unmapped_top_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946667"></a>Returns all the unmapped top clocks.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946669"></a><code>all_top_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946671"></a><code>get_property $CD all_top_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946673"></a>Returns all the top clocks.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946675"></a><code>mapped_block_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946677"></a><code>get_property $CD mapped_block_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946679"></a>Returns all the mapped block clocks.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946681"></a><code>unmapped_block_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946683"></a><code>get_property $CD unmapped_block_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946685"></a>Returns all the unmapped block clocks.</p>
+</td>
+</tr>
+<tr>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946687"></a><code>all_block_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946689"></a><code>get_property $CD all_block_clocks</code></p>
+</td>
+<td class="webflareTd" colspan="1" rowspan="1">
+<p>
+<a id="pgfId-2946691"></a>Returns all the block clocks.</p>
+</td>
+</tr>
+</tbody></table>
+
+<p>
+<a id="pgfId-2945362"></a>To report properties for a particular view, the <code><a actuate="user" class="URL" href="../tempustxtcmdref/filter_collection.html" show="replace" xml:link="simple">filter_collection</a></code> command can be used.</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945364"></a>get_property [filter_collection $CD top_view==&quot;tv1&quot;] mapped_top_clocks</pre>
+
+<p>
+<a id="pgfId-2945366"></a>This command will return the top clocks for all the instances of top view <code>tv1</code>.</p>
+<p>
+<a id="pgfId-2945368"></a>Similarly, to report properties for a particular view and particular instance, you can use the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945370"></a>get_property [filter_collection $CD top_view==&quot;view1&quot; &amp;&amp; top_instance==&quot;h1&quot;] mapped_top_clocks</pre>
+
+<p>
+<a id="pgfId-2945372"></a>This command will return the top clocks for top view tv1 and instance h1.</p>
+<p>
+<a id="pgfId-2945374"></a>If you want to report the top clocks that are mapped to a particular block clock only, then you can use the <code>get_property -clock</code> parameter, as shown below:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945376"></a>get_property [filter_collection $CD top_view==&quot;view1&quot; &amp;&amp; top_instance==&quot;h1&quot;] mapped_top_clocks -clock bc1</pre>
+
+<p>
+<a id="pgfId-2945396"></a>This command will return the top clocks for view<code> tv1</code> and instance <code>h1</code>, that are mapped to the block clock <code>bc1</code>. The <code>context_data</code> object can be generated for one block view only, either the one passed using the <code>-view</code> parameter or the default one used by the <code><a actuate="user" class="URL" href="../tempustxtcmdref/get_property.html" show="replace" xml:link="simple">get_property</a></code> command. If the properties of <code>context_data</code> are fetched for a different view, an error will be issued as shown below: </p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945400"></a>set CD [get_property [get_ports A] context_data] -view view1 get_property $CD top_view -view view2</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2945402"></a>=&gt; ERROR: Context data is not generated for block view &#39;view2&#39;</pre>
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_glitchanalysiscontext.html" id="prev" title="Glitch Analysis with Timing Context">Glitch Analysis with Timing Co ...</a></em></b><b><em><a href="analysisandreporting_contextclockmappingreport.html" id="nex" title="Generating Context Clock Mapping Report">Generating Context Clock Mappi ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

@@ -1,0 +1,168 @@
+
+<html><head><title>MIS Delta Delay Reporting</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823919" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="MIS Delta Delay Reporting" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823919" />
+<meta name="NextFile" content="analysisandreporting_misspice.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_misandssi.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- MIS Delta Delay Reporting" />
+<meta name="Keywords" content="Multiple input switching,simulation-based delay calculation for MIS" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Analysis,Delay Calculation" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_misandssi.html" title="MIS and SSI Analysis">MIS and SSI Analysis</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_misspice.html" title="Spice Validation Support and Results">Spice Validation Support and R ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:misdeltadelay" title="MIS Delta Delay Reporting"></a><h3>
+<a id="pgfId-2082812"></a><a id="10794"></a>MIS Delta Delay Reporting</h3>
+
+<p>
+<a id="pgfId-2082813"></a>Tempus performs simulation-based delay calculation for MIS. Multiple input switching is modeled by presenting switching inputs with equivalent current sources. Due to the nature of analysis, Tempus does not have delays without MIS impact, and thus, cannot determine MIS delta delay.</p>
+<p>
+<a id="pgfId-2082823"></a>You can report MIS delta delay in timing reports (<a href="../tempustxtcmdref/report_timing.html">report_timing</a> command) using one of the following commands:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2082826"></a>set <a href="../tempustxtcmdref/report_timing_format.html">report_timing_format</a> {retime}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2082829"></a><a href="../tempustxtcmdref/report_timing.html">report_timing</a> -format {retime_mis_delta}</pre>
+<p class="webflare-indent1"><strong>Figure -111
+<a id="pgfId-2082830"></a>MIS delta delay report</strong></p>
+<p>
+<a id="pgfId-2082834"></a></p>
+<div class="webflare-div-image">
+<img width="666" height="462" src="images/analysisandreporting-133.gif" /></div>
+
+<p>
+<a id="pgfId-2082835"></a>You can query on retime MIS delta delay using the <code>retime_mis_delta</code> property on timing point object of PBA path. </p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2082836"></a>set path_col [report_timing -early -net -collection -retime path_slew_propagation &#8230;]</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2082837"></a>foreach_in_collection each_tp [get_property $path_col timing_points] {</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2082838"></a>  puts &quot;[get_property $each_tp hierarchical_name] \</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2082839"></a>        [get_property $each_tp retime_mis_delta]&quot;</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2082840"></a>}</pre>
+
+<p>
+<a id="pgfId-2082841"></a>Output</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2082842"></a>  ...</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2082843"></a>  i5/B2 0.000000</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2082844"></a>  i5/ZN -0.024800</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2082845"></a>  i6/C 0.0000000</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2082846"></a>  i6/ZN 0.012600</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2082847"></a>  ...</pre>
+<h4>
+<a id="pgfId-3054499"></a>Script to Run Tempus with MIS </h4>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054500"></a>A sample script to run Tempus with MIS is given below.</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054501"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054502"></a><strong>#Design Import&#160;&#160;</strong></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054503"></a>read_view_definition viewDef.tcl</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054504"></a>read_verilog netlist.v</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054505"></a>set_top_module top </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054506"></a>read_spef -rc_corner RC_worst design.spef </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054507"></a>report_annotated_parasitics</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054508"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054509"></a>#Accuracy Settings</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054510"></a>set_delay_cal_mode -accuracy_level 3</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054511"></a>set_delay_cal_mode -ewm_type simulation -equivalent_waveform_model propagation</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054512"></a>set_delay_cal_mode -advanced_pincap_mode 2</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054513"></a>set_global report_precision 6</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054514"></a>set_global report_timing_format {hpin cell arc fanout load slew delay}</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054515"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054516"></a>#Enable and Configure MIS</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054517"></a>set_analysis_mode -multi_input_switching_mode 2</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054518"></a>set_multi_input_switching_mode -mis_alignment_mode 1</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054519"></a>set_multi_input_switching_mode -disable_lib_cells {&#8230;.}&#160;&#160;              #optional</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054520"></a>set_multi_input_switching_mode -switching_alignment_factor &lt;value&gt;&#160;&#160;  #optional   </pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054521"></a></pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054522"></a>#Perform Timing Analysis</pre>
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3054523"></a>update_timing -full</pre>
+
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-2082873"></a>There is no change in reports when MIS is enabled.</div>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_misandssi.html" id="prev" title="MIS and SSI Analysis">MIS and SSI Analysis</a></em></b><b><em><a href="analysisandreporting_misspice.html" id="nex" title="Spice Validation Support and Results">Spice Validation Support and R ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

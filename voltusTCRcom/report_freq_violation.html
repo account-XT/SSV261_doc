@@ -1,0 +1,353 @@
+
+<html><head><title>report_freq_violation</title>
+<meta name="page_sequence" content="30003000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666324" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="report_freq_violation" />
+<meta name="Keywords" content="violations,frequency,electromigration,Liberty" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Signal ElectroMigration," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusTCRcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666324" />
+<meta name="NextFile" content="set_max_cap_per_freq.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="create_top_scope.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Text Reference Manual  -- report_freq_violation" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltuscuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusTCRcomTOC.html">Contents</a></li><li><a class="prev" href="create_top_scope.html" title="create_top_scope">create_top_scope</a></li><li style="float: right;"><a class="viewPrint" href="voltusTCRcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_max_cap_per_freq.html" title="set_max_cap_per_freq">set_max_cap_per_freq</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Text Reference Manual <br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>report_freq_violation</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span id="report_freq_violation-report_freq_violation"></span><span class="confluence-anchor-link" id="report_freq_violation-report_freq_violation"></span>&#xa0;<code>report_freq_violation</code><br /><code>[-help]</code><br /><code>[-detailed]&#xa0;</code><br /><code>[-em_table_scale <em>float</em>]</code><br /><code>[-exclude_insts_file <em>string</em>]</code><br /><code>[-include_insts_file <em>string</em>]</code><br /><code>[-out_file <em>string</em>]</code><br /><code>[-report_format <em>integer</em>]</code><br /><code>[-sort {name | freq | mindiff | maxdiff | minfreq | maxfreq}]</code><br /><code>[-transition {min | max}]&#xa0;</code><br /><code>[-view &lt;string&gt;]<br /><code>[<code>-em_type {avg peak rms all}</code>]</code><br /></code></p>
+
+<p>Runs electromigration (EM) analysis based on the frequency table defined in the Liberty library, and generates a frequency violation report.</p>
+
+<p>The&#xa0;<code>report_freq_violation</code>&#xa0;command uses default activity (1.0 or 100% activity on data network and 200% on clock network) or user-defined activity (TCF/VCD) to compute effective frequency on each instance pin. It then determines frequency violation at the output pin from the electromigration templates defined in Liberty, as shown in the following figure:</p>
+
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732480777/732480778.png" data-linked-resource-container-id="732480777" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="signalelectromigrationT.10.1.1.png" data-linked-resource-id="732480778" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="250" src="attachments/732480777/732480778.png" tabindex="0" /></span></p>
+
+<p>The frequency limit on the output pin is derived based on the slew on the related input pin and output load.</p>
+
+<p>The activity for the design can be specified as follows:</p>
+<ul><li><code><span class="confluence-link">set_default_switching_activity</span></code></li></ul><ul><li><code><span class="confluence-link">propagate_activity</span></code></li></ul><ul><li><code><span class="confluence-link">write_tcf</span></code></li></ul><ul><li><code><span class="confluence-link">read_activity_file</span>&#xa0;-format TCF -set_net_freq true &lt;TCF file&gt;</code></li></ul><h4 id="report_freq_violation-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="2">
+<p>Outputs a brief description that includes type and default information for each <code>report_freq_violaltion</code> parameter.</p>
+
+<p>For a detailed description of the command and all of its parameters, use the man command: <br /><code>man report_freq_violation</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-detailed</code></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Generates a detailed report containing information for all instances, including those without violations.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-em_table_scale <em>float</em></span></code></td>
+<td class="confluenceTd" colspan="2">
+<p>Scale factor for EM table value.</p>
+
+<p><em>Default</em>: 1.0</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><code>-em_type {avg peak rms all}</code></code></td>
+<td class="confluenceTd" colspan="2"><br /></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><br /></td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies to report frequency violations for the rms/peak/avg current waveform in the frequency violation report. When this parameter is specified, the software reads the <code>em_max_toggle_rate</code> table in the Liberty library for the specified EM current type (rms/peak/avg).</p>
+
+<p>You can specify <code>all</code> to perform all three types of analyses.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code><span>-exclude_insts_file <em>string</em></span></code></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies a file that lists the names of instances to exclude from the frequency violation report.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-include_insts_file <em>string</em></span></code></td>
+<td class="confluenceTd" colspan="2"><span><span>Specifies the s</span>elected instance file name.</span></td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-out_file </code><code><em>string</em></code></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies the report file (default: <code>freqViolations.rpt</code>) for the violation data.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="3">
+<p><br /></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-report_format </code><code><em>integer</em></code></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies a format of the violation report. The report details vary according to the selected report format. You can specify report formats 0, 1, or 2. <br /><em>Default</em>: 0</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-sort</code><span> {</span><code>name</code><code>&#xa0;</code><span>| </span><code>freq</code><span>&#xa0;| </span><code>minDiff</code><span>&#xa0;| </span><code>maxDiff</code><span>&#xa0;| </span><code>minFreq</code><span> | </span><code>maxFreq</code><span>}</span></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Sorts the instance-based frequency data by <code>name</code>, <code>freq</code>, <code>minDiff</code>, <code>maxDiff</code>, <code>minFreq</code>, and <code>maxFreq</code>. By default, the violation report is not sorted.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>&#xa0;</code><code>&#xa0;</code></p>
+</td>
+<td class="confluenceTd">
+<p><code>name</code></p>
+</td>
+<td class="confluenceTd">
+<p>Name of a pin or arc.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>freq</code></p>
+</td>
+<td class="confluenceTd">
+<p>Frequency value of a pin or arc.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>min_freq</code></p>
+</td>
+<td class="confluenceTd">
+<p>Minimum frequency value of a pin or arc as defined in the frequency table.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>max_freq</code></p>
+</td>
+<td class="confluenceTd">
+<p>Maximum frequency value of a pin or arc as defined in the frequency table.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>&#xa0;</code><code>&#xa0;</code></p>
+</td>
+<td class="confluenceTd">
+<p><code>min_diff</code></p>
+</td>
+<td class="confluenceTd">
+<p>Difference between <code>freq</code> and <code>minFreq</code> of a pin or arc.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>max_diff</code></p>
+</td>
+<td class="confluenceTd">
+<p>Difference between <code>freq</code> and <code>minFreq</code> of a pin or arc.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><span style="font-family: monospace;">-transition {min | max}</span></td>
+<td class="confluenceTd" colspan="2">
+<p>Specify the slew used for the report.</p>
+
+<p><em>Default: </em><code>min</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-view </code><code><em>string</em></code></p>
+</td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies the view for which to generate the frequency violation report. Use this parameter when working with multi-mode multi-corner (MMMC) designs.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="report_freq_violation-Example">Example</h4>
+
+<p>The following command reports instances that violate frequency constraints and lists them in the&#xa0;<code>freqViol.rpt</code>&#xa0;report file:</p>
+
+<p><code>report_freq_violation -out_file freqViol.rpt</code></p>
+<h4 id="report_freq_violation-InstanceFileFormat">Instance File Format</h4>
+
+<p>The instance file is a text file that contains a list of instances. Each instance name appears in one line in the file. The comments begin with &quot;<code>#</code>&quot;. Leading or ending spaces in instance names are ignored.</p>
+<h4 id="report_freq_violation-ReportFormat">Report Format</h4>
+
+<p>The report formats are described below.</p>
+<h4 id="report_freq_violation-Format0"><em>Format 0</em></h4>
+
+<p>The following command generates a report providing details of&#xa0;<code>minFreq</code>,&#xa0;<code>Freq</code>,&#xa0;<code>Tran</code>,&#xa0;<code>Cap</code>,&#xa0;<code>Remark</code>, and&#xa0;<code>Arc/Pin</code>&#xa0;and directs the output to report file&#xa0;<code>summaryViol.rpt</code>:</p>
+
+<p><code>report_freq_violation -out_file summaryViol.rpt -report_format 0</code></p>
+
+<p>For example,</p>
+
+<p><code>minFreq&#xa0;&#xa0;&#xa0;&#xa0;Freq&#xa0;&#xa0;&#xa0;&#xa0;Tran&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Cap&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Remark&#xa0;&#xa0;&#xa0;&#xa0;Arc/Pin<br /></code><code>5.985&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;1.009&#xa0;&#xa0;&#xa0;0.0356&#xa0;&#xa0;&#xa0;0.003103&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;tt0/data/r3/add_27/U1_1_6/Y</code></p>
+<h4 id="report_freq_violation-Format1"><em>Format 1</em></h4>
+
+<p>When&#xa0;<code>reportFreqViolation</code>&#xa0;<code>-report_format</code>&#xa0;is set to&#xa0;<code>1</code>, the report provides details as shown in the following example:</p>
+
+<p><code>Status&#xa0;&#xa0;&#xa0;Remark&#xa0;&#xa0;&#xa0;freq&#xa0;&#xa0;&#xa0;minFreq&#xa0;&#xa0;&#xa0;maxFreq&#xa0;&#xa0;&#xa0;Arc/Pin<br /></code><code>[P]&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;*&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;1.009&#xa0;&#xa0;5.985&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;5.995&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;tt0/data/r3/add_27/U1_1_6/Y</code></p>
+<h4 id="report_freq_violation-Format2"><em>Format 2</em></h4>
+
+<p>A detailed report is generated when&#xa0;<code>reportFreqViolation</code>&#xa0;<code>-report_format</code>&#xa0;is set to&#xa0;<code>2</code>, as shown in the following example:</p>
+
+<p><code>Status&#xa0;&#xa0;Remark&#xa0;&#xa0;freq&#xa0;&#xa0;&#xa0;minFreq&#xa0;&#xa0;maxFreq&#xa0;&#xa0;&#xa0;&#xa0;minTran&#xa0;&#xa0;&#xa0;&#xa0;maxTran&#xa0;&#xa0;&#xa0;&#xa0;minCap&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;max_cap&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;Arc/Pin<br /></code><code>[P]&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;*&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;1.009&#xa0;&#xa0;5.985&#xa0;&#xa0;&#xa0;&#xa0;5.995&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;3.560e-02&#xa0;&#xa0;3.790e-02&#xa0;&#xa0;3.103e-03<br />3.103e-03&#xa0;&#xa0;tt0/data/r3/add_27/U1_1_6/Y</code></p>
+
+<p>Where:</p>
+
+<p><br /></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><tbody><tr><td class="confluenceTd">
+<p><code>Status</code></p>
+</td>
+<td class="confluenceTd">
+<p>Arc or pin status - <code>F</code> (fail), <code>V</code> (violation), <code>P</code> (pass), or <code>?</code> (unknown).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>Remark</code></p>
+</td>
+<td class="confluenceTd">
+<p>Indicates whether the pin is a clock.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>freq</code></p>
+</td>
+<td class="confluenceTd">
+<p>Working frequency of the arc or pin.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>minFreq</code></p>
+</td>
+<td class="confluenceTd">
+<p>Minimum frequency value taken from the frequency table.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>maxFreq</code></p>
+</td>
+<td class="confluenceTd">
+<p>Maximum frequency value taken from the frequency table.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>minTran</code></p>
+</td>
+<td class="confluenceTd">
+<p>Minimum slew value.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>maxTran</code></p>
+</td>
+<td class="confluenceTd">
+<p>Maximum slew value.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>minCap</code></p>
+</td>
+<td class="confluenceTd">
+<p>Minimum capacitance load.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>maxCap</code></p>
+</td>
+<td class="confluenceTd">
+<p>Maximum capacitance load.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>Arc/Pin</code></p>
+</td>
+<td class="confluenceTd">
+<p>Name of the arc or pin.</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="create_top_scope.html" id="prev" title="create_top_scope">create_top_scope</a></em></b><b><em><a href="set_max_cap_per_freq.html" id="nex" title="set_max_cap_per_freq">set_max_cap_per_freq</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

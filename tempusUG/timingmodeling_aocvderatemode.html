@@ -1,0 +1,118 @@
+
+<html><head><title>AOCV Derating Mode</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823951" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="AOCV Derating Mode" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823951" />
+<meta name="NextFile" content="timingmodeling_pgpinmodeling.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="timingmodeling_stageweightmodeling.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- AOCV Derating Mode" />
+<meta name="Keywords" content="AOCV Derating Mode" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Modeling,Stylus" />
+<meta name="prod_subfeature" content="Timing Modeling" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="timingmodeling_stageweightmodeling.html" title="Stage Weight Modeling in ETM">Stage Weight Modeling in ETM</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="timingmodeling_pgpinmodeling.html" title="PG Pin Modeling During Extraction">PG Pin Modeling During Extract ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:aocvderatemode" title="AOCV Derating Mode"></a><h3>
+<a id="pgfId-1018212"></a><a id="66139"></a>AOCV D<a id="AOCVDeratingMode"></a>erating Mode</h3>
+
+<p>
+<a id="pgfId-1018213"></a>The AOCV derating mode can be specified as path-based, graph-based, or none using the following setting:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-1018214"></a>set <a href="../tempustxtcmdref/timing_extract_model_aocv_mode.html">timing_extract_model_aocv_mode</a> {graph_based | path_based | none}</pre>
+
+<p>
+<a id="pgfId-1018216"></a>The global values are explained below:</p>
+<ul><li>
+<a id="pgfId-1018217"></a><code>graph_based</code>: Delays in ETM are derated using the graph-based stage counts.</li><li>
+<a id="pgfId-1018218"></a><code>path_based</code>: Delay in ETM are derated using total path stage count of worst path between those pin pairs.</li><li>
+<a id="pgfId-1018219"></a><code>none</code>: Models derated delays that contain the effect of user-derate but does not contain effect of AOCV derates. The default is set to <code>none</code>.</li></ul>
+
+
+<p>
+<a id="pgfId-1018220"></a>Before setting this global variable to <code>graph_based</code> or <code>path_based</code>, it is mandatory that the AOCV libraries are read in and AOCV analysis is enabled (using the <a href="../tempustxtcmdref/set_analysis_mode.html">set_analysis_mode</a> <code>-aocv</code> <code>true</code> setting).</p>
+
+<h4>
+<a id="pgfId-1018221"></a>Merging Model with stage_weight Attribute</h4>
+
+<p>
+<a id="pgfId-1018222"></a>The merged timing model contains minimum stage_weight defined between various input library files, hence the merged timing model is pessimistic.</p>
+
+<h4>
+<a id="pgfId-1018223"></a>Points to be Considered for AOCV-ETM Flow</h4>
+
+<p>
+<a id="pgfId-1018224"></a>The following points need to be considered for a block-level AOCV run:</p>
+<ol><li>
+<a id="pgfId-1018225"></a>If analysis of a block is performed in the standalone mode, then you need to specify the stage weight seen at the port(s). The applied stage weight affects the internal weight count of the block for the IO paths. If these weights are not applied, the pessimistic analysis will be done for the interfacing paths of the block (when block is top). Hence the ETMs will also have pessimistic numbers for such paths.</li><li>
+<a id="pgfId-1018226"></a>The same ETM may not be used for multiple instantiation at the top level, due to the following reasons:<ul><li>
+<a id="pgfId-1018227"></a>Different stage counts at the ports (as seen from the top) is possible.</li><li>
+<a id="pgfId-1018228"></a>Different critical paths between the ports for different instances is possible.</li></ul><br />
+<a id="pgfId-1018229"></a>You can use ETM with most conservative stage count for all the instances, but this will lead to pessimistic analysis.</li><li>
+<a id="pgfId-1018230"></a>The ETMs are written taking AOCV derates into account. At the top level, you need to have two types of AOCV derate tables:<ul><li>
+<a id="pgfId-1018231"></a>Cell level AOCV tables</li><li>
+<a id="pgfId-1018232"></a>Design level AOCV tables for net</li></ul></li><li>
+<a id="pgfId-1018233"></a>While loading ETM for model validation the AOCV derates are already modeled in the ETM. In this case, you should turn off AOCV analysis mode.</li></ol>
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-1018234"></a>If design level cell AOCV derates are used at the top level, then the block delays (as seen from the top) will have the AOCV effect twice - once during model extraction at the block level and second at the top level from design level cell AOCV tables. In case design level AOCV tables are being passed with ETM at the top level, then you should provide a cell level table for ETM with derating as 1 for all the possible stage counts and/or distance.</p>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="timingmodeling_stageweightmodeling.html" id="prev" title="Stage Weight Modeling in ETM">Stage Weight Modeling in ETM</a></em></b><b><em><a href="timingmodeling_pgpinmodeling.html" id="nex" title="PG Pin Modeling During Extraction">PG Pin Modeling During Extract ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

@@ -1,0 +1,196 @@
+
+<html><head><title>Static and Dynamic Power Analysis</title>
+<meta name="page_sequence" content="15000000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="anshikag" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666044" />
+<meta name="DataType" content="Release information" />
+<meta name="Description" content="Describes all the new features of Voltus IC Power Integrity Solution 26.1." />
+<meta name="DocTitle" content="What&#39;s New in Voltus Stylus Common UI" />
+<meta name="DocType" content="Release Note" />
+<meta name="FileTitle" content="Static and Dynamic Power Analysis" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="general" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis,Stylus," />
+<meta name="prod_subfeature" content="Static/Dynamic Power Analysis," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666044" />
+<meta name="NextFile" content="Rail_Analysis.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Library_Generation_and_Extraction.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="What&#39;s New in Voltus Stylus Common UI -- Static and Dynamic Power Analysis" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="epsWN261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusCUITOC.html">Contents</a></li><li><a class="prev" href="Library_Generation_and_Extraction.html" title="Library_Generation_and_Extraction">Library_Generation_and_Extract ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Rail_Analysis.html" title="Rail_Analysis">Rail_Analysis</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>What&#39;s New in Voltus Stylus Common UI<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <div style="width: 100%; font-size: 32px; text-align: left;               font-weight: bold;">4</div>
+<h1 style="margin: 4px 0 4px;"><span>Static and Dynamic Power Analysis</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p></p>
+<div class="toc-macro rbtoc1775666033164">
+<ul class="toc-indentation">
+<li><a href="#StaticandDynamicPowerAnalysis-Release26.10Enhancements">Release 26.10 Enhancements</a>
+<ul class="toc-indentation">
+<li><a href="#StaticandDynamicPowerAnalysis-PartitionSPEFSupport.1">Partition SPEF Support</a></li>
+<li><a href="#StaticandDynamicPowerAnalysis-DefaultChangeforUnifiedPowerSwitchFlowinXPFlow.1">Default Change for Unified Power Switch Flow in XP Flow</a></li>
+<li><a href="#StaticandDynamicPowerAnalysis-EnhancedSupportforLogicalHierarchyandDomain-BasedActivities.1">Enhanced Support for Logical Hierarchy and Domain-Based Activities</a></li>
+<li><a href="#StaticandDynamicPowerAnalysis-SupportAddedforIgnoringUnconstrainedNetsandPinswithValidTimingData.1">Support Added for Ignoring Unconstrained Nets and Pins with Valid Timing Data</a></li>
+<li><a href="#StaticandDynamicPowerAnalysis-ScalingCapacitancebySlewRatio.1">Scaling Capacitance by Slew Ratio</a></li>
+<li><a href="#StaticandDynamicPowerAnalysis-NewAttributetoForcePropagation">New Attribute to Force Propagation</a></li>
+<li><a href="#StaticandDynamicPowerAnalysis-off_pg_netsParameterEnhancedtoSupportReportingofBulkPinLeakage.1">off_pg_nets Parameter Enhanced to Support Reporting of Bulk Pin Leakage</a></li>
+<li><a href="#StaticandDynamicPowerAnalysis-SupportAddedforIgnoringUnconstrainedNetsandPinswithValidTimingData.2">Support Added for Ignoring Unconstrained Nets and Pins with Valid Timing Data</a></li>
+<li><a href="#StaticandDynamicPowerAnalysis-CustomOutputDirectoryforThermalResults.1">Custom Output Directory for Thermal Results</a></li>
+<li><a href="#StaticandDynamicPowerAnalysis-Instance-BasedFITReportingwithNewParameters.1">Instance-Based FIT Reporting with New Parameters</a></li>
+<li><a href="#StaticandDynamicPowerAnalysis-NewAttributetoViewCellUsageStatistics">New Attribute to View Cell Usage Statistics</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="StaticandDynamicPowerAnalysis-Release26.10Enhancements">Release 26.10 Enhancements</h2>
+
+<p><br /></p>
+
+<p><span class="fontredcadence"><div class="content-wrapper"><h3 id="StaticandDynamicPowerAnalysis-PartitionSPEFSupport.1">Partition SPEF Support</h3>
+
+<p>The<span> <code>power_</code></span><code>partition_spef</code> attribute has been introduced to generate block-level SPEF files from a flat SPEF file. This enhancement allows you to process input SPEF data and automatically generate partition-level SPEF chunks. The <code>power_partition_spef</code> attribute is supported only in the extensively parallel (XP) mode for full-chip designs using flat SPEF files.</p>
+
+<p>The use model of this feature is:</p>
+
+<p><code>set_power_spef_files { flat.spef.gz } &#xa0;</code><br /><code>set_db power_partition_spef true</code></p>
+<h3 id="StaticandDynamicPowerAnalysis-DefaultChangeforUnifiedPowerSwitchFlowinXPFlow.1">Default Change for Unified Power Switch Flow in XP Flow</h3>
+
+<p>The default value for the <code>power_unified_power_switch_flow</code> attribute has been changed to true in the XP flow.</p>
+
+<p>This change aligns the default behavior with the existing rail analysis parameter, <code>set_rail_analysis_config </code><code>-unified_power_switch_flow</code>, which is already set to <code>true</code> by default in the XP flow, ensuring consistency across both power and rail analysis modes. Due to this default behavior change, you may observe differences in power and current analysis results compared to previous versions. If you need to maintain the previous behavior, explicitly set the <code>power_</code><code>unified_power_switch_flow</code> <code>false</code> attribute in your scripts.</p>
+<h3 id="StaticandDynamicPowerAnalysis-EnhancedSupportforLogicalHierarchyandDomain-BasedActivities.1">Enhanced Support for Logical Hierarchy and Domain-Based Activities</h3>
+
+<p>Voltus has been enhanced to support multiple activities per block. Previously, the tool honored only a single activity for each block. With this enhancement, you can now define different switching activities for different domains and/or logical hierarchies within the same DEF block during stable flop scheduling.</p>
+
+<p>To enable this functionality, the following options have been introduced:</p>
+<ul><li><code><a href="../voltusTCRcom/set_default_switching_activity.html">set_default_switching_activity </a>-pg_net &lt;<em>netname</em>&gt;</code> - Specifies the name of the power net for domain-based switching activity assignment.</li><li><code>power_honor_default_switching_activity_in_scheduling {true|false} </code>-&#xa0; Controls whether default switching activity settings are applied during hierarchy/domain-based scheduling.</li></ul>
+<p>This feature improves accuracy for complex hierarchical designs with varying switching characteristics and optimizes flop scheduling based on realistic switching activity patterns.</p>
+
+<p><strong>Example</strong>:</p>
+
+<p>Following is an example of domain-based activity specification in the dynamic vectorless flow:<br /><code>set_default_switching_activity -sequential_activity 0.7 -input_activity 0.7 macro_activity 0.5 -clock_gates_output 2 &#8211;pg_net VDDM</code></p>
+<h3 id="StaticandDynamicPowerAnalysis-SupportAddedforIgnoringUnconstrainedNetsandPinswithValidTimingData.1">Support Added for Ignoring Unconstrained Nets and Pins with Valid Timing Data</h3>
+
+<p>Some nets/pins lack timing constraints (no associated clock) but contain valid timing data with arrival windows in the TWF file. Previously, the tool applied default frequency toggles to these unconstrained nets, which could cause false IR violation warnings due to high voltage drop.</p>
+
+<p>You can now use the <code>power_ignore_unconstraint_net_with_timing_data</code> <code>true</code> attribute to exclude unconstrained nets from toggle generation. This enhancement eliminates false IR violation reports and provides better control over toggle generation.</p>
+<h3 id="StaticandDynamicPowerAnalysis-ScalingCapacitancebySlewRatio.1"><span>Scaling Capacitance by Slew Ratio</span></h3>
+</div>
+
+<p>When using the lumped capacitor model, long net lines may cause reduction of effective capacitance (Ceff) due to high resistance shielding and low slew ratio. This can lead to overly optimistic delay estimate during Liberty lookups of lower load.</p>
+
+<p>In this release, the following attributes have been added to the <code><a href="../voltusTCRcom/power_Category_Attributes.html">power</a></code> category to adjust and scale the load capacitance using the slew ratio:</p>
+<ul><li><code>power_use_effective_load_cap_method {lumped | max | avg | min}</code> - Specifies the method to determine the slew ratio. This parameter has the following arguments:<ul><li><code>lumped</code> - the slew ratio is 1, which indicates that a lumped capacitance is used.</li><li><code>max</code> - the slew ratio is calculated as max(slew of all drivers)/ max(slew of all receivers)</li><li><code>min</code> - the slew ratio is calculated as min(slew of all drivers) / min(slew of all receivers) &#xa0;</li><li><code>avg</code> - the slew ratio is calculated as avg(slew of all drivers) / avg(slew of all receivers)</li></ul></li><li><code>power_effective_load_cap_slew_threshold_limit &lt;float between 0 and 1&gt;</code> - the minimum threshold value for slew ratio to prevent effective capacitance from being derated beyond realistic limits.</li></ul>
+<p>This enhancement eliminates over optimism and enables more accurate modeling for long nets.</p>
+
+<p><strong>Example</strong>:</p>
+
+<p><code>set_db power_method dynamic_vectorless</code><br /><code>set_db power_enable_state_propagation true</code><br /><code>set_db power_enable_xp true</code><br /><code>set_db power_use_effective_load_cap_method max</code><br /><code>set_db power_effective_load_cap_slew_threshold_limit 0.9</code></p>
+<h3 id="StaticandDynamicPowerAnalysis-NewAttributetoForcePropagation" style="text-align: left;">New Attribute to Force Propagation</h3>
+<p style="text-align: left;">In the dynamic vectorless flow, Voltus performs logic simulation by generating the state of an instance&#39;s output pins based on the states of its input pins. Occasionally, the output may become fixed or constant. In these scenarios, you can use the <code>power_enable_force_propagation true</code><span><code> <a href="../voltusTCRcom/power_Category_Attributes.html">power</a></code>&#xa0;category attribute </span>to ensure that the output toggles are according to the clock signal rather than the input pin states. This attribute assigns clock activity to outputs when input propagation is not feasible, thereby enhancing overall activity.</p>
+<h3 id="StaticandDynamicPowerAnalysis-off_pg_netsParameterEnhancedtoSupportReportingofBulkPinLeakage.1">off_pg_nets Parameter Enhanced to Support Reporting of Bulk Pin Leakage &#xa0;&#xa0;</h3>
+<p style="text-align: left;">The<span> <code>power_</code></span><code>off_pg_bulk_leakage<span>&#xa0;</span></code>power attribute has been introduced to account for the leakage power through an instance&#39;s bulk pin when it is connected to a power-ground (PG) rail in the ON state.</p>
+<p style="text-align: left;">The following diagram illustrates that the instance contributes bulk pin leakage to the ON state rail (<strong>vdd</strong>) through the<span>&#xa0;</span><em>VBP</em><span>&#xa0;</span>pin and zero leakage to the OFF state rail (<code>vddlsw</code>) through the VDD pin.</p>
+<p style="text-align: left;"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732479844/732479845.jpg" data-linked-resource-container-id="732479844" data-linked-resource-container-version="12" data-linked-resource-content-type="image/jpeg" data-linked-resource-default-alias="off_pg_bulk.jpg" data-linked-resource-id="732479845" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="217" src="attachments/732479844/732479845.jpg" tabindex="0" /></span></span></p>
+<h3 id="StaticandDynamicPowerAnalysis-SupportAddedforIgnoringUnconstrainedNetsandPinswithValidTimingData.2">Support Added for Ignoring Unconstrained Nets and Pins with Valid Timing Data</h3>
+
+<p>Some nets/pins lack timing constraints (no associated clock) but contain valid timing data with arrival windows in the TWF file. Previously, the tool applied default frequency toggles to these unconstrained nets, which could cause false IR violation warnings due to high voltage drop.</p>
+
+<p>You can now use the <code>power_ignore_unconstraint_net_with_timing_data</code> true attribute to exclude unconstrained nets from toggle generation. This enhancement eliminates false IR violation reports and provides better control over toggle generation.</p>
+<h3 class="content-wrapper" id="StaticandDynamicPowerAnalysis-CustomOutputDirectoryforThermalResults.1">Custom Output Directory for Thermal Results</h3>
+<div class="content-wrapper">
+<p>You can now use the <code><a href="../voltusTCRcom/set_thermal_analysis_mode.html">set_thermal_analysis_mode</a></code><code>&#xa0;-thermal_output_dir</code> parameter to specify a custom output directory for thermal analysis results instead of using the default <code>ThermalDir</code>. This enhancement gives you better control over where your output files are stored, making it easier to manage results across multiple runs.</p>
+
+<p><strong>Example</strong>:</p>
+
+<p>Use the <code>-thermal_output_dir</code> parameter to define your preferred directory path:</p>
+
+<p><code>set_thermal_analysis_mode -tool_path $CELSIUSTOOL \<br /></code><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; -boundary_condition_file bc_75.txt \<br /></code><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; -temperature_map_file temperatureMap_75 \<br /></code><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; -thermal_output_dir thermal_dir_new \<br /></code><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; -power_map_file vtm_output/top.vtm.txt</code></p>
+
+<p><code>report_thermal</code></p>
+<h3 id="StaticandDynamicPowerAnalysis-Instance-BasedFITReportingwithNewParameters.1">Instance-Based FIT Reporting with New Parameters</h3>
+
+<p>In this release, two new parameters are added to the <code><a href="../voltusTCRcom/report_power.html">report_power</a></code> command to generate instance-level FIT report based on cell-level data:</p>
+<ul><li><code>-cell_fit_file <em>filename &#8211; </em></code>Specifies a file that accepts a cell-based FIT input table with two columns: cell name and FIT value.</li><li><code>-output_cell_fit_file <em>filename</em></code> &#8211; Specifies the name of the output file for the generated FIT report, which includes three columns: instance name, corresponding cell name, and computed FIT value.&#xa0;</li></ul>
+<p>This enhancement ensures greater visibility into instance-level risks and supports more efficient debug and review of high-FIT contributors. Instance-based FIT report is supported only in the XP mode.</p>
+<h3 id="StaticandDynamicPowerAnalysis-NewAttributetoViewCellUsageStatistics">New Attribute to View Cell Usage Statistics</h3>
+
+<p>The <code>power_show_cell_usage_stats {true | false}</code> attribute has been added to the <code><a href="../voltusTCRcom/power_Category_Attributes.html">power</a></code>&#xa0;category. It provides cell usage statistics alongside power values, indicating the number of cells used from a specific library and the corresponding power percentage. This helps identify libraries with the greatest and least impact on power consumption.</p>
+
+<p>You must ensure that this attribute is specified before using the <code>report_power</code> command, as demonstrated below:<br /><code>set_db power_show_cell_usage_stats true</code><br /><code>report_power -out_file p1.rpt</code></p>
+
+<p>Following is a snippet from the report:<br /><code>Cell usage statistics:</code><br /><code>Library j1os_h , 88 cells ( 7.351713%) , 6.56434e-06 mW ( 0.554089% &#xa0;)</code><br /><code>Library j1os_l , 123 cells ( 10.275689%) , 0.000799809 mW ( 67.511081% &#xa0;)</code><br /><code>Library j1os , 986 cells ( 82.372597%) , 0.000378334 mW ( 31.934830% &#xa0;)</code></p>
+
+<p>The <code>power_show_cell_usage_stats</code> attribute is applicable only to the static power calculation, Verilog-based (<code>power_static_netlist verilog</code>) flow.</p>
+</div>
+</span></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Library_Generation_and_Extraction.html" id="prev" title="Library_Generation_and_Extraction">Library_Generation_and_Extract ...</a></em></b><b><em><a href="Rail_Analysis.html" id="nex" title="Rail_Analysis">Rail_Analysis</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

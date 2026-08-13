@@ -1,0 +1,623 @@
+
+<html><head><title>set_power</title>
+<meta name="page_sequence" content="24022000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666267" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_power" />
+<meta name="Keywords" content="set,power,cells,instances" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Static/Dynamic Power Analysis," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusTCRcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666267" />
+<meta name="NextFile" content="set_power_analysis_temperature.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_metal_density_options.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Text Reference Manual  -- set_power" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltuscuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusTCRcomTOC.html">Contents</a></li><li><a class="prev" href="set_metal_density_options.html" title="set_metal_density_options">set_metal_density_options</a></li><li style="float: right;"><a class="viewPrint" href="voltusTCRcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_power_analysis_temperature.html" title="set_power_analysis_temperature">set_power_analysis_temperature</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Text Reference Manual <br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_power</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p> <code>
+    <br />
+    <code>set_power<br />
+      <code>[<em>value</em>]<br />[-cap <em>value</em>]<br />[-fanout_limit <em>value</em>]</code> <br />[-reset]<br />[-leakage <code>
+        <em>value</em>
+      </code>]<br />[-pg_pin {<em>pg_pin</em>}]<br />[-pg_net <code>
+        <em>railname</em>
+      </code>]<br />[-pwl_waveform]<br />[-sticky]<br />[<span style="color:var(--ds-text,#172b4d);">-dynamic_async_mode&#xa0;{ <em>mode_name</em> }</span>] <br />[-dynamic_switch_pattern <code>
+        <em>pattern</em>
+      </code>]<br />[-dynamic_switch_event { switching_<em>events</em>&#xa0;}]<br />[-scale_factor <code>
+        <em>value</em>
+      </code>}<br />[-include_ddv_modes {<em>pattern_list</em>}]<br />[-internal]<br />[-switching <code>
+        <em>value</em>
+      </code>]<br />[-clocks {all|<code>
+        <em>clock_name</em>
+      </code>}]<br />[-exclude_clocks]<br />[-exclude_ddv_modes {<em>pattern_list</em>}]<br />[-base_cells <code>
+        <em>cell_name</em>
+      </code> <code>
+        <em>value</em>
+      </code>]<br />[-insts <code>
+        <em>inst_list</em>
+      </code> <code>
+        <em>value</em>
+      </code>]</code> <br /></code> <code>
+    <code>
+      <code>[-pin <em>pin_name</em> <em>pin_power</em>
+      </code>]<br /><code>
+        <code>[-force]</code> </code> <br /><code>
+        <code>[-custom_macro_pwl_waveform <em>filename</em>]</code> </code> <br />[-repeat]<br /><code>
+        <code>
+          <code>
+            <code>[<code>-ascii_power_file</code> <code>
+                <code>
+                  <em>filename</em>
+                </code> </code>]</code> </code> </code> </code> <br /><code>
+        <code>[-trigger_time_adjustment <em>time</em>]</code> </code> <br /><code>
+        <code>
+          <code>
+            <code>[&#8211;no_propagation]</code> </code> </code> </code> <br /><code>
+        <code>[-static_mode {&#xa0;<code>
+            <code>
+              <code>
+                <em>custom_label_name</em> | <em>mode_name</em>
+              </code> </code> </code> }]<br />[-signal_net <em>netname</em>]<br />[-slew&#xa0;<em>value</em>]</code> </code> <br /><code><code>[<code>-default_dynamic_pgv_mode { <em>mode_name</em> }</code>]</code></code><br /></code> </code></p>
+
+<p>Specifies the amount of power for all or part of the design. This command is used to define user-specified power on cells and instances. You must specify this command before <code>report_power</code>.</p>
+
+<p>The <code>set_power</code> command can accept a cell/instance list using the <code>get_cells</code>/<code>get_lib_cells</code> commands. You can use the <code>get* </code>commands to create a collection of cells/instances whose name matches the supplied pattern list. Therefore, providing you with the flexibility in providing lists through use of regular filter patterns. This feature is supported in both static and dynamic analysis engines.</p>
+<h4 id="set_power-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table class="wrapped confluenceTable" style="width: 1326.0px;"><colgroup> <col /> <col /> </colgroup><tbody><tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>
+          <code>
+            <code>
+              <code>
+                <code>-ascii_power_file</code> <code>
+                  <code>
+                    <em>filename</em>
+                  </code> </code> </code> </code> </code> </code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1184.0px;">Specifies the name of an instance list file. This file contains the list of instances in the following format:
+<p><code>
+            <em>instance_name</em> <em>power_value</em> &lt;<em>pin_name</em>&gt;</code></p>
+
+<p>Here,</p>
+<ul><li><code>
+              <code>
+                <em>instance_name</em>
+              </code>&#xa0;</code>is the instance name to which power is to be distributed.</li><li><code>
+              <code>
+                <em>power_value</em>
+              </code> </code>is the power value for the instance in watts.</li><li><code>
+              <em>pin_name</em>
+            </code>&#xa0;is an optional argument to specify the pin name. When specified, allows you to assign power to the specific pin of the instance.</li><li>The three fields should be in one line, and each instance should be in a new line.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;" valign="top">
+<p><code>-base_cells</code> <code>
+            <em>cell_name </em>
+          </code> <code>
+            <em>value</em>
+          </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1184.0px;" valign="top">
+<p>Specifies the cell name. If the cell or instance name is not specified, the power will be distributed to all rails.</p>
+
+<p>If you want to specify power for a group of cells/instances, use the <code>get_cells</code>/<code>get_lib_cells</code> commands. The <code>-base_cells</code> parameter can accept these commands to create a collection of cells/instances whose name matches the supplied pattern list. For example, <code>-base_cells[get_lib_cells NAND*] 2mw</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-cap <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1184.0px;">Specifies the capacitance value to all instances with nets more than or equal to the fanout limit (<code>-fanout_limit</code>).</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;" valign="top">
+<p><code>-clocks {all|</code> <code>
+            <em>clock_name</em>
+          </code> <code>}</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1184.0px;" valign="top">
+<p>Specifies the power value for clock networks. You can specify the power value for a specific clock network or the clock network power value for the whole design.</p>
+
+<p><strong>Note: </strong>This parameter cannot be used with the <code>-base_cells,</code> <code>-insts</code> and <code>-pg_net </code>parameters.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>
+          <code>
+            <code>
+              <code>-custom_macro_pwl_waveform <em>filename</em>
+              </code> </code> </code> </code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1184.0px;">
+<p>Specifies to use a custom trigger file to apply instance or cell PWL waveforms. Given one master cell PWL waveform, the software can automatically generate scaled PWL waveforms of the other companion cells defined in the trigger file proportional to the cell internal power. <br /><strong>Note</strong>: This parameter must be used with <code>set_power &#8211;dynamic_switch_pattern</code> in the vectorless flow.</p>
+
+<p>For more information on the trigger file format, see <a href="#set_power-trigger">Trigger File Format</a>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code><code><code><code><code>-default_dynamic_pgv_mode { <em>mode_name</em> }</code></code></code></code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1184.0px;">Specifies the current characterization mode to be used during dynamic power and jitter analyses. This parameter can be specified when using a PGV with multiple functional modes.
+<p>When this parameter is specified, the Power Calculation engine uses this preferred mode in scheduling the switching events for the macro blocks, and saves these events in the trigger file.</p>
+
+<p>The use model of this parameter is:<code><br />set_power&#xa0; -base_cells {} | -insts {} -default_dynamic_pgv_mode { <em>mode_name</em> }</code></p>
+
+<p>This parameter is mutually exclusive to the <code>-dynamic_switch_pattern</code> parameter. If a cell or instance has both the <code>-dynamic_switch_pattern</code> and <code>-<code>default_dynamic_pgv_mode</code></code> parameters defined in the same Tcl script, <code>-dynamic_switch_pattern</code> takes higher priority.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code><span style="color:var(--ds-text,#172b4d);">-dynamic_async_mode&#xa0;{ <em>mode_name</em> }</span></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1184.0px;">
+<p>Specifies to trigger asynchronous macros based on the length of the PWL waveform to create a single continuous waveform. This parameter allows you to specify the asynchronous mode for an instance or a cell. The start and end of the PWL saved in the PGV must have similar current value in order to avoid sudden jump in the current.</p>
+
+<p><strong>Use model</strong>:<br /><code>set_power -dynamic_async_mode {<em>mode</em>} [-insts {<em>name</em>} | -base_cells {<em>name</em>}]</code></p>
+
+<p><strong>Example</strong>:<br /><code>set_power -base_cells pll -dynamic_asynchronous_mode {READ_C}</code></p>
+
+<p>Here, power analysis will trigger the&#xa0;<code>READ_C</code><span>&#xa0;</span>mode and automatically splice the waveform based on its length.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-dynamic_switch_event { switching_<em>events</em> }</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1184.0px;">
+<p>Specifies&#xa0;the switching events for cells, instances, and pins along with their rise and fall time.&#xa0;&#xa0;<code>switching_<em>events</em>&#xa0;</code>is a string of toggle time followed by &#8220;r&#8221; or &#8220;f&#8221;, where &#8220;r&#8221; is for rise toggle and &#8220;f&#8221; is for fall toggle.&#xa0;The <code>-dynamic_switch_event</code> parameter should not be specified with the <code>-repeat</code> parameter.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;" valign="top">
+<p><code>-dynamic_switch_pattern </code> <code>
+            <em>pattern</em>
+          </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;" valign="top">
+<p>&#xa0;&#xa0;&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd" style="width: 1184.0px;" valign="top">
+<p>Specifies stimulus pattern on the pins of an instance and cell. Specify this parameter only in the dynamic mode for the type <code>instance</code> and <code>cell</code>.</p>
+
+<p>You can also use the <code>set_power</code> <code>-pin</code> parameter with the <code>-dynamic_switch_pattern</code> parameter to apply pin-specific dynamic switch pattern. That is, you can now apply different switching patterns on different pins, as shown in the following example:</p>
+<ul><li><code>set_power -insts FF14 -dynamic_switch_pattern {&#xa0;r - - f - - }&#xa0; -pin Q</code></li></ul>
+<p>The <code>-pin</code> parameter can be specified for both the <code>-</code><code>insts</code> and <code>-base_cells</code> parameters. Pin-based dynamic switch pattern has the following limitations:</p>
+<ul><li>
+<p>&#8220;<code><code>-insts</code> *</code>&#8221; and &#8220;<code>-base_cells *</code>&#8221; are not supported. All other wildcards except &#8220;<code>*</code>&#8221; is supported. For example &#8220;<code>AND*</code>&#8221; or &#8220;<code>top*</code>&#8221; is supported.</p>
+</li><li>The value of the <code>-no_propagation</code> parameter should be the same for all pins.</li></ul>
+<p>The <code>
+            <em>pattern</em>
+          </code> is applied to all pins (input and output) on the instance/cell. It is a string.</p>
+
+<p><code>
+            <em>pattern</em>
+          </code> specifies the switching pattern. If there is more than one clock domain with timing windows on a pin, only the windows on the fastest clock will be used, and the pattern will be applied to that clock period.&#xa0;It is a string of <code>0</code>, <code>1</code>, <code>r</code>, and <code>f</code> values. <code>0</code> for cycles not to switch and <code>1</code> for cycles to switch. <code>r</code> is for rise only and <code>f</code> for fall only.</p>
+
+<p>The pattern string should include enough digits to cover all of the clock cycles in the simulation period. If there are not enough digits, the pattern will be padded with 0 values at the end. If there are too many, the pattern will be truncated to the number of applicable cycles. Transitions will be scheduled in the center of each applicable timing window.</p>
+
+<p><strong>Notes</strong></p>
+<ul><li><code>0</code> and <code>1</code> is supported only in the probability-based vectorless flow. It is not supported in the state-propagation-based vectorless flow and the vector-based flow.</li><li>In case of macros, you can specify the mode names, that is, which mode switches in which clock cycle <code>-dynamic_switch_pattern { mode1 - mode2 - }</code>.</li><li>The dynamic switch pattern (DSP) events can be state propagated. Instance power is reported for instances directly annotated using DSP or those receiving activity through state propagation.</li><li>The dynamic switch pattern does not apply to clock network instances.</li></ul>
+<p>You can specify &#8220;<code>-</code>&#8221; to indicate that instances will not switch in a particular clock cycle. If &quot;<code>-</code>&quot; is the first value in the string of values specified within <code>{}</code>, you must insert a space before &quot;<code>-</code>&quot;, as shown below:</p>
+<ul><li>no switching: <code>-dynamic_switch_pattern { - - }</code></li><li>no switching in the 1st clock period: <code>-dynamic_switch_pattern { - r }</code></li></ul>
+<p><u>Examples</u>:</p>
+
+<p>In the following example, instance will not switch in the 4th clock cycle:<br /><code>set_power -dynamic_switch_pattern { f r f - r }</code></p>
+
+<p>In the following example, the mode <code>write</code> will switch in the 1st clock cycle, the mode <code>read</code> will switch in the 2nd and 4th clock cycle, and none of the modes will switch in the 3rd clock cycle:<br /><code>set_power -dynamic_switch_pattern { write read - read }</code></p>
+
+<p><strong>Note</strong>: Wildcards are supported only for <code>-dynamic_switch_pattern</code> with <code>-pin</code>. When <code>-dynamic_switch_patter</code>n is applied for<code> -instance</code> or <code>-cell</code> without the <code>-pin</code> parameter, wildcards are not supported.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;" valign="top">
+<p><code>-exclude_clocks</code></p>
+</td>
+<td class="confluenceTd" style="width: 1184.0px;" valign="top">
+<p>Excludes clock networks when specifying a scale factor or power specification for the whole design.</p>
+
+<p>This parameter cannot be used with the <code>-base_cells,</code> <code>-insts</code> and <code>-pg_net </code>parameters.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-exclude_ddv_modes {<em>pattern_list</em>}</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1184.0px;">
+<p>Excludes the current characterization (or Dynamic Detailed View) modes that match with the specified patterns.&#xa0;This parameter allows you to control the modes to be switched, instead of switching all the current characterization modes defined in the power-grid view.</p>
+
+<p><strong>Use Model</strong><br /><code>set_power&#xa0;&#8211;insts|-base_cells&#xa0;<em>name</em>&#xa0;&#8211;exclude_ddv_modes {<em>pattern_list</em>}</code></p>
+
+<p>Here:</p>
+<ul><li><em><code>pattern_list</code></em> is a list of mode names, separated by space or comma</li><li>the instance, cell, and pattern names can contain wildcard characters</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-fanout_limit <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1184.0px;">Specifies the fanout limit for nets. If an instance has nets more than or equal to the fanout limit, its switching/internal/leakage power is taken to be zero. When this parameter is specified, the user-defined power value is applied to all the driver instances that have nets more than or equal to the fanout limit.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>
+          <code>
+            <code>
+              <code>-force</code> </code> </code> </code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1184.0px;">Specifies to apply the <code>set_power</code> command even if there are Verilog mismatches. For dynamic or DEF-based static analysis, this parameter allows you to apply <code>set_power</code> to the DEF instances that do not exist in Verilog.</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;" valign="top">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd" style="width: 1184.0px;" valign="top">
+<p>Outputs the command usage.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-include_ddv_modes {<em>pattern_list</em>}</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1184.0px;">
+<p>Includes only the current characterization (or DDV) modes that match with the specified patterns.&#xa0;This parameter allows you to control the modes to be switched, instead of switching all the current characterization modes defined in the power-grid view.</p>
+
+<p><strong>Use Model</strong><br /><code>set_power &#8211;insts|-base_cells&#xa0;<em>name</em>&#xa0;&#8211;include_ddv_modes {<em>pattern_list</em>}</code></p>
+
+<p>Here:</p>
+<ul><li><em><code>pattern_list</code></em> is a list of mode names, separated by space or comma</li><li>the instance, cell, and pattern names can contain wildcard characters</li></ul></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;" valign="top">
+<p><code>-internal</code></p>
+</td>
+<td class="confluenceTd" style="width: 1184.0px;" valign="top">
+<p>Specifies the target internal power of the design, cell, or instance. To specify internal power for cells and instances, you can use the <code>-internal</code> parameter in conjunction with the <code>-base_cells</code> or <code>-insts</code> parameter.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;" valign="top">
+<p><code>-insts</code> <code>
+            <em>inst_list</em>
+          </code> <code>
+            <em>value</em>
+          </code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;" valign="top">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1184.0px;" valign="top">
+<p>Specifies the instance name. If the cell or instance name is not specified, the power will be distributed to all rails.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;" valign="top">
+<p><code>-leakage</code></p>
+</td>
+<td class="confluenceTd" style="width: 1184.0px;" valign="top">
+<p>Specifies the target leakage power of the design, cell, instance, or power net.</p>
+
+<p>To specify leakage power for cells and instances you can use <code>-leakage</code> option in conjunction with <code>-base_cells</code> or <code>-insts</code> option.</p>
+
+<p>To specify leakage power of a certain power net in the design you can use<code> -pg_net</code> option along with <code>-leakage</code> option.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>
+          <code>
+            <code>
+              <code>
+                <code>
+                  <code>&#8211;no_propagation</code> </code> </code> </code> </code> </code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1184.0px;">
+<p>Modifies the behavior of the <code>-dynamic_switch_pattern</code> parameter so that the user-defined switch pattern is applied only after state-propagation is complete. The use model of the command parameter is:</p>
+
+<p><code>set_power &#8211;dynamic_switch_pattern {pattern} &#8211;no_propagation</code></p>
+
+<p>The <code>-no_propagation</code> parameter is only applicable in conjunction with the <code>-dynamic_switch_pattern</code> parameter. When the <code>-no_propagation</code> parameter is added to the <code>-dynamic_switch_pattern</code> parameter, the dynamic power engine performs state propagation first, overrides the single instance switching event by the user-defined dynamic switch pattern, and does no further propagation.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-pg_net <em>railname</em>
+        </code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;" valign="top">
+<p><code>&#xa0;</code></p>
+</td>
+<td class="confluenceTd" style="width: 1184.0px;" valign="top">
+<p>Optional. The specified power or pwl for the cell, instance or design is applied to the specified rail. When not specified, the power or pwl is applied to all the rails associated with the instance. This option is generally used for MSMV cells.</p>
+
+<p>When this option is not specified the behavior is different for pwl and power options. When not specified and power option is used, the power is applied for the whole design, cell, or instance. When not specified and pwl option is used, the pwl is applied to every rail of the cell or instance.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-pg_pin {<em>pg_pin</em>}</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1184.0px;">Specifies the&#xa0;switch pattern for a specific PG pin of an instance. This parameter must be specified with the <code>-dynamic_switch_pattern&#xa0;</code>parameter.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>
+          <code>
+            <code>-pin <em>pin_name</em> <em>pin_power</em>
+            </code> </code> </code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1184.0px;">Specifies pin-wise power numbers for a specific instance. This parameter allows you to control the power assigned to power ground pins of an instance. Following is the use model of this parameter:
+<p><code>set_power&#xa0;<code>-insts</code> &lt;<em>inst_name</em>&gt; -pin &lt;<em>VDDA</em>&gt; &lt;<em>pin_power</em>&gt;</code> <br /><code>set_power&#xa0;<code>-insts</code> &lt;<em>inst_name</em>&gt; -pin &lt;<em>VDDB</em>&gt; &lt;<em>pin_power</em>&gt;</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;" valign="top">
+<p><code>-pwl_waveform</code></p>
+</td>
+<td class="confluenceTd" style="width: 1184.0px;" valign="top">
+<p>Specifies that power argument (<code>power | pwl</code>) is a waveform rather than a power number.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;"><code>
+          <code>-repeat</code> </code></td>
+<td class="confluenceTd" style="width: 1184.0px;">Repeats dynamic switch pattern of all the clock cycles in the simulation period.</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;" valign="top">
+<p><code>-reset</code></p>
+</td>
+<td class="confluenceTd" style="width: 1184.0px;" valign="top">
+<p>This parameter causes all previous <code>set_power</code> commands to be ignored.</p>
+
+<p>Note: You can selectively reset the instance/cell specifications. In addition, you can also selectively reset the cell and instance specifications of a list of objects through the &#xa0; <code>
+            <a href="get_cells.html">get_cells</a>
+          </code> and &#xa0; <code>
+            <a href="get_lib_cells.html">get_lib_cells</a>
+          </code> commands.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>
+          <code>-static_mode {&#xa0;<code>
+              <code>
+                <code>
+                  <em>custom_label_name</em> | <em>mode_name</em>
+                </code> </code> </code> }</code> </code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1184.0px;"><div class="content-wrapper">
+<p>Specifies the mode name or the custom label name associated with a cell or instance for computing instance current from PGV with static multi-voltage multi-frequency (MvMf) modes. This current is used to compute the instance&#8217;s internal power, and its switching and leakage power components would be set to zero.</p>
+
+<p>The use model of this parameter is given below:<br /><code>set_power&#xa0;<code>-insts</code> -static_mode READ</code></p>
+
+<p>If you specify custom label of a static MvMf mode, currents would be taken from it directly. Alternatively, if only mode name is specified for a cell/instance, the software snaps to the nearest custom label defined within this mode, based on the instance&#8217;s voltage and frequency to get the currents.</p>
+<div aria-label="Info" class="confluence-information-macro  confluence-information-macro-information" role="region"><span class="aui-icon aui-icon-small aui-iconfont-info-filled confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>If you specify a dynamic mode with <code>set_power &#8211;static_mode</code>, average current from the mode will be used in the static MvMf flow.</p>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-scale_factor <em>value</em>
+        </code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;" valign="top">
+<p><code>&#xa0;</code></p>
+</td>
+<td class="confluenceTd" style="width: 1184.0px;" valign="top">
+<p>Scales the power value by the specified scale factor. This parameter allows you to set a user-defined scale factor in the trigger file to scale the dynamic current of the PGV.</p>
+
+<p>To modify the scale factor, use the <code>-reset</code> parameter with the <code>-scale_factor</code> parameter.</p>
+
+<p><strong>Example</strong>: <br /><code>set_power -leakage -reset&#xa0; -scale_factor 5 -instance A</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-signal_net <em>netname</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1184.0px;">Specifies the signal net name for power assignment. When this parameter is specified, the driver instances connected to the signal net will be assigned the user-defined power value.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-slew&#xa0;<em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1184.0px;">Specifies the slew value to all instances with nets more than or equal to the fanout limit (<code>-fanout_limit</code>).</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;" valign="top">
+<p><code>-sticky</code></p>
+</td>
+<td class="confluenceTd" style="width: 1184.0px;" valign="top">
+<p>Applies the simulation based PWL waveform as is, to the specified cell/instance for dynamic power analysis.</p>
+
+<p>Use this option only if you have specified <code>-pwl_waveform</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>-switching <em>value</em>
+        </code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;" valign="top">
+<p><code>&#xa0;</code></p>
+</td>
+<td class="confluenceTd" style="width: 1184.0px;" valign="top">
+<p>Specifies the target switching power of the design, cell, or instance. To specify switching power for cells and instances, you can use the <code>-switching</code> parameter in conjunction with the <code>-base_cells</code> or <code>-insts</code> parameter.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1326.0px;"><code>
+          <code>-trigger_time_adjustment <em>time</em>
+          </code> </code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1184.0px;"><div class="content-wrapper">
+<p>Specifies to adjust the trigger time of the current waveforms for the various functional modes (read/write/idle) of the custom macros. This parameter allows you to start the waveform before the trigger time (negative time support) to account for the setup time for the operation, as shown below:</p>
+
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732480660/732480661.png" data-linked-resource-container-id="732480660" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="trigget_time_adjustment.png" data-linked-resource-id="732480661" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732480660/732480661.png" tabindex="0" width="400" /></span></p>
+
+<p>The specified time will be applied to the computed trigger time for each mode in the trigger files generated by power analysis. For example, if the trigger time (from timing window/vector) is computed as 1ns, 2ns, and 3ns, and if you specify <code>set_power -trigger_time_adjustment -100ps</code>, the software will adjust the trigger time to .9ns, 1.9ns, and 2.9ns.</p>
+</div>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="width: 142.0px;" valign="top">
+<p><code>
+            <em>value</em>
+          </code></p>
+</td>
+<td class="confluenceTd" style="width: 1184.0px;" valign="top">
+<p>Specifies power in milliwatts during static power calculation or piecewise linear (<code>-pwl</code>) current waveform, during dynamic power calculation for cell or instance. The command accepts a unit specification (e.g. 10w).</p>
+
+<p>The format of the PWL waveform is:<br /><code>{<em>time1</em> <em>current1</em> <em>time2</em> <em>current2</em> ...<em>time_n</em> <em>current_n</em>}</code></p>
+
+<p>Time is in ns and current in mA.</p>
+
+<p><strong>Example</strong>:<code>
+            <br />set_power -pwl_waveform -pg_net {} -base_cells BUFX2MTL {0 0 10 0 10.1 5 10.5 0}</code></p>
+
+<p>Here, at <code>0ns</code> its value is <code>0mA</code>, at <code>10ns</code> its value is <code>0mA</code>, at <code>10.1ns</code> its value is <code>5mA</code>, and so on.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_power-Examples">Examples</h4>
+<ul><li>The following command sets power for vdd rail to 10 milliwatts: <br /><code>set_power -pg_net vdd 10mw</code></li></ul><ul><li>The following command sets a power value of .005 milliwatts on power net vdd for instance clkin_neg_L14_I1: <br /><code>set_power -pg_net vdd -insts Top/A/clkin_neg_L14_I1 .005</code></li></ul><ul><li>The following command sets a power value of .005 milliwatts for any cell named INVX2 in the design: <br /><code>set_power -base_cells INVX2 .005mw</code></li></ul><ul><li>The following command defines a piecewise linear waveform of {0 0 10 0 10.1 5 10.5 0} for the cell of type BUFX2MTL for all power rails. <br /><code>set_power -pwl_waveform -pg_net {} -base_cells BUFX2MTL {0 0 10 0 10.1 5 10.5 0}</code></li></ul><ul><li>The following command specifies the leakage power for the cell DFFRX1. <br /><code>set_power -leakage -base_cells DFFRX1 10mw</code></li></ul><ul><li>The following commands specify the target leakage power for power nets VDD1 and VDD2. <br /><code>set_power -leakage -pg_net VDD1 100mw</code> <br /><code> set_power -leakage -pg_net VDD2 200mw</code></li></ul><ul><li>The following command specifies the PWL description of current for the instance SEHD130_1024X32X1CM8. The -sticky option tells the software to use the specified PWL simulation based waveforms as is. <br /><code>set_power -pwl_waveform -insts SEHD130_1024X32X1CM8 -sticky {0 0 1 1 2 2 7 0}</code></li></ul><ul><li>The following command scales the total power of the instance i_1 by a scale factor of 2: <br /><code>set_power -scale_factor 2 -insts i_1</code></li></ul><ul><li>The following command sets the total power of the design to 20mw while keeping the clock network power the same: <br /><code>set_power 20mw -exclude_clocks {all}</code></li></ul><ul><li>The following command assigns a switching power of 3mw to all instances of the cell AND1: <br /><code>set_power -base_cells AND1 -switching 3mw</code></li></ul><ul><li>The following command assigns 2mw power to all cells that match the specified pattern: <br /><code>set_power -base_cells[get_lib_cells NAND*] 2mw</code></li><li>The following command specifies that mode1 switches in the first cycle, mode2 switches in the third cycle and no switching in others: <br /><code>set_power -dynamic_switch_pattern { mode1 0 mode2 0 }</code></li><li>The following command resets power of all cells that match the specified pattern: <code>
+      <br />set_power -reset -base_cells[get_cells A/*]</code></li><li>The following command does not schedule DDV mode <code>scan*</code>:<br /><code>set_power -base_cells { * } -exclude_ddv_modes { scan* }</code></li><li>The following command does not schedule DDV mode <code>scan*</code> for instance &quot;<code>A1</code>&quot;:<br /><code>set_power -insts { A1 } -exclude_ddv_modes { scan* }</code></li><li>The following command only schedules DDV mode names with the <code>*read*</code> and <code>*write*</code> pattern:<br /><code>set_power -base_cells { * } -include_ddv_modes { *read*, *write* }</code></li><li>
+<p>The following commands specify the toggle time for the pin names Q7 and Q6:<br /><code>set_power -dynamic_switch_event { 1.1ns r 5.5ns f } -insts clk_b_i2 -pin Q7</code><br /><code>set_power -dynamic_switch_event { 2.2ns r 6.6ns f } -insts clk_b_i2 -pin Q6</code></p>
+</li><li>The following command specifies the toggle time for the cell name BUFX8:<br /><code>set_power -dynamic_switch_event { 2.22ns r 6.66ns f } -base_cells BUFX8&#xa0;</code></li></ul>
+<p><span class="confluence-anchor-link" id="set_power-trigger"></span></p>
+<h4 id="set_power-TriggerFileFormat">Trigger File Format</h4>
+
+<p>For specifying a custom trigger file, you must use the&#xa0;<code>
+    <code>
+      <code>-<code>
+          <code>
+            <code>
+              <code>custom_macro_pwl_waveform</code> </code> </code> </code> </code> </code> </code> parameter. The format of the trigger file is:</p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup> <col /> <col /> </colgroup><tbody><tr><th class="confluenceTh">Trigger File Format</th><th class="confluenceTh">Description</th></tr>
+<tr><td class="confluenceTd" colspan="2"><strong>#Cell names</strong></td>
+</tr>
+<tr><td class="highlight-blue confluenceTd" data-highlight-colour="blue">
+<p><code>MASTER CELL &lt;<em>cellname1</em>&gt;</code></p>
+</td>
+<td class="confluenceTd">Name of the reference cell.</td>
+</tr>
+<tr><td class="highlight-blue confluenceTd" colspan="1" data-highlight-colour="blue"><code>COMPANION_CELLS &lt;<em>cellname1</em> <em>cellname2&#xa0;</em> &#8230; &gt; &#xa0;&#xa0; </code></td>
+<td class="confluenceTd" colspan="1">Name of the cells that will use scaled PWL from the master cell.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><strong>#Mode and conditional details for trigger</strong></td>
+</tr>
+<tr><td class="highlight-blue confluenceTd" data-highlight-colour="blue">
+<p><code>MODE_NAME &lt;<em>mode1</em>&gt;<br />CONDITIONAL_INPUT &lt;conditional input statement for cellname1&gt;</code></p>
+</td>
+<td class="confluenceTd">
+<p>Mode name and conditional input statement for the cell. Conditional input of current for the given mode.</p>
+</td>
+</tr>
+<tr><td class="highlight-blue confluenceTd" data-highlight-colour="blue">
+<p><code>CONDITIONAL_PIN &lt;pin_name&gt; (rise|fall|both)</code></p>
+</td>
+<td class="confluenceTd">Conditional pin statement for the cell. Signal pin for which the tool should rise or fall.</td>
+</tr>
+<tr><td class="highlight-blue confluenceTd" data-highlight-colour="blue">
+<p><code>CONDITIONAL_STIMULUS_FILE &lt;usim1.txt&gt;</code></p>
+</td>
+<td class="confluenceTd">Simulation vector detail in the given mode.</td>
+</tr>
+<tr><td class="highlight-blue confluenceTd" data-highlight-colour="blue"><code>USER_PWL_FILE &lt;pwl1.txt&gt;</code></td>
+<td class="confluenceTd">
+<p>User-specified PWL file that contains information about the PWL waveforms (power/ground currents).&#xa0;</p>
+
+<p>For an example of a PWL file, see <a href="#set_power-pwl">PWL Format Example</a>.</p>
+</td>
+</tr>
+<tr><td class="highlight-blue confluenceTd" data-highlight-colour="blue"><code>END_MODE</code></td>
+<td class="confluenceTd">End mode section</td>
+</tr>
+<tr><td class="confluenceTd"><strong>#End cell section</strong></td>
+<td class="confluenceTd"><br /></td>
+</tr>
+<tr><td class="highlight-blue confluenceTd" data-highlight-colour="blue"><code>END</code></td>
+<td class="confluenceTd">End cell section</td>
+</tr>
+</tbody></table></div>
+
+<p><strong>Example of a Custom Macro Power Trigger File</strong></p>
+
+<p><code>MASTER_CELL&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; SRAM_A1</code> <br /><code>COMPANION_CELLS&#xa0;&#xa0;&#xa0; { SRAM_A2, SRAM_A3, SRAM_A4, SRAM_A5 }</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; MODE_NAME WRITE</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; CONDITIONAL_INPUT = ( !SD &amp; !SLP &amp; !CEB &amp; !WEB )</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; CONDITIONAL_PIN = CLK { RISE }</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; USER_PWL_FILE write_rise.txt&#xa0;&#xa0;&#xa0;&#xa0; </code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; END_MODE</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; MODE_NAME READ</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; CONDITIONAL_INPUT = ( !SD &amp; !SLP &amp; !CEB &amp; WEB )&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; CONDITIONAL_PIN = CLK { RISE }</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; USER_PWL_FILE read_rise.txt</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; END_MODE</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; ...</code> <br /><code>END</code></p>
+
+<p><span class="confluence-anchor-link" id="set_power-pwl"></span></p>
+
+<p><strong>Example of &#8220;USER_PWL_FILE&#8221; (Multiple regions)</strong></p>
+
+<p><code>UNIT CURRENT mA</code> <br /><code>UNIT TIME ns</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; NET VSS</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;
+ REGION { 0 0 0.1 -1 0.2 -2 0.3 -3 0.4 -10 0.5 -50 0.6 -40 0.7 -30 0.8 
+-20 1 0 2 0 3 0 3.9 0 4 -0.1 4.5 -0.2 5 -4 5.5 -3 6 -2 7 0 }</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; NET VDD</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;
+ REGION { 0 0 0.1 1 0.2 2 0.3 3 0.4 10 0.5 50 0.6 40 0.7 30 0.8 20 1 0 2
+ 0 3 0 3.9 0 4 0.1 4.5 0.2 5 4 5.5 3 6 2 7 0 }</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; NET VDDM</code> <br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;
+ REGION { 0 0 0.1 1 0.2 2 0.3 3 0.4 10 0.5 50 0.6 40 0.7 30 0.8 20 1 0 2
+ 0 3 0 3.9 0 4 0.1 4.5 0.2 5 4 5.5 3 6 2 7 0 }</code></p>
+
+<p><br /></p>
+
+<p></p>
+
+<p><br /></p>
+
+<p></p>
+<ul><li>pwl_waveform</li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_metal_density_options.html" id="prev" title="set_metal_density_options">set_metal_density_options</a></em></b><b><em><a href="set_power_analysis_temperature.html" id="nex" title="set_power_analysis_temperature">set_power_analysis_temperature</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

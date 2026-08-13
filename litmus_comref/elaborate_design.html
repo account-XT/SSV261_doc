@@ -1,0 +1,191 @@
+
+<html><head><title>elaborate_design</title>
+<meta name="page_sequence" content="19010000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="apokhara" />
+<meta name="CreateDate" content="2026-04-12" />
+<meta name="CreateTime" content="1776062381" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="" />
+<meta name="DocTitle" content="Litmus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="elaborate_design" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="litmus_comref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-12" />
+<meta name="ModifiedTime" content="1776062381" />
+<meta name="NextFile" content="encrypt.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="delete_rule_filter.html" />
+<meta name="c_product" content="Litmus," />
+<meta name="Product" content="Litmus," />
+<meta name="ProductFamily" content="Litmus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Litmus Text Command Reference -- elaborate_design" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="litmus26comref" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="litmus_comrefTOC.html">Contents</a></li><li><a class="prev" href="delete_rule_filter.html" title="delete_rule_filter">delete_rule_filter</a></li><li style="float: right;"><a class="viewPrint" href="litmus_comref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="encrypt.html" title="encrypt">encrypt</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Litmus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>elaborate_design</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>elaborate_design<span class="confluence-anchor-link" id="elaborate_design-elaborate_design"></span><span></span> <br />
+   [-help] <br /></code>-script <em>hdl_script</em><br /></code></p>
+
+
+<p>Converts RTL to a generic netlist based on the specified script, which should contain commands for reading HDL files into memory and creating a design hierarchy consisting of a top-level design and its referenced sub-designs from Verilog or SystemVerilog modules or VHDL entity/architectures.&#xa0;The command transforms each module/architecture to be represented as a design in the form of a structural netlist. It also performs semantic checking, sequential register (flops/latches) inferencing, and high-level HDL optimizations. Instances of undefined modules or entities are marked as unresolved and the corresponding modules/entities reported as blackboxes.</p>
+
+
+<p>A sample script that can be passed to <code>elaborate_design</code> is shown below:</p>
+
+<div aria-label="Note" class="confluence-information-macro  has-no-icon confluence-information-macro-note" role="region">
+ <p class="title conf-macro-render">Sample hdl_script.tcl</p>
+
+ <div class="confluence-information-macro-body">
+  <p style="text-align: left;"><code>read_hdl -language sv &quot;cpu_if.sv cpu_alu.sv cpu_rf.sv&quot;</code></p>
+
+  <p style="text-align: left;"><code>read_hdl -language v2001 &quot;cpu_top.v&quot;</code></p>
+
+  <p style="text-align: left;"><code>elaborate cpu_top</code></p>
+
+ </div>
+
+</div>
+
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region">
+ <span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span>
+ <div class="confluence-information-macro-body">
+  
+<p><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;Note that the </span>commands specified above are only valid within the script being passed to <code>elaborate_design</code>. You cannot use them directly at the Innovus prompt.</span></p>
+
+ </div>
+
+</div>
+
+<h4 id="elaborate_design-Parameters">Parameters&#xa0;</h4>
+
+<div class="table-wrap">
+ <table class="wrapped confluenceTable">
+  <colgroup>
+   <col />
+   <col />
+  </colgroup>
+  <tbody>
+   <tr>
+    <td class="confluenceTd" valign="top">
+<p><code>-help</code></p>
+</td>
+
+    <td class="confluenceTd" valign="top">
+<p>Outputs a brief description that includes type and default information for each <code>elaborate_design</code> parameter.</p>
+
+<p>For a detailed description of the command and all of its parameters, use the man command: <br /><code>man elaborate_design</code>.</p>
+</td>
+
+   </tr>
+
+   <tr>
+    <td class="confluenceTd" valign="top">
+<p><code>-script <em>hdl_script</em></code></p>
+</td>
+
+    <td class="confluenceTd">
+<p>Specifies the script for HDL manipulation within the Synthesis engine. T<span style="color:var(--ds-text,#172b4d);">he software looks for the specified script file in each search path directory set using the <code>script_search_path</code> attribute. Alternatively, you can specify the complete path to the script. &#xa0;</span></p>
+
+<p><em>Data_type</em>: string, required</p>
+</td>
+
+   </tr>
+
+  </tbody>
+ </table>
+</div>
+
+<h4 id="elaborate_design-Examples">Examples</h4>
+
+<ul>
+ <li>The following command&#xa0;elaborates the top-level design and all of its references based on the specified script:<br /><code>elaborate_design -script Xm_hifi3_ss_spfpu_7Xtmem.hdl.tcl</code></li>
+</ul>
+<h4 id="elaborate_design-RelatedInformation">Related Information</h4>
+
+<ul>
+ <li><span><code>hdl</code> Category Attributes</span></li>
+ <li><span style="color:var(--ds-text,#172b4d);"><code>script_search_path</code> attribute in <span>system Category Attributes</span></span></li>
+ <li><span>The Innovus Synthesis Flow</span></li>
+ <li><span style="letter-spacing: 0.0px;"><span>Design Initialization and Elaboration</span></span></li>
+</ul>
+
+<p></p>
+
+
+
+<p></p>
+
+
+<p></p>
+
+<p><br /></p>
+
+<p><br /></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="delete_rule_filter.html" id="prev" title="delete_rule_filter">delete_rule_filter</a></em></b><b><em><a href="encrypt.html" id="nex" title="encrypt">encrypt</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

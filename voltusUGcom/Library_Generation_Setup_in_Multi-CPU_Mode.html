@@ -1,0 +1,109 @@
+
+<html><head><title>Library Generation Setup in Multi-CPU Mode</title>
+<meta name="page_sequence" content="17003000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666114" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Library Generation Setup in Multi-CPU Mode" />
+<meta name="Keywords" content="library,CPU,design,macros,generation" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Distributed Processing," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666114" />
+<meta name="NextFile" content="IR_Drop_Analysis_Setup_in_Multi-CPU_Mode.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Power_Analysis_Setup_in_Multi-CPU_Mode.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Library Generation Setup in Multi-CPU Mode" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Power_Analysis_Setup_in_Multi-CPU_Mode.html" title="Power_Analysis_Setup_in_Multi-CPU_Mode">Power_Analysis_Setup_in_Multi- ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="IR_Drop_Analysis_Setup_in_Multi-CPU_Mode.html" title="IR_Drop_Analysis_Setup_in_Multi-CPU_Mode">IR_Drop_Analysis_Setup_in_Mult ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Library Generation Setup in Multi-CPU Mode</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>The Library Generation flow supports multi-CPU processing to improve the overall run time for large designs. You can enable this flow using the <code>-enable_distributed_processing</code> parameter of the <code>set_pg_library_mode</code> command.</p>
+
+<p>The flow requires separate Tcl scripts for the macro and standard cells. For macros, you need to specify the <code>-macros_config_file</code> parameter of the <code>set_pg_library_mode</code> command to provide configuration details for each macro cell per Library Generation run. This is an additional input for macros cell type wherein you can provide macro-specific Spice and GDS. The format of the file is:</p>
+
+<p><code>CELL &lt;cell1&gt;<br />GDS_FILE &lt;gds_file1&gt;<br />SUBCKT_FILE &lt;subckt_file1&gt;<br />TRIGGER_FILE &lt;trigger_file_path&gt;<br />POWER_GATE_PARAMS &lt;parameters&gt;</code></p>
+
+<p><code>CELL &lt;cell2&gt;<br />GDS_FILE &lt;gds_file1&gt;<br />SUBCKT_FILE &lt;subckt_file1&gt;<br />...</code></p>
+
+<p><code>CELL</code> is the keyword to specify a new cell that is to be characterized. This is a mandatory keyword. This keyword is followed by optional keywords, like <code>GDS_FILE</code> and <code>SUBCKT_FILE</code>, that are specific to the cell.</p>
+
+<p>The use model for Library Generation in the multi-CPU mode is:</p>
+
+<p><span class="fontredcadence">
+<p><code>set_distributed_hosts -local -time_out 240<br />set_multi_cpu_usage -local_cpu 4<br />set_pg_library_mode -enable_distributed_processing true<br />-cell_type macros|stdcells  <br />-macros_config_file config.file #applicable only for macros<br />.....<br />write_pg_library -out_dir &lt;directory_name&gt;</code></p>
+</span></p>
+<h4 id="LibraryGenerationSetupinMultiCPUMode-RelatedTopics"><br /><em> Related Topics</em></h4>
+<ul><li><a href="Distributed_Processing_Setup.html">Distributed Processing Setup</a></li><li><a href="Distributed_Processing.html">Distributed Processing</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Power_Analysis_Setup_in_Multi-CPU_Mode.html" id="prev" title="Power_Analysis_Setup_in_Multi-CPU_Mode">Power_Analysis_Setup_in_Multi- ...</a></em></b><b><em><a href="IR_Drop_Analysis_Setup_in_Multi-CPU_Mode.html" id="nex" title="IR_Drop_Analysis_Setup_in_Multi-CPU_Mode">IR_Drop_Analysis_Setup_in_Mult ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

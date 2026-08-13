@@ -1,0 +1,144 @@
+
+<html><head><title>Snapshots Hierarchy and Inheritance</title>
+<meta name="page_sequence" content="20005000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="leenap" />
+<meta name="CreateDate" content="2026-03-26" />
+<meta name="CreateTime" content="1774530256" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Stylus Common UI Migration Guide" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Migration Guide" />
+<meta name="DocType" content="Migration" />
+<meta name="FileTitle" content="Snapshots Hierarchy and Inheritance" />
+<meta name="Keywords" content="snapshot stack,push_snapshot_stack,create_snapshot,pop_snapshot_stack,hierarchy" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Metrics," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusMIGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-03-26" />
+<meta name="ModifiedTime" content="1774530256" />
+<meta name="NextFile" content="Streaming_Metrics.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Snapshots.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Migration Guide -- Snapshots Hierarchy and Inheritance" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="innovusCUIMig261" />
+<meta name="confluence-version" content="7.19.19" />
+<meta name="ecms-plugin-version" content="04.21.019" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusMIGcomTOC.html">Contents</a></li><li><a class="prev" href="Snapshots.html" title="Snapshots">Snapshots</a></li><li style="float: right;"><a class="viewPrint" href="voltusMIGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Streaming_Metrics.html" title="Streaming_Metrics">Streaming_Metrics</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Migration Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Snapshots Hierarchy and Inheritance</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span style="font-size: 20.0px;letter-spacing: -0.008em;">Snapshots Hierarchy</span></p>
+<div class="line number1 index0 alt2">
+<p>You can use snapshots to produce a hierarchy, which allows you to check the data of a specific step. You can do this by managing the&#xa0;<em>snapshot&#xa0;</em><em>stack </em>to control the current depth of the snapshots being made.</p>
+
+<p>For example the following code would produce the following tables:</p>
+<div class="container"><div class="line number1 index0 alt2"><code>&gt; set_metric -name timing.setup.wns -value {-0.100 ns}</code></div>
+<div class="line number2 index1 alt1"><code>&gt; create_snapshot -name init</code></div>
+<div class="line number3 index2 alt2"><code>&gt; push_snapshot_stack</code></div>
+<div class="line number4 index3 alt1"><code>&gt; set_metric -name timing.setup.wns -value {-0.700 ns}</code></div>
+<div class="line number5 index4 alt2"><code>&gt; create_snapshot -name place_start_up</code></div>
+<div class="line number6 index5 alt1"><code>&gt; set_metric -name timing.setup.wns -value {-0.550 ns}</code></div>
+<div class="line number7 index6 alt2"><code>&gt; create_snapshot -name place_work</code></div>
+<div class="line number8 index7 alt1"><code>&gt; set_metric -name timing.setup.wns -value {-0.500 ns}</code></div>
+<div class="line number9 index8 alt2"><code>&gt; create_snapshot -name place_finish</code></div>
+<div class="line number10 index9 alt1"><code>&gt; pop_snapshot_stack</code></div>
+<div class="line number11 index10 alt2"><code>&gt; create_snapshot -name place</code></div>
+<div class="line number12 index11 alt1"><code>&gt; set_metric -name timing.setup.wns -value {-0.050 ns}</code></div>
+<div class="line number13 index12 alt2"><code>&gt; create_snapshot -name clock</code></div>
+<div class="line number14 index13 alt1"><code>&gt; set_metric -name timing.setup.wns -value {-0.075 ns}</code></div>
+<div class="line number15 index14 alt2"><code>&gt; create_snapshot -name route</code></div>
+</div>
+<div class="line number15 index14 alt2">The above code creates the following snapshot hierarchy:</div>
+<div class="line number15 index14 alt2">
+<p><code> run</code><br /><code>&#xa0; |--- init</code><br /><code>&#xa0; |--- place</code><br /><code>&#xa0; | |--- place_start_up</code><br /><code>&#xa0; | |--- place_work</code><br /><code>&#xa0; | `--- place_finish</code><br /><code>&#xa0; |--- clock</code><br /><code>&#xa0; `--- route</code></p>
+
+<p>In the html file, a table is produced with a link for the &quot;place&quot; snapshot. &#xa0;When you click this link, it will show the lower hierarchy steps that were included through the use of the stack.</p>
+
+<p><span class="confluence-embedded-file-wrapper"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/712492788/712492789.png" data-linked-resource-container-id="712492788" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="snapshot_hierarchy.png" data-linked-resource-id="712492789" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/712492788/712492789.png" /></span></p>
+
+<p><strong>Note</strong>: While using the stack it is important to remember that the system is working with a stream of data. Therefore, when you push, a lower level of hierarchy is created, and when you pop the stack, the generated child snapshots are included in the&#xa0;<em><strong>next</strong></em> snapshot to be created.</p>
+</div>
+</div>
+<h2 id="SnapshotsHierarchyandInheritance-SnapshotsInheritance">Snapshots Inheritance</h2>
+
+<p><span>When a hierarchy is produced, the parent snapshot automatically </span><em>inherits</em><span> metric values from the last child snapshot. For example, consider the following:</span><br /><code>&gt; set_metric -name m -value 1</code><br /><code>&gt; create_snapshot -name before_parent</code><br /><code>&gt; push_snapshot_stack</code><br /><code>&gt; set_metric -name m -value 2</code><br /><code>&gt; create_snapshot -name child_A</code><br /><code>&gt; set_metric -name m -value 3</code><br /><code>&#xa0;</code><br /><code>&gt; create_snapshot -name child_B</code><br /><code>&gt; pop_snapshot_stack</code><br /><code>&gt; create_snapshot -name parent</code><br /><code>&gt; set_metric -name m -value 4</code><br /><code>&gt; create_snapshot -name after_parent</code></p>
+
+<p><br /></p>
+
+<p>The above code creates the following snapshot hierarchy:</p>
+
+<p><code>run</code><br /><code>&#xa0; |--- before_parent (m=1)</code><br /><code>&#xa0; |--- parent (m=3 *inherited)</code><br /><code>&#xa0; | |--- child_A (m=2)</code><br /><code>&#xa0; | `--- child_B (m=3)</code><br /><code>&#xa0; `--- after_parent (m=4)&#xa0;</code></p>
+
+<p>In this example, the snapshot &quot;parent&quot; will inherit the value for M that was captured by snapshot &quot;child_B&quot;, that is, &#39;3&#39;. &#xa0;</p>
+
+<p>Values are only inherited if that metric is not explicitly set during the parent. &#xa0;For example, consider the slight modification of the above example:<br />&#xa0;<br /><code>&gt; set_metric -name m -value 1</code><br /><code>&gt; create_snapshot -name before_parent</code><br /><code>&gt; push_snapshot_stack</code><br /><code>&gt; set_metric -name m -value 2</code><br /><code>&gt; create_snapshot -name child_A</code><br /><code>&gt; set_metric -name m -value 3</code><br /><code>&#xa0;</code><br /><code>&gt; create_snapshot -name child_B</code><br /><code>&gt; pop_snapshot_stack</code><br /><code>&gt; set_metric -name m -value PARENT_VALUE; ###### &lt;--- added line&#xa0;</code><br /><code>&gt; create_snapshot -name parent</code><br /><code>&gt; set_metric -name m -value 4</code><br /><code>&gt; create_snapshot -name after_parent</code><br />This would result in the value of &#39;PARENT_VALUE&#39; being captured for the &#39;m&#39; metric in the &#39;parent&#39; snapshot.</p>
+
+<p><br /></p>
+<h4 id="SnapshotsHierarchyandInheritance-RelatedInformation" style="text-align: left;">Related Information</h4>
+<ul><li><code><a href="Stylus_Common_UI_Metrics.html">Stylus Common UI Metrics</a></code></li><li><code><a href="Metric_Commands.html">Metric Commands</a></code></li><li><code><a href="Metric_Object_Definition.html">Metric Object Definition</a></code></li><li><code><a href="Snapshots.html">Snapshots</a></code></li><li><code><a href="Streaming_Metrics.html">Streaming Metrics</a></code></li></ul><div align="center">
+<p><br /></p>
+</div>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Snapshots.html" id="prev" title="Snapshots">Snapshots</a></em></b><b><em><a href="Streaming_Metrics.html" id="nex" title="Streaming_Metrics">Streaming_Metrics</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

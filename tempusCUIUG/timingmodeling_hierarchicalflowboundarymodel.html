@@ -1,0 +1,192 @@
+
+<html><head><title>Hierarchical Flow with Boundary Model</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845243" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Hierarchical Flow with Boundary Model" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845243" />
+<meta name="NextFile" content="timingmodeling_clockmappingboundarymodel.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="timingmodeling_boundarymodelflow.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- Hierarchical Flow with Boundary Model" />
+<meta name="Keywords" content="Hierarchical Flow with Boundary Model" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Scope Analysis,Timing Modeling,Stylus" />
+<meta name="prod_subfeature" content="Scope Analysis, Timing Modeling" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="timingmodeling_boundarymodelflow.html" title="Boundary Model Flow">Boundary Model Flow</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="timingmodeling_clockmappingboundarymodel.html" title="Clock Mapping in Top Level Run with Boundary Models">Clock Mapping in Top Level Run ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:hierarchicalflowboundarymodel" title="Hierarchical Flow with Boundary Model"></a><h3>
+<a id="pgfId-1034238"></a><a id="88082"></a>Hierarchical Flow with Boundary Model</h3>
+
+<p>
+<a id="pgfId-1032432"></a>The boundary model hierarchical flow is described below.</p>
+
+<h4>
+<a id="pgfId-1032433"></a>Creating Boundary Models</h4>
+
+<p>
+<a id="pgfId-1036230"></a>For creating a boundary model of a block, you can use the <a href="../tempusCUI/create_boundary_model.html">create_boundary_model</a> command.</p>
+<p>
+<a id="pgfId-1036399"></a>The block run script can be modified as follows:</p>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1036402"></a>read_libs &lt;&gt;</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1711366"></a>read_netlist block.v -top block</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1711367"></a>init_design</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1036404"></a>read_spef block.spef</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1036405"></a>read_sdc block.sdc</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1036395"></a><strong>create_boundary_model -dir bm</strong></pre>
+<div class="webflare-information-macro webflare-macro-note">
+<a id="pgfId-1667982"></a>The <code>create_boundary_model</code> command runs the <code>update_timing</code> command by default. It is recommended not to invoke this command explicitly. If you manually include the <code>update_timing</code> command, this might result in redundant execution and increased runtime, especially for large designs.</div>
+
+<h4>
+<a id="pgfId-1032447"></a>Boundary Model Usage</h4>
+
+<p>
+<a id="pgfId-1036292"></a>In the top-level timing run, the boundary model can be loaded (instead of the full block Verilog and SPEF) by using the <a href="../tempusCUI/read_boundary_model.html">read_boundary_model</a> command before the <code>init_design</code><a id="marker-1711378"></a> command is run. The boundary models can be loaded for multiple blocks.</p>
+<p>
+<a id="pgfId-1036442"></a>The following example shows a sample top run script for flat timing analysis:</p>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1711384"></a>read_libs [lib1, lib2]</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1711385"></a>read_boundary_model -dir BM1</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1711386"></a>read_boundary_model -dir BM2</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1711387"></a>read_netlist &#39;block.v&#39;</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1711388"></a>init_design</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1711389"></a>read_sdc tst.sdc</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1711390"></a>read_spef tst.spef </pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1711391"></a>update_timing -full</pre>
+<p>
+<a id="pgfId-1036468"></a>This script can be modified for top analysis with boundary models, as shown below:</p>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1711396"></a>read_libs &lt;&gt;</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1036471"></a><strong>read_boundary_model -dir bm</strong></pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1711401"></a>init_design</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1036473"></a>read_spef top.spef</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1036474"></a>read_sdc top.sdc</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-1036464"></a>update_timing</pre>
+<p>
+<a id="pgfId-1036351"></a>It may be noted that none of the higher-level SPEF files should contain parasitics for the boundary model block, because this will lead to extra parasitics being present on the primary I/O nets of the block instances. Therefore, for performing timing analysis with boundary models you must use the hierarchical SPEF.</p>
+<p>
+<a id="pgfId-1036352"></a>If both the boundary model and Verilog of a block are read at the top level, then the model netlist will override the block netlist. This run will have a higher run time and memory usage as compared to the run with only block boundary models - with the same accuracy. Hence, it is recommended to remove the block Verilog from the top run script.</p>
+
+<h4>
+<a id="pgfId-1032469"></a><a href="../tempusCUI/timing_Category_Attributes.html">timing_full_context_flow</a>attributeBoundary Model Contents</h4>
+
+<p>
+<a id="pgfId-1036507"></a>A boundary model consists of the following:</p>
+<ul><li>
+<a id="pgfId-1036530"></a>Netlist for a model in a binary form:<ul><li>
+<a id="pgfId-1036531"></a>Interface paths<br />
+<a id="pgfId-1036532"></a>The logic which constitutes the interface paths of a block are saved in the boundary model netlist. This includes the paths from the primary input ports to the sequential input pins, from the sequential output pins to the output ports, and from the input port(s) to the output ports. The interface paths are timed in the top level analysis. </li><li>
+<a id="pgfId-1036533"></a>Extended fanin<br />
+<a id="pgfId-1036526"></a>The slew/arrival and the graph-based analysis (GBA) slack at an endpoint depends on its full fanin cone, therefore, the cone is also saved in the boundary model for an accurate top level timing analysis. The extended fanin logic is timed during the top level analysis. </li><li>
+<a id="pgfId-1036570"></a>Internal attackers<br />
+<a id="pgfId-1036571"></a>Internal path nets, that are SI attackers to the interface paths nets, along with their slew and timing windows (TW) are preserved in the boundary model. All the leaf driver and receiver instances of such nets are also included. These attacker nets are not timed in the top level analysis but their SI impact, as per the stored slew and timing windows adjusted for clock latencies, is taken into account for better accuracy. </li><li>
+<a id="pgfId-1036572"></a>Side load receivers<br />
+<a id="pgfId-1036566"></a>The receiver instances on the interface path nets that are not part of the interface logic are included.</li></ul></li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+<a id="pgfId-1032480"></a>The following figure shows an example of a netlist saved for a boundary model of a simple block.</p>
+
+<p class="webflare-indent1"><strong>Figure -16
+<a id="pgfId-1032693"></a>Saved netlist for a boundary model</strong></p>
+<p>
+<a id="pgfId-1032484"></a></p>
+<div class="webflare-div-image">
+<img width="667" height="443" src="images/timingmodeling-21.gif" /></div>
+
+<p>
+<a id="pgfId-1032485"></a>The netlist contains the following data:</p>
+<ul><li>
+<a id="pgfId-1032486"></a>Parasitics for the nets in the model in the SPEF format.</li><li>
+<a id="pgfId-1032487"></a>The SDC constraints for elements on block internal paths. These constraints are not used by the top-level timing but are used if a block scope is generated for the boundary modeled block in the top-level session.</li><li>
+<a id="pgfId-1032488"></a>Timing context data. Several types of timing data are saved to improve the accuracy of the model. Some of these are:<ul><li>
+<a id="pgfId-1032489"></a>Timing windows and slew data for non-interface attacker nets.</li><li>
+<a id="pgfId-1032490"></a>Clock definitions. The definitions of all the clocks used in the block-level timing is stored in the model, in order to automatically map block-level clocks to the top-level clocks. This mapping is required for timing window application.</li><li>
+<a id="pgfId-1032491"></a>Constant values on pins of sequential instances that are not part of a boundary path. These constants can affect timing results of sequential instances and are therefore maintained in the boundary model. The extra constants on non-extended fanin pins are also maintained in the boundary model.</li></ul></li></ul>
+
+
+
+
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="timingmodeling_boundarymodelflow.html" id="prev" title="Boundary Model Flow">Boundary Model Flow</a></em></b><b><em><a href="timingmodeling_clockmappingboundarymodel.html" id="nex" title="Clock Mapping in Top Level Run with Boundary Models">Clock Mapping in Top Level Run ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

@@ -1,0 +1,123 @@
+
+<html><head><title>Power-Grid Library Generation</title>
+<meta name="page_sequence" content="22000000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666128" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Power-Grid Library Generation" />
+<meta name="Keywords" content="library,Ios,power-grid,characterization,,standard cells" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Power-Grid Library Generation," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666128" />
+<meta name="NextFile" content="Library_Generation_Flow.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Tcl_Command_Examples_for_Early_Rail_Analysis.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Power-Grid Library Generation" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Tcl_Command_Examples_for_Early_Rail_Analysis.html" title="Tcl_Command_Examples_for_Early_Rail_Analysis">Tcl_Command_Examples_for_Early ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Library_Generation_Flow.html" title="Library_Generation_Flow">Library_Generation_Flow</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <div style="width: 100%; font-size: 32px; text-align: left;               font-weight: bold;">12</div>
+<h1 style="margin: 4px 0 4px;"><span>Power-Grid Library Generation</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>Voltus IC Power Integrity Solution requires power-grid libraries for dynamic power calculation and static and dynamic IR drop analysis. The power-grid libraries are generated for standard cells, memories, IOs and custom macros in the design. Some of the library characterization features include the following:</p>
+<ul><li>GUI-driven and interactive Tcl command interface</li><li>Spectre-SIMI interface for accurate coupling capacitance characterization</li><li>Automatic spawning of library generation jobs for macros (memories)</li><li>Library reports and debugging</li><li>Library viewer</li></ul><div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p><span style="color:var(--ds-text,#172b4d);">Hierarchical PGV generation is not supported by Voltus. Use the hierarchical power integrity analysis flow with Extreme Modeling to generate xPGV model for large digital blocks.</span></p>
+</div>
+</div>
+
+<p>The Library Generation engine is used to create and modify a cell library database of power-grid views. In an integrated circuit design, it is common for many standard cells and megacells to be reused across multiple designs. Cadence flows require you to pre-process such cells, reducing the overall time required for extraction.</p>
+<div aria-label="Info" class="confluence-information-macro  confluence-information-macro-information" role="region"><span class="aui-icon aui-icon-small aui-iconfont-info-filled confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>Cadence strongly recommends that you pre-process standard cell layout separately from megacell layout. In most user environments, the standard cell layout rarely changes, but the megacell layout does. In addition, standard cells are more likely to be shared among groups and supported by a central CAD organization. Megacells may be unique to the particular design group without following a strict naming convention, so names may conflict within the same Library Generation library.</p>
+</div>
+</div>
+<h3 id="PowerGridLibraryGeneration-TypesofPower-GridLibraries">Types of Power-Grid Libraries</h3>
+
+<p>The following are the two types of libraries:</p>
+<ul><li>
+<p>Technology Library - The Technology Library contains the tech file, area capacitance specification, decap/filler/powergate cells, and tech view for all the cells. A technology library is a minimum requirement to run rail analysis.<br /><br /></p>
+</li></ul>
+<p><span class="fontredcadence"><div aria-label="Info" class="confluence-information-macro  confluence-information-macro-information" role="region"><span class="aui-icon aui-icon-small aui-iconfont-info-filled confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>The technology library is a mandatory requirement for rail analysis. However, to obtain accurate IR drop simulation, the power-grid library should be characterized for standard cells and macro blocks. When specifying the list of PGVs to rail analysis using the <code>set_rail_analysis_config</code> command, you must specify the technology library as the first PGV library in the list. If both technology and standard cell PGV libraries exist, the standard cell PGV is given a higher precedence.</p>
+</div>
+</div>
+</span></p>
+<ul><li>
+<p>Power-Grid Library- The Power Grid Library contains three kind of power grid views (PGV), Early/IR/EM, for standard cell and macro/memory/io cells. The power-grid library does not contain the tech file, and the decoupling capacitance is derived from Spice simulation.</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>Power Grid Libraries for standard cells are often generated by a third party and shipped to the customer with the corresponding process. In advanced process technologies (&lt; 90nm) there may be multiple variants for the same process including different number of metal layers, different width and thickness combinations for top metal layers. Since standard cells usually only use the bottom couple of metal layers, these variants should not affect the standard cell library itself. A third party can ship technology libraries for each process variant to use with a single standard cell power grid library or can create a specific combination of corner and header.lef. Voltus will use the Quantus techfile embedded in the technology library to process all the Power Grid Libraries.</p>
+</div>
+</div>
+</li></ul><h4 id="PowerGridLibraryGeneration-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Library_Generation_Flow.html">Library Generation Flow</a></li><li><a href="Types_of_Power-Grid_Views.html">Types of Power-Grid Views</a></li><li><a href="Generating_a_Technology_Library.html">Generating a Technology Library</a></li><li><a href="Generating_the_Standard_Cells_Power-Grid_Library.html">Generating the Standard Cells Power-Grid Library</a></li><li><a href="Creating_a_Power-Grid_View_for_a_Macro_Cell.html">Creating a Power-Grid View for a Macro Cell</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Tcl_Command_Examples_for_Early_Rail_Analysis.html" id="prev" title="Tcl_Command_Examples_for_Early_Rail_Analysis">Tcl_Command_Examples_for_Early ...</a></em></b><b><em><a href="Library_Generation_Flow.html" id="nex" title="Library_Generation_Flow">Library_Generation_Flow</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

@@ -1,0 +1,499 @@
+
+<html><head><title>Rail Analysis</title>
+<meta name="page_sequence" content="16000000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="anshikag" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775667214" />
+<meta name="DataType" content="Release information" />
+<meta name="Description" content="Describes all the new features of Voltus IC Power Integrity Solution 26.1." />
+<meta name="DocTitle" content="What&#39;s New in Voltus IC Power Integrity Solution" />
+<meta name="DocType" content="Release Note" />
+<meta name="FileTitle" content="Rail Analysis" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="general" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Rail Analysis,Stylus," />
+<meta name="prod_subfeature" content="Rail Analysis," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusWN" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775667214" />
+<meta name="NextFile" content="Multi-Die_IR_Analysis.html" />
+<meta name="Group" content="What&#39;s New in Voltus" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Static_and_Dynamic_Power_Analysis.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="What&#39;s New in Voltus IC Power Integrity Solution -- Rail Analysis" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="epsWN261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusWNTOC.html">Contents</a></li><li><a class="prev" href="Static_and_Dynamic_Power_Analysis.html" title="Static_and_Dynamic_Power_Analysis">Static_and_Dynamic_Power_Analy ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusWN.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Multi-Die_IR_Analysis.html" title="Multi-Die_IR_Analysis">Multi-Die_IR_Analysis</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>What&#39;s New in Voltus IC Power Integrity Solution<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <div style="width: 100%; font-size: 32px; text-align: left;               font-weight: bold;">5</div>
+<h1 style="margin: 4px 0 4px;"><span>Rail Analysis</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p></p>
+<div class="toc-macro rbtoc1775667198879">
+<ul class="toc-indentation">
+<li><a href="#RailAnalysis-Release26.10Enhancements">Release 26.10 Enhancements</a>
+<ul class="toc-indentation">
+<li><a href="#RailAnalysis-EnhancedRailAnalysisReportingwithAverageEffectiveResistance">Enhanced Rail Analysis Reporting with Average Effective Resistance</a></li>
+<li><a href="#RailAnalysis-GeneratesMultipleRLRPandREFFReportsinaSingleRun">Generates Multiple RLRP and REFF Reports in a Single Run</a></li>
+<li><a href="#RailAnalysis-SeparateTimingandSwitchingWindowEIVReports">Separate Timing and Switching Window EIV Reports</a></li>
+<li><a href="#RailAnalysis-NewParametertoSpecifytheLifetimeRatingFactor">New Parameter to Specify the Lifetime Rating Factor</a></li>
+<li><a href="#RailAnalysis-VoltusInsightAICommandEnhanced">Voltus InsightAI Command Enhanced</a></li>
+<li><a href="#RailAnalysis-NewParameterforViolationMagnitude-BasedRepairwithExternalSignoffToolConsistency">New Parameter for Violation Magnitude-Based Repair with External Signoff Tool Consistency</a></li>
+<li><a href="#RailAnalysis-SHEParameterFileSpecification">SHE Parameter File Specification</a></li>
+<li><a href="#RailAnalysis-PartialNetCoverageReportinginSPEF">Partial Net Coverage Reporting in SPEF</a></li>
+<li><a href="#RailAnalysis-AbilitytoCompressRailOutputFiles">Ability to Compress Rail Output Files</a></li>
+<li><a href="#RailAnalysis-set_power_dataCommandEnhanced">set_power_data Command Enhanced</a></li>
+<li><a href="#RailAnalysis-VoltusInsightAIReportingCapabilities">Voltus InsightAI Reporting Capabilities</a></li>
+<li><a href="#RailAnalysis-EnhancedVoltusInsightAICommandsforTimingPathProtectionduringPGReinforcement">Enhanced Voltus InsightAI Commands for Timing Path Protection during PG Reinforcement</a></li>
+<li><a href="#RailAnalysis-GenerationofVoltusInsightAIDatabase">Generation of Voltus InsightAI Database</a></li>
+<li><a href="#RailAnalysis-create_die_modelCommandEnhanced">create_die_model Command Enhanced</a></li>
+<li><a href="#RailAnalysis-SupporttoExcludeTapsinaPGV">Support to Exclude Taps in a PGV</a></li>
+<li><a href="#RailAnalysis-create_current_regionCommandEnhanced">create_current_region Command Enhanced</a></li>
+<li><a href="#RailAnalysis-RuntimeOptimizationforReadingtheDEFfiles">Runtime Optimization for Reading the DEF files</a></li>
+<li><a href="#RailAnalysis-SupporttoSuppresstheNegativeRCvalues">Support to Suppress the Negative RC values</a></li>
+<li><a href="#RailAnalysis-convert_gds_to_defCommandEnhanced">convert_gds_to_def Command Enhanced</a></li>
+<li><a href="#RailAnalysis-VoltusInsightAIEnhancements">Voltus InsightAI Enhancements</a></li>
+<li><a href="#RailAnalysis-read_power_rail_resultsCommandEnhanced">read_power_rail_results Command Enhanced</a></li>
+<li><a href="#RailAnalysis-SinglePartitionSupportDuringExtraction">Single Partition Support During Extraction</a></li>
+<li><a href="#RailAnalysis-SupporttoReadPowerDatatoIdentifyPTIFiles">Support to Read Power Data to Identify PTI Files</a></li>
+<li><a href="#RailAnalysis-AbilitytoReuseHPTData">Ability to Reuse HPT Data</a></li>
+<li><a href="#RailAnalysis-set_die_modelCommandEnhanced">set_die_model Command Enhanced</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<p></p>
+<h2 id="RailAnalysis-Release26.10Enhancements">Release 26.10 Enhancements</h2>
+
+<p><br /></p>
+
+<p><span class="fontredcadence"><h3 id="RailAnalysis-EnhancedRailAnalysisReportingwithAverageEffectiveResistance">Enhanced Rail Analysis Reporting with Average Effective Resistance</h3>
+
+<p>A new argument, <code>avg</code>, has been added to the <code><a href="../voltustxtcmdref/set_rail_analysis_mode.html">set_rail_analysis_mode</a></code>&#xa0;<code>-reff_pin_report_method</code> parameter to improve reporting reliability for signoff analysis. When analyzing large macro cells, instances at different physical locations can exhibit varying effective resistance (reff) values. These location-dependent variations can introduce instability in signoff results, making it challenging to achieve consistent and reliable analysis outcomes.</p>
+
+<p>The <code>avg </code>argument addresses this challenge by providing averaged effective resistance values, which offer greater stability compared to individual node measurements.</p>
+
+<p><strong>Usage Models</strong></p>
+<ul><li><code>-reff_pin_report_method avg</code> - Reports only the average effective resistance value for instance pins with multiple nodes</li><li><code>-reff_pin_report_method {worst avg best}</code>&#xa0;- Reports comprehensive effective resistance data: best, worst, and average values for instance pins with multiple nodes</li></ul><h3 id="RailAnalysis-GeneratesMultipleRLRPandREFFReportsinaSingleRun">Generates Multiple RLRP and REFF Reports in a Single Run</h3>
+
+<p>The <code><a href="../voltustxtcmdref/set_rail_analysis_mode.html">set_rail_analysis_mode</a></code>&#xa0;command has been enhanced with improved <code>-reff_pin_report_method</code> and <code>-rlrp_pin_report_method</code> parameters that now support generating multiple report types simultaneously. This enhancement accelerates closure of RLRP and REFF issues by having all necessary report variants readily available for comparison and analysis. Each report type is automatically saved to a separate file, making it easy to access specific analysis results.</p>
+
+<p><strong>Example</strong>:<br /><code>set_rail_analysis_mode -reff_pin_report_method { best avg worst}</code></p>
+
+<p>Output files:<br /><code>net.best.effr</code><br /><code>net.avg.effr<br />net.worst.effr</code><br /><code>domain_effr.best.rpt</code><br /><code>domain_effr.avg.rpt<br />domain_effr.worst.rpt<br /></code></p>
+<h3 id="RailAnalysis-SeparateTimingandSwitchingWindowEIVReports">Separate Timing and Switching Window EIV Reports</h3>
+
+<p>The <code><a href="../voltustxtcmdref/set_rail_analysis_mode.html">set_rail_analysis_mode</a></code>&#xa0;<code>-eiv_eval_window</code> parameter has been enhanced to provide greater flexibility in EIV report generation during rail analysis. Rail analysis reporting now supports generating separate EIV reports for both timing and switching windows within a single analysis run. Previously, you could use the <code>both </code>argument to generate a single combined report containing both switching and timing-window EIV data. &#xa0;Now, you can use the <code>-eiv_eval_window {switching timing}</code> parameter to generate distinct reports for each window type in a single run. This enhancement allows easier post-processing and review of specific EIV analysis results, generating both report types simultaneously without additional runs.</p>
+
+<p><strong>Example</strong>:</p>
+
+<p>The following image shows the EIV reports for the switching window, timing window, and both:</p>
+
+<p><code><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732479877/735316008.png" data-linked-resource-container-id="732479877" data-linked-resource-container-version="17" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="switching_timing_window.png" data-linked-resource-id="735316008" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732479877/735316008.png" tabindex="0" width="680" /></span></code></p>
+
+<p>The type of report generated is based on the following use models:</p>
+<ul><li><code>-eiv_eval_window {both}</code>&#xa0; - Reports 3 Only (*Default Behavior)</li><li><code>-eiv_eval_window {switching}</code>&#xa0; - Reports 1 Only</li><li><code>-eiv_eval_window {timing}</code>&#xa0; - Reports 2 Only</li><li><code>-eiv_eval_window {switching timing</code>}&#xa0; - Reports 1 and 2&#xa0;</li><li><code>-eiv_eval_window {switching both}</code>&#xa0; - Reports 1 and 3</li><li><code>-eiv_eval_window {timing&#xa0; both}</code>&#xa0; - Reports 2 and 3</li></ul>
+<p>When multiple EIV methods (best and worstavg) are enabled, the file naming convention for the EIV reports is based on the EIV method and EIV evaluation window, as shown in the following examples:</p>
+
+<p><code>VDD_VSS.worstavg.timing.iv&#xa0;</code><br /><code>VDD_VSS.worstavg.switching.iv</code><br /><code>VDD_VSS.best.timing.iv&#xa0;</code></p>
+<h3 id="RailAnalysis-NewParametertoSpecifytheLifetimeRatingFactor">New Parameter to Specify the Lifetime Rating Factor</h3>
+
+<p>A new parameter, <code>-lifetime_rating_factor_file</code>, has been introduced for both the <code><a href="../voltustxtcmdref/set_rail_analysis_mode.html">set_rail_analysis_mode</a></code>&#xa0;and <code><a href="../voltustxtcmdref/set_signal_em_analysis_mode.html">set_signal_em_analysis_mode</a></code> commands. This parameter allows you to specify a lifetime rating factor file that contains jmax_life values for each layer. These values are defined based on temperature and lifetime pairs. When you provide this file, EM analysis will automatically select the appropriate <code>jmax_life</code> factor for each layer according to the specific temperature-lifetime combinations defined within the file. The lifetime and EM temperature can be specified using the <code>-lifetime <em>hours</em></code> and <code>-em_temperature</code> <em><code>°C</code></em> parameters.</p>
+
+<p>Following is a snippet of the lifetime rating factor file:</p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup class=""><col class="" /></colgroup><tbody class=""><tr class=""><th class="confluenceTh">
+<p><code>*Rating factor of M0/V0/M1/V1/M2/V3/M3...</code><br /><code>TEMPERATURE &#xa0; &#xa0; &#xa0;&#xa0; 90&#xa0; &#xa0; &#xa0; &#xa0; 95&#xa0; &#xa0; &#xa0; &#xa0;100 &#xa0; &#xa0; 105&#xa0; &#xa0; &#xa0;110 ...&#xa0;&#xa0;</code><br /><code>LifeTime</code></p>
+
+<p>---------------------------------------------------------------------------------<br /><code>0.5&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 2.578&#xa0; &#xa0; 2.242&#xa0; &#xa0; 2.024&#xa0; &#xa0;1.774&#xa0; &#xa0;1.547&#xa0; &#xa0; &#xa0;</code><br /><code>1 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.520&#xa0; &#xa0; 2.191&#xa0; &#xa0; 1.979&#xa0; &#xa0;1.734&#xa0; &#xa0;1.512&#xa0; &#xa0; &#xa0;</code><br /><code>2 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.430&#xa0; &#xa0; 2.113&#xa0; &#xa0; 1.908&#xa0; &#xa0;1.672&#xa0; &#xa0;1.458<br />3 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.382&#xa0; &#xa0; 2.072&#xa0; &#xa0; 1.871&#xa0; &#xa0;1.639&#xa0; &#xa0;1.430<br />...</code></p>
+
+<p>---------------------------------------------------------------------------------<code>&#xa0; &#xa0; <br /></code></p>
+</th></tr>
+</tbody></table></div>
+<h3 id="RailAnalysis-VoltusInsightAICommandEnhanced">Voltus InsightAI Command Enhanced</h3>
+
+<p>The <code><a href="../voltustxtcmdref/set_voltus_insight_mode.html">set_voltus_insight_mode</a></code>&#xa0;command now includes new parameters to support enhanced scenario-based configuration (<span style="color:var(--ds-text,#172b4d);">differing<span>&#xa0;</span></span><span style="color:var(--ds-text,#172b4d);">EIV method, EIV evaluation window</span><span style="color:var(--ds-text,#172b4d);">, and thresholds</span>). These parameters allow scenarios to be defined for various groups or collections within the same repair/report session, enabling greater precision and flexibility. Instead of using uniform threshold or EIV values across all instances, you can customize settings based on:</p>
+<ul><li>Instance collections</li><li>Master blocks</li><li>Rail database directories</li></ul>
+<p>Example: If general clock threshold is set to 10% and data threshold to 12%, a critical instance group can have a stricter 9% threshold. All the 3 threshold settings are honored in the same session. This allows multiple scenarios with different threshold configurations to run simultaneously in a single session.&#xa0;</p>
+<div class="table-wrap"><table class="relative-table wrapped confluenceTable" style="width: 67.1743%;"><colgroup class=""><col class="" style="width: 15.0422%;" /><col class="" style="width: 84.9591%;" /></colgroup><tbody class=""><tr class=""><th class="confluenceTh">New Parameters</th><th class="confluenceTh">Description</th></tr>
+<tr class=""><td class="confluenceTd" colspan="2"><code>-disable_layer <em>filename</em></code></td>
+</tr>
+<tr class=""><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">
+<p>Specifies the name of the file that contains the list of layers to be disabled or excluded during pre-route and post-route RPG.</p>
+
+<p>The format of the file is:<br /><code>Layer1</code><br /><code>Layer2</code><br /><code>Layer3</code></p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd" colspan="2"><code>-instance_mapping <em>filename</em></code></td>
+</tr>
+<tr class=""><td class="confluenceTd"><br /></td>
+<td class="confluenceTd"><p style="text-align: left;">Specifies the name of the file that contains the mapping between a scenario and its corresponding instance files. Each scenario has its own set of instance files.&#xa0; Each line in an instance file defines either an instance name or a block instance name.</p>
+<p style="text-align: left;">Following is a snippet of the instance mapping file (<code>instance_mapping.txt</code>):</p>
+
+<p><code>SCENARIO_1 {instance1.txt instance2.txt}</code><br /><code>SCENARIO_2 {instance1.txt}</code></p>
+
+<p>The content of the 2 instance files is shown below:</p>
+
+<p><code>instance1.txt</code><br /><code>------------</code><br /><code>Inst_A*<br />Inst_B*<br /></code></p>
+
+<p><code>instance2.txt</code><br /><code>-------------</code><br /><code>Inst*</code></p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd" colspan="2"><code>-master_list {<em>list_of_master_blocks</em>}</code></td>
+</tr>
+<tr class=""><td class="confluenceTd"><br /></td>
+<td class="confluenceTd"><span style="color:var(--ds-text,#172b4d);">Specifies the list of master blocks to be reported for IR repair.&#xa0;</span></td>
+</tr>
+<tr class=""><td class="confluenceTd" colspan="2"><code>-master_mapping <em>filename</em></code></td>
+</tr>
+<tr class=""><td class="confluenceTd"><br /></td>
+<td class="confluenceTd"><p style="text-align: left;">Specifies the name of the file that contains the mapping between a scenario and its corresponding master files. Each scenario has its own set of master files.&#xa0; Each line in a master file defines one<strong> </strong>master block.</p>
+<p style="text-align: left;">Following is a snippet of the master mapping file (<code>master_mapping.txt</code>):</p>
+
+<p><code>SCENARIO_1 {master1.txt master2.txt}</code><br /><code>SCENARIO_2 {master1.txt}</code></p>
+
+<p>The content of the 2 master files is shown below:</p>
+
+<p><code>master1.txt</code><br /><code>-------------</code><br /><code>Top</code></p>
+
+<p><code>master2.txt</code><br /><code>-------------</code><br /><code>Super_filter</code></p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd"><strong>Enhanced Parameter</strong></td>
+<td class="confluenceTd"><p style="text-align: left;"><strong>Description</strong></p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd" colspan="2"><code><span style="color:var(--ds-text,#172b4d);">-db_mapping<span>&#xa0;</span></span><em style="text-align: left;">filename</em></code></td>
+</tr>
+<tr class=""><td class="confluenceTd"><span style="color:var(--ds-text,#172b4d);">&#xa0;</span></td>
+<td class="confluenceTd"><p style="text-align: left;">Specifies the name of the file that contains the mapping between a scenario and its corresponding rail directories. Each scenario can be mapped to multiple rail<span> directories. Previously, a single scenario could map to only one rail directory.</span></p>
+<p style="text-align: left;">Following is a snippet of the rail database mapping file (<code>db_mapping.txt</code>):</p>
+
+<p><code>SCENARIO_1 {RailDB1 RailDB2}</code><br /><code>SCENARIO_2 {RailDB1}</code></p>
+</td>
+</tr>
+</tbody></table></div>
+<h3 id="RailAnalysis-NewParameterforViolationMagnitude-BasedRepairwithExternalSignoffToolConsistency">New Parameter for Violation Magnitude-Based Repair with External Signoff Tool Consistency</h3>
+
+<p>A new parameter, <code><a href="../voltustxtcmdref/set_voltus_insight_mode.html">set_voltus_insight_mode</a></code>&#xa0;<code>-violation_input <em>filename</em></code>, has been introduced, enabling repair operations based on violation specifications that align with an external signoff tool. This feature allows Voltus to replicate violation magnitudes for individual instances, ensuring consistent repair behavior between the external signoff tool and Voltus while eliminating the need for global threshold adjustments.</p>
+
+<p>You can specify a text file containing a per‑instance violation specification in the following format:<br /><code>instance_name &#xa0; threshold(mV) &#xa0; violating_amount(mV)</code><br /><code>Example: &#xa0; &#xa0;</code><br /><code>inst_1 &#xa0;100 &#xa0;35</code><br /><code>inst_2&#xa0; 80 &#xa0;20</code></p>
+
+<p><span style="color:var(--ds-text,#172b4d);">For instance 1 (inst_1), an external signoff tool detected a 35mV violation against a 100mV threshold. This violation data allows Voltus to perform repairs using the same violation magnitude values reported by the external tool, ensuring consistency between the tools.</span></p>
+<h3 id="RailAnalysis-SHEParameterFileSpecification"><span style="color:var(--ds-text,#172b4d);">SHE Parameter File Specification</span></h3>
+
+<p><span style="color:var(--ds-text,#172b4d);">A new parameter, <code>-parameter_file,</code> has been introduced for both the <code><a href="../voltustxtcmdref/set_self_heat_analysis_mode.html">set_self_heat_analysis_mode</a></code> and <code><a href="../voltustxtcmdref/analyze_self_heat.html">analyze_self_heat</a></code> commands. This parameter allows you to specify the self-heating effect (SHE) analysis parameter file name (param.sh) required for SHE calculations. This foundry-provided file contains essential alpha and beta coupling factors that the tool uses for coupledT calculations when modeling heat transfer from devices to metal layers.</span></p>
+<h3 id="RailAnalysis-PartialNetCoverageReportinginSPEF">Partial Net Coverage Reporting in SPEF</h3>
+
+<p>A new parameter, <code><a href="../voltustxtcmdref/set_signal_em_analysis_mode.html">set_signal_em_analysis_mode</a></code>&#xa0;<code>-report_unannotated_shapes {true | false}</code>, has been introduced to enhance visibility into partial net coverage within SPEF files. When this parameter is set to <code>true</code>, the <code>&lt;<em>report_name</em>&gt;.rpt.unannotated_shapes</code> is generated. This report identifies and lists nets that contain shapes without resistance annotations, or unanalyzed/ partially analyzed segments. The feature helps to detect incomplete parasitic extraction coverage and improve accuracy during validation and signoff workflows. The reporting of partial net coverage works only when <code>-effort_level</code> is set to <code>high</code>.&#xa0;</p>
+
+<p><strong>Use Model:</strong></p>
+
+<p><code>set_signal_em_analysis_mode </code><code>-effort_level high</code><code>&#xa0;-report_unannotated_shapes true</code></p>
+
+<p><strong>Report Format:</strong></p>
+
+<p><code>NET: &lt;net_name&gt;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &lt;- Specifies the name of the analyzed simulation nets with unannotated shapes<br /></code><code>LAYER (x1 y1 x2 y2)&#xa0; &#xa0;&#xa0;&#xa0;&#xa0;&lt;- Layer name and shape coordinates</code></p>
+
+<p><strong>Sample Report:</strong></p>
+
+<p><code>NET: Net_A</code><br /><code>LAYER (x1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; y1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; x2&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; y2)</code></p>
+
+<p><code>M2&#xa0;&#xa0;&#xa0; (30.2850&#xa0;&#xa0;&#xa0; 12.0800&#xa0;&#xa0;&#xa0; 37.6150&#xa0;&#xa0;&#xa0; 12.2200)</code><br /><code>M2&#xa0;&#xa0;&#xa0; (30.2000&#xa0;&#xa0;&#xa0; 12.0650&#xa0;&#xa0;&#xa0; 30.2850&#xa0;&#xa0;&#xa0; 12.2350)</code><br />...</p>
+<div aria-label="Info" class="confluence-information-macro  confluence-information-macro-information" role="region"><span class="aui-icon aui-icon-small aui-iconfont-info-filled confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>&#xa0;This parameter is applicable only when running in the DP mode; it is not supported in the XP mode.</p>
+</div>
+</div>
+<h3 id="RailAnalysis-AbilitytoCompressRailOutputFiles">Ability to Compress Rail Output Files</h3>
+
+<p>A new parameter, <code>-report_compress_level</code>, has been added to the <code><a href="../voltustxtcmdref/set_rail_analysis_mode.html">set_rail_analysis_mode</a></code>&#xa0;command to compress the rail output files in the GNU Zip format. The compressed files will have the suffix <code>.gz</code>.</p>
+
+<p><strong>Use Model</strong>:<br /><code>set_rail_analysis_mode -report_compress_level {0 | 1-9}</code></p>
+<ul><li><code>0</code>: default, no compression</li><li><code>1-9</code>: the compression levels vary from 1 to 9. 1 provides the fastest compression speed but at a lower ratio, so the file size will be larger. 9 provides the highest compression ratio but at a lower speed.</li></ul><h3 id="RailAnalysis-set_power_dataCommandEnhanced">set_power_data Command Enhanced</h3>
+
+<p>The<span>&#xa0;</span><code>-cell</code><span>&#xa0;</span>parameter has been added to the <code><a href="../voltustxtcmdref/set_power_data.html">set_power_data</a></code><span>&#xa0;</span>command to specify power from the block-level run for the multiple instances of the same block. Therefore, you no longer need to specify power for each instance separately. This option is useful when power is calculated for hierarchical partitions of the design.</p>
+
+<p><strong>Use model</strong>:</p>
+
+<p><code>set_power_data -cell<span>&#xa0;</span><em>cellname</em></code></p>
+
+<p><strong>Example</strong>:</p>
+
+<p><code>set_power_data -cell BlockA -format current {file1, file2, file3 ...}</code></p>
+<h3 id="RailAnalysis-VoltusInsightAIReportingCapabilities">Voltus InsightAI Reporting Capabilities</h3>
+
+<p>A new REPORTS directory has been added at the root level to better organize the Voltus InsightAI analysis results. The following diagram illustrates the directory structure:</p>
+
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732479877/732479878.jpg" data-linked-resource-container-id="732479877" data-linked-resource-container-version="17" data-linked-resource-content-type="image/jpeg" data-linked-resource-default-alias="insight_directory.jpg" data-linked-resource-id="732479878" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="400" src="attachments/732479877/732479878.jpg" tabindex="0" /></span></p>
+
+<p>Here, the number of subdirectories created depends on the hierarchical structure of the design. The REPORTS directory includes the following:</p>
+<ul><li>The Design directory contains the reports for the complete design.</li><li>Each hierarchical master, including the top level, has its own directory that contains the corresponding reports.</li></ul>
+<p><strong>Example</strong><br />For a design with master blocks A and B, the following four directories are created:</p>
+<ul><li>Design &#8211; full design reports</li><li>Top Block &#8211; top-level reports</li><li>Master Block A &#8211; reports for master block A</li><li>Master Block B &#8211; reports for master block B</li></ul>
+<p><br /></p>
+
+<p>To support this enhancement, the following parameters have been introduced:</p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup class=""><col class="" /><col class="" /></colgroup><tbody class=""><tr class=""><th class="confluenceTh" colspan="2"><code><a href="../voltustxtcmdref/set_voltus_insight_mode.html">set_voltus_insight_mode</a></code></th></tr>
+<tr class=""><td class="confluenceTd"><code>-all_scenario_ranking <span style="color:var(--ds-text,#172b4d);">{wiv | tiv}</span></code></td>
+<td class="confluenceTd">Specifies that all scenarios are ranked either based on the total number of violations (TIV) or worst violations (WIV).</td>
+</tr>
+<tr class=""><td class="confluenceTd" colspan="2"><code>-scenario_ranking <span style="color:var(--ds-text,#172b4d);">{wiv | tiv | powerrlrp | powerreff | groundrlrp | groundreff}</span></code></td>
+</tr>
+<tr class=""><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">Specifies that the scenario ranking is done for a single scenario.</td>
+</tr>
+<tr class=""><td class="confluenceTd"><code>-groundREFF_threshold <em>value</em></code></td>
+<td class="confluenceTd">Specifies that the violation report contains only instances that have values less than the specified ground REFF threshold. &#xa0; &#xa0; &#xa0;</td>
+</tr>
+<tr class=""><td class="confluenceTd"><code>-groundRLRP_threshold <em>value</em></code></td>
+<td class="confluenceTd">Specifies that the violation report contains only instances that have values less than the specified ground RLRP threshold.</td>
+</tr>
+<tr class=""><td class="confluenceTd"><code>-powerREFF_threshold &#xa0;<em>value</em></code></td>
+<td class="confluenceTd">Specifies that the violation report contains only instances that have values less than the specified power REFF threshold.&#xa0;</td>
+</tr>
+<tr class=""><td class="confluenceTd"><code>-powerRLRP_threshold <em>value</em></code></td>
+<td class="confluenceTd">Specifies that the violation report contains only instances that have values less than the specified ground RLRP threshold.&#xa0;</td>
+</tr>
+<tr class=""><td class="highlight-grey confluenceTd" colspan="2" data-highlight-colour="grey"><strong><code><span style="color:var(--ds-text,#172b4d);"><a href="../voltustxtcmdref/get_ir_insight.html">get_ir_insight</a></span></code></strong></td>
+</tr>
+<tr class=""><td class="confluenceTd"><code>-report_mode {summary_only | detailed}&#xa0;</code></td>
+<td class="confluenceTd">
+<p>Controls the type of reports generated.</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><strong>Example</strong></p>
+
+<p><code><span>set_voltus_insight_mode -config config.txt -domain ALL -db_mapping db_mapping.txt<br />get_ir_insight -report_mode detailed</span></code></p>
+<h3 id="RailAnalysis-EnhancedVoltusInsightAICommandsforTimingPathProtectionduringPGReinforcement">Enhanced Voltus InsightAI Commands for Timing Path Protection during PG Reinforcement</h3>
+
+<p>The <code><a href="../voltustxtcmdref/set_voltus_insight_mode.html">set_voltus_insight_mode</a></code><code>&#xa0;</code>and <code><a href="../voltustxtcmdref/get_voltus_insight_mode.html">get_voltus_insight_mode</a></code>&#xa0;commands now include new parameters to help protect timing paths during PG stripe reinforcement.</p>
+<div class="table-wrap"><table class="relative-table wrapped confluenceTable" style="width: 71.5985%;"><colgroup class=""><col class="" style="width: 9.82567%;" /><col class="" style="width: 7.5798%;" /><col class="" style="width: 82.5854%;" /></colgroup><tbody class=""><tr class=""><th class="confluenceTh" colspan="3"><code>set_voltus_insight_mode </code></th></tr>
+<tr class=""><td class="confluenceTd" colspan="3"><code>-path_group {ALL | reg2reg}</code></td>
+</tr>
+<tr class=""><td class="confluenceTd"><br /></td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies which timing paths to protect during reinforce_pg.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd" colspan="3"><code>-timing_protection_config <em>filename</em></code></td>
+</tr>
+<tr class=""><td class="confluenceTd"><br /></td>
+<td class="confluenceTd" colspan="2">
+<p>Defines timing degradation thresholds per timing view using a configuration file.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd" colspan="3">
+<p><code>-initialize</code></p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd"><br /></td>
+<td class="confluenceTd" colspan="2">
+<p>Saves the current power settings before running the Insight repair commands using internal power/rail values. After InsightAI-based analysis, this parameter enables restoration of the original power settings.</p>
+</td>
+</tr>
+<tr class=""><td class="highlight-grey confluenceTd" colspan="3" data-highlight-colour="grey"><strong><code title="">get_voltus_insight_mode</code></strong></td>
+</tr>
+<tr class=""><td class="confluenceTd" colspan="3"><code>-timing_protection_config <em>filename</em></code></td>
+</tr>
+<tr class=""><td class="confluenceTd"><br /></td>
+<td class="confluenceTd" colspan="2">
+<p>Specifies to automatically generate the timing protection configuration file. This file includes the timing degradation thresholds per timing view.&#xa0;</p>
+</td>
+</tr>
+</tbody></table></div>
+<h3 id="RailAnalysis-GenerationofVoltusInsightAIDatabase">Generation of Voltus InsightAI Database</h3>
+
+<p>Voltus has been enhanced to generate the InsightAI database from rail analysis results. This database can be directly used for subsequent IR drop fixing operations, eliminating the need to reload the rail results. In addition, the database preserves the reinforce power-grid information, which is then applied to support incremental power-grid fixing. To enable this workflow, two new parameters have been added to the <code><a href="../voltustxtcmdref/set_voltus_insight_mode.html">set_voltus_insight_mode</a></code>&#xa0;command: <code><strong>input_insight_db</strong></code> and <code><strong>output_insight_db</strong></code>.</p>
+
+<p><strong>Use Model</strong></p>
+<ol><li>Generate the output database using the<span>&#xa0;</span><code>-output_insight_db<span>&#xa0;</span></code>parameter. The database is stored in the path: &lt;output_db&gt;/master_directory). &#xa0;<br />The indicative structure of the database is as following:<br /><code>&lt;output_db&gt;/master1/</code><br /><code>&lt;output_db&gt;/master2/</code><br /><code>&lt;output_db&gt;/master3/</code></li><li>Use the generated database as the input database specified with<span>&#xa0;</span><code>-input_insight_db. </code>The specified database will be one of the master databases generated using <code>-output_insight_db</code>. <br />You can then run<span>&#xa0;</span><code>reinforce_pg</code><span>&#xa0;</span>without loading the entire rail database, enabling you to fix issues without reloading the rail result.&#xa0;</li></ol><p style="text-align: left;"><strong>Example</strong>:</p>
+<p style="text-align: left;"><u>1st Step: Output Database Generation</u></p>
+<p style="text-align: left;"><code>set_voltus_insight_mode -config &lt;<em>insight_config</em>&gt; -import_analysis_data -db_mapping &lt;<em>db_mapping_file</em>&gt;<span>&#xa0;</span><strong>-output_insight_db</strong><span>&#xa0;</span>&lt;<em>output_db</em>&gt;<br />get_ir_insight -mode repair_directive_only | report_and_repair_directive<br /></code></p>
+<p style="text-align: left;">The database is generated under the directory &lt;<em>output_db</em>&gt;</p>
+<p style="text-align: left;"><u>2nd Step: Insight Database Fixing</u></p>
+<p style="text-align: left;"><code>set_voltus_insight_mode -config<span>&#xa0;</span><strong>-input_insight_db</strong><span>&#xa0;</span>&lt;<em>output_db</em>&gt;<br />reinforce_pg &#8211;auto_ir_fix postroute</code></p>
+<h3 id="RailAnalysis-create_die_modelCommandEnhanced">create_die_model Command Enhanced</h3>
+
+<p>The&#xa0; <code>-local_reference_ground</code> parameter has been added to the <code><a href="../voltustxtcmdref/create_die_model.html">create_die_model</a></code>&#xa0;command to assign a ground source as reference ground locally for sources in the current file <code>.isrc</code>. You can specify the reference node in the PLOC file as &quot;<code>RefGnd=PortName</code>&quot; to compute the isrc of port by considering reference ground locally during die-model generation.<br />&#xa0;<br /><strong>Use model</strong>:</p>
+
+<p><code>create_die_model \</code><br /><strong><code>-local_reference_ground true \</code></strong><br /><code>-port_grouping_by_ploc_files true \</code><br /><code>-generate_SIPI_port_definition_file true \</code><br /><code>-disable_isrc_node_zero true \ (make isrc with ref ground)</code><br /><code>-disable_global_node_zero false (keep global node zero in ckt)</code></p>
+<h3 id="RailAnalysis-SupporttoExcludeTapsinaPGV">Support to Exclude Taps in a PGV</h3>
+
+<p>Now, you can exclude the taps for a particular cell and pin of the specified layer by using the <code>-cell_eval_tap_layer_file</code> parameter of the <code><a href="../voltustxtcmdref/set_rail_analysis_mode.html">set_rail_analysis_mode</a></code>&#xa0;command. <span style="color:var(--ds-text,#172b4d);">The power-gate taps cannot be changed by this parameter.</span></p>
+
+<p>The parameter allows you to specify a file in the following format:</p>
+
+<p><code>CELL_NAME PIN_NAME LAYER_NAME</code></p>
+
+<p>The file supports wildcards (<code>*</code>) for cell name. You can specify <code>top</code>, <code>bottom</code>, or <code>all</code> for the layer name.</p>
+
+<p><strong>File Format Example</strong>:</p>
+
+<p><code>===$file===</code><br /><code>CELL_NAME PIN_NAME LAYER_NAME</code><br /><code>BUF_* VDD METAL_1</code></p>
+<h3 id="RailAnalysis-create_current_regionCommandEnhanced">create_current_region Command Enhanced</h3>
+
+<p>A new parameter, <code>-on_interdie_bump</code>, has been added to the <code><a href="../voltustxtcmdref/create_current_region.html">create_current_region</a></code>&#xa0;command to create tap nodes only on non-vsrc PLOC nodes. When the option is set to <code>true</code>, the number of total tap changes to include the tap nodes only on non-vsrc PLOC. You can check the change in total taps in the &#8220;Grid Statistics of Net XXX&#8221; section of the log file at <code>&lt;state directory&gt;/logs/design_report/dmg/ext_report.log</code></p>
+
+<p><strong>Use Model</strong>:</p>
+
+<p><code>create_current_region -on_interdie_bump true</code></p>
+<h3 id="RailAnalysis-RuntimeOptimizationforReadingtheDEFfiles">Runtime Optimization for Reading the DEF files</h3>
+
+<p>Voltus has been enhanced to parse the largest DEF file on the master machine. You can then reuse the data of the parsed-DEF file from the specified directory using the <code>-xp_reuse_parse_def_directory</code> parameter of the <code><a href="../voltustxtcmdref/set_rail_analysis_mode.html">set_rail_analysis_mode</a></code>&#xa0;command in the XP mode. This enhancement significantly reduces the runtime required for reading the large DEF files.</p>
+
+<p><strong>Use Model</strong>:</p>
+
+<p><code>set_rail_analysis_mode -xp_reuse_parse_def_directory <em>directory_name</em></code></p>
+
+<p><strong>Example</strong>:</p>
+
+<p><code>set_rail_analysis_mode -xp_reuse_parse_def_directory /DefHierReport/rail_dynamic/core_125C_dynamic_1</code></p>
+<h3 id="RailAnalysis-SupporttoSuppresstheNegativeRCvalues">Support to Suppress the Negative RC values</h3>
+
+<p>A new parameter, <code>-suppress_negative_res</code>, has been added to the <code><a href="../voltustxtcmdref/create_die_model.html">create_die_model</a></code>&#xa0;command to suppress the negative resistor and capacitor (RC) values during die-model generation. When this parameter is set to <code>true</code>, the generated netlist contains positive RC values with voltage-controlled (VC), current-controlled(CC), and function-controlled (FC) sources to ensure accuracy and stability in the die models.</p>
+
+<p><strong>Use model</strong>:</p>
+
+<p><code>create_die_model -suppress_negative_res true</code></p>
+<h3 id="RailAnalysis-convert_gds_to_defCommandEnhanced">convert_gds_to_def&#xa0;Command Enhanced</h3>
+<p style="text-align: left;">The<span>&#xa0;</span><code>-tech_gds_layermap</code><span>&#xa0;</span>parameter has been added to the<span> <code><a href="../voltustxtcmdref/convert_gds_to_def.html">convert_gds_to_def</a></code></span><span>&#xa0;</span>command to support the reading of GDS layermap file with DEF or LEF names. You can use this parameter to specify a file that contains layer mapping between GDS and tech layers. Now, you do not need to convert the DEF or LEF layers to qrcTechLayer for the layer map file.</p>
+<p style="text-align: left;">The format of the layer mapping file is:<br /><code>&lt;layer_name&gt; &lt;layer_type&gt; &lt;gds layer#&gt; &lt;gds layer data type&gt;</code></p>
+<p style="text-align: left;"><code>&lt;layer_type&gt;</code><span>&#xa0;</span>specifies the type of def or lef layer.</p>
+<p style="text-align: left;"><code>&lt;tech layer name&gt;</code><span>&#xa0;</span>specifies the name of the def or lef layer to map to the GDSII layer number.&#xa0;</p>
+<p style="text-align: left;"><code>&lt;gds&gt;</code><span>&#xa0;</span>specifies the keyword for the GDS layer mapping.</p>
+<p style="text-align: left;"><code>&lt;gds layer#&gt;</code><span>&#xa0;</span>specifies the layer number of the GDSII layer.</p>
+<p style="text-align: left;"><strong>Example</strong>:<br /><code>m0 TEXT 55 2</code></p>
+<h3 id="RailAnalysis-VoltusInsightAIEnhancements">Voltus InsightAI Enhancements</h3>
+
+<p>The following new parameters have been added to the <code><a href="../voltustxtcmdref/get_ir_insight.html">get_ir_insight</a></code> commands to identify aggressor candidates with maximum switching currents to guide power integrity improvements:</p>
+<div class="table-wrap"><table class="relative-table wrapped confluenceTable" style="width: 79.5882%;"><colgroup class=""><col class="" style="width: 22.4261%;" /><col class="" style="width: 77.5336%;" /></colgroup><tbody class=""><tr class=""><th class="confluenceTh">Parameter</th><th class="confluenceTh">Description</th></tr>
+<tr class=""><td class="confluenceTd"><code>-cap_lower_limit<br /></code></td>
+<td class="confluenceTd"><span style="color:var(--ds-text,#172b4d);">Specifies the minimum load capacitance value driven by aggressor candidates in the<span>&#xa0;</span></span><code style="text-align: left;">eco_report</code><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span>mode.</span></td>
+</tr>
+<tr class=""><td class="confluenceTd"><code>-cap_upper_limit<br /></code></td>
+<td class="confluenceTd"><span style="color:var(--ds-text,#172b4d);">Specifies the maximum load capacitance value driven by aggressor candidates in the<span>&#xa0;</span></span><code style="text-align: left;">eco_report</code><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span>mode.</span></td>
+</tr>
+</tbody></table></div>
+<h3 id="RailAnalysis-read_power_rail_resultsCommandEnhanced">read_power_rail_results Command Enhanced</h3>
+
+<p>Starting this release, you can use the <code>-force</code> option of the&#xa0;<code><a href="../voltustxtcmdref/read_power_rail_results.html">read_power_rail_results</a></code> command to block the pop-up window that appears when the <code>read_power_rail_results -reset</code> parameter is specified. The pop-up window displays a confirmation message for resetting the power and rail directories.</p>
+
+<p><strong>Use Model</strong>:</p>
+
+<p><code>read_power_rail_results -reset -force</code></p>
+<h3 id="RailAnalysis-SinglePartitionSupportDuringExtraction">Single Partition Support During Extraction</h3>
+
+<p>Voltus now supports single partitioning when extracting the specified metal layers. This helps to minimize extraction fracturing at partition boundaries, leading to better RC grid quality. With this enhancement, the false EM violations on the partition boundaries can be avoided.</p>
+
+<p>To support this, two new parameters are added to the <code><a href="../voltustxtcmdref/set_rail_analysis_mode.html">set_rail_analysis_mode</a></code>&#xa0;command:</p>
+<ul><li><code>-single_partition_extraction_layer</code> - Specifies to extract RC using a single partition on a top metal layer.</li></ul><p style="margin-left: 40.0px;"><strong>Use model</strong>:</p>
+<p style="margin-left: 40.0px;"><code>set_rail_analysis_mode -single_partition_extraction_layer {METAL_LAYER }</code></p>
+<p style="margin-left: 40.0px;"><strong>Example</strong>:</p>
+<p style="margin-left: 40.0px;"><code>set_rail_analysis_mode -single_partition_extraction_layer {METAL_8}</code></p>
+<ul><li><code>-single_partition_extraction_layer_list </code>- Specifies to extract RC using a single partition on multiple layers.</li></ul><p style="margin-left: 40.0px;"><strong>Use model</strong>:</p>
+<p style="margin-left: 40.0px;"><code>set_rail_analysis_mode -single_partition_extraction_layer_list {METAL_LAYER_1 METAL_LAYER_2 &#8230;&#8230; }</code></p>
+<p style="margin-left: 40.0px;"><strong>Example</strong>:</p>
+<p style="margin-left: 40.0px;"><code>set_rail_analysis_mode -single_partition_extraction_layer_list&#xa0; {METAL_5 METAL_8}</code></p>
+
+<p><br /></p>
+
+<p><strong>Ability to Exclude Instances during Rail Extraction</strong></p>
+
+<p>A new parameter, <code>-inst_ignore_file</code>, has been added to the&#xa0;<code><a href="../voltustxtcmdref/set_rail_analysis_mode.html">set_rail_analysis_mode</a></code> command to exclude the LEAF instances mentioned in the specified file during rail extraction.</p>
+
+<p><strong>Use Model</strong>:</p>
+
+<p><code>set_rail_analysis_mode -inst_ignore_file {filename}</code></p>
+
+<p><strong>File Format</strong>:<br /><code>Inst1</code><br /><code>Inst2</code><br /><code>.</code><br /><code>.</code><br /><code>.</code><br /><code>InstN</code></p>
+<h3 id="RailAnalysis-SupporttoReadPowerDatatoIdentifyPTIFiles">Support to Read Power Data to Identify PTI Files</h3>
+
+<p>The<span>&#xa0;</span><code>-power_directory</code><span>&#xa0;</span>parameter has been added to the<span> <code><a href="../voltustxtcmdref/set_power_data.html">set_power_data</a></code></span><code>&#xa0;</code>command to read the power data<span>&#xa0;</span><span style="color:var(--ds-text,#172b4d);">from the specified directory for cell power</span>. You no longer need to define each PTI file individually. Instead, you can use this parameter to read<span>&#xa0;</span><code>power_results.json</code><span>&#xa0;</span>and automatically identify all the PTI files. If the<span>&#xa0;</span><code>power_results.json</code><span>&#xa0;</span>is not found in the specified directory, then the power data could be retrieved from<span>&#xa0;</span><code>dir/voltus_power_output.latest</code>. When specified, the<span>&#xa0;</span><code>-power_directory</code><span>&#xa0;</span>parameter takes precedence and bypasses the<span>&#xa0;</span><code>-format</code><span>&#xa0;</span>parameter.</p>
+
+<p><strong>Use Model</strong>:<br /><code>set_power_data -cell<span>&#xa0;</span><em>&lt;cell name&gt;</em><span>&#xa0;</span>-power_directory<span>&#xa0;</span><em>&lt;power directory for cell power&gt;</em>&#xa0;</code></p>
+
+<p><strong>Example</strong>:<code><br />set_power_data -cell top_design -power_directory ./power</code></p>
+<h3 id="RailAnalysis-AbilitytoReuseHPTData">Ability to Reuse HPT Data</h3>
+
+<p><span style="color:var(--ds-text,#172b4d);">A new parameter, <code>-xp_reuse_hpt_directory,</code> has been added to the <code><a href="../voltustxtcmdref/set_rail_analysis_mode.html">set_rail_analysis_mode</a></code>&#xa0;command to support the </span>reuse of hierarchical path tracing (HPT) data from the HPT directory of a previous run with the modified extraction options. With this enhancement, you no longer need to run HPT again if there are no DEF changes <span style="color:var(--ds-text,#172b4d);">in the component section or logical connectivity and can use the earlier HPT data to avoid unnecessary runtime.<span> The reuse of HPT data is also allowed if the DEF changes are related to routing shape only.</span></span></p>
+
+<p><code>set_rail_analysis_mode -xp_reuse_hpt_directory <em>&lt;state directory&gt;</em></code></p>
+<h3 id="RailAnalysis-set_die_modelCommandEnhanced">set_die_model Command Enhanced</h3>
+
+<p>A new parameter <code>-static_current</code> has been added to the <code><a href="../voltustxtcmdref/set_die_model.html">set_die_model</a></code> command to use the average of PWL waveform as the static current for static rail analysis. Earlier, only the current value at <code>t=0</code> from the PWL waveform was considered for static run.</p>
+
+<p><strong>Use Model</strong>:</p>
+
+<p><code>set_die_model -static_current initial | average</code></p>
+
+<p><strong>Example</strong>:</p>
+
+<p><code>set_die_model -static_current</code> <code>average</code></p>
+</span></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Static_and_Dynamic_Power_Analysis.html" id="prev" title="Static_and_Dynamic_Power_Analysis">Static_and_Dynamic_Power_Analy ...</a></em></b><b><em><a href="Multi-Die_IR_Analysis.html" id="nex" title="Multi-Die_IR_Analysis">Multi-Die_IR_Analysis</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

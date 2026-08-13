@@ -1,0 +1,147 @@
+
+<html><head><title>connect</title>
+<meta name="page_sequence" content="24001000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="csaini" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287253" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="connect" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287253" />
+<meta name="NextFile" content="connect_hpin.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Interactive_ECO_Commands_and_Attributes.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- connect" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="Interactive_ECO_Commands_and_Attributes.html" title="Interactive_ECO_Commands_and_Attributes">Interactive_ECO_Commands_and_A ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="connect_hpin.html" title="connect_hpin">connect_hpin</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>connect</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>connect<span class="confluence-anchor-link" id="connect-connect"></span><span id="connect-connect"></span> <br /><code>[-help]&#xa0;<br /><em>port</em>|<em>pin</em>|<em>hpin</em>|<em>hport</em>|<em>pg_pin</em>+ <br />[-net <em>net_object</em> | -net_name <em>net_name</em> | -constant <em>0</em>|<em>1</em> |&#xa0;-hnet <em>hnet_object</em>&#xa0;]</code><br /></code></code></p>
+<p class="CodeCxSpFirst">Connects objects together. If these object exist in different levels of hierarchies, hpins/hport will be created to make these connections.</p>
+<p class="CodeCxSpFirst">If more than one object has a driver (i.e. has a net connected), it creates a multi driver situation. If only one object has a net, all other objects will be connected to that net. If no object has a net, a net will be created and they all&#xa0;will&#xa0;be connected to that net and the <code>-net_name</code> option provides a mechanism to optionally name the new net. Otherwise, a new net will be created using n_&lt;i&gt; convention. If the <code>-net</code> option is used (along with a net object), then all objects will be&#xa0;disconnected from their existing connection and connected to the new net.&#xa0;For local connections, it returns then hnet object pointer used to make the connection.&#xa0; For hierarchical connection, it returns the parent net object pointer.</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p><span style="color:var(--ds-text,#172b4d);">The <code>connect</code> command is a limited-access feature in this release. It is enabled by a variable specified using the&#xa0;</span><code><a href="../TCRcom/set_limited_access_feature.html">set_limited_access_feature</a></code><span style="color:var(--ds-text,#172b4d);">&#xa0;command.&#xa0;To use this feature, contact your Cadence representative to explain your usage requirements, and make sure this feature meets your needs before deploying it widely.</span></p>
+</div>
+</div>
+<h4 id="connect-Parameters"><br />Parameters</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="1"><code>-help</code></td>
+<td class="confluenceTd" colspan="1">
+<p>Outputs a brief description that includes the type and default information for each <span><code>connect</code> parameter</span>.</p>
+
+<p>For a detailed description of the command and all of its parameters, use the man command: <code>man connect</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><em>port</em><span>|</span><em>pin</em><span>|</span><em>hpin</em><span>|</span><em>hport</em><span>|</span><em>pg_pin</em><span>+</span></code></td>
+<td class="confluenceTd" colspan="1">
+<p>List of objects to connect.</p>
+<p class="CodeCxSpFirst">Multiple pin/port objects are supported. Note that only object pointers like hport:h1/hport1 are allowed, and simple names like h1/hport1 are not allowed. All objects in the list will be connected together so if objects have existing drivers, then a multidriver situation can be created.</p>
+<p class="CodeCxSpFirst"><em>Data_type: </em>port|pin|hpin|hport|pg_pin)+, required</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-constant <em>0</em><span>|</span><em>1</em></span></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Connect the object to a constant ( 0 or 1).</p>
+<p class="CodeCxSpFirst">This option will only work for hpin/pin/hport/port objects. When specified, any existing net connections to the <em>objects</em> specified will be disconnected prior to connecting to the constant. It does not connect the objects together, but instead adds a constant to each separate object at the level of hierarchy where the object exists. If an hpin or a pin is connected to an hnet (e.g. is not dangling), the constant is added to the hnet, otherwise it is added directly to the hpin/pin. If a constant is added to a port/hport, it is always&#xa0;added to the hnet of the port/hport. If there are existing drivers or constants attached to any net of the hnets mentioned above, an error&#xa0;message is given, but the connection is done anyway.</p>
+<p class="CodeCxSpFirst"><em>Data_type</em>: bool, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-hnet&#xa0;</span><em>hnet_object</em></code></td>
+<td class="confluenceTd" colspan="1">Specifies the hnet object to be used for the connections. <span style="color:var(--ds-text,#172b4d);">It is mutually exclusive with <code>-net_name</code>, <code>-net</code>, and <code>-constant</code>.&#xa0; &#xa0;Additionally, the <code>-hnet</code> option can only be used to make a local connection (i.e. at the same level of hierarchy).</span></td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-net&#xa0;<em>net_object</em></span></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Net object to be used for the connections.</p>
+<p class="CodeCxSpFirst">The object will be connected to the hnet of the specified net at&#xa0;the same level of hierarchy as the object. If there is no hnet&#xa0;at the same level of hierarchy, hports/hpins will be created using the base_name of the net object. Also, when <code>-net</code> is specified, any existing net connections to the <em>objects</em> specified will be disconnected prior to connecting to this net (for example, equivalent to&#xa0;running disconnect on each object first).</p>
+<p class="CodeCxSpFirst"><em>Data_type: </em>(net), optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span>-net_name&#xa0;<em>net_</em></span><em>name</em></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Net name to create when only pins specified.</p>
+<p class="CodeCxSpFirst">Net name to create when only pins specified (i.e. when -net is not specified). This is the base_name of the net and will replace the name of all nets connected to the pins in the object list. If a hierachical connection is being made the base_name will also be used to name any hports/hpins that are created.</p>
+<p class="CodeCxSpFirst">If <code><em>net_name</em></code> has any illegal chars, it will be automatically escaped.&#xa0; Thus -name &quot;i1/n2&quot; will result in &quot;i1\/n2&quot; for the .escaped_name, since it uses DEF escaping semantics.&#xa0; This is equivalent to checking if <code><em>net_name</em></code> is a legal Verilog identifier, and if not, prepend \ and add a trailing space to the internal Verilog name.</p>
+<p class="CodeCxSpFirst"><em>Data_type: </em>string, optional</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="connect-Examples">Examples</h4>
+<p class="CodeCxSpFirst">The following command connects two pins with the given net name:</p>
+<p class="CodeCxSpMiddle"><code>connect {pin:H1/I1/Y pin:H1/I3/A} &#8211;net_name H1/N1</code></p>
+<h4 class="CodeCxSpMiddle" id="connect-RelatedInformation">Related Information</h4>
+<ul><li class="CodeCxSpMiddle"><code><a href="disconnect.html">disconnect</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Interactive_ECO_Commands_and_Attributes.html" id="prev" title="Interactive_ECO_Commands_and_Attributes">Interactive_ECO_Commands_and_A ...</a></em></b><b><em><a href="connect_hpin.html" id="nex" title="connect_hpin">connect_hpin</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

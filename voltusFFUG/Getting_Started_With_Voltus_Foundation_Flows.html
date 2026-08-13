@@ -1,0 +1,419 @@
+
+<html><head><title>Getting Started With Voltus Foundation Flows</title>
+<meta name="page_sequence" content="12000000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-03-23" />
+<meta name="CreateTime" content="1774270335" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes all the foundation flows for Voltus IC Power Integrity Solution." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution Foundation Flows User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Getting Started With Voltus Foundation Flows" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusFFUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-03-23" />
+<meta name="ModifiedTime" content="1774270335" />
+<meta name="NextFile" content="" />
+<meta name="Group" content="Voltus Foundation Flows User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="About_This_Manual.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution Foundation Flows User Guide -- Getting Started With Voltus Foundation Flows" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="epsffug261" />
+<meta name="confluence-version" content="7.19.19" />
+<meta name="ecms-plugin-version" content="04.21.019" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusFFUGTOC.html">Contents</a></li><li><a class="prev" href="About_This_Manual.html" title="About_This_Manual">About_This_Manual</a></li><li style="float: right;"><a class="viewPrint" href="voltusFFUG.pdf">View/Print PDF</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution Foundation Flows User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <div style="width: 100%; font-size: 32px; text-align: left;               font-weight: bold;">1</div>
+<h1 style="margin: 4px 0 4px;"><span>Getting Started With Voltus Foundation Flows</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    <div>
+<p>&#xa0;</p>
+
+<p></p>
+<div class="toc-macro rbtoc1774270331911">
+<ul class="toc-indentation">
+<li><a href="#GettingStartedWithVoltusFoundationFlows-Overview">Overview</a></li>
+<li><a href="#GettingStartedWithVoltusFoundationFlows-SettinguptheFoundationFlowEnvironment">Setting up the Foundation Flow Environment</a></li>
+<li><a href="#GettingStartedWithVoltusFoundationFlows-UnderstandingtheFoundationFlowFramework">Understanding the Foundation Flow Framework</a>
+<ul class="toc-indentation">
+<li><a href="#GettingStartedWithVoltusFoundationFlows-FoundationFlowScripts">Foundation Flow Scripts</a></li>
+</ul>
+</li>
+<li><a href="#GettingStartedWithVoltusFoundationFlows-GuidelinesforEditingScripts">Guidelines for Editing Scripts</a></li>
+<li><a href="#GettingStartedWithVoltusFoundationFlows-DefiningVariablesforthePowerEnvironment">Defining Variables for the Power Environment</a>
+<ul class="toc-indentation">
+<li><a href="#GettingStartedWithVoltusFoundationFlows-setup.tcl">setup.tcl</a></li>
+<li><a href="#GettingStartedWithVoltusFoundationFlows-Exampleofsetup.tcl">Example of setup.tcl</a></li>
+<li><a href="#GettingStartedWithVoltusFoundationFlows-voltus_config.tcl">voltus_config.tcl</a></li>
+<li><a href="#GettingStartedWithVoltusFoundationFlows-Exampleofvoltus_config.tcl">Example of voltus_config.tcl</a></li>
+</ul>
+</li>
+<li><a href="#GettingStartedWithVoltusFoundationFlows-CustomizingthePlug-inScripts">Customizing the Plug-in Scripts</a></li>
+<li><a href="#GettingStartedWithVoltusFoundationFlows-LaunchingtheFoundationFlow">Launching the Foundation Flow</a></li>
+</ul>
+</div>
+<h2 id="GettingStartedWithVoltusFoundationFlows-Overview">Overview</h2>
+
+<p>The Foundation Flows are the Cadence-recommended procedures for performing Basic Power and IR Drop analysis using the Voltus IC Power Integrity Solution software. These flows support both CPF and non-CPF based designs. Cadence provides a set of scripts that give you an easy way to automate these flows. This document describes these scripts, and how to set up, customize, and run the scripts.</p>
+
+<p>The Foundation Flows are a starting point for building Power and Rail Analysis Signoff environment, but you can augment them with design-specific content.</p>
+
+<p>In Voltus, you have four stand-alone analysis foundation flows and a PG library generation flow. These are:</p>
+<ul><li>Static Power Analysis</li><li>Dynamic Power Analysis</li><li>Static Rail Analysis</li><li>Dynamic Rail Analysis (including power-up analysis)</li><li>PG library generation (used when no PG library is provided)</li></ul>Each flow can either load an Innovus database or can source some other input files. For non-Innovus based flow, various input files such as design data and library information are sourced and the design is loaded. You also need to load some other input files such as SDF, TWF, or IR drop files for all type of flows.
+<p>The requirements to load an Innovus database are:</p>
+<ul><li>Innovus&#xa0;design database</li></ul><ul><li>Parasitic information file</li></ul><ul><li>Power-grid views for all cells and macros</li></ul>
+<p>The requirements to load a non-Innovus or third party design database are:</p>
+<ul><li>Design DEF file</li></ul><ul><li>Design Verilog netlist file</li></ul><ul><li>Parasitic information file</li></ul><ul><li>CPF file (only for low power designs)</li></ul><ul><li>Timing and Physical libraries (.lib and .lef)</li></ul><ul><li>Power-grid views for all cells and macros</li></ul><h2 id="GettingStartedWithVoltusFoundationFlows-SettinguptheFoundationFlowEnvironment">Setting up the Foundation Flow Environment</h2>
+
+<p>Using the command prompt, you can create a foundation flow environment by performing the following steps:</p>
+<ol><li>Set the run-time environment by using the following command:<br /><code>set path = (&lt;install_dir&gt;/tools/bin $path)</code></li><li>Launch the Voltus console in the non-GUI environment using the -nowin parameter.<br /><code>voltus -nowin</code></li><li>Run the write_flow_template command.<br /> <code><a href="../voltustxtcmdref/write_flow_template.html">write_flow_template</a></code><code> -directory .</code><br />This command copies the Voltus Foundation Flows templates into the directory you specify (or to the current directory if you do not specify a directory with the<code> -directory</code> parameter).</li><li>Exit the Voltus software.<br /><code>exit</code><br /> You can access the Voltus foundation flow directory to verify if the README file, and the PLUG, EXAMPLES, SCRIPTS, and TEMPLATES folders are created.</li></ol><h2 id="GettingStartedWithVoltusFoundationFlows-UnderstandingtheFoundationFlowFramework">Understanding the Foundation Flow Framework</h2>
+
+<p>The following diagram illustrates the directory structure of the Voltus foundation flows:</p>
+
+<p>
+
+<map id="gliffy-map-732480798-6837" name="gliffy-map-732480798-6837"></map>
+</p>
+<table class="gliffy-macro-table" width="100%">
+    <tbody><tr>
+        <td>
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+ </caption>
+
+                <tbody><tr>
+                    <td>
+                        <img alt="" class="gliffy-macro-image" src="attachments/732480796/732480799.png" style="border: none; width: 760px;" usemap="#gliffy-map-732480798-6837" />
+                    </td>
+
+                </tr>
+
+            </tbody></table>
+ 
+        </td>
+
+    </tr>
+
+</tbody></table>
+<p>The Voltus foundation flow directory consists of:</p>
+<ul><li><strong>EXAMPLES</strong> - a folder containing example scripts for a sample design. These scripts have design specific content that explains how to set up the scripts.</li><li><strong>README.Voltus</strong> - a file containing the directory structure of the foundation flow, the content of each directory, and how to use the foundation flows.</li><li><strong>PLUG - </strong>Contains Voltus plug-in scripts. These scripts provide an easy method to expand and customize the basic flows.</li><li><strong>SCRIPTS</strong> - a folder containing the Voltus foundation flow related scripts.</li><li><strong>TEMPLATES</strong> - a folder containing the <code>setup.tcl</code> and <code>voltus</code><code><code>_</code>config.tcl </code>files that are required to create and configure the flow environment. You must copy these two files to your run directory and edit them.</li></ul><div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>You can complete the flow by specifying the variables in the <code>voltus_config.tcl</code> file. To customize the flow, enable the plug-ins in the <code>voltus_config.tcl</code> file, and update the corresponding plug-in scripts in the PLUG folder.</p>
+</div>
+</div>
+<h3 id="GettingStartedWithVoltusFoundationFlows-FoundationFlowScripts">Foundation Flow Scripts</h3>
+
+<p>This section discusses the Voltus foundation flow scripts:</p>
+<ul><li><code>TEMPLATES/Voltus/setup.tcl</code> - A single source of all design data required to run your design.</li><li><code>TEMPLATES/Voltus/voltus_config.tcl</code> - A configuration file to set up the flow related variables, to enable plug-in variables, and to configure the setup for multi-CPU processing.</li><li><code>SCRIPTS/gen_voltus_flow.tcl</code> - A file used to generate the Voltus flow (flattened scripts) based on the settings made in the <code>setup.tcl</code>, <code>voltus_config.tcl</code>, and plug-in script <code>&#xa0;</code>files.</li><li><code>SCRIPTS/ETC/Voltus/check_setup.tcl</code> - A script to perform sanity checking and verification of the <code>setup.tcl </code>and <code>voltus_config.tcl</code> files.</li><li><code>SCRIPTS/ETC/Voltus/utils.tcl</code> - Common procedures for all foundation flows (Innovus/Tempus/Voltus)</li><li><code>SCRIPTS/ETC/Voltus/default_settings.tcl</code> - The default settings for the Voltus flow.</li><li><code>PLUG/</code>Voltus -This folder contains the plug-in scripts used to customize a flow as all commands/parameters are not covered in <code>voltus_config.tcl</code>.</li></ul><h2 id="GettingStartedWithVoltusFoundationFlows-GuidelinesforEditingScripts">Guidelines for Editing Scripts</h2>
+
+<p>Follow the guidelines below to edit the <code>setup.tcl</code>, <code><code>voltus</code>_config.tcl, </code>and&#xa0;plug-in script files for your environment:</p>
+<ul><li>The hash (#) symbol indicates that the line (variable/command/parameter) is a comment and does not get read by the software. All the mandatory variables/commands/parameters have been left uncommented. You can uncomment a variable/command/parameter by deleting the hash (#) at the beginning of the line.</li></ul><ul><li>The script for each flow has the default or recommended settings. You can modify these default settings.</li></ul><ul><li>Any content within angled brackets or curly braces indicate information for which you must edit or substitute a value.</li></ul><div>
+<p>&#xa0;</p>
+<div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>For content within angled brackets, you must ensure that you delete the angled brackets after editing the value.</p>
+</div>
+</div>
+
+<p>You can edit the following example script to set the transition density of the pin i1/A to 100 transitions per second:</p>
+</div>
+<code><code>#set_switching_activity </code></code><br /><code><code># -pin &lt;pinname&gt;</code></code><br /><code><code># -activity &lt;activity factor&gt; </code></code><br /><code><code># -period &lt;period value&gt;</code></code><br /><code><code># -density &lt;density factor&gt; </code></code><br /><code><code># -duty &lt;duty factor&gt;</code></code><br /> <br />The modified example is given below:<br /> <code><code>set_switching_activity </code></code><br /><code><code>-pin i1/A</code></code><br /><code><code>-density 100 </code></code><br /><div>
+<p>&#xa0;</p>
+<div class="confluence-information-macro confluence-information-macro-information"><span class="aui-icon aui-icon-small aui-iconfont-info confluence-information-macro-icon"></span><div class="confluence-information-macro-body">
+<p>For content within curly braces, you must ensure that you retain the curly braces after editing the value.</p>
+</div>
+</div>
+
+<p>You can edit the following example script to add the list of decap cells and pg nets:</p>
+</div>
+</div>
+<div><code>set_power_analysis_mode </code><br /><code>-method static</code><br /><code>-create_binary_db true </code><br /><code>-binary_db_name StaticPower.db</code><br /><code>-write_static_currents true</code><br /><code>-decap_cell_list {list of decap cells}</code><br /><code>-off_pg_nets {list of off pgnets}</code><br /> <br />The modified example is given below:<br /> <code>set_power_analysis_mode </code><br /><code>-method static</code><br /><code>-create_binary_db true </code><br /><code>-binary_db_name StaticPower.db</code><br /><code>-write_static_currents true</code><br /><code> -decap_cell_list {DCAP* }</code><br /><code> -off_pg_nets {VDD}</code></div>
+<h2 id="GettingStartedWithVoltusFoundationFlows-DefiningVariablesforthePowerEnvironment">Defining Variables for the Power Environment</h2>
+<ul><li><code>setup.tcl</code></li><li><code>voltus_config.tcl</code></li></ul><h3 id="GettingStartedWithVoltusFoundationFlows-setup.tcl">setup.tcl</h3>
+
+<p>Defines the variables that are used in the flow. This script is unique for each design, and is the only script that is required. It contains variable settings that define the necessary information to drive the foundation flow; including design data, library information, MMMC configuration, and PGV.</p>
+
+<p>The following variables are defined in setup.tcl. They are put into an array named vars.</p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-Definingvariablestopointdata,libraries,reportsandscripts">Defining variables to point data, libraries, reports and scripts</h6>
+<p><code>set vars(script_root) SCRIPTS</code><br /><code>set vars(plug_root)&#xa0;&#xa0; PLUG/Voltus</code><br /><code>set vars(rpt_dir)&#xa0;&#xa0;&#xa0;&#xa0; reports</code><br /><code>set vars(log_dir)&#xa0;&#xa0;&#xa0;&#xa0; LOG</code><br /><code>set vars(data_root)&#xa0;&#xa0; &quot;DATA&quot;</code><br /><code>set vars(libs_root)&#xa0;&#xa0; &quot;DATA/libs&quot;</code></p>
+
+<p>&#xa0;</p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-Definingthedesigndata">Defining the design data</h6><ul><li><strong>Innovus Design</strong> - set this variable for an Innovus design database with routed information. You can set this variable by uncommenting it and giving the path of the&#xa0;Innovus database.</li></ul>
+<p><code># set vars(edi_db_name)&#xa0;&#xa0;&#xa0; &lt;EDI_design_path&gt;</code><br /><code># set vars(load_edi_db)&#xa0;&#xa0;&#xa0;&#xa0;<code>&quot;true&quot;</code></code></p>
+<ul><li><strong>Non-Innovus Design</strong> - set the following variables for a non-Innovus design database with third-party information.</li></ul>
+<p><code># set vars(netlist)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &lt;verilog netlist file&gt;</code><br /><code># set vars(def_files)&#xa0;&#xa0;&#xa0;&#xa0; &lt;def file&gt;</code><br /><code># set vars(sdc_files)&#xa0;&#xa0;&#xa0;&#xa0; &lt;timing constraints&gt;</code><br /><code># set vars(design)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &lt;top_design&gt;</code></p>
+
+<p><strong>Note:</strong> If you are providing an Innovus database, you should comment these variables.</p>
+
+<p>&#xa0;</p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-Ignoreundefinedcellswhileloadingthedesign">Ignore undefined cells while loading the design</h6>
+<p><code><code>#</code> set vars(ignore_undefined_cell)&#xa0;&quot;&lt;true/false&gt;&quot;; # default is &quot;false&quot;<br /># set vars(ignore_timing_library_check) &quot;&lt;true/false&gt;&quot;;# must be false for power<br /></code></p>
+
+<p>&#xa0;</p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-SpecifyingtheSPEFfile,ifthedesignisnon-MMMC">Specifying the SPEF file, if the design is non-MMMC</h6>
+<p><code><code>#</code> set vars(spef) &lt;spef only for non-mmmc design&gt; <br /></code></p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-Supportedflows-_defaultormmmc">Supported flows -&gt; default or mmmc</h6><ul><li><strong>Default</strong></li></ul>
+<p><code>#set vars(flow)&#xa0;&#xa0;&#xa0; &quot;default&quot;</code></p>
+<ul><li>&#xa0;<strong>MMMC</strong> - set the following variables only for an MMMC design:</li></ul>
+<p><code># set vars(cpf_file) &lt;CPF_file&gt; </code># only for CPF-based MMMC design <br /><code># set vars(mmmc_setup_file) &lt;view_definations_file&gt;</code><br /><code># set vars(rc_corners) &quot;&lt;corner1&gt; &lt;corner2&gt; ...&quot;</code><br /><code># set vars(&lt;corner1&gt;,spef) &lt;corner1_spef&gt;</code><br /><code># set vars(&lt;corner2&gt;,spef) &lt;corenr2_spef&gt;<br /># set vars(analysis_views) &quot;&lt;view1&gt; &lt;view2&gt;&quot;<br /></code></p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-Defininganactiveanalysisview,ifonlyoneviewisrequiredtobeactive">Defining an active analysis view, if only one view is required to be active</h6>
+<p><code>#set vars(active_analysis_view) &quot;&lt;active view&gt;&quot;</code></p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-Defininglibrarysetsforanon-Innovusdatabase">Defining library sets for a non-Innovus database</h6>
+<p><code># set vars(library_sets) &quot;max min&quot;</code><br /><code># set vars(max,timing) &lt;list of lib files&gt;</code><br /><code># set vars(min,timing) &lt;list of lib files&gt;</code></p>
+
+<p><code><code># </code>set vars(lef_files) &lt;list of lef files&gt;</code> #Define LEF files &#xa0;&#xa0;&#xa0; <br /><code># set vars(cl_views) &lt;list of .cl files&gt;</code> # Define Power-Grid views</p>
+
+<p><strong>Note:</strong> If you are providing an Innovus database, you should comment these variables.</p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-DefiningPGVsetsrequiredforcreationofpower-gridviews">Defining PGV sets required for creation of power-grid views<br /><br /></h6><ul><li>Variables for common power-grid creation</li></ul>
+<p><code># set vars(extraction_tech_file) &#xa0;&#xa0; &#xa0; &#xa0; &lt;technology file&gt;</code><br /><code># set vars(lef_layermap)&#xa0;&#xa0; &#xa0; &#xa0;&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;file&gt;&quot;</code></p>
+<ul><li>Specify advanced options of the command <code>set_advanced_pg_library_mode</code>, like &quot;<code>-default_frequency</code>&quot;</li></ul>
+<p><code># set vars(advanced_pg_library_mode)&#xa0;&#xa0; &#xa0;&quot;&lt;advanced options&gt;&quot; ;</code></p>
+<ul><li>Variables for techonly pg</li></ul>
+<p><code># set vars(techonly_pg_creation) &#xa0;&#xa0; &#xa0;&#xa0;&#xa0; &quot;&lt;true/false&gt;&quot;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; ;</code>#&#xa0; set to <code>true</code> to create techonly power-grid library based on defined variables<br /><code># set vars(techonly_ground_pins)&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;ground_pin_list&gt;&quot;</code><br /><code># set vars(techonly_power_pins) &#xa0;&#xa0; &#xa0; &#xa0;&#xa0; &quot;&lt;pin1 voltage1 ... pinN voltageN&gt;&quot;</code><br /><code># set vars(techonly_other_options)&#xa0; &#xa0; &#xa0; &quot;&lt;other options&gt;&quot;&#xa0;&#xa0;&#xa0; ;</code><br /><code># set vars(techonly_outdir) &#xa0;&#xa0; &#xa0;&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;dir_name&gt;&quot;&#xa0; </code><br /><code># set vars(techonly_prefix) &#xa0;&#xa0; &#xa0;&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;prefix&gt;&quot;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; ;<br /></code></p>
+<ul><li>Variables for std cells</li></ul>
+<p><code># set vars(stdcells_pg_creation) &#xa0;&#xa0;&#xa0; &#xa0;&#xa0; &quot;&lt;true/false&gt;&quot;&#xa0;&#xa0;&#xa0; ;</code>#&#xa0;set to&#xa0;<code>true</code> to create stdcells&#xa0;power-grid library based on defined variables<br /><code># set vars(stdcells_ground_pins)&#xa0;&#xa0; &#xa0; &#xa0;&#xa0; &quot;&lt;ground_pin_list&gt;&quot;</code><br /><code># set vars(stdcells_power_pins) &#xa0;&#xa0; &#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;pin1 voltage1 ... pinN voltageN&gt;&quot;</code><br /><code># set vars(stdcells_spice_models)&#xa0;&#xa0; &#xa0; &#xa0; &quot;&lt;file_list&gt;&quot;&#xa0;&#xa0;&#xa0;&#xa0; ;</code><br /><code># set vars(stdcells_spice_subckts) &#xa0;&#xa0; &#xa0; &quot;&lt;file_list&gt;&quot;</code><br /><code># set vars(stdcells_other_options)&#xa0; &#xa0; &#xa0; &quot;&lt;other options&gt;&quot; ;</code># specify optional options <br /><code># set vars(stdcells_outdir)&#xa0;&#xa0; &#xa0;&#xa0;&#xa0; &#xa0; &#xa0; &#xa0; &quot;&lt;dir_name&gt;&quot;</code><br /><code># set vars(stdcells_prefix) &#xa0;&#xa0; &#xa0;&#xa0; &#xa0; &#xa0; &#xa0; &quot;&lt;prefix&gt;&quot;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; ;</code></p>
+<ul><li>Variables for macro cells</li></ul>
+<p><code># set vars(macros_pg_creation)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;true/false&gt;&quot;</code> #&#xa0;set to <code>true</code> to create MACRO power-grid library based on defined variables<br /><code># set vars(macros_ground_pins)&#xa0;&#xa0; &#xa0;&#xa0;&#xa0; &#xa0;&#xa0; &quot;&lt;ground_pin_list&gt;&quot;</code><br /><code># set vars(macros_power_pins) &#xa0;&#xa0; &#xa0;&#xa0;&#xa0; &#xa0;&#xa0; &quot;&lt;pin1 voltage1 ... pinN voltageN&gt;&quot;</code><br /><code># set vars(macros_cell_list_file)&#xa0;&#xa0; &#xa0;&#xa0;&#xa0; &quot;&lt;built_cells_list&gt;&quot;</code><br /><code># set vars(macros_gds_files)&#xa0;&#xa0; &#xa0;&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;gds_file_list&gt;&quot;</code><br /><code># set vars(macros_gds_layermap)&#xa0;&#xa0; &#xa0; &#xa0;&#xa0;&#xa0; &quot;&lt;gds_layermap_file&gt;&quot;</code><br /><code># set vars(macros_spice_models)&#xa0;&#xa0; &#xa0; &#xa0;&#xa0;&#xa0; &quot;&lt;file_list&gt;&quot;</code><br /><code># set vars(macros_spice_subckts)&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;file_list&gt;&quot;</code><br /><code># set vars(macros_other_options)&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;other options&gt;&quot; ;</code> # specify optional options <br /><code># set vars(macros_outdir)&#xa0;&#xa0; &#xa0;&#xa0;&#xa0; &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;dir_name&gt;&quot;</code><br /><code># set vars(macros_prefix) &#xa0;&#xa0; &#xa0;&#xa0;&#xa0; &#xa0; &#xa0; &#xa0;&#xa0; &quot;&lt;prefix&gt;&quot;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; ;</code></p>
+<h3 id="GettingStartedWithVoltusFoundationFlows-Exampleofsetup.tcl">Example of setup.tcl</h3>
+
+<p>The following example shows the minimum design data settings required to run a non-Innovus design:</p>
+
+<p><code>set vars(script_root) SCRIPTS</code><br /><code>set vars(plug_root)&#xa0;&#xa0; PLUG/Voltus</code><br /><code>set vars(rpt_dir)&#xa0;&#xa0;&#xa0;&#xa0; RPT</code><br /><code>set vars(log_dir)&#xa0;&#xa0;&#xa0;&#xa0; LOG</code><br /><code>set vars(data_root)&#xa0;&#xa0; &quot;DATA&quot;</code><br /><code>set vars(libs_root)&#xa0;&#xa0; &quot;DATA/libs&quot;</code></p>
+
+<p><code>set vars(edi_db_name)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(data_root)/srio_mac_assembled.enc</code><br /><code>#set vars(load_edi_db)&#xa0;&#xa0;&#xa0;&#xa0; &quot;true&quot;</code><br /><code>set vars(netlist)&#xa0;&#xa0;&#xa0;&#xa0; &#xa0; &#xa0;&#xa0; $vars(data_root)/srio_mac.v.gz</code><br /><code>set vars(def_files)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &#xa0; $vars(data_root)/srio_mac_assembled.def</code><br /><code>set vars(sdc_files)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(data_root)/db_default_4.2-USR2.sdc</code><br /><code>set vars(design)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;srio_mac&quot;</code><br /><code>set vars(spef)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(data_root)/srio_mac_assembled_rc_worst.spef.gz</code></p>
+
+<p><code>#set vars(cpf_file)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(data_root)/chip_top_1.0e_integrated_for_backend.cpf</code><br /><code>set vars(mmmc_setup_file)&#xa0; $vars(data_root)/viewDefinition.tcl</code><br /><code>set vars(rc_corners)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;rc_worst rc_best&quot;</code><br /><code>set vars(rc_worst,spef)&#xa0;&#xa0;&#xa0; $vars(data_root)/srio_mac_assembled_rc_worst.spef.gz</code><br /><code>set vars(rc_best,spef)&#xa0;&#xa0;&#xa0;&#xa0; $vars(data_root)/srio_mac_assembled_rc_best.spef.gz</code><br /><code>set vars(analysis_views)&#xa0;&#xa0; &quot;setup_view1 hold_view1 setup_view2&#xa0; hold_view2&quot;</code></p>
+
+<p><code>#set vars(active_analysis_view) [lindex $vars(analysis_views) 0]</code></p>
+
+<p><code>set vars(library_sets) &quot;max min&quot;</code><br /><code>set vars(max,timing) &quot;\</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(libs_root)/tse_rf256x8p1_slow_syn.lib \</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(libs_root)/tse_ra280x67p2_slow_syn.lib \</code></p>
+
+<p><code>&quot;</code><br /><code>set vars(min,timing) &quot;\</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(libs_root)/tse_rf256x8p1_fast-40C_syn.lib \</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(libs_root)/tse_ra280x67p2_fast-40C_syn.lib \</code><br /><code>&quot;</code><br /><code>set vars(lef_files) &quot;\</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0; $vars(libs_root)/tse_ra280x67p2.vclef \</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0; $vars(libs_root)/tse_rf256x8p1.vclef \</code><br /><code>&quot;</code><br /><code>set vars(cl_views) &quot;\</code></p>
+
+<p><code>&#xa0;&#xa0;&#xa0;&#xa0; $vars(libs_root)/fast_allcells.cl \</code></p>
+
+<p><code>&quot;</code><br /><code>Puts &quot;&lt;FF&gt; Finished loading setup.tcl&quot;</code></p>
+<h3 id="GettingStartedWithVoltusFoundationFlows-voltus_config.tcl">voltus_config.tcl</h3>
+
+<p>This is an optional configuration file containing flow related information that is unique to a particular block or run. The following variables are defined in <code>voltus_config.tcl</code>. They are put into an array named vars.</p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-Specifyingtheanalysistype">Specifying the analysis type</h6>
+<p><code>#set vars(generate_pg)&#xa0;&#xa0;&#xa0;&#xa0; &quot;true&quot;</code> # set to <code>true</code> to add PG library generation flow before power and rail analysis<br /><code>#set vars(pg_only)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;true&quot;</code> # set to <code>true</code> to run only the PG library generation flow<br /><code>#set vars(static_power)&#xa0;&#xa0;&#xa0; &quot;true&quot;</code><br /><code>#set vars(static_rail)&#xa0;&#xa0;&#xa0;&#xa0; &quot;true&quot;</code><br /><code>#set vars(dynamic_power)&#xa0;&#xa0; &quot;true&quot;</code><br /><code>#set vars(dynamic_rail)&#xa0;&#xa0;&#xa0; &quot;true&quot;</code></p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-SpecifyingthePowerAnalysisParameters">Specifying the Power Analysis Parameters</h6>
+<p>Specify the global switching activity for all primary inputs, nets, and other instances whose activity has not been defined through TCF or VCD files. The following are the options to define the switching activity of the design:</p>
+
+<p><code># set vars(input_activity)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;primary input activity&gt;&quot; (OPTIONAL)</code><br /><code># set vars(seq_activity)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;activity at sequential logic output&gt;&quot; (OPTIONAL)</code><br /><code># set vars(global_activity)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;activity for all unset nodes&gt;&quot; (OPTIONAL)</code></p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-SpecifyingthePowerOutputDirectory">Specifying the Power Output Directory</h6>
+<p># Specify the directory path to write the power reports and current files for both the static and dynamic. The default directory for static power analysis: $vars(rpt_dir)/static_power. The default directory for dynamic power analysis: $vars(rpt_dir)/dynamic_power.</p>
+
+<p><code># set vars(static_power_reports)&#xa0;&#xa0; &quot;&lt;static_power_directory_name&gt;&quot;&#xa0; (OPTIONAL)</code><br /><code># set vars(dynamic_power_reports)&#xa0; &quot;&lt;dynamic_power_directory_name&gt;&quot; (OPTIONAL)</code></p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-SpecifyingtheStaticPowerCalculationParameters">Specifying the Static Power Calculation Parameters</h6>
+<p><code># set vars(static_power,analysis_view) &quot;$vars(active_analysis_view)&quot;</code> &#xa0;&#xa0; # specify the power analysis view for the MMMC design<br /><code># set vars(static_power,corner) &quot;min/max&quot;</code>&#xa0;&#xa0;&#xa0; # for a non-MMMC design, define the power analysis library corner, default:max<br /><code># set vars(static_power,create_binary_db) &quot;true/false&quot;</code>&#xa0;&#xa0;&#xa0; # set true to create power analysis binary db, default:false<br /><code># set vars(static_power,transition_time_method) &quot;min/avg/max&quot;</code>&#xa0;&#xa0;&#xa0; # set the transition time method, default:max<br /><code># set vars(static_power,write_static_currents) &quot;true/false&quot;</code>&#xa0;&#xa0;&#xa0; #&#xa0; set true to write the static current files, default:false</p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-SpecifyingtheDynamicPowerCalculationParameters">Specifying the Dynamic Power Calculation Parameters</h6>
+<p><code># set vars(dynamic_power,method) &quot;dynamic_vectorless/dynamic_vectorbased&quot;</code>&#xa0;&#xa0;&#xa0; # Specify the method of analysis to be performed, default:dynamic_vectorless<br /><code># set vars(dynamic_power,analysis_view) &quot;$vars(active_analysis_view)&quot;</code> &#xa0;&#xa0; # specify the power analysis view for MMMC setup<br /><code># set vars(dynamic_power,corner) &quot;min/max&quot;</code>&#xa0;&#xa0;&#xa0; # For non-MMMC designs define the library corner, default:max<br /><code># set vars(dynamic_power,create_binary_db) &quot;true/false&quot;</code>&#xa0;&#xa0;&#xa0; # set true to create power analysis binary db, default:false<br /><code># set vars(dynamic_power,transition_time_method) &quot;min/avg/max&quot;</code>&#xa0;&#xa0;&#xa0; # set the transition time method, default:max<br /><code># set vars(dynamic_power,disable_static) &quot;true/false&quot;</code>&#xa0;&#xa0;&#xa0; # To perform Static Power Analysis during Dynamic, default:true<br /><code># set vars(dynamic_power,write_static_currents) &quot;true/false&quot;</code>&#xa0;&#xa0;&#xa0; # To write the static current files, default:false</p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-PowerIncludeFileforDynamicPowerCalculation(Optional)">Power Include File for Dynamic Power Calculation (Optional)</h6>
+<p><code># set vars(dynamic_power_inc_file) &quot;&lt;power_include_file.inc&gt;&quot;</code> # All additional&#xa0;Power Analysis options, which do not have an equivalent option in Voltus, can be given through this include file.&#xa0; For more information, refer to &quot;Power Analysis Options&quot; in <em>Voltus Text Command Reference</em>.</p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-CommonParametersRequiredforRailAnalysis">Common Parameters Required for Rail Analysis</h6>
+<p><code># set vars(rail_analysis_temp_dir)&#xa0; &quot;./tmp&quot;</code> # specify the analysis temporary directory path<br /><code># set vars(power_domains)&#xa0;&#xa0;&#xa0; &quot;&lt;domain1 domain2&gt;&quot;</code>&#xa0;&#xa0;&#xa0; # specify the power domains in the design<br /><code># set vars(&lt;domain1&gt;,pwr_nets) &quot;&lt;pwr_net1 pwr_net2 ...&gt;&quot;&#xa0;&#xa0;</code>&#xa0; # specify list of power &amp; ground nets under each power domain (Required)<br /><code># set vars(&lt;domain1&gt;,gnd_nets) &quot;&lt;gnd_net1 gnd_net2 ...&gt;&quot;</code><br /><code># set vars(&lt;pg_net1&gt;,voltage) &quot;&lt;supply_voltage&gt;&quot;</code>&#xa0;&#xa0;&#xa0; # specify the supply voltage for the power nets<br /><code># set vars(threshold_percent) &quot;&lt;threshold_percent&gt;&quot;&#xa0;&#xa0;</code>&#xa0; # specify the voltage threshold in percentage (Optional) default is 5<br /><code># set vars(&lt;pg_net1&gt;,threshold)&#xa0;&#xa0; &quot;&lt;user_specified_threshold_value&gt;&quot;&#xa0;&#xa0;</code>&#xa0; # specify the threshold voltage per P/G net (Optional) else the tool evaluates<br /><code># set vars(supply_tolerance_percent) &quot;&lt;supply_tolerance&gt;&quot;&#xa0;&#xa0;&#xa0;</code> # specify power supply tolerance in percentage (Optional) default is 30<br /><code># set vars(&lt;pg_net1&gt;,tolerance)&#xa0;&#xa0; &quot;&lt;user_specified_tolerance_value&gt;&quot;&#xa0;</code>&#xa0;&#xa0; # specify the supply tolerance per P/G net (Optional) else the tool evaluates</p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-StaticRailAnalysisParameters">Static Rail Analysis Parameters</h6>
+<p><code># set vars(static_rail,analyze_domains) &quot;&lt;domain1 domain2 ....&gt;&quot;&#xa0;</code>&#xa0;&#xa0; # specify the list of power domains to be analyzed for static rail (Required)<br /><code># set vars(static_rail,analyze_type)&#xa0;&#xa0; &quot;&lt;net/domain&gt;&quot;&#xa0;</code>&#xa0;&#xa0; # specify the type of rail analysis to be performed, default:domain<br /><code># set vars(static_rail,accuracy)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;fast/fast_accurate/accurate&quot;&#xa0;</code>&#xa0;&#xa0; # specify the accuracy of the analysis, default:fast<br /><code># set vars(static_rail,analysis_view) &quot;$vars(active_analysis_view)&quot;&#xa0;</code>&#xa0;&#xa0; # specify the analysis view only for MMMC designs <br /><code># set vars(static_rail,temperature)&#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;user_set_temp&gt;&quot;&#xa0;&#xa0;</code>&#xa0; # specify the analysis temperature, default:25<br /><code># set vars(static_rail,dist_solver_processing) &quot;true/false&quot;&#xa0;</code>&#xa0;&#xa0; # enable parallel distributed process for solver, default:false (Optional)<br /><code># set vars(static_rail,gen_bb_voltage_file) &quot;&lt;list of instance names&gt;&quot;&#xa0;</code>&#xa0;&#xa0; # write the block boundary interface nodes voltage to the file specified (Optional)<br /><code># set vars(static_rail,ignore_shorts) &quot;true/false&quot;&#xa0;</code>&#xa0;&#xa0;&#xa0;&#xa0; # ignore shorts during signoff mode of analysis, default:false (Optional)<br /><code># set vars(static_rail,cell_ignore_file)&#xa0;&#xa0; &quot;&lt;cell_ignore_file&gt;&quot;&#xa0;&#xa0;</code>&#xa0; # cells to be ignored during rail analysis (Optional)<br /><code># set vars(static_rail,fast_views_list)&#xa0;&#xa0; &quot;&lt;fast_views_cell_file&gt;&quot;</code>&#xa0;&#xa0;&#xa0; # list of fast PGVs to be used for rail analysis (Optional)<br /><code># set vars(static_rail,fast_accurate_views_list)&#xa0;&#xa0; &quot;&lt;fast_accurate_views_cell_file&gt;&quot;&#xa0;</code>&#xa0;&#xa0;&#xa0; # list of fast_accurate PGVs to be used for rail analysis (Optional)<br /><code># set vars(static_rail,accurate_views_list)&#xa0;&#xa0; &quot;&lt;accurate_views_cell_file&gt;&quot;&#xa0;</code>&#xa0;&#xa0;&#xa0;&#xa0; # list of accurate PGVs to be used for rail analysis (Optional)<br /><code># set vars(static_rail,ext_inc_file)&#xa0;&#xa0;&#xa0; &quot;&lt;extractor_include_file&gt;&quot;</code>&#xa0;&#xa0;&#xa0;&#xa0; # specify extractor include file to control ZX extractor (Optional)<br /><code># set vars(static_rail,dis_analysis_types) &quot;&lt;list analysis types to be disabled&gt;&quot;&#xa0;</code>&#xa0;&#xa0;&#xa0; # disable analysis types (Optional)<br /><code># set vars(static_rail,&lt;pwr_net1&gt;,pti_file)&#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;pti_current_file&gt;&quot;</code>&#xa0;&#xa0;&#xa0; # specify PTI current files for all the PG nets (Optional)<br /><code># set vars(static_rail,&lt;pwr_net1&gt;,ascii_file)&#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;ascii_file&gt;&quot;</code>&#xa0;&#xa0;&#xa0; # specify ASCII format instance power file (Optional)<br /><code># set vars(static_rail,&lt;pwr_net1&gt;,scale)&#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;real_number&gt;&quot;&#xa0;&#xa0;</code>&#xa0;&#xa0; # specify scaling of the power/current data provided (Optional) default is 1.00</p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-VstormIncludeFileforStaticRailAnalysis(Optional)">Vstorm Include File for Static Rail Analysis (Optional)</h6>
+<p>The Vstorm include file with additional Vstorm options, which are not supported by Voltus. All additional Vstorm options can be given though this include file.</p>
+
+<p><code># set vars(static_rail,vstorm2_begin_file) &quot;&lt;vstorm_begin_file.inc&gt;&quot;&#xa0;&#xa0;</code>&#xa0; # The Vstorm options included before &quot;analyze_rail&quot;<br /><code># set vars(static_rail,vstorm2_end_file) &quot;&lt;vstorm_end_file.inc&gt;&quot;&#xa0;</code>&#xa0;&#xa0; # The Vstorm options included after &quot;analyze_rail&quot;</p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-ElectroMigration(EM)ModelFile(Optional)">ElectroMigration (EM) Model File (Optional)</h6>
+<p><code># set vars(em_models_file) &quot;&lt;em_models_file&gt;&quot;&#xa0;</code>&#xa0;&#xa0;&#xa0; # This file is required for electromigration(em)/current_density(rj) analysis</p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-PowerPadsLocationFiles">Power Pads Location Files</h6>
+<p><code># set vars(&lt;pg_net1&gt;,format)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;defpin&quot;&#xa0;&#xa0;</code>&#xa0; # Specify the format of the pad locations &quot;defpin/xy/padcell/boundary&quot;<br /><code># set vars(&lt;pg_net1&gt;,pad_file) &quot;&lt;net1_pp_location_file1.pp \<br />#&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; net1_pp_location_file2.pp \<br />#&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; net1_pp_location_file3.pp&gt;&quot; #</code> Specify the power pad location files of all the analysis nets</p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-DynamicRailAnalysisParameters">Dynamic Rail Analysis Parameters</h6>
+<p><code># set vars(dynamic_rail,analyze_domains) &quot;&lt;domain1 domain2 ....&gt;&quot;&#xa0;</code>&#xa0; # specify the list of power domains to be analyzed for dynamic rail (Required)<br /><code># set vars(dynamic_rail,analyze_type) &quot;net/domain&quot;&#xa0;&#xa0;</code>&#xa0; # specify the type of rail analysis to be performed, default:domain<br /><code># set vars(dynamic_rail,accuracy) &quot;fast/fast_accurate/accurate&quot;&#xa0;</code>&#xa0;&#xa0; # specify the accuracy of the analysis, default:fast<br /><code># set vars(dynamic_rail,analysis_view) &quot;$vars(active_analysis_view)&quot;&#xa0;</code>&#xa0;&#xa0; # specify the analysis view only for MMMC designs <br /><code># set vars(dynamic_rail,temperature)&#xa0; &quot;&lt;user_set_temp&gt;&quot;&#xa0;&#xa0;</code>&#xa0; # specify the analysis temperature, default:25<br /><code># set vars(dynamic_rail,dist_solver_processing) &quot;true/false&quot;</code>&#xa0;&#xa0;&#xa0; # enable parallel distributed process for solver, default:false (Optional)<br /><code># set vars(dynamic_rail,powering_up_nets)&#xa0; &quot;&lt;switchable_PGnets&gt;&quot;&#xa0;</code>&#xa0;&#xa0; # specify the list of powering up nets for dynamic rail and power-up analysis<br /><code># set vars(dynamic_rail,gen_power_switch_eco) &quot;true/false&quot;</code>&#xa0;&#xa0;&#xa0; # generate power switch Eco file, default:false (Optional)<br /><code># set vars(dynamic_rail,gen_decap_eco) &quot;true/false&quot;&#xa0;</code>&#xa0;&#xa0; # generate decap Eco file, default:false (Optional)<br /><code># set vars(dynamic_rail,decap_opt_method) &quot;feasibility&quot;</code>&#xa0;&#xa0;&#xa0; # decap opt method, can be &quot;area/feasibility/timing/removal/feasibility_removal&quot; (Optional)<br /><code># set vars(dynamic_rail,decap_removal_method) &quot;&lt;user_specified&gt;&quot;</code>&#xa0;&#xa0;&#xa0; # decap removal method, can be &quot;conservative/aggressive&quot; (Optional)<br /><code># set vars(dynamic_rail,save_voltage_waveforms) &quot;false&quot;&#xa0;</code>&#xa0;&#xa0; # save voltage waveforms, can be &quot;true/false&quot; (Optional)<br /><code># set vars(dynamic_rail,gen_bb_voltage_file) &quot;&lt;list of instance names&gt;&quot;</code>&#xa0;&#xa0;&#xa0; # write the block boundary interface nodes voltage to the file specified (Optional)<br /><code># set vars(dynamic_rail,save_current_files) &quot;true/false&quot;&#xa0;</code>&#xa0;&#xa0; # save the current files for dynamic hierchical power_view creation, default:false (Optional)<br /><code># set vars(dynamic_rail,ignore_shorts) &quot;true/false&quot;&#xa0;</code>&#xa0;&#xa0; # ignore shorts during signoff mode of analysis, default:false (Optional)<br /><code># set vars(dynamic_rail,decap_eco_file)&#xa0;&#xa0; &quot;&lt;decap_eco_file&gt;&quot;&#xa0;</code>&#xa0;&#xa0; # decap ECO file to be considered for dynamic ir drop analysis (Optional)<br /><code># set vars(dynamic_rail,cell_ignore_file)&#xa0;&#xa0; &quot;&lt;cell_ignore_file&gt;&quot;&#xa0;</code>&#xa0;&#xa0; # cells to be ignored during rail analysis (Optional)<br /><code># set vars(dynamic_rail,fast_views_list)&#xa0;&#xa0; &quot;&lt;fast_views_cell_file&gt;&quot;</code>&#xa0;&#xa0;&#xa0; # list of fast PGVs to be used for rail analysis (Optional)<br /><code># set vars(dynamic_rail,fast_accurate_views_list)&#xa0;&#xa0; &quot;&lt;fast_accurate_views_cell_file&gt;&quot;&#xa0;</code>&#xa0;&#xa0; # list of fast_accurate PGVs to be used for rail analysis (Optional)<br /><code># set vars(dynamic_rail,accurate_views_list)&#xa0;&#xa0; &quot;&lt;accurate_views_cell_file&gt;&quot;</code>&#xa0;&#xa0;&#xa0; # list of accurate PGVs to be used for rail analysis (Optional)<br /><code># set vars(dynamic_rail,ext_inc_file)&#xa0;&#xa0;&#xa0; &quot;&lt;extractor_include_file&gt;&quot;</code>&#xa0;&#xa0;&#xa0; # specify extractor include file to control ZX extractor (Optional)<br /><code># set vars(dynamic_rail,dis_analysis_types) &quot;&lt;list analysis types to be disabled&gt;&quot;</code>&#xa0;&#xa0; # disable analysis types (Optional)<br /><code># set vars(dynamic_rail,&lt;pwr_net1&gt;,pti_file)&#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;pti_current_file&gt;&quot;&#xa0;</code>&#xa0;&#xa0; # specify pti current files for all the PG nets (Optional)<br /><code># set vars(dynamic_rail,&lt;pwr_net1&gt;,scale)</code>&#xa0;&#xa0;<code>&#xa0;&#xa0; &quot;&lt;real_number&gt;&quot;&#xa0;</code>&#xa0;&#xa0; # specify scaling of the power/current data provided (Optional) default is 1.00</p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-VstormIncludeFileforDynamicRailAnalysis(Optional)">Vstorm Include File for Dynamic Rail Analysis (Optional)</h6>
+<p>The Vstorm include file with additional Vstorm options, which are not supported by Voltus. All additional Vstorm options can be given though this include file.</p>
+
+<p><code># set vars(dynamic_rail,vstorm2_begin_file) &quot;&lt;vstorm_begin_file.inc&gt;&quot;&#xa0;&#xa0;</code>&#xa0; # The Vstorm options included before &quot;analyze_rail&quot;<br /><code># set vars(<code>dynamic</code>_rail,vstorm2_end_file) &quot;&lt;vstorm_end_file.inc&gt;&quot;&#xa0;</code>&#xa0;&#xa0; # The Vstorm options included after &quot;analyze_rail&quot;</p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-VoltusToolControlSettings">Voltus Tool Control Settings</h6>
+<p><code># set vars(distribute)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;local/rsh/lsf/custom&quot;&#xa0;&#xa0;</code>&#xa0; # set the distribution process type, default:local<br /><code># set vars(local_cpus)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;num_local_cpus&gt;&quot;</code>&#xa0;&#xa0;&#xa0; # set the number of local CPUs, set any integer_number or &quot;max&quot;, default:0<br /><code># set vars(remote_hosts)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;number_of_hosts&gt;&quot;&#xa0;</code>&#xa0; # set number of remote hosts for distribute type non-local<br /><code># set vars(cpu_per_remote_host)&#xa0; &quot;&lt;number_of_cpus_per_host&gt;&quot;&#xa0;</code>&#xa0;&#xa0; # set number of CPUs per host for distribute type non-local<br /><code># set vars(rsh,host_list)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;host1 host2 host2 ......&gt;&quot;&#xa0;</code>&#xa0;&#xa0; # set host list for distribute type &quot;rsh&quot;<br /><code># set vars(lsf,queue)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;queue_name&gt;&quot;&#xa0;</code>&#xa0;&#xa0; # set lsf queue name for distribute type &quot;lsf&quot;<br /><code># set vars(lsf,resource)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;lsf_resource_string&gt;&quot;</code>&#xa0;&#xa0; # set lsf resource string for distribute type &quot;lsf&quot;<br /><code># set vars(lsf,args)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;lef_args&gt;&quot;</code>&#xa0;&#xa0; # set lsf args for distribute type &quot;lsf&quot;<br /><code># set vars(custom,script)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;&lt;specify_lsf_custom_script&gt;&quot;&#xa0;&#xa0;</code>&#xa0; # specify the lsf custom scripts for distribute type &quot;custom&quot;<br /><code># set vars(keep_license)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;true/false&quot;</code>&#xa0;&#xa0;&#xa0; # specify whether to keep the multiple CPU-licenses, default:true (Optional)</p>
+<h6 id="GettingStartedWithVoltusFoundationFlows-SupportedPlug-ins">Supported Plug-ins</h6>
+<p><code>#set vars(set_advanced_pg_library_mode_tcl)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(plug_root)/<code>set_advanced_pg_library_mode.tcl</code></code><br /><code>#set vars(user_load_design_tcl)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(plug_root)/user_load_design.tcl</code><br /><code>#set vars(pre_static_power_tcl)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(plug_root)/pre_static_power.tcl</code><br /><code>#set vars(report_static_power_tcl)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(plug_root)/report_static_power.tcl</code><br /><code>#set vars(post_static_power_tcl)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(plug_root)/post_static_power.tcl</code><br /><code>#set vars(pre_dynamic_power_tcl)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(plug_root)/pre_dynamic_power.tcl</code><br /><code>#set vars(post_dynamic_power_tcl)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(plug_root)/post_dynamic_power.tcl</code><br /><code>#set vars(set_static_rail_mode_tcl)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(plug_root)/set_static_rail_mode.tcl</code><br /><code>#set vars(set_static_rail_pg_nets_tcl)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(plug_root)/set_static_rail_pg_nets.tcl</code><br /><code>#set vars(set_static_rail_power_data_tcl)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(plug_root)/set_static_rail_power_data.tcl</code><br /><code>#set vars(set_static_rail_pad_location_tcl)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(plug_root)/set_static_rail_pad_location.tcl</code><br /><code>#set vars(set_static_rail_analysis_domain_tcl)&#xa0;&#xa0; $vars(plug_root)/set_static_rail_analysis_domain.tcl</code><br /><code>#set vars(pre_static_rail_tcl)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(plug_root)/pre_static_rail.tcl</code><br /><code>#set vars(post_static_rail_tcl)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(plug_root)/post_static_rail.tcl</code><br /><code>#set vars(set_dynamic_rail_mode_tcl)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(plug_root)/set_dynamic_rail_mode.tcl</code><br /><code>#set vars(set_dynamic_rail_pg_nets_tcl)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(plug_root)/set_dynamic_rail_pg_nets.tcl</code><br /><code>#set vars(set_dynamic_rail_power_data_tcl)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(plug_root)/set_dynamic_rail_power_data.tcl</code><br /><code>#set vars(set_dynamic_rail_pad_location_tcl)&#xa0;&#xa0;&#xa0;&#xa0; $vars(plug_root)/set_dynamic_rail_pad_location.tcl</code><br /><code>#set vars(set_dynamic_rail_analysis_domain_tcl)&#xa0; $vars(plug_root)/set_dynamic_rail_analysis_domain.tcl</code><br /><code>#set vars(pre_dynamic_rail_tcl)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(plug_root)/pre_dynamic_rail.tcl</code><br /><code>#set vars(post_dynamic_rail_tcl)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(plug_root)/post_dynamic_rail.tcl</code></p>
+
+<p><code>Puts &quot;&lt;FF&gt; Finished loading voltus_config.tcl&quot;</code></p>
+<h3 id="GettingStartedWithVoltusFoundationFlows-Exampleofvoltus_config.tcl">Example of voltus_config.tcl</h3>
+
+<p>The following example shows the analysis types that are to be run, and the settings for running the multi-CPU flow:</p>
+
+<p><code>set vars(input_activity) &quot;0.25&quot;</code><br /><code>set vars(seq_activity)&#xa0;&#xa0; &quot;0.25&quot;</code><br /><br /><code>#set vars(static_power_reports)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;RPT/STATIC_POWER&quot;</code><br /><code>#set vars(dynamic_power_reports)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;RPT/DYNAMIC_POWER&quot;</code><br /><br /><code>set vars(static_power,analysis_view) $vars(active_analysis_view)</code><br /><code>set vars(static_power,write_static_currents) &quot;true&quot;</code><br /><br /><code>set vars(dynamic_power,analysis_view)&#xa0;&#xa0; $vars(active_analysis_view)</code><br /><code>#set vars(dynamic_power,method) &quot;dynamic_vectorbased&quot;</code><br /><code>#set vars(dynamic_power_inc_file) $vars(script_root)/dynamic_power.inc</code><br /><br /><code>set vars(rail_analysis_temp_dir)&#xa0;&#xa0;&#xa0;&#xa0; &quot;./tmp&quot;</code><br /><code>set vars(power_domains)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;domain1&quot;</code><br /><code>set vars(domain1,pwr_nets)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;vdd\!&quot;</code><br /><code>set vars(domain1,gnd_nets)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;gnd\!&quot;</code><br /><code>set vars(vdd\!,voltage)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 1.08</code><br /><code>#set vars(threshold_percent)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 2.5</code><br /><code>#set vars(supply_tolerance_percent)&#xa0;&#xa0;&#xa0; 40</code><br /><br /><code>set vars(static_rail,analyze_domains)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;domain1&quot;</code><br /><code>#set vars(static_rail,analyze_type)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;net&quot;</code><br /><code>set vars(static_rail,analysis_view)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(active_analysis_view)</code><br /><code>#set vars(static_rail,accuracy)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;fast&quot;</code><br /><code>#set vars(static_rail,temperature)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;125&quot;</code><br /><code>#set vars(static_rail,vdd\!,scale)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;5.00&quot;</code><br /><code>#set vars(static_rail,gnd\!,scale)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;10.00&quot;</code><br /><code>#set vars(static_rail,gnd\!,pti_file)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(rpt_dir)/STATIC_POWER/static_gnd\!.ptiavg</code><br /><code>#set vars(static_rail,vdd\!,ascii_file)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(rpt_dir)/static_power/Instance_pin_power.rpt</code><br /><code>#set vars(static_rail,ext_inc_file)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; ./extractor_include_file.txt</code><br /><code># set vars(static_rail,vstorm2_begin_file) &quot;&lt;vstorm_begin_file.inc&gt;&quot;</code><br /><code># set vars(static_rail,vstorm2_end_file)&#xa0;&#xa0; &quot;&lt;vstorm_end_file.inc&gt;&quot;</code><br /><br /><code>set vars(vdd\!,format)&#xa0;&#xa0; &quot;defpin&quot;</code><br /><code>set vars(gnd\!,format)&#xa0;&#xa0; &quot;defpin&quot;</code><br /><br /><code>set vars(dynamic_rail,analyze_domains)&#xa0;&#xa0;&#xa0; &quot;domain1&quot;</code><br /><code>set vars(dynamic_rail,analysis_view)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; $vars(active_analysis_view)</code><br /><code>#set vars(dynamic_rail,accuracy)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;fast&quot;</code><br /><code>#set vars(dynamic_rail,temperature)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 125</code><br /><code>#set vars(dynamic_rail,vdd\!,scale)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;10.00&quot;</code><br /><code>#set vars(dynamic_rail,gnd\!,scale)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;10.00&quot;</code><br /><code>#set vars(dynamic_rail,cell_ignore_file)&#xa0;&#xa0; ./cell_ignore_list.txt</code><br /><br /><code>#set vars(distribute)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; lsf</code><br /><code>#set vars(remote_hosts)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 2</code><br /><code>#set vars(cpu_per_remote_hosts)&#xa0;&#xa0;&#xa0; 2</code><br /><code>#set vars(lsf,queue)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;rnd&quot;</code><br /><code>#set vars(remote_hosts)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 3</code><br /><code>#set vars(cpu_per_remote_host)&#xa0;&#xa0;&#xa0;&#xa0; 2</code><br /><code>#set vars(rsh,host_list)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;kitsopt11 kitsopt11 kitsopt12 kitsopt12 kitsopt13 kitsopt13&quot;</code><br /><code>#set vars(keep_license)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;false&quot;</code><br /><code>#set vars(local_cpus)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; &quot;4&quot;</code><br /><code>Puts &quot;&lt;FF&gt; Finished loading voltus_config.tcl&quot;</code></p>
+<h2 id="GettingStartedWithVoltusFoundationFlows-CustomizingthePlug-inScripts">Customizing the Plug-in Scripts</h2>
+
+<p>Based on the flow you want to run, you can customize the following plug-in scripts that contain the software-level directives:</p>
+<div class="table-wrap"><table class="confluenceTable"><tbody><tr><td class="confluenceTd">
+<p><strong>Plug-in Scipt</strong></p>
+</td>
+<td class="confluenceTd">
+<p><strong>Description</strong></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p>user_load_design.tcl</p>
+</td>
+<td class="confluenceTd" valign="top">This plug-in loads the design. You can specify all the design loading commands in this file to load the design for analysis.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">pre_static_power.tcl</td>
+<td class="confluenceTd" valign="top">This plug-in is called before executing the <code>report_power</code> command for specifying settings before static power calculation.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">report_static_power.tcl</td>
+<td class="confluenceTd" valign="top">This plug-in executes the static power run and writes out various text-based reports</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">post_static_power.tcl</td>
+<td class="confluenceTd" valign="top">This plug-in is called after executing the <code>report_power</code> command. It includes commands to view the static power analysis reports for debugging.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">pre_dynamic_power.tcl</td>
+<td class="confluenceTd" valign="top">This plug-in is called before executing the <code>report_power</code> command for specifying setting before dynamic power calculation.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">post_dynamic_power.tcl</td>
+<td class="confluenceTd" valign="top">This plug-in is called after executing the <code>report_power</code> command. It includes commands to view the dynamic power analysis reports for debugging.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">set_static_rail_mode.tcl</td>
+<td class="confluenceTd" valign="top">
+<p>This plug-in is called in place of the <code>set_rail_analysis_mode</code> command.&#xa0;</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">set_static_rail_pg_nets.tcl</td>
+<td class="confluenceTd" valign="top">This plug-in is called in place of the <code>set_pg_nets</code> command.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">set_static_rail_power_data.tcl</td>
+<td class="confluenceTd" valign="top">This plug-in is called in place of the&#xa0;<code>set_power_data</code> command.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">set_static_rail_pad_location.tcl</td>
+<td class="confluenceTd" valign="top">This plug-in is called in place of the&#xa0;<code>set_power_pads</code> command.</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p>set_static_rail_analysis_domain.tcl</p>
+</td>
+<td class="confluenceTd" valign="top">This plug-in is called in place of the&#xa0;<code>set_rail_analysis_domain </code>command.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">
+<p>pre_static_rail.tcl</p>
+</td>
+<td class="confluenceTd" colspan="1">This plug-in is called before executing the <code>analyze_rail</code> command for specifying settings before static rail analysis.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">post_static_rail.tcl</td>
+<td class="confluenceTd" colspan="1">This plug-in is called after executing the&#xa0;<code>analyze_rail</code> command. It includes commands to view the static rail analysis reports for debugging.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">set_dynamic_rail_mode.tcl</td>
+<td class="confluenceTd" colspan="1">This plug-in is called in place of the&#xa0;<code>set_rail_analysis_mode </code>command.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">set_dynamic_rail_pg_nets.tcl</td>
+<td class="confluenceTd" colspan="1">This plug-in is called in place of the <code>set_pg_nets</code> command.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">set_dynamic_rail_power_data.tcl</td>
+<td class="confluenceTd" colspan="1">This plug-in is called in place of the&#xa0;<code>set_power_data</code> command.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">set_dynamic_rail_pad_location.tcl</td>
+<td class="confluenceTd" colspan="1">This plug-in is called in place of the&#xa0;<code>set_power_pads</code> command.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">set_dynamic_rail_analysis_domain.tcl</td>
+<td class="confluenceTd" colspan="1">This plug-in is called in place of the&#xa0;<code>set_rail_analysis_domain </code>command.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">pre_dynamic_rail.tcl</td>
+<td class="confluenceTd" colspan="1">This plug-in is called before executing the <code>analyze_rail</code> command for specifying settings before dynamic rail analysis.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">post_dynamic_rail.tcl</td>
+<td class="confluenceTd" colspan="1">This plug-in is called after executing the&#xa0;<code>analyze_rail</code> command. It includes commands to view the dynamic rail analysis reports for debugging.</td>
+</tr>
+</tbody></table></div>
+
+<p>When the plug-in scripts are enabled in <code>voltus_config.tcl</code>, the scripts are either inserted into the <code>run_voltus.tcl</code> (the final run scripts), or will replace some of the commands in <code>run_voltus.tcl</code>, without any check by foundation flows. This means if there are any incorrect settings in the plug-in, the error is reported by the tool only when the script is being executed, rather than by the&#xa0;foundation flows in advance. This is why the plug-ins do not support the incremental mode.</p>
+
+<p>All possible commands/options are listed in the plug-in with commented commands for reference, as shown below:</p>
+
+<p><code>################################################################################</code></p>
+
+<p><code># set_power can be used to specify design/cell/instance power</code><br /><code># set_power 1500mw. This will set the total chip power to 1500mw</code><br /><code># set_power -type cell NAND* 5mw. This will set the power of all cells which match the pattern NAND* to 5mw</code><br /><code># set_power -type instance ram_256x12 15mw. This will set the power of instance ram_256x12 to 15mw</code><br /><code># set_power -type cell DCAP* -leakage 2mw. This will set the leakage power for cells which match the pattern DCAP* as 2mw</code></p>
+
+<p><code>################################################################################</code></p>
+
+<p><code>#set_power -reset</code><br /><code>#set_power &lt;chip power&gt;mw</code><br /><code>#set_power -cell &lt;cellname&gt; &lt;power&gt;mw</code><br /><code>#set_power -instance &lt;instname&gt; &lt;power&gt;mw</code><br /><code>#set_power -cell &lt;decap cell names&gt; -leakage &lt;power&gt;mw</code></p>
+
+<p>Because of the plug-in feature mentioned above, these lines will be copied to <code>run_voltus.tcl</code> without any filter. If you do not need these commands/options and want a clean <code>run_voltus.tcl</code>, you can remove them from the plug-in.</p>
+<h2 id="GettingStartedWithVoltusFoundationFlows-LaunchingtheFoundationFlow">Launching the Foundation Flow</h2>
+<ol><li>Copy the content in ./TEMPLATES/ to your run directory.<br /><code>cp -r ./Voltus_FF/TEMPLATES/* &lt;Run_directory&gt;</code></li><li>Modify the following files before generating the code for Voltus analysis:<br /><ol><li><code>setup.tcl</code> - Update the script with the design data. You can edit this file to set up the design file variables.</li><li>
+<p><code>voltus_config.tcl</code> - Select the flows (Voltus analysis variables) that you want to run. You need to explicitly set the variables to <code>true</code> to run the analysis type. If these flows do not meet your requirements, you can enable the plug-ins variables at the end of the file by uncommenting the required variable.</p>
+</li><li>(Optional step) If you enable a plug-in variable, you must copy the plug-in directory to your run directory, as shown below:
+<p><code>cp -r ./PLUG/ &lt;Run_directory&gt;.</code><br /><br />Then, modify the corresponding plug-in files in PLUG/Voltus. You must add full Voltus commands in the appropriate plug-in files for the controls that were not covered in <code>voltus_config.tcl</code>.<br /><strong>Note</strong>: You can change your plug-in directory using the setup.tcl variable <code>vars(plug_root)</code>.<br /><br /></p>
+</li></ol></li><li>
+<p>Use the following command to generate the flattended code.<br /><code>tclsh SCRIPTS/gen_voltus_flow.tcl</code><br /><br />This command generates the &quot;FF/Voltus&quot; directory in the run directory. This directory contains the flattened Voltus Foundation Flow scripts to run the flow. This command also generates the &quot;Makefile&quot; to run the flow. <br />Check the &quot;FF/voltus.check.rpt&quot; file for the setup status. If this code generation report file ends with &quot;Setup Check Passed&quot;, you can proceed with the next step. You can also browse the &quot;FF/Voltus/run_Voltus.tcl&quot; to understand how and when the plug-in is applied.</p>
+
+<p><strong>Note</strong>: The Foundation Flow will detect most of the errors in the variables you defined, and error out in this step.&#xa0;</p>
+</li><li>
+<p>Use the following commands to run the selected Voltus analysis:</p>
+<ol><li>
+<p>Link the Voltus makefile to Makefile:<br /><code>ln -s Makefile.Voltus Makefile</code></p>
+</li><li>
+<p>Run the Voltus analysis on the design for the analysis set in the &quot;<code>voltus_config.tcl</code>&quot; file:<br /><code>make flow</code><br />You can also run the optional command <code>make help</code> to show the usage of the make file.</p>
+</li></ol></li></ol><p style="margin-left: 60.0px;">This command generates the following directories in the run directory.</p>
+<ol><li style="list-style-type: none;background-image: none;"><ul><li>
+<p>LOG - contains log reports for Voltus analysis</p>
+</li><li>
+<p>RPT - contains Voltus analysis output reports</p>
+</li></ul></li></ol>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="About_This_Manual.html" id="prev" title="About_This_Manual">About_This_Manual</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

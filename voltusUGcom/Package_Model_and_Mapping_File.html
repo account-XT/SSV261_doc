@@ -1,0 +1,239 @@
+
+<html><head><title>Package Model and Mapping File</title>
+<meta name="page_sequence" content="41021000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666251" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Package Model and Mapping File" />
+<meta name="Keywords" content="SPICE,package,dynamic,mapping" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Rail Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666251" />
+<meta name="NextFile" content="Power-Up_Sequence_File.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Rules_for_EM_model_in_Via_layer.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Package Model and Mapping File" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Rules_for_EM_model_in_Via_layer.html" title="Rules_for_EM_model_in_Via_layer">Rules_for_EM_model_in_Via_laye ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Power-Up_Sequence_File.html" title="Power-Up_Sequence_File">Power-Up_Sequence_File</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Package Model and Mapping File</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="PackageModelandMappingFile-29440"></span></p>
+
+<p>The Package Model file contains a SPICE subcircuit describing a package model. It enables Voltus to use package models during full-chip static and dynamic power-grid analysis.</p>
+
+<p>The Mapping file specifies the name of the package terminal mapping file, which contains the mapping of the terminals of the SPICE subcircuit in the package model file to the locations at the grid or top-level pins. The mapping file formats supported by Voltus are:</p>
+<ul><li>Voltus-specific Format</li><li>Model Connection Protocol (MCP)</li></ul>
+<p><strong>Command</strong>: <code>set_package -spice </code><span class="webflare-courier-new" style="white-space: pre;"><em>model_file</em></span><code> -mapping </code><span class="webflare-courier-new" style="white-space: pre;"><em>mapping_file</em></span></p>
+
+<p><strong>Voltus-specific Format</strong></p>
+
+<p>The format of the package terminal mapping file is as follows:</p>
+<pre><code>
+subckt_terminal_name<br />subckt_terminal_name pin toplevel_pin_name<br />subckt_terminal_name cell pad_cell_instance_name<br />subckt_terminal_name x,y<br />subckt_terminal_name [power_pin|ground_pin] net_name<br /></code></pre>
+<p><strong>Format Description</strong>:</p>
+
+<p><code>subckt_terminal_name</code> specifies the name of the terminals of the SPICE subcircuit in the package model file to be mapped to the grid locations or the top-level pins. subckt_terminal_name without mapping information indicates that the terminal should be kept floating. subckt_terminal_name specified with the power or ground keyword indicates that the subcircuit terminal should be connected to a virtual power or ground node during power-grid analysis.</p>
+
+<p><code>pin toplevel_pin_name</code> specifies the name of the top-level pin to which to connect the SPICE subcircuit terminal.</p>
+
+<p><code>cell pad_cell_instance_name</code> specifies the name of the pad cell instance to which to connect the SPICE subcircuit terminal.</p>
+
+<p><code>x,y </code>specifies the location, in microns, where the specific SPICE subcircuit terminal should be attached.</p>
+
+<p><code>power_pin net_name</code> specifies the power pin name and net name to which to connect the SPICE subcircuit terminal.</p>
+
+<p><code>ground_pin net_name</code> specifies the ground pin name and net name to which to connect the SPICE subcircuit terminal.</p>
+
+<p><strong>Example</strong>:</p>
+
+<p>The following is an example of a terminal mapping file:</p>
+<pre><code>
+VDD_in power_pin VDD_CPU<br />VSS_in ground_pin VSS<br />VDD_out pin  VDD_CPUvsrc1<br />VDD_out pin  VDD_CPUvsrc2<br />VDD_out pin&#xa0;&#xa0;VDD_CPUvsrc3</code></pre>
+<p><strong>Model Connection Protocol (MCP)</strong></p>
+
+<p>The MCP mapping file format can be used for location based pin mapping for package models. MCP is a block that is inserted into a host file as the comment section. It uses the host file&#39;s comment leading strings as its leading string.<br />The format of the MCP package terminal mapping file is as follows:</p>
+<pre><code>
+* [MCP Begin]<br />* [MCP Ver] 1.1<br />* [REM] comment till the end of the line<br />* [Structure Type] PKG<br />* [MCP Source] source<br />* [Coordinate Unit] unit<br />* [Connection] compName modelName totalNumberOfPins<br />* [Connection Type] DIE<br />
+* [Power Nets]
+* pin cktnode net x y
+* &#8230;
+* pin cktnode net x y
+
+* [Ground Nets]
+* pin cktnode net x y
+* &#8230;
+* pin cktnode net x y
+
+* [Signal Nets]
+* pin cktnode net x y
+* &#8230;
+* pin cktnode net x y
+* [MCP End]</code></pre>
+<p><strong>Format Description</strong>:</p>
+
+<p><code>[MCP Begin]</code> and <code>[MCP End]</code> mark the MCP block.</p>
+
+<p>The contents of the MCP block are described below.</p>
+
+<p><code>[MCP Ver] 1.1</code> is a one-line item. It specifies the version of MCP. It is a required item.</p>
+
+<p><code>[REM]</code> comment is the MCP comment. It is a one-line item. The comment can also be in the form from the host, except in the net list section. In the net list sections, the comment must be in the form of MCP comments.</p>
+
+<p><code>[Structure Type]</code> PKG specifies the type of the extracted circuit model. It is a one-line item. It is optional. It can be a combination of the following (delimited by spaces) DIE, PKG, PCB.</p>
+
+<p><code>[MCP Source]</code> source specifies the origin of the circuit model. It is a one-line item. It can include the tool name, the tool version, and/or the date the model was created. This item is optional.</p>
+
+<p><code>[Coordinate Unit]</code> unit defines the unit used by the coordinates. unit can be one of the following, m, cm, mm, um, nm, mil. The default is m. This item is optional.</p>
+
+<p><code>[Connection] compName modelName totalNumberOfPins</code> starts a component connection section in the MCP block. It is a one-line item. This item is required. An MCP block should contain at least one component connection section. In the item, compName is the name of the component connection (or circuit name in SPD file, or reference designator in common layout tools); modelName is the model definition name of the component connection (or part number in common layout tools); and the totalNumberOfPins is the number of pins in this component connection. A new [Connection] line ends the previous component connection section and starts a new component connection section. The MCP file provides a separate connection section for each die in the MCP header for multi-die flow to ensure that each connection contains its own power nets and ground nets.<br /><code>[Connection Type] DIE</code> specifies the type of the component connection. It is a one-line item. It is optional. It can be a combination of the following (delimited by spaces) DIE, PKG, PCB, VRM, or SINK.<br /><code>[Power Nets]</code> starts the power pin section of the component. It is a one-line item. It is optional.<br /><code>pin cktnode net x y</code> lists the information for a pin. pin is the name of the pin. cktnode is the circuit node name used in the extracted circuit corresponding to the pin. net is the net of the pin. x y are optional and are the relative coordinates of the pin relative to the component origin. The five fields should be in one line.<br /><code>[Ground Nets]</code> starts the ground pin section of the component. It is a one-line item. It is optional.<br /><code>[Signal Nets] </code>starts the signal pin section (ends the [Power Nets] or [Ground Nets] section if exists) of the component connection. It is a one-line item. It is optional.<br />In the Power/Ground/Signal pin sections, comments must be in the MCP comment form as [REM] comment.</p>
+
+<p><strong>Example</strong>:</p>
+
+<p>The following is an example of an MCP file:</p>
+<pre><code>
+.subckt SigrityModel list_of_external_nodes<br />
+* The following is the MCP Section
+
+*****************************************
+* [MCP Begin]
+
+* [MCP Ver] 1.1
+
+* [MCP Source] Sigrity XtractIM 1.3.1 12/31/2007
+
+* [Coordinate Unit] um
+
+*
+*****************************************
+* The following is the info for component connection U1
+
+*****************************************
+
+* [Connection] U1 Si_fc_die_3000 3000
+* [Connection Type] DIE
+* [REM]
+* [REM] -----Power Pin List of U1----------
+* [REM]
+
+* [Power Nets]
+* VDD01 CKT01 NET1 0 0
+* VDD02 CKT02 NET1 200 0
+
+* [REM]
+* [REM] -----Ground Pin List of U1----------
+* [REM]
+
+* [Ground Nets]
+* [REM] Pins of net NET2
+* VSS01 CKT03 NET2 100 0
+* VSS01 CKT04 NET2 300 0
+* &#8230;
+
+* [REM]
+* [REM] -------------Signal Pin List of U1----------
+* [REM]
+
+* [Signal Nets]
+* SIG01 CKT05 NET3 500 300
+* SIG01 CKT06 NET3 300 500
+* &#8230;
+*
+* [MCP End]
+* This concludes the MCP section
+* Contents of the subckt
+.ends</code></pre>
+<p>The following is an example of the MCP header with multiple connections:</p>
+<pre><code>
+-----------------------------------------------------------------</code></pre><pre><code>
+MCP header for Multi-Die Flow:</code></pre><pre><code>
+-----------------------------------------------------------------</code></pre><pre><code>
+* [Connection] HBM1 Chip01_nportModel 12</code></pre><pre><code>
+* [Connection Type] Pkg</code></pre><pre><code>
+* [Power Nets]</code></pre><pre><code>
+*Bump_83 %RW_INTERPOSER%HBM1_Bump_83 HBM1_VDD 422.500 971.000</code></pre><pre><code>
+*Bump_92 %RW_INTERPOSER%HBM1_Bump_92 HBM1_VDD 382.500 971.000</code></pre><pre><code>
+* [Ground Nets]</code></pre><pre><code>
+*Bump_96 %RW_INTERPOSER%HBM1_Bump_96 HBM1_VSS 272.500 971.000</code></pre><pre><code>
+*Bump_113 %RW_INTERPOSER%HBM1_Bump_113 HBM1_VSS 232.500 971.000</code></pre><pre><code>
+* [Connection] LSI Chip02_nportModel 30</code></pre><pre><code>
+* [Connection Type] Pkg</code></pre><pre><code>
+* [Power Nets]</code></pre><pre><code>
+*Bump_107 %RW_INTERPOSER%LSI_1_TOP_Bump_107 LSI_1_VDDM1 40.000 540.000</code></pre><pre><code>
+*Bump_131 %RW_INTERPOSER%LSI_1_TOP_Bump_131 LSI_1_VDDM1 120.000 240.000</code></pre><pre><code>
+* [Ground Nets]</code></pre><pre><code>
+*Bump_219 %RW_INTERPOSER%LSI_1_TOP_Bump_291 LSI_1_VSS 575.000 390.000</code></pre><pre><code>
+*Bump_207 %RW_INTERPOSER%LSI_1_TOP_Bump_207 LSI_1_VSS 535.000 415.000</code></pre><h4 id="PackageModelandMappingFile-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="EM_Only_ICT_File.html">EM Only ICT File</a></li><li><a href="Power-Up_Sequence_File.html">Power-Up Sequence File</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Rules_for_EM_model_in_Via_layer.html" id="prev" title="Rules_for_EM_model_in_Via_layer">Rules_for_EM_model_in_Via_laye ...</a></em></b><b><em><a href="Power-Up_Sequence_File.html" id="nex" title="Power-Up_Sequence_File">Power-Up_Sequence_File</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

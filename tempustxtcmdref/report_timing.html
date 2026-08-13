@@ -1,0 +1,1450 @@
+
+<html><head><title>report_timing</title>
+<meta name="page_sequence" content="19104000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287364" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the Tempus commands." />
+<meta name="DocTitle" content="Tempus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="report_timing" />
+<meta name="Keywords" content="timing report,path information" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Analysis,REPORTS," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287364" />
+<meta name="NextFile" content="report_timing_context_clock_mapping.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="report_statistical_timing_derate_factors.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Text Command Reference -- report_timing" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="etstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="report_statistical_timing_derate_factors.html" title="report_statistical_timing_derate_factors">report_statistical_timing_dera ...</a></li><li style="float: right;"><a class="viewPrint" href="tempustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="report_timing_context_clock_mapping.html" title="report_timing_context_clock_mapping">report_timing_context_clock_ma ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>report_timing</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>report_timing<span id="report_timing-report_timing"></span><span class="confluence-anchor-link" id="report_timing-report_timing"></span></code><br /><code>[-help]<br />[-analysis_summary_csv_extended_file &lt;<em>string</em>&gt;]<br /> [-analysis_summary_csv_file &lt;<em>string</em>&gt;]<br />[-analysis_summary_file &lt;<em>string</em>&gt;]</code><br /><code>[-check_clocks]</code><br /><code>[-check_type {setup <span><span style="color:var(--ds-text,#172b4d);">| </span></span>hold <span><span style="color:var(--ds-text,#172b4d);">| </span></span>clock_gating_setup <span><span style="color:var(--ds-text,#172b4d);">| </span></span>clock_gating_hold <span><span style="color:var(--ds-text,#172b4d);">| </span></span>clock_gating_pulse_width <span><span style="color:var(--ds-text,#172b4d);">| </span></span>data_setup data_hold <span><span style="color:var(--ds-text,#172b4d);">| </span></span>recovery <span><span style="color:var(--ds-text,#172b4d);">| </span></span>removal <span><span style="color:var(--ds-text,#172b4d);">| </span></span>pulse_width <span><span style="color:var(--ds-text,#172b4d);">| </span></span>clock_period clock_separation <span><span style="color:var(--ds-text,#172b4d);">| </span></span>skew <span><span style="color:var(--ds-text,#172b4d);">| </span></span>no_change_setup <span><span style="color:var(--ds-text,#172b4d);">| </span></span>no_change_hold <span><span style="color:var(--ds-text,#172b4d);">| </span></span>max_delay <span><span style="color:var(--ds-text,#172b4d);">| </span></span>min_delay}]</code><br /><code>[-debug {unconstrained <span>|&#xa0;</span><span>time_borrow | cppr_point <span style="color:var(--ds-text,#172b4d);">| constraint_arc | context | wire_variation | vt_skew</span></span>}]<br /></code><code>[-delay_limit <em>float</em>]<br /> [-derate_summary]<br />[-gui]</code><br /><code>[-format&#xa0;<em>column_list</em>]<br /> [-hpin]<br /> [-max_slack&#xa0;<em>float</em>]<br /> [-min_slack&#xa0;<em>float</em>]</code><br /><code>[-net]<br />[-output_format {text | csv | gtd | binary}]<br />[<span class="inline-comment-marker" data-ref="5ff2ef86-ac4f-41a9-a723-1b90d4b8fd16">-path_exce</span>ptions {applied | ignored | all}]<br />[-path_group&#xa0;<em>groupname_list</em>]</code><br /><code>[-path_type {end&#xa0; <span><span style="color:var(--ds-text,#172b4d);">| </span></span>summary <span><span style="color:var(--ds-text,#172b4d);">| </span></span>full <span><span style="color:var(--ds-text,#172b4d);">| </span></span>full_clock <span><span style="color:var(--ds-text,#172b4d);">| </span></span>end_slack_only <span><span style="color:var(--ds-text,#172b4d);">| </span></span>summary_slack_only}]</code><br /><code>[-retime {aocv | path_slew_propagation | aocv_path_slew_propagation}]<br />[-retime_delaycal_pins&#xa0;&lt;<em>pin_name</em>&gt;]<br />[-retime_format {manual | retime_compare | retime_replace}]</code><br /><code>[-retime_mode {path | exhaustive}]<br />[-skip_io_paths]</code><code><br />[-unique_pins]<br />[-view&#xa0;<em>viewName</em>]</code><br /><code>[-worst_rc_corner]<br />[&gt; &lt;filename[.gz]&gt;]<br />[&gt;&gt; &lt;filename[.gz]&gt;]<br />[-late | -early]<br />[-rise | -fall]<br />[-begin_end_pair | [[ -max_paths <em>integer</em>]<br />[-nworst <em>integer</em>]]]<br />[-unconstrained | -point_to_point]<br />[-collection | -machine_readable | -tcl_list]<br />[-not_through&#xa0;<em>object_list</em>&#xa0;| -not_rise_through&#xa0;<em>object_list</em>&#xa0;| -not_fall_through&#xa0;<em>object_list</em>]<br />[[-from <em>object_list</em> | -from_rise <em>object_list</em> | -from_fall <em>object_list</em>]<br />[-clock_from&#xa0;<em>clk_signame_list</em>&#xa0;[-edge_from {lead trail}]]<br />[-through <em>object_list</em> | -through_rise <em>object_list</em> | -through_fall <em>object_list</em>]<br />[-to <em>object_list</em> | -to_rise <em>object_list</em> | -to_fall <em>object_list</em>]<br />[-clock_to&#xa0;<em>clk_signame_list</em>&#xa0;[-edge_to {lead trail}]]]</code><span>&#xa0;</span></p>
+
+<p>Generates a timing report that provides information about various paths in a design.&#xa0;</p>
+
+<p>The reports contain data on delays along the entire path. The start and end nodes of each path are identified.</p>
+
+<p>The timing report contains the following information:</p>
+<ul><li>The slack times of the arriving signal at the end node</li></ul><ul><li>The start node</li></ul><ul><li>The associated transitions</li></ul><ul><li>The signal required times and the actual signal arrival times</li></ul><ul><li>Summary of propagated vs ideal status of launching and capturing clocks</li></ul><ul><li>Any phase shifts applied when evaluating timing checks</li></ul><ul><li>Any CPPR values applied to timing check evaluation</li></ul>
+<p>The <code>report_timing</code> command output accommodates both the instance pin names and net names in the same column. Since both instance pin names and net names can be long, to save screen space, alternating instance pin and net names (depending on whether the row displays gate delay or net delay) are reported in a single column.</p>
+
+<p>When the <code style="letter-spacing: 0.0px;"><a href="timing_report_timing_header_detail_info.html">timing_report_timing_header_detail_info</a></code> timing global variable is set to <code style="letter-spacing: 0.0px;">extended</code>, the software generates reports with the following header details:</p>
+<ul><li>Analysis mode - best-case worst-case (BCWC) or on-chip variation (OCV)</li></ul><ul><li>Active views (displayed only in MMMC mode)</li></ul><ul><li>Clock reconvergence pessimism (CPPR)</li></ul><ul><li>Latch slack mode</li></ul><ul><li>Specified clock propagation value</li></ul><ul><li>Delay calculation</li></ul><ul><li>Specified delay calculation engine</li></ul>
+<p>When the <code><a href="timing_report_group_based_mode.html#timing_report_group_based_mode-timing_report_group_based_mode">timing_report_group_based_mode</a></code> global variable is set to <code>true</code>, the paths are grouped by clock domain. In this mode, the <code>report_timing</code> command will show the following four types of groups:</p>
+<ul><li>Clock gating group: This is an internal group that reports the clock gating check type paths.</li><li>Asynchronous group: This is also an internal group that reports the asynchronous check type paths.</li><li>Groups for all clocks in a design: These are internal groups that are classified on the basis of each reference clock. The paths belonging to each reference clock are reported separately under each clock name&#8217;s group. These groups do not honor the clock gating/asynchronous check types. Suppose there are three clocks, C1, C2, and C3, in a design, then three groups will be reported for each of these clocks. The endpoint sharing the same reference clock will be part of the same group. In case the endpoint belongs to multiple groups, then it will be reported separately in each group.</li><li>Default group: This is an internal group that reports combinational maximum or minimum delay paths.</li><li>User-defined groups: These are user-defined path groups that can be created by users with single or multiple constraints. These groups honor all the check types and are reported by default.</li></ul>
+<p>By default, the <code>timing_report_group_based_mode</code> global variable is set to <code>false</code>.</p>
+
+<p><strong>Note: </strong>This global variable does not honor user-defined path groups, so the paths will still be grouped by different clocks.</p>
+
+<p>In this mode, the following commands will have the same behavior and can be used interchangeably:</p>
+
+<p><code>report_timing -path_group <em>Clock_Name</em></code></p>
+
+<p><code>report_timing -clock_to <em>Clock_Name</em></code></p>
+
+<p>The <code>report_timing</code> command supports multi-threaded reporting. To enable multi-threaded reporting, you can use the following commands:&#xa0;</p>
+
+<p><code><a href="set_multi_cpu_usage.html">set_multi_cpu_usage</a> -localCpu number_of_CPU</code></p>
+
+<p><code><a href="set_table_style.html">set_table_style</a> -no_frame_fix_width [-nosplit]</code></p>
+
+<p><strong style="letter-spacing: 0.0px;">Note</strong>: When the <code style="letter-spacing: 0.0px;"><a href="timing_allow_input_delay_on_clock_source.html">timing_allow_input_delay_on_clock_source</a></code> global variable is set to <code>true</code> and the <code style="letter-spacing: 0.0px;"><a href="set_input_delay.html">set_input_delay</a></code> command is applied to a clock input, the specified delay value will be considered as the source clock latency for clock paths and as regular data path arrival time for clock source paths.</p>
+
+<p>You can use a one-step method for generating merged MMMC view reports from a DMMMC master shell. After running the <code><a href="distribute_views.html">distribute_views</a></code> command, you can use the <code>report_timing</code> command to generate reports collectively from all the active distributed views (that is, views available for interactive DMMMC analysis). The merged output report is arranged as per slack/criticality order across active views.</p>
+
+<p>When the <a href="timing_enable_wire_variation.html"><code>timing_enable_wire_variation</code></a> global variable is set to <code>true</code>, the timing reports show wire variation details in the below columns:</p>
+<ul><li><code>retime_slew_wire_stddev</code></li><li><code>retime_delay_wire_stddev</code></li><li><code>arrival_wire_stddev</code></li></ul>
+<p>For more details on wire variation, refer to the &quot;Wire Variation Analysis&quot; chapter in the <em>Tempus User Guide</em>.</p>
+
+<p></p>
+<div class="toc-macro rbtoc1777286906279">
+<ul class="toc-indentation">
+<li><a href="#report_timing-Parameters">Parameters</a></li>
+<li><a href="#report_timing-GroupPathReportingforUser-DefinedGroups">Group Path Reporting for User-Defined Groups</a></li>
+<li><a href="#report_timing-UseofInformationalFlags">Use of Informational Flags</a></li>
+<li><a href="#report_timing-RetimeAnalysisReportHeaderFlags">Retime Analysis Report Header Flags</a></li>
+<li><a href="#report_timing-ReportTimingColumnListOptions">Report Timing Column List Options</a></li>
+<li><a href="#report_timing-ReportingTimingChecksBetweenVariousTypesofClocks">Reporting Timing Checks Between Various Types of Clocks</a></li>
+<li><a href="#report_timing-report_timing-fromlatch/DSettings">report_timing -from latch/D Settings</a></li>
+<li><a href="#report_timing-Examples">Examples</a></li>
+<li><a href="#report_timing-RelatedCommands">Related Commands</a></li>
+</ul>
+</div>
+<h4 id="report_timing-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd"><code>-help</code></td>
+<td class="confluenceTd">
+<p>Outputs a brief description that includes type and default information for each <code>report_timing</code> parameter. For a detailed description of the command and all of its parameters, use the man command: man <code>report_timing</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>{&gt; | &gt;&gt;} </code><code><em>filename</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>When specified with <code>&gt;</code>, writes the report to the specified file name. If the file already exists, the software will overwrite it.</p>
+
+<p>When specified with <code>&gt;&gt;</code>, writes the report to the specified file name. If the file already exists, the software will concatenate the report at the end of the file.</p>
+
+<p>The <code><em>filename</em></code> parameter must be the last argument in the list. The <code><em>filename</em></code> and <code>-tcl_list</code> parameters are mutually exclusive; you cannot specify them together.</p>
+
+<p><strong>Note: </strong>To write a compressed report, add the <code>.gz</code> extension to the file name.</p>
+
+<p><strong>Note: </strong>The last argument specified with the <code>report_timing</code> command is not considered a filename.</p>
+
+<p><em>Default:</em> Report is displayed on standard output (not saved).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-analysis_summary_csv_extended_file &lt;<em>string</em>&gt;</code></td>
+<td class="confluenceTd">
+<p>Generates the CSV file to be used for merging.</p>
+
+<p><em>Data_type</em>: string, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-analysis_summary_csv_file &lt;<em>string</em>&gt;</code></td>
+<td class="confluenceTd">
+<p>Generates the analysis summary CSV file.</p>
+
+<p><em>Data_type</em>: string, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-analysis_summary_file &lt;<em>string</em>&gt;</code></td>
+<td class="confluenceTd">
+<p>Generates the analysis summary file.</p>
+
+<p><em>Data_type</em>: string, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-begin_end_pair</code></p>
+</td>
+<td class="confluenceTd">
+<p>Reports all the violating paths between unique source and target register pairs. To report other paths, you can specify this parameter with the <code>-max_slack</code> parameter.</p>
+
+<p>The paths are not sorted by slack - paths with the same source pins are reported adjacent to each other.</p>
+
+<p>When specified with the <code>-from</code>, <code>-through</code>, or <code>-to</code> parameter, the software only reports the unique register pair paths that match the path description.</p>
+
+<p>This parameter reports the paths that are grouped by path_groups, irrespective of the <code><a href="timing_report_group_based_mode.html">timing_report_group_based_mode</a></code> global variable setting.</p>
+
+<p>You can use the <code><a href="timing_report_begin_end_pair_max_path_limit.html">timing_report_begin_end_pair_max_path_limit</a></code> global variable to specify the maximum path limit. When the number of maximum paths to be reported by the <code>-begin_end_pair</code> parameter exceeds the specified limit (default is 200000), a warning message will be displayed. Also, some of the paths may not be reported.</p>
+
+<p><strong>Note</strong>: You cannot specify this parameter with the <code>-max_paths</code>, <code>-nworst</code>, <code>-unique_pins</code>, and <code>-min_slack</code> parameters.</p>
+
+<p><em>Data_type</em>: bool, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-check</code><code>_clocks</code></p>
+</td>
+<td class="confluenceTd">
+<p>Generates reports based on timing paths on the clock network instead of the standard timing to data endpoints. This report includes clock paths that end at the reference end of a check or a clock gating end point.</p>
+
+<p><em>Default</em>: Data paths and all the other clock paths (for example, a clock path ending at a D pin of a register) are reported.</p>
+
+<p><em>Data_type</em>: bool, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-check_type <em>check_type</em></code></td>
+<td class="confluenceTd">
+<p>Reports only the paths that end at the specified timing check. You can specify the following options:</p>
+
+<p><code>setup</code>, <code>hold</code>, <code>clock_gating_setup</code>, <code>clock_gating_hold</code>, <code>clock_gating_pulse_width</code>, <code>data_setup</code>, <code>data_hold</code>, <code>recovery</code>, <code>removal</code>, <code>pulse_width</code>, <code>clock_period</code>, <code>clock_separation</code>, <code>skew</code>, <code>no_change_setup</code>, <code>no_change_hold</code>, <code>max_delay</code>, and <code>min_delay</code>.</p>
+<ul><li>The clock style checks are: <code>pulse_width</code>, <code>clock_gating_pulse_width</code>, <code>clock_period</code>, <code>skew</code>, and <code>clock_separation</code>.</li><li>In setup analysis mode, the reported check types will be:&#xa0; <code>setup</code>, <code>skew</code>, <code>pulse_width</code>, <code>clock_period</code>, <code>clock_gating_setup</code>, <code>clock_gating_pulse_width</code>, <code>data_setup</code>, <code>recovery</code>, <code>clock_separation</code>, and <code>no_change_setup</code>.</li><li>In hold analysis mode, the reported check types will be: <code>hold</code>, <code>clock_gating_hold</code>, <code>data_hold</code>, <code>removal</code>, and <code>no_change_hold</code>.</li></ul>
+<p>If the software is in simultaneous setup and hold analysis mode, all of the check types listed above will be reported.</p>
+
+<p><span style="color:var(--ds-text,#172b4d);">When the<span>&#xa0;</span></span><code style="text-align: left;">max_delay</code><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span>and<span>&#xa0;</span></span><code style="text-align: left;">min_delay</code><span style="color:var(--ds-text,#172b4d);"><span> options </span>are specified,<span>&#xa0;</span></span><span style="color:var(--ds-text,#172b4d);">the timing report will display details of timing paths for which the<span>&#xa0;</span></span><code style="text-align: left;"><a href="set_max_delay.html">set_max_delay</a></code><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span>or<span>&#xa0;</span></span><code style="text-align: left;"><a href="set_min_delay.html">set_min_delay</a></code><span style="color:var(--ds-text,#172b4d);"><span>&#xa0;</span>constraints are defined.</span></p>
+
+<p>By default, the following checks are reported:</p>
+<ul><li><code>setup</code></li><li><code>hold</code></li><li><code>clock_gating_setup</code></li><li><code>clock_gating_hold</code></li><li><code>data_setup</code></li><li><code>data_hold</code></li><li><code>recovery</code></li><li><code>removal</code></li><li><code>no_change_setup</code></li><li><code>no_change_hold</code></li></ul>
+<p>Do not use this parameter with the <code>-unconstrained</code>, <code>-early</code>, or <code>-late</code> parameters.</p>
+
+<p><strong>Note: </strong>The <code>report_timing</code> command does not perform skew checks by default.</p>
+
+<p><em>Data_type</em>: enum, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>-clock_from </span><em>clk_signame_list</em></code></td>
+<td class="confluenceTd">
+<p>Generates reports based on the source clock waveform(s). This parameter reports only those paths whose source clocks are the clock signals in <code><em>clk_signame_list</em></code>.</p>
+
+<p><em>Data_type</em>: bool, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>-clock_to </span><em>clk_signame_list</em></code></td>
+<td class="confluenceTd">
+<p>Generates reports based on target clock waveform(s). This parameter reports only those paths whose target clocks are the clock signals in <code><em>clk_signame_list</em></code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-collection</code></p>
+</td>
+<td class="confluenceTd">
+<p>Returns a collection of timing paths, which is useful for performing Tcl queries on selected timing reports.</p>
+
+<p>To generate a collection of paths analyzed by Path-Based Analysis (PBA), you can use the <code>&#8211;retime</code> parameter.</p>
+
+<p><strong>Note</strong>: This parameter is not supported in DMMMC mode.</p>
+
+<p><em>Data_type</em>: bool, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>&#8211;debug {unconstrained <span>|&#xa0;</span><span>time_borrow | cppr_point <span style="color:var(--ds-text,#172b4d);">| constraint_arc | context | wire_variation | vt_skew</span></span>}</span></code></td>
+<td class="confluenceTd">
+<p>You can specify the following options for debugging:</p>
+<ul><li><code>unconstrained</code>: Determines the reasons for a path to be unconstrained.&#xa0;The report output will list all the applicable arcs/constraints that could not constrain the paths, along with the reasons.</li><li><code>time_borrow</code>: Reports time borrowing calculations. Time borrowing is the amount of time borrowed by a previous logic.</li><li><span><code>cppr_point</code>: </span>Reports the CPPR point information for the reported paths.</li><li><span style="color:var(--ds-text,#172b4d);"><code>constraint_arc</code>: Reports check arc details, such as constraint arc delay, constraint pins (along with the related pin slews), skewness, user derate, annotation, and when_cond.&#xa0;<br /></span></li><li><span style="color:var(--ds-text,#172b4d);"><code>context</code>: Reports the launch and capture path interface timing for each instance and indicates </span><span style="color:var(--ds-text,#172b4d);">the block port that shows latency in the MIM flow.</span></li><li><code>wire_variation</code>: Reports the corresponding slack shift details at the end of each timing path report.</li><li><code>vt_skew</code>: Reports voltage threshold (VT) skew analysis details.</li></ul>
+<p><em>Data_type</em>: string, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-delay</code><code>_limit </code><code><em>float</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the path delay limit for unconstrained paths (when the <code>-unconstrained</code> parameter is specified).</p>
+
+<p>For early paths (<code>-early</code> parameter), the software reports only those paths with a path delay less than the delay limit. For late paths (<code>-late</code> parameter), only those paths with a path delay more than the delay limit will be reported.</p>
+
+<p><strong>Note: </strong>The <code>-delay_limit</code> can only be used in conjunction with the <code>-unconstrained</code> parameter.</p>
+
+<p><em>Data_type</em>: float, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-derate_summary </code></p>
+</td>
+<td class="confluenceTd">
+<p>Generates a summary table for AOCV derating for launch and capture paths.</p>
+
+<p><em>Data_type</em>: bool, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-early</code><code> | </code><code>-late</code></p>
+</td>
+<td class="confluenceTd">
+<p>Reports for early paths (hold check) or late paths (setup check).</p>
+
+<p>If you specify a check type, setup, or hold with the <code><a href="set_analysis_mode.html">set_analysis_mode</a></code> command, the <code>report_timing</code> command reports the specified check by default.</p>
+
+<p><strong>Note: </strong>The <code>-early</code> and <code>-late</code> parameters are not mutually exclusive; you can specify them together.</p>
+
+<p><em>Default</em>: <code>-late</code></p>
+
+<p><em>Data_type</em>: bool, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>-edge_from {lead | trail}</span></code></td>
+<td class="confluenceTd">
+<p>Generates reports based on the source clock edge - leading or trailing.</p>
+
+<p><strong>Note: </strong>The <code>-edge_from</code> parameter can only be used in conjunction with the <code>-clock_from</code> parameter.</p>
+
+<p><em>Default</em>: Reports both source clock edges</p>
+
+<p><em>Data_type</em>: bool, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>-edge_to {lead | trail}</span></code></td>
+<td class="confluenceTd">
+<p>Generates reports based on the target clock edge, either leading or trailing.</p>
+
+<p><strong>Note: </strong>The <code>-edge_to</code> parameter can only be used in conjunction with the <code>-clock_to</code> parameter.</p>
+
+<p><em>Default</em>: Reports both the target clock edges</p>
+
+<p><em>Data_type</em>: bool, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-format </code><code><em>column_list</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Formats the report according to the specified <code><em>column_list</em></code>. The <code><em>column_list</em></code> specifies the columns to be displayed in the timing report and the order in which they appear.</p>
+
+<p>The valid format columns are:</p>
+
+<p>adjustment, abs_delay_err, abs_slew_err, annotation, aocv_adj_stages, aocv_derate, aocv_weight, arc, arrival, arrival_mean, arrival_sigma, cell, delay, delay_mean, delay_sigma, direction, edge, fanin, fanout, flags, hpin, incr_delay, instance, instance_location, latch_window, load, module, net, pct_delay_err, pct_slew_err, phase, phys_info, pin, pin_load, pin_location, power_domain, required, retime_delay, retime_delay_mean, retime_delay_sigma, retime_mis_delta, retime_mis_derate, retime_slew, retime_slew_mean, retime_slew_sigma, stage_count, slew, slew_mean, slew_sigma, socv_derate, spice_arrival, spice_delay, spice_slew, stolen, timing_point, total_derate, user_derate, voltage, vt_skew_derate, when_cond, wire_load, wlmodel</p>
+
+<p>For example:</p>
+
+<p><code>-format {hpin cell delay required arrival </code><code>required edge}</code></p>
+
+<p>Note:</p>
+<ul><li>The default net format (with the <code>-net</code> parameter) for the full path will be:<br /><code>{hpin edge net cell delay arrival required}</code></li><li>The <code>required</code> column will not be displayed when the <code>-unconstrained</code> parameter is specified.</li><li>The <code>adjustment</code> column is automatically added to the timing report. To disable this feature, you can set the <code><span style="color:var(--ds-text,#000000);"><a href="timing_report_generated_clock_info.html">timing_report_generated_clock_info</a></span></code>&#xa0;global variable to <code>false</code>. By default, this global variable is set to <code>true</code>.</li><li>You can use a combination of the <code>-format</code> and <code>-tcl_list</code> parameters to integrate the timing reports into your Tcl scripts. You can use the <code>-from</code> parameter to limit the number of paths reported and to find specific paths in the design.</li><li>The <code>-format</code> option cannot be used with the <code>-path_type </code><code>end</code> or <code>-path_type summary</code> options.</li><li>You can manage the retiming columns with the <code><a href="timing_report_retime_formatting_mode.html">timing_report_retime_formatting_mode</a></code>&#xa0;global variable.</li><li><span style="letter-spacing: 0.0px;">Informational tags are displayed for reporting additional details with the <code>flags</code> option. F</span><span style="letter-spacing: 0.0px;">or details on the &#39;<code>F</code></span><code>lags</code><span style="letter-spacing: 0.0px;">&#39; column, refer to the section on </span><a href="#report_timing-flags">Use of Informational Flags</a><span style="letter-spacing: 0.0px;">.</span></li></ul>
+<p>For more details on the report format options, see the <a href="#report_timing-columnlist">Report Timing Column List Options</a> table.</p>
+
+<p><em>Data_type</em>: string, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-gui</code></td>
+<td class="confluenceTd">
+<p>Displays the timing report in a GUI window.</p>
+
+<p><em>Data_type</em>: bool, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>{-from | -from_rise | -from_fall} </span><em>object_list</em></code></td>
+<td class="confluenceTd">
+<p><span>Reports paths starting from the object(s) specified in the <em><code>object</code></em></span><em><code>_list</code></em><span>. The supported objects are </span><span>pins and ports.</span></p>
+
+<p>Using <code>-from_rise</code> (or <code>-from_fall</code>) specifies that the rising (or falling) edge of the signals on the pins/ports in the <span><em><code>object</code></em></span><em><code>_list</code></em>&#xa0;are the start of the paths.</p>
+
+<p>You can use this option with the <code>-through</code> and <code>-to</code> parameters for specifying particular paths in the design.</p>
+
+<p><strong>Note</strong>: These parameters do not allow clock objects. You can use the <code>-clock_from</code> and <code>-clock_to</code> parameters to reference clock waveforms.</p>
+
+<p><em>Data_type</em>: string, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-hpin</code></td>
+<td class="confluenceTd">
+<p>Prints all the hierarchical crossings of an arc under the <code>hpin</code> column.</p>
+
+<p><em>Data_type</em>: bool, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-machine_readable</code></p>
+</td>
+<td class="confluenceTd">
+<p>Generates a detailed timing report in machine-readable format. This report can be used for debugging timing results using the timing debug feature.</p>
+
+<p><em>Data_type</em>: bool, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-max</code><code>_paths </code><code><em>integer</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Reports the specified number of worst paths in the design, with a maximum of nworst (<code>-nworst</code> parameter) paths to any single endpoint (default 1).</p>
+
+<p>In case of group-based mode (when <code><a href="timing_report_group_based_mode.html">timing_report_group_based_mode</a></code> is set to <code>true</code>), the <code>-max_paths</code> parameter specifies the number of worst paths reported per clock group.</p>
+
+<p><em>Default</em>: 1</p>
+
+<p><em>Data_type</em>: int, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-max</code><code>_slack </code><code><em>float</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Reports only those paths with slack less than the specified maximum slack value.</p>
+
+<p>The <code>-max_slack</code> parameter reports paths that fall within the specified range. A positive slack value indicates that timing was met, and a negative slack value indicates a timing violation.</p>
+
+<p>When the&#xa0;<code>-retime_mode</code> <code>exhaustive</code>&#xa0;option is specified, the <code>-max_slack</code> value is set to <code>0</code>.</p>
+
+<p>The <code>-max_slack</code> parameter cannot be used with the <code>-unconstrained</code> option.</p>
+
+<p><em>Data_type</em>: string, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-min_slack </code><code><em>float</em></code></p>
+</td>
+<td class="confluenceTd"><div class="content-wrapper">
+<p>Reports only those paths whose slack is greater than the specified <code>-min_slack</code> value.</p>
+
+<p>You can generate a timing report showing paths with slack greater than the specified slack using the <code>-max_paths</code> parameter. For example, to report all paths with a slack greater than 2ns, you can use the following command:<br /><code>min_slack 2.0 </code><code>-max_paths 1000</code></p>
+
+<p>In this case, the maximum number of paths reported will be 1000.</p>
+
+<p>When the <code>-min_slack</code> parameter is specified, the total number of paths processed will be as determined by the <code>-max_paths</code>/<code>-nworst</code> settings, and only those paths satisfying the <code>-min_slack</code> criteria will be reported. The software will not process paths beyond the specified <code>max_paths</code>/<code>nworst</code> limit, even if the <code>min_slack</code> criteria are satisfied.</p>
+
+<p>In the diagram below, if&#xa0;<code>-min_slack</code> is 0 and <code>&#8211;max_paths 4 &#8211;nworst 2</code> is specified, then only 3 paths will be reported; the path with a slack value of -1 will be ignored. Here, even if there is another path with slack that is greater than or equal to 2, then it will not be reported because the worst max_paths have been processed.</p>
+
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image confluence-thumbnail" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/720023607/720023625.png" data-linked-resource-container-id="720023607" data-linked-resource-container-version="8" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image2017-4-26 15:8:54.png" data-linked-resource-id="720023625" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="250" src="attachments/720023607/720023625.png" tabindex="0" /></span></p>
+
+<p>The <code>-min_slack</code> option cannot be used with the <code>-unconstrained</code> option.</p>
+
+<p><em>Data_type</em>: string, optional</p>
+</div>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-net</code></p>
+</td>
+<td class="confluenceTd">
+<p>Adds a row for the net arc. This parameter also separates the cell delay from the wire delay.</p>
+
+<p>The <code>report_timing </code><code>-net</code> command displays the net delays separate from the cell delays. However, the net delay may sometimes be shown as 0.0. To get the net delays to show up, you can&#xa0; increase the report precision using the <code><a href="report_precision.html">report_precision</a></code> global variable.</p>
+
+<p>By default, the net arc is not shown, and the net delay is added to the following delay.</p>
+
+<p><em>Data_type</em>: bool, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>{-not_through | -not_rise_through | -not_fall_through} </code><code><em>object_list</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>You can specify one of the following options:</p>
+<ul><li><span><code>-not_through</code>: </span>Reports paths that do not traverse through the specified nets, ports, or pins of a cell.</li></ul><p style="margin-left: 30.0px;">By default, this parameter will be ignored if an object has already been specified. In this case, the parameter shows the following behavior:</p>
+<ul><li style="list-style-type: none;background-image: none;"><ul><li>If a collection of all the input ports has been specified (using the <code><a href="all_inputs.html">all_inputs</a></code> command), then the report will show paths to the inout part, and paths starting from the internal part of inout will be excluded.</li></ul></li></ul><ul><li style="list-style-type: none;background-image: none;"><ul><li>If a collection of all the output ports has been specified (using the <code><a href="all_outputs.html">all_outputs</a></code> command), then the report will show paths starting from the internal part of the inout, and paths ending at the inout part will be excluded.</li></ul></li></ul><ul><li style="list-style-type: none;"><ul><li>If any other collection (not specified with the <code>all_inputs</code> or <code>all_outputs</code> command) is specified, then paths to both the ports will not be reported.</li></ul></li><li><code>-not_rise_through:</code><span> Does not report paths with rise transition.</span></li><li><code>-not_fall_through:</code><span> Does not report paths with fall transition.</span></li></ul>
+<p><span><em>Data_type</em>: string, optional</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-nworst </code><code><em>integer</em></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Specifies the maximum number of paths which can be reported for a particular endpoint (the total number of paths reported is specified by the <code>-max_paths</code> parameter).</p>
+
+<p>When the <code><a href="timing_report_group_based_mode.html">timing_report_group_based_mode</a></code><span> global variable </span>is set to <code>true</code> (group-based mode), the <code>-nworst</code> parameter specifies the maximum number of paths for a particular endpoint per clock group.</p>
+
+<p>You can use the <code>-nworst</code> parameter to report all the checks at an endpoint (or use <code>-check_type</code>) to report a specific check.</p>
+
+<p><em>Default</em>: <code>1</code></p>
+
+<p><em>Data_type</em>: int, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-output_format {text | csv | gtd | binary}</code></td>
+<td class="confluenceTd">
+<p>Generates a detailed timing report in the specified format - text, CSV, GTD, or binary.</p>
+
+<p><em>Data_type</em>: enum, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code><span>-path_exceptions&#xa0;{applied | ignored | all}</span></code></p>
+</td>
+<td class="confluenceTd">
+<p>Includes information on path exceptions applied and considered for the reported path. You can specify the following options:</p>
+<ul><li><code>applied</code><span>: Reports the honored exception on the reported path.</span></li><li><span><code>ignored</code>: Reports the ignored exceptions on the reported path.</span></li><li><code>all</code>: Reports both applied and ignored sets of exceptions on the reported.</li></ul>
+<p>If multiple from, to, or through pins are specified, the exception report for that path will show only those pins that are part of the current path.</p>
+
+<p><strong>Note</strong>: If a path is already unconstrained, then all further path exceptions applied to that particular path will be reported as ignored exceptions.</p>
+
+<p>The&#xa0;<code>&#8211;path_exceptions</code> parameter also reports -start/-end options with multi-cycle paths. Without the start or end specification, by default, the setup check is relative to the end clock, and the hold check is relative to the start clock. The <code>report_timing &#8211;path_exceptions all</code>&#xa0;command will report all the non-default <code>-start/-end</code> specifications.</p>
+
+<p>You cannot use this parameter with the following parameters:</p>
+<ul><li><code>-point_to_point</code></li></ul><ul><li><code>-collection</code></li></ul><ul><li><code>-path_type</code></li></ul><ul><li><code>-tcl_list</code></li></ul>
+<p>Also, you cannot use this parameter with block-based SSTA.</p>
+
+<p><strong>Note: </strong>Analyzing all the exceptions for a path will increase the runtime.</p>
+
+<p><em>Data_type</em>: enum, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-path_group </code><code><em>groupname_list</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Reports only the paths that are contained in the groups specified in the <code><em>groupname_list</em></code>.</p>
+
+<p>This parameter reports the paths belonging to the default path group by using <code>-path_group default</code>. The paths that do not belong to any user-specified path group belong to the default path group named <code>default</code>.</p>
+
+<p>In group-based mode, the internal groups, such as, clock gating, clock names, asynchronous, and user-defined path groups can be selected with the <code>-path_group</code>&#xa0;parameter.</p>
+
+<p><em>Data_type</em>: string, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>-path_type {end | summary | full | full_clock | end_slack_only | summary_slack_only}</span></code></td>
+<td class="confluenceTd">
+<p>The <code>-path_type</code> parameter allows to you choose the report format by path type.&#xa0;</p>
+
+<p>You can specify one of the following options:</p>
+<ul><li><code style="line-height: 1.4285715;">end</code>: Generates an end point report for each path consisting of an endpoint, cause, slack, arrival time, required time, and phase. This option generates a very fast report. The <code>-format</code> option does not have any impact on this report format.</li><li><code>summary</code><span>: Generates a summary report for each path consisting of a start point, endpoint, cause, slack, arrival time, required time, and phase. The <code>-format</code> option does not have any impact on this report format.</span></li><li><span><code>full</code><span>: Generates a report that displays the full path with accompanying required time and slack calculation. This is the default path type. You can control the report format using the <code>-format</code> option.</span></span></li><li><span><span><code>full_clock</code><span>: <span style="color:var(--ds-text,#172b4d);">If the reported path ends at a timing check, the software reports the full clock path (Other End Path), in addition to the full data path (Timing Path).</span></span></span></span></li><li><code>end_slack_only</code>: Generates an end point report (similar to <code>-path_type end</code> report), for each path consisting of an endpoint, slack, and cause (as Violated/Met). When this option is used, the path collections will not be reported. This option generates a very fast report. The <code>-format</code> option does not have any impact on this report format.</li><li><code style="letter-spacing: 0.0px;">summary_slack_only</code><span style="letter-spacing: 0.0px;">: Generates a summary report (similar to </span><code style="letter-spacing: 0.0px;">-path_type</code><span style="letter-spacing: 0.0px;"> </span><code>summary</code>) for each path, consisting of a start point, endpoint, slack, and cause (as Violated/Met). The <code style="letter-spacing: 0.0px;">-format</code><span style="letter-spacing: 0.0px;"> parameter does not have any impact on this report format.</span></li></ul>
+<p><span style="letter-spacing: 0.0px;">When the </span><code>-path_type</code> parameter is not specified, the default report format (<code>full</code>) is used.</p>
+
+<p>In MMMC mode, when you specify the <code>report_timing -</code><code>path_type</code> parameter (with <code>end</code>, <code>end_slack_only</code>, <code>summary</code>, or <code>summary_slack_only</code> options), the output report displays a view column for all the reported paths.</p>
+
+<p><strong>Note</strong>: The paths contained in a collection are not reported with the upgraded path type.</p>
+
+<p><em>Data_type</em>: enum, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-point_to_point </code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Traces the worst delay path between a pair of from-to pins. The paths reported with this parameter include only the cumulative delay of a path.</p>
+
+<p>You must specify either the <code>-from</code> or <code>-to</code> parameter to define the begin and end points of the path.</p>
+
+<p>If you do not specify a <code>-from</code> pin, the standard definition of the begin point of a path applies. If you specify a <code>-from</code> pin, it is treated as the begin point of the path. If you specify a <code>-from</code> pin that is not a valid begin point, the arrival time of the first pin starts from 0.</p>
+
+<p>If you do not specify a <code>-to</code> pin, the standard definition of the end point applies. If you specify a <code>-to</code> pin, it is treated as the end point, and only those paths ending in <code>-to</code> pins are reported. If you specify more than one <code>-to</code> pin, the worst path to each pin-to-pin is reported.</p>
+
+<p>When from-to pins are specified, the software will trace across the trigger arcs and report a path if there is a clock reaching the CK pin of the trigger arc. However, if there is a begin or end point present between the&#xa0;<code>-from</code> and <code>-to</code> pins, the software will not trace beyond it.</p>
+
+<p>If there is no clock reaching the CK pin of the trigger arc, the software cannot trace across the trigger arc, and no path is reported. Also, a clock path delay is included only when the clock is in propagated mode.</p>
+
+<p>The <code>-point_to_point</code> parameter can be used with the <code>-max_paths</code>&#xa0;and <code>-nworst</code> parameters.</p>
+
+<p><span style="letter-spacing: 0.0px;">The </span><code style="letter-spacing: 0.0px;">-point_to_point</code><span style="letter-spacing: 0.0px;"> and </span><code style="letter-spacing: 0.0px;">-through</code><span style="letter-spacing: 0.0px;"> parameters are mutually exclusive; you cannot specify them together.</span></p>
+
+<p><strong>Note</strong>: The <code>-point_to_point</code> parameter supports a single <code>-from</code><span> and </span><code>-to</code> pin; a list of pins is not supported.</p>
+
+<p><em>Data_type</em>: bool, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-retime_delaycal_pins&#xa0;</code><code>&lt;<em>pin_name</em>&gt;</code></p>
+</td>
+<td class="confluenceTd">
+<p>Reports the PBA delay calculation details for timing arcs that fanin to the user-specified to-pin list.&#xa0;</p>
+
+<p>You can specify multiple pins in the pin list. The delay calculation report will be printed at the end of each timing path for the arcs, which are retimed in that path. The PBA delay calculation report format is similar to the <code>report_delay_calculation</code> output in GBA mode; however, the results may vary because this output is based on path-based analysis.&#xa0;</p>
+
+<p>When a cell output pin list is provided, the generated report is for the cell arcs; the cell input pin list generates the net arc report.</p>
+
+<p><strong>Note</strong>: This parameter is supported for PBA reporting only.</p>
+
+<p><em>Data_type</em>: string, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-retime_format {manual | retime_compare | retime_replace}</code></td>
+<td class="confluenceTd">
+<p>Allows you to set the format of timing reports for retime-related fields. You can specify one of the following options:</p>
+<ul><li><code>manual</code>: Does not change the <code>report_timing</code> format.</li><li><code>retime_compare</code>: If GBA columns are present in the report format, then the corresponding retime options are added. If PBA columns are already present, then there is no change in the format.</li><li><code>retime_replace</code>: If GBA columns are present in the report format, then the GBA columns are replaced by the corresponding PBA columns. If PBA columns are already in the report, then there is no change in the format.</li></ul>
+<p><strong>Note</strong>: The timing report format can also be changed with the <a href="timing_report_retime_formatting_mode.html"><code>timing_report_retime_formatting_mode</code></a> global variable. The <code>report_timing</code> command setting has precedence over this global variable.</p>
+
+<p><em>Data_type</em>: enum, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><span><code>-retime_mode {path | exhaustive}</code> </span></td>
+<td class="confluenceTd">
+<p>Reanalyzes the specified set of paths using the specified method. You can use one of the following options:</p>
+<ul><li><code>path</code>: Reanalyzes the specified set of paths. By default, the software uses <code>-retime_mode</code> <code>path</code> setting, when the <code>-retime</code> <code>path_slew_propagation</code> option is specified.</li><li><code>exhaustive</code>: Enables exhaustive path-based analysis mode. In this mode, the software will exhaustively examine nworst paths of the selected endpoints and then select the true worst path to be reported - based on retimed slacks of all the examined paths.&#xa0;<br />When you use this option, reporting can be runtime intensive as the software needs to do an exhaustive search for true worst paths. Therefore, it is recommended to use this option in the later phases of the signoff stage, when there are very few violations left for analysis.</li></ul>
+<p><em>Default</em>: <code>path</code></p>
+
+<p><em>Data_type</em>: enum, optional</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code><span>-retime {aocv | path_slew_propagation | aocv_path_slew_propagation}</span></code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Reanalyzes the specified set of paths using path-based analysis (1 path per endpoint).</p>
+
+<p><strong>Note: </strong>This feature is not meant to be run on all the paths of a design.</p>
+
+<p>You can specify the following options:</p>
+<ul><li><code>aocv</code>: Computes AOCV stage count based on specific paths and applies the AOCV derate values to GBA (<span style="line-height: 1.42857;">graph-based analysis) </span>delays. The <code style="letter-spacing: 0.0px;">-retime aocv</code><span style="letter-spacing: 0.0px;"> option can be used with the following parameters only:</span></li></ul><ul><li style="list-style-type: none;"><ul><li><code>-clock_from</code></li></ul></li></ul><ul><li style="list-style-type: none;"><ul><li><code>-edge_from</code></li></ul></li></ul><ul><li style="list-style-type: none;"><ul><li><code>-clock_to</code></li></ul></li></ul><ul><li style="list-style-type: none;"><ul><li><code>-edge_to</code></li></ul></li></ul><ul><li style="list-style-type: none;"><ul><li><code>-rise/-fall</code></li></ul></li></ul><ul><li style="list-style-type: none;"><ul><li><code>-early/-late</code></li></ul></li></ul><ul><li style="list-style-type: none;"><ul><li><code>-check_type</code></li></ul></li></ul><ul><li style="list-style-type: none;"><ul><li><code>-max_paths</code></li></ul></li></ul><ul><li style="list-style-type: none;"><ul><li><code>-begin_end_pair</code></li></ul></li></ul><ul><li style="list-style-type: none;"><ul><li><code>-from/-from_rise/-from_fall</code></li></ul></li></ul><ul><li style="list-style-type: none;"><ul><li><code>-through/-through_rise/ -through_fall</code></li></ul></li></ul><ul><li style="list-style-type: none;"><ul><li><code>-to/-to_rise/-to_fall</code></li><li><code>-path_group</code></li><li><code>-path_exceptions</code></li><li><code>-net</code></li><li><code>-path_type</code></li><li><code>-max_slack</code></li><li><code>-min_slack</code></li><li><code>-view</code></li><li><code>-format <em>column_list</em></code></li><li><code>-derate_summary</code></li><li><code>-machine_readable</code></li><li><code>-nworst</code></li></ul></li><li><code>path_slew_propagation</code>: Re-evaluates the given set of graph-based analysis (GBA) paths by recalculating the delay values based upon actual propagated slew across the path. In this case, the AOCV derates are reported during graph-based analysis.</li></ul>
+<p>The default timing analysis uses worst-case slew propagation to calculate the delays at each stage. As a result, timing analysis results can be pessimistic.</p>
+
+<p><strong>Note: </strong>This feature should be run only on paths that do not meet the slack margin criteria, to help identify actual failing paths from those that are simply failing due to the conservative delay calculation.</p>
+
+<p>The signal integrity incremental delays can be recomputed for the entire path. You can use the following command to perform path-based signal integrity analysis:</p>
+
+<p><code>report_timing -retime path_slew_propagation</code></p>
+
+<p>In the <code>report_timing</code> command output, the Retime Incr Delay column reports recomputed signal integrity delays. To view this column, specify the <code>report_timing -format retime_incr_delay </code>option or use the <code><a href="report_timing_format.html">report_timing_format</a></code> global variable.</p>
+
+<p>The <code>-retime</code> parameter also supports re-timing a collection of paths. This option does not retime an already retimed path collection. This feature works in graph-based analysis (GBA) mode for path collections. You can use the following model to retime collections:<br /><code>report_timing $collection -retime path_slew_propagation</code></p>
+
+<p>A path collection stores context-dependent data, that is, a delay property in GBA will reflect the delay data of the timing path report generated in GBA mode. The same property in PBA will reflect the retime delay data of the timing path report in PBA mode.</p>
+
+<p>The delay column in timing reports is also context dependent, <span>under the </span><code><a href="timing_report_retime_formatting_mode.html">timing_report_retime_formatting_mode</a> retime_replace</code><span> global variable setting.</span></p>
+
+<p><strong>Note</strong>: For <span>memory optimization purposes, both&#xa0;</span>delays will not be stored in the same path collection. You can use this setting for comparison purposes.</p>
+<ul><li><code>aocv_path_slew_propagation</code><span>: Re-evaluates the given set of graph-based analysis (GBA) paths by using path-based AOCV derates and delays using actual path-based propagated slew. This option is a combination of options </span><code>-aocv</code><span> and </span><code>-path_slew_propagation</code><span>.</span></li></ul>
+<p><span>For retime report header details, see <a href="#report_timing-retimeheader">Retime Analysis Report Header Flags</a>.</span></p>
+
+<p><span><em>Data_type</em>: enum, optional</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><span><code>-skip_io_paths</code>&#xa0;</span></td>
+<td class="confluenceTd">
+<p>Specifies whether the input/output paths are to be ignored.</p>
+
+<p><span><em>Data_type</em>: bool, optional</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-rise | </code><code>-fall</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Reports the path with the specified edge on the endpoint.</p>
+
+<p>If an endpoint is specified using the <code>-to_rise</code> (or <code>-to_fall</code>) parameter, the <code>-rise</code> (or <code>-fall</code>) parameter is ignored, and paths with an edge specified by&#xa0;<code>-to_rise</code> (or <code>-to_fall</code>) are reported. The <code>-rise</code> option applies to end points only.</p>
+
+<p><span><em>Data_type</em>: bool, optional</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-tcl</code><code><code>_</code>list</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Produces the report in Tcl list format instead of a tabular format. This is useful for integrating timing with custom Tcl functions, and also for customizing report generation.</p>
+
+<p>The <code>-tcl_list</code> and <code><em>filename</em></code> parameters are mutually exclusive; you cannot specify them together.</p>
+
+<p><span><em>Data_type</em>: bool, optional</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>{-through | -through_rise | -</code><code>through_fall}</code> <em><code>object_list</code></em></p>
+</td>
+<td class="confluenceTd">
+<p>Reports paths that pass through pin(s) or net(s) specified by the <code><em>object</em><em>_list</em></code>. Any number of <code>-through</code> pins or nets can be specified. When you specify the&#xa0;<code>-through_rise</code> (or <code>-through_fall</code>) parameter, the paths go through the rising (or falling) edge of the signals on the pins/nets in the <code><em>object</em><em>_list</em></code>.<br />The <code><em>object</em><em>_list</em></code>&#xa0;is a logical OR function. The resulting path may pass through any of the pins or nets in the <code>-through <em>object</em><em>_list</em></code>. To force the report to pass through multiple pins or nets, separate <code>-through</code> statements might be required.</p>
+
+<p>You can use these parameters with the <code>-net</code> option.</p>
+
+<p><span><em>Data_type</em>: string, optional</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>{-to | -to_fall | -to_rise} <em>object_list</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Reports paths leading to the pin(s) specified in the <code><em>object</em><em>_list</em></code>. The pins in the <code><em>object</em><em>_list</em></code>&#xa0;can be either pins on the design boundary (ports) or pins on an instance. Only one list of <code>-to</code> pins can be specified per report. Using <code>-to_rise</code> (or <code>-to_fall</code>) specifies that the rising (or falling) edge of the signals on the pins in <code><em>object</em><em>_list</em></code>&#xa0;are at the end of the paths.</p>
+
+<p>The<code> -to_rise</code> option applies to end point as well as intermediate pins.</p>
+
+<p><span><em>Data_type</em>: string, optional</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-unconstrained</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Reports only the unconstrained paths (paths with no slack). Each signal arriving at the path end node, which does not have a matching required time, results in an unconstrained path.</p>
+
+<p>The <code>report_timing</code> command without the <code>-unconstrained</code> option reports only constrained paths. If no constrained path is found, there may be unconstrained paths or the path may not exist.</p>
+
+<p><strong>Note</strong>: The <code>-min_slack</code> and <code>-max_slack</code> cannot be specified with the <code>-unconstrained</code> parameter.</p>
+
+<p>See <a href="#report_timing-Examples">Examples</a> for the conditions under which a path is reported as constrained or unconstrained.</p>
+
+<p><span><em>Data_type</em>: bool, optional</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-unique</code><code><code>_p</code>ins</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Reports paths through a unique set of pins.</p>
+
+<p>When this parameter is specified in group-based mode for a given begin-end point pair, the software will consider all different launch clock paths for reporting unique paths. If, for a given begin-end pair and a given capture clock, there is a possibility of different launch clock paths, then each such path will be reported.</p>
+
+<p><strong>Note</strong>: Using this parameter may significantly affect runtime and memory usage if the number of paths to be reported is high.</p>
+
+<p><span><em>Data_type</em>: bool, optional</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-view {<em>viewName</em>}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Generates a report for the specified analysis view. By default, all the active views are analyzed.</p>
+
+<p>You must be in multi-mode multi-corner (MMMC) analysis mode in order to use this parameter. To create a view, you use the <code><a href="create_analysis_view.html#create_analysis_view-create_analysis_view">create_analysis_view</a> </code>command. To set an active view for analysis, you use the <code><a href="set_analysis_view.html#set_analysis_view-set_analysis_view">set_analysis_view</a> </code>command.</p>
+
+<p>The <code>report_timing</code> command performs block-based analysis in MMMC mode. By default, the command reports the worst endpoint(s) across all views. You can use the <code>-view</code> parameter to report for individual views.</p>
+
+<p><em>Default:</em> Reports the worst path to each endpoint across all the analysis views.</p>
+
+<p><span><em>Data_type</em>: bool, optional</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><code>-worst_rc_corner</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Identifies the worst interconnect parameter combination that leads to minimum slack (desired) and generates a report for the corner.</p>
+
+<p><span><em>Data_type</em>: bool, optional</span></p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="report_timing-GroupPathReportingforUser-DefinedGroups">Group Path Reporting for User-Defined Groups</h4>
+<ul><li>A user-defined group is created with the same name as any of the defined reference clocks and with the same constraint as for the &quot;to&quot; clock.&#xa0;For example,&#xa0;<code>group_path -name CLK -to CLK</code>.&#xa0;<br />In this case only one group named&#xa0;<code>CLK</code>&#xa0;will be displayed in the timing report. This will be the same default group with reference clock&#xa0;<code>CLK</code>. Note&#xa0;that default groups - clock gating and asynchronous checks - will not be honored for this group.</li><li>A user-defined group is created with the same name as any of the reference clocks but with different constraint as specified for the &quot;to&quot; clock. For example, <code>group_path -name CLK -</code><code>from pin1 -to CLK</code>.<br />In this case the two groups named&#xa0;<code>CLK</code>&#xa0;will be displayed in the timing report. One group will be the same as the default group with reference clock&#xa0;<code>CLK</code>&#xa0;(which&#xa0;will&#xa0;not honor clock gating or asynchronous checks)&#xa0;and the other&#xa0;will be the user-defined path group with name&#xa0;<code>CLK</code>, which&#xa0;will honor all the checks.</li></ul>
+<p><strong><strong><span class="confluence-anchor-link" id="report_timing-flags"></span></strong><br /></strong></p>
+<h4 id="report_timing-UseofInformationalFlags">Use of Informational Flags</h4>
+
+<p>Informational tags are used providing additional details. The following informational tags are supported:&#xa0;</p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><thead><tr><td class="confluenceTd"><p align="center"><strong>Flags</strong></p>
+</td>
+<td class="confluenceTd"><p align="center"><strong>Description</strong></p>
+</td>
+</tr>
+</thead><tbody><tr><td class="confluenceTd"><p align="center"><strong>(i)</strong></p>
+</td>
+<td class="confluenceTd">
+<p>Net is ideal</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><p align="center"><strong>(P)</strong></p>
+</td>
+<td class="confluenceTd">
+<p>Instance is preserved / don&#8217;t_touch</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><p align="center"><strong>(p)</strong></p>
+</td>
+<td class="confluenceTd">
+<p>Instance is preserved / don&#8217;t_touch but may be resized</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p>The output format uses the flag keys on the timing report and adds a description at the end of the report for reference. A sample output is as shown below:</p>
+
+<p><code>#----------------------------------------------------------------------------</code><br /><code># Timing Point&#xa0; Delay (ns) Latch&#xa0; Window&#xa0; &#xa0;Arrival&#xa0; &#xa0;Arc&#xa0; &#xa0;Flags&#xa0; &#xa0;Adjustment</code><br /><code># (ns)</code><br /><code>#----------------------------------------------------------------------------</code><br /><code>f0/CP&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;-&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;-&#xa0; &#xa0; 1.000000&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;CP&#xa0; &#xa0; &#xa0; &#xa0;-&#xa0; &#xa0; &#xa0; -</code><br /><code>f0/Q&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.254100&#xa0; &#xa0; -&#xa0; &#xa0; 1.254100&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;CP-&gt;Q&#xa0; &#xa0; -&#xa0; &#xa0; &#xa0; -</code><br /><code>b32/Z&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.598446&#xa0; &#xa0; -&#xa0; &#xa0; 1.852546&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;I-&gt;Z&#xa0; &#xa0; &#xa0;-&#xa0; &#xa0; &#xa0; -</code><br /><code>...</code><br /><code>b4/Z&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.086940&#xa0; &#xa0; -&#xa0; &#xa0; 2.502181&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;I-&gt;Z&#xa0; &#xa0; &#xa0;-&#xa0; &#xa0; &#xa0; -</code><br /><code>f1/D&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.000000&#xa0; &#xa0; -&#xa0; &#xa0; 2.502181&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;D&#xa0; &#xa0; &#xa0; &#xa0; &lt;&lt;&lt;&#xa0; &#xa0; -</code><br /><code>#----------------------------------------------------------------------------</code></p>
+
+<p>(<code>P) : Instance is preserved</code><br /><code>(p) : Instance is preserved but may be resized</code><br /><code>(i) : Net is ideal.</code><br /><code>(b) : Timing paths are broken.</code></p>
+
+<p><span class="confluence-anchor-link" id="report_timing-retimeheader"></span></p>
+<h4 id="report_timing-RetimeAnalysisReportHeaderFlags">Retime Analysis Report Header Flags</h4>
+<div class="table-wrap"><table class="relative-table wrapped confluenceTable" style="width: 63.2378%;"><colgroup class=""><col class="" style="width: 14.5878%;" /><col class="" style="width: 85.4456%;" /></colgroup><tbody class=""><tr class=""><td class="confluenceTd">
+<p>AOCV(default)</p>
+</td>
+<td class="confluenceTd">
+<p>Indicates that the selected retime analysis includes recalculation of path depths and AOCV derates.</p>
+
+<p>The AOCV retime is enabled with the <code>-retime</code> <code>aocv</code> or <code>aocv_path_slew_propagation</code> parameter.</p>
+
+<p>The AOCV stage counting mode (set using the <code><a href="timing_aocv_analysis_mode.html">timing_aocv_analysis_mode</a></code> global variable) is indicated in the parenthesis. The stage counting modes are given below:</p>
+<ul><li><code>launch_capture(default)&#xa0;&#xa0;&#xa0;&#xa0; (Default)</code></li><li><code>combine_launch_capture&#xa0; &#xa0; &#xa0; (Combine)</code></li><li><code>separate_clock_data&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(Separate)</code></li><li><code>clock_only&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (Clock)</code></li></ul></td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>Corr</p>
+</td>
+<td class="confluenceTd">
+<p>Indicates that the current SOCV accuracy mode considers the correlation of variation between stages.&#xa0;</p>
+
+<p>Starting with SOCV accuracy mode <code>medium</code> (specified using the&#xa0;<code><a href="set_delay_cal_mode.html">set_delay_cal_mode</a></code> <code>-socv_accuracy_mode</code> parameter), it is assumed that some portion of the variation is not completely uncorrelated random variation, so the software tracks a correlated and uncorrelated component for each of the applicable moments.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>Data Clock</p>
+</td>
+<td class="confluenceTd">
+<p>Indicates the portion of the path that has been retimed. By default, only the data path is retimed.</p>
+
+<p>If the <code><a href="timing_disable_retime_clock_path_slew_propagation.html">timing_disable_retime_clock_path_slew_propagation</a></code> global variable is set to <code>false</code>, then the clock path will also be retimed, and &#8220;Clock&#8221; will be added to the retime status.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>EWM</p>
+</td>
+<td class="confluenceTd">
+<p>Indicates that the equivalent waveform model is used (<code><a href="set_delay_cal_mode.html">set_delay_cal_mode</a></code> <code>-equivalent_waveform_model</code> parameter).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>GBA COLL</p>
+</td>
+<td class="confluenceTd">
+<p>Shows a collection of paths for which retime analysis is not performed.</p>
+
+<p>This can be controlled with the When the<span>&#xa0;</span><code>report_timing</code><span>&#xa0;</span><code>-path_type exhaustive -collection</code><span>&#xa0;</span>command.&#xa0;By default, the<span>&#xa0;</span><code>report_timing</code><span>&#xa0;</span><code>-collection</code><span>&#xa0;</span>parameter does not show GBA and PBA slack values separately.&#xa0;</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>GP</p>
+</td>
+<td class="confluenceTd">
+<p>Indicates that graph-based PBA mode settings are enabled.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>GS</p>
+</td>
+<td class="confluenceTd">
+<p>Indicates that GBA skewness mode settings are enabled.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>PBA COLL</p>
+</td>
+<td class="confluenceTd">
+<p>Shows a collection of paths for which retime analysis is performed while creating the collection.</p>
+
+<p>This can be controlled with the When the<span>&#xa0;</span><code>report_timing</code><span>&#xa0;</span><code>-path_type exhaustive -collection</code><span>&#xa0;</span>command.&#xa0;By default, the<span>&#xa0;</span><code>report_timing</code><span>&#xa0;</span><code>-collection</code><span>&#xa0;</span>parameter does not show GBA and PBA slack values separately.&#xa0;</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>Path-Slew</p>
+</td>
+<td class="confluenceTd">
+<p>Indicates the selected retime analysis is set to use path correct slew rates to reduce the pessimism from slew merging.&#xa0;</p>
+
+<p>This can be controlled with the <code>report_timing</code> <code>-retime</code> parameter. The path slews are recalculated in <code>path_slew_propagation</code> and <code>aocv_path_slew_propagation</code> modes.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>PG</p>
+</td>
+<td class="confluenceTd">
+<p>Indicates that group-based mode reporting is enabled when N paths are reported for every group.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>RC</p>
+</td>
+<td class="confluenceTd">
+<p>Indicates that RC variation is enabled with the <code><a href="timing_socv_rc_variation_mode.html">timing_socv_rc_variation_mode</a></code> setting, and an SOCV format RC variation side file library is available.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>SI</p>
+</td>
+<td class="confluenceTd">
+<p>Indicates that SI analysis is enabled during the retime analysis.</p>
+
+<p>The path-based analysis will recompute SI effects using path-correct victim timing windows.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>SOCV(Ultra)</p>
+</td>
+<td class="confluenceTd">
+<p>Indicates that SOCV analysis is enabled and has been incorporated into the retiming.&#xa0;</p>
+
+<p>The SOCV analysis mode (specified with the&#xa0;<a href="set_delay_cal_mode.html"><code>set_delay_cal_mode</code></a> <code>-socv_accuracy_mode</code> parameter) is shown in parenthesis. The accuracy modes are mapped as follows:</p>
+<ul><li><code>low&#xa0; &#xa0; &#xa0; &#xa0; &lt;not shown&gt;</code></li><li><code>medium&#xa0;&#xa0;&#xa0;&#xa0; Medium</code></li><li><code>high&#xa0; &#xa0; &#xa0; &#xa0;High</code></li><li><code>ultra&#xa0; &#xa0; &#xa0; Ultra</code></li></ul></td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>Spatial (CS)</p>
+</td>
+<td class="confluenceTd">
+<p>Indicates that spatial derating side files have been loaded, and an explicit spatial derate factor will be calculated.&#xa0;</p>
+
+<p>This is not shown for AOCV 2D derate tables, where the spatial and depth derates are combined.&#xa0; The GBA spatial derate mode (specified with the <code><a href="timing_spatial_derate_distance_mode.html">timing_spatial_derate_distance_mode</a></code> setting) is shown in parenthesis with the possible values given below:</p>
+<ul><li><code>chip_size&#xa0; &#xa0; &#xa0; &#xa0; (CS)</code></li><li data-uuid="6a9f8d71-f577-48e2-a28d-5a4e300de894"><code>arc_bounding_box</code>&#xa0; <code>(ARC)</code></li></ul>
+<p>The GBA spatial derate mode does not affect the path-based analysis bounding box calculation.</p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd">
+<p>WP</p>
+</td>
+<td class="confluenceTd">
+<p>Indicates that waveform propagation is enabled (using the&#xa0;<code>set_delay_cal_mode</code> -<code>equivalent_waveform_model</code> <code>propagation</code> setting).&#xa0;&#xa0;</p>
+
+<p>The path-based retime will also use this delay calculation accuracy setting when recomputing delays and transitions for the path.</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><br /></p>
+
+<p><strong>Examples of GBA/PBA Collection Reports</strong></p>
+<ul><li>When the <code>report_timing -path_type exhaustive -collection</code> command is specified, the following command generates a GBA collection report as shown below:<br /><code>tempus &gt; report_timing $tim_coll ; set tim_coll [report_timing -path_type exhaustive -collection]<br /></code><br /><code>**WARN: (TCLCMD-1248):  Since no &#39;-max_slack&#39; has been specified with exhaustive &#39;-retime_mode&#39;, tool will assume it&#39;s default value in this case which is &#39;0&#39;</code><br /><code>**WARN: (TCLCMD-1251):  The PBA exhaustive mode &#39;-nworst&#39; limit has been exhausted for some of the endpoints. Refer to verbose log file of current session for more details.</code><br /><code>INFO: Path Based Analysis (PBA) performed on total &#39;3&#39; paths</code><br /><code>INFO: Max depth 3 reached for end point &#39;htb/CG_REBAL_HIER_IN21/RC_IC_IN_1/E&#39; during Path Based Analysis</code><br /><br /><code>Path 1: VIOLATED Clock Gating Setup Check with Pin htb/CG_REBAL_HIER_IN21/RC_IC_IN_1/CK&#xa0;</code><br /><code>Endpoint: &#xa0; htb/CG_REBAL_HIER_IN21/RC_IC_IN_1/E (v) checked with &#xa0;leading edge of &#39;clk&#39;</code><br /><code>Beginpoint: htb/mc_vl_reg_2/Q &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(v) triggered by &#xa0;leading edge of &#39;clk&#39;</code><br /><code>Common point: SPINE_CELL_BBF1/Y</code><br /><code>Path Groups: {clock_gating_default}</code><br /><code>Analysis View: sg_05v_15c_sigmax</code><br /><code>Retime Analysis {<strong>GBA COLL</strong>}</code></li><li>When the <code>report_timing -path_type exhaustive -collection</code> command is specified, the following command shows a PBA collection report:<br /><code>tempus &gt; report_timing $tim_coll ; set tim_coll [report_timing -path_type exhaustive -collection]</code><br /><code><br />**WARN: (TCLCMD-1248):  Since no &#39;-max_slack&#39; has been specified with exhaustive &#39;-retime_mode&#39;, tool will assume it&#39;s default value in this case which is &#39;0&#39;</code><br /><code>INFO: Path Based Analysis (PBA) performed on total &#39;530&#39; paths</code><br /><code>INFO: Max depth 131 reached for end point &#39;htb/CG_REBAL_HIER_IN21/RC_IC_IN_1/E&#39; during Path Based Analysis</code><br /><br /><code>Path 1: VIOLATED Clock Gating Setup Check with Pin htb/RC_CG_REBALANCE_HIER_INST2989/RC_IC_IN_1/CK&#xa0;</code><br /><code>Endpoint: &#xa0; htb/RC_CG_REBALANCE_HIER_INST2989/RC_IC_IN_1/E (v) checked with &#xa0;leading edge of &#39;clk&#39;</code><br /><code>Beginpoint: htb/mc_vl_reg_2/Q &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(^) triggered by &#xa0;leading edge of &#39;clk&#39;</code><br /><code>Common point: SPINE_CELL_BBF1/Y</code><br /><code>Closest CPPR Driver Pin: { Launch: SPINE_CELL_BBF1/Y Capture: SPINE_CELL_BBF1/Y }</code><br /><code>Path Groups: {clock_gating_default}</code><br /><code>Analysis View: sg_05v_15c_sigmax</code><br /><code>Retime Analysis {<strong>PBA COLL</strong>}</code></li></ul>
+<p><strong>VT Skew Reports</strong></p>
+
+<p>The following informational tags are supported for VT skew reports:</p>
+<div class="table-wrap"><table class="relative-table wrapped confluenceTable" style="width: 89.1037%;"><colgroup class=""><col class="" style="width: 10.5493%;" /><col class="" style="width: 47.8462%;" /><col class="" style="width: 41.5847%;" /></colgroup><thead class=""><tr class=""><td class="confluenceTd"><p align="center"><strong>Flags</strong></p>
+</td>
+<td class="confluenceTd"><p align="center"><strong>Description</strong></p>
+</td>
+<td class="confluenceTd"><p align="center"><strong>Command Settings</strong></p>
+</td>
+</tr>
+</thead><tbody class=""><tr class=""><td class="confluenceTd"><p align="center" style="text-align: left;">VT-Skew</p>
+</td>
+<td class="confluenceTd"><p align="center" style="text-align: left;">Shows VT skew details.&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>set <a href="timing_enable_vtskew_derate_mode.html">timing_enable_vtskew_derate_mode</a> true&#xa0;</code></p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd"><p align="center" style="text-align: left;">&#xa0;PBA&#xa0;</p>
+</td>
+<td class="confluenceTd"><p align="center" style="text-align: left;">Shows that the current path has undergone VT skew analysis.</p>
+<p align="center" style="text-align: left;">However, all the paths might not be considered VT skew candidates - even if VT skew analysis mode is enabled.</p>
+</td>
+<td class="confluenceTd">
+<p><code><a href="set_vt_skew_config.html">set_vt_skew_config</a> -unique_vt_mode {none | slow | fast | nominal}</code></p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd"><p align="center" style="text-align: left;">PU</p>
+</td>
+<td class="confluenceTd"><p align="center" style="text-align: left;">Indicates unique VT skew for PBA.</p>
+<p align="center" style="text-align: left;">Displayed when unique VT mode is enabled.&#xa0;</p>
+</td>
+<td class="confluenceTd" rowspan="2">
+<p><code>set_vt_skew_config -unique_vt_mode {slow | fast | nominal}</code></p>
+
+<p><br /></p>
+</td>
+</tr>
+<tr class=""><td class="confluenceTd"><p align="center" style="text-align: left;">GU</p>
+</td>
+<td class="confluenceTd"><p align="center" style="text-align: left;">Indicates unique VT skew for GBA.</p>
+<p align="center" style="text-align: left;">Displayed when unique VT mode is enabled.&#xa0;</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p>The following report shows report header flags for retime analysis:<br /><br /><code>Path 1: MET Hold Check with Pin TDSP_CORE_INST/EXECUTE_INST/top_reg[11]/CP&#xa0;</code><br /><code>Endpoint: &#xa0; TDSP_CORE_INST/EXECUTE_INST/top_reg[11]/D &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(v) checked&#xa0;</code><br /><code>with &#xa0;leading edge of &#39;m_clk&#39;</code><br /><code>Beginpoint: TDSP_CORE_INST/DATA_BUS_MACH_INST/data_out_reg[11]/Q (v) triggered&#xa0;</code><br /><code>by &#xa0;leading edge of &#39;m_clk&#39;</code><br /><code>Path Groups: {m_clk}</code><br /><code>Analysis View: view2</code><br /><strong><code>Retime Analysis {Data Path-Slew SOCV(High)-Corr SI Vt-Skew (PBA GU PU)}</code></strong><br /><code>Retime Vt-Skew Analysis {VT_group_1@fast VT_group_2@fast VT_group_3@fast }</code><br /><code>Retime Vt-Skew Stats { Dominant_VT_group: NA Launch_Clock_VTGroups: 2 Capture_</code><br /><code>Clock_VTGroups: 1 Total_Clock_VTGroups: 2}</code><br /><code>Other End Arrival Time &#xa0; &#xa0; &#xa0; &#xa0; 0.569769 (+3.00S) | &#xa0;0.531640 | &#xa0;0.012710</code><br /><code>+ Hold &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;-0.035400 (+3.00S) | -0.035400 | &#xa0;0.000000</code><br /><code>+ Phase Shift &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.000000</code><br /><code>- CPPR Adjustment &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.051262 (+3.00S) | &#xa0;0.000100 | &#xa0;0.017054</code><br /><code>= Required Time &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.462027 (+3.00S) | &#xa0;0.496140 | &#xa0;0.011371(-)</code><br /><code>&#xa0; Arrival Time &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.769317 (-3.00S) | &#xa0;0.803430 | &#xa0;0.011371</code><br /><code>&#xa0; Slack Time &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.307290 (-3.00S) | &#xa0;0.307290 | &#xa0;0.000000</code><br /><code>= Slack Time(original) &#xa0; &#xa0; &#xa0; &#xa0; 0.356572 (-3.00S) | &#xa0;0.356572 | &#xa0;0.000000</code><br /><code>&#xa0; &#xa0; &#xa0;Clock Rise Edge &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.000000</code><br /><code>&#xa0; &#xa0; &#xa0;= Beginpoint Arrival Time &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.000000 (-3.00S) | &#xa0;0.000000 | &#xa0;0.000000</code></p>
+
+<p><br /></p>
+
+<p><strong><span class="confluence-anchor-link" id="report_timing-columnlist"></span><br /></strong></p>
+<h4 id="report_timing-ReportTimingColumnListOptions"><strong>Report Timing Column List Options&#xa0;</strong></h4>
+<div class="table-wrap"><table class="confluenceTable cadenceTable cadDefaultfont" id="cadDefaultfont" style="width: 720px;"><colgroup><col style="width: 100px;" /><col style="width: 340px;" /></colgroup><tbody><tr><td class="confluenceTd">
+<p><strong>Option</strong></p>
+</td>
+<td class="confluenceTd">
+<p><strong>Description</strong></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>adjustment</p>
+</td>
+<td class="confluenceTd">
+<p>Reports generated clock adjustment values. When reporting the detailed path for a generated clock, there are circumstances where the arrival time needs to be adjusted when a <a href="create_generated_clock.html"><code>create_generated_clock</code></a> assertion is encountered along the path. The adjustment argument can be used to provide a clearer indication of why a &quot;jump&quot; in the arrival time is seen in the path report.</p>
+
+<p><span style="letter-spacing: 0.0px;">When the </span><code style="letter-spacing: 0.0px;">create_generated_clock -edge_shift</code><span style="letter-spacing: 0.0px;"> parameter is specified, the adjustment column will show the amount of shift specified.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><span>abs_delay_err </span></td>
+<td class="confluenceTd">
+<p>Reports the absolute delay difference of Tempus from Spice.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><span>abs_slew_err </span></td>
+<td class="confluenceTd">
+<p>Reports the absolute slew difference of Tempus from Spice.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>annotation</p>
+</td>
+<td class="confluenceTd">
+<p>Reports RC parasitic annotations for net arcs, and delay annotations for either gate or net arcs. The following annotations are reported:</p>
+<ul><li>SDF: SDF back-annotation. The annotation status reflects the gate arc, not the interconnect arc.</li><li>SPEF: This entry appears if parasitic extraction has been done or annotated using SPEF.</li><li>LumpedRC: Lumped RC annotation</li><li>DlyAssert: Assertion set with set_annotated_delay command</li><li>WLM: Wire load model back-annotation</li><li>&lt;none&gt;: All others</li></ul></td>
+</tr>
+<tr><td class="confluenceTd">aocv_adj_stages</td>
+<td class="confluenceTd">Shows up &quot;Aocv Adjust Stages&quot; column. This column reports the <span style="color:var(--ds-text,#000000);">AOCV adjustment stages that&#xa0;</span>indicate the total effective stage count.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>aocv_derate</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the graph-based AOCV derating factor used for cells/nets in AOCV mode. In retime mode, this column will report graph-based derating for cells/nets before the AOCV branch point and path-based derating.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">aocv_weight</td>
+<td class="confluenceTd">Reports AOCV weight values for the path elements.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>arc</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the arc as described by the from pin, from pin edge, to pin, and to pin edge. For example, the arc from the rising edge of pin A to the falling edge of pin Z is reported as <code>A -&gt; Z</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>arrival</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the arrival time on the pin.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">arrival_mean</td>
+<td class="confluenceTd">Reports mean of the arrival time on a pin.</td>
+</tr>
+<tr><td class="confluenceTd">arrival_sigma</td>
+<td class="confluenceTd">Reports the standard deviation of the arrival time on a pin.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>cell</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the cell name of the given pin&#39;s instance.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>delay</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the arc delay. If the stolen slack at the arc output pin (output of transparent latches) is not zero, the stolen column is also displayed along with this column.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">delay_mean</td>
+<td class="confluenceTd">Reports the mean of each arc&#39;s delay.</td>
+</tr>
+<tr><td class="confluenceTd">delay_sigma&#xa0;</td>
+<td class="confluenceTd">
+<p>Reports the standard deviation of each arc&#39;s delay.</p>
+
+<p><strong>Note</strong>: In the absence of correlated and uncorrelated components of variation, the individual delay sigma values will not be summed up.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>direction</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the pin direction (IN, OUT).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>edge</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the edge of a pin (^=R, v=F).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>fanin</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the number of source nodes of a net connected to a timing pin.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>fanout</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the number of sinks of a net connected to a timing pin.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">flags</td>
+<td class="confluenceTd">
+<p>Indicates the size_only, dont_use, dont_touch, and ideal attributes.</p>
+
+<p>When the &#39;flags&#39; option is specified, a capacitance group entry (if it exists) <span>will be displayed under the &quot;Flags&quot; column. This value indicates the </span>input capacitance group being used for delay calculations &#8211; C1C2 (2-piece model) or C1CN (n-piece model).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>hpin</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the hierarchical name for a given pin.</p>
+
+<p><strong>Note</strong>: The hpin, pin, and timing_point will print the same values in the report output.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>incr_delay</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the incremental delay of a pertaining arc. The software reads the incremental delay from an incremental SDF file using the <code><a href="read_sdf.html">read_sdf</a></code> command.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>instance</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the hierarchical name of a given pin&#39;s instance.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>instance_location</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the location (x,y) of an instance. If a design is not placed, this column will be blank. This option displays the <code>instance</code> column automatically.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><span>latch_window</span></td>
+<td class="confluenceTd"><span>Reports the available window for the latch to sample the data.</span></td>
+</tr>
+<tr><td class="confluenceTd">
+<p>load</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the total capacitance load on a given pin.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">module</td>
+<td class="confluenceTd">
+<p>Reports the module name of the corresponding block hierarchy. This hierarchical module name will be reported only when the <code>-hpin</code> parameter of the <code>report_timing</code> command is specified.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>net</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the hierarchical name of a net connected to a given pin.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><span>pct_delay_err </span></td>
+<td class="confluenceTd">
+<p>Reports the percent delay difference of Tempus from Spice.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><span>pct_slew_err </span></td>
+<td class="confluenceTd">
+<p>Reports the percent slew difference of Tempus from Spice.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>phase</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the phase name of a pin.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">phys_info<span class="Apple-tab-span">&#xa0;</span></td>
+<td class="confluenceTd">Shows minimum/maximum assigned layer, and non-default rule name information.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>pin</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the reference name for the given pin.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>pin_load</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the pin load data. The pin load refers to the sum of the pin capacitance of all the pins connected to the current net.&#xa0;</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>pin_location</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the location (x,y) of a pin. If a design is not placed, this column will be blank.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>power_domain</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the power domain details of the specified path instance.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>required</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the required time on a pin.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>retime_delay</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the recalculated arc delay based on the path being reanalyzed with the specified retime method.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">retime_delay_mean</td>
+<td class="confluenceTd">
+<p>Reports the mean of the recalculated arc delay on the path being reanalyzed with the specified retime method.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>retime_delay_sigma</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the standard deviation of each parameter of an arc&#39;s retimed delay.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>retime_mis_delta</p>
+</td>
+<td class="confluenceTd">
+<p>Reports MIS delta delay in PBA mode for MIS-aware timing arcs in the path.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>retime_mis_derate</p>
+</td>
+<td class="confluenceTd">
+<p>Reports MIS derate values (in PBA mode) when derate-based advanced multi-input switching (AMIS-Derate) analysis is enabled.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>retime_slew</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the recalculated slew based on the path being reanalyzed with the specified retime method.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">retime_slew_mean</td>
+<td class="confluenceTd">
+<p>Reports the mean of each parameter of an arc sink pin&#39;s retimed slew.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>retime_slew_sigma</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the standard deviation of each parameter of an arc sink pin&#39;s retimed slew.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>stage_count</p>
+</td>
+<td class="confluenceTd">
+<p>Displays the aggregate stage count of a specific instance in graph-based analysis (GBA) mode, and the actual stage count in path-based analysis (PBA) mode.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">slew</td>
+<td class="confluenceTd">
+<p>Reports the propagated slew at the given pin.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">slew_mean</td>
+<td class="confluenceTd">Reports the mean of each parameter of an arc sink pin&#39;s slew.</td>
+</tr>
+<tr><td class="confluenceTd">slew_sigma</td>
+<td class="confluenceTd">Reports the standard deviation of each parameter of an arc sink pin&#39;s slew.</td>
+</tr>
+<tr><td class="confluenceTd">socv_derate</td>
+<td class="confluenceTd">
+<p>Reports the SOCV or the spatial derating factor applied to cells or nets in SOCV analysis mode.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><span>spice_arrival </span></td>
+<td class="confluenceTd">
+<p>Reports the Spice arrival time at the timing point.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><span>spice_delay </span></td>
+<td class="confluenceTd">
+<p>Reports the Spice delay of a timing arc.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><span>spice_slew</span></td>
+<td class="confluenceTd">
+<p>Reports the Spice slew of a timing point.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>stolen</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the slack stolen (or the time given to the previous stage) at the given pin. If the slack is not zero and the <code>delay</code> column is specified, then this column is displayed by default (but only visible on the output of transparent latches).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>timing_point</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the hierarchical names for the given points.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">total_derate</td>
+<td class="confluenceTd">
+<p>Reports the total derating factor applied on the corresponding cell or nets that reflect the combined impact of all the derates (OCV/AOCV/spatial) applied on each stage of the timing path.</p>
+
+<p><strong>Note</strong>: By default, the software will take into account the negative delays and keep the SOCV derate column in sync with the user-derate column. The software multiplies the negative delay by (2.0 - derating factor) to make it more pessimistic. However, reporting will always show derates based on the positive delay. The timing report output will show similar values for the SOCV Derate and Total Derate columns, but there will be no changes in the slack values.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>user_derate</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the derating scale factors set with the <code><a href="set_timing_derate.html">set_timing_derate</a></code> command.</p>
+
+<p><strong>Note: </strong>The timing system cannot provide an accurate derating factor for the lumped gate and wire delay when the <code>set_timing_derate </code>factors for <code>-cell_delay</code> and <code>-net_delay</code> are not equivalent. In this case, an asterisk (*) is reported in the SSI Derate column.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">voltage</td>
+<td class="confluenceTd">Returns the voltage that is used during delay calculations.</td>
+</tr>
+<tr><td class="confluenceTd" style="text-align: left;">vt_skew_derate</td>
+<td class="confluenceTd" style="text-align: left;">Returns voltage threshold (VT) skew analysis details.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>when_cond</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the &quot;when&quot; condition of the arc specified in the library.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>wire_load</p>
+</td>
+<td class="confluenceTd">
+<p>Reports the wire load.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><span>wlmodel</span></td>
+<td class="confluenceTd">
+<p>Reports the kind of parasitic used by a pin or net, such as SPEF. If the wire load model is derived from a Liberty file, the information is reported in the following format:</p>
+
+<p><code>Wireload model (.lib <em>model_name</em> <em>library_name</em>)</code></p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="report_timing-ReportingTimingChecksBetweenVariousTypesofClocks">Reporting Timing Checks Between Various Types of Clocks</h4>
+
+<p>The following table summarizes the timing checks and the min/max delay checks that are performed based on the types of launching and capturing clocks:</p>
+<ul><li>NZ (Non Zero Period Clock - Regular Clock)</li></ul><ul><li>Z (Zero Period Clock - Regular clock whose period is equal to zero)</li></ul><ul><li>@ (Asynchronous Clock - Clock which triggers the default input delay and the input delay without a clock)</li></ul><ul><li>CPD (Combinational Path Delay)</li></ul>
+<p><strong>&#xa0;</strong></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /><col /><col /></colgroup><tbody><tr><th class="confluenceTh">Launching Clock</th><th class="confluenceTh">Capturing Clock</th><th class="confluenceTh">Timing Checks</th><th class="confluenceTh">Path Delay Checks</th></tr>
+<tr><td class="confluenceTd">@</td>
+<td class="confluenceTd">@</td>
+<td class="confluenceTd">NO</td>
+<td class="confluenceTd">CPD</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">Z</td>
+<td class="confluenceTd" colspan="1">@</td>
+<td class="confluenceTd" colspan="1">NO</td>
+<td class="confluenceTd" colspan="1">CPD</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">NZ</td>
+<td class="confluenceTd" colspan="1">@</td>
+<td class="confluenceTd" colspan="1">NO</td>
+<td class="confluenceTd" colspan="1">CPD</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">@</td>
+<td class="confluenceTd" colspan="1">Z</td>
+<td class="confluenceTd" colspan="1">YES</td>
+<td class="confluenceTd" colspan="1">SPD</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">@</td>
+<td class="confluenceTd" colspan="1">NZ</td>
+<td class="confluenceTd" colspan="1">YES</td>
+<td class="confluenceTd" colspan="1">SPD</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">NZ</td>
+<td class="confluenceTd" colspan="1">Z</td>
+<td class="confluenceTd" colspan="1">NO</td>
+<td class="confluenceTd" colspan="1">SPD</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">Z</td>
+<td class="confluenceTd" colspan="1">NZ</td>
+<td class="confluenceTd" colspan="1">YES</td>
+<td class="confluenceTd" colspan="1">SPD</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">Z</td>
+<td class="confluenceTd" colspan="1">Z</td>
+<td class="confluenceTd" colspan="1">YES</td>
+<td class="confluenceTd" colspan="1">SPD</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1">NZ</td>
+<td class="confluenceTd" colspan="1">NZ</td>
+<td class="confluenceTd" colspan="1">YES</td>
+<td class="confluenceTd" colspan="1">SPD</td>
+</tr>
+</tbody></table></div>
+<h4 id="report_timing-report_timing-fromlatch/DSettings">report_timing -from latch/D Settings</h4>
+
+<p>The <code>report_timing -from</code> [register/latch]/CK command settings can be defined in line with the path reported in the full_clock path report (as the reported path might be clock-&gt;lat/CK-&gt;lat/Q-&gt;ff2/D). So the&#xa0;<code>report_timing -from</code> CK-pin can be very intuitive.</p>
+
+<p>However, in latch case scenarios where there are multiple D pins on a latch, Tempus supports <code>-from</code> latch/D pin, which is generally used for debug purposes. When propagating across the CK-&gt;Q arc, the software will perform worst-case across all the D-&gt;Q arcs and report the worst path possible. The <code>report_timing -from</code> latch/D2 command can be used to propagate arrival only across the D2-&gt;Q arc, so that no worst case occurs. And the path report or slack with respect to a particular D pin of the latch can be attained.</p>
+
+<p>Examples,</p>
+<ul><li>The following command uses lat/G (clock pin) , lat/D and lat/D2 (2 data pins), lat/Q (output/begin pin), and shows the report below:<br /><code>report_timing -to ff2/D -path_type full -format {hpin edge delay arrival arc} -net -from lat/G<br /><br />--------------------------------------------------------------------------------&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;<br />Path 1: MET Setup Check with Pin ff2/CK<br />Endpoint: &#xa0; ff2/D (v) checked with trailing edge of &#39;CK1&#39;<br />Beginpoint: lat/Q (v) triggered by trailing edge of &#39;CK1&#39;<br />Path Groups: {CK1}<br />Other End Arrival Time &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;1.400<br />- Setup &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.110<br />+ Phase Shift &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 2.500<br />+ CPPR Adjustment &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.000<br />= Required Time &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 3.790<br />- Arrival Time &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.073<br />= Slack Time &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;1.717<br />&#xa0; &#xa0; &#xa0;Clock Fall Edge &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 1.250<br />&#xa0; &#xa0; &#xa0;+ Clock Network Latency (Prop) &#xa0;0.120<br />&#xa0; &#xa0; &#xa0;= Beginpoint Arrival Time &#xa0; &#xa0; &#xa0; 1.370<br />&#xa0; &#xa0; &#xa0; -------------------------------------------------<br />&#xa0; &#xa0; &#xa0; Pin &#xa0; &#xa0; &#xa0; Edge &#xa0;Delay &#xa0;Time &#xa0; Arrival &#xa0;Arc<br />&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Given &#xa0;Time<br />&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;To<br />&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Start<br />&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Point<br />&#xa0; &#xa0; &#xa0; -------------------------------------------------<br />&#xa0; &#xa0; &#xa0; lat/G -&gt; &#xa0;v &#xa0; &#xa0; - &#xa0; &#xa0; &#xa0;- &#xa0; &#xa0; &#xa0;1.370 &#xa0; &#xa0;G v<br />&#xa0; &#xa0; &#xa0; lat/Q &#xa0; &#xa0; v &#xa0; &#xa0; 0.150 &#xa0;0.493 &#xa0;2.013 &#xa0; &#xa0;D v -&gt; Q v<br />&#xa0; &#xa0; &#xa0; buf9/A &#xa0; &#xa0;v &#xa0; &#xa0; 0.000 &#xa0;- &#xa0; &#xa0; &#xa0;2.013 &#xa0; &#xa0;-<br />&#xa0; &#xa0; &#xa0; buf9/Y &#xa0; &#xa0;v &#xa0; &#xa0; 0.030 &#xa0;- &#xa0; &#xa0; &#xa0;2.043 &#xa0; &#xa0;A v -&gt; Y v<br />&#xa0; &#xa0; &#xa0; buf10/A &#xa0; v &#xa0; &#xa0; 0.000 &#xa0;- &#xa0; &#xa0; &#xa0;2.043 &#xa0; &#xa0;-<br />&#xa0; &#xa0; &#xa0; buf10/Y &#xa0; v &#xa0; &#xa0; 0.030 &#xa0;- &#xa0; &#xa0; &#xa0;2.073 &#xa0; &#xa0;A v -&gt; Y v<br />&#xa0; &#xa0; &#xa0; ff2/D -&gt; &#xa0;v &#xa0; &#xa0; 0.000 &#xa0;- &#xa0; &#xa0; &#xa0;2.073 &#xa0; &#xa0;-<br />&#xa0; &#xa0; &#xa0; -------------------------------------------------<br /></code></li><li>The following command shows the report below:<br /><code>report_timing -to ff2/D -path_type full -format {hpin edge delay arrival arc} -net -from lat/D2</code><br /><code>--------------------------------------------------------------------------</code><br /><code>Path 1: MET Setup Check with Pin ff2/CK</code><br /><code>Endpoint: &#xa0; ff2/D (v) checked with trailing edge of &#39;CK1&#39;</code><br /><code>Beginpoint: lat/Q (v) triggered by trailing edge of &#39;CK1&#39;</code><br /><code>Path Groups: {CK1}</code><br /><code>Other End Arrival Time &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;1.400</code><br /><code>- Setup &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.110</code><br /><code>+ Phase Shift &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 2.500</code><br /><code>+ CPPR Adjustment &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.000</code><br /><code>= Required Time &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 3.790</code><br /><code>- Arrival Time &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;1.773</code><br /><code>= Slack Time &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;2.017</code><br /><code>&#xa0; &#xa0; &#xa0;Clock Fall Edge &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 1.250</code><br /><code>&#xa0; &#xa0; &#xa0;+ Clock Network Latency (Prop) &#xa0;0.120</code><br /><code>&#xa0; &#xa0; &#xa0;= Beginpoint Arrival Time &#xa0; &#xa0; &#xa0; 1.370</code><br /><code>&#xa0; &#xa0; &#xa0; --------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; Pin &#xa0; &#xa0; &#xa0; Edge &#xa0;Delay &#xa0;Time &#xa0; Arrival &#xa0;Arc</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Given &#xa0;Time</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;To</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Start</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Point</code><br /><code>&#xa0; &#xa0; &#xa0; --------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; lat/G &#xa0; &#xa0; v &#xa0; &#xa0; - &#xa0; &#xa0; &#xa0;- &#xa0; &#xa0; &#xa0;1.370 &#xa0; &#xa0;G v</code><br /><code>&#xa0; &#xa0; &#xa0; lat/Q &#xa0; &#xa0; v &#xa0; &#xa0; 0.150 &#xa0;0.193 &#xa0;1.713 &#xa0; &#xa0;D2 v -&gt; Q v</code><br /><code>&#xa0; &#xa0; &#xa0; buf9/A &#xa0; &#xa0;v &#xa0; &#xa0; 0.000 &#xa0;- &#xa0; &#xa0; &#xa0;1.713 &#xa0; &#xa0;-</code><br /><code>&#xa0; &#xa0; &#xa0; buf9/Y &#xa0; &#xa0;v &#xa0; &#xa0; 0.030 &#xa0;- &#xa0; &#xa0; &#xa0;1.743 &#xa0; &#xa0;A v -&gt; Y v</code><br /><code>&#xa0; &#xa0; &#xa0; buf10/A &#xa0; v &#xa0; &#xa0; 0.000 &#xa0;- &#xa0; &#xa0; &#xa0;1.743 &#xa0; &#xa0;-</code><br /><code>&#xa0; &#xa0; &#xa0; buf10/Y &#xa0; v &#xa0; &#xa0; 0.030 &#xa0;- &#xa0; &#xa0; &#xa0;1.773 &#xa0; &#xa0;A v -&gt; Y v</code><br /><code>&#xa0; &#xa0; &#xa0; ff2/D -&gt; &#xa0;v &#xa0; &#xa0; 0.000 &#xa0;- &#xa0; &#xa0; &#xa0;1.773 &#xa0; &#xa0;-</code><br /><code>&#xa0; &#xa0; &#xa0; --------------------------------------------------</code></li></ul>
+<p><span class="confluence-anchor-link" id="report_timing-examples"></span></p>
+<h4 id="report_timing-Examples">Examples</h4>
+
+<p><br /><strong>SPD (Sequential Path Delay) Examples</strong></p>
+<ul><li>The following command reports paths leading to the pin(s) specified by the <code><em>object</em><em>_list</em></code>:&#xa0;<br /><code>tempus &gt; report_timing -to&#xa0;u55/D</code><br />
+<p><code>Path 1: MET Setup Check with Pin u55/CK</code><br /><code>Endpoint: u55/D (^) checked with leading edge of &#39;CLK_W_4&#39;</code><br /><code>Beginpoint: u55/QN (^) triggered by leading edge of &#39;CLK_W_4&#39;</code><br /><code>Path Groups: {CLK_W_4}</code><br /><code>Other End Arrival Time 0.152</code><br /><code>- Setup 0.306</code><br /><code>+ Phase Shift 10.000</code><br /><code>= Required Time 9.845</code><br /><code>- Arrival Time 1.902</code><br /><code>= Slack Time 7.943</code><br /><code> Clock Rise Edge 0.000</code><br /><code> + Clock Network Latency (Prop) 0.152</code><br /><code> = Beginpoint Arrival Time 0.152</code><br /><code> ---------------------------------------------------------------------</code><br /><code> Pin &#xa0; &#xa0; &#xa0;Arc &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Cell &#xa0; &#xa0; &#xa0;Delay &#xa0; Arrival &#xa0; Required Instance </code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Time &#xa0; &#xa0; &#xa0;Time </code><br /><code> --------------------------------------------------------------------- &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; - </code><br /><code> u55/CK &#xa0; &#xa0;CK ^ &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; - &#xa0; &#xa0; &#xa0; - 0.151 &#xa0; &#xa0;8.094 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; u55</code><br /><code> u55/QN &#xa0; &#xa0;CK ^ -&gt; QN ^ &#xa0; DFF &#xa0; &#xa0; &#xa0;1.750 &#xa0; &#xa0; 1.901 &#xa0; &#xa0;9.844 &#xa0; &#xa0;u55</code><br /><code> u55/D -&gt; &#xa0;D ^ &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;DFF &#xa0; &#xa0; &#xa0;0.001 &#xa0; &#xa0; 1.902 &#xa0; &#xa0;9.845 &#xa0; &#xa0;u55</code><br /><code> --------------------------------------------------------------------</code></p>
+</li><li>The following command shows a report similar to the first with the addition of net arc information:<br /><code>tempus &gt; report_timing -to u55/D -net</code>
+<p><code>Path 1: MET Setup Check with Pin u55/CK</code><br /><code>Endpoint: u55/D (^) checked with leading edge of &#39;CLK_W_4&#39;</code><br /><code>Beginpoint: u55/QN (^) triggered by leading edge of &#39;CLK_W_4&#39;</code><br /><code>Path Groups: {CLK_W_4}</code><br /><code>Other End Arrival Time 0.152</code><br /><code>- Setup 0.306</code><br /><code>+ Phase Shift 10.000</code><br /><code>= Required Time 9.845</code><br /><code>- Arrival Time 1.902</code><br /><code>= Slack Time 7.943</code><br /><code> Clock Rise Edge 0.000</code><br /><code> + Clock Network Latency (Prop) 0.152</code><br /><code> = Beginpoint Arrival Time 0.152</code><br /><code> ---------------------------------------------------------------------</code><br /><code> Pin &#xa0; &#xa0; &#xa0; &#xa0;Arc &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Cell &#xa0; &#xa0;Delay &#xa0; &#xa0;Arrival Required &#xa0;Instance </code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Time &#xa0; &#xa0; Time </code><br /><code> --------------------------------------------------------------------</code><br /><code> u55/CK &#xa0; &#xa0; CK ^ &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; - &#xa0; &#xa0; &#xa0;- &#xa0; &#xa0; &#xa0; &#xa0;0.151 &#xa0; &#xa0;8.094 &#xa0; &#xa0; u55</code><br /><code> u55/QN &#xa0; &#xa0; CK ^ -&gt; QN ^ &#xa0; DFF &#xa0; &#xa0; 1.750 &#xa0; 1.901 &#xa0; &#xa0;9.844 &#xa0; &#xa0; u55</code><br /><code> u55/D -&gt; &#xa0; - &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;DFF &#xa0; &#xa0; 0.001 &#xa0; 1.902 &#xa0; &#xa0;9.845 &#xa0; &#xa0; u55</code><br /><code> --------------------------------------------------------------------</code></p>
+</li></ul><ul><li>The&#xa0;<code>report_timing</code>&#xa0;command also accepts&#xa0;<code>-collection</code>&#xa0;as an argument. For example,<br /><code>tempus &gt; report_timing [report_timing &#8211;collection]</code><br /><code>tempus &gt;&#xa0;set rpt [report_timing &#8211;collection]</code><br /><code>tempus &gt;&#xa0;report_timing $rpt</code></li></ul><ul><li>The following command displays the worst late path in the design. The format of the report is similar to the first example:&#xa0;<br /><code><span>tempus &gt;&#xa0;</span>report_timing</code></li></ul><ul><li>The following command displays the worst late path to each violating endpoint that has a slack less than -1.0:&#xa0;<br /><code><span>tempus &gt;&#xa0;</span>report_timing&#xa0;</code><code>-max_slack&#xa0;</code><code>-1.0</code></li></ul><ul><li>The following command displays all the late paths that end at port&#xa0;<code>out[2]</code>&#xa0;and that have negative slack up to a maximum of 1000 worst paths. If there are more than 1000 paths, only the 1000 worst paths are reported:<br /><code><span>tempus &gt;&#xa0;</span></code><code>report_timing&#xa0;</code><code>-to out[2]&#xa0;</code><code>-max_paths 1000&#xa0;</code><code>-max_slack 0.0</code></li></ul><ul><li>The following command reports the worst late path that starts at <code>in[0]</code>&#xa0;and ends at&#xa0;<code>out[1]</code>:&#xa0;<br /><code><span>tempus &gt;&#xa0;</span>report_timing&#xa0;</code><code>-from in[0]&#xa0;</code><code>-to out[1]</code></li></ul><ul><li>The following command displays the three worst paths that start at&#xa0;<code>in[1]</code>&#xa0;and end at&#xa0;<code>out[3]</code>. With reconvergent fanout, more than one path may exist:&#xa0;<br /><code>tempus &gt; report_timing&#xa0;</code><code>-from in[1]&#xa0;</code><code>-to out[3]&#xa0;</code><code>-max_paths 3</code></li></ul><ul><li>The following command displays the ten worst paths. Only the paths between the specified pins are enumerated.With reconvergent fanout, more than one path may exist:<br /><code>tempus &gt; report_timing&#xa0;</code><code>-from i102/Z&#xa0;</code><code>-to i123/A&#xa0;</code><code>-max_paths 10</code></li></ul><ul><li>The following command enumerates the worst ten paths through the given two pins, starting at the beginning points in the design and ending at the endpoints, similar to using the&#xa0;<code>-from</code>&#xa0;option:<br /><code>tempus &gt; report_timing&#xa0;</code><code>-through i102/Z&#xa0;</code><code>-through i123/A&#xa0;</code><code>-max_paths 10</code></li></ul><ul><li>The following command reports the ten worst paths through blocks A and C, or blocks B and C. The path only has to satisfy one element in a through list, but all through lists must be satisfied. The example can be thought of as ((A or B) and C):&#xa0;<br /><code><span>tempus &gt;</span><span>&#xa0;</span>report_timing&#xa0;</code><code>-through {A/*B/*}&#xa0;</code><code>-through {C/*}&#xa0;</code><code>-max_paths 10</code></li></ul><ul><li>The following command forces a path through pin A and pin B. Use the syntax shown in the example. Do not use&#xa0;<code>-through {A B}</code>:&#xa0;<br /><code><span>tempus &gt;</span><span>&#xa0;</span>report_timing -through A -through B</code></li></ul><ul><li>The following command displays the clock path through the clock root to Launch flop:<br /><code><span>tempus &gt;</span><span>&#xa0;</span>report_timing -through aBC_bs/bs_mex1/r2_00_q1_reg_10_/CK -to .... -path_type&#xa0;</code><code>full_clock&#xa0;</code></li><li>You will not see the path for the launch clock if you specify the following command because the <code>report_timing</code> command starts reporting from the CK pin:<br /><code><span>tempus &gt;</span><span>&#xa0;</span>report_timing -from aBC_bs/bs_mex1/r2_00_q1_reg_10_/CK<br /></code>The first command displays the path leading to the&#xa0;<code style="line-height: 1.4285715;">CK</code>&#xa0;pin.</li></ul><ul><li>The following command shows the&#xa0;<code>-unconstrained</code>&#xa0;option:&#xa0;<br /><code><span>tempus &gt;</span><span>&#xa0;</span>report_timing -unconstrained<br /><br /><code>Path 1:Endpoint: OUT4 (^) (unconstrained output)</code><br /><code>Beginpoint: u55/Q (^) triggered by leading edge of &#39;CLK_W_4&#39;</code><br /><code>Arrival Time 0.365</code><br /><code>+ Clock Network Latency (Prop) 0.150</code><br /><code>= Beginpoint Arrival Time 0.150</code><br /><code>--------------------------------------</code><br /><code>Load Slew Delay Arrival Cell Arc Pin</code><br /><code>Time</code><br /><code>--------------------------------------</code><br /><code>0.013 0.116 - 0.150 - CK ^ u55/CK</code><br /><code>0.011 0.072 0.215 0.365 DFF CK ^ -&gt; Q ^ u55/Q</code><br /><code>0.011 0.131 0.000 0.365 - OUT4 ^ OUT4 -&gt;</code><br /><code>-------------------------------------</code>&#xa0;</code></li></ul><ul><li>
+<p>The following command shows the&#xa0;<code>-unconstrained<span style="font-family: Arial , sans-serif;">&#xa0;</span></code><code>-path_type<span style="font-family: Arial , sans-serif;">&#xa0;</span></code><code>end</code>&#xa0;report:&#xa0;<br /><code>tempus &gt; report_timing -nworst 5 -unconstrained -path_type end -format {pin arrival phase}<br /><br /><code>------------------------------------------------------------------</code><br /><code>Path No. Pin &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Cause &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Arrival &#xa0;Phase</code><br /><code>------------------------------------------------------------------</code><br /><code>1 &#xa0; &#xa0; &#xa0; &#xa0;seg3/u9/CK ^ &#xa0;Unconstrained Path &#xa0;0.682 &#xa0; &#xa0;CLK_W_3(D)(P) *</code><br /><code>2 &#xa0; &#xa0; &#xa0; &#xa0;seg3/u9/CK ^ &#xa0;Unconstrained Path &#xa0;0.682 &#xa0; &#xa0;CLK_W_3(D)(P) *</code><br /><code>3 &#xa0; &#xa0; &#xa0; &#xa0;seg3/u3/CK ^ &#xa0;Unconstrained Path &#xa0;0.682 &#xa0; &#xa0;CLK_W_3(D)(P) *</code><br /><code>4 &#xa0; &#xa0; &#xa0; &#xa0;seg3/u3/CK ^ &#xa0;Unconstrained Path &#xa0;0.682 &#xa0; &#xa0;CLK_W_3(D)(P) *</code><br /><code>5 &#xa0; &#xa0; &#xa0; &#xa0;seg2/u9/CK ^ &#xa0;Unconstrained Path &#xa0;0.682 &#xa0; &#xa0;CLK_W_2(D)(P) *</code><br /><code>------------------------------------------------------------------</code>&#xa0;</code></p>
+</li><li>The following command sets a false path from u99/Q to u55/D:<br /><code>tempus &gt;&#xa0;set_false_path -from u99/Q -to u55/D<br /></code><code>tempus &gt;&#xa0;set_false_path -through u4/Y<br /></code><code>tempus &gt;&#xa0;report_timing -from u99/Q -to u55/D -unconstrained -path_exceptions all<br /><br /><code>Path 1:Endpoint: u55/D (^) (unconstrained output)</code><br /><code>Beginpoint: u99/Q (v) triggered by leading edge of &#39;CLK_W_4&#39;</code><br /><code>Arrival Time 0.827</code><br /><code>+ Clock Network Latency (Prop) 0.150</code><br /><code>= Beginpoint Arrival Time 0.150</code><br /><code>-----------------------------------------------------------</code><br /><code>Load &#xa0; &#xa0;Slew &#xa0; &#xa0;Delay &#xa0; Arrival &#xa0; Cell &#xa0; Arc &#xa0; Pin</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Time</code><br /><code>-----------------------------------------------------------</code><br /><code>0.013 &#xa0; 0.116 &#xa0; - &#xa0; &#xa0; &#xa0; &#xa0;0.150 &#xa0; &#xa0;- &#xa0; &#xa0; CK ^ &#xa0; &#xa0; &#xa0; &#xa0;u99/CK</code><br /><code>0.027 &#xa0; 0.086 &#xa0; 0.195 &#xa0; &#xa0;0.345 &#xa0; &#xa0;DFF &#xa0; CK ^ -&gt; Q v u99/Q -&gt;</code><br /><code>1.006 &#xa0; 1.140 &#xa0; 0.482 &#xa0; &#xa0;0.827 &#xa0; &#xa0;INV &#xa0; A v -&gt; Y ^ &#xa0;u4/Y</code><br /><code>1.006 &#xa0; 1.140 &#xa0; 0.000 &#xa0; &#xa0;0.827 &#xa0; &#xa0;DFF &#xa0; D ^ &#xa0; &#xa0; &#xa0; &#xa0; u55/D -&gt;</code><br /><code>------------------------------------------------------------</code><br /><code>Applied exceptions:</code><br /><code>---------------------------------</code><br /><code>Through Late</code><br /><code>---------------------------------</code><br /><code>u4/Y false</code><br /><code>---------------------------------</code><br /><code>Ignored exceptions:</code><br /><code>---------------------------------</code><br /><code>From To Late</code><br /><code>---------------------------------</code><br /><code>u99/Q u55/D false</code><br /><code>---------------------------------</code>&#xa0;</code></li></ul><ul><li>For hold paths, if the path has a setup multi-cycle path then those exceptions will also be reported because hold slacks get impacted by inferred path exceptions. For example:<br /><code>tempus &gt; set_multicycle_path 2 -setup -from IN1<br /><br /><code>Path 1: VIOLATED Hold Check with Pin seg1/u3/CK</code><br /><code>Endpoint: seg1/u3/D (v) checked with leading edge of &#39;CLK_W_1&#39;</code><br /><code>Beginpoint: IN1 (v) triggered by leading edge of &#39;@&#39;</code><br /><code>Path Groups: {CLK_W_1}</code><br /><code>Other End Arrival Time 0.682</code><br /><code>+ Hold -0.034</code><br /><code>+ Phase Shift 0.000</code><br /><code>- Cycle Adjustment -20.000</code><br /><code>= Required Time 20.648</code><br /><code>Arrival Time 0.117</code><br /><code>Slack Time -20.531</code><br /><code>Clock Rise Edge 0.000</code><br /><code>+ Input Delay 0.000</code><br /><code>+ Drive Adjustment -0.014</code><br /><code>= Beginpoint Arrival Time -0.014</code><br /><code>-------------------------------------------------------------</code><br /><code>Load &#xa0; &#xa0;Slew &#xa0; &#xa0;Delay &#xa0; Arrival &#xa0; Cell &#xa0; Arc &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Pin</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Time</code><br /><code>--------------------------------------------------------------</code><br /><code>0.013 &#xa0; 0.029 &#xa0; - &#xa0; &#xa0; &#xa0;-0.014 &#xa0; &#xa0;- &#xa0; &#xa0; &#xa0; IN1 v &#xa0; &#xa0; &#xa0; &#xa0;IN1</code><br /><code>0.013 &#xa0; 0.057 &#xa0; 0.054 &#xa0;0.040 &#xa0; &#xa0; CLKBUF &#xa0;A v -&gt; Y v &#xa0; seg1/u1/Y</code><br /><code>0.003 &#xa0; 0.050 &#xa0; 0.077 &#xa0;0.117 &#xa0; &#xa0; CLKBUF &#xa0;A v -&gt; Y v &#xa0; seg1/u2/Y</code><br /><code>0.003 &#xa0; 0.050 &#xa0; 0.000 &#xa0;0.117 &#xa0; &#xa0; DFF &#xa0; &#xa0; D v &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;seg1/u3/D</code><br /><code>---------------------------------------------------------------</code><br /><code>Applied exceptions:</code><br /><code>---------------------------------</code><br /><code>From Early Late</code><br /><code>---------------------------------</code><br /><code>IN1 - cycles 2</code><br /><code>---------------------------------</code>&#xa0;</code></li><li>The following command displays the timing report for analysis view <code>setup_view1</code>:<br /><code><span>tempus &gt;</span><span>&#xa0;</span>report_timing -view setup_view1<br /><br /><code>Path 1: MET Late External Delay Assertion</code><br /><code>Endpoint: EJ_TDOzstate (^) checked with leading edge of &#39;virt_out_EJ_TCK&#39;</code><br /><code>Beginpoint: core_ejt_ejt_tap_ejt_tck__EJ_TDOzstate_q_reg_0_/Q (^) triggered by trailing edge of &#39;EJ_TCK&#39;</code><br /><code>Path Groups: {virt_out_EJ_TCK}</code><br /><code>Analysis View: setup_view1</code><br /><code>Other End Arrival Time 0.000</code><br /><code>+ Source Insertion Delay 0.300</code><br /><code>- External Delay 1.250</code><br /><code>+ Phase Shift 17.400</code><br /><code>+ CPPR Adjustment 0.000</code><br /><code>= Required Time 16.450</code><br /><code>- Arrival Time 9.318</code><br /><code>= Slack Time 7.132</code><br /><code>Clock Fall Edge 8.700</code><br /><code>+ Clock Network Latency (Ideal) 0.000</code><br /><code>= Beginpoint Arrival Time 8.700</code><br /><code>--------------------------------------------------------------------</code><br /><code>Load &#xa0; Slew &#xa0; Delay &#xa0; Arrival &#xa0; Cell &#xa0; &#xa0; &#xa0; Arc &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Pin</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Time</code><br /><code>--------------------------------------------------------------------</code><br /><code>0.010 &#xa0;0.000 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;8.700 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;CP ^ &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; core_ejt_ejt</code><br /><code>0.118 &#xa0;0.145 &#xa0;0.127 &#xa0; 8.828 &#xa0; &#xa0; &#xa0;DFSVTD4 &#xa0; CP ^ -&gt; Q ^ &#xa0; &#xa0;core_reg_0_/Q</code><br /><code>0.525 &#xa0;0.438 &#xa0;0.411 &#xa0; 9.238 &#xa0; &#xa0; &#xa0;BUFVTD6 &#xa0; I ^ -&gt; Z ^ &#xa0; &#xa0; FE_OFC260_/Z</code><br /><code>0.525 &#xa0;0.474 &#xa0;0.080 &#xa0; 9.318 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;EJ_TDOzstate ^ EJ_TDOzstate</code><br /><code>---------------------------------------------------------------------</code></code></li><li>
+<p>When <code>-from</code> is intermediate begin point:<br /><code>tempus &gt; report_timing -to u55/D -from u99/Q -point_to_point</code> <br /><code><br />Path 1:Endpoint: u55/D (^) (unconstrained output)</code><br /><code>Beginpoint: u99/Q (v) triggered by leading edge of &#39;CLK_W_4&#39;</code><br /><code>Arrival Time 0.482</code><br /><code>-------------------------------------------------------------</code><br /><code>Load &#xa0; Slew &#xa0; &#xa0;Delay &#xa0; Arrival &#xa0; Cell &#xa0; Arc &#xa0; &#xa0; &#xa0; &#xa0;Pin</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Time</code><br /><code>-------------------------------------------------------------</code><br /><code>0.027 &#xa0;0.086 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.000 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Q v &#xa0; &#xa0; &#xa0; &#xa0;u99/Q -&gt;</code><br /><code>1.006 &#xa0;1.140 &#xa0;0.482 &#xa0; 0.482 &#xa0; &#xa0; &#xa0;INV &#xa0; &#xa0;A v -&gt; Y ^ u4/Y</code><br /><code>1.006 &#xa0;1.140 &#xa0;0.000 &#xa0; 0.482 &#xa0; &#xa0; &#xa0;DFF &#xa0; &#xa0;D ^ &#xa0; &#xa0; &#xa0; &#xa0;u55/D -&gt;</code><br /><code>------------------------------------------------------------</code>&#xa0;</p>
+</li><li>The following command recalculates the specified critical paths using the AOCV factor and generates the following timing report:<br /><code>tempus &gt; report_timing -from in3 -to Top_I9/D -retime aocv -path_type full_clock<br /><br /><code>Path 1: MET Setup Check with Pin Top_I9/CK</code><br /><code>Endpoint: Top_I9/D (v) checked with leading edge of &#39;clk2&#39;</code><br /><code>Beginpoint: in3 (^) triggered by leading edge of &#39;@&#39;</code><br /><code>Path Groups: {clk2}</code><br /><code>Retime Analysis { AOCV(Default) }</code><br /><code>Other End Arrival Time 0.000</code><br /><code>- Setup 0.248</code><br /><code>+ Phase Shift 1.000</code><br /><code>= Required Time 0.752</code><br /><code>- Arrival Time 0.061</code><br /><code>= Slack Time 0.691</code><br /><code>Clock Rise Edge 0.000</code><br /><code>+ Input Delay 0.000</code><br /><code>= Beginpoint Arrival Time 0.000</code><br /><code>Timing Path:</code><br /><code>----------------------------------------------------------</code><br /><code>Load &#xa0; Slew &#xa0; &#xa0;Delay &#xa0; Aocv &#xa0; &#xa0;Cell &#xa0; Arc &#xa0; &#xa0;Pin</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Derate</code><br /><code>----------------------------------------------------------</code><br /><code>0.011 &#xa0;0.004 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; in3 ^ &#xa0; &#xa0; &#xa0; in3 -&gt;</code><br /><code>0.011 &#xa0;0.004 &#xa0;0.001 &#xa0; 1.173 &#xa0; INVX1 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Top_I8/A</code><br /><code>0.007 &#xa0;0.076 &#xa0;0.060 &#xa0; 1.175 &#xa0; INVX1 &#xa0;A ^ -&gt; Y v &#xa0;Top_I8/Y</code><br /><code>0.007 &#xa0;0.076 &#xa0;0.000 &#xa0; 1.173 &#xa0; DFFX1 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Top_I9/D -&gt;</code><br /><code>----------------------------------------------------------</code><br /><code>Clock Rise Edge 0.000</code><br /><code>= Beginpoint Arrival Time 0.000</code><br /><code>Other End Path:</code><br /><code>-----------------------------------------------------</code><br /><code>Load &#xa0; &#xa0;Slew &#xa0; &#xa0;Delay &#xa0;Aocv &#xa0;Cell &#xa0; Arc &#xa0; &#xa0; Pin</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Derate</code><br /><code>-----------------------------------------------------</code><br /><code>0.012 &#xa0; 0.000 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;clk2 ^ &#xa0; clk2</code><br /><code>0.012 &#xa0; 0.000 &#xa0;0.000 &#xa0; 0.825 DFFX1 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Top_I9/CK</code><br /><code>----------------------------------------------------</code>&#xa0;</code></li></ul><ul><li>
+<p>The following command recalculates the specified critical paths using the AOCV factor and generates an AOCV derating summary table for the launch and capture paths, in addition to the timing report:<br /><code>tempus &gt; report_timing -from in3 -to Top_I9/D -retime aocv -path_type full_clock -derate_summary<br /><br /><code>Path 1: MET Setup Check with Pin Top_I9/CK</code><br /><code>Endpoint: Top_I9/D (v) checked with leading edge of &#39;clk2&#39;</code><br /><code>Beginpoint: in3 (^) triggered by leading edge of &#39;@&#39;</code><br /><code>Path Groups: {clk2}</code><br /><code>Retime Analysis { AOCV(Default) }</code><br /><code>Other End Arrival Time 0.000</code><br /><code>- Setup 0.248</code><br /><code>+ Phase Shift 1.000</code><br /><code>= Required Time 0.752</code><br /><code>- Arrival Time 0.061</code><br /><code>= Slack Time 0.691</code><br /><code>Clock Rise Edge 0.000</code><br /><code>+ Input Delay 0.000</code><br /><code>= Beginpoint Arrival Time 0.000</code><br /><code>Timing Path:</code><br /><code>-------------------------------------------------------</code><br /><code>Load &#xa0; &#xa0;Slew &#xa0; Delay &#xa0;Aocv &#xa0; Cell &#xa0; Arc &#xa0; &#xa0; &#xa0; &#xa0; Pin</code><br /><code>Derate</code><br /><code>-------------------------------------------------------</code><br /><code>0.011 &#xa0; 0.004 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; in3 ^ &#xa0; &#xa0; &#xa0;in3 -&gt;</code><br /><code>0.011 &#xa0; 0.004 &#xa0;0.001 &#xa0;1.173 &#xa0;INVX1 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Top_I8/A</code><br /><code>0.007 &#xa0; 0.076 &#xa0;0.060 &#xa0;1.175 &#xa0;INVX1 &#xa0;A ^ -&gt; Y v Top_I8/Y</code><br /><code>0.007 &#xa0; 0.076 &#xa0;0.000 &#xa0;1.173 &#xa0;DFFX1 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Top_I9/D -&gt;</code><br /><code>-----------------------------------------------------------</code><br /><code>Clock Rise Edge 0.000</code><br /><code>= Beginpoint Arrival Time 0.000</code><br /><code>Other End Path:</code><br /><code>---------------------------------------------------</code><br /><code>Load &#xa0; Slew &#xa0; &#xa0;Delay &#xa0;Aocv &#xa0; Cell &#xa0; Arc &#xa0; &#xa0; &#xa0;Pin</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Derate</code><br /><code>---------------------------------------------------</code><br /><code>0.012 &#xa0;0.000 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;clk2 ^ &#xa0;clk2</code><br /><code>0.012 &#xa0;0.000 &#xa0;0.000 &#xa0; 0.825 &#xa0;DFFX1 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Top_I9/CK</code><br /><code>-----------------------------------------------------</code><br /><code>DUAL LOCV Derate Summary</code><br /><code>Clock Branch Point None</code><br /><code>Distance 89.944</code>&#xa0;</code></p>
+</li><li>
+<p>The following command reports pin names and net names in the same column alternatively:&#xa0;<br /><code>tempus &gt; report_timing -format { load slew delay arrival cell pin_load fanout timing_point} &#8211;net<br /><br /><code>Path 1: MET Setup Check with Pin u55/CK</code><br /><code>Endpoint: u55/D (^) checked with leading edge of &#39;CLK_W_4&#39;</code><br /><code>Beginpoint: u99/Q (v) triggered by leading edge of &#39;CLK_W_4&#39;</code><br /><code>Path Groups: {CLK_W_4}</code><br /><code>Other End Arrival Time 0.150</code><br /><code>- Setup 0.176</code><br /><code>+ Phase Shift 10.000</code><br /><code>= Required Time 9.974</code><br /><code>- Arrival Time 0.827</code><br /><code>= Slack Time 9.148</code><br /><code>Clock Rise Edge 0.000</code><br /><code>+ Clock Network Latency (Prop) 0.150</code><br /><code>= Beginpoint Arrival Time 0.150</code><br /><code>-------------------------------------------------------------------</code><br /><code>Load &#xa0; &#xa0;Slew &#xa0; &#xa0;Delay &#xa0;Arrival &#xa0;Cell &#xa0; &#xa0;Pin Load Fanout Timing Point</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Time</code><br /><code>-------------------------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; 0.116 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.150 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;u99/CK</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; 0.086 &#xa0;0.195 &#xa0; 0.345 &#xa0; &#xa0;DFF &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; u99/Q</code><br /><code>0.027 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (net) &#xa0; 0.027 &#xa0; &#xa0;1 &#xa0; &#xa0; &#xa0;n3</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; 0.086 &#xa0;0.000 &#xa0; 0.345 &#xa0; &#xa0;INV &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; u4/A</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; 1.140 &#xa0;0.482 &#xa0; 0.827 &#xa0; &#xa0;INV &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; u4/Y</code><br /><code>1.006 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; (net) &#xa0; 1.006 &#xa0; &#xa0;2 &#xa0; &#xa0; &#xa0;n4</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; 1.140 &#xa0;0.000 &#xa0; 0.827 &#xa0; &#xa0;DFF &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; u55/D -&gt;</code><br /><code>-------------------------------------------------------------------</code>&#xa0;<br /></code></p>
+</li><li>
+<p>The following command reports power domain details of path instances:<br /><code>tempus &gt; report_timing -format { load slew delay arrival cell arc hpin power_domain}<br /><br /><code>Path 1: MET Setup Check with Pin u55/CK</code><br /><code>Endpoint: u55/D (^) checked with leading edge of &#39;CLK_W_4&#39;</code><br /><code>Beginpoint: u99/Q (v) triggered by leading edge of &#39;CLK_W_4&#39;</code><br /><code>Path Groups: {CLK_W_4}</code><br /><code>Other End Arrival Time 0.150</code><br /><code>- Setup 0.176</code><br /><code>+ Phase Shift 10.000</code><br /><code>= Required Time 9.974</code><br /><code>- Arrival Time 0.827</code><br /><code>= Slack Time 9.148</code><br /><code>Clock Rise Edge 0.000</code><br /><code>+ Clock Network Latency (Prop) 0.150</code><br /><code>= Beginpoint Arrival Time 0.150</code><br /><code>----------------------------------------------------------------</code><br /><code>Load &#xa0; Slew &#xa0; Delay &#xa0;Arrival &#xa0; Cell &#xa0; Arc &#xa0; &#xa0; &#xa0; &#xa0;Pin &#xa0; &#xa0; &#xa0; Power&#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Time &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Domain</code><br /><code>----------------------------------------------------------------</code><br /><code>0.013 &#xa0;0.116 &#xa0; &#xa0; &#xa0; &#xa0; 0.150 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;CK ^ &#xa0; &#xa0; &#xa0; &#xa0;u99/CK&#xa0;</code><br /><code>0.027 &#xa0;0.086 &#xa0;0.195 &#xa0;0.345 &#xa0; &#xa0; &#xa0;DFF &#xa0; CK ^ -&gt; Q v u99/Q &#xa0; &#xa0;PD1</code><br /><code>1.006 &#xa0;1.140 &#xa0;0.482 &#xa0;0.827 &#xa0; &#xa0; &#xa0;INV &#xa0; A v -&gt; Y ^ &#xa0;u4/Y &#xa0; &#xa0; PD2</code><br /><code>1.006 &#xa0;1.140 &#xa0;0.000 &#xa0;0.827 &#xa0; &#xa0; &#xa0;DFF &#xa0; D ^ &#xa0; &#xa0; &#xa0; &#xa0; u55/D -&gt; PD1</code><br /><code>----------------------------------------------------------------</code>&#xa0;</code></p>
+</li></ul><ul><li>The following examples refer to the figure shown below:<br /><br /><strong style="line-height: 1.4285715;">Conditions for Unconstrained and Constrained Paths</strong><strong style="line-height: 1.4285715;"><br /><br /><strong style="line-height: 1.4285715;"><strong><span class="confluence-embedded-file-wrapper"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/720023607/720023614.png" data-linked-resource-container-id="720023607" data-linked-resource-container-version="8" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="timinganalysisT.41.1.68.png" data-linked-resource-id="720023614" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/720023607/720023614.png" tabindex="0" /></span></strong></strong><br /></strong></li></ul><ul><li style="list-style-type: none;background-image: none;"><ul><li>Shows the path from&#xa0;<code>I</code>&#xa0;to&#xa0;<code>O</code>&#xa0;is reported as an unconstrained path under the following conditions (constraints on&#xa0;<code>I</code>&#xa0;and&#xa0;<code>O</code>):</li></ul><ul><li>No constraints on either&#xa0;<code>I</code>&#xa0;or&#xa0;<code>O</code></li></ul><ul><li><code>set_input_delay&#xa0;</code><code>-clock ck1 1.0 I</code><code><br /></code>No&#xa0;<code>set_output_delay</code>&#xa0;constraint on&#xa0;<code>O</code></li></ul><ul><li><code>set_input_delay 1.0 I</code><code><br /></code><code>set_output_delay 1.1 O</code></li></ul><ul><li>Shows the path from&#xa0;<code>I</code>&#xa0;to&#xa0;<code>O</code>&#xa0;is reported as a constrained path under the following conditions (constraints on&#xa0;<code>I</code>&#xa0;and&#xa0;<code>O</code>):</li></ul><ul><li><code>set_input_delay&#xa0;</code><code>-clock ck1 1.0 I</code><code><br /></code><code>set_output_delay&#xa0;</code><code>-clock ck1 1.0 O</code></li></ul><ul><li><code>set_input_delay&#xa0;</code><code>-clock ck1 1.0 I</code><code><br /></code><code>set_output_delay&#xa0;</code><code>-clock ck2 1.0 O<br /></code></li><li><code>set_output_delay&#xa0;</code><code>-clock ck1 1.0 O</code><code><br class="_mce_tagged_br" /></code>No&#xa0;<code>set_input_delay</code>&#xa0;constraint on I. It uses default delay of zero.&#xa0;<br /><em>Default</em>:&#xa0;<code>-late</code></li></ul><ul><li>The following command reports AOCV weight details of path elements:<br /><code>tempus &gt; report_timing -from in3 -to Top_I9/D -format {instance cell arc delay&#xa0;<br /></code><code>&#xa0; &#xa0; aocv_derate stage_count arrival aocv_weight} -path_type full_clock<br /><br /><code>Path 1: MET Setup Check with Pin Top_I9/CK</code><br /><code>Endpoint: Top_I9/D (v) checked with leading edge of &#39;clk2&#39;</code><br /><code>Beginpoint: in3 (^) triggered by leading edge of &#39;@&#39;</code><br /><code>Path Groups: {clk2}</code><br /><code>Other End Arrival Time 0.000</code><br /><code>- Setup 0.248</code><br /><code>+ Phase Shift 1.000</code><br /><code>= Required Time 0.752</code><br /><code>- Arrival Time 0.061</code><br /><code>= Slack Time 0.691</code><br /><code>Clock Rise Edge 0.000</code><br /><code>+ Input Delay 0.000</code><br /><code>= Beginpoint Arrival Time 0.000</code><br /><code>Timing Path:</code><br /><code>-----------------------------------------------------------------------</code><br /><code>Instance &#xa0; &#xa0; Cell &#xa0; &#xa0; &#xa0;Arc &#xa0; &#xa0; Delay &#xa0; &#xa0;Aocv &#xa0; &#xa0;Aocv &#xa0; &#xa0;Arrival &#xa0; &#xa0;Aocv</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Derate &#xa0;Stage &#xa0; Time &#xa0; &#xa0; &#xa0; Weight</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Count</code><br /><code>-----------------------------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; in3 ^ &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.000</code><br /><code>Top_I8 &#xa0; &#xa0; &#xa0; INVX1 &#xa0; &#xa0;A ^ -&gt; Y v &#xa0;0.061 &#xa0;1.175 &#xa0;1.000 &#xa0; &#xa0;0.061 &#xa0; &#xa0; 1</code><br /><code>Top_I9 &#xa0; &#xa0; &#xa0; DFFX1 &#xa0; &#xa0;D v &#xa0; &#xa0; &#xa0; &#xa0; 0.000 &#xa0;1.173 &#xa0;2.000 &#xa0; &#xa0;0.061 &#xa0; &#xa0; 1</code><br /><code>-----------------------------------------------------------------------</code><br /><code>Clock Rise Edge 0.000</code><br /><code>= Beginpoint Arrival Time 0.000</code><br /><code>Other End Path:</code><br /><code>-----------------------------------------------------------------------</code><br /><code>Instance &#xa0; Cell &#xa0; &#xa0; &#xa0;Arc &#xa0; &#xa0; &#xa0; Delay &#xa0; &#xa0; Aocv &#xa0; &#xa0;Aocv &#xa0; Arrival &#xa0; &#xa0;Aocv</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Derate &#xa0;Stage &#xa0;Time &#xa0; &#xa0; &#xa0; Weight</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Count</code><br /><code>-----------------------------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; clk2 ^ &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.000&#xa0;</code><br /><code>Top_I9 &#xa0; &#xa0;DFFX1 &#xa0; &#xa0; CK ^ &#xa0; &#xa0; &#xa0; 0.000 &#xa0; &#xa0; 0.825 &#xa0; 1.000 &#xa0;0.000 &#xa0; &#xa0; &#xa0;1</code><br /><code>----------------------------------------------------------------------</code>&#xa0;</code></li></ul><ul><li>The following command reports paths through unique set of pins:&#xa0;<br /><code>tempus &gt; report_timing -nworst 2 -unique_pins<br /><br /><code>Path 1: MET Setup Check with Pin seg3/u14/CK</code><br /><code>Endpoint: seg3/u14/D (^) checked with leading edge of &#39;CLK_W_3&#39;</code><br /><code>Beginpoint: seg3/u9/Q (^) triggered by leading edge of &#39;CLK_W_3&#39;</code><br /><code>Path Groups: {CLK_W_3}</code><br /><code>Other End Arrival Time 0.621</code><br /><code>- Setup 0.186</code><br /><code>+ Phase Shift 2.000</code><br /><code>= Required Time 2.434</code><br /><code>- Arrival Time 2.062</code><br /><code>= Slack Time 0.372</code><br /><code>Clock Rise Edge 0.000</code><br /><code>+ Clock Network Latency (Prop) 0.682</code><br /><code>= Beginpoint Arrival Time 0.682</code><br /><code>-----------------------------------------------------------</code><br /><code>Load &#xa0; Slew &#xa0; &#xa0;Delay &#xa0;Arrival &#xa0; Cell &#xa0; Arc &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Pin</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Time</code><br /><code>-----------------------------------------------------------</code><br /><code>0.008 &#xa0;0.049 &#xa0;0.682 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;CK ^ &#xa0; &#xa0; &#xa0; &#xa0; seg3/u9/CK</code><br /><code>0.011 &#xa0;0.075 &#xa0;0.185 &#xa0; 0.867 &#xa0; &#xa0; DFF &#xa0; &#xa0;CK ^ -&gt; Q ^ &#xa0;seg3/u9/Q</code><br /><code>0.027 &#xa0;0.077 &#xa0;0.073 &#xa0; 0.940 &#xa0; &#xa0; BUF &#xa0; &#xa0;A ^ -&gt; Y ^ &#xa0; seg3/u10/Y</code><br /><code>1.027 &#xa0;0.644 &#xa0;0.317 &#xa0; 1.257 &#xa0; &#xa0; INV &#xa0; &#xa0;A ^ -&gt; Y v &#xa0; seg3/u11/Y</code><br /><code>1.011 &#xa0;1.087 &#xa0;0.402 &#xa0; 1.659 &#xa0; &#xa0; INV &#xa0; &#xa0;A v -&gt; Y ^ &#xa0; seg3/u12/Y</code><br /><code>0.003 &#xa0;1.077 &#xa0;0.403 &#xa0; 2.062 &#xa0; &#xa0; BUF &#xa0; &#xa0;A ^ -&gt; Y ^ &#xa0; seg3/u13/Y</code><br /><code>0.003 &#xa0;1.077 &#xa0;0.000 &#xa0; 2.062 &#xa0; &#xa0; DFF &#xa0; &#xa0;D ^ &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;seg3/u14/D</code><br /><code>-------------------------------------------------------------</code><br /><code>Path 2: MET Setup Check with Pin u2/CK</code><br /><code>Endpoint: u2/D (v) checked with leading edge of &#39;CLK_W_1&#39;</code><br /><code>Beginpoint: CLK2 (v) triggered by trailing edge of &#39;CLK_W_2&#39;</code><br /><code>Path Groups: {CLK_W_1}</code><br /><code>Other End Arrival Time 0.000</code><br /><code>- Setup 0.188</code><br /><code>+ Phase Shift 15.000</code><br /><code>= Required Time 14.812</code><br /><code>- Arrival Time 12.463</code><br /><code>= Slack Time 2.349</code><br /><code>Clock Fall Edge 12.500</code><br /><code>= Beginpoint Arrival Time 12.500</code><br /><code>----------------------------------------------------------</code><br /><code>Load &#xa0; &#xa0;Slew &#xa0; Delay &#xa0; &#xa0;Arrival &#xa0; &#xa0;Cell &#xa0; &#xa0;Arc &#xa0; &#xa0;Pin</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Time</code><br /><code>----------------------------------------------------------</code><br /><code>0.034 &#xa0;0.003 &#xa0; 12.500 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; CLK2 v &#xa0; &#xa0; &#xa0;CLK2</code><br /><code>0.003 &#xa0;0.003 &#xa0; -0.037 &#xa0; 12.463 &#xa0; &#xa0; BUF &#xa0; &#xa0;A v -&gt; Y v &#xa0;u10999/Y</code><br /><code>0.003 &#xa0;0.003 &#xa0; 0.000 &#xa0; &#xa0;12.463 &#xa0; &#xa0; DFF &#xa0; &#xa0;D v &#xa0; &#xa0; &#xa0; &#xa0; u2/D</code><br /><code>----------------------------------------------------------</code>&#xa0;</code></li></ul><ul><li>The following command reports all the violating paths (or having slack greater than the value specified with &#8216;-max_slack&#8217;) between unique source and target register pairs:<br /><code>tempus &gt; report_timing -to u55/D -begin_end_pair -max_slack 10<br /><br /><code>Path 1: MET Setup Check with Pin u55/CK</code><br /><code>Endpoint: u55/D (^) checked with leading edge of &#39;CLK_W_4&#39;</code><br /><code>Beginpoint: u99/Q (v) triggered by leading edge of &#39;CLK_W_4&#39;</code><br /><code>Path Groups: {CLK_W_4}</code><br /><code>Other End Arrival Time 0.150</code><br /><code>- Setup 0.176</code><br /><code>+ Phase Shift 10.000</code><br /><code>= Required Time 9.974</code><br /><code>- Arrival Time 0.827</code><br /><code>= Slack Time 9.148</code><br /><code>Clock Rise Edge 0.000</code><br /><code>+ Clock Network Latency (Prop) 0.150</code><br /><code>= Beginpoint Arrival Time 0.150</code><br /><code>----------------------------------------------------------</code><br /><code>Load &#xa0; &#xa0;Slew &#xa0; &#xa0;Delay &#xa0; &#xa0;Arrival &#xa0; &#xa0;Cell &#xa0; &#xa0;Arc &#xa0; &#xa0;Pin</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Time</code><br /><code>----------------------------------------------------------</code><br /><code>0.013 &#xa0; 0.116 &#xa0; 0.150 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;CK ^ &#xa0; &#xa0; &#xa0; &#xa0; u99/CK</code><br /><code>0.027 &#xa0; 0.086 &#xa0; 0.195 &#xa0; &#xa0;0.345 &#xa0; &#xa0; &#xa0;DFF &#xa0; &#xa0;CK ^ -&gt; Q v &#xa0;u99/Q</code><br /><code>1.006 &#xa0; 1.140 &#xa0; 0.482 &#xa0; &#xa0;0.827 &#xa0; &#xa0; &#xa0;INV &#xa0; &#xa0;A v -&gt; Y ^ &#xa0; u4/Y</code><br /><code>1.006 &#xa0; 1.140 &#xa0; 0.000 &#xa0; &#xa0;0.827 &#xa0; &#xa0; &#xa0;DFF &#xa0; &#xa0;D ^ &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;u55/D -&gt;</code><br /><code>----------------------------------------------------------</code>&#xa0;</code></li></ul><ul><li>The following command generates a group based report in non-group mode:<br /><code>tempus &gt; report_timing -begin_end_pair -max_slack 10 -path_type end_slack_only</code></li></ul></li></ul><p style="margin-left: 90.0px;"><code>Path Groups: max_delay/setup {CLK_W_1}</code><br /><code>-----------------------------------------------</code><br /><code>End Point Slack Cause</code><br /><code>-----------------------------------------------</code><br /><code>u2/D f 2.349 MET</code><br /><code>-----------------------------------------------</code></p>
+<p style="margin-left: 90.0px;"><code>Path Groups: max_delay/setup {CLK_W_3}</code><br /><code>-----------------------------------------------</code><br /><code>End Point Slack Cause</code><br /><code>-----------------------------------------------</code><br /><code>seg3/u14/D r 0.372 MET</code><br /><code>seg3/u3/D f 2.397 MET</code><br /><code>----------------------------------------------</code></p>
+<p style="margin-left: 90.0px;"><code>report_timing -path_type full_clock -net -debug time_borrow</code><br /><code>Path 1: MET Latch Borrowed Time Check with Pin latch2/GN</code><br /><code>Endpoint: latch2/D (^) checked with trailing edge of &#39;CK1&#39;</code><br /><code>Beginpoint: ff1/Q (v) triggered by leading edge of &#39;CK1&#39;</code><br /><code>Path Groups: {CK1}</code><br /><code>Other End Arrival Time 2.558</code><br /><code>+ Borrow Edge Adjust 0.043</code><br /><code>+ Phase Shift 0.000</code><br /><code>+ CPPR Adjustment 0.000</code><br /><code>= Required Time 2.601</code><br /><code>- Arrival Time 0.544</code><br /><code>= Slack Time 2.057</code><br /><code>Clock Rise Edge 0.000</code><br /><code>+ Clock Network Latency (Prop) 0.313</code><br /><code>= Beginpoint Arrival Time 0.313</code><br /><code>------------------------------------------------------------------------------------</code><br /><code>Load &#xa0; Slew &#xa0; &#xa0;Delay &#xa0; Incr &#xa0; Arc &#xa0;Fanout Cell &#xa0; &#xa0; Arc &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;User &#xa0; &#xa0;Arrival Instance</code><br /><code>Delay &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Annotation &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Derate &#xa0; Time</code><br /><code>------------------------------------------------------------------------------------</code><br /><code>0.005 &#xa0;0.055 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;WLM &#xa0;2 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;CK ^ &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.313 &#xa0; ff1</code><br /><code>0.004 &#xa0;0.042 &#xa0; 0.123 &#xa0; 0.000 &#xa0;WLM &#xa0;1 &#xa0; &#xa0; &#xa0;DFFHQX1 &#xa0; CK ^ -&gt; Q v &#xa0;1.000 &#xa0;0.436 &#xa0; ff1</code><br /><code>0.004 &#xa0;0.044 &#xa0; 0.035 &#xa0; 0.000 &#xa0;WLM &#xa0;1 &#xa0; &#xa0; &#xa0;INVX1 &#xa0; &#xa0; A v -&gt; Y ^ &#xa0; 1.000 &#xa0;0.471 &#xa0; invd4</code><br /><code>0.004 &#xa0;0.026 &#xa0; 0.019 &#xa0; 0.000 &#xa0;WLM &#xa0;1 &#xa0; &#xa0; &#xa0;INVX1 &#xa0; &#xa0; A ^ -&gt; Y v &#xa0; 1.000 &#xa0;0.491 &#xa0; invd5</code><br /><code>0.010 &#xa0;0.082 &#xa0; 0.053 &#xa0; 0.000 &#xa0;WLM &#xa0;1 &#xa0; &#xa0; &#xa0;INVX1 &#xa0; &#xa0; A v -&gt; Y ^ &#xa0; 1.000 &#xa0;0.544 &#xa0; invd6</code><br /><code>0.010 &#xa0;0.082 &#xa0; 0.000 &#xa0; 0.000 &#xa0;WLM &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;TLATNRX4 D ^ &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;1.000 &#xa0;0.544 &#xa0; latch2</code><br /><code>-------------------------------------------------------------------------------------</code></p>
+<p style="margin-left: 90.0px;"><code>Time Borrow Calculations</code><br /><code>--------------------------</code></p>
+<p style="margin-left: 90.0px;"><code>Latch Early Close Edge 4.482</code><br /><code>- Library Setup 0.057</code><br /><code>- Latch Early Open Edge 2.558</code><br /><code>= Max Allowed Borrow Time 1.866</code><br /><code>- Time Borrowed 0.043</code><br /><code>= Available Time Borrow 1.824</code></p>
+<div><ul><li>When&#xa0;<code>timing_report_retime_formatting_mode</code> global variable is set to&#xa0;<code>retime_compare</code>, then the following report is displayed:<br /><code>tempus &gt; report_timing -retime path_slew_propagation -format { delay retime_delay slew }&#xa0;</code><br /><code>+-----------------------------------+&#xa0;</code><br /><code>| Delay &#xa0; | Retime | Slew | Retime |</code><br /><code>| &#xa0; &#xa0; &#xa0; &#xa0; | Delay &#xa0;| &#xa0; &#xa0; &#xa0;| Slew &#xa0; |</code><br /><code>|-------+--------+---------+--------|</code><br /><code>| &#xa0; &#xa0; &#xa0; &#xa0; | &#xa0; &#xa0; &#xa0; | 0.005 | 0.005 |</code><br /><code>| 0.000 &#xa0; | 0.000 | 0.005 | 0.005 |</code><br /><code>| 1.412 &#xa0; | 1.553 | 0.880 | 0.880 |</code><br /><code>| 0.000 &#xa0; | 0.000 | 0.913 | 0.880 |</code><br /><code>+-----------------------------------+</code><br /><br />When the<code> timing_report_retime_formatting_mode</code> global variable is set to <code>retime_replace</code>,&#xa0;then&#xa0;the GBA columns are replaced by the corresponding&#xa0;PBA columns, as shown in the example below:<br />
+<p><code>tempus &gt; report_timing -retime path_slew_propagation -format { delay retime_delay slew }&#xa0;</code></p>
+
+<p><code>+-------------------------+</code><br /><code>| Delay | Retime | Retime |</code><br /><code>| &#xa0; &#xa0; &#xa0; | Delay &#xa0;| Slew &#xa0; |</code><br /><code>|-------+--------+--------|</code><br /><code>| &#xa0; &#xa0; &#xa0; | &#xa0; &#xa0; &#xa0; | 0.005 &#xa0; |</code><br /><code>| 0.000 | 0.000 | 0.005 &#xa0; |</code><br /><code>| 1.412 | 1.553 | 0.880 &#xa0; |</code><br /><code>| 0.000 | 0.000 | 0.880 &#xa0; |</code><br /><code>+-------------------------+</code></p>
+</li><li>
+<p>The following command generates the PBA delay calculation report for the net arc terminating at ff2/D pin.<br /><code>tempus &gt; report_timing -to ff2/D -retime path_slew_propagation -retime_delaycal_pins ff2/D</code><br /><br /><code>-------------------------------------</code><br /><code>report_delay_calculation PBA Report</code><br /><code>-------------------------------------</code><br /><code>From pin : inv_inst/ZN</code><br /><code>Voltage : 0.765 V</code><br /><code>Cell : INV</code><br /><code>Library : ccs_timing_si</code><br /><code>To pin : ff2/D</code><br /><code>Voltage : 0.765 V</code><br /><code>Cell : DFF</code><br /><code>Library : ccs_timing_si</code><br /><code>Base or SI: SI delay</code><br /><code>Delay type: net</code><br /><br /><code>Rise Rise Fall Fall Slew</code><br /><code>Thresholds: Delay Slew Delay Slew Derate</code><br /><code>From pin : 50 30-&gt;70 50 70-&gt;30 0.5</code><br /><code>To pin : 50 30-&gt;70 50 70-&gt;30 0.5</code><br /><code>-------------------------------------------------------------</code><br /><code>From pin waveforms</code><br /><code>-------------------------------------------------------------</code><br /><code>Rise Waveform : { 0 0 6.88001e-12 -0.000345826 1.376e-11 -0.000759363 2.064e-11 -0.00122762 2.752e-11 -0.00172836 3.44001e-11 -0.00223374 4.81601e-11 -0.00319517 6.19201e-11 -0.00401515 7.56801e-11 -0.00442153 1.032e-10 -0.00183165 1.1696e-10 0.0012542 1.2384e-10 0.00306022 1.3072e-10 0.00495619 1.4448e-10 0.00885701 1.5824e-10 0.0128341 1.8576e-10 0.0208058 2.408e-10 0.0366083 3.50881e-10 0.067488 5.71041e-10 0.126359 6.26081e-10 0.140509 6.53601e-10 0.147502 7.08641e-10 0.161279 7.36161e-10 0.164503 7.49921e-10 0.164456 7.63681e-10 0.164333 7.77441e-10 0.164129 8.04961e-10 0.161906 8.32481e-10 0.158058 8.60001e-10 0.154065 8.87521e-10 0.149911 9.42561e-10 0.141834 9.97601e-10 0.134669 1.05264e-09 0.129404 1.10768e-09 0.126477 1.12144e-09 0.123602 1.12832e-09 0.119572 1.1352e-09 0.114331 1.14208e-09 0.108821 1.14896e-09 0.10317 1.16272e-09 0.0926769 1.17648e-09 0.0833663 1.204e-09 0.0657246 1.21776e-09 0.0578875 1.23152e-09 0.0515706 1.24528e-09 0.0458775 1.25904e-09 0.0406301 1.28656e-09 0.0323652 1.31408e-09 0.0270132 1.36912e-09 0.0280973 1.39664e-09 0.0336656 1.42416e-09 0.0379847 1.43792e-09 0.0378836 1.45168e-09 0.0365497 1.4792e-09 0.0332861 1.49296e-09 0.0314441 1.52048e-09 0.0278608 1.548e-09 0.0244482 1.60304e-09 0.0191201 1.65808e-09 0.0162272 1.71312e-09 0.0171329 1.76816e-09 0.0205911 1.8232e-09 0.0256714 1.87824e-09 0.0351823 1.90576e-09 0.0413911 1.91952e-09 0.0445492 1.9264e-09 0.0461416 1.94016e-09 0.048697 1.9436e-09 0.046998 1.94704e-09 0.0443201 1.95392e-09 0.038436 1.95736e-09 0.0352619 1.96424e-09 0.0289844 1.97112e-09 0.022866 1.98488e-09 0.0125791 1.99864e-09 0.00580478 2.0124e-09 0.000710309 2.02616e-09 -0.00178897 2.03992e-09 -0.00114673 2.05368e-09 0.000872076 2.06744e-09 0.00382227 2.0812e-09 0.00744581 2.10872e-09 0.0151135 2.13624e-09 0.0227224 2.16376e-09 0.0302613 2.2188e-09 0.0451577 2.32888e-09 0.0742571 2.54904e-09 0.129727 2.60408e-09 0.143045 2.6316e-09 0.143044 2.64536e-09 0.140082 2.65912e-09 0.137093 2.67288e-09 0.134064 2.7004e-09 0.12951 2.72792e-09 0.126729 2.78296e-09 0.1221 2.81048e-09 0.120269 2.86553e-09 0.118138 2.92057e-09 0.118162 3.03065e-09 0.12258 3.14073e-09 0.13482 3.25081e-09 0.155185 3.30585e-09 0.166687 3.36089e-09 0.178314 3.41593e-09 0.190705 3.47097e-09 0.203779 3.58105e-09 0.229323 3.63609e-09 0.241791 3.74617e-09 0.266165 3.96633e-09 0.312679 4.18649e-09 0.35642 4.29657e-09 0.377296 4.40665e-09 0.397506 4.51673e-09 0.417121 4.62681e-09 0.436119 4.84697e-09 0.472392 5.06713e-09 0.506472 5.28729e-09 0.538488 5.50745e-09 0.568534 5.72761e-09 0.596685 5.94777e-09 0.62296 6.16793e-09 0.647336 6.38809e-09 0.669575 6.60825e-09 0.689497 6.82841e-09 0.706756 7.04857e-09 0.721042 7.26873e-09 0.732528 7.48889e-09 0.741269 7.70905e-09 0.747704 7.92921e-09 0.752418 }</code><br /><code>-------------------------------------------------------------</code><br /><code>To pin waveforms</code><br /><code>-------------------------------------------------------------</code><br /><code>Rise Waveform : { 0 0 6.88001e-12 -0.00031215 1.376e-11 -0.000717461 2.064e-11 -0.00118119 2.752e-11 -0.00168008 3.44001e-11 -0.00218582 4.81601e-11 -0.00315118 6.19201e-11 -0.0039801 7.56801e-11 -0.00441444 1.032e-10 -0.00195223 1.1696e-10 0.00108838 1.2384e-10 0.00288516 1.3072e-10 0.00477386 1.4448e-10 0.00866932 1.5824e-10 0.0126446 1.8576e-10 0.0206168 2.408e-10 0.0364222 3.50881e-10 0.0673075 5.71041e-10 0.12619 6.26081e-10 0.140342 6.53601e-10 0.147336 7.08641e-10 0.161117 7.36161e-10 0.164325 7.49921e-10 0.16428 7.63681e-10 0.164156 7.77441e-10 0.163952 8.04961e-10 0.161721 8.32481e-10 0.157871 8.60001e-10 0.153877 8.87521e-10 0.149721 9.42561e-10 0.141646 9.97601e-10 0.134476 1.05264e-09 0.129217 1.10768e-09 0.126291 1.12144e-09 0.123396 1.12832e-09 0.11934 1.1352e-09 0.114094 1.14208e-09 0.108576 1.14896e-09 0.102955 1.16272e-09 0.0924557 1.17648e-09 0.0831177 1.204e-09 0.0655087 1.21776e-09 0.05769 1.23152e-09 0.0513455 1.24528e-09 0.0456527 1.25904e-09 0.0404119 1.28656e-09 0.0321485 1.31408e-09 0.0268007 1.36912e-09 0.0278778 1.39664e-09 0.0334662 1.42416e-09 0.0377678 1.43792e-09 0.0376836 1.45168e-09 0.0363449 1.4792e-09 0.0330793 1.49296e-09 0.0312404 1.52048e-09 0.027657 1.548e-09 0.0242445 1.60304e-09 0.0189107 1.65808e-09 0.0160238 1.71312e-09 0.0169355 1.76816e-09 0.020394 1.8232e-09 0.0254886 1.87824e-09 0.034983 1.90576e-09 0.0412062 1.91952e-09 0.0443699 1.9264e-09 0.0459651 1.94016e-09 0.0485097 1.9436e-09 0.0467553 1.94704e-09 0.0440755 1.95392e-09 0.0381743 1.95736e-09 0.0350146 1.96424e-09 0.0287352 1.97112e-09 0.0226158 1.98488e-09 0.0123552 1.99864e-09 0.00553888 2.0124e-09 0.000528693 2.02616e-09 -0.00200176 2.03992e-09 -0.00134081 2.05368e-09 0.000687182 2.06744e-09 0.00364017 2.0812e-09 0.00726146 2.10872e-09 0.0149298 2.13624e-09 0.0225402 2.16376e-09 0.0300808 2.2188e-09 0.0449804 2.32888e-09 0.0740856 2.54904e-09 0.129567 2.60408e-09 0.142888 2.6316e-09 0.142859 2.64536e-09 0.139899 2.65912e-09 0.136908 2.67288e-09 0.133879 2.7004e-09 0.129349 2.72792e-09 0.126549 2.78296e-09 0.121913 2.81048e-09 0.120103 2.86553e-09 0.117961 2.92057e-09 0.117997 3.03065e-09 0.122409 3.14073e-09 0.134658 3.25081e-09 0.155035 3.30585e-09 0.166534 3.36089e-09 0.178163 3.41593e-09 0.190548 3.47097e-09 0.203625 3.58105e-09 0.229173 3.63609e-09 0.241644 3.74617e-09 0.266022 3.96633e-09 0.312545 4.18649e-09 0.356294 4.29657e-09 0.377174 4.40665e-09 0.397388 4.51673e-09 0.417006 4.62681e-09 0.436007 4.84697e-09 0.472288 5.06713e-09 0.506374 5.28729e-09 0.538396 5.50745e-09 0.568448 5.72761e-09 0.596605 5.94777e-09 0.622885 6.16793e-09 0.647267 6.38809e-09 0.669513 6.60825e-09 0.689441 6.82841e-09 0.70671 7.04857e-09 0.721003 7.26873e-09 0.732498 7.48889e-09 0.741247 7.70905e-09 0.747687 7.92921e-09 0.752406 }</code><br /><code>-------------------------------------------------------------</code><br /><br /><code>-------------------------------------------------------------</code><br /><code>RC Summary for net vic_net</code><br /><code>-------------------------------------------------------------</code><br /><code>Number of capacitance : 3</code><br /><code>Net capacitance : 0.0568429 pF</code><br /><code>Total rise capacitance: 0.0572236 pF</code><br /><code>Total fall capacitance: 0.0572328 pF</code><br /><code>Number of resistance : 5</code><br /><code>Total resistance : 15.6659 Ohm</code><br /><code>-------------------------------------------------------------</code><br /><code>SI information for rise</code><br /><code>---------------------------------------------------------------------------------</code><br /><code>Victim clock : myclk</code><br /><code>---------------------------------------------------------------------------------</code><br /><code>Attacker Status Direction Slew Coupling cap Fanout Voltage Bump Timing window Clock</code><br /><code>---------------------------------------------------------------------------------</code><br /><code>att1 SY Fall 0.404581 ns 0.012500 pF 1 0.765 v 0.135482 v 1.123200 ns 1.123300 ns myclk</code><br /><code>att2 SY Fall 0.205181 ns 0.010500 pF 1 0.765 v 0.125344 v 1.390900 ns 1.419600 ns myclk</code><br /><code>---------------------------------------------------------------------------------</code><br /><code>Model types</code><br /><code>---------------------------------------------------------------------------------</code><br /><code>Net Term Cell Model</code><br /><code>---------------------------------------------------------------------------------</code><br /><code>vic_net inv_inst/ZN INV CCS</code><br /><code>vic_net ff2/D DFF CCS</code><br /><code>att1 ZN INV CCS</code><br /><code>att2 Q DFF CCS</code><br /><code>---------------------------------------------------------------------------------</code><br /><code>Underated Delays Rise</code><br /><code>-------------------------------------------------------------</code><br /><code>Incr Net delay : 2.586069 ns</code><br /><code>Net delay : 2.586721 ns</code><br /><code>-------------------------------------------------------------</code><br /><code>Transitions Rise</code><br /><code>-------------------------------------------------------------</code><br /><code>Input transition : 3.370655 ns</code><br /><code>Output transition : 3.370683 ns</code><br /><code>-------------------------------------------------------------</code><br /><code>Abbreviative attacker status and filtered reason:</code><br /><code>-------------------------------------------------------------</code><br /><code>SY : Synchronous</code><br /><code>INF: Attacker with infinite timing window</code><br /><code>PE : Filtered due to physical exclusion</code><br /><code>UF : Filtered by user</code><br /><code>CN : Filtered because it is a constant net</code><br /><code>SB : Filtered due to small bump</code><br /><code>TA : Filtered because of timing window does not overlap</code><br /><code>LC : Filtered due to logical correlation</code><br /><code>ACT: Attacker is Active.</code><br /><code>-------------------------------------------------------------</code></p>
+</li></ul></div>
+<ul><li>The following command generates a report that shows timing paths for which<span>&#xa0;</span><code><a href="set_max_delay.html">set_max_delay</a></code><span>&#xa0;</span>constraints are defined:<br /><code>report_timing -check_type max_delay -max_paths 10 &gt; 11</code>
+<p><code>Path 1: MET (0.721 ns) Path Delay Check with Pin ff2/D</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Group: CK1</code><br /><code>&#xa0; &#xa0; &#xa0;Startpoint: (R) ff1/Q</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Clock: (R) CK1</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0;Endpoint: (R) ff2/D</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Clock: (R) CK1</code></p>
+
+<p><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Capture &#xa0; &#xa0; &#xa0; &#xa0; Launch</code><br /><code>&#xa0; &#xa0; Path Delay:+ &#xa0; &#xa0; 1.000 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;-</code><br /><code>&#xa0; &#xa0; Src Latency:+&#xa0; &#xa0; 0.000 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.000</code><br /><code>&#xa0; &#xa0; Net Latency:+&#xa0; &#xa0; 0.010 (P)&#xa0; &#xa0; &#xa0; 0.010 (P)</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0;Arrival:= &#xa0; &#xa0; 1.010 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.010</code></p>
+
+<p><code>&#xa0; &#xa0; &#xa0; Setup:- &#xa0; &#xa0; 0.100</code><br /><code>&#xa0; &#xa0; &#xa0; Required Time:=&#xa0; &#xa0;0.910</code><br /><code>&#xa0; &#xa0; &#xa0; Launch Clock:=&#xa0; &#xa0; 0.010</code><br /><code>&#xa0; &#xa0; &#xa0; Data Path:+&#xa0; &#xa0; &#xa0; &#xa0;0.179</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Slack:=&#xa0; &#xa0; &#xa0; &#xa0;0.721</code><br /><code>&#xa0; &#xa0; &#xa0; ----------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; Pin &#xa0; &#xa0; Edge &#xa0;Direction &#xa0;Phase &#xa0; &#xa0; &#xa0; &#xa0;Arrival &#xa0;Delay</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Time</code><br /><code>&#xa0; &#xa0; &#xa0; ----------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; ff1/CK &#xa0;^ &#xa0; &#xa0; IN&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;CK1(C)(P) * &#xa0;0.010 &#xa0; &#xa0;-</code><br /><code>&#xa0; &#xa0; &#xa0; ff1/Q &#xa0; ^ &#xa0; &#xa0; OUT &#xa0; &#xa0; &#xa0; &#xa0;CK1(D)(P) * &#xa0;0.013 &#xa0; &#xa0;0.003</code><br /><code>&#xa0; &#xa0; &#xa0; buf4/Y &#xa0;^ &#xa0; &#xa0; OUT &#xa0; &#xa0; &#xa0; &#xa0;CK1(D)(P) * &#xa0;0.023 &#xa0; &#xa0;0.010</code><br /><code>&#xa0; &#xa0; &#xa0; buf5/Y &#xa0;^ &#xa0; &#xa0; OUT &#xa0; &#xa0; &#xa0; &#xa0;CK1(D)(P) * &#xa0;0.033 &#xa0; &#xa0;0.010</code><br /><code>&#xa0; &#xa0; &#xa0; and1/Y &#xa0;^ &#xa0; &#xa0; OUT &#xa0; &#xa0; &#xa0; &#xa0;CK1(D)(P) * &#xa0;0.179 &#xa0; &#xa0;0.146</code><br /><code>&#xa0; &#xa0; &#xa0; buf6/Y &#xa0;^ &#xa0; &#xa0; OUT &#xa0; &#xa0; &#xa0; &#xa0;CK1(D)(P) * &#xa0;0.189 &#xa0; &#xa0;0.010</code><br /><code>&#xa0; &#xa0; &#xa0; ff2/D &#xa0; ^ &#xa0; &#xa0; IN&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;CK1(D)(P) * &#xa0;0.189 &#xa0; &#xa0;0.000</code><br /><code>&#xa0; &#xa0; &#xa0; ----------------------------------------------------</code></p>
+
+<p><code>Path 2: MET (0.987 ns) Path Delay Check with Pin out1</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Group: default</code><br /><code>&#xa0; &#xa0; &#xa0;Startpoint: (R) ff2/Q</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Clock: (R) CK1</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0;Endpoint: (R) out1</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Clock:</code></p>
+
+<p><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Capture &#xa0; &#xa0; &#xa0; &#xa0; Launch</code><br /><code>&#xa0; &#xa0; &#xa0;Path Delay:+ &#xa0; &#xa0; 1.000 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;-</code><br /><code>&#xa0; &#xa0; Src Latency:+ &#xa0; &#xa0; 0.000 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.000</code><br /><code>&#xa0; &#xa0; Net Latency:+ &#xa0; &#xa0; 0.000 (I) &#xa0; &#xa0;0.010 (P)</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; Arrival:= &#xa0; &#xa0; 1.000 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.010</code></p>
+
+<p><code>&#xa0; &#xa0; &#xa0; &#xa0;Output Delay:- &#xa0; &#xa0; 0.000</code><br /><code>&#xa0; &#xa0; &#xa0; Required Time:= &#xa0; &#xa0; 1.000</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0;Launch Clock:= &#xa0; &#xa0; 0.010</code><br /><code>&#xa0; &#xa0; &#xa0; Data Path:+ &#xa0; &#xa0; 0.003</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Slack:= &#xa0; &#xa0; 0.987</code><br /><code>&#xa0; &#xa0; &#xa0; ----------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; Pin &#xa0; &#xa0; Edge &#xa0;Direction &#xa0;Phase &#xa0; &#xa0; &#xa0; &#xa0;Arrival &#xa0;Delay</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Time</code><br /><code>&#xa0; &#xa0; &#xa0; ----------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; ff2/CK &#xa0;^ &#xa0; &#xa0; IN&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;CK1(C)(P) * &#xa0;0.010 &#xa0; &#xa0;-</code><br /><code>&#xa0; &#xa0; &#xa0; ff2/Q &#xa0; ^ &#xa0; &#xa0; OUT &#xa0; &#xa0; &#xa0; &#xa0;CK1(D)(P) &#xa0; &#xa0;0.013 &#xa0; &#xa0;0.003</code><br /><code>&#xa0; &#xa0; &#xa0; out1 &#xa0; &#xa0;^ &#xa0; &#xa0; OUT &#xa0; &#xa0; &#xa0; &#xa0;CK1(D)(P) * &#xa0;0.013 &#xa0; &#xa0;0.000</code><br /><code>&#xa0; &#xa0; &#xa0; ----------------------------------------------------</code></p>
+</li><li>In PBA, EPBA, and IPBA mode, the timing report shows PBA header for columns (by default):<br /><code>report_timing -retime path_slew_propagation -path_type full_clock</code><br /><br /><code>Path 1: VIOLATED Late External Delay Assertion&#xa0;</code><br /><code>Endpoint: &#xa0; o5 &#xa0; &#xa0;(^) checked with &#xa0;leading edge of &#39;CLK&#39;</code><br /><code>Beginpoint: ff3/Q (^) triggered by &#xa0;leading edge of &#39;CLK&#39;</code><br /><code>Analysis View: an_view_setup</code><br /><code>Retime Analysis {Data Clock Path-Slew Spatial(CS) SOCV}</code><br /><code>Retime SOCV Analysis { Distance(um) : 27.653 }</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;<strong>NSigma &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; | &#xa0;Mean&#xa0; &#xa0; | &#xa0;Sigma&#xa0; |&#xa0; Stddev</strong></code><br /><code>Other End Arrival Time &#xa0; &#xa0; &#xa0; &#xa0; 0.0000 (-3.00S) &#xa0;| &#xa0;0.0000&#xa0; | &#xa0;0.0000 | &#xa0;0.0000</code><br /><code>- External Delay &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 2.5000</code><br /><code>+ Phase Shift &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.5000</code><br /><code>+ CPPR Adjustment &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.0000 (+3.00S) &#xa0;| &#xa0;0.0000&#xa0; | &#xa0;0.0000 | &#xa0;0.0000</code><br /><code>- Uncertainty &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;0.5000</code><br /><code>= Required Time &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; -2.5000 (-3.00S) &#xa0;| -2.5000&#xa0; | &#xa0;0.0000 | &#xa0;0.0000</code><br /><code>- Arrival Time &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 18.4496 (+3.00S) | &#xa0;18.4486 | &#xa0;0.0004 | &#xa0;0.0004</code><br /><code>= Slack Time &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;-20.9496 (-3.00S) | -20.9486 | &#xa0;0.0004 | &#xa0;0.0004</code><br /><code>= Slack Time(original) &#xa0; &#xa0; &#xa0; &#xa0;-20.9484 (-3.00S) | -20.9484 | &#xa0;0.0000 | &#xa0;0.0000</code><br /><code>&#xa0; &#xa0; &#xa0;Clock Rise Edge &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 0.0000</code><br /><code>&#xa0; &#xa0; &#xa0;+ Source Insertion Delay &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;1.0000 (+3.00S)&#xa0; &#xa0;| &#xa0;1.0000 | &#xa0;0.0000 | &#xa0;0.0000</code><br /><code>&#xa0; &#xa0; &#xa0;= Beginpoint Arrival Time &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 1.0000 (+3.00S)&#xa0; &#xa0;| &#xa0;1.0000 | &#xa0;0.0000 | &#xa0;0.0000</code><br /><code>&#xa0; &#xa0; &#xa0; -----------------------------------------------------------------------------------------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; Pin&#xa0; &#xa0; &#xa0; &#xa0;Phase&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Edge &#xa0;Delay &#xa0; &#xa0;Delay Mean &#xa0;Delay Stddev &#xa0;Retime Delay &#xa0;Retime Delay &#xa0;Retime Delay &#xa0;Arrival Time &#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Mean &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Stddev &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; -----------------------------------------------------------------------------------------------------------------------------------</code><br /><code>&#xa0; &#xa0; &#xa0; clk&#xa0; &#xa0; &#xa0; &#xa0;CLK(C)(P)(an_view_setup)*&#xa0; &#xa0;^ &#xa0; &#xa0; - &#xa0; &#xa0; &#xa0; &#xa0;- &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; - &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; - &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; - &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; - &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 1.0000 &#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; clk_L1/A &#xa0;CLK(C)(P)(an_view_setup)*&#xa0; &#xa0;^ &#xa0; &#xa0; 0.0004 &#xa0; 0.0004 &#xa0; &#xa0; &#xa0;0.0000 &#xa0; &#xa0; &#xa0; &#xa0;0.0014 &#xa0; &#xa0; &#xa0; &#xa0;0.0005 &#xa0; &#xa0; &#xa0; &#xa0;0.0003 &#xa0; &#xa0; &#xa0; &#xa0;1.0014 &#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; clk_L1/Y &#xa0;CLK(C)(P)(an_view_setup)*&#xa0; &#xa0;^ &#xa0; &#xa0; 0.0600 &#xa0; 0.0600 &#xa0; &#xa0; &#xa0;0.0000 &#xa0; &#xa0; &#xa0; &#xa0;0.0600 &#xa0; &#xa0; &#xa0; &#xa0;0.0600 &#xa0; &#xa0; &#xa0; &#xa0;0.0000 &#xa0; &#xa0; &#xa0; &#xa0;1.0613 &#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; clk_L2/A &#xa0;CLK(C)(P)(an_view_setup)*&#xa0; &#xa0;^ &#xa0; &#xa0; 0.0001 &#xa0; 0.0001 &#xa0; &#xa0; &#xa0;0.0000 &#xa0; &#xa0; &#xa0; &#xa0;0.0004 &#xa0; &#xa0; &#xa0; &#xa0;0.0002 &#xa0; &#xa0; &#xa0; &#xa0;0.0001 &#xa0; &#xa0; &#xa0; &#xa0;1.0613 &#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; clk_L2/Y &#xa0;CLK(C)(P)(an_view_setup)*&#xa0; &#xa0;^ &#xa0; &#xa0; 0.0604 &#xa0; 0.0604 &#xa0; &#xa0; &#xa0;0.0000 &#xa0; &#xa0; &#xa0; &#xa0;0.0604 &#xa0; &#xa0; &#xa0; &#xa0;0.0604 &#xa0; &#xa0; &#xa0; &#xa0;0.0000 &#xa0; &#xa0; &#xa0; &#xa0;1.1217 &#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; ff3/CLK&#xa0; &#xa0;CLK(C)(P)(an_view_setup)*&#xa0; &#xa0;^ &#xa0; &#xa0; 0.0001 &#xa0; 0.0001 &#xa0; &#xa0; &#xa0;0.0000 &#xa0; &#xa0; &#xa0; &#xa0;0.0011 &#xa0; &#xa0; &#xa0; &#xa0;0.0001 &#xa0; &#xa0; &#xa0; &#xa0;0.0003 &#xa0; &#xa0; &#xa0; &#xa0;1.1215 &#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; ff3/Q&#xa0; &#xa0; &#xa0;CLK(D)(P)(an_view_setup)*&#xa0; &#xa0;^ &#xa0; &#xa0; 17.3092 &#xa0;17.3092 &#xa0; &#xa0; 0.0000 &#xa0; &#xa0; &#xa0; &#xa0;17.3091 &#xa0; &#xa0; &#xa0; 17.3091 &#xa0; &#xa0; &#xa0; 0.0000 &#xa0; &#xa0; &#xa0; &#xa0;18.4306 &#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; o5&#xa0; &#xa0; &#xa0; &#xa0; CLK(D)(P)(an_view_setup)&#xa0; &#xa0; ^ &#xa0; &#xa0; 0.0182 &#xa0; 0.0182 &#xa0; &#xa0; &#xa0;0.0000 &#xa0; &#xa0; &#xa0; &#xa0;0.0197 &#xa0; &#xa0; &#xa0; &#xa0;0.0183 &#xa0; &#xa0; &#xa0; &#xa0;0.0005 &#xa0; &#xa0; &#xa0; &#xa0;18.4496 &#xa0;</code><br /><code>&#xa0; &#xa0; &#xa0; -----------------------------------------------------------------------------------------------------------------------------------</code></li></ul><h4 id="report_timing-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="report_net.html">report_net</a></code></li><li><code><a href="report_ports.html">report_ports</a></code></li><li>
+<p><code><a href="set_multi_cpu_usage.html">set_multi_cpu_usage</a></code></p>
+</li><li>
+<p><code><a href="set_table_style.html">set_table_style</a></code></p>
+</li><li>
+<p><code><a href="set_input_delay.html">set_input_delay</a></code></p>
+</li><li>
+<p><code style="text-align: left;"><a href="set_max_delay.html">set_max_delay</a></code></p>
+</li><li>
+<p><code style="text-align: left;"><a href="set_min_delay.html">set_min_delay</a></code></p>
+</li><li>
+<p><code><a href="set_analysis_mode.html">set_analysis_mode</a></code></p>
+</li><li>
+<p><code><a href="create_analysis_view.html#create_analysis_view-create_analysis_view">create_analysis_view</a></code></p>
+</li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="report_statistical_timing_derate_factors.html" id="prev" title="report_statistical_timing_derate_factors">report_statistical_timing_dera ...</a></em></b><b><em><a href="report_timing_context_clock_mapping.html" id="nex" title="report_timing_context_clock_mapping">report_timing_context_clock_ma ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

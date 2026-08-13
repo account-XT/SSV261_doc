@@ -1,0 +1,156 @@
+
+<html><head><title>set_annotated_glitch</title>
+<meta name="page_sequence" content="34025000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="gsatish" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287331" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_annotated_glitch" />
+<meta name="Keywords" content="noise analysis,glitch analysis,annotate glitch" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Signal Integrity," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287331" />
+<meta name="NextFile" content="set_cdb_binding.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_advanced_variation_mode.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- set_annotated_glitch" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="set_advanced_variation_mode.html" title="set_advanced_variation_mode">set_advanced_variation_mode</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_cdb_binding.html" title="set_cdb_binding">set_cdb_binding</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_annotated_glitch</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>set_annotated_glitch&#xa0;<span id="set_annotated_glitch-set_annotated_glitch"></span><br /><code>[-help]<br />[-overshoot <em>string</em>]&#xa0;<br />[-ports <em>string</em>]<br />[-undershoot <em>string</em>]<br />[-view <em>string</em>]<br />[-voltage_high <em>string</em>]<br />[-voltage_low <em>string</em>]</code></code></p>
+
+<p><br /></p>
+<div>
+<p>Allows the ability to annotate glitches at any specified pin/port. This command setting will override the VH/VL glitch with the specified value on the given point and use that glitch value to propagate downstream.</p>
+
+<p>If the&#xa0;defined&#xa0;annotated glitch waveforms do not start and end at 0, then the software will not consider those waveforms and a warning will be issued.&#xa0;In the following example both VL and VH waves should start and end with 0.0 values.&#xa0;Since the VH wave is not ending at 0, this waveform will be ignored.&#xa0;<br /><code>set_annotated_glitch -voltage_low {0 0 100e-12 0.01 200e-12 0.04 300e-12 0.03 600e-12 0} -ports dff1/CK -voltage_high {0 0 100e-12 0.1 200e-12 0.4 300e-12 0.3 600e-12 0.1} .</code></p>
+
+<p>The software&#xa0;does not save (and report) waveforms below 5% of VDD.&#xa0;Consider for example, the annotated glitch defined on a pin as:<br /><code>set_annotated_glitch -ports dff1/CK -voltage_high {0 0 100e-12 0.01 200e-12 0.04 300e-12 0.03 600e-12 0}</code></p>
+
+<p>In this case, the glitch peak is 0.04 (40mV), which is below 5% of VDD&#xa0;(1080mV) - equal to 54mV. Since this annotated glitch waveform peak is very low, the&#xa0;<code>report_noise</code>&#xa0;command will not report it. However, if the failure criteria is lower than 5%, then the software will save and report&#xa0;small glitch violations.</p>
+</div>
+<h4 id="set_annotated_glitch-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd"><code>-help</code></td>
+<td class="confluenceTd">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd"><code>-ports <em>string</em></code></td>
+<td class="confluenceTd">
+<p>Specifies port or pin names on which you need to apply glitches.</p>
+
+<p>This parameter works only when <code><a href="si_Category_Attributes.html">si_enable_glitch_propagation</a></code> attribute is set to <code>true</code> in the <code><a href="report_timing.html">report_timing</a>/<code><a href="update_timing.html">update_timing</a></code></code> flow.</p>
+
+<p>In the <code><a href="update_glitch.html">update_glitch</a></code> flow, the <code>si_enable_glitch_propagation</code><span> attribute</span> is already set to <code>true</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-overshoot <em>string</em><br /></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies a list of VHO glitch wave points.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-undershoot <em>string</em></code></td>
+<td class="confluenceTd" colspan="1">
+<p>Specifies a list of VLU glitch wave points.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-view <em>string</em></code></td>
+<td class="confluenceTd" colspan="1">Specifies a list of view names.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-voltage_high <em>string</em><br /></code></td>
+<td class="confluenceTd" colspan="1">Specifies a list of VH glitch wave points. You must specify at least 3 time value pairs.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-voltage_low <em>string</em><br /></code></td>
+<td class="confluenceTd" colspan="1">Specifies a list of VL glitch wave points. You must specify at least 3 time value pairs.</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_annotated_glitch-Examples">Examples</h4>
+<ul><li>
+<p>The following example annotates the specified VL glitch wave points:<br /><code>tempus &gt; set_annotated_glitch -voltage_low {0 0.0&#xa0; 0.2e-9 0.540 0.405e-9 0} -voltage_high {0.1e-9&#xa0; 0&#xa0; 0.205e-9 0.50 0.405e-9 0.200&#xa0; 0.6e-9 0.0}&#xa0;-ports {A}</code></p>
+</li></ul><ul><li>The following command overrides the glitch value at RIP with the annotated glitch, because glitch is annotated at the receiver input:<br /><code>tempus &gt; set_annotated_glitch -voltage_low {0 0 100e-12 0.1 200e-12 0.4 300e-12 0.3 600e-12 0} -ports seg2/u9/D</code><br /><code>tempus &gt; update_glitch</code><br /><code>tempus &gt; report_noise -nets seg2/n8</code>
+<p><code>-------------------------------------------------------------------------</code><br /><code>Peak(mV) Level TotalCap(fF) TotalArea Width(ps) Vdd(mV) Library VictimNet</code><br /><code>399.924&#xa0; VL&#xa0; &#xa0; 144.11&#xa0; &#xa0; &#xa0; &#xa0;110.00&#xa0; &#xa0; 550.104&#xa0; &#xa0;1080&#xa0; &#xa0; cell_w&#xa0; seg2/u9/D {seg2/n8}</code></p>
+
+<p><code>Receiver Input Threshold:</code><br /><code>Value&#xa0; &#xa0; (Threshold)&#xa0; ReceiverNet Receiver failure_type</code><br /><code>399.924&#xa0; (431.244)&#xa0; &#xa0; seg2/u9/D&#xa0; &#xa0;(DFF)&#xa0; &#xa0; [bbox]</code></p>
+
+<p><code>Constituents:</code><br /><code>Source Peak(mV) Offset(ps) Slew(ps) Xcap(fF) Vdd(mV) Edge Status Net</code><br /><code>Prp:&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 399.924&#xa0; &#xa0; --&#xa0; &#xa0; &#xa0; &#xa0;--&#xa0; &#xa0; &#xa0; &#xa0;--&#xa0; &#xa0; &#xa0; --&#xa0; &#xa0;--&#xa0; &#xa0; &#xa0;seg2/u8/Y</code><br /><code>--------------------------------------------------------------------------</code></p>
+</li></ul><ul><li>In the following example, the impact of aggressors coupled with the victim stage (along with the&#xa0;annotated glitch)&#xa0;is also considered&#xa0;because annotation is done at the driver output:<br /><code>tempus &gt; set_annotated_glitch -voltage_low {0 0 100e-12 0.1 200e-12 0.4 300e-12 0.3 600e-12 0} -ports seg2/u8/Y</code><br /><code>tempus &gt; update_glitch</code><br /><code>tempus &gt; report_noise -nets seg2/n8</code>
+<p><code>--------------------------------------------------------------------------------</code><br /><code>Peak(mV) Level TotalCap(fF) TotalArea Width(ps) Vdd(mV) Library&#xa0; VictimNet</code><br /><code>548.208&#xa0; VL&#xa0; &#xa0; 144.11&#xa0; &#xa0; &#xa0; &#xa0;159.30&#xa0; &#xa0; 581.172&#xa0; &#xa0;1080&#xa0; &#xa0; cell_w&#xa0; &#xa0;seg2/u9/D {seg2/n8}</code></p>
+
+<p><code>Receiver Input Threshold:</code><br /><code>Value (Threshold) ReceiverNet Receiver failure_type</code><br /><code>548.208 (432.648) seg2/u9/D&#xa0; &#xa0;(DFF)&#xa0; &#xa0; [bbox]</code></p>
+
+<p><code>Constituents:</code><br /><code>Source Peak(mV) Offset(ps) Slew(ps) Xcap(fF) Vdd(mV) Edge&#xa0; Status&#xa0; Net</code><br /><code>Cpl:&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 80.148&#xa0; &#xa0; &#xa0;371.000&#xa0; 340.000&#xa0; 68.138&#xa0; 1080&#xa0; R ACT&#xa0; &#xa0;seg3/n8</code><br /><code>Cpl:&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 75.159&#xa0; &#xa0; &#xa0;381.000&#xa0; 348.500&#xa0; 62.007&#xa0; 1080&#xa0; R ACT&#xa0; &#xa0;seg1/n8</code><br /><code>Prp:&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; 392.904&#xa0; &#xa0; --&#xa0; &#xa0; &#xa0; &#xa0;--&#xa0; &#xa0; &#xa0; &#xa0;--&#xa0; &#xa0; &#xa0; --&#xa0; &#xa0; --&#xa0; &#xa0; &#xa0; seg2/u8/Y</code><br /><code>----------------------------------------------------------------------------</code></p>
+</li></ul><h4 id="set_annotated_glitch-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="report_noise.html">report_noise</a></code></li><li><code><a href="update_glitch.html">update_glitch</a></code></li><li><code><a href="report_timing.html">report_timing</a></code></li><li><code><a href="update_timing.html">update_timing</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_advanced_variation_mode.html" id="prev" title="set_advanced_variation_mode">set_advanced_variation_mode</a></em></b><b><em><a href="set_cdb_binding.html" id="nex" title="set_cdb_binding">set_cdb_binding</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

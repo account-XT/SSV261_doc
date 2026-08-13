@@ -1,0 +1,102 @@
+
+<html><head><title>Voltage Threshold Skew Analysis Flow</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845214" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Voltage Threshold Skew Analysis Flow" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845214" />
+<meta name="NextFile" content="analysisandreporting_vtskewgroups.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_vtskeewoverview.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- Voltage Threshold Skew Analysis Flow" />
+<meta name="Keywords" content="Partitioning Libraries by Voltage Threshold,Enabling VT Skew Analysis,Voltage Threshold Skew Analysis Flow" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Analysis,REPORTS" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_vtskeewoverview.html" title="VT Skew Analysis - Overview">VT Skew Analysis - Overview</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_vtskewgroups.html" title="Liberty Threshold Voltage Groups">Liberty Threshold Voltage Grou ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:vtskewflow" title="Voltage Threshold Skew Analysis Flow"></a><h3>
+<a id="pgfId-2082946"></a><a id="39145"></a>Voltage Threshold Skew Analysis Flow</h3>
+
+<p>
+<a id="pgfId-2082947"></a>To perform Vth skew analysis, you need to configure the following settings:</p>
+<ul><li>
+<a id="pgfId-2082948"></a>Group timing libraries into different Vth classes (e.g., HVT, LVT, ULVT). This can be done using pre-existing attributes in the Liberty timing library, or by providing explicit grouping information using the <a href="../tempusCUI/set_threshold_voltage_group.html">set_threshold_voltage_group</a> command.</li><li>
+<a id="pgfId-2082953"></a>Use the <a href="../tempusCUI/set_vt_skew_derate.html">set_vt_skew_derate</a> command to specify fast and slow derates for each defined Vth class - for specific threshold voltage groups.</li><li>
+<a id="pgfId-2082956"></a>Use the <a href="../tempusCUI/set_vt_skew_config.html">set_vt_skew_config</a> command to customize the combinations of Vth classes to be analyzed. By default, the software will analyze all the possible combinations.</li><li>
+<a id="pgfId-2082959"></a>Configure <a href="../tempusCUI/report_timing.html">report_timing</a> command settings to generate graph- and path-based VT skew reports.</li></ul>
+
+
+
+<p>
+<a id="pgfId-2082960"></a>The Vth skew analysis is performed during path-based analysis (PBA). Path-based analysis is a re-timing of the set of paths produced by graph-based analysis (GBA). The more paths that are provided from GBA, the more analysis is done in PBA mode. The Vt skew analysis in GBA mode can be run in the following ways:</p>
+<ul><li>
+<a id="pgfId-2082961"></a>The Vt skew derates are applied in a worst-case manner in the GBA part of the flow so that early paths are sped up maximally and late paths are slowed down maximally. While this is bounding, it is also very pessimistic and may result in an unrealistic number of paths being selected for Vt skew analysis.</li><li>
+<a id="pgfId-2082962"></a>The GBA step in path-based Vt skew analysis can be optimized for paths with unique Vt&#39;s, thus reducing the pessimism in GBA analysis. A path has a unique Vt if there is only one Vt group present on both the launch and capture paths. The paths with a unique Vt are quite common so this approach can be used to significantly speed up the analysis. </li><li>
+<a id="pgfId-2082963"></a>PBA Vt skew analysis can use any of the available retime modes: path, exhaustive, or bounded exhaustive.</li></ul>
+
+
+
+<h3>
+<a id="pgfId-2082966"></a><a id="49781"></a>Enabling VT Skew Analysis</h3>
+
+<p>
+<a id="pgfId-2082967"></a>To enable or disable the VT skew analysis, you can use the setting:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-3007454"></a><a href="../tempusCUI/set_db.html">set_db</a> <a href="../tempusCUI/timing_Category_Attributes.html">timing_enable_vtskew_derate_mode</a> true</pre>
+<h3>
+<a id="pgfId-2082974"></a><a id="24855"></a>Partitioning Libraries by Voltage Threshold</h3>
+
+<p>
+<a id="pgfId-2082975"></a>The Liberty timing libraries may already include threshold voltage group definitions. These existing definitions may be used with the Vth skew analysis flow. If native group definitions are missing or if you want to have a different group name to use across different libraries, you can use the <a href="../tempusCUI/set_threshold_voltage_group.html">set_threshold_voltage_group</a>  command.</p>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_vtskeewoverview.html" id="prev" title="VT Skew Analysis - Overview">VT Skew Analysis - Overview</a></em></b><b><em><a href="analysisandreporting_vtskewgroups.html" id="nex" title="Liberty Threshold Voltage Groups">Liberty Threshold Voltage Grou ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

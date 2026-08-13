@@ -1,0 +1,340 @@
+
+<html><head><title>report_resistance</title>
+<meta name="page_sequence" content="28018000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666304" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocTitle" content="Voltus Stylus Common UI Text Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="report_resistance" />
+<meta name="Keywords" content="analyze,resistance,instance,REFF,RLRP,Full-Chip Analysis,Point-to-Point Analysis" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Rail Analysis," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusTCRcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666304" />
+<meta name="NextFile" content="report_self_heat.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="report_rail.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI Text Reference Manual  -- report_resistance" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltuscuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusTCRcomTOC.html">Contents</a></li><li><a class="prev" href="report_rail.html" title="report_rail">report_rail</a></li><li style="float: right;"><a class="viewPrint" href="voltusTCRcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="report_self_heat.html" title="report_self_heat">report_self_heat</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI Text Reference Manual <br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>report_resistance</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span id="report_resistance-analyze_resistance"></span> <code>report_resistance<br />[-help]<br />[-cell_name <em>master_cell_name</em>]<br />[-die_mode {3dic}]<br />[-force_reextraction {true | false}]<br />[-instance_list {<em>instance1</em> <em>pin1</em> <em>instance2</em> <em>pin2</em>...}]<br />[-instance_list_file <em>filename</em>]<br />[-instance_pair_list {<em>instance1</em> <em>instance2</em> <em>pin1</em>&#xa0; <em>pin2</em> ...}]<br />[-instance_pair_list_file <em>filename</em>]<br />-net_name <em>netName</em> | <code>-domain_name <em>domainName</em> </code><br />[-node_list {{<em>nodeX nodeY METAL_LAYER [LABEL]}...</em>}]<br />[-node_list_file <em>filename</em>]<br />[-node_pair_list {<em>node1X</em> <em>node1Y</em> <em>METAL_LAYER1</em> <em>node2X</em> <em>node2Y</em> <em>METAL_LAYER2</em>...<em>LABEL</em>}]<br />[-node_pair_list_file <em>filename</em>]<br />[-output_file <em>filename</em>]<br />[-output_dir <em>directory_name</em>]<br />[-region {<em>x1</em> <em>y1</em> <em>x2</em> <em>y2</em> <em>layer</em> <em>number_of_nodes</em> <em>region_name</em>}]<br />[-report_limit <em>value</em>]<br />[-threshold <em>value</em>]<br />[-write_cell_name]<br />[-domain_threshold <em>value</em>]<br /><code><code><code>[<code>-net_threshold&#xa0; <em>value</em></code>]</code></code></code><br /><code><code>[<code>-exclude_list_file <em>filename</em></code>]</code></code><br /></code></p>
+
+<p>Performs effective resistance analysis. Effective resistance computes effective resistance between two nodes on the power-grid, or from a node to all the voltage sources in the design, or from an instance to all the voltage sources in the design.</p>
+
+<p>You can run this command without performing power calculation and IRdrop analysis. The flow requires you to load the design, set power nets, set power pads, and run resistance analysis. This command enables the tool to consider the entire power structure, including embedded ring structure within IO cells if any.</p>
+
+<p><strong>Note</strong>: The&#xa0;<code>report_resistance</code> full chip analysis now supports running the&#xa0;<code>set_rail_analysis_config</code> <code>-enable_rlrp_analysis</code> command to perform least resistance path analysis (RLRP) in conjunction with effective resistance analysis (REFF) in the DP mode. However, RLRP and REFF analysis should be done separately in the XP mode. When performing the point-to-point effective resistance analysis (<code>report_resistance</code>) for the power/signal nets in the XP mode, disable the RLRP analysis (<code>set_rail_analysis_config -enable_rlrp_analysis false</code>).</p>
+
+<p><br /></p>
+<h4 id="report_resistance-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table class="wrapped confluenceTable" style="width: 1342.0px;"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" style="width: 58.0px;">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd" style="width: 1284.0px;">
+<p>Outputs a brief description that includes the type and default information for each <code>report_resistance</code> parameter.</p>
+
+<p>For a detailed description of the command and all of its parameters, use the man command <code>man report_resistance</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-cell_name <em>master_cell_name</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 58.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1284.0px;">Reports effective resistance for all instances of the specified master cell name. The <code>-cell_name</code> parameter improves the usability of effective resistance calculation by allowing you to specify only the cell name of the instances you want to analyze. You can specify multiple cells for performing effective resistance analysis of multiple cells simultaneously.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-die_mode {3dic}</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 58.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1284.0px;">Specifies to perform multi-die effective resistance analysis.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-domain_name <em>domainName</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 58.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1284.0px;">Specifies the domain name that is to be analyzed.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><code>-domain_threshold</code> <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 58.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1284.0px;">Specifies the minimum allowed effective resistance (effective resistance sum of each net) to instance. For specific instance list analysis, the instances below the threshold value will be reported as &#8220;PASS&#8221;, while the instances above the threshold value will be reported as &#8220;FAIL&#8221;. For full chip analysis, the instances below the threshold value will not be reported in the domain report. The default value is 0.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><code>-exclude_list_file <em>filename</em></code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 58.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1284.0px;">Specifies the name of a file containing a list of cells or instances that will not be processed during the resistance analysis flow. The specified cells/instances will be ignored from report generation.
+<p>The use model of this parameter is:<br /><code>report_resistance -exclude_list_file &lt;<em>file_name</em>&gt;</code></p>
+
+<p><u>File Format</u>:<code><br />&lt;CELL | INST&gt; &lt;<em>name</em>&gt;</code></p>
+
+<p><u>Example</u>:<code><br />CELL BUMP_MASTER</code><br /><code>CELL ESD_MASTER<br /><code>INST INSTA</code></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-force_reextraction {true | false}</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 58.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1284.0px;">Specifies to force a re-extract of resistances.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><code>-instance_list {<em><code><code><code><em>instance1</em> <em>pin1</em> <em>instance2</em> <em>pin2</em></code></code></code>...}</em></code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 58.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1284.0px;">
+<p>Specifies the list of instances for which effective resistance is to be calculated. <em>pin</em> is an optional argument. By default, the tool will use the instance pin associated with the net being analyzed. The&#xa0;<em>pin</em> argument can be used in special cases when two different pins of an instance are connected to the same net.</p>
+
+<p><strong>Note</strong>: The <code>-instance_list</code> and <code>-instance_list_file</code> parameters are mutually exclusive to the <code>-instance_pair_list</code> and <code>-instance_pair_list_file</code> parameters. This means that you can specify <code>-instance_list</code> and <code>-instance_list_file</code> together but you cannot specify <code>-instance_list</code> and <code>-instance_list_pair</code> together.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-instance_list_file <em>filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 58.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1284.0px;">
+<p>Specifies the name of the instance list file. This file contains the list of&#xa0;instances in the same format as mentioned for the <code><code><code>-instance</code></code>_list</code> parameter. The file allows you to specify a large number of instances. <code><code><code>-instance</code></code>_list_file</code> and <code><code><code>-instance</code></code>_list</code> are mutually exclusive.</p>
+
+<p><strong>Note</strong>: The <code>-instance_list</code> and <code>-instance_list_file</code> parameters are mutually exclusive to the <code>-instance_pair_list</code> and <code>-instance_pair_list_file</code> parameters. This means that you can specify <code>-instance_list</code> and <code>-instance_list_file</code> together but you cannot specify <code>-instance_list</code> and <code>-instance_list_pair</code> together.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-instance_pair_list {<code><code><code><code><code><em><code><em>instance1</em> <em>instance2</em> <em>pin1</em> <em>pin2</em></code></em></code></code></code><code><code><em><code> </code></em></code>...</code> </code></code>}</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 58.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1284.0px;">
+<p>Specifies the instance pair list to enable&#xa0;effective resistance calculation between two instances in the design. <em><code>pin1</code> </em>and <code><em>pin2</em> </code>are pins of <code><em>instance1</em> </code>and <code><em>instance2</em></code>, respectively.</p>
+
+<p><strong>Note</strong>: The <code>-instance_list</code> and <code>-instance_list_file</code> parameters are mutually exclusive to the <code>-instance_pair_list</code> and <code>-instance_pair_list_file</code> parameters. This means that you can specify <code>-instance_list</code> and <code>-instance_list_file</code> together but you cannot specify <code>-instance_list</code> and <code>-instance_list_pair</code> together.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-instance_pair_list_file <code><em>filename</em></code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 58.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1284.0px;">
+<p>Specifies the name of the instance pair list file. This file contains the instance pair list in the same format as mentioned for the <code><code><code>-instance</code></code>_pair_list</code> parameter. The file allows you to specify a large number of instance pairs. <code><code><code>-instance</code></code>_pair_list_file</code> and <code><code><code>-instance</code></code>_pair_list</code> are mutually exclusive.</p>
+
+<p><strong>Note</strong>: The <code>-instance_list</code> and <code>-instance_list_file</code> parameters are mutually exclusive to the <code>-instance_pair_list</code> and <code>-instance_pair_list_file</code> parameters. This means that you can specify <code>-instance_list</code> and <code>-instance_list_file</code> together but you cannot specify <code>-instance_list</code> and <code>-instance_list_pair</code> together.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-net_name <em>netName</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 58.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1284.0px;">Specifies the net name that is to be analyzed.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-net_threshold&#xa0; <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 58.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1284.0px;">
+<p>The effective resistance requirements for different power nets vary depending on the design. For example, an array or periphery supply to an SRAM needs to be signed off at a lower effective resistance threshold compared to the core supplies. This parameter allows you to specify different threshold values for different nets.</p>
+
+<p>The use model of this parameter is given below:</p>
+
+<p><code>set_rail_analysis_domain -domain_name ALL -power_nets {vdd vddar vdda vdd1 vdd2} -ground_nets vss<br />report_resistance -threshold 50 <strong>-net_threshold</strong> {{vdd 50} {vddar 20} {vdda 35} {vss 40}} -domain_name ALL -output_dir Reffective</code></p>
+
+<p>In this example, the threshold value for different nets are:</p>
+
+<p>vdd -&gt; 50<br />vddar →20<br />vdda -&gt; 35<br />vss -&gt; 40<br />vdd1 -&gt; 50<br />vdd2 -&gt; 50</p>
+
+<p>Here, for all the remaining nets for which a value is not specified using the <code>-net_threshold</code> parameter, the value specified with the <code>-threshold</code> parameter is applied.</p>
+
+<p>The different threshold values will have an impact on the list of instances reported in the <code>&lt;state_dir&gt;/Reports/&lt;net&gt;/&lt;net&gt;.effr</code> report.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-node_list <em>{{nodeX nodeY METAL_LAYER [LABEL]}...}</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 58.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1284.0px;">
+<p>Specifies the list of user-defined nodes for effective resistance calculation between the specified user-defined nodes and all voltage sources. You can add a list of nodes based on the region on a given layer. <code>LABEL</code> is any name chosen by you to identify node entries in the list. This is optional but helps during debugging.</p>
+
+<p><strong>Note</strong>: The <code>-node_list</code> and <code>-node_list_file</code> parameters are mutually exclusive to the <code>-node_pair_list</code> and <code>-node_pair_list_file</code> parameters. This means that you can specify <code>-node_list</code> and <code>-node_list_file</code> together but you cannot specify <code>-node_list</code> and <code>-node_pair_list</code> together.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-node_list_file <em>filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 58.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1284.0px;">
+<p>Specifies the name of the node list file. This file contains the list of user-defined nodes in the same format as mentioned for the <code>-node_list</code> parameter. The file allows you to specify a large number of nodes.&#xa0;</p>
+
+<p>You can specify multiple nets for node list based resistance analysis. The use model for multiple nets is:<code><br />report_resistance&#xa0;&#8211;domain &lt;<em>domain name</em>&gt; -node_list_file &lt;<em>filename</em>&gt;&#xa0;</code></p>
+
+<p>Here,</p>
+<ul><li>the <code>-domain</code> parameter will specify the domain name, that is, the domain with nets that is required to be analyzed.</li><li>the <code>-node_list_file</code> parameter will include the multiple net names</li></ul>
+<p>The format for specifying multiple nets is:</p>
+
+<p><code>NET &lt;netname1&gt;<br />node1X node1Y METAL_LAYER [LABEL]<br />node2X node2Y METAL_LAYER [LABEL]</code></p>
+
+<p><code>NET &lt;netname2&gt;<br />node1X node1Y METAL_LAYER [LABEL]<br />node2X node2Y METAL_LAYER [LABEL]</code></p>
+
+<p><strong>Note</strong>: The <code>-node_list</code> and <code>-node_list_file</code> parameters are mutually exclusive to the <code>-node_pair_list</code> and <code>-node_pair_list_file</code> parameters. This means that you can specify <code>-node_list</code> and <code>-node_list_file</code> together but you cannot specify <code>-node_list</code> and <code>-node_pair_list</code> together.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-node_pair_list {<em>node1X</em> <em>node1Y</em> <em>METAL_LAYER1</em> <em>node2X</em> <em>node2Y&#xa0;</em><em>METAL_LAYER2</em>...<code><em>LABEL</em></code>}</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 58.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1284.0px;">
+<p>Specifies the node pair list for effective resistance calculation between two nodes on the power-grid. <code>You can add a list of nodes based on the region on a given layer. LABEL</code> is any name chosen by you to identify node entries in the list. This is optional but helps during debugging.</p>
+
+<p><strong>Note</strong>: The <code>-node_list</code> and <code>-node_list_file</code> parameters are mutually exclusive to the <code>-node_pair_list</code> and <code>-node_pair_list_file</code> parameters. This means that you can specify <code>-node_list</code> and <code>-node_list_file</code> together but you cannot specify <code>-node_list</code> and <code>-node_pair_list</code> together.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-node_pair_list_file <code><em>filename</em></code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 58.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1284.0px;">
+<p>Specifies the name of the node pair list file. This file contains the&#xa0;node pair list in the same format as mentioned for the <code>-node_pair_list</code> parameter. The file allows you to specify a large number of node pairs.</p>
+
+<p>You can specify multiple nets for node pair list based resistance analysis. The use model for multiple nets is:<code><br />report_resistance &#8211;domain &lt;<em>domain name</em>&gt; -<code>node_pair_list_file</code> &lt;<em>filename</em>&gt;&#xa0;</code></p>
+
+<p>Here,</p>
+<ul><li>the <code>-domain</code> parameter will specify the domain name, that is, the domain with nets that is required to be analyzed.</li><li>the <code>-<code>node_pair_list_file</code></code> parameter will include the multiple net names</li></ul>
+<p>The format for specifying multiple nets is:</p>
+
+<p><code>NET &lt;netname1&gt;</code><br /><code>node1X node1Y METAL_LAYER1 node2X node2Y METAL_LAYER2 [LABEL]</code><br /><code>node3X node3Y METAL_LAYER3 node4X node4Y METAL_LAYER4 [LABEL]</code></p>
+
+<p><code>NET &lt;netname2&gt;</code><br /><code>node1X node1Y METAL_LAYER1 node2X node2Y METAL_LAYER2 [LABEL]</code><br /><code>node3X node3Y METAL_LAYER1 node4X node4Y METAL_LAYER4 [LABEL]</code></p>
+
+<p><strong>Note</strong>: The <code>-node_list</code> and <code>-node_list_file</code> parameters are mutually exclusive to the <code>-node_pair_list</code> and <code>-node_pair_list_file</code> parameters. This means that you can specify <code>-node_list</code> and <code>-node_list_file</code> together but you cannot specify <code>-node_list</code> and <code>-node_pair_list</code> together.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-output_file <em>filename</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 58.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1284.0px;">
+<p>Specifies the name of the output report file that contains the report header and the sorted list for resistance values.</p>
+
+<p><strong>Note</strong>: <span><span class="ui-provider ga b c d e f g h i j k l m n o p q r s t u v w x y z ab ac ae af ag ah ai aj ak">This parameter should not be specified in the XP flow as the XP reports are consolidated under the state directory by default.</span></span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-output_dir <em><code><em>directory_name</em></code></em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 58.0px;">
+<p><br /></p>
+</td>
+<td class="confluenceTd" style="width: 1284.0px;">
+<p>Specifies the name of the directory in which the output report file is saved.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-region {<em>x1 y1 x2 y2 layer number_of_nodes region_name</em>}</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 58.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1284.0px;">Analyzes resistance in the specified region. You can draw a box on a specific layer, and specify the number of nodes to be selected (maximum limit of 100 nodes). This parameter allows you to compute effective resistance on a given layer across the chip and determine how the resistance is changing for the design from top to bottom layer. You can assign a name for the region.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-report_limit <em>value</em></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 58.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1284.0px;">Specifies the number of instances printed in the report to save disk space.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code>-threshold value</code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 58.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1284.0px;">Specifies the minimum allowed effective resistance to display node/node-pair/instance/instance-pair that have a resistance value above this threshold value. If you specify threshold as a non zero value, then instances with resistance value above that threshold will be tagged as FAIL and the rest will be tagged as PASS.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2" style="width: 1342.0px;"><code><code>-write_cell_name</code></code></td>
+</tr>
+<tr><td class="confluenceTd" style="width: 58.0px;"><br /></td>
+<td class="confluenceTd" style="width: 1284.0px;">Specifies to print cell names in the effective resistance report. This parameter allows you to sort resistance values by cell names.</td>
+</tr>
+</tbody></table></div>
+<h4 id="report_resistance-Examples">Examples</h4>
+<ul><li>The following command performs effective resistance calculation for the list of nodes and instances: <br /><code>report_resistance -net_name VSS -node_list { 231 1061.6 M1 } -instance_list_file instance.list</code></li><li>The following command specifying a list of user-defined nodes and a node list file for effective resistance calculation:<br /><code><code>report_resistance</code>&#xa0;-net_name VDD -node_list {{ 213.556 133.469 M1&#xa0; I123 }} -node_list_file /../node_list.txt.1 -output_file reff_rpt</code></li><li>
+<p>The following is an example of specifying a list of instances for effective resistance calculation:<br /><code>report_resistance -instance_list {{INV11 VDD} {INV21 VDD}} -net_name VDD</code></p>
+</li><li>
+<p>The following is an example of specifying a list of user-defined nodes for effective resistance calculation:<br /><code>report_resistance -net_name VDD -node_list {{800 11.88 M4} {999.768 11.88 M4} {1000.296 11.880 M4}} -output_file out.txt</code></p>
+</li><li>
+<p>The following is an example of specifying node pair list for effective resistance calculation:<br /><code>report_resistance -net_name VDD -node_pair_list {195.728 133.369 M1 213.556 133.469 M1} -output_file out_nodelist.txt</code></p>
+</li><li>
+<p>The following is an example of specifying instance pair list for effective resistance calculation:<br /><code>report_resistance -net_name GND -instance_pair_list {inst1 inst2 GND GND} -output_file outfile -threshold 100</code></p>
+</li><li>
+<p>The following command performs effective resistance calculation for full chip analysis:<br /><code>report_resistance -threshold 13.0&#xa0; -domain_threshold 25.0 -domain_name ALL </code></p>
+
+<p><u><strong>Sample Report:</strong></u></p>
+
+<p><code>NET: VSS VDD</code><br /><code># Threshold:&#xa0;&#xa0; 25.000</code><br /><code># Total Effective resistance for instances sorted from high to low</code><br /><code># PASS/FAIL&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; REFF&#xa0; INSTANCE&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; PIN...</code></p>
+
+<p><code>&#xa0; FAIL&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 25.664&#xa0; clk__L1_I1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VDD(51.52%)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VSS(48.48%)</code><br /><code>&#xa0; FAIL&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 25.35&#xa0; clk__L2_I1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VDD(52.16%)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VSS(47.84%)</code><br /><code>&#xa0; FAIL&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 25.037&#xa0; clk__L3_I1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VDD(51.56%)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VSS(48.44%)<br /><br /></code></p>
+</li><li>
+<p>The following command performs effective resistance calculation for instance list analysis:<br /><code>report_resistance&#xa0;-domain_name ALL -threshold 13.0 -domain_threshold 25.0 -instance_list_file inst.list </code></p>
+
+<p><u><strong>Sample Report:</strong></u></p>
+
+<p><code>NET: VSS VDD</code><br /><code># Threshold:&#xa0;&#xa0; 25.000</code><br /><code># Total Effective resistance for instances sorted from high to low<br /># PASS/FAIL&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; REFF&#xa0; INSTANCE&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; PIN...</code><br /><code>&#xa0; FAIL&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 25.664&#xa0; clk__L1_I1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VDD(51.52%)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VSS(48.48%)</code><br /><code>&#xa0; FAIL&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 25.35&#xa0;&#xa0; clk__L2_I1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VDD(52.16%)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VSS(47.84%)</code><br /><code>&#xa0; FAIL&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 25.037&#xa0; clk__L3_I1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VDD(51.56%)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VSS(48.44%)</code><br /><code>&#xa0; PASS&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 24.724&#xa0; clk__L4_I1&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VDD(52.21%)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VSS(47.79%)</code><br /><code>&#xa0; PASS&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 23.047&#xa0; inst_pll&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VDD(50.55%)&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; VSS(49.45%)</code></p>
+
+<p><br /></p>
+</li></ul><ul><li>The following command reports reff for all instances of the cell type CKBD8:<br /><code>report_resistance -net_name VDD -cell_name CKBD8</code><br />The following is a sample reff report generated using the <code>-cell_name</code> parameter:<br />
+<p>*****************</p>
+
+<p><code># Layer Representation: LEF</code> <br /><code># Coordinate Unit: um</code> <br /><code># Resistance Unit: Ohm</code></p>
+<code>NET: VDD</code> <br /><code># Threshold:&#xa0;&#xa0;&#xa0; 0.000</code> <br /><code># Effective resistance for instances sorted from low to high</code> <br /><code># PASS/FAIL&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; REFF&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; INSTANCE&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; PIN&#xa0;&#xa0;&#xa0;</code> <br /><code>&#xa0; -&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; 3.5752&#xa0;&#xa0;&#xa0; add_94_37_I2/g695&#xa0;&#xa0;&#xa0; VDD&#xa0;&#xa0;&#xa0;&#xa0;</code> <br /><code>
+     &#xa0; -
+     <code>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </code>3.7521&#xa0;&#xa0;&#xa0; add_94_37_I2/g694&#xa0;&#xa0;&#xa0; VDD&#xa0;&#xa0; <br /></code></li></ul>
+<p><br /></p>
+<h4 id="report_resistance-RelatedTopics">Related Topics</h4>
+<ul><li>&quot;<u>Static Power, IRdrop and EM Analysis</u>&quot; in <em>Voltus</em><em> User Guide</em></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="report_rail.html" id="prev" title="report_rail">report_rail</a></em></b><b><em><a href="report_self_heat.html" id="nex" title="report_self_heat">report_self_heat</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

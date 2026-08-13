@@ -1,0 +1,185 @@
+
+<html><head><title>Setting up and Running Static Rail Analysis</title>
+<meta name="page_sequence" content="21030000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468588" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Setting up and Running Static Rail Analysis" />
+<meta name="Keywords" content="static,rail,analysis,CPF,net,current" />
+<meta name="topic_type" content="task" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Static/Dynamic Power Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468588" />
+<meta name="NextFile" content="Viewing_Static_Rail_Analysis_Results.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Rail_Analysis_Accuracy_Modes.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- Setting up and Running Static Rail Analysis" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="Rail_Analysis_Accuracy_Modes.html" title="Rail_Analysis_Accuracy_Modes">Rail_Analysis_Accuracy_Modes</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Viewing_Static_Rail_Analysis_Results.html" title="Viewing_Static_Rail_Analysis_Results">Viewing_Static_Rail_Analysis_R ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Setting up and Running Static Rail Analysis</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>The following procedure describes how to set up the static rail analysis mode and then run rail analysis.</p>
+<h4 id="SettingupandRunningStaticRailAnalysis-RequiredInputFiles"><em> Required Input Files</em></h4>
+<ul><li>Design data (LEF, netlist, DEF)</li><li>Common Power Format (CPF) file</li><li>Power-grid libraries (.cl).</li><li>Power database generated during static power calculation</li><li>Binary current files created during static power calculation</li></ul><h4 id="SettingupandRunningStaticRailAnalysis-Procedure"><em> Procedure</em></h4>
+
+<p>To perform static rail analysis, complete the following steps:</p>
+<ol><li>
+<p>Load the design data through the command line or through the GUI.<br /><strong>GUI</strong>: Select <em>File</em> - Read Design.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>read_lib -lef $lefs<br /></code><code>read_view_definition ../design/viewDefinition.tcl<br /></code><code>read_verilog ../design/postRouteOpt.enc.dat/super_filter.v.gz<br /></code><code>set_top_module super_filter -ignore_undefined_cell</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Specify the CPF file for power domain information through the command line or through the GUI.<br /><strong>GUI</strong>: Select <em>File</em> - Load/Commit CPF.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>read_power_domain -cpf ../design/super_filter.cpf</code></pre></td>
+</tr>
+</tbody></table></div>
+
+<p><code><br /></code></p>
+</span></p>
+</li><li>
+<p>Specify the location of the binary current files generated through power analysis.<br /><strong>Tcl command</strong>:</p>
+<div class="table-wrap"><table class="webflareTable webflareTableIndent wrapped confluenceTable"><tbody><tr><td class="webflareTd confluenceTd" colspan="1" rowspan="1"><pre><code>
+<code>set_power_data -format current { <br /></code></code><code><code>staticPowerResults/static_VDD_AO.ptiavg<br />staticPowerResults/static_VDD_ring.ptiavg<br />staticPowerResults/static_VSS.ptiavg}</code></code></pre></td>
+</tr>
+</tbody></table></div>
+</li><li>
+<p>Define the rail analysis mode through the command line or through the GUI.<br /><strong>GUI</strong>: Select <em>Power &amp; Rail </em>- Set Rail Analysis Mode.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>set_rail_analysis_mode  <br /></code><code>    -method                     static \<br />   </code><code> -accuracy                   xd \<br />    </code><code>-analysis_view              AV_wc_on \<br />    </code><code>-power_grid_library { \</code></pre><pre><code>        ../data/pgv_dir/tech_pgv/techonly.cl \</code></pre><pre><code>        ../data/pgv_dir/stdcell_pgv/stdcells.cl \</code></pre><pre><code>        ../data/pgv_dir/macro_pgv/macros_pll.cl \</code></pre><pre><code>     } \</code></pre><pre><code>    -use_em_view_list           ../data/voltus/em_view.list \</code></pre><pre><code>    -enable_rlrp_analysis       true \</code></pre><pre style="margin-left: 30.0px;"><code> -em_peak_analysis true \</code></pre><pre><code>     -verbosity true \<br /></code><code>     -temperature 125</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+
+<p><strong>Note:</strong></p>
+<ul><li><em>XD</em> uses LEF based views, and <em>HD</em> uses GDS based accurate views.</li><li>The technology library is a mandatory requirement for rail analysis. However, to obtain accurate IR drop simulation, power-grid library should be characterized for standard cells and macro blocks. When specifying the list of PGVs to rail analysis using the <code>set_rail_analysis_mode</code> command or the Set Rail Analysis Mode form, you must specify the technology library as the first PGV library in the list. If both technology and standard cell PGV libraries exist, the standard cell PGV is given a higher precedence.</li><li>You need to specify the EM analysis models if analyzing Electromigration. If you do not specify an Electromigration model file, the software will select Electromigration models from the Quantus technology file. You can use the command <code>set_rail_analysis_mode -em_models</code> file to override these settings.</li><li>You need to specify the <code>-em_peak_analysis</code> parameter to perform peak EM analysis. When this parameter is specified with <code>-process_techgen_em_rules true</code> or -<code>em_models</code>, both RMS and Peak EM will be reported in the same run.</li></ul></li><li>
+<p>Optional. If you do not load the CPF file, use the <code>set_pg_nets</code> command to define the power nets in the design, and assign attributes to these nets. Then, use <code>set_rail_analysis_domain</code> to define the power domains.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>set_pg_nets -net VDD_AO&#xa0;&#xa0;   -voltage 0.9 -threshold 0.85 <br /></code><code>set_pg_nets -net VDD_ring&#xa0;&#xa0; -voltage 0.9 -threshold 0.85 <br /></code><code>set_pg_nets -net VSS&#xa0;&#xa0;      -voltage 0.0 -threshold 0.05 <br /></code><code>set_rail_analysis_domain -name PD_ring -pwrnets VDD_AO&#xa0;&#xa0;-gndnets VSS -threshold 0.10<br /></code><code>set_rail_analysis_domain -name PD_AO -pwrnets VDD_AO&#xa0;&#xa0;-gndnets VSS -threshold 0.10</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li><li>
+<p>Define the location of the voltage sources for each power/ground net.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>set_power_pads -net VDD_AO -format xy -file ../design/super_filter_VDD_AO.pp</code></pre><pre><code>set_power_pads -net VSS -format xy -file ../design/super_filter_VSS.pp</code></pre></td>
+</tr>
+</tbody></table></div>
+
+<p><code><br /></code></p>
+</span></p>
+</li><li>
+<p>Run rail analysis through the command line or through the GUI.<br /><strong>GUI</strong>: Select <em>Power &amp; Rail </em>- Run Rail Analysis.<br /><strong>Tcl command</strong>:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><td class="confluenceTd" colspan="1" rowspan="1"><pre><code>#Analyze all domains<br /></code><code>analyze_rail -output ./staticRailResults -type domain ALL<br /></code><code>#Analyze only one domain<br /></code><code>analyze_rail -output ./staticRailResults -type domain PD_AO<br /></code><code>#Analyze a power net if the design did not have CPF and power domains<br /></code><code>analyze_rail -output ./staticRailResults -type net VDD_AO</code></pre></td>
+</tr>
+</tbody></table></div>
+</span></p>
+</li></ol>
+<p>The Voltus console will display rail analysis statistics, as shown in the following snippet:</p>
+<pre><code>Rail Analysis completed successfully.<br /></code><code>Finished Rail Analysis at 11:56:53 08/20/2018 (cpu=0:00:20, real=0:00:34, peak mem=1218.10MB)<br /></code><code>Current Voltus IC Power Integrity Solution resource usage: (total cpu=0:03:56, real=0:58:07, mem=1218.10</code></pre><h4 id="SettingupandRunningStaticRailAnalysis-Output"><em> Output</em></h4>
+
+<p>The rail output directory will contain the following information:</p>
+
+<p><span class="fontredcadence"><div class="table-wrap"><table class="wrapped confluenceTable"><tbody class=""><tr class=""><th class="confluenceTh" colspan="1" rowspan="1">
+<p>Directory Name</p>
+</th><th class="confluenceTh" colspan="1" rowspan="1">
+<p>Description</p>
+</th></tr>
+<tr class=""><td class="confluenceTd" colspan="1" rowspan="1">
+<p>&lt;<span class="webflare-courier-new"><em>domainName</em></span>&gt;_&lt;temperature&gt;_avg_&lt;<span class="webflare-courier-new"><em>X</em></span>&gt;</p>
+</td>
+<td class="confluenceTd" colspan="1" rowspan="1"><div class="content-wrapper">
+<p>For each run, an output directory is generated with the default name &lt;<span class="webflare-courier-new"><em>domainName</em></span>&gt;_&lt;<span class="webflare-courier-new"><em>temperature</em></span>&gt;_avg_&lt;<span class="webflare-courier-new"><em>X</em></span>&gt;. &lt;<span class="webflare-courier-new"><em>domainName</em></span>&gt; will be replaced with <code>ALL</code> if all domains are to be analyzed (<code>analyze</code>_rail -output <span class="webflare-courier-new"><em>dir</em></span><code> -type domain ALL</code>), or with <code>&lt;</code><span class="webflare-courier-new"><em>netName</em></span><code>&gt;</code> if a power net is to be analyzed. The output directory contains state directories for each net, such as VDD and VSS.</p>
+
+<p>Each state directory contains the following:</p>
+<ul><li><code>results</code> &#8211; a file that gives a summary of the rail analysis results for various plots, such as tc (tap current), rc (resistor current), and so on.</li><li>
+<p><code>Reports</code> &#8211; a folder that contains a list of useful report files that contain all power-grid integrity data.</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>You can specify the <code>set_rail_analysis_mode -def_based_hierarchical_reports true</code> parameter to generate separate rail reports (EIV, RLRP, and EFFR) for each DEF instance. Reports will be generated for every net in each DEF hierarchy using the following directory structure:</p>
+</div>
+</div>
+<pre class="webflare-pre-block webflare-courier-new">&lt;output_dir&gt;/&lt;state_dir&gt;/Reports/HIER/hier_&lt;HIER_ID&gt;/&lt;domain_name | net_name&gt;.&lt;report_type&gt;</pre></li><li>Auto-generated GIF files for the rail analysis plots</li></ul></div>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><code><br /></code></p>
+</span></p>
+
+<p><em style="font-weight: 600;letter-spacing: -0.003em;">Related Topics</em></p>
+<ul><li><a href="Rail_Analysis_Accuracy_Modes.html">Rail Analysis Accuracy Modes</a></li><li><a href="Viewing_Static_Rail_Analysis_Results.html">Viewing Static Rail Analysis Results</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Rail_Analysis_Accuracy_Modes.html" id="prev" title="Rail_Analysis_Accuracy_Modes">Rail_Analysis_Accuracy_Modes</a></em></b><b><em><a href="Viewing_Static_Rail_Analysis_Results.html" id="nex" title="Viewing_Static_Rail_Analysis_Results">Viewing_Static_Rail_Analysis_R ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

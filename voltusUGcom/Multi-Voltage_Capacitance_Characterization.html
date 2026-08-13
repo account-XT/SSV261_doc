@@ -1,0 +1,131 @@
+
+<html><head><title>Multi-Voltage Capacitance Characterization</title>
+<meta name="page_sequence" content="22021000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666137" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus Stylus Common UI User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Multi-Voltage Capacitance Characterization" />
+<meta name="Keywords" content="multi-mode,PGV,voltage,frequency" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Power-Grid Library Generation," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUGcom" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666137" />
+<meta name="NextFile" content="Power_Gate_Characterization_for_Power_Switches_with_Multiple_Pins_and_Nets.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Sample_Trigger_File_for_Static_PGV_Generation.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus Stylus Common UI User Guide -- Multi-Voltage Capacitance Characterization" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGcomTOC.html">Contents</a></li><li><a class="prev" href="Sample_Trigger_File_for_Static_PGV_Generation.html" title="Sample_Trigger_File_for_Static_PGV_Generation">Sample_Trigger_File_for_Static ...</a></li><li style="float: right;"><a class="viewPrint" href="voltusUGcom.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Power_Gate_Characterization_for_Power_Switches_with_Multiple_Pins_and_Nets.html" title="Power_Gate_Characterization_for_Power_Switches_with_Multiple_Pins_and_Nets">Power_Gate_Characterization_fo ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus Stylus Common UI User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Multi-Voltage Capacitance Characterization</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span class="confluence-anchor-link" id="MultiVoltageCapacitanceCharacterization-84616"></span></p>
+
+<p>Voltus generates PGVs that contain voltage-dependent capacitance table for the specified cell. This feature allows you to use accurate cell capacitance at different supply voltages in power-up analysis, and in different voltage domains in dynamic analysis.</p>
+
+<p>To enable this feature, specify the following parameters during PGV generation:</p>
+<ul><li>
+<p><code>set_pg_library_mode -enable_multi_voltage_cap_generation {true | false}</code> - computes the capacitance values over a range of input voltages, including the nominal voltage. It generates 10 values from 0.1 to 1.3 times the vdd voltage.</p>
+<div aria-label="Note" class="confluence-information-macro  confluence-information-macro-note" role="region"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p>You can use the <code>set_advanced_pg_library_mode -stdcell_characterization_voltage_value {</code><span class="webflare-courier-new" style="white-space: pre;"><em>val1</em></span><code> </code><span class="webflare-courier-new" style="white-space: pre;"><em>val2</em></span><code> </code><span class="webflare-courier-new" style="white-space: pre;"><em>val3</em></span><code> ...}</code> parameter to specify capacitance characterization voltages when generating standard cell PGVs containing voltage-dependent capacitance table for the specified cell. This parameter allows you to compute the capacitance based on the user-defined voltage values. This parameter must be specified with the <code>-enable_multi_voltage_cap_generation true</code> parameter. If this parameter is not specified with <code>-enable_multi_voltage_cap_generation</code>, capacitance is calculated based on the software-derived voltage range. When the <code>-stdcell_characterization_voltage_value</code> parameter is specified, the library generation engine prints the capacitance values and corresponding voltages in the report file, and the rail analysis engine prints the capacitance used for each instance.</p>
+</div>
+</div>
+
+<p>The following example illustrates the use model of user-defined cap characterization:</p>
+
+<p><span class="fontredcadence">
+<p><code>set_pg_library_mode &#xa0;-ground_pins VSS -power_pins &#xa0;{VDD 0.9 TVDD 0.9 } \</code><br /><code>-cell_type stdcells -enable_multi_voltage_cap_generation true</code><br /><code>set_advanced_pg_library_mode -stdcell_characterization_voltage_value {1.0 1.2 1.5 2.0 3.3}</code></p>
+</span></p>
+
+<p>The following is a snippet of the standard cell report file:</p>
+
+<p><br /></p>
+<div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481044/732481045.png" data-linked-resource-container-id="732481044" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="voltage_dependent_cap_user.png" data-linked-resource-id="732481045" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481044/732481045.png" tabindex="0" width="650" /></span></div>
+
+<p><strong><strong>Command Example:<br /></strong></strong></p>
+
+<p><span class="fontredcadence">
+<p><code>set_pg_library_mode -cell_type stdcells -cells_file cellfile -extraction_tech_file ./../qrcTechFile -layer_map ./../lefdef.layermap -temperature 125 -power_pins { vcc 1.26 vccpg 1.26 vccr 1.26 } -ground_pins { vss } -power_switch_parameters {{powercell_pg1 vcc vccpg} {powercell_pg1 vcc vccr} {powercell_pg2 vcc vccpg} {powercell_pg2 vcc vccr}} -spice_corners { tt } -spice_models spice_model/libspice -spice_subckts { powercell_pg.net powercell_pg2.net } -enable_multi_voltage_cap_generation true</code></p>
+
+<p>The PGV report includes the following information:</p>
+
+<p><code>INFO: PGV contains voltage dependent cap table for this cell</code></p>
+</span></p>
+</li><li><code>check_pg_library -report_detail_multiple_voltage_cap </code><span class="webflare-courier-new" style="white-space: pre;"><em>filename</em></span> - generates a capacitance table that contains the detailed capacitance values of the given power-grid library.<br /><br /><strong>Command Example</strong>:<pre class="webflare-pre-block webflare-courier-new">check_pg_library -report_detail_multiple_voltage_cap ../powergate_stdcells.cl</pre></li></ul>
+<p>The following is a snippet of the capacitance table file (<code>powergate_stdcells.cap_table</code>):</p>
+
+<p><br /></p>
+<div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481044/732481046.png" data-linked-resource-container-id="732481044" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="voltage_dependent_cap.png" data-linked-resource-id="732481046" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481044/732481046.png" tabindex="0" width="650" /></span></div>
+<h4 id="MultiVoltageCapacitanceCharacterization-RelatedTopics"><em> Related Topics</em></h4>
+<ul><li><a href="Multi-Mode_Power-Grid_View_Generation.html#MultiModePowerGridViewGeneration-89430">Multi-Mode Power-Grid View Generation</a></li><li><a href="Decap__Filler__and_Damping_Decap_Cells_Characterization.html#Decap,Filler,andDampingDecapCellsCharacterization-39624">Decap, Filler, and Damping Decap Cells Characterization</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Sample_Trigger_File_for_Static_PGV_Generation.html" id="prev" title="Sample_Trigger_File_for_Static_PGV_Generation">Sample_Trigger_File_for_Static ...</a></em></b><b><em><a href="Power_Gate_Characterization_for_Power_Switches_with_Multiple_Pins_and_Nets.html" id="nex" title="Power_Gate_Characterization_for_Power_Switches_with_Multiple_Pins_and_Nets">Power_Gate_Characterization_fo ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

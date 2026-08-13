@@ -1,0 +1,160 @@
+
+<html><head><title>Pushdown Block SDC Generation</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-10" />
+<meta name="CreateTime" content="1775823929" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Pushdown Block SDC Generation" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-10" />
+<meta name="ModifiedTime" content="1775823929" />
+<meta name="NextFile" content="analysisandreporting_contextdatareport.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_contextjitterhandling.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus User Guide -- Pushdown Block SDC Generation" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Analysis,Stylus" />
+<meta name="prod_subfeature" content="Timing Analysis" />
+<meta name="new_topic" content="Yes" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_contextjitterhandling.html" title="Context Jitter Handling">Context Jitter Handling</a></li><li style="float: right;"><a class="viewPrint" href="tempusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_contextdatareport.html" title="Context Data Reporting">Context Data Reporting</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:pushdownblock" title="Pushdown Block SDC Generation"></a><h3>
+<a id="pgfId-2945972"></a>Pushdown Block SDC Generation<a id="72024"></a></h3>
+
+<p>
+<a id="pgfId-2945973"></a>Tempus supports pushdown block SDC generation from top-level timing analysis. To generate block SDC from top-level timing analysis, you can specify the <code><a actuate="user" class="URL" href="../tempustxtcmdref/write_timing_context.html" show="replace" xml:link="simple">write_timing_context</a></code> -with_constraints parameter.</p>
+<p>
+<a id="pgfId-2945843"></a>Currently, block SDC generation is supported only for a single instance of a block. In case of multiple instantiated (MIM) blocks, the <code>write_timing_context </code>-instances parameter is mandatory to specify the instance for which the block SDC is to be generated. The block SDC generation from DSTA is not supported.</p>
+<p>
+<a id="pgfId-2945997"></a>When the <code>-with_constraints</code> parameter is specified, Tempus generates SDC for the specified modules and instances. The SDC is stored inside the context directory <code>&lt;context dir&gt;/&lt;module&gt;/&lt;module&gt;.&lt;constraint mode&gt;.sdc</code>.</p>
+<p>
+<a id="pgfId-2945999"></a>The block SDC does not contain data present in the regular block context database, such as, input/output delay, clock latency, or interface path exceptions. So this block SDC can be used only along with the context in context analysis and not in standalone block STA.</p>
+<p>
+<a id="pgfId-2946000"></a>The block SDC stored in context is not automatically read during the <code>read_timing_context</code> command run, so the block SDC should be read explicitly. </p>
+
+<h4>
+<a id="pgfId-2946002"></a>Clock Constraints in Pushdown Block SDC</h4>
+
+<p>
+<a id="pgfId-2946003"></a>All the block internal clocks are written in block SDC. Apart from block internal clocks, the below clocks definitions are also written:</p>
+<ul><li>
+<a id="pgfId-2946005"></a>Any top-level generated or regular clock that reaches the block ports is modeled as a source clock (<code><a actuate="user" class="URL" href="../tempustxtcmdref/create_clock.html" show="replace" xml:link="simple">create_clock</a></code>) on the block port (with the same name as top-level clock).</li><li>
+<a id="pgfId-2946006"></a>Any top-level clock that reaches the block only as data is modeled as a virtual clock (with the same name as top-level clock).</li><li>
+<a id="pgfId-2946007"></a>If the same clock enters multiple ports it is defined on all these ports.</li></ul>
+
+
+<p>
+<a id="pgfId-2946009"></a>The block SDC also contains <code>set_clock_group</code>, clock-to-clock exception, uncertainty, or jitter for the above clocks. The clock latency is written only for the block internal clocks.</p>
+
+<h4>
+<a id="pgfId-2946011"></a>Pushdown Block SDC Details</h4>
+
+<p>
+<a id="pgfId-2946012"></a>This section talks about commands that are part of pushdown block SDC during context analysis and those which are not.</p>
+<p>
+<a id="pgfId-2946014"></a>Below are the constraints that are written in pushdown Block SDC:</p>
+<ul><li>
+<a id="pgfId-2946015"></a>Global constraints like <code>set_min_pulse_width 1.0</code></li><li>
+<a id="pgfId-2946016"></a>Constraints that have block pins and block clocks. For example,<ul><li>
+<a id="pgfId-2946017"></a><code>set_false_path -through &lt;block internal pin&gt;</code></li><li>
+<a id="pgfId-2946018"></a><code>set_false_path -through &lt;block internal pin&gt; -through &lt;block internal pin&gt;</code></li><li>
+<a id="pgfId-2946019"></a><code>set_false_path -through &lt;block interface path pin&gt;</code></li><li>
+<a id="pgfId-2946020"></a><code>set_false_path -through &lt;block port&gt;</code></li><li>
+<a id="pgfId-2946021"></a><code>set_multicycle_path -from &lt;block clock&gt;</code></li></ul></li></ul>
+
+
+
+
+
+
+<p>
+<a id="pgfId-2946022"></a>The valid block constraints after filtering top-level objects from the constraints. For example:</p>
+<ul><li>
+<a id="pgfId-2946049"></a><code>set_false_path -through {&lt;toplevel pin&gt; &lt;block internal pin&gt;} -through {&lt;toplevel pin&gt; &lt;block internal pin&gt;}</code> will be written as <code>set_false_path -through &lt;block internal pin&gt; -through &lt;block internal pin&gt;</code> in block SDC.</li></ul>
+<p>
+<a id="pgfId-2946050"></a>The constraints like <code>set_path_adjust_group</code> and <code>set_path_adjust</code> related to block pins are also written in a separate file <code>&lt;context dir&gt;/&lt;module&gt;/&lt;module&gt;.pathadjust.sdc</code>.</p>
+<p>
+<a id="pgfId-2946051"></a>The following path adjust constraints are written in pushdown SDC:</p>
+<ul><li>
+<a id="pgfId-2946052"></a>When clocks are in -from/-to options like <code>s</code>et_path_adjust_group -from [get_clocks TP1]...</li><li>
+<a id="pgfId-2946053"></a>When block internal pins in -from/-to options like <code>s</code>et_path_adjust_group -from [get_pins &lt;block internal pin&gt;] -to [get_pins &lt;block internal pin&gt;]...</li></ul>
+
+<p>
+<a id="pgfId-2946054"></a>The following path adjust constraints are not written in pushdown SDC (but, captured in context):</p>
+<ul><li>
+<a id="pgfId-2946055"></a>Mix of block internal and top level pins in -from/-to options like <code>s</code>et_path_adjust_group -from [get_pins &lt;toplevel pin&gt;] -to [get_pins &lt;block internal pin&gt;]...</li><li>
+<a id="pgfId-2946056"></a>Path group information is written in separate file &lt;context dir&gt;/&lt;module&gt;/&lt;module&gt;.pathgroup.sdc. </li><li>
+<a id="pgfId-2946057"></a>Timing derates &lt;context dir&gt;/&lt;module&gt;/&lt;module&gt;.&lt;delay_corner&gt;.timingderate.sdc</li></ul>
+
+
+<p>
+<a id="pgfId-2946059"></a>The below constraints are not written in pushdown Block SDC since these are captured in the context:</p>
+<ul><li>
+<a id="pgfId-2946060"></a><code>set_input_delay</code>/<code>s</code>et_output_delay on the ports</li><li>
+<a id="pgfId-2946061"></a>Propagated case values on the ports</li><li>
+<a id="pgfId-2946062"></a><code>set_input_transition</code>/<code>s</code>et_driving_cell/<code>s</code>et_load on the ports</li><li>
+<a id="pgfId-2946063"></a>Constraints that have pins both inside and outside block. E.g, <code>set_false_path -through &lt;toplevel pin&gt; -through &lt;block internal pin&gt;</code></li><li>
+<a id="pgfId-2946065"></a>Clock latency for the clocks created on the ports (except for the block internal clocks)</li><li>
+<a id="pgfId-2946066"></a><code>set_dont_touch</code>, <code>set_dont_use</code> commands.</li><li>
+<a id="pgfId-2946067"></a>DRV constraints are not derived on the block ports / module</li></ul>
+
+
+
+
+
+
+<p>
+<a id="pgfId-2946069"></a>Pushdown SDC is also supported in C-MMMC analysis:</p>
+<ul><li>
+<a id="pgfId-2946070"></a>Pushdown SDC is written for all active constraints modes</li><li>
+<a id="pgfId-2946071"></a><code>set_timing_derate</code> is written for all active delay corners</li><li>
+<a id="pgfId-2946072"></a><code>set_path_adjust</code> is written for all active views</li></ul>
+
+
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_contextjitterhandling.html" id="prev" title="Context Jitter Handling">Context Jitter Handling</a></em></b><b><em><a href="analysisandreporting_contextdatareport.html" id="nex" title="Context Data Reporting">Context Data Reporting</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

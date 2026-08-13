@@ -1,0 +1,153 @@
+
+<html><head><title>Analyze DC Signal Electromigration</title>
+<meta name="page_sequence" content="33014000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-06" />
+<meta name="CreateTime" content="1775468642" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="This manual describes the use flow information in Voltus." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Analyze DC Signal Electromigration" />
+<meta name="Keywords" content="DC,signal,electromigration,frequency" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Signal ElectroMigration," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltusUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-06" />
+<meta name="ModifiedTime" content="1775468642" />
+<meta name="NextFile" content="DC_Signal_EM_Analysis_using_maxCap_and_maxTran_Limits.html" />
+<meta name="Group" content="Voltus User Guide" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Signal_EM_Report_Format.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution User Guide -- Analyze DC Signal Electromigration" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="voltusUG261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltusUGTOC.html">Contents</a></li><li><a class="prev" href="Signal_EM_Report_Format.html" title="Signal_EM_Report_Format">Signal_EM_Report_Format</a></li><li style="float: right;"><a class="viewPrint" href="voltusUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="DC_Signal_EM_Analysis_using_maxCap_and_maxTran_Limits.html" title="DC_Signal_EM_Analysis_using_maxCap_and_maxTran_Limits">DC_Signal_EM_Analysis_using_ma ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Analyze DC Signal Electromigration</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>Hot-carrier injection or DC signal electromigration can occur whenever a transistor switches. Whenever there are Ids (drain-source current), there is some probability that the carriers get enough kinetic energy to be injected into the gate oxide and cause a Vth shift. The calculation of this probability is a complex function of the Vgs (gate-source voltage) and the Vds (drain-source voltage) and Ids.</p>
+
+<p>The most common problem occurs when there is a slow output transition with a large output capacitance which would mean a high Vds for a long time with a high Vgs and Ids. This type of operation causes a higher probability of hot-carrier injection, and therefore, Vth shifts and could result in reliability problems. The following diagram illustrates that within a cell, some segments only experience DC current:</p>
+<div><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/732481772/732481773.png" data-linked-resource-container-id="732481772" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="signalelectromigration.21.1.10.png" data-linked-resource-id="732481773" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/732481772/732481773.png" tabindex="0" width="650" /></span></div>
+
+<p>The current discharged through wire A and B is a pulsed DC current that is proportional to the frequency of the signal net and the load capacitance:</p>
+
+<p><code>Idc = frequency x Cout</code></p>
+
+<p>Since the wire inside the cell has a fixed width, it also has a fixed maximum DC current electromigration limit. A high-frequency output needs a smaller Cout to keep Idc under the DC electromigration limit, while a low-frequency output can tolerate a higher Cout.</p>
+
+<p>The most useful way to express this limit is as a maxCap versus frequency limit for the cell.</p>
+<h3 id="AnalyzeDCSignalElectromigration-SampleTclScriptforDCSignalEMAnalysis">Sample Tcl Script for DC Signal EM Analysis</h3>
+
+<p><span class="fontredcadence">
+<p>The following is the sample Tcl script for DC Signal EM Analysis:</p>
+
+<p># read design</p>
+
+<p><code>read_lib -lef &lt;lefs&gt;</code></p>
+
+<p><code>read_lib -max &lt;timing libs&gt;</code></p>
+
+<p><code>read_lib -min &lt;timing libs&gt;</code></p>
+
+<p><code>read_verilog &lt;verilog netlist&gt;</code></p>
+
+<p><code>set_top_module &lt;design name&gt;</code></p>
+
+<p><code>read_sdc &lt;timing constraints&gt;</code></p>
+
+<p><code>read_def &lt;def netlist&gt;</code></p>
+
+<p><code>read_spef &lt;signal parasitics&gt;</code></p>
+
+<p># check max transition violations</p>
+<pre><code>report_design_rule \<br />-tran \<br />-max \<br />-outfile max.tran.rpt</code></pre>
+<p># check max capacitance violations</p>
+<pre><code>report_design_rule \<br />-cap \<br />-max \<br />-outfile max.cap.rpt</code></pre>
+<p># check max cap violations based on frequency</p>
+
+<p># manually set max cap limits per freq in liberty using <code>set_max_cap_per_freq</code> command</p>
+
+<p># note that lib name is library name inside dotlib, e.g. library (tcbn65lplvtwc)</p>
+
+<p># read activity file for frequency annotation</p>
+<pre><code>set_default_switching_activity \<br />-input_activity 0.2 \<br />-seq_activity 0.15 \<br />-clock_gates_output 2.0 \<br />-period 7.0</code></pre><pre><code><br />propagate_activity</code></pre><pre><code><br />write_tcf dma_mac.tcf</code></pre><pre><code>
+read_activity_file \<br />-format TCF \<br />-set_net_freq true dma_mac.tcf</code></pre><pre><code>
+set_max_cap_per_freq \<br />-force \<br />-lib tcbn65lplvtwc \<br />-freq {50e6 70e6 100e6 200e6} \<br />-cap {5.0 4.0 3.0 1.5} \<br />-pins {* *}</code></pre><pre><code>
+report_design_rule \<br />-cap \<br />-max \<br />-outfile max.capperfreq.rpt</code></pre>
+<p># check max tran violations based on frequency</p>
+
+<p># manually set max tran limits per freq in liberty using <code>set_max_tran_per_freq</code> command</p>
+<pre><code>set_max_tran_per_freq \<br />-force \<br />-lib tcbn65lplvtwc \<br />-freq {50e6 70e6 100e6 200e6} \<br />-tran {5.0 4.0 3.0 1.5} \<br />-pins {* *}</code></pre><pre><code>
+report_design_rule \<br />-tran \<br />-max \<br />-outfile max.tranperfreq.rpt</code></pre>
+<p># check frequency violation</p>
+
+<p># requires dotlib with em templates</p>
+<pre><code>report_freq_violation \<br />-detailed \<br />-outfile freq.rpt</code></pre></span></p>
+<h4 id="AnalyzeDCSignalElectromigration-RelatedTopics"><em style="font-weight: 600;letter-spacing: -0.003em;">Related Topics</em></h4>
+<ul><li><a href="Analyze_AC_Signal_Electromigration.html">Analyze AC Signal Electromigration</a></li><li><a href="DC_Signal_EM_Analysis_using_maxCap_and_maxTran_Limits.html">DC Signal EM Analysis using maxCap and maxTran Limits</a></li></ul>
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Signal_EM_Report_Format.html" id="prev" title="Signal_EM_Report_Format">Signal_EM_Report_Format</a></em></b><b><em><a href="DC_Signal_EM_Analysis_using_maxCap_and_maxTran_Limits.html" id="nex" title="DC_Signal_EM_Analysis_using_maxCap_and_maxTran_Limits">DC_Signal_EM_Analysis_using_ma ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

@@ -1,0 +1,130 @@
+
+<html><head><title>relink_db_files</title>
+<meta name="page_sequence" content="21003000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="apokhara" />
+<meta name="CreateDate" content="2026-04-12" />
+<meta name="CreateTime" content="1776062395" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="" />
+<meta name="DocTitle" content="Litmus Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="relink_db_files" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="litmus_comref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-12" />
+<meta name="ModifiedTime" content="1776062395" />
+<meta name="NextFile" content="write_mmmc.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="read_physical.html" />
+<meta name="c_product" content="Litmus," />
+<meta name="Product" content="Litmus," />
+<meta name="ProductFamily" content="Litmus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Litmus Text Command Reference -- relink_db_files" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="litmus26comref" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="litmus_comrefTOC.html">Contents</a></li><li><a class="prev" href="read_physical.html" title="read_physical">read_physical</a></li><li style="float: right;"><a class="viewPrint" href="litmus_comref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="write_mmmc.html" title="write_mmmc">write_mmmc</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Litmus Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>relink_db_files</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>relink_db_files<span class="confluence-anchor-link" id="relink_db_files-relink_db_files"></span><span id="relink_db_files-relink_db_files"></span>
+  </code> <br /> <code>[-help]</code>&#xa0;&#xa0;<br /><code>-db_dir <em>db_directory</em>&#xa0;<br />-new_lib_dirs {<em>new_lib_directory1</em>&#xa0;<em>new_lib_directory2</em> ...}</code></p>
+
+<p>Relinks symbolic links to library files inside a DB directory.</p>
+
+<p>By default, <code>write_db</code>&#xa0;saves the location of library files as symbolic links under <code>&lt;db_dir&gt;/libs/&#8230;</code>. When a DB directory is copied to a new network where all the libraries are in a different location, or a new version of the library files are needed, you can use <code>relink_db_files</code> to change the symbolic links to new locations .</p>
+
+<p>The <code>relink_db_files</code>&#xa0;command will search each <code>-new_lib_dirs</code> directory and the sub-directory tree below it for each library file name inside <code>&lt;db_dir&gt;</code>, and create a symbolic link to the new location. Only the base file name is used for the search (except for <code>qrcTechFile</code>). Therefore, two path names inside the new directory, such as<code> /timing/fast/std.lib</code> and <code>/timing/slow/std.lib</code>, will have duplicate names of &#8220;<code>std.lib</code>&#8221;. The duplicate names are not supported and will cause an error. You can use the&#xa0;<code>read_db</code>&#xa0;command to update all the LEF full-path names or use a new MMMC files with all the new .lib full-path names if duplicate file names need to be updated. If there are missing library file names, the tool will show an error.&#xa0;</p>
+
+<p>The&#xa0;<code><span>relink_db_files</span></code> command supports <code>.lib</code>, <code>.lef</code>, and <code>qrcTechFile</code>&#xa0;library file types.</p>
+<h4 id="relink_db_files-Parameters">Parameters</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" valign="top">
+<p><code>-help</code></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p>Prints a brief description that includes the type and default information for each <code><span>relink_db_files</span></code> parameter.</p>
+
+<p>For a detailed description of the command and all of its parameters, use the <code>man</code> command: <br /> <code>man <span>relink_db_files</span></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code><span><span>-db_dir&#xa0;</span><em>db_directory</em><br /></span></code></td>
+<td class="confluenceTd" colspan="1">The current db directory which contains incorrect library symbolic links.</td>
+</tr>
+<tr><td class="confluenceTd" colspan="1"><code>-new_lib_dirs</code><em><code><span> {</span><em>new_lib_directory1</em><span>&#xa0;</span><em>new_lib_directory2</em><span>&#xa0;...}</span><br /></code></em></td>
+<td class="confluenceTd" colspan="1">The new directories to search for library files.</td>
+</tr>
+</tbody></table></div>
+<h4 id="relink_db_files-Example">Example</h4>
+
+<p>If the current LEF files are all under<code>/libs/lefs_v1.0/</code> (or sub-directories) and the current <code>.lib</code> and <code>qrcTechFiles</code> are all under<code>/libs/timing_v1.0/</code> (or sub-directories), you use the following command to update the LEF files to use <code>/libs/lefs_v2.0/</code>:</p>
+
+<p><code>&gt;relink_db_files -db_dir my_db -new_lib_dirs {/libs/lefs_v2.0 /libs/timing_v1.0}</code></p>
+
+<p><strong>Note</strong>: The command must find every library file. Therefore, you need to list the top of the old timing directory tree along with the top of the new LEF files directory tree.</p>
+<h4 id="relink_db_files-RelatedInformation">Related Information</h4>
+<ul><li><code><code>write_db</code><br /></code></li><li><span><code><span>read_db</span><br /></code></span></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="read_physical.html" id="prev" title="read_physical">read_physical</a></em></b><b><em><a href="write_mmmc.html" id="nex" title="write_mmmc">write_mmmc</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

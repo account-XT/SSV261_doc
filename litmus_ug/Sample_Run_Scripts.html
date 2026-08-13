@@ -1,0 +1,102 @@
+
+<html><head><title>Sample Run Scripts</title>
+<meta name="page_sequence" content="18006000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="apokhara" />
+<meta name="CreateDate" content="2026-04-12" />
+<meta name="CreateTime" content="1776062302" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="" />
+<meta name="DocTitle" content="Litmus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Sample Run Scripts" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="litmus_ug" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-12" />
+<meta name="ModifiedTime" content="1776062302" />
+<meta name="NextFile" content="Working_with_the_GUI.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Constraint_Promotion_Results.html" />
+<meta name="c_product" content="Litmus," />
+<meta name="Product" content="Litmus," />
+<meta name="ProductFamily" content="Litmus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Litmus User Guide -- Sample Run Scripts" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="litmus26ug" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="litmus_ugTOC.html">Contents</a></li><li><a class="prev" href="Constraint_Promotion_Results.html" title="Constraint_Promotion_Results">Constraint_Promotion_Results</a></li><li style="float: right;"><a class="viewPrint" href="litmus_ug.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Working_with_the_GUI.html" title="Working_with_the_GUI">Working_with_the_GUI</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Litmus User Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Sample Run Scripts</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>This section provides reference script templates for running Constraint Promotion in both <strong>Netlist-based</strong> and <strong>RTL-based</strong> flows. These scripts reflect the recommended sequence of operations and illustrate how design setup, constraint registration, promotion analysis, and review align in a unified methodology.</p>
+<ol><li><strong>Netlist Flow Script:</strong> The Netlist flow is typically used when a synthesized or post‑layout gate-level <span class="inline-comment-marker" data-ref="7ae6f273-8d87-4512-b7bc-cc8f18b335c1">is available</span>.<ol><li><code>init_design</code> ensures that all library, connectivity, and SDC contexts are resolved.</li><li>Running <code>report_sdc</code> and <code>report_rule_check</code> <em>before</em> promotion eliminates structural or linting issues early.</li><li>Promotion should <span class="inline-comment-marker" data-ref="8441c613-b5e5-47e0-9536-2e9167519633">start only</span> after all block constraints are registered.</li></ol></li><li><strong>RTL Flow Script:</strong> The RTL flow mirrors the Netlist flow but includes RTL elaboration and optional library loading. This flow is commonly used early in the project lifecycle when block SDCs and top-level constraints are still evolving.<ol><li>The <code>input_libs</code> step is optional and depends on the level of timing modeling required.</li><li>All RTL must be elaborated before constraint lint checks are executed.</li><li>The rest of the flow is consistent with the Netlist flow, ensuring uniformity across design representations.</li></ol></li></ol>
+<p>The figure below summarizes the flow&#xa0;for both design views:</p>
+
+<p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img alt="" class="confluence-embedded-image confluence-content-image-border" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/745809539/745809540.png" data-linked-resource-container-id="745809539" data-linked-resource-container-version="1" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="image-2026-2-6_12-48-2-1.png" data-linked-resource-id="745809540" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" height="301" src="attachments/745809539/745809540.png" tabindex="0" width="700" /></span></p>
+<div aria-label="Tip" class="confluence-information-macro  confluence-information-macro-tip" role="region"><span class="aui-icon aui-icon-small aui-iconfont-approve confluence-information-macro-icon" role="presentation"></span><div class="confluence-information-macro-body">
+<p><strong>To ensure stable and predictable promotion behavior:</strong></p>
+<ul><li>Always validate SDC and lint issues before running promotion.</li><li>Use consistent MMMC environments across flows for alignment with Synthesis <span class="inline-comment-marker" data-ref="bc5cd122-945a-43a6-9125-219cb192280e">and</span> Implementation tools.</li><li>Register block SDCs only after the top‑level SDC context is fully loaded.</li><li>Favor instance-based registration when blocks differ across instantiations.</li><li>Always write the final SDC using <code>write_sdc</code> to maintain a clean record of promoted constraints.</li></ul></div>
+</div>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Constraint_Promotion_Results.html" id="prev" title="Constraint_Promotion_Results">Constraint_Promotion_Results</a></em></b><b><em><a href="Working_with_the_GUI.html" id="nex" title="Working_with_the_GUI">Working_with_the_GUI</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

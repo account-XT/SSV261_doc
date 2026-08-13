@@ -1,0 +1,116 @@
+
+<html><head><title>VT Skew Reporting</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-22" />
+<meta name="CreateTime" content="1776845214" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes flow in Tempus Timing Signoff Solution" />
+<meta name="DocTitle" content="Tempus Stylus User Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="VT Skew Reporting" />
+<meta name="FileType" content="Chapter" />
+<meta name="FMWikiRelease" content="FM-Wiki-4.1.0" />
+<meta name="Keyword" content="tempusCUIUG" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-22" />
+<meta name="ModifiedTime" content="1776845214" />
+<meta name="NextFile" content="analysisandreporting_drvreporting.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital Implementation" />
+<meta name="PrevFile" content="analysisandreporting_vtskewgroups.html" />
+<meta name="c_product" content="Tempus" />
+<meta name="Product" content="Tempus" />
+<meta name="ProductFamily" content="Tempus" />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2025 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus User Guide -- VT Skew Reporting" />
+<meta name="Keywords" content="VT Skew Reporting,Using Unique Vth mode in GBA Mode" />
+<meta name="topic_type" content="concept" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="Timing Analysis,REPORTS" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="Version" content="26.10" />
+<meta name="SpaceKey" content="tempusCUIUG2610" />
+<meta name="webflare-version" content="2.9" />
+<link rel="stylesheet" href="styles/webflare.css" type="text/css" />
+
+
+  <script>/*<![CDATA[*/
+ document.addEventListener("DOMContentLoaded", function(event) {  document.querySelectorAll("img").forEach((img, index) => {
+if (img.hasAttribute("usemap")){return;}else{img.classList.add("cursorclass");} img.addEventListener("click", (e) => {if(img.hasAttribute("usemap")){            img.setAttribute("style","cursor:none;");return;};document.querySelector("#cad_image_modal").classList.add("opac");document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0;margin: auto;max-height:95%;"  src="${e.target.src}">`;});});});
+/*]]>*/</script> 
+
+
+
+
+ <style>/*<![CDATA[*/
+.cursorclass{cursor:pointer;}#cad_image_modal{position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;}#cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;}#cad_image_modal span{position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;}
+/*]]>*/</style> 
+</head><body style="background-color: #FFFFFF;"><a name="pagetop"></a>
+<!-- Begin Buttons -->
+<header><div class="docHeadr">Product Documentation<img src="icons/Cadence-Logo.jpg" /></div><nav class="blueHead"><ul><li><a class="content" href="tempusCUIUGTOC.html">Contents</a></li><li><a class="prev" href="analysisandreporting_vtskewgroups.html" title="Liberty Threshold Voltage Groups">Liberty Threshold Voltage Grou ...</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUIUG.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="analysisandreporting_drvreporting.html" title="Design Rule Violation (DRV) Reporting">Design Rule Violation (DRV) Re ...</a></li></ul></nav></header>
+<!-- End Buttons -->
+<h5><center>Tempus Stylus User Guide<br />Product Version 26.10, May 2026</center></h5><div id="main-content" style="min-height: 50vh; margin-left: 5%; margin-right: 2%;"><a name="#firstpage"></a>
+
+<a id="Filename:vtskewreports" title="VT Skew Reporting"></a><h3>
+<a id="pgfId-2083003"></a><a id="89985"></a>VT Skew Reporting</h3>
+<h4>
+<a id="pgfId-2083004"></a>Unique VT Skew Mode Configuration</h4>
+
+<p>
+<a id="pgfId-2083005"></a>A path is defined as having a unique Vth if all of the clock cells present in the given path and downstream from the CPPR common point are of the same Vt class. By default, all the fast, slow, and nominal permutations of the Vth derate will be analyzed. You can specify only a single Vth derate to use for the unique Vth class on these paths. In several designs, unique Vth paths are common so reducing the amount of analysis can help performance considerably.</p>
+
+<h4>
+<a id="pgfId-2083007"></a>Using Unique Vth mode in GBA Mode</h4>
+
+<p>
+<a id="pgfId-2083008"></a>The GBA unique Vth mode improves performance considerably by reducing the initial GBA pessimism caused by using the Vth derating extremes.</p>
+<p>
+<a id="pgfId-2083009"></a>You can configure the Vth derate for the unique Vt group (to use during GBA and PBA) using the following command:</p>
+
+<pre class="webflare-courier-new codeContent">
+<a id="pgfId-2083012"></a><a href="../tempusCUI/set_vt_skew_config.html">set_vt_skew_config</a> -unique_vt_mode slow</pre>
+
+<p>
+<a id="pgfId-2083013"></a>With the above settings GBA analysis will be run using the Vth slow derate value on both the launch and capture clock paths for all the Vt groups. PBA will also use the specified unique Vt derate mode only if there is a unique Vt group.</p>
+<p>
+<a id="pgfId-2083016"></a>When the GBA unique Vt mode is configured, the <a href="../tempusCUI/report_timing.html">report_timing</a> command can be run with a <code>-max_slack</code> value greater than 0 to add additional pessimism.</p>
+
+<h4>
+<a id="pgfId-2083017"></a>report_timing Output</h4>
+
+<p>
+<a id="pgfId-2083020"></a>The <a href="../tempusCUI/report_timing.html">report_timing</a> command provides additional information for the Vth skew analysis output:</p>
+<ul><li>
+<a id="pgfId-2083021"></a>A retime Vt-Skew analysis entry in the timing report header indicates the Vth combination that may have resulted in the PBA path with the least slack.</li><li>
+<a id="pgfId-2083022"></a>The actual Vth skew derate applied to a given instance can be shown in the detailed path report by adding the <code>vt_skew_derate</code> field to the format. For example:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id3007509">
+<a id="pgfId-3007509"></a><code>timing_point cell vt_group vt_skew_derate total_derate delay arrival</code><a href="../tempusCUI/set_db.html">set_db</a> <a href="../tempusCUI/timing_Category_Attributes.html">timing_report_fields</a> {timing_point cell vt_group vt_skew_derate total_derate delay arrival}</pre></li><li>
+<a id="pgfId-2083028"></a>A summary of the slacks from all Vth combinations analyzed can be presented in a table at the end of the timing report for debugging purposes by using the <code>report_timing</code> <code>-debug vt_skew</code> command. For example:<br /><pre class="webflare-pre-block webflare-courier-new" id="#id2083029">
+<a id="pgfId-2083029"></a><code>report_timing -from EX4_RS -to EX4_RT -retime path_slew_propagation       \ -debug vt_skew</code></pre>
+<a id="pgfId-2083030"></a>For performance reasons, this parameter is not recommended when generating a large number of paths.</li></ul>
+
+
+
+
+
+<p>
+<a id="pgfId-2083031"></a>An example timing report is given below:</p>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-2083032"></a>Path 1: MET Setup Check with Pin EX4_RT/CK <br />Endpoint:   EX4_RT/D (v) checked with  leading edge of &#39;PH1&#39;<br />Beginpoint: EX4_RS/Q (v) triggered by  leading edge of &#39;PH1&#39;<br />Retime Analysis { Data Path-Slew Vt-Skew  }<br />Retime Vt-Skew Analysis { ELVT@slow LVT@nom SVT@slow ULVT@slow }<br />Other End Arrival Time          0.241<br />- Setup                         0.296<br />+ Phase Shift                  10.000<br />= Required Time                 9.945<br />- Arrival Time                  1.031<br />= Slack Time                    8.913<br />= Slack Time(original)          8.868<br />---------------------------------------------------------------<br />Timing Point&#160;&#160; Cell&#160;&#160;     <strong>Vt-Skew</strong>   Total     Delay   Arrival  <br />                          <strong>Derate</strong>    Derate            Time  <br />---------------------------------------------------------------<br />clk            -          -         -         -       0.000  <br />EX4_C0/Y&#160;&#160;     BUFX1_L    <strong>1.000</strong>     1.000     0.128   0.115  <br />...<br />EX4_RT/D -&gt;&#160;&#160;  DFFHQX1_S  <strong>1.000</strong>     1.000     0.000   1.031  <br />---------------------------------------------------------------<br />---------------------------------------------------------------<br />VT Skew Combinations Slack Summary<br />---------------------------------------------------------------<br />ELVT@slow LVT@nom   SVT@slow  ULVT@slow  : 8.913<br />ELVT@slow LVT@slow&#160;&#160;SVT@slow&#160;&#160;ULVT@slow&#160;&#160;: 8.913</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-2083033"></a>---------------------------------------------------------------</pre>
+<pre class="webflare-courier-new webflare-indent1 codeContent">
+<a id="pgfId-2083034"></a></pre>
+
+<br /><a href="#pagetop">Return to top</a><br /></div>
+<!-- Begin Buttons --><!-- End Buttons -->
+<footer><nav class="navigation"><b><em><a href="analysisandreporting_vtskewgroups.html" id="prev" title="Liberty Threshold Voltage Groups">Liberty Threshold Voltage Grou ...</a></em></b><b><em><a href="analysisandreporting_drvreporting.html" id="nex" title="Design Rule Violation (DRV) Reporting">Design Rule Violation (DRV) Re ...</a></em></b></nav><div>
+            For further assistance, visit <a href="https://support.cadence.com">Cadence ASK portal</a>. &#169; 2025, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a></div></footer>
+ 
+
+ <div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;⠀ </center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div> 
+
+</body></html>

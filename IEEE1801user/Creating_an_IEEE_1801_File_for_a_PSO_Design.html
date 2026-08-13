@@ -1,0 +1,465 @@
+
+<html><head><title>Creating an IEEE 1801 File for a PSO Design</title>
+<meta name="page_sequence" content="13002000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="eastham" />
+<meta name="CreateDate" content="2026-03-25" />
+<meta name="CreateTime" content="1774430426" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes how to capture power intent for your design using IEEE 1801, and includes a list of 1801 commands and options supported across Cadence tools." />
+<meta name="DocTitle" content="IEEE 1801 Cross Platform Guide" />
+<meta name="DocType" content="User Guide" />
+<meta name="FileTitle" content="Creating an IEEE 1801 File for a PSO Design" />
+<meta name="Keywords" content="" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="IEEE1801user" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-03-25" />
+<meta name="ModifiedTime" content="1774430426" />
+<meta name="NextFile" content="Creating_an_IEEE_1801_File_for_a_DVFS_Design.html" />
+<meta name="Group" content="" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="Creating_an_IEEE_1801_File_for_an_MSV_Design.html" />
+<meta name="c_product" content="Innovus," />
+<meta name="Product" content="Innovus," />
+<meta name="ProductFamily" content="Innovus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="IEEE 1801 Cross Platform Guide -- Creating an IEEE 1801 File for a PSO Design" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="IEEE1801user40" />
+<meta name="confluence-version" content="7.19.19" />
+<meta name="ecms-plugin-version" content="04.21.019" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="IEEE1801userTOC.html">Contents</a></li><li><a class="prev" href="Creating_an_IEEE_1801_File_for_an_MSV_Design.html" title="Creating_an_IEEE_1801_File_for_an_MSV_Design">Creating_an_IEEE_1801_File_for ...</a></li><li style="float: right;"><a class="viewPrint" href="IEEE1801user.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="Creating_an_IEEE_1801_File_for_a_DVFS_Design.html" title="Creating_an_IEEE_1801_File_for_a_DVFS_Design">Creating_an_IEEE_1801_File_for ...</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>IEEE 1801 Cross Platform Guide<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>Creating an IEEE 1801 File for a PSO Design</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p>A design using power shut off (<span style=""><strong>PSO</strong></span>) is a design in which some portions can be switched on and off as needed to save leakage and dynamic power.</p>
+
+<p>Logic blocks (hierarchical instances), leaf instances, and pins that use the same&#xa0;<span style=""><em>main</em></span>&#xa0;power supply and that can be simultaneously switched on or off are said to belong to the same&#xa0;<span style=""><strong>power domain</strong></span><span style=""><em>.&#xa0;</em></span>Figure 2-2, <a href="#CreatinganIEEE1801FileforaPSODesign-1037990">An Example of a Design with PSO</a>, has three power domains:</p>
+<ul><li>The top-level of the design,&#xa0;<span style="">top</span>, and hierarchical instances,&#xa0;<span style="">inst_C</span>&#xa0;and&#xa0;<span style="">pm_inst,</span>&#xa0;are always on: they belong to domain&#xa0;<span style="">PD1.</span></li></ul><ul><li>Hierarchical instances&#xa0;<span style="">inst_A</span>&#xa0;and&#xa0;<span style="">inst_B&#xa0;</span>are always switched on and off simultaneously: they belong to power domain&#xa0;<span style="">PD2.</span></li></ul><ul><li>Hierarchical instance&#xa0;<span style="">inst_D</span>&#xa0;can be switched on and off independently from hierarchical instances&#xa0;<span style="">inst_A</span>&#xa0;and&#xa0;<span style="">inst_B:</span>&#xa0;it belongs to power domain&#xa0;<span style="">PD3.<br /><br /></span></li></ul><div class="pbi_avoid CadenceImageWrapperMacro"><span class="content-title" id="Figure-4c06a5f4abb8492d83a8c309699e778d"><strong>Figure 2.1:</strong> <strong><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforaPSODesign-1037990"></span>An Example of a Design with PSO</strong></span>
+<p>
+
+<map id="gliffy-map-726572373-2742" name="gliffy-map-726572373-2742"></map>
+</p>
+<table class="gliffy-macro-table" width="100%">
+    <tbody><tr>
+        <td>
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+ </caption>
+
+                <tbody><tr>
+                    <td>
+                        <img alt="" class="gliffy-macro-image" src="attachments/726572370/726572374.png" style="border: none; width: 546px;" usemap="#gliffy-map-726572373-2742" />
+                    </td>
+
+                </tr>
+
+            </tbody></table>
+ 
+        </td>
+
+    </tr>
+
+</tbody></table>
+<p><br /></p>
+</div>
+
+<p>Power domain&#xa0;<code style="letter-spacing: 0.0px;">PD1</code>&#xa0;is never powered down. It is called an&#xa0;<span style=""><strong>unswitched</strong></span>&#xa0;domain.</p>
+
+<p>Power domains&#xa0;<code>PD2</code>&#xa0;and&#xa0;<code>PD3</code>&#xa0;can be powered down. They are referred to as&#xa0;<span style=""><strong>switchable&#xa0;</strong></span><span style=""><strong>domains</strong></span>.</p>
+
+<p>A steady state of the design in which some power domains are switched on and some power domains are switched off is called a power state. In a power state, each power domain operates on a specific voltage. Table 2-1, <a href="#CreatinganIEEE1801FileforaPSODesign-PowerStates">Power States</a>,&#xa0;shows the three power states&#xa0;of the example design.<br /><br /></p>
+<div class="pbi_avoid CadenceImageWrapperMacro"><span class="content-title" id="Table-ee24b7643403454389d71a8a3135dcbd"><strong>Table 2.1:</strong> <strong><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforaPSODesign-PowerStates"></span>Power States</strong></span><div class="table-wrap"><table border="1" cellpadding="5" cellspacing="0" class="wrapped confluenceTable"><colgroup><col /><col /><col /><col /></colgroup><tbody><tr><th class="confluenceTh" rowspan="2" width="158">
+<p><strong>Power Mode</strong></p>
+</th><th class="confluenceTh" colspan="3" width="282">
+<p><strong>Power Domain</strong></p>
+</th></tr>
+<tr><th class="confluenceTh" valign="top" width="158">
+<p>PD1</p>
+</th><th class="confluenceTh" valign="top" width="94">
+<p>PD2</p>
+</th><th class="confluenceTh" valign="top" width="94">
+<p>PD3</p>
+</th></tr>
+<tr><td class="confluenceTd" valign="top">
+<p><span style="">PM1</span></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><span style="">1.1V</span></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><span style="">1.1V</span></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><span style="">1.1V</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><span style="">PM2</span></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><span style="">1.1V</span></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><span style="">0.0V</span></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><span style="">1.1V<br /></span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><span style="">PM3</span></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><span style="">1.1V</span></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><span style="">0.0V</span></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><span style="">0.0V</span></p>
+</td>
+</tr>
+</tbody></table></div>
+</div>
+<div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body">A voltage of 0.0V indicates that the power domain is off.</div>
+</div>
+
+<p>In order to prevent unknown values in the power domains that are powered down from propagating to the domains that remain powered on,&#xa0;<span style=""><strong>isolation cells</strong></span>&#xa0;are needed. These isolation cells are typically placed at the boundaries of the power domains that are powered down or the input boundary of domains receiving a powered down signal. You can, however, also insert isolation cells at the intermediate domain boundaries as required.</p>
+
+<p>To help facilitate powered down blocks in resuming normal operation,&#xa0;<span style=""><strong>state retention cells</strong></span>&#xa0;can be used for some sequential cells to keep their previous state prior to power down. Since these cells retain their state, they do not need to be reset or reconfigured after a power cycle. This allows the device to more quickly resume normal operation and, in some cases, continue where it left off in its processing.</p>
+
+<p>For switchable domains, you need to indicate how the power supply is connected and disconnected from the gates.</p>
+<ul><li>For internal switchable domains, you must add&#xa0;<span style=""><strong>power switch logic</strong></span><span style=""><strong><em>.</em></strong></span></li></ul><ul><li>For external switchable domains, the power switch logic is not part of the chip, so a control signal may not be available. In IEEE 1801, the&#xa0;<span style="">add_power_states</span>&#xa0;command will define states to indicate whether or not domains can power off. In simulation, the testbench will drive the voltage of the switchable pins.</li></ul>
+<p>For this example, we are assuming that power domains&#xa0;<span style="">PD2</span>&#xa0;and&#xa0;<span style="">PD3</span>&#xa0;are internal switchable domains.</p>
+
+<p>Special control signals are used to shut down a power domain, enable state retention, and control the working of the power switch logic. Table 2-2, <a href="#CreatinganIEEE1801FileforaPSODesign-1039110">Signals Controlling the Power Domains</a>, shows the signals used in this example.<br /><br /></p>
+<div class="pbi_avoid CadenceImageWrapperMacro"><span class="content-title" id="Table-8f1a6010873e4c009cf5278dba467cfe"><strong>Table 2.2:</strong> <strong><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforaPSODesign-1039110"></span>Signals Controlling the Power Domains</strong></span><div class="table-wrap"><table border="1" cellpadding="5" cellspacing="0" class="wrapped confluenceTable"><tbody><tr><th class="confluenceTh" rowspan="2" width="123">
+<p><strong>Power Domain</strong></p>
+</th><th class="confluenceTh" colspan="3" width="468">
+<p><strong>Control Signals</strong></p>
+</th></tr>
+<tr><th class="confluenceTh" valign="top" width="123">
+<p>power switch</p>
+</th><th class="confluenceTh" valign="top" width="164">
+<p>isolation cell</p>
+</th><th class="confluenceTh" valign="top" width="152">
+<p>state retention cell</p>
+</th></tr>
+<tr><td class="confluenceTd" valign="top">
+<p><span style="">PD1</span></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><span style="">no control signal</span></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><span style="">no control signal</span></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><span style="">no control signal</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><span style="">PD2</span></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><span style="">ps_enable[0]</span></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><span style="">ice_enable[0]</span></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><span style="">pge_enable[0]</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" valign="top">
+<p><span style="">PD3</span></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><span style="">ps_enable[1]</span></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><span style="">ice_enable[1]</span></p>
+</td>
+<td class="confluenceTd" valign="top">
+<p><span style="">pge_enable[1]</span></p>
+</td>
+</tr>
+</tbody></table></div>
+</div>
+
+<p>When a domain is switchable, it derives its power from another power domain through either internal or external power switch logic.</p>
+
+<p>In this example, power domains&#xa0;<code>PD2</code>&#xa0;and&#xa0;<code>PD3</code>&#xa0;derive their power from power domain supply net&#xa0;<code>VDD</code>, so&#xa0;<code>VDD</code>&#xa0;will become the input voltage for both power switches.</p>
+
+<p>The majority of instances in a power domain are driven by the same power supply. For switchable domains, it is the primary power and ground nets of the (primary) power domain. This supply is automatically attached to the power and ground pins (follow-pins) of all the instances of that domain. In IEEE 1801, the power nets and connections are defined using&#xa0;<span style=""><strong>supply sets</strong></span>.</p>
+
+<p>On the other hand, isolation cells and state retention cells are driven by multiple power supplies. These special low power instances can have two sets of power and ground pins, and supply sets for each of these can be explicitly defined in the 1801 file. When using the&#xa0;<code>create_power_domain</code>&#xa0;command, the&#xa0;<span style=""><strong>isolation supply set</strong>&#xa0;</span>defines the default additional supply for isolation cells and the&#xa0;<span style=""><strong>retention supply set</strong></span>&#xa0;defines the additional supply for retention cells. These can be overwritten by explicit supply sets defined on the&#xa0;<code>set_isolation</code>&#xa0;and&#xa0;<code>set_retention</code>&#xa0;commands.</p>
+
+<p>If the design can operate in different power modes, you need to check if the design functions correctly in each of these modes not only at the typical conditions but also when slightly different operating conditions apply. IEEE 1801 files will only define the nominal operating voltage and do not specify any of the related timing information. For a multi-mode, multi-corner timing analysis, additional views and constraints need to be specified in tool-specific design files.</p>
+<h2 id="CreatinganIEEE1801FileforaPSODesign-1052886Example:ACompleteIEEE1801FileforPSO"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforaPSODesign-1052886"></span>Example:&#xa0;A&#xa0;Complete IEEE 1801 File for PSO</h2>
+
+<p><code>upf_version 2.0</code></p>
+
+<p><code>#Define supply ports and nets<br /></code><code>create_supply_port VDD<br /></code><code>create_supply_net VDD<br /></code><code>connect_supply_net VDD -ports VDD</code></p>
+
+<p><code>create_supply_port VSS&#xa0;<br /></code><code>create_supply_net VSS&#xa0;<br /></code><code>connect_supply_net VSS -ports VSS</code></p>
+
+<p><code>create_supply_net VDD2&#xa0;</code><code>create_supply_net VDD3</code></p>
+
+<p><code>#Connect supply nets to power domain supply sets<br /></code><code>create_supply_set ss_PD1 -function {power VDD} -function {ground VSS}<br /></code><code>create_supply_set ss_PD2 -function {power VDD2} -function {ground VSS}<br /></code><code>create_supply_set ss_PD3 -function {power VDD3} -function {ground VSS}</code></p>
+
+<p><code># Create Power Domains&#xa0;<br /></code><code>create_power_domain PD1 -include_scope -supply {primary ss_PD1}&#xa0;<br /></code><code>create_power_domain PD2 -elements {inst_A inst_B} -supply {primary ss_PD2}&#xa0;<br /></code><code>create_power_domain PD3 -elements { inst_C} -supply {primary ss_PD3}&#xa0;</code></p>
+
+<p><code><code>set_port_attributes -ports [find_objects . -pattern * -object_type port] \</code><br /><code>&#xa0; &#xa0;-driver_supply PD1.primary -receiver_supply PD1.primary</code></code></p>
+
+<p><code>#Specify Isolation Constraints on outputs of switchable domains</code><br /><code>set_isolation iso2 -domain PD2 -applies_to outputs \</code><br /><code>&#xa0; &#xa0;-isolation_supply_set PD1.primary\</code><br /><code>&#xa0; &#xa0;-location parent \</code><br /><code>&#xa0; &#xa0;-isolation_signal {pm_inst/ice_enable[0]} \</code><br /><code>&#xa0; &#xa0;-clamp_value 0</code></p>
+
+<p><code>set_isolation iso3 -domain PD3 -applies_to outputs \</code><br /><code>&#xa0; &#xa0;-isolation_supply_set PD1.primary \</code><br /><code>&#xa0; &#xa0;-location parent \</code><br /><code>&#xa0; &#xa0;-isolation_signal {pm_inst/ice_enable[1]} \</code><br /><code>&#xa0; &#xa0;-clamp_value 0</code></p>
+
+<p><code>#Specify retention for switchable domains<br /></code><code>set_retention st2 -domain PD2 \</code><br /><code>&#xa0; &#xa0;-save_signal {pm_inst/pge_enable[0] high} \</code><br /><code>&#xa0; &#xa0;-restore_signal {pm_inst/pge_enable[0] low} \</code><br /><code>&#xa0; &#xa0;-retention_supply_set PD1.primary</code></p>
+
+<p><code>set_retention st3 -domain PD3 \</code><br /><code>&#xa0; &#xa0;-save_signal {pm_inst/pge_enable[1] high} \</code><br /><code>&#xa0; &#xa0;-restore_signal {pm_inst/pge_enable[1] low} \</code><br /><code>&#xa0; &#xa0;-retention_supply_set PD1.primary</code></p>
+
+<p><code>#Define power states for each domain<br /></code><code>add_power_state PD1.primary \</code><br /><code>&#xa0; &#xa0;-state ON { -supply_expr {power == `{FULL_ON, 1.0} &amp;&amp; ground == `{FULL_ON, 0.0}} -simstate NORMAL}</code></p>
+
+<p><code>add_power_state PD2.primary \</code><br /><code>&#xa0; &#xa0;-state ON { -supply_expr {power == `{FULL_ON, 1.0} &amp;&amp; ground == `{FULL_ON, 0.0}} -simstate NORMAL} \</code><br /><code>&#xa0; &#xa0;-state OFF { -supply_expr {power == `{OFF} &amp;&amp; ground == `{FULL_ON, 0.0}} -simstate CORRUPT}</code></p>
+
+<p><code>add_power_state PD3.primary \</code><br /><code>&#xa0; &#xa0;-state ON { -supply_expr {power == `{FULL_ON, 1.0} &amp;&amp; ground == `{FULL_ON, 0.0}} -simstate NORMAL} \</code><br /><code>&#xa0; &#xa0;-state OFF { -supply_expr {power == `{OFF} &amp;&amp; ground == `{FULL_ON, 0.0}} -simstate CORRUPT}</code></p>
+
+<p><code># Add System Level States</code><br /><code>add_power_state PD1 -state PM1 {-logic_expr { PD1.primary == ON &amp;&amp; PD2.primary == ON &amp;&amp; PD3.primary == ON }}</code><br /><code>add_power_state PD1 -state PM2 {-logic_expr { PD1.primary == ON &amp;&amp; PD2.primary == OFF &amp;&amp; PD3.primary == ON }} -update</code><br /><code>add_power_state PD1 -state PM3 {-logic_expr { PD1.primary == ON &amp;&amp; PD2.primary == OFF &amp;&amp; PD3.primary == OFF }} -update</code><br /><code>add_power_state PD1 -state PM4 {-logic_expr { PD1.primary == ON &amp;&amp; PD2.primary == OFF &amp;&amp; PD3.primary == OFF }} -update</code></p>
+
+<p><code>#Create power switches</code><br /><code>create_power_switch PD2_sw -domain PD2 \</code><br /><code>&#xa0; &#xa0;-output_supply_port {vddo PD2.primary.power} \</code><br /><code>&#xa0; &#xa0;-input_supply_port {vddi PD1.primary.power} \</code><br /><code>&#xa0; &#xa0;-control_port {EN pm_inst/pse_enable[0]} \</code><br /><code>&#xa0; &#xa0;-on_state {full_on vddi {!EN}} \</code><br /><code>&#xa0; &#xa0;-off_state {full_off {EN}}</code></p>
+
+<p><code>create_power_switch PD3_sw -domain PD3 \</code><br /><code>&#xa0; &#xa0;-output_supply_port {vddo PD3.primary.power} \</code><br /><code>&#xa0; &#xa0;-input_supply_port {vddi PD1.primary.power} \</code><br /><code>&#xa0; &#xa0;-control_port {EN pm_inst/pse_enable[1]} \</code><br /><code>&#xa0; &#xa0;-on_state {full_on vddi {!EN}} \</code><br /><code>&#xa0; &#xa0;-off_state {full_off {EN}}</code></p>
+<h2 id="CreatinganIEEE1801FileforaPSODesign-1095696StepstoCreatetheIEEE1801FileforDesignsUsingPSO"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforaPSODesign-1095696"></span>Steps to Create the IEEE 1801 File for Designs Using PSO</h2>
+
+<p>This section describes the information to include in an IEEE 1801 file for a design using the PSO methodology. Since these cells retain their state, they do not need to be reset or reconfigured after a power cycle. This allows the device to more quickly resume normal operation and, in some cases, continue where it left off in its processing. Figure 2-2, <a href="#CreatinganIEEE1801FileforaPSODesign-1037990">An Example of a Design with PSO</a>,&#xa0;is used throughout this section.</p>
+<ul><li><a href="#CreatinganIEEE1801FileforaPSODesign-1038510">Specifying the Power&#xa0;Domains</a></li></ul><ul><li><a href="#CreatinganIEEE1801FileforaPSODesign-1095894">Specifying the Power&#xa0;and Ground Nets and Ports</a></li></ul><ul><li><a href="#CreatinganIEEE1801FileforaPSODesign-1095946">Specifying Supply Sets</a></li></ul><ul><li><a href="#CreatinganIEEE1801FileforaPSODesign-1096049">Associate the Supply Set to the Power Domains</a></li></ul><ul><li><a href="#CreatinganIEEE1801FileforaPSODesign-1096103">Specifying the Voltage States Allowed for Each Domain</a></li></ul><ul><li><a href="#CreatinganIEEE1801FileforaPSODesign-1096534">Defining System Level Power States</a></li></ul><ul><li><a href="#CreatinganIEEE1801FileforaPSODesign-1105286">Specifying the Rules to Create Isolation Logic</a></li></ul><ul><li><a href="#CreatinganIEEE1801FileforaPSODesign-1079136">Specifying the Rules to Create State Retention Logic</a></li></ul><ul><li><a href="#CreatinganIEEE1801FileforaPSODesign-1099894">Specifying the Power&#xa0;Switch Logic</a></li></ul><ul><li><a href="#CreatinganIEEE1801FileforaPSODesign-1099878">Updating the Rules with Information for Implementation</a></li></ul><ul><li><a href="#CreatinganIEEE1801FileforaPSODesign-1112700">Specifying Low Power Cell Attributes</a></li></ul><h3 id="CreatinganIEEE1801FileforaPSODesign-1038510SpecifyingthePowerDomains"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforaPSODesign-1038510"></span>Specifying the Power Domains</h3>
+
+<p>To identify portions of the design that operate on the same voltage and that can be simultaneously switched on or off, use the&#xa0;<code><span style="">create_power_domain</span></code>&#xa0;command with the following syntax&#xa0;to specify a power domain and its associated instances:</p>
+<p style="margin-left: 30.0px;"><code>create_power_domain -name&#xa0;<em>power_domain</em></code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-elements&#xa0;<em>instance_list</em>]&#xa0;</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-exclude_elements&#xa0;<em>instance_list</em>]</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-include_scope]</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-supply {<em>supply_set_handle</em>&#xa0;[<em>supply_set_ref</em>]]</code></p>
+
+<p>For Figure 2-2, <a href="#CreatinganIEEE1801FileforaPSODesign-1037990">An Example of a Design with PSO</a>, specify three power domains:</p>
+
+<p><code>create_power_domain PD1 -include_scope</code><br /><code>create_power_domain PD2 -elements {inst_A inst_B}</code><br /><code>create_power_domain PD3 -elements {inst_C}</code></p>
+<h3 id="CreatinganIEEE1801FileforaPSODesign-1095894SpecifyingthePowerandGroundNetsandPorts"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforaPSODesign-1095894"></span>Specifying the Power and Ground Nets and Ports</h3>
+
+<p>For IEEE 1801, you can define the supply ports and nets (power and ground) used in a design. The supply ports are external ports that provide a voltage supply to the device. The supply nets are the internal nets that will be used to connect domains and power pins of individual components in the design.&#xa0;Once specified, these power or ground supplies can be associated to power domains, and as connections to special cells. &#xa0;</p>
+
+<p>Define the power and ground supplies using the following syntax:&#xa0;</p>
+<p style="margin-left: 30.0px;"><code>create_supply_port&#xa0;<em>supply_port_name&#xa0;<br /></em>create_supply_net<em>&#xa0;</em></code><em><code>supply_net_name</code></em>&#xa0;</p>
+
+<p>&#xa0;Then, connect the supply port to the supply net as shown:</p>
+<p style="margin-left: 30.0px;"><code>connect_supply_net&#xa0;<em>supply_net_name</em>&#xa0;-port&#xa0;<em>supply_port_name</em></code><em><br /></em></p>
+
+<p>For a complete description of these commands, see the IEEE 1801-2013 specification.</p>
+<h3 id="CreatinganIEEE1801FileforaPSODesign-1095946SpecifyingSupplySets"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforaPSODesign-1095946"></span>Specifying Supply Sets</h3>
+
+<p>For IEEE 1801, a basic building block of the low power intent is the supply set. Because a supply set is a bundle of supply nets, you can use the supply set to simplify the connection of supply nets to power domains and special cells. That is, rather than specifying each supply net individually, you can use a supply set instead.</p>
+
+<p>To define a supply set for each power domain, use the following syntax:</p>
+<p style="margin-left: 30.0px;"><code>create_supply_set ss_<em>name</em>&#xa0;[-function {<em>supply_function</em>&#xa0;<em>supply_net</em>}]*</code></p>
+
+<p>The supply set defines a set of functions such as primary power and primary ground, and then defines which supply nets provide those functions.&#xa0;For example, to specify that the primary power for&#xa0;<code>ss_PD1</code>&#xa0;is provided by the supply net&#xa0;<code>VDD</code>&#xa0;and the ground is provided by&#xa0;<code>VSS</code>, use the following&#xa0;<code>create_supply_set</code>&#xa0;command:</p>
+
+<p><code>create_supply_set ss_PD1 -function {power VDD} -function {ground VSS}</code><br /><code>create_supply_set ss_PD2 -function {power VDD2} -function {ground VSS}</code><br /><code>create_supply_set ss_PD3 -function {power VDD3} -function {ground VSS}</code></p>
+<div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body"><code>PD2</code> and <code>PD3</code>&#xa0;will receive their power function from <code>VDD2</code> and <code>VDD3</code> respectively.</div>
+</div>
+<h3 id="CreatinganIEEE1801FileforaPSODesign-1096049AssociatetheSupplySettothePowerDomains"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforaPSODesign-1096049"></span>Associate the Supply Set to the Power Domains</h3>
+
+<p>To associate supply sets to power domains, use the&#xa0;<code>associate_supply_set</code>&#xa0;command with the following syntax:</p>
+<p style="margin-left: 30.0px;"><code>associate_supply_set ss_<em>name</em>&#xa0;-handle&#xa0;<em>power_domain</em>.<em>handle</em></code></p>
+
+<p>For example:</p>
+<p style="margin-left: 30.0px;"><code>associate_supply_set ss_PD1 -handle PD1.primary</code></p>
+
+<p>This associated supply set defines that all primary power and ground pins for any cell in&#xa0;<code>PD1</code>&#xa0;will be connected to the nets defined in the&#xa0;<code>ss_PD1</code>&#xa0;supply set. In this case, it means that all primary power pins in the&#xa0;<code>PD1</code>&#xa0;domain will be connected to the&#xa0;<code>supply_net VDD</code>.</p>
+<h3 id="CreatinganIEEE1801FileforaPSODesign-1096103SpecifyingtheVoltageStatesAllowedforEachDomain"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforaPSODesign-1096103"></span>Specifying the Voltage States Allowed for Each Domain</h3>
+
+<p>For IEEE 1801, Cadence recommends using an&#xa0;<code><span style="">add_power_state</span></code>&#xa0;command for each power domain. Use this command to define the allowed operating voltage for each specifed domain. Although it is not required, it does provide a very clear definition of power intent for more complex designs.</p>
+
+<p>To specify the operating voltages used in the design, use the&#xa0;<code><span style="">add_power_state</span></code>&#xa0;command. For example:</p>
+
+<p><code>add_power_state PD1.primary \</code><br /><code>&#xa0; &#xa0; -state ON { -supply_expr {power == \</code><br /><code>&#xa0; &#xa0; `{FULL_ON, 0.8} &amp;&amp; ground == `{FULL_ON, 0.0}} \</code><br /><code>&#xa0; &#xa0; -simstate NORMAL}</code><br /><br /><code>add_power_state PD2.primary \</code><br /><code>&#xa0; &#xa0; -state ON { -supply_expr {power == \</code><br /><code>&#xa0; &#xa0; `{FULL_ON, 1.0} &amp;&amp; ground == `{FULL_ON, 0.0} \</code><br /><code>&#xa0; &#xa0; -simstate NORMAL} \</code><br /><br /><code>-state OFF { -supply_expr {power == \</code><br /><code>&#xa0; &#xa0; `{OFF} &amp;&amp; ground == `{FULL_ON, 0.0}} \</code><br /><code>&#xa0; &#xa0; -simstate CORRUPT}</code><br /><br /><code>add_power_state PD3.primary \</code><br /><code>&#xa0; &#xa0; -state ON { -supply_expr {power == \</code><br /><code>&#xa0; &#xa0; `{FULL_ON, 1.2} &amp;&amp; ground == `{FULL_ON, 0.0}} \</code><br /><code>&#xa0; &#xa0; -simstate NORMAL} \</code><br /><br /><code>-state OFF { -supply_expr {power == \</code><br /><code>&#xa0; &#xa0; `{OFF} &amp;&amp; ground == `{FULL_ON, 0.0}} \</code><br /><code>&#xa0; &#xa0; -simstate CORRUPT}</code></p>
+
+<p>The&#xa0;<code>add_power_state</code>&#xa0;for domain&#xa0;<code>PD2</code>&#xa0;has two defined states:&#xa0;</p>
+<ul><li><code>ON</code>&#xa0;is the powered up state, and is defined by specifying that the power and ground net are in the&#xa0;<code>FULL_ON</code>&#xa0;state.&#xa0;</li><li><code>OFF</code>&#xa0;specifies that the power is shutoff and the primary power net is in the&#xa0;<code>OFF</code>&#xa0;state.&#xa0;</li></ul>
+<p>Both&#xa0;<code>FULL_ON</code>&#xa0;and&#xa0;<code>OFF</code>&#xa0;are keywords for IEEE 1801 that define the functional state of the supply.</p>
+
+<p><strong>Note:</strong>&#xa0;If your designs have a pmos or nmos bias, you can also specify these using the&#xa0;<code>-supply_expr</code>&#xa0;option.</p>
+<h3 id="CreatinganIEEE1801FileforaPSODesign-1096534DefiningSystemLevelPowerStates"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforaPSODesign-1096534"></span>Defining System Level Power States</h3>
+
+<p>The&#xa0;<code>add_power_state</code>&#xa0;command can also define system level power states. A system level power state defines the interactions between domains rather than the allowed states per domain.</p>
+
+<p>The IEEE 1801 specification allows for both legal and illegal power states. Legal states are used extensively by checking and verification tools to ensure that proper isolation and level shifting has been inserted into a design. Typically, Illegal states are used by simulation tools to detect errors in power management logic.</p>
+
+<p>For a PSO design, the&#xa0;<code>add_power_state</code> command must define all the valid power state combinations (on and off). Table 2-1, <a href="#CreatinganIEEE1801FileforaPSODesign-PowerStates">Power States</a>, illustrates a design with three valid states, despite having only two power shutoff domains: If&#xa0;<code>PD3</code>&#xa0;is off when&#xa0;<code>PD2</code>&#xa0;is always off, this requirement should be captured by the states.</p>
+
+<p>Example:</p>
+
+<p><code>add_power_state PD1 \</code><br /><code>&#xa0; &#xa0; -state PM1 {-logic_expr { PD1.primary == ON \</code><br /><code>&#xa0; &#xa0; &amp;&amp; PD2.primary == ON &amp;&amp; PD3.primary == ON }}</code><br /><br /><code>add_power_state PD1 \</code><br /><code>&#xa0; &#xa0; -state PM2 {-logic_expr { PD1.primary == ON \</code><br /><code>&#xa0; &#xa0; &amp;&amp; PD2.primary == OFF &amp;&amp; PD3.primary == ON }} -update</code><br /><br /><code>add_power_state PD1 \</code><br /><code>&#xa0; &#xa0; -state PM3 {-logic_expr { PD1.primary == ON \</code><br /><code>&#xa0; &#xa0; &amp;&amp; PD2.primary == OFF &amp;&amp; PD3.primary == OFF }} -update&#xa0;</code><br /><br /><code>add_power_state PD1 \</code><br /><code>&#xa0; &#xa0; -state PM4 {-logic_expr { PD1.primary == ON \</code><br /><code>&#xa0; &#xa0; &amp;&amp; PD2.primary == ON &amp;&amp; PD3.primary == OFF }} -illegal -update</code></p>
+<div class="confluence-information-macro confluence-information-macro-note"><span class="aui-icon aui-icon-small aui-iconfont-warning confluence-information-macro-icon"></span><div class="confluence-information-macro-body">The <code>add_power_state</code>&#xa0;commands above refer to the power domain states only. This is the recommended style for system level power states. If this were an hierarchical IEEE 1801 flow, the <code>-logic_expr</code>&#xa0;option could also refer to other lower level system states. In this way, the top-level states can utilize a higher level of abstraction and do not need to know all the low level details of each domain or subsystem.</div>
+</div>
+<h3 id="CreatinganIEEE1801FileforaPSODesign-1105286SpecifyingtheRulestoCreateIsolationLogic"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforaPSODesign-1105286"></span>Specifying the Rules to Create Isolation Logic</h3>
+
+<p>Isolation is used to prevent unknown states from propagating from a domain that is powered down to powered on logic in the design. In IEEE 1801, the power intent for inserting isolation cells is called an&#xa0;<strong>isolation strategy</strong>. An isolation strategy typically defines the value of a pin when the driver of that pin powers off. To define when isolation cells must be added or to specify which pins must be isolated, use the&#xa0;<code>set_isolation</code>&#xa0;command. The syntax below lists common options and values:</p>
+
+<p><code>set_isolation&#xa0;<em>strategy_name</em></code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;-domain&#xa0;<em>domain_name&#xa0;</em></code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;-isolation_signal&#xa0;<em>expression</em></code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-applies_to {inputs|outputs|both}]&#xa0;</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-elements&#xa0;<em>pin_list</em>]</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-clamp_value { 0 | 1 | latch | Z }</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-isolation_supply_set&#xa0;<em>supply_set_list</em>]</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-location {self other parent fanout}]</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-diff_supply_only]</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-source &lt;<em>source_domain_name</em>&#xa0;|&#xa0;<em>source_supply_ref</em>&gt;]</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-sink &lt;<em>sink_domain_name</em>&#xa0;|&#xa0;<em>sink_supply_ref</em>&gt;]</code></p>
+
+<p>The isolation strategy is always related to a power domain. By default, it applies to all the inputs and outputs of the domain specified in the strategy, but you can filter it based on a number of parameters.</p>
+
+<p>A specific list of pins or instances:</p>
+<ul><li><code>-diff_supply_only</code>&#xa0;&#8212; Only isolate if the driver and receiver of the pin are from different power supplies. This option prevents unnecessary isolation insertion.</li></ul><ul><li><code>-source</code>/<code>-sink</code>&#xa0;&#8212; Specify constraints based on the driver or receiver of the pin. These options give more flexibility and control to the isolation, but are uncommon in most designs.</li></ul>
+<p>The functionality of the isolation is defined by the&#xa0;<code>-clamp_value</code>&#xa0;and&#xa0;<code>-isolation_signal</code>&#xa0;options.</p>
+<ul><li><code>-clamp_value</code>&#xa0;defines the logic value that the pin should take when isolated. The most common arguments are&#xa0;<code>0</code>,&#xa0;<code>1</code>, and&#xa0;<code>latch</code>.</li></ul><ul><li><code>-isolation_signal</code>&#xa0;defines the control for the isolation When the isolation signal is active the specified value will be driven on the pin.</li></ul>
+<p><code>-location</code>&#xa0;specifies where in the hierarchy the isolation should be inserted. Typically, this will be either inside of the specified domain (<code>self</code>) or on the pin just outside the specified domain (<code>other</code>). See Figure 2-3, <a href="#CreatinganIEEE1801FileforaPSODesign-1107027">Using the Location Option</a>, for an illustrated explanation.&#xa0;<br /><br />Isolation always applies to a pin on the interface between two domains. Pins&#xa0;<code>A</code>&#xa0;and&#xa0;<code>B</code>&#xa0;are on the interface between&#xa0;<code>PDTOP</code>&#xa0;and&#xa0;<code>PD1</code>. The&#xa0;<code>-location</code>&#xa0;option defines what side of that pin the isolation should be placed</p>
+<ul><li><em>Self</em>: Place the cell in the same domain as that specified by the&#xa0;<code>-domain</code>&#xa0;option</li><li><em>Other</em>: Place the cell in the other domain (the one not specified by the&#xa0;<code>-domain</code>&#xa0;option)</li><li><em>Parent</em>: Place the isolation cell at a higher level of the hierarchy<br /><br /></li></ul><div class="pbi_avoid CadenceImageWrapperMacro"><span class="content-title" id="Figure-743bb0a36b3f40c7a71cc4b133b4dfa7"><strong>Figure 2.2:</strong> <strong><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforaPSODesign-1107027"></span>Using the Location Option</strong></span>
+<p>
+
+<map id="gliffy-map-726572371-141" name="gliffy-map-726572371-141"></map>
+</p>
+<table class="gliffy-macro-table" width="100%">
+    <tbody><tr>
+        <td>
+            <table class="gliffy-macro-inner-table">
+                <caption align="bottom">
+ </caption>
+
+                <tbody><tr>
+                    <td>
+                        <img alt="" class="gliffy-macro-image" src="attachments/726572370/726572372.png" style="border: none; width: 526px;" usemap="#gliffy-map-726572371-141" />
+                    </td>
+
+                </tr>
+
+            </tbody></table>
+ 
+        </td>
+
+    </tr>
+
+</tbody></table></div>
+
+<p><code>-isolation_supply_set</code>&#xa0;defines the power supply that will be connected to the secondary power pins, if any, for the inserted isolation cell.</p>
+
+<p>Typically, isolation logic is needed to prevent unknown signals going from a power domain being switched off to a power domain that remains on. In some cases, the input of a power shutoff domain requires a stable input value. In this case, additional isolation is required on that input pin. This is not the typical case, but is sometimes required for certain types of memories.</p>
+
+<p>Referring to Figure 2-2, <a href="#CreatinganIEEE1801FileforaPSODesign-1037990">An Example of a Design with PSO</a>, isolation logic will be needed in power modes 2 and 3 for any nets going from power domain&#xa0;<code>PD2</code>&#xa0;to&#xa0;<code>PD1</code>&#xa0;and&#xa0;<code>PD3</code>, and for any nets going from power domains&#xa0;<code>PD3</code>&#xa0;and&#xa0;<code>PD2</code>&#xa0;to&#xa0;<code>PD1</code>.&#xa0;For example:</p>
+
+<p><code>set_isolation iso2 -domain PD2 -applies_to outputs \</code><br /><code>&#xa0; &#xa0; -isolation_supply_set PD1.primary \</code><br /><code>&#xa0; &#xa0; -location parent \</code><br /><code>&#xa0; &#xa0; -isolation_signal {pm_inst/ice_enable[0]} \</code><br /><code>&#xa0; &#xa0; -clamp_value 0</code><br /><br /><code>set_isolation iso3 -domain PD3 -applies_to outputs \</code><br /><code>&#xa0; &#xa0; -isolation_supply_set PD1.primary \</code><br /><code>&#xa0; &#xa0; -location parent \</code><br /><code>&#xa0; &#xa0; -isolation_signal {pm_inst/ice_enable[1]} \</code><br /><code>&#xa0; &#xa0; -clamp_value 0</code></p>
+<h3 id="CreatinganIEEE1801FileforaPSODesign-1079136SpecifyingtheRulestoCreateStateRetentionLogic"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforaPSODesign-1079136"></span>Specifying the Rules to Create State Retention Logic</h3>
+
+<p>State retention is a design methodology that allows a set of registers to be preserved through a power on/power off sequence. There are two common applications for state retention:</p>
+<ul><li>Preserve Configuration Registers &#8212;&#xa0;Preserve a specific set of configuration registers through the power sequence. This allows the domain to start up with the same configuration and speeds up the power on cycle. Without retention, the device would need to be reconfigured and in many cases this adds overhead to the system software.</li></ul><ul><li>Full restore of the domain &#8212;&#xa0;Allow the device to start up in the exact state that it was powered off. That is, any operations in the domain essentially pause during power shutoff and then resume immediately on power up.<br /><br />In many cases, you can save ALL registers in the design. This ensures that a full&#xa0;<em>known</em>&#xa0;state of the device is restored. However,&#xa0;IEEE 1801 does not require that all registers are maintained, and you may attempt to optimize a partial set of registers. This partial set provides a smaller area for the design but runs some risk of missing a register and having incomplete or incorrect restoration.</li></ul>
+<p>To define a rule for replacing selected registers or all registers in the specified power domain with state retention registers, use the&#xa0;<code>set_retention</code>&#xa0;command. Common options are:</p>
+<p style="margin-left: 30.0px;"><code>set_retention</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;<em>strategy_name</em></code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;-domain&#xa0;<em>power_domain</em></code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-elements&#xa0;<em>element_list</em>]</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-exclude_elements&#xa0;<em>element_list</em>]</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-save_signal {<em>logic_net</em>&#xa0;&lt;high | low | posedge | negedge&gt;}</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-restore_signal {<em>logic_net</em>&#xa0;&lt;high | low | posedge | negedge&gt;}]</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-restore_condition expr]</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-save_condition expr]</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-retention_condition expr]</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-retention_supply&#xa0;<em>supply_set_ref</em>]</code></p>
+
+<p>The retention strategy is defined per domain and specifies which elements should be retained and the control over that retention. The&#xa0;<code>-save_signal</code>&#xa0;and&#xa0;<code>-restore_signal</code>&#xa0;options define the control signal that triggers the save and restore operations respectively. The&#xa0;<code>-save_condition</code>,&#xa0;<code>-restore</code><code>_condition</code>, and&#xa0;<code>-retention_condition</code>&#xa0;options&#xa0;are used by simulation and static checking as additional checks on the operation of the retention. For instance, to ensure the clock is held low at the time of the save, specify&#xa0;<code>-save_condition</code>&#xa0;<code>{!clk}</code>.</p>
+
+<p>The retention cells have a separate retention supply that is kept active when the domain is off. This retention supply is specified with the&#xa0;<code>-retention_supply_set</code>&#xa0;option.</p>
+
+<p>For Figure 2-2, <a href="#CreatinganIEEE1801FileforaPSODesign-1037990">An Example of a Design with PSO</a>:</p>
+
+<p><code>set_retention st2 -domain PD2 \</code><br /><code>&#xa0; &#xa0; -save_signal {pm_inst/pge_enable[0] high} \</code><br /><code>&#xa0; &#xa0; -restore_signal {pm_inst/pge_enable[0] low} \</code><br /><code>&#xa0; &#xa0; -retention_supply_set PD1.primary</code><br /><br /><code>set_retention st3 -domain PD3 \</code><br /><code>&#xa0; &#xa0; -save_signal {pm_inst/pge_enable[1] high} \</code><br /><code>&#xa0; &#xa0; -restore_signal {pm_inst/pge_enable[1] low} \</code><br /><code>&#xa0; &#xa0; -retention_supply_set PD1.primary</code></p>
+<h3 id="CreatinganIEEE1801FileforaPSODesign-1099894SpecifyingthePowerSwitchLogic"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforaPSODesign-1099894"></span>Specifying the Power Switch Logic</h3>
+
+<p>In a PSO design, one must define the power switch that controls the shutoff behavior of the domain. This includes the input and output power nets, the control ports, and each allowed state for the power switch.</p>
+
+<p>To specify the power switch, use the&#xa0;<code>create_power_switch</code>&#xa0;command with the following syntax:</p>
+
+<p><code>create_power_switch&#xa0;</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;-domain&#xa0;<em>power_domain</em></code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;-output_supply_port {<em>port</em>&#xa0;<em>supply_net_name</em>}</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;{-input_supply_port {<em>port</em>&#xa0;<em>supply_net_name</em>}}*</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;{-control_port {<em>port_name</em>&#xa0;[<em>net_name</em>]}*</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;{-on_state {<em>state_name</em>&#xa0;<em>input_supply_port</em>&#xa0;{<em>boolean_expression</em>}}}*</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[{-off_state {<em>state_name</em>&#xa0;{<em>boolean_expression</em>}}]*</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-ack_port {<em>port_name</em>&#xa0;<em>net_name</em>&#xa0;[<em>logic_value</em>]}]*</code><br /><code>&#xa0;&#xa0;&#xa0;&#xa0;[-ack_delay {<em>port_name</em>&#xa0;<em>delay</em>}]*</code></p>
+
+<p>The typical power switch will have a single control signal that defines when the input supply will be connected to the output supply. Use the&#xa0;<code>-on_state</code>&#xa0;option to define the control logic. With advanced syntax, the&#xa0;<code>create_power_switch</code>&#xa0;command allows for the definition of much more complicated switches, such as multiple input voltages and/or multiple control signals.</p>
+
+<p>The&#xa0;<code>-ack_port</code>&#xa0;option defines an acknowledge signal that generates a value when the output power has been fully restored. This is often used as an input to other power switches or as an input to an FSM waiting for the domain to be fully restored before proceeding to the next state.</p>
+
+<p>For Figure 2-2, <a href="#CreatinganIEEE1801FileforaPSODesign-1037990">An Example of a Design with PSO</a>:</p>
+
+<p><code>create_power_switch PD2_sw -domain PD2 \</code><br /><code>&#xa0; &#xa0; -output_supply_port {vddo PD2.primary.power} \</code><br /><code>&#xa0; &#xa0; -input_supply_port {vddi PD1.primary.power} \</code><br /><code>&#xa0; &#xa0; -control_port {EN pm_inst/pse_enable[0]} \</code><br /><code>&#xa0; &#xa0; -on_state {full_on vddi {!EN}} \</code><br /><code>&#xa0; &#xa0; -off_state {full_off {EN}}</code><br /><br /><code>create_power_switch PD3_sw -domain PD3 \</code><br /><code>&#xa0; &#xa0; -output_supply_port {vddo PD3.primary.power} \</code><br /><code>&#xa0; &#xa0; -input_supply_port {vddi PD1.primary.power} \</code><br /><code>&#xa0; &#xa0; -control_port {EN pm_inst/pse_enable[1]} \</code><br /><code>&#xa0; &#xa0; -on_state {full_on vddi {!EN}} \</code><br /><code>&#xa0; &#xa0; -off_state {full_off {EN}}</code></p>
+<h3 id="CreatinganIEEE1801FileforaPSODesign-1099878UpdatingtheRuleswithInformationforImplementation"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforaPSODesign-1099878"></span>Updating the Rules with Information for Implementation</h3>
+
+<p>The user can optionally specify the exact set of cells to map to for isolation, retention, and for power switch insertion. To do this use the&#xa0;<code>map_*</code>&#xa0;commands in IEEE 1801:</p>
+
+<p><code>map_retention_cell st2 -domain PD2 -lib_cells DRFF</code><br /><code>map_retention_cell st3 -domain PD3 -lib_cells DRFF</code><br /><code>use_interface_cell iso1 -strategy iso2 -domain PD2 -lib_cells ISOLNX2M</code><br /><code>use_interface_cell iso2 -strategy iso3 -domain PD3 -lib_cells ISOLNX2M</code><br /><code>map_power_switch PD2_sw -domain PD2 -lib_cells {HEAD32M}</code><br /><code>map_power_switch PD3_sw -domain PD3 -lib_cells {HEAD32M}</code></p>
+<h3 id="CreatinganIEEE1801FileforaPSODesign-1112700SpecifyingLowPowerCellAttributes"><span class="confluence-anchor-link" id="CreatinganIEEE1801FileforaPSODesign-1112700"></span>Specifying Low Power Cell Attributes</h3>
+
+<p>The 1801-2013 specification allows for the definition of library attributes in two different manners:</p>
+<ul><li>Native 1801 commands</li></ul><ul><li>Attributes in the Liberty definition of the technology</li></ul>
+<p>The IEEE-2013 recommendation is to use native 1801 commands because that format is entirely within the 1801 specification. While the Liberty format is the de facto standard for library information, it is not a format controlled by the IEEE Standards Association or any other open standards body.</p>
+
+<p>For PSO designs, the common low power cells are:</p>
+<p style="margin-left: 30.0px;"><code>define_always_on_cell</code></p>
+<p style="margin-left: 30.0px;"><code>define_isolation_cell</code></p>
+<p style="margin-left: 30.0px;"><code>define_retention_cell</code></p>
+
+<p>Example of 1801 low power cells:</p>
+
+<p><code>define_always_on_cell -cells LP_AON -power VDD -ground VSS</code></p>
+
+<p><code>define_isolation_cell -cells ISO_ON \</code><br /><code>&#xa0; &#xa0; -power VDD -ground VSS \</code><br /><code>&#xa0; &#xa0; -enable EN \</code><br /><code>&#xa0; &#xa0; -valid_location on</code></p>
+
+<p><code>define_isolation_cell cells ISO_OFF \</code><br /><code>&#xa0; &#xa0; -power VDD -ground VSS \</code><br /><code>&#xa0; &#xa0; -power_switchable VDD_SW \</code><br /><code>&#xa0; &#xa0; -enable EN \</code><br /><code>&#xa0; &#xa0; -valid_location off</code></p>
+
+<p><code>define_retention_cell -cells RET1 \</code><br /><code>&#xa0; &#xa0; -power VDD -ground VSS \</code><br /><code>&#xa0; &#xa0; -power_switchable VDD_SW \</code><br /><code>&#xa0; &#xa0; -clock_pin CK \</code><br /><code>&#xa0; &#xa0; -always_on_pin Q \</code><br /><code>&#xa0; &#xa0; -save_function {SV posedge}</code></p>
+
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="Creating_an_IEEE_1801_File_for_an_MSV_Design.html" id="prev" title="Creating_an_IEEE_1801_File_for_an_MSV_Design">Creating_an_IEEE_1801_File_for ...</a></em></b><b><em><a href="Creating_an_IEEE_1801_File_for_a_DVFS_Design.html" id="nex" title="Creating_an_IEEE_1801_File_for_a_DVFS_Design">Creating_an_IEEE_1801_File_for ...</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

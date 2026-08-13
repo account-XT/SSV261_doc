@@ -1,0 +1,176 @@
+
+<html><head><title>set_die_model</title>
+<meta name="page_sequence" content="18032000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="priyaej" />
+<meta name="CreateDate" content="2026-04-08" />
+<meta name="CreateTime" content="1775666322" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Describes the text commands in Voltus IC Power Integrity Solution." />
+<meta name="DocTitle" content="Voltus IC Power Integrity Solution Text Command Reference" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_die_model" />
+<meta name="Keywords" content="import,interposer,die model,package,netlist" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Rail Analysis," />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="voltustxtcmdref" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-08" />
+<meta name="ModifiedTime" content="1775666322" />
+<meta name="NextFile" content="set_dynamic_rail_simulation.html" />
+<meta name="Group" content="Voltus Text Command Reference" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_advanced_rail_options.html" />
+<meta name="c_product" content="Voltus," />
+<meta name="Product" content="Voltus," />
+<meta name="ProductFamily" content="Voltus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Voltus IC Power Integrity Solution Text Command Reference -- set_die_model" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="epstxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.001" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="voltustxtcmdrefTOC.html">Contents</a></li><li><a class="prev" href="set_advanced_rail_options.html" title="set_advanced_rail_options">set_advanced_rail_options</a></li><li style="float: right;"><a class="viewPrint" href="voltustxtcmdref.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_dynamic_rail_simulation.html" title="set_dynamic_rail_simulation">set_dynamic_rail_simulation</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Voltus IC Power Integrity Solution Text Command Reference<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_die_model</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><span id="set_die_model-set_die_model"></span><span class="confluence-anchor-link" id="set_die_model-set_die_model"></span> <code><br /><code>set_die_model<br />[-help]<br />-spice<em> model_file</em><br />[<span style="color:var(--ds-text,#172b4d);">-static_current {initial | average}]</span><br />[-subckt <em>subcircuitname</em>]<br />{-reset&#xa0; | [[-die_instance_name <em>dieinstname</em> [-spice <em>model_file</em> [-mapping <code><em>mapping_file</em></code>]]] ]<br />}</code> <br /></code></p>
+
+<p>Specifies to import a die model on die Interposer or on package netlist.</p>
+
+<p>This command gives information about the die model that will be used in the rail analysis of another die, wherein the two die are connected through die Interposer die or package netlist. For example, if you are performing IR drop analysis for a die (<strong>die2</strong>) on an Interposer/package design that is connected to another die (<strong>die1</strong>), and if the two die share the power/ground network, it is imperative to import the die model of <strong>die1</strong> during IR drop analysis of <strong>die2</strong>.</p>
+
+<p>You can import multiple die models by specifying multiple <code>set_die_model</code> commands.&#xa0;&#xa0;</p>
+<h4 id="set_die_model-Parameters">Parameters</h4>
+<p align="left"><br /></p>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd" colspan="2"><code>-die_instance_name <em>dieinstname</em></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">
+<p><span>Mandatory parameter.</span> Specifies the die instance name for die model. This is the die model of the die that needs to be imported.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-help </code></p>
+</td>
+<td class="confluenceTd">
+<p>Outputs a brief description that includes the type and default information for each <code>set_die_model</code> parameter.</p>
+
+<p>For a detailed description of the command and all of its parameters, use the man command <code>man</code>&#xa0;<code><code>set_die_model</code></code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-mapping </code><code><em>mapping_file</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p><span>Mandatory parameter.</span> Specifies the name of the mapping file that contains the port connection mapping between the die model and voltage source of the chip to be analyzed.</p>
+
+<p>The two mapping file formats are:</p>
+<ul><li><strong>Mapping when die model on LEF/DEF-based Interposer Die</strong><br /><code>#port_of_die_model&#xa0; cell&#xa0;&#xa0; die_name/VSRC_pad_name</code><br /><code>VDD_Bump_VDD_9_0&#xa0;&#xa0;&#xa0; cell&#xa0;&#xa0; Interposer/Bump_DIE0_VDD_0</code><br /><code>VDD_Bump_VDD_9_0&#xa0;&#xa0;&#xa0; cell&#xa0;&#xa0; Interposer/Bump_DIE0_VDD_1</code><br />...</li></ul><ul><li><strong>Mapping when die model on Package Design</strong><br /><code>#port_of_die_model&#xa0; pkg&#xa0;&#xa0;&#xa0; port_of_pkg_netlist</code><br /><code>VDD_Bump_VDD_9_0&#xa0;&#xa0;&#xa0; pkg&#xa0;&#xa0;&#xa0; VDD_3</code><br /><code>VDD_Bump_VDD_9_0&#xa0;&#xa0;&#xa0; pkg&#xa0;&#xa0;&#xa0; VDD_4</code></li></ul></td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-reset</code></p>
+</td>
+<td class="confluenceTd">
+<p>Resets all the previous&#xa0;<code><code><code>set_die_model</code></code></code> command settings to the default settings.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code>-spice</code><code><em> model_file</em></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p><span>Mandatory parameter.</span> Specifies a file containing a SPICE subcircuit describing the die model.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2">
+<p><code><span style="color:var(--ds-text,#172b4d);">-static_current {initial | average}</span></code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><br /></p>
+</td>
+<td class="confluenceTd">
+<p><span><span style="color:var(--ds-text,#172b4d);"><strong>Default</strong>: <code>initial</code></span></span></p>
+
+<p><span><span style="color:var(--ds-text,#172b4d);">Specifies to use the average of PWL waveform as the static current for static rail analysis. By default, only the current value at&#xa0;</span><code style="text-align: left;">t=0</code><span style="color:var(--ds-text,#172b4d);">&#xa0;from the PWL waveform is considered for static run.</span></span></p>
+
+<p><span><span style="color:var(--ds-text,#172b4d);">Example:</span></span></p>
+
+<p><span><span style="color:var(--ds-text,#172b4d);"><code>set_die_model -static_current</code> <code>average</code></span></span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd" colspan="2"><code>-subckt <em>subcircuitname</em></code></td>
+</tr>
+<tr><td class="confluenceTd"><br /></td>
+<td class="confluenceTd">Defines the top-level subcircuit in package files. When this parameter is not specified, the first circuit in the Spice file is used as the default top circuit.</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_die_model-Examples">Examples</h4>
+<ul><li>The following command imports two die models <code>Die1</code> and <code>Die2</code>: <br /><code>set_die_model -die_instance_name Die1 &#8211;spice die1_model.ckt -mapping die1_port.txt</code><br /><code>set_die_model &#8211;die_instance_name Die2 &#8211;spice die2_model.ckt -mapping die2_port.txt</code></li></ul><h4 id="set_die_model-RelatedTopics">Related Topics</h4>
+<ul><li>&quot;<u>Package Analysis</u>&quot; in the&#xa0;<em>Voltus User Guide</em><br /><br /><br /></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_advanced_rail_options.html" id="prev" title="set_advanced_rail_options">set_advanced_rail_options</a></em></b><b><em><a href="set_dynamic_rail_simulation.html" id="nex" title="set_dynamic_rail_simulation">set_dynamic_rail_simulation</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

@@ -1,0 +1,298 @@
+
+<html><head><title>set_min_delay</title>
+<meta name="page_sequence" content="39092000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="gsatish" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287480" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="set_min_delay" />
+<meta name="Keywords" content="object list,delay limit,minimum delay timing path" />
+<meta name="topic_type" content="reference" />
+<meta name="reference_type" content="command reference" />
+<meta name="prod_feature" content="Stylus," />
+<meta name="prod_subfeature" content="Timing Constraints," />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287480" />
+<meta name="NextFile" content="set_min_fanout.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="set_min_capacitance.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- set_min_delay" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="set_min_capacitance.html" title="set_min_capacitance">set_min_capacitance</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="set_min_fanout.html" title="set_min_fanout">set_min_fanout</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>set_min_delay</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code><code>set_min_delay<span class="confluence-anchor-link" id="set_min_delay-set_min_delay"></span><span id="set_min_delay-set_min_delay"></span> <br /><span style="color:var(--ds-text,#172b4d);">[-help]</span><br /><span>[-combinational_from_to | -ignore_clock_latency]&#xa0;</span><br />[{-from |-rise_from | -fall_from} <code><em>from_list</em></code>]<br /><span style="color:var(--ds-text,#172b4d);">[-no_segment]</span>&#xa0;<br />[{-through | -rise_through | -fall_through} <code><em>through_list</em></code>] <br />[{-to | -rise_to | -fall_to} <code><em>to_list</em></code>] <br />[-rise] <br />[-fall] <br />[-comment <code><em>string</em></code>]<br /><code><em>value</em></code> </code> <br /></code></p>
+
+<p>Specifies a minimum delay for a timing path. The <code>set_min_delay</code> command takes precedence over other path exceptions specified for the same path, except for <code>set_false_path</code> command specifications.</p>
+
+<p>Use either the <code>-from</code>, <code>-to,</code> or <code>-through</code> option with the <code>set_min_delay</code> command to identify the paths. Specifying both the <code>-from</code> and <code>-to</code> options identifies a path with specific starting and ending points. If a clock is specified as the <code>-to</code> object, all primary outputs and registers clocked by that clock are used as an endpoint.</p>
+
+<p>When you specify a sequential cell name for starting point of the timing path, the valid path starts from the clk pin. This means the latency and delay from clk to output Q is also included in the delay. For path segmentation, you can specify the path to start from Q output of the register by adding /Q after the cell name. In this case, path from clk to Q is not considered in the calculation. For example, in the following set of commands, the valid path starts from different points:</p>
+
+<p><code>set_min_delay 0.66 -from TR1/BR1 -to BLK/BR1/D</code></p>
+
+<p><code>set_min_delay 0.66 -from TR1/BR1/Q -to BLK/BR1/D</code></p>
+
+<p>For the first command, the valid path starts from clk, and for the second command the valid path starts from the Q output. In the second case, the path from clk to Q is not considered. For an example of the results generated for paths with and without path segmentation, see <a href="#set_min_delay-examples">Examples</a>.</p>
+
+<p>Use only one <code>-from</code>, <code>-rise_from</code>, or <code>-fall_from</code>, <code>-to</code>, <code>-rise_to,</code> or <code>-fall_to</code> parameter per command. You can use multiple <code>-through</code> parameters in the same command.</p>
+<h4 id="set_min_delay-Parameters">Parameters&#xa0;</h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col /><col /></colgroup><tbody><tr><td class="confluenceTd"><code>-help</code></td>
+<td class="confluenceTd">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd"><code>-combinational_from_to</code></td>
+<td class="confluenceTd">
+<p>Defines a path defined by -from/to pins as combinational.</p>
+
+<p>When this parameter is used, the path between the -<code>from</code>/-<code>to</code> pins is treated as purely combinational, <br />that is, both the source/capture clock latencies are excluded from slack computation. <br />The presence of -<code>from</code>/<code>-to</code> pins is required for this option to take effect; the -<code>from</code>/<code>-to</code> pins can be <br />sequential or combinational start/end pins.</p>
+
+<p>The <code>-combinational_from_to</code>&#xa0;parameter will be deprecated in a future release. This parameter will continue to work in the current&#xa0;release, but for compatibility with future releases you should migrate your scripts to use&#xa0;the <code>-ignore_clock_latency</code> parameter.</p>
+
+<p>You can use the following attributes to match the semantics between the&#xa0;<code>-ignore_clock_latency</code>&#xa0;and&#xa0;<code>-combinational_from_to</code>&#xa0;parameters:</p>
+<ul><li><code>timing_constraint_path_delay_exclude_check_delay_from_ignore_clock_latency&#xa0;</code></li><li><code>timing_constraint_path_delay_exclude_io_delay_from_ignore_clock_latency&#xa0;</code></li></ul></td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-comment </code><code><em>string</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Allows you to insert comments. The comments are read but are ignored with a one-time warning message. They are not used during timing analysis reporting nor are they written out during saving of constraints.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-fall</code></p>
+</td>
+<td class="confluenceTd">
+<p>Applies the assertion at the falling edge of the signal on the path endpoints.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-from |</code><code>-rise_from | </code><code>-fall_from </code><code><em>from_list</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a list of timing paths start points. The <code><em>from_list</em></code> argument can contain either object IDs or hierarchical names relative to the current module or clock names. The <code><em>from_list</em></code> argument can be a collection.</p>
+
+<p>The valid start points are:</p>
+<ul><li>Input port</li></ul><ul><li>Bidirectional port</li></ul><ul><li>Clock pin of sequential cell <br />Clock pin of sequential cell is one of the following:</li></ul><ul><li>Structural clock pin that is part of latch or flip-flop.</li></ul><ul><li>Inferred clock pin in cells like macro cells. A pin is an inferred clock pin if it is associated with one of the following:</li></ul><ul><li>Reference end of setup check</li></ul><ul><li>Reference end of hold check</li></ul><ul><li>Reference end of removal check</li></ul><ul><li>Reference end of recovery check</li></ul><ul><li>Minimum period check</li></ul><ul><li>Minimum pulse width check</li></ul><ul><li>Pin associated with set_input_delay</li></ul>
+<p>Specify one of the following:</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>-from:</code></p>
+
+<p>Applies the minimum delay constraint to all paths originating from the <code><em>from_list</em></code> list. If a clock is specified as the <code>-from</code> object, all primary inputs and registers clocked by that clock are used as start points.</p>
+
+<p>By default, the <code>-from</code> option applies the constraints to both the rising and the falling edges.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>-rise_from:</code> Applies the minimum delay constraint at the rising edge of the signal on the from pins.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>-fall_from:</code> Applies the minimum delay constraint at the falling edge of the signal on the from pins.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="text-align: left;">
+<p><code>-no_segment</code></p>
+</td>
+<td class="confluenceTd" style="text-align: left;">
+<p>Specifies the constraint as non-segmenting.</p>
+
+<p>When specified, the software allows path delay checks without path segmentation.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-ignore_clock_latency</code></td>
+<td class="confluenceTd">
+<p>When this parameter is specified, the software does not count the launch/capture clock latency delays into the timing path delay.</p>
+
+<p>The&#xa0;<code>-ignore_clock_latency</code>&#xa0;parameter is an industry-standard construct introduced in SDC 2.1 to control the handling of clock-related timing with respect to the&#xa0;<code>set_max_delay</code>/<code>set_min_delay</code>&#xa0;constraints.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-rise</code></p>
+</td>
+<td class="confluenceTd">
+<p>Applies the assertion at the rising edge of the signal on the path endpoints.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-through | </code><code>-rise_through | </code><code>-fall_through </code><code><em>through_list</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a list of timing paths through points.</p>
+
+<p>The <code><em>through_list</em></code> argument can contain either object IDs or hierarchical names relative to the current module or clock names. The pins can be on intermediate hierarchical boundaries. The <code><em>through_list</em></code> argument can be a collection.</p>
+
+<p>Specify one of the following:</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>-through: </code>When you use this parameter without using the <code style="line-height: 1.4285715;">-from</code> or <code style="line-height: 1.4285715;">-to</code> options, all paths that go through the specified pins have the specified delay. When you use it with both the <code style="line-height: 1.4285715;">-from</code> and <code style="line-height: 1.4285715;">-to</code> options, any path starting at any pin on the <code style="line-height: 1.4285715;">-from</code> list <em style="line-height: 1.4285715;">and </em>going through any point on the <code style="line-height: 1.4285715;">-through</code> pin list <em style="line-height: 1.4285715;">and </em>going to any point on the <code style="line-height: 1.4285715;">-to</code> list is affected by the constraint.</p>
+
+<p>By default, the <code>-through</code> option applies the constraint to both the rising and the falling edges.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>-rise_through: Applies the assertion at the rising edge of the signal on the through pins.</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>-fall_through: Applies the assertion at the falling edge of the signal on the through pins.</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-to | </code><code>-rise_to | </code><code>-fall_to </code><code><em>to_list</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a list of timing paths end points.</p>
+
+<p>The <code><em>to_list</em></code> argument can contain either object IDs or hierarchical names relative to the current module or clock names. The pins can be on intermediate hierarchical boundaries. The <code><em>pin_or_clock_list</em></code> argument can be a collection.</p>
+
+<p>The valid end points are:</p>
+<ul><li>Output port</li></ul><ul><li>Bidirectional port</li></ul><ul><li>Data pin of sequential cell <br />Data pin of sequential cell is one of the following:</li></ul><ul><li>Structural data pin that is part of latch or flip-flop.</li></ul><ul><li>Inferred data pin in cells like macro cells. A pin is an inferred data pin if it is associated with one of the following:</li></ul><ul><li>Signal end of setup check</li></ul><ul><li>Signal end of hold check</li></ul><ul><li>Signal end of non-sequential setup check</li></ul><ul><li>Signal end of non-sequential hold check</li></ul><ul><li>Signal end of removal check</li></ul><ul><li>Signal end of recovery check</li></ul><ul><li>Pin associated with <code>set_external_delay</code></li></ul><ul><li>Data pin of clock gating cell</li></ul>
+<p>Select from one of the following:</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>-to:</code></p>
+
+<p>Applies the minimum delay constraint to all paths ending in the <code>-to</code> pin list. If a clock is specified as the <code>-to</code> object, all primary outputs and registers clocked by that clock are used as endpoint.</p>
+
+<p>By default, the <code>-to</code> option applies the constraint to both the rising and the falling edges.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>-rise_to: Applies the minimum delay constraint at the rising edge of the signal on the to pins.</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>&#xa0;&#xa0;</p>
+</td>
+<td class="confluenceTd">
+<p><code>-fall_to: Applies the minimum delay constraint at the falling edge of the signal on the to pins.</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code><em>value</em></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the minimum delay value.</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="set_min_delay-examples"><span class="confluence-anchor-link" id="set_min_delay-examples"></span></h4>
+<h4 id="set_min_delay-Examples">Examples</h4>
+<ul><li>The following command specifies a minimum delay of&#xa0;<code>2.5</code>&#xa0;for paths from&#xa0;<code>in1</code>&#xa0;to&#xa0;<code>out1</code>:<br /><code>tempus &gt;&#xa0;set_min_delay 2.5 -from in1 -to out1</code></li><li>
+<p>The following commands show the timing report output without path segmentation:&#xa0;<br /><code>tempus &gt; set_min_delay 3 -from f0 -to f1/D &#xa0;&#xa0;</code><br /><code>tempus &gt; report_timing -early -from f0 -to f1/D &#xa0;</code><br /><br /><code>Path 1: VIOLATED (-2.927 ns) Path Delay Check with Pin f1/D</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;View: view1</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Group: clk2</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Startpoint: (R) f0/CK</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Clock: (R) clk1</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Endpoint: (F) f1/D</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Clock: (R) clk2</code></p>
+
+<p><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Capture &#xa0; &#xa0; &#xa0; Launch</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Path Delay:+ &#xa0; &#xa0;3.000 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;-</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; Src Latency:+ &#xa0; &#xa0;0.000 &#xa0; &#xa0; &#xa0; &#xa0;0.000</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; Net Latency:+ &#xa0; &#xa0;0.000 (I) &#xa0; &#xa0;0.000 (I)</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Arrival:= &#xa0; &#xa0;3.000 &#xa0; &#xa0; &#xa0; &#xa0;0.000</code></p>
+
+<p><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Hold:+ &#xa0; &#xa0;0.043</code><br /><code>&#xa0; &#xa0; &#xa0; Required Time:= &#xa0; &#xa0;3.043</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0;Launch Clock:= &#xa0; &#xa0;0.000</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Data Path:+ &#xa0; &#xa0;0.116</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Slack:= &#xa0; -2.927</code></p>
+
+<p><code>#-------------------------------------------------------------------------------</code><br /><code># Timing Point &#xa0;Flags &#xa0;Arc &#xa0; &#xa0; Edge &#xa0;Cell &#xa0; &#xa0; &#xa0; &#xa0; Fanout &#xa0;Trans &#xa0; Delay &#xa0;Arrival &#xa0;</code><br /><code># &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(ns) &#xa0; &#xa0;(ns) &#xa0; &#xa0; (ns) &#xa0;</code><br /><code>#-------------------------------------------------------------------------------</code><br /><code>&#xa0; f0/CK &#xa0; &#xa0; &#xa0; &#xa0; &lt;&lt;&lt; &#xa0; &#xa0;CK &#xa0; &#xa0; &#xa0;R &#xa0; &#xa0; (arrival) &#xa0; &#xa0; &#xa0; &#xa0; 1 &#xa0;0.000 &#xa0; &#xa0; &#xa0; - &#xa0; &#xa0;0.000 &#xa0;</code><br /><code>&#xa0; f0/QN &#xa0; &#xa0; &#xa0; &#xa0; - &#xa0; &#xa0; &#xa0;CK-&gt;QN &#xa0;F &#xa0; &#xa0; LDN_FDPQB_1 &#xa0; &#xa0; &#xa0; 1 &#xa0;0.000 &#xa0; 0.074 &#xa0; &#xa0;0.074 &#xa0;</code><br /><code>&#xa0; b0/X &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;- &#xa0; &#xa0; &#xa0;A-&gt;X &#xa0; &#xa0;F &#xa0; &#xa0; LDN_BUF_1 &#xa0; &#xa0; &#xa0; &#xa0; 1 &#xa0;0.024 &#xa0; 0.042 &#xa0; &#xa0;0.116 &#xa0;</code><br /><code>&#xa0; f1/D &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;&lt;&lt;&lt; &#xa0; &#xa0;D &#xa0; &#xa0; &#xa0; F &#xa0; &#xa0; LDN_FDPQB_1 &#xa0; &#xa0; &#xa0; 1 &#xa0;0.017 &#xa0; 0.000 &#xa0; &#xa0;0.116 &#xa0;</code><br /><code>#-------------------------------------------------------------------------------</code></p>
+</li><li>
+<p>The following commands show the timing report output with path segmentation:<br /><code>tempus &gt; set_min_delay 3 -from f0/QN -to f1/D &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;</code><br /><code>tempus &gt; report_timing -early -from f0/QN -to f1/D &#xa0;</code><br /><br /><code>Path 1: VIOLATED (-3.001 ns) Path Delay Check with Pin f1/D</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;View: view1</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Group: clk2</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Startpoint: (F) f0/QN</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Clock:</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Endpoint: (F) f1/D</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Clock: (R) clk2</code></p>
+
+<p><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Capture &#xa0; &#xa0; &#xa0; Launch</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Path Delay:+ &#xa0; &#xa0;3.000 &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;-</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; Src Latency:+ &#xa0; &#xa0;0.000 &#xa0; &#xa0; &#xa0; &#xa0;0.000</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; Net Latency:+ &#xa0; &#xa0;0.000 (I) &#xa0; &#xa0;0.000 (I)</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Arrival:= &#xa0; &#xa0;3.000 &#xa0; &#xa0; &#xa0; &#xa0;0.000</code></p>
+
+<p><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;Hold:+ &#xa0; &#xa0;0.043</code><br /><code>&#xa0; &#xa0; &#xa0; Required Time:= &#xa0; &#xa0;3.043</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0;Launch Clock:= &#xa0; &#xa0;0.000</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Data Path:+ &#xa0; &#xa0;0.042</code><br /><code>&#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; Slack:= &#xa0; -3.001</code></p>
+
+<p><code>#-----------------------------------------------------------------------------</code><br /><code>#Timing Point &#xa0;Flags &#xa0;Arc &#xa0; Edge &#xa0;Cell &#xa0; &#xa0; &#xa0; &#xa0; Fanout &#xa0;Trans &#xa0; Delay&#xa0; &#xa0;Arrival &#xa0;</code><br /><code># &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;(ns) &#xa0; &#xa0;(ns) &#xa0; &#xa0; (ns) &#xa0;</code><br /><code>#-----------------------------------------------------------------------------</code><br /><code>&#xa0;f0/QN &#xa0; &#xa0; &#xa0; &#xa0; &lt;&lt;&lt; &#xa0; &#xa0;QN &#xa0; &#xa0;F &#xa0; &#xa0; (arrival) &#xa0; &#xa0; &#xa0; &#xa0; 1 &#xa0;0.024 &#xa0; 0.000 &#xa0; &#xa0;0.000 &#xa0;</code><br /><code>&#xa0;b0/X &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;- &#xa0; &#xa0; &#xa0;A-&gt;X &#xa0;F &#xa0; &#xa0; LDN_BUF_1 &#xa0; &#xa0; &#xa0; &#xa0; 1 &#xa0;0.024 &#xa0; 0.042 &#xa0; &#xa0;0.042 &#xa0;</code><br /><code>&#xa0;f1/D &#xa0; &#xa0; &#xa0; &#xa0; &#xa0;&lt;&lt;&lt; &#xa0; &#xa0;D &#xa0; &#xa0; F &#xa0; &#xa0; LDN_FDPQB_1 &#xa0; &#xa0; &#xa0; 1 &#xa0;0.017 &#xa0; 0.000 &#xa0; &#xa0;0.042 &#xa0;</code><br /><code>#-----------------------------------------------------------------------------</code></p>
+</li></ul><h4 id="set_min_delay-RelatedTopics">Related Topics</h4>
+<ul><li><a href="Timing_Constraint_Commands.html">Path Exception Priorities</a></li></ul><h4 id="set_min_delay-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="set_input_delay.html#set_input_delay-set_input_delay">set_input_delay</a></code></li><li><code><a href="set_output_delay.html#set_output_delay-set_output_delay">set_output_delay</a></code></li><li><code><a href="set_false_path.html#set_false_path-set_false_path">set_false_path</a></code></li><li><code><a href="set_max_delay.html#set_max_delay-set_max_delay">set_max_delay</a></code></li><li><code><a href="set_multicycle_path.html#set_multicycle_path-set_multicycle_path">set_multicycle_path</a></code></li><li><code><a href="reset_path_exception.html">reset_path_exception</a></code></li><li><code><a href="report_path_exceptions.html">report_path_exceptions</a></code></li></ul>
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="set_min_capacitance.html" id="prev" title="set_min_capacitance">set_min_capacitance</a></em></b><b><em><a href="set_min_fanout.html" id="nex" title="set_min_fanout">set_min_fanout</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>

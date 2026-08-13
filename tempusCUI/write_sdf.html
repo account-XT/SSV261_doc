@@ -1,0 +1,640 @@
+
+<html><head><title>write_sdf</title>
+<meta name="page_sequence" content="37154000" />
+<meta name="Approver" content="Technical Publications" />
+<meta name="Author" content="arkaur" />
+<meta name="CreateDate" content="2026-04-27" />
+<meta name="CreateTime" content="1777287429" />
+<meta name="DataType" content="Manuals" />
+<meta name="Description" content="Tempus Stylus Text Reference Manual" />
+<meta name="DocTitle" content="Tempus Stylus Text Command Reference Manual" />
+<meta name="DocType" content="Reference" />
+<meta name="FileTitle" content="write_sdf" />
+<meta name="Keywords" content="write delays,standard delay format sdf file,sdf file" />
+<meta name="topic_type" content="" />
+<meta name="reference_type" content="" />
+<meta name="prod_feature" content="" />
+<meta name="prod_subfeature" content="" />
+<meta name="new_topic" content="No" />
+<meta name="spotlight_topic" content="null" />
+<meta name="FileType" content="Chapter" />
+<meta name="Keyword" content="tempusCUI" />
+<meta name="Language" content="English" />
+<meta name="ModifiedDate" content="2026-04-27" />
+<meta name="ModifiedTime" content="1777287429" />
+<meta name="NextFile" content="write_timing_context.html" />
+<meta name="Group" content="Stylus Common UI Manuals" />
+<meta name="Platform" content="Digital IC Design," />
+<meta name="PrevFile" content="write_sdc.html" />
+<meta name="c_product" content="Tempus," />
+<meta name="Product" content="Tempus," />
+<meta name="ProductFamily" content="Tempus," />
+<meta name="ProductVersion" content="26.10" />
+<meta name="RightsManagement" content="Copyright 2026 Cadence Design Systems Inc." />
+<meta name="Title" content="Tempus Stylus Text Command Reference Manual -- write_sdf" />
+<meta name="Version" content="26.10" />
+<meta name="Renderer" content="WIKI" />
+<meta name="SpaceKey" content="cuitxtcmdref261" />
+<meta name="confluence-version" content="9.2.13" />
+<meta name="ecms-plugin-version" content="05.00.002" />
+
+        
+        <link href="styles/site.css" rel="stylesheet" type="text/css" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    
+
+    
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll("img").forEach((img, index) => {
+   img.addEventListener("click", (e) => { 
+    document.querySelector("#cad_image_modal").classList.add("opac");
+      document.querySelector("#cad_image_modal_center").innerHTML = `<img style="position:absolute;top:0;bottom:0;left:0;right:0; margin: auto;max-height: 96%;max-width: 96%;" src="${e.target.src}">`;});});});
+</script>
+
+<style>
+.eclipse .syntaxhighlighter .line > code {font-size:12px !important;}
+ img{cursor:pointer;
+ }
+ #cad_image_modal{
+ position:fixed;left:0;top:0;width:100%;background:#00000099;overflow:hidden;height:0;opacity:0;transition: height 0ms 1s, opacity 1s 0ms;
+ }
+ #cad_image_modal.opac{height: 100%;opacity: 1;transition: height 0ms 0ms, opacity 1s 0ms;
+ }
+ #cad_image_modal span{
+  position:fixed;right:10px;top:10px;cursor:pointer;color:#fff;
+ }
+ </style>
+
+</head><body style="background-color: #FFFFFF;"><!-- Begin Buttons --><header xmlns:html="http://www.w3.org/1999/xhtml"><div class="docHeadr">Product Documentation<img src="images/Cadence-Logo.jpg" /></div>
+<nav class="blueHead"><ul><li><a class="content" href="tempusCUITOC.html">Contents</a></li><li><a class="prev" href="write_sdc.html" title="write_sdc">write_sdc</a></li><li style="float: right;"><a class="viewPrint" href="tempusCUI.pdf">View/Print PDF</a></li><li style="float: right;margin-right: 25px;"><a class="nextd" href="write_timing_context.html" title="write_timing_context">write_timing_context</a></li></ul></nav></header><!-- End Buttons --><div xmlns:html="http://www.w3.org/1999/xhtml" style="font-size:14px;line-height:1.42857142857;margin:20px 0 0 0;font-weight:bold;"><center>Tempus Stylus Text Command Reference Manual<br />Product Version 26.10, May 2026</center></div>
+<div xmlns:html="http://www.w3.org/1999/xhtml" style="margin-left:5%;">
+<p></p>
+
+<p></p>
+<div id="main-header">
+                    
+                    
+                                                <h1 style="margin: 4px 0 4px;"><span>write_sdf</span></h1>
+
+                    
+                </div>
+<div class="wiki-content group" id="main-content">
+                    
+<p><code>write_sdf&#xa0;<span id="write_sdf-write_sdf"></span>&#xa0;<span class="confluence-anchor-link" id="write_sdf-write_sdf"></span>&#xa0;</code>&#xa0;<br /><code>[<em>sdf_file</em>]&#xa0;<br />[-gate_level_sim_model]<br />[-adjust_setuphold_for_zero_hold_slack]&#xa0;<br />[-base_delay]</code>&#xa0;<br /><code>[-cell_timing {all | none | nochecks}]</code>&#xa0;<br /><code>[-collapse_internal_pins]&#xa0;</code>&#xa0;<br /><code>[-infer_condelse]&#xa0;</code>&#xa0;<br /><code>[-delimiter char]&#xa0;</code>&#xa0;<br /><code>[-delta_delay]&#xa0;</code>&#xa0;<br /><code>[-edges {edged | library | noedge | check_edge}]</code>&#xa0;<br /><code>[-exclude_cells]</code>&#xa0;<br /><code>[-exclude_cells_keep_io_nets]<br />[-exclude_cells_keep_top_level_nets]</code><br /><code>[-exclude_disabled_arcs]&#xa0;</code>&#xa0;<br /><code>[-exclude_disabled_modes]&#xa0;</code>&#xa0;<br /><code>[-exclude_whatif_arcs]</code>&#xa0;<br /><code>[-zero_negative_delays]</code>&#xa0;<br /><code>[-ideal_clock_network]&#xa0;</code>&#xa0;<br /><code>[-include_cells <em>string</em>]<br /><span style="color:var(--ds-text,#172b4d);">[-include_variation]&#xa0;</span><br />[-<span>infer_condelse]</span></code><br /><code>[-interconnect {all | none | noport | noinport | nooutport}]</code>&#xa0;<br /><code>[-map_file {file1&#xa0;file2&#xa0;...]</code>&#xa0;<code><br /><code>[-recrem&#xa0;[merge_always | split | merge_when_paired]]</code><br /><code>[-map_removal_to_hold]&#xa0;</code>&#xa0;</code><br /><code>[-max_view&#xa0;<em>viewName</em>]</code>&#xa0;<br /><code>[-min_clock_si_threshold&#xa0;<em>number</em>]</code>&#xa0;<br /><code>[-min_data_si_threshold&#xa0;<em>number</em>]</code>&#xa0;<br /><code>[-min_period_edges {posedge | negedge | both | none}]</code>&#xa0;<br /><code>[-min_view&#xa0;<em>viewName</em>]&#xa0;<br />[-multi_drive_net_syntax&#xa0;<em>string</em>]</code>&#xa0;<br /><code>[-no_derate]<br />[-no_escape]</code>&#xa0;<br /><code>[-exclude_negative_checks]</code>&#xa0;<br /><code>[-path&#xa0;name]</code>&#xa0;<br /><code>[-precision&#xa0;<em>non_neg_integer</em>]&#xa0;</code>&#xa0;<br /><code>[-process]</code>&#xa0;<br /><code><span>[-recompute_delaycal]</span></code><br /><code>[-recompute_parallel_arcs]&#xa0;</code>&#xa0;<br /><code>[-scale&#xa0;float]</code>&#xa0;<br /><code>[-setuphold [merge_always | split | merge_when_paired]]</code>&#xa0;<br /><code>[-split_recrem]&#xa0;</code>&#xa0;<br /><code>[-split_setuphold]&#xa0;</code>&#xa0;<br /><code>[-target_application {sta | verilog}]</code>&#xa0;<br /><code>[-gate_level_sim_model]</code><br /><code>[-temperature]</code>&#xa0;<br /><code>[-transform_out_to_out_arcs]</code>&#xa0;<br /><code>[-typical_view&#xa0;<em>viewName</em>]</code>&#xa0;<br /><code>[-version { 2.1 | 3.0 }]&#xa0;</code>&#xa0;<br /><code>[-view&#xa0;<em>viewName</em>]&#xa0;</code>&#xa0;<br /><code>[-voltage]<br />[-worst_case_illegal_cond_arcs&#xa0;<em>string</em>]</code></p>
+
+<p>Writes delays to a Standard Delay Format (SDF) file. The&#xa0;<code>write_sdf</code>&#xa0;command can generate both plain-text and GNU zipped (.gz) SDF files.</p>
+
+<p>By default, the&#xa0;<code>write_sdf</code>&#xa0;command uses the delays already cached by the system and writes only values of the triplets.</p>
+<h4 id="write_sdf-Parameters"><span>Parameters&#xa0;</span></h4>
+<div class="table-wrap"><table class="wrapped confluenceTable"><colgroup><col style="width: 332.0px;" /><col style="width: 437.0px;" /></colgroup><tbody><tr><td class="confluenceTd"><code>-help</code></td>
+<td class="confluenceTd">Prints out the command usage.</td>
+</tr>
+<tr><td class="confluenceTd"><code>-gate_level_sim_model</code></td>
+<td class="confluenceTd">Writes out the gate-level simulation (GLS) SDF file.</td>
+</tr>
+<tr><td class="confluenceTd"><code>--adjust_setuphold_for_zero_hold_slack</code></td>
+<td class="confluenceTd">Adjusts the hold timing check to meet non-negative slack values.</td>
+</tr>
+<tr><td class="confluenceTd"><code>-base_delay</code></td>
+<td class="confluenceTd">
+<p>Writes out base delay information in the SDF file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-cell_timing {all | none | nochecks}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies which cell delays and timing checks to write out.<br /><em>Default</em>: <code>all</code></p>
+<ul><li><code>all</code> - Writes all cell delays and timing checks to the SDF file. This is the default.</li></ul><ul><li><code>nochecks</code> - Disables the writing of timing checks only.</li></ul><ul><li><code>none</code> - Prevents cell delays and timing checks from being written into the SDF file.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-collapse_internal_pins</code></p>
+</td>
+<td class="confluenceTd"><div class="content-wrapper">
+<p>Collapses arcs across internal pins to a single primary input to primary output arc.</p>
+
+<p>Use the <code>-collapse_internal_pins</code> parameter when the SDF file being generated is intended for use by an application that does not support the same internal pin structure in its leaf cell libraries (for example, Cadence VXL and NCsim Verilog simulation products). Do <em>not</em> use this parameter to generate an SDF file intended for use within the Tempus flow, or by third party tools that utilize the same Liberty timing models.</p>
+
+<p><em>Default:</em> Arcs between internal pins in a timing model are written to the SDF file as explicit annotations to and from the internal pins internal pins.</p>
+
+<p><span class="confluence-embedded-file-wrapper"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/721423115/721423118.png" data-linked-resource-container-id="721423115" data-linked-resource-container-version="2" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="timinganalysisT.13.1.73.png" data-linked-resource-id="721423118" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/721423115/721423118.png" tabindex="0" /></span></p>
+
+<p><br /></p>
+
+<p>For example, assume the following arc between internal pins:</p>
+
+<p>The following SDF would be generated by default:</p>
+<code>(U1/in1 U1/IntPinA (1::1) (1::1))</code> <br /><br /><code>(U1/IntPinA U1/IntPinB (2::2) (2::2))</code> <br /><br /><code>(U1/IntPinB U1/out1 (3::3) (3::3))</code> <br />
+<p>If you specify <code>-collapse_internal_pins</code>, the resulting SDF would show a single arc with the merged delays:</p>
+<code>(U1/in1 U1/out1 (6::6) (6::6))</code></div>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-infer_condelse</code></p>
+</td>
+<td class="confluenceTd">
+<p>Writes <code>CONDELSE</code> constructs with the default value when a <code>COND</code> construct is written.</p>
+
+<p><strong>Note: </strong>Use this argument with the <code>-version 3.0</code> option.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-delimiter </code><code><em>char</em>
+          </code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the hierarchy divider character to use in the output file. This option sets the hierarchy divider of only the <code>write_sdf</code> command. If omitted, the default hierarchy divider character (<code>/</code>) is used as the <code>write_sdf</code> default.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-delta_delay</code></td>
+<td class="confluenceTd">Writes out delta delay values to the SDF file.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-edges {edged | library | noedge | check_edge}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the edges values.</p>
+<ul><li><code>check_edge</code> - Keeps edge specifiers on timing check arcs but does not add edge specifiers on delay arcs.</li></ul><ul><li><code>edged</code> - Keeps edge specifiers on timing check arcs and delay arcs.</li></ul><ul><li><code>library</code> - Assumes that the <code><em>sdf_edges </em></code>attributes are specified in the .<code>lib</code> file. The default <code><em>sdf_edges </em></code>value of a timing arc is <code>noedge</code>.</li></ul><ul><li><code>noedge</code> - Does not keep edge specifiers.</li></ul>
+<p><em>Default</em><span>: </span><code>edged</code></p>
+
+<p><span>Refer to </span><a href="#write_sdf-table">Table</a><span> for full qualifications of the possible values for the edges option.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-exclude_cells</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a list of leaf-cell or hierarchical instances whose timing data will be excluded from the the SDF (Standard Delay Format) file. If you specify a hierarchical instance, the timing data for all leaf-cells below the level of hierarchy will be omitted from the SDF file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-exclude_cells_keep_io_nets&#xa0;</code></td>
+<td class="confluenceTd">
+<p>Restricts the filtering to just the annotations which are completely enclosed by the cell. Annotations to or from the cell will be preserved.</p>
+
+<p>By default, when the <code>-exclude_cells</code> parameter is used, any annotations within the excluded cell and any annotations to or from the excluded cell are filtered from the SDF.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>-exclude_cells_keep_top_level_nets</span></code></td>
+<td class="confluenceTd">
+<p>Allows you to configure the handling of top-level interconnect&#xa0;annotations to an instance that is excluded from the SDF using the&#xa0;<code>write_sdf&#xa0;-exclude_cells</code>&#xa0;parameter.&#xa0;</p>
+
+<p>When this parameter is specified, the interconnect arcs which span to the ports of the instance will be included in the SDF. By default, no interconnect arcs to the instance are included. The delay annotated&#xa0;will be the worst-case delays of the top-level nets to/from the first level sink/source pins within the block that traverse a given input/output port of the instance, respectively.&#xa0;</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-exclude_disabled_arcs</code></p>
+</td>
+<td class="confluenceTd">
+<p>Excludes user set disabled arcs in the Standard Delay Format (SDF) file. If the user sets this option, the disabled arcs set by commands <code>set_mode</code>, <code>set_disable_timing</code>, and <code>set_case_analysis </code>are excluded.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-exclude_disabled_modes</code></p>
+</td>
+<td class="confluenceTd">
+<p>Excludes timing arcs that have been disabled due to an active library mode set by the <code>set_mode</code> command, from appearing in the SDF file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-exclude_whatif_arcs</code></p>
+</td>
+<td class="confluenceTd">
+<p>Excludes what-if arcs in the SDF file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><em><code>sdf_file</code></em></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the name of the SDF output file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-zero_negative_delays </code></p>
+</td>
+<td class="confluenceTd">
+<p>Converts all negative interconnect and <code>IOPATH</code> delays to zero.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-ideal_clock_network</code></p>
+</td>
+<td class="confluenceTd">
+<p>Marks delays of delay arcs, that are on the ideal clock networks, as 0 in the SDF file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>-include_cells <em>string</em></span></code></td>
+<td class="confluenceTd">
+<p>Specifies a list of leaf-cell or hierarchical instances to be only included in the SDF file.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd" style="text-align: left;"><code>-include_variation&#xa0;</code></td>
+<td class="confluenceTd" style="text-align: left;">
+<p>When the selected analysis type is SOCV, the<span>&#xa0;</span><code>-include_variation</code><span>&#xa0;</span>parameter can be used to export SDF delays and check values, including the variation component.</p>
+
+<p>By default, the SDF delays and check values will not have the mean + N*sigma value.&#xa0;</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code><span>-infer_condelse</span></code></td>
+<td class="confluenceTd">Writes CONDELSE constructs with the default value when a COND construct is written.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-interconnect {all | none | noport | noinport | nooutport}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies which interconnect delays to write.</p>
+<ul><li><code>all</code> - Writes all <code>INTERCONN </code>delays into the SDF file. This is the default if the <code>-interconnect</code> option is not specified.</li></ul><ul><li><code>none</code> - No <code>INTERCONN</code> delays are written into the SDF file.</li></ul><ul><li><code>noport</code> - No top level port <code>INTERCONN</code> delays are written into the SDF file.</li></ul><ul><li><code>nooutport</code> - Disables only the output port <code>INTERCONN </code>delays.</li></ul>
+<p><em>Default</em>: <code>all</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-map_file {file1 file2 ...}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a list of map files. The map files can be used to determine what is written into the SDF files. For example, a map file can provide delay information on internal pins which are not defined in the timing library.</p>
+
+<p>Syntax for a map file (for a cell) is as follows:</p>
+<ul><li>A template section (the text to output) that reference variables of the form $&lt;number&gt;</li></ul><ul><li>A variable definition section that tells the expression to evaluate to obtain the value</li></ul></td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-recrem [merge_always | split | merge_when_paired]</code></p>
+</td>
+<td class="confluenceTd">
+<p>Determines how <code>RECOVERY and REMOVAL</code> timing checks are written.</p>
+<ul><li><code>merge_always</code> - Always writes combined <code>RECREM</code> checks, even if either a <code>RECOVERY</code>, or a <code>REMOVAL</code>, check does not exist. <br />For example, if a <code>RECOVERY</code> check exists, but a <code>REMOVAL</code> check does not, the software writes a combined <code>RECREM</code> check in the SDF file as follows:<br /><br />RECREM (<code>
+              <em>value</em>
+            </code>) (<code>
+              <em>value</em>
+            </code>) () ()</li></ul><ul><li><code>split</code> - Splits the <code>RECREM</code> checks into a <code>RECOVERY</code> check and a <code>REMOVAL</code> check.</li></ul><ul><li><code>merge_when_paired</code> - Writes combined <code>RECREM</code> checks only when both a <code>RECOVERY</code> and a <code>REMOVAL</code> check exist. <br />For example, if both a <code>RECOVERY</code> and a <code>REMOVAL</code> check exist, the software writes a combined <code>RECREM</code> check in the SDF file as follows:<br /><br />RECREM (<code>
+              <em>value</em>
+            </code>) (<code>
+              <em>value</em>
+            </code>) (<code>
+              <em>value</em>
+            </code>) (<code>
+              <em>value</em>
+            </code> ) <br /><br />However, if a <code>RECOVERY</code> check exists, but a <code>REMOVAL</code> check does not, the software only writes the <code>RECOVERY</code> check in the SDF file:<br /><br />RECOVERY (<code>
+              <em>value</em>
+            </code>) (<code>
+              <em>value</em>
+            </code>)</li></ul>
+<p><em>Default:</em> <code>merge_always</code></p>
+
+<p><strong>Note</strong>: The <code>RECREM </code>sum should be zero or greater than zero. A negative value will be adjusted to enforce this condition. This is an SDF v3.0 requirement (the software may issue a warning).</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-map_removal_to_hold</code></p>
+</td>
+<td class="confluenceTd">
+<p>Converts the SDF v2.1 unsupported <code>REMOVAL</code> (and the <code>REMOVAL</code> portion of the <code>RECREM</code> constructs) to <code>HOLD</code> checks when used with the <code>-version 2.1</code> option.<br /><em>Default</em>: Not to write out the unsupported checks.</p>
+
+<p>Converts the <code>REMOVAL</code> checks to <code>HOLD</code> checks when combined with the <code>-version</code> <code>3.0</code> option.The <code>RECREM</code> checks are split into a <code>RECOVERY</code> check and a <code>HOLD</code> check. This option automatically splits the <code>RECREM</code> checks. <br /><em>Default</em>: To maintain the version 3.0 checks.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-max_view </code><code><em>viewName</em>
+          </code></p>
+</td>
+<td class="confluenceTd">Uses the late delay from the specified analysis view to populate the SDF max slot, when in multi-mode multi-corner analysis mode.</td>
+</tr>
+<tr><td class="confluenceTd"><code>-min_clock_si_threshold <em>number</em>
+        </code></td>
+<td class="confluenceTd">
+<p>Specifies the absolute minimum delta delay change threshold on the clock path to be written into the SDF file.</p>
+
+<p>Time unit is in seconds.</p>
+
+<p><em>Default</em>: 1e-20</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-min_data_si_threshold&#xa0;<em>number</em>
+        </code></td>
+<td class="confluenceTd">
+<p>Specifies the absolute minimum delta delay change threshold on the data path to be written into the SDF file.</p>
+
+<p>Time unit is in seconds.</p>
+
+<p><em>Default</em>: 1e-20</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-min_period_edges {posedge | negedge | both | none}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies how to write out minimum <code>PERIOD</code> checks. Two check arcs are always created for the <code>min_period</code> check when you read in a .<code>lib</code> file. The following options let you keep or remove the positive edge, the negative edge, both edges, or no edges from the PERIOD statement in the .<code>sdf</code> file.</p>
+<ul><li><code>posedge</code> - Writes out one positive edge <code>PERIOD</code> check.</li></ul><ul><li><code>negedge</code> - Writes out one negative edge <code>PERIOD</code> check.</li></ul><ul><li><code>both</code> - Writes out both the positive edge and the negative edge <code>PERIOD</code> checks. This is the default.</li></ul><ul><li><code>none</code> - Writes out one <code>PERIOD</code> check without any edge specifier.</li></ul></td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-min_view </code><code><em>viewName</em>
+          </code></p>
+</td>
+<td class="confluenceTd">
+<p>Uses the early delay from the specified analysis view to populate the SDF <code>min</code> slot, when in multi-mode multi-corner analysis mode.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-multi_drive_net_syntax <em>string</em></code></td>
+<td class="confluenceTd">
+<p>Specifies the multi-drive nets as ports or interconnects.</p>
+
+<p>You can use the&#xa0;<code>interconnect</code>&#xa0;and&#xa0;<code>port</code>&#xa0;options if you need to define the net delays of multi-driven nets (clock mesh) as interconnects or ports respectively in the SDF.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-no_derate</code></p>
+</td>
+<td class="confluenceTd">
+<p>Writes non-derated delays to the Standard Delay Format (SDF) file. By default, the <code>set_timing_derate</code> command writes scaled delays to the SDF file.</p>
+
+<p><span>When the </span><code>-no_derate</code><span> parameter is specified, the </span><code>write_sdf</code><span> command removes all the applied derates.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-no_escape</code></td>
+<td class="confluenceTd">
+<p>Writes out object names without escaping hierarchical dividers. Normally, when writing out a SDF file, the hierarchical divider (/) is escaped because it is a special character.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-exclude_negative_checks</code></p>
+</td>
+<td class="confluenceTd">
+<p>Converts all negative timing check values to <code>0.0</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-path </code><code><em>name</em><br /></code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies the sub-block name.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-precision </code><code><em>non_neg_integer</em>
+          </code></p>
+</td>
+<td class="confluenceTd">
+<p>Controls the number of digits appearing after the decimal point in the output SDF file. The default precision is the value of the <code>report_precision</code>.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-process</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies one or a combination of the following process names that will appear in the header of the generated SDF file:</p>
+<ul><li><code>best</code></li></ul><ul><li><code>typical</code></li></ul><ul><li><code>worst</code></li></ul>
+<p>Use the colon delimiter to specify multiple process names. For example:</p>
+
+<p><code>-process best:typical:worst</code></p>
+
+<p>In the above example, the header of the generated SDF file will contain:</p>
+
+<p><code>(PROCESS &quot;best:typical:worst&quot;)</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-recompute_delaycal</code></td>
+<td class="confluenceTd">
+<p>Instructs the software to recompute any necessary data required for a complete SDF file before exporting. By default,&#xa0;only the existing data that has been computed for STA is exported to the SDF. You must use this parameter to ensure that the SDF file is complete for&#xa0;general use in other applications.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-recompute_parallel_arcs</code></td>
+<td class="confluenceTd">
+<p>Instructs the software to temporarily recompute delays with separate<br />delay calculation for parallel arcs.</p>
+
+<p>The software normally operates in a high performance mode which optimizes the handling of multiple timing arcs between input and output pin pairs. By default, the SDF file generated will contain the same delay information for all of these arcs. To have the SDF recalculated with explicit pin pair data, you should use the option<code>&#xa0;-recompute_parallel_arcs</code>&#xa0;to cause delays for each parallel arc to be explicitly calculated. It is recommended to use this option for generating SDF for functional simulation applications.</p>
+
+<p><strong>Note</strong>: When you use the <code>write_sdf -recompute_parallel_arcs</code> option timing analysis is performed again. You need to obtain a new delay calculation to generate the SDF, and another delay calculation to put the system back to where it was before <code>write_sdf</code> was specified. Since delay calculation is run again, timing analysis will be reset.</p>
+
+<p><strong>Note</strong><span>: The </span><code>-recompute_parallel_arcs </code><span>parameter is obsolete. This parameter still works in this release, but to ensure compatibility with future releases </span><span>update your scripts to </span><span>use the </span><code>-recompute_delaycal</code><span> parameter instead.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-scale </code> <code><em>float</em>
+          </code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies a multiplier to the delay values used in the SDF file. The delay values are scaled, but the units are the same.<br /><em>Default</em>: <code>1</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-setuphold [merge_always | split | merge_when_paired]</code></p>
+</td>
+<td class="confluenceTd">
+<p>Determines how <code>SETUP and HOLD</code> timing checks are written.</p>
+<ul><li><code>merge_always</code> - Always writes combined <code>SETUPHOLD</code> checks, even if either a <code>SETUP</code> or a <code>HOLD</code>, check does not exist. <br />For example, if a <code>SETUP</code> check exists, but a <code>HOLD</code> check does not, the software writes a combined <code>SETUPHOLD</code> check in the SDF file as follows:<br /><br />SETUPHOLD (<code>
+              <em>value</em>
+            </code>) (<code>
+              <em>value</em>
+            </code>) () ()</li></ul><ul><li><code>split</code> - Splits the <code>SETUPHOLD</code> timing checks into separate <code>SETUP</code> and <code>HOLD</code> checks.</li></ul><ul><li><code>merge_when_paired</code> - Writes combined <code>SETUPHOLD</code> checks only when both a <code>SETUP</code> and a <code>HOLD</code> check exist. <br />For example, if both a <code>SETUP</code> and a <code>HOLD</code> check exist, the software writes a combined <code>SETUPHOLD</code> check in the SDF file as follows:<br /><br />SETUPHOLD (<code>
+              <em>value</em>
+            </code>) (<code>
+              <em>value</em>
+            </code>) (<code>
+              <em>value</em>
+            </code>) (<code>
+              <em>value</em>
+            </code> ) <br /><br />However, if a <code>SETUP</code> check exists, but a <code>HOLD</code> check does not, the software only writes the <code>SETUP</code> check in the SDF file:<br /><br />SETUP (<code>
+              <em>value</em>
+            </code>) (<code>
+              <em>value</em>
+            </code>)</li></ul>
+<p><em>Default:</em> <code>merge_always</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-split_recrem</code></p>
+</td>
+<td class="confluenceTd">
+<p>Splits the <code>RECREM</code> checks into a <code>RECOVERY</code> check and a <code>REMOVAL</code> check.</p>
+
+<p><em>Default</em>: To write the combined <code>RECREM</code> check.</p>
+
+<p><strong>Note: </strong>Use this option only with the <code>version</code> <code>3.0</code> option.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-split_setuphold</code></p>
+</td>
+<td class="confluenceTd">
+<p>Splits the <code>SETUPHOLD</code> timing checks into separate <code>SETUP</code> and <code>HOLD</code> checks.</p>
+
+<p><em>Default</em>: To write the combined <code>SETUPHOLD</code> checks.</p>
+
+<p><strong>Note</strong><span>: In SDC v3.0, the negative values are illegal in </span><code>SETUP</code><span>, </span><code>HOLD</code><span>, </span><code>RECOVERY</code><span>, and </span><code>REMOVAL</code><span> checks. Therefore, the negative values are converted to zero automatically with the </span><code>-split_setuphold</code><span> and </span><code>-split_recrem</code><span> parameters.</span></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-target_application { sta | verilog}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Allows customization of the SDF output for use with STA or Verilog applications. You can select the following options:</p>
+<ul><li><code>sta</code>: You can use the <code>sta</code> option to configure the SDF output for use with static-timing analysis (STA) applications. This includes sign-off timing analysis with products, such as Cadence Tempus, as well as for working with implementation flows that use STA for internal timing analysis. The <code>sta</code> option preserves maximum accuracy and generates SDF output that matches the structure of the Liberty timing libraries.<br />
+<p>This option is equivalent to the following options:<br /><br /><code>write_sdf -interconnect all</code>, <code>-cell_timing all</code>, <code>-edges edged</code>, <code>-setuphold</code> <code>merge_when_paired</code>, and <code>-recrem&#xa0;</code> <code>merge_when_paired</code>.</p>
+</li></ul><ul><li><code>verilog</code>: You can use the <code>verilog</code> option to generate SDF output that is compatible with Cadence Verilog-XL or Verilog-NC simulators.<br /><br />This option is equivalent to the following options:
+<p><code>write_sdf -zero_negative_delays -edges</code> <code>check_edge</code>, <code>-setuphold </code> <code>merge_when_paired</code>, <code>-recrem</code> <code>merge_when_paired</code>, <code>-min_period_edges</code> <code>-none</code>, <code>-collapse_internal_pins</code>, and <code>-recompute_parallel_arcs</code>.</p>
+</li></ul>
+<p>When the <code>-target_application</code> option is not specified then by default SDF output is configured for use with STA applications.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-gate_level_sim_model</code></td>
+<td class="confluenceTd">Writes out the GLS SDF file.</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-temperature</code></p>
+</td>
+<td class="confluenceTd">
+<p>Defines the temperature values that will appear in the header of the generated SDF file.<br />Use the colon delimiter to specify multiple temperature values. For example:</p>
+
+<p><code>-temperature -40.0:25.0:125</code></p>
+
+<p>In the above example, the header of the generated SDF file will contain:</p>
+
+<p><code>(TEMPERATURE -40.0:25.0:125)</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-transform_out_to_out_arcs</code></p>
+</td>
+<td class="confluenceTd"><div class="content-wrapper">
+<p>Writes out all output-to-output timing arcs as input-to-output arcs. Input-to-output arc delays are computed by adding the delay from the input pin to one of the output pins plus the delay from that output pin to the other output pin. For instance, in the following figure, the delay between <code>in</code> and <code>out2</code> would be the sum of <code>delay1</code> and <code>delay2</code>.<br /><br /><span class="confluence-embedded-file-wrapper"><img alt="" class="confluence-embedded-image" data-base-url="https://rdwiki.cadence.com" data-image-src="attachments/721423115/721423119.png" data-linked-resource-container-id="721423115" data-linked-resource-container-version="2" data-linked-resource-content-type="image/png" data-linked-resource-default-alias="timinganalysisT.13.1.74.png" data-linked-resource-id="721423119" data-linked-resource-type="attachment" data-linked-resource-version="1" data-unresolved-comment-count="0" draggable="false" src="attachments/721423115/721423119.png" tabindex="0" /></span></p>
+</div>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-typical_view </code><code><em>viewName</em>
+          </code></p>
+</td>
+<td class="confluenceTd">
+<p>Uses the late delay from the specified analysis view to populate the SDF <code>typ</code> slot, when in multi-mode multi-corner analysis mode.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-version {2.1 | 3.0}</code></p>
+</td>
+<td class="confluenceTd">
+<p>Specifies whether to generate the SDF V2.1 or V3.0. The default SDF version is 3.0. Used in combination with the <code>-map_removal_to_hold&#xa0;</code>option.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-view </code><code><em>viewName</em>
+          </code></p>
+</td>
+<td class="confluenceTd">
+<p>Uses the early and late delays for the specified analysis view to populate the <code>min</code> and <code>max</code> SDF triplet slots, when in multi-mode multi-corner analysis mode. The SDF <code>typ</code> slot remains empty (<code>
+            <em>earlyVal</em>
+          </code> <code>::</code> <code>
+            <em>lateVal</em>
+          </code>).</p>
+
+<p>In multi-mode multi-corner analysis mode, if you want to use SPEF information when calculating the delays, you must use <code><a href="read_spef.html">read_spef</a></code> <code>-rc_corner</code> to import the SPEF files for each RC corner in the design.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p><code>-voltage</code></p>
+</td>
+<td class="confluenceTd">
+<p>Defines the voltage values that will appear in the header of the generated SDF file.<br />Use the colon delimiter to specify multiple voltage values. For example:</p>
+
+<p><code>-voltage 1.980:1.800:1.620</code></p>
+
+<p>In the above example, the header of the generated SDF file will contain:</p>
+
+<p><code>(VOLTAGE 1.980:1.800:1.620)</code></p>
+</td>
+</tr>
+<tr><td class="confluenceTd"><code>-worst_case_illegal_cond_arcs <em>string</em></code></td>
+<td class="confluenceTd">
+<p>Specifies the sdf_cond - all, none, delays, or checks - for the arcs.</p>
+
+<p>When this parameter is specified, the&#xa0;<code>write_sdf</code>&#xa0;command&#xa0;detects illegal SDF condition syntax coming from the Liberty library and generates an unconditional annotation in the&#xa0;SDF file that worst-cases the delays of the related timing arcs. This prevents downstream tools (such as, Verilog simulators)&#xa0;from complaining about illegal syntax in the SDF file.&#xa0;</p>
+</td>
+</tr>
+</tbody></table></div>
+
+<p><strong><span class="confluence-anchor-link" id="write_sdf-table"></span><br /></strong></p>
+
+<p><strong>Definition of -edges Option Values&#xa0;</strong></p>
+
+<p><br /></p>
+<div class="table-wrap"><table class="confluenceTable cadenceTable cadDefaultfont" id="cadDefaultfont" style="width: 720px;"><colgroup><col style="width: 220px;" /><col style="width: 500px;" /><col style="width: 0px;" /><col style="width: 0px;" /></colgroup><tbody><tr><td class="confluenceTd">
+<p><strong>&#xa0;&#xa0;&#xa0;</strong></p>
+</td>
+<td class="confluenceTd">
+<p><strong>edged Value</strong></p>
+</td>
+<td class="confluenceTd">
+<p><strong>library Value</strong></p>
+</td>
+<td class="confluenceTd">
+<p><strong>noedge Value</strong></p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>IOPATH from a unate input pin to output pin</p>
+</td>
+<td class="confluenceTd">
+<p>No edge specifier</p>
+</td>
+<td class="confluenceTd">
+<p>No edge specifier</p>
+</td>
+<td class="confluenceTd">
+<p>No edge specifier</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>IOPATH from a non-unate input pin to output pin</p>
+</td>
+<td class="confluenceTd">
+<p>Edge specifier at the input pin</p>
+</td>
+<td class="confluenceTd">
+<p>Edge specifier at the input pin when <code>sdf_edges</code> is either &quot;<code>both_edges</code>&quot; or &quot;<code>start_edge</code>&quot;</p>
+</td>
+<td class="confluenceTd">
+<p>No edge specifier<br /><br />When merging edged paths, the maximum values are used for MAX and TYP fields; minimum values are used for MIN fields.</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>IOPATH of a clock/enable pin to data out pin</p>
+</td>
+<td class="confluenceTd">
+<p>Edge specifier at the input pin</p>
+</td>
+<td class="confluenceTd">
+<p>Edge specifier at the input pin when <code>sdf_edges</code> is either &quot;<code>both_edges</code>&quot; or &quot;<code>start_edge</code>&quot;</p>
+</td>
+<td class="confluenceTd">
+<p>No edge specifier</p>
+</td>
+</tr>
+<tr><td class="confluenceTd">
+<p>Timing Checks</p>
+</td>
+<td class="confluenceTd">
+<p>Edge specifiers match the check arcs specified in the timing library</p>
+</td>
+<td class="confluenceTd">
+<p>Overridden by value of the <code>sdf_edges</code> attribute <br /><br />For <code>both_edges</code>, the timing checks will contain edge specifier on both starting and ending pins <br /><br />For <code>start_edge</code>, the starting pin (for HOLD type check) or ending pin (for SETUP type check) is edge-specified <br /><br />For <code>end_edge</code>, the ending pin (for HOLD style check) or the starting pin (for SETUP type check) is edge-specified <br /><br />The timing checks are duplicated or combined appropriately. The <code>start_edge</code> and <code>end_edge</code> are interpreted as first and second events, respectively, of the Verilog-XL&#39;s $hold() and $setup system tasks</p>
+</td>
+<td class="confluenceTd">
+<p>Only the edge specifiers of the reference pin are written</p>
+</td>
+</tr>
+</tbody></table></div>
+<h4 id="write_sdf-Examples">Examples</h4>
+<ul><li>The following command writes out an SDF 2.1 compliant output file named <em>my.sdf</em> with 4 digits after the decimal point:<br /><code>tempus&gt;&#xa0;write_sdf -version 2.1 -precision 4 my.sdf</code><br /><br />The following SDF file output shows a comparison between the output of <code style="letter-spacing: 0.0px;">-edges edged</code> with <code style="letter-spacing: 0.0px;">-edges noedge:</code><br /><code>(HOLD (posedge D) (posedge CK) (-0.14:-0.14:-0.14)) <br />(HOLD (negedge D) (posedge CK) (-0.06:-0.06:-0.06)) <br />(SETUP (posedge D) (posedge CK) (0.22:0.22:0.22)) <br />(SETUP (negedge D) (posedge CK) (0.41:0.41:0.41))&#xa0;</code><br /><code><br /></code>When the <code>-edges</code> parameter is set to <code>noedge</code>, only the edge specifiers of the clock pin will be written, as shown below:<br /><code>(HOLD D (posedge CK) (-0.14:-0.06:-0.06))<br /> (SETUP D (posedge CK) (0.22:0.41:0.41))<br /></code></li><li>The following command writes out the delta delay values for the analysis view to the specified SDF file:<br /><code>write_sdf -delta_delay -view view1 tst.sdf</code></li><li>The following command writes non-derated delays to the specified SDF file:<br /><code>write_sdf tst.sdf -no_derate</code></li></ul><h4 id="write_sdf-RelatedCommands">Related Commands</h4>
+<ul><li><code><a href="read_sdf.html">read_sdf</a></code></li></ul>
+<p><br /></p>
+
+<p></p>
+
+                    </div>
+<br /><br /></div>
+<footer xmlns:html="http://www.w3.org/1999/xhtml"><nav class="navigation"><b><em><a href="write_sdc.html" id="prev" title="write_sdc">write_sdc</a></em></b><b><em><a href="write_timing_context.html" id="nex" title="write_timing_context">write_timing_context</a></em></b></nav><div>
+          For further assistance, visit <a href="https://support.cadence.com">Cadence ASK</a> portal. Copyright &#169; 2026, <a href="https://www.cadence.com">Cadence Design Systems, Inc.</a> All rights reserved.
+        </div>
+</footer><br xmlns:html="http://www.w3.org/1999/xhtml" />
+<div id="cad_image_modal" style="background-color: rgba(0, 0, 0, 0.6);"><center id="cad_image_modal_center">&#160;&#10240;</center><span style="margin-right:50px;margin-top:100px;font-weight:bold;font-size:20px;background:#e5e5e5;border:1px solid #e5e5e5;border-radius:25px;height:30px;width:20px;padding-left:6px;padding-top:2px;color: black;" onclick="document.querySelector('#cad_image_modal').classList.remove('opac');">X</span></div>
+
+</body></html>
